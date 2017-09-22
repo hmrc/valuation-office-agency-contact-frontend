@@ -21,9 +21,36 @@ error.required = Please enter a value
 error.summary.title = There’s been a problem
 error.summary.text = Check the following
 
-index.title = valuation-office-agency-contact-frontend
-index.heading = valuation-office-agency-contact-frontend
-index.guidance = Welcome to your new frontend. Please see the README file for a guide to getting started.
+
+index.title = Start
+index.heading = Find contact details of your Valuation Office
+index.general-information = Use this service to find contact details for the Valuation Office for your enquiry, in England and Wales.
+index.contact-guidance = You can contact the Valuation Office Agency (VOA) about:
+index.council-title = Council Tax
+index.business2017-title = business rates 2017 valuation
+index.otherbusiness-title = other business rates enquiries
+index.housing-title = Housing Benefit, Local Housing Allowances, or fair rents
+index.lettings-title = providing lettings information to, or contacting, the Rent Officers
+index.righttobuy-title = Right to Buy, or appeals against Community Infrastructure Levy
+index.dvs-title = valuation and property advice, for public sector bodies, by DVS (this service also operates in Scotland)
+index.questions-part1 = If you have questions about your bill, refunds, or relief, contact
+index.questions-part2 = your local council
+index.questions-part3 = instead.
+index.council-url = https://www.gov.uk/contact-your-local-council-about-business-rates
+index.start-button = Start now
+index.agents-part1 = Agents: if you know the office you need to contact, use the
+index.agents-part2 = VOA maps
+index.agents-part3 = to find the Listing or Valuation Officer details.
+index.voamaps-url = https://www.gov.uk/government/publications/contacting-your-regional-valuation-office
+index.scotlandNI-title = Scotland and Northern Ireland
+index.scotlandNI-information = If you are enquiring about property in Scotland or Northern Ireland contact:
+index.scotland-url = https://www.saa.gov.uk/contact-us
+index.scotland-assessors.title = the Scottish Assessors
+index.scotland-assessors.end = in Scotland
+index.ni-url = https://www.finance-ni.gov.uk/contacts/contact-land-property-services
+index.ni-part1 = the Land and Property Services
+index.ni-part2 = in Northern Ireland
+
 
 session_expired.title = For your security, this service has been reset
 session_expired.heading = For your security, this service has been reset
@@ -36,7 +63,7 @@ site.hidden-edit = Change {0}
 site.no = No
 site.yes = Yes
 site.save_and_continue = Save and continue
-site.service_name = valuation-office-agency-contact-frontend
+site.service_name = Valuation Office Agency Contact Finder
 site.textarea.char_limit = (Limit is {0} characters)
 
 unauthorised.title = You can’t access this service with this account

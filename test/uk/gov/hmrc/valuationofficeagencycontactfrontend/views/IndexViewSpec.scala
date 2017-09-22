@@ -25,6 +25,10 @@ class IndexViewSpec extends ViewBehaviours {
 
   "Index view" must {
 
-    behave like normalPage(view, "index", "guidance")
+    behave like normalPage(view, "index", "general-information", "contact-guidance", "council-title", "business2017-title",
+      "otherbusiness-title", "housing-title", "lettings-title", "righttobuy-title", "dvs-title", "questions-part1",
+      "questions-part2", "questions-part3", "council-url", "start-button", "agents-part1", "agents-part2", "agents-part3",
+      "voamaps-url", "scotlandNI-title", "scotlandNI-information", "scotland-url", "scotland-assessors.title", "scotland-assessors.end",
+      "ni-url", "ni-part1", "ni-part2")
   }
 }
