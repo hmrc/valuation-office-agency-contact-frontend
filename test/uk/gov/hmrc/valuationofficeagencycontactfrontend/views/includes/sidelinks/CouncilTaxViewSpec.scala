@@ -16,8 +16,9 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views.includes.sidelinks
 
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.{SidelinkBehaviours}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.SidelinkBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.includes.sidelinks.councilTax
+
 
 
 class CouncilTaxViewSpec extends SidelinkBehaviours {
@@ -31,4 +32,5 @@ class CouncilTaxViewSpec extends SidelinkBehaviours {
       "taxband-assessment.title", "taxband-assessment.information", "pay-url", "pay-title", "pay-information"
     )
   }
+
 }
