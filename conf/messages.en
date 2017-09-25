@@ -81,3 +81,27 @@ contactDetails.heading = contactDetails
 contactDetails.field1 = Field 1
 contactDetails.field2 = Field 2
 contactDetails.checkYourAnswersLabel = contactDetails
+
+postcodeFinder.title = Postcode Finder
+postcodeFinder.heading = What property are you contacting us about?
+postcodeFinder.paragraph = To make sure your enquiry goes to the right team enter the postcode for the property your enquiry is about. This will find contact details for the Valuation Office in your area.
+postcodeFinder.royalmail-url.title = Find a postcode on Royal Mail’s postcode finder
+postcodeFinder.royalmail-url = http://www.royalmail.com/find-a-postcode
+postcodeFinder.nopostcode-url = I don’t have, or can’t find, my postcode
+postcodeFinder.continuebutton = Continue
+postcodeFinder.back-title = Back
+
+councilTax.title = Useful links for Council Tax
+councilTax.information = These links may help answer your enquiry. They are the most common enquiries the VOA receives.
+councilTax.taxband-url = https://www.gov.uk/council-tax-bands
+councilTax.taxband-title= Check a Council Tax band
+councilTax.taxband-information = Find out the Council Tax band for a home in England or Wales.
+councilTax.taxband-changes.url = http://www.gov.uk/guidance/council-tax-band-changes
+councilTax.taxband-changes.title = Changes to your property
+councilTax.taxband-changes.information = Your Council Tax band may change if your property has been altered, such as demolished or divided into flats.
+councilTax.taxband-assessment.url = https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed
+councilTax.taxband-assessment.title= How Council Tax bands are assessed
+councilTax.taxband-assessment.information = How domestic properties are valued for Council Tax bands.
+councilTax.pay-url = https://www.gov.uk/pay-council-tax
+councilTax.pay-title= Pay your Council Tax
+councilTax.pay-information = Search for your local authority and pay your Council Tax online.

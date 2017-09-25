@@ -21,3 +21,5 @@ GET        /contactDetails                       uk.gov.hmrc.valuationofficeagen
 POST       /contactDetails                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onSubmit(mode: Mode = NormalMode)
 GET        /changeContactDetails                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onPageLoad(mode: Mode = CheckMode)
 POST       /changeContactDetails                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onSubmit(mode: Mode = CheckMode)
+
+GET        /postcodeFinder                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PostcodeFinderController.onPageLoad

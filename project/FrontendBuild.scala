@@ -28,6 +28,7 @@ private object AppDependencies {
   private val playConditionalFormMappingVersion = "0.2.0"
   private val playLanguageVersion = "3.4.0"
 
+
   val compile = Seq(
     ws,
     "uk.gov.hmrc" %% "play-reactivemongo" % playReactivemongoVersion,
