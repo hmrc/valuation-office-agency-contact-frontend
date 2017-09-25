@@ -25,5 +25,46 @@
 
     <h1 class="heading-xlarge">@messages("index.heading")</h1>
 
-    <p>@messages("index.guidance")</p>
+    <p>@messages("index.general-information")</p>
+
+    <p>@messages("index.contact-guidance")</p>
+
+    <ul class="list list-bullet">
+        <li>@messages("index.council-title")</li>
+        <li>@messages("index.business-title")</li>
+        <li>@messages("index.housing-title")</li>
+        <li>@messages("index.lettings-title")</li>
+        <li>@messages("index.righttobuy-title")</li>
+        <li>@messages("index.dvs-title")</li>
+    </ul>
+
+    <p>@messages("index.questions-part1")
+        <a href=@messages("index.council-url") target="_self" onclick="handleOutboundLinkClicks(event, 'START-LA')">@messages("index.questions-part2")</a>  @messages("index.questions-part3")
+    </p>
+
+    <p>
+        <a href="" id="continue" class="button button-start">@messages("index.start-button")</a>
+    </p>
+
+    <br>
+    <div class="panel panel-border-wide">
+        <p>@messages("index.agents-part1")
+            <a href=@messages("index.voamaps-url")
+            target="_self"
+            onclick="handleOutboundLinkClicks(event, 'MAPS')">@messages("index.agents-part2")</a> @messages("index.agents-part3")
+        </p>
+    </div>
+
+    <hr>
+    <h4 class="heading-small"> @messages("index.scotlandNI-title")</h4>
+
+    <p>@messages("index.scotlandNI-information")</p>
+    <ul class="list list-bullet">
+        <li><a href=@messages("index.scotland-url") target="_self">@messages("index.scotland-assessors.title")</a>
+            @messages("index.scotland-assessors.end")</li>
+
+        <li><a href=@messages("index.ni-url") target="_self">
+            @messages("index.ni-part1")</a> @messages("index.ni-part2")</li>
+
+    </ul>
 }
