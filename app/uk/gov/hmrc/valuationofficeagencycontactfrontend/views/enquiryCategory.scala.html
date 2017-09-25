@@ -42,6 +42,8 @@
             inputs = EnquiryCategoryForm.options
         )
 
-        @components.submit_button()
+        @components.continue_button()
+
+        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url class="backlink">@messages("site.back")</a>
     }
 }

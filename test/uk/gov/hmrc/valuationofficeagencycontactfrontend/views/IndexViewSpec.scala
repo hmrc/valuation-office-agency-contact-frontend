@@ -16,6 +16,8 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
+import org.jsoup.select.Elements
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.index
 
@@ -30,5 +32,17 @@ class IndexViewSpec extends ViewBehaviours {
       "questions-part2", "questions-part3", "council-url", "start-button", "agents-part1", "agents-part2", "agents-part3",
       "voamaps-url", "scotlandNI-title", "scotlandNI-information", "scotland-url", "scotland-assessors.title", "scotland-assessors.end",
       "ni-url", "ni-part1", "ni-part2")
+  }
+
+  "The Start now button links to the enquiryCategoryController onPageLoad method" in {
+    val doc = asDocument(view())
+    val href = doc.getElementById("continue").attr("href")
+    assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url.toString)
+  }
+
+  "The start button uses the button--get-started class" in {
+    val doc = asDocument(view())
+    val button = doc.select("a[class~=button--get-started]")
+    assert(button.size() == 1)
   }
 }

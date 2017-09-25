@@ -76,7 +76,13 @@ class EnquiryCategoryViewSpec extends ViewBehaviours {
         labelDefinedAndUsedOnce("valuation_for_public_body")
       }
 
-      "has a link marked 'back' leading to the start page" in {}
+      "has a link marked with site.back leading to the start page" in {
+        val doc = asDocument(createView())
+        val backlinkText = doc.select("a[class=backlink]").text()
+        backlinkText mustBe messages("site.back")
+        val backlinkUrl = doc.select("a[class=backlink]").attr("href")
+        backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url
+      }
     }
 
     for(option <- EnquiryCategoryForm.options) {
