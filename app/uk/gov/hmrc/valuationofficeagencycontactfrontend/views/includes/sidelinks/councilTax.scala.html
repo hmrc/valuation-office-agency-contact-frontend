@@ -16,8 +16,8 @@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 
-@(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
-
+@()(implicit messages: Messages)
+<div class="service-info">
 <div class="govuk-related-items" id="councilTaxLinks" style="display:block">
 <h2 class="heading-medium-side-link">@messages("councilTax.title")</h2>
 <p>@messages("councilTax.information")</p>
@@ -51,4 +51,5 @@
     <p>@messages("councilTax.pay-information")</p>
   </li>
 </ul>
+</div>
 </div>

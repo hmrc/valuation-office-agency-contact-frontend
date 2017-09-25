@@ -15,52 +15,28 @@
  *@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.includes.sidelinks.councilTax
 
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
 @main_template(
     title = messages("postcodeFinder.title"),
     appConfig = appConfig,
+    sidebarLinks = Some(councilTax()),
     bodyClasses = None) {
-<!--
-    <div class="grid-row">
-        <div class="column-two-thirds">
-            <h1 class="heading-xlarge">@messages("postcodeFinder.heading")</h1>
 
-            <p>@messages("postcodeFinder.paragraph")</p>
+    <h1 class="heading-xlarge">@messages("postcodeFinder.heading")</h1>
 
-            <p><a href=@messages("postcodeFinder.royalmail-url") target="_self" onclick="handleOutboundLinkClicks(event, 'FIND-POSTCODE')">@messages("postcodeFinder.royalmail-url.title")</a></p>
-            <p><a href="">@messages("postcodeFinder.nopostcode-url")</a></p>
+    <p>@messages("postcodeFinder.paragraph")</p>
+
+    <p><a href=@messages("postcodeFinder.royalmail-url") target="_self" onclick="handleOutboundLinkClicks(event, 'FIND-POSTCODE')">@messages("postcodeFinder.royalmail-url.title")</a></p>
+    <p><a href="">@messages("postcodeFinder.nopostcode-url")</a></p>
 
 
-            <button id="continue" type="submit" class="button" role="button">@messages("postcodeFinder.continuebutton")</button>
-            <br>
-            <a href="" class="link-back">@messages("postcodeFinder.back-title")</a>
+    <button id="continue" type="submit" class="button" role="button">@messages("postcodeFinder.continuebutton")</button>
+    </br> </br>
 
-
-        </div>
-        <div class="sidebar">
-
-        @uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.includes.sidelinks.councilTax(appConfig)
-
-        </div>
-
-    </div>-->
-
-    <div id="content" class="centered-content">
-        <article class="content__body">
-            <div>
-                <div class="grid-layout grid-layout--maintain-width">
-                    <div class="grid-layout__column grid-layout__column--2-3">
-                        column1mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-                    </div>
-                    <div class="grid-layout__column grid-layout__column--1-3">
-                        column 3
-                    </div>
-                </div>
-            </div>
-        </article>
-    </div>
+    <a href="" class="back-link">@messages("postcodeFinder.back-title")</a>
 
 
 }

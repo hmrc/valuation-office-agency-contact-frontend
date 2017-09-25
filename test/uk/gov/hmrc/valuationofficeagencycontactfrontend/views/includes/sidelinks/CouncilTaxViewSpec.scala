@@ -22,7 +22,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.includes.side
 
 class CouncilTaxViewSpec extends SidelinkBehaviours {
 
-  def view = () => councilTax(frontendAppConfig)(fakeRequest, messages)
+  def view = () => councilTax()(messages)
 
   "Council Tax view" must {
 
