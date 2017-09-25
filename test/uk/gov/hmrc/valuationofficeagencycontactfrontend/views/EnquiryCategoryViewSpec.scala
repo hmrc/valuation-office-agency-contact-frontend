@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
+import org.jsoup.select.Elements
 import play.api.data.Form
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
@@ -30,6 +31,14 @@ class EnquiryCategoryViewSpec extends ViewBehaviours {
 
   def createViewUsingForm = (form: Form[String]) => enquiryCategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
+  def labelDefinedAndUsedOnce(option: String) = {
+    val prefix = "enquiryCategory"
+    val doc = asDocument(createView())
+    assert(messages.isDefinedAt(s"$prefix.$option"))
+    val label = doc.select(s"label[for=$prefix.$option]")
+    assert(label.size() == 1)
+  }
+
   "EnquiryCategory view" must {
     behave like normalPage(createView, messageKeyPrefix)
   }
@@ -42,6 +51,32 @@ class EnquiryCategoryViewSpec extends ViewBehaviours {
           assertContainsRadioButton(doc, option.id, "value", option.value, false)
         }
       }
+
+      "has a radio button with the label set to the message with key enquiryCategory.council_tax and that it is used once" in {
+        labelDefinedAndUsedOnce("council_tax")
+      }
+
+      "has a radio button with the label set to the message with key enquiryCategory.business_rates and that it is used once" in {
+        labelDefinedAndUsedOnce("business_rates")
+      }
+
+      "has a radio button with the label set to the message with key enquiryCategory.housing_benefit and that it is used once" in {
+        labelDefinedAndUsedOnce("housing_benefit")
+      }
+
+      "has a radio button with the label set to the message with key enquiryCategory.providing_lettings and that it is used once" in {
+        labelDefinedAndUsedOnce("providing_lettings")
+      }
+
+      "has a radio button with the label set to the message with key enquiryCategory.valuations_for_tax and that it is used once" in {
+        labelDefinedAndUsedOnce("valuations_for_tax")
+      }
+
+      "has a radio button with the label set to the message with key enquiryCategory.valuation_for_public_body and that it is used once" in {
+        labelDefinedAndUsedOnce("valuation_for_public_body")
+      }
+
+      "has a link marked 'back' leading to the start page" in {}
     }
 
     for(option <- EnquiryCategoryForm.options) {
