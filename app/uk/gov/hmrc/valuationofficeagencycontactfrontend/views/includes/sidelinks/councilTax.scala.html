@@ -1,0 +1,55 @@
+@*
+ * Copyright 2017 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+
+@()(implicit messages: Messages)
+<div class="service-info">
+<div class="govuk-related-items" id="councilTaxLinks" style="display:block">
+<h2 class="heading-medium-side-link">@messages("councilTax.title")</h2>
+<p>@messages("councilTax.information")</p>
+<ul class="results-list">
+  <li>
+    <h3><a href=@messages("councilTax.taxband-url")
+    target="_self"
+    onclick="handleOutboundLinkClicks(event, 'CT-1')">@messages("councilTax.taxband-title")</a></h3>
+    <p>@messages("councilTax.taxband-information")</p>
+  </li>
+  <li>
+    <h3><a href=@messages("councilTax.taxband-changes.url")
+    target="_self"
+    onclick="handleOutboundLinkClicks(event, 'CT-2')">@messages("councilTax.taxband-changes.title")</a></h3>
+    <p>
+      @messages("councilTax.taxband-changes.information")
+    </p>
+  </li>
+  <li>
+    <h3><a href=@messages("councilTax.taxband-assessment.url")
+    target="_self"
+    onclick="handleOutboundLinkClicks(event, 'CT-3')">
+      @messages("councilTax.taxband-assessment.title")</a></h3>
+    <p>@messages("councilTax.taxband-assessment.information")
+    </p>
+  </li>
+  <li>
+    <h3><a href=@messages("councilTax.pay-url")
+    target="_self"
+    onclick="handleOutboundLinkClicks(event, 'CT-4')">@messages("councilTax.pay-title")</a></h3>
+    <p>@messages("councilTax.pay-information")</p>
+  </li>
+</ul>
+</div>
+</div>
