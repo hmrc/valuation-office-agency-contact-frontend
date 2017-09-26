@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend
 
+import org.joda.time.LocalDate
 import org.mockito.Mockito._
 import org.scalatest.mockito.MockitoSugar
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
@@ -33,6 +34,10 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       "go to Index from an identifier that doesn't exist in the route map" in {
         case object UnknownIdentifier extends Identifier
         navigator.nextPage(UnknownIdentifier, NormalMode)(mock[UserAnswers]) mustBe routes.IndexController.onPageLoad()
+      }
+
+      "return a function that goes to the static placeholder page when an enquiry category has been selected" in {
+        navigator.nextPage(EnquiryCategoryId, NormalMode)(mock[UserAnswers]) mustBe routes.StaticPagePlaceholderController.onPageLoad()
       }
     }
 

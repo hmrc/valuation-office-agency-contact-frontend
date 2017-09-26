@@ -28,11 +28,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 class Navigator @Inject()() {
 
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
-    EnquiryCategoryId -> (answers => {
-      if (answers.enquiryCategory.get == "option2")
-        routes.ContactDetailsController.onPageLoad(NormalMode)
-      else
-        routes.CheckYourAnswersController.onPageLoad()})
+    EnquiryCategoryId -> (_ => routes.StaticPagePlaceholderController.onPageLoad())
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map(
