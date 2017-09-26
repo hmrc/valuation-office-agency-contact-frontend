@@ -21,7 +21,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.postcodeFinde
 
 class PostcodeFinderControllerSpec extends ControllerSpecBase {
 
-  "PostcodeF inder Controller" must {
+  "PostcodeFinder Controller" must {
     "return 200 for a GET" in {
       val result = new PostcodeFinderController(frontendAppConfig, messagesApi).onPageLoad()(fakeRequest)
       status(result) mustBe OK
