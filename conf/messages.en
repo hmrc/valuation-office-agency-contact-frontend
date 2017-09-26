@@ -81,14 +81,14 @@ contactDetails.field1 = Field 1
 contactDetails.field2 = Field 2
 contactDetails.checkYourAnswersLabel = contactDetails
 
-postcodeFinder.title = Postcode Finder
-postcodeFinder.heading = What property are you contacting us about?
-postcodeFinder.paragraph = To make sure your enquiry goes to the right team enter the postcode for the property your enquiry is about. This will find contact details for the Valuation Office in your area.
-postcodeFinder.royalmail-url.title = Find a postcode on Royal Mail’s postcode finder
-postcodeFinder.royalmail-url = http://www.royalmail.com/find-a-postcode
-postcodeFinder.nopostcode-url = I don’t have, or can’t find, my postcode
-postcodeFinder.continuebutton = Continue
-postcodeFinder.back-title = Back
+staticPagePlaceholder.title = Postcode Finder
+staticPagePlaceholder.heading = What property are you contacting us about?
+staticPagePlaceholder.paragraph = To make sure your enquiry goes to the right team enter the postcode for the property your enquiry is about. This will find contact details for the Valuation Office in your area.
+staticPagePlaceholder.royalmail-url.title = Find a postcode on Royal Mail’s postcode finder
+staticPagePlaceholder.royalmail-url = http://www.royalmail.com/find-a-postcode
+staticPagePlaceholder.nopostcode-url = I don’t have, or can’t find, my postcode
+staticPagePlaceholder.continuebutton = Continue
+staticPagePlaceholder.back-title = Back
 
 councilTax.title = Useful links for Council Tax
 councilTax.information = These links may help answer your enquiry. They are the most common enquiries the VOA receives.

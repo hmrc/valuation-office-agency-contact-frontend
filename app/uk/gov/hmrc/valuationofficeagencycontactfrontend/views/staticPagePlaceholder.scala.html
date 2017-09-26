@@ -20,23 +20,23 @@
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("postcodeFinder.title"),
+    title = messages("staticPagePlaceholder.title"),
     appConfig = appConfig,
     sidebarLinks = Some(councilTax()),
     bodyClasses = None) {
 
-    <h1 class="heading-xlarge">@messages("postcodeFinder.heading")</h1>
+    <h1 class="heading-xlarge">@messages("staticPagePlaceholder.heading")</h1>
 
-    <p>@messages("postcodeFinder.paragraph")</p>
+    <p>@messages("staticPagePlaceholder.paragraph")</p>
 
-    <p><a href=@messages("postcodeFinder.royalmail-url") target="_self" onclick="handleOutboundLinkClicks(event, 'FIND-POSTCODE')">@messages("postcodeFinder.royalmail-url.title")</a></p>
-    <p><a href="">@messages("postcodeFinder.nopostcode-url")</a></p>
+    <p><a href=@messages("staticPagePlaceholder.royalmail-url") target="_self" onclick="handleOutboundLinkClicks(event, 'FIND-POSTCODE')">@messages("staticPagePlaceholder.royalmail-url.title")</a></p>
+    <p><a href="">@messages("staticPagePlaceholder.nopostcode-url")</a></p>
 
 
-    <button id="continue" type="submit" class="button" role="button">@messages("postcodeFinder.continuebutton")</button>
+    <button id="continue" type="submit" class="button" role="button">@messages("staticPagePlaceholder.continuebutton")</button>
     </br> </br>
 
-    <a href="" class="back-link">@messages("postcodeFinder.back-title")</a>
+    <a href="" class="back-link">@messages("staticPagePlaceholder.back-title")</a>
 
 
 }

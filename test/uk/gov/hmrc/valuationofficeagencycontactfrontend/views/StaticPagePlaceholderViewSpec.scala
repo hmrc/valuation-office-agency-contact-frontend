@@ -17,16 +17,16 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.postcodeFinder
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.staticPagePlaceholder
 
 
-class PostcodeFinderViewSpec extends ViewBehaviours {
+class StaticPagePlaceholderViewSpec extends ViewBehaviours {
 
-  def view = () => postcodeFinder(frontendAppConfig)(fakeRequest, messages)
+  def view = () => staticPagePlaceholder(frontendAppConfig)(fakeRequest, messages)
 
-  "Postcode Finder view" must {
+  "StaticPagePlaceholder view" must {
 
-    behave like normalPage(view, "postcodeFinder", "title", "heading", "paragraph", "royalmail-url", "royalmail-url.title",
+    behave like normalPage(view, "staticPagePlaceholder", "title", "heading", "paragraph", "royalmail-url", "royalmail-url.title",
       "nopostcode-url", "continuebutton", "back-title")
   }
 }

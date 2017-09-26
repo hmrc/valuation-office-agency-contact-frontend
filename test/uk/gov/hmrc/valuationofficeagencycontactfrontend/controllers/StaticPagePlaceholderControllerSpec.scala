@@ -17,19 +17,19 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.test.Helpers._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.postcodeFinder
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.staticPagePlaceholder
 
-class PostcodeFinderControllerSpec extends ControllerSpecBase {
+class StaticPagePlaceholderControllerSpec extends ControllerSpecBase {
 
-  "PostcodeFinder Controller" must {
+  "StaticPagePlaceholder Controller" must {
     "return 200 for a GET" in {
-      val result = new PostcodeFinderController(frontendAppConfig, messagesApi).onPageLoad()(fakeRequest)
+      val result = new StaticPagePlaceholderController(frontendAppConfig, messagesApi).onPageLoad()(fakeRequest)
       status(result) mustBe OK
     }
 
     "return the correct view for a GET" in {
-      val result = new PostcodeFinderController(frontendAppConfig, messagesApi).onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe postcodeFinder(frontendAppConfig)(fakeRequest, messages).toString
+      val result = new StaticPagePlaceholderController(frontendAppConfig, messagesApi).onPageLoad()(fakeRequest)
+      contentAsString(result) mustBe staticPagePlaceholder(frontendAppConfig)(fakeRequest, messages).toString
     }
   }
 }
