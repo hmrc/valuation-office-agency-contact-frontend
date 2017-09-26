@@ -1,0 +1,56 @@
+@*
+ * Copyright 2017 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+
+
+@import uk.gov.hmrc.play.views.html._
+@(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
+
+@main_template(
+    title = messages("enquiryCategory.title"),
+    appConfig = appConfig,
+    bodyClasses = None) {
+
+    <h1 class="heading-xlarge">@messages("enquiryCategory.heading")</h1>
+
+    <a class="enquiry-link" href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.StaticPagePlaceholderController.onPageLoad().url target="_self" >@messages("enquiryCategory.council_tax")</a>
+    @components.progressive_reveal("enquiryCategory.council_tax.summary",Seq("enquiryCategory.council_tax.about1", "enquiryCategory.council_tax.about2", "enquiryCategory.council_tax.about3"))
+
+    <a class="enquiry-link" href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.StaticPagePlaceholderController.onPageLoad().url target="_self" >@messages("enquiryCategory.business_rates")</a></p>
+    @components.progressive_reveal("enquiryCategory.business_rates.summary",Seq("enquiryCategory.business_rates.about1", "enquiryCategory.business_rates.about2"))
+
+    <a class="enquiry-link" href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.StaticPagePlaceholderController.onPageLoad().url target="_self" >@messages("enquiryCategory.housing_benefit")</a>
+    @components.progressive_reveal("enquiryCategory.housing_benefit.summary",Seq("enquiryCategory.housing_benefit.about1", "enquiryCategory.housing_benefit.about2", "enquiryCategory.housing_benefit.about3"),
+    Some(messages("enquiryCategory.housing_benefit.finaltext")))
+
+    <a class="enquiry-link" href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.StaticPagePlaceholderController.onPageLoad().url target="_self" >@messages("enquiryCategory.providing_lettings")</a>
+    @components.progressive_reveal("enquiryCategory.providing_lettings.summary",Seq("enquiryCategory.providing_lettings.about1", "enquiryCategory.providing_lettings.about2"))
+
+    <a class="enquiry-link" href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.StaticPagePlaceholderController.onPageLoad().url target="_self" >@messages("enquiryCategory.valuations_for_tax")</a></p>
+    @components.progressive_reveal("enquiryCategory.valuations_for_tax.summary",Seq("enquiryCategory.valuations_for_tax.about1", "enquiryCategory.valuations_for_tax.about2", "enquiryCategory.valuations_for_tax.about3",
+    "enquiryCategory.valuations_for_tax.about4"))
+
+    <a class="enquiry-link" href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.StaticPagePlaceholderController.onPageLoad().url target="_self" >@messages("enquiryCategory.valuation_for_public_body")</a>
+    @components.progressive_reveal("enquiryCategory.valuation_for_public_body.summary",Seq("enquiryCategory.valuation_for_public_body.about1"),
+        Some(messages("enquiryCategory.valuation_for_public_body.finaltext")))
+
+
+
+    <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url class="back-link">@messages("site.back")</a>
+
+}
+
