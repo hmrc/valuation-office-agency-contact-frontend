@@ -17,6 +17,7 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.includes.sidelinks.councilTax
 
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
 @main_template(
@@ -36,7 +37,7 @@
     <button id="continue" type="submit" class="button" role="button">@messages("staticPagePlaceholder.continuebutton")</button>
     </br> </br>
 
-    <a href="" class="back-link">@messages("staticPagePlaceholder.back-title")</a>
+    <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url class="back-link">@messages("staticPagePlaceholder.back-title")</a>
 
 
 }

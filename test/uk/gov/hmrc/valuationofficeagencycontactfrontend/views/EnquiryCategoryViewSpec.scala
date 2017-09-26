@@ -78,9 +78,9 @@ class EnquiryCategoryViewSpec extends ViewBehaviours {
 
       "has a link marked with site.back leading to the start page" in {
         val doc = asDocument(createView())
-        val backlinkText = doc.select("a[class=backlink]").text()
+        val backlinkText = doc.select("a[class=back-link]").text()
         backlinkText mustBe messages("site.back")
-        val backlinkUrl = doc.select("a[class=backlink]").attr("href")
+        val backlinkUrl = doc.select("a[class=back-link]").attr("href")
         backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url
       }
     }
