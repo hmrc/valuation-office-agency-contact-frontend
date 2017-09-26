@@ -55,7 +55,7 @@ session_expired.title = For your security, this service has been reset
 session_expired.heading = For your security, this service has been reset
 session_expired.guidance = The details you have given have been deleted because you did not continue the service for 1 hour.
 
-site.back = Wibble
+site.back = Back
 site.continue = Continue
 site.delete = Remove
 site.edit = Change
