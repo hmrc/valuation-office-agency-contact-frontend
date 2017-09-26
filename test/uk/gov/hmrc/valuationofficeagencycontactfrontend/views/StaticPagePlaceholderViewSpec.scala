@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.staticPagePlaceholder
 
@@ -28,5 +29,13 @@ class StaticPagePlaceholderViewSpec extends ViewBehaviours {
 
     behave like normalPage(view, "staticPagePlaceholder", "title", "heading", "paragraph", "royalmail-url", "royalmail-url.title",
       "nopostcode-url", "continuebutton", "back-title")
+  }
+
+  "has a link marked with site.back leading to the enquiry category page" in {
+    val doc = asDocument(view())
+    val backlinkText = doc.select("a[class=backlink]").text()
+    backlinkText mustBe messages("site.back")
+    val backlinkUrl = doc.select("a[class=backlink]").attr("href")
+    backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
   }
 }
