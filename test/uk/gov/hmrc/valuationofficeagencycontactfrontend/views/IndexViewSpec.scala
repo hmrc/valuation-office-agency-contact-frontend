@@ -31,7 +31,7 @@ class IndexViewSpec extends ViewBehaviours {
       "housing-title", "lettings-title", "righttobuy-title", "dvs-title", "questions-part1",
       "questions-part2", "questions-part3", "council-url", "start-button", "agents-part1", "agents-part2", "agents-part3",
       "voamaps-url", "scotlandNI-title", "scotlandNI-information", "scotland-url", "scotland-assessors.title", "scotland-assessors.end",
-      "ni-url", "ni-part1", "ni-part2")
+      "ni-url", "ni-part1", "ni-part2", "alternative-start")
   }
 
   "The Start now button links to the enquiryCategoryController onPageLoad method" in {
@@ -44,5 +44,11 @@ class IndexViewSpec extends ViewBehaviours {
     val doc = asDocument(view())
     val button = doc.select("a[class~=button--get-started]")
     assert(button.size() == 1)
+  }
+
+  "The Alternative Start links to the AlternativeCategoryController onPageLoad method" in {
+    val doc = asDocument(view())
+    val href = doc.getElementById("alternativestart").attr("href")
+    assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.AlternativeEnquiryCategoryController.onPageLoad().url.toString)
   }
 }

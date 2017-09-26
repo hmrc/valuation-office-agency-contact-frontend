@@ -49,6 +49,7 @@ index.scotland-assessors.end = in Scotland
 index.ni-url = https://www.finance-ni.gov.uk/contacts/contact-land-property-services
 index.ni-part1 = the Land and Property Services
 index.ni-part2 = in Northern Ireland
+index.alternative-start = Alternative Start
 
 
 session_expired.title = For your security, this service has been reset
@@ -79,6 +80,35 @@ enquiryCategory.providing_lettings = Providing lettings information to, or conta
 enquiryCategory.valuations_for_tax = Valuations for taxes, Right to Buy, or appeals against Community Infrastructure Levy
 enquiryCategory.valuation_for_public_body = Valuation and property advice, for public sector bodies, by DVS
 enquiryCategory.checkYourAnswersLabel = enquiryCategory
+
+enquiryCategory.council_tax.summary = Council Tax enquiries could be about:
+enquiryCategory.council_tax.about1 = your Council Tax band and how it’s assessed
+enquiryCategory.council_tax.about2 = changes you’ve made to your property that you think may affect your Council Tax band
+enquiryCategory.council_tax.about3 = how your Council Tax band is affected by running a home-based business
+
+enquiryCategory.business_rates.summary = Business rates enquiries could be about:
+enquiryCategory.business_rates.about1 = checking or challenging your rateable value
+enquiryCategory.business_rates.about2 = appeals for previous revaluations, such as the 2010 rating list
+
+enquiryCategory.housing_benefit.summary = Housing Benefit enquiries could be about:
+enquiryCategory.housing_benefit.about1 = broad rental market area (BRMA)
+enquiryCategory.housing_benefit.about2 = appeals for previous revaluations, such as the 2010 rating list
+enquiryCategory.housing_benefit.about3 = fair rents
+enquiryCategory.housing_benefit.finaltext = To apply for Housing Benefit, contact your local authority.
+
+enquiryCategory.providing_lettings.summary = Providing lettings enquiries could be about:
+enquiryCategory.providing_lettings.about1 = lettings enquiries for landlords and tenants
+enquiryCategory.providing_lettings.about2 = submitting rental data to a Rent Officer
+
+enquiryCategory.valuations_for_tax.summary = Valuation for taxes enquiries could be about:
+enquiryCategory.valuations_for_tax.about1 = valuations for taxes administered by HMRC
+enquiryCategory.valuations_for_tax.about2 = determination of value for Right to Buy (RTB) in England and Wales, and valuations for RTB in Scotland
+enquiryCategory.valuations_for_tax.about3 = valuations required to support delivery of Department for Work and Pensions (DWP) benefits
+enquiryCategory.valuations_for_tax.about4 = decisions on appeals against the Community Infrastructure Levy
+
+enquiryCategory.valuation_for_public_body.summary = Valuation for public sector bodies enquiries could be about:
+enquiryCategory.valuation_for_public_body.about1 = independent valuation and professional property advice for public bodies
+enquiryCategory.valuation_for_public_body.finaltext = Note: this service also operates in Scotland.
 
 contactDetails.title = contactDetails
 contactDetails.heading = contactDetails

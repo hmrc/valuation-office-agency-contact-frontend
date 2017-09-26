@@ -22,4 +22,5 @@ POST        /contactDetails                     uk.gov.hmrc.valuationofficeagenc
 GET         /changeContactDetails               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onPageLoad(mode: Mode = CheckMode)
 POST        /changeContactDetails               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onSubmit(mode: Mode = CheckMode)
 
-GET         /staticPagePlaceholder                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.StaticPagePlaceholderController.onPageLoad
+GET         /staticPagePlaceholder              uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.StaticPagePlaceholderController.onPageLoad
+GET         /alternativeEnquiryCategory         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.AlternativeEnquiryCategoryController.onPageLoad
