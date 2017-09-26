@@ -55,6 +55,8 @@ session_expired.title = For your security, this service has been reset
 session_expired.heading = For your security, this service has been reset
 session_expired.guidance = The details you have given have been deleted because you did not continue the service for 1 hour.
 
+site.back = Back
+site.continue = Continue
 site.delete = Remove
 site.edit = Change
 site.hidden-delete = Delete {0}
@@ -69,10 +71,13 @@ unauthorised.title = You can’t access this service with this account
 unauthorised.heading = You can’t access this service with this account
 
 enquiryCategory.title = enquiryCategory
-enquiryCategory.heading = enquiryCategory
-enquiryCategory.option1 = enquiryCategory Option 1
-enquiryCategory.option2 = enquiryCategory Option 2
-enquiryCategory.option3 = enquiryCategory Option 3
+enquiryCategory.heading = What’s your enquiry about?
+enquiryCategory.council_tax = Council Tax
+enquiryCategory.business_rates = Business rates
+enquiryCategory.housing_benefit = Housing Benefit, Local Housing Allowances, or fair rents
+enquiryCategory.providing_lettings = Providing lettings information to, or contacting, the Rent Officers
+enquiryCategory.valuations_for_tax = Valuations for taxes, Right to Buy, or appeals against Community Infrastructure Levy
+enquiryCategory.valuation_for_public_body = Valuation and property advice, for public sector bodies, by DVS
 enquiryCategory.checkYourAnswersLabel = enquiryCategory
 
 contactDetails.title = contactDetails

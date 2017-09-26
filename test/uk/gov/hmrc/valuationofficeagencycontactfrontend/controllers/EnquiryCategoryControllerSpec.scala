@@ -89,5 +89,6 @@ class EnquiryCategoryControllerSpec extends ControllerSpecBase {
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(onwardRoute.url)
     }
+
   }
 }

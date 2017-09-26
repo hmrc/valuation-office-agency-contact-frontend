@@ -37,9 +37,12 @@ object EnquiryCategoryForm extends FormErrorHelper {
     Form(single("value" -> of(EnquiryCategoryFormatter)))
 
   def options = Seq(
-    RadioOption("enquiryCategory", "option1"),
-    RadioOption("enquiryCategory", "option2"),
-    RadioOption("enquiryCategory", "option3")
+    RadioOption("enquiryCategory", "council_tax"),
+    RadioOption("enquiryCategory", "business_rates"),
+    RadioOption("enquiryCategory", "housing_benefit"),
+    RadioOption("enquiryCategory", "providing_lettings"),
+    RadioOption("enquiryCategory", "valuations_for_tax"),
+    RadioOption("enquiryCategory", "valuation_for_public_body")
   )
 
   def optionIsValid(value: String) = options.exists(o => o.value == value)
