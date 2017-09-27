@@ -47,7 +47,7 @@
             viewModel = InputViewModel[ContactDetails]("contactPreference", form),
             legend = messages("contactDetails.contactPreference"),
             legendClass = None,
-            inputs = ContactDetailsForm.options
+            inputs = ContactDetailsForm.contactPreferenceOptions
         )
 
         @components.input_textarea(InputViewModel[ContactDetails]("message", form), label = messages("contactDetails.message"))

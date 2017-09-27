@@ -50,7 +50,7 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
 
     "contain radio buttons for the contactPreference" in {
       val doc = asDocument(createViewUsingForm(form))
-      for (option <- ContactDetailsForm.options) {
+      for (option <- ContactDetailsForm.contactPreferenceOptions) {
         assertContainsRadioButton(doc, option.id, "contactPreference", option.value, false)
       }
     }

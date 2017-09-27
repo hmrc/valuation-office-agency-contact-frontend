@@ -34,7 +34,7 @@ object ContactDetailsForm {
     )(ContactDetails.apply)(ContactDetails.unapply)
   )
 
-  def options = Seq(
+  def contactPreferenceOptions = Seq(
     RadioOption("contactDetails", "email_preference"),
     RadioOption("contactDetails", "phone_preference")
   )
