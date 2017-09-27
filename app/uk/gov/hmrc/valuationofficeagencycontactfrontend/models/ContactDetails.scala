@@ -18,7 +18,12 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
 
 import play.api.libs.json._
 
-case class ContactDetails (field1: String, field2: String)
+case class ContactDetails (firstName: String,
+                           lastName: String,
+                           telephoneNumber: String,
+                           email: String,
+                           contactPreference: String,
+                           message: String)
 
 object ContactDetails {
   implicit val format = Json.format[ContactDetails]

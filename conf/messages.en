@@ -111,9 +111,13 @@ enquiryCategory.valuation_for_public_body.about1 = independent valuation and pro
 enquiryCategory.valuation_for_public_body.finaltext = Note: this service also operates in Scotland.
 
 contactDetails.title = contactDetails
-contactDetails.heading = contactDetails
-contactDetails.field1 = Field 1
-contactDetails.field2 = Field 2
+contactDetails.heading = Send  the VOA a message
+contactDetails.firstName = First name
+contactDetails.lastName = Last name
+contactDetails.telephoneNumber = Telephone number
+contactDetails.email = Email address
+contactDetails.contactPreference = Contact Preference
+contactDetails.message = Your message
 contactDetails.checkYourAnswersLabel = contactDetails
 
 staticPagePlaceholder.title = Postcode Finder

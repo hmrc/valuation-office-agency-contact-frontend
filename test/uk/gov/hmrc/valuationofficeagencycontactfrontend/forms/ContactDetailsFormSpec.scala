@@ -22,15 +22,19 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
 class ContactDetailsFormSpec extends FormBehaviours {
 
   val validData: Map[String, String] = Map(
-    "field1" -> "value 1",
-    "field2" -> "value 2"
+    "firstName" -> "value 1",
+    "lastName" -> "value 2",
+    "telephoneNumber" -> "value 3",
+    "email" -> "value 4",
+    "contactPreference" -> "value 5",
+    "message" -> "value 6"
   )
 
   val form = ContactDetailsForm()
 
   "ContactDetails form" must {
-    behave like questionForm(ContactDetails("value 1", "value 2"))
+    behave like questionForm(ContactDetails("value 1", "value 2", "value 3", "value 4", "value 5", "value 6"))
 
-    behave like formWithMandatoryTextFields("field1", "field2")
+    behave like formWithMandatoryTextFields("firstName", "lastName", "telephoneNumber", "email", "contactPreference", "message")
   }
 }

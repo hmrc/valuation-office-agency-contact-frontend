@@ -24,8 +24,12 @@ object ContactDetailsForm {
 
   def apply(): Form[ContactDetails] = Form(
     mapping(
-      "field1" -> nonEmptyText,
-      "field2" -> nonEmptyText
+      "firstName" -> nonEmptyText,
+      "lastName" -> nonEmptyText,
+      "telephoneNumber" -> nonEmptyText,
+      "email" -> nonEmptyText,
+      "contactPreference" -> nonEmptyText,
+      "message" -> nonEmptyText
     )(ContactDetails.apply)(ContactDetails.unapply)
   )
 }
