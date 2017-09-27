@@ -23,7 +23,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow, R
 class CheckYourAnswersHelper(userAnswers: UserAnswers) {
 
   def contactDetails: Option[AnswerRow] = userAnswers.contactDetails map {
-    x => AnswerRow("contactDetails.checkYourAnswersLabel", s"${x.field1} ${x.field2}", false, routes.ContactDetailsController.onPageLoad(CheckMode).url)
+    x => AnswerRow("contactDetails.checkYourAnswersLabel", s"${x.firstName} ${x.lastName} ${x.telephoneNumber} ${x.email} ${x.contactPreference} ${x.message}",
+      false, routes.ContactDetailsController.onPageLoad(CheckMode).url)
   }
 
   def enquiryCategory: Option[AnswerRow] = userAnswers.enquiryCategory map {

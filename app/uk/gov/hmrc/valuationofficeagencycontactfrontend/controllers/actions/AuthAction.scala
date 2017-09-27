@@ -37,9 +37,11 @@ class AuthActionImpl @Inject()(override val authConnector: AuthConnector, config
     implicit val hc: HeaderCarrier = HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))
 
     authorised().retrieve(Retrievals.externalId) {
+      //$COVERAGE-OFF$
       _.map {
         externalId => block(AuthenticatedRequest(request, externalId))
       }.getOrElse(throw new UnauthorizedException("Unable to retrieve external Id"))
+      //$COVERAGE-ON$
     } recover {
       case ex: NoActiveSession =>
         Redirect(config.loginUrl, Map("continue" -> Seq(config.loginContinueUrl)))

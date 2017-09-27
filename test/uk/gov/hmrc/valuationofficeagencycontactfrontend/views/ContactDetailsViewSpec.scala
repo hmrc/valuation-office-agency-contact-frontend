@@ -18,8 +18,8 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import play.api.data.Form
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{NormalMode, ContactDetails}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{ContactDetailsForm, EnquiryCategoryForm}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.QuestionViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.contactDetails
 
@@ -31,12 +31,54 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
 
   def createViewUsingForm = (form: Form[ContactDetails]) => contactDetails(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
+  def labelDefinedAndUsedOnce(option: String) = {
+    val prefix = "contactDetails"
+    val doc = asDocument(createView())
+    assert(messages.isDefinedAt(s"$prefix.$option"))
+    val label = doc.select(s"label[for=$prefix.$option]")
+    assert(label.size() == 1)
+  }
+
   override val form = ContactDetailsForm()
 
   "ContactDetails view" must {
 
     behave like normalPage(createView, messageKeyPrefix)
 
-    behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.ContactDetailsController.onSubmit(NormalMode).url, "field1", "field2")
+    behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.ContactDetailsController.onSubmit(NormalMode).url, "firstName", "lastName",
+    "telephoneNumber", "email", "message")
+
+    "contain radio buttons for the contactPreference" in {
+      val doc = asDocument(createViewUsingForm(form))
+      for (option <- ContactDetailsForm.contactPreferenceOptions) {
+        assertContainsRadioButton(doc, option.id, "contactPreference", option.value, false)
+      }
+    }
+
+
+    "has a radio button with the label set to the message with key contactDetails.email_preference and that it is used once" in {
+      labelDefinedAndUsedOnce("email_preference")
+    }
+
+    "has a radio button with the label set to the message with key contactDetails.phone_preference and that it is used once" in {
+      labelDefinedAndUsedOnce("phone_preference")
+    }
+
+    "has a link marked with site.back leading to the start page" in {
+      val doc = asDocument(createViewUsingForm(form))
+      val backlinkText = doc.select("a[class=back-link]").text()
+      backlinkText mustBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=back-link]").attr("href")
+      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url
+    }
   }
-}
+
+
+
+
+
+
+
+
+
+    }

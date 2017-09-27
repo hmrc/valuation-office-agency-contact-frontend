@@ -15,7 +15,7 @@
  *@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
-
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 
 @import uk.gov.hmrc.play.views.html._
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
@@ -47,6 +47,9 @@
     <a class="enquiry-link" href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.StaticPagePlaceholderController.onPageLoad().url target="_self" >@messages("enquiryCategory.valuation_for_public_body")</a>
     @components.progressive_reveal("enquiryCategory.valuation_for_public_body.summary",Seq("enquiryCategory.valuation_for_public_body.about1"),
         Some(messages("enquiryCategory.valuation_for_public_body.finaltext")))
+
+    <a id="other-business" href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url target="_self" >@messages("enquiryCategory.other_business")</a>
+    </br></br>
 
 
 

@@ -33,7 +33,7 @@ object EnquiryCategoryForm extends FormErrorHelper {
     def unbind(key: String, value: String) = Map(key -> value)
   }
 
-  def apply(): Form[String] = 
+  def apply(): Form[String] =
     Form(single("value" -> of(EnquiryCategoryFormatter)))
 
   def options = Seq(
@@ -42,7 +42,8 @@ object EnquiryCategoryForm extends FormErrorHelper {
     RadioOption("enquiryCategory", "housing_benefit"),
     RadioOption("enquiryCategory", "providing_lettings"),
     RadioOption("enquiryCategory", "valuations_for_tax"),
-    RadioOption("enquiryCategory", "valuation_for_public_body")
+    RadioOption("enquiryCategory", "valuation_for_public_body"),
+    RadioOption("enquiryCategory", "other_business")
   )
 
   def optionIsValid(value: String) = options.exists(o => o.value == value)

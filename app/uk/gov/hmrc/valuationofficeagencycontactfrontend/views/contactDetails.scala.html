@@ -21,6 +21,7 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, ContactDetails}
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.InputViewModel
 
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
 @(appConfig: FrontendAppConfig, form: Form[ContactDetails], mode: Mode)(implicit request: Request[_], messages: Messages)
 
 @main_template(
@@ -34,10 +35,25 @@
 
         @components.heading("contactDetails.heading")
 
-        @components.input_text(InputViewModel[ContactDetails]("field1", form), label = messages("contactDetails.field1"))
+        @components.input_text(InputViewModel[ContactDetails]("firstName", form), label = messages("contactDetails.firstName"))
 
-        @components.input_text(InputViewModel[ContactDetails]("field2", form), label = messages("contactDetails.field2"))
+        @components.input_text(InputViewModel[ContactDetails]("lastName", form), label = messages("contactDetails.lastName"))
+
+        @components.input_text(InputViewModel[ContactDetails]("telephoneNumber", form), label = messages("contactDetails.telephoneNumber"))
+
+        @components.input_text(InputViewModel[ContactDetails]("email", form), label = messages("contactDetails.email"))
+
+        @components.input_radio(
+            viewModel = InputViewModel[ContactDetails]("contactPreference", form),
+            legend = messages("contactDetails.contactPreference"),
+            legendClass = None,
+            inputs = ContactDetailsForm.contactPreferenceOptions
+        )
+
+        @components.input_textarea(InputViewModel[ContactDetails]("message", form), label = messages("contactDetails.message"))
 
         @components.submit_button()
+
+        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url class="back-link">@messages("site.back")</a>
     }
 }

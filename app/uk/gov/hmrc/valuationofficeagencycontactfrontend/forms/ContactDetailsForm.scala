@@ -19,13 +19,23 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 import play.api.data.Form
 import play.api.data.Forms._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object ContactDetailsForm {
 
   def apply(): Form[ContactDetails] = Form(
     mapping(
-      "field1" -> nonEmptyText,
-      "field2" -> nonEmptyText
+      "firstName" -> nonEmptyText,
+      "lastName" -> nonEmptyText,
+      "telephoneNumber" -> nonEmptyText,
+      "email" -> nonEmptyText,
+      "contactPreference" -> nonEmptyText,
+      "message" -> nonEmptyText
     )(ContactDetails.apply)(ContactDetails.unapply)
+  )
+
+  def contactPreferenceOptions = Seq(
+    RadioOption("contactDetails", "email_preference"),
+    RadioOption("contactDetails", "phone_preference")
   )
 }

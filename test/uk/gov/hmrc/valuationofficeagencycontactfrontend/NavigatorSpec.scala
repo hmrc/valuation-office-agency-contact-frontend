@@ -28,23 +28,31 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
 
   val navigator = new Navigator
 
+  val mockUserAnswers = mock[UserAnswers]
+
   "Navigator" when {
 
     "in Normal mode" must {
       "go to Index from an identifier that doesn't exist in the route map" in {
         case object UnknownIdentifier extends Identifier
-        navigator.nextPage(UnknownIdentifier, NormalMode)(mock[UserAnswers]) mustBe routes.IndexController.onPageLoad()
+        navigator.nextPage(UnknownIdentifier, NormalMode)(mockUserAnswers) mustBe routes.IndexController.onPageLoad()
       }
 
-      "return a function that goes to the static placeholder page when an enquiry category has been selected" in {
-        navigator.nextPage(EnquiryCategoryId, NormalMode)(mock[UserAnswers]) mustBe routes.StaticPagePlaceholderController.onPageLoad()
+      "return a function that goes to the static placeholder page when an enquiry category has been selected and the selection is not other business" in {
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.StaticPagePlaceholderController.onPageLoad()
+      }
+
+      "return a function that goes to the contact form page when an enquiry category has been selected and the selection is other business" in {
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("other_business")
+        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
       }
     }
 
     "in Check mode" must {
       "go to CheckYourAnswers from an identifier that doesn't exist in the edit route map" in {
         case object UnknownIdentifier extends Identifier
-        navigator.nextPage(UnknownIdentifier, CheckMode)(mock[UserAnswers]) mustBe routes.CheckYourAnswersController.onPageLoad()
+        navigator.nextPage(UnknownIdentifier, CheckMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
       }
     }
   }

@@ -23,13 +23,23 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CheckMode, Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
+import play.api.Logger
 
 @Singleton
 class Navigator @Inject()() {
 
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
-    EnquiryCategoryId -> (_ => routes.StaticPagePlaceholderController.onPageLoad())
-  )
+    EnquiryCategoryId -> (answers => {
+      answers.enquiryCategory match {
+        case Some("other_business") => routes.ContactDetailsController.onPageLoad(NormalMode)
+        case Some(_) => routes.StaticPagePlaceholderController.onPageLoad()
+        case None => {
+          Logger.warn("Navigation for enquiry category reached without selection of enquiry by controller")
+          throw new RuntimeException("Navigation for enquiry category reached without selection of enquiry by controller")
+        }
+      }
+    }
+  ))
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map(
   )
