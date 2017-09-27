@@ -32,8 +32,9 @@ object BooleanForm extends FormErrorHelper {
         case _ => produceError(key, errorKey)
       }
     }
-
+    //$COVERAGE-OFF$
     def unbind(key: String, value: Boolean) = Map(key -> value.toString)
+    //$COVERAGE-ON$
   }
 
   def apply(errorKey: String = "error.boolean"): Form[Boolean] = Form(single("value" -> of(booleanFormat(errorKey))))

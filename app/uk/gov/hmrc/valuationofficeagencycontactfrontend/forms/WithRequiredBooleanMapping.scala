@@ -32,8 +32,9 @@ trait WithRequiredBooleanMapping {
         case _ => Left(Seq(FormError(key, "error.boolean", Nil)))
       }
     }
-
+    //$COVERAGE-OFF$
     def unbind(key: String, value: Boolean) = Map(key -> value.toString)
+    //$COVERAGE-ON$
   }
 
   val requiredBoolean: Mapping[Boolean] = Forms.of[Boolean](requiredBooleanFormatter)

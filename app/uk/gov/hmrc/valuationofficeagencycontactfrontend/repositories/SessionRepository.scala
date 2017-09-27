@@ -31,7 +31,7 @@ import uk.gov.hmrc.mongo.json.ReactiveMongoFormats
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
-
+//$COVERAGE-OFF$
 case class DatedCacheMap(id: String,
                          data: Map[String, JsValue],
                          lastUpdated: DateTime = DateTime.now(DateTimeZone.UTC))
@@ -96,3 +96,4 @@ class SessionRepository @Inject()(config: Configuration) {
 
   def apply(): ReactiveMongoRepository = sessionRepository
 }
+//$COVERAGE-ON$

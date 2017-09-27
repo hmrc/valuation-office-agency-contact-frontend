@@ -76,6 +76,10 @@ class EnquiryCategoryViewSpec extends ViewBehaviours {
         labelDefinedAndUsedOnce("valuation_for_public_body")
       }
 
+      "has a radio button with the label set to the message with key enquiryCategory.other_business and that it is used once" in {
+        labelDefinedAndUsedOnce("other_business")
+      }
+
       "has a link marked with site.back leading to the start page" in {
         val doc = asDocument(createView())
         val backlinkText = doc.select("a[class=back-link]").text()

@@ -28,8 +28,14 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 class Navigator @Inject()() {
 
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
-    EnquiryCategoryId -> (_ => routes.StaticPagePlaceholderController.onPageLoad())
-  )
+    EnquiryCategoryId -> (answers => {
+      answers.enquiryCategory match {
+        case Some("other_business") => routes.ContactDetailsController.onPageLoad(NormalMode)
+        case Some(_) => routes.StaticPagePlaceholderController.onPageLoad()
+        case None => throw new RuntimeException("Submission of User answers without a selection")
+      }
+    }
+  ))
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map(
   )

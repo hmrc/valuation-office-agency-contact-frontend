@@ -79,6 +79,7 @@ enquiryCategory.housing_benefit = Housing Benefit, Local Housing Allowances, or 
 enquiryCategory.providing_lettings = Providing lettings information to, or contacting, the Rent Officers
 enquiryCategory.valuations_for_tax = Valuations for taxes, Right to Buy, or appeals against Community Infrastructure Levy
 enquiryCategory.valuation_for_public_body = Valuation and property advice, for public sector bodies, by DVS
+enquiryCategory.other_business = Other business
 enquiryCategory.checkYourAnswersLabel = enquiryCategory
 
 enquiryCategory.council_tax.summary = Council Tax enquiries could be about:
@@ -118,6 +119,8 @@ contactDetails.telephoneNumber = Telephone number
 contactDetails.email = Email address
 contactDetails.contactPreference = I prefer to be contacted using
 contactDetails.message = Your message
+contactDetails.email_preference = Email
+contactDetails.phone_preference = Phone
 contactDetails.checkYourAnswersLabel = contactDetails
 
 staticPagePlaceholder.title = Postcode Finder

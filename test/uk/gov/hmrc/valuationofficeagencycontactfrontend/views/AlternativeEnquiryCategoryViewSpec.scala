@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.alternativeEnquiryCategory
 
@@ -33,7 +34,7 @@ class AlternativeEnquiryCategoryViewSpec extends ViewBehaviours {
     "providing_lettings.summary", "providing_lettings.about1", "providing_lettings.about2", "valuations_for_tax.summary",
     "valuations_for_tax.about1", "valuations_for_tax.about2", "valuations_for_tax.about3", "valuations_for_tax.about4",
     "valuation_for_public_body.summary", "valuation_for_public_body.about1", "housing_benefit.finaltext",
-      "valuation_for_public_body.finaltext")
+      "valuation_for_public_body.finaltext", "other_business")
   }
 
   "has a link marked with site.back leading to the start page" in {
@@ -48,5 +49,11 @@ class AlternativeEnquiryCategoryViewSpec extends ViewBehaviours {
     val doc = asDocument(view())
     val button = doc.select("a[class~=enquiry-link]")
     assert(button.size() == 6)
+  }
+
+  "has a link marked with other-business leading to the contact form page" in {
+    val doc = asDocument(view())
+    val contactFormUrl = doc.getElementById("other-business").attr("href")
+    contactFormUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url
   }
 }

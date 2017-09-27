@@ -21,6 +21,7 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, ContactDetails}
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.InputViewModel
 
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
 @(appConfig: FrontendAppConfig, form: Form[ContactDetails], mode: Mode)(implicit request: Request[_], messages: Messages)
 
 @main_template(
@@ -42,10 +43,17 @@
 
         @components.input_text(InputViewModel[ContactDetails]("email", form), label = messages("contactDetails.email"))
 
-        @components.input_text(InputViewModel[ContactDetails]("contactPreference", form), label = messages("contactDetails.contactPreference"))
+        @components.input_radio(
+            viewModel = InputViewModel[ContactDetails]("contactPreference", form),
+            legend = messages("contactDetails.contactPreference"),
+            legendClass = None,
+            inputs = ContactDetailsForm.options
+        )
 
-        @components.input_text(InputViewModel[ContactDetails]("message", form), label = messages("contactDetails.message"))
+        @components.input_textarea(InputViewModel[ContactDetails]("message", form), label = messages("contactDetails.message"))
 
         @components.submit_button()
+
+        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url class="back-link">@messages("site.back")</a>
     }
 }

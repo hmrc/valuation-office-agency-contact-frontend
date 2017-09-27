@@ -45,5 +45,29 @@ class ContactDetailsSpec extends FlatSpec {
     assert(c.message === "Just a message")
   }
 
+  "Wrong First name " should "shouldn't be Alex1" in {
+    assert(c.firstName != "Alex1")
+  }
+
+  "Wrong Last name " should "shouldn't be Smith1" in {
+    assert(c.lastName != "Smith1")
+  }
+
+  "Wrong Telephone number " should "shouldn't be 07727823457" in {
+    assert(c.telephoneNumber != "07727823457")
+  }
+
+  "Wrong Email address " should "shouldn't be test@email.com1" in {
+    assert(c.email != "test@email.com1")
+  }
+
+  "Wrong Contact Preference " should "shouldn't be phone1" in {
+    assert(c.contactPreference != "phone1")
+  }
+
+  "Wrong Message should be " should "shouldn't be Just a message1" in {
+    assert(c.message != "Just a message1")
+  }
+
 
 }
