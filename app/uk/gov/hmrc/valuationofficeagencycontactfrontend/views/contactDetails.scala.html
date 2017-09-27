@@ -34,13 +34,17 @@
 
         @components.heading("contactDetails.heading")
 
-        @components.input_text(InputViewModel[ContactDetails]("first_name", form), label = messages("contactDetails.first_name"))
+        @components.input_text(InputViewModel[ContactDetails]("firstName", form), label = messages("contactDetails.firstName"))
 
-        @components.input_text(InputViewModel[ContactDetails]("last_name", form), label = messages("contactDetails.last_name"))
+        @components.input_text(InputViewModel[ContactDetails]("lastName", form), label = messages("contactDetails.lastName"))
 
-        @components.input_text(InputViewModel[ContactDetails]("field3", form), label = messages("contactDetails.field2"))
+        @components.input_text(InputViewModel[ContactDetails]("telephoneNumber", form), label = messages("contactDetails.telephoneNumber"))
 
-        @components.input_text(InputViewModel[ContactDetails]("field4", form), label = messages("contactDetails.field2"))
+        @components.input_text(InputViewModel[ContactDetails]("email", form), label = messages("contactDetails.email"))
+
+        @components.input_text(InputViewModel[ContactDetails]("contactPreference", form), label = messages("contactDetails.contactPreference"))
+
+        @components.input_text(InputViewModel[ContactDetails]("message", form), label = messages("contactDetails.message"))
 
         @components.submit_button()
     }
