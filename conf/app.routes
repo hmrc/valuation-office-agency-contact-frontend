@@ -24,3 +24,9 @@ POST        /changeContactDetails               uk.gov.hmrc.valuationofficeagenc
 
 GET         /staticPagePlaceholder              uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.StaticPagePlaceholderController.onPageLoad
 GET         /alternativeEnquiryCategory         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.AlternativeEnquiryCategoryController.onPageLoad
+
+GET        /councilTaxSubcategory               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onPageLoad(mode: Mode = NormalMode)
+POST       /councilTaxSubcategory               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onSubmit(mode: Mode = NormalMode)
+
+GET        /changeCouncilTaxSubcategory         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onPageLoad(mode: Mode = CheckMode)
+POST       /changeCouncilTaxSubcategory         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onSubmit(mode: Mode = CheckMode)

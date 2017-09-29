@@ -146,3 +146,9 @@ councilTax.taxband-assessment.information = How domestic properties are valued f
 councilTax.pay-url = https://www.gov.uk/pay-council-tax
 councilTax.pay-title= Pay your Council Tax
 councilTax.pay-information = Search for your local authority and pay your Council Tax online.
+
+councilTaxSubcategory.title = councilTaxSubcategory
+councilTaxSubcategory.heading = councilTaxSubcategory
+councilTaxSubcategory.option1 = councilTaxSubcategory Option 1
+councilTaxSubcategory.option2 = councilTaxSubcategory Option 2
+councilTaxSubcategory.checkYourAnswersLabel = councilTaxSubcategory
