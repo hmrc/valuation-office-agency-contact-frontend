@@ -43,7 +43,9 @@ class Navigator @Inject()() {
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     EnquiryCategoryId -> enquiryRouting,
     CouncilTaxSubcategoryId -> (answers => routes.ContactDetailsController.onPageLoad(NormalMode)),
-    BusinessRatesSubcategoryId -> (answers => routes.ContactDetailsController.onPageLoad(NormalMode)))
+    BusinessRatesSubcategoryId -> (answers => routes.ContactDetailsController.onPageLoad(NormalMode)),
+    ContactDetailsId -> (contactAnswers => routes.PropertyDetailsController.onPageLoad(NormalMode)),
+    PropertyDetailsId -> (propertyAnswers => routes.CheckYourAnswersController.onPageLoad()))
 
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map(

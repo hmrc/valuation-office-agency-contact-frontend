@@ -71,6 +71,12 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
       val backlinkUrl = doc.select("a[class=back-link]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url
     }
+
+    "contain continue button with the value Continue" in {
+      val doc = asDocument(createViewUsingForm(ContactDetailsForm()))
+      val continueButton = doc.getElementById("submit").text()
+      assert(continueButton == messages("site.continue"))
+    }
   }
 
 

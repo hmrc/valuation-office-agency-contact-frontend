@@ -1,0 +1,53 @@
+@*
+ * Copyright 2017 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+@import uk.gov.hmrc.play.views.html._
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.FormHelpers
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, PropertyDetails}
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.InputViewModel
+
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+@(appConfig: FrontendAppConfig, form: Form[PropertyDetails], mode: Mode)(implicit request: Request[_], messages: Messages)
+
+@main_template(
+    title = messages("propertyDetails.title"),
+    appConfig = appConfig,
+    bodyClasses = None) {
+
+    @helpers.form(action = PropertyDetailsController.onSubmit(mode), 'autoComplete -> "off") {
+
+        @components.error_summary(form.errors)
+
+        @components.heading("propertyDetails.heading")
+
+        @components.input_text(InputViewModel[PropertyDetails]("addressLine1", form), label = messages("propertyDetails.addressLine1"))
+
+        @components.input_text(InputViewModel[PropertyDetails]("addressLine2", form), label = messages("propertyDetails.addressLine2"))
+
+        @components.input_text(InputViewModel[PropertyDetails]("town", form), label = messages("propertyDetails.town"))
+
+        @components.input_text(InputViewModel[PropertyDetails]("county", form), label = messages("propertyDetails.county"))
+
+        @components.input_text(InputViewModel[PropertyDetails]("postcode", form), label = messages("propertyDetails.postcode"))
+
+        @components.continue_button()
+
+        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url class="back-link">@messages("site.back")</a>
+
+    }
+}

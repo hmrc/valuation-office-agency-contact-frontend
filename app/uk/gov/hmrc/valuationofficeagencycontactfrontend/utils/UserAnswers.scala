@@ -21,6 +21,9 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 
 class UserAnswers(val cacheMap: CacheMap) {
+
+  def propertyDetails: Option[PropertyDetails] = cacheMap.getEntry[PropertyDetails](PropertyDetailsId.toString)
+
   def enquiryCategory: Option[String] = cacheMap.getEntry[String](EnquiryCategoryId.toString)
 
   def councilTaxSubcategory: Option[String] = cacheMap.getEntry[String](CouncilTaxSubcategoryId.toString)

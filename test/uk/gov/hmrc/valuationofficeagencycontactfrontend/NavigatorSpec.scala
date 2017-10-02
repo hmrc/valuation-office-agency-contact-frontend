@@ -63,6 +63,16 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
       }
 
+      "return a function that goes to the property details page when the contact form has been submitted without errors" in {
+        when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "073753753733", "Phone", "your message"))
+        navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.PropertyDetailsController.onPageLoad(NormalMode)
+      }
+
+      "return a function that goes to the check your details page when the property details form has been submitted without errors" in {
+        when (mockUserAnswers.propertyDetails) thenReturn Some(PropertyDetails("1", "Street", "Town", "Some county", "AA11AA"))
+        navigator.nextPage(PropertyDetailsId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
+      }
+
     }
 
     "in Check mode" must {
