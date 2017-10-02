@@ -42,8 +42,7 @@ object EnquiryCategoryForm extends FormErrorHelper {
     RadioOption("enquiryCategory", "housing_benefit"),
     RadioOption("enquiryCategory", "providing_lettings"),
     RadioOption("enquiryCategory", "valuations_for_tax"),
-    RadioOption("enquiryCategory", "valuation_for_public_body"),
-    RadioOption("enquiryCategory", "other_business")
+    RadioOption("enquiryCategory", "valuation_for_public_body")
   )
 
   def optionIsValid(value: String) = options.exists(o => o.value == value)
