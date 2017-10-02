@@ -20,11 +20,10 @@ class Edit$className;format="cap"$Controller @Inject()(appConfig: FrontendAppCon
                                                   override val messagesApi: MessagesApi,
                                                   dataCacheConnector: DataCacheConnector,
                                                   navigator: Navigator,
-                                                  authenticate: AuthAction,
                                                   getData: DataRetrievalAction,
                                                   requireData: DataRequiredAction) extends FrontendController with I18nSupport {
 
-  def onPageLoad(index: Int, mode: Mode) = (authenticate andThen getData andThen requireData) {
+  def onPageLoad(index: Int, mode: Mode) = (getData andThen requireData) {
     implicit request =>
       request.userAnswers.$pluralName;format="decap"$.flatMap(x => x.lift(index)) match {
         case None => NotFound
@@ -32,7 +31,7 @@ class Edit$className;format="cap"$Controller @Inject()(appConfig: FrontendAppCon
       }
   }
 
-  def onSubmit(index: Int, mode: Mode) = (authenticate andThen getData andThen requireData).async {
+  def onSubmit(index: Int, mode: Mode) = (getData andThen requireData).async {
     implicit request =>
       request.userAnswers.$pluralName;format="decap"$.flatMap(x => x.lift(index)) match {
         case None => Future.successful(NotFound)
@@ -41,7 +40,7 @@ class Edit$className;format="cap"$Controller @Inject()(appConfig: FrontendAppCon
             (formWithErrors: Form[$className$]) =>
               Future.successful(BadRequest(edit$className$(index, appConfig, formWithErrors, mode))),
             (value) =>
-              dataCacheConnector.replaceInCollection[$className$](request.externalId, $pluralName$Id.toString, index, value).map(cacheMap =>
+              dataCacheConnector.replaceInCollection[$className$](request.sessionId, $pluralName$Id.toString, index, value).map(cacheMap =>
                 Redirect(navigator.nextPage(Edit$className$Id, mode)(new UserAnswers(cacheMap)))
               )
           )

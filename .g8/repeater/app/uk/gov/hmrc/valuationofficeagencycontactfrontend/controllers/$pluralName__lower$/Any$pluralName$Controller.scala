@@ -20,11 +20,10 @@ class Any$pluralName$Controller @Inject()(appConfig: FrontendAppConfig,
                                          override val messagesApi: MessagesApi,
                                          dataCacheConnector: DataCacheConnector,
                                          navigator: Navigator,
-                                         authenticate: AuthAction,
                                          getData: DataRetrievalAction,
                                          requireData: DataRequiredAction) extends FrontendController with I18nSupport {
 
-  def onPageLoad(mode: Mode) = (authenticate andThen getData andThen requireData) {
+  def onPageLoad(mode: Mode) = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.any$pluralName$ match {
         case None => BooleanForm()
@@ -33,13 +32,13 @@ class Any$pluralName$Controller @Inject()(appConfig: FrontendAppConfig,
       Ok(any$pluralName$(appConfig, preparedForm, mode))
   }
 
-  def onSubmit(mode: Mode) = (authenticate andThen getData andThen requireData).async {
+  def onSubmit(mode: Mode) = (getData andThen requireData).async {
     implicit request =>
       BooleanForm().bindFromRequest().fold(
         (formWithErrors: Form[Boolean]) =>
           Future.successful(BadRequest(any$pluralName$(appConfig, formWithErrors, mode))),
         (value) =>
-          dataCacheConnector.save[Boolean](request.externalId, Any$pluralName$Id.toString, value).map(cacheMap =>
+          dataCacheConnector.save[Boolean](request.sessionId, Any$pluralName$Id.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(Any$pluralName$Id, mode)(new UserAnswers(cacheMap))))
       )
   }

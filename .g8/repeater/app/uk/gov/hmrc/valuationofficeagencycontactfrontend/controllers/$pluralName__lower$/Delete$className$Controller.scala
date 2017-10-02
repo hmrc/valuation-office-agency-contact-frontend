@@ -20,11 +20,10 @@ class Delete$className;format="cap"$Controller @Inject()(appConfig: FrontendAppC
                                                   override val messagesApi: MessagesApi,
                                                   dataCacheConnector: DataCacheConnector,
                                                   navigator: Navigator,
-                                                  authenticate: AuthAction,
                                                   getData: DataRetrievalAction,
                                                   requireData: DataRequiredAction) extends FrontendController with I18nSupport {
 
-  def onPageLoad(index: Int, mode: Mode) = (authenticate andThen getData andThen requireData) {
+  def onPageLoad(index: Int, mode: Mode) = (getData andThen requireData) {
     implicit request =>
       request.userAnswers.$pluralName;format="decap"$.flatMap(x => x.lift(index)) match {
         case None => NotFound
@@ -32,7 +31,7 @@ class Delete$className;format="cap"$Controller @Inject()(appConfig: FrontendAppC
       }
   }
 
-  def onSubmit(index: Int, mode: Mode) = (authenticate andThen getData andThen requireData).async {
+  def onSubmit(index: Int, mode: Mode) = (getData andThen requireData).async {
     implicit request =>
       request.userAnswers.$pluralName;format="decap"$.flatMap(x => x.lift(index)) match {
         case None => Future.successful(NotFound)
@@ -42,7 +41,7 @@ class Delete$className;format="cap"$Controller @Inject()(appConfig: FrontendAppC
               Future.successful(BadRequest(delete$className$(index, $className;format="decap"$, appConfig, formWithErrors, mode))),
             (value) =>
               if (value) {
-              dataCacheConnector.removeFromCollection[$className$](request.externalId, $pluralName$Id.toString, $className;format="decap"$).map(cacheMap =>
+              dataCacheConnector.removeFromCollection[$className$](request.sessionId, $pluralName$Id.toString, $className;format="decap"$).map(cacheMap =>
                 Redirect(navigator.nextPage(Delete$className$Id, mode)(new UserAnswers(cacheMap))))
               } else {
                 Future.successful(Redirect(navigator.nextPage(Delete$className$Id, mode)(request.userAnswers)))
