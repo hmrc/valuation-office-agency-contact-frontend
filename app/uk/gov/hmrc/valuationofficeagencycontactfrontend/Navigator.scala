@@ -28,19 +28,22 @@ import play.api.Logger
 @Singleton
 class Navigator @Inject()() {
 
-  private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
-    EnquiryCategoryId -> (answers => {
-      answers.enquiryCategory match {
-        case Some("council_tax") => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
-        case Some("other_business") => routes.ContactDetailsController.onPageLoad(NormalMode)
-        case Some(_) => routes.StaticPagePlaceholderController.onPageLoad()
-        case None => {
-          Logger.warn("Navigation for enquiry category reached without selection of enquiry by controller")
-          throw new RuntimeException("Navigation for enquiry category reached without selection of enquiry by controller")
-        }
+  val enquiryRouting: UserAnswers => Call = answers => {
+    answers.enquiryCategory match {
+      case Some("council_tax") => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
+      case Some("other_business") => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case Some(_) => routes.StaticPagePlaceholderController.onPageLoad()
+      case None => {
+        Logger.warn("Navigation for enquiry category reached without selection of enquiry by controller")
+        throw new RuntimeException("Navigation for enquiry category reached without selection of enquiry by controller")
       }
     }
-  ))
+  }
+
+  private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
+    EnquiryCategoryId -> enquiryRouting,
+    CouncilTaxSubcategoryId -> (answers => routes.ContactDetailsController.onPageLoad(NormalMode)))
+
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map(
   )

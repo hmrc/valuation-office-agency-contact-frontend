@@ -37,8 +37,10 @@ object CouncilTaxSubcategoryForm extends FormErrorHelper {
     Form(single("value" -> of(CouncilTaxSubcategoryFormatter)))
 
   def options = Seq(
-    RadioOption("councilTaxSubcategory", "option1"),
-    RadioOption("councilTaxSubcategory", "option2")
+    RadioOption("councilTaxSubcategory", "find"),
+    RadioOption("councilTaxSubcategory", "change"),
+    RadioOption("councilTaxSubcategory", "asses"),
+    RadioOption("councilTaxSubcategory", "pay")
   )
 
   def optionIsValid(value: String) = options.exists(o => o.value == value)

@@ -52,6 +52,12 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         when (mockUserAnswers.enquiryCategory) thenReturn Some("other_business")
         navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
       }
+
+      "return a function that goes to the contact form page when an enquiry category for council tax has been selected" in {
+        when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("find")
+        navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
+      }
+
     }
 
     "in Check mode" must {

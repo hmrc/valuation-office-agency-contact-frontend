@@ -149,8 +149,9 @@ councilTax.pay-information = Search for your local authority and pay your Counci
 
 councilTaxSubcategory.title = Council Tax Enquiry
 councilTaxSubcategory.heading = What’s your enquiry about?
-councilTaxSubcategory.option1 = Option 1
-councilTaxSubcategory.option2 = Option 2
-councilTaxSubcategory.firstheader = Council Tax Enquiry
+councilTaxSubcategory.find = Finding my council tax band
+councilTaxSubcategory.change = Has my band changed
+councilTaxSubcategory.asses = Property assessment
+councilTaxSubcategory.pay = Paying council tax
 councilTaxSubcategory.para1 = Contact Details of the Council Tax Office
 councilTaxSubcategory.checkYourAnswersLabel = councilTaxSubcategory
