@@ -147,8 +147,10 @@ councilTax.pay-url = https://www.gov.uk/pay-council-tax
 councilTax.pay-title= Pay your Council Tax
 councilTax.pay-information = Search for your local authority and pay your Council Tax online.
 
-councilTaxSubcategory.title = councilTaxSubcategory
-councilTaxSubcategory.heading = councilTaxSubcategory
-councilTaxSubcategory.option1 = councilTaxSubcategory Option 1
-councilTaxSubcategory.option2 = councilTaxSubcategory Option 2
+councilTaxSubcategory.title = Council Tax Enquiry
+councilTaxSubcategory.heading = What’s your enquiry about?
+councilTaxSubcategory.option1 = Option 1
+councilTaxSubcategory.option2 = Option 2
+councilTaxSubcategory.firstheader = Council Tax Enquiry
+councilTaxSubcategory.para1 = Contact Details of the Council Tax Office
 councilTaxSubcategory.checkYourAnswersLabel = councilTaxSubcategory
