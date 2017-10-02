@@ -63,6 +63,11 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
       }
 
+      "return a function that goes to the contact form page when an enquiry category for business rates has been selected" in {
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("check")
+        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
+      }
+
     }
 
     "in Check mode" must {

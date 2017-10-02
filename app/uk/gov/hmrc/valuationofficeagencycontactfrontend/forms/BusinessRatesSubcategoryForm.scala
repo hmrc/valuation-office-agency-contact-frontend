@@ -37,8 +37,11 @@ object BusinessRatesSubcategoryForm extends FormErrorHelper {
     Form(single("value" -> of(BusinessRatesSubcategoryFormatter)))
 
   def options = Seq(
-    RadioOption("businessRatesSubcategory", "option1"),
-    RadioOption("businessRatesSubcategory", "option2")
+    RadioOption("businessRatesSubcategory", "check"),
+    RadioOption("businessRatesSubcategory", "proposal"),
+    RadioOption("businessRatesSubcategory", "estimate"),
+    RadioOption("businessRatesSubcategory", "valuation"),
+    RadioOption("businessRatesSubcategory", "change")
   )
 
   def optionIsValid(value: String) = options.exists(o => o.value == value)

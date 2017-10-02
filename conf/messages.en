@@ -156,26 +156,13 @@ councilTaxSubcategory.pay = Paying council tax
 councilTaxSubcategory.para1 = Contact Details of the Council Tax Office
 councilTaxSubcategory.checkYourAnswersLabel = councilTaxSubcategory
 
-businessRatesSubcategory.title = businessRatesSubcategory
-businessRatesSubcategory.heading = businessRatesSubcategory
-businessRatesSubcategory.option1 = businessRatesSubcategory Option 1
-businessRatesSubcategory.option2 = businessRatesSubcategory Option 2
+businessRatesSubcategory.title = Business Rates
+businessRatesSubcategory.heading = What’s your enquiry about?
+businessRatesSubcategory.check = Check and challenge your business rates valuation
+businessRatesSubcategory.proposal = Proposal to alter the 2017 rating list for Wales
+businessRatesSubcategory.estimate = Estimate your business rates
+businessRatesSubcategory.valuation = I think my valuation is too high
+businessRatesSubcategory.change = My business or premises have changed
 businessRatesSubcategory.checkYourAnswersLabel = businessRatesSubcategory
 
-contactDetails.title = contactDetails
-contactDetails.heading = contactDetails
-contactDetails.field1 = Field 1
-contactDetails.field2 = Field 2
-contactDetails.checkYourAnswersLabel = contactDetails
 
-councilTaxSubcategory.title = councilTaxSubcategory
-councilTaxSubcategory.heading = councilTaxSubcategory
-councilTaxSubcategory.option1 = councilTaxSubcategory Option 1
-councilTaxSubcategory.option2 = councilTaxSubcategory Option 2
-councilTaxSubcategory.checkYourAnswersLabel = councilTaxSubcategory
-
-enquiryCategory.title = enquiryCategory
-enquiryCategory.heading = enquiryCategory
-enquiryCategory.option1 = enquiryCategory Option 1
-enquiryCategory.option2 = enquiryCategory Option 2
-enquiryCategory.checkYourAnswersLabel = enquiryCategory
