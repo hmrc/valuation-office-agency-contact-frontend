@@ -38,15 +38,36 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(UnknownIdentifier, NormalMode)(mockUserAnswers) mustBe routes.IndexController.onPageLoad()
       }
 
-      "return a function that goes to the static placeholder page when an enquiry category has been selected and the selection is not other business" in {
-        when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      "return a function that goes to the static placeholder page when an enquiry category has been selected and the selection is not other business or council tax or business rates" in {
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
         navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.StaticPagePlaceholderController.onPageLoad()
+      }
+
+      "return a function that goes to the council tax subcategory page when an enquiry category has been selected and the selection is council tax" in {
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
       }
 
       "return a function that goes to the contact form page when an enquiry category has been selected and the selection is other business" in {
         when (mockUserAnswers.enquiryCategory) thenReturn Some("other_business")
         navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
       }
+
+      "return a function that goes to the contact form page when an enquiry category for council tax has been selected" in {
+        when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("find")
+        navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
+      }
+
+      "return a function that goes to the business rates subcategory page when an enquiry category has been selected and the selection is business" in {
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
+      }
+
+      "return a function that goes to the contact form page when an enquiry category for business rates has been selected" in {
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("check")
+        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
+      }
+
     }
 
     "in Check mode" must {

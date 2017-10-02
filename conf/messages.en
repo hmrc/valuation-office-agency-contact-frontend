@@ -146,3 +146,23 @@ councilTax.taxband-assessment.information = How domestic properties are valued f
 councilTax.pay-url = https://www.gov.uk/pay-council-tax
 councilTax.pay-title= Pay your Council Tax
 councilTax.pay-information = Search for your local authority and pay your Council Tax online.
+
+councilTaxSubcategory.title = Council Tax Enquiry
+councilTaxSubcategory.heading = What’s your enquiry about?
+councilTaxSubcategory.find = Finding my council tax band
+councilTaxSubcategory.change = Has my band changed
+councilTaxSubcategory.assess = Property assessment
+councilTaxSubcategory.pay = Paying council tax
+councilTaxSubcategory.para1 = Contact Details of the Council Tax Office
+councilTaxSubcategory.checkYourAnswersLabel = councilTaxSubcategory
+
+businessRatesSubcategory.title = Business Rates
+businessRatesSubcategory.heading = What’s your enquiry about?
+businessRatesSubcategory.check = Check and challenge your business rates valuation
+businessRatesSubcategory.proposal = Proposal to alter the 2017 rating list for Wales
+businessRatesSubcategory.estimate = Estimate your business rates
+businessRatesSubcategory.valuation = I think my valuation is too high
+businessRatesSubcategory.business_change = My business or premises have changed
+businessRatesSubcategory.checkYourAnswersLabel = businessRatesSubcategory
+
+
