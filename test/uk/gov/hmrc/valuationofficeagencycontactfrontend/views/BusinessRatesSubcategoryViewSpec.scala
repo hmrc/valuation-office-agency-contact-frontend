@@ -42,6 +42,12 @@ class BusinessRatesSubcategoryViewSpec extends ViewBehaviours {
           assertContainsRadioButton(doc, option.id, "value", option.value, false)
         }
       }
+
+      "contain continue button with the value Continue" in {
+        val doc = asDocument(createViewUsingForm(BusinessRatesSubcategoryForm()))
+        val continueButton = doc.getElementById("submit").text()
+        assert(continueButton == messages("site.continue"))
+      }
     }
 
     for(option <- BusinessRatesSubcategoryForm.options) {

@@ -45,6 +45,12 @@ class EnquiryCategoryViewSpec extends ViewBehaviours {
 
   "EnquiryCategory view" when {
     "rendered" must {
+
+      "contain continue button with the value Continue" in {
+        val doc = asDocument(createViewUsingForm(EnquiryCategoryForm()))
+        val continueButton = doc.getElementById("submit").text()
+        assert(continueButton == messages("site.continue"))
+      }
       "contain radio buttons for the value" in {
         val doc = asDocument(createViewUsingForm(EnquiryCategoryForm()))
         for (option <- EnquiryCategoryForm.options) {
