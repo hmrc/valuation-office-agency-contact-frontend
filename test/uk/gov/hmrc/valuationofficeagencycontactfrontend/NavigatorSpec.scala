@@ -38,7 +38,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(UnknownIdentifier, NormalMode)(mockUserAnswers) mustBe routes.IndexController.onPageLoad()
       }
 
-      "return a function that goes to the static placeholder page when an enquiry category has been selected and the selection is not other business or council tax" in {
+      "return a function that goes to the static placeholder page when an enquiry category has been selected and the selection is not other business or council tax or business rates" in {
         when (mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
         navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.StaticPagePlaceholderController.onPageLoad()
       }
@@ -56,6 +56,11 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       "return a function that goes to the contact form page when an enquiry category for council tax has been selected" in {
         when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("find")
         navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
+      }
+
+      "return a function that goes to the business rates subcategory page when an enquiry category has been selected and the selection is business" in {
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
       }
 
     }

@@ -22,16 +22,20 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow, R
 
 class CheckYourAnswersHelper(userAnswers: UserAnswers) {
 
+  def enquiryCategory: Option[AnswerRow] = userAnswers.enquiryCategory map {
+    x => AnswerRow("enquiryCategory.checkYourAnswersLabel", s"enquiryCategory.$x", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url)
+  }
+
   def councilTaxSubcategory: Option[AnswerRow] = userAnswers.councilTaxSubcategory map {
     x => AnswerRow("councilTaxSubcategory.checkYourAnswersLabel", s"councilTaxSubcategory.$x", true, routes.CouncilTaxSubcategoryController.onPageLoad(CheckMode).url)
   }
 
   def contactDetails: Option[AnswerRow] = userAnswers.contactDetails map {
-    x => AnswerRow("contactDetails.checkYourAnswersLabel", s"${x.firstName} ${x.lastName} ${x.telephoneNumber} ${x.email} ${x.contactPreference} ${x.message}",
-      false, routes.ContactDetailsController.onPageLoad(CheckMode).url)
+    x => AnswerRow("contactDetails.checkYourAnswersLabel", s"${x.firstName} ${x.lastName} ${x.lastName}", false, routes.ContactDetailsController.onPageLoad(CheckMode).url)
   }
 
-  def enquiryCategory: Option[AnswerRow] = userAnswers.enquiryCategory map {
-    x => AnswerRow("enquiryCategory.checkYourAnswersLabel", s"enquiryCategory.$x", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url)
+  def businessRatesSubcategory: Option[AnswerRow] = userAnswers.businessRatesSubcategory map {
+    x => AnswerRow("businessRatesSubcategory.checkYourAnswersLabel", s"businessRatesSubcategory.$x", true, routes.BusinessRatesSubcategoryController.onPageLoad(CheckMode).url)
   }
+
 }

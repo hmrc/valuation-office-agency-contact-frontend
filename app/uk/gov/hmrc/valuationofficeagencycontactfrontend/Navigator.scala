@@ -31,6 +31,7 @@ class Navigator @Inject()() {
   val enquiryRouting: UserAnswers => Call = answers => {
     answers.enquiryCategory match {
       case Some("council_tax") => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
+      case Some("business_rates") => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
       case Some("other_business") => routes.ContactDetailsController.onPageLoad(NormalMode)
       case Some(_) => routes.StaticPagePlaceholderController.onPageLoad()
       case None => {
