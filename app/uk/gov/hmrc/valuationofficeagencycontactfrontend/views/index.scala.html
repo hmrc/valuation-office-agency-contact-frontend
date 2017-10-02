@@ -20,57 +20,91 @@
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("index.title"),
+    title = messages("checkBeforeYouStart.title"),
     appConfig = appConfig,
     bodyClasses = None) {
 
-    <h1 class="heading-xlarge">@messages("index.heading")</h1>
+    <h1 class="heading-xlarge">@messages("checkBeforeYouStart.heading")</h1>
 
-    <p>@messages("index.general-information")</p>
+    <p>@messages("checkBeforeYouStart.para1")</p>
 
-    <p>@messages("index.contact-guidance")</p>
+    <div class="grid-layout grid-layout--no-gutter">
+        <div class="grid-layout__column grid-layout__column--1-2">
+            <br>
+            <h2 class="heading-medium">@messages("checkBeforeYouStart.council_tax.subheading")</h2>
 
-    <ul class="list list-bullet">
-        <li>@messages("index.council-title")</li>
-        <li>@messages("index.business-title")</li>
-        <li>@messages("index.housing-title")</li>
-        <li>@messages("index.lettings-title")</li>
-        <li>@messages("index.righttobuy-title")</li>
-        <li>@messages("index.dvs-title")</li>
-    </ul>
+            <p>
+                <a href=@messages("checkBeforeYouStart.council_tax.url1") target="_self">@messages("checkBeforeYouStart.council_tax.para1")</a>
+                <br>
+                @messages("checkBeforeYouStart.council_tax.para2")
+            </p>
 
-    <p>@messages("index.questions-part1")
-        <a href=@messages("index.council-url") target="_self" onclick="handleOutboundLinkClicks(event, 'START-LA')">@messages("index.questions-part2")</a>  @messages("index.questions-part3")
-    </p>
+            <p>
+                <a href=@messages("checkBeforeYouStart.council_tax.url2") target="_self">@messages("checkBeforeYouStart.council_tax.para3")</a>
+                <br>
+                @messages("checkBeforeYouStart.council_tax.para4")
+            </p>
 
-    <p>
-        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url id="continue" class="button button--get-started">@messages("index.start-button")</a>
+            <p>
+                <a href=@messages("checkBeforeYouStart.council_tax.url3") target="_self">@messages("checkBeforeYouStart.council_tax.para5")</a>
+                <br>
+                @messages("checkBeforeYouStart.council_tax.para6")
+            </p>
 
-    </p>
+            <p>
+                <a href=@messages("checkBeforeYouStart.council_tax.url4") target="_self">@messages("checkBeforeYouStart.council_tax.para7")</a>
+                <br>
+                @messages("checkBeforeYouStart.council_tax.para8")
+            </p>
+        </div>
 
-        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.AlternativeEnquiryCategoryController.onPageLoad().url id="alternativestart">
-        @messages("index.alternative-start")
-        </a>
+        <div class="gutter-left">
+            <div class="grid-layout__column grid-layout__column--1-2">
+                <br>
+                <h2 class="heading-medium">@messages("checkBeforeYouStart.business_rates.subheading")</h2>
 
-    <br>
-    <div class="panel panel-border-wide">
-        <p>@messages("index.agents-part1")
-            <a href=@messages("index.voamaps-url")
-            target="_self"
-            onclick="handleOutboundLinkClicks(event, 'MAPS')">@messages("index.agents-part2")</a> @messages("index.agents-part3")
-        </p>
+                <p>
+                    <a href=@messages("checkBeforeYouStart.business_rates.url1") target="_self">@messages("checkBeforeYouStart.business_rates.para1")</a>
+                    <br>
+                    @messages("checkBeforeYouStart.business_rates.para2")
+                </p>
+
+                <p>
+                    <a href=@messages("checkBeforeYouStart.business_rates.url2") target="_self">@messages("checkBeforeYouStart.business_rates.para3")</a>
+                    <br>
+                    @messages("checkBeforeYouStart.business_rates.para4")
+                </p>
+
+                <p>
+                    <a href=@messages("checkBeforeYouStart.business_rates.url3") target="_self">@messages("checkBeforeYouStart.business_rates.para5")</a>
+                    <br>
+                    @messages("checkBeforeYouStart.business_rates.para6")
+                </p>
+
+                <p>
+                    <a href=@messages("checkBeforeYouStart.business_rates.url4") target="_self">@messages("checkBeforeYouStart.business_rates.para7")</a>
+                    <br>
+                    @messages("checkBeforeYouStart.business_rates.para8")
+                </p>
+
+                <p>
+                    <a href=@messages("checkBeforeYouStart.business_rates.url5") target="_self">@messages("checkBeforeYouStart.business_rates.para9")</a>
+                    <br>
+                    @messages("checkBeforeYouStart.business_rates.para10")
+                </p>
+
+
+
+            </div>
+        </div>
     </div>
 
-    <hr>
-    <h4 class="heading-small"> @messages("index.scotlandNI-title")</h4>
+    <p>@messages("checkBeforeYouStart.business_rates.para11")</p>
 
-    <p>@messages("index.scotlandNI-information")</p>
-    <ul class="list list-bullet">
-        <li><a href=@messages("index.scotland-url") target="_self">@messages("index.scotland-assessors.title")</a>
-            @messages("index.scotland-assessors.end")</li>
+    <p>
+        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url id="continue" class="button button--get-started">@messages("site.continue")</a>
 
-        <li><a href=@messages("index.ni-url") target="_self">
-            @messages("index.ni-part1")</a> @messages("index.ni-part2")</li>
+    </p>
 
-    </ul>
+
 }

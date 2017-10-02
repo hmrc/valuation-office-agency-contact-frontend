@@ -31,5 +31,6 @@ class IndexControllerSpec extends ControllerSpecBase {
       val result = new IndexController(frontendAppConfig, messagesApi).onPageLoad()(fakeRequest)
       contentAsString(result) mustBe index(frontendAppConfig)(fakeRequest, messages).toString
     }
+
   }
 }
