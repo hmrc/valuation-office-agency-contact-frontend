@@ -39,7 +39,7 @@ object CouncilTaxSubcategoryForm extends FormErrorHelper {
   def options = Seq(
     RadioOption("councilTaxSubcategory", "find"),
     RadioOption("councilTaxSubcategory", "change"),
-    RadioOption("councilTaxSubcategory", "asses"),
+    RadioOption("councilTaxSubcategory", "assess"),
     RadioOption("councilTaxSubcategory", "pay")
   )
 
