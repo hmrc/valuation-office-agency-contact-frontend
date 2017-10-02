@@ -36,11 +36,10 @@ class ContactDetailsController @Inject()(appConfig: FrontendAppConfig,
                                                   override val messagesApi: MessagesApi,
                                                   dataCacheConnector: DataCacheConnector,
                                                   navigator: Navigator,
-                                                  authenticate: AuthAction,
                                                   getData: DataRetrievalAction,
                                                   requireData: DataRequiredAction) extends FrontendController with I18nSupport {
 
-  def onPageLoad(mode: Mode) = (authenticate andThen getData andThen requireData) {
+  def onPageLoad(mode: Mode) = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.contactDetails match {
         case None => ContactDetailsForm()
@@ -49,13 +48,13 @@ class ContactDetailsController @Inject()(appConfig: FrontendAppConfig,
       Ok(contactDetails(appConfig, preparedForm, mode))
   }
 
-  def onSubmit(mode: Mode) = (authenticate andThen getData andThen requireData).async {
+  def onSubmit(mode: Mode) = (getData andThen requireData).async {
     implicit request =>
       ContactDetailsForm().bindFromRequest().fold(
         (formWithErrors: Form[ContactDetails]) =>
           Future.successful(BadRequest(contactDetails(appConfig, formWithErrors, mode))),
         (value) =>
-          dataCacheConnector.save[ContactDetails](request.externalId, ContactDetailsId.toString, value).map(cacheMap =>
+          dataCacheConnector.save[ContactDetails](request.sessionId, ContactDetailsId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(ContactDetailsId, mode)(new UserAnswers(cacheMap))))
       )
   }
