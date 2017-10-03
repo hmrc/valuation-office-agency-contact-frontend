@@ -33,14 +33,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.propertyDetai
 import scala.concurrent.Future
 
 class PropertyDetailsController @Inject()(appConfig: FrontendAppConfig,
-                                                  override val messagesApi: MessagesApi,
-                                                  dataCacheConnector: DataCacheConnector,
-                                                  navigator: Navigator,
-                                                  authenticate: AuthAction,
-                                                  getData: DataRetrievalAction,
-                                                  requireData: DataRequiredAction) extends FrontendController with I18nSupport {
+                                          override val messagesApi: MessagesApi,
+                                          dataCacheConnector: DataCacheConnector,
+                                          navigator: Navigator,
+                                          getData: DataRetrievalAction,
+                                          requireData: DataRequiredAction) extends FrontendController with I18nSupport {
 
-  def onPageLoad(mode: Mode) = (authenticate andThen getData andThen requireData) {
+  def onPageLoad(mode: Mode) = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.propertyDetails match {
         case None => PropertyDetailsForm()
@@ -49,13 +48,13 @@ class PropertyDetailsController @Inject()(appConfig: FrontendAppConfig,
       Ok(propertyDetails(appConfig, preparedForm, mode))
   }
 
-  def onSubmit(mode: Mode) = (authenticate andThen getData andThen requireData).async {
+  def onSubmit(mode: Mode) = (getData andThen requireData).async {
     implicit request =>
       PropertyDetailsForm().bindFromRequest().fold(
         (formWithErrors: Form[PropertyDetails]) =>
           Future.successful(BadRequest(propertyDetails(appConfig, formWithErrors, mode))),
         (value) =>
-          dataCacheConnector.save[PropertyDetails](request.externalId, PropertyDetailsId.toString, value).map(cacheMap =>
+          dataCacheConnector.save[PropertyDetails](request.sessionId, PropertyDetailsId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(PropertyDetailsId, mode)(new UserAnswers(cacheMap))))
       )
   }
