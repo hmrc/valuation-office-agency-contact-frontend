@@ -62,6 +62,7 @@ session_expired.guidance = The details you have given have been deleted because 
 
 site.back = Back
 site.continue = Continue
+site.start-again = Start again
 site.delete = Remove
 site.edit = Change
 site.hidden-delete = Delete {0}
@@ -177,3 +178,19 @@ propertyDetails.town = Town/City
 propertyDetails.county = County
 propertyDetails.postcode = Postcode
 propertyDetails.checkYourAnswersLabel = Property Details
+
+valuationAdvice.title = Valuation Advice 
+valuationAdvice.heading = Contact details
+valuationAdvice.subheading = Valuation and property advice for public sector bodies
+valuationAdvice.paragraph = Use these details to contact us with your enquiry.
+valuationAdvice.first-contact.title = Rory O’Boyle
+valuationAdvice.first-contact.email = rory.oboyle@voa.gsi.gov.uk
+valuationAdvice.first-contact.phone = 03000 503406
+valuationAdvice.first-contact.phone-url = tel:+443000503406
+valuationAdvice.second-contact.title = Alastair Johnson
+valuationAdvice.second-contact.email = alastair.m.johnson@voa.gsi.gov.uk
+valuationAdvice.second-contact.phone = 03000 506356
+valuationAdvice.second-contact.phone-url = tel:+443000506356
+valuationAdvice.email-title = Email
+valuationAdvice.phone-title = Telephone
+valuationAdvice.response-paragraph = We aim to respond within 20 working days. However, it may take longer for complex enquiries.

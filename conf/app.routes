@@ -55,3 +55,5 @@ GET         /propertyDetails                       uk.gov.hmrc.valuationofficeag
 POST        /propertyDetails                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyDetailsController.onSubmit(mode: Mode = NormalMode)
 GET         /changePropertyDetails                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyDetailsController.onPageLoad(mode: Mode = CheckMode)
 POST        /changePropertyDetails                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyDetailsController.onSubmit(mode: Mode = CheckMode)
+
+GET         /valuationAdvice                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ValuationAdviceController.onPageLoad()

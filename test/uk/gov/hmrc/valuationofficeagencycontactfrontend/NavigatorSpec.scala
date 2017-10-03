@@ -73,6 +73,11 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(PropertyDetailsId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
       }
 
+      "return a function that goes to the valuation advice page when an enquiry category for valuation and property advice has been selected" in {
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("valuation_for_public_body")
+        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.ValuationAdviceController.onPageLoad()
+      }
+
     }
 
     "in Check mode" must {
