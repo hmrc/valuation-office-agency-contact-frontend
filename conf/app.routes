@@ -40,3 +40,18 @@ GET         /councilTaxSubcategory                 uk.gov.hmrc.valuationofficeag
 POST        /councilTaxSubcategory                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onSubmit(mode: Mode = NormalMode)
 GET         /changeCouncilTaxSubcategory           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onPageLoad(mode: Mode = CheckMode)
 POST        /changeCouncilTaxSubcategory           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onSubmit(mode: Mode = CheckMode)
+
+GET         /businessRatesSubcategory              uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onPageLoad(mode: Mode = NormalMode)
+POST        /businessRatesSubcategory              uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onSubmit(mode: Mode = NormalMode)
+GET         /changeBusinessRatesSubcategory        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onPageLoad(mode: Mode = CheckMode)
+POST        /changeBusinessRatesSubcategory        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onSubmit(mode: Mode = CheckMode)
+
+GET         /councilTaxSubcategory                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onPageLoad(mode: Mode = NormalMode)
+POST        /councilTaxSubcategory                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onSubmit(mode: Mode = NormalMode)
+GET         /changeCouncilTaxSubcategory           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onPageLoad(mode: Mode = CheckMode)
+POST        /changeCouncilTaxSubcategory           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onSubmit(mode: Mode = CheckMode)
+
+GET         /propertyDetails                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyDetailsController.onPageLoad(mode: Mode = NormalMode)
+POST        /propertyDetails                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyDetailsController.onSubmit(mode: Mode = NormalMode)
+GET         /changePropertyDetails                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyDetailsController.onPageLoad(mode: Mode = CheckMode)
+POST        /changePropertyDetails                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyDetailsController.onSubmit(mode: Mode = CheckMode)

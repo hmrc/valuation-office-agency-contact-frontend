@@ -52,7 +52,7 @@
 
         @components.input_textarea(InputViewModel[ContactDetails]("message", form), label = messages("contactDetails.message"))
 
-        @components.submit_button()
+        @components.continue_button()
 
         <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url class="back-link">@messages("site.back")</a>
     }

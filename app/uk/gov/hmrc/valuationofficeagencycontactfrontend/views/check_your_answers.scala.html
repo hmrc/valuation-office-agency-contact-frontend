@@ -17,6 +17,7 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{Section, AnswerSection, RepeaterAnswerSection}
 
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 @(appConfig: FrontendAppConfig, answerSections: Seq[Section])(implicit request: Request[_], messages: Messages)
 
 @main_template(
@@ -28,7 +29,9 @@
 
     <p>@messages("checkYourAnswers.guidance")</p>
 
-    @for(section <- answerSections){
+    <h2 class="heading-medium">@messages("checkYourAnswers.subheading")</h2>
+
+    @for(section <- answerSections) {
         @{
             section match {
                 case a: AnswerSection => components.answer_section(a)
@@ -36,4 +39,8 @@
             }
         }
     }
+
+    <br>
+    <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyDetailsController.onPageLoad(NormalMode).url class="back-link">@messages("site.back")</a>
+
 }

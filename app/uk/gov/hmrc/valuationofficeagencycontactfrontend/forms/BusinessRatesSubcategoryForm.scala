@@ -41,7 +41,7 @@ object BusinessRatesSubcategoryForm extends FormErrorHelper {
     RadioOption("businessRatesSubcategory", "proposal"),
     RadioOption("businessRatesSubcategory", "estimate"),
     RadioOption("businessRatesSubcategory", "valuation"),
-    RadioOption("businessRatesSubcategory", "business_schange")
+    RadioOption("businessRatesSubcategory", "business_change")
   )
 
   def optionIsValid(value: String) = options.exists(o => o.value == value)

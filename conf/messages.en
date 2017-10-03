@@ -33,8 +33,9 @@ checkBeforeYouStart.business_rates.para10 = Find out how your business rates cou
 checkBeforeYouStart.business_rates.para11 = If you can’t find an answer to your query, or you have a query about something else, you can continue to our contact form.
 
 checkYourAnswers.title = Check Your Answers
-checkYourAnswers.heading = Check Your Answers
-checkYourAnswers.guidance = Guidance for check your answers
+checkYourAnswers.heading = Contact the Valuation Office Agency
+checkYourAnswers.guidance = Please check the information you have given us before submitting. You can edit any details that are incorrect.
+checkYourAnswers.subheading = Summary
 
 date.day = Day
 date.month = Month
@@ -83,7 +84,7 @@ enquiryCategory.providing_lettings = Providing lettings information to, or conta
 enquiryCategory.valuations_for_tax = Valuations for taxes, Right to Buy, or appeals against Community Infrastructure Levy
 enquiryCategory.valuation_for_public_body = Valuation and property advice, for public sector bodies, by DVS
 enquiryCategory.other_business = Other business
-enquiryCategory.checkYourAnswersLabel = enquiryCategory
+enquiryCategory.checkYourAnswersLabel = Enquiry Category
 
 enquiryCategory.council_tax.summary = Council Tax enquiries could be about:
 enquiryCategory.council_tax.about1 = your Council Tax band and how it’s assessed
@@ -124,7 +125,7 @@ contactDetails.contactPreference = I prefer to be contacted using
 contactDetails.message = Your message
 contactDetails.email_preference = Email
 contactDetails.phone_preference = Phone
-contactDetails.checkYourAnswersLabel = contactDetails
+contactDetails.checkYourAnswersLabel = Contact Details
 
 staticPagePlaceholder.title = Postcode Finder
 staticPagePlaceholder.heading = What property are you contacting us about?
@@ -157,7 +158,7 @@ councilTaxSubcategory.change = Has my band changed
 councilTaxSubcategory.assess = Property assessment
 councilTaxSubcategory.pay = Paying council tax
 councilTaxSubcategory.para1 = Contact Details of the Council Tax Office
-councilTaxSubcategory.checkYourAnswersLabel = councilTaxSubcategory
+councilTaxSubcategory.checkYourAnswersLabel = Council Tax
 
 businessRatesSubcategory.title = Business Rates
 businessRatesSubcategory.heading = What’s your enquiry about?
@@ -166,6 +167,13 @@ businessRatesSubcategory.proposal = Proposal to alter the 2017 rating list for W
 businessRatesSubcategory.estimate = Estimate your business rates
 businessRatesSubcategory.valuation = I think my valuation is too high
 businessRatesSubcategory.business_change = My business or premises have changed
-businessRatesSubcategory.checkYourAnswersLabel = businessRatesSubcategory
+businessRatesSubcategory.checkYourAnswersLabel = Business Rates
 
-
+propertyDetails.title = Property Details
+propertyDetails.heading = Which property are you contacting us about?
+propertyDetails.addressLine1 = Address Line 1
+propertyDetails.addressLine2 = Address Line 2
+propertyDetails.town = Town/City
+propertyDetails.county = County
+propertyDetails.postcode = Postcode
+propertyDetails.checkYourAnswersLabel = Property Details

@@ -48,11 +48,6 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
       }
 
-      "return a function that goes to the contact form page when an enquiry category has been selected and the selection is other business" in {
-        when (mockUserAnswers.enquiryCategory) thenReturn Some("other_business")
-        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
-      }
-
       "return a function that goes to the contact form page when an enquiry category for council tax has been selected" in {
         when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("find")
         navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
@@ -66,6 +61,16 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       "return a function that goes to the contact form page when an enquiry category for business rates has been selected" in {
         when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("check")
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
+      }
+
+      "return a function that goes to the property details page when the contact form has been submitted without errors" in {
+        when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "073753753733", "Phone", "your message"))
+        navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.PropertyDetailsController.onPageLoad(NormalMode)
+      }
+
+      "return a function that goes to the check your details page when the property details form has been submitted without errors" in {
+        when (mockUserAnswers.propertyDetails) thenReturn Some(PropertyDetails("1", "Street", "Town", "Some county", "AA11AA"))
+        navigator.nextPage(PropertyDetailsId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
       }
 
     }
