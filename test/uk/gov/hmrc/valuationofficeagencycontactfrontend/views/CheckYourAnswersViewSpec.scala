@@ -27,7 +27,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
   "Check Your Answers view" must {
 
-    behave like normalPage(view, "checkYourAnswers")
+    behave like normalPage(view, "checkYourAnswers", "subheading")
 
     "has a link marked with site.back leading to the Property Details Page" in {
       val doc = asDocument(view())

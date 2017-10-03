@@ -33,8 +33,9 @@ checkBeforeYouStart.business_rates.para10 = Find out how your business rates cou
 checkBeforeYouStart.business_rates.para11 = If you can’t find an answer to your query, or you have a query about something else, you can continue to our contact form.
 
 checkYourAnswers.title = Check Your Answers
-checkYourAnswers.heading = Check Your Answers
-checkYourAnswers.guidance = Guidance for check your answers
+checkYourAnswers.heading = Contact the Valuation Office Agency
+checkYourAnswers.guidance = Please check the information you have given us before submitting. You can edit any details that are incorrect.
+checkYourAnswers.subheading = Summary
 
 date.day = Day
 date.month = Month
@@ -166,7 +167,7 @@ businessRatesSubcategory.proposal = Proposal to alter the 2017 rating list for W
 businessRatesSubcategory.estimate = Estimate your business rates
 businessRatesSubcategory.valuation = I think my valuation is too high
 businessRatesSubcategory.business_change = My business or premises have changed
-businessRatesSubcategory.checkYourAnswersLabel = businessRatesSubcategory
+businessRatesSubcategory.checkYourAnswersLabel = Business Rates
 
 propertyDetails.title = Property Details
 propertyDetails.heading = Which property are you contacting us about?
