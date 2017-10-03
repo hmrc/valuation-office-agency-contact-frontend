@@ -19,7 +19,7 @@ class Add$className$ControllerSpec extends ControllerSpecBase {
   def onwardRoute = routes.$className$OverviewController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new Add$className$Controller(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute), FakeAuthAction,
+    new Add$className$Controller(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl)
 
   def viewAsString(form: Form[$className$] = $className$Form()) = add$className$(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString

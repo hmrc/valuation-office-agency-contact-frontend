@@ -33,7 +33,7 @@ class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase {
   def onwardRoute = routes.IndexController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new CouncilTaxSubcategoryController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute), FakeAuthAction,
+    new CouncilTaxSubcategoryController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl)
 
   def viewAsString(form: Form[String] = CouncilTaxSubcategoryForm()) = councilTaxSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString

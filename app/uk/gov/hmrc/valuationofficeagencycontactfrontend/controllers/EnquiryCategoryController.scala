@@ -37,11 +37,10 @@ class EnquiryCategoryController @Inject()(
                                         override val messagesApi: MessagesApi,
                                         dataCacheConnector: DataCacheConnector,
                                         navigator: Navigator,
-                                        authenticate: AuthAction,
                                         getData: DataRetrievalAction,
                                         requireData: DataRequiredAction) extends FrontendController with I18nSupport {
 
-  def onPageLoad(mode: Mode) = (authenticate andThen getData) {
+  def onPageLoad(mode: Mode) = getData {
     implicit request =>
       val preparedForm = request.userAnswers.flatMap(x => x.enquiryCategory) match {
         case None => EnquiryCategoryForm()
@@ -50,13 +49,13 @@ class EnquiryCategoryController @Inject()(
       Ok(enquiryCategory(appConfig, preparedForm, mode))
   }
 
-  def onSubmit(mode: Mode) = (authenticate andThen getData).async {
+  def onSubmit(mode: Mode) = getData.async {
     implicit request =>
       EnquiryCategoryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(enquiryCategory(appConfig, formWithErrors, mode))),
         (value) =>
-          dataCacheConnector.save[String](request.externalId, EnquiryCategoryId.toString, value).map(cacheMap =>
+          dataCacheConnector.save[String](request.sessionId, EnquiryCategoryId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(EnquiryCategoryId, mode)(new UserAnswers(cacheMap))))
       )
   }

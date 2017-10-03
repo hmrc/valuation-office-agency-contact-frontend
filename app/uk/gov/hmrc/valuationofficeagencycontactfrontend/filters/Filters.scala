@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.filters
 
-import play.api.mvc.{Request, Result}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.AuthenticatedRequest
+import javax.inject.Inject
+import play.api.http.DefaultHttpFilters
+import uk.gov.hmrc.play.bootstrap.filters.FrontendFilters
 
-import scala.concurrent.Future
-
-object FakeAuthAction extends AuthAction {
-  override def invokeBlock[A](request: Request[A], block: (AuthenticatedRequest[A]) => Future[Result]): Future[Result] =
-    block(AuthenticatedRequest(request, "id"))
-}
+class Filters @Inject() (
+                          sessionIdFilter: SessionIdFilter,
+                          frontendFilters: FrontendFilters
+                        ) extends DefaultHttpFilters(frontendFilters.filters :+ sessionIdFilter: _*)
 

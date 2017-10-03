@@ -14,7 +14,7 @@ class $className$OverviewControllerSpec extends ControllerSpecBase {
   def onwardRoute = baseRoutes.IndexController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new $className$OverviewController(frontendAppConfig, messagesApi, new FakeNavigator(desiredRoute = onwardRoute), FakeAuthAction,
+    new $className$OverviewController(frontendAppConfig, messagesApi, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl)
 
   def viewAsString(viewModel: $className$OverviewViewModel) = $className;format="decap"$Overview(frontendAppConfig, viewModel, NormalMode)(fakeRequest, messages).toString

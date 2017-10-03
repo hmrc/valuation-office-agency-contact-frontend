@@ -19,7 +19,7 @@ class Delete$className$ControllerSpec extends ControllerSpecBase {
   def onwardRoute = routes.$className$OverviewController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new Delete$className$Controller(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute), FakeAuthAction,
+    new Delete$className$Controller(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl)
 
   def viewAsString(index: Int, $className;format="decap"$: $className$, form: Form[Boolean] = BooleanForm()) = delete$className$(index, $className;format="decap"$, frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString

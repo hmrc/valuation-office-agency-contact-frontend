@@ -16,8 +16,9 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions
 
+import play.api.mvc.Request
 import uk.gov.hmrc.http.cache.client.CacheMap
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.{AuthenticatedRequest, OptionalDataRequest}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.OptionalDataRequest
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 import scala.concurrent.Future
@@ -25,8 +26,8 @@ import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
 class FakeDataRetrievalAction(cacheMapToReturn: Option[CacheMap]) extends DataRetrievalAction {
-  override protected def transform[A](request: AuthenticatedRequest[A]): Future[OptionalDataRequest[A]] = cacheMapToReturn match {
-    case None => Future(OptionalDataRequest(request.request, request.externalId, None))
-    case Some(cacheMap)=> Future(OptionalDataRequest(request.request, request.externalId, Some(new UserAnswers(cacheMap))))
+  override protected def transform[A](request: Request[A]): Future[OptionalDataRequest[A]] = cacheMapToReturn match {
+    case None => Future(OptionalDataRequest(request, "id", None))
+    case Some(cacheMap)=> Future(OptionalDataRequest(request, "id", Some(new UserAnswers(cacheMap))))
   }
 }

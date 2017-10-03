@@ -37,11 +37,10 @@ class CouncilTaxSubcategoryController @Inject()(
                                         override val messagesApi: MessagesApi,
                                         dataCacheConnector: DataCacheConnector,
                                         navigator: Navigator,
-                                        authenticate: AuthAction,
                                         getData: DataRetrievalAction,
                                         requireData: DataRequiredAction) extends FrontendController with I18nSupport {
 
-  def onPageLoad(mode: Mode) = (authenticate andThen getData andThen requireData) {
+  def onPageLoad(mode: Mode) = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.councilTaxSubcategory match {
         case None => CouncilTaxSubcategoryForm()
@@ -50,13 +49,13 @@ class CouncilTaxSubcategoryController @Inject()(
       Ok(councilTaxSubcategory(appConfig, preparedForm, mode))
   }
 
-  def onSubmit(mode: Mode) = (authenticate andThen getData andThen requireData).async {
+  def onSubmit(mode: Mode) = (getData andThen requireData).async {
     implicit request =>
       CouncilTaxSubcategoryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(councilTaxSubcategory(appConfig, formWithErrors, mode))),
         (value) =>
-          dataCacheConnector.save[String](request.externalId, CouncilTaxSubcategoryId.toString, value).map(cacheMap =>
+          dataCacheConnector.save[String](request.sessionId, CouncilTaxSubcategoryId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(CouncilTaxSubcategoryId, mode)(new UserAnswers(cacheMap))))
       )
   }
