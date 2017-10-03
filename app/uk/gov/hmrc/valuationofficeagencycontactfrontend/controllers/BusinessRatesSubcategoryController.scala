@@ -37,11 +37,10 @@ class BusinessRatesSubcategoryController @Inject()(
                                         override val messagesApi: MessagesApi,
                                         dataCacheConnector: DataCacheConnector,
                                         navigator: Navigator,
-                                        authenticate: AuthAction,
                                         getData: DataRetrievalAction,
                                         requireData: DataRequiredAction) extends FrontendController with I18nSupport {
 
-  def onPageLoad(mode: Mode) = (authenticate andThen getData andThen requireData) {
+  def onPageLoad(mode: Mode) = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.businessRatesSubcategory match {
         case None => BusinessRatesSubcategoryForm()
@@ -50,13 +49,13 @@ class BusinessRatesSubcategoryController @Inject()(
       Ok(businessRatesSubcategory(appConfig, preparedForm, mode))
   }
 
-  def onSubmit(mode: Mode) = (authenticate andThen getData andThen requireData).async {
+  def onSubmit(mode: Mode) = (getData andThen requireData).async {
     implicit request =>
       BusinessRatesSubcategoryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(businessRatesSubcategory(appConfig, formWithErrors, mode))),
         (value) =>
-          dataCacheConnector.save[String](request.externalId, BusinessRatesSubcategoryId.toString, value).map(cacheMap =>
+          dataCacheConnector.save[String](request.sessionId, BusinessRatesSubcategoryId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(BusinessRatesSubcategoryId, mode)(new UserAnswers(cacheMap))))
       )
   }
