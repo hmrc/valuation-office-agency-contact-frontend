@@ -30,19 +30,9 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
 
   def createViewUsingForm = (form: Form[String]) => councilTaxSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
-  def labelDefinedAndUsedOnce(option: String) = {
-    val prefix = "councilTaxSubcategory"
-    val doc = asDocument(createView())
-    assert(messages.isDefinedAt(s"$prefix.$option"))
-    val label = doc.select(s"label[for=$prefix.$option]")
-    assert(label.size() == 1)
-  }
-
   "CouncilTaxSubcategory view" must {
     behave like normalPage(createView, messageKeyPrefix, "para1")
   }
-
-
 
   "CouncilTaxSubcategory view" when {
     "rendered" must {
@@ -54,19 +44,19 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
       }
 
       "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_assess and that it is used once" in {
-        labelDefinedAndUsedOnce("council_tax_assess")
+        labelDefinedAndUsedOnce("council_tax_assess", messageKeyPrefix, createView)
       }
 
       "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_change and that it is used once" in {
-        labelDefinedAndUsedOnce("council_tax_change")
+        labelDefinedAndUsedOnce("council_tax_change", messageKeyPrefix, createView)
       }
 
       "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_home_business and that it is used once" in {
-        labelDefinedAndUsedOnce("council_tax_home_business")
+        labelDefinedAndUsedOnce("council_tax_home_business", messageKeyPrefix, createView)
       }
 
       "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_other and that it is used once" in {
-        labelDefinedAndUsedOnce("council_tax_other")
+        labelDefinedAndUsedOnce("council_tax_other", messageKeyPrefix, createView)
       }
 
       "contain continue button with the value Continue" in {
