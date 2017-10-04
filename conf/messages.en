@@ -167,7 +167,7 @@ businessRatesSubcategory.business_rates_rateable_value = Rateable value and how 
 businessRatesSubcategory.business_rates_update_details = I want to check or update my property details
 businessRatesSubcategory.business_rates_challenge_valuation = I want to challenge my valuation
 businessRatesSubcategory.business_rates_moved_property = I’ve moved to a property without a rateable value
-businessRatesSubcategory.business_rates_other_rates = Other business rates enquiries
+businessRatesSubcategory.business_rates_other = Other business rates enquiries
 businessRatesSubcategory.checkYourAnswersLabel = Business Rates
 
 checkAndChallenge.title = Check and challenge

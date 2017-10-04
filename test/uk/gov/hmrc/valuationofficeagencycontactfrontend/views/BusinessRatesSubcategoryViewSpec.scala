@@ -67,8 +67,8 @@ class BusinessRatesSubcategoryViewSpec extends ViewBehaviours {
         labelDefinedAndUsedOnce("business_rates_moved_property")
       }
 
-      "has a radio button with the label set to the message with key businessRatesSubcategory..business_rates_other_rates and that it is used once" in {
-        labelDefinedAndUsedOnce("business_rates_other_rates")
+      "has a radio button with the label set to the message with key businessRatesSubcategory..business_rates_other and that it is used once" in {
+        labelDefinedAndUsedOnce("business_rates_other")
       }
 
       "contain continue button with the value Continue" in {
