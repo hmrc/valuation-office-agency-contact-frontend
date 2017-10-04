@@ -30,13 +30,13 @@
     appConfig = appConfig,
     bodyClasses = None) {
 
+    @components.heading("councilTaxSubcategory.heading")
+
     <p>@messages("councilTaxSubcategory.para1")</p>
 
     @helpers.form(action = CouncilTaxSubcategoryController.onSubmit(mode), 'autoComplete -> "off") {
 
         @components.error_summary(form.errors)
-
-        @components.heading("councilTaxSubcategory.heading")
 
         @components.input_radio(
             viewModel = InputViewModel[String]("value", form),
