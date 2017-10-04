@@ -19,27 +19,27 @@
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("serviceUnavailable.title"),
+    title = "Service unavailable",
     appConfig = appConfig,
     bodyClasses = None) {
 
-    <h1 class="heading-xlarge">@messages("serviceUnavailable.heading")</h1>
+    <h1 class="heading-xlarge">Service unavailable</h1>
 
-    <p>@messages("serviceUnavailable.paragraph")</p>
+    <p>We’re working hard to get the site up and running as soon as possible. Thank you for your patience.</p>
 
-    <p>@messages("serviceUnavailable.contact-information")</p>
+    <p>If you would like to contact the VOA, you can do so by phone.</p>
 
-    <h2 class="heading-medium">@messages("serviceUnavailable.phone-title")</h2>
+    <h2 class="heading-medium">Phone</h2>
 
     <p>
-        <b class="bold">@messages("serviceUnavailable.england") </b><a href=@messages("serviceUnavailable.england.phone-url")>@messages("serviceUnavailable.england.phone-number")</a>
+        <b class="bold">England:</b><a href="tel:+443000501501">03000 501 501</a>
         <br>
-        <b class="bold">@messages("serviceUnavailable.wales") </b><a href=@messages("serviceUnavailable.wales.phone-url")>@messages("serviceUnavailable.wales.phone-number")</a>
+        <b class="bold">Wales:</b><a href="tel:+443000505505">03000 505 505</a>
     </p>
-    <h2 class="heading-medium">@messages("serviceUnavailable.opening-times.title")</h2>
+    <h2 class="heading-medium">Opening times</h2>
     <p>
-        @messages("serviceUnavailable.opening-times.paragraph")
-        <a href=@messages("serviceUnavailable.call-charges.url")>@messages("serviceUnavailable.call-charges.title")</a>
+        Monday to Friday, 8:30am to 5:00pm. Closed on bank holidays.
+        <a href="https://www.gov.uk/call-charges">Find out about call charges</a>
     </p>
 
 }
