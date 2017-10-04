@@ -30,8 +30,16 @@ class BusinessRatesSubcategoryViewSpec extends ViewBehaviours {
 
   def createViewUsingForm = (form: Form[String]) => businessRatesSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
+  def labelDefinedAndUsedOnce(option: String) = {
+    val prefix = "businessRatesSubcategory"
+    val doc = asDocument(createView())
+    assert(messages.isDefinedAt(s"$prefix.$option"))
+    val label = doc.select(s"label[for=$prefix.$option]")
+    assert(label.size() == 1)
+  }
+
   "BusinessRatesSubcategory view" must {
-    behave like normalPage(createView, messageKeyPrefix)
+    behave like normalPage(createView, messageKeyPrefix, "para1")
   }
 
   "BusinessRatesSubcategory view" when {
@@ -41,6 +49,26 @@ class BusinessRatesSubcategoryViewSpec extends ViewBehaviours {
         for (option <- BusinessRatesSubcategoryForm.options) {
           assertContainsRadioButton(doc, option.id, "value", option.value, false)
         }
+      }
+
+      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_rateable_value and that it is used once" in {
+        labelDefinedAndUsedOnce("business_rates_rateable_value")
+      }
+
+      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_update_details and that it is used once" in {
+        labelDefinedAndUsedOnce("business_rates_update_details")
+      }
+
+      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_challenge_valuation and that it is used once" in {
+        labelDefinedAndUsedOnce("business_rates_challenge_valuation")
+      }
+
+      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_moved_property and that it is used once" in {
+        labelDefinedAndUsedOnce("business_rates_moved_property")
+      }
+
+      "has a radio button with the label set to the message with key businessRatesSubcategory..business_rates_other_rates and that it is used once" in {
+        labelDefinedAndUsedOnce("business_rates_other_rates")
       }
 
       "contain continue button with the value Continue" in {

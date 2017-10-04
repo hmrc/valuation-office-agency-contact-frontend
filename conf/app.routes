@@ -56,3 +56,4 @@ POST        /propertyDetails                       uk.gov.hmrc.valuationofficeag
 GET         /changePropertyDetails                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyDetailsController.onPageLoad(mode: Mode = CheckMode)
 POST        /changePropertyDetails                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyDetailsController.onSubmit(mode: Mode = CheckMode)
 
+GET         /checkAndChallenge                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CheckAndChallengeController.onPageLoad()
