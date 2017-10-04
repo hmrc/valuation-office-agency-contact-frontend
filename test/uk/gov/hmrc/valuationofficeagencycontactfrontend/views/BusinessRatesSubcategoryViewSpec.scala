@@ -31,7 +31,7 @@ class BusinessRatesSubcategoryViewSpec extends ViewBehaviours {
   def createViewUsingForm = (form: Form[String]) => businessRatesSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
   "BusinessRatesSubcategory view" must {
-    behave like normalPage(createView, messageKeyPrefix)
+    behave like normalPage(createView, messageKeyPrefix, "para1")
   }
 
   "BusinessRatesSubcategory view" when {
@@ -41,6 +41,26 @@ class BusinessRatesSubcategoryViewSpec extends ViewBehaviours {
         for (option <- BusinessRatesSubcategoryForm.options) {
           assertContainsRadioButton(doc, option.id, "value", option.value, false)
         }
+      }
+
+      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_rateable_value and that it is used once" in {
+        labelDefinedAndUsedOnce("business_rates_rateable_value", messageKeyPrefix, createView)
+      }
+
+      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_update_details and that it is used once" in {
+        labelDefinedAndUsedOnce("business_rates_update_details", messageKeyPrefix, createView)
+      }
+
+      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_challenge_valuation and that it is used once" in {
+        labelDefinedAndUsedOnce("business_rates_challenge_valuation", messageKeyPrefix, createView)
+      }
+
+      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_moved_property and that it is used once" in {
+        labelDefinedAndUsedOnce("business_rates_moved_property", messageKeyPrefix, createView)
+      }
+
+      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_other and that it is used once" in {
+        labelDefinedAndUsedOnce("business_rates_other", messageKeyPrefix, createView)
       }
 
       "contain continue button with the value Continue" in {
