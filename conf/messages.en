@@ -178,21 +178,3 @@ propertyDetails.county = County
 propertyDetails.postcode = Postcode
 propertyDetails.checkYourAnswersLabel = Property Details
 
-serviceUnavailable.title = Service unavailable
-serviceUnavailable.heading = Service unavailable
-serviceUnavailable.paragraph = We’re working hard to get the site up and running as soon as possible. Thank you for your patience.
-serviceUnavailable.contact-information = If you would like to contact the VOA, you can do so by phone.
-serviceUnavailable.phone-title = Phone
-serviceUnavailable.england = England:
-serviceUnavailable.england.phone-url = tel:+443000501501
-serviceUnavailable.england.phone-number = 03000 501 501
-serviceUnavailable.wales = Wales:
-serviceUnavailable.wales.phone-url = tel:+443000505505
-serviceUnavailable.wales.phone-number = 03000 505 505
-serviceUnavailable.opening-times.title = Opening times
-serviceUnavailable.opening-times.paragraph = Monday to Friday, 8:30am to 5:00pm. Closed on bank holidays.
-serviceUnavailable.call-charges.title = Find out about call charges
-serviceUnavailable.call-charges.url = https://www.gov.uk/call-charges
-serviceUnavailable.closed_for_maintenance = This service is temporarily unavailable until [DATE] whilst we make some improvements. We apologise for any inconvenience this may cause you and thank you for your patience.
-
-
