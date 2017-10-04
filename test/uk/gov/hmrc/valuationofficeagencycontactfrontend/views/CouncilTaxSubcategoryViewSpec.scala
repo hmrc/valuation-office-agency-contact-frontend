@@ -43,6 +43,22 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
         }
       }
 
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_assess and that it is used once" in {
+        labelDefinedAndUsedOnce("council_tax_assess", messageKeyPrefix, createView)
+      }
+
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_change and that it is used once" in {
+        labelDefinedAndUsedOnce("council_tax_change", messageKeyPrefix, createView)
+      }
+
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_home_business and that it is used once" in {
+        labelDefinedAndUsedOnce("council_tax_home_business", messageKeyPrefix, createView)
+      }
+
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_other and that it is used once" in {
+        labelDefinedAndUsedOnce("council_tax_other", messageKeyPrefix, createView)
+      }
+
       "contain continue button with the value Continue" in {
         val doc = asDocument(createViewUsingForm(CouncilTaxSubcategoryForm()))
         val continueButton = doc.getElementById("submit").text()

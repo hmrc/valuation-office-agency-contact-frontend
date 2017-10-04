@@ -153,22 +153,27 @@ councilTax.pay-title= Pay your Council Tax
 councilTax.pay-information = Search for your local authority and pay your Council Tax online.
 
 councilTaxSubcategory.title = Council Tax Enquiry
-councilTaxSubcategory.heading = What’s your enquiry about?
-councilTaxSubcategory.find = Finding my council tax band
-councilTaxSubcategory.change = Has my band changed
-councilTaxSubcategory.assess = Property assessment
-councilTaxSubcategory.pay = Paying council tax
-councilTaxSubcategory.para1 = Contact Details of the Council Tax Office
+councilTaxSubcategory.heading = What do you want to know about Council Tax?
+councilTaxSubcategory.council_tax_home_business = How your Council Tax is affected by running a home-based business
+councilTaxSubcategory.council_tax_change = Changes  you’ve made to your property that you think may affect your Council Tax band
+councilTaxSubcategory.council_tax_assess = Your Council Tax band and how it’s assessed
+councilTaxSubcategory.council_tax_other = Other
+councilTaxSubcategory.para1 = This could be
 councilTaxSubcategory.checkYourAnswersLabel = Council Tax
 
 businessRatesSubcategory.title = Business Rates
-businessRatesSubcategory.heading = What’s your enquiry about?
-businessRatesSubcategory.check = Check and challenge your business rates valuation
-businessRatesSubcategory.proposal = Proposal to alter the 2017 rating list for Wales
-businessRatesSubcategory.estimate = Estimate your business rates
-businessRatesSubcategory.valuation = I think my valuation is too high
-businessRatesSubcategory.business_change = My business or premises have changed
+businessRatesSubcategory.heading = What is your enquiry about Business Rates?
+businessRatesSubcategory.para1 = This could be about
+businessRatesSubcategory.business_rates_rateable_value = Rateable value and how it’s calculated
+businessRatesSubcategory.business_rates_update_details = I want to check or update my property details
+businessRatesSubcategory.business_rates_challenge_valuation = I want to challenge my valuation
+businessRatesSubcategory.business_rates_moved_property = I’ve moved to a property without a rateable value
+businessRatesSubcategory.business_rates_other = Other business rates enquiries
 businessRatesSubcategory.checkYourAnswersLabel = Business Rates
+
+checkAndChallenge.title = Check and challenge
+checkAndChallenge.heading = You will now be transferred to the VOA’s Find, Check and Challenge Business Rates service. 
+checkAndChallenge.url = https://www.gov.uk/correct-your-business-rates
 
 propertyDetails.title = Property Details
 propertyDetails.heading = Which property are you contacting us about?

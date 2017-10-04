@@ -21,6 +21,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.ViewSpecBase
 
 trait ViewBehaviours extends ViewSpecBase {
 
+  def labelDefinedAndUsedOnce(option: String, prefix: String, view: () => HtmlFormat.Appendable) = {
+    val doc = asDocument(view())
+    assert(messages.isDefinedAt(s"$prefix.$option"))
+    val label = doc.select(s"label[for=$prefix.$option]")
+    assert(label.size() == 1)
+  }
+
   def normalPage(view: () => HtmlFormat.Appendable,
                  messageKeyPrefix: String,
                  expectedGuidanceKeys: String*) = {

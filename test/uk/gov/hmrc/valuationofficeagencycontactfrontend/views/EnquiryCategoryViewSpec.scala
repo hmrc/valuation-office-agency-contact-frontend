@@ -31,14 +31,6 @@ class EnquiryCategoryViewSpec extends ViewBehaviours {
 
   def createViewUsingForm = (form: Form[String]) => enquiryCategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
-  def labelDefinedAndUsedOnce(option: String) = {
-    val prefix = "enquiryCategory"
-    val doc = asDocument(createView())
-    assert(messages.isDefinedAt(s"$prefix.$option"))
-    val label = doc.select(s"label[for=$prefix.$option]")
-    assert(label.size() == 1)
-  }
-
   "EnquiryCategory view" must {
     behave like normalPage(createView, messageKeyPrefix)
   }
@@ -59,27 +51,27 @@ class EnquiryCategoryViewSpec extends ViewBehaviours {
       }
 
       "has a radio button with the label set to the message with key enquiryCategory.council_tax and that it is used once" in {
-        labelDefinedAndUsedOnce("council_tax")
+        labelDefinedAndUsedOnce("council_tax", messageKeyPrefix, createView)
       }
 
       "has a radio button with the label set to the message with key enquiryCategory.business_rates and that it is used once" in {
-        labelDefinedAndUsedOnce("business_rates")
+        labelDefinedAndUsedOnce("business_rates", messageKeyPrefix, createView)
       }
 
       "has a radio button with the label set to the message with key enquiryCategory.housing_benefit and that it is used once" in {
-        labelDefinedAndUsedOnce("housing_benefit")
+        labelDefinedAndUsedOnce("housing_benefit", messageKeyPrefix, createView)
       }
 
       "has a radio button with the label set to the message with key enquiryCategory.providing_lettings and that it is used once" in {
-        labelDefinedAndUsedOnce("providing_lettings")
+        labelDefinedAndUsedOnce("providing_lettings", messageKeyPrefix, createView)
       }
 
       "has a radio button with the label set to the message with key enquiryCategory.valuations_for_tax and that it is used once" in {
-        labelDefinedAndUsedOnce("valuations_for_tax")
+        labelDefinedAndUsedOnce("valuations_for_tax", messageKeyPrefix, createView)
       }
 
       "has a radio button with the label set to the message with key enquiryCategory.valuation_for_public_body and that it is used once" in {
-        labelDefinedAndUsedOnce("valuation_for_public_body")
+        labelDefinedAndUsedOnce("valuation_for_public_body", messageKeyPrefix, createView)
       }
 
       "has a link marked with site.back leading to the start page" in {
