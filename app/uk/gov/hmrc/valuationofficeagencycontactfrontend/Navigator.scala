@@ -55,7 +55,7 @@ class Navigator @Inject()() {
   val contactDetailsRouting: UserAnswers => Call = answers => {
     answers.enquiryCategory match {
       case Some("council_tax") => routes.CouncilTaxAddressController.onPageLoad(NormalMode)
-      case Some("business_rates") => routes.CouncilTaxAddressController.onPageLoad(NormalMode)
+      case Some("business_rates") => routes.BusinessRatesAddressController.onPageLoad(NormalMode)
       case Some(_) => routes.StaticPagePlaceholderController.onPageLoad()
       case None => {
         Logger.warn("Navigation for contact details page reached without selection of enquiry by controller")
@@ -71,7 +71,8 @@ class Navigator @Inject()() {
     CouncilTaxSubcategoryId -> (answers => routes.ContactDetailsController.onPageLoad(NormalMode)),
     BusinessRatesSubcategoryId -> businessSubcategoryRouting,
     ContactDetailsId -> contactDetailsRouting,
-    CouncilTaxAddressId -> (councilTaxAnswers => routes.CheckYourAnswersController.onPageLoad()))
+    CouncilTaxAddressId -> (councilTaxAnswers => routes.CheckYourAnswersController.onPageLoad()),
+    BusinessRatesAddressId -> (businessRatesAnswers => routes.CheckYourAnswersController.onPageLoad()))
 
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map(

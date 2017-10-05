@@ -33,6 +33,14 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe check_your_answers(frontendAppConfig, Seq(AnswerSection(None, Seq())))(fakeRequest, messages).toString
     }
 
+
+    "Intercept No enquiry selected by throwing an exception" in {
+      val result = controller().onPageLoad()(fakeRequest)
+      val exception = intercept[RuntimeException] {
+      }
+      exception.getMessage mustBe "Navigation for check your anwsers page reached without selection of enquiry by controller"
+    }
+
     "redirect to Session Expired for a GET if not existing data is found" in {
       val result = controller(dontGetAnyData).onPageLoad()(fakeRequest)
 

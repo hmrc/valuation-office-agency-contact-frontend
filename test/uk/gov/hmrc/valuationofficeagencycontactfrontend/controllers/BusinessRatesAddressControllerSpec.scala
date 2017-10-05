@@ -48,16 +48,17 @@ class BusinessRatesAddressControllerSpec extends ControllerSpecBase {
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(BusinessRatesAddressId.toString -> Json.toJson(BusinessRatesAddress("value 1", "value 2")))
+      val validData = Map(BusinessRatesAddressId.toString -> Json.toJson(BusinessRatesAddress("value 1", "value 2", "value 3", "value 4", "value 5", "value 6", "value 7")))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsString(BusinessRatesAddressForm().fill(BusinessRatesAddress("value 1", "value 2")))
+      contentAsString(result) mustBe viewAsString(BusinessRatesAddressForm().fill(BusinessRatesAddress("value 1", "value 2", "value 3", "value 4", "value 5", "value 6", "value 7")))
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("field1", "value 1"), ("field2", "value 2"))
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("businessName", "value 1"), ("businessAddressLine1", "value 2"), ("businessAddressLine2", "value 3"),
+        ("businessAddressLine3", "value 4"), ("town", "value 5"), ("county", "value 6"), ("postcode", "value 7"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -83,7 +84,8 @@ class BusinessRatesAddressControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("field1", "value 1"), ("field2", "value 2"))
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("businessName", "value 1"), ("businessAddressLine1", "value 2"), ("businessAddressLine2", "value 3"),
+        ("businessAddressLine3", "value 4"), ("town", "value 5"), ("county", "value 6"), ("postcode", "value 7"))
       val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER

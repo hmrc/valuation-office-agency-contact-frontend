@@ -19,7 +19,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 import play.api.data.Form
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesAddressForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{NormalMode, BusinessRatesAddress}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{BusinessRatesAddress, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.QuestionViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.businessRatesAddress
 
@@ -39,5 +39,19 @@ class BusinessRatesAddressViewSpec extends QuestionViewBehaviours[BusinessRatesA
 
     behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.BusinessRatesAddressController.onSubmit(NormalMode).url, "businessName",
       "businessAddressLine1", "businessAddressLine2", "businessAddressLine3", "town", "county", "postcode")
+
+    "contain continue button with the value Continue" in {
+      val doc = asDocument(createViewUsingForm(BusinessRatesAddressForm()))
+      val continueButton = doc.getElementById("submit").text()
+      assert(continueButton == messages("site.continue"))
+    }
+
+    "has a link marked with site.back leading to the Contact Details Page" in {
+      val doc = asDocument(createView())
+      val backlinkText = doc.select("a[class=back-link]").text()
+      backlinkText mustBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=back-link]").attr("href")
+      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url
+    }
   }
 }

@@ -32,8 +32,8 @@ checkBeforeYouStart.business_rates.url5 = https://www.gov.uk/introduction-to-bus
 checkBeforeYouStart.business_rates.para10 = Find out how your business rates could change if the premises is altered or the nature of your business has changed.
 checkBeforeYouStart.business_rates.para11 = If you can’t find an answer to your query, or you have a query about something else, you can continue to our contact form.
 
-checkYourAnswers.title = Check Your Answers
-checkYourAnswers.heading = Contact the Valuation Office Agency
+checkYourAnswers.title = Summary
+checkYourAnswers.heading = Your enquiry summary 
 checkYourAnswers.guidance = Please check the information you have given us before submitting. You can edit any details that are incorrect.
 checkYourAnswers.subheading = Summary
 
@@ -84,7 +84,7 @@ enquiryCategory.providing_lettings = Providing lettings information to, or conta
 enquiryCategory.valuations_for_tax = Valuations for taxes, Right to Buy, or appeals against Community Infrastructure Levy
 enquiryCategory.valuation_for_public_body = Valuation and property advice, for public sector bodies, by DVS
 enquiryCategory.other_business = Other business
-enquiryCategory.checkYourAnswersLabel = Enquiry Category
+enquiryCategory.checkYourAnswersLabel = Enquiry Type
 
 enquiryCategory.council_tax.summary = Council Tax enquiries could be about:
 enquiryCategory.council_tax.about1 = your Council Tax band and how it’s assessed
@@ -194,5 +194,5 @@ businessRatesAddress.businessAddressLine3 = Business address line 3
 businessRatesAddress.town = Town* 
 businessRatesAddress.county = County*
 businessRatesAddress.postcode = Postcode
-businessRatesAddress.checkYourAnswersLabel = Business Rates Address
+businessRatesAddress.checkYourAnswersLabel = Property Details
 

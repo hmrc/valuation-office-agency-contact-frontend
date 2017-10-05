@@ -17,6 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import com.google.inject.Inject
+import play.api.Logger
 import play.api.i18n.{I18nSupport, MessagesApi}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.CheckYourAnswersHelper
@@ -33,7 +34,17 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
   def onPageLoad() = (getData andThen requireData) {
     implicit request =>
       val checkYourAnswersHelper = new CheckYourAnswersHelper(request.userAnswers)
-      val sections = Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.councilTaxAddress).flatten))
+
+      val sections = request.userAnswers.enquiryCategory match {
+        case Some("council_tax") => Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.councilTaxAddress, checkYourAnswersHelper.councilTaxSubcategory).flatten))
+        case Some("business_rates") => Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.businessRatesAddress, checkYourAnswersHelper.businessRatesSubcategory).flatten))
+        case Some(_) => Seq()
+        case None => {
+          Logger.warn("Navigation for Check your answers page reached without selection of enquiry by controller")
+          throw new RuntimeException("Navigation for check your anwsers page reached without selection of enquiry by controller")
+        }
+      }
+      //val sections = Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.councilTaxAddress).flatten))
       Ok(check_your_answers(appConfig, sections))
   }
 }

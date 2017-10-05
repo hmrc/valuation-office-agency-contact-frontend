@@ -21,6 +21,7 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, BusinessRatesAddress}
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.InputViewModel
 
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 @(appConfig: FrontendAppConfig, form: Form[BusinessRatesAddress], mode: Mode)(implicit request: Request[_], messages: Messages)
 
 @main_template(
@@ -34,10 +35,23 @@
 
         @components.heading("businessRatesAddress.heading")
 
-        @components.input_text(InputViewModel[BusinessRatesAddress]("field1", form), label = messages("businessRatesAddress.field1"))
+        @components.input_text(InputViewModel[BusinessRatesAddress]("businessName", form), label = messages("businessRatesAddress.businessName"))
 
-        @components.input_text(InputViewModel[BusinessRatesAddress]("field2", form), label = messages("businessRatesAddress.field2"))
+        @components.input_text(InputViewModel[BusinessRatesAddress]("businessAddressLine1", form), label = messages("businessRatesAddress.businessAddressLine1"))
 
-        @components.submit_button()
+        @components.input_text(InputViewModel[BusinessRatesAddress]("businessAddressLine2", form), label = messages("businessRatesAddress.businessAddressLine3"))
+
+        @components.input_text(InputViewModel[BusinessRatesAddress]("businessAddressLine3", form), label = messages("businessRatesAddress.businessAddressLine3"))
+
+        @components.input_text(InputViewModel[BusinessRatesAddress]("town", form), label = messages("businessRatesAddress.town"))
+
+        @components.input_text(InputViewModel[BusinessRatesAddress]("county", form), label = messages("businessRatesAddress.county"))
+
+        @components.input_text(InputViewModel[BusinessRatesAddress]("postcode", form), label = messages("businessRatesAddress.postcode"))
+
+        @components.continue_button()
+
+        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url class="back-link">@messages("site.back")</a>
+
     }
 }
