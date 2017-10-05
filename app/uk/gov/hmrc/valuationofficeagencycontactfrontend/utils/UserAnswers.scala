@@ -22,7 +22,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 
 class UserAnswers(val cacheMap: CacheMap) {
 
-  def propertyDetails: Option[PropertyDetails] = cacheMap.getEntry[PropertyDetails](PropertyDetailsId.toString)
+  def councilTaxAddress: Option[CouncilTaxAddress] = cacheMap.getEntry[CouncilTaxAddress](CouncilTaxAddressId.toString)
 
   def enquiryCategory: Option[String] = cacheMap.getEntry[String](EnquiryCategoryId.toString)
 

@@ -17,9 +17,9 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.behaviours.FormBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.PropertyDetails
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.CouncilTaxAddress
 
-class PropertyDetailsFormSpec extends FormBehaviours {
+class CouncilTaxAddressFormSpec extends FormBehaviours {
 
   val validData: Map[String, String] = Map(
     "addressLine1" -> "value 1",
@@ -29,10 +29,10 @@ class PropertyDetailsFormSpec extends FormBehaviours {
     "postcode" -> "value 5"
   )
 
-  val form = PropertyDetailsForm()
+  val form = CouncilTaxAddressForm()
 
-  "PropertyDetails form" must {
-    behave like questionForm(PropertyDetails("value 1", "value 2", "value 3", "value 4", "value 5"))
+  "Council Tax Address form" must {
+    behave like questionForm(CouncilTaxAddress("value 1", "value 2", "value 3", "value 4", "value 5"))
 
     behave like formWithMandatoryTextFields("addressLine1", "addressLine2", "town", "county", "postcode")
   }

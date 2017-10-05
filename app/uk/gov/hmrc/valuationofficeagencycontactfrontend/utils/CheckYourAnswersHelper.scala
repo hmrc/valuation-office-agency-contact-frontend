@@ -22,8 +22,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow, R
 
 class CheckYourAnswersHelper(userAnswers: UserAnswers) {
 
-  def propertyDetails: Option[AnswerRow] = userAnswers.propertyDetails map {
-    x => AnswerRow("propertyDetails.checkYourAnswersLabel", s"${x.addressLine1} ${x.addressLine2} ${x.town} ${x.county} ${x.postcode}", false, routes.PropertyDetailsController.onPageLoad(CheckMode).url)
+  def councilTaxAddress: Option[AnswerRow] = userAnswers.councilTaxAddress map {
+    x => AnswerRow("councilTaxAddress.checkYourAnswersLabel", s"${x.addressLine1} ${x.addressLine2} ${x.town} ${x.county} ${x.postcode}", false, routes.CouncilTaxAddressController.onPageLoad(CheckMode).url)
   }
 
   def enquiryCategory: Option[AnswerRow] = userAnswers.enquiryCategory map {

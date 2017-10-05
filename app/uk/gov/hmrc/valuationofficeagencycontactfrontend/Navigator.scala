@@ -52,12 +52,26 @@ class Navigator @Inject()() {
     }
   }
 
+  val contactDetailsRouting: UserAnswers => Call = answers => {
+    answers.enquiryCategory match {
+      case Some("council_tax") => routes.CouncilTaxAddressController.onPageLoad(NormalMode)
+      case Some("business_rates") => routes.CouncilTaxAddressController.onPageLoad(NormalMode)
+      case Some(_) => routes.StaticPagePlaceholderController.onPageLoad()
+      case None => {
+        Logger.warn("Navigation for contact details page reached without selection of enquiry by controller")
+        throw new RuntimeException("Navigation for contact details page reached without selection of enquiry by controller")
+      }
+    }
+  }
+
+
+
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     EnquiryCategoryId -> enquiryRouting,
     CouncilTaxSubcategoryId -> (answers => routes.ContactDetailsController.onPageLoad(NormalMode)),
     BusinessRatesSubcategoryId -> businessSubcategoryRouting,
-    ContactDetailsId -> (contactAnswers => routes.PropertyDetailsController.onPageLoad(NormalMode)),
-    PropertyDetailsId -> (propertyAnswers => routes.CheckYourAnswersController.onPageLoad()))
+    ContactDetailsId -> contactDetailsRouting,
+    CouncilTaxAddressId -> (councilTaxAnswers => routes.CheckYourAnswersController.onPageLoad()))
 
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map(

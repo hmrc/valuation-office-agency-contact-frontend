@@ -53,9 +53,20 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
       }
 
-      "return a function that goes to the business rates subcategory page when an enquiry category has been selected and the selection is business" in {
+      "return a function that goes to the council tax property details page when the contact form has been submitted without errors and the enquiry is council tax" in {
+        when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "test@email.com", "0208382737288", "073753753733", "Phone"))
+        navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAddressController.onPageLoad(NormalMode)
+      }
+
+
+      "return a function that goes to the business rates subcategory page when an enquiry category has been selected and the selection is business rates" in {
         when (mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
         navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
+      }
+
+      "return a function that goes to the contact form page when an enquiry category for business rates has been selected and the selection is not check or update OR challenge my valuation" in {
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_rateable_value")
+        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
       }
 
       "return a function that goes to the check and challenge page when an enquiry category for business rates has been selected and the selection is I want to check or update my property details" in {
@@ -68,19 +79,9 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CheckAndChallengeController.onPageLoad()
       }
 
-      "return a function that goes to the contact form page when an enquiry category for business rates has been selected and the selection is not check or update OR challenge my valuation" in {
-        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_rateable_value")
-        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
-      }
-
-      "return a function that goes to the property details page when the contact form has been submitted without errors" in {
-        when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "test@email.com", "0208382737288", "073753753733", "Phone"))
-        navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.PropertyDetailsController.onPageLoad(NormalMode)
-      }
-
-      "return a function that goes to the check your details page when the property details form has been submitted without errors" in {
-        when (mockUserAnswers.propertyDetails) thenReturn Some(PropertyDetails("1", "Street", "Town", "Some county", "AA11AA"))
-        navigator.nextPage(PropertyDetailsId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
+      "return a function that goes to the check your details page when the council tax address details form has been submitted without errors" in {
+        when (mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("1", "Street", "Town", "Some county", "AA11AA"))
+        navigator.nextPage(CouncilTaxAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
       }
 
     }
