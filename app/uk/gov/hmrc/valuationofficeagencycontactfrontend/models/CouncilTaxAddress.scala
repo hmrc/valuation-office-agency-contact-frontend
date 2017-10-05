@@ -18,8 +18,8 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
 
 import play.api.libs.json._
 
-case class PropertyDetails (addressLine1: String, addressLine2: String, town: String, county: String, postcode: String)
+case class CouncilTaxAddress(addressLine1: String, addressLine2: String, town: String, county: String, postcode: String)
 
-object PropertyDetails {
-  implicit val format = Json.format[PropertyDetails]
+object CouncilTaxAddress {
+  implicit val format = Json.format[CouncilTaxAddress]
 }

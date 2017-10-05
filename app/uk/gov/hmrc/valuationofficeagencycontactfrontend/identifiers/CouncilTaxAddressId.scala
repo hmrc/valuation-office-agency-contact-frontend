@@ -16,6 +16,6 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers
 
-case object PropertyDetailsId extends Identifier {
-  override def toString: String = "propertyDetails"
+case object CouncilTaxAddressId extends Identifier {
+  override def toString: String = "councilTaxAddress"
 }

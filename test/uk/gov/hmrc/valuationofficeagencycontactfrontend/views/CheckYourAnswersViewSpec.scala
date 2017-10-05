@@ -34,7 +34,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
       val backlinkText = doc.select("a[class=back-link]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl = doc.select("a[class=back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyDetailsController.onPageLoad(NormalMode).url
+      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxAddressController.onPageLoad(NormalMode).url
     }
   }
 

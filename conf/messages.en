@@ -160,7 +160,6 @@ councilTaxSubcategory.council_tax_home_business = How your Council Tax is affect
 councilTaxSubcategory.council_tax_change = Changes  you’ve made to your property that you think may affect your Council Tax band
 councilTaxSubcategory.council_tax_assess = Your Council Tax band and how it’s assessed
 councilTaxSubcategory.council_tax_other = Other
-councilTaxSubcategory.para1 = This could be
 councilTaxSubcategory.checkYourAnswersLabel = Council Tax
 
 businessRatesSubcategory.title = Business Rates
@@ -176,12 +175,12 @@ checkAndChallenge.title = Check and challenge
 checkAndChallenge.heading = You will now be transferred to the VOA’s Find, Check and Challenge Business Rates service. 
 checkAndChallenge.url = https://www.gov.uk/correct-your-business-rates
 
-propertyDetails.title = Property Details
-propertyDetails.heading = Which property are you contacting us about?
-propertyDetails.addressLine1 = Address Line 1
-propertyDetails.addressLine2 = Address Line 2
-propertyDetails.town = Town/City
-propertyDetails.county = County
-propertyDetails.postcode = Postcode
-propertyDetails.checkYourAnswersLabel = Property Details
+councilTaxAddress.title = Council tax property Details
+councilTaxAddress.heading = What is your address
+councilTaxAddress.addressLine1 = Address Line 1*
+councilTaxAddress.addressLine2 = Address Line 2
+councilTaxAddress.town = Town*
+councilTaxAddress.county = County*
+councilTaxAddress.postcode = Postcode
+councilTaxAddress.checkYourAnswersLabel = Property Details
 
