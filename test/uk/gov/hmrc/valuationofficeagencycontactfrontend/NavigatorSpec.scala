@@ -74,7 +74,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       }
 
       "return a function that goes to the property details page when the contact form has been submitted without errors" in {
-        when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "073753753733", "Phone", "your message"))
+        when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "test@email.com", "0208382737288", "073753753733", "Phone"))
         navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.PropertyDetailsController.onPageLoad(NormalMode)
       }
 

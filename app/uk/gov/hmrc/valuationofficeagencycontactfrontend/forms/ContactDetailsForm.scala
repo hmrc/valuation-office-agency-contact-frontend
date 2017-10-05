@@ -27,10 +27,11 @@ object ContactDetailsForm {
     mapping(
       "firstName" -> nonEmptyText,
       "lastName" -> nonEmptyText,
-      "telephoneNumber" -> nonEmptyText,
       "email" -> nonEmptyText,
-      "contactPreference" -> nonEmptyText,
-      "message" -> nonEmptyText
+      "confirmEmail" -> nonEmptyText,
+      "telephone" -> nonEmptyText,
+      "mobile" -> nonEmptyText,
+      "contactPreference" -> nonEmptyText
     )(ContactDetails.apply)(ContactDetails.unapply)
   )
 

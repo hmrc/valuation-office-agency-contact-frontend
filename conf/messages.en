@@ -115,16 +115,19 @@ enquiryCategory.valuation_for_public_body.summary = Valuation for public sector 
 enquiryCategory.valuation_for_public_body.about1 = independent valuation and professional property advice for public bodies
 enquiryCategory.valuation_for_public_body.finaltext = Note: this service also operates in Scotland.
 
-contactDetails.title = contactDetails
-contactDetails.heading = Send the VOA a message
-contactDetails.firstName = First name
-contactDetails.lastName = Last name
-contactDetails.telephoneNumber = Telephone number
-contactDetails.email = Email address
-contactDetails.contactPreference = I prefer to be contacted using
-contactDetails.message = Your message
+contactDetails.title = Contact Details
+contactDetails.heading = What are your contact details 
+contactDetails.firstName = Your first name*
+contactDetails.lastName = Surname*
+contactDetails.email = Email * 
+contactDetails.confirmEmail = Confirm email *
+contactDetails.supply-number.para = Please supply either a landline number or a mobile number *
+contactDetails.telephone = Telephone
+contactDetails.mobile = Mobile
+contactDetails.contact_preference_heading = Contact preferences 
+contactDetails.contactPreference = I prefer to be contacted by
 contactDetails.email_preference = Email
-contactDetails.phone_preference = Phone
+contactDetails.phone_preference = Telephone
 contactDetails.checkYourAnswersLabel = Contact Details
 
 staticPagePlaceholder.title = Postcode Finder
@@ -162,7 +165,6 @@ councilTaxSubcategory.checkYourAnswersLabel = Council Tax
 
 businessRatesSubcategory.title = Business Rates
 businessRatesSubcategory.heading = What is your enquiry about Business Rates?
-businessRatesSubcategory.para1 = This could be about
 businessRatesSubcategory.business_rates_rateable_value = Rateable value and how it’s calculated
 businessRatesSubcategory.business_rates_update_details = I want to check or update my property details
 businessRatesSubcategory.business_rates_challenge_valuation = I want to challenge my valuation

@@ -35,7 +35,7 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
   }
 
   def contactDetails: Option[AnswerRow] = userAnswers.contactDetails map {
-    x => AnswerRow("contactDetails.checkYourAnswersLabel", s"${x.firstName} ${x.lastName} ${x.email} ${x.message}", false, routes.ContactDetailsController.onPageLoad(CheckMode).url)
+    x => AnswerRow("contactDetails.checkYourAnswersLabel", s"${x.firstName} ${x.lastName} ${x.email}", false, routes.ContactDetailsController.onPageLoad(CheckMode).url)
   }
 
   def businessRatesSubcategory: Option[AnswerRow] = userAnswers.businessRatesSubcategory map {
