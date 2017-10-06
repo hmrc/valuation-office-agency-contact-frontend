@@ -20,7 +20,7 @@ import org.mockito.Mockito.when
 import org.scalatest.mockito.MockitoSugar
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{BusinessRatesAddress, ContactDetails, CouncilTaxAddress}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{BusinessRatesAddress, ContactDetails, CouncilTaxAddress, TellUsMore}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, RadioOption, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_answers
@@ -61,10 +61,12 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
       when (mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
       when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("a")
+      when (mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
       val result = controller().sections(mockUserAnswers)
       val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
-      result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.businessRatesAddress, checkYourAnswersHelper.businessRatesSubcategory).flatten)))
+      result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.businessRatesAddress,
+        checkYourAnswersHelper.tellUsMore).flatten)))
     }
 
     "The sections function produces sections with the council tax check your answers section when the enquiry category is council_tax" in {
@@ -73,10 +75,12 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
       when (mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
       when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("a")
+      when (mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
       val result = controller().sections(mockUserAnswers)
       val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
-      result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.councilTaxAddress, checkYourAnswersHelper.councilTaxSubcategory).flatten)))
+      result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.councilTaxAddress,
+        checkYourAnswersHelper.tellUsMore).flatten)))
 
     }
 
