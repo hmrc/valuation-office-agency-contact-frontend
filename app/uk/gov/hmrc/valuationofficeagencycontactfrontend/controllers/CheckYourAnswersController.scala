@@ -20,31 +20,39 @@ import com.google.inject.Inject
 import play.api.Logger
 import play.api.i18n.{I18nSupport, MessagesApi}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.CheckYourAnswersHelper
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_answers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
+
+import scala.util.Try
 
 class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
                                            override val messagesApi: MessagesApi,
                                            getData: DataRetrievalAction,
                                            requireData: DataRequiredAction) extends FrontendController with I18nSupport {
 
+  def sections (answers: UserAnswers): Option[Seq[AnswerSection]] = {
+
+    val checkYourAnswersHelper = new CheckYourAnswersHelper(answers)
+
+    answers.enquiryCategory match{
+      case Some("business_rates") => Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.businessRatesAddress, checkYourAnswersHelper.businessRatesSubcategory).flatten)))
+      case Some("council_tax") => Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.councilTaxAddress, checkYourAnswersHelper.councilTaxSubcategory).flatten)))
+      case _ => None
+    }
+  }
+
   def onPageLoad() = (getData andThen requireData) {
     implicit request =>
-      val checkYourAnswersHelper = new CheckYourAnswersHelper(request.userAnswers)
 
-      val sections = request.userAnswers.enquiryCategory match {
-        case Some("council_tax") => Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.councilTaxAddress, checkYourAnswersHelper.councilTaxSubcategory).flatten))
-        case Some("business_rates") => Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.businessRatesAddress, checkYourAnswersHelper.businessRatesSubcategory).flatten))
-        case Some(_) => Seq()
+      sections(request.userAnswers) match {
+        case Some(s) => Ok(check_your_answers(appConfig, s))
         case None => {
           Logger.warn("Navigation for Check your answers page reached without selection of enquiry by controller")
           throw new RuntimeException("Navigation for check your anwsers page reached without selection of enquiry by controller")
         }
       }
-      //val sections = Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.councilTaxAddress).flatten))
-      Ok(check_your_answers(appConfig, sections))
   }
 }

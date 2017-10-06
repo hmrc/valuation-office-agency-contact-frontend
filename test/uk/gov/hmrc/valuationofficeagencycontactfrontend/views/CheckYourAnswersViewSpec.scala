@@ -29,7 +29,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
     behave like normalPage(view, "checkYourAnswers", "subheading")
 
-    "has a link marked with site.back leading to the Property Details Page" in {
+    "has a link marked with site.back leading to the Contact Details Page" in {
       val doc = asDocument(view())
       val backlinkText = doc.select("a[class=back-link]").text()
       backlinkText mustBe messages("site.back")
