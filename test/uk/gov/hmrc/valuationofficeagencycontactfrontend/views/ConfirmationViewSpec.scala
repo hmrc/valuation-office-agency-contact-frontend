@@ -25,7 +25,7 @@ class ConfirmationViewSpec extends ViewBehaviours {
 
   "Confirmation view" must {
 
-    behave like normalPage(view, "confirmation", "para1", "para2", "para3", "para4", "para5", "para6", "reference",
+    behave like normalPage(view, "confirmation", "para1", "para2", "para3", "para4", "para5", "reference",
       "survey-para1", "survey-para2")
 
     "contain start again button " in {
