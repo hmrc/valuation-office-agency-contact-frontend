@@ -64,19 +64,16 @@ class Navigator @Inject()() {
     }
   }
 
-
-
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     EnquiryCategoryId -> enquiryRouting,
     CouncilTaxSubcategoryId -> (answers => routes.ContactDetailsController.onPageLoad(NormalMode)),
     BusinessRatesSubcategoryId -> businessSubcategoryRouting,
     ContactDetailsId -> contactDetailsRouting,
-    CouncilTaxAddressId -> (councilTaxAnswers => routes.CheckYourAnswersController.onPageLoad()),
-    BusinessRatesAddressId -> (businessRatesAnswers => routes.CheckYourAnswersController.onPageLoad()))
+    CouncilTaxAddressId -> (councilTaxAnswers => routes.TellUsMoreController.onPageLoad(NormalMode)),
+    BusinessRatesAddressId -> (businessRatesAnswers => routes.TellUsMoreController.onPageLoad(NormalMode)),
+    TellUsMoreId -> (tellUsAnswer => routes.CheckYourAnswersController.onPageLoad()))
 
-
-  private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map(
-  )
+  private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()
 
   def nextPage(id: Identifier, mode: Mode): UserAnswers => Call = mode match {
     case NormalMode =>

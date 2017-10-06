@@ -84,14 +84,19 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CheckAndChallengeController.onPageLoad()
       }
 
-      "return a function that goes to the summary page when the council tax address details form has been submitted without errors" in {
+      "return a function that goes to the tell us more page when the council tax address details form has been submitted without errors" in {
         when (mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("1", "Street", "Town", "Some county", "AA11AA"))
-        navigator.nextPage(CouncilTaxAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
+        navigator.nextPage(CouncilTaxAddressId, NormalMode)(mockUserAnswers) mustBe routes.TellUsMoreController.onPageLoad(NormalMode)
       }
 
-      "return a function that goes to the summary page when the business address details form has been submitted without errors" in {
+      "return a function that goes to the tell us more page when the business address details form has been submitted without errors" in {
         when (mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("Business", "1", "Unit", "Street", "London", "County", "AA11AA"))
-        navigator.nextPage(BusinessRatesAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
+        navigator.nextPage(BusinessRatesAddressId, NormalMode)(mockUserAnswers) mustBe routes.TellUsMoreController.onPageLoad(NormalMode)
+      }
+
+      "return a function that goes to the summary page when the tell us more form has been submitted without errors" in {
+        when (mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("Hello"))
+        navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
       }
 
     }
