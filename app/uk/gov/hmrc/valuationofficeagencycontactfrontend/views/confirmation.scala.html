@@ -16,6 +16,7 @@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
 @main_template(
@@ -34,5 +35,10 @@
     <p>@messages("confirmation.para6")</p>
     <p>@messages("confirmation.survey-para1")</p>
     <p>@messages("confirmation.survey-para2")</p>
+
+    <p>
+        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url id="start-again" class="button">@messages("site.start-again")</a>
+
+    </p>
 
 }
