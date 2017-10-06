@@ -70,6 +70,7 @@ site.no = No
 site.yes = Yes
 site.save_and_continue = Save and continue
 site.start-again = Start again
+site.submit = Submit
 site.service_name = Valuation Office Agency Contact Finder
 site.textarea.char_limit = (Limit is {0} characters)
 

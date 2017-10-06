@@ -29,6 +29,11 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
     behave like normalPage(view, "checkYourAnswers", "subheading")
 
+    "contain continue button with the value Continue" in {
+      val doc = asDocument(view())
+      val submitButton = doc.getElementById("submit").text()
+      assert(submitButton == messages("site.submit"))
+    }
     "has a link marked with site.back leading to the Contact Details Page" in {
       val doc = asDocument(view())
       val backlinkText = doc.select("a[class=back-link]").text()
