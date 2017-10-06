@@ -22,12 +22,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow, R
 
 class CheckYourAnswersHelper(userAnswers: UserAnswers) {
 
-  def businessRatesAddress: Option[AnswerRow] = userAnswers.businessRatesAddress map {
-    x => AnswerRow("businessRatesAddress.checkYourAnswersLabel", s"${x.businessName} ${x.businessAddressLine1} ${x.town} ${x.county} ${x.postcode}", false, routes.BusinessRatesAddressController.onPageLoad(CheckMode).url)
-  }
-
-  def councilTaxAddress: Option[AnswerRow] = userAnswers.councilTaxAddress map {
-    x => AnswerRow("councilTaxAddress.checkYourAnswersLabel", s"${x.addressLine1} ${x.addressLine2} ${x.town} ${x.county} ${x.postcode}", false, routes.CouncilTaxAddressController.onPageLoad(CheckMode).url)
+  def tellUsMore: Option[AnswerRow] = userAnswers.tellUsMore map {
+    x => AnswerRow("tellUsMore.checkYourAnswersLabel", s"${x.message}", false, routes.TellUsMoreController.onPageLoad(CheckMode).url)
   }
 
   def enquiryCategory: Option[AnswerRow] = userAnswers.enquiryCategory map {
@@ -38,12 +34,20 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
     x => AnswerRow("councilTaxSubcategory.checkYourAnswersLabel", s"councilTaxSubcategory.$x", true, routes.CouncilTaxSubcategoryController.onPageLoad(CheckMode).url)
   }
 
-  def contactDetails: Option[AnswerRow] = userAnswers.contactDetails map {
-    x => AnswerRow("contactDetails.checkYourAnswersLabel", s"${x.firstName} ${x.lastName} ${x.email}", false, routes.ContactDetailsController.onPageLoad(CheckMode).url)
-  }
-
   def businessRatesSubcategory: Option[AnswerRow] = userAnswers.businessRatesSubcategory map {
     x => AnswerRow("businessRatesSubcategory.checkYourAnswersLabel", s"businessRatesSubcategory.$x", true, routes.BusinessRatesSubcategoryController.onPageLoad(CheckMode).url)
+  }
+
+  def businessRatesAddress: Option[AnswerRow] = userAnswers.businessRatesAddress map {
+    x => AnswerRow("businessRatesAddress.checkYourAnswersLabel", s"${x.businessName} ${x.businessAddressLine1} ${x.town} ${x.county} ${x.postcode}", false, routes.BusinessRatesAddressController.onPageLoad(CheckMode).url)
+  }
+
+  def councilTaxAddress: Option[AnswerRow] = userAnswers.councilTaxAddress map {
+    x => AnswerRow("councilTaxAddress.checkYourAnswersLabel", s"${x.addressLine1} ${x.addressLine2} ${x.town} ${x.county} ${x.postcode}", false, routes.CouncilTaxAddressController.onPageLoad(CheckMode).url)
+  }
+
+  def contactDetails: Option[AnswerRow] = userAnswers.contactDetails map {
+    x => AnswerRow("contactDetails.checkYourAnswersLabel", s"${x.firstName} ${x.lastName} ${x.email}", false, routes.ContactDetailsController.onPageLoad(CheckMode).url)
   }
 
 }

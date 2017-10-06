@@ -184,7 +184,6 @@ councilTaxAddress.county = County*
 councilTaxAddress.postcode = Postcode
 councilTaxAddress.checkYourAnswersLabel = Property Details
 
-
 businessRatesAddress.title = Business Rates Address
 businessRatesAddress.heading = What is the address of your business
 businessRatesAddress.businessName = Business name*
@@ -196,3 +195,7 @@ businessRatesAddress.county = County*
 businessRatesAddress.postcode = Postcode
 businessRatesAddress.checkYourAnswersLabel = Property Details
 
+tellUsMore.title = Tell Us More
+tellUsMore.heading = Tell us more about your enquiry 
+tellUsMore.message = Your message
+tellUsMore.checkYourAnswersLabel = Enquiry

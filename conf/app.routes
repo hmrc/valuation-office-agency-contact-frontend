@@ -45,3 +45,8 @@ GET         /businessRatesAddress                  uk.gov.hmrc.valuationofficeag
 POST        /businessRatesAddress                  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesAddressController.onSubmit(mode: Mode = NormalMode)
 GET         /changeBusinessRatesAddress            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesAddressController.onPageLoad(mode: Mode = CheckMode)
 POST        /changeBusinessRatesAddress            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesAddressController.onSubmit(mode: Mode = CheckMode)
+
+GET         /tellUsMore                            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onPageLoad(mode: Mode = NormalMode)
+POST        /tellUsMore                            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onSubmit(mode: Mode = NormalMode)
+GET         /changeTellUsMore                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onPageLoad(mode: Mode = CheckMode)
+POST        /changeTellUsMore                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onSubmit(mode: Mode = CheckMode)
