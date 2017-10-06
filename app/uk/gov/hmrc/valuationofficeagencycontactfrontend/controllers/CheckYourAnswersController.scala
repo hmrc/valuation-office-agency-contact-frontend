@@ -38,8 +38,10 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
     val checkYourAnswersHelper = new CheckYourAnswersHelper(answers)
 
     answers.enquiryCategory match{
-      case Some("business_rates") => Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.businessRatesAddress, checkYourAnswersHelper.businessRatesSubcategory).flatten)))
-      case Some("council_tax") => Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.councilTaxAddress, checkYourAnswersHelper.councilTaxSubcategory).flatten)))
+      case Some("business_rates") => Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.businessRatesAddress,
+        checkYourAnswersHelper.tellUsMore).flatten)))
+      case Some("council_tax") => Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.councilTaxAddress,
+        checkYourAnswersHelper.tellUsMore).flatten)))
       case _ => None
     }
   }
