@@ -22,7 +22,7 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.InputViewModel
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
-@(appConfig: FrontendAppConfig, form: Form[TellUsMore], mode: Mode)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, form: Form[TellUsMore], mode: Mode, enquiryKey: String)(implicit request: Request[_], messages: Messages)
 
 @main_template(
     title = messages("tellUsMore.title"),
@@ -30,6 +30,8 @@
     bodyClasses = None) {
 
     @components.heading("tellUsMore.heading")
+
+    <h2 class="heading-medium">@messages(enquiryKey)</h2>
 
     <p>@messages("tellUsMore.para")</p>
 

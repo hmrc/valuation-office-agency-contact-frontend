@@ -27,9 +27,9 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
 
   val messageKeyPrefix = "tellUsMore"
 
-  def createView = () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode)(fakeRequest, messages)
+  def createView = () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "")(fakeRequest, messages)
 
-  def createViewUsingForm = (form: Form[TellUsMore]) => tellUsMore(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+  def createViewUsingForm = (form: Form[TellUsMore]) => tellUsMore(frontendAppConfig, form, NormalMode, "")(fakeRequest, messages)
 
   override val form = TellUsMoreForm()
 
