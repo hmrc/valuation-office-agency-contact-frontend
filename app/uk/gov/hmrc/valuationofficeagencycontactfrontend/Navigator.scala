@@ -56,7 +56,10 @@ class Navigator @Inject()() {
     answers.enquiryCategory match {
       case Some("council_tax") => routes.CouncilTaxAddressController.onPageLoad(NormalMode)
       case Some("business_rates") => routes.BusinessRatesAddressController.onPageLoad(NormalMode)
-      case Some(_) => routes.StaticPagePlaceholderController.onPageLoad()
+      case Some(sel) => {
+        Logger.warn(s"Navigation for contact details page reached with an unknown selection $sel of enquiry by controller")
+        throw new RuntimeException(s"Navigation for contact details page reached unknown selection $sel of enquiry by controller")
+      }
       case None => {
         Logger.warn("Navigation for contact details page reached without selection of enquiry by controller")
         throw new RuntimeException("Navigation for contact details page reached without selection of enquiry by controller")
@@ -66,12 +69,12 @@ class Navigator @Inject()() {
 
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     EnquiryCategoryId -> enquiryRouting,
-    CouncilTaxSubcategoryId -> (answers => routes.ContactDetailsController.onPageLoad(NormalMode)),
+    CouncilTaxSubcategoryId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
     BusinessRatesSubcategoryId -> businessSubcategoryRouting,
     ContactDetailsId -> contactDetailsRouting,
-    CouncilTaxAddressId -> (councilTaxAnswers => routes.TellUsMoreController.onPageLoad(NormalMode)),
-    BusinessRatesAddressId -> (businessRatesAnswers => routes.TellUsMoreController.onPageLoad(NormalMode)),
-    TellUsMoreId -> (tellUsAnswer => routes.CheckYourAnswersController.onPageLoad()))
+    CouncilTaxAddressId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
+    BusinessRatesAddressId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
+    TellUsMoreId -> (_ => routes.CheckYourAnswersController.onPageLoad()))
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()
 

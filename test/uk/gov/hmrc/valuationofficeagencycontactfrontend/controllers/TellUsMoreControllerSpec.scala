@@ -19,14 +19,14 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import org.mockito.Mockito.when
 import org.scalatest.mockito.MockitoSugar
 import play.api.data.Form
-import play.api.libs.json.Json
+import play.api.libs.json.{JsString, Json}
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.TellUsMoreForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.TellUsMoreId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxSubcategoryId, EnquiryCategoryId, TellUsMoreId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
@@ -46,153 +46,159 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   "TellUsMore Controller" must {
 
-//    "return OK and the correct view for a GET" in {
-//      val result = controller().onPageLoad(NormalMode)(fakeRequest)
-//
-//      status(result) mustBe OK
-//      contentAsString(result) mustBe viewAsString()
-//    }
+      "return OK and the correct view for a GET" in {
+        val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_change"))
 
-//    "populate the view correctly on a GET when the question has previously been answered" in {
-//      val validData = Map(TellUsMoreId.toString -> Json.toJson(TellUsMore("value 1")))
-//      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+        val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+        val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+        status(result) mustBe OK
+        contentAsString(result) mustBe viewAsString()
+      }
+
+//      "populate the view correctly on a GET when the question has previously been answered" in {
+//        val validData = Map(TellUsMoreId.toString -> Json.toJson(TellUsMore("value 1")))
+//        val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 //
-//      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+//        val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 //
-//      contentAsString(result) mustBe viewAsString(TellUsMoreForm().fill(TellUsMore("value 1")))
-//    }
-    "The council tax key function produces a string with a council tax subcategory key when the enquiry category is council_tax" +
+//        contentAsString(result) mustBe viewAsString(TellUsMoreForm().fill(TellUsMore("value 1")))
+//      }
+
+
+      "The council tax key function produces a string with a council tax subcategory key when the enquiry category is council_tax" +
       " and the council_tax_home_business has been selected" in {
-      when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
-      when (mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
-      when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_home_business")
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
+      when(mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_home_business")
 
       val result = controller().councilTaxKey(mockUserAnswers)
-      result mustBe Some("councilTaxSubcategory.council_tax_home_business")
+      result mustBe Right("councilTaxSubcategory.council_tax_home_business")
     }
 
     "The council tax key function produces a string with a council tax subcategory key when the enquiry category is council_tax" +
       " and the council_tax_change has been selected" in {
-      when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
-      when (mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
-      when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_change")
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
+      when(mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_change")
 
       val result = controller().councilTaxKey(mockUserAnswers)
-      result mustBe Some("councilTaxSubcategory.council_tax_change")
+      result mustBe Right("councilTaxSubcategory.council_tax_change")
     }
 
     "The council tax key function produces a string with a council tax subcategory key when the enquiry category is council_tax" +
       " and the council_tax_assess has been selected" in {
-      when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
-      when (mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
-      when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_assess")
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
+      when(mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_assess")
 
       val result = controller().councilTaxKey(mockUserAnswers)
-      result mustBe Some("councilTaxSubcategory.council_tax_assess")
+      result mustBe Right("councilTaxSubcategory.council_tax_assess")
     }
 
     "The council tax key function produces a string with a council tax subcategory key when the enquiry category is council_tax" +
       " and the council_tax_other has been selected" in {
-      when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
-      when (mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
-      when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_other")
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
+      when(mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_other")
 
       val result = controller().councilTaxKey(mockUserAnswers)
-      result mustBe Some("councilTaxSubcategory.council_tax_other")
+      result mustBe Right("councilTaxSubcategory.council_tax_other")
     }
 
-    "The council tax key function produces a None when the enquiry category is council_tax" +
+    "The council tax key function produces a Left(Returned None) when the enquiry category is council_tax" +
       " and no council tax subcategory has been selected" in {
-      when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
-      when (mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
-      when (mockUserAnswers.councilTaxSubcategory) thenReturn None
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
+      when(mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn None
 
       val result = controller().councilTaxKey(mockUserAnswers)
-      result mustBe None
+      result mustBe Left("Returned None from council tax subcategory")
     }
 
     "The business rates key function produces a string with a business rates subcategory when the enquiry category is business_rates" +
       " and the business_rates_rateable_value has been selected" in {
-      when (mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
-      when (mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
-      when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_rateable_value")
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
+      when(mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_rateable_value")
 
       val result = controller().businessRatesKey(mockUserAnswers)
-      result mustBe Some("businessRatesSubcategory.business_rates_rateable_value")
+      result mustBe Right("businessRatesSubcategory.business_rates_rateable_value")
     }
 
     "The business rates key function produces a string with a business rates subcategory when the enquiry category is business_rates" +
       " and the business_rates_moved_property has been selected" in {
-      when (mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
-      when (mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
-      when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_moved_property")
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
+      when(mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_moved_property")
 
       val result = controller().businessRatesKey(mockUserAnswers)
-      result mustBe Some("businessRatesSubcategory.business_rates_moved_property")
+      result mustBe Right("businessRatesSubcategory.business_rates_moved_property")
     }
 
     "The business rates key function produces a string with a business rates subcategory when the enquiry category is business_rates" +
       " and the business_rates_other has been selected" in {
-      when (mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
-      when (mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
-      when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
+      when(mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
 
       val result = controller().businessRatesKey(mockUserAnswers)
-      result mustBe Some("businessRatesSubcategory.business_rates_other")
+      result mustBe Right("businessRatesSubcategory.business_rates_other")
     }
 
 
-    "The business rates key function produces a None when the enquiry category is business_rates" +
+    "The business rates key function produces a Left(Returned None) when the enquiry category is business_rates" +
       " and no subcategory has been selected" in {
-      when (mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
-      when (mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
-      when (mockUserAnswers.businessRatesSubcategory) thenReturn None
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
+      when(mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn None
 
       val result = controller().businessRatesKey(mockUserAnswers)
-      result mustBe None
+      result mustBe Left("Returned None from business rates subcategory")
     }
 
     "The enquiry key function produces a string with a council tax subcategory key when the enquiry category is council_tax" +
       " and the council_tax_assess has been selected" in {
-      when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
-      when (mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
-      when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_assess")
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
+      when(mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_assess")
 
       val result = controller().councilTaxKey(mockUserAnswers)
-      val isCouncilTaxSelection = result.get.startsWith("councilTaxSubcategory")
+      val isCouncilTaxSelection = result.right.get.startsWith("councilTaxSubcategory")
       isCouncilTaxSelection mustBe true
     }
 
     "The enquiry key function produces a string with a business rates subcategory when the enquiry category is business_rates" +
       " and the business_rates_other has been selected" in {
-      when (mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
-      when (mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
-      when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
+      when(mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isBusinessRatesSelection = result.get.startsWith("businessRatesSubcategory")
+      val isBusinessRatesSelection = result.right.get.startsWith("businessRatesSubcategory")
       isBusinessRatesSelection mustBe true
     }
 
-    "The enquiry key function produces a None when the enquiry category has not been selected" in {
-      when (mockUserAnswers.enquiryCategory) thenReturn None
-      when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
-      when (mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
-      when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
+    "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn None
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
+      when(mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      result mustBe None
+      result mustBe Left("Unknown enquiry category in enquiry key")
     }
 
     "redirect to the next page when valid data is submitted" in {

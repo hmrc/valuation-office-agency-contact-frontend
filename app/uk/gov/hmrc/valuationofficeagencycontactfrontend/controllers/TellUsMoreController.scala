@@ -34,39 +34,41 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.tellUsMore
 import scala.concurrent.Future
 
 class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
-                                                  override val messagesApi: MessagesApi,
-                                                  dataCacheConnector: DataCacheConnector,
-                                                  navigator: Navigator,
-                                                  getData: DataRetrievalAction,
-                                                  requireData: DataRequiredAction) extends FrontendController with I18nSupport {
+                                     override val messagesApi: MessagesApi,
+                                     dataCacheConnector: DataCacheConnector,
+                                     navigator: Navigator,
+                                     getData: DataRetrievalAction,
+                                     requireData: DataRequiredAction) extends FrontendController with I18nSupport {
 
-  def councilTaxKey(answers: UserAnswers): Option[String] = {
+  def councilTaxKey(answers: UserAnswers): Either[String, String] = {
 
-    answers.councilTaxSubcategory match{
-      case Some("council_tax_home_business") => Some("councilTaxSubcategory.council_tax_home_business")
-      case Some("council_tax_change") => Some("councilTaxSubcategory.council_tax_change")
-      case Some("council_tax_assess") => Some("councilTaxSubcategory.council_tax_assess")
-      case Some("council_tax_other") => Some("councilTaxSubcategory.council_tax_other")
-      case _ => None
+    answers.councilTaxSubcategory match {
+      case Some("council_tax_home_business") => Right("councilTaxSubcategory.council_tax_home_business")
+      case Some("council_tax_change") => Right("councilTaxSubcategory.council_tax_change")
+      case Some("council_tax_assess") => Right("councilTaxSubcategory.council_tax_assess")
+      case Some("council_tax_other") => Right("councilTaxSubcategory.council_tax_other")
+      case Some(sel) => Left(sel)
+      case None => Left("Returned None from council tax subcategory")
     }
   }
 
-  def businessRatesKey(answers: UserAnswers): Option[String] = {
+  def businessRatesKey(answers: UserAnswers): Either[String, String] = {
 
-    answers.businessRatesSubcategory match{
-      case Some("business_rates_rateable_value") => Some("businessRatesSubcategory.business_rates_rateable_value")
-      case Some("business_rates_moved_property") => Some("businessRatesSubcategory.business_rates_moved_property")
-      case Some("business_rates_other") => Some("businessRatesSubcategory.business_rates_other")
-      case _ => None
+    answers.businessRatesSubcategory match {
+      case Some("business_rates_rateable_value") => Right("businessRatesSubcategory.business_rates_rateable_value")
+      case Some("business_rates_moved_property") => Right("businessRatesSubcategory.business_rates_moved_property")
+      case Some("business_rates_other") => Right("businessRatesSubcategory.business_rates_other")
+      case Some(sel) => Left(sel)
+      case None => Left("Returned None from business rates subcategory")
     }
   }
 
-  def enquiryKey(answers: UserAnswers): Option[String] = {
+  def enquiryKey(answers: UserAnswers): Either[String, String] = {
 
-    answers.enquiryCategory match{
+    answers.enquiryCategory match {
       case Some("council_tax") => councilTaxKey(answers)
       case Some("business_rates") => businessRatesKey(answers)
-      case _ => None
+      case _ => Left("Unknown enquiry category in enquiry key")
     }
   }
 
@@ -77,11 +79,11 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
         case Some(value) => TellUsMoreForm().fill(value)
       }
 
-      enquiryKey(request.userAnswers) match{
-        case Some(key) =>  Ok(tellUsMore(appConfig, preparedForm, mode, key))
-        case None => {
-          Logger.warn("Navigation for Tell us more page reached without selection of enquiry by controller")
-          throw new RuntimeException("Navigation for Tell us more page reached without selection of enquiry by controller")
+      enquiryKey(request.userAnswers) match {
+        case Right(key) => Ok(tellUsMore(appConfig, preparedForm, mode, key))
+        case Left(msg) => {
+          Logger.warn(s"Navigation for Tell us more page reached with error $msg")
+          throw new RuntimeException(s"Navigation for Tell us more page reached with error $msg")
         }
       }
 

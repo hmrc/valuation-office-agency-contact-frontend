@@ -183,7 +183,7 @@ councilTaxAddress.addressLine1 = Address Line 1*
 councilTaxAddress.addressLine2 = Address Line 2
 councilTaxAddress.town = Town*
 councilTaxAddress.county = County*
-councilTaxAddress.postcode = Postcode
+councilTaxAddress.postcode = Postcode*
 councilTaxAddress.checkYourAnswersLabel = Property Details
 
 businessRatesAddress.title = Business Rates Address
@@ -194,7 +194,7 @@ businessRatesAddress.businessAddressLine2 = Business address line 2
 businessRatesAddress.businessAddressLine3 = Business address line 3
 businessRatesAddress.town = Town* 
 businessRatesAddress.county = County*
-businessRatesAddress.postcode = Postcode
+businessRatesAddress.postcode = Postcode*
 businessRatesAddress.checkYourAnswersLabel = Property Details
 
 tellUsMore.title = Tell Us More
@@ -210,9 +210,9 @@ tellUsMore.checkYourAnswersLabel = Enquiry
 
 confirmation.title = Confirmation
 confirmation.heading = Thank you for your enquiry
-confirmation.para1 = Your reference number is
-confirmation.reference = CT online 17 123456
-confirmation.para2 = Please make a note of this reference number.
+confirmation.para1 = Your reference is
+confirmation.reference = CT online 17 XG68H5
+confirmation.para2 = Please make a note of this reference.
 confirmation.para3 = What happens next
 confirmation.para4 = We will send you a copy of your enquiry with a reference number to your email address. 
 confirmation.para5 = We aim to respond to you as soon as possible. It may take up to 20 working days for complex enquiries or during busy periods.

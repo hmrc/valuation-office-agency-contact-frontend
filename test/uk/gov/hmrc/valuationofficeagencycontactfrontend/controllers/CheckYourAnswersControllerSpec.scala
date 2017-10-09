@@ -25,7 +25,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersH
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_answers
 
-class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSugar{
+class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
 
@@ -57,45 +57,43 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
     }
 
     "The sections function produces sections with the business rates check your answers section when the enquiry category is business_rates" in {
-      when (mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
-      when (mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
-      when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("a")
-      when (mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
+      when(mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("a")
+      when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
       val result = controller().sections(mockUserAnswers)
       val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
-      result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.businessRatesAddress,
-        checkYourAnswersHelper.tellUsMore).flatten)))
+      result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.businessRatesSubcategory,
+        checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.businessRatesAddress, checkYourAnswersHelper.tellUsMore).flatten)))
     }
 
     "The sections function produces sections with the council tax check your answers section when the enquiry category is council_tax" in {
 
-      when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
-      when (mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
-      when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("a")
-      when (mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
+      when(mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("a")
+      when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
       val result = controller().sections(mockUserAnswers)
       val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
-      result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.councilTaxAddress,
-        checkYourAnswersHelper.tellUsMore).flatten)))
-
+      result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.councilTaxSubcategory,
+        checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.councilTaxAddress, checkYourAnswersHelper.tellUsMore).flatten)))
     }
 
     "The sections function returns None when giving an unrecognized enquiry category" in {
-      when (mockUserAnswers.enquiryCategory) thenReturn Some("adsada")
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("adsada")
       val result = controller().sections(mockUserAnswers)
       result mustBe None
     }
 
     "The sections function returns None when the enquiry category is None" in {
-      when (mockUserAnswers.enquiryCategory) thenReturn None
+      when(mockUserAnswers.enquiryCategory) thenReturn None
       val result = controller().sections(mockUserAnswers)
       result mustBe None
     }
-
 
 
   }

@@ -33,11 +33,11 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.businessRates
 import scala.concurrent.Future
 
 class BusinessRatesAddressController @Inject()(appConfig: FrontendAppConfig,
-                                                  override val messagesApi: MessagesApi,
-                                                  dataCacheConnector: DataCacheConnector,
-                                                  navigator: Navigator,
-                                                  getData: DataRetrievalAction,
-                                                  requireData: DataRequiredAction) extends FrontendController with I18nSupport {
+                                               override val messagesApi: MessagesApi,
+                                               dataCacheConnector: DataCacheConnector,
+                                               navigator: Navigator,
+                                               getData: DataRetrievalAction,
+                                               requireData: DataRequiredAction) extends FrontendController with I18nSupport {
 
   def onPageLoad(mode: Mode) = (getData andThen requireData) {
     implicit request =>
