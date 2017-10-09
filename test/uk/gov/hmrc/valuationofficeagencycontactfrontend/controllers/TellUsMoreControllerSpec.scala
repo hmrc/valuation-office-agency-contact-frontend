@@ -42,7 +42,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
     new TellUsMoreController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl)
 
-  def viewAsString(form: Form[TellUsMore] = TellUsMoreForm()) = tellUsMore(frontendAppConfig, form, NormalMode, "")(fakeRequest, messages).toString
+  def viewAsString(form: Form[TellUsMore] = TellUsMoreForm()) = tellUsMore(frontendAppConfig, form, NormalMode, "council_tax_change")(fakeRequest, messages).toString
 
   "TellUsMore Controller" must {
 
