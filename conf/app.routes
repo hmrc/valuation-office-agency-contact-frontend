@@ -23,18 +23,6 @@ GET         /changeContactDetails                  uk.gov.hmrc.valuationofficeag
 POST        /changeContactDetails                  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onSubmit(mode: Mode = CheckMode)
 
 GET         /staticPagePlaceholder                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.StaticPagePlaceholderController.onPageLoad
-GET         /alternativeEnquiryCategory            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.AlternativeEnquiryCategoryController.onPageLoad
-
-GET         /councilTaxSubcategory                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onPageLoad(mode: Mode = NormalMode)
-POST        /councilTaxSubcategory                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onSubmit(mode: Mode = NormalMode)
-
-GET         /changeCouncilTaxSubcategory           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onPageLoad(mode: Mode = CheckMode)
-POST        /changeCouncilTaxSubcategory           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onSubmit(mode: Mode = CheckMode)
-
-GET         /businessRatesSubcategory              uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onPageLoad(mode: Mode = NormalMode)
-POST        /businessRatesSubcategory              uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onSubmit(mode: Mode = NormalMode)
-GET         /changeBusinessRatesSubcategory        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onPageLoad(mode: Mode = CheckMode)
-POST        /changeBusinessRatesSubcategory        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onSubmit(mode: Mode = CheckMode)
 
 GET         /councilTaxSubcategory                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onPageLoad(mode: Mode = NormalMode)
 POST        /councilTaxSubcategory                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onSubmit(mode: Mode = NormalMode)
@@ -45,11 +33,6 @@ GET         /businessRatesSubcategory              uk.gov.hmrc.valuationofficeag
 POST        /businessRatesSubcategory              uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onSubmit(mode: Mode = NormalMode)
 GET         /changeBusinessRatesSubcategory        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onPageLoad(mode: Mode = CheckMode)
 POST        /changeBusinessRatesSubcategory        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onSubmit(mode: Mode = CheckMode)
-
-GET         /councilTaxSubcategory                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onPageLoad(mode: Mode = NormalMode)
-POST        /councilTaxSubcategory                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onSubmit(mode: Mode = NormalMode)
-GET         /changeCouncilTaxSubcategory           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onPageLoad(mode: Mode = CheckMode)
-POST        /changeCouncilTaxSubcategory           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onSubmit(mode: Mode = CheckMode)
 
 GET         /councilTaxAddress                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxAddressController.onPageLoad(mode: Mode = NormalMode)
 POST        /councilTaxAddress                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxAddressController.onSubmit(mode: Mode = NormalMode)
@@ -57,3 +40,15 @@ GET         /changeCouncilTaxAddress               uk.gov.hmrc.valuationofficeag
 POST        /changeCouncilTaxAddress               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxAddressController.onSubmit(mode: Mode = CheckMode)
 
 GET         /checkAndChallenge                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CheckAndChallengeController.onPageLoad()
+
+GET         /businessRatesAddress                  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesAddressController.onPageLoad(mode: Mode = NormalMode)
+POST        /businessRatesAddress                  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesAddressController.onSubmit(mode: Mode = NormalMode)
+GET         /changeBusinessRatesAddress            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesAddressController.onPageLoad(mode: Mode = CheckMode)
+POST        /changeBusinessRatesAddress            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesAddressController.onSubmit(mode: Mode = CheckMode)
+
+GET         /tellUsMore                            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onPageLoad(mode: Mode = NormalMode)
+POST        /tellUsMore                            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onSubmit(mode: Mode = NormalMode)
+GET         /changeTellUsMore                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onPageLoad(mode: Mode = CheckMode)
+POST        /changeTellUsMore                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onSubmit(mode: Mode = CheckMode)
+
+GET         /confirmation                           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ConfirmationController.onPageLoad()

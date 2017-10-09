@@ -1,0 +1,56 @@
+@*
+ * Copyright 2017 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+@(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
+
+@main_template(
+    title = messages("confirmation.title"),
+    appConfig = appConfig,
+    bodyClasses = None) {
+
+
+    <div class="govuk-box-highlight" style="margin: 1em 0;
+        padding: 2em 1em;
+        color: #fff;
+        background: #28a197;
+        text-align: center;">
+        <h1 class="heading-xlarge">@messages("confirmation.heading")</h1>
+        <p class="font-large">
+            @messages("confirmation.para1") <br>
+            <strong class="bold">@messages("confirmation.reference")</strong>
+        </p>
+    </div>
+
+
+    <p>@messages("confirmation.para2")</p>
+    <h2 class="heading-medium">@messages("confirmation.para3")</h2>
+    <p>@messages("confirmation.para4")</p>
+    <p>@messages("confirmation.para5")</p>
+
+    <hr style="margin-bottom: 10px">
+
+    <h2 class="heading-medium">@messages("confirmation.survey-para1")</h2>
+    <p>@messages("confirmation.survey-para2")</p>
+
+    <p>
+        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url id="start-again" class="button">@messages("site.start-again")</a>
+
+    </p>
+
+}

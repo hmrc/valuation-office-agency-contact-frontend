@@ -1,4 +1,4 @@
-@*
+/*
  * Copyright 2017 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,10 +12,20 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *@
+ */
 
-@()(implicit messages: Messages)
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
 
-<div class="section">
-    <button id="submit" class="button">@messages("site.submit")</button>
-</div>
+import play.api.libs.json._
+
+case class BusinessRatesAddress (businessName: String,
+                                 businessAddressLine1: String,
+                                 businessAddressLine2: String,
+                                 businessAddressLine3: String,
+                                 town: String,
+                                 county: String,
+                                 postcode: String)
+
+object BusinessRatesAddress {
+  implicit val format = Json.format[BusinessRatesAddress]
+}

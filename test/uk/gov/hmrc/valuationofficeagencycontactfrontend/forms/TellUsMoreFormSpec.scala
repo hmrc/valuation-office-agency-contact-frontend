@@ -1,4 +1,4 @@
-@*
+/*
  * Copyright 2017 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,10 +12,24 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *@
+ */
 
-@()(implicit messages: Messages)
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
-<div class="section">
-    <button id="submit" class="button">@messages("site.submit")</button>
-</div>
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.behaviours.FormBehaviours
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.TellUsMore
+
+class TellUsMoreFormSpec extends FormBehaviours {
+
+  val validData: Map[String, String] = Map(
+    "message" -> "value 1"
+  )
+
+  val form = TellUsMoreForm()
+
+  "TellUsMore form" must {
+    behave like questionForm(TellUsMore("value 1"))
+
+    behave like formWithMandatoryTextFields("message")
+  }
+}

@@ -16,21 +16,37 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
+import org.mockito.Mockito.when
+import org.scalatest.mockito.MockitoSugar
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{BusinessRatesAddress, ContactDetails, CouncilTaxAddress, TellUsMore}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, RadioOption, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_answers
 
-class CheckYourAnswersControllerSpec extends ControllerSpecBase {
+class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSugar {
+
+  val mockUserAnswers = mock[UserAnswers]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new CheckYourAnswersController(frontendAppConfig, messagesApi, dataRetrievalAction, new DataRequiredActionImpl)
 
   "Check Your Answers Controller" must {
+
     "return 200 and the correct view for a GET" in {
+      pending
       val result = controller().onPageLoad()(fakeRequest)
       status(result) mustBe OK
       contentAsString(result) mustBe check_your_answers(frontendAppConfig, Seq(AnswerSection(None, Seq())))(fakeRequest, messages).toString
+    }
+
+    "Intercept No enquiry selected by throwing an exception" in {
+      pending
+      val result = controller().onPageLoad()(fakeRequest)
+      val exception = intercept[RuntimeException] {
+      }
+      exception.getMessage mustBe "Navigation for check your anwsers page reached without selection of enquiry by controller"
     }
 
     "redirect to Session Expired for a GET if not existing data is found" in {
@@ -39,5 +55,46 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase {
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad().url)
     }
+
+    "The sections function produces sections with the business rates check your answers section when the enquiry category is business_rates" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
+      when(mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("a")
+      when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
+
+      val result = controller().sections(mockUserAnswers)
+      val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
+      result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.businessRatesSubcategory,
+        checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.businessRatesAddress, checkYourAnswersHelper.tellUsMore).flatten)))
+    }
+
+    "The sections function produces sections with the council tax check your answers section when the enquiry category is council_tax" in {
+
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e", "f", "g"))
+      when(mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("a")
+      when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
+
+      val result = controller().sections(mockUserAnswers)
+      val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
+      result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.councilTaxSubcategory,
+        checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.councilTaxAddress, checkYourAnswersHelper.tellUsMore).flatten)))
+    }
+
+    "The sections function returns None when giving an unrecognized enquiry category" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("adsada")
+      val result = controller().sections(mockUserAnswers)
+      result mustBe None
+    }
+
+    "The sections function returns None when the enquiry category is None" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn None
+      val result = controller().sections(mockUserAnswers)
+      result mustBe None
+    }
+
+
   }
 }

@@ -55,12 +55,12 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
       labelDefinedAndUsedOnce("phone_preference", messageKeyPrefix, createView)
     }
 
-    "has a link marked with site.back leading to the start page" in {
+    "has a link marked with site.back leading to the Enquiry Category Page" in {
       val doc = asDocument(createViewUsingForm(form))
       val backlinkText = doc.select("a[class=back-link]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl = doc.select("a[class=back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url
+      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
     }
 
     "contain continue button with the value Continue" in {

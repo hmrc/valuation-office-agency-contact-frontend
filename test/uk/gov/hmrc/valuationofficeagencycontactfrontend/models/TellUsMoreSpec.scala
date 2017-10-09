@@ -1,4 +1,4 @@
-@*
+/*
  * Copyright 2017 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,10 +12,19 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *@
+ */
 
-@()(implicit messages: Messages)
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.TellUsMore
+import org.scalatest.FlatSpec
 
-<div class="section">
-    <button id="submit" class="button">@messages("site.submit")</button>
-</div>
+class TellUsMoreSpec extends FlatSpec {
+
+  val m = TellUsMore("Hello")
+
+  "Message " should "be Hello" in {
+    assert(m.message === "Hello")
+  }
+
+
+
+}
