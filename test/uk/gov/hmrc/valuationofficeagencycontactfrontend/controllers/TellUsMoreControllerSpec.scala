@@ -42,7 +42,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
     new TellUsMoreController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl)
 
-  def viewAsString(form: Form[TellUsMore] = TellUsMoreForm()) = tellUsMore(frontendAppConfig, form, NormalMode, "council_tax_change")(fakeRequest, messages).toString
+  def viewAsString(form: Form[TellUsMore] = TellUsMoreForm(), msg: String = "") = tellUsMore(frontendAppConfig, form, NormalMode, msg)(fakeRequest, messages).toString
 
   "TellUsMore Controller" must {
 
@@ -54,17 +54,20 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
         val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
         status(result) mustBe OK
-        contentAsString(result) mustBe viewAsString()
+        contentAsString(result) mustBe viewAsString(TellUsMoreForm(), "councilTaxSubcategory.council_tax_change")
       }
 
-//      "populate the view correctly on a GET when the question has previously been answered" in {
-//        val validData = Map(TellUsMoreId.toString -> Json.toJson(TellUsMore("value 1")))
-//        val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
-//
-//        val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
-//
-//        contentAsString(result) mustBe viewAsString(TellUsMoreForm().fill(TellUsMore("value 1")))
-//      }
+      "populate the view correctly on a GET when the question has previously been answered" in {
+        val validData = Map(
+          EnquiryCategoryId.toString -> JsString("council_tax"),
+          CouncilTaxSubcategoryId.toString -> JsString("council_tax_change"),
+          TellUsMoreId.toString -> Json.toJson(TellUsMore("value 1")))
+        val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+        val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+        contentAsString(result) mustBe viewAsString(TellUsMoreForm().fill(TellUsMore("value 1")), "councilTaxSubcategory.council_tax_change")
+      }
 
 
       "The council tax key function produces a string with a council tax subcategory key when the enquiry category is council_tax" +
