@@ -30,3 +30,18 @@ case class ContactDetails (firstName: String,
 object ContactDetails {
   implicit val format = Json.format[ContactDetails]
 }
+
+case class ConfirmedContactDetails(firstName: String,
+                  lastName: String,
+                  email: String,
+                  telephone: String,
+                  mobile: String,
+                  contactPreference: String
+                 )
+
+object ConfirmedContactDetails {
+  implicit val format = Json.format[ConfirmedContactDetails]
+
+  def apply(cd: ContactDetails): ConfirmedContactDetails =
+    ConfirmedContactDetails(cd.firstName, cd.lastName, cd.email, cd.telephone, cd.mobile, cd.contactPreference)
+}
