@@ -22,17 +22,18 @@ import org.mockito.Mockito.{verify, when}
 import org.scalatest.mockito.MockitoSugar
 import play.api.http.Status
 import play.api.libs.json._
-import uk.gov.hmrc.play.test.WithFakeApplication
+import uk.gov.hmrc.play.test.{UnitSpec, WithFakeApplication}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.exceptions.JsonInvalidException
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 
 import scala.concurrent.{Await, Future}
-import scala.util.{Failure, Success}
+import scala.util.{Failure, Success, Try}
 import uk.gov.hmrc.http.{HeaderCarrier, HttpReads, HttpResponse}
 import uk.gov.hmrc.play.http.ws.WSHttp
+import scala.concurrent.ExecutionContext.Implicits.global
 
-class RnrbConnectorSpec extends SpecBase with WithFakeApplication with MockitoSugar {
+class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
 
   def getHttpMock(returnedData: JsValue) = {
     val httpMock = mock[WSHttp]
@@ -66,7 +67,7 @@ class RnrbConnectorSpec extends SpecBase with WithFakeApplication with MockitoSu
         val httpMock = getHttpMock(minimalJson)
 
         val connector = new LightweightContactEventsConnector(httpMock)
-        await(connector.send(contactModel))
+        connector.send(contactModel)
 
         verify(httpMock).POST(urlCaptor.capture, bodyCaptor.capture, headersCaptor.capture)(jsonWritesNapper.capture,
           httpReadsNapper.capture, headerCarrierNapper.capture, any())
@@ -81,20 +82,20 @@ class RnrbConnectorSpec extends SpecBase with WithFakeApplication with MockitoSu
 
         val referenceResult = Reference(enquiryType, reference)
 
-        val result = await(new LightweightContactEventsConnector(getHttpMock(Json.toJson(referenceResult))).send(contactModel))
+        new LightweightContactEventsConnector(getHttpMock(Json.toJson(referenceResult))).send(contactModel).map{
+            case Success(r) => r mustBe referenceResult
+            case Failure(e) => assert(false)
+        }
 
-        result mustBe referenceResult
       }
 
       "return a string representing the error when send method fails" in {
         val errorResponse = JsString("Something went wrong!")
 
-        val result = await(new LightweightContactEventsConnector(getHttpMock(errorResponse)).send(contactModel))
-
-        result match {
-          case Failure(exception) => {
-            exception mustBe a[JsonInvalidException]
-            exception.getMessage() mustBe List.fill(5)("JSON error: error.path.missing\n").mkString("")
+        new LightweightContactEventsConnector(getHttpMock(errorResponse)).send(contactModel).map{
+          case Failure(e) => {
+            e mustBe a[JsonInvalidException]
+            e.getMessage() mustBe List.fill(5)("JSON error: error.path.missing\n").mkString("")
           }
           case Success(_) => fail
         }
@@ -113,7 +114,7 @@ class RnrbConnectorSpec extends SpecBase with WithFakeApplication with MockitoSu
         val httpMock = getHttpMock(minimalJson)
 
         val connector = new LightweightContactEventsConnector(httpMock)
-        await(connector.sendJson(minimalJson))
+        connector.sendJson(minimalJson)
 
         verify(httpMock).POST(urlCaptor.capture, bodyCaptor.capture, headersCaptor.capture)(jsonWritesNapper.capture,
           httpReadsNapper.capture, headerCarrierNapper.capture, any())
@@ -128,17 +129,17 @@ class RnrbConnectorSpec extends SpecBase with WithFakeApplication with MockitoSu
 
         val referenceResult = Reference(enquiryType, reference)
 
-        val result = await(new LightweightContactEventsConnector(getHttpMock(Json.toJson(referenceResult))).sendJson(minimalJson))
+        new LightweightContactEventsConnector(getHttpMock(Json.toJson(referenceResult))).sendJson(minimalJson).map{
+          case Success(r) => r mustBe referenceResult
+          case Failure(e) => assert(false)
+        }
 
-        result mustBe referenceResult
       }
 
       "return a string representing the error when send method fails" in {
         val errorResponse = JsString("Something went wrong!")
 
-        val result = await(new LightweightContactEventsConnector(getHttpMock(errorResponse)).sendJson(minimalJson))
-
-        result match {
+        new LightweightContactEventsConnector(getHttpMock(errorResponse)).sendJson(minimalJson).map{
           case Failure(exception) => {
             exception mustBe a[JsonInvalidException]
             exception.getMessage() mustBe List.fill(5)("JSON error: error.path.missing\n").mkString("")
