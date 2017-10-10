@@ -27,11 +27,10 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.exceptions.JsonInvalidException
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 
-import scala.concurrent.Future
+import scala.concurrent.{Await, Future}
 import scala.util.{Failure, Success}
 import uk.gov.hmrc.http.{HeaderCarrier, HttpReads, HttpResponse}
 import uk.gov.hmrc.play.http.ws.WSHttp
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
 
 class RnrbConnectorSpec extends SpecBase with WithFakeApplication with MockitoSugar {
 
