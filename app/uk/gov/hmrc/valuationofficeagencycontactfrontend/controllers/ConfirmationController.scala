@@ -22,12 +22,26 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ConfirmedContactDetails, ContactDetails, ContactModel, CouncilTaxAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmation
 
 @Singleton
-class ConfirmationController @Inject()(val appConfig: FrontendAppConfig, val messagesApi: MessagesApi) extends FrontendController with I18nSupport {
+class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
+                                       val messagesApi: MessagesApi,
+                                       val connector: LightweightContactEventsConnector) extends FrontendController with I18nSupport {
+
+  val message = "message"
+  val enquiryCategory = "EC"
+  val subEnquiryCategory = "SEC"
+  val contactDetails = ContactDetails("first", "last", "email", "email", "tel", "mob", "pref")
+  val confirmedContactDetails = ConfirmedContactDetails(contactDetails)
+  val councilTaxAddress = CouncilTaxAddress("a", "b", "c", "d", "e")
+
+  val contactModel = ContactModel(confirmedContactDetails, Some(councilTaxAddress), None, enquiryCategory, subEnquiryCategory,message)
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
+    val result = connector.send(contactModel)
     Ok(confirmation(appConfig))
   }
 }

@@ -14,12 +14,29 @@
  * limitations under the License.
  */
 
+/*
+ * Copyright 2017 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors
 
 import org.mockito.ArgumentCaptor
 import org.mockito.Matchers._
 import org.mockito.Mockito.{verify, when}
 import org.scalatest.mockito.MockitoSugar
+import play.api.Configuration
 import play.api.http.Status
 import play.api.libs.json._
 import uk.gov.hmrc.play.test.{UnitSpec, WithFakeApplication}
@@ -30,7 +47,6 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import scala.concurrent.{Await, Future}
 import scala.util.{Failure, Success, Try}
 import uk.gov.hmrc.http.{HeaderCarrier, HttpReads, HttpResponse}
-import uk.gov.hmrc.play.http.ws.WSHttp
 import scala.concurrent.ExecutionContext.Implicits.global
 
 class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
@@ -43,6 +59,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
     httpMock
   }
 
+  val configuration = injector.instanceOf[Configuration]
   val minimalJson = JsObject(Map[String, JsValue]())
 
   val message = "message"
@@ -52,7 +69,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
   val confirmedContactDetails = ConfirmedContactDetails(contactDetails)
   val councilTaxAddress = CouncilTaxAddress("a", "b", "c", "d", "e")
 
-  val contactModel = ContactModel(confirmedContactDetails, Some(councilTaxAddress), None, enquiryCategory, subEnquiryCategory,message)
+  val contactModel = ContactModel(confirmedContactDetails, Some(councilTaxAddress), None, enquiryCategory, subEnquiryCategory, message)
 
   "LightweightContactEvents Connector" when {
 
@@ -66,7 +83,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
         val headersCaptor = ArgumentCaptor.forClass(classOf[Seq[(String, String)]])
         val httpMock = getHttpMock(minimalJson)
 
-        val connector = new LightweightContactEventsConnector(httpMock)
+        val connector = new LightweightContactEventsConnector(httpMock, configuration)
         connector.send(contactModel)
 
         verify(httpMock).POST(urlCaptor.capture, bodyCaptor.capture, headersCaptor.capture)(jsonWritesNapper.capture,
@@ -82,9 +99,9 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
 
         val referenceResult = Reference(enquiryType, reference)
 
-        new LightweightContactEventsConnector(getHttpMock(Json.toJson(referenceResult))).send(contactModel).map{
-            case Success(r) => r mustBe referenceResult
-            case Failure(e) => assert(false)
+        new LightweightContactEventsConnector(getHttpMock(Json.toJson(referenceResult)), configuration).send(contactModel).map {
+          case Success(r) => r mustBe referenceResult
+          case Failure(e) => assert(false)
         }
 
       }
@@ -92,7 +109,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
       "return a string representing the error when send method fails" in {
         val errorResponse = JsString("Something went wrong!")
 
-        new LightweightContactEventsConnector(getHttpMock(errorResponse)).send(contactModel).map{
+        new LightweightContactEventsConnector(getHttpMock(errorResponse), configuration).send(contactModel).map {
           case Failure(e) => {
             e mustBe a[JsonInvalidException]
             e.getMessage() mustBe List.fill(5)("JSON error: error.path.missing\n").mkString("")
@@ -113,7 +130,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
         val headersCaptor = ArgumentCaptor.forClass(classOf[Seq[(String, String)]])
         val httpMock = getHttpMock(minimalJson)
 
-        val connector = new LightweightContactEventsConnector(httpMock)
+        val connector = new LightweightContactEventsConnector(httpMock, configuration)
         connector.sendJson(minimalJson)
 
         verify(httpMock).POST(urlCaptor.capture, bodyCaptor.capture, headersCaptor.capture)(jsonWritesNapper.capture,
@@ -129,7 +146,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
 
         val referenceResult = Reference(enquiryType, reference)
 
-        new LightweightContactEventsConnector(getHttpMock(Json.toJson(referenceResult))).sendJson(minimalJson).map{
+        new LightweightContactEventsConnector(getHttpMock(Json.toJson(referenceResult)), configuration).sendJson(minimalJson).map {
           case Success(r) => r mustBe referenceResult
           case Failure(e) => assert(false)
         }
@@ -139,7 +156,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
       "return a string representing the error when send method fails" in {
         val errorResponse = JsString("Something went wrong!")
 
-        new LightweightContactEventsConnector(getHttpMock(errorResponse)).sendJson(minimalJson).map{
+        new LightweightContactEventsConnector(getHttpMock(errorResponse), configuration).sendJson(minimalJson).map {
           case Failure(exception) => {
             exception mustBe a[JsonInvalidException]
             exception.getMessage() mustBe List.fill(5)("JSON error: error.path.missing\n").mkString("")

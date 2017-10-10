@@ -17,20 +17,21 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors
 
 import javax.inject.{Inject, Singleton}
+
+import play.api.Configuration
 import play.api.libs.json._
-import uk.gov.hmrc.play.config.ServicesConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.exceptions.JsonInvalidException
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.json.JsonErrorProcessor
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactModel, Reference}
+import uk.gov.hmrc.play.bootstrap.config.BaseUrl
+
+import scala.util.{Failure, Success}
+import uk.gov.hmrc.http.HeaderCarrier
+
 
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
-import scala.util.{Failure, Success}
-import uk.gov.hmrc.http.{CoreGet, CorePost, HeaderCarrier, HttpResponse}
 
-import uk.gov.hmrc.play.http.ws.WSHttp
-
-class LightweightContactEventsConnector @Inject()(http: WSHttp) extends ServicesConfig {
+class LightweightContactEventsConnector @Inject()(http: WSHttp, override val configuration: Configuration) extends BaseUrl {
 
   implicit val hc: HeaderCarrier = HeaderCarrier()
   lazy val serviceUrl = baseUrl("lightweight-contact-events")
