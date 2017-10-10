@@ -25,32 +25,30 @@
     bodyClasses = None) {
 
 
-    <div class="govuk-box-highlight" style="margin: 1em 0;
-        padding: 2em 1em;
-        color: #fff;
-        background: #28a197;
-        text-align: center;">
-        <h1 class="heading-xlarge">@messages("confirmation.heading")</h1>
-        <p class="font-large">
-            @messages("confirmation.para1") <br>
-            <strong class="bold">@messages("confirmation.reference")</strong>
-        </p>
+
+    <div class="transaction-banner--complete">
+      <h1 class="transaction-banner__heading">@messages("confirmation.heading")</h1>
+      <p>@messages("confirmation.para1")</p>
+      <p><strong class="bold">@messages("confirmation.reference")</strong></p>
     </div>
 
 
+
     <p>@messages("confirmation.para2")</p>
-    <h2 class="heading-medium">@messages("confirmation.para3")</h2>
+    <p>
+        <a href="javascript:window.print()" class="print-link print-hidden js-visible" id="print-link">@messages("site.print.link")</a>
+    </p>
+
+    <h2 class="heading-medium divider--top--thick">@messages("confirmation.para3")</h2>
     <p>@messages("confirmation.para4")</p>
     <p>@messages("confirmation.para5")</p>
 
-    <hr style="margin-bottom: 10px">
-
-    <h2 class="heading-medium">@messages("confirmation.survey-para1")</h2>
+    <h2 class="heading-medium divider--top--thick">@messages("confirmation.survey-para1")</h2>
     <p>@messages("confirmation.survey-para2")</p>
 
     <p>
         <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url id="start-again" class="button">@messages("site.start-again")</a>
-
     </p>
+
 
 }
