@@ -17,25 +17,23 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.behaviours.FormBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.CouncilTaxAddress
 
-class ContactDetailsFormSpec extends FormBehaviours {
+class CouncilTaxAddressFormSpec extends FormBehaviours {
 
   val validData: Map[String, String] = Map(
-    "firstName" -> "value 1",
-    "lastName" -> "value 2",
-    "email" -> "value 3",
-    "confirmEmail" -> "value 4",
-    "telephone" -> "value 5",
-    "mobile" -> "value 6" ,
-    "contactPreference" -> "value 7"
+    "addressLine1" -> "value 1",
+    "addressLine2" -> "value 2",
+    "town" -> "value 3",
+    "county" -> "value 4",
+    "postcode" -> "value 5"
   )
 
-  val form = ContactDetailsForm()
+  val form = CouncilTaxAddressForm()
 
-  "ContactDetails form" must {
-    behave like questionForm(ContactDetails("value 1", "value 2", "value 3", "value 4", "value 5", "value 6", "value 7"))
+  "Council Tax Address form" must {
+    behave like questionForm(CouncilTaxAddress("value 1", "value 2", "value 3", "value 4", "value 5"))
 
-    behave like formWithMandatoryTextFields("firstName", "lastName", "email", "confirmEmail", "telephone", "mobile")
+    behave like formWithMandatoryTextFields("addressLine1", "addressLine2", "town", "county", "postcode")
   }
 }

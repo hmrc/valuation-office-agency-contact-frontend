@@ -20,10 +20,12 @@ import play.api.libs.json._
 
 case class ContactDetails (firstName: String,
                            lastName: String,
-                           telephoneNumber: String,
                            email: String,
-                           contactPreference: String,
-                           message: String)
+                           confirmEmail: String,
+                           telephone: String,
+                           mobile: String,
+                           contactPreference: String
+                           )
 
 object ContactDetails {
   implicit val format = Json.format[ContactDetails]

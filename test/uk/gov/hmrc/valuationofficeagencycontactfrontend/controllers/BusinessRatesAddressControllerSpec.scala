@@ -23,22 +23,22 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import play.api.test.Helpers._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.ContactDetailsId
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{NormalMode, ContactDetails}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.contactDetails
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesAddressForm
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.BusinessRatesAddressId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{NormalMode, BusinessRatesAddress}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.businessRatesAddress
 
-class ContactDetailsControllerSpec extends ControllerSpecBase {
+class BusinessRatesAddressControllerSpec extends ControllerSpecBase {
 
   def onwardRoute = routes.IndexController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new ContactDetailsController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+    new BusinessRatesAddressController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl)
 
-  def viewAsString(form: Form[ContactDetails] = ContactDetailsForm()) = contactDetails(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[BusinessRatesAddress] = BusinessRatesAddressForm()) = businessRatesAddress(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
-  "ContactDetails Controller" must {
+  "BusinessRatesAddress Controller" must {
 
     "return OK and the correct view for a GET" in {
       val result = controller().onPageLoad(NormalMode)(fakeRequest)
@@ -48,17 +48,17 @@ class ContactDetailsControllerSpec extends ControllerSpecBase {
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(ContactDetailsId.toString -> Json.toJson(ContactDetails("value 1", "value 2", "value 3", "value 4", "value 5", "value 6", "value 7")))
+      val validData = Map(BusinessRatesAddressId.toString -> Json.toJson(BusinessRatesAddress("value 1", "value 2", "value 3", "value 4", "value 5", "value 6", "value 7")))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsString(ContactDetailsForm().fill(ContactDetails("value 1", "value 2", "value 3", "value 4", "value 5", "value 6", "value 7")))
+      contentAsString(result) mustBe viewAsString(BusinessRatesAddressForm().fill(BusinessRatesAddress("value 1", "value 2", "value 3", "value 4", "value 5", "value 6", "value 7")))
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("firstName", "value 1"), ("lastName", "value 2"), ("email", "value 3"),
-        ("confirmEmail", "value 4"), ("telephone", "value 5"), ("mobile", "value 6"), ("contactPreference", "value 7"))
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("businessName", "value 1"), ("businessAddressLine1", "value 2"), ("businessAddressLine2", "value 3"),
+        ("businessAddressLine3", "value 4"), ("town", "value 5"), ("county", "value 6"), ("postcode", "value 7"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -68,7 +68,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase {
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm = ContactDetailsForm().bind(Map("value" -> "invalid value"))
+      val boundForm = BusinessRatesAddressForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -84,9 +84,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("firstName", "value 1"), ("lastName", "value 2"), ("email", "value 3"),
-        ("confirmEmail", "value 4"), ("telephone", "value 5"), ("mobile", "value 6"), ("contactPreference", "value 7"))
-
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("businessName", "value 1"), ("businessAddressLine1", "value 2"), ("businessAddressLine2", "value 3"),
+        ("businessAddressLine3", "value 4"), ("town", "value 5"), ("county", "value 6"), ("postcode", "value 7"))
       val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER

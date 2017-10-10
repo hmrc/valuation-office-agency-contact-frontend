@@ -18,32 +18,32 @@
 @import uk.gov.hmrc.play.views.html._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.FormHelpers
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, PropertyDetails}
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, CouncilTaxAddress}
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.InputViewModel
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
-@(appConfig: FrontendAppConfig, form: Form[PropertyDetails], mode: Mode)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, form: Form[CouncilTaxAddress], mode: Mode)(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("propertyDetails.title"),
+    title = messages("councilTaxAddress.title"),
     appConfig = appConfig,
     bodyClasses = None) {
 
-    @helpers.form(action = PropertyDetailsController.onSubmit(mode), 'autoComplete -> "off") {
+    @helpers.form(action = CouncilTaxAddressController.onSubmit(mode), 'autoComplete -> "off") {
 
         @components.error_summary(form.errors)
 
-        @components.heading("propertyDetails.heading")
+        @components.heading("councilTaxAddress.heading")
 
-        @components.input_text(InputViewModel[PropertyDetails]("addressLine1", form), label = messages("propertyDetails.addressLine1"))
+        @components.input_text(InputViewModel[CouncilTaxAddress]("addressLine1", form), label = messages("councilTaxAddress.addressLine1"))
 
-        @components.input_text(InputViewModel[PropertyDetails]("addressLine2", form), label = messages("propertyDetails.addressLine2"))
+        @components.input_text(InputViewModel[CouncilTaxAddress]("addressLine2", form), label = messages("councilTaxAddress.addressLine2"))
 
-        @components.input_text(InputViewModel[PropertyDetails]("town", form), label = messages("propertyDetails.town"))
+        @components.input_text(InputViewModel[CouncilTaxAddress]("town", form), label = messages("councilTaxAddress.town"))
 
-        @components.input_text(InputViewModel[PropertyDetails]("county", form), label = messages("propertyDetails.county"))
+        @components.input_text(InputViewModel[CouncilTaxAddress]("county", form), label = messages("councilTaxAddress.county"))
 
-        @components.input_text(InputViewModel[PropertyDetails]("postcode", form), label = messages("propertyDetails.postcode"))
+        @components.input_text(InputViewModel[CouncilTaxAddress]("postcode", form), label = messages("councilTaxAddress.postcode"))
 
         @components.continue_button()
 

@@ -17,34 +17,41 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.play.views.html._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxSubcategoryForm
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.FormHelpers
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, TellUsMore}
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.InputViewModel
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
-@(appConfig: FrontendAppConfig, form: Form[String], mode: Mode)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, form: Form[TellUsMore], mode: Mode, enquiryKey: String)(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("councilTaxSubcategory.title"),
+    title = messages("tellUsMore.title"),
     appConfig = appConfig,
     bodyClasses = None) {
 
-    @components.heading("councilTaxSubcategory.heading")
+    @components.heading("tellUsMore.heading")
 
-    @helpers.form(action = CouncilTaxSubcategoryController.onSubmit(mode), 'autoComplete -> "off") {
+    <h2 class="heading-medium">@messages(enquiryKey)</h2>
+
+    <p>@messages("tellUsMore.para")</p>
+
+    <ul class="bullets">
+        <li>@messages("tellUsMore.para1")</li>
+        <li>@messages("tellUsMore.para2")</li>
+        <li>@messages("tellUsMore.para3")</li>
+        <li>@messages("tellUsMore.para4")</li>
+        <li>@messages("tellUsMore.para5")</li>
+    </ul>
+
+    @helpers.form(action = TellUsMoreController.onSubmit(mode), 'autoComplete -> "off") {
 
         @components.error_summary(form.errors)
 
-        @components.input_radio(
-            viewModel = InputViewModel[String]("value", form),
-            legend = messages("councilTaxSubcategory.heading"),
-            legendClass = Some("visually-hidden"),
-            inputs = CouncilTaxSubcategoryForm.options
-        )
+        @components.input_textarea(InputViewModel[TellUsMore]("message", form), label = messages("tellUsMore.message"))
 
         @components.continue_button()
-
-        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url class="back-link">@messages("site.back")</a>
     }
+
+    <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url class="back-link">@messages("site.back")</a>
+
 }

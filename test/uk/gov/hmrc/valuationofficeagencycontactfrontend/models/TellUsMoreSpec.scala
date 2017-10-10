@@ -14,12 +14,17 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.TellUsMore
+import org.scalatest.FlatSpec
 
-import play.api.libs.json._
+class TellUsMoreSpec extends FlatSpec {
 
-case class PropertyDetails (addressLine1: String, addressLine2: String, town: String, county: String, postcode: String)
+  val m = TellUsMore("Hello")
 
-object PropertyDetails {
-  implicit val format = Json.format[PropertyDetails]
+  "Message " should "be Hello" in {
+    assert(m.message === "Hello")
+  }
+
+
+
 }

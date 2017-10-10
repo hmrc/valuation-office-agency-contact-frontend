@@ -14,8 +14,18 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
 
-case object PropertyDetailsId extends Identifier {
-  override def toString: String = "propertyDetails"
+import play.api.libs.json._
+
+case class BusinessRatesAddress (businessName: String,
+                                 businessAddressLine1: String,
+                                 businessAddressLine2: String,
+                                 businessAddressLine3: String,
+                                 town: String,
+                                 county: String,
+                                 postcode: String)
+
+object BusinessRatesAddress {
+  implicit val format = Json.format[BusinessRatesAddress]
 }

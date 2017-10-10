@@ -31,22 +31,14 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
 
   def createViewUsingForm = (form: Form[ContactDetails]) => contactDetails(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
-  def labelDefinedAndUsedOnce(option: String) = {
-    val prefix = "contactDetails"
-    val doc = asDocument(createView())
-    assert(messages.isDefinedAt(s"$prefix.$option"))
-    val label = doc.select(s"label[for=$prefix.$option]")
-    assert(label.size() == 1)
-  }
-
   override val form = ContactDetailsForm()
 
   "ContactDetails view" must {
 
-    behave like normalPage(createView, messageKeyPrefix)
+    behave like normalPage(createView, messageKeyPrefix, "supply-number.para", "contact_preference_heading")
 
     behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.ContactDetailsController.onSubmit(NormalMode).url, "firstName", "lastName",
-    "telephoneNumber", "email", "message")
+      "email", "confirmEmail", "telephone", "mobile")
 
     "contain radio buttons for the contactPreference" in {
       val doc = asDocument(createViewUsingForm(form))
@@ -55,21 +47,20 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
       }
     }
 
-
     "has a radio button with the label set to the message with key contactDetails.email_preference and that it is used once" in {
-      labelDefinedAndUsedOnce("email_preference")
+      labelDefinedAndUsedOnce("email_preference", messageKeyPrefix, createView)
     }
 
     "has a radio button with the label set to the message with key contactDetails.phone_preference and that it is used once" in {
-      labelDefinedAndUsedOnce("phone_preference")
+      labelDefinedAndUsedOnce("phone_preference", messageKeyPrefix, createView)
     }
 
-    "has a link marked with site.back leading to the start page" in {
+    "has a link marked with site.back leading to the Enquiry Category Page" in {
       val doc = asDocument(createViewUsingForm(form))
       val backlinkText = doc.select("a[class=back-link]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl = doc.select("a[class=back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url
+      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
     }
 
     "contain continue button with the value Continue" in {
@@ -79,12 +70,4 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
     }
   }
 
-
-
-
-
-
-
-
-
-    }
+}

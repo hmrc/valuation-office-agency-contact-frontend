@@ -29,12 +29,17 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
     behave like normalPage(view, "checkYourAnswers", "subheading")
 
-    "has a link marked with site.back leading to the Property Details Page" in {
+    "contain continue button with the value Continue" in {
+      val doc = asDocument(view())
+      val submitButton = doc.getElementById("submit").text()
+      assert(submitButton == messages("site.submit"))
+    }
+    "has a link marked with site.back leading to the Contact Details Page" in {
       val doc = asDocument(view())
       val backlinkText = doc.select("a[class=back-link]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl = doc.select("a[class=back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyDetailsController.onPageLoad(NormalMode).url
+      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url
     }
   }
 

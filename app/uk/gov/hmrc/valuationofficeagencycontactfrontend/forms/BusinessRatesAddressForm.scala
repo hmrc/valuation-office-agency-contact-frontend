@@ -18,25 +18,19 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
 import play.api.data.Form
 import play.api.data.Forms._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.BusinessRatesAddress
 
-object ContactDetailsForm {
+object BusinessRatesAddressForm {
 
-  def apply(): Form[ContactDetails] = Form(
+  def apply(): Form[BusinessRatesAddress] = Form(
     mapping(
-      "firstName" -> nonEmptyText,
-      "lastName" -> nonEmptyText,
-      "email" -> nonEmptyText,
-      "confirmEmail" -> nonEmptyText,
-      "telephone" -> nonEmptyText,
-      "mobile" -> nonEmptyText,
-      "contactPreference" -> nonEmptyText
-    )(ContactDetails.apply)(ContactDetails.unapply)
-  )
-
-  def contactPreferenceOptions = Seq(
-    RadioOption("contactDetails", "email_preference"),
-    RadioOption("contactDetails", "phone_preference")
+      "businessName" -> nonEmptyText,
+      "businessAddressLine1" -> nonEmptyText,
+      "businessAddressLine2" -> nonEmptyText,
+      "businessAddressLine3" -> nonEmptyText,
+      "town" -> nonEmptyText,
+      "county" -> nonEmptyText,
+      "postcode" -> nonEmptyText
+    )(BusinessRatesAddress.apply)(BusinessRatesAddress.unapply)
   )
 }

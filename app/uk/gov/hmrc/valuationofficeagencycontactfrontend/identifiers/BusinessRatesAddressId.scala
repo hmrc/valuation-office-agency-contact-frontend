@@ -14,21 +14,8 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers
 
-import play.api.data.Form
-import play.api.data.Forms._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.PropertyDetails
-
-object PropertyDetailsForm {
-
-  def apply(): Form[PropertyDetails] = Form(
-    mapping(
-      "addressLine1" -> nonEmptyText,
-      "addressLine2" -> nonEmptyText,
-      "town" -> nonEmptyText,
-      "county" -> nonEmptyText,
-      "postcode" -> nonEmptyText
-    )(PropertyDetails.apply)(PropertyDetails.unapply)
-  )
+case object BusinessRatesAddressId extends Identifier {
+  override def toString: String = "businessRatesAddress"
 }

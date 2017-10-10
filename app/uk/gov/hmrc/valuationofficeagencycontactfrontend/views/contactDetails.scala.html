@@ -22,6 +22,7 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.InputViewModel
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 @(appConfig: FrontendAppConfig, form: Form[ContactDetails], mode: Mode)(implicit request: Request[_], messages: Messages)
 
 @main_template(
@@ -39,9 +40,19 @@
 
         @components.input_text(InputViewModel[ContactDetails]("lastName", form), label = messages("contactDetails.lastName"))
 
-        @components.input_text(InputViewModel[ContactDetails]("telephoneNumber", form), label = messages("contactDetails.telephoneNumber"))
-
         @components.input_text(InputViewModel[ContactDetails]("email", form), label = messages("contactDetails.email"))
+
+        @components.input_text(InputViewModel[ContactDetails]("confirmEmail", form), label = messages("contactDetails.confirmEmail"))
+
+        <p>@messages("contactDetails.supply-number.para")</p>
+
+        @components.input_text(InputViewModel[ContactDetails]("telephone", form), label = messages("contactDetails.telephone"))
+
+        @components.input_text(InputViewModel[ContactDetails]("mobile", form), label = messages("contactDetails.mobile"))
+
+        <p></p>
+
+        <h2 class="heading-medium">@messages("contactDetails.contact_preference_heading")</h2>
 
         @components.input_radio(
             viewModel = InputViewModel[ContactDetails]("contactPreference", form),
@@ -50,10 +61,8 @@
             inputs = ContactDetailsForm.contactPreferenceOptions
         )
 
-        @components.input_textarea(InputViewModel[ContactDetails]("message", form), label = messages("contactDetails.message"))
-
         @components.continue_button()
 
-        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url class="back-link">@messages("site.back")</a>
+        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url class="back-link">@messages("site.back")</a>
     }
 }

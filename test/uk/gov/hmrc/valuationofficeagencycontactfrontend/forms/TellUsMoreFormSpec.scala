@@ -17,23 +17,19 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.behaviours.FormBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.PropertyDetails
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.TellUsMore
 
-class PropertyDetailsFormSpec extends FormBehaviours {
+class TellUsMoreFormSpec extends FormBehaviours {
 
   val validData: Map[String, String] = Map(
-    "addressLine1" -> "value 1",
-    "addressLine2" -> "value 2",
-    "town" -> "value 3",
-    "county" -> "value 4",
-    "postcode" -> "value 5"
+    "message" -> "value 1"
   )
 
-  val form = PropertyDetailsForm()
+  val form = TellUsMoreForm()
 
-  "PropertyDetails form" must {
-    behave like questionForm(PropertyDetails("value 1", "value 2", "value 3", "value 4", "value 5"))
+  "TellUsMore form" must {
+    behave like questionForm(TellUsMore("value 1"))
 
-    behave like formWithMandatoryTextFields("addressLine1", "addressLine2", "town", "county", "postcode")
+    behave like formWithMandatoryTextFields("message")
   }
 }

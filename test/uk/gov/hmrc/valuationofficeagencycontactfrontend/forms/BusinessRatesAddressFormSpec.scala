@@ -17,25 +17,25 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.behaviours.FormBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.BusinessRatesAddress
 
-class ContactDetailsFormSpec extends FormBehaviours {
+class BusinessRatesAddressFormSpec extends FormBehaviours {
 
   val validData: Map[String, String] = Map(
-    "firstName" -> "value 1",
-    "lastName" -> "value 2",
-    "email" -> "value 3",
-    "confirmEmail" -> "value 4",
-    "telephone" -> "value 5",
-    "mobile" -> "value 6" ,
-    "contactPreference" -> "value 7"
+    "businessName" -> "value 1",
+    "businessAddressLine1" -> "value 2",
+    "businessAddressLine2" -> "value 3",
+    "businessAddressLine3" -> "value 4",
+    "town" -> "value 5",
+    "county" -> "value 6",
+    "postcode" -> "value 7"
   )
 
-  val form = ContactDetailsForm()
+  val form = BusinessRatesAddressForm()
 
-  "ContactDetails form" must {
-    behave like questionForm(ContactDetails("value 1", "value 2", "value 3", "value 4", "value 5", "value 6", "value 7"))
+  "BusinessRatesAddress form" must {
+    behave like questionForm(BusinessRatesAddress("value 1", "value 2", "value 3", "value 4", "value 5", "value 6", "value 7"))
 
-    behave like formWithMandatoryTextFields("firstName", "lastName", "email", "confirmEmail", "telephone", "mobile")
+    behave like formWithMandatoryTextFields("businessName", "businessAddressLine1", "businessAddressLine2", "businessAddressLine3", "town", "county", "postcode")
   }
 }

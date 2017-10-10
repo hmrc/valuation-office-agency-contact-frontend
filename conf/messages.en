@@ -32,8 +32,8 @@ checkBeforeYouStart.business_rates.url5 = https://www.gov.uk/introduction-to-bus
 checkBeforeYouStart.business_rates.para10 = Find out how your business rates could change if the premises is altered or the nature of your business has changed.
 checkBeforeYouStart.business_rates.para11 = If you can’t find an answer to your query, or you have a query about something else, you can continue to our contact form.
 
-checkYourAnswers.title = Check Your Answers
-checkYourAnswers.heading = Contact the Valuation Office Agency
+checkYourAnswers.title = Summary
+checkYourAnswers.heading = Your enquiry summary 
 checkYourAnswers.guidance = Please check the information you have given us before submitting. You can edit any details that are incorrect.
 checkYourAnswers.subheading = Summary
 
@@ -62,7 +62,6 @@ session_expired.guidance = The details you have given have been deleted because 
 
 site.back = Back
 site.continue = Continue
-site.start-again = Start again
 site.delete = Remove
 site.edit = Change
 site.hidden-delete = Delete {0}
@@ -70,6 +69,8 @@ site.hidden-edit = Change {0}
 site.no = No
 site.yes = Yes
 site.save_and_continue = Save and continue
+site.start-again = Start again
+site.submit = Submit
 site.service_name = Valuation Office Agency Contact Finder
 site.textarea.char_limit = (Limit is {0} characters)
 
@@ -85,7 +86,7 @@ enquiryCategory.providing_lettings = Providing lettings information to, or conta
 enquiryCategory.valuations_for_tax = Valuations for taxes, Right to Buy, or appeals against Community Infrastructure Levy
 enquiryCategory.valuation_for_public_body = Valuation and property advice, for public sector bodies, by DVS
 enquiryCategory.other_business = Other business
-enquiryCategory.checkYourAnswersLabel = Enquiry Category
+enquiryCategory.checkYourAnswersLabel = Enquiry Type
 
 enquiryCategory.council_tax.summary = Council Tax enquiries could be about:
 enquiryCategory.council_tax.about1 = your Council Tax band and how it’s assessed
@@ -116,16 +117,19 @@ enquiryCategory.valuation_for_public_body.summary = Valuation for public sector 
 enquiryCategory.valuation_for_public_body.about1 = independent valuation and professional property advice for public bodies
 enquiryCategory.valuation_for_public_body.finaltext = Note: this service also operates in Scotland.
 
-contactDetails.title = contactDetails
-contactDetails.heading = Send the VOA a message
-contactDetails.firstName = First name
-contactDetails.lastName = Last name
-contactDetails.telephoneNumber = Telephone number
-contactDetails.email = Email address
-contactDetails.contactPreference = I prefer to be contacted using
-contactDetails.message = Your message
+contactDetails.title = Contact Details
+contactDetails.heading = What are your contact details 
+contactDetails.firstName = Your first name*
+contactDetails.lastName = Surname*
+contactDetails.email = Email * 
+contactDetails.confirmEmail = Confirm email *
+contactDetails.supply-number.para = Please supply either a landline number or a mobile number *
+contactDetails.telephone = Telephone
+contactDetails.mobile = Mobile
+contactDetails.contact_preference_heading = Contact preferences 
+contactDetails.contactPreference = I prefer to be contacted by
 contactDetails.email_preference = Email
-contactDetails.phone_preference = Phone
+contactDetails.phone_preference = Telephone
 contactDetails.checkYourAnswersLabel = Contact Details
 
 staticPagePlaceholder.title = Postcode Finder
@@ -158,12 +162,10 @@ councilTaxSubcategory.council_tax_home_business = How your Council Tax is affect
 councilTaxSubcategory.council_tax_change = Changes  you’ve made to your property that you think may affect your Council Tax band
 councilTaxSubcategory.council_tax_assess = Your Council Tax band and how it’s assessed
 councilTaxSubcategory.council_tax_other = Other
-councilTaxSubcategory.para1 = This could be
 councilTaxSubcategory.checkYourAnswersLabel = Council Tax
 
 businessRatesSubcategory.title = Business Rates
 businessRatesSubcategory.heading = What is your enquiry about Business Rates?
-businessRatesSubcategory.para1 = This could be about
 businessRatesSubcategory.business_rates_rateable_value = Rateable value and how it’s calculated
 businessRatesSubcategory.business_rates_update_details = I want to check or update my property details
 businessRatesSubcategory.business_rates_challenge_valuation = I want to challenge my valuation
@@ -175,14 +177,47 @@ checkAndChallenge.title = Check and challenge
 checkAndChallenge.heading = You will now be transferred to the VOA’s Find, Check and Challenge Business Rates service. 
 checkAndChallenge.url = https://www.gov.uk/correct-your-business-rates
 
-propertyDetails.title = Property Details
-propertyDetails.heading = Which property are you contacting us about?
-propertyDetails.addressLine1 = Address Line 1
-propertyDetails.addressLine2 = Address Line 2
-propertyDetails.town = Town/City
-propertyDetails.county = County
-propertyDetails.postcode = Postcode
-propertyDetails.checkYourAnswersLabel = Property Details
+councilTaxAddress.title = Council tax property Details
+councilTaxAddress.heading = What is your address
+councilTaxAddress.addressLine1 = Address Line 1*
+councilTaxAddress.addressLine2 = Address Line 2
+councilTaxAddress.town = Town*
+councilTaxAddress.county = County*
+councilTaxAddress.postcode = Postcode*
+councilTaxAddress.checkYourAnswersLabel = Property Details
+
+businessRatesAddress.title = Business Rates Address
+businessRatesAddress.heading = What is the address of your business
+businessRatesAddress.businessName = Business name*
+businessRatesAddress.businessAddressLine1 = Business address line 1
+businessRatesAddress.businessAddressLine2 = Business address line 2
+businessRatesAddress.businessAddressLine3 = Business address line 3
+businessRatesAddress.town = Town* 
+businessRatesAddress.county = County*
+businessRatesAddress.postcode = Postcode*
+businessRatesAddress.checkYourAnswersLabel = Property Details
+
+tellUsMore.title = Tell Us More
+tellUsMore.heading = Tell us more about your enquiry 
+tellUsMore.message = Your message
+tellUsMore.para = Help with what to include:
+tellUsMore.para1 = Your relationship to the property (for example, owner or tenant)
+tellUsMore.para2 = The property address
+tellUsMore.para3 = How long you have been at this address
+tellUsMore.para4 = Business rate reference number (this can be found on your bill)
+tellUsMore.para5 = Authorisation from the owner or tenant of the property if you are acting on their behalf (if you're an agent) 
+tellUsMore.checkYourAnswersLabel = Enquiry
+
+confirmation.title = Confirmation
+confirmation.heading = Thank you for your enquiry
+confirmation.para1 = Your reference is
+confirmation.reference = CT online 17 XG68H5
+confirmation.para2 = Please make a note of this reference.
+confirmation.para3 = What happens next
+confirmation.para4 = We will send you a copy of your enquiry with a reference number to your email address. 
+confirmation.para5 = We aim to respond to you as soon as possible. It may take up to 20 working days for complex enquiries or during busy periods.
+confirmation.survey-para1 = What did you think of this service? 
+confirmation.survey-para2 = Please complete the short survey to tell us what you think about our new service and how we can improve. This will take no longer than 3 minutes. 
 
 valuationAdvice.title = Valuation Advice 
 valuationAdvice.heading = Contact details
