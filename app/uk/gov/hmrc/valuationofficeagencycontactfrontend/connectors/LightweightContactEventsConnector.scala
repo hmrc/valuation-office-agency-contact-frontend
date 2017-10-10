@@ -17,12 +17,11 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors
 
 import javax.inject.{Inject, Singleton}
-import com.eclipsesource.schema.SchemaType
 import play.api.libs.json._
 import uk.gov.hmrc.play.config.ServicesConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.exceptions.JsonInvalidException
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.json.JsonErrorProcessor
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactModel}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactModel, Reference}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -32,10 +31,10 @@ import uk.gov.hmrc.http.{CoreGet, CorePost, HeaderCarrier, HttpResponse}
 import uk.gov.hmrc.play.http.ws.WSHttp
 
 class LightweightContactEventsConnector @Inject()(http: WSHttp) extends ServicesConfig {
+
   implicit val hc: HeaderCarrier = HeaderCarrier()
   lazy val serviceUrl = baseUrl("lightweight-contact-events")
   val baseSegment = "/lightweight-contact-events/"
-  val schemaBaseSegment = s"${baseSegment}api/conf/0.1/schemas/"
   val jsonContentTypeHeader = ("Content-Type", "application/json")
 
   def getStyleGuide = http.GET(s"$serviceUrl${baseSegment}style-guide")
@@ -46,24 +45,12 @@ class LightweightContactEventsConnector @Inject()(http: WSHttp) extends Services
     http.POST(s"$serviceUrl${baseSegment}create", json, Seq(jsonContentTypeHeader))
       .map {
         response =>
-          Json.fromJson[String](response.json) match {
+          Json.fromJson[Reference](response.json) match {
             case JsSuccess(result, _) => Success(result)
             case JsError(error) => {
               Failure(new JsonInvalidException(JsonErrorProcessor(error)))
             }
           }
       }
-
-//  def getSuccessfulResponseSchema =
-//    http.GET(s"$serviceUrl${schemaBaseSegment}create").map {
-//      response =>
-//        Json.fromJson[String](response.json) match {
-//          case JsSuccess(schema, _) => Success(schema)
-//          case error: JsError => {
-//            val errorLookupResult = (JsError.toJson(error) \ "obj" \ 0 \ "msg" \ 0).as[String]
-//            Failure(new JsonInvalidException(errorLookupResult.toString))
-//          }
-//        }
-//    }
-
 }
+
