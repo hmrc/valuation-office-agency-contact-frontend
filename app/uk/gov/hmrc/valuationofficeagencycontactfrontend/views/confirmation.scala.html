@@ -22,33 +22,48 @@
 @main_template(
     title = messages("confirmation.title"),
     appConfig = appConfig,
-    bodyClasses = None) {
+    bodyClasses = Some("full-width")) {
 
 
-
+    <br /><br />
     <div class="transaction-banner--complete">
       <h1 class="transaction-banner__heading">@messages("confirmation.heading")</h1>
-      <p>@messages("confirmation.para1")</p>
       <p><strong class="bold">@messages("confirmation.reference")</strong></p>
     </div>
 
+    <p class="text">@messages("confirmation.para1")</p>
+    <p class="text">@messages("confirmation.para2")</p>
 
+    <h2 class="heading-medium">@messages("confirmation.enquirySummary")</h2>
 
-    <p>@messages("confirmation.para2")</p>
-    <p>
-        <a href="javascript:window.print()" class="print-link print-hidden js-visible" id="print-link">@messages("site.print.link")</a>
-    </p>
+    <ul class="tabular-data tabular-data--list text">
+        <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
+            <div class="tabular-data__data tabular-data__data--4-12">Enquiry Type</div>
+            <div class="tabular-data__data tabular-data__data--8-12">Council Tax</div>
+        </li>
+        <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
+            <div class="tabular-data__data tabular-data__data--4-12">Council Tax</div>
+            <div class="tabular-data__data tabular-data__data--8-12">What is my Council Tax band</div>
+        </li>
+        <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
+            <div class="tabular-data__data tabular-data__data--4-12">Contact Details</div>
+            <div class="tabular-data__data tabular-data__data--8-12">1 2 3  5</div>
+        </li>
+        <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
+            <div class="tabular-data__data tabular-data__data--4-12">Property Details</div>
+            <div class="tabular-data__data tabular-data__data--8-12">6 7 8 9 10</div>
+        </li>
+        <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
+            <div class="tabular-data__data tabular-data__data--4-12">Enquiry</div>
+            <div class="tabular-data__data tabular-data__data--8-12">xx</div>
+        </li>
+    </ul>
+    <br />
+    <h2 class="heading-medium">@messages("confirmation.whatHappensnext")</h2>
+    <p class="text">@messages("confirmation.para3")</p>
 
-    <h2 class="heading-medium divider--top--thick">@messages("confirmation.para3")</h2>
-    <p>@messages("confirmation.para4")</p>
-    <p>@messages("confirmation.para5")</p>
+    <p><a href="javascript:window.print()" class="button print-hidden js-visible" id="print-button">@messages("site.print.button")</a></p>
 
-    <h2 class="heading-medium divider--top--thick">@messages("confirmation.survey-para1")</h2>
-    <p>@messages("confirmation.survey-para2")</p>
-
-    <p>
-        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url id="start-again" class="button">@messages("site.start-again")</a>
-    </p>
 
 
 }

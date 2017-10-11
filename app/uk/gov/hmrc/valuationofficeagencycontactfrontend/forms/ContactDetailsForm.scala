@@ -29,14 +29,7 @@ object ContactDetailsForm {
       "lastName" -> nonEmptyText,
       "email" -> nonEmptyText,
       "confirmEmail" -> nonEmptyText,
-      "telephone" -> nonEmptyText,
-      "mobile" -> nonEmptyText,
-      "contactPreference" -> nonEmptyText
+      "contactNumber" -> nonEmptyText
     )(ContactDetails.apply)(ContactDetails.unapply)
-  )
-
-  def contactPreferenceOptions = Seq(
-    RadioOption("contactDetails", "email_preference"),
-    RadioOption("contactDetails", "phone_preference")
   )
 }

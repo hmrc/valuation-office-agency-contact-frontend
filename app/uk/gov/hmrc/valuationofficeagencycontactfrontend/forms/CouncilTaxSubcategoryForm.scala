@@ -33,13 +33,14 @@ object CouncilTaxSubcategoryForm extends FormErrorHelper {
     def unbind(key: String, value: String) = Map(key -> value)
   }
 
-  def apply(): Form[String] = 
+  def apply(): Form[String] =
     Form(single("value" -> of(CouncilTaxSubcategoryFormatter)))
 
   def options = Seq(
-    RadioOption("councilTaxSubcategory", "council_tax_assess"),
-    RadioOption("councilTaxSubcategory", "council_tax_change"),
-    RadioOption("councilTaxSubcategory", "council_tax_home_business"),
+    RadioOption("councilTaxSubcategory", "council_tax_band"),
+    RadioOption("councilTaxSubcategory", "council_tax_calculated"),
+    RadioOption("councilTaxSubcategory", "council_tax_changes"),
+    RadioOption("councilTaxSubcategory", "council_tax_challenge"),
     RadioOption("councilTaxSubcategory", "council_tax_other")
   )
 

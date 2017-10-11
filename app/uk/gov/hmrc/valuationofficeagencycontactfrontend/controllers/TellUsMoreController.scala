@@ -43,9 +43,10 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
   def councilTaxKey(answers: UserAnswers): Either[String, String] = {
 
     answers.councilTaxSubcategory match {
-      case Some("council_tax_home_business") => Right("councilTaxSubcategory.council_tax_home_business")
-      case Some("council_tax_change") => Right("councilTaxSubcategory.council_tax_change")
-      case Some("council_tax_assess") => Right("councilTaxSubcategory.council_tax_assess")
+      case Some("council_tax_band") => Right("councilTaxSubcategory.council_tax_band")
+      case Some("council_tax_calculated") => Right("councilTaxSubcategory.council_tax_calculated")
+      case Some("council_tax_changes") => Right("councilTaxSubcategory.council_tax_changes")
+      case Some("council_tax_challenge") => Right("councilTaxSubcategory.council_tax_challenge")
       case Some("council_tax_other") => Right("councilTaxSubcategory.council_tax_other")
       case Some(sel) => Left(sel)
       case None => Left("Returned None from council tax subcategory")
@@ -56,7 +57,9 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
 
     answers.businessRatesSubcategory match {
       case Some("business_rates_rateable_value") => Right("businessRatesSubcategory.business_rates_rateable_value")
-      case Some("business_rates_moved_property") => Right("businessRatesSubcategory.business_rates_moved_property")
+      case Some("business_rates_business_rates") => Right("businessRatesSubcategory.business_rates_business_rates")
+      case Some("business_rates_update_details") => Right("businessRatesSubcategory.business_rates_update_details")
+      case Some("business_rates_challenge_valuation") => Right("businessRatesSubcategory.business_rates_challenge_valuation")
       case Some("business_rates_other") => Right("businessRatesSubcategory.business_rates_other")
       case Some(sel) => Left(sel)
       case None => Left("Returned None from business rates subcategory")

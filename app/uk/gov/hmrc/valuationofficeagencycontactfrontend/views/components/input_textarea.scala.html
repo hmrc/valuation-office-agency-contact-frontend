@@ -47,7 +47,7 @@ charLimit: Option[Int] = None
                 cols="30"
                 rows="20"
         style="margin: 10px 0px; height: 200px !important;"
-        ></textarea>
+        >@{viewModel.value}</textarea>
         @if(charLimit.isDefined){
         <noscript>
             <p class="char-counter-text flush">@messages("site.textarea.char_limit", charLimit.get)</p>

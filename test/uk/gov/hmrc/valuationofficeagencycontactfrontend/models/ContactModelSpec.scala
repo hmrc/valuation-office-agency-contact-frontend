@@ -23,7 +23,7 @@ class ContactModelSpec extends SpecBase {
   val message = "message"
   val enquiryCategory = "EC"
   val subEnquiryCategory = "SEC"
-  val contactDetails = ContactDetails("first", "last", "email", "email", "tel", "mob", "pref")
+  val contactDetails = ContactDetails("first", "last", "email", "email", "contactNumber")
   val confirmedContactDetails = ConfirmedContactDetails(contactDetails)
 
   "Given a message, enquiryCategory and subEnquiryCategory strings, contact details and a council tax address produce a " +
