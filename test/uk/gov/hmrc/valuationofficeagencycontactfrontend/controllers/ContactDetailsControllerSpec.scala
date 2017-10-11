@@ -48,17 +48,17 @@ class ContactDetailsControllerSpec extends ControllerSpecBase {
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(ContactDetailsId.toString -> Json.toJson(ContactDetails("value 1", "value 2", "value 3", "value 4", "value 5", "value 6", "value 7")))
+      val validData = Map(ContactDetailsId.toString -> Json.toJson(ContactDetails("value 1", "value 2", "value 3", "value 4", "value 5")))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsString(ContactDetailsForm().fill(ContactDetails("value 1", "value 2", "value 3", "value 4", "value 5", "value 6", "value 7")))
+      contentAsString(result) mustBe viewAsString(ContactDetailsForm().fill(ContactDetails("value 1", "value 2", "value 3", "value 4", "value 5")))
     }
 
     "redirect to the next page when valid data is submitted" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("firstName", "value 1"), ("lastName", "value 2"), ("email", "value 3"),
-        ("confirmEmail", "value 4"), ("telephone", "value 5"), ("mobile", "value 6"), ("contactPreference", "value 7"))
+        ("confirmEmail", "value 4"), ("contactNumber", "value 5"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -85,7 +85,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase {
 
     "redirect to Session Expired for a POST if no existing data is found" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("firstName", "value 1"), ("lastName", "value 2"), ("email", "value 3"),
-        ("confirmEmail", "value 4"), ("telephone", "value 5"), ("mobile", "value 6"), ("contactPreference", "value 7"))
+        ("confirmEmail", "value 4"), ("contactNumber", "value 5"))
 
       val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 

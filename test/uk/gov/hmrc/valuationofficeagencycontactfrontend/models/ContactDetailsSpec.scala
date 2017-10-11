@@ -19,7 +19,7 @@ import org.scalatest.FlatSpec
 
 class ContactDetailsSpec extends FlatSpec {
 
-  val c = ContactDetails("Alex", "Smith", "test@email.com", "test@email.com", "02078273278732", "07727823456", "phone")
+  val c = ContactDetails("Alex", "Smith", "test@email.com", "test@email.com", "02078273278732")
 
   "First name " should "be Alex" in {
     assert(c.firstName === "Alex")
@@ -37,17 +37,12 @@ class ContactDetailsSpec extends FlatSpec {
     assert(c.confirmEmail === "test@email.com")
   }
 
-  "Telephone number " should "be 02078273278732" in {
-    assert(c.telephone === "02078273278732")
+  "Contact number " should "be 02078273278732" in {
+    assert(c.contactNumber === "02078273278732")
   }
 
-  "Mobile number " should "be 07727823456" in {
-    assert(c.mobile === "07727823456")
-  }
 
-  "Contact Preference " should "be phone" in {
-    assert(c.contactPreference === "phone")
-  }
+
 
 
   "Wrong First name " should "shouldn't be Alex1" in {
@@ -65,16 +60,11 @@ class ContactDetailsSpec extends FlatSpec {
   "Wrong Confirm Email address " should "shouldn't be test@email.com1" in {
     assert(c.email != "test@email.com1")
   }
-  "Wrong Telephone number " should "shouldn't be 02078273278735" in {
-    assert(c.telephone != "02078273278735")
+  "Wrong Contact number " should "shouldn't be 02078273278735" in {
+    assert(c.contactNumber != "02078273278735")
   }
 
-  "Wrong Mobile number should be " should "shouldn't be 07727823459" in {
-    assert(c.mobile != "07727823459")
-  }
 
-  "Wrong Contact Preference " should "shouldn't be phone1" in {
-    assert(c.contactPreference != "phone1")
-  }
+
 
 }
