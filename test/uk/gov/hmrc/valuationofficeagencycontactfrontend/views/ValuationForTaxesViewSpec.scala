@@ -27,7 +27,9 @@ class ValuationForTaxesViewSpec extends ViewBehaviours {
   "Valuation Advice view" must {
 
     behave like normalPage(view, "valuationForTaxes", "subheading", "para1", "email-title", "email", "general-title", "england.phone-title",
-      "")
+      "england.phone", "england.phone-url", "wales.phone-title", "wales.phone", "wales.phone-url", "opening-title", "opening-para",
+      "call-charges.para", "call-charges.url", "response-para")
+
     "has a link marked with site.back leading to the Enquiry Category Page" in {
       val doc = asDocument(view())
       val backlinkText = doc.select("a[class=back-link]").text()
@@ -42,7 +44,7 @@ class ValuationForTaxesViewSpec extends ViewBehaviours {
       assert(startAgainButton == messages("site.start-again"))
     }
 
-    "The Start again button links to the Enquiry Category onPageLoad method" in {
+    "The Start again button links to the Index Controller onPageLoad method" in {
       val doc = asDocument(view())
       val href = doc.getElementById("start-again").attr("href")
       assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url.toString)

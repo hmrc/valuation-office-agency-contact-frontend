@@ -1,18 +1,18 @@
 @*
-* Copyright 2017 HM Revenue & Customs
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*@
+ * Copyright 2017 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
@@ -20,15 +20,15 @@
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("valuationAdvice.title"),
+    title = messages("valuationForTaxes.title"),
     appConfig = appConfig,
     bodyClasses = None) {
 
-    <h1 class="heading-xlarge">@messages("valuationAdvice.heading")</h1>
+    <h1 class="heading-xlarge">@messages("valuationForTaxes.heading")</h1>
 
-    <h2 class="heading-medium">@messages("valuationAdvice.subheading")</h2>
+    <h1 class="heading-medium">@messages("valuationForTaxes.subheading")</h1>
 
-    <p>@messages("valuationAdvice.paragraph")</p>
+    <p>@messages("valuationForTaxes.para1")</p>
 
     <h3 class="heading-small">@messages("valuationAdvice.first-contact.title")</h3>
 
