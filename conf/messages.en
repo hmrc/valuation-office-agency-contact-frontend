@@ -33,7 +33,7 @@ checkBeforeYouStart.business_rates.para10 = Find out how your business rates cou
 checkBeforeYouStart.business_rates.para11 = If you can’t find an answer to your query, or you have a query about something else, you can continue to our contact form.
 
 checkYourAnswers.title = Summary
-checkYourAnswers.heading = Your enquiry summary 
+checkYourAnswers.heading = Your enquiry summary
 checkYourAnswers.guidance = Please check the information you have given us before submitting. You can edit any details that are incorrect.
 checkYourAnswers.subheading = Summary
 
@@ -73,6 +73,7 @@ site.start-again = Start again
 site.submit = Submit
 site.service_name = Valuation Office Agency Contact Finder
 site.textarea.char_limit = (Limit is {0} characters)
+site.print.link=Print reference
 
 unauthorised.title = You can’t access this service with this account
 unauthorised.heading = You can’t access this service with this account
@@ -118,15 +119,15 @@ enquiryCategory.valuation_for_public_body.about1 = independent valuation and pro
 enquiryCategory.valuation_for_public_body.finaltext = Note: this service also operates in Scotland.
 
 contactDetails.title = Contact Details
-contactDetails.heading = What are your contact details 
+contactDetails.heading = What are your contact details
 contactDetails.firstName = Your first name*
 contactDetails.lastName = Surname*
-contactDetails.email = Email * 
+contactDetails.email = Email *
 contactDetails.confirmEmail = Confirm email *
 contactDetails.supply-number.para = Please supply either a landline number or a mobile number *
 contactDetails.telephone = Telephone
 contactDetails.mobile = Mobile
-contactDetails.contact_preference_heading = Contact preferences 
+contactDetails.contact_preference_heading = Contact preferences
 contactDetails.contactPreference = I prefer to be contacted by
 contactDetails.email_preference = Email
 contactDetails.phone_preference = Telephone
@@ -174,7 +175,7 @@ businessRatesSubcategory.business_rates_other = Other business rates enquiries
 businessRatesSubcategory.checkYourAnswersLabel = Business Rates
 
 checkAndChallenge.title = Check and challenge
-checkAndChallenge.heading = You will now be transferred to the VOA’s Find, Check and Challenge Business Rates service. 
+checkAndChallenge.heading = You will now be transferred to the VOA’s Find, Check and Challenge Business Rates service.
 checkAndChallenge.url = https://www.gov.uk/correct-your-business-rates
 
 councilTaxAddress.title = Council tax property Details
@@ -192,20 +193,20 @@ businessRatesAddress.businessName = Business name*
 businessRatesAddress.businessAddressLine1 = Business address line 1
 businessRatesAddress.businessAddressLine2 = Business address line 2
 businessRatesAddress.businessAddressLine3 = Business address line 3
-businessRatesAddress.town = Town* 
+businessRatesAddress.town = Town*
 businessRatesAddress.county = County*
 businessRatesAddress.postcode = Postcode*
 businessRatesAddress.checkYourAnswersLabel = Property Details
 
 tellUsMore.title = Tell Us More
-tellUsMore.heading = Tell us more about your enquiry 
+tellUsMore.heading = Tell us more about your enquiry
 tellUsMore.message = Your message
 tellUsMore.para = Help with what to include:
 tellUsMore.para1 = Your relationship to the property (for example, owner or tenant)
 tellUsMore.para2 = The property address
 tellUsMore.para3 = How long you have been at this address
 tellUsMore.para4 = Business rate reference number (this can be found on your bill)
-tellUsMore.para5 = Authorisation from the owner or tenant of the property if you are acting on their behalf (if you're an agent) 
+tellUsMore.para5 = Authorisation from the owner or tenant of the property if you are acting on their behalf (if you're an agent)
 tellUsMore.checkYourAnswersLabel = Enquiry
 
 confirmation.title = Confirmation
@@ -214,7 +215,7 @@ confirmation.para1 = Your reference is
 confirmation.reference = CT online 17 XG68H5
 confirmation.para2 = Please make a note of this reference.
 confirmation.para3 = What happens next
-confirmation.para4 = We will send you a copy of your enquiry with a reference number to your email address. 
+confirmation.para4 = We will send you a copy of your enquiry with a reference number to your email address.
 confirmation.para5 = We aim to respond to you as soon as possible. It may take up to 20 working days for complex enquiries or during busy periods.
-confirmation.survey-para1 = What did you think of this service? 
-confirmation.survey-para2 = Please complete the short survey to tell us what you think about our new service and how we can improve. This will take no longer than 3 minutes. 
+confirmation.survey-para1 = What did you think of this service?
+confirmation.survey-para2 = Please complete the short survey to tell us what you think about our new service and how we can improve. This will take no longer than 3 minutes.
