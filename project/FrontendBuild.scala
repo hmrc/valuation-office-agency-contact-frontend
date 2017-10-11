@@ -14,7 +14,6 @@ private object AppDependencies {
   import play.sbt.PlayImport._
   import play.core.PlayVersion
 
-  private val frontendBootstrapVersion = "8.8.0"
   private val playHealthVersion = "2.1.0"
   private val logbackJsonLoggerVersion = "3.1.0"
   private val govukTemplateVersion = "5.3.0"
@@ -40,8 +39,7 @@ private object AppDependencies {
     "uk.gov.hmrc" %% "http-caching-client" % httpCachingClientVersion,
     "uk.gov.hmrc" %% "play-conditional-form-mapping" % playConditionalFormMappingVersion,
     "uk.gov.hmrc" %% "bootstrap-play-25" % "0.7.0",
-    "uk.gov.hmrc" %% "play-language" % playLanguageVersion,
-    "uk.gov.hmrc" %% "frontend-bootstrap" % frontendBootstrapVersion
+    "uk.gov.hmrc" %% "play-language" % playLanguageVersion
   )
 
   trait TestDependencies {
