@@ -34,6 +34,14 @@ class ConfirmationViewSpec extends ViewBehaviours {
       assert(startAgainButton == messages("site.start-again"))
     }
 
+    "contain a print button " in {
+      val doc = asDocument(view())
+      val printButton = doc.getElementById("print-link").text()
+      val href = doc.getElementById("print-link").attr("href")
+      assert(printButton == messages("site.print.link"))
+      assert(href == "javascript:window.print()")
+    }
+
     "The Start again button links to the Index Controller onPageLoad method" in {
       val doc = asDocument(view())
       val href = doc.getElementById("start-again").attr("href")

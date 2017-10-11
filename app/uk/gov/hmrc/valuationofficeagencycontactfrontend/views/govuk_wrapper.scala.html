@@ -34,7 +34,8 @@
     linkElem = None,
     headScripts = None)
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href='@routes.Assets.versioned("stylesheets/valuationofficeagencycontactfrontend-app.css")' />
+    <link rel="stylesheet" media="screen" href='@routes.Assets.versioned("stylesheets/valuationofficeagencycontactfrontend-app.css")' />
+    <link rel="stylesheet" media="print" href='@routes.Assets.versioned("stylesheets/valuationofficeagencycontactfrontend-app-print.css")' />
 }
 
 @headerNavLinks = {}
@@ -44,7 +45,7 @@
     navTitle = Some(messages("site.service_name")),
     navTitleLink = None,
     showBetaLink = false,
-    navLinks = Some(headerNavLinks))
+    navLinks = None)
 }
 
 @afterHeader = {}
@@ -64,7 +65,7 @@
 
 @serviceInfo = {
     <div class="service-info">
-        
+
     </div>
 }
 
@@ -74,7 +75,7 @@
     @views.html.language_selection(
         appConfig.languageMap,
         appConfig.routeToSwitchLanguage,
-        Some("translate u-align--right"))
+        Some("label--inline-right"))
 }
 
 @if(contentHeader.isDefined) {

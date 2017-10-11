@@ -1,4 +1,4 @@
-@*
+/*
  * Copyright 2017 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,9 +12,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *@
+ */
 
-@(headingKey: String, headingSize: String = "heading-large")(implicit messages: Messages)
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
 
+import play.api.libs.json.Json
 
-    <h1 class="@headingSize">@messages(headingKey)</h1>
+case class Reference(enquiryType: String /* council-tax or business-rate */ , reference: String)
+
+object Reference {
+  implicit val format = Json.format[Reference]
+}
