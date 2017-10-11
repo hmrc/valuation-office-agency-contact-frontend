@@ -18,27 +18,27 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
 
 import play.api.libs.json.Json
 
-case class ContactModel(contact: ConfirmedContactDetails,
-                        councilTaxAddress: Option[CouncilTaxAddress],
-                        businessRatesAddress: Option[BusinessRatesAddress],
-                        enquiryCategory: String,
-                        subEnquiryCategory: String,
-                        message: String)
+case class Contact(contact: ConfirmedContactDetails,
+                   councilTaxAddress: Option[CouncilTaxAddress],
+                   businessRatesAddress: Option[BusinessRatesAddress],
+                   enquiryCategory: String,
+                   subEnquiryCategory: String,
+                   message: String)
 
-object ContactModel {
-  implicit val format = Json.format[ContactModel]
-
-  def apply(message: String,
-            enquiryCategory: String,
-            subEnquiryCategory: String,
-            contact: ContactDetails,
-            councilTaxAddress: CouncilTaxAddress): ContactModel =
-    ContactModel(ConfirmedContactDetails(contact), Some(councilTaxAddress), None, enquiryCategory, subEnquiryCategory, message)
+object Contact {
+  implicit val format = Json.format[Contact]
 
   def apply(message: String,
             enquiryCategory: String,
             subEnquiryCategory: String,
             contact: ContactDetails,
-            businessRatesAddress: BusinessRatesAddress): ContactModel =
-    ContactModel(ConfirmedContactDetails(contact), None, Some(businessRatesAddress), enquiryCategory, subEnquiryCategory, message)
+            councilTaxAddress: CouncilTaxAddress): Contact =
+    Contact(ConfirmedContactDetails(contact), Some(councilTaxAddress), None, enquiryCategory, subEnquiryCategory, message)
+
+  def apply(message: String,
+            enquiryCategory: String,
+            subEnquiryCategory: String,
+            contact: ContactDetails,
+            businessRatesAddress: BusinessRatesAddress): Contact =
+    Contact(ConfirmedContactDetails(contact), None, Some(businessRatesAddress), enquiryCategory, subEnquiryCategory, message)
 }

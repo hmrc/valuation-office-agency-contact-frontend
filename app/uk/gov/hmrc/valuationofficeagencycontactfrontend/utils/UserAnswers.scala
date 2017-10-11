@@ -16,7 +16,9 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
+import play.api.Logger
 import uk.gov.hmrc.http.cache.client.CacheMap
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 
@@ -35,4 +37,25 @@ class UserAnswers(val cacheMap: CacheMap) {
 
   def councilTaxAddress: Option[CouncilTaxAddress] = cacheMap.getEntry[CouncilTaxAddress](CouncilTaxAddressId.toString)
 
+  def contact(): Either[String, Contact] = {
+
+    val optionalContactModel = for {
+      cd <- contactDetails
+      eq <- enquiryCategory
+      subcategory <- eq match {
+        case "council_tax" => councilTaxSubcategory
+        case "business_rates" => businessRatesSubcategory
+        case _ => None
+      }
+      tellUs <- tellUsMore
+    } yield Contact(ConfirmedContactDetails(cd), councilTaxAddress, businessRatesAddress, eq, subcategory, tellUs.message)
+
+    optionalContactModel match {
+      case Some(Contact(_, None, None, _, _, _)) => Left("No address present")
+      case Some(Contact(_, cta, None, _, _, _)) => Right(optionalContactModel.get)
+      case Some(Contact(_, None, bra, _, _, _)) => Right(optionalContactModel.get)
+      case Some(Contact(_, cta, bra, _, _, _)) => Left("Both addresses present")
+      case _ => Left("Unable to parse")
+    }
+  }
 }
