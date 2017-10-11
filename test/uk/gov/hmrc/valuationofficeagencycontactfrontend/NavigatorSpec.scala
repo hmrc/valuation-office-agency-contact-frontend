@@ -99,6 +99,36 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
       }
 
+      "return a function that goes to the confirmation council tax address page when the ccheck your answers page has been submitted without errors and the enquiry is about council tax" in {
+        when (mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("line1", "line2", "town", "county", "postcode"))
+        when (mockUserAnswers.businessRatesAddress) thenReturn None
+        navigator.nextPage(CheckYourAnswersId, NormalMode)(mockUserAnswers) mustBe routes.ConfirmCouncilTaxController.onPageLoad()
+      }
+
+      "return a function that goes to the confirmation business rates address page when the check your answers page has been submitted without errors and the enquiry is about business rates" in {
+        when (mockUserAnswers.councilTaxAddress) thenReturn None
+        when (mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("name", "line1", "line2", "line3", "town", "county", "postcode"))
+        navigator.nextPage(CheckYourAnswersId, NormalMode)(mockUserAnswers) mustBe routes.ConfirmBusinessRatesController.onPageLoad()
+      }
+
+      "return a function that throws a runtime exception if both the council tax and business rates are in the model" in {
+        when (mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("line1", "line2", "town", "county", "postcode"))
+        when (mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("name", "line1", "line2", "line3", "town", "county", "postcode"))
+
+        intercept[Exception] {
+          navigator.nextPage(CheckYourAnswersId, NormalMode)(mockUserAnswers)
+        }
+      }
+
+      "return a function that throws a runtime exception if neither the council tax and business rates are in the model" in {
+        when (mockUserAnswers.councilTaxAddress) thenReturn None
+        when (mockUserAnswers.businessRatesAddress) thenReturn None
+
+        intercept[Exception] {
+          navigator.nextPage(CheckYourAnswersId, NormalMode)(mockUserAnswers)
+        }
+      }
+
     }
 
     "in Check mode" must {

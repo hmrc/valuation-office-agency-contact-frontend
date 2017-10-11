@@ -18,18 +18,25 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import com.google.inject.Inject
 import play.api.Logger
+import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_answers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{check_your_answers, enquiryCategory}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CheckYourAnswersId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
+import play.api.mvc.{Action, AnyContent}
 
+import scala.concurrent.Future
 import scala.util.Try
 
 class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
                                            override val messagesApi: MessagesApi,
+                                           navigator: Navigator,
                                            getData: DataRetrievalAction,
                                            requireData: DataRequiredAction) extends FrontendController with I18nSupport {
 
@@ -56,5 +63,9 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
           throw new RuntimeException("Navigation for check your anwsers page reached without selection of enquiry by controller")
         }
       }
+  }
+
+  def onSubmit() = (getData andThen requireData) { implicit request =>
+    Redirect(navigator.nextPage(CheckYourAnswersId, NormalMode)(request.userAnswers))
   }
 }

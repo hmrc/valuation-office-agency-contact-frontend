@@ -67,6 +67,20 @@ class Navigator @Inject()() {
     }
   }
 
+  val confirmationPageRouting: UserAnswers => Call = answers => {
+    if (answers.councilTaxAddress.isEmpty && answers.businessRatesAddress.isEmpty) {
+      Logger.warn("Navigation for contact details page reached without council tax address or business rates address")
+      throw new RuntimeException("Navigation for contact details page reached without council tax address or business rates address")
+    } else if (answers.businessRatesAddress.isDefined && answers.councilTaxAddress.isEmpty) {
+      routes.ConfirmBusinessRatesController.onPageLoad()
+    } else if (answers.businessRatesAddress.isEmpty && answers.councilTaxAddress.isDefined) {
+      routes.ConfirmCouncilTaxController.onPageLoad()
+    } else {
+      Logger.warn("Navigation for contact details page reached with neither council tax address or business rates address")
+      throw new RuntimeException("Navigation for contact details page reached with neither council tax address or business rates address")
+    }
+  }
+
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     EnquiryCategoryId -> enquiryRouting,
     CouncilTaxSubcategoryId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
@@ -74,7 +88,9 @@ class Navigator @Inject()() {
     ContactDetailsId -> contactDetailsRouting,
     CouncilTaxAddressId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
     BusinessRatesAddressId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
-    TellUsMoreId -> (_ => routes.CheckYourAnswersController.onPageLoad()))
+    TellUsMoreId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
+    CheckYourAnswersId -> confirmationPageRouting
+  )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()
 

@@ -40,9 +40,7 @@
         }
     }
 
-    <p>
-        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ConfirmationController.onPageLoad().url id="submit" class="button">@messages("site.submit")</a>
-    </p>
+    @components.submit_button()
     
     <p>
         <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url class="back-link">@messages("site.back")</a>
