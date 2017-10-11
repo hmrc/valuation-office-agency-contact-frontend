@@ -27,11 +27,11 @@ import uk.gov.hmrc.play.bootstrap.config.BaseUrl
 
 import scala.util.{Failure, Success}
 import uk.gov.hmrc.http.HeaderCarrier
-
+import uk.gov.hmrc.play.bootstrap.http.HttpClient
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
-class LightweightContactEventsConnector @Inject()(http: WSHttp, override val configuration: Configuration) extends BaseUrl {
+class LightweightContactEventsConnector @Inject()(http: HttpClient, override val configuration: Configuration) extends BaseUrl {
 
   implicit val hc: HeaderCarrier = HeaderCarrier()
   lazy val serviceUrl = baseUrl("lightweight-contact-events")

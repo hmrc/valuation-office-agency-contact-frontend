@@ -47,12 +47,14 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import scala.concurrent.{Await, Future}
 import scala.util.{Failure, Success, Try}
 import uk.gov.hmrc.http.{HeaderCarrier, HttpReads, HttpResponse}
+import uk.gov.hmrc.play.bootstrap.http.HttpClient
+
 import scala.concurrent.ExecutionContext.Implicits.global
 
 class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
 
   def getHttpMock(returnedData: JsValue) = {
-    val httpMock = mock[WSHttp]
+    val httpMock = mock[HttpClient]
     when(httpMock.POST(anyString, any[JsValue], any[Seq[(String, String)]])(any[Writes[Any]], any[HttpReads[Any]],
       any[HeaderCarrier], any())) thenReturn Future.successful(HttpResponse(Status.OK, Some(returnedData)))
     when(httpMock.GET(anyString)(any[HttpReads[Any]], any[HeaderCarrier], any())) thenReturn Future.successful(HttpResponse(Status.OK, Some(returnedData)))
