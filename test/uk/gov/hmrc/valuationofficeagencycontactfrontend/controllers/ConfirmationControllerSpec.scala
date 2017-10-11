@@ -18,17 +18,21 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmation
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
 
 class ConfirmationControllerSpec extends ControllerSpecBase {
 
+  val connector = injector.instanceOf[LightweightContactEventsConnector]
+
   "Confirmation Controller" must {
     "return 200 for a GET" in {
-      val result = new ConfirmationController(frontendAppConfig, messagesApi).onPageLoad()(fakeRequest)
+
+      val result = new ConfirmationController(frontendAppConfig, messagesApi, connector).onPageLoad()(fakeRequest)
       status(result) mustBe OK
     }
 
     "return the correct view for a GET" in {
-      val result = new ConfirmationController(frontendAppConfig, messagesApi).onPageLoad()(fakeRequest)
+      val result = new ConfirmationController(frontendAppConfig, messagesApi, connector).onPageLoad()(fakeRequest)
       contentAsString(result) mustBe confirmation(frontendAppConfig)(fakeRequest, messages).toString
     }
 
