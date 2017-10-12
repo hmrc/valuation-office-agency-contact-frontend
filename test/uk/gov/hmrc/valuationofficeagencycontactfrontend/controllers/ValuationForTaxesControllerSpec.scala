@@ -28,7 +28,7 @@ class ValuationForTaxesControllerSpec extends ControllerSpecBase {
     }
 
     "return the correct view for a GET" in {
-      val result = new ValuationAdviceController(frontendAppConfig, messagesApi).onPageLoad()(fakeRequest)
+      val result = new ValuationForTaxesController(frontendAppConfig, messagesApi).onPageLoad()(fakeRequest)
       contentAsString(result) mustBe valuationForTaxes(frontendAppConfig)(fakeRequest, messages).toString
     }
 
