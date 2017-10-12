@@ -30,7 +30,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
   "Create Contact Model method" must {
 
     "Return a ContactModel object containing a CouncilTaxAddress if all the information is present and the enquiry selected is council_tax" in {
-      val cd = ContactDetails("a", "b", "c", "d", "e", "f", "g")
+      val cd = ContactDetails("a", "b", "c", "d", "e")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val ec = "council_tax"
       val councilTaxAddress = Some(CouncilTaxAddress("a", "b", "c", "d", "f"))
@@ -47,7 +47,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
     }
 
     "Return a ContactModel object containing a Business Tax Address if all the information is present and the enquiry selected is business_rates" in {
-      val cd = ContactDetails("a", "b", "c", "d", "e", "f", "g")
+      val cd = ContactDetails("a", "b", "c", "d", "e")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val ec = "business_rates"
       val businessAddress = Some(BusinessRatesAddress("a", "b", "c", "d", "f", "g", "h"))
@@ -72,7 +72,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
     }
 
     "Return a Left(Unable to parse) if both business address and council tax address are present in the model" in {
-      val cd = ContactDetails("a", "b", "c", "d", "e", "f", "g")
+      val cd = ContactDetails("a", "b", "c", "d", "e")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val ec = "business_rates"
       val businessAddress = Some(BusinessRatesAddress("a", "b", "c", "d", "f", "g", "h"))
@@ -88,7 +88,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
     }
 
     "Return a Left(Unable to parse) if neither business address and council tax address are present in the model" in {
-      val cd = ContactDetails("a", "b", "c", "d", "e", "f", "g")
+      val cd = ContactDetails("a", "b", "c", "d", "e")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val ec = "business_rates"
       val businessSubcategory = "business_rates_rateable_value"

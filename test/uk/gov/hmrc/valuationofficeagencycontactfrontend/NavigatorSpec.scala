@@ -101,7 +101,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       }
 
       "return a function that goes to the confirmation council tax address page when the check your answers page has been submitted without errors and the enquiry is about council tax" in {
-        val cd = ContactDetails("a", "b", "c", "d", "e", "f", "g")
+        val cd = ContactDetails("a", "b", "c", "d", "e")
         val ec = "council_tax"
         val councilTaxAddress = Some(CouncilTaxAddress("a", "b", "c", "d", "f"))
         val councilTaxSubcategory = "council_tax_home_business"
@@ -113,7 +113,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       }
 
       "return a function that goes to the confirmation business rates address page when the check your answers page has been submitted without errors and the enquiry is about business rates" in {
-        val cd = ContactDetails("a", "b", "c", "d", "e", "f", "g")
+        val cd = ContactDetails("a", "b", "c", "d", "e")
         val ec = "business_rates"
         val businessAddress = Some(BusinessRatesAddress("a", "b", "c", "d", "f", "g", "h"))
         val businessSubcategory = "business_rates_rateable_value"
