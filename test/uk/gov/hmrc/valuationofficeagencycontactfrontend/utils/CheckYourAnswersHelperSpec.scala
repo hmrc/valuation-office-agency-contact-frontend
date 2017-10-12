@@ -16,12 +16,9 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend
 
-import org.joda.time.LocalDate
-import org.mockito.Mockito._
 import org.scalatest.mockito.MockitoSugar
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerRow
