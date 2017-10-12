@@ -16,9 +16,9 @@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.BusinessRatesAddress
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Contact
 
-@(appConfig: FrontendAppConfig, businessRatesAddress: BusinessRatesAddress)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, businessContact: Contact)(implicit request: Request[_], messages: Messages)
 
 @main_template(
   title = messages("confirmation.title"),

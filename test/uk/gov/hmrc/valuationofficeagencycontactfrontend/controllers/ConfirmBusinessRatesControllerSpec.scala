@@ -28,30 +28,30 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, RadioOption, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmationCouncilTax
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmationBusinessRates
 
-class ConfirmCouncilTaxControllerSpec extends ControllerSpecBase with MockitoSugar {
+class ConfirmBusinessRatesControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val connector = injector.instanceOf[LightweightContactEventsConnector]
   def onwardRoute = routes.IndexController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new ConfirmCouncilTaxController(frontendAppConfig, messagesApi, connector, dataRetrievalAction, new DataRequiredActionImpl)
+    new ConfirmBusinessRatesController(frontendAppConfig, messagesApi, connector, dataRetrievalAction, new DataRequiredActionImpl)
 
-  "Confirm Council Tax Controller" must {
+  "Confirm Business Rat Controller" must {
 
     "return 200 and the correct view for a GET" in {
       val cd = ContactDetails("a", "b", "c", "d", "e")
-      val ec = "council_tax"
-      val councilTaxAddress = CouncilTaxAddress("a", "b", "c", "d", "f")
-      val councilTaxSubcategory = "council_tax_home_business"
-      val tellUs = TellUsMore("Hello")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
+      val ec = "business_rates"
+      val businessAddress = Some(BusinessRatesAddress("a", "b", "c", "d", "f", "g", "h"))
+      val businessSubcategory = "business_rates_rateable_value"
+      val tellUs = TellUsMore("Hello")
 
-      val contact = Contact(confirmedContactDetails, Some(councilTaxAddress), None, ec, councilTaxSubcategory, tellUs.message)
+      val contact = Contact(confirmedContactDetails, None, businessAddress, ec, businessSubcategory, tellUs.message)
 
-      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
-        ContactDetailsId.toString -> Json.toJson(cd), CouncilTaxAddressId.toString -> Json.toJson(councilTaxAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), BusinessRatesSubcategoryId.toString -> JsString(businessSubcategory),
+        ContactDetailsId.toString -> Json.toJson(cd), BusinessRatesAddressId.toString -> Json.toJson(businessAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
@@ -59,7 +59,7 @@ class ConfirmCouncilTaxControllerSpec extends ControllerSpecBase with MockitoSug
 
       status(result) mustBe OK
 
-      contentAsString(result) mustBe confirmationCouncilTax(frontendAppConfig, contact)(fakeRequest, messages).toString
+      contentAsString(result) mustBe confirmationBusinessRates(frontendAppConfig, contact)(fakeRequest, messages).toString
     }
 
     "redirect to Session Expired for a GET if not existing data is found" in {

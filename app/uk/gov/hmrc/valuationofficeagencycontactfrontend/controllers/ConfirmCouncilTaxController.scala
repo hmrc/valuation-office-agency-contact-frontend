@@ -36,12 +36,10 @@ class ConfirmCouncilTaxController @Inject()(val appConfig: FrontendAppConfig,
 
   def onPageLoad: Action[AnyContent] = (getData andThen requireData){ implicit request =>
 
-    val contactModel = request.userAnswers.contact.right.get
+    val contact = request.userAnswers.contact.right.get
 
-    val councilTaxAddress: CouncilTaxAddress = contactModel.councilTaxAddress.get
+    val result = connector.send(contact)
 
-    val result = connector.send(contactModel)
-
-    Ok(confirmationCouncilTax(appConfig, councilTaxAddress))
+    Ok(confirmationCouncilTax(appConfig, contact))
   }
 }
