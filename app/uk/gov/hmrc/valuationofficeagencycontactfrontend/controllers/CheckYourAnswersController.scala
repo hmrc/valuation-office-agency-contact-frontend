@@ -65,7 +65,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
       }
   }
 
-  def onSubmit() = (getData andThen requireData) { implicit request =>
+  def goToConfirmationPage() = (getData andThen requireData) { implicit request =>
     Redirect(navigator.nextPage(CheckYourAnswersId, NormalMode)(request.userAnswers))
   }
 }

@@ -68,17 +68,17 @@ class Navigator @Inject()() {
   }
 
   val confirmationPageRouting: UserAnswers => Call = answers => {
-
-    if (answers.councilTaxAddress.isEmpty && answers.businessRatesAddress.isEmpty) {
-      Logger.warn("Navigation for contact details page reached without council tax address or business rates address")
-      throw new RuntimeException("Navigation for contact details page reached without council tax address or business rates address")
-    } else if (answers.businessRatesAddress.isDefined && answers.councilTaxAddress.isEmpty) {
-      routes.ConfirmBusinessRatesController.onPageLoad()
-    } else if (answers.businessRatesAddress.isEmpty && answers.councilTaxAddress.isDefined) {
-      routes.ConfirmCouncilTaxController.onPageLoad()
-    } else {
-      Logger.warn("Navigation for contact details page reached with neither council tax address or business rates address")
-      throw new RuntimeException("Navigation for contact details page reached with neither council tax address or business rates address")
+    answers.contact match {
+      case Left(msg) => {
+        Logger.warn(msg)
+        throw new RuntimeException(msg)
+      }
+      case Right(c) if(c.councilTaxAddress.isDefined) => println(">>>>>>>>>>>>>>>>>>>. Council");routes.ConfirmCouncilTaxController.onPageLoad()
+      case Right(b) if(b.businessRatesAddress.isDefined) => routes.ConfirmBusinessRatesController.onPageLoad()
+      case _ => {
+        Logger.warn("Unknown exception in Confirmation Page Routing")
+        throw new RuntimeException("Unknown exception in Confirmation Page Routing")
+      }
     }
   }
 

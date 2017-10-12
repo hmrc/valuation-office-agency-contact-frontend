@@ -51,10 +51,10 @@ class UserAnswers(val cacheMap: CacheMap) {
     } yield Contact(ConfirmedContactDetails(cd), councilTaxAddress, businessRatesAddress, eq, subcategory, tellUs.message)
 
     optionalContactModel match {
-      case Some(Contact(_, None, None, _, _, _)) => Left("No address present")
-      case Some(Contact(_, cta, None, _, _, _)) => Right(optionalContactModel.get)
-      case Some(Contact(_, None, bra, _, _, _)) => Right(optionalContactModel.get)
-      case Some(Contact(_, cta, bra, _, _, _)) => Left("Both addresses present")
+      case Some(Contact(_, None, None, _, _, _)) => Left("Navigation for contact details page reached with neither council tax address or business rates address")
+      case Some(c @ Contact(_, cta, None, _, _, _)) => Right(c)
+      case Some(b @ Contact(_, None, bra, _, _, _)) => Right(b)
+      case Some(Contact(_, cta, bra, _, _, _)) => Left("Navigation for contact details page reached with both council tax address and business rates address")
       case _ => Left("Unable to parse")
     }
   }

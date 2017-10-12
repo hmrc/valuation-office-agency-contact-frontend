@@ -27,30 +27,6 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
 
-  class TestUserAnswers(cacheMap: CacheMap,
-                        cd: ContactDetails,
-                        eq: String,
-                        cts: String,
-                        brs: String,
-                        councilAddress: Option[CouncilTaxAddress],
-                        businessAddress: Option[BusinessRatesAddress],
-                        tum: TellUsMore) extends UserAnswers(cacheMap) {
-
-    override def tellUsMore: Option[TellUsMore] = Some(tum)
-
-    override def enquiryCategory: Option[String] = Some(eq)
-
-    override def councilTaxSubcategory: Option[String] = Some(cts)
-
-    override def contactDetails: Option[ContactDetails] = Some(cd)
-
-    override def businessRatesSubcategory: Option[String] = Some(brs)
-
-    override def businessRatesAddress: Option[BusinessRatesAddress] = businessAddress
-
-    override def councilTaxAddress: Option[CouncilTaxAddress] = councilAddress
-  }
-
   "Create Contact Model method" must {
 
     "Return a ContactModel object containing a CouncilTaxAddress if all the information is present and the enquiry selected is council_tax" in {
@@ -108,7 +84,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
 
       val result = userAnswers.contact()
 
-      result mustBe Left("Both addresses present")
+      result mustBe Left("Navigation for contact details page reached with both council tax address and business rates address")
     }
 
     "Return a Left(Unable to parse) if neither business address and council tax address are present in the model" in {
@@ -122,7 +98,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
 
       val result = userAnswers.contact()
 
-      result mustBe Left("No address present")
+      result mustBe Left("Navigation for contact details page reached with neither council tax address or business rates address")
     }
   }
 }

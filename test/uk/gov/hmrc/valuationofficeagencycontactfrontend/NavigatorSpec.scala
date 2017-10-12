@@ -19,6 +19,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend
 import org.joda.time.LocalDate
 import org.mockito.Mockito._
 import org.scalatest.mockito.MockitoSugar
+import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
@@ -99,16 +100,28 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
       }
 
-      "return a function that goes to the confirmation council tax address page when the ccheck your answers page has been submitted without errors and the enquiry is about council tax" in {
-        when (mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("line1", "line2", "town", "county", "postcode"))
-        when (mockUserAnswers.businessRatesAddress) thenReturn None
-        navigator.nextPage(CheckYourAnswersId, NormalMode)(mockUserAnswers) mustBe routes.ConfirmCouncilTaxController.onPageLoad()
+      "return a function that goes to the confirmation council tax address page when the check your answers page has been submitted without errors and the enquiry is about council tax" in {
+        val cd = ContactDetails("a", "b", "c", "d", "e", "f", "g")
+        val ec = "council_tax"
+        val councilTaxAddress = Some(CouncilTaxAddress("a", "b", "c", "d", "f"))
+        val councilTaxSubcategory = "council_tax_home_business"
+        val tellUs = TellUsMore("Hello")
+
+        val userAnswers = new TestUserAnswers(new CacheMap("", Map()), cd, ec, councilTaxSubcategory, "", councilTaxAddress, None, tellUs)
+
+        navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmCouncilTaxController.onPageLoad()
       }
 
       "return a function that goes to the confirmation business rates address page when the check your answers page has been submitted without errors and the enquiry is about business rates" in {
-        when (mockUserAnswers.councilTaxAddress) thenReturn None
-        when (mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("name", "line1", "line2", "line3", "town", "county", "postcode"))
-        navigator.nextPage(CheckYourAnswersId, NormalMode)(mockUserAnswers) mustBe routes.ConfirmBusinessRatesController.onPageLoad()
+        val cd = ContactDetails("a", "b", "c", "d", "e", "f", "g")
+        val ec = "business_rates"
+        val businessAddress = Some(BusinessRatesAddress("a", "b", "c", "d", "f", "g", "h"))
+        val businessSubcategory = "business_rates_rateable_value"
+        val tellUs = TellUsMore("Hello")
+
+        val userAnswers = new TestUserAnswers(new CacheMap("", Map()), cd, ec, "", businessSubcategory, None, businessAddress, tellUs)
+
+        navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmBusinessRatesController.onPageLoad()
       }
 
       "return a function that throws a runtime exception if both the council tax and business rates are in the model" in {
@@ -123,6 +136,16 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       "return a function that throws a runtime exception if neither the council tax and business rates are in the model" in {
         when (mockUserAnswers.councilTaxAddress) thenReturn None
         when (mockUserAnswers.businessRatesAddress) thenReturn None
+
+        intercept[Exception] {
+          navigator.nextPage(CheckYourAnswersId, NormalMode)(mockUserAnswers)
+        }
+      }
+
+      "return a function that throws a runtime exception if no model can be created" in {
+        when (mockUserAnswers.councilTaxAddress) thenReturn None
+        when (mockUserAnswers.businessRatesAddress) thenReturn None
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
 
         intercept[Exception] {
           navigator.nextPage(CheckYourAnswersId, NormalMode)(mockUserAnswers)
