@@ -22,6 +22,9 @@ import play.api.i18n.{Messages, MessagesApi}
 import play.api.inject.Injector
 import play.api.mvc.AnyContentAsEmpty
 import play.api.test.FakeRequest
+import uk.gov.hmrc.http.cache.client.CacheMap
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{BusinessRatesAddress, ContactDetails, CouncilTaxAddress, TellUsMore}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
 
@@ -34,4 +37,28 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
   def fakeRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest("", "")
 
   def messages: Messages = messagesApi.preferred(fakeRequest)
+
+  class FakeUserAnswers(cd: ContactDetails,
+                        eq: String,
+                        cts: String,
+                        brs: String,
+                        councilAddress: Option[CouncilTaxAddress],
+                        businessAddress: Option[BusinessRatesAddress],
+                        tum: TellUsMore,
+                        cacheMap: CacheMap = new CacheMap("", Map())) extends UserAnswers(cacheMap) {
+
+    override def tellUsMore: Option[TellUsMore] = Some(tum)
+
+    override def enquiryCategory: Option[String] = Some(eq)
+
+    override def councilTaxSubcategory: Option[String] = Some(cts)
+
+    override def contactDetails: Option[ContactDetails] = Some(cd)
+
+    override def businessRatesSubcategory: Option[String] = Some(brs)
+
+    override def businessRatesAddress: Option[BusinessRatesAddress] = businessAddress
+
+    override def councilTaxAddress: Option[CouncilTaxAddress] = councilAddress
+  }
 }
