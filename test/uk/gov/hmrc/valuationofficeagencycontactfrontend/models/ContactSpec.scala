@@ -19,7 +19,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
 import play.api.libs.json.Json
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
 
-class ContactModelSpec extends SpecBase {
+class ContactSpec extends SpecBase {
   val message = "message"
   val enquiryCategory = "EC"
   val subEnquiryCategory = "SEC"
@@ -29,7 +29,7 @@ class ContactModelSpec extends SpecBase {
   "Given a message, enquiryCategory and subEnquiryCategory strings, contact details and a council tax address produce a " +
     "contact model with the council tax address and the business rates set to None" in {
     val councilTaxAddress = CouncilTaxAddress("a", "b", "c", "d", "e")
-    val result = ContactModel(message, enquiryCategory, subEnquiryCategory, contactDetails, councilTaxAddress)
+    val result = Contact(message, enquiryCategory, subEnquiryCategory, contactDetails, councilTaxAddress)
 
     result.businessRatesAddress mustBe None
     result.councilTaxAddress mustBe Some(councilTaxAddress)
@@ -42,7 +42,7 @@ class ContactModelSpec extends SpecBase {
   "Given a message, enquiryCategory and subEnquiryCategory strings, contact details and a business rates address produce a " +
     "contact model with the council tax address and the business rates set to None" in {
     val businessRatesAddress = BusinessRatesAddress("a", "b", "c", "d", "e", "f", "g")
-    val result = ContactModel(message, enquiryCategory, subEnquiryCategory, contactDetails, businessRatesAddress)
+    val result = Contact(message, enquiryCategory, subEnquiryCategory, contactDetails, businessRatesAddress)
 
     result.businessRatesAddress mustBe Some(businessRatesAddress)
     result.councilTaxAddress mustBe None

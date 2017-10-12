@@ -67,6 +67,21 @@ class Navigator @Inject()() {
     }
   }
 
+  val confirmationPageRouting: UserAnswers => Call = answers => {
+    answers.contact match {
+      case Left(msg) => {
+        Logger.warn(msg)
+        throw new RuntimeException(msg)
+      }
+      case Right(c) if(c.councilTaxAddress.isDefined) => routes.ConfirmCouncilTaxController.onPageLoad()
+      case Right(b) if(b.businessRatesAddress.isDefined) => routes.ConfirmBusinessRatesController.onPageLoad()
+      case _ => {
+        Logger.warn("Unknown exception in Confirmation Page Routing")
+        throw new RuntimeException("Unknown exception in Confirmation Page Routing")
+      }
+    }
+  }
+
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     EnquiryCategoryId -> enquiryRouting,
     CouncilTaxSubcategoryId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
@@ -74,7 +89,9 @@ class Navigator @Inject()() {
     ContactDetailsId -> contactDetailsRouting,
     CouncilTaxAddressId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
     BusinessRatesAddressId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
-    TellUsMoreId -> (_ => routes.CheckYourAnswersController.onPageLoad()))
+    TellUsMoreId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
+    CheckYourAnswersId -> confirmationPageRouting
+  )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()
 
