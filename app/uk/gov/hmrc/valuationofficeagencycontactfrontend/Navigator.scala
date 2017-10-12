@@ -68,6 +68,7 @@ class Navigator @Inject()() {
   }
 
   val confirmationPageRouting: UserAnswers => Call = answers => {
+
     if (answers.councilTaxAddress.isEmpty && answers.businessRatesAddress.isEmpty) {
       Logger.warn("Navigation for contact details page reached without council tax address or business rates address")
       throw new RuntimeException("Navigation for contact details page reached without council tax address or business rates address")

@@ -126,3 +126,4 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
     }
   }
 }
+
