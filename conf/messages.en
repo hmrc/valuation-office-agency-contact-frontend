@@ -71,9 +71,9 @@ site.yes = Yes
 site.save_and_continue = Save and continue
 site.start-again = Start again
 site.submit = Submit
-site.service_name = Valuation Office Agency Contact Finder
+site.service_name = Valuation Office Agency Contact Form
 site.textarea.char_limit = (Limit is {0} characters)
-site.print.link=Print reference
+site.print.button=Print or save to PDF
 
 unauthorised.title = You can’t access this service with this account
 unauthorised.heading = You can’t access this service with this account
@@ -120,17 +120,11 @@ enquiryCategory.valuation_for_public_body.finaltext = Note: this service also op
 
 contactDetails.title = Contact Details
 contactDetails.heading = What are your contact details
-contactDetails.firstName = Your first name*
-contactDetails.lastName = Surname*
+contactDetails.firstName = First name *
+contactDetails.lastName = Surname *
 contactDetails.email = Email *
 contactDetails.confirmEmail = Confirm email *
-contactDetails.supply-number.para = Please supply either a landline number or a mobile number *
-contactDetails.telephone = Telephone
-contactDetails.mobile = Mobile
-contactDetails.contact_preference_heading = Contact preferences
-contactDetails.contactPreference = I prefer to be contacted by
-contactDetails.email_preference = Email
-contactDetails.phone_preference = Telephone
+contactDetails.contactNumber = Telephone / Mobile *
 contactDetails.checkYourAnswersLabel = Contact Details
 
 staticPagePlaceholder.title = Postcode Finder
@@ -159,18 +153,20 @@ councilTax.pay-information = Search for your local authority and pay your Counci
 
 councilTaxSubcategory.title = Council Tax Enquiry
 councilTaxSubcategory.heading = What do you want to know about Council Tax?
-councilTaxSubcategory.council_tax_home_business = How your Council Tax is affected by running a home-based business
-councilTaxSubcategory.council_tax_change = Changes  you’ve made to your property that you think may affect your Council Tax band
-councilTaxSubcategory.council_tax_assess = Your Council Tax band and how it’s assessed
-councilTaxSubcategory.council_tax_other = Other
+councilTaxSubcategory.council_tax_band = What is my Council Tax band
+councilTaxSubcategory.council_tax_calculated = How is my Council Tax band calculated
+councilTaxSubcategory.council_tax_changes = There have been changes to my property
+councilTaxSubcategory.council_tax_challenge = I want to challenge my Council Tax band
+councilTaxSubcategory.council_tax_other = Other Council Tax enquiries
+
 councilTaxSubcategory.checkYourAnswersLabel = Council Tax
 
 businessRatesSubcategory.title = Business Rates
 businessRatesSubcategory.heading = What is your enquiry about Business Rates?
-businessRatesSubcategory.business_rates_rateable_value = Rateable value and how it’s calculated
+businessRatesSubcategory.business_rates_rateable_value = What is my property’s rateable value
+businessRatesSubcategory.business_rates_business_rates = How are business rates calculated
 businessRatesSubcategory.business_rates_update_details = I want to check or update my property details
-businessRatesSubcategory.business_rates_challenge_valuation = I want to challenge my valuation
-businessRatesSubcategory.business_rates_moved_property = I’ve moved to a property without a rateable value
+businessRatesSubcategory.business_rates_challenge = I want to challenge my valuation
 businessRatesSubcategory.business_rates_other = Other business rates enquiries
 businessRatesSubcategory.checkYourAnswersLabel = Business Rates
 
@@ -179,7 +175,7 @@ checkAndChallenge.heading = You will now be transferred to the VOA’s Find, Che
 checkAndChallenge.url = https://www.gov.uk/correct-your-business-rates
 
 councilTaxAddress.title = Council tax property Details
-councilTaxAddress.heading = What is your address
+councilTaxAddress.heading = What is the address of the property you are enquiring about?
 councilTaxAddress.addressLine1 = Address Line 1*
 councilTaxAddress.addressLine2 = Address Line 2
 councilTaxAddress.town = Town*
@@ -203,19 +199,15 @@ tellUsMore.heading = Tell us more about your enquiry
 tellUsMore.message = Your message
 tellUsMore.para = Help with what to include:
 tellUsMore.para1 = Your relationship to the property (for example, owner or tenant)
-tellUsMore.para2 = The property address
-tellUsMore.para3 = How long you have been at this address
-tellUsMore.para4 = Business rate reference number (this can be found on your bill)
-tellUsMore.para5 = Authorisation from the owner or tenant of the property if you are acting on their behalf (if you're an agent)
+tellUsMore.para2 = How long you have been at this address
+tellUsMore.para3 = We do not require attachments at this time, if required, we will contact you.
 tellUsMore.checkYourAnswersLabel = Enquiry
 
 confirmation.title = Confirmation
 confirmation.heading = Thank you for your enquiry
-confirmation.para1 = Your reference is
 confirmation.reference = CT online 17 XG68H5
-confirmation.para2 = Please make a note of this reference.
-confirmation.para3 = What happens next
-confirmation.para4 = We will send you a copy of your enquiry with a reference number to your email address.
-confirmation.para5 = We aim to respond to you as soon as possible. It may take up to 20 working days for complex enquiries or during busy periods.
-confirmation.survey-para1 = What did you think of this service?
-confirmation.survey-para2 = Please complete the short survey to tell us what you think about our new service and how we can improve. This will take no longer than 3 minutes.
+confirmation.enquirySummary = Your enquiry summary
+confirmation.whatHappensnext = What happens next
+confirmation.para1 = We aim to respond to you as soon as possible. It may take up to 20 working days for complex enquiries or during busy periods.
+confirmation.para2 = In all contact with the VOA, please have your property address to quote.
+confirmation.para3 = Please print or save this receipt as a pdf and retain in case you need to talk to us further about your enquiry.

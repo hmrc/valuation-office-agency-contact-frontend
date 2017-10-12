@@ -33,14 +33,14 @@ object BusinessRatesSubcategoryForm extends FormErrorHelper {
     def unbind(key: String, value: String) = Map(key -> value)
   }
 
-  def apply(): Form[String] = 
+  def apply(): Form[String] =
     Form(single("value" -> of(BusinessRatesSubcategoryFormatter)))
 
   def options = Seq(
     RadioOption("businessRatesSubcategory", "business_rates_rateable_value"),
+    RadioOption("businessRatesSubcategory", "business_rates_business_rates"),
     RadioOption("businessRatesSubcategory", "business_rates_update_details"),
-    RadioOption("businessRatesSubcategory", "business_rates_challenge_valuation"),
-    RadioOption("businessRatesSubcategory", "business_rates_moved_property"),
+    RadioOption("businessRatesSubcategory", "business_rates_challenge"),
     RadioOption("businessRatesSubcategory", "business_rates_other")
   )
 
