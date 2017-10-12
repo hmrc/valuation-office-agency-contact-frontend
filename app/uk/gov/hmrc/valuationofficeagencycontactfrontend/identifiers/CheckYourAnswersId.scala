@@ -14,22 +14,11 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers
 
-import play.api.data.Form
-import play.api.data.Forms._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
-
-object ContactDetailsForm {
-
-  def apply(): Form[ContactDetails] = Form(
-    mapping(
-      "firstName" -> nonEmptyText,
-      "lastName" -> nonEmptyText,
-      "email" -> nonEmptyText,
-      "confirmEmail" -> nonEmptyText,
-      "contactNumber" -> nonEmptyText
-    )(ContactDetails.apply)(ContactDetails.unapply)
-  )
+/**
+  * Created by andy on 11/10/2017.
+  */
+object CheckYourAnswersId extends Identifier {
+  override def toString: String = "checkYourAnswers"
 }

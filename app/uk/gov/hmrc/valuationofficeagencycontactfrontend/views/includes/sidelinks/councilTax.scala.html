@@ -17,39 +17,39 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 
 @()(implicit messages: Messages)
-<div class="service-info">
-<div class="govuk-related-items" id="councilTaxLinks" style="display:block">
-<h2 class="heading-medium-side-link">@messages("councilTax.title")</h2>
-<p>@messages("councilTax.information")</p>
-<ul class="results-list">
-  <li>
-    <h3><a href=@messages("councilTax.taxband-url")
-    target="_self"
-    onclick="handleOutboundLinkClicks(event, 'CT-1')">@messages("councilTax.taxband-title")</a></h3>
-    <p>@messages("councilTax.taxband-information")</p>
-  </li>
-  <li>
-    <h3><a href=@messages("councilTax.taxband-changes.url")
-    target="_self"
-    onclick="handleOutboundLinkClicks(event, 'CT-2')">@messages("councilTax.taxband-changes.title")</a></h3>
-    <p>
-      @messages("councilTax.taxband-changes.information")
-    </p>
-  </li>
-  <li>
-    <h3><a href=@messages("councilTax.taxband-assessment.url")
-    target="_self"
-    onclick="handleOutboundLinkClicks(event, 'CT-3')">
-      @messages("councilTax.taxband-assessment.title")</a></h3>
-    <p>@messages("councilTax.taxband-assessment.information")
-    </p>
-  </li>
-  <li>
-    <h3><a href=@messages("councilTax.pay-url")
-    target="_self"
-    onclick="handleOutboundLinkClicks(event, 'CT-4')">@messages("councilTax.pay-title")</a></h3>
-    <p>@messages("councilTax.pay-information")</p>
-  </li>
-</ul>
-</div>
-</div>
+<section class="section subsection section--blue-top">
+    <div class="govuk-related-items" id="councilTaxLinks" style="display:block">
+    <h2 class="heading-medium-side-link">@messages("councilTax.title")</h2>
+    <p>@messages("councilTax.information")</p>
+    <ul class="results-list">
+      <li>
+        <h3><a href=@messages("councilTax.taxband-url")
+        target="_self"
+        onclick="handleOutboundLinkClicks(event, 'CT-1')">@messages("councilTax.taxband-title")</a></h3>
+        <p>@messages("councilTax.taxband-information")</p>
+      </li>
+      <li>
+        <h3><a href=@messages("councilTax.taxband-changes.url")
+        target="_self"
+        onclick="handleOutboundLinkClicks(event, 'CT-2')">@messages("councilTax.taxband-changes.title")</a></h3>
+        <p>
+          @messages("councilTax.taxband-changes.information")
+        </p>
+      </li>
+      <li>
+        <h3><a href=@messages("councilTax.taxband-assessment.url")
+        target="_self"
+        onclick="handleOutboundLinkClicks(event, 'CT-3')">
+          @messages("councilTax.taxband-assessment.title")</a></h3>
+        <p>@messages("councilTax.taxband-assessment.information")
+        </p>
+      </li>
+      <li>
+        <h3><a href=@messages("councilTax.pay-url")
+        target="_self"
+        onclick="handleOutboundLinkClicks(event, 'CT-4')">@messages("councilTax.pay-title")</a></h3>
+        <p>@messages("councilTax.pay-information")</p>
+      </li>
+    </ul>
+    </div>
+</section>

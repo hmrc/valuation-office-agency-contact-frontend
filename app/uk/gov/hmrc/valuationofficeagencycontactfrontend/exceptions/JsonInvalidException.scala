@@ -14,22 +14,6 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.exceptions
 
-import play.api.data.Form
-import play.api.data.Forms._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
-
-object ContactDetailsForm {
-
-  def apply(): Form[ContactDetails] = Form(
-    mapping(
-      "firstName" -> nonEmptyText,
-      "lastName" -> nonEmptyText,
-      "email" -> nonEmptyText,
-      "confirmEmail" -> nonEmptyText,
-      "contactNumber" -> nonEmptyText
-    )(ContactDetails.apply)(ContactDetails.unapply)
-  )
-}
+class JsonInvalidException(msg: String) extends RuntimeException(msg)

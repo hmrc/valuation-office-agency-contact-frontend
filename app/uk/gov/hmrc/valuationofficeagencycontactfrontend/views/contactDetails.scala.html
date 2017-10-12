@@ -44,22 +44,7 @@
 
         @components.input_text(InputViewModel[ContactDetails]("confirmEmail", form), label = messages("contactDetails.confirmEmail"))
 
-        <p>@messages("contactDetails.supply-number.para")</p>
-
-        @components.input_text(InputViewModel[ContactDetails]("telephone", form), label = messages("contactDetails.telephone"))
-
-        @components.input_text(InputViewModel[ContactDetails]("mobile", form), label = messages("contactDetails.mobile"))
-
-        <p></p>
-
-        <h2 class="heading-medium">@messages("contactDetails.contact_preference_heading")</h2>
-
-        @components.input_radio(
-            viewModel = InputViewModel[ContactDetails]("contactPreference", form),
-            legend = messages("contactDetails.contactPreference"),
-            legendClass = None,
-            inputs = ContactDetailsForm.contactPreferenceOptions
-        )
+        @components.input_text(InputViewModel[ContactDetails]("contactNumber", form), label = messages("contactDetails.contactNumber"))
 
         @components.continue_button()
 
