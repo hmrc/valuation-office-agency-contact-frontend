@@ -38,7 +38,7 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
 
   def messages: Messages = messagesApi.preferred(fakeRequest)
 
-  class TestUserAnswers(cacheMap: CacheMap,
+  class FakeUserAnswers(cacheMap: CacheMap,
                         cd: ContactDetails,
                         eq: String,
                         cts: String,

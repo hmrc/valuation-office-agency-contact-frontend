@@ -23,19 +23,25 @@ import play.api.mvc.{Action, AnyContent}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ConfirmedContactDetails, ContactDetails, Contact, CouncilTaxAddress}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ConfirmedContactDetails, Contact, ContactDetails, CouncilTaxAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmationCouncilTax
 
 @Singleton()
 class ConfirmCouncilTaxController @Inject()(val appConfig: FrontendAppConfig,
                                             val messagesApi: MessagesApi,
-                                            val connector: LightweightContactEventsConnector) extends FrontendController with I18nSupport {
+                                            val connector: LightweightContactEventsConnector,
+                                            getData: DataRetrievalAction,
+                                            requireData: DataRequiredAction) extends FrontendController with I18nSupport {
 
-  def onPageLoad: Action[AnyContent] = Action { implicit request =>
-    val contactModel = ???
-    val councilTaxAddress: CouncilTaxAddress = ???
+  def onPageLoad: Action[AnyContent] = (getData andThen requireData){ implicit request =>
+
+    val contactModel = request.userAnswers.contact.right.get
+
+    val councilTaxAddress: CouncilTaxAddress = contactModel.councilTaxAddress.get
 
     val result = connector.send(contactModel)
+
     Ok(confirmationCouncilTax(appConfig, councilTaxAddress))
   }
 }

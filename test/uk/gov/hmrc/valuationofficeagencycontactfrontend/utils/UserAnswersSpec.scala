@@ -39,7 +39,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
 
       val expectedResult = Contact(confirmedContactDetails, councilTaxAddress, None, ec, councilTaxSubcategory, tellUs.message)
 
-      val userAnswers = new TestUserAnswers(new CacheMap("", Map()), cd, ec, councilTaxSubcategory, "", councilTaxAddress, None, tellUs)
+      val userAnswers = new FakeUserAnswers(new CacheMap("", Map()), cd, ec, councilTaxSubcategory, "", councilTaxAddress, None, tellUs)
 
       val result = userAnswers.contact()
 
@@ -56,7 +56,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
 
       val expectedResult = Contact(confirmedContactDetails, None, businessAddress, ec, businessSubcategory, tellUs.message)
 
-      val userAnswers = new TestUserAnswers(new CacheMap("", Map()), cd, ec, "", businessSubcategory, None, businessAddress, tellUs)
+      val userAnswers = new FakeUserAnswers(new CacheMap("", Map()), cd, ec, "", businessSubcategory, None, businessAddress, tellUs)
 
       val result = userAnswers.contact()
 
@@ -80,7 +80,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
       val councilAddress = Some(CouncilTaxAddress("a", "b", "c", "d", "f"))
       val tellUs = TellUsMore("Hello")
 
-      val userAnswers = new TestUserAnswers(new CacheMap("", Map()), cd, ec, "", businessSubcategory, councilAddress, businessAddress, tellUs)
+      val userAnswers = new FakeUserAnswers(new CacheMap("", Map()), cd, ec, "", businessSubcategory, councilAddress, businessAddress, tellUs)
 
       val result = userAnswers.contact()
 
@@ -94,7 +94,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
       val businessSubcategory = "business_rates_rateable_value"
       val tellUs = TellUsMore("Hello")
 
-      val userAnswers = new TestUserAnswers(new CacheMap("", Map()), cd, ec, "", businessSubcategory, None, None, tellUs)
+      val userAnswers = new FakeUserAnswers(new CacheMap("", Map()), cd, ec, "", businessSubcategory, None, None, tellUs)
 
       val result = userAnswers.contact()
 

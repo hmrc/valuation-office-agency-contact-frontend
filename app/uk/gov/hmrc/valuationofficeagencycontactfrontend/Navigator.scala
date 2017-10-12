@@ -73,7 +73,7 @@ class Navigator @Inject()() {
         Logger.warn(msg)
         throw new RuntimeException(msg)
       }
-      case Right(c) if(c.councilTaxAddress.isDefined) => println(">>>>>>>>>>>>>>>>>>>. Council");routes.ConfirmCouncilTaxController.onPageLoad()
+      case Right(c) if(c.councilTaxAddress.isDefined) => routes.ConfirmCouncilTaxController.onPageLoad()
       case Right(b) if(b.businessRatesAddress.isDefined) => routes.ConfirmBusinessRatesController.onPageLoad()
       case _ => {
         Logger.warn("Unknown exception in Confirmation Page Routing")
