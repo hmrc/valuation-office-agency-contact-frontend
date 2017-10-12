@@ -40,7 +40,7 @@ object BusinessRatesSubcategoryForm extends FormErrorHelper {
     RadioOption("businessRatesSubcategory", "business_rates_rateable_value"),
     RadioOption("businessRatesSubcategory", "business_rates_business_rates"),
     RadioOption("businessRatesSubcategory", "business_rates_update_details"),
-    RadioOption("businessRatesSubcategory", "business_rates_challenge_valuation"),
+    RadioOption("businessRatesSubcategory", "business_rates_challenge"),
     RadioOption("businessRatesSubcategory", "business_rates_other")
   )
 

@@ -59,7 +59,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
       case Some("business_rates_rateable_value") => Right("businessRatesSubcategory.business_rates_rateable_value")
       case Some("business_rates_business_rates") => Right("businessRatesSubcategory.business_rates_business_rates")
       case Some("business_rates_update_details") => Right("businessRatesSubcategory.business_rates_update_details")
-      case Some("business_rates_challenge_valuation") => Right("businessRatesSubcategory.business_rates_challenge_valuation")
+      case Some("business_rates_challenge") => Right("businessRatesSubcategory.business_rates_challenge")
       case Some("business_rates_other") => Right("businessRatesSubcategory.business_rates_other")
       case Some(sel) => Left(sel)
       case None => Left("Returned None from business rates subcategory")

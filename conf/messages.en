@@ -163,10 +163,10 @@ councilTaxSubcategory.checkYourAnswersLabel = Council Tax
 
 businessRatesSubcategory.title = Business Rates
 businessRatesSubcategory.heading = What is your enquiry about Business Rates?
-businessRatesSubcategory.business_rates_rateable_value = What is my property''s rateable value
+businessRatesSubcategory.business_rates_rateable_value = What is my property’s rateable value
 businessRatesSubcategory.business_rates_business_rates = How are business rates calculated
 businessRatesSubcategory.business_rates_update_details = I want to check or update my property details
-businessRatesSubcategory.business_rates_challenge_valuation = I want to challenge my valuation
+businessRatesSubcategory.business_rates_challenge = I want to challenge my valuation
 businessRatesSubcategory.business_rates_other = Other business rates enquiries
 businessRatesSubcategory.checkYourAnswersLabel = Business Rates
 

@@ -51,8 +51,8 @@ class BusinessRatesSubcategoryViewSpec extends ViewBehaviours {
         labelDefinedAndUsedOnce("business_rates_update_details", messageKeyPrefix, createView)
       }
 
-      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_challenge_valuation and that it is used once" in {
-        labelDefinedAndUsedOnce("business_rates_challenge_valuation", messageKeyPrefix, createView)
+      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_challenge and that it is used once" in {
+        labelDefinedAndUsedOnce("business_rates_challenge", messageKeyPrefix, createView)
       }
 
       "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_business_rates and that it is used once" in {
