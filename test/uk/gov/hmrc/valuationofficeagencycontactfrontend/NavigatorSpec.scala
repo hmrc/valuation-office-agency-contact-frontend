@@ -100,6 +100,11 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
       }
 
+      "return a function that goes to the valuation advice page when an enquiry category for valuation and property advice has been selected" in {
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("valuation_for_public_body")
+        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.ValuationAdviceController.onPageLoad()
+      }
+
       "return a function that goes to the confirmation council tax address page when the check your answers page has been submitted without errors and the enquiry is about council tax" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
         val ec = "council_tax"
