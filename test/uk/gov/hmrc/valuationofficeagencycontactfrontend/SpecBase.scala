@@ -38,14 +38,14 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
 
   def messages: Messages = messagesApi.preferred(fakeRequest)
 
-  class FakeUserAnswers(cacheMap: CacheMap,
-                        cd: ContactDetails,
+  class FakeUserAnswers(cd: ContactDetails,
                         eq: String,
                         cts: String,
                         brs: String,
                         councilAddress: Option[CouncilTaxAddress],
                         businessAddress: Option[BusinessRatesAddress],
-                        tum: TellUsMore) extends UserAnswers(cacheMap) {
+                        tum: TellUsMore,
+                        cacheMap: CacheMap = new CacheMap("", Map())) extends UserAnswers(cacheMap) {
 
     override def tellUsMore: Option[TellUsMore] = Some(tum)
 

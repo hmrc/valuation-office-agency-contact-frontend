@@ -107,7 +107,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         val councilTaxSubcategory = "council_tax_home_business"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(new CacheMap("", Map()), cd, ec, councilTaxSubcategory, "", councilTaxAddress, None, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", councilTaxAddress, None, tellUs)
 
         navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmCouncilTaxController.onPageLoad()
       }
@@ -119,7 +119,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(new CacheMap("", Map()), cd, ec, "", businessSubcategory, None, businessAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, ec, "", businessSubcategory, None, businessAddress, tellUs)
 
         navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmBusinessRatesController.onPageLoad()
       }
