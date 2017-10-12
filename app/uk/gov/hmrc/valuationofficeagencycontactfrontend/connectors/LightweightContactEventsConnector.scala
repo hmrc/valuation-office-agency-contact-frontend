@@ -22,7 +22,7 @@ import play.api.Configuration
 import play.api.libs.json._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.exceptions.JsonInvalidException
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.json.JsonErrorProcessor
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactModel, Reference}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Contact, Reference}
 import uk.gov.hmrc.play.bootstrap.config.BaseUrl
 
 import scala.util.{Failure, Success}
@@ -40,7 +40,7 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient, override val
 
   def getStyleGuide = http.GET(s"$serviceUrl${baseSegment}style-guide")
 
-  def send(input: ContactModel) = sendJson(Json.toJson(input))
+  def send(input: Contact) = sendJson(Json.toJson(input))
 
   def sendJson(json: JsValue) =
     http.POST(s"$serviceUrl${baseSegment}create", json, Seq(jsonContentTypeHeader))
