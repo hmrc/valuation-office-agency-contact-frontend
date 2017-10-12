@@ -29,11 +29,13 @@
     appConfig = appConfig,
     bodyClasses = None) {
 
+    @components.heading("enquiryCategory.heading")
+
     @helpers.form(action = EnquiryCategoryController.onSubmit(mode), 'autoComplete -> "off") {
 
         @components.error_summary(form.errors)
 
-        @components.heading("enquiryCategory.heading")
+
 
         @components.input_radio(
             viewModel = InputViewModel[String]("value", form),

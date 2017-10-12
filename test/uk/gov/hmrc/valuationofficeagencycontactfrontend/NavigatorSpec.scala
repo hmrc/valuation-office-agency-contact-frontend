@@ -19,6 +19,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend
 import org.joda.time.LocalDate
 import org.mockito.Mockito._
 import org.scalatest.mockito.MockitoSugar
+import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
@@ -54,7 +55,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       }
 
       "return a function that goes to the council tax property details page when the contact form has been submitted without errors and the enquiry is council tax" in {
-        when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "test@email.com", "0208382737288", "073753753733", "Phone"))
+        when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "test@email.com", "0208382737288"))
         navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAddressController.onPageLoad(NormalMode)
       }
 
@@ -70,7 +71,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       }
 
       "return a function that goes to the business rates address page when the contact form has been submitted without errors and the enquiry is business rates" in {
-        when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "test@email.com", "0208382737288", "073753753733", "Phone"))
+        when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "test@email.com", "0208382737288"))
         navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesAddressController.onPageLoad(NormalMode)
       }
 
@@ -80,7 +81,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       }
 
       "return a function that goes to the check and challenge page when an enquiry category for business rates has been selected and the selection is I want to challenge my valuation" in {
-        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_challenge_valuation")
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_challenge")
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CheckAndChallengeController.onPageLoad()
       }
 
@@ -102,6 +103,58 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       "return a function that goes to the valuation advice page when an enquiry category for valuation and property advice has been selected" in {
         when (mockUserAnswers.enquiryCategory) thenReturn Some("valuation_for_public_body")
         navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.ValuationAdviceController.onPageLoad()
+      }
+
+      "return a function that goes to the confirmation council tax address page when the check your answers page has been submitted without errors and the enquiry is about council tax" in {
+        val cd = ContactDetails("a", "b", "c", "d", "e")
+        val ec = "council_tax"
+        val councilTaxAddress = Some(CouncilTaxAddress("a", "b", "c", "d", "f"))
+        val councilTaxSubcategory = "council_tax_home_business"
+        val tellUs = TellUsMore("Hello")
+
+        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", councilTaxAddress, None, tellUs)
+
+        navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmCouncilTaxController.onPageLoad()
+      }
+
+      "return a function that goes to the confirmation business rates address page when the check your answers page has been submitted without errors and the enquiry is about business rates" in {
+        val cd = ContactDetails("a", "b", "c", "d", "e")
+        val ec = "business_rates"
+        val businessAddress = Some(BusinessRatesAddress("a", "b", "c", "d", "f", "g", "h"))
+        val businessSubcategory = "business_rates_rateable_value"
+        val tellUs = TellUsMore("Hello")
+
+        val userAnswers = new FakeUserAnswers(cd, ec, "", businessSubcategory, None, businessAddress, tellUs)
+
+        navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmBusinessRatesController.onPageLoad()
+      }
+
+      "return a function that throws a runtime exception if both the council tax and business rates are in the model" in {
+        when (mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("line1", "line2", "town", "county", "postcode"))
+        when (mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("name", "line1", "line2", "line3", "town", "county", "postcode"))
+
+        intercept[Exception] {
+          navigator.nextPage(CheckYourAnswersId, NormalMode)(mockUserAnswers)
+        }
+      }
+
+      "return a function that throws a runtime exception if neither the council tax and business rates are in the model" in {
+        when (mockUserAnswers.councilTaxAddress) thenReturn None
+        when (mockUserAnswers.businessRatesAddress) thenReturn None
+
+        intercept[Exception] {
+          navigator.nextPage(CheckYourAnswersId, NormalMode)(mockUserAnswers)
+        }
+      }
+
+      "return a function that throws a runtime exception if unjnown exception is thrown in confirmation routing" in {
+        when (mockUserAnswers.councilTaxAddress) thenReturn None
+        when (mockUserAnswers.businessRatesAddress) thenReturn None
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+
+        intercept[Exception] {
+          navigator.nextPage(CheckYourAnswersId, NormalMode)(mockUserAnswers)
+        }
       }
 
     }

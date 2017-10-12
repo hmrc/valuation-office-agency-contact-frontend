@@ -25,20 +25,17 @@ class ConfirmationViewSpec extends ViewBehaviours {
 
   "Confirmation view" must {
 
-    behave like normalPage(view, "confirmation", "para1", "para2", "para3", "para4", "para5", "reference",
-      "survey-para1", "survey-para2")
+    behave like normalPage(view, "confirmation", "para1", "para2", "enquirySummary", "whatHappensnext", "para3")
 
-    "contain start again button " in {
+    "contain a print button " in {
       val doc = asDocument(view())
-      val startAgainButton = doc.getElementById("start-again").text()
-      assert(startAgainButton == messages("site.start-again"))
+      val printButton = doc.getElementById("print-button").text()
+      val href = doc.getElementById("print-button").attr("href")
+      assert(printButton == messages("site.print.button"))
+      assert(href == "javascript:window.print()")
     }
 
-    "The Start again button links to the Index Controller onPageLoad method" in {
-      val doc = asDocument(view())
-      val href = doc.getElementById("start-again").attr("href")
-      assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url.toString)
-    }
+
   }
 
 }

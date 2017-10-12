@@ -22,11 +22,22 @@ case class ContactDetails (firstName: String,
                            lastName: String,
                            email: String,
                            confirmEmail: String,
-                           telephone: String,
-                           mobile: String,
-                           contactPreference: String
+                           contactNumber: String
                            )
 
 object ContactDetails {
   implicit val format = Json.format[ContactDetails]
+}
+
+case class ConfirmedContactDetails(firstName: String,
+                  lastName: String,
+                  email: String,
+                  contactNumber: String
+                 )
+
+object ConfirmedContactDetails {
+  implicit val format = Json.format[ConfirmedContactDetails]
+
+  def apply(cd: ContactDetails): ConfirmedContactDetails =
+    ConfirmedContactDetails(cd.firstName, cd.lastName, cd.email, cd.contactNumber)
 }
