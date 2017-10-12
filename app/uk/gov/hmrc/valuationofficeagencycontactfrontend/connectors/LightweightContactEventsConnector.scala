@@ -20,16 +20,15 @@ import javax.inject.{Inject, Singleton}
 
 import play.api.Configuration
 import play.api.libs.json._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.exceptions.JsonInvalidException
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.json.JsonErrorProcessor
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactModel, Reference}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactModel
 import uk.gov.hmrc.play.bootstrap.config.BaseUrl
 
-import scala.util.{Failure, Success}
+import scala.util.{Failure, Success, Try}
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.http.HttpClient
 
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 
 class LightweightContactEventsConnector @Inject()(http: HttpClient, override val configuration: Configuration) extends BaseUrl {
 
@@ -42,14 +41,14 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient, override val
 
   def send(input: ContactModel) = sendJson(Json.toJson(input))
 
-  def sendJson(json: JsValue) =
+  def sendJson(json: JsValue): Future[Try[Int]] =
     http.POST(s"$serviceUrl${baseSegment}create", json, Seq(jsonContentTypeHeader))
       .map {
         response =>
-          Json.fromJson[Reference](response.json) match {
-            case JsSuccess(result, _) => Success(result)
-            case JsError(error) => {
-              Failure(new JsonInvalidException(JsonErrorProcessor(error)))
+          response.status match {
+            case 200 => Success(200)
+            case status => {
+              Failure(new RuntimeException("Received status of " + status + " from upstream service"))
             }
           }
       }
