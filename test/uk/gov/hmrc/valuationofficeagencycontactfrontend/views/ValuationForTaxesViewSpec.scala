@@ -24,7 +24,7 @@ class ValuationForTaxesViewSpec extends ViewBehaviours {
 
   def view = () => valuationForTaxes(frontendAppConfig)(fakeRequest, messages)
 
-  "Valuation Advice view" must {
+  "Valuation For Taxes view" must {
 
     behave like normalPage(view, "valuationForTaxes", "subheading", "para1", "email-title", "email", "general-title", "england.phone-title",
       "england.phone", "england.phone-url", "wales.phone-title", "wales.phone", "wales.phone-url", "opening-title", "opening-para",
