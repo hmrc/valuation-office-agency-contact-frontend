@@ -55,7 +55,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       }
 
       "return a function that goes to the council tax property details page when the contact form has been submitted without errors and the enquiry is council tax" in {
-        when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "test@email.com", "0208382737288", "073753753733", "Phone"))
+        when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "test@email.com", "0208382737288"))
         navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAddressController.onPageLoad(NormalMode)
       }
 
@@ -71,7 +71,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       }
 
       "return a function that goes to the business rates address page when the contact form has been submitted without errors and the enquiry is business rates" in {
-        when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "test@email.com", "0208382737288", "073753753733", "Phone"))
+        when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "test@email.com", "0208382737288"))
         navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesAddressController.onPageLoad(NormalMode)
       }
 
@@ -81,7 +81,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       }
 
       "return a function that goes to the check and challenge page when an enquiry category for business rates has been selected and the selection is I want to challenge my valuation" in {
-        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_challenge_valuation")
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_challenge")
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CheckAndChallengeController.onPageLoad()
       }
 

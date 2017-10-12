@@ -39,7 +39,7 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
   }
 
   def businessRatesAddress: Option[AnswerRow] = userAnswers.businessRatesAddress map {
-    x => AnswerRow("businessRatesAddress.checkYourAnswersLabel", s"${x.businessName} ${x.businessAddressLine1} ${x.town} ${x.county} ${x.postcode}", false, routes.BusinessRatesAddressController.onPageLoad(CheckMode).url)
+    x => AnswerRow("businessRatesAddress.checkYourAnswersLabel", s"${x.businessName} ${x.businessAddressLine1} ${x.businessAddressLine2} ${x.businessAddressLine3} ${x.town} ${x.county} ${x.postcode}", false, routes.BusinessRatesAddressController.onPageLoad(CheckMode).url)
   }
 
   def councilTaxAddress: Option[AnswerRow] = userAnswers.councilTaxAddress map {
@@ -47,7 +47,7 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
   }
 
   def contactDetails: Option[AnswerRow] = userAnswers.contactDetails map {
-    x => AnswerRow("contactDetails.checkYourAnswersLabel", s"${x.firstName} ${x.lastName} ${x.email}", false, routes.ContactDetailsController.onPageLoad(CheckMode).url)
+    x => AnswerRow("contactDetails.checkYourAnswersLabel", s"${x.firstName} ${x.lastName} ${x.email}  ${x.contactNumber}", false, routes.ContactDetailsController.onPageLoad(CheckMode).url)
   }
 
 }

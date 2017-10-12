@@ -43,16 +43,20 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
         }
       }
 
-      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_assess and that it is used once" in {
-        labelDefinedAndUsedOnce("council_tax_assess", messageKeyPrefix, createView)
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_band and that it is used once" in {
+        labelDefinedAndUsedOnce("council_tax_band", messageKeyPrefix, createView)
       }
 
-      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_change and that it is used once" in {
-        labelDefinedAndUsedOnce("council_tax_change", messageKeyPrefix, createView)
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_calculated and that it is used once" in {
+        labelDefinedAndUsedOnce("council_tax_calculated", messageKeyPrefix, createView)
       }
 
-      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_home_business and that it is used once" in {
-        labelDefinedAndUsedOnce("council_tax_home_business", messageKeyPrefix, createView)
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_changes and that it is used once" in {
+        labelDefinedAndUsedOnce("council_tax_changes", messageKeyPrefix, createView)
+      }
+
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_challenge and that it is used once" in {
+        labelDefinedAndUsedOnce("council_tax_challenge", messageKeyPrefix, createView)
       }
 
       "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_other and that it is used once" in {

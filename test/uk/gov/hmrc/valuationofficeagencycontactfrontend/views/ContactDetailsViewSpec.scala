@@ -35,25 +35,11 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
 
   "ContactDetails view" must {
 
-    behave like normalPage(createView, messageKeyPrefix, "supply-number.para", "contact_preference_heading")
+    behave like normalPage(createView, messageKeyPrefix)
 
     behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.ContactDetailsController.onSubmit(NormalMode).url, "firstName", "lastName",
-      "email", "confirmEmail", "telephone", "mobile")
+      "email", "confirmEmail", "contactNumber")
 
-    "contain radio buttons for the contactPreference" in {
-      val doc = asDocument(createViewUsingForm(form))
-      for (option <- ContactDetailsForm.contactPreferenceOptions) {
-        assertContainsRadioButton(doc, option.id, "contactPreference", option.value, false)
-      }
-    }
-
-    "has a radio button with the label set to the message with key contactDetails.email_preference and that it is used once" in {
-      labelDefinedAndUsedOnce("email_preference", messageKeyPrefix, createView)
-    }
-
-    "has a radio button with the label set to the message with key contactDetails.phone_preference and that it is used once" in {
-      labelDefinedAndUsedOnce("phone_preference", messageKeyPrefix, createView)
-    }
 
     "has a link marked with site.back leading to the Enquiry Category Page" in {
       val doc = asDocument(createViewUsingForm(form))
