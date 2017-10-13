@@ -19,7 +19,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmationBusinessRates
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormater}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter}
 
 class ConfirmationBusinessRatesViewSpec extends ViewBehaviours {
 
@@ -30,7 +30,7 @@ class ConfirmationBusinessRatesViewSpec extends ViewBehaviours {
     val bSub = "council_tax_home_business"
     val tellUs = TellUsMore("Hello")
     var contact = Contact(confirmCd, None, ba, ec, bSub, tellUs.message)
-    val date = DateFormater.todaysDate()
+    val date = DateFormatter.todaysDate()
 
     def view = () => confirmationBusinessRates(frontendAppConfig, contact, date)(fakeRequest, messages)
 
@@ -45,6 +45,21 @@ class ConfirmationBusinessRatesViewSpec extends ViewBehaviours {
       assert(printButton == messages("site.print.button"))
       assert(href == "javascript:window.print()")
     }
+
+     "Given a business rates address it should contain a formatted address string" in {
+       val doc = asDocument(view())
+       assert(doc.toString.contains("a, b, c, d, f, h, i"))
+     }
+
+     "Given a business rates address it should contain a formatted address string with <br/> interstitial" in {
+       val doc = asDocument(view())
+       assert(doc.toString.contains("<br>b"))
+       assert(doc.toString.contains("<br>c"))
+       assert(doc.toString.contains("<br>d"))
+       assert(doc.toString.contains("<br>f"))
+       assert(doc.toString.contains("<br>h"))
+       assert(doc.toString.contains("<br>i"))
+     }
 
   }
 

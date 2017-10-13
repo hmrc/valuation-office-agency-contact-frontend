@@ -26,7 +26,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightCo
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{BusinessRatesAddress, ConfirmedContactDetails, Contact, ContactDetails}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmationBusinessRates
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.DateFormater
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.DateFormatter
 
 @Singleton()
 class ConfirmBusinessRatesController @Inject()(val appConfig: FrontendAppConfig,
@@ -39,7 +39,7 @@ class ConfirmBusinessRatesController @Inject()(val appConfig: FrontendAppConfig,
 
     val contact = request.userAnswers.contact.right.get
     val result = connector.send(contact)
-    val date = DateFormater.todaysDate()
+    val date = DateFormatter.todaysDate()
 
     Ok(confirmationBusinessRates(appConfig, contact, date))
   }
