@@ -203,20 +203,6 @@ tellUsMore.para2 = How long you have been at this address
 tellUsMore.para3 = We do not require attachments at this time, if required, we will contact you.
 tellUsMore.checkYourAnswersLabel = Enquiry
 
-confirmation.title = Confirmation
-confirmation.heading = Thank you for your enquiry
-confirmation.reference.ndr = NDRonline
-confirmation.reference.ct = CTonline
-confirmation.enquirySummary = Your enquiry summary
-confirmation.whatHappensnext = What happens next
-confirmation.para1 = We aim to respond to you as soon as possible. It may take up to 20 working days for complex enquiries or during busy periods.
-confirmation.para2 = In all contact with the VOA, please have your property address to quote.
-confirmation.para3 = Please print or save this receipt as a pdf and retain in case you need to talk to us further about your enquiry.
-confirmation.section.enquiryType = Enquiry type
-confirmation.section.yourDetails = Your details
-confirmation.section.propertyAddress = Property address
-confirmation.section.yourMessage = Your message
-
 valuationAdvice.title = Valuation Advice
 valuationAdvice.heading = Contact details
 valuationAdvice.subheading = Valuation and property advice for public sector bodies
