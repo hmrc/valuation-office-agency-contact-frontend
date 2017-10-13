@@ -26,7 +26,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightCo
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, RadioOption, UserAnswers, DateFormater}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, RadioOption, UserAnswers, DateFormatter}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmationBusinessRates
 
@@ -47,7 +47,7 @@ class ConfirmBusinessRatesControllerSpec extends ControllerSpecBase with Mockito
       val businessAddress = Some(BusinessRatesAddress("a", "b", "c", "d", "f", "g", "h"))
       val businessSubcategory = "business_rates_rateable_value"
       val tellUs = TellUsMore("Hello")
-      val date = DateFormater.todaysDate()
+      val date = DateFormatter.todaysDate()
 
       val contact = Contact(confirmedContactDetails, None, businessAddress, ec, businessSubcategory, tellUs.message)
 

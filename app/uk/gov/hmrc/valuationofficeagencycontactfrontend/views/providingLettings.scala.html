@@ -20,33 +20,35 @@
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("valuationForTaxes.title"),
+    title = messages("providingLettings.title"),
     appConfig = appConfig,
     bodyClasses = None) {
 
-    <h1 class="heading-xlarge">@messages("valuationForTaxes.heading")</h1>
+    <h1 class="heading-xlarge">@messages("providingLettings.heading")</h1>
 
-    <h2 class="heading-medium">@messages("valuationForTaxes.subheading")</h2>
+    <h2 class="heading-medium">@messages("providingLettings.subheading")</h2>
 
-    <p>@messages("valuationForTaxes.para1")</p>
+    <p class="bold">@messages("providingLettings.para1")</p>
 
-    <h3 class="heading-small">@messages("valuationForTaxes.email-title")</h3>
-
-    <p><a href="mailto:@messages("valuationForTaxes.email")">@messages("valuationForTaxes.email")</a></p>
-
-    <h3 class="heading-small">@messages("valuationForTaxes.generalEnquiries-title")</h3>
+    <h3 class="heading-small">@messages("providingLettings.address.heading")</h3>
 
     <p>
-        @messages("valuationForTaxes.phone1")<br />
-        @messages("valuationForTaxes.phone2")
+        @messages("providingLettings.address.1")<br />
+        @messages("providingLettings.address.2")<br />
+        @messages("providingLettings.address.3")<br />
+        @messages("providingLettings.address.4")<br />
+        @messages("providingLettings.address.5")
     </p>
 
-    <h3 class="heading-small">@messages("valuationForTaxes.openingHours-title")</h3>
+    <h3 class="heading-small">@messages("providingLettings.email-title")</h3>
 
-    <p>@messages("valuationForTaxes.openingHours")</p>
+    <p><a href="mailto:@messages("providingLettings.email")">@messages("providingLettings.email")</a></p>
 
-    <p>@messages("valuationForTaxes.para2")</p>
+    <h3 class="heading-small">@messages("providingLettings.phone-title")</h3>
 
+    <p>@messages("providingLettings.phone-number")</p>
+
+    <p>@messages("providingLettings.para2")</p>
     <p><a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url id="start-again" class="button">@messages("site.start-again")</a></p>
     <br />
     <p><a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url class="back-link">@messages("site.back")</a></p>

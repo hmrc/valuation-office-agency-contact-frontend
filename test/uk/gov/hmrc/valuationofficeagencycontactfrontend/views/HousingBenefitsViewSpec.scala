@@ -18,23 +18,29 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.valuationForTaxes
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.housingBenefits
 
-class ValuationForTaxesViewSpec extends ViewBehaviours {
+class HousingBenefitsViewSpec extends ViewBehaviours {
 
-  def view = () => valuationForTaxes(frontendAppConfig)(fakeRequest, messages)
+  def view = () => housingBenefits(frontendAppConfig)(fakeRequest, messages)
 
-  "Valuation For Taxes view" must {
+  "Housing benefits view" must {
 
-    behave like normalPage(view, "valuationForTaxes", 
+    behave like normalPage(view, "housingBenefits",
+        "title",
+        "heading",
         "subheading",
         "para1",
+        "address.heading",
+        "address.1",
+        "address.2",
+        "address.3",
+        "address.4",
+        "address.5",
         "email-title",
         "email",
-        "generalEnquiries-title",
-        "phone1",
-        "phone2",
-        "openingHours",
+        "phone-title",
+        "phone-number",
         "para2"
     )
 
