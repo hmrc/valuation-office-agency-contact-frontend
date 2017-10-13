@@ -16,6 +16,7 @@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Contact
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters._
 
 @(appConfig: FrontendAppConfig, businessContact: Contact, date: String)(implicit request: Request[_], messages: Messages)
 
@@ -28,7 +29,7 @@
         <h1 class="transaction-banner__heading">@messages("confirmation.heading")</h1>
         <p>Submitted: @date</p>
         <p>@messages("confirmation.reference.ndr")</p>
-        <p>@businessContact.businessRatesAddress</p>
+        <p>@formattedBusinessRatesAddress(businessContact.businessRatesAddress, ", ")</p>
       </div>
 
         <p class="text">@messages("confirmation.para1")</p>
@@ -51,7 +52,7 @@
             </li>
             <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
                 <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.propertyAddress")</div>
-                <div class="tabular-data__data tabular-data__data--8-12">@businessContact.businessRatesAddress</div>
+                <div class="tabular-data__data tabular-data__data--8-12">@Html(formattedBusinessRatesAddress(businessContact.businessRatesAddress, "<br/>"))</div>
             </li>
             <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
                 <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.yourMessage")</div>

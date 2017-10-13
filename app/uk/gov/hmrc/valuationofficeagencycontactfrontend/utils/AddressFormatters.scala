@@ -20,10 +20,21 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{BusinessRatesAdd
 
 object AddressFormatters {
 
-  def formattedCouncilTaxAddress(address: CouncilTaxAddress, interstitial: String): String = ???
+  def formattedCouncilTaxAddress(address: Option[CouncilTaxAddress], interstitial: String): String = {
+    address.fold("") {addr =>
+      insertInterstitials(Seq(addr.addressLine1, addr.addressLine2, addr.town, addr.county, addr.postcode), interstitial)
+    }
+  }
 
-  def formattedBusinessRatesAddress(address: BusinessRatesAddress, interstitial: String): String = ???
+  def formattedBusinessRatesAddress(address: Option[BusinessRatesAddress], interstitial: String): String = {
+    address.fold("") { addr =>
+      insertInterstitials(Seq(addr.businessName, addr.businessAddressLine1, addr.businessAddressLine2, addr.businessAddressLine3,
+        addr.town, addr.county, addr.postcode), interstitial)
+    }
+  }
 
-  def insertInterstitials(address: Seq[String], interstitial: String): String = ???
+  private [utils] def insertInterstitials(address: Seq[String], interstitial: String): String = {
+    if (address.isEmpty) "" else address.head.trim + address.tail.fold("") { (acc, elem) => acc + interstitial + elem.trim }
+  }
 
 }

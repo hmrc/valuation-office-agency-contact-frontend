@@ -18,7 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-object DateFormater{
+object DateFormatter{
     def todaysDate(): String = {
         val date = LocalDate.now()
         val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
