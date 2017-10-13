@@ -39,10 +39,6 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(UnknownIdentifier, NormalMode)(mockUserAnswers) mustBe routes.IndexController.onPageLoad()
       }
 
-      "return a function that goes to the static placeholder page when an enquiry category has been selected and the selection is not other business or council tax or business rates" in {
-        when (mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
-        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.StaticPagePlaceholderController.onPageLoad()
-      }
 
       "return a function that goes to the council tax subcategory page when an enquiry category has been selected and the selection is council tax" in {
         when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
@@ -156,6 +152,22 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
           navigator.nextPage(CheckYourAnswersId, NormalMode)(mockUserAnswers)
         }
       }
+
+      "return a function that goes to the valuation for taxes page when an enquiry category for valuation for taxes has been selected" in {
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("valuations_for_tax")
+        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.ValuationForTaxesController.onPageLoad()
+      }
+
+      "return a function that goes to the housing benefits page when an enquiry category for housing benefits has been selected" in {
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
+        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.HousingBenefitsController.onPageLoad()
+      }
+
+      "return a function that goes to the providing lettings page when an enquiry category for providing lettings has been selected" in {
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("providing_lettings")
+        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.ProvidingLettingsController.onPageLoad()
+      }
+
 
     }
 

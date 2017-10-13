@@ -1,0 +1,58 @@
+@*
+ * Copyright 2017 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+
+@(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
+
+@main_template(
+    title = messages("housingBenefits.title"),
+    appConfig = appConfig,
+    bodyClasses = None) {
+
+    <h1 class="heading-xlarge">@messages("housingBenefits.heading")</h1>
+
+    <h2 class="heading-medium">@messages("housingBenefits.subheading")</h2>
+
+    <p class="bold">@messages("housingBenefits.para1")</p>
+
+    <h3 class="heading-small">@messages("housingBenefits.address.heading")</h3>
+
+    <p>
+        @messages("housingBenefits.address.1")<br />
+        @messages("housingBenefits.address.2")<br />
+        @messages("housingBenefits.address.3")<br />
+        @messages("housingBenefits.address.4")<br />
+        @messages("housingBenefits.address.5")
+    </p>
+
+    <h3 class="heading-small">@messages("housingBenefits.email-title")</h3>
+
+    <p><a href="mailto:@messages("housingBenefits.email")">@messages("housingBenefits.email")</a></p>
+
+    <h3 class="heading-small">@messages("housingBenefits.phone-title")</h3>
+
+    <p>@messages("housingBenefits.phone-number")</p>
+
+    <p>@messages("housingBenefits.para2")</p>
+
+    <p><a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url id="start-again" class="button">@messages("site.start-again")</a></p>
+    <br />
+    <p><a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url class="back-link">@messages("site.back")</a></p>
+
+
+}
