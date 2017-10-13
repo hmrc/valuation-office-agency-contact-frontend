@@ -15,14 +15,52 @@
  *@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
-
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Contact
 
-@(appConfig: FrontendAppConfig, businessContact: Contact)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, businessContact: Contact, date: String)(implicit request: Request[_], messages: Messages)
 
 @main_template(
   title = messages("confirmation.title"),
   appConfig = appConfig,
-  bodyClasses = None) {
-  <p></p>
+  bodyClasses = Some("full-width")) {
+      <br /><br />
+      <div class="transaction-banner--complete">
+        <h1 class="transaction-banner__heading">@messages("confirmation.heading")</h1>
+        <p>Submitted: @date</p>
+        <p>@messages("confirmation.reference.ndr")</p>
+        <p>@businessContact.businessRatesAddress</p>
+      </div>
+
+        <p class="text">@messages("confirmation.para1")</p>
+        <p class="text">@messages("confirmation.para2")</p>
+
+        <h2 class="heading-medium">@messages("confirmation.enquirySummary")</h2>
+
+        <ul class="tabular-data tabular-data--list text">
+            <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
+                <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.enquiryType")</div>
+                <div class="tabular-data__data tabular-data__data--8-12">@messages(s"enquiryCategory.${businessContact.enquiryCategory}")<br />@messages(s"businessRatesSubcategory.${businessContact.subEnquiryCategory}")</div>
+            </li>
+            <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
+                <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.yourDetails")</div>
+                <div class="tabular-data__data tabular-data__data--8-12">
+                    @businessContact.contact.firstName @businessContact.contact.lastName<br />
+                    @businessContact.contact.email<br />
+                    @businessContact.contact.contactNumber
+                </div>
+            </li>
+            <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
+                <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.propertyAddress")</div>
+                <div class="tabular-data__data tabular-data__data--8-12">@businessContact.businessRatesAddress</div>
+            </li>
+            <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
+                <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.yourMessage")</div>
+                <div class="tabular-data__data tabular-data__data--8-12">@businessContact.message</div>
+            </li>
+        </ul>
+        <br />
+        <h2 class="heading-medium">@messages("confirmation.whatHappensnext")</h2>
+        <p class="text">@messages("confirmation.para3")</p>
+
+        <p><a href="javascript:window.print()" class="button print-hidden js-visible" id="print-button">@messages("site.print.button")</a></p>
 }
