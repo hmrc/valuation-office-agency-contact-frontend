@@ -39,7 +39,7 @@ class ConfirmBusinessRatesController @Inject()(val appConfig: FrontendAppConfig,
 
     val contact = request.userAnswers.contact.right.get
     val result = connector.send(contact)
-    val date = DateFormater.returnDate()
+    val date = DateFormater.todaysDate()
 
     Ok(confirmationBusinessRates(appConfig, contact, date))
   }

@@ -30,7 +30,7 @@ class ConfirmationCouncilTaxViewSpec extends ViewBehaviours {
     val cSub = "council_tax_home_business"
     val tellUs = TellUsMore("Hello")
     var contact = Contact(confirmCd, ct, None, ec, cSub, tellUs.message)
-    val date = DateFormater.returnDate()
+    val date = DateFormater.todaysDate()
 
     def view = () => confirmationCouncilTax(frontendAppConfig, contact, date)(fakeRequest, messages)
 

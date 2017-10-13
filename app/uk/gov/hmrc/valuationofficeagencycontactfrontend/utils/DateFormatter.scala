@@ -19,7 +19,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 object DateFormater{
-    def returnDate(): String = {
+    def todaysDate(): String = {
         val date = LocalDate.now()
         val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
         date.format(formatter)

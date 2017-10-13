@@ -47,7 +47,7 @@ class ConfirmCouncilTaxControllerSpec extends ControllerSpecBase with MockitoSug
       val councilTaxSubcategory = "council_tax_home_business"
       val tellUs = TellUsMore("Hello")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
-      val date = DateFormater.returnDate()
+      val date = DateFormater.todaysDate()
 
       val contact = Contact(confirmedContactDetails, Some(councilTaxAddress), None, ec, councilTaxSubcategory, tellUs.message)
 
