@@ -26,6 +26,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightCo
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ConfirmedContactDetails, Contact, ContactDetails, CouncilTaxAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmationCouncilTax
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormater}
 
 @Singleton()
 class ConfirmCouncilTaxController @Inject()(val appConfig: FrontendAppConfig,
@@ -37,9 +38,9 @@ class ConfirmCouncilTaxController @Inject()(val appConfig: FrontendAppConfig,
   def onPageLoad: Action[AnyContent] = (getData andThen requireData){ implicit request =>
 
     val contact = request.userAnswers.contact.right.get
-
     val result = connector.send(contact)
+    val date = DateFormater.todaysDate()
 
-    Ok(confirmationCouncilTax(appConfig, contact))
+    Ok(confirmationCouncilTax(appConfig, contact, date))
   }
 }
