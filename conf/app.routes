@@ -40,6 +40,7 @@ POST        /councilTaxAddress                     uk.gov.hmrc.valuationofficeag
 GET         /changeCouncilTaxAddress               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxAddressController.onPageLoad(mode: Mode = CheckMode)
 POST        /changeCouncilTaxAddress               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxAddressController.onSubmit(mode: Mode = CheckMode)
 
+GET         /valuationAdvice                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ValuationAdviceController.onPageLoad()
 GET         /checkAndChallenge                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CheckAndChallengeController.onPageLoad()
 
 GET         /businessRatesAddress                  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesAddressController.onPageLoad(mode: Mode = NormalMode)
