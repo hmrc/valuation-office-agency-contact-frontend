@@ -39,11 +39,15 @@
         <ul class="tabular-data tabular-data--list text">
             <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
                 <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.enquiryType")</div>
-                <div class="tabular-data__data tabular-data__data--8-12">@messages(s"enquiryCategory.${businessContact.enquiryCategory}")</div>
+                <div class="tabular-data__data tabular-data__data--8-12">@messages(s"enquiryCategory.${businessContact.enquiryCategory}")<br />@messages(s"businessRatesSubcategory.${businessContact.subEnquiryCategory}")</div>
             </li>
             <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
                 <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.yourDetails")</div>
-                <div class="tabular-data__data tabular-data__data--8-12">@messages(s"businessRatesSubcategory.${businessContact.subEnquiryCategory}")</div>
+                <div class="tabular-data__data tabular-data__data--8-12">
+                    @businessContact.contact.firstName @businessContact.contact.lastName<br />
+                    @businessContact.contact.email<br />
+                    @businessContact.contact.contactNumber
+                </div>
             </li>
             <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
                 <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.propertyAddress")</div>

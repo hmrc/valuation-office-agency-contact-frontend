@@ -206,6 +206,7 @@ tellUsMore.checkYourAnswersLabel = Enquiry
 confirmation.title = Confirmation
 confirmation.heading = Thank you for your enquiry
 confirmation.reference.ndr = NDRonline
+confirmation.reference.ct = CTonline
 confirmation.enquirySummary = Your enquiry summary
 confirmation.whatHappensnext = What happens next
 confirmation.para1 = We aim to respond to you as soon as possible. It may take up to 20 working days for complex enquiries or during busy periods.
