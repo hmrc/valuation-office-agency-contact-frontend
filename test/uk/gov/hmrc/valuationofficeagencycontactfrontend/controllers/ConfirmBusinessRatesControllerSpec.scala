@@ -26,7 +26,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightCo
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, RadioOption, UserAnswers}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, RadioOption, UserAnswers, DateFormater}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmationBusinessRates
 
@@ -47,6 +47,7 @@ class ConfirmBusinessRatesControllerSpec extends ControllerSpecBase with Mockito
       val businessAddress = Some(BusinessRatesAddress("a", "b", "c", "d", "f", "g", "h"))
       val businessSubcategory = "business_rates_rateable_value"
       val tellUs = TellUsMore("Hello")
+      val date = DateFormater.returnDate()
 
       val contact = Contact(confirmedContactDetails, None, businessAddress, ec, businessSubcategory, tellUs.message)
 
@@ -59,7 +60,7 @@ class ConfirmBusinessRatesControllerSpec extends ControllerSpecBase with Mockito
 
       status(result) mustBe OK
 
-      contentAsString(result) mustBe confirmationBusinessRates(frontendAppConfig, contact)(fakeRequest, messages).toString
+      contentAsString(result) mustBe confirmationBusinessRates(frontendAppConfig, contact, date)(fakeRequest, messages).toString
     }
 
     "redirect to Session Expired for a GET if not existing data is found" in {

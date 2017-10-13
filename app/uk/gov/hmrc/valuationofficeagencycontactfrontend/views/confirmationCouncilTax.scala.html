@@ -18,7 +18,7 @@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Contact
 
-@(appConfig: FrontendAppConfig, councilContact: Contact)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, councilContact: Contact, date: String)(implicit request: Request[_], messages: Messages)
 
 @main_template(
     title = messages("confirmation.title"),
@@ -27,7 +27,7 @@
         <br /><br />
         <div class="transaction-banner--complete">
           <h1 class="transaction-banner__heading">@messages("confirmation.heading")</h1>
-          <p>Submitted: xx/xx/xxxx</p>
+          <p>Submitted: @date</p>
           <p>@messages("confirmation.reference.ct")</p>
           <p>@councilContact.councilTaxAddress</p>
         </div>

@@ -26,7 +26,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightCo
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, RadioOption, UserAnswers}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, RadioOption, UserAnswers, DateFormater}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmationCouncilTax
 
@@ -47,6 +47,7 @@ class ConfirmCouncilTaxControllerSpec extends ControllerSpecBase with MockitoSug
       val councilTaxSubcategory = "council_tax_home_business"
       val tellUs = TellUsMore("Hello")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
+      val date = DateFormater.returnDate()
 
       val contact = Contact(confirmedContactDetails, Some(councilTaxAddress), None, ec, councilTaxSubcategory, tellUs.message)
 
@@ -59,7 +60,7 @@ class ConfirmCouncilTaxControllerSpec extends ControllerSpecBase with MockitoSug
 
       status(result) mustBe OK
 
-      contentAsString(result) mustBe confirmationCouncilTax(frontendAppConfig, contact)(fakeRequest, messages).toString
+      contentAsString(result) mustBe confirmationCouncilTax(frontendAppConfig, contact, date)(fakeRequest, messages).toString
     }
 
     "redirect to Session Expired for a GET if not existing data is found" in {
