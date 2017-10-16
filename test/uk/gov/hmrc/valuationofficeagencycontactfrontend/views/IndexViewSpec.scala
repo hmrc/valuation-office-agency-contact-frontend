@@ -31,7 +31,7 @@ class IndexViewSpec extends ViewBehaviours {
       "council_tax.para4", "council_tax.para5", "council_tax.para6", "council_tax.para7", "council_tax.para8", "business_rates.subheading", "business_rates.para1",
       "business_rates.para2", "business_rates.para3", "business_rates.para4", "business_rates.para5", "business_rates.para6", "business_rates.para7",
       "business_rates.para8", "business_rates.para9", "business_rates.para10", "business_rates.para11", "council_tax.url1", "council_tax.url2", "council_tax.url3",
-    "council_tax.url4", "business_rates.url1", "business_rates.url2", "business_rates.url3", "business_rates.url4", "business_rates.url5")
+    "council_tax.url4", "business_rates.url1", "business_rates.url2", "business_rates.url3", "business_rates.url4", "business_rates.url5", "council_tax.url5", "council_tax.para9", "council_tax.para10")
   }
 
   "The Continue button links to the enquiryCategoryController onPageLoad method" in {
