@@ -35,3 +35,9 @@ p.font-xsmall{
 .hero__heading-small {
   display: block;
 }
+
+.word-break {
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+}
