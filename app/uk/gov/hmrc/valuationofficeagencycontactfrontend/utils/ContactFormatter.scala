@@ -20,13 +20,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ConfirmedContact
 
 object ContactFormatter {
 
- def formattedConfirmedContactDetails(contact: ConfirmedContactDetails, intestitial: String): String = {
-    insertInterstitials(Seq(contact.firstName.trim+" "+contact.lastName.trim, contact.email, contact.contactNumber), intestitial)
+ def formattedConfirmedContactDetails(contact: ConfirmedContactDetails, interstitial: String): String = {
+    insertInterstitials(Seq(contact.firstName.trim+" "+contact.lastName.trim, contact.email, contact.contactNumber), interstitial)
  }
- 
- def formattedContactDetails(contact: Option[ContactDetails], intestitial: String): String = {
+
+ def formattedContactDetails(contact: Option[ContactDetails], interstitial: String): String = {
   contact.fold("") { con =>
-   insertInterstitials(Seq(con.firstName.trim+" "+con.lastName.trim, con.email, con.contactNumber), intestitial)
+   insertInterstitials(Seq(con.firstName.trim+" "+con.lastName.trim, con.email, con.contactNumber), interstitial)
   }
  }
 
