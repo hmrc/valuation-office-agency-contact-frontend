@@ -19,6 +19,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.CheckMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow, RepeaterAnswerRow, RepeaterAnswerSection}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters._
 
 class CheckYourAnswersHelper(userAnswers: UserAnswers) {
 
@@ -39,11 +40,11 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
   }
 
   def businessRatesAddress: Option[AnswerRow] = userAnswers.businessRatesAddress map {
-    x => AnswerRow("businessRatesAddress.checkYourAnswersLabel", s"${x.businessName} ${x.businessAddressLine1} ${x.businessAddressLine2} ${x.businessAddressLine3} ${x.town} ${x.county} ${x.postcode}", false, routes.BusinessRatesAddressController.onPageLoad(CheckMode).url)
+    x => AnswerRow("businessRatesAddress.checkYourAnswersLabel", formattedBusinessRatesAddress(userAnswers.businessRatesAddress, "<br>"), false, routes.BusinessRatesAddressController.onPageLoad(CheckMode).url)
   }
 
   def councilTaxAddress: Option[AnswerRow] = userAnswers.councilTaxAddress map {
-    x => AnswerRow("councilTaxAddress.checkYourAnswersLabel", s"${x.addressLine1} ${x.addressLine2} ${x.town} ${x.county} ${x.postcode}", false, routes.CouncilTaxAddressController.onPageLoad(CheckMode).url)
+    x => AnswerRow("councilTaxAddress.checkYourAnswersLabel", formattedCouncilTaxAddress(userAnswers.councilTaxAddress, "<br>"), false, routes.CouncilTaxAddressController.onPageLoad(CheckMode).url)
   }
 
   def contactDetails: Option[AnswerRow] = userAnswers.contactDetails map {

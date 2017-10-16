@@ -22,6 +22,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerRow
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters._
 
 class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
@@ -131,7 +132,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.businessRatesAddress
-        result mustBe Some(AnswerRow("businessRatesAddress.checkYourAnswersLabel", s"${ba.businessName} ${ba.businessAddressLine1} ${ba.businessAddressLine2} ${ba.businessAddressLine3} ${ba.town} ${ba.county} ${ba.postcode}", false, routes.BusinessRatesAddressController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("businessRatesAddress.checkYourAnswersLabel", formattedBusinessRatesAddress(userAnswers.businessRatesAddress, "<br>"), false, routes.BusinessRatesAddressController.onPageLoad(CheckMode).url))
       }
 
       "businessRatesAddress function should return a None if no business rates address is found in the User Answers" in {
@@ -153,7 +154,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.councilTaxAddress
-        result mustBe Some( AnswerRow("councilTaxAddress.checkYourAnswersLabel", s"${cta.addressLine1} ${cta.addressLine2} ${cta.town} ${cta.county} ${cta.postcode}", false, routes.CouncilTaxAddressController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("councilTaxAddress.checkYourAnswersLabel", formattedCouncilTaxAddress(userAnswers.councilTaxAddress, "<br>"), false, routes.CouncilTaxAddressController.onPageLoad(CheckMode).url))
       }
 
       "councilTaxAddress function should return a None if no council tax address is found in the User Answers" in {
