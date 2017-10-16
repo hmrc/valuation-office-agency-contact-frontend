@@ -17,8 +17,8 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CheckMode, ConfirmedContactDetails}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow, RepeaterAnswerRow, RepeaterAnswerSection}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CheckMode}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.ContactFormatter._
 
