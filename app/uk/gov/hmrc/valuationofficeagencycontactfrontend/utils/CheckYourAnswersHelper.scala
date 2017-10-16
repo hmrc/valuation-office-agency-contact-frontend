@@ -17,9 +17,10 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.CheckMode
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CheckMode, ConfirmedContactDetails}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow, RepeaterAnswerRow, RepeaterAnswerSection}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.ContactFormatter._
 
 class CheckYourAnswersHelper(userAnswers: UserAnswers) {
 
@@ -48,7 +49,7 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
   }
 
   def contactDetails: Option[AnswerRow] = userAnswers.contactDetails map {
-    x => AnswerRow("contactDetails.checkYourAnswersLabel", s"${x.firstName} ${x.lastName} ${x.email}  ${x.contactNumber}", false, routes.ContactDetailsController.onPageLoad(CheckMode).url)
+    x => AnswerRow("contactDetails.checkYourAnswersLabel", formattedContactDetails(userAnswers.contactDetails, "<br>"), false, routes.ContactDetailsController.onPageLoad(CheckMode).url)
   }
 
 }
