@@ -23,6 +23,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerRow
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.ContactFormatter._
 
 class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
@@ -176,7 +177,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.contactDetails
-        result mustBe Some(AnswerRow("contactDetails.checkYourAnswersLabel", s"${cd.firstName} ${cd.lastName} ${cd.email}  ${cd.contactNumber}", false, routes.ContactDetailsController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("contactDetails.checkYourAnswersLabel", formattedContactDetails(userAnswers.contactDetails, "<br>"), false, routes.ContactDetailsController.onPageLoad(CheckMode).url))
       }
 
       "contactDetails function should return a None if no contact details is found in the User Answers" in {
