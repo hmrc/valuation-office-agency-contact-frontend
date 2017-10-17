@@ -25,42 +25,47 @@
     title = messages("confirmation.title"),
     appConfig = appConfig,
     bodyClasses = Some("full-width")) {
-        <br /><br />
-        <div class="transaction-banner--complete">
-          <h1 class="transaction-banner__heading">@messages("confirmation.heading")</h1>
-          <p>Submitted: @date</p>
-          <p>@messages("confirmation.reference.ct")</p>
-          <p>@formattedCouncilTaxAddress(councilContact.councilTaxAddress, ", ")</p>
-        </div>
+    <br />
+    <br />
+    <div class="transaction-banner--complete">
+        <h1 class="transaction-banner__heading">@messages("confirmation.heading")</h1>
+        <p>Submitted: @date</p>
+        <p>@messages("confirmation.reference.ct")</p>
+        <p>@formattedCouncilTaxAddress(councilContact.councilTaxAddress, ", ")</p>
+    </div>
 
-          <p class="text">@messages("confirmation.para1")</p>
-          <p class="text">@messages("confirmation.para2")</p>
+    <p class="text">@messages("confirmation.para1")</p>
+    <p class="text">@messages("confirmation.para2")</p>
 
-          <h2 class="heading-medium">@messages("confirmation.enquirySummary")</h2>
+    <h2 class="heading-medium">@messages("confirmation.enquirySummary")</h2>
 
-          <ul class="tabular-data tabular-data--list text">
-              <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
-                  <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.enquiryType")</div>
-                  <div class="tabular-data__data tabular-data__data--8-12">@messages(s"enquiryCategory.${councilContact.enquiryCategory}")<br />@messages(s"councilTaxSubcategory.${councilContact.subEnquiryCategory}")</div>
-              </li>
-              <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
-                  <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.yourDetails")</div>
-                  <div class="tabular-data__data tabular-data__data--8-12">
-                      @Html(formattedConfirmedContactDetails(councilContact.contact, "<br/>"))
-                  </div>
-              </li>
-              <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
-                  <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.propertyAddress")</div>
-                  <div class="tabular-data__data tabular-data__data--8-12">@Html(formattedCouncilTaxAddress(councilContact.councilTaxAddress, "<br/>"))</div>
-              </li>
-              <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
-                  <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.yourMessage")</div>
-                  <div class="tabular-data__data tabular-data__data--8-12  word-break">@councilContact.message</div>
-              </li>
-          </ul>
-          <br />
-          <h2 class="heading-medium">@messages("confirmation.whatHappensnext")</h2>
-          <p class="text">@messages("confirmation.para3")</p>
+    <ul class="tabular-data tabular-data--list text">
+        <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
+            <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.enquiryType")</div>
+            <div class="tabular-data__data tabular-data__data--8-12">@messages(s"enquiryCategory.${councilContact.enquiryCategory}") <br />
+                @messages(s"councilTaxSubcategory.${councilContact.subEnquiryCategory}")</div>
+        </li>
+        <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
+            <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.yourDetails")</div>
+            <div class="tabular-data__data tabular-data__data--8-12">
+            @Html(formattedConfirmedContactDetails(councilContact.contact, "<br/>"))
+            </div>
+        </li>
+        <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
+            <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.propertyAddress")</div>
+            <div class="tabular-data__data tabular-data__data--8-12">@Html(formattedCouncilTaxAddress(councilContact.councilTaxAddress, "<br/>"))</div>
+        </li>
+        <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
+            <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.yourMessage")</div>
+            <div class="tabular-data__data tabular-data__data--8-12  word-break">@councilContact.message</div>
+        </li>
+    </ul>
+    <br />
+    <h2 class="heading-medium">@messages("confirmation.whatHappensnext")</h2>
+    <p class="text">@messages("confirmation.para3")</p>
 
-          <p><a href="javascript:window.print()" class="button print-hidden js-visible" id="print-button">@messages("site.print.button")</a></p>
-    }
+    <p><a href="javascript:window.print()" class="button print-hidden js-visible" id="print-button">@messages("site.print.button")</a></p>
+    <br />
+    <p><a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoadWithNewSession().url id="start-again" class="button">@messages("site.start-again")</a></p>
+
+}

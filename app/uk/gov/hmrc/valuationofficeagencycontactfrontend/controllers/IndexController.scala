@@ -20,6 +20,7 @@ import javax.inject.{Inject, Singleton}
 
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent}
+import uk.gov.hmrc.http.SessionKeys
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.index
@@ -30,5 +31,9 @@ class IndexController @Inject()(val appConfig: FrontendAppConfig,
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
     Ok(index(appConfig))
+  }
+
+  def onPageLoadWithNewSession: Action[AnyContent] = Action { implicit request =>
+    Ok(index(appConfig)).withNewSession
   }
 }

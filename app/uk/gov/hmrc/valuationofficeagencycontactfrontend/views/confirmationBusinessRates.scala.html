@@ -48,7 +48,7 @@
         <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
             <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.yourDetails")</div>
             <div class="tabular-data__data tabular-data__data--8-12">
-               @Html(formattedConfirmedContactDetails(businessContact.contact, "<br/>"))
+            @Html(formattedConfirmedContactDetails(businessContact.contact, "<br/>"))
             </div>
         </li>
         <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
@@ -65,4 +65,7 @@
     <p class="text">@messages("confirmation.para3")</p>
 
     <p><a href="javascript:window.print()" class="button print-hidden js-visible" id="print-button">@messages("site.print.button")</a></p>
+    <br />
+    <p><a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoadWithNewSession().url id="start-again" class="button">@messages("site.start-again")</a></p>
+
 }
