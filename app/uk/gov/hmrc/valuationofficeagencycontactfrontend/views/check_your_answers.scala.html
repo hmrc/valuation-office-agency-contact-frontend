@@ -25,6 +25,8 @@
     appConfig = appConfig,
     bodyClasses = None) {
 
+    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url)
+
     <h1 class="heading-xlarge">@messages("checkYourAnswers.heading")</h1>
 
     <p>@messages("checkYourAnswers.guidance")</p>
@@ -42,7 +44,4 @@
 
     <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CheckYourAnswersController.goToConfirmationPage().url >@components.submit_button()</a>
 
-    <p>
-        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url class="back-link">@messages("site.back")</a>
-    </p>
 }

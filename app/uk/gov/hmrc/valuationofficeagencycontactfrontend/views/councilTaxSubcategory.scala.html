@@ -30,6 +30,8 @@
     appConfig = appConfig,
     bodyClasses = None) {
 
+    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url)
+
     @components.heading("councilTaxSubcategory.heading")
 
     @helpers.form(action = CouncilTaxSubcategoryController.onSubmit(mode), 'autoComplete -> "off") {
@@ -45,6 +47,5 @@
 
         @components.continue_button()
 
-        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url class="back-link">@messages("site.back")</a>
     }
 }
