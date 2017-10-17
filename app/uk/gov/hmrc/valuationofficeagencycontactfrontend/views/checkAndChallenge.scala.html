@@ -24,16 +24,12 @@
   appConfig = appConfig,
   bodyClasses = None) {
 
-  <h1 class="heading-xlarge">@messages("checkAndChallenge.heading")</h1>
+    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
 
+    <h1 class="heading-xlarge">@messages("checkAndChallenge.heading")</h1>
 
-  <p>
-    <a href=@messages("checkAndChallenge.url") id="continue" class="button">@messages("site.continue")</a>
-
-  </p>
-
-  <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url class="back-link">@messages("site.back")</a>
-
-
+    <p>
+        <a href=@messages("checkAndChallenge.url") id="continue" class="button">@messages("site.continue")</a>
+    </p>
 
 }

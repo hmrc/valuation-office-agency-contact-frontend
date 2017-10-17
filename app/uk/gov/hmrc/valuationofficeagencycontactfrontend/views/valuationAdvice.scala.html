@@ -24,6 +24,8 @@
     appConfig = appConfig,
     bodyClasses = None) {
 
+    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url)        
+
     <h1 class="heading-xlarge">@messages("valuationAdvice.heading")</h1>
 
     <h2 class="heading-medium">@messages("valuationAdvice.subheading")</h2>
@@ -63,8 +65,5 @@
     <p>
         <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoadWithNewSession().url id="start-again" class="button">@messages("site.start-again")</a>
     </p>
-    <br />
-    <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url class="back-link">@messages("site.back")</a>
-
 
 }

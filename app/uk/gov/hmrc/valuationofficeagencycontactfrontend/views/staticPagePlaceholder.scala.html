@@ -26,18 +26,16 @@
     sidebarLinks = Some(councilTax()),
     bodyClasses = None) {
 
+    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url)
+
     <h1 class="heading-xlarge">@messages("staticPagePlaceholder.heading")</h1>
 
     <p>@messages("staticPagePlaceholder.paragraph")</p>
 
     <p><a href=@messages("staticPagePlaceholder.royalmail-url") target="_self" onclick="handleOutboundLinkClicks(event, 'FIND-POSTCODE')">@messages("staticPagePlaceholder.royalmail-url.title")</a></p>
+
     <p><a href="">@messages("staticPagePlaceholder.nopostcode-url")</a></p>
 
-
     <button id="continue" type="submit" class="button" role="button">@messages("staticPagePlaceholder.continuebutton")</button>
-    </br> </br>
-
-    <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url class="back-link">@messages("staticPagePlaceholder.back-title")</a>
-
 
 }

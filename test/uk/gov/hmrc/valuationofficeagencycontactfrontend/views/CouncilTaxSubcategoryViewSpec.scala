@@ -71,9 +71,9 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
 
       "has a link marked with site.back leading to the Enquiry Category Page" in {
         val doc = asDocument(createView())
-        val backlinkText = doc.select("a[class=back-link]").text()
+        val backlinkText = doc.select("a[class=link-back]").text()
         backlinkText mustBe messages("site.back")
-        val backlinkUrl = doc.select("a[class=back-link]").attr("href")
+        val backlinkUrl = doc.select("a[class=link-back]").attr("href")
         backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
       }
     }
