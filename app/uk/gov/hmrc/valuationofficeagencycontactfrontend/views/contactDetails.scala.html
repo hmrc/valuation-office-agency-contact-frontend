@@ -30,6 +30,8 @@
     appConfig = appConfig,
     bodyClasses = None) {
 
+    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url)
+
     @helpers.form(action = ContactDetailsController.onSubmit(mode), 'autoComplete -> "off") {
 
         @components.error_summary(form.errors)
@@ -48,6 +50,5 @@
 
         @components.continue_button()
 
-        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url class="link-back">@messages("site.back")</a>
     }
 }
