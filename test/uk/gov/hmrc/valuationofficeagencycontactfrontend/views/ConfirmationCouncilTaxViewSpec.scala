@@ -66,6 +66,17 @@ class ConfirmationCouncilTaxViewSpec extends ViewBehaviours {
        assert(doc.toString.contains("<br>c5"))
      }
 
-  }
+     "contain start again button " in {
+       val doc = asDocument(view())
+       val startAgainButton = doc.getElementById("start-again").text()
+       assert(startAgainButton == messages("site.start-again"))
+     }
 
+     "The Start again button links to the Index Controller onPageLoadWithNewSession method" in {
+       val doc = asDocument(view())
+       val href = doc.getElementById("start-again").attr("href")
+       assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoadWithNewSession().url.toString)
+     }
+  }
 }
+
