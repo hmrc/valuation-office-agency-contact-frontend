@@ -16,8 +16,11 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
+import play.api.mvc.Result
 import play.api.test.Helpers._
+import uk.gov.hmrc.http.SessionKeys
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.index
+import scala.concurrent.ExecutionContext.Implicits.global
 
 class IndexControllerSpec extends ControllerSpecBase {
 
@@ -30,6 +33,17 @@ class IndexControllerSpec extends ControllerSpecBase {
     "return the correct view for a GET" in {
       val result = new IndexController(frontendAppConfig, messagesApi).onPageLoad()(fakeRequest)
       contentAsString(result) mustBe index(frontendAppConfig)(fakeRequest, messages).toString
+    }
+
+    "When calling onPageLoadWithNewSession changes the sessionId to a new one" in {
+      val firstResult = new IndexController(frontendAppConfig, messagesApi).onPageLoad()(fakeRequest)
+
+      val firstSession = firstResult.map { result1 => result1.session(fakeRequest).get(SessionKeys.sessionId)
+        val secondResult = new IndexController(frontendAppConfig, messagesApi).onPageLoadWithNewSession(fakeRequest)
+        val secondSession = secondResult.map {result2 => result2.session(fakeRequest).get(SessionKeys.sessionId)
+          assert(result1 != result2)
+        }
+      }
     }
 
   }

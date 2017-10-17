@@ -60,3 +60,5 @@ GET         /confirmationBusinessRates             uk.gov.hmrc.valuationofficeag
 GET         /valuationForTaxes                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ValuationForTaxesController.onPageLoad()
 GET         /housingBenefits                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.HousingBenefitsController.onPageLoad()
 GET         /providingLettings                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ProvidingLettingsController.onPageLoad()
+
+GET         /indexWithNewSession                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.IndexController.onPageLoadWithNewSession()
