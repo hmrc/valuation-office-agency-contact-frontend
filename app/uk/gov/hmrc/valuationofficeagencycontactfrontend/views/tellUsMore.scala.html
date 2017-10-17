@@ -29,6 +29,8 @@
     appConfig = appConfig,
     bodyClasses = None) {
 
+    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url)
+
     @components.heading("tellUsMore.heading")
 
     <h2 class="heading-medium">@messages(enquiryKey)</h2>
@@ -50,7 +52,5 @@
 
         @components.continue_button()
     }
-
-    <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url class="back-link">@messages("site.back")</a>
 
 }

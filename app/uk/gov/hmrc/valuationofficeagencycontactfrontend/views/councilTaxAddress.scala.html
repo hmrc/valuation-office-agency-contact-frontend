@@ -29,6 +29,8 @@
     appConfig = appConfig,
     bodyClasses = None) {
 
+    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url)
+
     @helpers.form(action = CouncilTaxAddressController.onSubmit(mode), 'autoComplete -> "off") {
 
         @components.error_summary(form.errors)
@@ -46,8 +48,6 @@
         @components.input_text(InputViewModel[CouncilTaxAddress]("postcode", form), label = messages("councilTaxAddress.postcode"))
 
         @components.continue_button()
-
-        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url class="back-link">@messages("site.back")</a>
 
     }
 }
