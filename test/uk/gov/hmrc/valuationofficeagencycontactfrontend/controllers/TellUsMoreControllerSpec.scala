@@ -141,7 +141,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       " and the business_rates_rateable_value has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", "a", "a", "a", "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_rateable_value")
 
       val result = controller().businessRatesKey(mockUserAnswers)
@@ -152,7 +152,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       " and the business_rates_business_rates has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", "a", "a", "a", "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_business_rates")
 
       val result = controller().businessRatesKey(mockUserAnswers)
@@ -163,7 +163,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       " and the business_rates_other has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", "a", "a", "a", "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
 
       val result = controller().businessRatesKey(mockUserAnswers)
@@ -175,7 +175,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       " and no subcategory has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", "a", "a", "a", "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn None
 
       val result = controller().businessRatesKey(mockUserAnswers)
@@ -198,7 +198,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       " and the business_rates_other has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", "a", "a", "a", "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
 
       val result = controller().enquiryKey(mockUserAnswers)
@@ -209,7 +209,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn None
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", "a", "a", "a", "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
 
       val result = controller().enquiryKey(mockUserAnswers)

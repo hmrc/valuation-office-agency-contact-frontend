@@ -16,24 +16,17 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{BusinessRatesAddress, PropertyAddress}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.PropertyAddress
 
 object AddressFormatters {
 
-  def formattedCouncilTaxAddress(address: Option[PropertyAddress], interstitial: String): String = {
+  def formattedPropertyAddress(address: Option[PropertyAddress], interstitial: String): String = {
     address.fold("") {addr =>
       insertInterstitials(Seq(addr.addressLine1, addr.addressLine2, addr.town, addr.county, addr.postcode), interstitial)
     }
   }
 
-  def formattedBusinessRatesAddress(address: Option[BusinessRatesAddress], interstitial: String): String = {
-    address.fold("") { addr =>
-      insertInterstitials(Seq(addr.businessName, addr.businessAddressLine1, addr.businessAddressLine2, addr.businessAddressLine3,
-        addr.town, addr.county, addr.postcode), interstitial)
-    }
-  }
-
-  private [utils] def insertInterstitials(address: Seq[String], interstitial: String): String = {
+  private[utils] def insertInterstitials(address: Seq[String], interstitial: String): String = {
     if (address.isEmpty) "" else address.head.trim + address.tail.fold("") { (acc, elem) => acc + interstitial + elem.trim }
   }
 

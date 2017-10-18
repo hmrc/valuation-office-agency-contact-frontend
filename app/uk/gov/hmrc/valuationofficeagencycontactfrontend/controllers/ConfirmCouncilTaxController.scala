@@ -24,7 +24,6 @@ import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ConfirmedContactDetails, Contact, ContactDetails, PropertyAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmationCouncilTax
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter}
 

@@ -26,7 +26,7 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyAddressForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyAddressId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{NormalMode, PropertyAddress}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.councilTaxAddress
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.propertyAddress
 
 class PropertyAddressControllerSpec extends ControllerSpecBase {
 
@@ -36,9 +36,9 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
     new PropertyAddressController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl)
 
-  def viewAsString(form: Form[PropertyAddress] = PropertyAddressForm()) = councilTaxAddress(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[PropertyAddress] = PropertyAddressForm()) = propertyAddress(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
-  "Council Tax Address Controller" must {
+  "Property Address Controller" must {
 
     "return OK and the correct view for a GET" in {
       val result = controller().onPageLoad(NormalMode)(fakeRequest)

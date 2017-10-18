@@ -21,43 +21,43 @@ class PropertyAddressSpec extends FlatSpec {
 
    val p = PropertyAddress("1", "High Street", "London", "London", "ZZ11ZZ")
 
-  "Council tax address line 1" should "be 1" in{
+  "Property address line 1" should "be 1" in{
     assert(p.addressLine1 == "1")
   }
 
-  "Council tax address line 2" should "be High Street" in{
+  "Property address line 2" should "be High Street" in{
     assert(p.addressLine2 == "High Street")
   }
 
-  "Council tax Town" should "be London" in{
+  "Property Town" should "be London" in{
     assert(p.town == "London")
   }
 
-  "Council tax County" should "be London" in{
+  "Property County" should "be London" in{
     assert(p.county == "London")
   }
 
-  "Council tax Postcode" should "be ZZ11ZZ" in{
+  "Property Postcode" should "be ZZ11ZZ" in{
     assert(p.postcode == "ZZ11ZZ")
   }
 
-  "Council tax address line 1" should "should't be 2" in{
+  "Property address line 1" should "should't be 2" in{
     assert(p.addressLine1 != "2")
   }
 
-  "Council tax address line 2" should "shouldn't be Avenue" in{
+  "Property address line 2" should "shouldn't be Avenue" in{
     assert(p.addressLine2 != "Avenue")
   }
 
-  "Council tax Town" should "shouldn't be" in{
+  "Property Town" should "shouldn't be" in{
     assert(p.town != "Leeds")
   }
 
-  "Council tax County" should "shouldn't be Cardiff" in{
+  "Property County" should "shouldn't be Cardiff" in{
     assert(p.county != "Cardiff")
   }
 
-  "Council tax Postcode" should "shouldn't be AA11AA" in{
+  "Property Postcode" should "shouldn't be AA11AA" in{
     assert(p.postcode != "AA11AA")
   }
 }

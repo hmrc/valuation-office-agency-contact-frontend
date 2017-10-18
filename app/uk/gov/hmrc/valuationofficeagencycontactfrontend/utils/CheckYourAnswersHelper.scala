@@ -40,12 +40,8 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
     x => AnswerRow("businessRatesSubcategory.checkYourAnswersLabel", s"businessRatesSubcategory.$x", true, routes.BusinessRatesSubcategoryController.onPageLoad(CheckMode).url)
   }
 
-  def businessRatesAddress: Option[AnswerRow] = userAnswers.businessRatesAddress map {
-    x => AnswerRow("businessRatesAddress.checkYourAnswersLabel", formattedBusinessRatesAddress(userAnswers.businessRatesAddress, "<br>"), false, routes.BusinessRatesAddressController.onPageLoad(CheckMode).url)
-  }
-
   def propertyAddress: Option[AnswerRow] = userAnswers.propertyAddress map {
-    x => AnswerRow("propertyAddress.checkYourAnswersLabel", formattedCouncilTaxAddress(userAnswers.propertyAddress, "<br>"), false, routes.PropertyAddressController.onPageLoad(CheckMode).url)
+    x => AnswerRow("propertyAddress.checkYourAnswersLabel", formattedPropertyAddress(userAnswers.propertyAddress, "<br>"), false, routes.PropertyAddressController.onPageLoad(CheckMode).url)
   }
 
   def contactDetails: Option[AnswerRow] = userAnswers.contactDetails map {

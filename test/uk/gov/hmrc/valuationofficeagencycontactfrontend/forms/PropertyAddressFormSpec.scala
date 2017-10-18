@@ -31,7 +31,7 @@ class PropertyAddressFormSpec extends FormBehaviours {
 
   val form = PropertyAddressForm()
 
-  "Council Tax Address form" must {
+  "Property Address form" must {
     behave like questionForm(PropertyAddress("value 1", "value 2", "value 3", "value 4", "value 5"))
 
     behave like formWithMandatoryTextFields("addressLine1", "addressLine2", "town", "county", "postcode")

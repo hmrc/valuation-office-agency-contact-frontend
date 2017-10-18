@@ -31,7 +31,7 @@
         <h1 class="transaction-banner__heading">@messages("confirmation.heading")</h1>
         <p>Submitted: @date</p>
         <p>@messages("confirmation.reference.ndr")</p>
-        <p>@formattedBusinessRatesAddress(businessContact.businessRatesAddress, ", ")</p>
+        <p>@formattedPropertyAddress(businessContact.propertyAddress, ", ")</p>
     </div>
 
     <p class="text">@messages("confirmation.para1")</p>
@@ -53,7 +53,7 @@
         </li>
         <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
             <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.propertyAddress")</div>
-            <div class="tabular-data__data tabular-data__data--8-12">@Html(formattedBusinessRatesAddress(businessContact.businessRatesAddress, "<br/>"))</div>
+            <div class="tabular-data__data tabular-data__data--8-12">@Html(formattedPropertyAddress(businessContact.propertyAddress, "<br/>"))</div>
         </li>
         <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
             <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.yourMessage")</div>

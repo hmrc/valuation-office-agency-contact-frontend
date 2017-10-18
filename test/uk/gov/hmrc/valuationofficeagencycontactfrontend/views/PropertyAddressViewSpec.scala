@@ -21,23 +21,23 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyAddressForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{NormalMode, PropertyAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.QuestionViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.councilTaxAddress
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.propertyAddress
 
 class PropertyAddressViewSpec extends QuestionViewBehaviours[PropertyAddress] {
 
   val messageKeyPrefix = "propertyAddress"
 
-  def createView = () => councilTaxAddress(frontendAppConfig, PropertyAddressForm(), NormalMode)(fakeRequest, messages)
+  def createView = () => propertyAddress(frontendAppConfig, PropertyAddressForm(), NormalMode)(fakeRequest, messages)
 
-  def createViewUsingForm = (form: Form[PropertyAddress]) => councilTaxAddress(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+  def createViewUsingForm = (form: Form[PropertyAddress]) => propertyAddress(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
   override val form = PropertyAddressForm()
 
-  "Council Tax Address view" must {
+  "Property Address view" must {
 
     behave like normalPage(createView, messageKeyPrefix)
 
-    behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.CouncilTaxAddressController.onSubmit(NormalMode).url, "addressLine1", "addressLine2",
+    behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.ContactDetailsController.onSubmit(NormalMode).url, "addressLine1", "addressLine2",
       "town", "county", "postcode")
 
     "contain continue button with the value Continue" in {

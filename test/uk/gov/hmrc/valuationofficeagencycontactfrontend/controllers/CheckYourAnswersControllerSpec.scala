@@ -21,7 +21,7 @@ import org.scalatest.mockito.MockitoSugar
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{BusinessRatesAddress, ContactDetails, PropertyAddress, TellUsMore}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, PropertyAddress, TellUsMore}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, RadioOption, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_answers
@@ -62,14 +62,14 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
     "The sections function produces sections with the business rates check your answers section when the enquiry category is business_rates" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("a", "a", "a", "a", "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", "a", "a", "a", "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("a")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
       val result = controller().sections(mockUserAnswers)
       val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
       result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.businessRatesSubcategory,
-        checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.businessRatesAddress, checkYourAnswersHelper.tellUsMore).flatten)))
+        checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress, checkYourAnswersHelper.tellUsMore).flatten)))
     }
 
     "The sections function produces sections with the council tax check your answers section when the enquiry category is council_tax" in {
