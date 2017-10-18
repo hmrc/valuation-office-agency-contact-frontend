@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.CouncilTaxAddress
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.PropertyAddress
 import org.scalatest.FlatSpec
 
-class CouncilTaxAddressSpec extends FlatSpec {
+class PropertyAddressSpec extends FlatSpec {
 
-   val p = CouncilTaxAddress("1", "High Street", "London", "London", "ZZ11ZZ")
+   val p = PropertyAddress("1", "High Street", "London", "London", "ZZ11ZZ")
 
   "Council tax address line 1" should "be 1" in{
     assert(p.addressLine1 == "1")

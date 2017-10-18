@@ -26,7 +26,7 @@ class ConfirmationCouncilTaxViewSpec extends ViewBehaviours {
     val cd = ContactDetails("c1", "c2", "c3", "c4", "c5")
     val confirmCd = ConfirmedContactDetails(cd)
     val ec = "council_tax"
-    val ct = Some(CouncilTaxAddress("a", "b", "c", "d", "f"))
+    val ct = Some(PropertyAddress("a", "b", "c", "d", "f"))
     val cSub = "council_tax_home_business"
     val tellUs = TellUsMore("Hello")
     var contact = Contact(confirmCd, ct, None, ec, cSub, tellUs.message)

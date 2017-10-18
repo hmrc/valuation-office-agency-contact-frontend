@@ -21,7 +21,7 @@ import org.scalatest.mockito.MockitoSugar
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{BusinessRatesAddress, ContactDetails, CouncilTaxAddress, TellUsMore}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{BusinessRatesAddress, ContactDetails, PropertyAddress, TellUsMore}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, RadioOption, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_answers
@@ -76,14 +76,14 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", "a", "a", "a", "a"))
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("a")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
       val result = controller().sections(mockUserAnswers)
       val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
       result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.councilTaxSubcategory,
-        checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.councilTaxAddress, checkYourAnswersHelper.tellUsMore).flatten)))
+        checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress, checkYourAnswersHelper.tellUsMore).flatten)))
     }
 
     "The sections function returns None when giving an unrecognized enquiry category" in {

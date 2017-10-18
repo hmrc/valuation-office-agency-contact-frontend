@@ -177,14 +177,14 @@ checkAndChallenge.title = Check and challenge
 checkAndChallenge.heading = You will now be transferred to the VOA’s Find, Check and Challenge Business Rates service.
 checkAndChallenge.url = https://www.gov.uk/correct-your-business-rates
 
-councilTaxAddress.title = Council tax property Details
-councilTaxAddress.heading = What is the address of the property you are enquiring about?
-councilTaxAddress.addressLine1 = Address Line 1*
-councilTaxAddress.addressLine2 = Address Line 2
-councilTaxAddress.town = Town*
-councilTaxAddress.county = County*
-councilTaxAddress.postcode = Postcode*
-councilTaxAddress.checkYourAnswersLabel = Property Details
+propertyAddress.title = Property Details
+propertyAddress.heading = Which property are you contacting us about ?
+propertyAddress.addressLine1 = Address Line 1
+propertyAddress.addressLine2 = Address Line 2
+propertyAddress.town = Town
+propertyAddress.county = County
+propertyAddress.postcode = Postcode
+propertyAddress.checkYourAnswersLabel = Property Details
 
 businessRatesAddress.title = Business Rates Address
 businessRatesAddress.heading = What is the address of your business

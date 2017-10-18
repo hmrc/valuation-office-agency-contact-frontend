@@ -82,8 +82,8 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       }
 
       "return a function that goes to the tell us more page when the council tax address details form has been submitted without errors" in {
-        when (mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("1", "Street", "Town", "Some county", "AA11AA"))
-        navigator.nextPage(CouncilTaxAddressId, NormalMode)(mockUserAnswers) mustBe routes.TellUsMoreController.onPageLoad(NormalMode)
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", "Street", "Town", "Some county", "AA11AA"))
+        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.TellUsMoreController.onPageLoad(NormalMode)
       }
 
       "return a function that goes to the tell us more page when the business address details form has been submitted without errors" in {
@@ -104,7 +104,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       "return a function that goes to the confirmation council tax address page when the check your answers page has been submitted without errors and the enquiry is about council tax" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
         val ec = "council_tax"
-        val councilTaxAddress = Some(CouncilTaxAddress("a", "b", "c", "d", "f"))
+        val councilTaxAddress = Some(PropertyAddress("a", "b", "c", "d", "f"))
         val councilTaxSubcategory = "council_tax_home_business"
         val tellUs = TellUsMore("Hello")
 
@@ -126,7 +126,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       }
 
       "return a function that throws a runtime exception if both the council tax and business rates are in the model" in {
-        when (mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("line1", "line2", "town", "county", "postcode"))
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("line1", "line2", "town", "county", "postcode"))
         when (mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("name", "line1", "line2", "line3", "town", "county", "postcode"))
 
         intercept[Exception] {
@@ -135,7 +135,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       }
 
       "return a function that throws a runtime exception if neither the council tax and business rates are in the model" in {
-        when (mockUserAnswers.councilTaxAddress) thenReturn None
+        when (mockUserAnswers.propertyAddress) thenReturn None
         when (mockUserAnswers.businessRatesAddress) thenReturn None
 
         intercept[Exception] {
@@ -144,7 +144,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       }
 
       "return a function that throws a runtime exception if unjnown exception is thrown in confirmation routing" in {
-        when (mockUserAnswers.councilTaxAddress) thenReturn None
+        when (mockUserAnswers.propertyAddress) thenReturn None
         when (mockUserAnswers.businessRatesAddress) thenReturn None
         when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
 

@@ -14,8 +14,21 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
-case object CouncilTaxAddressId extends Identifier {
-  override def toString: String = "councilTaxAddress"
+import play.api.data.Form
+import play.api.data.Forms._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.PropertyAddress
+
+object PropertyAddressForm {
+
+  def apply(): Form[PropertyAddress] = Form(
+    mapping(
+      "addressLine1" -> nonEmptyText,
+      "addressLine2" -> nonEmptyText,
+      "town" -> nonEmptyText,
+      "county" -> nonEmptyText,
+      "postcode" -> nonEmptyText
+    )(PropertyAddress.apply)(PropertyAddress.unapply)
+  )
 }

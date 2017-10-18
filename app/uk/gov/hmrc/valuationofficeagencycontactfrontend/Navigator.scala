@@ -58,8 +58,8 @@ class Navigator @Inject()() {
 
   val contactDetailsRouting: UserAnswers => Call = answers => {
     answers.enquiryCategory match {
-      case Some("council_tax") => routes.CouncilTaxAddressController.onPageLoad(NormalMode)
-      case Some("business_rates") => routes.BusinessRatesAddressController.onPageLoad(NormalMode)
+      case Some("council_tax") => routes.PropertyAddressController.onPageLoad(NormalMode)
+      case Some("business_rates") => routes.PropertyAddressController.onPageLoad(NormalMode)
       case Some(sel) => {
         Logger.warn(s"Navigation for contact details page reached with an unknown selection $sel of enquiry by controller")
         throw new RuntimeException(s"Navigation for contact details page reached unknown selection $sel of enquiry by controller")
@@ -91,7 +91,7 @@ class Navigator @Inject()() {
     CouncilTaxSubcategoryId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
     BusinessRatesSubcategoryId -> businessSubcategoryRouting,
     ContactDetailsId -> contactDetailsRouting,
-    CouncilTaxAddressId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
+    PropertyAddressId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
     BusinessRatesAddressId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
     TellUsMoreId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
     CheckYourAnswersId -> confirmationPageRouting

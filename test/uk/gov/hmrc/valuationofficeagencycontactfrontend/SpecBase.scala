@@ -23,7 +23,7 @@ import play.api.inject.Injector
 import play.api.mvc.AnyContentAsEmpty
 import play.api.test.FakeRequest
 import uk.gov.hmrc.http.cache.client.CacheMap
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{BusinessRatesAddress, ContactDetails, CouncilTaxAddress, TellUsMore}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{BusinessRatesAddress, ContactDetails, PropertyAddress, TellUsMore}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
@@ -42,7 +42,7 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
                         eq: String,
                         cts: String,
                         brs: String,
-                        councilAddress: Option[CouncilTaxAddress],
+                        councilAddress: Option[PropertyAddress],
                         businessAddress: Option[BusinessRatesAddress],
                         tum: TellUsMore,
                         cacheMap: CacheMap = new CacheMap("", Map())) extends UserAnswers(cacheMap) {
@@ -59,6 +59,6 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
 
     override def businessRatesAddress: Option[BusinessRatesAddress] = businessAddress
 
-    override def councilTaxAddress: Option[CouncilTaxAddress] = councilAddress
+    override def propertyAddress: Option[PropertyAddress] = councilAddress
   }
 }

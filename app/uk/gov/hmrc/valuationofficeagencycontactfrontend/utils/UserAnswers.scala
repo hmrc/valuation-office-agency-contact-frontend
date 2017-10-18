@@ -35,7 +35,7 @@ class UserAnswers(val cacheMap: CacheMap) {
 
   def businessRatesAddress: Option[BusinessRatesAddress] = cacheMap.getEntry[BusinessRatesAddress](BusinessRatesAddressId.toString)
 
-  def councilTaxAddress: Option[CouncilTaxAddress] = cacheMap.getEntry[CouncilTaxAddress](CouncilTaxAddressId.toString)
+  def propertyAddress: Option[PropertyAddress] = cacheMap.getEntry[PropertyAddress](PropertyAddressId.toString)
 
   def contact(): Either[String, Contact] = {
 
@@ -48,7 +48,7 @@ class UserAnswers(val cacheMap: CacheMap) {
         case _ => None
       }
       tellUs <- tellUsMore
-    } yield Contact(ConfirmedContactDetails(cd), councilTaxAddress, businessRatesAddress, eq, subcategory, tellUs.message)
+    } yield Contact(ConfirmedContactDetails(cd), propertyAddress, businessRatesAddress, eq, subcategory, tellUs.message)
 
     optionalContactModel match {
       case Some(Contact(_, None, None, _, _, _)) => Left("Navigation for contact details page reached with neither council tax address or business rates address")

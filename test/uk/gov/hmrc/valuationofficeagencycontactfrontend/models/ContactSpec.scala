@@ -28,7 +28,7 @@ class ContactSpec extends SpecBase {
 
   "Given a message, enquiryCategory and subEnquiryCategory strings, contact details and a council tax address produce a " +
     "contact model with the council tax address and the business rates set to None" in {
-    val councilTaxAddress = CouncilTaxAddress("a", "b", "c", "d", "e")
+    val councilTaxAddress = PropertyAddress("a", "b", "c", "d", "e")
     val result = Contact(message, enquiryCategory, subEnquiryCategory, contactDetails, councilTaxAddress)
 
     result.businessRatesAddress mustBe None

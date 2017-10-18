@@ -23,20 +23,20 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import play.api.test.Helpers._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxAddressForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CouncilTaxAddressId
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{NormalMode, CouncilTaxAddress}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyAddressForm
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyAddressId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{NormalMode, PropertyAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.councilTaxAddress
 
-class CouncilTaxAddressControllerSpec extends ControllerSpecBase {
+class PropertyAddressControllerSpec extends ControllerSpecBase {
 
   def onwardRoute = routes.IndexController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new CouncilTaxAddressController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+    new PropertyAddressController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl)
 
-  def viewAsString(form: Form[CouncilTaxAddress] = CouncilTaxAddressForm()) = councilTaxAddress(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[PropertyAddress] = PropertyAddressForm()) = councilTaxAddress(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
   "Council Tax Address Controller" must {
 
@@ -48,12 +48,12 @@ class CouncilTaxAddressControllerSpec extends ControllerSpecBase {
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(CouncilTaxAddressId.toString -> Json.toJson(CouncilTaxAddress("value 1", "value 2", "value 3", "value 4", "value 5")))
+      val validData = Map(PropertyAddressId.toString -> Json.toJson(PropertyAddress("value 1", "value 2", "value 3", "value 4", "value 5")))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsString(CouncilTaxAddressForm().fill(CouncilTaxAddress("value 1", "value 2", "value 3", "value 4", "value 5")))
+      contentAsString(result) mustBe viewAsString(PropertyAddressForm().fill(PropertyAddress("value 1", "value 2", "value 3", "value 4", "value 5")))
     }
 
     "redirect to the next page when valid data is submitted" in {
@@ -68,7 +68,7 @@ class CouncilTaxAddressControllerSpec extends ControllerSpecBase {
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm = CouncilTaxAddressForm().bind(Map("value" -> "invalid value"))
+      val boundForm = PropertyAddressForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 

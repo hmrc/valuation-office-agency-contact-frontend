@@ -17,7 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{BusinessRatesAddress, CouncilTaxAddress}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{BusinessRatesAddress, PropertyAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters._
 
 class AddressFormattersSpec extends SpecBase {
@@ -25,12 +25,12 @@ class AddressFormattersSpec extends SpecBase {
   "Address Formatter" must {
 
     "Given a complete Council Tax Address it should generate a formatted string using the given interstitial" in {
-      val cta = CouncilTaxAddress("a", "b", "c", "d", "e")
+      val cta = PropertyAddress("a", "b", "c", "d", "e")
       formattedCouncilTaxAddress(Some(cta), "<br/>") mustBe "a<br/>b<br/>c<br/>d<br/>e"
     }
 
     "Given a Council Tax Address with elements that have too many spaces it should generate a formatted string using the given interstitial" in {
-      val cta = CouncilTaxAddress(" a ", " b ", " c ", " d ", " e ")
+      val cta = PropertyAddress(" a ", " b ", " c ", " d ", " e ")
       formattedCouncilTaxAddress(Some(cta), "<br/>") mustBe "a<br/>b<br/>c<br/>d<br/>e"
     }
 

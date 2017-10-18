@@ -19,7 +19,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
 import play.api.libs.json.Json
 
 case class Contact(contact: ConfirmedContactDetails,
-                   councilTaxAddress: Option[CouncilTaxAddress],
+                   councilTaxAddress: Option[PropertyAddress],
                    businessRatesAddress: Option[BusinessRatesAddress],
                    enquiryCategory: String,
                    subEnquiryCategory: String,
@@ -32,7 +32,7 @@ object Contact {
             enquiryCategory: String,
             subEnquiryCategory: String,
             contact: ContactDetails,
-            councilTaxAddress: CouncilTaxAddress): Contact =
+            councilTaxAddress: PropertyAddress): Contact =
     Contact(ConfirmedContactDetails(contact), Some(councilTaxAddress), None, enquiryCategory, subEnquiryCategory, message)
 
   def apply(message: String,

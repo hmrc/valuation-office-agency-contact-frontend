@@ -75,7 +75,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       " and the council_tax_changes has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", "a", "a", "a", "a"))
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_changes")
 
       val result = controller().councilTaxKey(mockUserAnswers)
@@ -86,7 +86,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       " and the council_tax_calculated has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", "a", "a", "a", "a"))
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_calculated")
 
       val result = controller().councilTaxKey(mockUserAnswers)
@@ -97,7 +97,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       " and the council_tax_band has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", "a", "a", "a", "a"))
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_band")
 
       val result = controller().councilTaxKey(mockUserAnswers)
@@ -108,7 +108,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       " and the council_tax_challenge has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", "a", "a", "a", "a"))
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_challenge")
 
       val result = controller().councilTaxKey(mockUserAnswers)
@@ -119,7 +119,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       " and the council_tax_other has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", "a", "a", "a", "a"))
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_other")
 
       val result = controller().councilTaxKey(mockUserAnswers)
@@ -130,7 +130,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       " and no council tax subcategory has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", "a", "a", "a", "a"))
       when(mockUserAnswers.councilTaxSubcategory) thenReturn None
 
       val result = controller().councilTaxKey(mockUserAnswers)
@@ -186,7 +186,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       " and the council_tax_band has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("a", "a", "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", "a", "a", "a", "a"))
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_band")
 
       val result = controller().councilTaxKey(mockUserAnswers)
