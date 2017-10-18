@@ -43,16 +43,16 @@ class ConfirmCouncilTaxControllerSpec extends ControllerSpecBase with MockitoSug
     "return 200 and the correct view for a GET" in {
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val ec = "council_tax"
-      val councilTaxAddress = CouncilTaxAddress("a", "b", "c", "d", "f")
+      val propertyAddress = PropertyAddress("a", "b", "c", "d", "f")
       val councilTaxSubcategory = "council_tax_home_business"
       val tellUs = TellUsMore("Hello")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val date = DateFormatter.todaysDate()
 
-      val contact = Contact(confirmedContactDetails, Some(councilTaxAddress), None, ec, councilTaxSubcategory, tellUs.message)
+      val contact = Contact(confirmedContactDetails, Some(propertyAddress), ec, councilTaxSubcategory, tellUs.message)
 
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
-        ContactDetailsId.toString -> Json.toJson(cd), CouncilTaxAddressId.toString -> Json.toJson(councilTaxAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 

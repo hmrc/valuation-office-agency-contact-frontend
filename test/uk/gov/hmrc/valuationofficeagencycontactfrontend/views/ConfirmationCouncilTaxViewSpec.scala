@@ -26,10 +26,10 @@ class ConfirmationCouncilTaxViewSpec extends ViewBehaviours {
     val cd = ContactDetails("c1", "c2", "c3", "c4", "c5")
     val confirmCd = ConfirmedContactDetails(cd)
     val ec = "council_tax"
-    val ct = Some(CouncilTaxAddress("a", "b", "c", "d", "f"))
+    val address = Some(PropertyAddress("a", "b", "c", "d", "f"))
     val cSub = "council_tax_home_business"
     val tellUs = TellUsMore("Hello")
-    var contact = Contact(confirmCd, ct, None, ec, cSub, tellUs.message)
+    var contact = Contact(confirmCd, address, ec, cSub, tellUs.message)
     val date = DateFormatter.todaysDate()
 
     def view = () => confirmationCouncilTax(frontendAppConfig, contact, date)(fakeRequest, messages)
@@ -46,12 +46,12 @@ class ConfirmationCouncilTaxViewSpec extends ViewBehaviours {
       assert(href == "javascript:window.print()")
     }
 
-     "Given a council tax address it should contain a formatted address string" in {
+     "Given a property address it should contain a formatted address string" in {
        val doc = asDocument(view())
        assert(doc.toString.contains("a, b, c, d, f"))
      }
 
-     "Given a council tax address it should contain a formatted address string with <br/> interstitial" in {
+     "Given a property address it should contain a formatted address string with <br/> interstitial" in {
        val doc = asDocument(view())
        assert(doc.toString.contains("<br>b"))
        assert(doc.toString.contains("<br>c"))

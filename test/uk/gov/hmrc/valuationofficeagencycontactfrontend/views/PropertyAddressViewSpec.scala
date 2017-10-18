@@ -18,30 +18,30 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import play.api.data.Form
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxAddressForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{NormalMode, CouncilTaxAddress}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyAddressForm
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{NormalMode, PropertyAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.QuestionViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.councilTaxAddress
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.propertyAddress
 
-class CouncilTaxAddressViewSpec extends QuestionViewBehaviours[CouncilTaxAddress] {
+class PropertyAddressViewSpec extends QuestionViewBehaviours[PropertyAddress] {
 
-  val messageKeyPrefix = "councilTaxAddress"
+  val messageKeyPrefix = "propertyAddress"
 
-  def createView = () => councilTaxAddress(frontendAppConfig, CouncilTaxAddressForm(), NormalMode)(fakeRequest, messages)
+  def createView = () => propertyAddress(frontendAppConfig, PropertyAddressForm(), NormalMode)(fakeRequest, messages)
 
-  def createViewUsingForm = (form: Form[CouncilTaxAddress]) => councilTaxAddress(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+  def createViewUsingForm = (form: Form[PropertyAddress]) => propertyAddress(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
-  override val form = CouncilTaxAddressForm()
+  override val form = PropertyAddressForm()
 
-  "Council Tax Address view" must {
+  "Property Address view" must {
 
     behave like normalPage(createView, messageKeyPrefix)
 
-    behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.CouncilTaxAddressController.onSubmit(NormalMode).url, "addressLine1", "addressLine2",
+    behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.ContactDetailsController.onSubmit(NormalMode).url, "addressLine1", "addressLine2",
       "town", "county", "postcode")
 
     "contain continue button with the value Continue" in {
-      val doc = asDocument(createViewUsingForm(CouncilTaxAddressForm()))
+      val doc = asDocument(createViewUsingForm(PropertyAddressForm()))
       val continueButton = doc.getElementById("submit").text()
       assert(continueButton == messages("site.continue"))
     }

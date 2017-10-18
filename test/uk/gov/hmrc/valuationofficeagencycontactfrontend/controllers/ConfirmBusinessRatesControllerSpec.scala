@@ -16,18 +16,15 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
-import org.mockito.Mockito.when
 import org.scalatest.mockito.MockitoSugar
 import play.api.libs.json.{JsString, Json}
 import play.api.test.Helpers._
 import uk.gov.hmrc.http.cache.client.CacheMap
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, RadioOption, UserAnswers, DateFormatter}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmationBusinessRates
 
 class ConfirmBusinessRatesControllerSpec extends ControllerSpecBase with MockitoSugar {
@@ -38,21 +35,20 @@ class ConfirmBusinessRatesControllerSpec extends ControllerSpecBase with Mockito
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ConfirmBusinessRatesController(frontendAppConfig, messagesApi, connector, dataRetrievalAction, new DataRequiredActionImpl)
 
-  "Confirm Business Rat Controller" must {
+  "Confirm Business Rates Controller" must {
 
     "return 200 and the correct view for a GET" in {
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val ec = "business_rates"
-      val businessAddress = Some(BusinessRatesAddress("a", "b", "c", "d", "f", "g", "h"))
+      val propertyAddress = Some(PropertyAddress("a", "b", "c", "d", "f"))
       val businessSubcategory = "business_rates_rateable_value"
       val tellUs = TellUsMore("Hello")
       val date = DateFormatter.todaysDate()
 
-      val contact = Contact(confirmedContactDetails, None, businessAddress, ec, businessSubcategory, tellUs.message)
-
+      val contact = Contact(confirmedContactDetails, propertyAddress, ec, businessSubcategory, tellUs.message)
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), BusinessRatesSubcategoryId.toString -> JsString(businessSubcategory),
-        ContactDetailsId.toString -> Json.toJson(cd), BusinessRatesAddressId.toString -> Json.toJson(businessAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 

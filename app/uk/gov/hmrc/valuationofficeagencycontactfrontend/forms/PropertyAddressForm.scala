@@ -18,17 +18,17 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
 import play.api.data.Form
 import play.api.data.Forms._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.CouncilTaxAddress
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.PropertyAddress
 
-object CouncilTaxAddressForm {
+object PropertyAddressForm {
 
-  def apply(): Form[CouncilTaxAddress] = Form(
+  def apply(): Form[PropertyAddress] = Form(
     mapping(
       "addressLine1" -> nonEmptyText,
       "addressLine2" -> nonEmptyText,
       "town" -> nonEmptyText,
       "county" -> nonEmptyText,
       "postcode" -> nonEmptyText
-    )(CouncilTaxAddress.apply)(CouncilTaxAddress.unapply)
+    )(PropertyAddress.apply)(PropertyAddress.unapply)
   )
 }

@@ -14,12 +14,8 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers
 
-import play.api.libs.json._
-
-case class CouncilTaxAddress(addressLine1: String, addressLine2: String, town: String, county: String, postcode: String)
-
-object CouncilTaxAddress {
-  implicit val format = Json.format[CouncilTaxAddress]
+case object PropertyAddressId extends Identifier {
+  override def toString: String = "propertyAddress"
 }
