@@ -156,18 +156,19 @@ councilTax.pay-url = https://www.gov.uk/pay-council-tax
 councilTax.pay-title= Pay your Council Tax
 councilTax.pay-information = Search for your local authority and pay your Council Tax online.
 
-councilTaxSubcategory.title = Council Tax Enquiry
+councilTaxSubcategory.title = What do you want to know about Council Tax?
 councilTaxSubcategory.heading = What do you want to know about Council Tax?
 councilTaxSubcategory.council_tax_band = What is my Council Tax band
 councilTaxSubcategory.council_tax_calculated = How is my Council Tax band calculated
 councilTaxSubcategory.council_tax_changes = There have been changes to my property
 councilTaxSubcategory.council_tax_challenge = I want to challenge my Council Tax band
+councilTaxSubcategory.council_tax_property = My property is in poor condition
 councilTaxSubcategory.council_tax_other = Other Council Tax enquiries
 
 councilTaxSubcategory.checkYourAnswersLabel = Council Tax
 
-businessRatesSubcategory.title = Business Rates
-businessRatesSubcategory.heading = What is your enquiry about Business Rates?
+businessRatesSubcategory.title = What do you want to know about business rates?
+businessRatesSubcategory.heading = What do you want to know about business rates?
 businessRatesSubcategory.business_rates_rateable_value = What is my property’s rateable value
 businessRatesSubcategory.business_rates_business_rates = How are business rates calculated
 businessRatesSubcategory.business_rates_update_details = I want to check or update my property details
