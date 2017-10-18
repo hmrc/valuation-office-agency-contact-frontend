@@ -50,9 +50,9 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
       }
 
-      "return a function that goes to the council tax property details page when the contact form has been submitted without errors and the enquiry is council tax" in {
+      "return a function that goes to the property address page when the contact form has been submitted without errors and the enquiry is council tax" in {
         when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "test@email.com", "0208382737288"))
-        navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAddressController.onPageLoad(NormalMode)
+        navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.PropertyAddressController.onPageLoad(NormalMode)
       }
 
 
@@ -66,9 +66,9 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
       }
 
-      "return a function that goes to the business rates address page when the contact form has been submitted without errors and the enquiry is business rates" in {
+      "return a function that goes to the property address page when the contact form has been submitted without errors and the enquiry is business rates" in {
         when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "test@email.com", "0208382737288"))
-        navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesAddressController.onPageLoad(NormalMode)
+        navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.PropertyAddressController.onPageLoad(NormalMode)
       }
 
       "return a function that goes to the check and challenge page when an enquiry category for business rates has been selected and the selection is I want to check or update my property details" in {
@@ -81,14 +81,9 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CheckAndChallengeController.onPageLoad()
       }
 
-      "return a function that goes to the tell us more page when the council tax address details form has been submitted without errors" in {
-        when (mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("1", "Street", "Town", "Some county", "AA11AA"))
-        navigator.nextPage(CouncilTaxAddressId, NormalMode)(mockUserAnswers) mustBe routes.TellUsMoreController.onPageLoad(NormalMode)
-      }
-
-      "return a function that goes to the tell us more page when the business address details form has been submitted without errors" in {
-        when (mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("Business", "1", "Unit", "Street", "London", "County", "AA11AA"))
-        navigator.nextPage(BusinessRatesAddressId, NormalMode)(mockUserAnswers) mustBe routes.TellUsMoreController.onPageLoad(NormalMode)
+      "return a function that goes to the tell us more page when the property address details form has been submitted without errors" in {
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", "Street", "Town", "Some county", "AA11AA"))
+        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.TellUsMoreController.onPageLoad(NormalMode)
       }
 
       "return a function that goes to the summary page when the tell us more form has been submitted without errors" in {
@@ -101,51 +96,41 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.ValuationAdviceController.onPageLoad()
       }
 
-      "return a function that goes to the confirmation council tax address page when the check your answers page has been submitted without errors and the enquiry is about council tax" in {
+      "return a function that goes to the confirmation council tax page when the check your answers page has been submitted without errors and the enquiry is about council tax" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
         val ec = "council_tax"
-        val councilTaxAddress = Some(CouncilTaxAddress("a", "b", "c", "d", "f"))
+        val propertyAddress = Some(PropertyAddress("a", "b", "c", "d", "f"))
         val councilTaxSubcategory = "council_tax_home_business"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", councilTaxAddress, None, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", propertyAddress, tellUs)
 
         navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmCouncilTaxController.onPageLoad()
       }
 
-      "return a function that goes to the confirmation business rates address page when the check your answers page has been submitted without errors and the enquiry is about business rates" in {
+      "return a function that goes to the confirmation business rates page when the check your answers page has been submitted without errors and the enquiry is about business rates" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
         val ec = "business_rates"
-        val businessAddress = Some(BusinessRatesAddress("a", "b", "c", "d", "f", "g", "h"))
+        val propertyAddress = Some(PropertyAddress("a", "b", "c", "d", "f"))
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, "", businessSubcategory, None, businessAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, ec, "", businessSubcategory, propertyAddress, tellUs)
 
         navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmBusinessRatesController.onPageLoad()
       }
 
-      "return a function that throws a runtime exception if both the council tax and business rates are in the model" in {
-        when (mockUserAnswers.councilTaxAddress) thenReturn Some(CouncilTaxAddress("line1", "line2", "town", "county", "postcode"))
-        when (mockUserAnswers.businessRatesAddress) thenReturn Some(BusinessRatesAddress("name", "line1", "line2", "line3", "town", "county", "postcode"))
+
+      "return a function that throws a runtime exception if no property address is in the model" in {
+        when (mockUserAnswers.propertyAddress) thenReturn None
 
         intercept[Exception] {
           navigator.nextPage(CheckYourAnswersId, NormalMode)(mockUserAnswers)
         }
       }
 
-      "return a function that throws a runtime exception if neither the council tax and business rates are in the model" in {
-        when (mockUserAnswers.councilTaxAddress) thenReturn None
-        when (mockUserAnswers.businessRatesAddress) thenReturn None
-
-        intercept[Exception] {
-          navigator.nextPage(CheckYourAnswersId, NormalMode)(mockUserAnswers)
-        }
-      }
-
-      "return a function that throws a runtime exception if unjnown exception is thrown in confirmation routing" in {
-        when (mockUserAnswers.councilTaxAddress) thenReturn None
-        when (mockUserAnswers.businessRatesAddress) thenReturn None
+      "return a function that throws a runtime exception if unknown exception is thrown in confirmation routing" in {
+        when (mockUserAnswers.propertyAddress) thenReturn None
         when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
 
         intercept[Exception] {

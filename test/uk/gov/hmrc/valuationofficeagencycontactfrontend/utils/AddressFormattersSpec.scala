@@ -17,25 +17,25 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{BusinessRatesAddress, CouncilTaxAddress}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.PropertyAddress
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters._
 
 class AddressFormattersSpec extends SpecBase {
 
   "Address Formatter" must {
 
-    "Given a complete Council Tax Address it should generate a formatted string using the given interstitial" in {
-      val cta = CouncilTaxAddress("a", "b", "c", "d", "e")
-      formattedCouncilTaxAddress(Some(cta), "<br/>") mustBe "a<br/>b<br/>c<br/>d<br/>e"
+    "Given a complete Property Address it should generate a formatted string using the given interstitial" in {
+      val address = PropertyAddress("a", "b", "c", "d", "e")
+      formattedPropertyAddress(Some(address), "<br/>") mustBe "a<br/>b<br/>c<br/>d<br/>e"
     }
 
-    "Given a Council Tax Address with elements that have too many spaces it should generate a formatted string using the given interstitial" in {
-      val cta = CouncilTaxAddress(" a ", " b ", " c ", " d ", " e ")
-      formattedCouncilTaxAddress(Some(cta), "<br/>") mustBe "a<br/>b<br/>c<br/>d<br/>e"
+    "Given a Property Address with elements that have too many spaces it should generate a formatted string using the given interstitial" in {
+      val address = PropertyAddress(" a ", " b ", " c ", " d ", " e ")
+      formattedPropertyAddress(Some(address), "<br/>") mustBe "a<br/>b<br/>c<br/>d<br/>e"
     }
 
-    "Given no Council Tax Address it should generate am empty string" in {
-      formattedCouncilTaxAddress(None, "<br/>") mustBe ""
+    "Given no Property Address it should generate am empty string" in {
+      formattedPropertyAddress(None, "<br/>") mustBe ""
     }
 
     "Given a Sequence with three strings insert the interstitials" in {
@@ -51,20 +51,6 @@ class AddressFormattersSpec extends SpecBase {
       insertInterstitials(Seq(" a ", " b ", " c "), ",") mustBe "a,b,c"
     }
 
-    "Given a complete Business Rates Address it should generate a formatted string using the given interstitial" in {
-      val  bra = BusinessRatesAddress("a", "b", "c", "d", "e", "f", "g")
-      formattedBusinessRatesAddress(Some(bra), "<br/>") mustBe "a<br/>b<br/>c<br/>d<br/>e<br/>f<br/>g"
-
-    }
-
-    "Given a Business Rates Address with elements that have too many spaces it should generate a formatted string using the given interstitial" in {
-      val  bra = BusinessRatesAddress(" a ", " b ", " c ", " d ", " e ", " f ", " g ")
-      formattedBusinessRatesAddress(Some(bra), "<br/>") mustBe "a<br/>b<br/>c<br/>d<br/>e<br/>f<br/>g"
-    }
-
-    "Given no Business Rates Address it should generate am empty string" in {
-      formattedBusinessRatesAddress(None, "<br/>") mustBe ""
-    }
   }
 }
 

@@ -29,34 +29,34 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
 
   "Create Contact Model method" must {
 
-    "Return a ContactModel object containing a CouncilTaxAddress if all the information is present and the enquiry selected is council_tax" in {
+    "Return a ContactModel object containing a Property Address if all the information is present and the enquiry selected is council_tax" in {
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val ec = "council_tax"
-      val councilTaxAddress = Some(CouncilTaxAddress("a", "b", "c", "d", "f"))
+      val propertyAddress = Some(PropertyAddress("a", "b", "c", "d", "f"))
       val councilTaxSubcategory = "council_tax_home_business"
       val tellUs = TellUsMore("Hello")
 
-      val expectedResult = Contact(confirmedContactDetails, councilTaxAddress, None, ec, councilTaxSubcategory, tellUs.message)
+      val expectedResult = Contact(confirmedContactDetails, propertyAddress, ec, councilTaxSubcategory, tellUs.message)
 
-      val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", councilTaxAddress, None, tellUs)
+      val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", propertyAddress, tellUs)
 
       val result = userAnswers.contact()
 
       result mustBe Right(expectedResult)
     }
 
-    "Return a ContactModel object containing a Business Tax Address if all the information is present and the enquiry selected is business_rates" in {
+    "Return a ContactModel object containing a Property Address if all the information is present and the enquiry selected is business_rates" in {
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val ec = "business_rates"
-      val businessAddress = Some(BusinessRatesAddress("a", "b", "c", "d", "f", "g", "h"))
+      val propertyAddress = Some(PropertyAddress("a", "b", "c", "d", "f"))
       val businessSubcategory = "business_rates_rateable_value"
       val tellUs = TellUsMore("Hello")
 
-      val expectedResult = Contact(confirmedContactDetails, None, businessAddress, ec, businessSubcategory, tellUs.message)
+      val expectedResult = Contact(confirmedContactDetails, propertyAddress, ec, businessSubcategory, tellUs.message)
 
-      val userAnswers = new FakeUserAnswers(cd, ec, "", businessSubcategory, None, businessAddress, tellUs)
+      val userAnswers = new FakeUserAnswers(cd, ec, "", businessSubcategory, propertyAddress, tellUs)
 
       val result = userAnswers.contact()
 
@@ -71,30 +71,14 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
       result mustBe Left("Unable to parse")
     }
 
-    "Return a Left(Unable to parse) if both business address and council tax address are present in the model" in {
-      val cd = ContactDetails("a", "b", "c", "d", "e")
-      val confirmedContactDetails = ConfirmedContactDetails(cd)
-      val ec = "business_rates"
-      val businessAddress = Some(BusinessRatesAddress("a", "b", "c", "d", "f", "g", "h"))
-      val businessSubcategory = "business_rates_rateable_value"
-      val councilAddress = Some(CouncilTaxAddress("a", "b", "c", "d", "f"))
-      val tellUs = TellUsMore("Hello")
-
-      val userAnswers = new FakeUserAnswers(cd, ec, "", businessSubcategory, councilAddress, businessAddress, tellUs)
-
-      val result = userAnswers.contact()
-
-      result mustBe Left("Navigation for contact details page reached with both council tax address and business rates address")
-    }
-
-    "Return a Left(Unable to parse) if neither business address and council tax address are present in the model" in {
+    "Return a Left(Unable to parse) if no property address present in the model" in {
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val ec = "business_rates"
       val businessSubcategory = "business_rates_rateable_value"
       val tellUs = TellUsMore("Hello")
 
-      val userAnswers = new FakeUserAnswers(cd, ec, "", businessSubcategory, None, None, tellUs)
+      val userAnswers = new FakeUserAnswers(cd, ec, "", businessSubcategory, None, tellUs)
 
       val result = userAnswers.contact()
 

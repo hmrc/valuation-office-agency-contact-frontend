@@ -58,8 +58,8 @@ class Navigator @Inject()() {
 
   val contactDetailsRouting: UserAnswers => Call = answers => {
     answers.enquiryCategory match {
-      case Some("council_tax") => routes.CouncilTaxAddressController.onPageLoad(NormalMode)
-      case Some("business_rates") => routes.BusinessRatesAddressController.onPageLoad(NormalMode)
+      case Some("council_tax") => routes.PropertyAddressController.onPageLoad(NormalMode)
+      case Some("business_rates") => routes.PropertyAddressController.onPageLoad(NormalMode)
       case Some(sel) => {
         Logger.warn(s"Navigation for contact details page reached with an unknown selection $sel of enquiry by controller")
         throw new RuntimeException(s"Navigation for contact details page reached unknown selection $sel of enquiry by controller")
@@ -77,8 +77,18 @@ class Navigator @Inject()() {
         Logger.warn(msg)
         throw new RuntimeException(msg)
       }
-      case Right(c) if(c.councilTaxAddress.isDefined) => routes.ConfirmCouncilTaxController.onPageLoad()
-      case Right(b) if(b.businessRatesAddress.isDefined) => routes.ConfirmBusinessRatesController.onPageLoad()
+      case Right(addr) => answers.enquiryCategory match {
+        case Some("council_tax") => routes.ConfirmCouncilTaxController.onPageLoad()
+        case Some("business_rates") => routes.ConfirmBusinessRatesController.onPageLoad()
+        case Some(sel) => {
+          Logger.warn(s"Navigation for confirmation page reached with an unknown selection $sel of enquiry by controller")
+          throw new RuntimeException(s"Navigation for confirmation page reached unknown selection $sel of enquiry by controller")
+        }
+        case None => {
+          Logger.warn("Navigation for confirmation page reached without selection of enquiry by controller")
+          throw new RuntimeException("Navigation for confirmation page reached without selection of enquiry by controller")
+        }
+      }
       case _ => {
         Logger.warn("Unknown exception in Confirmation Page Routing")
         throw new RuntimeException("Unknown exception in Confirmation Page Routing")
@@ -91,8 +101,7 @@ class Navigator @Inject()() {
     CouncilTaxSubcategoryId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
     BusinessRatesSubcategoryId -> businessSubcategoryRouting,
     ContactDetailsId -> contactDetailsRouting,
-    CouncilTaxAddressId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
-    BusinessRatesAddressId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
+    PropertyAddressId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
     TellUsMoreId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
     CheckYourAnswersId -> confirmationPageRouting
   )

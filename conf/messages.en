@@ -156,18 +156,19 @@ councilTax.pay-url = https://www.gov.uk/pay-council-tax
 councilTax.pay-title= Pay your Council Tax
 councilTax.pay-information = Search for your local authority and pay your Council Tax online.
 
-councilTaxSubcategory.title = Council Tax Enquiry
+councilTaxSubcategory.title = What do you want to know about Council Tax?
 councilTaxSubcategory.heading = What do you want to know about Council Tax?
 councilTaxSubcategory.council_tax_band = What is my Council Tax band
 councilTaxSubcategory.council_tax_calculated = How is my Council Tax band calculated
 councilTaxSubcategory.council_tax_changes = There have been changes to my property
 councilTaxSubcategory.council_tax_challenge = I want to challenge my Council Tax band
+councilTaxSubcategory.council_tax_property = My property is in poor condition
 councilTaxSubcategory.council_tax_other = Other Council Tax enquiries
 
 councilTaxSubcategory.checkYourAnswersLabel = Council Tax
 
-businessRatesSubcategory.title = Business Rates
-businessRatesSubcategory.heading = What is your enquiry about Business Rates?
+businessRatesSubcategory.title = What do you want to know about business rates?
+businessRatesSubcategory.heading = What do you want to know about business rates?
 businessRatesSubcategory.business_rates_rateable_value = What is my property’s rateable value
 businessRatesSubcategory.business_rates_business_rates = How are business rates calculated
 businessRatesSubcategory.business_rates_update_details = I want to check or update my property details
@@ -179,25 +180,14 @@ checkAndChallenge.title = Check and challenge
 checkAndChallenge.heading = You will now be transferred to the VOA’s Find, Check and Challenge Business Rates service.
 checkAndChallenge.url = https://www.gov.uk/correct-your-business-rates
 
-councilTaxAddress.title = Council tax property Details
-councilTaxAddress.heading = What is the address of the property you are enquiring about?
-councilTaxAddress.addressLine1 = Address Line 1*
-councilTaxAddress.addressLine2 = Address Line 2
-councilTaxAddress.town = Town*
-councilTaxAddress.county = County*
-councilTaxAddress.postcode = Postcode*
-councilTaxAddress.checkYourAnswersLabel = Property Details
-
-businessRatesAddress.title = Business Rates Address
-businessRatesAddress.heading = What is the address of your business
-businessRatesAddress.businessName = Business name*
-businessRatesAddress.businessAddressLine1 = Business address line 1
-businessRatesAddress.businessAddressLine2 = Business address line 2
-businessRatesAddress.businessAddressLine3 = Business address line 3
-businessRatesAddress.town = Town*
-businessRatesAddress.county = County*
-businessRatesAddress.postcode = Postcode*
-businessRatesAddress.checkYourAnswersLabel = Property Details
+propertyAddress.title = Property Details
+propertyAddress.heading = Which property are you contacting us about ?
+propertyAddress.addressLine1 = Address Line 1
+propertyAddress.addressLine2 = Address Line 2
+propertyAddress.town = Town
+propertyAddress.county = County
+propertyAddress.postcode = Postcode
+propertyAddress.checkYourAnswersLabel = Property Details
 
 tellUsMore.title = Tell Us More
 tellUsMore.heading = Tell us more about your enquiry

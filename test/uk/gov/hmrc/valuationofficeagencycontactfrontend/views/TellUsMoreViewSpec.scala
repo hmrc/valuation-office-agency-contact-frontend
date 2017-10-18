@@ -51,6 +51,6 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
     val backlinkText = doc.select("a[class=link-back]").text()
     backlinkText mustBe messages("site.back")
     val backlinkUrl = doc.select("a[class=link-back]").attr("href")
-    backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url
+    backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
   }
 }

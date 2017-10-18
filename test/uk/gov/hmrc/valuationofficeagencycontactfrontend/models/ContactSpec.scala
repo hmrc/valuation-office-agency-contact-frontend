@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
 
-import play.api.libs.json.Json
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
 
 class ContactSpec extends SpecBase {
@@ -26,29 +25,16 @@ class ContactSpec extends SpecBase {
   val contactDetails = ContactDetails("first", "last", "email", "email", "contactNumber")
   val confirmedContactDetails = ConfirmedContactDetails(contactDetails)
 
-  "Given a message, enquiryCategory and subEnquiryCategory strings, contact details and a council tax address produce a " +
-    "contact model with the council tax address and the business rates set to None" in {
-    val councilTaxAddress = CouncilTaxAddress("a", "b", "c", "d", "e")
-    val result = Contact(message, enquiryCategory, subEnquiryCategory, contactDetails, councilTaxAddress)
+  "Given a message, enquiryCategory and subEnquiryCategory strings, contact details and a property address produce a " +
+    "contact model with the property address" in {
+    val propertyAddress = PropertyAddress("a", "b", "c", "d", "e")
+    val result = Contact(message, enquiryCategory, subEnquiryCategory, contactDetails, propertyAddress)
 
-    result.businessRatesAddress mustBe None
-    result.councilTaxAddress mustBe Some(councilTaxAddress)
-    result.message mustBe message
-    result.enquiryCategory mustBe enquiryCategory
-    result.subEnquiryCategory mustBe subEnquiryCategory
-    result.contact mustBe confirmedContactDetails
-  }
-
-  "Given a message, enquiryCategory and subEnquiryCategory strings, contact details and a business rates address produce a " +
-    "contact model with the council tax address and the business rates set to None" in {
-    val businessRatesAddress = BusinessRatesAddress("a", "b", "c", "d", "e", "f", "g")
-    val result = Contact(message, enquiryCategory, subEnquiryCategory, contactDetails, businessRatesAddress)
-
-    result.businessRatesAddress mustBe Some(businessRatesAddress)
-    result.councilTaxAddress mustBe None
+    result.propertyAddress mustBe Some(propertyAddress)
     result.message mustBe message
     result.enquiryCategory mustBe enquiryCategory
     result.subEnquiryCategory mustBe subEnquiryCategory
     result.contact mustBe confirmedContactDetails
   }
 }
+

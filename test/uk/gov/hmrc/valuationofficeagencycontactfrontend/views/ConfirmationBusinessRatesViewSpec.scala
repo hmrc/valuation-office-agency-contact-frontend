@@ -26,10 +26,10 @@ class ConfirmationBusinessRatesViewSpec extends ViewBehaviours {
     val cd = ContactDetails("c1", "c2", "c3", "c4", "c5")
     val confirmCd = ConfirmedContactDetails(cd)
     val ec = "council_tax"
-    val ba = Some(BusinessRatesAddress("a", "b", "c", "d", "f", "h", "i"))
+    val address = Some(PropertyAddress("a", "b", "c", "d", "f"))
     val bSub = "council_tax_home_business"
     val tellUs = TellUsMore("Hello")
-    var contact = Contact(confirmCd, None, ba, ec, bSub, tellUs.message)
+    var contact = Contact(confirmCd, address, ec, bSub, tellUs.message)
     val date = DateFormatter.todaysDate()
 
     def view = () => confirmationBusinessRates(frontendAppConfig, contact, date)(fakeRequest, messages)
@@ -46,19 +46,18 @@ class ConfirmationBusinessRatesViewSpec extends ViewBehaviours {
       assert(href == "javascript:window.print()")
     }
 
-     "Given a business rates address it should contain a formatted address string" in {
+     "Given a property address it should contain a formatted address string" in {
        val doc = asDocument(view())
-       assert(doc.toString.contains("a, b, c, d, f, h, i"))
+       assert(doc.toString.contains("a, b, c, d, f"))
      }
 
-     "Given a business rates address it should contain a formatted address string with <br/> interstitial" in {
+     "Given a property address it should contain a formatted address string with <br/> interstitial" in {
        val doc = asDocument(view())
        assert(doc.toString.contains("<br>b"))
        assert(doc.toString.contains("<br>c"))
        assert(doc.toString.contains("<br>d"))
        assert(doc.toString.contains("<br>f"))
-       assert(doc.toString.contains("<br>h"))
-       assert(doc.toString.contains("<br>i"))
+
      }
 
      "Given a Contact Details it should contain a formatted Contact Details string with <br/> interstitial" in {
