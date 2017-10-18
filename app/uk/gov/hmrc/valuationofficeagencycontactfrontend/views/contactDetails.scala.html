@@ -46,7 +46,7 @@
 
         @components.input_text(InputViewModel[ContactDetails]("confirmEmail", form), label = messages("contactDetails.confirmEmail"))
 
-        @components.input_text(InputViewModel[ContactDetails]("contactNumber", form), label = messages("contactDetails.contactNumber"))
+        @components.input_text(InputViewModel[ContactDetails]("contactNumber", form), label = messages("contactDetails.contactNumber"), hint = Some(messages("hintText.optional")))
 
         @components.continue_button()
 
