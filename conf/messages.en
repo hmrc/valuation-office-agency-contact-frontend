@@ -44,6 +44,8 @@ date.day = Day
 date.month = Month
 date.year = Year
 
+hintText.optional = Optional
+
 error.boolean = Please give an answer
 error.invalid_date = Give a correct date
 error.date.day_blank = Enter a day
@@ -122,12 +124,12 @@ enquiryCategory.valuation_for_public_body.about1 = independent valuation and pro
 enquiryCategory.valuation_for_public_body.finaltext = Note: this service also operates in Scotland.
 
 contactDetails.title = Contact Details
-contactDetails.heading = What are your contact details
-contactDetails.firstName = First name *
-contactDetails.lastName = Surname *
-contactDetails.email = Email *
-contactDetails.confirmEmail = Confirm email *
-contactDetails.contactNumber = Telephone / Mobile *
+contactDetails.heading = What are your contact details?
+contactDetails.firstName = First name
+contactDetails.lastName = Surname
+contactDetails.email = Email
+contactDetails.confirmEmail = Confirm email
+contactDetails.contactNumber = Phone number
 contactDetails.checkYourAnswersLabel = Contact Details
 
 staticPagePlaceholder.title = Postcode Finder
