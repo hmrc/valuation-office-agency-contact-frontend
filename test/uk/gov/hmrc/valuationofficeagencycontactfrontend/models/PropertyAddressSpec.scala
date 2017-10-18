@@ -19,45 +19,45 @@ import org.scalatest.FlatSpec
 
 class PropertyAddressSpec extends FlatSpec {
 
-   val p = PropertyAddress("1", "High Street", "London", "London", "ZZ11ZZ")
+   val address = PropertyAddress("1", "High Street", "London", "London", "ZZ11ZZ")
 
   "Property address line 1" should "be 1" in{
-    assert(p.addressLine1 == "1")
+    assert(address.addressLine1 == "1")
   }
 
   "Property address line 2" should "be High Street" in{
-    assert(p.addressLine2 == "High Street")
+    assert(address.addressLine2 == "High Street")
   }
 
   "Property Town" should "be London" in{
-    assert(p.town == "London")
+    assert(address.town == "London")
   }
 
   "Property County" should "be London" in{
-    assert(p.county == "London")
+    assert(address.county == "London")
   }
 
   "Property Postcode" should "be ZZ11ZZ" in{
-    assert(p.postcode == "ZZ11ZZ")
+    assert(address.postcode == "ZZ11ZZ")
   }
 
   "Property address line 1" should "should't be 2" in{
-    assert(p.addressLine1 != "2")
+    assert(address.addressLine1 != "2")
   }
 
   "Property address line 2" should "shouldn't be Avenue" in{
-    assert(p.addressLine2 != "Avenue")
+    assert(address.addressLine2 != "Avenue")
   }
 
   "Property Town" should "shouldn't be" in{
-    assert(p.town != "Leeds")
+    assert(address.town != "Leeds")
   }
 
   "Property County" should "shouldn't be Cardiff" in{
-    assert(p.county != "Cardiff")
+    assert(address.county != "Cardiff")
   }
 
   "Property Postcode" should "shouldn't be AA11AA" in{
-    assert(p.postcode != "AA11AA")
+    assert(address.postcode != "AA11AA")
   }
 }

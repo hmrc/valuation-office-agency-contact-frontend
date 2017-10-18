@@ -25,13 +25,13 @@ class AddressFormattersSpec extends SpecBase {
   "Address Formatter" must {
 
     "Given a complete Property Address it should generate a formatted string using the given interstitial" in {
-      val cta = PropertyAddress("a", "b", "c", "d", "e")
-      formattedPropertyAddress(Some(cta), "<br/>") mustBe "a<br/>b<br/>c<br/>d<br/>e"
+      val address = PropertyAddress("a", "b", "c", "d", "e")
+      formattedPropertyAddress(Some(address), "<br/>") mustBe "a<br/>b<br/>c<br/>d<br/>e"
     }
 
     "Given a Property Address with elements that have too many spaces it should generate a formatted string using the given interstitial" in {
-      val cta = PropertyAddress(" a ", " b ", " c ", " d ", " e ")
-      formattedPropertyAddress(Some(cta), "<br/>") mustBe "a<br/>b<br/>c<br/>d<br/>e"
+      val address = PropertyAddress(" a ", " b ", " c ", " d ", " e ")
+      formattedPropertyAddress(Some(address), "<br/>") mustBe "a<br/>b<br/>c<br/>d<br/>e"
     }
 
     "Given no Property Address it should generate am empty string" in {

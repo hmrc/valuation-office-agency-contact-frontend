@@ -26,10 +26,10 @@ class ConfirmationBusinessRatesViewSpec extends ViewBehaviours {
     val cd = ContactDetails("c1", "c2", "c3", "c4", "c5")
     val confirmCd = ConfirmedContactDetails(cd)
     val ec = "council_tax"
-    val ba = Some(PropertyAddress("a", "b", "c", "d", "f"))
+    val address = Some(PropertyAddress("a", "b", "c", "d", "f"))
     val bSub = "council_tax_home_business"
     val tellUs = TellUsMore("Hello")
-    var contact = Contact(confirmCd, ba, ec, bSub, tellUs.message)
+    var contact = Contact(confirmCd, address, ec, bSub, tellUs.message)
     val date = DateFormatter.todaysDate()
 
     def view = () => confirmationBusinessRates(frontendAppConfig, contact, date)(fakeRequest, messages)
