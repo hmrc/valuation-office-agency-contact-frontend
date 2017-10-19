@@ -78,8 +78,7 @@ class Navigator @Inject()() {
         throw new RuntimeException(msg)
       }
       case Right(addr) => answers.enquiryCategory match {
-        case Some("council_tax") => routes.ConfirmCouncilTaxController.onPageLoad()
-        case Some("business_rates") => routes.ConfirmBusinessRatesController.onPageLoad()
+        case Some("council_tax") | Some("business_rates") => routes.ConfirmationController.onPageLoad()
         case Some(sel) => {
           Logger.warn(s"Navigation for confirmation page reached with an unknown selection $sel of enquiry by controller")
           throw new RuntimeException(s"Navigation for confirmation page reached unknown selection $sel of enquiry by controller")

@@ -27,7 +27,9 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
 
   val messageKeyPrefix = "tellUsMore"
 
-  def createView = () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "")(fakeRequest, messages)
+  def createView = () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.ct-reference")(fakeRequest, messages)
+
+  def createAlternativeView = () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.ndr-reference")(fakeRequest, messages)
 
   def createViewUsingForm = (form: Form[TellUsMore]) => tellUsMore(frontendAppConfig, form, NormalMode, "")(fakeRequest, messages)
 
@@ -35,7 +37,7 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
 
   "TellUsMore view" must {
 
-    behave like normalPage(createView, messageKeyPrefix, "para", "para1", "para2", "para3", "para4")
+    behave like normalPage(createView, messageKeyPrefix, "para", "para1", "para2", "para3", "para4", "ct-reference")
 
     behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.TellUsMoreController.onSubmit(NormalMode).url, "message")
   }
@@ -44,6 +46,11 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
     val doc = asDocument(createViewUsingForm(TellUsMoreForm()))
     val continueButton = doc.getElementById("submit").text()
     assert(continueButton == messages("site.continue"))
+  }
+
+  "contain tellUsMore.ndr-reference paragraph" in {
+    val doc = asDocument(createAlternativeView())
+    assert(doc.toString.contains(messages("tellUsMore.ndr-reference")))
   }
 
   "has a link marked with site.back leading to the Contact Details Page" in {

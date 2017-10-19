@@ -39,7 +39,6 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(UnknownIdentifier, NormalMode)(mockUserAnswers) mustBe routes.IndexController.onPageLoad()
       }
 
-
       "return a function that goes to the council tax subcategory page when an enquiry category has been selected and the selection is council tax" in {
         when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
         navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
@@ -54,7 +53,6 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "test@email.com", "0208382737288"))
         navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.PropertyAddressController.onPageLoad(NormalMode)
       }
-
 
       "return a function that goes to the business rates subcategory page when an enquiry category has been selected and the selection is business rates" in {
         when (mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
@@ -96,7 +94,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.ValuationAdviceController.onPageLoad()
       }
 
-      "return a function that goes to the confirmation council tax page when the check your answers page has been submitted without errors and the enquiry is about council tax" in {
+      "return a function that goes to the confirmation page when the check your answers page has been submitted without errors and the enquiry is about council tax" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
         val ec = "council_tax"
         val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", "d", "f"))
@@ -105,21 +103,43 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
 
         val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", propertyAddress, tellUs)
 
-        navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmCouncilTaxController.onPageLoad()
+        navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmationController.onPageLoad()
       }
 
-      "return a function that goes to the confirmation business rates page when the check your answers page has been submitted without errors and the enquiry is about business rates" in {
+      "return a function that goes to the confirmation page when address line 2 is None and" +
+        " the check your answers page has been submitted without errors and the enquiry is about council tax" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val ec = "business_rates"
+        val propertyAddress = Some(PropertyAddress("a", None, "c", "d", "f"))
+        val councilTaxSubcategory = "council_tax_home_business"
+        val tellUs = TellUsMore("Hello")
+
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", propertyAddress, tellUs)
+
+        navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmationController.onPageLoad()
+      }
+
+      "return a function that goes to the confirmation page when the check your answers page has been submitted without errors and the enquiry is about business rates" in {
+        val cd = ContactDetails("a", "b", "c", "d", "e")
         val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", "d", "f"))
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, "", businessSubcategory, propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "business_rates", "", businessSubcategory, propertyAddress, tellUs)
 
-        navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmBusinessRatesController.onPageLoad()
+        navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmationController.onPageLoad()
       }
 
+      "return a function that goes to the confirmation page when address line 2 is None and " +
+        "the check your answers page has been submitted without errors and the enquiry is about business rates" in {
+        val cd = ContactDetails("a", "b", "c", "d", "e")
+        val propertyAddress = Some(PropertyAddress("a", None, "c", "d", "f"))
+        val businessSubcategory = "business_rates_rateable_value"
+        val tellUs = TellUsMore("Hello")
+
+        val userAnswers = new FakeUserAnswers(cd, "business_rates", "", businessSubcategory, propertyAddress, tellUs)
+
+        navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmationController.onPageLoad()
+      }
 
       "return a function that throws a runtime exception if no property address is in the model" in {
         when (mockUserAnswers.propertyAddress) thenReturn None
@@ -152,8 +172,6 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         when (mockUserAnswers.enquiryCategory) thenReturn Some("providing_lettings")
         navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.ProvidingLettingsController.onPageLoad()
       }
-
-
     }
 
     "in Check mode" must {

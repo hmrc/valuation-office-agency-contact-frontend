@@ -49,8 +49,7 @@ GET         /changeTellUsMore                      uk.gov.hmrc.valuationofficeag
 POST        /changeTellUsMore                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onSubmit(mode: Mode = CheckMode)
 
 
-GET         /confirmationCouncilTax                uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ConfirmCouncilTaxController.onPageLoad()
-GET         /confirmationBusinessRates             uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ConfirmBusinessRatesController.onPageLoad()
+GET         /confirmation                          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ConfirmationController.onPageLoad()
 
 GET         /valuationForTaxes                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ValuationForTaxesController.onPageLoad()
 GET         /housingBenefits                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.HousingBenefitsController.onPageLoad()

@@ -62,7 +62,6 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
           throw new RuntimeException(s"Navigation for Tell us more page reached with error $msg")
         }
       }
-
   }
 
   def onSubmit(mode: Mode) = (getData andThen requireData).async {
