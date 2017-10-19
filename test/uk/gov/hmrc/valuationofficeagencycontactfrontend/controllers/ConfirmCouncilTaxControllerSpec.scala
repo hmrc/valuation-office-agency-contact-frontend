@@ -43,7 +43,7 @@ class ConfirmCouncilTaxControllerSpec extends ControllerSpecBase with MockitoSug
     "return 200 and the correct view for a GET" in {
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val ec = "council_tax"
-      val propertyAddress = PropertyAddress("a", "b", "c", "d", "f")
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", "d", "f")
       val councilTaxSubcategory = "council_tax_home_business"
       val tellUs = TellUsMore("Hello")
       val confirmedContactDetails = ConfirmedContactDetails(cd)

@@ -33,22 +33,20 @@
 
     @components.heading("tellUsMore.heading")
 
-    <h2 class="heading-medium">@messages(enquiryKey)</h2>
-
     <p>@messages("tellUsMore.para")</p>
 
     <ul class="bullets">
         <li>@messages("tellUsMore.para1")</li>
         <li>@messages("tellUsMore.para2")</li>
+        <li>@messages("tellUsMore.para3")</li>
+        <li>@messages("tellUsMore.para4") @messages(enquiryKey)</li>
     </ul>
 
     @helpers.form(action = TellUsMoreController.onSubmit(mode), 'autoComplete -> "off") {
 
         @components.error_summary(form.errors)
 
-        @components.input_textarea(InputViewModel[TellUsMore]("message", form), label = messages("tellUsMore.message"))
-
-        <p>@messages("tellUsMore.para3")</p>
+        @components.input_textarea(InputViewModel[TellUsMore]("message", form), label = messages("tellUsMore.message"), labelClass = Some("visually-hidden"))
 
         @components.continue_button()
     }

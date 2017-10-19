@@ -26,7 +26,7 @@ class ConfirmationCouncilTaxViewSpec extends ViewBehaviours {
     val cd = ContactDetails("c1", "c2", "c3", "c4", "c5")
     val confirmCd = ConfirmedContactDetails(cd)
     val ec = "council_tax"
-    val address = Some(PropertyAddress("a", "b", "c", "d", "f"))
+    val address = Some(PropertyAddress("a", Some("b"), "c", "d", "f"))
     val cSub = "council_tax_home_business"
     val tellUs = TellUsMore("Hello")
     var contact = Contact(confirmCd, address, ec, cSub, tellUs.message)
@@ -36,7 +36,16 @@ class ConfirmationCouncilTaxViewSpec extends ViewBehaviours {
 
    "ConfirmationCouncilTax view" must {
 
-    behave like normalPage(view, "confirmation", "reference.ct", "enquirySummary", "whatHappensnext",  "para1", "para2", "para3", "section.enquiryType", "section.yourDetails", "section.propertyAddress" , "section.yourMessage")
+    behave like normalPage(view, "confirmation",
+    "para1",
+    "enquirySummary",
+    "whatHappensnext",
+    "para2",
+    "section.enquiryType",
+    "section.yourDetails",
+    "section.propertyAddress",
+    "section.yourMessage",
+    "section.date")
 
     "contain a print button " in {
       val doc = asDocument(view())
@@ -46,10 +55,6 @@ class ConfirmationCouncilTaxViewSpec extends ViewBehaviours {
       assert(href == "javascript:window.print()")
     }
 
-     "Given a property address it should contain a formatted address string" in {
-       val doc = asDocument(view())
-       assert(doc.toString.contains("a, b, c, d, f"))
-     }
 
      "Given a property address it should contain a formatted address string with <br/> interstitial" in {
        val doc = asDocument(view())
@@ -66,17 +71,13 @@ class ConfirmationCouncilTaxViewSpec extends ViewBehaviours {
        assert(doc.toString.contains("<br>c5"))
      }
 
-     "contain start again button " in {
+     "contain Back to GOVUK link " in {
        val doc = asDocument(view())
-       val startAgainButton = doc.getElementById("start-again").text()
-       assert(startAgainButton == messages("site.start-again"))
-     }
+       val startAgainButton = doc.getElementById("backToGovUk").text()
+       assert(startAgainButton == messages("site.govuk"))
+       val govukUrl = doc.select("a[id=backToGovUk]").attr("href")
+       govukUrl mustBe "http://www.gov.uk"
+   }
 
-     "The Start again button links to the Index Controller onPageLoadWithNewSession method" in {
-       val doc = asDocument(view())
-       val href = doc.getElementById("start-again").attr("href")
-       assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoadWithNewSession().url.toString)
-     }
   }
 }
-

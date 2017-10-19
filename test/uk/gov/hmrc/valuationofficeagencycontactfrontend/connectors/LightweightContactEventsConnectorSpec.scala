@@ -69,14 +69,16 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
   val subEnquiryCategory = "SEC"
   val contactDetails = ContactDetails("first", "last", "email", "email", "contactNumber")
   val confirmedContactDetails = ConfirmedContactDetails(contactDetails)
-  val propertyAddress = PropertyAddress("a", "b", "c", "d", "e")
+  val propertyAddress = PropertyAddress("a", Some("b"), "c", "d", "e")
+  val alternativePropertyAddress = PropertyAddress("a", None, "c", "d", "e")
 
   val contactModel = Contact(confirmedContactDetails, Some(propertyAddress), enquiryCategory, subEnquiryCategory, message)
+  val alternativeContactModel = Contact(confirmedContactDetails, Some(alternativePropertyAddress), enquiryCategory, subEnquiryCategory, message)
 
   "LightweightContactEvents Connector" when {
 
     "provided with a Contact Model Input" must {
-      "call the Microservice with the given JSON" in {
+      "call the Microservice with the given JSON for propertyAddress" in {
         implicit val headerCarrierNapper = ArgumentCaptor.forClass(classOf[HeaderCarrier])
         implicit val httpReadsNapper = ArgumentCaptor.forClass(classOf[HttpReads[Any]])
         implicit val jsonWritesNapper = ArgumentCaptor.forClass(classOf[Writes[Any]])
@@ -95,14 +97,41 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
         headersCaptor.getValue mustBe Seq(connector.jsonContentTypeHeader)
       }
 
-      "return a case class representing the received JSON when the send method is successful" in {
+      "return a 200 status when the send method is successfull using contactModel" in {
         val enquiryType = "council-tax"
 
         new LightweightContactEventsConnector(getHttpMock(200), configuration).send(contactModel).map {
           case Success(status) => status mustBe 200
           case Failure(e) => assert(false)
         }
+      }
 
+      "call the Microservice with the given JSON for alternativePropertyAddress" in {
+        implicit val headerCarrierNapper = ArgumentCaptor.forClass(classOf[HeaderCarrier])
+        implicit val httpReadsNapper = ArgumentCaptor.forClass(classOf[HttpReads[Any]])
+        implicit val jsonWritesNapper = ArgumentCaptor.forClass(classOf[Writes[Any]])
+        val urlCaptor = ArgumentCaptor.forClass(classOf[String])
+        val bodyCaptor = ArgumentCaptor.forClass(classOf[JsValue])
+        val headersCaptor = ArgumentCaptor.forClass(classOf[Seq[(String, String)]])
+        val httpMock = getHttpMock(200)
+
+        val connector = new LightweightContactEventsConnector(httpMock, configuration)
+        connector.send(alternativeContactModel)
+
+        verify(httpMock).POST(urlCaptor.capture, bodyCaptor.capture, headersCaptor.capture)(jsonWritesNapper.capture,
+          httpReadsNapper.capture, headerCarrierNapper.capture, any())
+        urlCaptor.getValue must endWith(s"${connector.baseSegment}create")
+        bodyCaptor.getValue mustBe Json.toJson(alternativeContactModel)
+        headersCaptor.getValue mustBe Seq(connector.jsonContentTypeHeader)
+      }
+
+      "return a 200 status when the send method is successful using alternativeContactModel" in {
+        val enquiryType = "council-tax"
+
+        new LightweightContactEventsConnector(getHttpMock(200), configuration).send(alternativeContactModel).map {
+          case Success(status) => status mustBe 200
+          case Failure(e) => assert(false)
+        }
       }
 
       "return a string representing the error when send method fails" in {

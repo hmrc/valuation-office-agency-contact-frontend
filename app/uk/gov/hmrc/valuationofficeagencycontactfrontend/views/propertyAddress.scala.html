@@ -39,7 +39,7 @@
 
         @components.input_text(InputViewModel[PropertyAddress]("addressLine1", form), label = messages("propertyAddress.addressLine1"))
 
-        @components.input_text(InputViewModel[PropertyAddress]("addressLine2", form), label = messages("propertyAddress.addressLine2"))
+        @components.input_text(InputViewModel[PropertyAddress]("addressLine2", form), label = messages("propertyAddress.addressLine2"), hint = Some(messages("hintText.optional")))
 
         @components.input_text(InputViewModel[PropertyAddress]("town", form), label = messages("propertyAddress.town"))
 

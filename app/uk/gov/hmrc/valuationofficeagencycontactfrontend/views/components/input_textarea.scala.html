@@ -19,6 +19,7 @@
 @(
 viewModel: InputViewModelBase,
 label: String,
+labelClass: Option[String] = Some("bold"),
 secondaryLabel: Option[String] = None,
 inputClass: Option[String] = None,
 hint: Option[String] = None,
@@ -27,8 +28,8 @@ charLimit: Option[Int] = None
 
 <div class="form-field @if(viewModel.errorKey != ""){form-field--error}">
     <label class="form-label" for="@{viewModel.id}">
-        <span class="bold">@label</span>
-        @if(hint != ""){
+        <span class="@labelClass">@label</span>
+    @if(hint != ""){
         <span class="form-hint">@hint</span>
         }
         @if(viewModel.errorKey != ""){

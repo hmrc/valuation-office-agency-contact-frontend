@@ -21,8 +21,11 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.PropertyAddress
 object AddressFormatters {
 
   def formattedPropertyAddress(address: Option[PropertyAddress], interstitial: String): String = {
-    address.fold("") {addr =>
-      insertInterstitials(Seq(addr.addressLine1, addr.addressLine2, addr.town, addr.county, addr.postcode), interstitial)
+    address.fold("") { addr =>
+      addr.addressLine2 match {
+        case Some(addressLine2) => insertInterstitials(Seq(addr.addressLine1, addressLine2, addr.town, addr.county, addr.postcode), interstitial)
+        case None => insertInterstitials(Seq(addr.addressLine1, addr.town, addr.county, addr.postcode), interstitial)
+      }
     }
   }
 
