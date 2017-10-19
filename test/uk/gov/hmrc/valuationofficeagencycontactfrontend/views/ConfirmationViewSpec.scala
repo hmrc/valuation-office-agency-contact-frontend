@@ -59,14 +59,14 @@ class ConfirmationViewSpec extends ViewBehaviours {
       assert(href == "javascript:window.print()")
     }
 
-    "Given a property address it should contain a formatted address string with <br/> interstitial" in {
+    "Given a property address with address line 2 (None) it should contain a formatted address string with <br/> interstitial" in {
       val doc = asDocument(alternativeView())
       assert(doc.toString.contains("<br>c"))
       assert(doc.toString.contains("<br>d"))
       assert(doc.toString.contains("<br>f"))
     }
 
-    "Given a property address with address line 2 (None) it should contain a formatted address string with <br/> interstitial" in {
+    "Given a property address it should contain a formatted address string with <br/> interstitial" in {
       val doc = asDocument(view())
       assert(doc.toString.contains("<br>b"))
       assert(doc.toString.contains("<br>c"))
