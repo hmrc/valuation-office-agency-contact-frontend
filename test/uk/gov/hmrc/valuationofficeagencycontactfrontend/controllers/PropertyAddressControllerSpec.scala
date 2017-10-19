@@ -48,12 +48,12 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(PropertyAddressId.toString -> Json.toJson(PropertyAddress("value 1", "value 2", "value 3", "value 4", "value 5")))
+      val validData = Map(PropertyAddressId.toString -> Json.toJson(PropertyAddress("value 1", Some("value 2"), "value 3", "value 4", "value 5")))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsString(PropertyAddressForm().fill(PropertyAddress("value 1", "value 2", "value 3", "value 4", "value 5")))
+      contentAsString(result) mustBe viewAsString(PropertyAddressForm().fill(PropertyAddress("value 1", Some("value 2"), "value 3", "value 4", "value 5")))
     }
 
     "redirect to the next page when valid data is submitted" in {

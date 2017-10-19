@@ -69,7 +69,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
   val subEnquiryCategory = "SEC"
   val contactDetails = ContactDetails("first", "last", "email", "email", "contactNumber")
   val confirmedContactDetails = ConfirmedContactDetails(contactDetails)
-  val propertyAddress = PropertyAddress("a", "b", "c", "d", "e")
+  val propertyAddress = PropertyAddress("a", Some("b"), "c", "d", "e")
 
   val contactModel = Contact(confirmedContactDetails, Some(propertyAddress), enquiryCategory, subEnquiryCategory, message)
 

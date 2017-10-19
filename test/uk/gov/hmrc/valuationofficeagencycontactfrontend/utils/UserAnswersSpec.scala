@@ -33,7 +33,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val ec = "council_tax"
-      val propertyAddress = Some(PropertyAddress("a", "b", "c", "d", "f"))
+      val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", "d", "f"))
       val councilTaxSubcategory = "council_tax_home_business"
       val tellUs = TellUsMore("Hello")
 
@@ -50,7 +50,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val ec = "business_rates"
-      val propertyAddress = Some(PropertyAddress("a", "b", "c", "d", "f"))
+      val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", "d", "f"))
       val businessSubcategory = "business_rates_rateable_value"
       val tellUs = TellUsMore("Hello")
 
