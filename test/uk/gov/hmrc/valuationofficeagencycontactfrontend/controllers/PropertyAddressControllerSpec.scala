@@ -90,5 +90,24 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad().url)
     }
+
+    "populate the view correctly on a GET when the question has previously been answered and address line 2 is None" in {
+      val validData = Map(PropertyAddressId.toString -> Json.toJson(PropertyAddress("value 1", None, "value 3", "value 4", "value 5")))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      contentAsString(result) mustBe viewAsString(PropertyAddressForm().fill(PropertyAddress("value 1", None, "value 3", "value 4", "value 5")))
+    }
+
+    "redirect to the next page when valid data is submitted and address line 2 is None" in {
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("addressLine1", "value 1"), ("town", "value 3"),
+        ("county", "value 4"), ("postcode", "value 5"))
+
+      val result = controller().onSubmit(NormalMode)(postRequest)
+
+      status(result) mustBe SEE_OTHER
+      redirectLocation(result) mustBe Some(onwardRoute.url)
+    }
   }
 }

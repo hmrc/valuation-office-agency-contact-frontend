@@ -60,4 +60,14 @@ class PropertyAddressSpec extends FlatSpec {
   "Property Postcode" should "shouldn't be AA11AA" in{
     assert(address.postcode != "AA11AA")
   }
+
+  val alternativeAddress = PropertyAddress("1", None, "London", "London", "ZZ11ZZ")
+
+  "Alternative Property address line 2" should "be None" in{
+    assert(alternativeAddress.addressLine2 == None)
+  }
+
+  "Alternative Property address line 2" should "shouldn't be Avenue" in{
+    assert(address.addressLine2 != None)
+  }
 }
