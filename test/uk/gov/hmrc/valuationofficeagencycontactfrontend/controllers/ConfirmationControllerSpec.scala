@@ -100,11 +100,11 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isBusinessRatesSelection = result.right.get.("tellUsMore.ndr-reference")
+      val isBusinessRatesSelection = result.right.get.startsWith("businessRatesSubcategory")
       isBusinessRatesSelection mustBe true
     }
 
-    "The enquiry key function produces a string with a tell us more ct-reference key when the enquiry category is council_tax" +
+    "The enquiry key function produces a string with a councilTaxSubcategory key when the enquiry category is council_tax" +
       " and the council_tax_band has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
@@ -112,7 +112,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_band")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.ct-reference")
+      val isCouncilTaxSelection = result.right.get.startsWith("councilTaxSubcategory")
       isCouncilTaxSelection mustBe true
     }
 
