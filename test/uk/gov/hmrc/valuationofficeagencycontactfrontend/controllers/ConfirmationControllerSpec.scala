@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
+import org.mockito.Mockito.when
 import org.scalatest.mockito.MockitoSugar
 import play.api.libs.json.{JsString, Json}
 import play.api.test.Helpers._
@@ -24,11 +25,12 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightCo
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.DateFormatter
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmation
 
 class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
+  val mockUserAnswers = mock[UserAnswers]
   val connector = injector.instanceOf[LightweightContactEventsConnector]
   def onwardRoute = routes.IndexController.onPageLoad()
 
@@ -57,7 +59,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
       status(result) mustBe OK
 
-      contentAsString(result) mustBe confirmation(frontendAppConfig, contact, date)(fakeRequest, messages).toString
+      contentAsString(result) mustBe confirmation(frontendAppConfig, contact, date, "councilTaxSubcategory")(fakeRequest, messages).toString
     }
 
     "return 200 and the correct view for a GET when address line 2 is None" in {
@@ -80,7 +82,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
       status(result) mustBe OK
 
-      contentAsString(result) mustBe confirmation(frontendAppConfig, contact, date)(fakeRequest, messages).toString
+      contentAsString(result) mustBe confirmation(frontendAppConfig, contact, date, "councilTaxSubcategory")(fakeRequest, messages).toString
     }
 
     "redirect to Session Expired for a GET if not existing data is found" in {
@@ -88,6 +90,40 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad().url)
+    }
+
+    "The enquiry key function produces a string with a businessRatesSubcategory string key when the enquiry category is business_rates" +
+      " and the business_rates_other has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", "a", "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isBusinessRatesSelection = result.right.get.("tellUsMore.ndr-reference")
+      isBusinessRatesSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more ct-reference key when the enquiry category is council_tax" +
+      " and the council_tax_band has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", "a", "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_band")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.ct-reference")
+      isCouncilTaxSelection mustBe true
+    }
+
+    "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn None
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", "a", "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      result mustBe Left("Unknown enquiry category in enquiry key")
     }
 
   }

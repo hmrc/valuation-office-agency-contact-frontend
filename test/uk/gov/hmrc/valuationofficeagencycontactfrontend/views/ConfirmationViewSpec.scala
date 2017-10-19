@@ -34,9 +34,9 @@ class ConfirmationViewSpec extends ViewBehaviours {
   val alternativeContact = Contact(confirmCd, alternativeAddress, ec, cSub, tellUs.message)
   val date = DateFormatter.todaysDate()
 
-  def view = () => confirmation(frontendAppConfig, contact, date)(fakeRequest, messages)
+  def view = () => confirmation(frontendAppConfig, contact, date, "councilTaxSubcategory")(fakeRequest, messages)
 
-  def alternativeView = () => confirmation(frontendAppConfig, alternativeContact, date)(fakeRequest, messages)
+  def alternativeView = () => confirmation(frontendAppConfig, alternativeContact, date, "councilTaxSubcategory")(fakeRequest, messages)
 
   "Confirmation view" must {
 

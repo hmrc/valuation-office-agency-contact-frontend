@@ -19,7 +19,7 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.ContactFormatter._
 
-@(appConfig: FrontendAppConfig, contact: Contact, date: String)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, contact: Contact, date: String, key: String)(implicit request: Request[_], messages: Messages)
 
 @main_template(
     title = messages("confirmation.title"),
@@ -38,7 +38,7 @@
         <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
             <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.enquiryType")</div>
             <div class="tabular-data__data tabular-data__data--8-12">@messages(s"enquiryCategory.${contact.enquiryCategory}") <br />
-                @messages(s"councilTaxSubcategory.${contact.subEnquiryCategory}")</div>
+                @messages(s"$key.${contact.subEnquiryCategory}")</div>
         </li>
         <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
             <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.yourDetails")</div>
