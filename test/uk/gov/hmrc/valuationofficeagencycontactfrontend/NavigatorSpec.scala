@@ -109,24 +109,22 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       "return a function that goes to the confirmation page when address line 2 is None and" +
         " the check your answers page has been submitted without errors and the enquiry is about council tax" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val ec = "council_tax"
         val propertyAddress = Some(PropertyAddress("a", None, "c", "d", "f"))
         val councilTaxSubcategory = "council_tax_home_business"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", propertyAddress, tellUs)
 
         navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmationController.onPageLoad()
       }
 
       "return a function that goes to the confirmation page when the check your answers page has been submitted without errors and the enquiry is about business rates" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val ec = "business_rates"
         val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", "d", "f"))
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, "", businessSubcategory, propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "business_rates", "", businessSubcategory, propertyAddress, tellUs)
 
         navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmationController.onPageLoad()
       }
@@ -134,12 +132,11 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       "return a function that goes to the confirmation page when address line 2 is None and " +
         "the check your answers page has been submitted without errors and the enquiry is about business rates" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val ec = "business_rates"
         val propertyAddress = Some(PropertyAddress("a", None, "c", "d", "f"))
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, "", businessSubcategory, propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "business_rates", "", businessSubcategory, propertyAddress, tellUs)
 
         navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmationController.onPageLoad()
       }
