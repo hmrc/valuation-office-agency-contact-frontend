@@ -24,15 +24,15 @@ import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmationCouncilTax
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmation
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter}
 
 @Singleton()
-class ConfirmCouncilTaxController @Inject()(val appConfig: FrontendAppConfig,
-                                            val messagesApi: MessagesApi,
-                                            val connector: LightweightContactEventsConnector,
-                                            getData: DataRetrievalAction,
-                                            requireData: DataRequiredAction) extends FrontendController with I18nSupport {
+class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
+                                       val messagesApi: MessagesApi,
+                                       val connector: LightweightContactEventsConnector,
+                                       getData: DataRetrievalAction,
+                                       requireData: DataRequiredAction) extends FrontendController with I18nSupport {
 
   def onPageLoad: Action[AnyContent] = (getData andThen requireData){ implicit request =>
 
@@ -40,6 +40,6 @@ class ConfirmCouncilTaxController @Inject()(val appConfig: FrontendAppConfig,
     val result = connector.send(contact)
     val date = DateFormatter.todaysDate()
 
-    Ok(confirmationCouncilTax(appConfig, contact, date))
+    Ok(confirmation(appConfig, contact, date))
   }
 }

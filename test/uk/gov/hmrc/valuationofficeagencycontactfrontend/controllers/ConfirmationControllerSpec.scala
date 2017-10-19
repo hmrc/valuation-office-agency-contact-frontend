@@ -24,30 +24,31 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightCo
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmationBusinessRates
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.DateFormatter
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmation
 
-class ConfirmBusinessRatesControllerSpec extends ControllerSpecBase with MockitoSugar {
+class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val connector = injector.instanceOf[LightweightContactEventsConnector]
   def onwardRoute = routes.IndexController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new ConfirmBusinessRatesController(frontendAppConfig, messagesApi, connector, dataRetrievalAction, new DataRequiredActionImpl)
+    new ConfirmationController(frontendAppConfig, messagesApi, connector, dataRetrievalAction, new DataRequiredActionImpl)
 
-  "Confirm Business Rates Controller" must {
+  "Confirmation Controller" must {
 
     "return 200 and the correct view for a GET" in {
       val cd = ContactDetails("a", "b", "c", "d", "e")
-      val confirmedContactDetails = ConfirmedContactDetails(cd)
-      val ec = "business_rates"
-      val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", "d", "f"))
-      val businessSubcategory = "business_rates_rateable_value"
+      val ec = "council_tax"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", "d", "f")
+      val councilTaxSubcategory = "council_tax_home_business"
       val tellUs = TellUsMore("Hello")
+      val confirmedContactDetails = ConfirmedContactDetails(cd)
       val date = DateFormatter.todaysDate()
 
-      val contact = Contact(confirmedContactDetails, propertyAddress, ec, businessSubcategory, tellUs.message)
-      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), BusinessRatesSubcategoryId.toString -> JsString(businessSubcategory),
+      val contact = Contact(confirmedContactDetails, Some(propertyAddress), ec, councilTaxSubcategory, tellUs.message)
+
+      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
         ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
@@ -56,7 +57,30 @@ class ConfirmBusinessRatesControllerSpec extends ControllerSpecBase with Mockito
 
       status(result) mustBe OK
 
-      contentAsString(result) mustBe confirmationBusinessRates(frontendAppConfig, contact, date)(fakeRequest, messages).toString
+      contentAsString(result) mustBe confirmation(frontendAppConfig, contact, date)(fakeRequest, messages).toString
+    }
+
+    "return 200 and the correct view for a GET when address line 2 is None" in {
+      val cd = ContactDetails("a", "b", "c", "d", "e")
+      val ec = "council_tax"
+      val propertyAddress = PropertyAddress("a", None, "c", "d", "f")
+      val councilTaxSubcategory = "council_tax_home_business"
+      val tellUs = TellUsMore("Hello")
+      val confirmedContactDetails = ConfirmedContactDetails(cd)
+      val date = DateFormatter.todaysDate()
+
+      val contact = Contact(confirmedContactDetails, Some(propertyAddress), ec, councilTaxSubcategory, tellUs.message)
+
+      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+
+      contentAsString(result) mustBe confirmation(frontendAppConfig, contact, date)(fakeRequest, messages).toString
     }
 
     "redirect to Session Expired for a GET if not existing data is found" in {
