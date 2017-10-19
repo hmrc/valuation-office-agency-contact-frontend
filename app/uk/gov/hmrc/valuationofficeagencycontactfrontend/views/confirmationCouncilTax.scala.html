@@ -24,18 +24,13 @@
 @main_template(
     title = messages("confirmation.title"),
     appConfig = appConfig,
-    bodyClasses = Some("full-width")) {
+    bodyClasses = Some("")) {
     <br />
     <br />
     <div class="transaction-banner--complete">
         <h1 class="transaction-banner__heading">@messages("confirmation.heading")</h1>
-        <p>Submitted: @date</p>
-        <p>@messages("confirmation.reference.ct")</p>
-        <p>@formattedPropertyAddress(councilContact.propertyAddress, ", ")</p>
+        <p>@messages("confirmation.para1")</p>
     </div>
-
-    <p class="text">@messages("confirmation.para1")</p>
-    <p class="text">@messages("confirmation.para2")</p>
 
     <h2 class="heading-medium">@messages("confirmation.enquirySummary")</h2>
 
@@ -59,13 +54,17 @@
             <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.yourMessage")</div>
             <div class="tabular-data__data tabular-data__data--8-12  word-break">@councilContact.message</div>
         </li>
+        <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
+            <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.date")</div>
+            <div class="tabular-data__data tabular-data__data--8-12  word-break">@date</div>
+        </li>
     </ul>
     <br />
     <h2 class="heading-medium">@messages("confirmation.whatHappensnext")</h2>
-    <p class="text">@messages("confirmation.para3")</p>
+    <p class="text">@messages("confirmation.para2")</p>
 
     <p><a href="javascript:window.print()" class="button print-hidden js-visible" id="print-button">@messages("site.print.button")</a></p>
     <br />
-    <p><a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoadWithNewSession().url id="start-again" class="button">@messages("site.start-again")</a></p>
+    <p><a href="http://www.gov.uk" id="backToGovUk">@messages("site.govuk")</a></p>
 
 }
