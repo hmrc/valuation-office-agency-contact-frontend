@@ -25,7 +25,7 @@ object PropertyAddressForm {
   def apply(): Form[PropertyAddress] = Form(
     mapping(
       "addressLine1" -> nonEmptyText,
-      "addressLine2" -> nonEmptyText,
+      "addressLine2" -> optional(text),
       "town" -> nonEmptyText,
       "county" -> nonEmptyText,
       "postcode" -> nonEmptyText

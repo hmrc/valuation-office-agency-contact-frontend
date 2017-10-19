@@ -40,37 +40,10 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
                                      getData: DataRetrievalAction,
                                      requireData: DataRequiredAction) extends FrontendController with I18nSupport {
 
-  def councilTaxKey(answers: UserAnswers): Either[String, String] = {
-
-    answers.councilTaxSubcategory match {
-      case Some("council_tax_band") => Right("councilTaxSubcategory.council_tax_band")
-      case Some("council_tax_calculated") => Right("councilTaxSubcategory.council_tax_calculated")
-      case Some("council_tax_changes") => Right("councilTaxSubcategory.council_tax_changes")
-      case Some("council_tax_challenge") => Right("councilTaxSubcategory.council_tax_challenge")
-      case Some("council_tax_other") => Right("councilTaxSubcategory.council_tax_other")
-      case Some(sel) => Left(sel)
-      case None => Left("Returned None from council tax subcategory")
-    }
-  }
-
-  def businessRatesKey(answers: UserAnswers): Either[String, String] = {
-
-    answers.businessRatesSubcategory match {
-      case Some("business_rates_rateable_value") => Right("businessRatesSubcategory.business_rates_rateable_value")
-      case Some("business_rates_business_rates") => Right("businessRatesSubcategory.business_rates_business_rates")
-      case Some("business_rates_update_details") => Right("businessRatesSubcategory.business_rates_update_details")
-      case Some("business_rates_challenge") => Right("businessRatesSubcategory.business_rates_challenge")
-      case Some("business_rates_other") => Right("businessRatesSubcategory.business_rates_other")
-      case Some(sel) => Left(sel)
-      case None => Left("Returned None from business rates subcategory")
-    }
-  }
-
   def enquiryKey(answers: UserAnswers): Either[String, String] = {
-
     answers.enquiryCategory match {
-      case Some("council_tax") => councilTaxKey(answers)
-      case Some("business_rates") => businessRatesKey(answers)
+      case Some("council_tax") => Right("tellUsMore.ct-reference")
+      case Some("business_rates") => Right("tellUsMore.ndr-reference")
       case _ => Left("Unknown enquiry category in enquiry key")
     }
   }

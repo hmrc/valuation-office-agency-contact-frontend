@@ -41,7 +41,7 @@ class ConfirmBusinessRatesControllerSpec extends ControllerSpecBase with Mockito
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val ec = "business_rates"
-      val propertyAddress = Some(PropertyAddress("a", "b", "c", "d", "f"))
+      val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", "d", "f"))
       val businessSubcategory = "business_rates_rateable_value"
       val tellUs = TellUsMore("Hello")
       val date = DateFormatter.todaysDate()

@@ -192,10 +192,13 @@ propertyAddress.checkYourAnswersLabel = Property Details
 tellUsMore.title = Tell Us More
 tellUsMore.heading = Tell us more about your enquiry
 tellUsMore.message = Your message
-tellUsMore.para = Help with what to include:
-tellUsMore.para1 = Your relationship to the property (for example, owner or tenant)
-tellUsMore.para2 = How long you have been at this address
-tellUsMore.para3 = We do not require attachments at this time, if required, we will contact you.
+tellUsMore.para = To deal with your enquiry quickly, you'll need to provide:
+tellUsMore.para1 = What your enquiry is about
+tellUsMore.para2 = Your relationship to the property (for example, owner or tenant)
+tellUsMore.para3 = How long you have been at this address
+tellUsMore.para4 = Property reference number
+tellUsMore.ct-reference = (this can be found on your Council Tax bill)
+tellUsMore.ndr-reference = (this can be found on your business rates bill)
 tellUsMore.checkYourAnswersLabel = Enquiry
 
 confirmation.title = Confirmation

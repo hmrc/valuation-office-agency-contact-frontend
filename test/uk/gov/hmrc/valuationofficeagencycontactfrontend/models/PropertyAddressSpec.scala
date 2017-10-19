@@ -19,14 +19,14 @@ import org.scalatest.FlatSpec
 
 class PropertyAddressSpec extends FlatSpec {
 
-   val address = PropertyAddress("1", "High Street", "London", "London", "ZZ11ZZ")
+   val address = PropertyAddress("1", Some("High Street"), "London", "London", "ZZ11ZZ")
 
   "Property address line 1" should "be 1" in{
     assert(address.addressLine1 == "1")
   }
 
   "Property address line 2" should "be High Street" in{
-    assert(address.addressLine2 == "High Street")
+    assert(address.addressLine2 == Some("High Street"))
   }
 
   "Property Town" should "be London" in{
@@ -46,7 +46,7 @@ class PropertyAddressSpec extends FlatSpec {
   }
 
   "Property address line 2" should "shouldn't be Avenue" in{
-    assert(address.addressLine2 != "Avenue")
+    assert(address.addressLine2 != Some("Avenue"))
   }
 
   "Property Town" should "shouldn't be" in{
@@ -59,5 +59,15 @@ class PropertyAddressSpec extends FlatSpec {
 
   "Property Postcode" should "shouldn't be AA11AA" in{
     assert(address.postcode != "AA11AA")
+  }
+
+  val alternativeAddress = PropertyAddress("1", None, "London", "London", "ZZ11ZZ")
+
+  "Alternative Property address line 2" should "be None" in{
+    assert(alternativeAddress.addressLine2 == None)
+  }
+
+  "Alternative Property address line 2" should "shouldn't be Avenue" in{
+    assert(address.addressLine2 != None)
   }
 }
