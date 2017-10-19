@@ -122,7 +122,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       "return a function that goes to the confirmation page when the check your answers page has been submitted without errors and the enquiry is about business rates" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
         val ec = "business_rates"
-        val propertyAddress = Some(PropertyAddress("a", None, "c", "d", "f"))
+        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", "d", "f"))
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
 
@@ -135,7 +135,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         "the check your answers page has been submitted without errors and the enquiry is about business rates" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
         val ec = "business_rates"
-        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", "d", "f"))
+        val propertyAddress = Some(PropertyAddress("a", None, "c", "d", "f"))
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
 
