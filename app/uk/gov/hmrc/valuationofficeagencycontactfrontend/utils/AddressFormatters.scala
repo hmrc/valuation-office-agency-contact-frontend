@@ -22,15 +22,18 @@ object AddressFormatters {
 
   def formattedPropertyAddress(address: Option[PropertyAddress], interstitial: String): String = {
     address.fold("") { addr =>
-      addr.addressLine2 match {
-        case Some(addressLine2) => insertInterstitials(Seq(addr.addressLine1, addressLine2, addr.town, addr.county, addr.postcode), interstitial)
-        case None => insertInterstitials(Seq(addr.addressLine1, addr.town, addr.county, addr.postcode), interstitial)
-      }
+      insertInterstitials(Seq(Some(addr.addressLine1), addr.addressLine2, Some(addr.town), addr.county, Some(addr.postcode)), interstitial)
     }
   }
 
-  private[utils] def insertInterstitials(address: Seq[String], interstitial: String): String = {
-    if (address.isEmpty) "" else address.head.trim + address.tail.fold("") { (acc, elem) => acc + interstitial + elem.trim }
+  private[utils] def insertInterstitials(address: Seq[Option[String]], interstitial: String): String = {
+    if (address.isEmpty) "" else trim(address.head, "") + address.tail.foldLeft("") {(acc, elem) => acc + trim(elem, interstitial)}
   }
 
+  def trim(ostr: Option[String], interstitial: String): String = {
+    ostr match {
+      case Some(s) => interstitial + s.trim
+      case None => ""
+    }
+  }
 }

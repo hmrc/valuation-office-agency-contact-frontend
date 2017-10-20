@@ -62,7 +62,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
     "The sections function produces sections with the business rates check your answers section when the enquiry category is business_rates" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("a")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
@@ -72,10 +72,11 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
         checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress, checkYourAnswersHelper.tellUsMore).flatten)))
     }
 
-    "The sections function produces sections with the business rates check your answers section when the enquiry category is business_rates and address line 2 is None" in {
+    "The sections function produces sections with the business rates check your answers section when the enquiry category is business_rates " +
+      "and addressLine2 and county are None" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("a")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
@@ -89,7 +90,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("a")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
@@ -99,11 +100,12 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
         checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress, checkYourAnswersHelper.tellUsMore).flatten)))
     }
 
-    "The sections function produces sections with the council tax check your answers section when the enquiry category is council_tax and address line 2 is None" in {
+    "The sections function produces sections with the council tax check your answers section when the enquiry category is council_tax " +
+      "and addressLine2 and county are None" in {
 
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("a")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 

@@ -18,21 +18,30 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import javax.inject.{Inject, Singleton}
 
+import play.api.Logger
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmationCouncilTax
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmation
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, UserAnswers}
 
 @Singleton()
-class ConfirmCouncilTaxController @Inject()(val appConfig: FrontendAppConfig,
-                                            val messagesApi: MessagesApi,
-                                            val connector: LightweightContactEventsConnector,
-                                            getData: DataRetrievalAction,
-                                            requireData: DataRequiredAction) extends FrontendController with I18nSupport {
+class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
+                                       val messagesApi: MessagesApi,
+                                       val connector: LightweightContactEventsConnector,
+                                       getData: DataRetrievalAction,
+                                       requireData: DataRequiredAction) extends FrontendController with I18nSupport {
+
+  def enquiryKey(answers: UserAnswers): Either[String, String] = {
+    answers.enquiryCategory match {
+      case Some("council_tax") => Right("councilTaxSubcategory")
+      case Some("business_rates") => Right("businessRatesSubcategory")
+      case _ => Left("Unknown enquiry category in enquiry key")
+    }
+  }
 
   def onPageLoad: Action[AnyContent] = (getData andThen requireData){ implicit request =>
 
@@ -40,6 +49,13 @@ class ConfirmCouncilTaxController @Inject()(val appConfig: FrontendAppConfig,
     val result = connector.send(contact)
     val date = DateFormatter.todaysDate()
 
-    Ok(confirmationCouncilTax(appConfig, contact, date))
+    enquiryKey(request.userAnswers) match {
+      case Right(key) => Ok(confirmation(appConfig, contact, date, key))
+      case Left(msg) => {
+        Logger.warn(s"Navigation for Confirmation page reached with error $msg")
+        throw new RuntimeException(s"Navigation for Confirmation page reached with error $msg")
+      }
+    }
+
   }
 }

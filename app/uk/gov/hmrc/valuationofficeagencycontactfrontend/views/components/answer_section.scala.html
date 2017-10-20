@@ -24,7 +24,7 @@
 }
 
 <ul class="tabular-data tabular-data--list">
-    @for(row <- answerSection.rows){
-        @components.answer_row(row)
+    @for((row, index) <- answerSection.rows.zipWithIndex){
+        @components.answer_row(row, index)
     }
 </ul>

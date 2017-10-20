@@ -33,11 +33,11 @@
 
     <h2 class="heading-medium">@messages("checkYourAnswers.subheading")</h2>
 
-    @for(section <- answerSections) {
+    @for((section, index) <- answerSections.zipWithIndex) {
         @{
             section match {
                 case a: AnswerSection => components.answer_section(a)
-                case r: RepeaterAnswerSection => components.repeater_answer_section(r)
+                case r: RepeaterAnswerSection => components.repeater_answer_section(r, index)
             }
         }
     }

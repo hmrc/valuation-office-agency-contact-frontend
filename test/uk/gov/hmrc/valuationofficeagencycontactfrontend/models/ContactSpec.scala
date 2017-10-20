@@ -27,7 +27,18 @@ class ContactSpec extends SpecBase {
 
   "Given a message, enquiryCategory and subEnquiryCategory strings, contact details and a property address produce a " +
     "contact model with the property address" in {
-    val propertyAddress = PropertyAddress("a", Some("b"), "c", "d", "e")
+    val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "e")
+    val result = Contact(message, enquiryCategory, subEnquiryCategory, contactDetails, propertyAddress)
+
+    result.propertyAddress mustBe Some(propertyAddress)
+    result.message mustBe message
+    result.enquiryCategory mustBe enquiryCategory
+    result.subEnquiryCategory mustBe subEnquiryCategory
+    result.contact mustBe confirmedContactDetails
+  }
+
+  "contact model with the property address containing optional fields as None" in {
+    val propertyAddress = PropertyAddress("a", None, "c", None, "e")
     val result = Contact(message, enquiryCategory, subEnquiryCategory, contactDetails, propertyAddress)
 
     result.propertyAddress mustBe Some(propertyAddress)
