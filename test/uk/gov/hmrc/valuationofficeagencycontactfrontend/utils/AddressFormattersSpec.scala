@@ -49,18 +49,24 @@ class AddressFormattersSpec extends SpecBase {
     }
 
     "Given a Sequence with three strings insert the interstitials" in {
-      insertInterstitials(Seq("a", "b", "c"), ",") mustBe "a,b,c"
+      insertInterstitials(Seq(Some("a"), Some("b"), Some("c")), ",") mustBe "a,b,c"
     }
 
     "Given an empty sequence return an empty String" in {
       insertInterstitials(Seq(), ",") mustBe ""
-
     }
 
     "Given a sequence of strings that have leading or trailing spaces return the formatted string without the leading or trailing spaces" in {
-      insertInterstitials(Seq(" a ", " b ", " c "), ",") mustBe "a,b,c"
+      insertInterstitials(Seq(Some(" a "), Some(" b "), Some(" c ")), ",") mustBe "a,b,c"
     }
 
+    "Given an Option String with spaces trim it" in {
+      trim(Some("   a   "), ",") mustBe ",a"
+    }
+
+    "Given a None in place of an optional string return empty string" in {
+      trim(None, ", ") mustBe ""
+    }
   }
 }
 
