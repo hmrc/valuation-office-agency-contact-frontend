@@ -80,7 +80,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       }
 
       "return a function that goes to the tell us more page when the property address details form has been submitted without errors" in {
-        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", "Some county", "AA11AA"))
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
         navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.TellUsMoreController.onPageLoad(NormalMode)
       }
 
@@ -97,7 +97,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       "return a function that goes to the confirmation page when the check your answers page has been submitted without errors and the enquiry is about council tax" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
         val ec = "council_tax"
-        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", "d", "f"))
+        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", Some("d"), "f"))
         val councilTaxSubcategory = "council_tax_home_business"
         val tellUs = TellUsMore("Hello")
 
@@ -106,10 +106,10 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmationController.onPageLoad()
       }
 
-      "return a function that goes to the confirmation page when address line 2 is None and" +
+      "return a function that goes to the confirmation page when addressLine2 and county are None and" +
         " the check your answers page has been submitted without errors and the enquiry is about council tax" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val propertyAddress = Some(PropertyAddress("a", None, "c", "d", "f"))
+        val propertyAddress = Some(PropertyAddress("a", None, "c", None, "f"))
         val councilTaxSubcategory = "council_tax_home_business"
         val tellUs = TellUsMore("Hello")
 
@@ -120,7 +120,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
 
       "return a function that goes to the confirmation page when the check your answers page has been submitted without errors and the enquiry is about business rates" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", "d", "f"))
+        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", Some("d"), "f"))
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
 
@@ -129,10 +129,10 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmationController.onPageLoad()
       }
 
-      "return a function that goes to the confirmation page when address line 2 is None and " +
+      "return a function that goes to the confirmation page when addressLine2 and county are None and " +
         "the check your answers page has been submitted without errors and the enquiry is about business rates" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val propertyAddress = Some(PropertyAddress("a", None, "c", "d", "f"))
+        val propertyAddress = Some(PropertyAddress("a", None, "c", None, "f"))
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
 

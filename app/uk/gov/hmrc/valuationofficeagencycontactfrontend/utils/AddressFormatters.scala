@@ -22,7 +22,7 @@ object AddressFormatters {
 
   def formattedPropertyAddress(address: Option[PropertyAddress], interstitial: String): String = {
     address.fold("") { addr =>
-      insertInterstitials(Seq(Some(addr.addressLine1), addr.addressLine2, Some(addr.town), Some(addr.county), Some(addr.postcode)), interstitial)
+      insertInterstitials(Seq(Some(addr.addressLine1), addr.addressLine2, Some(addr.town), addr.county, Some(addr.postcode)), interstitial)
     }
   }
 

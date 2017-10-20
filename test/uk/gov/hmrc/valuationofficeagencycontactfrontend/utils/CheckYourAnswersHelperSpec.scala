@@ -36,26 +36,24 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
       "tellUsMore function should return an Answer Row containing tellUsMore.checkYourAnswersLabel label and a message" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val ec = "council_tax"
-        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", "d", "f"))
+        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", Some("d"), "f"))
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", propertyAddress, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.tellUsMore
         result mustBe Some(AnswerRow("tellUsMore.checkYourAnswersLabel", "Hello", false, routes.TellUsMoreController.onPageLoad(CheckMode).url))
       }
 
-      "tellUsMore function should return an Answer Row containing tellUsMore.checkYourAnswersLabel label and a message when address line 2 is None" in {
+      "tellUsMore function should return an Answer Row containing tellUsMore.checkYourAnswersLabel label and a message when address line 2 and county are None" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val ec = "council_tax"
-        val propertyAddress = Some(PropertyAddress("a", None, "c", "d", "f"))
+        val propertyAddress = Some(PropertyAddress("a", None, "c", None, "f"))
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", propertyAddress, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.tellUsMore
@@ -72,8 +70,8 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
       "enquiryCategory function should return an Answer Row containing enquiryCategory.checkYourAnswersLabel label and a enquiry category option" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
+        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", Some("d"), "f"))
         val ec = "council_tax"
-        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", "d", "f"))
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
@@ -84,10 +82,10 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         result mustBe Some(AnswerRow("enquiryCategory.checkYourAnswersLabel", s"enquiryCategory.$ec", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url))
       }
 
-      "enquiryCategory function should return an Answer Row containing enquiryCategory.checkYourAnswersLabel label and a enquiry category option when address line 2 is None" in {
+      "enquiryCategory function should return an Answer Row containing enquiryCategory.checkYourAnswersLabel label and a enquiry category option when address line 2 and county are None" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
         val ec = "council_tax"
-        val propertyAddress = Some(PropertyAddress("a", None, "c", "d", "f"))
+        val propertyAddress = Some(PropertyAddress("a", None, "c", None, "f"))
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
@@ -108,26 +106,25 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
       "councilTaxSubcategory function should return an Answer Row containing councilTaxSubcategory.checkYourAnswersLabel label and a council tax subcategory option" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val ec = "council_tax"
-        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", "d", "f"))
+        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", Some("d"), "f"))
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", propertyAddress, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.councilTaxSubcategory
         result mustBe Some(AnswerRow("councilTaxSubcategory.checkYourAnswersLabel", s"councilTaxSubcategory.$councilTaxSubcategory", true, routes.CouncilTaxSubcategoryController.onPageLoad(CheckMode).url))
       }
 
-      "councilTaxSubcategory function should return an Answer Row containing councilTaxSubcategory.checkYourAnswersLabel label and a council tax subcategory option when address line 2 is None" in {
+      "councilTaxSubcategory function should return an Answer Row containing councilTaxSubcategory.checkYourAnswersLabel label " +
+        "and a council tax subcategory option when address line 2 and county are None" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val ec = "council_tax"
-        val propertyAddress = Some(PropertyAddress("a", None, "c", "d", "f"))
+        val propertyAddress = Some(PropertyAddress("a", None, "c", None, "f"))
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", propertyAddress, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.councilTaxSubcategory
@@ -144,26 +141,25 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
       "businessRatesSubcategory function should return an Answer Row containing businessRatesSubcategory.checkYourAnswersLabel label and a business rates subcategory option" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val ec = "business_rates"
-        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", "d", "f"))
+        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", Some("d"), "f"))
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, "", businessSubcategory, propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "business_rates", "", businessSubcategory, propertyAddress, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.businessRatesSubcategory
         result mustBe Some(AnswerRow("businessRatesSubcategory.checkYourAnswersLabel", s"businessRatesSubcategory.$businessSubcategory", true, routes.BusinessRatesSubcategoryController.onPageLoad(CheckMode).url))
       }
 
-      "businessRatesSubcategory function should return an Answer Row containing businessRatesSubcategory.checkYourAnswersLabel label and a business rates subcategory option when address line 2 is None" in {
+      "businessRatesSubcategory function should return an Answer Row containing businessRatesSubcategory.checkYourAnswersLabel label " +
+        "and a business rates subcategory option when address line 2 and county are None" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val ec = "business_rates"
-        val propertyAddress = Some(PropertyAddress("a", None, "c", "d", "f"))
+        val propertyAddress = Some(PropertyAddress("a", None, "c", None, "f"))
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, "", businessSubcategory, propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "business_rates", "", businessSubcategory, propertyAddress, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.businessRatesSubcategory
@@ -180,26 +176,25 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
       "propertyAddress function should return an Answer Row containing propertyAddress.checkYourAnswersLabel label and a council tax address" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val ec = "council_tax"
-        val address = PropertyAddress("a", Some("b"), "c", "d", "f")
+        val address = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", Some(address), tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", Some(address), tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.propertyAddress
         result mustBe Some(AnswerRow("propertyAddress.checkYourAnswersLabel", formattedPropertyAddress(userAnswers.propertyAddress, "<br>"), false, routes.PropertyAddressController.onPageLoad(CheckMode).url))
       }
 
-      "propertyAddress function should return an Answer Row containing propertyAddress.checkYourAnswersLabel label and a council tax address when address line 2 is None" in {
+      "propertyAddress function should return an Answer Row containing propertyAddress.checkYourAnswersLabel label " +
+        "and a council tax address when address line 2 and county are None" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val ec = "council_tax"
-        val address = PropertyAddress("a", None, "c", "d", "f")
+        val address = PropertyAddress("a", None, "c", None, "f")
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", Some(address), tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", Some(address), tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.propertyAddress
@@ -216,22 +211,22 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
       "contactDetails function should return an Answer Row containing contactDetails.checkYourAnswersLabel label and a contact details object" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val ec = "council_tax"
-        val address = PropertyAddress("a", Some("b"), "c", "d", "f")
+        val address = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", Some(address), tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", Some(address), tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.contactDetails
         result mustBe Some(AnswerRow("contactDetails.checkYourAnswersLabel", formattedContactDetails(userAnswers.contactDetails, "<br>"), false, routes.ContactDetailsController.onPageLoad(CheckMode).url))
       }
 
-      "contactDetails function should return an Answer Row containing contactDetails.checkYourAnswersLabel label and a contact details object when address line 2 is None" in {
+      "contactDetails function should return an Answer Row containing contactDetails.checkYourAnswersLabel label and a " +
+        "contact details object when address line 2 and county are None" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
         val ec = "council_tax"
-        val address = PropertyAddress("a", None, "c", "d", "f")
+        val address = PropertyAddress("a", None, "c", None, "f")
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 

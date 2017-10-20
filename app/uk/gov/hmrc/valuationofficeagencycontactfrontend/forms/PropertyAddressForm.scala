@@ -27,7 +27,7 @@ object PropertyAddressForm {
       "addressLine1" -> nonEmptyText,
       "addressLine2" -> optional(text),
       "town" -> nonEmptyText,
-      "county" -> nonEmptyText,
+      "county" -> optional(text),
       "postcode" -> nonEmptyText
     )(PropertyAddress.apply)(PropertyAddress.unapply)
   )
