@@ -165,7 +165,7 @@ councilTaxSubcategory.council_tax_changes = There have been changes to my proper
 councilTaxSubcategory.council_tax_challenge = I want to challenge my Council Tax band
 councilTaxSubcategory.council_tax_property = My property is in poor condition
 councilTaxSubcategory.council_tax_other = Other Council Tax enquiries
-councilTaxSubcategory.checkYourAnswersLabel = Enquiry details
+councilTaxSubcategory.checkYourAnswersLabel = Enquiry Details
 
 businessRatesSubcategory.title = What do you want to know about business rates?
 businessRatesSubcategory.heading = What do you want to know about business rates?
@@ -174,7 +174,7 @@ businessRatesSubcategory.business_rates_business_rates = How are business rates 
 businessRatesSubcategory.business_rates_update_details = I want to check or update my property details
 businessRatesSubcategory.business_rates_challenge = I want to challenge my valuation
 businessRatesSubcategory.business_rates_other = Other business rates enquiries
-businessRatesSubcategory.checkYourAnswersLabel = Enquiry details
+businessRatesSubcategory.checkYourAnswersLabel = Enquiry Details
 
 checkAndChallenge.title = Check and challenge
 checkAndChallenge.heading = You will now be transferred to the VOA’s Find, Check and Challenge Business Rates service.

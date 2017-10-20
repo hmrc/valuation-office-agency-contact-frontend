@@ -26,8 +26,8 @@ class ConfirmationViewSpec extends ViewBehaviours {
   val cd = ContactDetails("c1", "c2", "c3", "c4", "c5")
   val confirmCd = ConfirmedContactDetails(cd)
   val ec = "council_tax"
-  val address = Some(PropertyAddress("a", Some("b"), "c", "d", "f"))
-  val alternativeAddress = Some(PropertyAddress("a", None, "c", "d", "f"))
+  val address = Some(PropertyAddress("a", Some("b"), "c", Some("d"), "f"))
+  val alternativeAddress = Some(PropertyAddress("a", None, "c", None, "f"))
   val cSub = "council_tax_home_business"
   val tellUs = TellUsMore("Hello")
   val contact = Contact(confirmCd, address, ec, cSub, tellUs.message)
@@ -59,10 +59,9 @@ class ConfirmationViewSpec extends ViewBehaviours {
       assert(href == "javascript:window.print()")
     }
 
-    "Given a property address with address line 2 (None) it should contain a formatted address string with <br/> interstitial" in {
+    "Given a property address with address line 2 and county as None it should contain a formatted address string with <br/> interstitial" in {
       val doc = asDocument(alternativeView())
       assert(doc.toString.contains("<br>c"))
-      assert(doc.toString.contains("<br>d"))
       assert(doc.toString.contains("<br>f"))
     }
 

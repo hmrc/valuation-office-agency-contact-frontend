@@ -43,7 +43,7 @@
 
         @components.input_text(InputViewModel[PropertyAddress]("town", form), label = messages("propertyAddress.town"))
 
-        @components.input_text(InputViewModel[PropertyAddress]("county", form), label = messages("propertyAddress.county"))
+        @components.input_text(InputViewModel[PropertyAddress]("county", form), label = messages("propertyAddress.county"), hint = Some(messages("hintText.optional")))
 
         @components.input_text(InputViewModel[PropertyAddress]("postcode", form), label = messages("propertyAddress.postcode"))
 

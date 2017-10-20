@@ -42,7 +42,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
     "return 200 and the correct view for a GET" in {
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val ec = "council_tax"
-      val propertyAddress = PropertyAddress("a", Some("b"), "c", "d", "f")
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
       val councilTaxSubcategory = "council_tax_home_business"
       val tellUs = TellUsMore("Hello")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
@@ -62,10 +62,10 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       contentAsString(result) mustBe confirmation(frontendAppConfig, contact, date, "councilTaxSubcategory")(fakeRequest, messages).toString
     }
 
-    "return 200 and the correct view for a GET when address line 2 is None" in {
+    "return 200 and the correct view for a GET when addressLine2 and county are None" in {
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val ec = "council_tax"
-      val propertyAddress = PropertyAddress("a", None, "c", "d", "f")
+      val propertyAddress = PropertyAddress("a", None, "c", None, "f")
       val councilTaxSubcategory = "council_tax_home_business"
       val tellUs = TellUsMore("Hello")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
@@ -96,7 +96,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       " and the business_rates_other has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
 
       val result = controller().enquiryKey(mockUserAnswers)
@@ -108,7 +108,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       " and the council_tax_band has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_band")
 
       val result = controller().enquiryKey(mockUserAnswers)
@@ -119,7 +119,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn None
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
-      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", "a", "a"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
 
       val result = controller().enquiryKey(mockUserAnswers)
