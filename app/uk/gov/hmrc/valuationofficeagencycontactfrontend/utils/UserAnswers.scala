@@ -50,8 +50,8 @@ class UserAnswers(val cacheMap: CacheMap) {
     } yield Contact(ConfirmedContactDetails(cd), pa, eq, subcategory, tellUs.message)
 
     optionalContactModel match {
-      case Some(c @ Contact(_, pa, _, _, _)) => Right(c)
-      case _ => Left("Unable to parse")
+      case Some(c @ Contact(_, _, _, _, _)) => Right(c)
+      case None => Left("Unable to parse")
     }
   }
 }
