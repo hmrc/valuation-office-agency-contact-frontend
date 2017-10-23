@@ -36,7 +36,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
       "tellUsMore function should return an Answer Row containing tellUsMore.checkYourAnswersLabel label and a message" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", Some("d"), "f"))
+        val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
@@ -49,7 +49,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
       "tellUsMore function should return an Answer Row containing tellUsMore.checkYourAnswersLabel label and a message when address line 2 and county are None" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val propertyAddress = Some(PropertyAddress("a", None, "c", None, "f"))
+        val propertyAddress = PropertyAddress("a", None, "c", None, "f")
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
@@ -70,7 +70,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
       "enquiryCategory function should return an Answer Row containing enquiryCategory.checkYourAnswersLabel label and a enquiry category option" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", Some("d"), "f"))
+        val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
         val ec = "council_tax"
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
@@ -85,7 +85,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
       "enquiryCategory function should return an Answer Row containing enquiryCategory.checkYourAnswersLabel label and a enquiry category option when address line 2 and county are None" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
         val ec = "council_tax"
-        val propertyAddress = Some(PropertyAddress("a", None, "c", None, "f"))
+        val propertyAddress = PropertyAddress("a", None, "c", None, "f")
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
@@ -106,7 +106,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
       "councilTaxSubcategory function should return an Answer Row containing councilTaxSubcategory.checkYourAnswersLabel label and a council tax subcategory option" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", Some("d"), "f"))
+        val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
@@ -120,7 +120,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
       "councilTaxSubcategory function should return an Answer Row containing councilTaxSubcategory.checkYourAnswersLabel label " +
         "and a council tax subcategory option when address line 2 and county are None" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val propertyAddress = Some(PropertyAddress("a", None, "c", None, "f"))
+        val propertyAddress = PropertyAddress("a", None, "c", None, "f")
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
@@ -141,7 +141,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
       "businessRatesSubcategory function should return an Answer Row containing businessRatesSubcategory.checkYourAnswersLabel label and a business rates subcategory option" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", Some("d"), "f"))
+        val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
 
@@ -155,7 +155,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
       "businessRatesSubcategory function should return an Answer Row containing businessRatesSubcategory.checkYourAnswersLabel label " +
         "and a business rates subcategory option when address line 2 and county are None" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val propertyAddress = Some(PropertyAddress("a", None, "c", None, "f"))
+        val propertyAddress = PropertyAddress("a", None, "c", None, "f")
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
 
@@ -180,11 +180,11 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", Some(address), tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", address, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.propertyAddress
-        result mustBe Some(AnswerRow("propertyAddress.checkYourAnswersLabel", formattedPropertyAddress(userAnswers.propertyAddress, "<br>"), false, routes.PropertyAddressController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("propertyAddress.checkYourAnswersLabel", formattedPropertyAddress(address, "<br>"), false, routes.PropertyAddressController.onPageLoad(CheckMode).url))
       }
 
       "propertyAddress function should return an Answer Row containing propertyAddress.checkYourAnswersLabel label " +
@@ -194,11 +194,11 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", Some(address), tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", address, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.propertyAddress
-        result mustBe Some(AnswerRow("propertyAddress.checkYourAnswersLabel", formattedPropertyAddress(userAnswers.propertyAddress, "<br>"), false, routes.PropertyAddressController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("propertyAddress.checkYourAnswersLabel", formattedPropertyAddress(address, "<br>"), false, routes.PropertyAddressController.onPageLoad(CheckMode).url))
       }
 
       "propertyAddress function should return a None if no property address is found in the User Answers" in {
@@ -215,7 +215,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", Some(address), tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", address, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.contactDetails
@@ -230,7 +230,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", Some(address), tellUs)
+        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", address, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.contactDetails

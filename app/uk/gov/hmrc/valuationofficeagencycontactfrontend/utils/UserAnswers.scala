@@ -39,6 +39,7 @@ class UserAnswers(val cacheMap: CacheMap) {
 
     val optionalContactModel = for {
       cd <- contactDetails
+      pa <- propertyAddress
       eq <- enquiryCategory
       subcategory <- eq match {
         case "council_tax" => councilTaxSubcategory
@@ -46,10 +47,9 @@ class UserAnswers(val cacheMap: CacheMap) {
         case _ => None
       }
       tellUs <- tellUsMore
-    } yield Contact(ConfirmedContactDetails(cd), propertyAddress, eq, subcategory, tellUs.message)
+    } yield Contact(ConfirmedContactDetails(cd), pa, eq, subcategory, tellUs.message)
 
     optionalContactModel match {
-      case Some(Contact(_, None, _, _, _)) => Left("Navigation for contact details page reached with neither council tax address or business rates address")
       case Some(c @ Contact(_, pa, _, _, _)) => Right(c)
       case _ => Left("Unable to parse")
     }

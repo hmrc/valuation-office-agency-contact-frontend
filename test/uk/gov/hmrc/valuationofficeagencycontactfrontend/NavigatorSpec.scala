@@ -97,7 +97,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       "return a function that goes to the confirmation page when the check your answers page has been submitted without errors and the enquiry is about council tax" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
         val ec = "council_tax"
-        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", Some("d"), "f"))
+        val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
         val councilTaxSubcategory = "council_tax_home_business"
         val tellUs = TellUsMore("Hello")
 
@@ -109,7 +109,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       "return a function that goes to the confirmation page when addressLine2 and county are None and" +
         " the check your answers page has been submitted without errors and the enquiry is about council tax" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val propertyAddress = Some(PropertyAddress("a", None, "c", None, "f"))
+        val propertyAddress = PropertyAddress("a", None, "c", None, "f")
         val councilTaxSubcategory = "council_tax_home_business"
         val tellUs = TellUsMore("Hello")
 
@@ -120,7 +120,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
 
       "return a function that goes to the confirmation page when the check your answers page has been submitted without errors and the enquiry is about business rates" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val propertyAddress = Some(PropertyAddress("a", Some("b"), "c", Some("d"), "f"))
+        val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
 
@@ -132,7 +132,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       "return a function that goes to the confirmation page when addressLine2 and county are None and " +
         "the check your answers page has been submitted without errors and the enquiry is about business rates" in {
         val cd = ContactDetails("a", "b", "c", "d", "e")
-        val propertyAddress = Some(PropertyAddress("a", None, "c", None, "f"))
+        val propertyAddress = PropertyAddress("a", None, "c", None, "f")
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
 

@@ -48,7 +48,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val date = DateFormatter.todaysDate()
 
-      val contact = Contact(confirmedContactDetails, Some(propertyAddress), ec, councilTaxSubcategory, tellUs.message)
+      val contact = Contact(confirmedContactDetails, propertyAddress, ec, councilTaxSubcategory, tellUs.message)
 
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
         ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
@@ -71,7 +71,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val date = DateFormatter.todaysDate()
 
-      val contact = Contact(confirmedContactDetails, Some(propertyAddress), ec, councilTaxSubcategory, tellUs.message)
+      val contact = Contact(confirmedContactDetails, propertyAddress, ec, councilTaxSubcategory, tellUs.message)
 
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
         ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
