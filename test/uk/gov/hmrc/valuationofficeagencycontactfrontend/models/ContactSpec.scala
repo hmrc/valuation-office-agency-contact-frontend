@@ -30,7 +30,7 @@ class ContactSpec extends SpecBase {
     val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "e")
     val result = Contact(message, enquiryCategory, subEnquiryCategory, contactDetails, propertyAddress)
 
-    result.propertyAddress mustBe Some(propertyAddress)
+    result.propertyAddress mustBe propertyAddress
     result.message mustBe message
     result.enquiryCategory mustBe enquiryCategory
     result.subEnquiryCategory mustBe subEnquiryCategory
@@ -41,7 +41,7 @@ class ContactSpec extends SpecBase {
     val propertyAddress = PropertyAddress("a", None, "c", None, "e")
     val result = Contact(message, enquiryCategory, subEnquiryCategory, contactDetails, propertyAddress)
 
-    result.propertyAddress mustBe Some(propertyAddress)
+    result.propertyAddress mustBe propertyAddress
     result.message mustBe message
     result.enquiryCategory mustBe enquiryCategory
     result.subEnquiryCategory mustBe subEnquiryCategory
