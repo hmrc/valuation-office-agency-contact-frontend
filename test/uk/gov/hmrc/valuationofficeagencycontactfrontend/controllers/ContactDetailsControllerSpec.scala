@@ -53,12 +53,12 @@ class ContactDetailsControllerSpec extends ControllerSpecBase {
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsString(ContactDetailsForm().fill(ContactDetails("value 1", "value 2", "value 3", "value 4", "value 5")))
+      contentAsString(result) mustBe viewAsString(ContactDetailsForm().fill(ContactDetails("a", "b", "a@test.com", "a@test.com", "0847428742424")))
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("firstName", "value 1"), ("lastName", "value 2"), ("email", "value 3"),
-        ("confirmEmail", "value 4"), ("contactNumber", "value 5"))
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("firstName", "a"), ("lastName", "b"), ("email", "a@test.com"),
+        ("confirmEmail", "a@test.com"), ("contactNumber", "0487357346776"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -84,8 +84,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("firstName", "value 1"), ("lastName", "value 2"), ("email", "value 3"),
-        ("confirmEmail", "value 4"), ("contactNumber", "value 5"))
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("firstName", "a"), ("lastName", "b"), ("email", "a@test.com"),
+        ("confirmEmail", "a@test.com"), ("contactNumber", "0493584384343"))
 
       val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 

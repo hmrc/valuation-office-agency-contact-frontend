@@ -24,15 +24,15 @@ class ContactDetailsFormSpec extends FormBehaviours {
   val validData: Map[String, String] = Map(
     "firstName" -> "value 1",
     "lastName" -> "value 2",
-    "email" -> "value 3",
-    "confirmEmail" -> "value 4",
+    "email" -> "test@test.com",
+    "confirmEmail" -> "test@test.com",
     "contactNumber" -> "value 5"
   )
 
   val form = ContactDetailsForm()
 
   "ContactDetails form" must {
-    behave like questionForm(ContactDetails("value 1", "value 2", "value 3", "value 4", "value 5"))
+    behave like questionForm(ContactDetails("value 1", "value 2", "test@test.com", "test@test.com", "value 5"))
 
     behave like formWithMandatoryTextFields("firstName", "lastName", "email", "confirmEmail", "contactNumber")
   }
