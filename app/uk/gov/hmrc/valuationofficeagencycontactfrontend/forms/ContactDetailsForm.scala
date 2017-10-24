@@ -16,20 +16,33 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
-import play.api.data.Form
+import play.api.data.{Form, FormError}
 import play.api.data.Forms._
+import play.api.data.format.Formatter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
+
+object EmailConstraint extends Formatter[String] {
+  override def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = {
+    if (data.getOrElse(key, "").equals(data.getOrElse("email", ""))) {
+      Right(data.getOrElse(key, ""))
+    } else {
+      Left(List(FormError(key, "Not Match!")))
+    }
+  }
+
+  override def unbind(key: String, value: String) = Map(key -> value)
+}
 
 object ContactDetailsForm {
-
   def apply(): Form[ContactDetails] = Form(
     mapping(
       "firstName" -> nonEmptyText,
       "lastName" -> nonEmptyText,
-      "email" -> nonEmptyText,
-      "confirmEmail" -> nonEmptyText,
+      "email" -> email,
+      "confirmEmail" -> of(EmailConstraint),
       "contactNumber" -> nonEmptyText
     )(ContactDetails.apply)(ContactDetails.unapply)
   )
 }
+
+
