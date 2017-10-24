@@ -34,13 +34,16 @@ object EmailConstraint extends Formatter[String] {
 }
 
 object ContactDetailsForm {
+
+  val phoneRegex = """^^[0-9\s\+()-]{10,20}+$"""
+
   def apply(): Form[ContactDetails] = Form(
     mapping(
       "firstName" -> nonEmptyText,
       "lastName" -> nonEmptyText,
       "email" -> email,
       "confirmEmail" -> of(EmailConstraint),
-      "contactNumber" -> nonEmptyText
+      "contactNumber" -> nonEmptyText.verifying("error.invalid_phone", _ matches(phoneRegex))
     )(ContactDetails.apply)(ContactDetails.unapply)
   )
 }

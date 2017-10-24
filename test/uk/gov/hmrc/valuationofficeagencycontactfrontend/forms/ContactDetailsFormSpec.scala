@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
+import play.api.data.FormError
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.behaviours.FormBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
 
@@ -60,9 +61,16 @@ class ContactDetailsFormSpec extends FormBehaviours {
       checkForError(form, data, expectedError)
     }
 
-    "EmailConstraint bind method will return Left(error.email.unmatched) if the emails don't match" in {
-      val data = validDate +
-      val result = EmailConstraint.bind("confirmEmail", )
+    "EmailConstraint bind method should return Left(error.email.unmatched) if the emails don't match" in {
+      val data = validData + ("confirmEmail" -> "ab@test.com")
+      val result = EmailConstraint.bind("confirmEmail", data)
+      result shouldBe Left(List(FormError("confirmEmail", "error.email.unmatched")))
+    }
+
+    "EmailConstraint bind method should return Right(email) if the emails are valid and match" in {
+      val data = validData + ("confirmEmail" -> "a@test.com")
+      val result = EmailConstraint.bind("confirmEmail", data)
+      result shouldBe Right(data.getOrElse("email", ""))
     }
   }
 
