@@ -27,15 +27,15 @@ class ContactDetailsFormSpec extends FormBehaviours {
     "lastName" -> "b",
     "email" -> "a@test.com",
     "confirmEmail" -> "a@test.com",
-    "contactNumber" -> "c"
+    "contactNumber" -> "1234567890"
   )
 
   val form = ContactDetailsForm()
 
   "ContactDetails form" must {
-    behave like questionForm(ContactDetails("a", "b", "a@test.com", "a@test.com", "c"))
+    behave like questionForm(ContactDetails("a", "b", "a@test.com", "a@test.com", "1234567890"))
 
-    behave like formWithMandatoryTextFields("firstName", "lastName", "contactNumber")
+    behave like formWithMandatoryTextFields("firstName", "lastName")
 
     "fail to bind when email is blank" in {
       val data = validData + ("email" -> "") + ("confirmEmail" -> "")
@@ -71,6 +71,30 @@ class ContactDetailsFormSpec extends FormBehaviours {
       val data = validData + ("confirmEmail" -> "a@test.com")
       val result = EmailConstraint.bind("confirmEmail", data)
       result shouldBe Right(data.getOrElse("email", ""))
+    }
+
+    "fail to bind when contact number is blank" in {
+      val data = validData + ("contactNumber" -> "")
+      val expectedError = Seq(error("contactNumber", "error.required"), error("contactNumber", "error.invalid_phone")).flatMap(e => e)
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when contact number is omitted" in {
+      val data = validData - "contactNumber"
+      val expectedError = error("contactNumber", "error.required")
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when contact number is invalid" in {
+      val data = validData + ("contactNumber" -> "asdsa2332323232")
+      val expectedError = error("contactNumber", "error.invalid_phone")
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when contact number length is less than 10" in {
+      val data = validData + ("contactNumber" -> "123456789")
+      val expectedError = error("contactNumber", "error.invalid_phone")
+      checkForError(form, data, expectedError)
     }
   }
 
