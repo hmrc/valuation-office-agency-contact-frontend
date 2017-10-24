@@ -37,9 +37,32 @@ class ContactDetailsFormSpec extends FormBehaviours {
     behave like formWithMandatoryTextFields("firstName", "lastName", "contactNumber")
 
     "fail to bind when email is blank" in {
-      val data = validData + ("email" -> "")
+      val data = validData + ("email" -> "") + ("confirmEmail" -> "")
       val expectedError = error("email", "error.email")
       checkForError(form, data, expectedError)
+    }
+
+    "fail to bind when email is invalid" in {
+      val data = validData + ("email" -> "a.test.com") + ("confirmEmail" -> "a.test.com")
+      val expectedError = error("email", "error.email")
+      checkForError(form, data, expectedError)
+    }
+
+    "fail to bind when emails don't match" in {
+      val data = validData + ("confirmEmail" -> "ab@test.com")
+      val expectedError = error("confirmEmail", "error.email.unmatched")
+      checkForError(form, data, expectedError)
+    }
+
+    "fail to bind when emails don't match and second email is blank" in {
+      val data = validData + ("confirmEmail" -> "")
+      val expectedError = error("confirmEmail", "error.email.unmatched")
+      checkForError(form, data, expectedError)
+    }
+
+    "EmailConstraint bind method will return Left(error.email.unmatched) if the emails don't match" in {
+      val data = validDate +
+      val result = EmailConstraint.bind("confirmEmail", )
     }
   }
 
