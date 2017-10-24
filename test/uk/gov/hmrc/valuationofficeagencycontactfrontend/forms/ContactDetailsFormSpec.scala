@@ -22,18 +22,25 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
 class ContactDetailsFormSpec extends FormBehaviours {
 
   val validData: Map[String, String] = Map(
-    "firstName" -> "value 1",
-    "lastName" -> "value 2",
-    "email" -> "test@test.com",
-    "confirmEmail" -> "test@test.com",
-    "contactNumber" -> "value 5"
+    "firstName" -> "a",
+    "lastName" -> "b",
+    "email" -> "a@test.com",
+    "confirmEmail" -> "a@test.com",
+    "contactNumber" -> "c"
   )
 
   val form = ContactDetailsForm()
 
   "ContactDetails form" must {
-    behave like questionForm(ContactDetails("value 1", "value 2", "test@test.com", "test@test.com", "value 5"))
+    behave like questionForm(ContactDetails("a", "b", "a@test.com", "a@test.com", "c"))
 
-    behave like formWithMandatoryTextFields("firstName", "lastName", "email", "confirmEmail", "contactNumber")
+    behave like formWithMandatoryTextFields("firstName", "lastName", "contactNumber")
+
+    "fail to bind when email is blank" in {
+      val data = validData + ("email" -> "")
+      val expectedError = error("email", "error.email")
+      checkForError(form, data, expectedError)
+    }
   }
+
 }

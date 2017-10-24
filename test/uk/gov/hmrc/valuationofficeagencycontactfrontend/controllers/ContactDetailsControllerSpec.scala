@@ -48,7 +48,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase {
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(ContactDetailsId.toString -> Json.toJson(ContactDetails("value 1", "value 2", "value 3", "value 4", "value 5")))
+      val validData = Map(ContactDetailsId.toString -> Json.toJson(ContactDetails("a", "b", "a@test.com", "a@test.com", "0847428742424")))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)

@@ -26,7 +26,7 @@ object EmailConstraint extends Formatter[String] {
     if (data.getOrElse(key, "").equals(data.getOrElse("email", ""))) {
       Right(data.getOrElse(key, ""))
     } else {
-      Left(List(FormError(key, "Not Match!")))
+      Left(List(FormError(key, "error.email.unmatched")))
     }
   }
 
