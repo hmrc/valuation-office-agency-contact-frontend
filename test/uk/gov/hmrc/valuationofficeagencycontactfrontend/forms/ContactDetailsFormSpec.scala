@@ -127,7 +127,7 @@ class ContactDetailsFormSpec extends FormBehaviours {
 
     "fail to bind when contact number is blank" in {
       val data = validData + ("contactNumber" -> "")
-      val expectedError = Seq(error("contactNumber", "error.required"), error("contactNumber", "error.invalid_phone")).flatMap(e => e)
+      val expectedError = Seq(error("contactNumber", "error.required"), error("contactNumber", "error.phone.invalid")).flatMap(e => e)
       checkForError(form, data, expectedError)
     }
 
@@ -139,13 +139,13 @@ class ContactDetailsFormSpec extends FormBehaviours {
 
     s"fail to bind when contact number is invalid" in {
       val data = validData + ("contactNumber" -> "asdsa2332323232")
-      val expectedError = error("contactNumber", "error.invalid_phone")
+      val expectedError = error("contactNumber", "error.phone.invalid")
       checkForError(form, data, expectedError)
     }
 
-    s"fail to bind when contact number length is less than 10" in {
-      val data = validData + ("contactNumber" -> "123456789")
-      val expectedError = error("contactNumber", "error.invalid_phone")
+    s"fail to bind when contact number length is more than 24" in {
+      val data = validData + ("contactNumber" -> "1234567890123456789012345")
+      val expectedError = error("contactNumber", "error.phone.max_length")
       checkForError(form, data, expectedError)
     }
   }

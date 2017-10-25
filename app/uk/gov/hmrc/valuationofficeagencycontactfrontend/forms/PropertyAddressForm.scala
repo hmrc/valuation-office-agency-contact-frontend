@@ -22,13 +22,27 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.PropertyAddress
 
 object PropertyAddressForm {
 
+  private val addressLineRegex = """^[A-Za-z0-9\s\-&]+$"""
+  private val postcodeRegex = """(GIR ?0AA)|((([A-Z-[QVX]][0-9][0-9]?)|(([A-Z-[QVX]][A-Z-[IJZ]][0-9][0-9]?)|(([A-Z-[QVX]][0-9][A-HJKPSTUW])|([A-Z-[QVX]][A-Z-[IJZ]][0-9][ABEHMNPRVWXY])))) ?[0-9][A-Z-[CIKMOV]]{2})""" //scalastyle:ignore
+
+
   def apply(): Form[PropertyAddress] = Form(
     mapping(
-      "addressLine1" -> nonEmptyText.verifying("error.addressline.max_length", _.length <= 50),
-      "addressLine2" -> optional(text.verifying("error.addressline.max_length", _.length <= 50)),
-      "town" -> nonEmptyText,
-      "county" -> optional(text),
+      "addressLine1" -> nonEmptyText
+        .verifying("error.addressline.max_length", _.length <= 35)
+        .verifying("error.addressline.invalid", _.matches(addressLineRegex)),
+      "addressLine2" -> optional(text
+        .verifying("error.addressline.max_length", _.length <= 35)
+        .verifying("error.addressline.invalid", _.matches(addressLineRegex))),
+      "town" -> nonEmptyText
+        .verifying("error.addressline.max_length", _.length <= 35)
+        .verifying("error.addressline.invalid", _.matches(addressLineRegex)),
+      "county" -> optional(text
+        .verifying("error.addressline.max_length", _.length <= 35)
+        .verifying("error.addressline.invalid", _.matches(addressLineRegex))),
       "postcode" -> nonEmptyText
+        .verifying("error.postcode.max_length", _.length <= 8)
+        .verifying("error.postcode.invalid", _.toUpperCase.matches(postcodeRegex))
     )(PropertyAddress.apply)(PropertyAddress.unapply)
   )
 }

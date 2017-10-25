@@ -65,8 +65,12 @@ error.name.invalid = You can only enter these characters: A-Z, a-z, space
 error.email = Enter a valid email address
 error.email.mismatch = Emails don’t match
 error.email.max_length = You can only enter up to 129 characters
-error.invalid_phone = Please enter a valid contact number
-error.addressline.max_length = Maximum length is 50 characters
+error.phone.invalid = You can only enter these characters: 0-9, +, -, (), space
+error.phone.max_length = You can only enter up to 24 characters
+error.addressline.max_length = You can only enter up to 35 characters
+error.addressline.invalid = You can only enter these characters: A-Z, a-z, 0-9, -, &, space
+error.postcode.invalid = Must be a valid postcode
+error.postcode.max_length = You can only enter up to 8 characters
 
 session_expired.title = For your security, this service has been reset
 session_expired.heading = For your security, this service has been reset
