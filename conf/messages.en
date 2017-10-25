@@ -63,6 +63,8 @@ error.summary.text = Check the following
 error.email.unmatched = Emails don’t match
 error.email = Please enter a valid email address
 error.invalid_phone = Please enter a valid contact number
+error.invalid_firstname = Please enter a valid first name
+error.invalid_surname = Please enter a valid surname
 
 session_expired.title = For your security, this service has been reset
 session_expired.heading = For your security, this service has been reset

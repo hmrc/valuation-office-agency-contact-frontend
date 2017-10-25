@@ -23,8 +23,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
 class ContactDetailsFormSpec extends FormBehaviours {
 
   val validData: Map[String, String] = Map(
-    "firstName" -> "a",
-    "lastName" -> "b",
+    "firstName" -> "Alex",
+    "lastName" -> "Smith",
     "email" -> "a@test.com",
     "confirmEmail" -> "a@test.com",
     "contactNumber" -> "1234567890"
@@ -33,7 +33,7 @@ class ContactDetailsFormSpec extends FormBehaviours {
   val form = ContactDetailsForm()
 
   "ContactDetails form" must {
-    behave like questionForm(ContactDetails("a", "b", "a@test.com", "a@test.com", "1234567890"))
+    behave like questionForm(ContactDetails("Alex", "Smith", "a@test.com", "a@test.com", "1234567890"))
 
     behave like formWithMandatoryTextFields("firstName", "lastName")
 
@@ -94,6 +94,30 @@ class ContactDetailsFormSpec extends FormBehaviours {
     s"fail to bind when contact number length is less than 10" in {
       val data = validData + ("contactNumber" -> "123456789")
       val expectedError = error("contactNumber", "error.invalid_phone")
+      checkForError(form, data, expectedError)
+    }
+
+    "fail to bind when first name is blank" in {
+      val data = validData + ("firstName" -> "")
+      val expectedError = Seq(error("firstName", "error.required"), error("firstName", "error.invalid_firstname")).flatMap(e => e)
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when first name is omitted" in {
+      val data = validData - "firstName"
+      val expectedError = error("firstName", "error.required")
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when firstName is invalid" in {
+      val data = validData + ("firstName" -> "asdsa424")
+      val expectedError = error("firstName", "error.invalid_firstname")
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when firstName length is more than 35" in {
+      val data = validData + ("firstName" -> "abcdefghijklmnoqprstasdsjjdsfjdsjkfsdjfdsjfjksfkjsjkfdjksfjkjkfdjkfdsjkfjkdsfdjksjfds")
+      val expectedError = error("firstName", "error.invalid_phone")
       checkForError(form, data, expectedError)
     }
   }
