@@ -35,8 +35,6 @@ class ContactDetailsFormSpec extends FormBehaviours {
   "ContactDetails form" must {
     behave like questionForm(ContactDetails("Alex", "Smith", "a@test.com", "a@test.com", "1234567890"))
 
-    behave like formWithMandatoryTextFields("firstName", "lastName")
-
     "fail to bind when email is blank" in {
       val data = validData + ("email" -> "") + ("confirmEmail" -> "")
       val expectedError = error("email", "error.email")
@@ -117,7 +115,32 @@ class ContactDetailsFormSpec extends FormBehaviours {
 
     s"fail to bind when firstName length is more than 35" in {
       val data = validData + ("firstName" -> "abcdefghijklmnoqprstasdsjjdsfjdsjkfsdjfdsjfjksfkjsjkfdjksfjkjkfdjkfdsjkfjkdsfdjksjfds")
-      val expectedError = error("firstName", "error.invalid_phone")
+      val expectedError = error("firstName", "error.invalid_firstname")
+      checkForError(form, data, expectedError)
+    }
+
+
+    "fail to bind when surname is blank" in {
+      val data = validData + ("lastName" -> "")
+      val expectedError = Seq(error("lastName", "error.required"), error("lastName", "error.invalid_surname")).flatMap(e => e)
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when surname is omitted" in {
+      val data = validData - "lastName"
+      val expectedError = error("lastName", "error.required")
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when surname is invalid" in {
+      val data = validData + ("lastName" -> "asdsa-£")
+      val expectedError = error("lastName", "error.invalid_surname")
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when surname length is more than 35" in {
+      val data = validData + ("lastName" -> "abcdefghijklmnoqprstasdsjjdsfjdsjkfsdjfdsjfjksfkjsjkfdjksfjkjkfdjkfdsjkfjkdsfdjksjfds")
+      val expectedError = error("lastName", "error.invalid_surname")
       checkForError(form, data, expectedError)
     }
   }
