@@ -25,15 +25,63 @@ class ContactDetailsFormSpec extends FormBehaviours {
   val validData: Map[String, String] = Map(
     "firstName" -> "Alex",
     "lastName" -> "Smith",
-    "email" -> "a@test.com",
-    "confirmEmail" -> "a@test.com",
+    "email" -> "a@a",
+    "confirmEmail" -> "a@a",
     "contactNumber" -> "1234567890"
   )
 
   val form = ContactDetailsForm()
 
   "ContactDetails form" must {
-    behave like questionForm(ContactDetails("Alex", "Smith", "a@test.com", "a@test.com", "1234567890"))
+    behave like questionForm(ContactDetails("Alex", "Smith", "a@a", "a@a", "1234567890"))
+
+    "fail to bind when first name is blank" in {
+      val data = validData + ("firstName" -> "")
+      val expectedError = Seq(error("firstName", "error.required"), error("firstName", "error.name.invalid")).flatMap(e => e)
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when first name is omitted" in {
+      val data = validData - "firstName"
+      val expectedError = error("firstName", "error.required")
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when first name is invalid" in {
+      val data = validData + ("firstName" -> "asdsa424")
+      val expectedError = error("firstName", "error.name.invalid")
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when first name length is more than 56" in {
+      val data = validData + ("firstName" -> "abcdefghijklmnoqprstasdsjjdsfjdsjkfsdjfdsjfjksfkjsjkfdjksfjkjkfdjkfdsjkfjkdsfdjksjfds")
+      val expectedError = error("firstName", "error.name.max_length")
+      checkForError(form, data, expectedError)
+    }
+
+    "fail to bind when surname is blank" in {
+      val data = validData + ("lastName" -> "")
+      val expectedError = Seq(error("lastName", "error.required"), error("lastName", "error.name.invalid")).flatMap(e => e)
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when surname is omitted" in {
+      val data = validData - "lastName"
+      val expectedError = error("lastName", "error.required")
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when surname is invalid" in {
+      val data = validData + ("lastName" -> "asdsa424")
+      val expectedError = error("lastName", "error.name.invalid")
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when surname length is more than 56" in {
+      val data = validData + ("lastName" -> "abcdefghijklmnoqprstasdsjjdsfjdsjkfsdjfdsjfjksfkjsjkfdjksfjkjkfdjkfdsjkfjkdsfdjksjfds")
+      val expectedError = error("lastName", "error.name.max_length")
+      checkForError(form, data, expectedError)
+    }
 
     "fail to bind when email is blank" in {
       val data = validData + ("email" -> "") + ("confirmEmail" -> "")
@@ -47,28 +95,34 @@ class ContactDetailsFormSpec extends FormBehaviours {
       checkForError(form, data, expectedError)
     }
 
+    "fail to bind when email length is more than 129" in {
+      val data = validData + ("email" -> "baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@testaaaaaaaaaaaaaaaaaaaa.com") +
+        ("confirmEmail" -> "baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@testaaaaaaaaaaaaaaaaaaaa.com")
+      val expectedError = error("email", "error.email.max_length")
+      checkForError(form, data, expectedError)
+    }
+
     "fail to bind when emails don't match" in {
       val data = validData + ("confirmEmail" -> "ab@test.com")
-      val expectedError = error("confirmEmail", "error.email.unmatched")
+      val expectedError = error("confirmEmail", "error.email.mismatch")
       checkForError(form, data, expectedError)
     }
 
     "fail to bind when emails don't match and second email is blank" in {
       val data = validData + ("confirmEmail" -> "")
-      val expectedError = error("confirmEmail", "error.email.unmatched")
+      val expectedError = error("confirmEmail", "error.email.mismatch")
       checkForError(form, data, expectedError)
     }
 
     "EmailConstraint bind method should return Left(error.email.unmatched) if the emails don't match" in {
       val data = validData + ("confirmEmail" -> "ab@test.com")
       val result = EmailConstraint.bind("confirmEmail", data)
-      result shouldBe Left(List(FormError("confirmEmail", "error.email.unmatched")))
+      result shouldBe Left(List(FormError("confirmEmail", "error.email.mismatch")))
     }
 
     "EmailConstraint bind method should return Right(email) if the emails are valid and match" in {
-      val data = validData + ("confirmEmail" -> "a@test.com")
-      val result = EmailConstraint.bind("confirmEmail", data)
-      result shouldBe Right(data.getOrElse("email", ""))
+      val result = EmailConstraint.bind("confirmEmail", validData)
+      result shouldBe Right(validData.getOrElse("email", ""))
     }
 
     "fail to bind when contact number is blank" in {
@@ -94,55 +148,5 @@ class ContactDetailsFormSpec extends FormBehaviours {
       val expectedError = error("contactNumber", "error.invalid_phone")
       checkForError(form, data, expectedError)
     }
-
-    "fail to bind when first name is blank" in {
-      val data = validData + ("firstName" -> "")
-      val expectedError = Seq(error("firstName", "error.required"), error("firstName", "error.invalid_firstname")).flatMap(e => e)
-      checkForError(form, data, expectedError)
-    }
-
-    s"fail to bind when first name is omitted" in {
-      val data = validData - "firstName"
-      val expectedError = error("firstName", "error.required")
-      checkForError(form, data, expectedError)
-    }
-
-    s"fail to bind when firstName is invalid" in {
-      val data = validData + ("firstName" -> "asdsa424")
-      val expectedError = error("firstName", "error.invalid_firstname")
-      checkForError(form, data, expectedError)
-    }
-
-    s"fail to bind when firstName length is more than 35" in {
-      val data = validData + ("firstName" -> "abcdefghijklmnoqprstasdsjjdsfjdsjkfsdjfdsjfjksfkjsjkfdjksfjkjkfdjkfdsjkfjkdsfdjksjfds")
-      val expectedError = error("firstName", "error.invalid_firstname")
-      checkForError(form, data, expectedError)
-    }
-
-
-    "fail to bind when surname is blank" in {
-      val data = validData + ("lastName" -> "")
-      val expectedError = Seq(error("lastName", "error.required"), error("lastName", "error.invalid_surname")).flatMap(e => e)
-      checkForError(form, data, expectedError)
-    }
-
-    s"fail to bind when surname is omitted" in {
-      val data = validData - "lastName"
-      val expectedError = error("lastName", "error.required")
-      checkForError(form, data, expectedError)
-    }
-
-    s"fail to bind when surname is invalid" in {
-      val data = validData + ("lastName" -> "asdsa-£")
-      val expectedError = error("lastName", "error.invalid_surname")
-      checkForError(form, data, expectedError)
-    }
-
-    s"fail to bind when surname length is more than 35" in {
-      val data = validData + ("lastName" -> "abcdefghijklmnoqprstasdsjjdsfjdsjkfsdjfdsjfjksfkjsjkfdjksfjkjkfdjkfdsjkfjkdsfdjksjfds")
-      val expectedError = error("lastName", "error.invalid_surname")
-      checkForError(form, data, expectedError)
-    }
   }
-
 }

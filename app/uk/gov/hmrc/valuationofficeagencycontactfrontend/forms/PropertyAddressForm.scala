@@ -24,8 +24,8 @@ object PropertyAddressForm {
 
   def apply(): Form[PropertyAddress] = Form(
     mapping(
-      "addressLine1" -> nonEmptyText,
-      "addressLine2" -> optional(text),
+      "addressLine1" -> nonEmptyText.verifying("error.addressline.max_length", _.length <= 50),
+      "addressLine2" -> optional(text.verifying("error.addressline.max_length", _.length <= 50)),
       "town" -> nonEmptyText,
       "county" -> optional(text),
       "postcode" -> nonEmptyText

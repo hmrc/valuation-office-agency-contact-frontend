@@ -26,7 +26,7 @@ object EmailConstraint extends Formatter[String] {
     if (data.getOrElse(key, "").equals(data.getOrElse("email", ""))) {
       Right(data.getOrElse(key, ""))
     } else {
-      Left(List(FormError(key, "error.email.unmatched")))
+      Left(List(FormError(key, "error.email.mismatch")))
     }
   }
 
@@ -35,14 +35,18 @@ object EmailConstraint extends Formatter[String] {
 
 object ContactDetailsForm {
 
-  private val phoneRegex = """^^[0-9\s\+()-]{10,20}$"""
-  private val nameRegex = """^[a-zA-Z\s]{1,35}$"""
+  private val phoneRegex = """^[0-9\s\+()-]{10,20}$"""
+  private val nameRegex = """^[a-zA-Z\s]+$"""
 
   def apply(): Form[ContactDetails] = Form(
     mapping(
-      "firstName" -> nonEmptyText.verifying("error.invalid_firstname", _.matches(nameRegex)),
-      "lastName" -> nonEmptyText.verifying("error.invalid_surname", _.matches(nameRegex)),
-      "email" -> email,
+      "firstName" -> nonEmptyText
+        .verifying("error.name.max_length", _.length <= 56)
+        .verifying("error.name.invalid", _.matches(nameRegex)),
+      "lastName" -> nonEmptyText
+        .verifying("error.name.max_length", _.length <= 56)
+        .verifying("error.name.invalid", _.matches(nameRegex)),
+      "email" -> email.verifying("error.email.max_length", _.length <= 129),
       "confirmEmail" -> of(EmailConstraint),
       "contactNumber" -> nonEmptyText.verifying("error.invalid_phone", _ matches(phoneRegex))
     )(ContactDetails.apply)(ContactDetails.unapply)
