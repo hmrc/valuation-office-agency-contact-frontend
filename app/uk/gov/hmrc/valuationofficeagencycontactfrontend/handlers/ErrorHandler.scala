@@ -34,6 +34,6 @@ class ErrorHandler @Inject()(
     uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error_template(pageTitle, heading, message, appConfig)
 
   override def internalServerErrorTemplate(implicit request: Request[_]): Html =
-    uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.internalServerError()
+    uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.internalServerError(appConfig)
 }
 
