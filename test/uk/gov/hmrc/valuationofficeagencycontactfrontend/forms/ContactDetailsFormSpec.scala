@@ -16,24 +16,143 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
+import play.api.data.FormError
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.behaviours.FormBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
 
 class ContactDetailsFormSpec extends FormBehaviours {
 
   val validData: Map[String, String] = Map(
-    "firstName" -> "value 1",
-    "lastName" -> "value 2",
-    "email" -> "value 3",
-    "confirmEmail" -> "value 4",
-    "contactNumber" -> "value 5"
+    "firstName" -> "Alex",
+    "lastName" -> "Smith",
+    "email" -> "a@a",
+    "confirmEmail" -> "a@a",
+    "contactNumber" -> "12345678901"
   )
 
   val form = ContactDetailsForm()
 
   "ContactDetails form" must {
-    behave like questionForm(ContactDetails("value 1", "value 2", "value 3", "value 4", "value 5"))
+    behave like questionForm(ContactDetails("Alex", "Smith", "a@a", "a@a", "12345678901"))
 
-    behave like formWithMandatoryTextFields("firstName", "lastName", "email", "confirmEmail", "contactNumber")
+    "fail to bind when first name is blank" in {
+      val data = validData + ("firstName" -> "")
+      val expectedError = Seq(error("firstName", "error.required"), error("firstName", "error.name.invalid")).flatten
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when first name is omitted" in {
+      val data = validData - "firstName"
+      val expectedError = error("firstName", "error.required")
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when first name is invalid" in {
+      val data = validData + ("firstName" -> "asdsa424")
+      val expectedError = error("firstName", "error.name.invalid")
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when first name length is more than 56" in {
+      val data = validData + ("firstName" -> "abcdefghijklmnoqprstas" * 3)
+      val expectedError = error("firstName", "error.name.max_length")
+      checkForError(form, data, expectedError)
+    }
+
+    "fail to bind when surname is blank" in {
+      val data = validData + ("lastName" -> "")
+      val expectedError = Seq(error("lastName", "error.required"), error("lastName", "error.name.invalid")).flatten
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when surname is omitted" in {
+      val data = validData - "lastName"
+      val expectedError = error("lastName", "error.required")
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when surname is invalid" in {
+      val data = validData + ("lastName" -> "asdsa424")
+      val expectedError = error("lastName", "error.name.invalid")
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when surname length is more than 56" in {
+      val data = validData + ("lastName" -> "abcdefghijklmnoqprstas" * 3)
+      val expectedError = error("lastName", "error.name.max_length")
+      checkForError(form, data, expectedError)
+    }
+
+    "fail to bind when email is blank" in {
+      val data = validData + ("email" -> "") + ("confirmEmail" -> "")
+      val expectedError = Seq(error("email", "error.required"), error("email", "error.email.invalid")).flatten
+      checkForError(form, data, expectedError)
+    }
+
+    "fail to bind when email is invalid" in {
+      val data = validData + ("email" -> "a.test.com") + ("confirmEmail" -> "a.test.com")
+      val expectedError = error("email", "error.email.invalid")
+      checkForError(form, data, expectedError)
+    }
+
+    "fail to bind when email length is more than 129" in {
+      val data = validData + ("email" -> ("a" * 80 + "@" + "b" * 50)) + ("confirmEmail" -> ("a" * 80 + "@" + "b" * 50))
+      val expectedError = error("email", "error.email.max_length")
+      checkForError(form, data, expectedError)
+    }
+
+    "fail to bind when emails don't match" in {
+      val data = validData + ("confirmEmail" -> "ab@test.com")
+      val expectedError = error("confirmEmail", "error.email.mismatch")
+      checkForError(form, data, expectedError)
+    }
+
+    "fail to bind when emails don't match and second email is blank" in {
+      val data = validData + ("confirmEmail" -> "")
+      val expectedError = error("confirmEmail", "error.email.mismatch")
+      checkForError(form, data, expectedError)
+    }
+
+    "EmailConstraint bind method should return Left(error.email.mismatch) if the emails don't match" in {
+      val data = validData + ("confirmEmail" -> "ab@test.com")
+      val result = EmailConstraint.bind("confirmEmail", data)
+      result shouldBe Left(List(FormError("confirmEmail", "error.email.mismatch")))
+    }
+
+    "EmailConstraint bind method should return Right(email) if the emails are valid and match" in {
+      val result = EmailConstraint.bind("confirmEmail", validData)
+      result shouldBe Right(validData.getOrElse("email", ""))
+    }
+
+    "fail to bind when contact number is blank" in {
+      val data = validData + ("contactNumber" -> "")
+      val expectedError = Seq(error("contactNumber", "error.required"), error("contactNumber", "error.phone.invalid"),
+        error("contactNumber", "error.phone.min_length")).flatten
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when contact number is omitted" in {
+      val data = validData - "contactNumber"
+      val expectedError = error("contactNumber", "error.required")
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when contact number is invalid" in {
+      val data = validData + ("contactNumber" -> "asdsa2332323232")
+      val expectedError = error("contactNumber", "error.phone.invalid")
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when contact number length is more than 24" in {
+      val data = validData + ("contactNumber" -> "1234567890123456789012345")
+      val expectedError = error("contactNumber", "error.phone.max_length")
+      checkForError(form, data, expectedError)
+    }
+
+    s"fail to bind when contact number length is less than 11" in {
+      val data = validData + ("contactNumber" -> "1234567890")
+      val expectedError = error("contactNumber", "error.phone.min_length")
+      checkForError(form, data, expectedError)
+    }
   }
 }

@@ -52,12 +52,12 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
       assert(submitButton == messages("site.submit"))
     }
 
-    "has a link marked with site.back leading to the Contact Details Page" in {
+    "has a link marked with site.back leading to the Tell Us More Page" in {
       val doc = asDocument(view1())
       val backlinkText = doc.select("a[class=link-back]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl = doc.select("a[class=link-back]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url
+      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "contain Enquiry Type label" in {

@@ -48,17 +48,17 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(PropertyAddressId.toString -> Json.toJson(PropertyAddress("value 1", Some("value 2"), "value 3", Some("value 4"), "value 5")))
+      val validData = Map(PropertyAddressId.toString -> Json.toJson(PropertyAddress("value 1", Some("value 2"), "value 3", Some("value 4"), "AA1 1AA")))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsString(PropertyAddressForm().fill(PropertyAddress("value 1", Some("value 2"), "value 3", Some("value 4"), "value 5")))
+      contentAsString(result) mustBe viewAsString(PropertyAddressForm().fill(PropertyAddress("value 1", Some("value 2"), "value 3", Some("value 4"), "AA1 1AA")))
     }
 
     "redirect to the next page when valid data is submitted" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("addressLine1", "value 1"), ("addressLine2", "value 2"), ("town", "value 3"),
-        ("county", "value 4"), ("postcode", "value 5"))
+        ("county", "value 4"), ("postcode", "AA1 1AA"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -101,7 +101,7 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to the next page when valid data is submitted and address line 2 and county are None" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("addressLine1", "value 1"), ("town", "value 3"), ("postcode", "value 5"))
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("addressLine1", "value 1"), ("town", "value 3"), ("postcode", "BB11BB"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
