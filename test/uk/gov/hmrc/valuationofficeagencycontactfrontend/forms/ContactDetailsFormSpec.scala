@@ -85,13 +85,13 @@ class ContactDetailsFormSpec extends FormBehaviours {
 
     "fail to bind when email is blank" in {
       val data = validData + ("email" -> "") + ("confirmEmail" -> "")
-      val expectedError = Seq(error("email", "error.required"), error("email", "error.email")).flatten
+      val expectedError = Seq(error("email", "error.required"), error("email", "error.email.invalid")).flatten
       checkForError(form, data, expectedError)
     }
 
     "fail to bind when email is invalid" in {
       val data = validData + ("email" -> "a.test.com") + ("confirmEmail" -> "a.test.com")
-      val expectedError = error("email", "error.email")
+      val expectedError = error("email", "error.email.invalid")
       checkForError(form, data, expectedError)
     }
 
@@ -114,7 +114,7 @@ class ContactDetailsFormSpec extends FormBehaviours {
       checkForError(form, data, expectedError)
     }
 
-    "EmailConstraint bind method should return Left(error.email.unmatched) if the emails don't match" in {
+    "EmailConstraint bind method should return Left(error.email.mismatch) if the emails don't match" in {
       val data = validData + ("confirmEmail" -> "ab@test.com")
       val result = EmailConstraint.bind("confirmEmail", data)
       result shouldBe Left(List(FormError("confirmEmail", "error.email.mismatch")))
