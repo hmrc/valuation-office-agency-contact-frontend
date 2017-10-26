@@ -37,6 +37,8 @@ object ContactDetailsForm {
 
   private val phoneRegex = """^[0-9\s\+()-]+$"""
   private val nameRegex = """^[a-zA-Z\s]+$"""
+  private val emailRegex = """^[a-zA-Z0-9\.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$""" //scalastyle:ignore
+
 
   def apply(): Form[ContactDetails] = Form(
     mapping(
@@ -46,7 +48,9 @@ object ContactDetailsForm {
       "lastName" -> nonEmptyText
         .verifying("error.name.max_length", _.length <= 56)
         .verifying("error.name.invalid", _.matches(nameRegex)),
-      "email" -> email.verifying("error.email.max_length", _.length <= 129),
+      "email" -> nonEmptyText
+        .verifying("error.email.max_length", _.length <= 129)
+        .verifying("error.email", _.matches(emailRegex)),
       "confirmEmail" -> of(EmailConstraint),
       "contactNumber" -> nonEmptyText
         .verifying("error.phone.max_length", _.length <= 24)

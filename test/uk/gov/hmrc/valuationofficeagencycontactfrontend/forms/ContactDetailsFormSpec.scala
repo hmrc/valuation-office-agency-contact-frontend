@@ -37,7 +37,7 @@ class ContactDetailsFormSpec extends FormBehaviours {
 
     "fail to bind when first name is blank" in {
       val data = validData + ("firstName" -> "")
-      val expectedError = Seq(error("firstName", "error.required"), error("firstName", "error.name.invalid")).flatMap(e => e)
+      val expectedError = Seq(error("firstName", "error.required"), error("firstName", "error.name.invalid")).flatten
       checkForError(form, data, expectedError)
     }
 
@@ -61,7 +61,7 @@ class ContactDetailsFormSpec extends FormBehaviours {
 
     "fail to bind when surname is blank" in {
       val data = validData + ("lastName" -> "")
-      val expectedError = Seq(error("lastName", "error.required"), error("lastName", "error.name.invalid")).flatMap(e => e)
+      val expectedError = Seq(error("lastName", "error.required"), error("lastName", "error.name.invalid")).flatten
       checkForError(form, data, expectedError)
     }
 
@@ -85,7 +85,7 @@ class ContactDetailsFormSpec extends FormBehaviours {
 
     "fail to bind when email is blank" in {
       val data = validData + ("email" -> "") + ("confirmEmail" -> "")
-      val expectedError = error("email", "error.email")
+      val expectedError = Seq(error("email", "error.required"), error("email", "error.email")).flatten
       checkForError(form, data, expectedError)
     }
 
@@ -127,7 +127,7 @@ class ContactDetailsFormSpec extends FormBehaviours {
 
     "fail to bind when contact number is blank" in {
       val data = validData + ("contactNumber" -> "")
-      val expectedError = Seq(error("contactNumber", "error.required"), error("contactNumber", "error.phone.invalid")).flatMap(e => e)
+      val expectedError = Seq(error("contactNumber", "error.required"), error("contactNumber", "error.phone.invalid")).flatten
       checkForError(form, data, expectedError)
     }
 
