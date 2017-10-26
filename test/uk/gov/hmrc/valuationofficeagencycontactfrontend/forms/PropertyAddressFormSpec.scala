@@ -54,8 +54,8 @@ class PropertyAddressFormSpec extends FormBehaviours {
       checkForError(form, data, expectedError)
     }
 
-    s"fail to bind when address line 1 length is more than 35" in {
-      val data = validData + ("addressLine1" -> "abcdfgabcdfabcdfabcdfabcdfabcdfancdf")
+    s"fail to bind when address line 1 length is more than 80" in {
+      val data = validData + ("addressLine1" -> "aaaaaaaaaaaaaaaaaaaaaa" * 4)
       val expectedError = error("addressLine1", "error.addressline.max_length")
       checkForError(form, data, expectedError)
     }
@@ -66,8 +66,8 @@ class PropertyAddressFormSpec extends FormBehaviours {
       checkForError(form, data, expectedError)
     }
 
-    s"fail to bind when address line 2 length is more than 35" in {
-      val data = validData + ("addressLine2" -> "abcdfgabcdfabcdfabcdfabcdfabcdfancdf")
+    s"fail to bind when address line 2 length is more than 80" in {
+      val data = validData + ("addressLine2" -> "aaaaaaaaaaaaaaaaaaaaaa" * 4)
       val expectedError = error("addressLine2", "error.addressline.max_length")
       checkForError(form, data, expectedError)
     }
@@ -90,8 +90,8 @@ class PropertyAddressFormSpec extends FormBehaviours {
       checkForError(form, data, expectedError)
     }
 
-    s"fail to bind when town length is more than 35" in {
-      val data = validData + ("town" -> "abcdfgabcdfabcdfabcdfabcdfabcdfancdf")
+    s"fail to bind when town length is more than 80" in {
+      val data = validData + ("town" -> "aaaaaaaaaaaaaaaaaaaaaa" * 4)
       val expectedError = error("town", "error.addressline.max_length")
       checkForError(form, data, expectedError)
     }
@@ -102,8 +102,8 @@ class PropertyAddressFormSpec extends FormBehaviours {
       checkForError(form, data, expectedError)
     }
 
-    s"fail to bind when county length is more than 35" in {
-      val data = validData + ("county" -> "abcdfgabcdfabcdfabcdfabcdfabcdfancdf")
+    s"fail to bind when county length is more than 80" in {
+      val data = validData + ("county" -> "aaaaaaaaaaaaaaaaaaaaaa" * 4)
       val expectedError = error("county", "error.addressline.max_length")
       checkForError(form, data, expectedError)
     }

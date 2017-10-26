@@ -53,6 +53,7 @@ object ContactDetailsForm {
         .verifying("error.email.invalid", _.matches(emailRegex)),
       "confirmEmail" -> of(EmailConstraint),
       "contactNumber" -> nonEmptyText
+        .verifying("error.phone.min_length", _.length >= 11)
         .verifying("error.phone.max_length", _.length <= 24)
         .verifying("error.phone.invalid", _ matches (phoneRegex))
     )(ContactDetails.apply)(ContactDetails.unapply)
