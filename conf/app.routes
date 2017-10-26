@@ -56,3 +56,5 @@ GET         /housingBenefits                       uk.gov.hmrc.valuationofficeag
 GET         /providingLettings                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ProvidingLettingsController.onPageLoad()
 
 GET         /indexWithNewSession                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.IndexController.onPageLoadWithNewSession()
+
+GET         /error                                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.IndexController.showError()
