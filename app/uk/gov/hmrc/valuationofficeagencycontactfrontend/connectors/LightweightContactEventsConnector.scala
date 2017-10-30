@@ -20,8 +20,7 @@ import javax.inject.{Inject, Singleton}
 
 import play.api.Configuration
 import play.api.libs.json._
-
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Contact
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Contact, ContactWithEnMessage}
 import uk.gov.hmrc.play.bootstrap.config.BaseUrl
 
 import scala.util.{Failure, Success, Try}
