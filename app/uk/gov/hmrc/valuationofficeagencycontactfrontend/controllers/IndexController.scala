@@ -36,9 +36,5 @@ class IndexController @Inject()(val appConfig: FrontendAppConfig,
   def onPageLoadWithNewSession: Action[AnyContent] = Action { implicit request =>
     Ok(index(appConfig)).withNewSession
   }
-
-  def showError: Action[AnyContent] = Action { implicit request =>
-    throw new RuntimeException("error")
-    Ok(index(appConfig))
-  }
 }
+

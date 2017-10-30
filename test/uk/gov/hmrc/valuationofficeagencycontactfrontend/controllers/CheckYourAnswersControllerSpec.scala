@@ -18,13 +18,16 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import org.mockito.Mockito.when
 import org.scalatest.mockito.MockitoSugar
+import play.api.libs.json.{JsString, Json}
 import play.api.test.Helpers._
+import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, PropertyAddress, TellUsMore}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ConfirmedContactDetails, ContactDetails, PropertyAddress, TellUsMore}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, RadioOption, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_answers
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{check_your_answers, internalServerError}
 
 class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSugar {
 
@@ -127,6 +130,24 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       result mustBe None
     }
 
+    "return 500 and the error view for a reaching summary page with wrong enquiry or unknown enquiry" in {
+      val cd = ContactDetails("a", "b", "c", "d", "e")
+      val ec = "other"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_home_business"
+      val tellUs = TellUsMore("Hello")
+      val confirmedContactDetails = ConfirmedContactDetails(cd)
+      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
 
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      intercept[Exception] {
+        val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+        status(result) mustBe INTERNAL_SERVER_ERROR
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+      }
+    }
   }
 }
+
