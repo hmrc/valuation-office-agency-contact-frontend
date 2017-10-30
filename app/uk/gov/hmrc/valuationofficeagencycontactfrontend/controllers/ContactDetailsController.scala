@@ -18,6 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import javax.inject.Inject
 
+import play.api.Logger
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
@@ -26,18 +27,26 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.ContactDetailsId
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, ContactDetails}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.contactDetails
 
 import scala.concurrent.Future
 
 class ContactDetailsController @Inject()(appConfig: FrontendAppConfig,
-                                                  override val messagesApi: MessagesApi,
-                                                  dataCacheConnector: DataCacheConnector,
-                                                  navigator: Navigator,
-                                                  getData: DataRetrievalAction,
-                                                  requireData: DataRequiredAction) extends FrontendController with I18nSupport {
+                                         override val messagesApi: MessagesApi,
+                                         dataCacheConnector: DataCacheConnector,
+                                         navigator: Navigator,
+                                         getData: DataRetrievalAction,
+                                         requireData: DataRequiredAction) extends FrontendController with I18nSupport {
+
+  def enquiryBackLink(answers: UserAnswers): Either[String, String] = {
+    answers.enquiryCategory match {
+      case Some("council_tax") => Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
+      case Some("business_rates") => Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
+      case _ => Left("Unknown enquiry category in enquiry key")
+    }
+  }
 
   def onPageLoad(mode: Mode) = (getData andThen requireData) {
     implicit request =>
@@ -45,14 +54,27 @@ class ContactDetailsController @Inject()(appConfig: FrontendAppConfig,
         case None => ContactDetailsForm()
         case Some(value) => ContactDetailsForm().fill(value)
       }
-      Ok(contactDetails(appConfig, preparedForm, mode))
+      enquiryBackLink(request.userAnswers) match {
+        case Right(link) => Ok(contactDetails(appConfig, preparedForm, mode, link))
+        case Left(msg) => {
+          Logger.warn(s"Navigation for Contact Details page reached with error $msg")
+          throw new RuntimeException(s"Navigation for Contact Details page reached with error $msg")
+        }
+      }
+
   }
 
   def onSubmit(mode: Mode) = (getData andThen requireData).async {
     implicit request =>
       ContactDetailsForm().bindFromRequest().fold(
         (formWithErrors: Form[ContactDetails]) =>
-          Future.successful(BadRequest(contactDetails(appConfig, formWithErrors, mode))),
+          Future.successful(enquiryBackLink(request.userAnswers) match {
+            case Right(link) => BadRequest(contactDetails(appConfig, formWithErrors, mode, link))
+            case Left(msg) => {
+              Logger.warn(s"Navigation for Contact Details page reached with error $msg")
+              throw new RuntimeException(s"Navigation for Contact Details page reached with error $msg")
+            }
+          }),
         (value) =>
           dataCacheConnector.save[ContactDetails](request.sessionId, ContactDetailsId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(ContactDetailsId, mode)(new UserAnswers(cacheMap))))

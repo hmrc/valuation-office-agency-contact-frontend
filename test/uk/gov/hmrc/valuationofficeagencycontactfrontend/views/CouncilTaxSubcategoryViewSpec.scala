@@ -78,7 +78,7 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
         val backlinkText = doc.select("a[class=link-back]").text()
         backlinkText mustBe messages("site.back")
         val backlinkUrl = doc.select("a[class=link-back]").attr("href")
-        backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url
+        backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
       }
     }
 
