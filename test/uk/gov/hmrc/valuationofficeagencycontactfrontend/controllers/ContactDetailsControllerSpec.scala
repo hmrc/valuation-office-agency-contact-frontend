@@ -50,7 +50,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
 
   "ContactDetails Controller" must {
 
-    "return OK and the correct view for a GET" in {
+    "return OK and the correct view for a GET when enquory category is business_rates" in {
       val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"), BusinessRatesSubcategoryId.toString -> JsString("business_rates_other"))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
@@ -59,7 +59,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
       contentAsString(result) mustBe viewAsStringNDR()
     }
 
-    "populate the view correctly on a GET when the question has previously been answered" in {
+    "populate the view correctly on a GET when the question has previously been answered and enquiry category is business_rates" in {
       val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"), CouncilTaxSubcategoryId.toString -> JsString("business_rates_other"),
         ContactDetailsId.toString -> Json.toJson(ContactDetails("a", "b", "a@test.com", "a@test.com", "0847428742424")))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
