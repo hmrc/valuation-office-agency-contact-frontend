@@ -143,8 +143,8 @@ class ContactDetailsFormSpec extends FormBehaviours {
       checkForError(form, data, expectedError)
     }
 
-    s"fail to bind when contact number length is more than 24" in {
-      val data = validData + ("contactNumber" -> "1234567890123456789012345")
+    s"fail to bind when contact number length is more than 20" in {
+      val data = validData + ("contactNumber" -> "123456789012345678901")
       val expectedError = error("contactNumber", "error.phone.max_length")
       checkForError(form, data, expectedError)
     }
