@@ -32,13 +32,13 @@ object ContactWithEnMessage {
   def apply(ct: Contact, messagesApi: MessagesApi): ContactWithEnMessage = {
     messagesApi.messages.get("en") match {
       case Some(messageMap) =>
-        val enquiryCategoryMsg = messageMap.get(ct.enquiryCategory) match {
+        val enquiryCategoryMsg = messageMap.get("enquiryCategory." + ct.enquiryCategory) match {
           case Some(msg) => msg
           case None =>
             Logger.warn("Unable to find key " + ct.enquiryCategory + " in en messages")
             throw new RuntimeException("Unable to find key " + ct.enquiryCategory + " in en messages")
         }
-        val subEnquiryCategoryMsg = messageMap.get(ct.subEnquiryCategory) match {
+        val subEnquiryCategoryMsg = messageMap.get("councilTaxSubcategory." + ct.subEnquiryCategory) match {
           case Some(msg) => msg
           case None =>
             Logger.warn("Unable to find key " + ct.subEnquiryCategory + " in en messages")

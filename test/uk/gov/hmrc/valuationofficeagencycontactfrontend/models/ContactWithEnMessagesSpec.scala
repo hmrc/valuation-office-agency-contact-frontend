@@ -26,7 +26,7 @@ class ContactWithEnMessagesSpec extends SpecBase with MockitoSugar {
   val contactDetails = ContactDetails("first", "last", "email", "email", "contactNumber")
   val confirmedContactDetails = ConfirmedContactDetails(contactDetails)
   val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "e")
-  val contact = Contact(confirmedContactDetails, propertyAddress, "enquiryCategory.council_tax", "councilTaxSubcategory.council_tax_band", "msg")
+  val contact = Contact(confirmedContactDetails, propertyAddress, "council_tax", "council_tax_band", "msg")
 
   "return a ContactWithEnMessages when given a contact with proper keys for the enquiryCategory and subEnquiryCategory" in {
     when(mockMessages.messages) thenReturn (Map("en" -> Map("enquiryCategory.council_tax" -> "CT", "councilTaxSubcategory.council_tax_band" -> "TB")))

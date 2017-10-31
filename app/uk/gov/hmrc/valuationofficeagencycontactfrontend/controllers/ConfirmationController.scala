@@ -46,18 +46,23 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
 
   def onPageLoad: Action[AnyContent] = (getData andThen requireData){ implicit request =>
 
-    val contact = request.userAnswers.contact match {
+    println(">>>>>>>>>>>>> UA " + request.userAnswers.contact())
+
+    val contact = request.userAnswers.contact() match {
       case Right(ct) => ct
       case Left(msg) =>
         Logger.warn(s"Navigation for Confirmation page reached without a contact and error $msg")
         throw new RuntimeException(s"Navigation for Confirmation page reached without a contact and error $msg")
     }
 
-    val result = connector.send(contact)
+    //val contact = request.userAnswers.contact.right.get
+
+    val result = connector.send(contact, messagesApi)
     val date = DateFormatter.todaysDate()
 
     enquiryKey(request.userAnswers) match {
-      case Right(key) => Ok(confirmation(appConfig, contact, date, key))
+      case Right(key) =>
+        Ok(confirmation(appConfig, contact, date, key))
       case Left(msg) => {
         Logger.warn(s"Navigation for Confirmation page reached with error $msg")
         throw new RuntimeException(s"Navigation for Confirmation page reached with error $msg")
