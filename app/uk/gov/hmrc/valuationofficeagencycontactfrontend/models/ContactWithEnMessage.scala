@@ -38,11 +38,20 @@ object ContactWithEnMessage {
             Logger.warn("Unable to find key " + ct.enquiryCategory + " in en messages")
             throw new RuntimeException("Unable to find key " + ct.enquiryCategory + " in en messages")
         }
-        val subEnquiryCategoryMsg = messageMap.get("councilTaxSubcategory." + ct.subEnquiryCategory) match {
+
+        val enquiryKey = ct.enquiryCategory match {
+          case "council_tax" => "councilTaxSubcategory"
+          case "business_rates" => "businessRatesSubcategory"
+          case err =>
+            Logger.warn("Unown enquiry category key " + ct.enquiryCategory)
+            throw new RuntimeException("Unable to find key " + ct.enquiryCategory + " in en messages")
+        }
+
+        val subEnquiryCategoryMsg = messageMap.get(enquiryKey + "." + ct.subEnquiryCategory) match {
           case Some(msg) => msg
           case None =>
             Logger.warn("Unable to find key " + ct.subEnquiryCategory + " in en messages")
-            throw new RuntimeException("Unable to find key " + ct.subEnquiryCategory + " in en messages")
+            throw new RuntimeException("Unable to find key " + enquiryKey + ct.subEnquiryCategory + " in en messages")
         }
         ContactWithEnMessage(ct.contact, ct.propertyAddress, enquiryCategoryMsg, subEnquiryCategoryMsg, ct.message)
       case None =>
