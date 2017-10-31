@@ -19,9 +19,9 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors
 import javax.inject.{Inject, Singleton}
 
 import play.api.Configuration
+import play.api.i18n.MessagesApi
 import play.api.libs.json._
-
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Contact
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Contact, ContactWithEnMessage}
 import uk.gov.hmrc.play.bootstrap.config.BaseUrl
 
 import scala.util.{Failure, Success, Try}
@@ -40,7 +40,7 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient, override val
 
   def getStyleGuide = http.GET(s"$serviceUrl${baseSegment}style-guide")
 
-  def send(input: Contact) = sendJson(Json.toJson(input))
+  def send(input: Contact, messagesApi: MessagesApi) = sendJson(Json.toJson(ContactWithEnMessage(input, messagesApi)))
 
   def sendJson(json: JsValue): Future[Try[Int]] =
     http.POST(s"$serviceUrl${baseSegment}create", json, Seq(jsonContentTypeHeader))
