@@ -37,3 +37,4 @@ class IndexController @Inject()(val appConfig: FrontendAppConfig,
     Ok(index(appConfig)).withNewSession
   }
 }
+
