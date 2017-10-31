@@ -18,6 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import org.mockito.Mockito.when
 import org.scalatest.mockito.MockitoSugar
+import play.api.i18n.{Messages, MessagesApi}
 import play.api.libs.json.{JsString, Json}
 import play.api.test.Helpers._
 import uk.gov.hmrc.http.cache.client.CacheMap
@@ -40,10 +41,11 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
   "Confirmation Controller" must {
 
     "return 200 and the correct view for a GET" in {
+
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val ec = "council_tax"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
-      val councilTaxSubcategory = "council_tax_home_business"
+      val councilTaxSubcategory = "council_tax_band"
       val tellUs = TellUsMore("Hello")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val date = DateFormatter.todaysDate()
@@ -66,7 +68,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val ec = "council_tax"
       val propertyAddress = PropertyAddress("a", None, "c", None, "f")
-      val councilTaxSubcategory = "council_tax_home_business"
+      val councilTaxSubcategory = "council_tax_band"
       val tellUs = TellUsMore("Hello")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val date = DateFormatter.todaysDate()
