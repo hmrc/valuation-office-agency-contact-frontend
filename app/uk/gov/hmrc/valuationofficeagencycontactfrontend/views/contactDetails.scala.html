@@ -23,14 +23,14 @@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
-@(appConfig: FrontendAppConfig, form: Form[ContactDetails], mode: Mode)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, form: Form[ContactDetails], mode: Mode, backLink: String)(implicit request: Request[_], messages: Messages)
 
 @main_template(
     title = messages("contactDetails.title"),
     appConfig = appConfig,
     bodyClasses = None) {
 
-    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url)
+    @components.back_link(backLink)
 
     @helpers.form(action = ContactDetailsController.onSubmit(mode), 'autoComplete -> "off") {
 
