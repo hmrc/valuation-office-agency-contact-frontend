@@ -29,11 +29,11 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
   val ctBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
   val ndrBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
 
-  def createNDRViewUsingForm = (form: Form[ContactDetails]) => contactDetails(frontendAppConfig, form, NormalMode, ndrBackLink)(fakeRequest, messages)
+  def createNDRViewUsingForm(form: Form[ContactDetails]) = contactDetails(frontendAppConfig, form, NormalMode, ndrBackLink)(fakeRequest, messages)
 
-  def createCTView = () => contactDetails(frontendAppConfig, ContactDetailsForm(), NormalMode, ctBackLink)(fakeRequest, messages)
+  def createCTView() = contactDetails(frontendAppConfig, ContactDetailsForm(), NormalMode, ctBackLink)(fakeRequest, messages)
 
-  def createCTViewUsingForm = (form: Form[ContactDetails]) => contactDetails(frontendAppConfig, form, NormalMode, ctBackLink)(fakeRequest, messages)
+  def createCTViewUsingForm(form: Form[ContactDetails]) = contactDetails(frontendAppConfig, form, NormalMode, ctBackLink)(fakeRequest, messages)
 
   override val form = ContactDetailsForm()
 
