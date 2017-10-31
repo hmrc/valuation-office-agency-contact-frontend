@@ -37,14 +37,19 @@ import org.mockito.Matchers._
 import org.mockito.Mockito.{verify, when}
 import org.scalatest.mockito.MockitoSugar
 import play.api.Configuration
+import play.api.http.Status
 import play.api.libs.json._
-import uk.gov.hmrc.http.{HeaderCarrier, HttpReads, HttpResponse}
+import uk.gov.hmrc.play.test.{UnitSpec, WithFakeApplication}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.exceptions.JsonInvalidException
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
+import scala.concurrent.{Await, Future}
+import scala.util.{Failure, Success, Try}
+import uk.gov.hmrc.http.{HeaderCarrier, HttpReads, HttpResponse}
+import uk.gov.hmrc.play.bootstrap.http.HttpClient
+import play.api.i18n.MessagesApi
+
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
-import scala.util.{Failure, Success}
 
 class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
 
