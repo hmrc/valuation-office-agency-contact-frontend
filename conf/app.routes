@@ -1,6 +1,6 @@
 # microservice specific routes
 
-GET         /                                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.IndexController.onPageLoad
+GET         /                                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.EnquiryCategoryController.onPageLoad(mode: Mode = NormalMode)
 
 GET         /assets/*file                          controllers.Assets.versioned(path="/public", file: Asset)
 
@@ -22,8 +22,6 @@ GET         /contactDetails                        uk.gov.hmrc.valuationofficeag
 POST        /contactDetails                        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onSubmit(mode: Mode = NormalMode)
 GET         /changeContactDetails                  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onPageLoad(mode: Mode = CheckMode)
 POST        /changeContactDetails                  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onSubmit(mode: Mode = CheckMode)
-
-GET         /staticPagePlaceholder                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.StaticPagePlaceholderController.onPageLoad
 
 GET         /councilTaxSubcategory                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onPageLoad(mode: Mode = NormalMode)
 POST        /councilTaxSubcategory                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onSubmit(mode: Mode = NormalMode)
@@ -55,4 +53,7 @@ GET         /valuationForTaxes                     uk.gov.hmrc.valuationofficeag
 GET         /housingBenefits                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.HousingBenefitsController.onPageLoad()
 GET         /providingLettings                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ProvidingLettingsController.onPageLoad()
 
-GET         /indexWithNewSession                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.IndexController.onPageLoadWithNewSession()
+GET         /enquiryCategoryWithNewSession         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.EnquiryCategoryController.onPageLoadWithNewSession(mode: Mode = NormalMode)
+
+GET         /councilTaxSmartLinks                  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSmartLinksController.onPageLoad()
+GET         /goto-councilTaxSubcategory            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSmartLinksController.goToCouncilTaxSubcategoryPage()

@@ -33,7 +33,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.contactDetail
 
 class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar {
 
-  def onwardRoute = routes.IndexController.onPageLoad()
+  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   val mockUserAnswers = mock[UserAnswers]
 

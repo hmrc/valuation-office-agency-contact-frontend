@@ -23,14 +23,16 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import play.api.test.Helpers._
+import uk.gov.hmrc.http.SessionKeys
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.EnquiryCategoryId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.enquiryCategory
+import scala.concurrent.ExecutionContext.Implicits.global
 
 class EnquiryCategoryControllerSpec extends ControllerSpecBase {
 
-  def onwardRoute = routes.IndexController.onPageLoad()
+  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new EnquiryCategoryController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
@@ -88,6 +90,19 @@ class EnquiryCategoryControllerSpec extends ControllerSpecBase {
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(onwardRoute.url)
+    }
+
+    "When calling onPageLoadWithNewSession changes the sessionId to a new one" in {
+      val firstResult = controller().onPageLoad(NormalMode)(fakeRequest)
+
+      val firstSession = firstResult.map { result1 =>
+        result1.session(fakeRequest).get(SessionKeys.sessionId)
+        val secondResult = controller().onPageLoadWithNewSession(NormalMode)(fakeRequest)
+        val secondSession = secondResult.map { result2 =>
+          result2.session(fakeRequest).get(SessionKeys.sessionId)
+          assert(result1 != result2)
+        }
+      }
     }
 
   }

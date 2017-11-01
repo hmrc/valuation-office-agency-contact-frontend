@@ -20,6 +20,7 @@ import javax.inject.Inject
 
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
+import play.api.mvc.{Action, AnyContent}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
@@ -47,6 +48,15 @@ class EnquiryCategoryController @Inject()(
         case Some(value) => EnquiryCategoryForm().fill(value)
       }
       Ok(enquiryCategory(appConfig, preparedForm, mode))
+  }
+
+  def onPageLoadWithNewSession(mode: Mode): Action[AnyContent] = getData {
+    implicit request =>
+      val preparedForm = request.userAnswers.flatMap(x => x.enquiryCategory) match {
+        case None => EnquiryCategoryForm()
+        case Some(value) => EnquiryCategoryForm().fill(value)
+      }
+      Ok(enquiryCategory(appConfig, preparedForm, mode)).withNewSession
   }
 
   def onSubmit(mode: Mode) = getData.async {

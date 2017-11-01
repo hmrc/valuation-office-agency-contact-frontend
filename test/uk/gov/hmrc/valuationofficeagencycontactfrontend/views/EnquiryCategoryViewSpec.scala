@@ -73,14 +73,6 @@ class EnquiryCategoryViewSpec extends ViewBehaviours {
       "has a radio button with the label set to the message with key enquiryCategory.valuation_for_public_body and that it is used once" in {
         labelDefinedAndUsedOnce("valuation_for_public_body", messageKeyPrefix, createView)
       }
-
-      "has a link marked with site.back leading to the start page" in {
-        val doc = asDocument(createView())
-        val backlinkText = doc.select("a[class=link-back]").text()
-        backlinkText mustBe messages("site.back")
-        val backlinkUrl = doc.select("a[class=link-back]").attr("href")
-        backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoad().url
-      }
     }
 
     for(option <- EnquiryCategoryForm.options) {

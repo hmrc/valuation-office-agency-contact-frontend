@@ -22,6 +22,7 @@ import play.api.i18n.{I18nSupport, Lang, MessagesApi}
 import play.api.mvc.{Action, AnyContent, Call, Controller}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.play.language.LanguageUtils
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 
 // TODO, upstream this into play-language
 class LanguageSwitchController @Inject() (
@@ -32,7 +33,7 @@ class LanguageSwitchController @Inject() (
 
   private def langToCall(lang: String): (String) => Call = appConfig.routeToSwitchLanguage
 
-  private def fallbackURL: String = routes.IndexController.onPageLoad().url
+  private def fallbackURL: String = routes.EnquiryCategoryController.onPageLoad(NormalMode).url
 
   private def languageMap: Map[String, Lang] = appConfig.languageMap
 

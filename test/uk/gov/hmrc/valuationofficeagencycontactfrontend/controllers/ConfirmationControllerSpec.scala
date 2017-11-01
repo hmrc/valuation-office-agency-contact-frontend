@@ -34,7 +34,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
   val mockUserAnswers = mock[UserAnswers]
   val connector = injector.instanceOf[LightweightContactEventsConnector]
 
-  def onwardRoute = routes.IndexController.onPageLoad()
+  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ConfirmationController(frontendAppConfig, messagesApi, connector, dataRetrievalAction, new DataRequiredActionImpl)

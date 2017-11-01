@@ -61,7 +61,7 @@ class ProvidingLettingsViewSpec extends ViewBehaviours {
     "The Start again button links to the Index Controller onPageLoad method" in {
       val doc = asDocument(view())
       val href = doc.getElementById("start-again").attr("href")
-      assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoadWithNewSession().url.toString)
+      assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoadWithNewSession().url.toString)
     }
   }
 

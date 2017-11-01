@@ -30,13 +30,16 @@ class Navigator @Inject()() {
 
   val enquiryRouting: UserAnswers => Call = answers => {
     answers.enquiryCategory match {
-      case Some("council_tax") => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
+      case Some("council_tax") => routes.CouncilTaxSmartLinksController.onPageLoad()
       case Some("business_rates") => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
       case Some("housing_benefit") => routes.HousingBenefitsController.onPageLoad()
       case Some("valuations_for_tax") => routes.ValuationForTaxesController.onPageLoad()
       case Some("providing_lettings") => routes.ProvidingLettingsController.onPageLoad()
       case Some("valuation_for_public_body") => routes.ValuationAdviceController.onPageLoad()
-      case Some(_) => routes.StaticPagePlaceholderController.onPageLoad()
+      case Some(option) => {
+        Logger.warn(s"Navigation for enquiry category reached with unknown option $option by controller")
+        throw new RuntimeException(s"Navigation for enquiry category reached with unknown option $option by controller")
+      }
       case None => {
         Logger.warn("Navigation for enquiry category reached without selection of enquiry by controller")
         throw new RuntimeException("Navigation for enquiry category reached without selection of enquiry by controller")
@@ -102,14 +105,15 @@ class Navigator @Inject()() {
     ContactDetailsId -> contactDetailsRouting,
     PropertyAddressId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
     TellUsMoreId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
-    CheckYourAnswersId -> confirmationPageRouting
+    CheckYourAnswersId -> confirmationPageRouting,
+    CouncilTaxSmartLinksId -> (_ => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode))
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()
 
   def nextPage(id: Identifier, mode: Mode): UserAnswers => Call = mode match {
     case NormalMode =>
-      routeMap.getOrElse(id, _ => routes.IndexController.onPageLoad())
+      routeMap.getOrElse(id, _ => routes.EnquiryCategoryController.onPageLoad(NormalMode))
     case CheckMode =>
       editRouteMap.getOrElse(id, _ => routes.CheckYourAnswersController.onPageLoad())
   }

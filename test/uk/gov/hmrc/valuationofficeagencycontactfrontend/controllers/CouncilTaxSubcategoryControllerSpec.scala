@@ -30,7 +30,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.councilTaxSub
 
 class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase {
 
-  def onwardRoute = routes.IndexController.onPageLoad()
+  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new CouncilTaxSubcategoryController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),

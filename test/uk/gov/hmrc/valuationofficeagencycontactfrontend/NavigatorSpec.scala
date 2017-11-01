@@ -37,12 +37,12 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
     "in Normal mode" must {
       "go to Index from an identifier that doesn't exist in the route map" in {
         case object UnknownIdentifier extends Identifier
-        navigator.nextPage(UnknownIdentifier, NormalMode)(mockUserAnswers) mustBe routes.IndexController.onPageLoad()
+        navigator.nextPage(UnknownIdentifier, NormalMode)(mockUserAnswers) mustBe routes.EnquiryCategoryController.onPageLoad(NormalMode)
       }
 
-      "return a function that goes to the council tax subcategory page when an enquiry category has been selected and the selection is council tax" in {
+      "return a function that goes to the Council Tax Smart Links page when an enquiry category has been selected and the selection is council tax" in {
         when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
+        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxSmartLinksController.onPageLoad()
       }
 
       "return a function that goes to the contact form page when an enquiry category for council tax has been selected" in {
@@ -180,6 +180,19 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         case object UnknownIdentifier extends Identifier
         navigator.nextPage(UnknownIdentifier, CheckMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
       }
+
+      "return a function that throws a runtime exception if unknown enquiry category is selected on the enquiry category page" in {
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("other_selection")
+        intercept[Exception] {
+          navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers)
+        }
+      }
+
+      "return a function that goes to the council tax subcategory page when an enquiry category has been selected and the selection is council_tax" in {
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+        navigator.nextPage(CouncilTaxSmartLinksId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
+      }
+
     }
   }
 }
