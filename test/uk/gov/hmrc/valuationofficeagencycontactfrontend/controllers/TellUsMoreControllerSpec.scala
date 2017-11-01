@@ -147,5 +147,14 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
         contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
       }
     }
+
+      "return 500 and the error view for a GET with no enquiry type" in {
+        intercept[Exception] {
+          val result = controller().onPageLoad(NormalMode)(fakeRequest)
+          status(result) mustBe INTERNAL_SERVER_ERROR
+          contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+        }
+      }
+
   }
 }

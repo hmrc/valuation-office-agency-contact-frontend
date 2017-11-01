@@ -25,7 +25,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, RadioOption, UserAnswers}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, DateFormatter, RadioOption, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{check_your_answers, internalServerError}
 
@@ -40,19 +40,25 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
   "Check Your Answers Controller" must {
 
-    "return 200 and the correct view for a GET" in {
-      pending
-      val result = controller().onPageLoad()(fakeRequest)
-      status(result) mustBe OK
-      contentAsString(result) mustBe check_your_answers(frontendAppConfig, Seq(AnswerSection(None, Seq())))(fakeRequest, messages).toString
-    }
+    "return 200 for a GET" in {
+      val cd = ContactDetails("a", "b", "c", "d", "e")
+      val ec = "council_tax"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_band"
+      val tellUs = TellUsMore("Hello")
+      val confirmedContactDetails = ConfirmedContactDetails(cd)
+      val date = DateFormatter.todaysDate()
 
-    "Intercept No enquiry selected by throwing an exception" in {
-      pending
-      val result = controller().onPageLoad()(fakeRequest)
-      val exception = intercept[RuntimeException] {
-      }
-      exception.getMessage mustBe "Navigation for check your anwsers page reached without selection of enquiry by controller"
+      val contact = Contact(confirmedContactDetails, propertyAddress, ec, councilTaxSubcategory, tellUs.message)
+
+      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
     }
 
     "redirect to Session Expired for a GET if not existing data is found" in {
@@ -148,6 +154,17 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
         contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
       }
     }
+
+    "return 500 and the error view for a reaching summary page with no enquiry" in {
+
+      intercept[Exception] {
+        val result = controller().onPageLoad()(fakeRequest)
+        status(result) mustBe INTERNAL_SERVER_ERROR
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+      }
+    }
+
   }
 }
+
 
