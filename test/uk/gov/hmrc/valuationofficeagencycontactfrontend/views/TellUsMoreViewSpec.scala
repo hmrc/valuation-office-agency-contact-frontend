@@ -45,7 +45,7 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
   "contain continue button with the value Continue" in {
     val doc = asDocument(createViewUsingForm(TellUsMoreForm()))
     val continueButton = doc.getElementById("submit").text()
-    assert(continueButton == messages("site.continue"))
+    assert(continueButton == messages("site.submit.enquiry"))
   }
 
   "contain tellUsMore.ndr-reference paragraph" in {

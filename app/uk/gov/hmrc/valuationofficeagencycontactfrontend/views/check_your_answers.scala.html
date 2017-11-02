@@ -42,6 +42,6 @@
         }
     }
 
-    <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CheckYourAnswersController.goToConfirmationPage().url >@components.submit_button()</a>
+    @components.button_link(messageKey = "site.submit.enquiry", href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CheckYourAnswersController.goToConfirmationPage().url, id = "submit")
 
 }
