@@ -43,7 +43,6 @@ class CouncilTaxSmartLinksControllerSpec extends ControllerSpecBase {
 
     "return a redirect when calling goToCouncilTaxSubcategoryPage" in {
       val result = controller().goToCouncilTaxSubcategoryPage()(fakeRequest)
-      println(">>>>>>>>>>>"+ status(result))
       status(result) mustBe SEE_OTHER
     }
   }
