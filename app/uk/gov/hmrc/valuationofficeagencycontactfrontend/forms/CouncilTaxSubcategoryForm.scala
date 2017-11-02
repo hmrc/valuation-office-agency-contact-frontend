@@ -37,11 +37,10 @@ object CouncilTaxSubcategoryForm extends FormErrorHelper {
     Form(single("value" -> of(CouncilTaxSubcategoryFormatter)))
 
   def options = Seq(
-    RadioOption("councilTaxSubcategory", "council_tax_band"),
-    RadioOption("councilTaxSubcategory", "council_tax_calculated"),
+    RadioOption("councilTaxSubcategory", "council_tax_poor_repair"),
     RadioOption("councilTaxSubcategory", "council_tax_changes"),
-    RadioOption("councilTaxSubcategory", "council_tax_challenge"),
-    RadioOption("councilTaxSubcategory", "council_tax_property"),
+    RadioOption("councilTaxSubcategory", "council_tax_ndr_changes"),
+    RadioOption("councilTaxSubcategory", "council_tax_annexe"),
     RadioOption("councilTaxSubcategory", "council_tax_other")
   )
 
