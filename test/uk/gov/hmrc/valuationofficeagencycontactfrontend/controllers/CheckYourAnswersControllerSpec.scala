@@ -18,38 +18,47 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import org.mockito.Mockito.when
 import org.scalatest.mockito.MockitoSugar
+import play.api.libs.json.{JsString, Json}
 import play.api.test.Helpers._
+import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, PropertyAddress, TellUsMore}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, RadioOption, UserAnswers}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, DateFormatter, RadioOption, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_answers
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{check_your_answers, internalServerError}
 
 class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
 
-  def onwardRoute = routes.IndexController.onPageLoad()
+  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new CheckYourAnswersController(frontendAppConfig, messagesApi, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction, new DataRequiredActionImpl)
 
   "Check Your Answers Controller" must {
 
-    "return 200 and the correct view for a GET" in {
-      pending
-      val result = controller().onPageLoad()(fakeRequest)
-      status(result) mustBe OK
-      contentAsString(result) mustBe check_your_answers(frontendAppConfig, Seq(AnswerSection(None, Seq())))(fakeRequest, messages).toString
-    }
+    "return 200 for a GET" in {
+      val cd = ContactDetails("a", "b", "c", "d", "e")
+      val ec = "council_tax"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_poor_repair"
+      val tellUs = TellUsMore("Hello")
+      val confirmedContactDetails = ConfirmedContactDetails(cd)
+      val date = DateFormatter.todaysDate()
 
-    "Intercept No enquiry selected by throwing an exception" in {
-      pending
-      val result = controller().onPageLoad()(fakeRequest)
-      val exception = intercept[RuntimeException] {
-      }
-      exception.getMessage mustBe "Navigation for check your anwsers page reached without selection of enquiry by controller"
+      val contact = Contact(confirmedContactDetails, propertyAddress, ec, councilTaxSubcategory, tellUs.message)
+
+      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
     }
 
     "redirect to Session Expired for a GET if not existing data is found" in {
@@ -91,7 +100,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("a")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_poor_repair")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
       val result = controller().sections(mockUserAnswers)
@@ -106,7 +115,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("a")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_poor_repair")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
       val result = controller().sections(mockUserAnswers)
@@ -127,6 +136,35 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       result mustBe None
     }
 
+    "return 500 and the error view for a reaching summary page with wrong enquiry or unknown enquiry" in {
+      val cd = ContactDetails("a", "b", "c", "d", "e")
+      val ec = "other"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_poor_repair"
+      val tellUs = TellUsMore("Hello")
+      val confirmedContactDetails = ConfirmedContactDetails(cd)
+      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      intercept[Exception] {
+        val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+        status(result) mustBe INTERNAL_SERVER_ERROR
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+      }
+    }
+
+    "return 500 and the error view for a reaching summary page with no enquiry" in {
+
+      intercept[Exception] {
+        val result = controller().onPageLoad()(fakeRequest)
+        status(result) mustBe INTERNAL_SERVER_ERROR
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+      }
+    }
 
   }
 }
+
+

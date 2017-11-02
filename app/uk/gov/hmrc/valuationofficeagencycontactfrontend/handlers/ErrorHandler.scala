@@ -18,7 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.handlers
 
 import javax.inject.{Inject, Singleton}
 
-import play.api.i18n.{I18nSupport, MessagesApi}
+import play.api.i18n.{I18nSupport, Messages, MessagesApi}
 import play.api.mvc.Request
 import play.twirl.api.Html
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
@@ -32,5 +32,8 @@ class ErrorHandler @Inject()(
 
   override def standardErrorTemplate(pageTitle: String, heading: String, message: String)(implicit rh: Request[_]): Html =
     uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error_template(pageTitle, heading, message, appConfig)
+
+  override def internalServerErrorTemplate(implicit request: Request[_]): Html =
+    uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.internalServerError(appConfig)
 }
 

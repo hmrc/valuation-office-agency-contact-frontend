@@ -30,13 +30,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxS
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.tellUsMore
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{internalServerError, tellUsMore}
 
 class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
 
-  def onwardRoute = routes.IndexController.onPageLoad()
+  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new TellUsMoreController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
@@ -136,5 +136,25 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad().url)
     }
+
+    "return 500 and the error view for a GET with wrong or unknown enquiry type" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("other"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_calculated"))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      intercept[Exception] {
+        val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+        status(result) mustBe INTERNAL_SERVER_ERROR
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+      }
+    }
+
+      "return 500 and the error view for a GET with no enquiry type" in {
+        intercept[Exception] {
+          val result = controller().onPageLoad(NormalMode)(fakeRequest)
+          status(result) mustBe INTERNAL_SERVER_ERROR
+          contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+        }
+      }
+
   }
 }

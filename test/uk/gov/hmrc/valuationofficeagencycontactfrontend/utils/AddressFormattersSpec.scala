@@ -26,26 +26,22 @@ class AddressFormattersSpec extends SpecBase {
 
     "Given a complete Property Address it should generate a formatted string using the given interstitial" in {
       val address = PropertyAddress("a", Some("b"), "c", Some("d"), "e")
-      formattedPropertyAddress(Some(address), "<br/>") mustBe "a<br/>b<br/>c<br/>d<br/>e"
+      formattedPropertyAddress(address, "<br/>") mustBe "a<br/>b<br/>c<br/>d<br/>e"
     }
 
     "Given a Property Address without address line 2 and county should generate a formatted string using the given interstitial" in {
       val address = PropertyAddress("a", None, "c", None, "e")
-      formattedPropertyAddress(Some(address), "<br/>") mustBe "a<br/>c<br/>e"
+      formattedPropertyAddress(address, "<br/>") mustBe "a<br/>c<br/>e"
     }
 
     "Given a Property Address with elements that have too many spaces it should generate a formatted string using the given interstitial" in {
       val address = PropertyAddress(" a ", Some(" b "), " c ", Some(" d "), " e ")
-      formattedPropertyAddress(Some(address), "<br/>") mustBe "a<br/>b<br/>c<br/>d<br/>e"
+      formattedPropertyAddress(address, "<br/>") mustBe "a<br/>b<br/>c<br/>d<br/>e"
     }
 
     "Given a Property Address with no address line 2 and without county, with elements that have too many spaces it should generate a formatted string using the given interstitial" in {
       val address = PropertyAddress(" a ", None, " c ", None, " e ")
-      formattedPropertyAddress(Some(address), "<br/>") mustBe "a<br/>c<br/>e"
-    }
-
-    "Given no Property Address it should generate am empty string" in {
-      formattedPropertyAddress(None, "<br/>") mustBe ""
+      formattedPropertyAddress(address, "<br/>") mustBe "a<br/>c<br/>e"
     }
 
     "Given a Sequence with three strings insert the interstitials" in {

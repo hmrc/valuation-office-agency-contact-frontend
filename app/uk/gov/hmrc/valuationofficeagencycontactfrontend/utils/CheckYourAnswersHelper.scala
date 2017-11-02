@@ -41,7 +41,7 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
   }
 
   def propertyAddress: Option[AnswerRow] = userAnswers.propertyAddress map {
-    x => AnswerRow("propertyAddress.checkYourAnswersLabel", formattedPropertyAddress(userAnswers.propertyAddress, "<br>"), false, routes.PropertyAddressController.onPageLoad(CheckMode).url)
+    addr => AnswerRow("propertyAddress.checkYourAnswersLabel", formattedPropertyAddress(addr, "<br>"), false, routes.PropertyAddressController.onPageLoad(CheckMode).url)
   }
 
   def contactDetails: Option[AnswerRow] = userAnswers.contactDetails map {

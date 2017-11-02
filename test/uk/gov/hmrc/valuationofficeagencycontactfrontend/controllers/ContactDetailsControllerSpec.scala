@@ -16,49 +16,62 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
+import org.mockito.Mockito.when
+import org.scalatest.mockito.MockitoSugar
 import play.api.data.Form
-import play.api.libs.json.Json
+import play.api.libs.json.{JsString, Json}
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.ContactDetailsId
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{NormalMode, ContactDetails}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.contactDetails
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, CouncilTaxSubcategoryId, EnquiryCategoryId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{contactDetails, internalServerError}
 
-class ContactDetailsControllerSpec extends ControllerSpecBase {
+class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar {
 
-  def onwardRoute = routes.IndexController.onPageLoad()
+  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+
+  val mockUserAnswers = mock[UserAnswers]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ContactDetailsController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl)
 
-  def viewAsString(form: Form[ContactDetails] = ContactDetailsForm()) = contactDetails(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  val ctBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
+  val ndrBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
+
+  def viewAsStringCT(form: Form[ContactDetails] = ContactDetailsForm()) = contactDetails(frontendAppConfig, form, NormalMode, ctBackLink)(fakeRequest, messages).toString
+
+  def viewAsStringNDR(form: Form[ContactDetails] = ContactDetailsForm()) = contactDetails(frontendAppConfig, form, NormalMode, ndrBackLink)(fakeRequest, messages).toString
 
   "ContactDetails Controller" must {
 
-    "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(NormalMode)(fakeRequest)
+    "return OK and the correct view for a GET when enquory category is business_rates" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"), BusinessRatesSubcategoryId.toString -> JsString("business_rates_other"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+      contentAsString(result) mustBe viewAsStringNDR()
     }
 
-    "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(ContactDetailsId.toString -> Json.toJson(ContactDetails("value 1", "value 2", "value 3", "value 4", "value 5")))
+    "populate the view correctly on a GET when the question has previously been answered and enquiry category is business_rates" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"), CouncilTaxSubcategoryId.toString -> JsString("business_rates_other"),
+        ContactDetailsId.toString -> Json.toJson(ContactDetails("a", "b", "a@test.com", "a@test.com", "0847428742424")))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsString(ContactDetailsForm().fill(ContactDetails("value 1", "value 2", "value 3", "value 4", "value 5")))
+      contentAsString(result) mustBe viewAsStringNDR(ContactDetailsForm().fill(ContactDetails("a", "b", "a@test.com", "a@test.com", "0847428742424")))
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("firstName", "value 1"), ("lastName", "value 2"), ("email", "value 3"),
-        ("confirmEmail", "value 4"), ("contactNumber", "value 5"))
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("firstName", "a"), ("lastName", "b"), ("email", "a@test.com"),
+        ("confirmEmail", "a@test.com"), ("contactNumber", "0487357346776"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -69,11 +82,25 @@ class ContactDetailsControllerSpec extends ControllerSpecBase {
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm = ContactDetailsForm().bind(Map("value" -> "invalid value"))
+      val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"), BusinessRatesSubcategoryId.toString -> JsString("business_rates_other"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller().onSubmit(NormalMode)(postRequest)
-
+      val result = controller(getRelevantData).onSubmit(NormalMode)(postRequest)
       status(result) mustBe BAD_REQUEST
-      contentAsString(result) mustBe viewAsString(boundForm)
+      contentAsString(result) mustBe viewAsStringNDR(boundForm)
+    }
+
+    "return an error when invalid data is submitted and enquiry category is wrong or unwnown" in {
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
+      val boundForm = ContactDetailsForm().bind(Map("value" -> "invalid value"))
+      val validData = Map(EnquiryCategoryId.toString -> JsString("other"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      intercept[Exception] {
+        val result = controller(getRelevantData).onSubmit(NormalMode)(postRequest)
+        status(result) mustBe INTERNAL_SERVER_ERROR
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+      }
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {
@@ -84,13 +111,66 @@ class ContactDetailsControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("firstName", "value 1"), ("lastName", "value 2"), ("email", "value 3"),
-        ("confirmEmail", "value 4"), ("contactNumber", "value 5"))
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("firstName", "a"), ("lastName", "b"), ("email", "a@test.com"),
+        ("confirmEmail", "a@test.com"), ("contactNumber", "0493584384343"))
 
       val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad().url)
     }
+
+    "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
+      val result = controller().enquiryBackLink(mockUserAnswers)
+      val isBusinessRatesSelection = result.isRight
+      isBusinessRatesSelection mustBe true
+      assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
+    }
+
+    "The enquiry key function produces a string with a Council Tax subcategory back link when the enquiry category is council_tax" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_poor_repair")
+      val result = controller().enquiryBackLink(mockUserAnswers)
+      val isCouncilTaxSelection = result.isRight
+      isCouncilTaxSelection mustBe true
+      assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
+    }
+
+    "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn None
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
+      val result = controller().enquiryBackLink(mockUserAnswers)
+      result mustBe Left("Unknown enquiry category in enquiry key")
+    }
+
+    "return OK and the correct view for a GET when enquiry category is council_tax" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_poor_repair"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "populate the view correctly on a GET when the question has previously been answered and enquiry category is council_tax" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_poor_repair"),
+        ContactDetailsId.toString -> Json.toJson(ContactDetails("a", "b", "a@test.com", "a@test.com", "0847428742424")))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      contentAsString(result) mustBe viewAsStringCT(ContactDetailsForm().fill(ContactDetails("a", "b", "a@test.com", "a@test.com", "0847428742424")))
+    }
+
+    "return 500 and the error view for a GET with no enquiry type" in {
+      intercept[Exception] {
+        val result = controller().onPageLoad(NormalMode)(fakeRequest)
+        status(result) mustBe INTERNAL_SERVER_ERROR
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+      }
+    }
+
   }
 }

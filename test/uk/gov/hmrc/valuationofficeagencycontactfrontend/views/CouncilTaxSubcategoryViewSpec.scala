@@ -43,24 +43,20 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
         }
       }
 
-      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_band and that it is used once" in {
-        labelDefinedAndUsedOnce("council_tax_band", messageKeyPrefix, createView)
-      }
-
-      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_calculated and that it is used once" in {
-        labelDefinedAndUsedOnce("council_tax_calculated", messageKeyPrefix, createView)
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_poor_repair and that it is used once" in {
+        labelDefinedAndUsedOnce("council_tax_poor_repair", messageKeyPrefix, createView)
       }
 
       "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_changes and that it is used once" in {
         labelDefinedAndUsedOnce("council_tax_changes", messageKeyPrefix, createView)
       }
 
-      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_challenge and that it is used once" in {
-        labelDefinedAndUsedOnce("council_tax_challenge", messageKeyPrefix, createView)
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_ndr_changes and that it is used once" in {
+        labelDefinedAndUsedOnce("council_tax_ndr_changes", messageKeyPrefix, createView)
       }
 
-      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_property and that it is used once" in {
-        labelDefinedAndUsedOnce("council_tax_property", messageKeyPrefix, createView)
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_annexe and that it is used once" in {
+        labelDefinedAndUsedOnce("council_tax_annexe", messageKeyPrefix, createView)
       }
 
       "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_other and that it is used once" in {
@@ -73,12 +69,12 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
         assert(continueButton == messages("site.continue"))
       }
 
-      "has a link marked with site.back leading to the Contact Details Page" in {
+      "has a link marked with site.back leading to the Council Tax Smart Links" in {
         val doc = asDocument(createView())
         val backlinkText = doc.select("a[class=link-back]").text()
         backlinkText mustBe messages("site.back")
         val backlinkUrl = doc.select("a[class=link-back]").attr("href")
-        backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url
+        backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSmartLinksController.onPageLoad().url
       }
     }
 

@@ -18,6 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import org.mockito.Mockito.when
 import org.scalatest.mockito.MockitoSugar
+import play.api.i18n.{Messages, MessagesApi}
 import play.api.libs.json.{JsString, Json}
 import play.api.test.Helpers._
 import uk.gov.hmrc.http.cache.client.CacheMap
@@ -26,13 +27,14 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{Dat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, UserAnswers}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmation
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation, internalServerError}
 
 class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
   val connector = injector.instanceOf[LightweightContactEventsConnector]
-  def onwardRoute = routes.IndexController.onPageLoad()
+
+  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ConfirmationController(frontendAppConfig, messagesApi, connector, dataRetrievalAction, new DataRequiredActionImpl)
@@ -40,15 +42,16 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
   "Confirmation Controller" must {
 
     "return 200 and the correct view for a GET" in {
+
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val ec = "council_tax"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
-      val councilTaxSubcategory = "council_tax_home_business"
+      val councilTaxSubcategory = "council_tax_poor_repair"
       val tellUs = TellUsMore("Hello")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val date = DateFormatter.todaysDate()
 
-      val contact = Contact(confirmedContactDetails, Some(propertyAddress), ec, councilTaxSubcategory, tellUs.message)
+      val contact = Contact(confirmedContactDetails, propertyAddress, ec, councilTaxSubcategory, tellUs.message)
 
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
         ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
@@ -66,12 +69,12 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val ec = "council_tax"
       val propertyAddress = PropertyAddress("a", None, "c", None, "f")
-      val councilTaxSubcategory = "council_tax_home_business"
+      val councilTaxSubcategory = "council_tax_poor_repair"
       val tellUs = TellUsMore("Hello")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val date = DateFormatter.todaysDate()
 
-      val contact = Contact(confirmedContactDetails, Some(propertyAddress), ec, councilTaxSubcategory, tellUs.message)
+      val contact = Contact(confirmedContactDetails, propertyAddress, ec, councilTaxSubcategory, tellUs.message)
 
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
         ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
@@ -109,7 +112,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_band")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_poor_repair")
 
       val result = controller().enquiryKey(mockUserAnswers)
       val isCouncilTaxSelection = result.right.get.startsWith("councilTaxSubcategory")
@@ -124,6 +127,39 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
       val result = controller().enquiryKey(mockUserAnswers)
       result mustBe Left("Unknown enquiry category in enquiry key")
+    }
+
+    "return 500 and the error view for a GET with unknown or wrong enquiry type" in {
+      val cd = ContactDetails("a", "b", "c", "d", "e")
+      val ec = "other"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_poor_repair"
+      val tellUs = TellUsMore("Hello")
+      val confirmedContactDetails = ConfirmedContactDetails(cd)
+      val date = DateFormatter.todaysDate()
+
+      val contact = Contact(confirmedContactDetails, propertyAddress, ec, councilTaxSubcategory, tellUs.message)
+
+      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      intercept[Exception] {
+        val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+        status(result) mustBe INTERNAL_SERVER_ERROR
+
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+      }
+    }
+
+    "return 500 and the error view for a GET with no enquiry type" in {
+      intercept[Exception] {
+        val result = controller().onPageLoad()(fakeRequest)
+        status(result) mustBe INTERNAL_SERVER_ERROR
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+      }
     }
 
   }

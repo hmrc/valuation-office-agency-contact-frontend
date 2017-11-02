@@ -26,34 +26,51 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.contactDetail
 class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
 
   val messageKeyPrefix = "contactDetails"
+  val ctBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
+  val ndrBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
 
-  def createView = () => contactDetails(frontendAppConfig, ContactDetailsForm(), NormalMode)(fakeRequest, messages)
+  def createNDRViewUsingForm(form: Form[ContactDetails]) = contactDetails(frontendAppConfig, form, NormalMode, ndrBackLink)(fakeRequest, messages)
 
-  def createViewUsingForm = (form: Form[ContactDetails]) => contactDetails(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+  def createCTView() = contactDetails(frontendAppConfig, ContactDetailsForm(), NormalMode, ctBackLink)(fakeRequest, messages)
+
+  def createCTViewUsingForm(form: Form[ContactDetails]) = contactDetails(frontendAppConfig, form, NormalMode, ctBackLink)(fakeRequest, messages)
 
   override val form = ContactDetailsForm()
 
   "ContactDetails view" must {
 
-    behave like normalPage(createView, messageKeyPrefix)
+    behave like normalPage(createCTView, messageKeyPrefix)
 
-    behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.ContactDetailsController.onSubmit(NormalMode).url, "firstName", "lastName",
+    behave like pageWithTextFields(createCTViewUsingForm, messageKeyPrefix, routes.ContactDetailsController.onSubmit(NormalMode).url, "firstName", "lastName",
       "email", "confirmEmail", "contactNumber")
 
 
-    "has a link marked with site.back leading to the Enquiry Category Page" in {
-      val doc = asDocument(createViewUsingForm(form))
+    "Contact Details has a link marked with site.back leading to the council tax subcategory page when enquiry category is council_tax" in {
+      val doc = asDocument(createCTViewUsingForm(form))
       val backlinkText = doc.select("a[class=link-back]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl = doc.select("a[class=link-back]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
+      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
 
-    "contain continue button with the value Continue" in {
-      val doc = asDocument(createViewUsingForm(ContactDetailsForm()))
+    "contain continue button with the value Continue when the enquiry category is council_tax" in {
+      val doc = asDocument(createCTViewUsingForm(ContactDetailsForm()))
+      val continueButton = doc.getElementById("submit").text()
+      assert(continueButton == messages("site.continue"))
+    }
+
+    "Contact Details has a link marked with site.back leading to the business rates subcategory page when enquiry category is business_rates" in {
+      val doc = asDocument(createNDRViewUsingForm(form))
+      val backlinkText = doc.select("a[class=link-back]").text()
+      backlinkText mustBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=link-back]").attr("href")
+      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
+    }
+
+    "contain continue button with the value Continue when the enquiry category is business_rates" in {
+      val doc = asDocument(createNDRViewUsingForm(ContactDetailsForm()))
       val continueButton = doc.getElementById("submit").text()
       assert(continueButton == messages("site.continue"))
     }
   }
-
 }

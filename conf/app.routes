@@ -1,6 +1,6 @@
 # microservice specific routes
 
-GET         /                                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.IndexController.onPageLoad
+GET         /                                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.EnquiryCategoryController.onPageLoad(mode: Mode = NormalMode)
 
 GET         /assets/*file                          controllers.Assets.versioned(path="/public", file: Asset)
 
@@ -23,8 +23,6 @@ POST        /contactDetails                        uk.gov.hmrc.valuationofficeag
 GET         /changeContactDetails                  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onPageLoad(mode: Mode = CheckMode)
 POST        /changeContactDetails                  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onSubmit(mode: Mode = CheckMode)
 
-GET         /staticPagePlaceholder                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.StaticPagePlaceholderController.onPageLoad
-
 GET         /councilTaxSubcategory                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onPageLoad(mode: Mode = NormalMode)
 POST        /councilTaxSubcategory                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onSubmit(mode: Mode = NormalMode)
 GET         /changeCouncilTaxSubcategory           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onPageLoad(mode: Mode = CheckMode)
@@ -41,13 +39,11 @@ GET         /changePropertyAddress                 uk.gov.hmrc.valuationofficeag
 POST        /changePropertyAddress                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyAddressController.onSubmit(mode: Mode = CheckMode)
 
 GET         /valuationAdvice                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ValuationAdviceController.onPageLoad()
-GET         /checkAndChallenge                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CheckAndChallengeController.onPageLoad()
 
 GET         /tellUsMore                            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onPageLoad(mode: Mode = NormalMode)
 POST        /tellUsMore                            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onSubmit(mode: Mode = NormalMode)
 GET         /changeTellUsMore                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onPageLoad(mode: Mode = CheckMode)
 POST        /changeTellUsMore                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onSubmit(mode: Mode = CheckMode)
-
 
 GET         /confirmation                          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ConfirmationController.onPageLoad()
 
@@ -55,4 +51,8 @@ GET         /valuationForTaxes                     uk.gov.hmrc.valuationofficeag
 GET         /housingBenefits                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.HousingBenefitsController.onPageLoad()
 GET         /providingLettings                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ProvidingLettingsController.onPageLoad()
 
-GET         /indexWithNewSession                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.IndexController.onPageLoadWithNewSession()
+GET         /councilTaxSmartLinks                  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSmartLinksController.onPageLoad()
+GET         /goto-councilTaxSubcategory            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSmartLinksController.goToCouncilTaxSubcategoryPage()
+
+GET         /businessRatesSmartLinks               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSmartLinksController.onPageLoad()
+GET         /goto-businessRatesSubcategory         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSmartLinksController.goToBusinessRatesSubcategoryPage()

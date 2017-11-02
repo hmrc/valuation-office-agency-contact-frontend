@@ -26,11 +26,11 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
   val tellUs = TellUsMore("Hello")
   val cd = ContactDetails("c1", "c2", "c3", "c4", "c5")
-  val propertyAddress1 = Some(PropertyAddress("a", None, "c", None, "f"))
+  val propertyAddress1 = PropertyAddress("a", None, "c", None, "f")
   val userAnswers1 = new FakeUserAnswers(cd, "council_tax", "council_tax_band", "", propertyAddress1, tellUs)
   val checkYourAnswersHelper1 = new CheckYourAnswersHelper(userAnswers1)
 
-  val propertyAddress2 = Some(PropertyAddress("a", Some("b"), "c", Some("d"), "f"))
+  val propertyAddress2 = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
   val userAnswers2= new FakeUserAnswers(cd, "business_rates", "", "business_rates_rateable_value", propertyAddress2, tellUs)
   val checkYourAnswersHelper2 = new CheckYourAnswersHelper(userAnswers2)
 
@@ -52,12 +52,12 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
       assert(submitButton == messages("site.submit"))
     }
 
-    "has a link marked with site.back leading to the Contact Details Page" in {
+    "has a link marked with site.back leading to the Tell Us More Page" in {
       val doc = asDocument(view1())
       val backlinkText = doc.select("a[class=link-back]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl = doc.select("a[class=link-back]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url
+      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "contain Enquiry Type label" in {

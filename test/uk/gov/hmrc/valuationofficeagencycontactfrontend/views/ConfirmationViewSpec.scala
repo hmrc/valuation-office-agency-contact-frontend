@@ -26,8 +26,8 @@ class ConfirmationViewSpec extends ViewBehaviours {
   val cd = ContactDetails("c1", "c2", "c3", "c4", "c5")
   val confirmCd = ConfirmedContactDetails(cd)
   val ec = "council_tax"
-  val address = Some(PropertyAddress("a", Some("b"), "c", Some("d"), "f"))
-  val alternativeAddress = Some(PropertyAddress("a", None, "c", None, "f"))
+  val address = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+  val alternativeAddress = PropertyAddress("a", None, "c", None, "f")
   val cSub = "council_tax_home_business"
   val tellUs = TellUsMore("Hello")
   val contact = Contact(confirmCd, address, ec, cSub, tellUs.message)
