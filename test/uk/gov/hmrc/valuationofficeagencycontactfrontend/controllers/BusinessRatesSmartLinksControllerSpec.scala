@@ -40,5 +40,11 @@ class BusinessRatesSmartLinksControllerSpec extends ControllerSpecBase {
       val result = controller().onPageLoad(fakeRequest)
       contentAsString(result) mustBe businessRatesSmartLinks(frontendAppConfig)(fakeRequest, messages).toString
     }
+
+    "return a redirect when calling goToBusinessRatesSubcategoryPage" in {
+      val result = controller().goToBusinessRatesSubcategoryPage()(fakeRequest)
+      status(result) mustBe SEE_OTHER
+    }
+
   }
 }
