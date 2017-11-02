@@ -36,7 +36,7 @@ class EnquiryCategoryControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new EnquiryCategoryController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl)
+      dataRetrievalAction, getClearCacheMap)
 
   def viewAsString(form: Form[String] = EnquiryCategoryForm()) = enquiryCategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
@@ -55,7 +55,7 @@ class EnquiryCategoryControllerSpec extends ControllerSpecBase {
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsString(EnquiryCategoryForm().fill(EnquiryCategoryForm.options.head.value))
+      contentAsString(result) mustBe viewAsString()
     }
 
     "redirect to the next page when valid data is submitted" in {
@@ -90,19 +90,6 @@ class EnquiryCategoryControllerSpec extends ControllerSpecBase {
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(onwardRoute.url)
-    }
-
-    "When calling onPageLoadWithNewSession changes the sessionId to a new one" in {
-      val firstResult = controller().onPageLoad(NormalMode)(fakeRequest)
-
-      val firstSession = firstResult.map { result1 =>
-        result1.session(fakeRequest).get(SessionKeys.sessionId)
-        val secondResult = controller().onPageLoadWithNewSession(NormalMode)(fakeRequest)
-        val secondSession = secondResult.map { result2 =>
-          result2.session(fakeRequest).get(SessionKeys.sessionId)
-          assert(result1 != result2)
-        }
-      }
     }
 
   }

@@ -28,21 +28,19 @@ import uk.gov.hmrc.play.HeaderCarrierConverter
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-//class DataClearActionImpl @Inject()(val dataCacheConnector: DataCacheConnector) extends DataClearAction {
-//
-//  override protected def transform[A](request: Request[A]): Future[OptionalDataRequest[A]] = {
-//    implicit val hc = HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))
-//
-//    hc.sessionId match {
-//      case None => Future.failed(new IllegalStateException())
-//      case Some(sessionId) =>
-//        dataCacheConnector.clear(sessionId.toString).map {
-//          case true => OptionalDataRequest(request, sessionId.toString, None)
-//          case false => OptionalDataRequest(request, sessionId.toString, None)
-//        }
-//    }
-//  }
-//}
-//
-//@ImplementedBy(classOf[DataClearActionImpl])
-//trait DataClearAction extends ActionTransformer[Request, OptionalDataRequest] with ActionBuilder[OptionalDataRequest]
+class DataClearActionImpl @Inject()(val dataCacheConnector: DataCacheConnector) extends DataClearAction {
+
+  override protected def transform[A](request: Request[A]): Future[OptionalDataRequest[A]] = {
+    implicit val hc = HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))
+
+    hc.sessionId match {
+      case None => Future.failed(new IllegalStateException())
+      case Some(sessionId) =>
+        dataCacheConnector.clear(sessionId.toString)
+        Future.successful(OptionalDataRequest(request, sessionId.toString, None))
+    }
+  }
+}
+
+@ImplementedBy(classOf[DataClearActionImpl])
+trait DataClearAction extends ActionTransformer[Request, OptionalDataRequest] with ActionBuilder[OptionalDataRequest]

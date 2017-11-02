@@ -50,5 +50,33 @@ class DataClearActionSpec extends SpecBase with MockitoSugar with ScalaFutures w
       }
     }
 
+    "there is no data in the cache" must {
+      "set userAnswers to 'None' in the request" in {
+        val dataCacheConnector = mock[DataCacheConnector]
+        when(dataCacheConnector.fetch(Matchers.any())) thenReturn Future(None)
+        val action = new Harness(dataCacheConnector)
+
+        val futureResult = action.callTransform(fakeRequest.withSession(SessionKeys.sessionId -> "id"))
+
+        whenReady(futureResult) { result =>
+          result.userAnswers.isEmpty mustBe true
+        }
+      }
+    }
+
+    "there is data in the cache" must {
+      "set userAnswers to 'None' in the request" in {
+        val dataCacheConnector = mock[DataCacheConnector]
+        when(dataCacheConnector.fetch(Matchers.any())) thenReturn Future(Some(new CacheMap("id", Map())))
+        val action = new Harness(dataCacheConnector)
+
+        val futureResult = action.callTransform(fakeRequest.withSession(SessionKeys.sessionId -> "id"))
+
+        whenReady(futureResult) { result =>
+          result.userAnswers.isEmpty mustBe true
+        }
+      }
+    }
+
   }
 }
