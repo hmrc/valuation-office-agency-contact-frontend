@@ -21,12 +21,11 @@ import javax.inject.{Inject, Singleton}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CouncilTaxSmartLinksId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.BusinessRatesSmartLinksId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.councilTaxSmartLinks
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.businessRatesSmartLinks
 
 @Singleton
 class BusinessRatesSmartLinksController @Inject()(val appConfig: FrontendAppConfig,
@@ -36,11 +35,11 @@ class BusinessRatesSmartLinksController @Inject()(val appConfig: FrontendAppConf
                                                   requireData: DataRequiredAction) extends FrontendController with I18nSupport {
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
-    Ok(councilTaxSmartLinks(appConfig))
+    Ok(businessRatesSmartLinks(appConfig))
   }
 
-  def goToBusinessRatesSmartLinksPage() = (getData andThen requireData) { implicit request =>
-    Redirect(navigator.nextPage(CouncilTaxSmartLinksId, NormalMode)(request.userAnswers))
+  def goToBusinessRatesSubcategoryPage() = (getData andThen requireData) { implicit request =>
+    Redirect(navigator.nextPage(BusinessRatesSmartLinksId, NormalMode)(request.userAnswers))
   }
 }
 

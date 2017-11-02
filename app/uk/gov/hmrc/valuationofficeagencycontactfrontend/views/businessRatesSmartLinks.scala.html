@@ -1,0 +1,75 @@
+@*
+ * Copyright 2017 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+
+@(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
+
+@main_template(
+    title = messages("checkBeforeYouStart.title"),
+    appConfig = appConfig,
+    bodyClasses = Some("article")) {
+
+    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url)
+
+    <h1 class="heading-xlarge">@messages("checkBeforeYouStart.heading")</h1>
+
+    <p>@messages("checkBeforeYouStart.para1")</p>
+
+    <br>
+
+    <h2 class="heading-medium">@messages("checkBeforeYouStart.business_rates.subheading")</h2>
+
+    <p>
+        <a href=@messages("checkBeforeYouStart.business_rates.url1") target="_self">@messages("checkBeforeYouStart.business_rates.para1")</a>
+        <br>
+        @messages("checkBeforeYouStart.business_rates.para2")
+    </p>
+
+    <p>
+        <a href=@messages("checkBeforeYouStart.business_rates.url2") target="_self">@messages("checkBeforeYouStart.business_rates.para3")</a>
+        <br>
+        @messages("checkBeforeYouStart.business_rates.para4")
+    </p>
+
+    <p>
+        <a href=@messages("checkBeforeYouStart.business_rates.url3") target="_self">@messages("checkBeforeYouStart.business_rates.para5")</a>
+        <br>
+        @messages("checkBeforeYouStart.business_rates.para6")
+    </p>
+
+    <p>
+        <a href=@messages("checkBeforeYouStart.business_rates.url4") target="_self">@messages("checkBeforeYouStart.business_rates.para7")</a>
+        <br>
+        @messages("checkBeforeYouStart.business_rates.para8")
+    </p>
+
+    <p>
+        <a href=@messages("checkBeforeYouStart.business_rates.url5") target="_self">@messages("checkBeforeYouStart.business_rates.para9")</a>
+        <br>
+        @messages("checkBeforeYouStart.business_rates.para10")
+    </p>
+
+    <p>@messages("checkBeforeYouStart.business_rates.para11")</p>
+
+    <p>
+        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSmartLinksController.goToBusinessRatesSubcategoryPage().url id="continue" class="button button--get-started">@messages("site.continue")</a>
+
+    </p>
+
+
+}
