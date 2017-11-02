@@ -39,7 +39,6 @@ GET         /changePropertyAddress                 uk.gov.hmrc.valuationofficeag
 POST        /changePropertyAddress                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyAddressController.onSubmit(mode: Mode = CheckMode)
 
 GET         /valuationAdvice                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ValuationAdviceController.onPageLoad()
-GET         /checkAndChallenge                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CheckAndChallengeController.onPageLoad()
 
 GET         /tellUsMore                            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onPageLoad(mode: Mode = NormalMode)
 POST        /tellUsMore                            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onSubmit(mode: Mode = NormalMode)
@@ -54,3 +53,6 @@ GET         /providingLettings                     uk.gov.hmrc.valuationofficeag
 
 GET         /councilTaxSmartLinks                  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSmartLinksController.onPageLoad()
 GET         /goto-councilTaxSubcategory            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSmartLinksController.goToCouncilTaxSubcategoryPage()
+
+GET         /businessRatesSmartLinks               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSmartLinksController.onPageLoad()
+GET         /goto-businessRatesSubcategory         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSmartLinksController.goToBusinessRatesSubcategoryPage()

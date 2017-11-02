@@ -31,7 +31,7 @@ class Navigator @Inject()() {
   val enquiryRouting: UserAnswers => Call = answers => {
     answers.enquiryCategory match {
       case Some("council_tax") => routes.CouncilTaxSmartLinksController.onPageLoad()
-      case Some("business_rates") => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
+      case Some("business_rates") => routes.BusinessRatesSmartLinksController.onPageLoad()
       case Some("housing_benefit") => routes.HousingBenefitsController.onPageLoad()
       case Some("valuations_for_tax") => routes.ValuationForTaxesController.onPageLoad()
       case Some("providing_lettings") => routes.ProvidingLettingsController.onPageLoad()
@@ -43,18 +43,6 @@ class Navigator @Inject()() {
       case None => {
         Logger.warn("Navigation for enquiry category reached without selection of enquiry by controller")
         throw new RuntimeException("Navigation for enquiry category reached without selection of enquiry by controller")
-      }
-    }
-  }
-
-  val businessSubcategoryRouting: UserAnswers => Call = answers => {
-    answers.businessRatesSubcategory match {
-      case Some("business_rates_update_details") => routes.CheckAndChallengeController.onPageLoad()
-      case Some("business_rates_challenge") => routes.CheckAndChallengeController.onPageLoad()
-      case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case None => {
-        Logger.warn("Navigation for business rates subcategory reached without selection of enquiry by controller")
-        throw new RuntimeException("Navigation for business rates subcategory reached without selection of enquiry by controller")
       }
     }
   }
@@ -101,12 +89,13 @@ class Navigator @Inject()() {
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     EnquiryCategoryId -> enquiryRouting,
     CouncilTaxSubcategoryId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
-    BusinessRatesSubcategoryId -> businessSubcategoryRouting,
+    BusinessRatesSubcategoryId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
     ContactDetailsId -> contactDetailsRouting,
     PropertyAddressId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
     TellUsMoreId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
     CheckYourAnswersId -> confirmationPageRouting,
-    CouncilTaxSmartLinksId -> (_ => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode))
+    CouncilTaxSmartLinksId -> (_ => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)),
+    BusinessRatesSmartLinksId -> (_ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode))
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()

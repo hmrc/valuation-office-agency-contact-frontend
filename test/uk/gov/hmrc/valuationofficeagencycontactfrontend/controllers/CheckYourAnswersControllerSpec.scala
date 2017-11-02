@@ -44,7 +44,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val ec = "council_tax"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
-      val councilTaxSubcategory = "council_tax_band"
+      val councilTaxSubcategory = "council_tax_poor_repair"
       val tellUs = TellUsMore("Hello")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val date = DateFormatter.todaysDate()
@@ -100,7 +100,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("a")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_poor_repair")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
       val result = controller().sections(mockUserAnswers)
@@ -115,7 +115,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("a")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_poor_repair")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
       val result = controller().sections(mockUserAnswers)
@@ -140,7 +140,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val ec = "other"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
-      val councilTaxSubcategory = "council_tax_home_business"
+      val councilTaxSubcategory = "council_tax_poor_repair"
       val tellUs = TellUsMore("Hello")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),

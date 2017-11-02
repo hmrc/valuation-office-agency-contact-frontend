@@ -131,7 +131,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
 
     "The enquiry key function produces a string with a Council Tax subcategory back link when the enquiry category is council_tax" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_band")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_poor_repair")
       val result = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection mustBe true
@@ -146,7 +146,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "return OK and the correct view for a GET when enquiry category is council_tax" in {
-      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_calculated"))
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_poor_repair"))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
@@ -155,7 +155,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "populate the view correctly on a GET when the question has previously been answered and enquiry category is council_tax" in {
-      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_home_business"),
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_poor_repair"),
         ContactDetailsId.toString -> Json.toJson(ContactDetails("a", "b", "a@test.com", "a@test.com", "0847428742424")))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
