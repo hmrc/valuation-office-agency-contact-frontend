@@ -43,20 +43,20 @@ class BusinessRatesSubcategoryViewSpec extends ViewBehaviours {
         }
       }
 
-      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_rateable_value and that it is used once" in {
-        labelDefinedAndUsedOnce("business_rates_rateable_value", messageKeyPrefix, createView)
+      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_poor_repair and that it is used once" in {
+        labelDefinedAndUsedOnce("business_rates_poor_repair", messageKeyPrefix, createView)
       }
 
-      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_update_details and that it is used once" in {
-        labelDefinedAndUsedOnce("business_rates_update_details", messageKeyPrefix, createView)
+      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_changes and that it is used once" in {
+        labelDefinedAndUsedOnce("business_rates_changes", messageKeyPrefix, createView)
       }
 
-      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_challenge and that it is used once" in {
-        labelDefinedAndUsedOnce("business_rates_challenge", messageKeyPrefix, createView)
+      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_ct_change and that it is used once" in {
+        labelDefinedAndUsedOnce("business_rates_ct_change", messageKeyPrefix, createView)
       }
 
-      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_business_rates and that it is used once" in {
-        labelDefinedAndUsedOnce("business_rates_business_rates", messageKeyPrefix, createView)
+      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_closed and that it is used once" in {
+        labelDefinedAndUsedOnce("business_rates_closed", messageKeyPrefix, createView)
       }
 
       "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_other and that it is used once" in {

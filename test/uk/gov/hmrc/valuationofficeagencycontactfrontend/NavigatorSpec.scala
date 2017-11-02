@@ -60,24 +60,14 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesSmartLinksController.onPageLoad()
       }
 
-      "return a function that goes to the contact form page when an enquiry category for business rates has been selected and the selection is not check or update OR challenge my valuation" in {
-        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_rateable_value")
+      "return a function that goes to the contact form page when an enquiry category for business rates has been selected" in {
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_poor_repair")
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
       }
 
       "return a function that goes to the property address page when the contact form has been submitted without errors and the enquiry is business rates" in {
         when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "test@email.com", "0208382737288"))
         navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.PropertyAddressController.onPageLoad(NormalMode)
-      }
-
-      "return a function that goes to the check and challenge page when an enquiry category for business rates has been selected and the selection is I want to check or update my property details" in {
-        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_update_details")
-        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CheckAndChallengeController.onPageLoad()
-      }
-
-      "return a function that goes to the check and challenge page when an enquiry category for business rates has been selected and the selection is I want to challenge my valuation" in {
-        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_challenge")
-        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CheckAndChallengeController.onPageLoad()
       }
 
       "return a function that goes to the tell us more page when the property address details form has been submitted without errors" in {

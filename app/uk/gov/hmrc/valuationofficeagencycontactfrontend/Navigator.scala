@@ -47,18 +47,6 @@ class Navigator @Inject()() {
     }
   }
 
-  val businessSubcategoryRouting: UserAnswers => Call = answers => {
-    answers.businessRatesSubcategory match {
-      case Some("business_rates_update_details") => routes.CheckAndChallengeController.onPageLoad()
-      case Some("business_rates_challenge") => routes.CheckAndChallengeController.onPageLoad()
-      case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case None => {
-        Logger.warn("Navigation for business rates subcategory reached without selection of enquiry by controller")
-        throw new RuntimeException("Navigation for business rates subcategory reached without selection of enquiry by controller")
-      }
-    }
-  }
-
   val contactDetailsRouting: UserAnswers => Call = answers => {
     answers.enquiryCategory match {
       case Some("council_tax") => routes.PropertyAddressController.onPageLoad(NormalMode)
@@ -101,7 +89,7 @@ class Navigator @Inject()() {
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     EnquiryCategoryId -> enquiryRouting,
     CouncilTaxSubcategoryId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
-    BusinessRatesSubcategoryId -> businessSubcategoryRouting,
+    BusinessRatesSubcategoryId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
     ContactDetailsId -> contactDetailsRouting,
     PropertyAddressId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
     TellUsMoreId -> (_ => routes.CheckYourAnswersController.onPageLoad()),

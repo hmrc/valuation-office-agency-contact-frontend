@@ -156,16 +156,12 @@ councilTaxSubcategory.checkYourAnswersLabel = Enquiry Details
 
 businessRatesSubcategory.title = What do you want to know about business rates?
 businessRatesSubcategory.heading = What do you want to know about business rates?
-businessRatesSubcategory.business_rates_rateable_value = What is my property’s rateable value
-businessRatesSubcategory.business_rates_business_rates = How are business rates calculated
-businessRatesSubcategory.business_rates_update_details = I want to check or update my property details
-businessRatesSubcategory.business_rates_challenge = I want to challenge my valuation
-businessRatesSubcategory.business_rates_other = Other business rates enquiries
+businessRatesSubcategory.business_rates_poor_repair = My property is in poor repair
+businessRatesSubcategory.business_rates_changes = My property or the local area has changed
+businessRatesSubcategory.business_rates_ct_change = My property has changed from Business Rates to Council Tax
+businessRatesSubcategory.business_rates_closed = My business has closed
+businessRatesSubcategory.business_rates_other = Any other Business Rates enquiry
 businessRatesSubcategory.checkYourAnswersLabel = Enquiry Details
-
-checkAndChallenge.title = Check and challenge
-checkAndChallenge.heading = You will now be transferred to the VOA’s Find, Check and Challenge Business Rates service.
-checkAndChallenge.url = https://www.gov.uk/correct-your-business-rates
 
 propertyAddress.title = Property Details
 propertyAddress.heading = Which property are you contacting us about ?
@@ -199,7 +195,6 @@ confirmation.section.yourDetails = Your details
 confirmation.section.propertyAddress = Property address
 confirmation.section.yourMessage = Your message
 confirmation.section.date = Date submitted
-
 
 valuationAdvice.title = Valuation Advice
 valuationAdvice.heading = Contact details
@@ -261,7 +256,6 @@ providingLettings.email = NSOhelpdesk@voa.gsi.gov.uk
 providingLettings.phone-title = Phone
 providingLettings.phone-number = 03000 502502
 providingLettings.para2 = We aim to respond within 20 working days. However, it may take longer for complex enquiries.
-
 
 error500.title = Service unavailable
 error500.heading = Sorry, we are experiencing technical difficulties
