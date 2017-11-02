@@ -22,7 +22,7 @@
 @main_template(
     title = messages("checkBeforeYouStart.title"),
     appConfig = appConfig,
-    bodyClasses = Some("article")) {
+    bodyClasses = Some("full-width")) {
 
     @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url)
 
