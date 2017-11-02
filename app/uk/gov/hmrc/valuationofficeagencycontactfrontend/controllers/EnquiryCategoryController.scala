@@ -39,24 +39,15 @@ class EnquiryCategoryController @Inject()(
                                         dataCacheConnector: DataCacheConnector,
                                         navigator: Navigator,
                                         getData: DataRetrievalAction,
-                                        requireData: DataRequiredAction) extends FrontendController with I18nSupport {
+                                        clearData: DataClearAction) extends FrontendController with I18nSupport {
 
-  def onPageLoad(mode: Mode) = getData {
+  def onPageLoad(mode: Mode) = clearData {
     implicit request =>
       val preparedForm = request.userAnswers.flatMap(x => x.enquiryCategory) match {
         case None => EnquiryCategoryForm()
         case Some(value) => EnquiryCategoryForm().fill(value)
       }
       Ok(enquiryCategory(appConfig, preparedForm, mode))
-  }
-
-  def onPageLoadWithNewSession(mode: Mode): Action[AnyContent] = getData {
-    implicit request =>
-      val preparedForm = request.userAnswers.flatMap(x => x.enquiryCategory) match {
-        case None => EnquiryCategoryForm()
-        case Some(value) => EnquiryCategoryForm().fill(value)
-      }
-      Ok(enquiryCategory(appConfig, preparedForm, mode)).withNewSession
   }
 
   def onSubmit(mode: Mode) = getData.async {

@@ -14,21 +14,17 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions
 
+import play.api.mvc.Request
 import uk.gov.hmrc.http.cache.client.CacheMap
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{FakeDataClearAction, FakeDataRetrievalAction}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.OptionalDataRequest
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
-trait ControllerSpecBase extends SpecBase {
+import scala.concurrent.Future
 
-  val cacheMapId = "id"
+import scala.concurrent.ExecutionContext.Implicits.global
 
-  def emptyCacheMap = CacheMap(cacheMapId, Map())
-
-  def getEmptyCacheMap = new FakeDataRetrievalAction(Some(emptyCacheMap))
-
-  def dontGetAnyData = new FakeDataRetrievalAction(None)
-
-  def getClearCacheMap = new FakeDataClearAction(Some(emptyCacheMap))
+class FakeDataClearAction(cacheMapToReturn: Option[CacheMap]) extends DataClearAction {
+  override protected def transform[A](request: Request[A]): Future[OptionalDataRequest[A]] = Future.successful(OptionalDataRequest(request, "id", None))
 }
