@@ -22,12 +22,15 @@ import play.api.Logger
 
 case class ContactWithEnMessage (contact: ConfirmedContactDetails,
                                  propertyAddress: PropertyAddress,
+                                 isCouncilTaxEnquiry: Boolean,
                                  enquiryCategoryMsg: String,
                                  subEnquiryCategoryMsg: String,
                                  message: String)
 
 object ContactWithEnMessage {
   implicit val format = Json.format[ContactWithEnMessage]
+  val councilTaxKey = "council_tax"
+  val businessRatesKey = "business_rates"
 
   def apply(ct: Contact, messagesApi: MessagesApi): ContactWithEnMessage = {
     messagesApi.messages.get("en") match {
@@ -40,8 +43,8 @@ object ContactWithEnMessage {
         }
 
         val enquiryKey = ct.enquiryCategory match {
-          case "council_tax" => "councilTaxSubcategory"
-          case "business_rates" => "businessRatesSubcategory"
+          case `councilTaxKey` => "councilTaxSubcategory"
+          case `businessRatesKey` => "businessRatesSubcategory"
           case err =>
             Logger.warn("Unown enquiry category key " + ct.enquiryCategory)
             throw new RuntimeException("Unable to find key " + ct.enquiryCategory + " in en messages")
@@ -53,7 +56,7 @@ object ContactWithEnMessage {
             Logger.warn("Unable to find key " + ct.subEnquiryCategory + " in en messages")
             throw new RuntimeException("Unable to find key " + enquiryKey + ct.subEnquiryCategory + " in en messages")
         }
-        ContactWithEnMessage(ct.contact, ct.propertyAddress, enquiryCategoryMsg, subEnquiryCategoryMsg, ct.message)
+        ContactWithEnMessage(ct.contact, ct.propertyAddress, ct.enquiryCategory == councilTaxKey, enquiryCategoryMsg, subEnquiryCategoryMsg, ct.message)
       case None =>
         Logger.warn("Unable to find en messages when creating message map")
         throw new RuntimeException("Unable to find en messages when creating message map")
