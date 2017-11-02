@@ -26,10 +26,10 @@ class BusinessRatesSmartLinksViewSpec extends ViewBehaviours {
 
   "Business Rates Smart Links View" must {
 
-    behave like normalPage(view, "checkBeforeYouStart", "para1", "council_tax.subheading", "business_rates.para1",
-      "council_tax.para2", "council_tax.para3", "council_tax.para4", "council_tax.para5", "council_tax.para6",
-      "council_tax.para7", "council_tax.para8", "council_tax.url1", "council_tax.url2", "council_tax.url3",
-      "council_tax.url4", "council_tax.para9", "council_tax.para10")
+    behave like normalPage(view, "checkBeforeYouStart", "para1", "business_rates.subheading", "business_rates.para1",
+      "business_rates.para2", "business_rates.para3", "business_rates.para4", "business_rates.para5", "business_rates.para6",
+      "business_rates.para7", "business_rates.para8", "business_rates.para9", "business_rates.para10", "business_rates.para11",
+      "business_rates.url1", "business_rates.url2", "business_rates.url3", "business_rates.url4", "business_rates.url5")
   }
 
   "The Continue button links to the goToBusinessRatesSubcategoryPage method" in {
@@ -44,7 +44,7 @@ class BusinessRatesSmartLinksViewSpec extends ViewBehaviours {
     assert(button.size() == 1)
   }
 
-  "has a link marked with site.back leading to the Enquiry Category Page" in {
+  "has a link marked with site.back leading to the Business Rates Smart Links Page" in {
     val doc = asDocument(view())
     val backlinkText = doc.select("a[class=link-back]").text()
     backlinkText mustBe messages("site.back")
