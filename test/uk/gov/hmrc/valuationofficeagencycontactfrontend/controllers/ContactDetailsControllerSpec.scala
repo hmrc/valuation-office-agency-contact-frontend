@@ -29,11 +29,11 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, CouncilTaxSubcategoryId, EnquiryCategoryId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.contactDetails
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{contactDetails, internalServerError}
 
 class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar {
 
-  def onwardRoute = routes.IndexController.onPageLoad()
+  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   val mockUserAnswers = mock[UserAnswers]
 
@@ -99,6 +99,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
       intercept[Exception] {
         val result = controller(getRelevantData).onSubmit(NormalMode)(postRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
       }
     }
 
@@ -162,5 +163,14 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
 
       contentAsString(result) mustBe viewAsStringCT(ContactDetailsForm().fill(ContactDetails("a", "b", "a@test.com", "a@test.com", "0847428742424")))
     }
+
+    "return 500 and the error view for a GET with no enquiry type" in {
+      intercept[Exception] {
+        val result = controller().onPageLoad(NormalMode)(fakeRequest)
+        status(result) mustBe INTERNAL_SERVER_ERROR
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+      }
+    }
+
   }
 }

@@ -16,6 +16,6 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers
 
-object CheckYourAnswersId extends Identifier {
-  override def toString: String = "checkYourAnswers"
+object CouncilTaxSmartLinksId extends Identifier {
+  override def toString: String = "councilTaxSmartLinks"
 }

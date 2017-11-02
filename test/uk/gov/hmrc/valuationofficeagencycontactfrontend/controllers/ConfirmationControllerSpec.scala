@@ -34,7 +34,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
   val mockUserAnswers = mock[UserAnswers]
   val connector = injector.instanceOf[LightweightContactEventsConnector]
 
-  def onwardRoute = routes.IndexController.onPageLoad()
+  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ConfirmationController(frontendAppConfig, messagesApi, connector, dataRetrievalAction, new DataRequiredActionImpl)
@@ -153,5 +153,14 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
         contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
       }
     }
+
+    "return 500 and the error view for a GET with no enquiry type" in {
+      intercept[Exception] {
+        val result = controller().onPageLoad()(fakeRequest)
+        status(result) mustBe INTERNAL_SERVER_ERROR
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+      }
+    }
+
   }
 }

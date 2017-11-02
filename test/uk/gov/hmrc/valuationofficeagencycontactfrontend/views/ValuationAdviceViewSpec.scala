@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
-import org.jsoup.select.Elements
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSubcategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.valuationAdvice
@@ -45,10 +43,10 @@ class ValuationAdviceViewSpec extends ViewBehaviours {
       assert(startAgainButton == messages("site.start-again"))
     }
 
-    "The Start again button links to the Index Controller onPageLoadWithNewSession method" in {
+    "The Start again button links to the Enquiry Category Controller onPageLoad method" in {
       val doc = asDocument(view())
       val href = doc.getElementById("start-again").attr("href")
-      assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.IndexController.onPageLoadWithNewSession().url.toString)
+      assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url.toString)
     }
   }
 

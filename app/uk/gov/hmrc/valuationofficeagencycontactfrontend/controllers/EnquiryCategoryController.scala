@@ -20,6 +20,7 @@ import javax.inject.Inject
 
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
+import play.api.mvc.{Action, AnyContent}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
@@ -38,9 +39,9 @@ class EnquiryCategoryController @Inject()(
                                         dataCacheConnector: DataCacheConnector,
                                         navigator: Navigator,
                                         getData: DataRetrievalAction,
-                                        requireData: DataRequiredAction) extends FrontendController with I18nSupport {
+                                        clearData: DataClearAction) extends FrontendController with I18nSupport {
 
-  def onPageLoad(mode: Mode) = getData {
+  def onPageLoad(mode: Mode) = clearData {
     implicit request =>
       val preparedForm = request.userAnswers.flatMap(x => x.enquiryCategory) match {
         case None => EnquiryCategoryForm()

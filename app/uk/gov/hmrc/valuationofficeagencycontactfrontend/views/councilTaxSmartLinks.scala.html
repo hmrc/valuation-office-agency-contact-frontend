@@ -22,14 +22,14 @@
 @main_template(
     title = messages("checkBeforeYouStart.title"),
     appConfig = appConfig,
-    bodyClasses = Some("full-width")) {
+    bodyClasses = Some("article")) {
+
+    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url)
 
     <h1 class="heading-xlarge">@messages("checkBeforeYouStart.heading")</h1>
 
     <p>@messages("checkBeforeYouStart.para1")</p>
 
-    <div class="grid-layout grid-layout--no-gutter">
-        <div class="grid-layout__column grid-layout__column--1-2">
             <br>
             <h2 class="heading-medium">@messages("checkBeforeYouStart.council_tax.subheading")</h2>
 
@@ -62,53 +62,9 @@
                 <br>
                 @messages("checkBeforeYouStart.council_tax.para10")
             </p>
-        </div>
-
-        <div class="gutter-left">
-            <div class="grid-layout__column grid-layout__column--1-2">
-                <br>
-                <h2 class="heading-medium">@messages("checkBeforeYouStart.business_rates.subheading")</h2>
-
-                <p>
-                    <a href=@messages("checkBeforeYouStart.business_rates.url1") target="_self">@messages("checkBeforeYouStart.business_rates.para1")</a>
-                    <br>
-                    @messages("checkBeforeYouStart.business_rates.para2")
-                </p>
-
-                <p>
-                    <a href=@messages("checkBeforeYouStart.business_rates.url2") target="_self">@messages("checkBeforeYouStart.business_rates.para3")</a>
-                    <br>
-                    @messages("checkBeforeYouStart.business_rates.para4")
-                </p>
-
-                <p>
-                    <a href=@messages("checkBeforeYouStart.business_rates.url3") target="_self">@messages("checkBeforeYouStart.business_rates.para5")</a>
-                    <br>
-                    @messages("checkBeforeYouStart.business_rates.para6")
-                </p>
-
-                <p>
-                    <a href=@messages("checkBeforeYouStart.business_rates.url4") target="_self">@messages("checkBeforeYouStart.business_rates.para7")</a>
-                    <br>
-                    @messages("checkBeforeYouStart.business_rates.para8")
-                </p>
-
-                <p>
-                    <a href=@messages("checkBeforeYouStart.business_rates.url5") target="_self">@messages("checkBeforeYouStart.business_rates.para9")</a>
-                    <br>
-                    @messages("checkBeforeYouStart.business_rates.para10")
-                </p>
-
-
-
-            </div>
-        </div>
-    </div>
-
-    <p>@messages("checkBeforeYouStart.business_rates.para11")</p>
 
     <p>
-        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url id="continue" class="button button--get-started">@messages("site.continue")</a>
+        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSmartLinksController.goToCouncilTaxSubcategoryPage().url id="continue" class="button button--get-started">@messages("site.continue")</a>
 
     </p>
 

@@ -17,12 +17,12 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors
 
 import com.google.inject.{ImplementedBy, Inject}
-import play.api.libs.json.{Format, Json}
+import play.api.libs.json.{Format, JsValue, Json}
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.repositories.SessionRepository
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.CascadeUpsert
-import scala.concurrent.ExecutionContext.Implicits.global
 
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 class DataCacheConnectorImpl @Inject()(val sessionRepository: SessionRepository, val cascadeUpsert: CascadeUpsert) extends DataCacheConnector {
@@ -38,6 +38,15 @@ class DataCacheConnectorImpl @Inject()(val sessionRepository: SessionRepository,
     sessionRepository().get(cacheId).flatMap { optionalCacheMap =>
       optionalCacheMap.fold(Future(false)) { cacheMap =>
         val newCacheMap = cacheMap copy (data = cacheMap.data - key)
+        sessionRepository().upsert(newCacheMap)
+      }
+    }
+  }
+
+  def clear(cacheId: String): Future[Boolean] = {
+    sessionRepository().get(cacheId).flatMap { optionalCacheMap =>
+      optionalCacheMap.fold(Future(false)) { cacheMap =>
+        val newCacheMap = cacheMap copy (data = Map())
         sessionRepository().upsert(newCacheMap)
       }
     }
@@ -90,6 +99,8 @@ trait DataCacheConnector {
   def save[A](cacheId: String, key: String, value: A)(implicit fmt: Format[A]): Future[CacheMap]
 
   def remove(cacheId: String, key: String): Future[Boolean]
+
+  def clear(cacheId: String): Future[Boolean]
 
   def fetch(cacheId: String): Future[Option[CacheMap]]
 
