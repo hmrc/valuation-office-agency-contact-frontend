@@ -145,52 +145,23 @@ contactDetails.confirmEmail = Confirm email
 contactDetails.contactNumber = Phone number
 contactDetails.checkYourAnswersLabel = Contact Details
 
-staticPagePlaceholder.title = Postcode Finder
-staticPagePlaceholder.heading = What property are you contacting us about?
-staticPagePlaceholder.paragraph = To make sure your enquiry goes to the right team enter the postcode for the property your enquiry is about. This will find contact details for the Valuation Office in your area.
-staticPagePlaceholder.royalmail-url.title = Find a postcode on Royal Mail’s postcode finder
-staticPagePlaceholder.royalmail-url = http://www.royalmail.com/find-a-postcode
-staticPagePlaceholder.nopostcode-url = I don’t have, or can’t find, my postcode
-staticPagePlaceholder.continuebutton = Continue
-staticPagePlaceholder.back-title = Back
-
-councilTax.title = Useful links for Council Tax
-councilTax.information = These links may help answer your enquiry. They are the most common enquiries the VOA receives.
-councilTax.taxband-url = https://www.gov.uk/council-tax-bands
-councilTax.taxband-title= Check a Council Tax band
-councilTax.taxband-information = Find out the Council Tax band for a home in England or Wales.
-councilTax.taxband-changes.url = http://www.gov.uk/guidance/council-tax-band-changes
-councilTax.taxband-changes.title = Changes to your property
-councilTax.taxband-changes.information = Your Council Tax band may change if your property has been altered, such as demolished or divided into flats.
-councilTax.taxband-assessment.url = https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed
-councilTax.taxband-assessment.title= How Council Tax bands are assessed
-councilTax.taxband-assessment.information = How domestic properties are valued for Council Tax bands.
-councilTax.pay-url = https://www.gov.uk/pay-council-tax
-councilTax.pay-title= Pay your Council Tax
-councilTax.pay-information = Search for your local authority and pay your Council Tax online.
-
 councilTaxSubcategory.title = What do you want to know about Council Tax?
 councilTaxSubcategory.heading = What do you want to know about Council Tax?
-councilTaxSubcategory.council_tax_band = What is my Council Tax band
-councilTaxSubcategory.council_tax_calculated = How is my Council Tax band calculated
-councilTaxSubcategory.council_tax_changes = There have been changes to my property
-councilTaxSubcategory.council_tax_challenge = I want to challenge my Council Tax band
-councilTaxSubcategory.council_tax_property = My property is in poor condition
-councilTaxSubcategory.council_tax_other = Other Council Tax enquiries
+councilTaxSubcategory.council_tax_poor_repair = My property is in poor repair or uninhabitable
+councilTaxSubcategory.council_tax_changes = My property or the local area has changed
+councilTaxSubcategory.council_tax_ndr_changes = My property has changed from Council Tax to Business Rates
+councilTaxSubcategory.council_tax_annexe = An Annexe at my property
+councilTaxSubcategory.council_tax_other = Any other Council Tax enquiry
 councilTaxSubcategory.checkYourAnswersLabel = Enquiry Details
 
 businessRatesSubcategory.title = What do you want to know about business rates?
 businessRatesSubcategory.heading = What do you want to know about business rates?
-businessRatesSubcategory.business_rates_rateable_value = What is my property’s rateable value
-businessRatesSubcategory.business_rates_business_rates = How are business rates calculated
-businessRatesSubcategory.business_rates_update_details = I want to check or update my property details
-businessRatesSubcategory.business_rates_challenge = I want to challenge my valuation
-businessRatesSubcategory.business_rates_other = Other business rates enquiries
+businessRatesSubcategory.business_rates_poor_repair = My property is in poor repair
+businessRatesSubcategory.business_rates_changes = My property or the local area has changed
+businessRatesSubcategory.business_rates_ct_change = My property has changed from Business Rates to Council Tax
+businessRatesSubcategory.business_rates_closed = My business has closed
+businessRatesSubcategory.business_rates_other = Any other Business Rates enquiry
 businessRatesSubcategory.checkYourAnswersLabel = Enquiry Details
-
-checkAndChallenge.title = Check and challenge
-checkAndChallenge.heading = You will now be transferred to the VOA’s Find, Check and Challenge Business Rates service.
-checkAndChallenge.url = https://www.gov.uk/correct-your-business-rates
 
 propertyAddress.title = Property Details
 propertyAddress.heading = Which property are you contacting us about ?
@@ -224,7 +195,6 @@ confirmation.section.yourDetails = Your details
 confirmation.section.propertyAddress = Property address
 confirmation.section.yourMessage = Your message
 confirmation.section.date = Date submitted
-
 
 valuationAdvice.title = Valuation Advice
 valuationAdvice.heading = Contact details
@@ -286,7 +256,6 @@ providingLettings.email = NSOhelpdesk@voa.gsi.gov.uk
 providingLettings.phone-title = Phone
 providingLettings.phone-number = 03000 502502
 providingLettings.para2 = We aim to respond within 20 working days. However, it may take longer for complex enquiries.
-
 
 error500.title = Service unavailable
 error500.heading = Sorry, we are experiencing technical difficulties

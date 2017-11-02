@@ -46,7 +46,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val ec = "council_tax"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
-      val councilTaxSubcategory = "council_tax_band"
+      val councilTaxSubcategory = "council_tax_poor_repair"
       val tellUs = TellUsMore("Hello")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val date = DateFormatter.todaysDate()
@@ -69,7 +69,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val ec = "council_tax"
       val propertyAddress = PropertyAddress("a", None, "c", None, "f")
-      val councilTaxSubcategory = "council_tax_band"
+      val councilTaxSubcategory = "council_tax_poor_repair"
       val tellUs = TellUsMore("Hello")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val date = DateFormatter.todaysDate()
@@ -112,7 +112,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_band")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_poor_repair")
 
       val result = controller().enquiryKey(mockUserAnswers)
       val isCouncilTaxSelection = result.right.get.startsWith("councilTaxSubcategory")
@@ -133,7 +133,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       val cd = ContactDetails("a", "b", "c", "d", "e")
       val ec = "other"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
-      val councilTaxSubcategory = "council_tax_home_business"
+      val councilTaxSubcategory = "council_tax_poor_repair"
       val tellUs = TellUsMore("Hello")
       val confirmedContactDetails = ConfirmedContactDetails(cd)
       val date = DateFormatter.todaysDate()
