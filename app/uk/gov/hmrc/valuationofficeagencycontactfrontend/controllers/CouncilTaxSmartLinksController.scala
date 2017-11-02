@@ -42,4 +42,3 @@ class CouncilTaxSmartLinksController @Inject()(val appConfig: FrontendAppConfig,
     Redirect(navigator.nextPage(CouncilTaxSmartLinksId, NormalMode)(request.userAnswers))
   }
 }
-
