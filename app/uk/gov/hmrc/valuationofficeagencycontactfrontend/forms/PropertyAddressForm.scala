@@ -22,7 +22,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.PropertyAddress
 
 object PropertyAddressForm {
 
-  private val addressLineRegex = """^[A-Za-z0-9\s\-&]+$"""
+  private val addressLineRegex = """^[A-Za-z0-9\s\-&,]+$"""
   private val postcodeRegex = """(GIR ?0AA)|((([A-Z-[QVX]][0-9][0-9]?)|(([A-Z-[QVX]][A-Z-[IJZ]][0-9][0-9]?)|(([A-Z-[QVX]][0-9][A-HJKPSTUW])|([A-Z-[QVX]][A-Z-[IJZ]][0-9][ABEHMNPRVWXY])))) ?[0-9][A-Z-[CIKMOV]]{2})""" //scalastyle:ignore
 
 
