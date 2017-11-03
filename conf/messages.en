@@ -72,7 +72,7 @@ error.addressline.max_length = Maximum length is 80
 error.addressline.invalid = You can only enter these characters: A-Z, a-z, 0-9, -, &, space
 error.postcode.invalid = Must be a valid postcode
 error.postcode.max_length = Maximum length is 8
-error.message.max_length = Maximum length is 5000
+error.message.max_length = Maximum length is 5000 characters
 
 session_expired.title = For your security, this service has been reset
 session_expired.heading = For your security, this service has been reset
