@@ -24,6 +24,8 @@
 
 @(appConfig: FrontendAppConfig, form: Form[String], mode: Mode)(implicit request: Request[_], messages: Messages)
 
+
+
 @main_template(
     title = messages("enquiryCategory.title"),
     appConfig = appConfig,
@@ -45,6 +47,8 @@
         )
 
         @components.continue_button()
+
+        <p><a href="http://www.gov.uk" id="backToGovUk" class="print-hide">@messages("site.govuk")</a></p>
 
     }
 }

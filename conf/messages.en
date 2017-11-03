@@ -91,7 +91,7 @@ site.submit = Submit
 site.submit.enquiry = Submit your enquiry
 site.service_name = Valuation Office Agency Contact Form
 site.textarea.char_limit = (Limit is {0} characters)
-site.print.button=Print or save to PDF
+site.print.button=Print or save
 site.govuk=Back to GOV.UK
 
 unauthorised.title = You can’t access this service with this account
@@ -187,7 +187,7 @@ tellUsMore.checkYourAnswersLabel = Enquiry
 
 confirmation.title = Confirmation
 confirmation.heading = Thank you for your enquiry
-confirmation.para1=Your reference is the property address
+confirmation.para1=Your reference is
 confirmation.enquirySummary = Your enquiry summary
 confirmation.whatHappensnext = What happens next
 confirmation.para2 = We aim to respond to you within 20 working days. We will contact you if we need any further information
