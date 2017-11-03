@@ -24,13 +24,13 @@
 @main_template(
     title = messages("confirmation.title"),
     appConfig = appConfig,
-    bodyClasses = Some("")) {
+    bodyClasses = Some("full-width")) {
     <br />
     <br />
     <div class="transaction-banner--complete">
         <h1 class="transaction-banner__heading">@messages("confirmation.heading")</h1>
         <p class="heading-24--normal">@messages("confirmation.para1")</p>
-        <p>@Html(formattedPropertyAddress(contact.propertyAddress, "<br/>"))</p>
+        <p class="heading-24--normal">@Html(formattedPropertyAddress(contact.propertyAddress, ", "))</p>
     </div>
 
     <h2 class="heading-medium">@messages("confirmation.enquirySummary")</h2>
