@@ -24,12 +24,13 @@
 @main_template(
     title = messages("confirmation.title"),
     appConfig = appConfig,
-    bodyClasses = Some("")) {
+    bodyClasses = Some("full-width")) {
     <br />
     <br />
     <div class="transaction-banner--complete">
         <h1 class="transaction-banner__heading">@messages("confirmation.heading")</h1>
-        <p>@messages("confirmation.para1")</p>
+        <p class="heading-24--normal">@messages("confirmation.para1")</p>
+        <p class="heading-24--normal">@Html(formattedPropertyAddress(contact.propertyAddress, ", "))</p>
     </div>
 
     <h2 class="heading-medium">@messages("confirmation.enquirySummary")</h2>
@@ -63,8 +64,7 @@
     <h2 class="heading-medium">@messages("confirmation.whatHappensnext")</h2>
     <p class="text">@messages("confirmation.para2")</p>
 
-    <p><a href="javascript:window.print()" class="button print-hidden js-visible" id="print-button">@messages("site.print.button")</a></p>
-    <br />
-    <p><a href="http://www.gov.uk" id="backToGovUk">@messages("site.govuk")</a></p>
+    @components.button_link(messageKey="site.print.button", href="javascript:window.print()", id="print-button", className="button print-hidden js-visible")
+    <p><a href="http://www.gov.uk" id="backToGovUk" class="print-hide">@messages("site.govuk")</a></p>
 
 }

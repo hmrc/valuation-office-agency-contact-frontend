@@ -24,7 +24,7 @@ object TellUsMoreForm {
 
   def apply(): Form[TellUsMore] = Form(
     mapping(
-      "message" -> nonEmptyText
+      "message" -> nonEmptyText.verifying("error.message.max_length", _.length <= 5000)
     )(TellUsMore.apply)(TellUsMore.unapply)
   )
 }

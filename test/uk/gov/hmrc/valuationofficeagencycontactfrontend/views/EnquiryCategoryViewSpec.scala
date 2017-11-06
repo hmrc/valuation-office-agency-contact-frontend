@@ -87,5 +87,14 @@ class EnquiryCategoryViewSpec extends ViewBehaviours {
         }
       }
     }
+
+    "contain Back to GOVUK link " in {
+      val doc = asDocument(createView())
+      val startAgainButton = doc.getElementById("backToGovUk").text()
+      assert(startAgainButton == messages("site.govuk"))
+      val govukUrl = doc.select("a[id=backToGovUk]").attr("href")
+      govukUrl mustBe "http://www.gov.uk"
+    }
+
   }
 }

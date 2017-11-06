@@ -22,17 +22,17 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.PropertyAddress
 class PropertyAddressFormSpec extends FormBehaviours {
 
   val validData: Map[String, String] = Map(
-    "addressLine1" -> "value 1",
-    "addressLine2" -> "value 2",
-    "town" -> "value 3",
-    "county" -> "value 4",
+    "addressLine1" -> "value, 1",
+    "addressLine2" -> "value, 2",
+    "town" -> "value, 3",
+    "county" -> "value, 4",
     "postcode" -> "AA1 1AA"
   )
 
   val form = PropertyAddressForm()
 
   "Property Address form" must {
-    behave like questionForm(PropertyAddress("value 1", Some("value 2"), "value 3", Some("value 4"), "AA1 1AA"))
+    behave like questionForm(PropertyAddress("value, 1", Some("value, 2"), "value, 3", Some("value, 4"), "AA1 1AA"))
 
     behave like formWithOptionalTextFields("addressLine2", "county")
 
