@@ -36,18 +36,13 @@ object EmailConstraint extends Formatter[String] {
 object ContactDetailsForm {
 
   private val phoneRegex = """^[0-9\s]+$"""
-  private val nameRegex = """^[a-zA-Z\s]+$"""
   private val emailRegex = """^[a-zA-Z0-9\.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$""" //scalastyle:ignore
 
 
   def apply(): Form[ContactDetails] = Form(
     mapping(
-      "firstName" -> nonEmptyText
-        .verifying("error.name.max_length", _.length <= 56)
-        .verifying("error.name.invalid", _.matches(nameRegex)),
-      "lastName" -> nonEmptyText
-        .verifying("error.name.max_length", _.length <= 56)
-        .verifying("error.name.invalid", _.matches(nameRegex)),
+      "firstName" -> nonEmptyText,
+      "lastName" -> nonEmptyText,
       "email" -> nonEmptyText
         .verifying("error.email.max_length", _.length <= 129)
         .verifying("error.email.invalid", _.matches(emailRegex)),
