@@ -18,6 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors
 
 import javax.inject.{Inject, Singleton}
 
+import play.api.Logger
 import play.api.Configuration
 import play.api.i18n.MessagesApi
 import play.api.libs.json._
@@ -42,16 +43,25 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient, override val
 
   def send(input: Contact, messagesApi: MessagesApi) = sendJson(Json.toJson(ContactWithEnMessage(input, messagesApi)))
 
-  def sendJson(json: JsValue): Future[Try[Int]] =
+  def sendJson(json: JsValue): Future[Try[Int]] = {
+    println(">>>>>>>>>>>>>>>> " + "BEFORE POST")
     http.POST(s"$serviceUrl${baseSegment}create", json, Seq(jsonContentTypeHeader))
       .map {
         response =>
           response.status match {
             case 200 => Success(200)
             case status => {
+              Logger.warn("Received status of " + status + " from upstream service")
               Failure(new RuntimeException("Received status of " + status + " from upstream service"))
             }
           }
-      }
+      } recover {
+      case e =>
+        println(">>>>>>>>>>>>>>> " + "RECOVER")
+        Logger.warn("Received exception " + e.getMessage + " from upstream service")
+        Failure(new RuntimeException("Received exception " + e.getMessage + " from upstream service"))
+    }
+  }
+
 }
 

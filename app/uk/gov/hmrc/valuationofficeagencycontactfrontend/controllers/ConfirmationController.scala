@@ -29,6 +29,9 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactWithEnMess
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmation
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, UserAnswers}
 
+import scala.concurrent.Future
+import scala.util.Try
+
 @Singleton()
 class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
                                        val messagesApi: MessagesApi,
@@ -53,7 +56,7 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
         throw new RuntimeException(s"Navigation for Confirmation page reached without a contact and error $msg")
     }
 
-    val result = connector.send(contact, messagesApi)
+    val result: Future[Try[Int]] = connector.send(contact, messagesApi)
     val date = DateFormatter.todaysDate()
 
     enquiryKey(request.userAnswers) match {
