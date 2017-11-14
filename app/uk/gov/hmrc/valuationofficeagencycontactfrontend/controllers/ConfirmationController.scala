@@ -20,7 +20,7 @@ import javax.inject.{Inject, Singleton}
 
 import play.api.Logger
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.{Action, AnyContent}
+import play.api.mvc.{Action, AnyContent, Result}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
@@ -28,6 +28,9 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{Dat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactWithEnMessage
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmation
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, UserAnswers}
+
+import scala.concurrent.Future
+import scala.util.{Failure, Success, Try}
 
 @Singleton()
 class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
@@ -44,7 +47,7 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
     }
   }
 
-  def onPageLoad: Action[AnyContent] = (getData andThen requireData){ implicit request =>
+  def onPageLoad = (getData andThen requireData).async { implicit request =>
 
     val contact = request.userAnswers.contact() match {
       case Right(ct) => ct
@@ -54,16 +57,19 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
     }
 
     val result = connector.send(contact, messagesApi)
-    val date = DateFormatter.todaysDate()
 
-    enquiryKey(request.userAnswers) match {
-      case Right(key) =>
-        Ok(confirmation(appConfig, contact, date, key))
-      case Left(msg) => {
-        Logger.warn(s"Navigation for Confirmation page reached with error $msg")
-        throw new RuntimeException(s"Navigation for Confirmation page reached with error $msg")
-      }
+    result map {
+      case Success(s) =>
+        val date = DateFormatter.todaysDate()
+        enquiryKey(request.userAnswers) match {
+          case Right(key) =>
+            Ok(confirmation(appConfig, contact, date, key))
+          case Left(msg) => {
+            Logger.warn(s"Navigation for Confirmation page reached with error $msg")
+            throw new RuntimeException(s"Navigation for Confirmation page reached with error $msg")
+          }
+        }
+      case Failure(ex) => throw new RuntimeException(s"Navigation for Confirmation page reached with error")
     }
-
   }
 }
