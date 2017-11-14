@@ -42,6 +42,13 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ConfirmationController(frontendAppConfig, messagesApi, mockConnector, dataRetrievalAction, new DataRequiredActionImpl)
 
+  val mockConnectorF = mock[LightweightContactEventsConnector]
+  when (mockConnectorF.send(any[Contact], any[MessagesApi])) thenReturn
+    Future.successful(Failure(new RuntimeException("Received exception from upstream service")))
+
+  def controllerF(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
+    new ConfirmationController(frontendAppConfig, messagesApi, mockConnectorF, dataRetrievalAction, new DataRequiredActionImpl)
+
   "Confirmation Controller" must {
 
     "return 200 and the correct view for a GET" in {
@@ -160,6 +167,14 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
     "return 500 and the error view for a GET with no enquiry type" in {
       intercept[Exception] {
         val result = controller().onPageLoad()(fakeRequest)
+        status(result) mustBe INTERNAL_SERVER_ERROR
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+      }
+    }
+
+    "return 500 and error view for a GET when the backend service call fails" in {
+      intercept[Exception] {
+        val result = controllerF().onPageLoad()(fakeRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
         contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
       }

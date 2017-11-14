@@ -148,6 +148,12 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
           case Success(_) => fail
         }
       }
+
+      "throw an exception if the backend service call fails" in {
+        new LightweightContactEventsConnector(getHttpMock(500), configuration).send(contactModel, messagesApi). map {f =>
+          assert(f.isFailure)
+        }
+      }
     }
 
     "provided with JSON directly" must {
@@ -188,6 +194,12 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
             exception.getMessage() mustBe "Received status of 500 from upstream service"
           }
           case Success(_) => fail
+        }
+      }
+
+      "throw an exception if the backend service call fails" in {
+        new LightweightContactEventsConnector(getHttpMock(500), configuration).sendJson(minimalJson). map {f =>
+          assert(f.isFailure)
         }
       }
 
