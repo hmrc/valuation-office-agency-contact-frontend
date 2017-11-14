@@ -149,7 +149,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
         }
       }
 
-      "throw an exception if the backend service call fails" in {
+      "return a failure if the backend service call fails using Contact Model" in {
         new LightweightContactEventsConnector(getHttpMock(500), configuration).send(contactModel, messagesApi). map {f =>
           assert(f.isFailure)
         }
@@ -197,7 +197,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
         }
       }
 
-      "throw an exception if the backend service call fails" in {
+      "return failure if the backend service call fails using minimal Json" in {
         new LightweightContactEventsConnector(getHttpMock(500), configuration).sendJson(minimalJson). map {f =>
           assert(f.isFailure)
         }

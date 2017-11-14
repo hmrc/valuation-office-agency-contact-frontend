@@ -30,7 +30,6 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmation
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, UserAnswers}
 
 import scala.concurrent.Future
-import scala.util.Try
 import scala.util.{Failure, Success, Try}
 
 @Singleton()
