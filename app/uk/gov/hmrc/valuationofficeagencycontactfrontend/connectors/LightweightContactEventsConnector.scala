@@ -44,7 +44,6 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient, override val
   def send(input: Contact, messagesApi: MessagesApi) = sendJson(Json.toJson(ContactWithEnMessage(input, messagesApi)))
 
   def sendJson(json: JsValue): Future[Try[Int]] = {
-    println(">>>>>>>>>>>>>>>> " + "BEFORE POST")
     http.POST(s"$serviceUrl${baseSegment}create", json, Seq(jsonContentTypeHeader))
       .map {
         response =>
@@ -57,7 +56,6 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient, override val
           }
       } recover {
       case e =>
-        println(">>>>>>>>>>>>>>> " + "RECOVER")
         Logger.warn("Received exception " + e.getMessage + " from upstream service")
         Failure(new RuntimeException("Received exception " + e.getMessage + " from upstream service"))
     }

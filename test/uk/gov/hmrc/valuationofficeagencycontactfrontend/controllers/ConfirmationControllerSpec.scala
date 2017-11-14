@@ -18,6 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import org.mockito.Mockito.when
 import org.scalatest.mockito.MockitoSugar
+import org.mockito.Matchers._
 import play.api.i18n.{Messages, MessagesApi}
 import play.api.libs.json.{JsString, Json}
 import play.api.test.Helpers._
@@ -28,16 +29,18 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation, internalServerError}
-
+import scala.concurrent.Future
+import scala.util.{Failure, Success, Try}
 class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
-  val connector = injector.instanceOf[LightweightContactEventsConnector]
+  val mockConnector = mock[LightweightContactEventsConnector]
+  when (mockConnector.send(any[Contact], any[MessagesApi])) thenReturn Future.successful(Success(200))
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new ConfirmationController(frontendAppConfig, messagesApi, connector, dataRetrievalAction, new DataRequiredActionImpl)
+    new ConfirmationController(frontendAppConfig, messagesApi, mockConnector, dataRetrievalAction, new DataRequiredActionImpl)
 
   "Confirmation Controller" must {
 
