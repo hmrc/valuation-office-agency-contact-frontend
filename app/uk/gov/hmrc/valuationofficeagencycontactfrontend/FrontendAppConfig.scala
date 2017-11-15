@@ -19,11 +19,11 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend
 import com.google.inject.{Inject, Singleton}
 import play.api.Configuration
 import play.api.i18n.Lang
-import uk.gov.hmrc.play.bootstrap.config.{AppName, BaseUrl}
+import uk.gov.hmrc.play.bootstrap.config.AppName
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 
 @Singleton
-class FrontendAppConfig @Inject() (override val configuration: Configuration) extends AppName with BaseUrl {
+class FrontendAppConfig @Inject() (override val configuration: Configuration) extends AppName {
 
   private def loadConfig(key: String) = configuration.getString(key).getOrElse(throw new Exception(s"Missing configuration key: $key"))
 
@@ -38,7 +38,7 @@ class FrontendAppConfig @Inject() (override val configuration: Configuration) ex
   lazy val betaFeedbackUrl = s"$contactHost/contact/beta-feedback"
   lazy val betaFeedbackUnauthenticatedUrl = s"$contactHost/contact/beta-feedback-unauthenticated"
 
-  lazy val authUrl = baseUrl("auth")
+  val authUrl = configuration.underlying.getString("microservice.services.auth.host")
   //$COVERAGE-ON$
   lazy val loginUrl = loadConfig("urls.login")
   lazy val loginContinueUrl = loadConfig("urls.loginContinue")

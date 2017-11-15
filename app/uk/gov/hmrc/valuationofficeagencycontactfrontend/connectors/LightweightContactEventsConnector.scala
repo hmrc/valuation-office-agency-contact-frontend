@@ -23,7 +23,6 @@ import play.api.Configuration
 import play.api.i18n.MessagesApi
 import play.api.libs.json._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Contact, ContactWithEnMessage}
-import uk.gov.hmrc.play.bootstrap.config.BaseUrl
 
 import scala.util.{Failure, Success, Try}
 import uk.gov.hmrc.http.HeaderCarrier
@@ -32,10 +31,10 @@ import uk.gov.hmrc.play.bootstrap.http.HttpClient
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class LightweightContactEventsConnector @Inject()(http: HttpClient, override val configuration: Configuration) extends BaseUrl {
+class LightweightContactEventsConnector @Inject()(http: HttpClient, val configuration: Configuration) {
 
   implicit val hc: HeaderCarrier = HeaderCarrier()
-  lazy val serviceUrl = baseUrl("lightweight-contact-events")
+  val serviceUrl = configuration.underlying.getString("microservice.services.lightweight-contact-events.host")
   val baseSegment = "/lightweight-contact-events/"
   val jsonContentTypeHeader = ("Content-Type", "application/json")
 
@@ -44,6 +43,7 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient, override val
   def send(input: Contact, messagesApi: MessagesApi) = sendJson(Json.toJson(ContactWithEnMessage(input, messagesApi)))
 
   def sendJson(json: JsValue): Future[Try[Int]] = {
+    println(">>>>>>>>>>>>> " + s"$serviceUrl${baseSegment}create")
     http.POST(s"$serviceUrl${baseSegment}create", json, Seq(jsonContentTypeHeader))
       .map {
         response =>
