@@ -195,6 +195,8 @@ confirmation.section.yourDetails = Your details
 confirmation.section.propertyAddress = Property address
 confirmation.section.yourMessage = Your message
 confirmation.section.date = Date submitted
+confirmation.survey.url = https://www.smartsurvey.co.uk/s/GKGO0/
+confirmation.survey.para = Your feedback will help us improve the service
 
 valuationAdvice.title = Valuation Advice
 valuationAdvice.heading = Contact details
@@ -272,3 +274,4 @@ error500.opening-times.title = Opening times
 error500.opening-times.paragraph = Monday to Friday, 8:30am to 5:00pm. Closed on bank holidays.
 error500.call-charges.title = Find out about call charges
 error500.call-charges.url = https://www.gov.uk/call-charges
+
