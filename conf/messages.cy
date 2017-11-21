@@ -196,7 +196,7 @@ confirmation.section.propertyAddress = Cyfeiriad yr eiddo
 confirmation.section.yourMessage = Eich neges
 confirmation.section.date = Dyddiad pan y’i anfonwyd
 confirmation.survey.url = https://www.smartsurvey.co.uk/s/GKGO0
-confirmation.survey.para = Bydd eich adborth yn ein helpu i wella'r gwasanaeth
+confirmation.survey.para = Bydd eich adborth yn ein helpu i wella’r gwasanaeth
  
 valuationAdvice.title = Cyngor Prisiad
 valuationAdvice.heading = Manylion cyswllt
