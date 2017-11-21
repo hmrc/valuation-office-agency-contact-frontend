@@ -195,7 +195,7 @@ confirmation.section.yourDetails = Your details
 confirmation.section.propertyAddress = Property address
 confirmation.section.yourMessage = Your message
 confirmation.section.date = Date submitted
-confirmation.survey.url = https://www.smartsurvey.co.uk/s/GKGO0/
+confirmation.survey.url = https://www.smartsurvey.co.uk/s/GKGO0
 confirmation.survey.para = Your feedback will help us improve the service
 
 valuationAdvice.title = Valuation Advice
