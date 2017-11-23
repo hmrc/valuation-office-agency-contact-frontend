@@ -26,4 +26,6 @@ object FormHelpers {
       case Some(error) => error.message
     }
   }
+
+  val antiXSSRegex = """^[A-Za-z0-9\s\-&,]+$"""
 }

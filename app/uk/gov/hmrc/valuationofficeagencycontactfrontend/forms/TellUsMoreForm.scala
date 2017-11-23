@@ -19,12 +19,15 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 import play.api.data.Form
 import play.api.data.Forms._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.TellUsMore
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.FormHelpers.antiXSSRegex
 
 object TellUsMoreForm {
 
   def apply(): Form[TellUsMore] = Form(
     mapping(
-      "message" -> nonEmptyText.verifying("error.message.max_length", _.length <= 5000)
+      "message" -> nonEmptyText
+        .verifying("error.message.max_length", _.length <= 5000)
+        .verifying("error.xss.invalid", _.matches(antiXSSRegex))
     )(TellUsMore.apply)(TellUsMore.unapply)
   )
 }
