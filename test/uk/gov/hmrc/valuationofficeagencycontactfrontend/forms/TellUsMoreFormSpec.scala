@@ -30,13 +30,30 @@ class TellUsMoreFormSpec extends FormBehaviours {
   "TellUsMore form" must {
     behave like questionForm(TellUsMore("value 1"))
 
-    behave like formWithMandatoryTextFields("message")
-
     s"fail to bind when message length is more than 5000" in {
       val data = validData + ("message" -> "aaaaaaaaaa" * 501)
       val expectedError = error("message", "error.message.max_length")
       checkForError(form, data, expectedError)
     }
+
+    s"fail to bind when message is invalid" in {
+      val data = validData + ("message" -> "<script>alert(\"xss\")</script>")
+      val expectedError = error("message", "error.message.xss-invalid")
+      checkForError(form, data, expectedError)
+    }
+
+    "fail to bind when message is blank" in {
+      val data = validData + ("message" -> "")
+      val expectedError = Seq(error("message", "error.required"), error("message", "error.message.xss-invalid")).flatten
+      checkForError(form, data, expectedError)
+    }
+
+    "fail to bind when message is omitted" in {
+      val data = validData - "message"
+      val expectedError = error("message", "error.required")
+      checkForError(form, data, expectedError)
+    }
+
   }
 
 }

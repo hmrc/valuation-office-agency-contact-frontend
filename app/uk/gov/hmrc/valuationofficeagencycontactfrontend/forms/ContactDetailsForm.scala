@@ -20,6 +20,7 @@ import play.api.data.{Form, FormError}
 import play.api.data.Forms._
 import play.api.data.format.Formatter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.FormHelpers.antiXSSRegex
 
 object EmailConstraint extends Formatter[String] {
   override def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = {
@@ -41,8 +42,8 @@ object ContactDetailsForm {
 
   def apply(): Form[ContactDetails] = Form(
     mapping(
-      "firstName" -> nonEmptyText,
-      "lastName" -> nonEmptyText,
+      "firstName" -> nonEmptyText.verifying("error.xss.invalid", _.matches(antiXSSRegex)),
+      "lastName" -> nonEmptyText.verifying("error.xss.invalid", _.matches(antiXSSRegex)),
       "email" -> nonEmptyText
         .verifying("error.email.max_length", _.length <= 129)
         .verifying("error.email.invalid", _.matches(emailRegex)),

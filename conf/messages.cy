@@ -67,10 +67,11 @@ error.phone.invalid = Defnyddiwch rifau yn unig
 error.phone.max_length = 20 yw’r uchafswm hyd
 error.phone.min_length = 11 yw’r isafswm hyd
 error.addressline.max_length = 80 yw’r uchafswm hyd
-error.addressline.invalid = Gallwch ond nodi’r cymeriadau hyn: A-Y, a-y, 0-9, -, &, comaau, a bylchau
+error.xss.invalid = Gallwch ond nodi’r cymeriadau hyn: A-Y, a-y, 0-9, -, &, comaau, a bylchau
 error.postcode.invalid = Rhaid iddo fod yn god post dilys
 error.postcode.max_length = 8 yw’r uchafswm hyd
 error.message.max_length = 5000 o gymeriadau yw’r uchafswm hyd
+error.message.xss-invalid = Gallwch ond nodi’r cymeriadau hyn: A-Y, a-y, 0-9, -, &, ., £, %, (), ;, :, ?, !, `, ’, ", comaau, a bylchau
  
 session_expired.title = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod
 session_expired.heading = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod
