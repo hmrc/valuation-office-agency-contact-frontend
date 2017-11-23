@@ -38,13 +38,13 @@ class TellUsMoreFormSpec extends FormBehaviours {
 
     s"fail to bind when message is invalid" in {
       val data = validData + ("message" -> "<script>alert(\"xss\")</script>")
-      val expectedError = error("message", "error.xss.invalid")
+      val expectedError = error("message", "error.message.xss-invalid")
       checkForError(form, data, expectedError)
     }
 
     "fail to bind when message is blank" in {
       val data = validData + ("message" -> "")
-      val expectedError = Seq(error("message", "error.required"), error("message", "error.xss.invalid")).flatten
+      val expectedError = Seq(error("message", "error.required"), error("message", "error.message.xss-invalid")).flatten
       checkForError(form, data, expectedError)
     }
 
