@@ -31,7 +31,7 @@ class TellUsMoreFormSpec extends FormBehaviours {
     behave like questionForm(TellUsMore("value 1"))
 
     s"fail to bind when message length is more than 5000" in {
-      val data = validData + ("message" -> "aaaaaaaaaa" * 501)
+      val data = validData + ("message" -> "a" * 5001)
       val expectedError = error("message", "error.message.max_length")
       checkForError(form, data, expectedError)
     }
