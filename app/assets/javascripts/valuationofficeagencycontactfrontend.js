@@ -125,3 +125,15 @@ $(document).ready(function() {
               e.preventDefault();
       });
   }
+
+  // =====================================================
+  // Track radio options
+  // =====================================================
+  trackRadios();
+  function trackRadios(){
+      $('.ga-track-radio').click(function(){
+          $(this).attr('ga-on','click')
+          $(this).attr('ga-event-category',$('input:radio:checked').val())
+      });
+
+  }
