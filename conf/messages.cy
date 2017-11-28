@@ -104,7 +104,7 @@ enquiryCategory.business_rates = Ardrethi busnes
 enquiryCategory.housing_benefit = Budd-dal Tai, Lwfansau Tai Lleol, neu renti teg
 enquiryCategory.providing_lettings =  Darparu gwybodaeth am y gosod i’r, neu gysylltu â’r, Swyddogion Rhent
 enquiryCategory.valuations_for_tax = Prisio ar gyfer trethi, Hawl i Brynu, neu apeliadau yn erbyn Ardoll Seilwaith Cymunedol
-enquiryCategory.valuation_for_public_body = Prisio a chyngor ar eiddo, ar gyfer cyrff sector cyhoeddus, gan y Gwasanaethau Prisiwr Dosbarth (DVS)
+enquiryCategory.valuation_for_public_body = Prisio a chyngor ar eiddo, ar gyfer cyrff sector cyhoeddus, gan y Gwasanaethau Prisiwr Dosbarth (GPD)
 enquiryCategory.other_business = Busnes arall
 enquiryCategory.checkYourAnswersLabel = Math o ymholiad
  
@@ -201,18 +201,12 @@ confirmation.survey.para = Bydd eich adborth yn ein helpu i wella’r gwasanaeth
  
 valuationAdvice.title = Cyngor Prisiad
 valuationAdvice.heading = Manylion cyswllt
-valuationAdvice.subheading = Prisiad a chyngor ar eiddo ar gyfer cyrff sector cyhoeddus
+valuationAdvice.subheading = Prisiad a chyngor ar eiddo ar gyfer cyrff sector cyhoeddus, gan  y Gwasanaethau Prisiwr Dosbarth (GPD)
 valuationAdvice.paragraph =  Defnyddiwch y manylion hyn i gysylltu â ni gyda’ch ymholiad.
-valuationAdvice.first-contact.title = Rory O’Boyle
-valuationAdvice.first-contact.email = rory.oboyle@voa.gsi.gov.uk
-valuationAdvice.first-contact.phone = 03000 503406
-valuationAdvice.first-contact.phone-url = tel:+443000503406
-valuationAdvice.second-contact.title = Alastair Johnson
-valuationAdvice.second-contact.email = alastair.m.johnson@voa.gsi.gov.uk
-valuationAdvice.second-contact.phone = 03000 506356
-valuationAdvice.second-contact.phone-url = tel:+443000506356
 valuationAdvice.email-title = E-bost
+valuationAdvice.email-url = dvscustomersupport@voa.gsi.gov.uk
 valuationAdvice.phone-title =  Ffôn
+valuationAdvice.phone-number = 03000 500400
 valuationAdvice.response-paragraph = Anelwn i ateb cyn pen 20 diwrnod gwaith. Fodd bynnag, gall ymholiadau cymhleth gymryd yn hirach.
  
 valuationForTaxes.title = Manylion cyswllt
