@@ -24,7 +24,7 @@
     appConfig = appConfig,
     bodyClasses = None) {
 
-    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url)            
+    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url)
 
     <h1 class="heading-xlarge">@messages("providingLettings.heading")</h1>
 
@@ -44,7 +44,7 @@
 
     <h3 class="heading-small">@messages("providingLettings.email-title")</h3>
 
-    <p><a href="mailto:@messages("providingLettings.email")">@messages("providingLettings.email")</a></p>
+    <p><a href="mailto:@messages("providingLettings.email")" ga-on="click" ga-event-category="LE-EMAIL">@messages("providingLettings.email")</a></p>
 
     <h3 class="heading-small">@messages("providingLettings.phone-title")</h3>
 
