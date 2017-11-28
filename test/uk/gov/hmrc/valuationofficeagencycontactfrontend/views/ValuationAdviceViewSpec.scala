@@ -26,8 +26,8 @@ class ValuationAdviceViewSpec extends ViewBehaviours {
 
   "Valuation Advice view" must {
 
-    behave like normalPage(view, "valuationAdvice", "subheading", "paragraph", "first-contact.title", "first-contact.email", "first-contact.phone", "second-contact.title",
-      "second-contact.email", "second-contact.phone", "email-title", "phone-title", "response-paragraph", "first-contact.phone-url", "second-contact.phone-url")
+    behave like normalPage(view, "valuationAdvice", "subheading", "paragraph", "email-title", "phone-title",
+    "email-url", "phone-number", "response-paragraph")
 
     "has a link marked with site.back leading to the Enquiry Category Page" in {
       val doc = asDocument(view())

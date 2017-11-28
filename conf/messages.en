@@ -104,7 +104,7 @@ enquiryCategory.business_rates = Business rates
 enquiryCategory.housing_benefit = Housing Benefit, Local Housing Allowances, or fair rents
 enquiryCategory.providing_lettings = Providing lettings information to, or contacting, the Rent Officers
 enquiryCategory.valuations_for_tax = Valuations for taxes, Right to Buy, or appeals against Community Infrastructure Levy
-enquiryCategory.valuation_for_public_body = Valuation and property advice, for public sector bodies, by DVS
+enquiryCategory.valuation_for_public_body = Valuation and property advice, for public sector bodies, by District Valuer Services (DVS)
 enquiryCategory.other_business = Other business
 enquiryCategory.checkYourAnswersLabel = Enquiry Type
 
@@ -201,18 +201,12 @@ confirmation.survey.para = Your feedback will help us improve the service
 
 valuationAdvice.title = Valuation Advice
 valuationAdvice.heading = Contact details
-valuationAdvice.subheading = Valuation and property advice for public sector bodies
+valuationAdvice.subheading = Valuation and property advice for public sector bodies by District Valuer Services (DVS)
 valuationAdvice.paragraph = Use these details to contact us with your enquiry.
-valuationAdvice.first-contact.title = Rory O’Boyle
-valuationAdvice.first-contact.email = rory.oboyle@voa.gsi.gov.uk
-valuationAdvice.first-contact.phone = 03000 503406
-valuationAdvice.first-contact.phone-url = tel:+443000503406
-valuationAdvice.second-contact.title = Alastair Johnson
-valuationAdvice.second-contact.email = alastair.m.johnson@voa.gsi.gov.uk
-valuationAdvice.second-contact.phone = 03000 506356
-valuationAdvice.second-contact.phone-url = tel:+443000506356
 valuationAdvice.email-title = Email
+valuationAdvice.email-url = dvscustomersupport@voa.gsi.gov.uk
 valuationAdvice.phone-title = Telephone
+valuationAdvice.phone-number = 03000 500400
 valuationAdvice.response-paragraph = We aim to respond within 20 working days. However, it may take longer for complex enquiries.
 
 valuationForTaxes.title = Contact details
