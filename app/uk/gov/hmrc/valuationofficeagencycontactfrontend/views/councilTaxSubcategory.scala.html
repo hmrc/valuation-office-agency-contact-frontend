@@ -42,10 +42,11 @@
             viewModel = InputViewModel[String]("value", form),
             legend = messages("councilTaxSubcategory.heading"),
             legendClass = Some("visually-hidden"),
-            inputs = CouncilTaxSubcategoryForm.options
+            inputs = CouncilTaxSubcategoryForm.options,
+            trackGaId = Some("councilTaxSubcategory")
         )
 
-        @components.continue_button(inputType="button ga-track-radio")
+        @components.continue_button()
 
     }
 }
