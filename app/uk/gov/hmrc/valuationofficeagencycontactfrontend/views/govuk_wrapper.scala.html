@@ -50,14 +50,20 @@
 
 @afterHeader = {}
 
+@analyticsAdditionalJs = {
+    ga('require', 'eventTracker');
+}
+
 @bodyEnd = {
 @uiLayouts.footer(
     analyticsToken = Some(appConfig.analyticsToken),
     analyticsHost = appConfig.analyticsHost,
     ssoUrl = None,
     scriptElem = scriptElem,
-    gaCalls = None)
+    gaCalls = None,
+    analyticsAdditionalJs = Some(analyticsAdditionalJs))
     <script src='@routes.Assets.versioned("javascripts/valuationofficeagencycontactfrontend-app.min.js")'> </script>
+    <script async src='@routes.Assets.versioned("javascripts/autotrack.js")'> </script>
 }
 
 @footerTop = {}
