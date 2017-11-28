@@ -36,7 +36,7 @@ import org.mockito.ArgumentCaptor
 import org.mockito.Matchers._
 import org.mockito.Mockito.{verify, when}
 import org.scalatest.mockito.MockitoSugar
-import play.api.Configuration
+import play.api.{Configuration, Environment}
 import play.api.http.Status
 import play.api.libs.json._
 import uk.gov.hmrc.play.test.{UnitSpec, WithFakeApplication}
@@ -62,6 +62,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
   }
 
   val configuration = injector.instanceOf[Configuration]
+  val environment = injector.instanceOf[Environment]
   val minimalJson = JsObject(Map[String, JsValue]())
 
   val message = "message"
@@ -90,7 +91,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
         val headersCaptor = ArgumentCaptor.forClass(classOf[Seq[(String, String)]])
         val httpMock = getHttpMock(200)
 
-        val connector = new LightweightContactEventsConnector(httpMock, configuration)
+        val connector = new LightweightContactEventsConnector(httpMock, configuration, environment)
         connector.send(contactModel, messagesApi)
 
         verify(httpMock).POST(urlCaptor.capture, bodyCaptor.capture, headersCaptor.capture)(jsonWritesNapper.capture,
@@ -103,7 +104,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
       "return a 200 status when the send method is successfull using contactModel" in {
         val enquiryType = "council-tax"
 
-        new LightweightContactEventsConnector(getHttpMock(200), configuration).send(contactModel, messagesApi).map {
+        new LightweightContactEventsConnector(getHttpMock(200), configuration, environment).send(contactModel, messagesApi).map {
           case Success(status) => status mustBe 200
           case Failure(e) => assert(false)
         }
@@ -118,7 +119,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
         val headersCaptor = ArgumentCaptor.forClass(classOf[Seq[(String, String)]])
         val httpMock = getHttpMock(200)
 
-        val connector = new LightweightContactEventsConnector(httpMock, configuration)
+        val connector = new LightweightContactEventsConnector(httpMock, configuration, environment)
         connector.send(alternativeContactModel, messagesApi)
 
         verify(httpMock).POST(urlCaptor.capture, bodyCaptor.capture, headersCaptor.capture)(jsonWritesNapper.capture,
@@ -131,7 +132,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
       "return a 200 status when the send method is successful using alternativeContactModel" in {
         val enquiryType = "council-tax"
 
-        new LightweightContactEventsConnector(getHttpMock(200), configuration).send(alternativeContactModel, messagesApi).map {
+        new LightweightContactEventsConnector(getHttpMock(200), configuration, environment).send(alternativeContactModel, messagesApi).map {
           case Success(status) => status mustBe 200
           case Failure(e) => assert(false)
         }
@@ -140,12 +141,18 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
       "return a string representing the error when send method fails" in {
         val errorResponse = JsString("Something went wrong!")
 
-        new LightweightContactEventsConnector(getHttpMock(500), configuration).send(contactModel, messagesApi).map {
+        new LightweightContactEventsConnector(getHttpMock(500), configuration, environment).send(contactModel, messagesApi).map {
           case Failure(e) => {
             e mustBe a[RuntimeException]
             e.getMessage() mustBe "Received status of 500 from upstream service"
           }
           case Success(_) => fail
+        }
+      }
+
+      "return a failure if the backend service call fails using Contact Model" in {
+        new LightweightContactEventsConnector(getHttpMock(500), configuration, environment).send(contactModel, messagesApi). map {f =>
+          assert(f.isFailure)
         }
       }
     }
@@ -161,7 +168,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
         val headersCaptor = ArgumentCaptor.forClass(classOf[Seq[(String, String)]])
         val httpMock = getHttpMock(200)
 
-        val connector = new LightweightContactEventsConnector(httpMock, configuration)
+        val connector = new LightweightContactEventsConnector(httpMock, configuration, environment)
         connector.sendJson(minimalJson)
 
         verify(httpMock).POST(urlCaptor.capture, bodyCaptor.capture, headersCaptor.capture)(jsonWritesNapper.capture,
@@ -172,7 +179,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
       }
 
       "return a case class representing the received JSON when the send method is successful" in {
-        new LightweightContactEventsConnector(getHttpMock(200), configuration).sendJson(minimalJson).map {
+        new LightweightContactEventsConnector(getHttpMock(200), configuration, environment).sendJson(minimalJson).map {
           case Success(status) => status mustBe 200
           case Failure(e) => assert(false)
         }
@@ -182,12 +189,18 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
       "return a string representing the error when send method fails" in {
         val errorResponse = JsString("Something went wrong!")
 
-        new LightweightContactEventsConnector(getHttpMock(500), configuration).sendJson(minimalJson).map {
+        new LightweightContactEventsConnector(getHttpMock(500), configuration, environment).sendJson(minimalJson).map {
           case Failure(exception) => {
             exception mustBe a[JsonInvalidException]
             exception.getMessage() mustBe "Received status of 500 from upstream service"
           }
           case Success(_) => fail
+        }
+      }
+
+      "return failure if the backend service call fails using minimal Json" in {
+        new LightweightContactEventsConnector(getHttpMock(500), configuration, environment).sendJson(minimalJson). map {f =>
+          assert(f.isFailure)
         }
       }
 

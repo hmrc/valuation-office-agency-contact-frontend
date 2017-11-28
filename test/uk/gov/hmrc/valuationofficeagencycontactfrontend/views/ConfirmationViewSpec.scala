@@ -49,7 +49,9 @@ class ConfirmationViewSpec extends ViewBehaviours {
       "section.yourDetails",
       "section.propertyAddress",
       "section.yourMessage",
-      "section.date")
+      "section.date",
+      "survey.url",
+      "survey.para")
 
     "contain a print button " in {
       val doc = asDocument(view())
@@ -86,6 +88,14 @@ class ConfirmationViewSpec extends ViewBehaviours {
       assert(startAgainButton == messages("site.govuk"))
       val govukUrl = doc.select("a[id=backToGovUk]").attr("href")
       govukUrl mustBe "http://www.gov.uk"
+    }
+
+    "contain a Survey Link" in {
+      val doc = asDocument(view())
+      val survey = doc.getElementById("survey").text()
+      survey mustBe messages("confirmation.survey.para")
+      val surveyLink = doc.select("a[id=survey]").attr("href")
+      surveyLink mustBe messages("confirmation.survey.url")
     }
 
   }

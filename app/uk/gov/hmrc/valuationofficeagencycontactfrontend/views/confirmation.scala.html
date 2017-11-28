@@ -35,7 +35,7 @@
 
     <h2 class="heading-medium">@messages("confirmation.enquirySummary")</h2>
 
-    <ul class="tabular-data tabular-data--list text">
+    <ul class="tabular-data tabular-data--list">
         <li class="tabular-data__entry tabular-data__entry--grouped divider--bottom">
             <div class="tabular-data__data tabular-data__data--4-12">@messages("confirmation.section.enquiryType")</div>
             <div class="tabular-data__data tabular-data__data--8-12">@messages(s"enquiryCategory.${contact.enquiryCategory}") <br />
@@ -62,7 +62,9 @@
     </ul>
     <br />
     <h2 class="heading-medium">@messages("confirmation.whatHappensnext")</h2>
-    <p class="text">@messages("confirmation.para2")</p>
+    <p>@messages("confirmation.para2")</p>
+
+    <a class="print-hide" href=@messages("confirmation.survey.url") target="_self" id="survey">@messages("confirmation.survey.para")</a>
 
     @components.button_link(messageKey="site.print.button", href="javascript:window.print()", id="print-button", className="button print-hidden js-visible")
     <p><a href="http://www.gov.uk" id="backToGovUk" class="print-hide">@messages("site.govuk")</a></p>

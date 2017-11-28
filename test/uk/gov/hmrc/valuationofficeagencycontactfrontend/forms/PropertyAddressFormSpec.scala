@@ -38,7 +38,7 @@ class PropertyAddressFormSpec extends FormBehaviours {
 
     "fail to bind when address line 1 is blank" in {
       val data = validData + ("addressLine1" -> "")
-      val expectedError = Seq(error("addressLine1", "error.required"), error("addressLine1", "error.addressline.invalid")).flatten
+      val expectedError = Seq(error("addressLine1", "error.required"), error("addressLine1", "error.xss.invalid")).flatten
       checkForError(form, data, expectedError)
     }
 
@@ -50,7 +50,7 @@ class PropertyAddressFormSpec extends FormBehaviours {
 
     s"fail to bind when address line 1 is invalid" in {
       val data = validData + ("addressLine1" -> "1st Line£")
-      val expectedError = error("addressLine1", "error.addressline.invalid")
+      val expectedError = error("addressLine1", "error.xss.invalid")
       checkForError(form, data, expectedError)
     }
 
@@ -62,7 +62,7 @@ class PropertyAddressFormSpec extends FormBehaviours {
 
     s"fail to bind when address line 2 is invalid" in {
       val data = validData + ("addressLine2" -> "2nd Line£")
-      val expectedError = error("addressLine2", "error.addressline.invalid")
+      val expectedError = error("addressLine2", "error.xss.invalid")
       checkForError(form, data, expectedError)
     }
 
@@ -74,7 +74,7 @@ class PropertyAddressFormSpec extends FormBehaviours {
 
     "fail to bind when town is blank" in {
       val data = validData + ("town" -> "")
-      val expectedError = Seq(error("town", "error.required"), error("town", "error.addressline.invalid")).flatten
+      val expectedError = Seq(error("town", "error.required"), error("town", "error.xss.invalid")).flatten
       checkForError(form, data, expectedError)
     }
 
@@ -86,7 +86,7 @@ class PropertyAddressFormSpec extends FormBehaviours {
 
     s"fail to bind when town is invalid" in {
       val data = validData + ("town" -> "town*")
-      val expectedError = error("town", "error.addressline.invalid")
+      val expectedError = error("town", "error.xss.invalid")
       checkForError(form, data, expectedError)
     }
 
@@ -98,7 +98,7 @@ class PropertyAddressFormSpec extends FormBehaviours {
 
     s"fail to bind when county is invalid" in {
       val data = validData + ("county" -> "county!<>")
-      val expectedError = error("county", "error.addressline.invalid")
+      val expectedError = error("county", "error.xss.invalid")
       checkForError(form, data, expectedError)
     }
 

@@ -22,9 +22,12 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.TellUsMore
 
 object TellUsMoreForm {
 
+  private val antiXSSMessageRegex = """^["'`A-Za-z0-9\s\-&,\.£\(\)%;:\?\!]+$"""
   def apply(): Form[TellUsMore] = Form(
     mapping(
-      "message" -> nonEmptyText.verifying("error.message.max_length", _.length <= 5000)
+      "message" -> nonEmptyText
+        .verifying("error.message.max_length", _.length <= 5000)
+        .verifying("error.message.xss-invalid", _.matches(antiXSSMessageRegex))
     )(TellUsMore.apply)(TellUsMore.unapply)
   )
 }

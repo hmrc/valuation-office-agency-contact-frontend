@@ -60,8 +60,6 @@ error.number = Please enter a valid number
 error.required = This field is required
 error.summary.title = There’s been a problem
 error.summary.text = Check the following
-error.name.max_length = Maximum length is 56
-error.name.invalid = You can only enter these characters: A-Z, a-z, commas, and spaces
 error.email.invalid = Enter a valid email address
 error.email.mismatch = Emails don’t match
 error.email.max_length = Maximum length is 129
@@ -69,10 +67,11 @@ error.phone.invalid = Please use numbers only
 error.phone.max_length = Maximum length is 20
 error.phone.min_length = Minimum length is 11
 error.addressline.max_length = Maximum length is 80
-error.addressline.invalid = You can only enter these characters: A-Z, a-z, 0-9, -, &, space
+error.xss.invalid = You can only enter these characters: A-Z, a-z, 0-9, -, &, commas, and spaces
 error.postcode.invalid = Must be a valid postcode
 error.postcode.max_length = Maximum length is 8
 error.message.max_length = Maximum length is 5000 characters
+error.message.xss-invalid = You can only enter these characters: A-Z, a-z, 0-9, -, &, ., £, %, (), ;, :, ?, !, `, ’, ", commas, and spaces
 
 session_expired.title = For your security, this service has been reset
 session_expired.heading = For your security, this service has been reset
@@ -197,6 +196,8 @@ confirmation.section.yourDetails = Your details
 confirmation.section.propertyAddress = Property address
 confirmation.section.yourMessage = Your message
 confirmation.section.date = Date submitted
+confirmation.survey.url = https://www.smartsurvey.co.uk/s/GKGO0
+confirmation.survey.para = Your feedback will help us improve the service
 
 valuationAdvice.title = Valuation Advice
 valuationAdvice.heading = Contact details
@@ -274,3 +275,4 @@ error500.opening-times.title = Opening times
 error500.opening-times.paragraph = Monday to Friday, 8:30am to 5:00pm. Closed on bank holidays.
 error500.call-charges.title = Find out about call charges
 error500.call-charges.url = https://www.gov.uk/call-charges
+
