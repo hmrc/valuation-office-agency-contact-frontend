@@ -24,7 +24,7 @@
     appConfig = appConfig,
     bodyClasses = None) {
 
-    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url)        
+    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url)
 
     <h1 class="heading-xlarge">@messages("valuationAdvice.heading")</h1>
 
@@ -40,7 +40,7 @@
             @messages("valuationAdvice.phone-title")
         </div>
         <div class="grid-layout__column grid-layout__column--2-3">
-            <a href="mailto:@messages("valuationAdvice.first-contact.email")" onclick="handleOutboundLinkClicks(event, 'VP-EMAIL')">@messages("valuationAdvice.first-contact.email")</a><br>
+            <a href="mailto:@messages("valuationAdvice.first-contact.email")" onclick="handleOutboundLinkClicks(event, 'VP-EMAIL')" ga-on="click" ga-event-category="VP-EMAIL">@messages("valuationAdvice.first-contact.email")</a><br>
             <a href=@messages("valuationAdvice.first-contact.phone-url")>@messages("valuationAdvice.first-contact.phone")</a>
         </div>
     </div>
@@ -54,7 +54,7 @@
             @messages("valuationAdvice.phone-title")
         </div>
         <div class="grid-layout__column grid-layout__column--2-3">
-            <a href="mailto:@messages("valuationAdvice.second-contact.email")" onclick="handleOutboundLinkClicks(event, 'VP-EMAIL')">@messages("valuationAdvice.second-contact.email")</a><br>
+            <a href="mailto:@messages("valuationAdvice.second-contact.email")" onclick="handleOutboundLinkClicks(event, 'VP-EMAIL')" ga-on="click" ga-event-category="VP-EMAIL">@messages("valuationAdvice.second-contact.email")</a><br>
             <a href=@messages("valuationAdvice.second-contact.phone-url")>@messages("valuationAdvice.second-contact.phone")</a>
         </div>
     </div>

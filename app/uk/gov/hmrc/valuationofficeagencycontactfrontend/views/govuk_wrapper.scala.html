@@ -75,7 +75,8 @@
     @views.html.language_selection(
         appConfig.languageMap,
         appConfig.routeToSwitchLanguage,
-        Some("label--inline-right"))
+        Some("label--inline-right"),
+        appName = Some(messages("site.service_name")))
 }
 
 @if(contentHeader.isDefined) {
