@@ -43,10 +43,11 @@
             viewModel = InputViewModel[String]("value", form),
             legend = messages("enquiryCategory.heading"),
             legendClass = Some("visually-hidden"),
-            inputs = EnquiryCategoryForm.options
+            inputs = EnquiryCategoryForm.options,
+            trackGaId = Some("enquiryCategory")
         )
 
-        @components.continue_button(inputType="button ga-track-radio")
+        @components.continue_button()
 
         <p><a href="http://www.gov.uk" id="backToGovUk" class="print-hide">@messages("site.govuk")</a></p>
 

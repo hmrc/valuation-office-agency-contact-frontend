@@ -32,30 +32,14 @@
 
     <p>@messages("valuationAdvice.paragraph")</p>
 
-    <h3 class="heading-small">@messages("valuationAdvice.first-contact.title")</h3>
-
     <div class="grid-layout grid-layout--no-gutter">
         <div class="grid-layout__column grid-layout__column--1-3">
             @messages("valuationAdvice.email-title") <br>
             @messages("valuationAdvice.phone-title")
         </div>
         <div class="grid-layout__column grid-layout__column--2-3">
-            <a href="mailto:@messages("valuationAdvice.first-contact.email")" onclick="handleOutboundLinkClicks(event, 'VP-EMAIL')" ga-on="click" ga-event-category="VP-EMAIL">@messages("valuationAdvice.first-contact.email")</a><br>
-            <a href=@messages("valuationAdvice.first-contact.phone-url")>@messages("valuationAdvice.first-contact.phone")</a>
-        </div>
-    </div>
-    <br>
-
-    <h3 class="heading-small">@messages("valuationAdvice.second-contact.title")</h3>
-
-    <div class="grid-layout grid-layout--no-gutter">
-        <div class="grid-layout__column grid-layout__column--1-3">
-            @messages("valuationAdvice.email-title") <br>
-            @messages("valuationAdvice.phone-title")
-        </div>
-        <div class="grid-layout__column grid-layout__column--2-3">
-            <a href="mailto:@messages("valuationAdvice.second-contact.email")" onclick="handleOutboundLinkClicks(event, 'VP-EMAIL')" ga-on="click" ga-event-category="VP-EMAIL">@messages("valuationAdvice.second-contact.email")</a><br>
-            <a href=@messages("valuationAdvice.second-contact.phone-url")>@messages("valuationAdvice.second-contact.phone")</a>
+            <a href="mailto:@messages("valuationAdvice.email-url")" onclick="handleOutboundLinkClicks(event, 'VP-EMAIL')" ga-on="click" ga-event-category="VP-EMAIL">@messages("valuationAdvice.email-url")</a><br>
+            @messages("valuationAdvice.phone-number")
         </div>
     </div>
     <br>

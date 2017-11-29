@@ -131,9 +131,10 @@ $(document).ready(function() {
   // =====================================================
   trackRadios();
   function trackRadios(){
-      $('.ga-track-radio').click(function(){
-          $(this).attr('ga-on','click')
-          $(this).attr('ga-event-category',$('input:radio:checked').val())
+      $("[data-ga-track-id] input:radio").change(function(){
+          var val = $("[data-ga-track-id] input:radio:checked").val()
+          var id = $("[data-ga-track-id]").attr('data-ga-track-id');
+          $("[data-ga-track-id]").closest('form').find('#submit').attr("onclick", 'ga("send", "event", "'+id+'", "click", "'+val+'")')
       });
 
   }
