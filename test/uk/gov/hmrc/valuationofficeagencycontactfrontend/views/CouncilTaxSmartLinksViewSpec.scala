@@ -26,10 +26,9 @@ class CouncilTaxSmartLinksViewSpec extends ViewBehaviours {
 
   "Council Tax Smart Links View" must {
 
-    behave like normalPage(view, "checkBeforeYouStart", "para1", "council_tax.subheading", "council_tax.para1",
-      "council_tax.para2", "council_tax.para3", "council_tax.para4", "council_tax.para5", "council_tax.para6",
-      "council_tax.para7", "council_tax.para8", "council_tax.url1", "council_tax.url2", "council_tax.url3",
-      "council_tax.url4", "council_tax.para9", "council_tax.para10")
+    behave like normalPage(view, "checkBeforeYouStartCouncilTax", "paragraph", "subheading", "para1",
+      "para2", "para3", "para4", "para5", "para6", "para7", "para8", "url1", "url2", "url3",
+      "url4", "para9", "para10")
   }
 
   "The Continue button links to the goToCouncilTaxSubcategoryPage method" in {

@@ -20,47 +20,47 @@
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("checkBeforeYouStart.title"),
+    title = messages("checkBeforeYouStartCouncilTax.title"),
     appConfig = appConfig,
     bodyClasses = Some("full-width")) {
 
     @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url)
 
-    <h1 class="heading-xlarge">@messages("checkBeforeYouStart.heading")</h1>
+    <h1 class="heading-xlarge">@messages("checkBeforeYouStartCouncilTax.heading")</h1>
 
-    <p>@messages("checkBeforeYouStart.para1")</p>
+    <p>@messages("checkBeforeYouStartCouncilTax.paragraph")</p>
 
             <br>
-            <h2 class="heading-medium">@messages("checkBeforeYouStart.council_tax.subheading")</h2>
+            <h2 class="heading-medium">@messages("checkBeforeYouStartCouncilTax.subheading")</h2>
 
             <p>
-                <a href=@messages("checkBeforeYouStart.council_tax.url1") target="_self"  ga-on="click" ga-event-action="click" ga-event-category="CT-Smartlinks" ga-event-label="CT-1">@messages("checkBeforeYouStart.council_tax.para1")</a>
+                <a href=@messages("checkBeforeYouStartCouncilTax.url1") target="_self"  ga-on="click" ga-event-action="click" ga-event-category="CT-Smartlinks" ga-event-label="CT-1">@messages("checkBeforeYouStartCouncilTax.para1")</a>
                 <br>
-                @messages("checkBeforeYouStart.council_tax.para2")
+                @messages("checkBeforeYouStartCouncilTax.para2")
             </p>
 
             <p>
-                <a href=@messages("checkBeforeYouStart.council_tax.url2") target="_self"  ga-on="click" ga-event-action="click" ga-event-category="CT-Smartlinks" ga-event-label="CT-2">@messages("checkBeforeYouStart.council_tax.para3")</a>
+                <a href=@messages("checkBeforeYouStartCouncilTax.url2") target="_self"  ga-on="click" ga-event-action="click" ga-event-category="CT-Smartlinks" ga-event-label="CT-2">@messages("checkBeforeYouStartCouncilTax.para3")</a>
                 <br>
-                @messages("checkBeforeYouStart.council_tax.para4")
+                @messages("checkBeforeYouStartCouncilTax.para4")
             </p>
 
             <p>
-                <a href=@messages("checkBeforeYouStart.council_tax.url3") target="_self"  ga-on="click" ga-event-action="click" ga-event-category="CT-Smartlinks" ga-event-label="CT-3">@messages("checkBeforeYouStart.council_tax.para5")</a>
+                <a href=@messages("checkBeforeYouStartCouncilTax.url3") target="_self"  ga-on="click" ga-event-action="click" ga-event-category="CT-Smartlinks" ga-event-label="CT-3">@messages("checkBeforeYouStartCouncilTax.para5")</a>
                 <br>
-                @messages("checkBeforeYouStart.council_tax.para6")
+                @messages("checkBeforeYouStartCouncilTax.para6")
             </p>
 
             <p>
-                <a href=@messages("checkBeforeYouStart.council_tax.url4") target="_self"  ga-on="click" ga-event-action="click" ga-event-category="CT-Smartlinks" ga-event-label="CT-4">@messages("checkBeforeYouStart.council_tax.para7")</a>
+                <a href=@messages("checkBeforeYouStartCouncilTax.url4") target="_self"  ga-on="click" ga-event-action="click" ga-event-category="CT-Smartlinks" ga-event-label="CT-4">@messages("checkBeforeYouStartCouncilTax.para7")</a>
                 <br>
-                @messages("checkBeforeYouStart.council_tax.para8")
+                @messages("checkBeforeYouStartCouncilTax.para8")
             </p>
 
             <p>
-                <a href=@messages("checkBeforeYouStart.council_tax.url5") target="_self"  ga-on="click" ga-event-action="click" ga-event-category="CT-Smartlinks" ga-event-label="CT-5">@messages("checkBeforeYouStart.council_tax.para9")</a>
+                <a href=@messages("checkBeforeYouStartCouncilTax.url5") target="_self"  ga-on="click" ga-event-action="click" ga-event-category="CT-Smartlinks" ga-event-label="CT-5">@messages("checkBeforeYouStartCouncilTax.para9")</a>
                 <br>
-                @messages("checkBeforeYouStart.council_tax.para10")
+                @messages("checkBeforeYouStartCouncilTax.para10")
             </p>
 
     <p>

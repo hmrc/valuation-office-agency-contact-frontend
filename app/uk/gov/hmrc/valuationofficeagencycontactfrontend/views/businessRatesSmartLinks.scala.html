@@ -20,51 +20,51 @@
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("checkBeforeYouStart.title"),
+    title = messages("checkBeforeYouStartBusinessRates.title"),
     appConfig = appConfig,
     bodyClasses = Some("full-width")) {
 
     @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url)
 
-    <h1 class="heading-xlarge">@messages("checkBeforeYouStart.heading")</h1>
+    <h1 class="heading-xlarge">@messages("checkBeforeYouStartBusinessRates.heading")</h1>
 
-    <p>@messages("checkBeforeYouStart.para1")</p>
+    <p>@messages("checkBeforeYouStartBusinessRates.paragraph")</p>
 
     <br>
 
-    <h2 class="heading-medium">@messages("checkBeforeYouStart.business_rates.subheading")</h2>
+    <h2 class="heading-medium">@messages("checkBeforeYouStartBusinessRates.subheading")</h2>
 
     <p>
-        <a href=@messages("checkBeforeYouStart.business_rates.url1") target="_self" ga-on="click" ga-event-action="click" ga-event-category="BR-Smartlinks" ga-event-label="BR-1">@messages("checkBeforeYouStart.business_rates.para1")</a>
+        <a href=@messages("checkBeforeYouStartBusinessRates.url1") target="_self" ga-on="click" ga-event-action="click" ga-event-category="BR-Smartlinks" ga-event-label="BR-1">@messages("checkBeforeYouStartBusinessRates.para1")</a>
         <br>
-        @messages("checkBeforeYouStart.business_rates.para2")
+        @messages("checkBeforeYouStartBusinessRates.para2")
     </p>
 
     <p>
-        <a href=@messages("checkBeforeYouStart.business_rates.url2") target="_self" ga-on="click" ga-event-action="click" ga-event-category="BR-Smartlinks" ga-event-label="BR-2">@messages("checkBeforeYouStart.business_rates.para3")</a>
+        <a href=@messages("checkBeforeYouStartBusinessRates.url2") target="_self" ga-on="click" ga-event-action="click" ga-event-category="BR-Smartlinks" ga-event-label="BR-2">@messages("checkBeforeYouStartBusinessRates.para3")</a>
         <br>
-        @messages("checkBeforeYouStart.business_rates.para4")
+        @messages("checkBeforeYouStartBusinessRates.para4")
     </p>
 
     <p>
-        <a href=@messages("checkBeforeYouStart.business_rates.url3") target="_self" ga-on="click" ga-event-action="click" ga-event-category="BR-Smartlinks" ga-event-label="BR-3">@messages("checkBeforeYouStart.business_rates.para5")</a>
+        <a href=@messages("checkBeforeYouStartBusinessRates.url3") target="_self" ga-on="click" ga-event-action="click" ga-event-category="BR-Smartlinks" ga-event-label="BR-3">@messages("checkBeforeYouStartBusinessRates.para5")</a>
         <br>
-        @messages("checkBeforeYouStart.business_rates.para6")
+        @messages("checkBeforeYouStartBusinessRates.para6")
     </p>
 
     <p>
-        <a href=@messages("checkBeforeYouStart.business_rates.url4") target="_self" ga-on="click" ga-event-action="click" ga-event-category="BR-Smartlinks" ga-event-label="BR-4">@messages("checkBeforeYouStart.business_rates.para7")</a>
+        <a href=@messages("checkBeforeYouStartBusinessRates.url4") target="_self" ga-on="click" ga-event-action="click" ga-event-category="BR-Smartlinks" ga-event-label="BR-4">@messages("checkBeforeYouStartBusinessRates.para7")</a>
         <br>
-        @messages("checkBeforeYouStart.business_rates.para8")
+        @messages("checkBeforeYouStartBusinessRates.para8")
     </p>
 
     <p>
-        <a href=@messages("checkBeforeYouStart.business_rates.url5") target="_self" ga-on="click" ga-event-action="click" ga-event-category="BR-Smartlinks" ga-event-label="BR-5">@messages("checkBeforeYouStart.business_rates.para9")</a>
+        <a href=@messages("checkBeforeYouStartBusinessRates.url5") target="_self" ga-on="click" ga-event-action="click" ga-event-category="BR-Smartlinks" ga-event-label="BR-5">@messages("checkBeforeYouStartBusinessRates.para9")</a>
         <br>
-        @messages("checkBeforeYouStart.business_rates.para10")
+        @messages("checkBeforeYouStartBusinessRates.para10")
     </p>
 
-    <p>@messages("checkBeforeYouStart.business_rates.para11")</p>
+    <p>@messages("checkBeforeYouStartBusinessRates.para11")</p>
 
     <p>
         <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSmartLinksController.goToBusinessRatesSubcategoryPage().url id="continue" class="button button--get-started">@messages("site.continue")</a>

@@ -26,10 +26,9 @@ class BusinessRatesSmartLinksViewSpec extends ViewBehaviours {
 
   "Business Rates Smart Links View" must {
 
-    behave like normalPage(view, "checkBeforeYouStart", "para1", "business_rates.subheading", "business_rates.para1",
-      "business_rates.para2", "business_rates.para3", "business_rates.para4", "business_rates.para5", "business_rates.para6",
-      "business_rates.para7", "business_rates.para8", "business_rates.para9", "business_rates.para10", "business_rates.para11",
-      "business_rates.url1", "business_rates.url2", "business_rates.url3", "business_rates.url4", "business_rates.url5")
+    behave like normalPage(view, "checkBeforeYouStartBusinessRates", "paragraph", "subheading", "para1",
+      "para2", "para3", "para4", "para5", "para6", "para7", "para8", "para9", "para10", "para11",
+      "url1", "url2", "url3", "url4", "url5")
   }
 
   "The Continue button links to the goToBusinessRatesSubcategoryPage method" in {
