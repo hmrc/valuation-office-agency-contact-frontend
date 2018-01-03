@@ -40,6 +40,7 @@ object CouncilTaxSubcategoryForm extends FormErrorHelper {
     RadioOption("councilTaxSubcategory", "council_tax_poor_repair"),
     RadioOption("councilTaxSubcategory", "council_tax_changes"),
     RadioOption("councilTaxSubcategory", "council_tax_ndr_changes"),
+    RadioOption("councilTaxSubcategory", "council_tax_business_uses"),
     RadioOption("councilTaxSubcategory", "council_tax_annexe"),
     RadioOption("councilTaxSubcategory", "council_tax_other")
   )

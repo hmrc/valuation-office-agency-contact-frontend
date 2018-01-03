@@ -149,10 +149,12 @@ contactDetails.checkYourAnswersLabel = Manylion cyswllt
  
 councilTaxSubcategory.title = Beth ydych eisiau gwybod am Dreth Gyngor?
 councilTaxSubcategory.heading = Beth ydych eisiau gwybod am Dreth Gyngor?
+councilTaxSubcategory.subheading = Am beth ydych am roi gwybod i ni?
 councilTaxSubcategory.council_tax_poor_repair = Mae fy eiddo mewn cyflwr gwael neu amreswyliadwy
 councilTaxSubcategory.council_tax_changes = Mae fy eiddo neu’r ardal leol wedi newid
 councilTaxSubcategory.council_tax_ndr_changes = Mae fy eiddo wedi newid o Dreth Gyngor i Ardrethi Busnes
-councilTaxSubcategory.council_tax_annexe = Rhandy lle mae’r eiddo
+councilTaxSubcategory.council_tax_business_uses = Defnyddir fy eiddo ar gyfer busnes erbyn hyn
+councilTaxSubcategory.council_tax_annexe = Rhandy i’m heiddo
 councilTaxSubcategory.council_tax_other = Unrhyw ymholiad arall ynghylch y Dreth Gyngor
 councilTaxSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
  

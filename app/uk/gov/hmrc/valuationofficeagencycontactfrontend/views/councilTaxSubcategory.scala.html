@@ -34,6 +34,8 @@
 
     @components.heading("councilTaxSubcategory.heading")
 
+    <p>@messages("councilTaxSubcategory.subheading")</p>
+
     @helpers.form(action = CouncilTaxSubcategoryController.onSubmit(mode), 'autoComplete -> "off") {
 
         @components.error_summary(form.errors)
