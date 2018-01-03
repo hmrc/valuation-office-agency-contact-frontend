@@ -31,7 +31,7 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
   def createViewUsingForm = (form: Form[String]) => councilTaxSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
   "CouncilTaxSubcategory view" must {
-    behave like normalPage(createView, messageKeyPrefix)
+    behave like normalPage(createView, messageKeyPrefix, "subheading")
   }
 
   "CouncilTaxSubcategory view" when {
