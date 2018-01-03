@@ -31,7 +31,7 @@ class BusinessRatesSubcategoryViewSpec extends ViewBehaviours {
   def createViewUsingForm = (form: Form[String]) => businessRatesSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
   "BusinessRatesSubcategory view" must {
-    behave like normalPage(createView, messageKeyPrefix)
+    behave like normalPage(createView, messageKeyPrefix, "subheading")
   }
 
   "BusinessRatesSubcategory view" when {
