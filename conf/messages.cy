@@ -38,7 +38,7 @@ checkBeforeYouStart.business_rates.para11 = Os na allwch gael gafael ar ateb i�
  
 checkYourAnswers.title = Crynodeb
 checkYourAnswers.heading = Crynodeb o’ch ymholiad
-checkYourAnswers.guidance = Gwiriwch yr wybodaeth yr ydych wedi’i rhoi i ni cyn cyflwyno. Gallwch olygu manylion sy’n anghywir.
+checkYourAnswers.guidance = Gwiriwch yr wybodaeth yr ydych wedi’i rhoi i ni cyn ei chyflwyno. Gallwch newid unrhyw fanylion sy’n anghywir.
 checkYourAnswers.subheading = Crynodeb
  
 date.day = Diwrnod
