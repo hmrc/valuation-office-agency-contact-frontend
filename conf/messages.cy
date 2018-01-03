@@ -17,6 +17,7 @@ checkBeforeYouStart.council_tax.para8 = Chwilio am eich awdurdod lleol a thalu�
 checkBeforeYouStart.council_tax.url5 = https://www.gov.uk/council-tax-appeals
 checkBeforeYouStart.council_tax.para9 = Herio’ch band Treth Gyngor
 checkBeforeYouStart.council_tax.para10 = Cael gwybod beth allwch ei wneud os ydych yn anghytuno gyda’ch band Treth Gyngor.
+checkBeforeYouStart.council_tax.para11 = Os na allwch gael gafael ar ateb i’ch ymholiad, neu os oes gennych ymholiad ynghylch rhywbeth arall, gallwch fynd yn eich blaen i’n ffurflen gyswllt.
 checkBeforeYouStart.business_rates.subheading = Cysylltiadau defnyddiol ar gyfer ardrethi busnes
 checkBeforeYouStart.business_rates.para1 = Gwirio a herio’ch prisiad ardrethi busnes
 checkBeforeYouStart.business_rates.url1 = https://www.gov.uk/correct-your-business-rates
