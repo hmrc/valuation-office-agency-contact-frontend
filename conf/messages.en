@@ -38,7 +38,7 @@ checkBeforeYouStart.business_rates.para11 = If you can’t find an answer to you
 
 checkYourAnswers.title = Summary
 checkYourAnswers.heading = Your enquiry summary
-checkYourAnswers.guidance = Please check the information you have given us before submitting. You can edit any details that are incorrect.
+checkYourAnswers.guidance = Please check the information you have given us before submitting. You can change any details that are incorrect.
 checkYourAnswers.subheading = Summary
 
 date.day = Day
