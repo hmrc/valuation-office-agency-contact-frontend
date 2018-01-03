@@ -160,11 +160,13 @@ councilTaxSubcategory.checkYourAnswersLabel = Enquiry Details
 
 businessRatesSubcategory.title = What do you want to know about business rates?
 businessRatesSubcategory.heading = What do you want to know about business rates?
+businessRatesSubcategory.subheading = What do you want to tell us about?
 businessRatesSubcategory.business_rates_poor_repair = My property is in poor repair
 businessRatesSubcategory.business_rates_changes = My property or the local area has changed
 businessRatesSubcategory.business_rates_ct_change = My property has changed from Business Rates to Council Tax
+businessRatesSubcategory.business_rates_not_used = My property is no longer used for business
 businessRatesSubcategory.business_rates_closed = My business has closed
-businessRatesSubcategory.business_rates_other = Any other Business Rates enquiry
+businessRatesSubcategory.business_rates_other = Any other business rates enquiry
 businessRatesSubcategory.checkYourAnswersLabel = Enquiry Details
 
 propertyAddress.title = Property Details

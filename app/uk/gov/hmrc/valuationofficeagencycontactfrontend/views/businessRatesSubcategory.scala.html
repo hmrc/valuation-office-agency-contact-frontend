@@ -34,6 +34,8 @@
 
     @components.heading("businessRatesSubcategory.heading")
 
+    <p>@messages("businessRatesSubcategory.subheading")</p>
+
     @helpers.form(action = BusinessRatesSubcategoryController.onSubmit(mode), 'autoComplete -> "off") {
 
         @components.error_summary(form.errors)

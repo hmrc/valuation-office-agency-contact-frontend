@@ -160,9 +160,11 @@ councilTaxSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
  
 businessRatesSubcategory.title = Beth ydych eisiau gwybod am drethi busnes?
 businessRatesSubcategory.heading = Beth ydych eisiau gwybod am drethi busnes?
+businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
 businessRatesSubcategory.business_rates_poor_repair = Mae fy eiddo mewn cyflwr gwael
 businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu’r ardal leol wedi newid
 businessRatesSubcategory.business_rates_ct_change = Mae fy eiddo wedi newid o Ardrethi Busnes i Dreth Gyngor
+businessRatesSubcategory.business_rates_not_used = Ni ddefnyddir fy eiddo ar gyfer busnes mwyach
 businessRatesSubcategory.business_rates_closed = Mae’r busnes wedi cau
 businessRatesSubcategory.business_rates_other = Unrhyw ymholiad arall ynghylch Ardrethi Busnes
 businessRatesSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
