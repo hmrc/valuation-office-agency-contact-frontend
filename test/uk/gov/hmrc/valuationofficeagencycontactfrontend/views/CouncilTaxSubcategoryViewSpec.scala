@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 HM Revenue & Customs
+ * Copyright 2018 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
   def createViewUsingForm = (form: Form[String]) => councilTaxSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
   "CouncilTaxSubcategory view" must {
-    behave like normalPage(createView, messageKeyPrefix)
+    behave like normalPage(createView, messageKeyPrefix, "subheading")
   }
 
   "CouncilTaxSubcategory view" when {

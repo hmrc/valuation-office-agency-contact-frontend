@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 HM Revenue & Customs
+ * Copyright 2018 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,6 +40,7 @@ object BusinessRatesSubcategoryForm extends FormErrorHelper {
     RadioOption("businessRatesSubcategory", "business_rates_poor_repair"),
     RadioOption("businessRatesSubcategory", "business_rates_changes"),
     RadioOption("businessRatesSubcategory", "business_rates_ct_change"),
+    RadioOption("businessRatesSubcategory", "business_rates_not_used"),
     RadioOption("businessRatesSubcategory", "business_rates_closed"),
     RadioOption("businessRatesSubcategory", "business_rates_other")
   )

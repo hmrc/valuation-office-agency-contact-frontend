@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 HM Revenue & Customs
+ * Copyright 2018 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,6 +40,7 @@ object CouncilTaxSubcategoryForm extends FormErrorHelper {
     RadioOption("councilTaxSubcategory", "council_tax_poor_repair"),
     RadioOption("councilTaxSubcategory", "council_tax_changes"),
     RadioOption("councilTaxSubcategory", "council_tax_ndr_changes"),
+    RadioOption("councilTaxSubcategory", "council_tax_business_uses"),
     RadioOption("councilTaxSubcategory", "council_tax_annexe"),
     RadioOption("councilTaxSubcategory", "council_tax_other")
   )
