@@ -17,7 +17,7 @@ private object AppDependencies {
   private val playHealthVersion = "2.1.0"
   private val logbackJsonLoggerVersion = "3.1.0"
   private val govukTemplateVersion = "5.13.0"
-  private val playUiVersion = "7.11.0"
+  private val playUiVersion = "7.13.0"
   private val hmrcTestVersion = "3.0.0"
   private val scalaTestVersion = "3.0.1"
   private val scalaTestPlusPlayVersion = "2.0.1"
@@ -27,7 +27,7 @@ private object AppDependencies {
   private val playReactivemongoVersion = "5.2.0"
   private val playConditionalFormMappingVersion = "0.2.0"
   private val playLanguageVersion = "3.4.0"
-  private val bootstrapPlayVersion = "1.1.0"
+  private val bootstrapPlayVersion = "1.2.0"
 
 
   val compile = Seq(
