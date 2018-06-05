@@ -17,25 +17,24 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import javax.inject.{Inject, Singleton}
-
 import play.api.Logger
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.{Action, AnyContent, Result}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactWithEnMessage
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmation
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CheckYourAnswersId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, UserAnswers}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmation
 
-import scala.concurrent.Future
-import scala.util.{Failure, Success, Try}
+import scala.util.{Failure, Success}
 
 @Singleton()
 class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
                                        val messagesApi: MessagesApi,
                                        val connector: LightweightContactEventsConnector,
+                                       navigator: Navigator,
                                        getData: DataRetrievalAction,
                                        requireData: DataRequiredAction) extends FrontendController with I18nSupport {
 
@@ -47,7 +46,7 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
     }
   }
 
-  def onPageLoad = (getData andThen requireData).async { implicit request =>
+  def onPageLoadSendEmail = (getData andThen requireData).async { implicit request =>
 
     val contact = request.userAnswers.contact() match {
       case Right(ct) => ct
@@ -60,10 +59,9 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
 
     result map {
       case Success(s) =>
-        val date = DateFormatter.todaysDate()
         enquiryKey(request.userAnswers) match {
           case Right(key) =>
-            Ok(confirmation(appConfig, contact, date, key))
+            Redirect(navigator.nextPage(CheckYourAnswersId, NormalMode)(request.userAnswers))
           case Left(msg) => {
             Logger.warn(s"Navigation for Confirmation page reached with error $msg")
             throw new RuntimeException(s"Navigation for Confirmation page reached with error $msg")
@@ -71,5 +69,18 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
         }
       case Failure(ex) => throw new RuntimeException(s"Navigation for Confirmation page reached with error")
     }
+  }
+
+  def onPageLoad = (getData andThen requireData) { implicit request =>
+
+    val contact = request.userAnswers.contact() match {
+      case Right(ct) => ct
+      case Left(msg) =>
+        Logger.warn(s"Navigation for Confirmation page reached without a contact and error $msg")
+        throw new RuntimeException(s"Navigation for Confirmation page reached without a contact and error $msg")
+    }
+
+    val date = DateFormatter.todaysDate()
+    Ok(confirmation(appConfig, contact, date, enquiryKey(request.userAnswers).right.get))
   }
 }
