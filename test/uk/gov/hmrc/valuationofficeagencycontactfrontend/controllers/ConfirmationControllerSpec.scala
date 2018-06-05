@@ -16,21 +16,23 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
+import org.mockito.Matchers._
 import org.mockito.Mockito.when
 import org.scalatest.mockito.MockitoSugar
-import org.mockito.Matchers._
-import play.api.i18n.{Messages, MessagesApi}
+import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsString, Json}
 import play.api.test.Helpers._
 import uk.gov.hmrc.http.cache.client.CacheMap
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation, internalServerError}
+
 import scala.concurrent.Future
-import scala.util.{Failure, Success, Try}
+import scala.util.{Failure, Success}
 class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
@@ -40,14 +42,14 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new ConfirmationController(frontendAppConfig, messagesApi, mockConnector, dataRetrievalAction, new DataRequiredActionImpl)
+    new ConfirmationController(frontendAppConfig, messagesApi, mockConnector, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction, new DataRequiredActionImpl)
 
   val mockConnectorF = mock[LightweightContactEventsConnector]
   when (mockConnectorF.send(any[Contact], any[MessagesApi])) thenReturn
     Future.successful(Failure(new RuntimeException("Received exception from upstream service")))
 
   def controllerF(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new ConfirmationController(frontendAppConfig, messagesApi, mockConnectorF, dataRetrievalAction, new DataRequiredActionImpl)
+    new ConfirmationController(frontendAppConfig, messagesApi, mockConnectorF, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction, new DataRequiredActionImpl)
 
   "Confirmation Controller" must {
 
