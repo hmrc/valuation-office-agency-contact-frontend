@@ -22,7 +22,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.TellUsMore
 
 object TellUsMoreForm {
 
-  private val antiXSSMessageRegex = """^["'`A-Za-z0-9\s\-&,\.£\(\)%;:\?\!]+$"""
+  private val antiXSSMessageRegex = """^['`A-Za-z0-9\s\-&,\.£\(\)%;:\?\!]+$"""
   def apply(): Form[TellUsMore] = Form(
     mapping(
       "message" -> nonEmptyText

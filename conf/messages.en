@@ -29,7 +29,7 @@ checkBeforeYouStart.business_rates.para5 = Rateable value and estimate your busi
 checkBeforeYouStart.business_rates.url3 = https://www.gov.uk/calculate-your-business-rates
 checkBeforeYouStart.business_rates.para6 = You can check the rateable value, how your valuation is calculated, and use this to estimate your business rates.
 checkBeforeYouStart.business_rates.para7 = I think my valuation is too high
-checkBeforeYouStart.business_rates.url4 = https://www.gov.uk/business-rate-appeals/before-you-appeal
+checkBeforeYouStart.business_rates.url4 = https://www.gov.uk/guidance/how-to-check-your-rateable-value-is-correct
 checkBeforeYouStart.business_rates.para8 = This guidance can help if you disagree with your property’s valuation.
 checkBeforeYouStart.business_rates.para9 = My business or premises have changed
 checkBeforeYouStart.business_rates.url5 = https://www.gov.uk/introduction-to-business-rates/if-your-business-or-premises-change-or-cant-be-used
@@ -72,7 +72,7 @@ error.xss.invalid = You can only enter these characters: A-Z, a-z, 0-9, -, &, co
 error.postcode.invalid = Must be a valid postcode
 error.postcode.max_length = Maximum length is 8
 error.message.max_length = Maximum length is 5000 characters
-error.message.xss-invalid = You can only enter these characters: A-Z, a-z, 0-9, -, &, ., £, %, (), ;, :, ?, !, `, ’, ", commas, and spaces
+error.message.xss-invalid = You can only enter these characters: A-Z, a-z, 0-9, -, &, ., £, %, (), ;, :, ?, !, `, ’, commas, and spaces
 
 session_expired.title = For your security, this service has been reset
 session_expired.heading = For your security, this service has been reset
