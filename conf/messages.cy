@@ -29,7 +29,7 @@ checkBeforeYouStart.business_rates.para5 = Gwerth ardrethol ac amcangyfrif eich 
 checkBeforeYouStart.business_rates.url3 = https://www.gov.uk/calculate-your-business-rates
 checkBeforeYouStart.business_rates.para6 = Gallwch wirio’r gwerth ardrethol, sut y cyfrifwyd eich prisiad, a defnyddio hyn i amcangyfrif eich ardrethi busnes.
 checkBeforeYouStart.business_rates.para7 = Yn fy marn i mae’r prisiad yn rhy uchel
-checkBeforeYouStart.business_rates.url4 = https://www.gov.uk/business-rate-appeals/before-you-appeal
+checkBeforeYouStart.business_rates.url4 = https://www.gov.uk/guidance/how-to-check-your-rateable-value-is-correct
 checkBeforeYouStart.business_rates.para8 = Gall yr arweiniad hwn helpu os ydych yn anghytuno gyda’r prisiad o’ch eiddo.
 checkBeforeYouStart.business_rates.para9 = Mae fy musnes neu’r safle wedi newid
 checkBeforeYouStart.business_rates.url5 = https://www.gov.uk/introduction-to-business-rates/if-your-business-or-premises-change-or-cant-be-used
@@ -72,7 +72,7 @@ error.xss.invalid = Gallwch ond nodi’r cymeriadau hyn: A-Y, a-y, 0-9, -, &, co
 error.postcode.invalid = Rhaid iddo fod yn god post dilys
 error.postcode.max_length = 8 yw’r uchafswm hyd
 error.message.max_length = 5000 o gymeriadau yw’r uchafswm hyd
-error.message.xss-invalid = Gallwch ond nodi’r cymeriadau hyn: A-Y, a-y, 0-9, -, &, ., £, %, (), ;, :, ?, !, `, ’, ", comaau, a bylchau
+error.message.xss-invalid = Gallwch ond nodi’r cymeriadau hyn: A-Y, a-y, 0-9, -, &, ., £, %, (), ;, :, ?, !, `, ’, comaau, a bylchau
  
 session_expired.title = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod
 session_expired.heading = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod
