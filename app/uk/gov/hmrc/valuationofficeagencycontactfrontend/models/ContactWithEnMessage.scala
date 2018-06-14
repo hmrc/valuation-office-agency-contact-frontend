@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
 
+import org.apache.commons.lang3.StringEscapeUtils
 import play.api.i18n.MessagesApi
 import play.api.libs.json.Json
 import play.api.Logger
@@ -56,7 +57,8 @@ object ContactWithEnMessage {
             Logger.warn("Unable to find key " + enquiryKey + ct.subEnquiryCategory + " in en messages")
             throw new RuntimeException("Unable to find key " + enquiryKey + ct.subEnquiryCategory + " in en messages")
         }
-        ContactWithEnMessage(ct.contact, ct.propertyAddress, ct.enquiryCategory == councilTaxKey, enquiryCategoryMsg, subEnquiryCategoryMsg, ct.message)
+        ContactWithEnMessage(ct.contact, ct.propertyAddress, ct.enquiryCategory == councilTaxKey, enquiryCategoryMsg,
+          subEnquiryCategoryMsg, StringEscapeUtils.escapeJava(ct.message))
       case None =>
         Logger.warn("Unable to find en messages when creating message map")
         throw new RuntimeException("Unable to find en messages when creating message map")
