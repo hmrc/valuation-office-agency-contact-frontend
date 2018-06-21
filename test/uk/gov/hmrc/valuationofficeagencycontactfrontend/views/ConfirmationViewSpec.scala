@@ -88,5 +88,12 @@ class ConfirmationViewSpec extends ViewBehaviours {
       govukUrl mustBe "http://www.gov.uk"
     }
 
+    "contain a Survey Link" in {
+      val doc = asDocument(view())
+      val survey = doc.getElementById("survey").text()
+      survey mustBe messages("confirmation.survey.para")
+      val surveyLink = doc.select("a[id=survey]").attr("href")
+      surveyLink mustBe messages("confirmation.survey.url")
+    }
   }
 }
