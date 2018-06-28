@@ -16,23 +16,19 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors
 
-import javax.inject.{Inject, Singleton}
-
-import play.api.Logger
+import javax.inject.Inject
+import play.api.Mode.Mode
 import play.api.i18n.MessagesApi
 import play.api.libs.json._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Contact, ContactWithEnMessage}
-
-import scala.util.{Failure, Success, Try}
+import play.api.{Configuration, Environment, Logger}
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.http.HttpClient
 import uk.gov.hmrc.play.config.ServicesConfig
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Contact, ContactWithEnMessage}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
-
-import play.api.Mode.Mode
-import play.api.{Configuration, Environment}
+import scala.util.{Failure, Success, Try}
 
 class LightweightContactEventsConnector @Inject()(http: HttpClient,
                                                   val configuration: Configuration,
@@ -56,7 +52,9 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient,
       .map {
         response =>
           response.status match {
-            case 200 => Success(200)
+            case 200 =>
+              AuditingService.sendEvent("sendenquirytoVOA", json)
+              Success(200)
             case status => {
               Logger.warn("Received status of " + status + " from upstream service")
               Failure(new RuntimeException("Received status of " + status + " from upstream service"))
