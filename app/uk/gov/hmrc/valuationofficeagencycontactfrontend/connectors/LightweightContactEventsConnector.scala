@@ -47,7 +47,7 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient,
 
   def send(input: Contact, messagesApi: MessagesApi) = sendJson(Json.toJson(ContactWithEnMessage(input, messagesApi)))
 
-  def sendJson(json: JsValue): Future[Try[Int]] = {
+  def sendJson(json: JsValue)(implicit hc: HeaderCarrier): Future[Try[Int]] = {
     http.POST(s"$serviceUrl${baseSegment}create", json, Seq(jsonContentTypeHeader))
       .map {
         response =>
