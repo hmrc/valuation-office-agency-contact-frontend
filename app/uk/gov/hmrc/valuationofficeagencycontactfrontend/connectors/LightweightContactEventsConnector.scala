@@ -45,7 +45,7 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient,
 
   def getStyleGuide = http.GET(s"$serviceUrl${baseSegment}style-guide")
 
-  def send(input: Contact, messagesApi: MessagesApi) = sendJson(Json.toJson(ContactWithEnMessage(input, messagesApi)))
+  def send(input: Contact, messagesApi: MessagesApi)(implicit hc: HeaderCarrier) = sendJson(Json.toJson(ContactWithEnMessage(input, messagesApi)))
 
   def sendJson(json: JsValue)(implicit hc: HeaderCarrier): Future[Try[Int]] = {
     http.POST(s"$serviceUrl${baseSegment}create", json, Seq(jsonContentTypeHeader))
