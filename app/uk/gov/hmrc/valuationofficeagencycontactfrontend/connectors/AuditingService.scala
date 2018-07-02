@@ -42,7 +42,7 @@ trait AuditingService {
     ExtendedDataEvent(
       auditSource = "digital-contact-centre",
       auditType = auditType,
-      tags = (hc.headers :+ "transactionName" -> "submit-contact-to-VOA").toMap,
+      tags = (hc.headers :+ "transactionName" -> "submit-contact-to-VOA").toMap-("X-Request-Chain", "x-forwarded-for"),
       detail = json
     )
   }
