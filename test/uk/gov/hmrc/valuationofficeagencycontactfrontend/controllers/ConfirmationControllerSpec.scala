@@ -22,6 +22,7 @@ import org.scalatest.mockito.MockitoSugar
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsString, Json}
 import play.api.test.Helpers._
+import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
@@ -37,7 +38,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
   val mockConnector = mock[LightweightContactEventsConnector]
-  when (mockConnector.send(any[Contact], any[MessagesApi])) thenReturn Future.successful(Success(200))
+  when (mockConnector.send(any[Contact], any[MessagesApi])(any[HeaderCarrier])) thenReturn Future.successful(Success(200))
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
@@ -45,7 +46,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
     new ConfirmationController(frontendAppConfig, messagesApi, mockConnector, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction, new DataRequiredActionImpl)
 
   val mockConnectorF = mock[LightweightContactEventsConnector]
-  when (mockConnectorF.send(any[Contact], any[MessagesApi])) thenReturn
+  when (mockConnectorF.send(any[Contact], any[MessagesApi])(any[HeaderCarrier])) thenReturn
     Future.successful(Failure(new RuntimeException("Received exception from upstream service")))
 
   def controllerF(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
