@@ -42,7 +42,12 @@ trait AuditingService {
     ExtendedDataEvent(
       auditSource = "digital-contact-centre",
       auditType = auditType,
-      tags = (hc.headers :+ "transactionName" -> "submit-contact-to-VOA").toMap-("X-Request-Chain", "x-forwarded-for"),
+      tags = (hc.headers :+ "transactionName" -> "submit-contact-to-VOA"
+        :+ "clientIP" -> hc.trueClientIp.getOrElse("")
+        :+ "clientPort" -> hc.trueClientPort.getOrElse("")).toMap-("X-Request-Chain",
+        "x-forwarded-for",
+        "trueClientIp",
+        "trueClientPort"),
       detail = json
     )
   }
