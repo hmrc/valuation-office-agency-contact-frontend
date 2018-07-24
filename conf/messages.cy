@@ -76,7 +76,7 @@ error.message.xss-invalid = Gallwch ond nodi’r cymeriadau hyn: A-Y, a-y, 0-9, 
  
 session_expired.title = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod
 session_expired.heading = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod
-session_expired.guidance = Mae’r manylion yr ydych wedi’u nodi wedi cael eu dileu am nad ydych wedi mynd yn eich blaen gyda’r gwasanaeth am 1 awr.
+session_expired.guidance = Mae'r gwasanaeth wedi bennu oherwydd ei fod yn anweithgar am 15 munud.  Nad yw eich gwybodaeth wedi’i gyflwyno.
  
 site.back = YYn ôl
 site.continue = Yn eich blaen
