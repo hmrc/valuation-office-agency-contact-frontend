@@ -18,7 +18,6 @@ import uk.gov.hmrc.SbtAutoBuildPlugin
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin
 import uk.gov.hmrc.versioning.SbtGitVersioning
 
-lazy val appDependencies : Seq[ModuleID] = dependencies
 lazy val plugins : Seq[Plugins] = Seq.empty
 lazy val playSettings : Seq[Setting[_]] = Seq.empty
 
@@ -42,6 +41,7 @@ lazy val root = Project(appName, file("."))
   .settings(
     scalacOptions ++= Seq("-Xfatal-warnings", "-feature"),
     libraryDependencies ++= appDependencies,
+    dependencyOverrides ++= appDependencyOverrides,
     retrieveManaged := true,
     evictionWarningOptions in update := EvictionWarningOptions.default.withWarnScalaVersionEviction(false)
   )
@@ -49,7 +49,7 @@ lazy val root = Project(appName, file("."))
   .settings(inConfig(IntegrationTest)(Defaults.itSettings): _*)
   .settings(
     Keys.fork in IntegrationTest := false,
-    unmanagedSourceDirectories in IntegrationTest <<= (baseDirectory in IntegrationTest)(base => Seq(base / "it")),
+    unmanagedSourceDirectories in IntegrationTest := (baseDirectory in IntegrationTest)(base => Seq(base / "it")).value,
     addTestReportOption(IntegrationTest, "int-test-reports"),
     testGrouping in IntegrationTest := oneForkedJvmPerTest((definedTests in IntegrationTest).value),
     parallelExecution in IntegrationTest := false)

@@ -1,4 +1,5 @@
 import sbt._
+import sbt.Keys._
 
 object Dependencies {
 
@@ -7,8 +8,8 @@ object Dependencies {
 
     private val playHealthVersion = "2.1.0"
     private val logbackJsonLoggerVersion = "3.1.0"
-    private val govukTemplateVersion = "5.13.0"
-    private val playUiVersion = "7.13.0"
+    private val govukTemplateVersion = "5.22.0"
+    private val playUiVersion = "7.16.0"
     private val hmrcTestVersion = "3.0.0"
     private val scalaTestVersion = "3.0.1"
     private val scalaTestPlusPlayVersion = "2.0.1"
@@ -22,8 +23,8 @@ object Dependencies {
     private val frontendBootstrapVersion = "8.23.0"
 
 
-    val compile = Seq(
-      ws,
+    val compile: Seq[ModuleID] = Seq(
+       ws,
       "uk.gov.hmrc" %% "play-reactivemongo" % playReactivemongoVersion,
       "uk.gov.hmrc" %% "logback-json-logger" % logbackJsonLoggerVersion,
       "uk.gov.hmrc" %% "govuk-template" % govukTemplateVersion,
@@ -36,6 +37,10 @@ object Dependencies {
       "uk.gov.hmrc" %% "frontend-bootstrap" % frontendBootstrapVersion
     )
 
+    lazy val appDependencyOverrides: Set[ModuleID] = Set(
+      "uk.gov.hmrc" %% "govuk-template" % govukTemplateVersion
+    )
+
     trait TestDependencies {
       lazy val scope: String = "test"
       lazy val test: Seq[ModuleID] = ???
@@ -43,16 +48,15 @@ object Dependencies {
 
     lazy val Test = new TestDependencies {
         override lazy val test = Seq(
-          "uk.gov.hmrc" %% "hmrctest" % hmrcTestVersion % scope,
-          "org.scalatest" %% "scalatest" % scalaTestVersion % scope,
-          "org.scalatestplus.play" %% "scalatestplus-play" % scalaTestPlusPlayVersion % scope,
-          "org.pegdown" % "pegdown" % pegdownVersion % scope,
-          "org.jsoup" % "jsoup" % "1.10.3" % scope,
-          "com.typesafe.play" %% "play-test" % PlayVersion.current % scope,
-          "org.mockito" % "mockito-all" % mockitoAllVersion % scope
+            "uk.gov.hmrc" %% "hmrctest" % hmrcTestVersion % scope,
+            "org.scalatest" %% "scalatest" % scalaTestVersion % scope,
+            "org.scalatestplus.play" %% "scalatestplus-play" % scalaTestPlusPlayVersion % scope,
+            "org.pegdown" % "pegdown" % pegdownVersion % scope,
+            "org.jsoup" % "jsoup" % "1.10.3" % scope,
+            "com.typesafe.play" %% "play-test" % PlayVersion.current % scope,
+            "org.mockito" % "mockito-all" % mockitoAllVersion % scope
         )
       }.test
 
-    lazy val dependencies = compile ++ Test
-
+    lazy val appDependencies = compile ++ Test
 }
