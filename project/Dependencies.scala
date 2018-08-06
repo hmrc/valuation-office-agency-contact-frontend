@@ -13,7 +13,6 @@ object Dependencies {
     private val hmrcTestVersion = "3.0.0"
     private val scalaTestVersion = "3.0.1"
     private val scalaTestPlusPlayVersion = "2.0.1"
-    private val pegdownVersion = "1.6.0"
     private val mockitoAllVersion = "1.10.19"
     private val httpCachingClientVersion = "7.1.0"
     private val playReactivemongoVersion = "5.2.0"
@@ -51,7 +50,6 @@ object Dependencies {
             "uk.gov.hmrc" %% "hmrctest" % hmrcTestVersion % scope,
             "org.scalatest" %% "scalatest" % scalaTestVersion % scope,
             "org.scalatestplus.play" %% "scalatestplus-play" % scalaTestPlusPlayVersion % scope,
-            "org.pegdown" % "pegdown" % pegdownVersion % scope,
             "org.jsoup" % "jsoup" % "1.10.3" % scope,
             "com.typesafe.play" %% "play-test" % PlayVersion.current % scope,
             "org.mockito" % "mockito-all" % mockitoAllVersion % scope
