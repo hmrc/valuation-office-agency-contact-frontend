@@ -32,8 +32,9 @@ inputs: Seq[RadioOption]
         @if(hint.nonEmpty){
         <span class="form-hint">@{hint.get}</span>
         }
-        @if(viewModel.errorKey.nonEmpty){
-        <span class="error-notification" id="error-message-@{viewModel.id}-input">@messages(viewModel.errorKey)</span>
+        @* TODO for some reason, this element is hidden. Why?   *@
+        @for(errorKey <- viewModel.errorKey) {
+            <span class="error-notification" id="error-message-@{viewModel.id}-input">@messages(errorKey)</span>
         }
         @for(input <- inputs) {
         <label class="block-label selection-button-radio" for="@{input.id}">

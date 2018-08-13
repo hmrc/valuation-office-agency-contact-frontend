@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
-import play.api.data.Form
+import play.api.data.{Form, FormError}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{ContactDetailsForm, EnquiryCategoryForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode}
@@ -71,6 +71,18 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
       val doc = asDocument(createNDRViewUsingForm(ContactDetailsForm()))
       val continueButton = doc.getElementById("submit").text()
       assert(continueButton == messages("site.continue"))
+    }
+
+    "show more that one error next to text input" in {
+      val form = ContactDetailsForm()
+        .withError(FormError("firstName", "error.xss.invalid"))
+        .withError(FormError("firstName", "error.required"))
+
+      val doc = asDocument(createNDRViewUsingForm(form))
+
+      val errorMessageElements = doc.getElementsByAttributeValue("id", "error-message-firstName-input")
+      assert(errorMessageElements.size() == 2)
+
     }
   }
 }

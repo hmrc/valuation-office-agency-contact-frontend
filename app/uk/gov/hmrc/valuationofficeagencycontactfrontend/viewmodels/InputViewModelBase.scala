@@ -18,6 +18,6 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels
 
 trait InputViewModelBase {
   val id: String
-  def errorKey: String
+  def errorKey: Seq[String]
   def value: Option[String]
 }

@@ -60,4 +60,16 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
     val backlinkUrl = doc.select("a[class=link-back]").attr("href")
     backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
   }
+
+  "show more that one error in text area" in {
+    val form = TellUsMoreForm()
+      .withError("message", "error.message.max_length")
+      .withError("message", "error.message.xss-invalid")
+
+    val doc = asDocument(createViewUsingForm(form))
+
+    val errorMessageElements = doc.getElementsByAttributeValue("id", "error-message-message-input")
+
+    errorMessageElements.size() mustBe 2
+  }
 }
