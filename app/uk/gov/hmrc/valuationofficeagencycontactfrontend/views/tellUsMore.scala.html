@@ -44,7 +44,7 @@
 
     @helpers.form(action = TellUsMoreController.onSubmit(mode), 'autoComplete -> "off") {
 
-        @components.error_summary(form.errors)
+        @components.error_summary_single_input(form.errors)
 
         @components.input_textarea(InputViewModel[TellUsMore]("message", form), label = messages("tellUsMore.message"), labelClass = Some("visually-hidden"))
 

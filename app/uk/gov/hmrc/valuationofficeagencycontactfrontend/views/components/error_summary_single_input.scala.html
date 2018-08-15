@@ -14,7 +14,7 @@
  * limitations under the License.
  *@
 
-@(errors: Seq[FormError], messagesPrefix: String)(implicit messages: Messages)
+@(errors: Seq[FormError])(implicit messages: Messages)
 @if(errors.nonEmpty) {
     <div class="error-summary error-summary--show" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
 
@@ -25,8 +25,8 @@
         <p>@messages("error.summary.text")</p>
 
         <ul class="error-summary-list">
-            @for(error <- errors.map(_.key).toSet[String]) {
-                <li><a href="#@{error}">@messages(s"${messagesPrefix}.${error}")</a></li>
+            @for(error <- errors) {
+                <li><a href="#@{error.key}">@messages(error.message, error.args:_*)</a></li>
             }
         </ul>
 
