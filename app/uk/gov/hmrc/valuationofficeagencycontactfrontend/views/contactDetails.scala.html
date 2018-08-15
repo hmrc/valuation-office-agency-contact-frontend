@@ -34,7 +34,7 @@
 
     @helpers.form(action = ContactDetailsController.onSubmit(mode), 'autoComplete -> "off") {
 
-        @components.error_summary(form.errors)
+        @components.error_summary(form.errors, "contactDetails")
 
         @components.heading("contactDetails.heading")
 

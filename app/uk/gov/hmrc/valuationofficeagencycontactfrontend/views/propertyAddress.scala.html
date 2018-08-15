@@ -33,7 +33,7 @@
 
     @helpers.form(action = PropertyAddressController.onSubmit(mode), 'autoComplete -> "off") {
 
-        @components.error_summary(form.errors)
+        @components.error_summary(form.errors, "propertyAddress")
 
         @components.heading("propertyAddress.heading")
 

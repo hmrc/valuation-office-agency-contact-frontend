@@ -38,7 +38,7 @@
 
     @helpers.form(action = CouncilTaxSubcategoryController.onSubmit(mode), 'autoComplete -> "off") {
 
-        @components.error_summary(form.errors)
+        @components.error_summary_single_input(form.errors)
 
         @components.input_radio(
             viewModel = InputViewModel[String]("value", form),
