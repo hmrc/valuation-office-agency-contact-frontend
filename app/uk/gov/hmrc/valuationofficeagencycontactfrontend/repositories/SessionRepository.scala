@@ -25,6 +25,7 @@ import play.modules.reactivemongo.MongoDbConnection
 import reactivemongo.api.DefaultDB
 import reactivemongo.api.indexes.{Index, IndexType}
 import reactivemongo.bson.{BSONDocument, BSONObjectID}
+import reactivemongo.play.json._
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.mongo.ReactiveRepository
 import uk.gov.hmrc.mongo.json.ReactiveMongoFormats
@@ -77,13 +78,11 @@ class ReactiveMongoRepository(config: Configuration, mongo: () => DefaultDB)
   }
 
   def get(id: String): Future[Option[CacheMap]] = {
-    collection.find(Json.obj("id" -> id)).cursor[CacheMap]().collect[Seq]().map { (cmSeq: Seq[CacheMap]) =>
-      if (cmSeq.length != 1) {
-        None
-      } else {
-        Some(cmSeq.head)
-      }
-    }
+
+    find("id" -> id)
+      .map(_.headOption)
+      .map(_.map(x => CacheMap(id, x.data)))
+
   }
 }
 

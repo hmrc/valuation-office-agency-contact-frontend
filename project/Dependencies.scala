@@ -6,20 +6,20 @@ object Dependencies {
     import play.core.PlayVersion
     import play.sbt.PlayImport._
 
-    private val playHealthVersion = "2.1.0"
+    private val playHealthVersion = "2.2.0"
     private val logbackJsonLoggerVersion = "3.1.0"
     private val govukTemplateVersion = "5.22.0"
-    private val playUiVersion = "7.16.0"
+    private val playUiVersion = "7.20.0"
     private val hmrcTestVersion = "3.0.0"
     private val scalaTestVersion = "3.0.1"
     private val scalaTestPlusPlayVersion = "2.0.1"
     private val mockitoAllVersion = "1.10.19"
     private val httpCachingClientVersion = "7.1.0"
-    private val playReactivemongoVersion = "5.2.0"
+    private val playReactivemongoVersion = "6.2.0"
     private val playConditionalFormMappingVersion = "0.2.0"
     private val playLanguageVersion = "3.4.0"
     private val bootstrapPlayVersion = "1.7.0"
-    private val frontendBootstrapVersion = "8.23.0"
+    private val frontendBootstrapVersion = "8.27.0"
 
 
     val compile: Seq[ModuleID] = Seq(
