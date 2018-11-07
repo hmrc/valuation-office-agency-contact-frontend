@@ -17,7 +17,6 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.repositories
 
 import javax.inject.{Inject, Singleton}
-
 import org.joda.time.{DateTime, DateTimeZone}
 import play.api.{Configuration, Logger}
 import play.api.libs.json.{JsValue, Json}
@@ -47,24 +46,13 @@ object DatedCacheMap {
 class ReactiveMongoRepository(config: Configuration, mongo: () => DefaultDB)
   extends ReactiveRepository[DatedCacheMap, BSONObjectID](config.getString("appName").get, mongo, DatedCacheMap.formats) {
 
-  val fieldName = "lastUpdated"
-  val createdIndexName = "userAnswersExpiry"
-  val expireAfterSeconds = "expireAfterSeconds"
   val timeToLiveInSeconds: Int = config.getInt("mongodb.timeToLiveInSeconds").get
 
-  createIndex(fieldName, createdIndexName, timeToLiveInSeconds)
-
-  private def createIndex(field: String, indexName: String, ttl: Int): Future[Boolean] = {
-    collection.indexesManager.ensure(Index(Seq((field, IndexType.Ascending)), Some(indexName),
-      options = BSONDocument(expireAfterSeconds -> ttl))) map {
-      result => {
-        Logger.debug(s"set [$indexName] with value $ttl -> result : $result")
-        result
-      }
-    } recover {
-      case e => Logger.error("Failed to set TTL councilTaxSmartLinks", e)
-        false
-    }
+  override def indexes: Seq[Index] =  {
+    Seq(
+    Index(Seq("lastUpdated" -> IndexType.Ascending), name = Some("userAnswersExpiry"),
+      options = BSONDocument("expireAfterSeconds" -> timeToLiveInSeconds)),
+    Index(Seq("id" -> IndexType.Descending), name = Some("contact-form-id_idx")))
   }
 
   def upsert(cm: CacheMap): Future[Boolean] = {
