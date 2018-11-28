@@ -16,11 +16,14 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
+import org.scalatest.mockito.MockitoSugar
+import org.mockito.Mockito.when
+import org.mockito.Matchers.any
 import play.api.data.Form
 import play.api.libs.json.JsString
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{DataCacheConnector, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxSubcategoryForm
@@ -28,15 +31,22 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CouncilTaxSu
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.councilTaxSubcategory
 
-class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase {
+import scala.concurrent.Future
+
+class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
-  def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new CouncilTaxSubcategoryController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+  def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) = {
+    val fakeDataCacheConnector = mock[DataCacheConnector]
+    when(fakeDataCacheConnector.save(any, any, any)(any))
+      .thenReturn(Future.successful(CacheMap("councilTaxSubcategory", Map("councilTaxSubcategory" -> JsString("bar")))))
+    new CouncilTaxSubcategoryController(frontendAppConfig, messagesApi, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl)
+  }
 
-  def viewAsString(form: Form[String] = CouncilTaxSubcategoryForm()) = councilTaxSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = CouncilTaxSubcategoryForm()) =
+    councilTaxSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
   "CouncilTaxSubcategory Controller" must {
 
