@@ -146,10 +146,20 @@ contactDetails.email = E-bost
 contactDetails.confirmEmail = Cadarnhewch y cyfeiriad e-bost
 contactDetails.contactNumber =  Rhif ffôn
 contactDetails.checkYourAnswersLabel = Manylion cyswllt
- 
+
+checkYourTaxBand.title = Heriwch eich band treth cyngor
+checkYourTaxBand.p1 = Cysylltwch ag Asiantaeth y Swyddfa Brisio (VOA) i egluro pam eich bod yn meddwl bod eich band yn anghywir. Mae''n rhaid i chi allu <a href="https://www.gov.uk/challenge-council-tax-band/evidence-supports-your-challenge">darparu tystiolaeth</a>. Efallai y bydd y VOA yn gallu adolygu a newid eich band heb fod angen i chi ei herio.
+checkYourTaxBand.l1 = Asiantaeth y Swyddfa Brisio
+checkYourTaxBand.l2 = Ffôn (Lloegr): 03000 501 501
+checkYourTaxBand.l3 = Ffôn (Cymru): 03000 505 505
+checkYourTaxBand.l4 = <a href="https://www.gov.uk/call-charges">Cael gwybod am gostau galwadau</a>
+councilTaxChallenge.council_tax_challenge = Heriwch eich band treth cyngor
+
 councilTaxSubcategory.title = Beth ydych eisiau gwybod am Dreth Gyngor?
 councilTaxSubcategory.heading = Beth ydych eisiau gwybod am Dreth Gyngor?
+councilTaxSubcategory.council_tax_challenge = Heriwch eich band treth cyngor
 councilTaxSubcategory.subheading = Am beth ydych am roi gwybod i ni?
+councilTaxSubcategory.council_tax_challenge = Heriwch eich band treth cyngor
 councilTaxSubcategory.council_tax_poor_repair = Mae fy eiddo mewn cyflwr gwael neu amreswyliadwy
 councilTaxSubcategory.council_tax_changes = Mae fy eiddo neu’r ardal leol wedi newid
 councilTaxSubcategory.council_tax_ndr_changes = Mae fy eiddo wedi newid o Dreth Gyngor i Ardrethi Busnes
