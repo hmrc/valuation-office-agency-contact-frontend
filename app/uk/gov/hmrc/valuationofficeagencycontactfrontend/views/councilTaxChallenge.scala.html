@@ -26,19 +26,18 @@ bodyClasses = Some("full-width")) {
 
     @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
 
-    <h1 class="heading-xlarge">@Messages("checkYourTaxBand.title")</h1>
+    <div class="challenge">
+        <h1 class="heading-large">@Messages("checkYourTaxBand.title")</h1>
 
-    <p class="lede">
-      @Html(Messages("checkYourTaxBand.p1"))
-    </p>
+        <p class="challenge-description">
+          @Html(Messages("checkYourTaxBand.p1"))
+        </p>
 
-    <div class="panel panel-indent">
-        <ul class="list">
-            <li><b>@Messages("checkYourTaxBand.l1")</b></li>
-            <li>@Messages("checkYourTaxBand.l2")</li>
-            <li>@Messages("checkYourTaxBand.l3")</li>
-            <li>@Html(Messages("checkYourTaxBand.l4"))</li>
-        </ul>
+        <div class="challenge-contact">
+            <p><strong>@Messages("checkYourTaxBand.l1")</strong>  <br>
+                @Messages("checkYourTaxBand.l2")<br>
+                @Messages("checkYourTaxBand.l3")<br>
+                @Html(Messages("checkYourTaxBand.l4"))
+        </div>
     </div>
-
 }

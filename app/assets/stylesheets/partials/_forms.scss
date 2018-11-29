@@ -151,3 +151,21 @@ override character count display
         display: block;
     }
 }
+
+/*
+=====================================
+Challenge form
+=====================================
+*/
+.challenge {
+    margin-top: 50px;
+    .challenge-contact {
+        border-left: 1px solid #bfc1c3;
+        padding-left: 15px;
+        margin-bottom: 30px;
+        margin-top: 30px;
+    }
+    .challenge-description {
+        margin-top: 45px;
+    }
+}
