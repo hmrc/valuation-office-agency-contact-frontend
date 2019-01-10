@@ -37,6 +37,15 @@
     <link rel="stylesheet" media="screen" href='@routes.Assets.versioned("stylesheets/valuationofficeagencycontactfrontend-app.css")' />
     <link rel="stylesheet" media="print" href='@routes.Assets.versioned("stylesheets/valuationofficeagencycontactfrontend-app-print.css")' />
     <!-- Google Tag Manager -->
+    <!-- Track External Links -->
+    <script>
+        var trackOutboundLink = function(url) {
+            ga('send', 'event', 'outbound', 'click', url, {
+                'transport': 'beacon',
+                'hitCallback': function(){document.location = url;}
+            });
+        }
+    </script>
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
