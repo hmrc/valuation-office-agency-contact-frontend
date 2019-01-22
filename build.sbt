@@ -41,7 +41,7 @@ lazy val root = Project(appName, file("."))
   .settings(publishingSettings: _*)
   .settings(defaultSettings(): _*)
   .settings(
-    scalacOptions ++= Seq("-Xfatal-warnings", "-feature"),
+    scalacOptions ++= Seq("-feature"),
     libraryDependencies ++= appDependencies,
     dependencyOverrides ++= appDependencyOverrides,
     retrieveManaged := true,
