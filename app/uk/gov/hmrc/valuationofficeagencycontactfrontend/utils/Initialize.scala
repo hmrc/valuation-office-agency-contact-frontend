@@ -17,10 +17,19 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
 
+import javax.inject.Inject
+
+import play.api.Mode._
+import play.api.{Environment, Configuration}
 import uk.gov.hmrc.play.audit.http.connector.AuditConnector
-import uk.gov.hmrc.play.frontend.config.LoadAuditingConfig
+import uk.gov.hmrc.play.bootstrap.config.LoadAuditingConfig
+import uk.gov.hmrc.play.config.ServicesConfig
 
 
-object AuditServiceConnector extends AuditConnector {
-  override lazy val auditingConfig = LoadAuditingConfig("auditing")
+class AuditServiceConnector @Inject()(val configuration: Configuration,
+                                      environment: Environment)  extends AuditConnector with ServicesConfig {
+  override protected def mode: Mode = environment.mode
+
+  override protected def runModeConfiguration: Configuration = configuration
+  override lazy val auditingConfig = LoadAuditingConfig(runModeConfiguration,mode,"auditing")
 }
