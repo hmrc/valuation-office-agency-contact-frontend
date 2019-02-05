@@ -32,7 +32,8 @@ import scala.util.{Failure, Success, Try}
 
 class LightweightContactEventsConnector @Inject()(http: HttpClient,
                                                   val configuration: Configuration,
-                                                  environment: Environment) extends ServicesConfig {
+                                                  environment: Environment,
+                                                   auditService: AuditingService) extends ServicesConfig {
 
   override protected def mode: Mode = environment.mode
 
@@ -53,7 +54,7 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient,
         response =>
           response.status match {
             case 200 =>
-              AuditingService.sendEvent("sendenquirytoVOA", json)
+              auditService.sendEvent("sendenquirytoVOA", json)
               Success(200)
             case status => {
               Logger.warn("Received status of " + status + " from upstream service")
