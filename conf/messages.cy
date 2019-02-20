@@ -1,6 +1,8 @@
 checkBeforeYouStart.title = Gwiriwch cyn i chi ddechrau
 checkBeforeYouStart.heading = Gwiriwch cyn i chi ddechrau
-checkBeforeYouStart.local_council = Gellir datrys rhai ymholiadau drwy gysylltu â'ch cyngor lleol. <a href="https://www.gov.uk/guidance/your-property-and-council-tax" onclick="trackOutboundLink('https://www.gov.uk/guidance/your-property-and-council-tax'); return false;">Darganfyddwch pryd y dylech chi gysylltu â'ch cyngor lleol am eich eiddo domestig</a>.
+checkBeforeYouStart.local_council.part1 = Gellir datrys rhai ymholiadau drwy gysylltu â'ch cyngor lleol.
+checkBeforeYouStart.local_council.url = https://www.gov.uk/guidance/your-property-and-council-tax
+checkBeforeYouStart.local_council.part2 = Darganfyddwch pryd y dylech chi gysylltu â'ch cyngor lleol am eich eiddo domestig
 checkBeforeYouStart.para1 = Mae’r cysylltiadau hyn yn cynnwys atebion i’n ymholiadau mwyaf cyffredin. Cyn i chi gyflwyno ymholiad i Asiantaeth y Swyddfa Brisio, gwiriwch ein tudalennau. Mae’n bosibl y byddwch yn dod o hyd i ateb i’ch ymholiad.
 checkBeforeYouStart.council_tax.subheading = Cysylltiadau defnyddiol ar gyfer Treth Gyngor
 checkBeforeYouStart.council_tax.para1 = Gwiriwch fand Treth Gyngor

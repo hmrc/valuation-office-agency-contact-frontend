@@ -28,7 +28,12 @@
 
     <h1 class="heading-xlarge">@messages("checkBeforeYouStart.heading")</h1>
 
-    <p>@Html(messages("checkBeforeYouStart.local_council"))</p>
+    <p>
+        @messages("checkBeforeYouStart.local_council.part1")
+        <a href=@messages("checkBeforeYouStart.local_council.url") target="_self"  ga-on="click" ga-event-action="click" ga-event-category="CT-Smartlinks" ga-event-label="Link-to-council">
+            @messages("checkBeforeYouStart.local_council.part2")
+        </a>
+    </p>
 
     <p>@messages("checkBeforeYouStart.para1")</p>
 
