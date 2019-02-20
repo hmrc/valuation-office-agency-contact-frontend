@@ -1,6 +1,8 @@
 checkBeforeYouStart.title = Check before you start
 checkBeforeYouStart.heading = Check before you start
-checkBeforeYouStart.local_council = Some enquiries can be resolved by contacting your local council first. <a href="https://www.gov.uk/guidance/your-property-and-council-tax" onclick="trackOutboundLink('https://www.gov.uk/guidance/your-property-and-council-tax'); return false;">Find out when you should contact your local council about your domestic property</a>.
+checkBeforeYouStart.local_council.part1 = Some enquiries can be resolved by contacting your local council first.
+checkBeforeYouStart.local_council.url = https://www.gov.uk/guidance/your-property-and-council-tax
+checkBeforeYouStart.local_council.part2 = Find out when you should contact your local council about your domestic property.
 checkBeforeYouStart.para1 = These links contain answers to our most common enquiries. Before you submit an enquiry to the VOA, please check our pages. You may find an answer to your enquiry.
 checkBeforeYouStart.council_tax.subheading = Useful links for Council Tax
 checkBeforeYouStart.council_tax.para1 = Check a Council Tax band
