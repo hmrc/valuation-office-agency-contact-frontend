@@ -36,6 +36,8 @@ class FrontendAppConfig @Inject() (val configuration: Configuration, environment
   private lazy val contactHost = configuration.getString("contact-frontend.host").getOrElse("")
   private val contactFormServiceIdentifier = "valuationofficeagencycontactfrontend"
 
+  lazy val optimizelyId = configuration.getString(s"optimizely.projectId").getOrElse("")
+
   lazy val analyticsToken = loadConfig(s"google-analytics.token")
   lazy val analyticsHost = loadConfig(s"google-analytics.host")
   lazy val GTM = loadConfig(s"google-analytics.GTM")
