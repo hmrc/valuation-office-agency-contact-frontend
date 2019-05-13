@@ -86,10 +86,23 @@ class Navigator @Inject()() {
     }
   }
 
+  val businessRatesPageRouting: UserAnswers => Call = answers => {
+    answers.businessRatesSubcategory match {
+      case Some("business_rates_challenge") => routes.BusinessRatesChallengeController.onChallengePageLoad()
+      case Some("business_rates_changes") => routes.BusinessRatesChallengeController.onAreaChangePageLoad()
+      case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case None => {
+        Logger.warn(s"Navigation for Business Rates page reached without selection of enquiry by controller ")
+        throw new RuntimeException("Unknown exception in Business Page Routing")
+      }
+
+    }
+  }
+
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     EnquiryCategoryId -> enquiryRouting,
     CouncilTaxSubcategoryId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
-    BusinessRatesSubcategoryId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
+    BusinessRatesSubcategoryId -> (businessRatesPageRouting),
     ContactDetailsId -> contactDetailsRouting,
     PropertyAddressId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
     TellUsMoreId -> (_ => routes.CheckYourAnswersController.onPageLoad()),

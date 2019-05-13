@@ -171,14 +171,23 @@ councilTaxSubcategory.council_tax_other = Any other Council Tax enquiry
 councilTaxSubcategory.checkYourAnswersLabel = Enquiry Details
 
 businessRatesSubcategory.title = What do you want to know about business rates?
-businessRatesSubcategory.heading = What do you want to know about business rates?
+businessRatesSubcategory.heading = What is your business rates enquiry about?
 businessRatesSubcategory.subheading = What do you want to tell us about?
-businessRatesSubcategory.business_rates_poor_repair = My property is in poor repair
+
+businessRatesSubcategory.business_rates_challenge = Challenging my business rates valuation
 businessRatesSubcategory.business_rates_changes = My property or the local area has changed
-businessRatesSubcategory.business_rates_ct_change = My property has changed from Business Rates to Council Tax
+businessRatesSubcategory.business_rates_ct_change = I need my property assessed for business rates
+businessRatesSubcategory.business_rates_from_home = Running a business from home
 businessRatesSubcategory.business_rates_not_used = My property is no longer used for business
-businessRatesSubcategory.business_rates_closed = My business has closed
 businessRatesSubcategory.business_rates_other = Any other business rates enquiry
+
+businessRatesChallenge.heading = Challenging my business rates valuation
+businessRatesChallenge.body = Use the Valuation Office Agency’s <a href="https://www.gov.uk/correct-your-business-rates" target="_self" ga-on="click" ga-event-action="cca-link-bus-rates" ga-event-category="councilTaxSubcategory" ga-event-label="Link_to_CCA">online service</a> to check and challenge your business rates valuation<br />You’ll need to register and claim your property before you can challenge the valuation.
+
+propertyOrAreaChanged.heading = My property or the local area has changed
+propertyOrAreaChanged.body = Use the Valuation Office Agency’s <a href="https://www.gov.uk/correct-your-business-rates" target="_self" ga-on="click" ga-event-action="cca-link-prop-changed" ga-event-category="councilTaxSubcategory" ga-event-label="Link_to_CCA">online service</a> to tell us about changes to your property or the surrounding area<br />You’ll need to register and claim your property before you can tell us about the changes.
+
+
 businessRatesSubcategory.checkYourAnswersLabel = Enquiry Details
 
 propertyAddress.title = Property Details
