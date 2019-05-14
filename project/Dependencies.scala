@@ -50,7 +50,8 @@ object Dependencies {
             "org.scalatestplus.play" %% "scalatestplus-play" % scalaTestPlusPlayVersion % scope,
             "org.jsoup" % "jsoup" % "1.10.3" % scope,
             "com.typesafe.play" %% "play-test" % PlayVersion.current % scope,
-            "org.mockito" % "mockito-all" % mockitoAllVersion % scope
+            "org.mockito" % "mockito-all" % mockitoAllVersion % scope,
+            "org.scalacheck" %% "scalacheck" % "1.14.0" % scope
         )
       }.test
 

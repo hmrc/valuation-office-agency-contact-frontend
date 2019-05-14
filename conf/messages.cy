@@ -174,12 +174,20 @@ councilTaxSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
 businessRatesSubcategory.title = Beth ydych eisiau gwybod am drethi busnes?
 businessRatesSubcategory.heading = Beth ydych eisiau gwybod am drethi busnes?
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
-businessRatesSubcategory.business_rates_poor_repair = Mae fy eiddo mewn cyflwr gwael
+
+businessRatesSubcategory.business_rates_challenge = Challenging my business rates valuation
 businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu’r ardal leol wedi newid
 businessRatesSubcategory.business_rates_ct_change = Mae fy eiddo wedi newid o Ardrethi Busnes i Dreth Gyngor
+businessRatesSubcategory.business_rates_from_home = Running a business from home
 businessRatesSubcategory.business_rates_not_used = Ni ddefnyddir fy eiddo ar gyfer busnes mwyach
-businessRatesSubcategory.business_rates_closed = Mae’r busnes wedi cau
 businessRatesSubcategory.business_rates_other = Unrhyw ymholiad arall ynghylch Ardrethi Busnes
+
+businessRatesChallenge.heading = Challenging my business rates valuation
+businessRatesChallenge.body = Use the Valuation Office Agency’s <a href="https://www.gov.uk/correct-your-business-rates" target="_self" ga-on="click" ga-event-action="cca-link-bus-rates" ga-event-category="councilTaxSubcategory" ga-event-label="Link_to_CCA">online service</a> to check and challenge your business rates valuation<br />You’ll need to register and claim your property before you can challenge the valuation.
+
+propertyOrAreaChanged.heading = My property or the local area has changed
+propertyOrAreaChanged.body = Use the Valuation Office Agency’s <a href="https://www.gov.uk/correct-your-business-rates" target="_self" ga-on="click" ga-event-action="cca-link-prop-changed" ga-event-category="councilTaxSubcategory" ga-event-label="Link_to_CCA">online service</a> to tell us about changes to your property or the surrounding area<br />You’ll need to register and claim your property before you can tell us about the changes.
+
 businessRatesSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
  
 propertyAddress.title = Manylion yr eiddo

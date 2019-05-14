@@ -18,7 +18,9 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend
 
 import org.joda.time.LocalDate
 import org.mockito.Mockito._
+import org.scalacheck.Gen
 import org.scalatest.mockito.MockitoSugar
+import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import play.api.mvc.Call
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
@@ -26,7 +28,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
-class NavigatorSpec extends SpecBase with MockitoSugar {
+class NavigatorSpec extends SpecBase with MockitoSugar with GeneratorDrivenPropertyChecks{
 
   val navigator = new Navigator
 
@@ -64,6 +66,31 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
         when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_poor_repair")
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
       }
+
+      "return a function that goes to the challange form page when an enquiry category for business rates has been selected and business_rates_challenge option selected" in {
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_challenge")
+        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesChallengeController.onChallengePageLoad()
+      }
+
+      "return a function that goes to the challange form page when an enquiry category for business rates has been selected and business_rates_changes option selected" in {
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_changes")
+        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesChallengeController.onAreaChangePageLoad()
+      }
+
+      "throw exception when an enquiry category for business rates has been selected and not other options was selected on next page" in {
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn None
+        an [RuntimeException] should be thrownBy navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers)
+      }
+
+      // Property base testing, can be disabled.
+      "return a function that goes to the contact form page when an enquiry category for business rates has been selected and random string selected on next page" in {
+        forAll(("category")) { (category: String) =>
+          val userAnswerMock = mock[UserAnswers]
+          when (userAnswerMock.businessRatesSubcategory) thenReturn Some(category)
+          navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(userAnswerMock) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
+        }
+      }
+
 
       "return a function that goes to the property address page when the contact form has been submitted without errors and the enquiry is business rates" in {
         when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "test@email.com", "0208382737288"))
