@@ -176,8 +176,8 @@ businessRatesSubcategory.heading = Beth yw eich ymholiad ardrethu busnes?
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
 
 businessRatesSubcategory.business_rates_challenge = Herio fy mhrisiad ardrethi busnes
-businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu''r ardal leol wedi newid
-businessRatesSubcategory.business_rates_ct_change = Mae angen i''m heiddo gael ei asesu ar gyfer ardrethi busnes
+businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu’r ardal lleol wedi newid
+businessRatesSubcategory.business_rates_assessed_for_bus_rates = Mae angen i''m heiddo gael ei asesu ar gyfer ardrethi busnes
 businessRatesSubcategory.business_rates_from_home = Rhedeg busnes o gartref
 businessRatesSubcategory.business_rates_not_used = Nid yw fy eiddo bellach yn cael ei ddefnyddio ar gyfer busnes
 businessRatesSubcategory.business_rates_other = Unrhyw ymholiad ardrethu busnes arall

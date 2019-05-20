@@ -176,7 +176,7 @@ businessRatesSubcategory.subheading = What do you want to tell us about?
 
 businessRatesSubcategory.business_rates_challenge = Challenging my business rates valuation
 businessRatesSubcategory.business_rates_changes = My property or the local area has changed
-businessRatesSubcategory.business_rates_ct_change = I need my property assessed for business rates
+businessRatesSubcategory.business_rates_assessed_for_bus_rates = I need my property assessed for business rates
 businessRatesSubcategory.business_rates_from_home = Running a business from home
 businessRatesSubcategory.business_rates_not_used = My property is no longer used for business
 businessRatesSubcategory.business_rates_other = Any other business rates enquiry
