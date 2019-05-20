@@ -172,21 +172,21 @@ councilTaxSubcategory.council_tax_other = Unrhyw ymholiad arall ynghylch y Dreth
 councilTaxSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
  
 businessRatesSubcategory.title = Beth ydych eisiau gwybod am drethi busnes?
-businessRatesSubcategory.heading = Beth ydych eisiau gwybod am drethi busnes?
+businessRatesSubcategory.heading = Beth yw eich ymholiad ardrethu busnes?
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
 
-businessRatesSubcategory.business_rates_challenge = Challenging my business rates valuation
-businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu’r ardal leol wedi newid
-businessRatesSubcategory.business_rates_ct_change = Mae fy eiddo wedi newid o Ardrethi Busnes i Dreth Gyngor
-businessRatesSubcategory.business_rates_from_home = Running a business from home
-businessRatesSubcategory.business_rates_not_used = Ni ddefnyddir fy eiddo ar gyfer busnes mwyach
-businessRatesSubcategory.business_rates_other = Unrhyw ymholiad arall ynghylch Ardrethi Busnes
+businessRatesSubcategory.business_rates_challenge = Herio fy mhrisiad ardrethi busnes
+businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu’r ardal lleol wedi newid
+businessRatesSubcategory.business_rates_assessed_for_bus_rates = Mae angen i''m heiddo gael ei asesu ar gyfer ardrethi busnes
+businessRatesSubcategory.business_rates_from_home = Rhedeg busnes o gartref
+businessRatesSubcategory.business_rates_not_used = Nid yw fy eiddo bellach yn cael ei ddefnyddio ar gyfer busnes
+businessRatesSubcategory.business_rates_other = Unrhyw ymholiad ardrethu busnes arall
 
-businessRatesChallenge.heading = Challenging my business rates valuation
-businessRatesChallenge.body = Use the Valuation Office Agency’s <a href="https://www.gov.uk/correct-your-business-rates" target="_self" ga-on="click" ga-event-action="cca-link-bus-rates" ga-event-category="councilTaxSubcategory" ga-event-label="Link_to_CCA">online service</a> to check and challenge your business rates valuation<br />You’ll need to register and claim your property before you can challenge the valuation.
+businessRatesChallenge.heading = Herio fy mhrisiad ardrethi busnes
+businessRatesChallenge.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self" ga-on="click" ga-event-action="cca-link-bus-rates" ga-event-category="councilTaxSubcategory" ga-event-label="Link_to_CCA">wasanaeth ar-lein</a> Asiantaeth y Swyddfa Brisio i wirio a herio eich prisiad ardrethi busnes.<br />Bydd angen i chi gofrestru a hawlio''ch eiddo cyn i chi allu herio''r prisiad.
 
-propertyOrAreaChanged.heading = My property or the local area has changed
-propertyOrAreaChanged.body = Use the Valuation Office Agency’s <a href="https://www.gov.uk/correct-your-business-rates" target="_self" ga-on="click" ga-event-action="cca-link-prop-changed" ga-event-category="councilTaxSubcategory" ga-event-label="Link_to_CCA">online service</a> to tell us about changes to your property or the surrounding area<br />You’ll need to register and claim your property before you can tell us about the changes.
+propertyOrAreaChanged.heading = Mae fy eiddo neu''r ardal lleol wedi newid
+propertyOrAreaChanged.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self" ga-on="click" ga-event-action="cca-link-prop-changed" ga-event-category="councilTaxSubcategory" ga-event-label="Link_to_CCA"> wasanaeth ar-lein</a> Asiantaeth y Swyddfa Brisio i ddweud wrthym am newidiadau i''ch eiddo neu''r ardal o''i hamgylch.<br />Bydd angen i chi gofrestru a hawlio''ch eiddo cyn i chi allu dweud wrthym am y newidiadau.
 
 businessRatesSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
  
