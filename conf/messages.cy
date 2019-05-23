@@ -182,9 +182,11 @@ businessRatesSubcategory.business_rates_from_home = Rhedeg busnes o gartref
 businessRatesSubcategory.business_rates_not_used = Nid yw fy eiddo bellach yn cael ei ddefnyddio ar gyfer busnes
 businessRatesSubcategory.business_rates_other = Unrhyw ymholiad ardrethu busnes arall
 
+businessRatesChallenge.title = Herio fy mhrisiad ardrethi busnes
 businessRatesChallenge.heading = Herio fy mhrisiad ardrethi busnes
 businessRatesChallenge.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self" ga-on="click" ga-event-action="cca-link-bus-rates" ga-event-category="councilTaxSubcategory" ga-event-label="Link_to_CCA">wasanaeth ar-lein</a> Asiantaeth y Swyddfa Brisio i wirio a herio eich prisiad ardrethi busnes.<br />Bydd angen i chi gofrestru a hawlio''ch eiddo cyn i chi allu herio''r prisiad.
 
+propertyOrAreaChanged.title = Mae fy eiddo neu''r ardal lleol wedi newid
 propertyOrAreaChanged.heading = Mae fy eiddo neu''r ardal lleol wedi newid
 propertyOrAreaChanged.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self" ga-on="click" ga-event-action="cca-link-prop-changed" ga-event-category="councilTaxSubcategory" ga-event-label="Link_to_CCA"> wasanaeth ar-lein</a> Asiantaeth y Swyddfa Brisio i ddweud wrthym am newidiadau i''ch eiddo neu''r ardal o''i hamgylch.<br />Bydd angen i chi gofrestru a hawlio''ch eiddo cyn i chi allu dweud wrthym am y newidiadau.
 

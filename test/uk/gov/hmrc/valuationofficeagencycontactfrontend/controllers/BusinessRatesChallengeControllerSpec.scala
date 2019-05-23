@@ -24,13 +24,13 @@ class BusinessRatesChallengeControllerSpec extends ControllerSpecBase {
     "return 200 for GET on AreaChangePageLoad" in {
       val resutl = new BusinessRatesChallengeController(messagesApi, frontendAppConfig).onAreaChangePageLoad(fakeRequest)
       status(resutl) mustBe OK
-      contentAsString(resutl) must include ("propertyOrAreaChanged.title")
+      contentAsString(resutl) must include ("My property or the local area has changed")
     }
 
     "return 200 for GET on ChallengePageLoad" in {
       val resutl = new BusinessRatesChallengeController(messagesApi, frontendAppConfig).onChallengePageLoad(fakeRequest)
       status(resutl) mustBe OK
-      contentAsString(resutl) must include ("businessRatesChallenge.title")
+      contentAsString(resutl) must include ("Challenging my business rates valuation")
     }
 
   }
