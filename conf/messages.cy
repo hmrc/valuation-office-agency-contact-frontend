@@ -188,7 +188,7 @@ businessRatesChallenge.body = Defnyddiwch <a href="https://www.gov.uk/correct-yo
 
 propertyOrAreaChanged.title = Mae fy eiddo neu''r ardal lleol wedi newid
 propertyOrAreaChanged.heading = Mae fy eiddo neu''r ardal lleol wedi newid
-propertyOrAreaChanged.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self" ga-on="click" ga-event-action="cca-link-prop-changed" ga-event-category="councilTaxSubcategory" ga-event-label="Link_to_CCA">wasanaeth ar-lein</a> Asiantaeth y Swyddfa Brisio i ddweud wrthym am newidiadau i’ch eiddo neu'r ardal o’i hamgylch.
+propertyOrAreaChanged.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self" ga-on="click" ga-event-action="cca-link-prop-changed" ga-event-category="councilTaxSubcategory" ga-event-label="Link_to_CCA">wasanaeth ar-lein</a> Asiantaeth y Swyddfa Brisio i ddweud wrthym am newidiadau i’ch eiddo neu’r ardal o’i hamgylch.
 businessRatesSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
  
 propertyAddress.title = Manylion yr eiddo
