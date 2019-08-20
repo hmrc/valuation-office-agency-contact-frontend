@@ -27,12 +27,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CheckYourAns
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmation
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurveyForm
 
 import scala.util.{Failure, Success}
 
 @Singleton()
 class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
-                                       val messagesApi: MessagesApi,
+                                       val messagesApi: MessagesApi,git 
                                        val connector: LightweightContactEventsConnector,
                                        navigator: Navigator,
                                        getData: DataRetrievalAction,
@@ -81,6 +82,6 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
     }
 
     val date = DateFormatter.todaysDate()
-    Ok(confirmation(appConfig, contact, date, enquiryKey(request.userAnswers).right.get))
+    Ok(confirmation(appConfig, contact, date, enquiryKey(request.userAnswers).right.get, SatisfactionSurveyForm.apply))
   }
 }

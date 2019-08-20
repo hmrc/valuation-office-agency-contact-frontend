@@ -223,9 +223,22 @@ confirmation.section.yourDetails = Eich manylion
 confirmation.section.propertyAddress = Cyfeiriad yr eiddo
 confirmation.section.yourMessage = Eich neges
 confirmation.section.date = Dyddiad pan y’i anfonwyd
-confirmation.survey.url = https://www.smartsurvey.co.uk/s/GKGO0
-confirmation.survey.para = Bydd eich adborth yn ein helpu i wella’r gwasanaeth
- 
+confirmation.feedback = Adborth
+confirmation.feedback.subheading = Yn gyffredinol, sut y byddech yn disgrifio’ch profiad gyda’r ffurflen hon?
+satisfaction.verySatisfied = Bodlon iawn
+satisfaction.satisfied = Bodlon
+satisfaction.neither = Ddim yn fodlon nac yn anfodlon
+satisfaction.dissatisfied = Anfodlon
+satisfaction.veryDissatisfied = Anfodlon iawn
+confirmation.feedback.improve = Sut y gallwn wella’r gwasanaeth hwn?
+confirmation.feedback.warning = Peidiwch â chynnwys unrhyw wybodaeth bersonol nac ariannol, er enghraifft eich rhif Yswiriant Gwladol neu rifau cardiau credyd.
+confirmation.feedback.submit = Cyflwyno
+
+# SURVEY THANKYOU
+###############################
+heading.feedback.thankyou=Diolch am eich adborth
+feedback.anotherForm=cyflwyno ffurflen arall
+
 valuationAdvice.title = Cyngor Prisiad
 valuationAdvice.heading = Manylion cyswllt
 valuationAdvice.subheading = Prisiad a chyngor ar eiddo ar gyfer cyrff sector cyhoeddus, gan  y Gwasanaethau Prisiwr Dosbarth (GPD)
