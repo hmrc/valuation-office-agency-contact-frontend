@@ -16,21 +16,33 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
+import play.api.Logger
 import play.api.data.Form
 import play.api.data.Forms.{mapping, nonEmptyText}
+import play.api.data.format.Formatter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
-object SatisfactionSurveyForm {
+object SatisfactionSurveyForm extends FormErrorHelper {
 
   private val antiXSSMessageRegex = """^['`A-Za-z0-9\s\-&,\.£\(\)%;:\?\!]+$"""
 
   def apply(): Form[SatisfactionSurvey] = Form(
     mapping(
       "satisfaction" -> nonEmptyText,
+//        .verifying("error.required", _.length <= 1200),
       "details" -> nonEmptyText
         .verifying("error.message.max_length", _.length <= 1200)
         .verifying("error.message.xss-invalid", _.matches(antiXSSMessageRegex))
-    )(SatisfactionSurvey.apply)(SatisfactionSurvey.unapply)
+    )(SatisfactionSurvey.apply)(SatisfactionSurvey.unapply)//.verifying(
+//      "Failed for Constraints!",
+//      fields =>
+//        fields match {
+//          case userData => {
+//            Logger.warn(s"****** Satisfaction: ${userData.satisfaction} : Details: ${userData.details} .... ******")
+//            false
+//          }
+//        }
+//    )
   )
 
   def options = Seq(
@@ -40,6 +52,11 @@ object SatisfactionSurveyForm {
     RadioOption("satisfaction", "dissatisfied"),
     RadioOption("satisfaction", "veryDissatisfied")
   )
+
+  def optionIsValid(value: String) = {
+    Logger.warn(s"****** ${value} : .... ******")
+    options.exists(o => o.value == value)
+  }
 }
 
 case class SatisfactionSurvey (satisfaction: String, details: String)

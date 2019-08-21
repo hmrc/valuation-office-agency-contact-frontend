@@ -33,7 +33,7 @@ import scala.util.{Failure, Success}
 
 @Singleton()
 class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
-                                       val messagesApi: MessagesApi,git 
+                                       val messagesApi: MessagesApi,
                                        val connector: LightweightContactEventsConnector,
                                        navigator: Navigator,
                                        getData: DataRetrievalAction,

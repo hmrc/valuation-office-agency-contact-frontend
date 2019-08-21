@@ -80,14 +80,14 @@
                 <h1>@Messages("confirmation.feedback")</h1>
             </div>
 
-            @helpers.form(action = BusinessRatesChallengeController.onChallengePageLoad, 'autoComplete -> "off") {
+            @helpers.form(action = SatisfactionSurveyController.formCompleteFeedback, 'autoComplete -> "off") {
 
                 @helper.CSRF.formField
 
                 @components.error_summary(form.errors, "satisfactionSurvey")
 
                 @components.input_radio(
-                    viewModel = InputViewModel[SatisfactionSurvey]("value", form),
+                    viewModel = InputViewModel[SatisfactionSurvey]("satisfaction", form),
                     legend = messages("confirmation.feedback.subheading"),
                     inputs = SatisfactionSurveyForm.options,
                     trackGaId = Some("satisfaction")
