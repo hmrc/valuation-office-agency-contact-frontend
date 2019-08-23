@@ -18,7 +18,6 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import javax.inject.{Inject, Singleton}
 import play.api.Logger
-import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.Action
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
@@ -26,12 +25,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navi
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation, satisfactionSurveyThankYou}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{SatisfactionSurvey, SatisfactionSurveyForm}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CheckYourAnswersId, CouncilTaxSubcategoryId}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, UserAnswers}
-
-import scala.concurrent.Future
-import scala.util.{Failure, Success}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{AddressFormatters, DateFormatter, UserAnswers}
 
 @Singleton()
 class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
@@ -49,23 +43,22 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
   }
 
   def formCompleteFeedback  = (getData andThen requireData) { implicit request =>
+
+    val contact = request.userAnswers.contact() match {
+      case Right(ct) => ct
+      case Left(msg) =>
+        Logger.warn(s"Navigation for Confirmation page reached without a contact and error $msg")
+        throw new RuntimeException(s"Navigation for Confirmation page reached without a contact and error $msg")
+    }
+
     SatisfactionSurveyForm().bindFromRequest().fold(
       formWithErrors => {
         Logger.warn(s"****** ERRORS ${formWithErrors.value.getOrElse("None")} ******")
-
-        val contact = request.userAnswers.contact() match {
-          case Right(ct) => ct
-          case Left(msg) =>
-            Logger.warn(s"Navigation for Confirmation page reached without a contact and error $msg")
-            throw new RuntimeException(s"Navigation for Confirmation page reached without a contact and error $msg")
-        }
-
         val date = DateFormatter.todaysDate()
-
         Ok(confirmation(appConfig, contact, date, enquiryKey(request.userAnswers).right.get, formWithErrors))
       },
       success => {
-        sendFeedback(success, "Get address as ref number")
+        sendFeedback(success, AddressFormatters.formattedPropertyAddress(contact.propertyAddress, ", "))
         Redirect(routes.SatisfactionSurveyController.surveyThankyou())
       }
     )

@@ -211,7 +211,9 @@ tellUsMore.para4 = Cyfeirnod yr eiddo
 tellUsMore.ct-reference = (fe welwch hwn ar waelod eich bil Treth Gyngor)
 tellUsMore.ndr-reference = (fe welwch hwn ar eich bil ardrethi busnes)
 tellUsMore.checkYourAnswersLabel = Ymholiad
- 
+
+# CONFIRMATION
+###############################
 confirmation.title = Cadarnhad
 confirmation.heading = Diolch am eich ymholiad
 confirmation.para1= Eich cyfeirnod yw
@@ -230,6 +232,8 @@ satisfaction.satisfied = Bodlon
 satisfaction.neither = Ddim yn fodlon nac yn anfodlon
 satisfaction.dissatisfied = Anfodlon
 satisfaction.veryDissatisfied = Anfodlon iawn
+satisfactionSurvey.satisfaction = Yn gyffredinol, sut y byddech yn disgrifio''ch profiad gyda''r ffurflen hon? - Rhaid i chi ddewis un
+satisfactionSurvey.satisfaction = 1200 o gymeriadau yw’r uchafswm hyd
 confirmation.feedback.improve = Sut y gallwn wella’r gwasanaeth hwn?
 confirmation.feedback.warning = Peidiwch â chynnwys unrhyw wybodaeth bersonol nac ariannol, er enghraifft eich rhif Yswiriant Gwladol neu rifau cardiau credyd.
 confirmation.feedback.submit = Cyflwyno
