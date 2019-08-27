@@ -16,10 +16,11 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurveyForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmation
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.DateFormatter
 
 class ConfirmationViewSpec extends ViewBehaviours {
 
@@ -34,9 +35,9 @@ class ConfirmationViewSpec extends ViewBehaviours {
   val alternativeContact = Contact(confirmCd, alternativeAddress, ec, cSub, tellUs.message)
   val date = DateFormatter.todaysDate()
 
-  def view = () => confirmation(frontendAppConfig, contact, date, "councilTaxSubcategory")(fakeRequest, messages)
+  def view = () => confirmation(frontendAppConfig, contact, date, "councilTaxSubcategory", SatisfactionSurveyForm.apply)(fakeRequest, messages)
 
-  def alternativeView = () => confirmation(frontendAppConfig, alternativeContact, date, "councilTaxSubcategory")(fakeRequest, messages)
+  def alternativeView = () => confirmation(frontendAppConfig, alternativeContact, date, "councilTaxSubcategory", SatisfactionSurveyForm.apply)(fakeRequest, messages)
 
   "Confirmation view" must {
 
@@ -88,12 +89,5 @@ class ConfirmationViewSpec extends ViewBehaviours {
       govukUrl mustBe "http://www.gov.uk"
     }
 
-    "contain a Survey Link" in {
-      val doc = asDocument(view())
-      val survey = doc.getElementById("survey").text()
-      survey mustBe messages("confirmation.survey.para")
-      val surveyLink = doc.select("a[id=survey]").attr("href")
-      surveyLink mustBe messages("confirmation.survey.url")
-    }
   }
 }

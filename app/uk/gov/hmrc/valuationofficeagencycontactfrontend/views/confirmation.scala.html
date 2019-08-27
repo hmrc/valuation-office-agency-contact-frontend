@@ -77,12 +77,10 @@
         <div class="help-content">
 
             <div class="form-title heading-large">
-                <h1>@Messages("confirmation.feedback")</h1>
+                <h2>@Messages("confirmation.feedback")</h2>
             </div>
 
             @helpers.form(action = SatisfactionSurveyController.formCompleteFeedback, 'autoComplete -> "off") {
-
-                @helper.CSRF.formField
 
                 @components.error_summary(form.errors, "satisfactionSurvey")
 

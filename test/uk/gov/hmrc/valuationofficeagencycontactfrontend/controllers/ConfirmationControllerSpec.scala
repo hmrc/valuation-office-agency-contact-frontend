@@ -27,6 +27,7 @@ import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurveyForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, UserAnswers}
@@ -75,7 +76,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
       status(result) mustBe OK
 
-      contentAsString(result) mustBe confirmation(frontendAppConfig, contact, date, "councilTaxSubcategory")(fakeRequest, messages).toString
+      contentAsString(result) mustBe confirmation(frontendAppConfig, contact, date, "councilTaxSubcategory", SatisfactionSurveyForm.apply())(fakeRequest, messages).toString
     }
 
     "return 200 and the correct view for a GET when addressLine2 and county are None" in {
@@ -98,7 +99,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
       status(result) mustBe OK
 
-      contentAsString(result) mustBe confirmation(frontendAppConfig, contact, date, "councilTaxSubcategory")(fakeRequest, messages).toString
+      contentAsString(result) mustBe confirmation(frontendAppConfig, contact, date, "councilTaxSubcategory", SatisfactionSurveyForm.apply)(fakeRequest, messages).toString
     }
 
     "redirect to Session Expired for a GET if not existing data is found" in {
@@ -140,6 +141,10 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
       val result = controller().enquiryKey(mockUserAnswers)
       result mustBe Left("Unknown enquiry category in enquiry key")
+    }
+
+    "populate the satisfaction survey view correctly on a GET" in {
+
     }
 
     "return 500 and the error view for a GET with unknown or wrong enquiry type" in {
