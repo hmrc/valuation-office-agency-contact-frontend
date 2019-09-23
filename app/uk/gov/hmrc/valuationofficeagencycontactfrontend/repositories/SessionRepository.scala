@@ -18,12 +18,11 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.repositories
 
 import javax.inject.{Inject, Singleton}
 import org.joda.time.{DateTime, DateTimeZone}
-import play.api.{Configuration, Logger}
+import play.api.{Configuration, Logger, Play}
 import play.api.libs.json.{JsValue, Json}
-import play.modules.reactivemongo.MongoDbConnection
-import reactivemongo.api.DefaultDB
+import play.modules.reactivemongo.ReactiveMongoComponent
 import reactivemongo.api.indexes.{Index, IndexType}
-import reactivemongo.bson.{BSONDocument, BSONObjectID}
+import reactivemongo.bson.{BSONDocument, BSONInteger, BSONObjectID}
 import reactivemongo.play.json._
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.mongo.ReactiveRepository
@@ -43,15 +42,17 @@ object DatedCacheMap {
   def apply(cacheMap: CacheMap): DatedCacheMap = DatedCacheMap(cacheMap.id, cacheMap.data)
 }
 
-class ReactiveMongoRepository(config: Configuration, mongo: () => DefaultDB)
-  extends ReactiveRepository[DatedCacheMap, BSONObjectID](config.getString("appName").get, mongo, DatedCacheMap.formats) {
-
-  val timeToLiveInSeconds: Int = config.getInt("mongodb.timeToLiveInSeconds").get
+@Singleton
+class SessionRepository @Inject() (config: Configuration, mongo: ReactiveMongoComponent)
+  extends ReactiveRepository[DatedCacheMap, BSONObjectID]("sessions",
+    mongo.mongoConnector.db, DatedCacheMap.formats) {
 
   override def indexes: Seq[Index] =  {
+    //Must be here. Otherwise is access before is properly initialized
+    val timeToLiveInSeconds: Int = config.getString("mongodb.timeToLiveInSeconds").map(_.toInt).get
     Seq(
-    Index(Seq("lastUpdated" -> IndexType.Ascending), name = Some("userAnswersExpiry"),
-      options = BSONDocument("expireAfterSeconds" -> timeToLiveInSeconds)),
+    Index(Seq("lastUpdated" -> IndexType.Ascending), name = Some("lastUpdatedExpiryIndex"),
+      options = BSONDocument( "expireAfterSeconds" -> BSONInteger(timeToLiveInSeconds))),
     Index(Seq("id" -> IndexType.Descending), name = Some("contact-form-id_idx")))
   }
 
@@ -60,7 +61,7 @@ class ReactiveMongoRepository(config: Configuration, mongo: () => DefaultDB)
     val cmDocument = Json.toJson(DatedCacheMap(cm))
     val modifier = BSONDocument("$set" -> cmDocument)
 
-    collection.update(selector, modifier, upsert = true).map { lastError =>
+    collection.update.one(selector, modifier, upsert = true).map { lastError =>
       lastError.ok
     }
   }
@@ -74,13 +75,4 @@ class ReactiveMongoRepository(config: Configuration, mongo: () => DefaultDB)
   }
 }
 
-@Singleton
-class SessionRepository @Inject()(config: Configuration) {
-
-  class DbConnection extends MongoDbConnection
-
-  private lazy val sessionRepository = new ReactiveMongoRepository(config, new DbConnection().db)
-
-  def apply(): ReactiveMongoRepository = sessionRepository
-}
 //$COVERAGE-ON$
