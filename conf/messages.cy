@@ -231,9 +231,9 @@ valuationAdvice.heading = Manylion cyswllt
 valuationAdvice.subheading = Prisiad a chyngor ar eiddo ar gyfer cyrff sector cyhoeddus, gan  y Gwasanaethau Prisiwr Dosbarth (GPD)
 valuationAdvice.paragraph =  Defnyddiwch y manylion hyn i gysylltu â ni gyda’ch ymholiad.
 valuationAdvice.email-title = E-bost
-valuationAdvice.email-url = dvscustomersupport@voa.gsi.gov.uk
+valuationAdvice.email-url = clientdevelopment@voa.gsi.gov.uk
 valuationAdvice.phone-title =  Ffôn
-valuationAdvice.phone-number = 03000 500400
+valuationAdvice.phone-number = 03000 501501
 valuationAdvice.response-paragraph = Anelwn i ateb cyn pen 20 diwrnod gwaith. Fodd bynnag, gall ymholiadau cymhleth gymryd yn hirach.
  
 valuationForTaxes.title = Manylion cyswllt
