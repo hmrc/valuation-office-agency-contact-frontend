@@ -52,7 +52,8 @@ object Dependencies {
             "org.jsoup" % "jsoup" % "1.10.3" % scope,
             "com.typesafe.play" %% "play-test" % PlayVersion.current % scope,
             "org.mockito" % "mockito-all" % mockitoAllVersion % scope,
-            "org.scalacheck" %% "scalacheck" % "1.14.0" % scope
+            "org.scalacheck" %% "scalacheck" % "1.14.0" % scope,
+            "com.typesafe.akka" %% "akka-testkit" % "2.5.18" % scope
         )
       }.test
 
