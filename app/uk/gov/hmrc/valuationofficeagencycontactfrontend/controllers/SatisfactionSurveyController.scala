@@ -53,7 +53,6 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
 
     SatisfactionSurveyForm().bindFromRequest().fold(
       formWithErrors => {
-        Logger.warn(s"****** ERRORS ${formWithErrors.value.getOrElse("None")} ******")
         val date = DateFormatter.todaysDate()
         Ok(confirmation(appConfig, contact, date, enquiryKey(request.userAnswers).right.get, formWithErrors))
       },
@@ -72,7 +71,6 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
   }
 
   def surveyThankyou = Action { implicit request =>
-    Logger.warn("****** Go to thank you page ..... ******")
     Ok(satisfactionSurveyThankYou(appConfig))
   }
 }
