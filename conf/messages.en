@@ -213,6 +213,8 @@ tellUsMore.ct-reference = (this can be found on your Council Tax bill)
 tellUsMore.ndr-reference = (this can be found on your business rates bill)
 tellUsMore.checkYourAnswersLabel = Enquiry
 
+# CONFIRMATION
+###############################
 confirmation.title = Confirmation
 confirmation.heading = Thank you for your enquiry
 confirmation.para1=Your reference is
@@ -224,8 +226,23 @@ confirmation.section.yourDetails = Your details
 confirmation.section.propertyAddress = Property address
 confirmation.section.yourMessage = Your message
 confirmation.section.date = Date submitted
-confirmation.survey.url = https://www.smartsurvey.co.uk/s/GKGO0
-confirmation.survey.para = Your feedback will help us improve the service
+confirmation.feedback = Feedback
+confirmation.feedback.subheading = Overall, how would you describe your experience with the form?
+satisfaction.verySatisfied = Very satisfied
+satisfaction.satisfied = Satisfied
+satisfaction.neither = Neither satisfied or dissatisfied
+satisfaction.dissatisfied = Dissatisfied
+satisfaction.veryDissatisfied = Very dissatisfied
+satisfactionSurvey.satisfaction = Overall, how would you describe your experience with the form? - You must choose one
+satisfactionSurvey.satisfaction = Maximum length is 1200 characters
+confirmation.feedback.improve = How can we improve this service?
+confirmation.feedback.warning = Don’t include any personal or financial information, for example your National Insurance or credit card numbers.
+confirmation.feedback.submit = Submit
+
+# SURVEY THANKYOU
+###############################
+heading.feedback.thankyou=Thank you for your feedback
+feedback.anotherForm=Submit another form
 
 valuationAdvice.title = Valuation Advice
 valuationAdvice.heading = Contact details

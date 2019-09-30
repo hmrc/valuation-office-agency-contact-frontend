@@ -15,11 +15,16 @@
  *@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Contact
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.ContactFormatter._
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.InputViewModel
+@import uk.gov.hmrc.play.views.html._
 
-@(appConfig: FrontendAppConfig, contact: Contact, date: String, key: String)(implicit request: Request[_], messages: Messages)
+
+@(appConfig: FrontendAppConfig, contact: Contact, date: String, key: String, form: Form[SatisfactionSurvey])(implicit request: Request[_], messages: Messages)
 
 @main_template(
     title = messages("confirmation.title"),
@@ -64,9 +69,41 @@
     <h2 class="heading-medium">@messages("confirmation.whatHappensnext")</h2>
     <p>@messages("confirmation.para2")</p>
 
-    <a class="print-hide" href=@messages("confirmation.survey.url") target="_self" id="survey">@messages("confirmation.survey.para")</a>
+    <p>
+        <a class="print-hide" href=javascript:window.print() target="_self" id="print-button" class="button print-hidden js-visible">@messages("site.print.button")</a>
+    </p>
 
-    @components.button_link(messageKey="site.print.button", href="javascript:window.print()", id="print-button", className="button print-hidden js-visible")
+    <div class="help__wrapper">
+        <div class="help-content">
+
+            <div class="form-title heading-large">
+                <h2>@Messages("confirmation.feedback")</h2>
+            </div>
+
+            @helpers.form(action = SatisfactionSurveyController.formCompleteFeedback, 'autoComplete -> "off") {
+
+                @components.error_summary(form.errors, "satisfactionSurvey")
+
+                @components.input_radio(
+                    viewModel = InputViewModel[SatisfactionSurvey]("satisfaction", form),
+                    legend = messages("confirmation.feedback.subheading"),
+                    inputs = SatisfactionSurveyForm.options,
+                    trackGaId = Some("satisfaction")
+                )
+
+                @components.input_textarea(
+                    InputViewModel[SatisfactionSurvey]("details", form),
+                    label = messages("confirmation.feedback.improve"),
+                    charLimit = Some(1200)
+                )
+
+                <p>@messages("confirmation.feedback.warning")</p>
+
+                @components.continue_button(messageKey = "confirmation.feedback.submit")
+            }
+        </div>
+    </div>
+
     <p><a href="http://www.gov.uk" id="backToGovUk" class="print-hide">@messages("site.govuk")</a></p>
 
 }
