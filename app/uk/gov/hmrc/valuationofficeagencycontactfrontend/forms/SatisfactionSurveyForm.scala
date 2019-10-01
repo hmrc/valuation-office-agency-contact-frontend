@@ -44,7 +44,6 @@ object SatisfactionSurveyForm {
   )
 
   def optionIsValid(value: String) = {
-    Logger.warn(s"****** ${value} : .... ******")
     options.exists(o => o.value == value)
   }
 }
