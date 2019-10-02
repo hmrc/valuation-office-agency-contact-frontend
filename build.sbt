@@ -1,4 +1,5 @@
 import Dependencies.{Test, _}
+import sbt.Keys.parallelExecution
 
 lazy val appName = "valuation-office-agency-contact-frontend"
 
@@ -31,11 +32,10 @@ lazy val root = Project(appName, file("."))
 
     ScoverageKeys.coverageExcludedFiles := "<empty>;Reverse.*;.*filters.*;.*handlers.*;.*components.*;.*models.*;" +
       ".*BuildInfo.*;.*javascript.*;.*FrontendAuditConnector.*;.*Routes.*;.*GuiceInjector;.*DataCacheConnector;" +
-      ".*ControllerConfiguration;.*LanguageSwitchController",
+      ".*ControllerConfiguration;.*LanguageSwitchController;.*MongoCleanupActor",
     ScoverageKeys.coverageMinimum := 90,
     ScoverageKeys.coverageFailOnMinimum := true,
-    ScoverageKeys.coverageHighlighting := true,
-    parallelExecution in test := false
+    ScoverageKeys.coverageHighlighting := true
   )
   .settings(scalaSettings: _*)
   .settings(publishingSettings: _*)
@@ -45,12 +45,14 @@ lazy val root = Project(appName, file("."))
     libraryDependencies ++= appDependencies,
     dependencyOverrides ++= appDependencyOverrides,
     retrieveManaged := true,
-    evictionWarningOptions in update := EvictionWarningOptions.default.withWarnScalaVersionEviction(false)
+    evictionWarningOptions in update := EvictionWarningOptions.default.withWarnScalaVersionEviction(false),
+    parallelExecution in sbt.Test := false,
+    Keys.fork in sbt.Test := true
   )
   .configs(IntegrationTest)
   .settings(inConfig(IntegrationTest)(Defaults.itSettings): _*)
   .settings(
-    Keys.fork in IntegrationTest := false,
+    Keys.fork in IntegrationTest := true,
     unmanagedSourceDirectories in IntegrationTest := (baseDirectory in IntegrationTest)(base => Seq(base / "it")).value,
     addTestReportOption(IntegrationTest, "int-test-reports"),
     testGrouping in IntegrationTest := oneForkedJvmPerTest((definedTests in IntegrationTest).value),

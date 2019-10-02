@@ -24,6 +24,8 @@ object Dependencies {
     val compile: Seq[ModuleID] = Seq(
        ws,
       "uk.gov.hmrc" %% "simple-reactivemongo" % simpleReactivemongoVersion,
+      "org.reactivemongo" %% "reactivemongo" % "0.18.7",
+      "org.reactivemongo" %% "reactivemongo-play-json" % "0.18.7-play25",
       "uk.gov.hmrc" %% "logback-json-logger" % logbackJsonLoggerVersion,
       "uk.gov.hmrc" %% "govuk-template" % govukTemplateVersion,
       "uk.gov.hmrc" %% "play-health" % playHealthVersion,
@@ -57,10 +59,5 @@ object Dependencies {
         )
       }.test
 
-    def tmpMacWorkaround(): Seq[ModuleID] =
-      if (sys.props.get("os.name").fold(false)(_.toLowerCase.contains("mac")))
-        Seq("org.reactivemongo" % "reactivemongo-shaded-native" % "0.17.1-osx-x86-64" % "runtime,test,it")
-      else Seq()
-
-    lazy val appDependencies = compile ++ Test ++ tmpMacWorkaround
+    lazy val appDependencies = compile ++ Test
 }
