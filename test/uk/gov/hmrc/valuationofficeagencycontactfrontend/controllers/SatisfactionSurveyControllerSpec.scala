@@ -28,12 +28,16 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{AuditServiceConnector, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.satisfactionSurveyThankYou
 
+import scala.concurrent.ExecutionContext
+
 class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
   val mockUserAnswers = mock[UserAnswers]
   val configuration = injector.instanceOf[Configuration]
   val environment = injector.instanceOf[Environment]
+  implicit def ec: ExecutionContext = injector.instanceOf[ExecutionContext]
+
   def auditingService = new AuditingService(new AuditServiceConnector(configuration, environment))
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =

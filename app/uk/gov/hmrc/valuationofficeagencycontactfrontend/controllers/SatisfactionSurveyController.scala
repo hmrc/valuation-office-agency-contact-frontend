@@ -17,7 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import javax.inject.{Inject, Singleton}
-import play.api.Logger
+import play.api.{Environment, Logger}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, Request}
 import uk.gov.hmrc.http.HeaderCarrier
@@ -38,10 +38,9 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
                                              navigator: Navigator,
                                              getData: DataRetrievalAction,
                                              requireData: DataRequiredAction,
-                                             auditService: AuditingService) extends FrontendController with I18nSupport {
+                                             auditService: AuditingService)(implicit ec: ExecutionContext) extends FrontendController with I18nSupport {
 
   implicit def hc(implicit request: Request[_]):HeaderCarrier = HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))
-  implicit def ec: ExecutionContext = play.api.libs.concurrent.Execution.Implicits.defaultContext
 
   def enquiryKey(answers: UserAnswers): Either[String, String] = {
     answers.enquiryCategory match {
