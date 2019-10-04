@@ -20,19 +20,26 @@ import javax.inject.{Inject, Singleton}
 import play.api.Logger
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.Action
+import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.AuditingService
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation, satisfactionSurveyThankYou}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{SatisfactionSurvey, SatisfactionSurveyForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{AddressFormatters, DateFormatter, UserAnswers}
 
+import scala.concurrent.ExecutionContext
+
 @Singleton()
 class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
                                              val messagesApi: MessagesApi,
                                              navigator: Navigator,
                                              getData: DataRetrievalAction,
-                                             requireData: DataRequiredAction) extends FrontendController with I18nSupport {
+                                             requireData: DataRequiredAction,
+                                             auditService: AuditingService) extends FrontendController with I18nSupport {
+
+  implicit val hc: HeaderCarrier = HeaderCarrier()
 
   def enquiryKey(answers: UserAnswers): Either[String, String] = {
     answers.enquiryCategory match {
@@ -63,11 +70,10 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
     )
   }
 
-  private def sendFeedback(f: SatisfactionSurvey, refNum: String) = {
-    // TODO Send feedback to Splunk - VOA-1314
-    Logger.warn("TODO Send feedback to Splunk - VOA-1314")
-    Logger.warn(s"****** SurveySatisfaction (satisfaction:  ${f.satisfaction} : referenceNumber ${refNum}) ******")
-    Logger.warn(s"****** SurveyFeedback (feedback:  ${f.details} : referenceNumber ${refNum}) ******")
+  private def sendFeedback(f: SatisfactionSurvey, refNum: String) {
+    auditService.sendSatisfactionSurvey("SurveySatisfaction", Map("satisfaction" -> f.satisfaction, "referenceNumber" -> refNum)).flatMap { _ =>
+      auditService.sendSatisfactionSurvey("SurveyFeedback", Map("feedback" -> f.details.getOrElse(""), "referenceNumber" -> refNum))
+    }
   }
 
   def surveyThankyou = Action { implicit request =>

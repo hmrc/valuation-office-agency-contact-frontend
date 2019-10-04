@@ -17,13 +17,14 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors
 
 import javax.inject.Inject
-
 import play.api.libs.json.JsValue
 import uk.gov.hmrc.http.HeaderCarrier
+import uk.gov.hmrc.play.audit.http.connector.AuditResult
 import uk.gov.hmrc.play.audit.model.ExtendedDataEvent
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AuditServiceConnector
+import uk.gov.hmrc.play.audit.model.DataEvent
 
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{ExecutionContext, Future}
 
 
 class AuditingService @Inject()(auditConnector: AuditServiceConnector)  {
@@ -47,4 +48,9 @@ class AuditingService @Inject()(auditConnector: AuditServiceConnector)  {
     )
   }
 
+  def sendSatisfactionSurvey (event: String, detail: Map[String, String], tags: Map[String, String] = Map.empty)
+                   (implicit ec: ExecutionContext, hc: HeaderCarrier): Future[AuditResult] = {
+    val de = DataEvent(auditSource = "digital-contact-centre", auditType = event, tags = tags, detail = detail)
+    auditConnector.sendEvent(de)
+  }
 }
