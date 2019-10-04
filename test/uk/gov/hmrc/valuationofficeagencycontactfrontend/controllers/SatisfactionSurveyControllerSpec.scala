@@ -16,30 +16,29 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
-import org.mockito.Mockito.when
 import org.scalatest.mockito.MockitoSugar
-import play.api.Logger
+import play.api.{Configuration, Environment}
 import play.api.data.Form
-import play.api.libs.json.JsString
 import play.api.test.Helpers._
-import play.libs.Json
-import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.AuditingService
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{SatisfactionSurvey, SatisfactionSurveyForm}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{ContactDetailsId, CouncilTaxSubcategoryId, EnquiryCategoryId, PropertyAddressId, TellUsMoreId}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ConfirmedContactDetails, Contact, ContactDetails, NormalMode, PropertyAddress, TellUsMore}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{AuditServiceConnector, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.satisfactionSurveyThankYou
 
 class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
   val mockUserAnswers = mock[UserAnswers]
+  val configuration = injector.instanceOf[Configuration]
+  val environment = injector.instanceOf[Environment]
+  def auditingService = new AuditingService(new AuditServiceConnector(configuration, environment))
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new SatisfactionSurveyController(frontendAppConfig, messagesApi, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl)
+      dataRetrievalAction, new DataRequiredActionImpl, auditingService)
 
   def viewAsString(form: Form[SatisfactionSurvey] = SatisfactionSurveyForm()) =
     satisfactionSurveyThankYou(frontendAppConfig)(fakeRequest, messages).toString
