@@ -39,7 +39,7 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
                                              requireData: DataRequiredAction,
                                              auditService: AuditingService) extends FrontendController with I18nSupport {
 
-  implicit val hc: HeaderCarrier = HeaderCarrier()
+  implicit def hc(implicit request: Request[_]):HeaderCarrier = HeaderCarrierConverter.fromHeadersAndSession(request.headers, request.session)
 
   def enquiryKey(answers: UserAnswers): Either[String, String] = {
     answers.enquiryCategory match {
