@@ -17,10 +17,11 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import javax.inject.{Inject, Singleton}
-import play.api.Logger
+import play.api.{Environment, Logger}
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.Action
+import play.api.mvc.{Action, Request}
 import uk.gov.hmrc.http.HeaderCarrier
+import uk.gov.hmrc.play.HeaderCarrierConverter
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.AuditingService
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
@@ -37,9 +38,9 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
                                              navigator: Navigator,
                                              getData: DataRetrievalAction,
                                              requireData: DataRequiredAction,
-                                             auditService: AuditingService) extends FrontendController with I18nSupport {
+                                             auditService: AuditingService)(implicit ec: ExecutionContext) extends FrontendController with I18nSupport {
 
-  implicit def hc(implicit request: Request[_]):HeaderCarrier = HeaderCarrierConverter.fromHeadersAndSession(request.headers, request.session)
+  implicit def hc(implicit request: Request[_]):HeaderCarrier = HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))
 
   def enquiryKey(answers: UserAnswers): Either[String, String] = {
     answers.enquiryCategory match {
@@ -70,7 +71,7 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
     )
   }
 
-  private def sendFeedback(f: SatisfactionSurvey, refNum: String) {
+  private def sendFeedback(f: SatisfactionSurvey, refNum: String)(implicit headerCarrier: HeaderCarrier) {
     auditService.sendSatisfactionSurvey("SurveySatisfaction", Map("satisfaction" -> f.satisfaction, "referenceNumber" -> refNum)).flatMap { _ =>
       auditService.sendSatisfactionSurvey("SurveyFeedback", Map("feedback" -> f.details.getOrElse(""), "referenceNumber" -> refNum))
     }
