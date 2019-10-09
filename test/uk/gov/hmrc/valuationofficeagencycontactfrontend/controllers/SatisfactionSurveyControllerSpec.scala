@@ -19,14 +19,18 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import org.scalatest.mockito.MockitoSugar
 import play.api.{Configuration, Environment}
 import play.api.data.Form
+import play.api.libs.json.{JsString, Json}
+import play.api.test.FakeRequest
 import play.api.test.Helpers._
+import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.AuditingService
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{SatisfactionSurvey, SatisfactionSurveyForm}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, CouncilTaxSubcategoryId, EnquiryCategoryId, PropertyAddressId, TellUsMoreId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode, PropertyAddress, TellUsMore}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{AuditServiceConnector, UserAnswers}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.satisfactionSurveyThankYou
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{internalServerError, satisfactionSurveyThankYou}
 
 import scala.concurrent.ExecutionContext
 
@@ -56,8 +60,88 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
       contentAsString(result) mustBe viewAsString()
     }
 
-    // test submitted form
+    "feedback submission must be successful for formCompleteFeedback" in {
+      val cd = ContactDetails("a", "b", "c", "d", "e")
+      val ec = "council_tax"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_poor_repair"
+      val tellUs = TellUsMore("Hello")
 
+      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val request = FakeRequest().withFormUrlEncodedBody("satisfaction" -> "verySatisfied", "details" -> "value 1")
+
+      val result = controller(getRelevantData).formCompleteFeedback()(request)
+
+      status(result) mustBe SEE_OTHER
+    }
+
+    "feedback submission must fail form data is invalid" in {
+
+      val cd = ContactDetails("a", "b", "c", "d", "e")
+      val ec = "other"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_poor_repair"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val request = FakeRequest().withFormUrlEncodedBody("satisfaction" -> "verySatisfied", "details" -> "value 1")
+
+      intercept[Exception] {
+        val result = controller(getRelevantData).formCompleteFeedback()(request)
+        status(result) mustBe INTERNAL_SERVER_ERROR
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+      }
+    }
+
+    "feedback submission (council tax) must show form errors if survey incomplete" in {
+      val cd = ContactDetails("a", "b", "c", "d", "e")
+      val ec = "council_tax"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_poor_repair"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val request = FakeRequest().withFormUrlEncodedBody("details" -> "value 1")
+
+      val result = controller(getRelevantData).formCompleteFeedback()(request)
+      val boundForm = SatisfactionSurveyForm().bind(Map("satisfaction" -> "invalid", "details" -> "Text details"))
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsString(boundForm)
+    }
+
+    "feedback submission (business rates) must show form errors if survey incomplete" in {
+      val cd = ContactDetails("a", "b", "c", "d", "e")
+      val ec = "business_rates"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val businessSubcategory = "business_rates_other"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), BusinessRatesSubcategoryId.toString -> JsString(businessSubcategory),
+        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val request = FakeRequest().withFormUrlEncodedBody("details" -> "value 1")
+
+      val result = controller(getRelevantData).formCompleteFeedback()(request)
+      val boundForm = SatisfactionSurveyForm().bind(Map("satisfaction" -> "invalid", "details" -> "Text details"))
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsString(boundForm)
+    }
 
   }
 }

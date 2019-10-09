@@ -55,8 +55,8 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
     val contact = request.userAnswers.contact() match {
       case Right(ct) => ct
       case Left(msg) =>
-        Logger.warn(s"Navigation for Confirmation page reached without a contact and error $msg")
-        throw new RuntimeException(s"Navigation for Confirmation page reached without a contact and error $msg")
+        Logger.warn(s"Navigation for Survey page reached without a contact and error $msg")
+        throw new RuntimeException(s"Navigation for Survey page reached without a contact and error $msg")
     }
 
     SatisfactionSurveyForm().bindFromRequest().fold(
