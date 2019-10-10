@@ -188,5 +188,21 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       }
     }
 
+    "return 303 and send email when form complete" in {
+      val cd = ContactDetails("a", "b", "c", "d", "e")
+      val ec = "council_tax"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_poor_repair"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoadSendEmail()(fakeRequest)
+
+      status(result) mustBe SEE_OTHER
+    }
   }
 }
