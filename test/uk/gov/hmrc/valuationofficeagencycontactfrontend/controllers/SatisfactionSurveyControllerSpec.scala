@@ -116,10 +116,10 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
       val request = FakeRequest().withFormUrlEncodedBody("details" -> "value 1")
 
       val result = controller(getRelevantData).formCompleteFeedback()(request)
-      val boundForm = SatisfactionSurveyForm().bind(Map("satisfaction" -> "invalid", "details" -> "Text details"))
 
       status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString(boundForm)
+      contentAsString(result) must include(
+        "Overall, how would you describe your experience with the form? - You must choose one")
     }
 
     "feedback submission (business rates) must show form errors if survey incomplete" in {
@@ -137,10 +137,10 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
       val request = FakeRequest().withFormUrlEncodedBody("details" -> "value 1")
 
       val result = controller(getRelevantData).formCompleteFeedback()(request)
-      val boundForm = SatisfactionSurveyForm().bind(Map("satisfaction" -> "invalid", "details" -> "Text details"))
 
       status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString(boundForm)
+      contentAsString(result) must include(
+        "Overall, how would you describe your experience with the form? - You must choose one")
     }
 
   }
