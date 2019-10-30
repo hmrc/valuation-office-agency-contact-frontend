@@ -67,7 +67,7 @@
 
 @bodyEnd = {
 @uiLayouts.footer(
-    analyticsToken = Some(appConfig.GTM),
+    analyticsToken = Some("GTM-" + appConfig.GTM),
     analyticsHost = appConfig.analyticsHost,
     ssoUrl = None,
     scriptElem = scriptElem,
