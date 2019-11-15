@@ -31,6 +31,8 @@
     appConfig = appConfig,
     bodyClasses = None) {
 
+    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
+    
     @components.heading("propertyOrAreaChanged.heading")
 
     <p>@Html(Messages("propertyOrAreaChanged.body"))</p>

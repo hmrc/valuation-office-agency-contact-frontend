@@ -22,14 +22,16 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.FormHelpers
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.InputViewModel
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html._
-
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
 @main_template(
     title = messages("businessRatesChallenge.title"),
     appConfig = appConfig,
     bodyClasses = None) {
+
+    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
 
     @components.heading("businessRatesChallenge.heading")
 
