@@ -8,24 +8,22 @@ object Dependencies {
 
     private val playHealthVersion = "3.14.0-play-25"
     private val logbackJsonLoggerVersion = "4.6.0"
-    private val govukTemplateVersion = "5.40.0-play-25"
-    private val playUiVersion = "8.1.0-play-25"
+    private val govukTemplateVersion = "5.46.0-play-25"
+    private val playUiVersion = "8.5.0-play-25"
     private val hmrcTestVersion = "3.4.0-play-25"
     private val scalaTestVersion = "3.0.8"
     private val scalaTestPlusPlayVersion = "2.0.1"
     private val mockitoAllVersion = "1.10.19"
-    private val httpCachingClientVersion = "8.5.0-play-25"
-    private val simpleReactivemongoVersion = "7.20.0-play-25"
-    private val playConditionalFormMappingVersion = "1.1.0-play-25"
-    private val playLanguageVersion = "3.4.0"
-    private val bootstrapPlayVersion = "5.0.0"
+    private val httpCachingClientVersion = "9.0.0-play-25"
+    private val simpleReactivemongoVersion = "7.21.0-play-25"
+    private val playConditionalFormMappingVersion = "1.2.0-play-25"
+    private val playLanguageVersion = "4.2.0-play-25"
+    private val bootstrapPlayVersion = "5.1.0"
 
 
     val compile: Seq[ModuleID] = Seq(
        ws,
       "uk.gov.hmrc" %% "simple-reactivemongo" % simpleReactivemongoVersion,
-      "org.reactivemongo" %% "reactivemongo" % "0.18.7",
-      "org.reactivemongo" %% "reactivemongo-play-json" % "0.18.7-play25",
       "uk.gov.hmrc" %% "logback-json-logger" % logbackJsonLoggerVersion,
       "uk.gov.hmrc" %% "govuk-template" % govukTemplateVersion,
       "uk.gov.hmrc" %% "play-health" % playHealthVersion,
@@ -34,7 +32,7 @@ object Dependencies {
       "uk.gov.hmrc" %% "play-conditional-form-mapping" % playConditionalFormMappingVersion,
       "uk.gov.hmrc" %% "bootstrap-play-25" % bootstrapPlayVersion,
       "uk.gov.hmrc" %% "play-language" % playLanguageVersion,
-      "uk.gov.hmrc" %% "http-verbs" % "10.0.0-play-25"
+      "uk.gov.hmrc" %% "http-verbs" % "10.2.0-play-25"
     )
 
     lazy val appDependencyOverrides: Set[ModuleID] = Set(
