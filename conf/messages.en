@@ -79,7 +79,7 @@ error.message.xss-invalid = You can only enter these characters: A-Z, a-z, 0-9, 
 
 session_expired.title = For your security, this service has been reset
 session_expired.heading = For your security, this service has been reset
-session_expired.guidance = The service has timed out because it was inactive for 15 minutes. Your information has not been submitted.
+session_expired.guidance = The service has timed out because it was inactive for 60 minutes. Your information has not been submitted.
 
 site.back = Back
 site.continue = Continue
