@@ -39,8 +39,6 @@ class HousingBenefitsViewSpec extends ViewBehaviours {
         "address.5",
         "email-title",
         "email",
-        "phone-title",
-        "phone-number",
         "para2"
     )
 
