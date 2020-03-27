@@ -255,7 +255,7 @@ valuationAdvice.email-title = Email
 valuationAdvice.email-url = clientdevelopment@voa.gsi.gov.uk
 valuationAdvice.phone-title = Telephone
 valuationAdvice.phone-number = 03000 501501
-valuationAdvice.response-paragraph = We aim to respond within 20 working days. However, it may take longer for complex enquiries.
+valuationAdvice.response-paragraph = Due to the current outbreak of Covid-19, we’re unable to offer a telephony service and it will take longer than usual to respond to your query. We’re sorry for any inconvenience this may cause.
 
 valuationForTaxes.title = Contact details
 valuationForTaxes.heading = Contact details
@@ -268,7 +268,7 @@ valuationForTaxes.phone1 = Telephone (England) 03000 501501
 valuationForTaxes.phone2 = Telephone (Wales) 03000 505505
 valuationForTaxes.openingHours-title = Opening hours
 valuationForTaxes.openingHours = 8:30am to 5:00pm. Closed on bank holidays.
-valuationForTaxes.para2 = We aim to respond within 20 working days. However, it may take longer for complex enquiries.
+valuationForTaxes.para2 = Due to the current outbreak of Covid-19, we’re unable to offer a telephony service and it will take longer than usual to respond to your query. We’re sorry for any inconvenience this may cause.
 
 housingBenefits.title = Contact details
 housingBenefits.heading = Contact details
@@ -284,7 +284,7 @@ housingBenefits.email-title =  Email
 housingBenefits.email = NSOhelpdesk@voa.gsi.gov.uk
 housingBenefits.phone-title = Phone
 housingBenefits.phone-number = 03000 502502
-housingBenefits.para2 = We aim to respond within 20 working days. However, it may take longer for complex enquiries.
+housingBenefits.para2 = Due to the current outbreak of Covid-19, we’re unable to offer a telephony service and it will take longer than usual to respond to your query. We’re sorry for any inconvenience this may cause.
 
 providingLettings.title = Contact details
 providingLettings.heading = Contact details
@@ -300,7 +300,7 @@ providingLettings.email-title =  Email
 providingLettings.email = NSOhelpdesk@voa.gsi.gov.uk
 providingLettings.phone-title = Phone
 providingLettings.phone-number = 03000 502502
-providingLettings.para2 = We aim to respond within 20 working days. However, it may take longer for complex enquiries.
+providingLettings.para2 = Due to the current outbreak of Covid-19, we’re unable to offer a telephony service and it will take longer than usual to respond to your query. We’re sorry for any inconvenience this may cause.
 
 error500.title = Service unavailable
 error500.heading = Sorry, we are experiencing technical difficulties

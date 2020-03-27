@@ -254,7 +254,7 @@ valuationAdvice.email-title = E-bost
 valuationAdvice.email-url = clientdevelopment@voa.gsi.gov.uk
 valuationAdvice.phone-title =  Ffôn
 valuationAdvice.phone-number = 03000 501501
-valuationAdvice.response-paragraph = Anelwn i ateb cyn pen 20 diwrnod gwaith. Fodd bynnag, gall ymholiadau cymhleth gymryd yn hirach.
+valuationAdvice.response-paragraph = Oherwydd yr achosion cyfredol o Covid-19, ni allwn gynnig gwasanaeth teleffoni a bydd yn cymryd mwy o amser na’r arfer i ymateb i’ch ymholiad. Mae’n ddrwg gennym am unrhyw anghyfleustra y gallai hyn ei achosi.
  
 valuationForTaxes.title = Manylion cyswllt
 valuationForTaxes.heading = Manylion cyswllt
@@ -267,7 +267,7 @@ valuationForTaxes.phone1 = Rhif f ffôn (England) 03000 501501
 valuationForTaxes.phone2 = Rhif f ffôn (Cymru) 03000 505505
 valuationForTaxes.openingHours-title = Oriau agor
 valuationForTaxes.openingHours =  08:30 – 17:00. Ar gau ar wyliau’r banc.
-valuationForTaxes.para2 = Anelwn i ateb cyn pen 20 diwrnod gwaith. Fodd bynnag, gall ymholiadau cymhleth gymryd yn hirach.
+valuationForTaxes.para2 = Oherwydd yr achosion cyfredol o Covid-19, ni allwn gynnig gwasanaeth teleffoni a bydd yn cymryd mwy o amser na’r arfer i ymateb i’ch ymholiad. Mae’n ddrwg gennym am unrhyw anghyfleustra y gallai hyn ei achosi.
  
 housingBenefits.title = Manylion cyswllt
 housingBenefits.heading = Manylion cyswllt
@@ -283,7 +283,7 @@ housingBenefits.email-title = E-bost
 housingBenefits.email = NSOhelpdesk@voa.gsi.gov.uk
 housingBenefits.phone-title =  Ffôn
 housingBenefits.phone-number = 03000 502502
-housingBenefits.para2 = Anelwn i ateb cyn pen 20 diwrnod gwaith. Fodd bynnag, gall ymholiadau cymhleth gymryd yn hirach.
+housingBenefits.para2 = Oherwydd yr achosion cyfredol o Covid-19, ni allwn gynnig gwasanaeth teleffoni a bydd yn cymryd mwy o amser na’r arfer i ymateb i’ch ymholiad. Mae’n ddrwg gennym am unrhyw anghyfleustra y gallai hyn ei achosi.
  
 providingLettings.title = Manylion cyswllt
 providingLettings.heading = Manylion cyswllt
@@ -299,7 +299,7 @@ providingLettings.email-title = E-bost
 providingLettings.email = NSOhelpdesk@voa.gsi.gov.uk
 providingLettings.phone-title =  Ffôn
 providingLettings.phone-number = 03000 502502
-providingLettings.para2 = Anelwn i ateb cyn pen 20 diwrnod gwaith. Fodd bynnag, gall ymholiadau cymhleth gymryd yn hirach.
+providingLettings.para2 = Oherwydd yr achosion cyfredol o Covid-19, ni allwn gynnig gwasanaeth teleffoni a bydd yn cymryd mwy o amser na’r arfer i ymateb i’ch ymholiad. Mae’n ddrwg gennym am unrhyw anghyfleustra y gallai hyn ei achosi.
  
 error500.title = Nid yw’r gwasanaeth ar gael
 error500.heading = Mae’n ddrwg gennym, rydym yn profi anawsterau technegol

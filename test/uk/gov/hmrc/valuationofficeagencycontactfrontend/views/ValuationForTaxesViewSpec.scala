@@ -31,10 +31,6 @@ class ValuationForTaxesViewSpec extends ViewBehaviours {
         "para1",
         "email-title",
         "email",
-        "generalEnquiries-title",
-        "phone1",
-        "phone2",
-        "openingHours",
         "para2"
     )
 
