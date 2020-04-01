@@ -31,12 +31,6 @@ class ProvidingLettingsViewSpec extends ViewBehaviours {
         "heading",
         "subheading",
         "para1",
-        "address.heading",
-        "address.1",
-        "address.2",
-        "address.3",
-        "address.4",
-        "address.5",
         "email-title",
         "email",
         "para2"
