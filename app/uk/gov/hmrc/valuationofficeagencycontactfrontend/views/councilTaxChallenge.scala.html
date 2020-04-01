@@ -33,11 +33,10 @@ bodyClasses = Some("full-width")) {
           @Html(Messages("checkYourTaxBand.p1"))
         </p>
 
-        <div class="challenge-contact">
-            <p><strong>@Messages("checkYourTaxBand.l1")</strong>  <br>
-                @Messages("checkYourTaxBand.l2")<br>
-                @Messages("checkYourTaxBand.l3")<br>
-                @Html(Messages("checkYourTaxBand.l4"))
-        </div>
+        <h3 class="heading-small">@messages("checkYourTaxBand.email.heading")</h3>
+
+        <p><a href="mailto:@messages("checkYourTaxBand.email")">@messages("checkYourTaxBand.email")</a></p>
+
+        <p>@messages("checkYourTaxBand.covid.p")</p>
     </div>
 }
