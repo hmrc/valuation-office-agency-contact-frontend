@@ -160,6 +160,9 @@ checkYourTaxBand.l2 = Ffôn (Lloegr): 03000 501 501
 checkYourTaxBand.l3 = Ffôn (Cymru): 03000 505 505
 checkYourTaxBand.l4 = <a href="https://www.gov.uk/call-charges">Cael gwybod am gostau galwadau</a>
 councilTaxChallenge.council_tax_challenge = Heriwch eich band treth cyngor
+checkYourTaxBand.email.heading = E-bost
+checkYourTaxBand.email = ctonline@voa.gsi.gov.uk
+checkYourTaxBand.covid.p = Due to the current outbreak of COVID-19 we’re unable to offer a telephony service or accept post. It will take longer than usual to respond to your query and we’re sorry for any inconvenience this may cause.
 
 councilTaxSubcategory.title = Beth ydych eisiau gwybod am Dreth Gyngor?
 councilTaxSubcategory.heading = Beth ydych eisiau gwybod am Dreth Gyngor?
