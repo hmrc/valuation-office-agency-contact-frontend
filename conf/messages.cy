@@ -162,7 +162,7 @@ checkYourTaxBand.l4 = <a href="https://www.gov.uk/call-charges">Cael gwybod am g
 councilTaxChallenge.council_tax_challenge = Heriwch eich band treth cyngor
 checkYourTaxBand.email.heading = E-bost
 checkYourTaxBand.email = ctonline@voa.gsi.gov.uk
-checkYourTaxBand.covid.p = Due to the current outbreak of COVID-19 we’re unable to offer a telephony service or accept post. It will take longer than usual to respond to your query and we’re sorry for any inconvenience this may cause.
+checkYourTaxBand.covid.p = Oherwydd yr achosion cyfredol o COVID-19, ni allwn gynnig gwasanaeth teleffoni na derbyn post. Bydd yn cymryd mwy o amser nag arfer i ymateb i’ch ymholiad ac mae’n ddrwg gennym am unrhyw anghyfleustra y gallai hyn ei achosi.
 
 councilTaxSubcategory.title = Beth ydych eisiau gwybod am Dreth Gyngor?
 councilTaxSubcategory.heading = Beth ydych eisiau gwybod am Dreth Gyngor?
@@ -286,7 +286,7 @@ housingBenefits.email-title = E-bost
 housingBenefits.email = NSOhelpdesk@voa.gsi.gov.uk
 housingBenefits.phone-title =  Ffôn
 housingBenefits.phone-number = 03000 502502
-housingBenefits.para2 = Oherwydd yr achosion cyfredol o Covid-19, ni allwn gynnig gwasanaeth teleffoni a bydd yn cymryd mwy o amser na’r arfer i ymateb i’ch ymholiad. Mae’n ddrwg gennym am unrhyw anghyfleustra y gallai hyn ei achosi.
+housingBenefits.para2 = Oherwydd yr achosion cyfredol o COVID-19, ni allwn gynnig gwasanaeth teleffoni na derbyn post. Bydd yn cymryd mwy o amser nag arfer i ymateb i’ch ymholiad ac mae’n ddrwg gennym am unrhyw anghyfleustra y gallai hyn ei achosi.
  
 providingLettings.title = Manylion cyswllt
 providingLettings.heading = Manylion cyswllt
@@ -302,8 +302,8 @@ providingLettings.email-title = E-bost
 providingLettings.email = NSOhelpdesk@voa.gsi.gov.uk
 providingLettings.phone-title =  Ffôn
 providingLettings.phone-number = 03000 502502
-providingLettings.para2 = Oherwydd yr achosion cyfredol o Covid-19, ni allwn gynnig gwasanaeth teleffoni a bydd yn cymryd mwy o amser na’r arfer i ymateb i’ch ymholiad. Mae’n ddrwg gennym am unrhyw anghyfleustra y gallai hyn ei achosi.
- 
+providingLettings.para2 = Oherwydd yr achosion cyfredol o COVID-19, ni allwn gynnig gwasanaeth teleffoni na derbyn post. Bydd yn cymryd mwy o amser nag arfer i ymateb i’ch ymholiad ac mae’n ddrwg gennym am unrhyw anghyfleustra y gallai hyn ei achosi.
+
 error500.title = Nid yw’r gwasanaeth ar gael
 error500.heading = Mae’n ddrwg gennym, rydym yn profi anawsterau technegol
 error500.tryagain.para = Rhowch gynnig arall arni yn nes ymlaen
