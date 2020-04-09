@@ -26,9 +26,12 @@ class BusinessRatesSmartLinksViewSpec extends ViewBehaviours {
 
   "Business Rates Smart Links View" must {
 
-    behave like normalPage(view, "checkBeforeYouStart", "para1", "business_rates.subheading", "business_rates.para1",
+    behave like normalPage(view, "checkBeforeYouStart", "para1", "business_rates.subheading",
+      "business_rates.covid.link", "business_rates.covid.para", "business_rates.run.home.link", "business_rates.run.home.para",
+      "business_rates.holiday.lets.link", "business_rates.holiday.lets.para", "business_rates.para1",
       "business_rates.para2", "business_rates.para3", "business_rates.para4", "business_rates.para5", "business_rates.para6",
       "business_rates.para7", "business_rates.para8", "business_rates.para9", "business_rates.para10", "business_rates.para11",
+      "business_rates.covid.url", "business_rates.run.home.url", "business_rates.holiday.lets.url",
       "business_rates.url1", "business_rates.url2", "business_rates.url3", "business_rates.url4", "business_rates.url5")
   }
 
