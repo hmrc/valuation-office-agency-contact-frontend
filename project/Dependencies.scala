@@ -36,7 +36,7 @@ object Dependencies {
       "uk.gov.hmrc" %% "http-verbs" % "10.7.0-play-26"
     )
 
-    lazy val appDependencyOverrides: Set[ModuleID] = Set(
+    lazy val appDependencyOverrides: Seq[ModuleID] = Seq(
 //      "uk.gov.hmrc" %% "govuk-template" % govukTemplateVersion,
       "com.typesafe.akka" %% "akka-stream"    % akkaVersion     force(),
       "com.typesafe.akka" %% "akka-protobuf"  % akkaVersion     force(),
