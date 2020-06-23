@@ -17,15 +17,17 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import javax.inject.{Inject, Singleton}
-
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.{Action, AnyContent}
+import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.housingBenefits
 
 @Singleton
-class HousingBenefitsController @Inject()(val appConfig: FrontendAppConfig, val messagesApi: MessagesApi) extends FrontendController with I18nSupport {
+class HousingBenefitsController @Inject()(val appConfig: FrontendAppConfig,
+                                          override val messagesApi: MessagesApi,
+                                          cc: MessagesControllerComponents
+                                         ) extends FrontendController(cc) with I18nSupport {
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
     Ok(housingBenefits(appConfig))

@@ -29,7 +29,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{Dat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{SatisfactionSurvey, SatisfactionSurveyForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, CouncilTaxSubcategoryId, EnquiryCategoryId, PropertyAddressId, TellUsMoreId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode, PropertyAddress, TellUsMore}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{AuditServiceConnector, UserAnswers}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{internalServerError, satisfactionSurveyThankYou}
 
 import scala.concurrent.ExecutionContext
@@ -40,13 +40,12 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
   val mockUserAnswers = mock[UserAnswers]
   val configuration = injector.instanceOf[Configuration]
   val environment = injector.instanceOf[Environment]
-  implicit def ec: ExecutionContext = injector.instanceOf[ExecutionContext]
 
-  def auditingService = new AuditingService(new AuditServiceConnector(configuration, environment))
+  def auditingService = injector.instanceOf[AuditingService]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new SatisfactionSurveyController(frontendAppConfig, messagesApi, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl, auditingService)
+      dataRetrievalAction, new DataRequiredActionImpl(ec), auditingService, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[SatisfactionSurvey] = SatisfactionSurveyForm()) =
     satisfactionSurveyThankYou(frontendAppConfig)(fakeRequest, messages).toString

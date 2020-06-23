@@ -16,6 +16,9 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours
 
+import java.util.Locale
+
+import play.api.i18n.Lang
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.ViewSpecBase
 
@@ -38,7 +41,7 @@ trait ViewBehaviours extends ViewSpecBase {
           val doc = asDocument(view())
           val nav = doc.getElementById("proposition-menu")
           val span = nav.children.first
-          span.text mustBe messagesApi("site.service_name")
+          span.text mustBe messagesApi("site.service_name")(Lang(Locale.UK))
         }
 
         "display the correct browser title" in {

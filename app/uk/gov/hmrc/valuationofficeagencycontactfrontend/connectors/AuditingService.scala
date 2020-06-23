@@ -19,15 +19,14 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors
 import javax.inject.Inject
 import play.api.libs.json.JsValue
 import uk.gov.hmrc.http.HeaderCarrier
-import uk.gov.hmrc.play.audit.http.connector.AuditResult
+import uk.gov.hmrc.play.audit.http.connector.{AuditConnector, AuditResult}
 import uk.gov.hmrc.play.audit.model.ExtendedDataEvent
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AuditServiceConnector
 import uk.gov.hmrc.play.audit.model.DataEvent
 
 import scala.concurrent.{ExecutionContext, Future}
 
 
-class AuditingService @Inject()(auditConnector: AuditServiceConnector)  {
+class AuditingService @Inject()(auditConnector: AuditConnector)  {
 
   def sendEvent(auditType: String, json: JsValue)(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit = {
     val event = eventFor(auditType, json)

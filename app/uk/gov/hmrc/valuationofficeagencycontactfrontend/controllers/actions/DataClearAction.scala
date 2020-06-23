@@ -18,16 +18,14 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions
 
 
 import com.google.inject.{ImplementedBy, Inject}
-import play.api.mvc.{ActionBuilder, ActionTransformer, Request}
+import play.api.mvc.{ActionBuilder, ActionTransformer, AnyContent, BodyParser, ControllerComponents, Request}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.OptionalDataRequest
 import uk.gov.hmrc.play.HeaderCarrierConverter
 
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 
-class DataClearActionImpl @Inject()(val dataCacheConnector: DataCacheConnector) extends DataClearAction {
+class DataClearActionImpl @Inject()(val dataCacheConnector: DataCacheConnector, cc: ControllerComponents) extends DataClearAction {
 
   override protected def transform[A](request: Request[A]): Future[OptionalDataRequest[A]] = {
     implicit val hc = HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))
@@ -39,7 +37,11 @@ class DataClearActionImpl @Inject()(val dataCacheConnector: DataCacheConnector) 
         Future.successful(OptionalDataRequest(request, sessionId.toString, None))
     }
   }
+
+  override def parser: BodyParser[AnyContent] = cc.parsers.default
+
+  override protected def executionContext: ExecutionContext = cc.executionContext
 }
 
 @ImplementedBy(classOf[DataClearActionImpl])
-trait DataClearAction extends ActionTransformer[Request, OptionalDataRequest] with ActionBuilder[OptionalDataRequest]
+trait DataClearAction extends ActionTransformer[Request, OptionalDataRequest] with ActionBuilder[OptionalDataRequest, AnyContent]

@@ -23,8 +23,11 @@ import play.api.inject.Injector
 import play.api.mvc.AnyContentAsEmpty
 import play.api.test.FakeRequest
 import uk.gov.hmrc.http.cache.client.CacheMap
+import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, PropertyAddress, TellUsMore}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
+
+import scala.concurrent.ExecutionContext
 
 trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
 
@@ -37,6 +40,10 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
   def fakeRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest("", "")
 
   def messages: Messages = messagesApi.preferred(fakeRequest)
+
+  def servicesConfig: ServicesConfig = app.injector.instanceOf[ServicesConfig]
+
+  implicit def ec: ExecutionContext = app.injector.instanceOf[ExecutionContext]
 
   class FakeUserAnswers(cd: ContactDetails,
                         eq: String,

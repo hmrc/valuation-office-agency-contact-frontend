@@ -22,8 +22,8 @@ import play.api.i18n.MessagesApi
 import play.api.libs.json._
 import play.api.{Configuration, Environment, Logger}
 import uk.gov.hmrc.http.HeaderCarrier
+import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 import uk.gov.hmrc.play.bootstrap.http.HttpClient
-import uk.gov.hmrc.play.config.ServicesConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Contact, ContactWithEnMessage}
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -32,15 +32,11 @@ import scala.util.{Failure, Success, Try}
 
 class LightweightContactEventsConnector @Inject()(http: HttpClient,
                                                   val configuration: Configuration,
-                                                  environment: Environment,
-                                                   auditService: AuditingService) extends ServicesConfig {
-
-  override protected def mode: Mode = environment.mode
-
-  override protected def runModeConfiguration: Configuration = configuration
+                                                   auditService: AuditingService,
+                                                  servicesConfig: ServicesConfig) {
 
   implicit val hc: HeaderCarrier = HeaderCarrier()
-  val serviceUrl = baseUrl("lightweight-contact-events")
+  val serviceUrl = servicesConfig.baseUrl("lightweight-contact-events")
   val baseSegment = "/lightweight-contact-events/"
   val jsonContentTypeHeader = ("Content-Type", "application/json")
 

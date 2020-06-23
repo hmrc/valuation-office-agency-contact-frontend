@@ -19,7 +19,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import javax.inject.{Inject, Singleton}
 import play.api.{Environment, Logger}
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.{Action, Request}
+import play.api.mvc.{Action, MessagesControllerComponents, Request}
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.HeaderCarrierConverter
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
@@ -34,11 +34,12 @@ import scala.concurrent.ExecutionContext
 
 @Singleton()
 class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
-                                             val messagesApi: MessagesApi,
+                                             override val messagesApi: MessagesApi,
                                              navigator: Navigator,
                                              getData: DataRetrievalAction,
                                              requireData: DataRequiredAction,
-                                             auditService: AuditingService)(implicit ec: ExecutionContext) extends FrontendController with I18nSupport {
+                                             auditService: AuditingService,
+                                             cc: MessagesControllerComponents)(implicit ec: ExecutionContext) extends FrontendController(cc) with I18nSupport {
 
   implicit def hc(implicit request: Request[_]):HeaderCarrier = HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))
 

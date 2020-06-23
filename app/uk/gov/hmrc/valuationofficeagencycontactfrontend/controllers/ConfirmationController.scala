@@ -19,6 +19,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import javax.inject.{Inject, Singleton}
 import play.api.Logger
 import play.api.i18n.{I18nSupport, MessagesApi}
+import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
@@ -29,15 +30,20 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, Us
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmation
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurveyForm
 
+import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Success}
 
 @Singleton()
 class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
-                                       val messagesApi: MessagesApi,
+                                       override val messagesApi: MessagesApi,
                                        val connector: LightweightContactEventsConnector,
                                        navigator: Navigator,
                                        getData: DataRetrievalAction,
-                                       requireData: DataRequiredAction) extends FrontendController with I18nSupport {
+                                       requireData: DataRequiredAction,
+                                       cc: MessagesControllerComponents
+                                      ) extends FrontendController(cc) with I18nSupport {
+
+  implicit val ec: ExecutionContext = cc.executionContext
 
   def enquiryKey(answers: UserAnswers): Either[String, String] = {
     answers.enquiryCategory match {
