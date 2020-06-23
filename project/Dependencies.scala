@@ -37,7 +37,6 @@ object Dependencies {
     )
 
     lazy val appDependencyOverrides: Seq[ModuleID] = Seq(
-//      "uk.gov.hmrc" %% "govuk-template" % govukTemplateVersion,
       "com.typesafe.akka" %% "akka-stream"    % akkaVersion     force(),
       "com.typesafe.akka" %% "akka-protobuf"  % akkaVersion     force(),
       "com.typesafe.akka" %% "akka-slf4j"     % akkaVersion     force(),
