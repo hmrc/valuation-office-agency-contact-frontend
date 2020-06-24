@@ -17,18 +17,19 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.test.Helpers._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.unauthorised
 
 class UnauthorisedControllerSpec extends ControllerSpecBase {
 
   "Unauthorised Controller" must {
     "return 200 for a GET" in {
-      val result = new UnauthorisedController(frontendAppConfig, messagesApi).onPageLoad()(fakeRequest)
+      val result = new UnauthorisedController(frontendAppConfig, messagesApi, MessageControllerComponentsHelpers.stubMessageControllerComponents).onPageLoad()(fakeRequest)
       status(result) mustBe OK
     }
 
     "return the correct view for a GET" in {
-      val result = new UnauthorisedController(frontendAppConfig, messagesApi).onPageLoad()(fakeRequest)
+      val result = new UnauthorisedController(frontendAppConfig, messagesApi, MessageControllerComponentsHelpers.stubMessageControllerComponents).onPageLoad()(fakeRequest)
       contentAsString(result) mustBe unauthorised(frontendAppConfig)(fakeRequest, messages).toString
     }
   }

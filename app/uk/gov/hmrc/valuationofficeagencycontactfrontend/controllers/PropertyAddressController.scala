@@ -17,9 +17,9 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import javax.inject.Inject
-
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
+import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
@@ -30,14 +30,18 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, PropertyAd
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.propertyAddress
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 
 class PropertyAddressController @Inject()(appConfig: FrontendAppConfig,
                                           override val messagesApi: MessagesApi,
                                           dataCacheConnector: DataCacheConnector,
                                           navigator: Navigator,
                                           getData: DataRetrievalAction,
-                                          requireData: DataRequiredAction) extends FrontendController with I18nSupport {
+                                          requireData: DataRequiredAction,
+                                          cc: MessagesControllerComponents
+                                         ) extends FrontendController(cc) with I18nSupport {
+
+  implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode) = (getData andThen requireData) {
     implicit request =>

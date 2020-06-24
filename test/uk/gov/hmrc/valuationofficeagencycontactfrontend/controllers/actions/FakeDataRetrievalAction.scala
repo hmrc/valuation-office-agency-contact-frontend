@@ -16,13 +16,13 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions
 
-import play.api.mvc.Request
+import play.api.mvc.{AnyContent, BodyParser, Request}
+import play.api.test.Helpers
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.OptionalDataRequest
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
-import scala.concurrent.Future
-
+import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.ExecutionContext.Implicits.global
 
 class FakeDataRetrievalAction(cacheMapToReturn: Option[CacheMap]) extends DataRetrievalAction {
@@ -30,4 +30,8 @@ class FakeDataRetrievalAction(cacheMapToReturn: Option[CacheMap]) extends DataRe
     case None => Future(OptionalDataRequest(request, "id", None))
     case Some(cacheMap)=> Future(OptionalDataRequest(request, "id", Some(new UserAnswers(cacheMap))))
   }
+
+  override def parser: BodyParser[AnyContent] = Helpers.stubControllerComponents().parsers.default
+
+  override protected def executionContext: ExecutionContext = Helpers.stubControllerComponents().executionContext
 }

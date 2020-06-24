@@ -30,7 +30,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{Dat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurveyForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, UserAnswers}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation, internalServerError}
 
 import scala.concurrent.Future
@@ -44,14 +44,16 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new ConfirmationController(frontendAppConfig, messagesApi, mockConnector, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction, new DataRequiredActionImpl)
+    new ConfirmationController(frontendAppConfig, messagesApi, mockConnector, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction,
+      new DataRequiredActionImpl(ec), MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   val mockConnectorF = mock[LightweightContactEventsConnector]
   when (mockConnectorF.send(any[Contact], any[MessagesApi])(any[HeaderCarrier])) thenReturn
     Future.successful(Failure(new RuntimeException("Received exception from upstream service")))
 
   def controllerF(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new ConfirmationController(frontendAppConfig, messagesApi, mockConnectorF, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction, new DataRequiredActionImpl)
+    new ConfirmationController(frontendAppConfig, messagesApi, mockConnectorF, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction,
+      new DataRequiredActionImpl(ec), MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   "Confirmation Controller" must {
 

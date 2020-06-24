@@ -25,7 +25,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, DateFormatter, RadioOption, UserAnswers}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, DateFormatter, MessageControllerComponentsHelpers, RadioOption, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{check_your_answers, internalServerError}
 
@@ -36,7 +36,8 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new CheckYourAnswersController(frontendAppConfig, messagesApi, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction, new DataRequiredActionImpl)
+    new CheckYourAnswersController(frontendAppConfig, messagesApi, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction,
+      new DataRequiredActionImpl(ec), MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   "Check Your Answers Controller" must {
 

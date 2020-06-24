@@ -17,26 +17,20 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend
 
 import com.google.inject.{Inject, Singleton}
-import play.api.Mode.Mode
 import play.api.{Configuration, Environment}
 import play.api.i18n.Lang
-import uk.gov.hmrc.play.bootstrap.config.AppName
-import uk.gov.hmrc.play.config.ServicesConfig
+import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 
 @Singleton
-class FrontendAppConfig @Inject() (val configuration: Configuration, environment: Environment) extends AppName with ServicesConfig {
+class FrontendAppConfig @Inject() (val configuration: Configuration, servicesConfig: ServicesConfig) {
 
-  override protected def mode: Mode = environment.mode
+  private def loadConfig(key: String) = configuration.getOptional[String](key).getOrElse(throw new Exception(s"Missing configuration key: $key"))
 
-  override protected def runModeConfiguration: Configuration = configuration
-
-  private def loadConfig(key: String) = configuration.getString(key).getOrElse(throw new Exception(s"Missing configuration key: $key"))
-
-  private lazy val contactHost = configuration.getString("contact-frontend.host").getOrElse("")
+  private lazy val contactHost = configuration.get[String]("contact-frontend.host")
   private val contactFormServiceIdentifier = "valuationofficeagencycontactfrontend"
 
-  lazy val optimizelyId = configuration.getString(s"optimizely.projectId").getOrElse("")
+  lazy val optimizelyId = configuration.getOptional[String](s"optimizely.projectId").getOrElse("")
 
   lazy val analyticsToken = loadConfig(s"google-analytics.token")
   lazy val analyticsHost = loadConfig(s"google-analytics.host")
@@ -47,12 +41,12 @@ class FrontendAppConfig @Inject() (val configuration: Configuration, environment
   lazy val betaFeedbackUrl = s"$contactHost/contact/beta-feedback"
   lazy val betaFeedbackUnauthenticatedUrl = s"$contactHost/contact/beta-feedback-unauthenticated"
 
-  val authUrl = baseUrl("auth")
+  val authUrl = servicesConfig.baseUrl("auth")
   //$COVERAGE-ON$
   lazy val loginUrl = loadConfig("urls.login")
   lazy val loginContinueUrl = loadConfig("urls.loginContinue")
 
-  lazy val languageTranslationEnabled = configuration.getBoolean("microservice.services.features.welsh-translation").getOrElse(true)
+  lazy val languageTranslationEnabled = configuration.getOptional[Boolean]("microservice.services.features.welsh-translation").getOrElse(true)
   def languageMap: Map[String, Lang] = Map(
     "english" -> Lang("en"),
     "cymraeg" -> Lang("cy"))

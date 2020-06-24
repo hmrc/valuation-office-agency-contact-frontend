@@ -17,9 +17,8 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import javax.inject.{Inject, Singleton}
-
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.{Action, AnyContent}
+import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.session_expired
@@ -28,7 +27,9 @@ import scala.concurrent.Future
 
 @Singleton
 class SessionExpiredController @Inject()(val appConfig: FrontendAppConfig,
-                                         val messagesApi: MessagesApi) extends FrontendController with I18nSupport {
+                                         override val messagesApi: MessagesApi,
+                                         cc: MessagesControllerComponents
+                                        ) extends FrontendController(cc) with I18nSupport {
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
     Ok(session_expired(appConfig))

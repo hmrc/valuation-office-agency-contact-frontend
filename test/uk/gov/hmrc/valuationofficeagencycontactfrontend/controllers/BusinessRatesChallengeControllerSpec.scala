@@ -16,19 +16,23 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
+import play.api.test.Helpers
 import play.api.test.Helpers._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 
 class BusinessRatesChallengeControllerSpec extends ControllerSpecBase {
 
   "BusinessRatesChallengeController" must {
     "return 200 for GET on AreaChangePageLoad" in {
-      val resutl = new BusinessRatesChallengeController(messagesApi, frontendAppConfig).onAreaChangePageLoad(fakeRequest)
+      val resutl = new BusinessRatesChallengeController(messagesApi, frontendAppConfig,
+        MessageControllerComponentsHelpers.stubMessageControllerComponents).onAreaChangePageLoad(fakeRequest)
       status(resutl) mustBe OK
       contentAsString(resutl) must include ("My property or the local area has changed")
     }
 
     "return 200 for GET on ChallengePageLoad" in {
-      val resutl = new BusinessRatesChallengeController(messagesApi, frontendAppConfig).onChallengePageLoad(fakeRequest)
+      val resutl = new BusinessRatesChallengeController(messagesApi, frontendAppConfig,
+        MessageControllerComponentsHelpers.stubMessageControllerComponents).onChallengePageLoad(fakeRequest)
       status(resutl) mustBe OK
       contentAsString(resutl) must include ("Challenging my business rates valuation")
     }

@@ -27,7 +27,9 @@ import uk.gov.hmrc.http.SessionKeys
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.EnquiryCategoryId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.enquiryCategory
+
 import scala.concurrent.ExecutionContext.Implicits.global
 
 class EnquiryCategoryControllerSpec extends ControllerSpecBase {
@@ -36,7 +38,7 @@ class EnquiryCategoryControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new EnquiryCategoryController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, getClearCacheMap)
+      dataRetrievalAction, getClearCacheMap, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = EnquiryCategoryForm()) = enquiryCategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 

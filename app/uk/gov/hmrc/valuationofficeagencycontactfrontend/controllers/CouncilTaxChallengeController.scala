@@ -18,6 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import javax.inject.Inject
 import play.api.i18n.{I18nSupport, MessagesApi}
+import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
@@ -26,7 +27,9 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.councilTaxCha
 class CouncilTaxChallengeController @Inject() (appConfig: FrontendAppConfig,
                                                 override val messagesApi: MessagesApi,
                                                 getData: DataRetrievalAction,
-                                                requireData: DataRequiredAction) extends FrontendController with I18nSupport {
+                                                requireData: DataRequiredAction,
+                                               cc: MessagesControllerComponents
+                                              ) extends FrontendController(cc) with I18nSupport {
   def onPageLoad() = (getData andThen requireData) {
     implicit request =>
       Ok(councilTaxChallenge(appConfig))

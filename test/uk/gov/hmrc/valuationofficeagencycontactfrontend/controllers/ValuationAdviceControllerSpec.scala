@@ -17,18 +17,19 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.test.Helpers._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.valuationAdvice
 
 class ValuationAdviceControllerSpec extends ControllerSpecBase {
 
   "Valuation Advice Controller" must {
     "return 200 for a GET" in {
-      val result = new ValuationAdviceController(frontendAppConfig, messagesApi).onPageLoad()(fakeRequest)
+      val result = new ValuationAdviceController(frontendAppConfig, messagesApi, MessageControllerComponentsHelpers.stubMessageControllerComponents).onPageLoad()(fakeRequest)
       status(result) mustBe OK
     }
 
     "return the correct view for a GET" in {
-      val result = new ValuationAdviceController(frontendAppConfig, messagesApi).onPageLoad()(fakeRequest)
+      val result = new ValuationAdviceController(frontendAppConfig, messagesApi, MessageControllerComponentsHelpers.stubMessageControllerComponents).onPageLoad()(fakeRequest)
       contentAsString(result) mustBe valuationAdvice(frontendAppConfig)(fakeRequest, messages).toString
     }
 

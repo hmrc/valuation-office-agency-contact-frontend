@@ -20,6 +20,7 @@ import javax.inject.Inject
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.libs.json.{JsResult, JsString, JsSuccess, JsValue}
+import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
@@ -31,7 +32,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.councilTaxSubcategory
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 import scala.util.Success
 
 class CouncilTaxSubcategoryController @Inject()(
@@ -40,7 +41,11 @@ class CouncilTaxSubcategoryController @Inject()(
                                         dataCacheConnector: DataCacheConnector,
                                         navigator: Navigator,
                                         getData: DataRetrievalAction,
-                                        requireData: DataRequiredAction) extends FrontendController with I18nSupport {
+                                        requireData: DataRequiredAction,
+                                        cc: MessagesControllerComponents
+                                               ) extends FrontendController(cc) with I18nSupport {
+
+  implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode) = (getData andThen requireData) {
     implicit request =>

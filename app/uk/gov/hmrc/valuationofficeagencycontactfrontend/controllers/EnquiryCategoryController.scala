@@ -17,10 +17,9 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import javax.inject.Inject
-
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.{Action, AnyContent}
+import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
@@ -31,7 +30,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.enquiryCategory
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 
 class EnquiryCategoryController @Inject()(
                                         appConfig: FrontendAppConfig,
@@ -39,7 +38,11 @@ class EnquiryCategoryController @Inject()(
                                         dataCacheConnector: DataCacheConnector,
                                         navigator: Navigator,
                                         getData: DataRetrievalAction,
-                                        clearData: DataClearAction) extends FrontendController with I18nSupport {
+                                        clearData: DataClearAction,
+                                        cc: MessagesControllerComponents
+                                         ) extends FrontendController(cc) with I18nSupport {
+
+  implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode) = clearData {
     implicit request =>

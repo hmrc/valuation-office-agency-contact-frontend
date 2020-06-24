@@ -17,18 +17,19 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.test.Helpers._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.housingBenefits
 
 class HousingBenefitsControllerSpec extends ControllerSpecBase {
 
   "Housing benefits Controller" must {
     "return 200 for a GET" in {
-      val result = new HousingBenefitsController(frontendAppConfig, messagesApi).onPageLoad()(fakeRequest)
+      val result = new HousingBenefitsController(frontendAppConfig, messagesApi, MessageControllerComponentsHelpers.stubMessageControllerComponents).onPageLoad()(fakeRequest)
       status(result) mustBe OK
     }
 
     "return the correct view for a GET" in {
-      val result = new HousingBenefitsController(frontendAppConfig, messagesApi).onPageLoad()(fakeRequest)
+      val result = new HousingBenefitsController(frontendAppConfig, messagesApi, MessageControllerComponentsHelpers.stubMessageControllerComponents).onPageLoad()(fakeRequest)
       contentAsString(result) mustBe housingBenefits(frontendAppConfig)(fakeRequest, messages).toString
     }
 

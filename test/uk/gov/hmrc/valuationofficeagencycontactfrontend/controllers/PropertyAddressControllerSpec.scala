@@ -26,6 +26,7 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyAddressForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyAddressId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{NormalMode, PropertyAddress}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.propertyAddress
 
 class PropertyAddressControllerSpec extends ControllerSpecBase {
@@ -34,7 +35,7 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new PropertyAddressController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl)
+      dataRetrievalAction, new DataRequiredActionImpl(ec), MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[PropertyAddress] = PropertyAddressForm()) = propertyAddress(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 

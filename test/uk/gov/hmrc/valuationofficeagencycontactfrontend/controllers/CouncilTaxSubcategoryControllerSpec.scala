@@ -29,6 +29,7 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxSubcategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CouncilTaxSubcategoryId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.councilTaxSubcategory
 
 import scala.concurrent.Future
@@ -42,7 +43,7 @@ class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with Mockit
     when(fakeDataCacheConnector.save(any, any, any)(any))
       .thenReturn(Future.successful(CacheMap("councilTaxSubcategory", Map("councilTaxSubcategory" -> JsString("bar")))))
     new CouncilTaxSubcategoryController(frontendAppConfig, messagesApi, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl)
+      dataRetrievalAction, new DataRequiredActionImpl(ec), MessageControllerComponentsHelpers.stubMessageControllerComponents)
   }
 
   def viewAsString(form: Form[String] = CouncilTaxSubcategoryForm()) =

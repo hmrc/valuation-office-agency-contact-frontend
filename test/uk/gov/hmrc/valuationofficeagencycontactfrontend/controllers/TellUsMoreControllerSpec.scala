@@ -28,7 +28,7 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.TellUsMoreForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxSubcategoryId, EnquiryCategoryId, TellUsMoreId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, UserAnswers}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{internalServerError, tellUsMore}
 
@@ -40,7 +40,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new TellUsMoreController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl)
+      dataRetrievalAction, new DataRequiredActionImpl(ec), MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[TellUsMore] = TellUsMoreForm(), msg: String = "") = tellUsMore(frontendAppConfig, form, NormalMode, msg)(fakeRequest, messages).toString
 
