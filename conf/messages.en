@@ -103,6 +103,7 @@ site.start-again = Start again
 site.submit = Submit
 site.submit.enquiry = Submit your enquiry
 site.service_name = Valuation Office Agency Contact Form
+service.name = Valuation Office Agency Contact Form
 site.textarea.char_limit = (Limit is {0} characters)
 site.print.button=Print or save
 site.govuk=Back to GOV.UK

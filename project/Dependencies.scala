@@ -33,7 +33,8 @@ object Dependencies {
       "uk.gov.hmrc" %% "play-conditional-form-mapping" % playConditionalFormMappingVersion,
       "uk.gov.hmrc" %% "bootstrap-play-26" % bootstrapPlayVersion,
       "uk.gov.hmrc" %% "play-language" % playLanguageVersion,
-      "uk.gov.hmrc" %% "http-verbs" % "10.7.0-play-26"
+      "uk.gov.hmrc" %% "http-verbs" % "10.7.0-play-26",
+      "uk.gov.hmrc" %% "play-frontend-govuk" % "0.48.0-play-26"
     )
 
     lazy val appDependencyOverrides: Seq[ModuleID] = Seq(
