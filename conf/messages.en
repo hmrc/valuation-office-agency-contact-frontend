@@ -109,6 +109,7 @@ service.name = Valuation Office Agency Contact Form
 site.textarea.char_limit = (Limit is {0} characters)
 site.print.button=Print or save
 site.govuk=Back to GOV.UK
+site.new_service = This is a new service
 
 unauthorised.title = You can’t access this service with this account
 unauthorised.heading = You can’t access this service with this account

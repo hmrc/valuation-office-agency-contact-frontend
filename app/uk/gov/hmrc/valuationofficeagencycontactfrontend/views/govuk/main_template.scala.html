@@ -36,7 +36,7 @@
 
 @beforeBLock = {
     @govukPhaseBanner(PhaseBanner(tag = Option(Tag(Text("BETA"))),
-        content = HtmlContent("This is a new service")))
+        content = HtmlContent(messages("site.new_service"))))
     @beforeContentBlock
 
 }

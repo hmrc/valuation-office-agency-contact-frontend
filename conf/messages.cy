@@ -109,6 +109,7 @@ service.name = Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio
 site.textarea.char_limit = (Y terfyn yw {0} o gymeriadau)
 site.print.button= Argraffwch neu cadwch
 site.govuk= Yn ôl i GOV.UK
+site.new_service = This is a new service
  
 unauthorised.title = Ni allwch gyrchu’r gwasanaeth gyda’r cyfrif hwn
 unauthorised.heading = Ni allwch gyrchu’r gwasanaeth gyda’r cyfrif hwn
