@@ -39,6 +39,7 @@ class EnquiryCategoryController @Inject()(
                                         navigator: Navigator,
                                         getData: DataRetrievalAction,
                                         clearData: DataClearAction,
+                                        enquiryCategory: enquiryCategory,
                                         cc: MessagesControllerComponents
                                          ) extends FrontendController(cc) with I18nSupport {
 

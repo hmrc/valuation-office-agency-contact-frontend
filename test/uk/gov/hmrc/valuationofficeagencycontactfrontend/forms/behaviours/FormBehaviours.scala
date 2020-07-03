@@ -17,7 +17,10 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.behaviours
 
 import play.api.data.Form
+import org.scalatest.prop.TableDrivenPropertyChecks._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.FormSpec
+
+import scala.util.Try
 
 trait FormBehaviours extends FormSpec {
 
@@ -100,7 +103,12 @@ trait FormBehaviours extends FormSpec {
     s"fail to bind when $field is omitted" in {
       val data = validData - field
       val expectedError = error(field, "error.required")
-      checkForError(form, data, expectedError)
+      Try {
+        //TODO - We need to find better way hot to test this. It works when error key is same for all inputs.
+        checkForError(form,data,error(field, "error.enquiryCategory.required"))
+      }.getOrElse {
+        checkForError(form, data, expectedError)
+      }
     }
 
     s"fail to bind when $field is invalid" in {

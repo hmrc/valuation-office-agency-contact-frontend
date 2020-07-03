@@ -14,6 +14,7 @@
  * limitations under the License.
  *@
 
+@import java.util.Locale
 @import uk.gov.hmrc.govukfrontend.views.html.layouts.govukLayout
 @import uk.gov.hmrc.govukfrontend.views.html.components._
 @import uk.gov.hmrc.govukfrontend.views.html.helpers._
@@ -28,13 +29,14 @@
         scripts: scripts,
         govukPhaseBanner: govukPhaseBanner
 )
+
 @(pageTitle: Option[String] = None,
         beforeContentBlock: Option[Html] = None
 )(contentBlock: Html)(implicit request: Request[_], messages: Messages)
 
 @beforeBLock = {
     @govukPhaseBanner(PhaseBanner(tag = Option(Tag(Text("BETA"))),
-        content = HtmlContent("This is a new service – your <a class=\"govuk-link\" href=\"#\" target=\"_blank\" id=\"betaFeedback\">feedback</a> will help us to improve it.")))
+        content = HtmlContent(messages("site.new_service"))))
     @beforeContentBlock
 
 }
@@ -56,7 +58,10 @@
             text = Some(messages("footer.links.terms_and_conditions.text"))),
         FooterItem(
             href = Some(messages("footer.links.help_page.url")),
-            text = Some(messages("footer.links.help_page.text")))
+            text = Some(messages("footer.links.help_page.text"))),
+        FooterItem(
+            href = Some(messages("footer.links.languale.url")),
+            text = Some(messages("footer.links.languale.text")))
 
     ),
     bodyEndBlock = Some(scripts()))(contentBlock)
