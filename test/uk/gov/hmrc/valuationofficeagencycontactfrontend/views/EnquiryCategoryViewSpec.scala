@@ -21,9 +21,10 @@ import play.api.data.Form
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.enquiryCategory
-
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{enquiryCategory => enquiry_category}
 class EnquiryCategoryViewSpec extends ViewBehaviours {
+
+  def enquiryCategory = app.injector.instanceOf[enquiry_category]
 
   val messageKeyPrefix = "enquiryCategory"
 
@@ -40,7 +41,7 @@ class EnquiryCategoryViewSpec extends ViewBehaviours {
 
       "contain continue button with the value Continue" in {
         val doc = asDocument(createViewUsingForm(EnquiryCategoryForm()))
-        val continueButton = doc.getElementById("submit").text()
+        val continueButton = doc.getElementsByClass("govuk-button").first().text()
         assert(continueButton == messages("site.continue"))
       }
       "contain radio buttons for the value" in {
@@ -87,14 +88,5 @@ class EnquiryCategoryViewSpec extends ViewBehaviours {
         }
       }
     }
-
-    "contain Back to GOVUK link " in {
-      val doc = asDocument(createView())
-      val startAgainButton = doc.getElementById("backToGovUk").text()
-      assert(startAgainButton == messages("site.govuk"))
-      val govukUrl = doc.select("a[id=backToGovUk]").attr("href")
-      govukUrl mustBe "http://www.gov.uk"
-    }
-
   }
 }

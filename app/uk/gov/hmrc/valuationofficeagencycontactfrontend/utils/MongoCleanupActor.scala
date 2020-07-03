@@ -25,6 +25,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MongoCleanupActor.
 
 import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.duration._
+import scala.language.postfixOps
 
 @Singleton
 class MongoCleanupActor @Inject()(mongo: ReactiveMongoComponent)(implicit val ec: ExecutionContext) extends Actor {

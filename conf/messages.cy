@@ -58,7 +58,8 @@ date.month = Mis
 date.year = Blwyddyn
  
 hintText.optional = Opsiynol
- 
+
+error.title = Error:
 error.boolean = Rhowch ateb
 error.invalid_date = Rhowch ddyddiad cywir
 error.date.day_blank = Nodwch ddiwrnod
@@ -71,6 +72,7 @@ error.integer = Rhowch ateb mewn rhifau cyfan
 error.non_numeric = Rhowch werth gan ddefnyddio rhifau’n unig
 error.number = Rhowch rif dilys
 error.required = Mae angen llenwi’r blwch hwn
+error.enquiryCategory.required = Mae angen llenwi’r blwch hwn
 error.summary.title = Mae problem wedi codi
 error.summary.text = Gwiriwch y canlynol
 error.email.invalid = Nodwch gyfeiriad e-bost dilys
@@ -326,3 +328,6 @@ error500.opening-times.title = Oriau agor
 error500.opening-times.paragraph =  Dydd Llun – Dydd Gwener, 08:30 – 17:00. Ar gau ar wyliau’r banc.
 error500.call-charges.title = Gwybodaeth am gostau galwadau
 error500.call-charges.url = https://www.gov.uk/costau-galwadau
+
+footer.links.languale.url = /valuation-office-agency-contact-frontend/language/english
+footer.links.languale.text = English

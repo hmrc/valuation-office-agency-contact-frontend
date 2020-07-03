@@ -59,6 +59,7 @@ date.year = Year
 
 hintText.optional = Optional
 
+error.title = Error:
 error.boolean = Please give an answer
 error.invalid_date = Give a correct date
 error.date.day_blank = Enter a day
@@ -71,6 +72,7 @@ error.integer = Give an answer in whole numbers
 error.non_numeric = Give a value using only numbers
 error.number = Please enter a valid number
 error.required = This field is required
+error.enquiryCategory.required = Select what your enquiry is about
 error.summary.title = There’s been a problem
 error.summary.text = Check the following
 error.email.invalid = Enter a valid email address
@@ -328,3 +330,5 @@ error500.opening-times.paragraph = Monday to Friday, 8:30am to 5:00pm. Closed on
 error500.call-charges.title = Find out about call charges
 error500.call-charges.url = https://www.gov.uk/call-charges
 
+footer.links.languale.url = /valuation-office-agency-contact-frontend/language/cymraeg
+footer.links.languale.text = Cymraeg

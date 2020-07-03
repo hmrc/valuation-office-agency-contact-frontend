@@ -26,7 +26,7 @@ object EnquiryCategoryForm extends FormErrorHelper {
   def EnquiryCategoryFormatter = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
-      case None => produceError(key, "error.required")
+      case None => produceError(key, "error.enquiryCategory.required")
       case _ => produceError(key, "error.unknown")
     }
 

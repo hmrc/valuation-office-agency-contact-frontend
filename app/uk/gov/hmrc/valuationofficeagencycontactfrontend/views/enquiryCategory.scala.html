@@ -14,42 +14,60 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukButton, GovukRadios, GovukErrorSummary, GovukFieldset}
+@import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
-@import uk.gov.hmrc.play.views.html._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.FormHelpers
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.InputViewModel
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
+
+
+@this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
+        govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary, govukFieldset: GovukFieldset)
+
 
 @(appConfig: FrontendAppConfig, form: Form[String], mode: Mode)(implicit request: Request[_], messages: Messages)
 
-
-
-@main_template(
-    title = messages("enquiryCategory.title"),
-    appConfig = appConfig,
-    bodyClasses = None) {
-
-    @components.heading("enquiryCategory.heading")
-
-    @helpers.form(action = EnquiryCategoryController.onSubmit(mode), 'autoComplete -> "off") {
-
-        @components.error_summary_single_input(form.errors)
-
-
-
-        @components.input_radio(
-            viewModel = InputViewModel[String]("value", form),
-            legend = messages("enquiryCategory.heading"),
-            legendClass = Some("visually-hidden"),
-            inputs = EnquiryCategoryForm.options,
-            trackGaId = Some("enquiryCategory")
+@content = {
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">@messages("enquiryCategory.heading")</h1>
+    </legend>
+    @govukRadios(Radios(
+        name = "value",
+        items = EnquiryCategoryForm.options.map(i => RadioItem(
+            content = Text(messages(i.messageKey)),
+            id = Option(i.id),
+            value = Option(i.value),
+            checked = form("value").value.map(_ == i.value).getOrElse(false)
         )
+        )
+    ))
 
-        @components.continue_button()
+    @govukButton(Button(content = Text(messages("site.continue"))))
 
-        <p><a href="http://www.gov.uk" id="backToGovUk" class="print-hide">@messages("site.govuk")</a></p>
+}
 
+@mainTemplate(
+    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("enquiryCategory.title"))else messages("enquiryCategory.title"))
+) {
+    @formWithCSFR(action = EnquiryCategoryController.onSubmit(mode), 'autoComplete -> "off") {
+        @if(form.hasErrors) {
+            @govukErrorSummary(
+                ErrorSummary(
+                    title = Text(messages("error.summary.title")),
+                    description = Text(messages("error.summary.text")),
+                    errorList = form.errors.map(e => ErrorLink(href = Some("#" + e.key), content = HtmlContent(messages(e.messages, e.args))))
+                )
+            )
+        }
+        @govukFieldset(Fieldset(html = content ))
     }
 }
