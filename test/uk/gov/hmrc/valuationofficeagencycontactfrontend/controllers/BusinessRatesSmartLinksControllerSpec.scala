@@ -21,15 +21,17 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.businessRatesSmartLinks
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSmartLinks => business_rates_smart_links}
 
 class BusinessRatesSmartLinksControllerSpec extends ControllerSpecBase {
+
+  def businessRatesSmartLinks = app.injector.instanceOf[business_rates_smart_links]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new BusinessRatesSmartLinksController(frontendAppConfig, messagesApi, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSmartLinks, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   "Business Rates Smart Links Controller" must {
     "return 200 for a GET" in {

@@ -18,9 +18,11 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.businessRatesSmartLinks
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSmartLinks => business_rates_smart_links}
 
 class BusinessRatesSmartLinksViewSpec extends ViewBehaviours {
+
+  def businessRatesSmartLinks = app.injector.instanceOf[business_rates_smart_links]
 
   def view = () => businessRatesSmartLinks(frontendAppConfig)(fakeRequest, messages)
 
@@ -37,21 +39,21 @@ class BusinessRatesSmartLinksViewSpec extends ViewBehaviours {
 
   "The Continue button links to the goToBusinessRatesSubcategoryPage method" in {
     val doc = asDocument(view())
-    val href = doc.getElementById("continue").attr("href")
+    val href = doc.getElementsByAttributeValue("class", "govuk-button govuk-button--start").first().attr("href")
     assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSmartLinksController.goToBusinessRatesSubcategoryPage().url.toString)
   }
 
   "The Continue button uses the button--get-started class" in {
     val doc = asDocument(view())
-    val button = doc.select("a[class~=button--get-started]")
+    val button = doc.select("a[class~=govuk-button--start]")
     assert(button.size() == 1)
   }
 
   "has a link marked with site.back leading to the Business Rates Smart Links Page" in {
     val doc = asDocument(view())
-    val backlinkText = doc.select("a[class=link-back]").text()
+    val backlinkText = doc.select("a[class=govuk-back-link]").text()
     backlinkText mustBe messages("site.back")
-    val backlinkUrl = doc.select("a[class=link-back]").attr("href")
+    val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
     backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
   }
 

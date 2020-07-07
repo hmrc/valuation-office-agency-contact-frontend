@@ -24,7 +24,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navi
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.BusinessRatesSmartLinksId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.businessRatesSmartLinks
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSmartLinks => business_rates_smart_links}
 
 @Singleton
 class BusinessRatesSmartLinksController @Inject()(val appConfig: FrontendAppConfig,
@@ -32,6 +32,7 @@ class BusinessRatesSmartLinksController @Inject()(val appConfig: FrontendAppConf
                                                   navigator: Navigator,
                                                   getData: DataRetrievalAction,
                                                   requireData: DataRequiredAction,
+                                                  businessRatesSmartLinks: business_rates_smart_links,
                                                   cc: MessagesControllerComponents
                                                  ) extends FrontendController(cc) with I18nSupport {
 

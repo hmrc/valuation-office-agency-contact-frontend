@@ -14,80 +14,90 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukBackLink, GovukButton, GovukErrorSummary, GovukFieldset}
+@import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+
+@this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
+        govukButton: GovukButton, govukBackLink: GovukBackLink)
 
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
-@main_template(
-    title = messages("checkBeforeYouStart.title"),
-    appConfig = appConfig,
-    bodyClasses = Some("full-width")) {
+@beforeBlock = {
+@govukBackLink(BackLink(content = Text(messages("site.back")), href =
+        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url))
+}
 
-    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url)
 
-    <h1 class="heading-xlarge">@messages("checkBeforeYouStart.heading")</h1>
+@mainTemplate(
+    beforeContentBlock = Option(beforeBlock),
+    pageTitle = Option(messages("checkBeforeYouStart.title"))) {
 
-    <p>@messages("checkBeforeYouStart.para1")</p>
+    <h1 class="govuk-heading-xl">@messages("checkBeforeYouStart.heading")</h1>
 
-    <br>
+    <p class="govuk-body">@messages("checkBeforeYouStart.para1")</p>
 
-    <h2 class="heading-medium">@messages("checkBeforeYouStart.business_rates.subheading")</h2>
+    <h2 class="govuk-heading-l">@messages("checkBeforeYouStart.business_rates.subheading")</h2>
 
-    <p>
-        <a href=@messages("checkBeforeYouStart.business_rates.covid.url") target="_self">@messages("checkBeforeYouStart.business_rates.covid.link")</a>
+    <p class="govuk-body">
+        <a href=@messages("checkBeforeYouStart.business_rates.covid.url") class="govuk-link" target="_self">@messages("checkBeforeYouStart.business_rates.covid.link")</a>
         <br>
         @messages("checkBeforeYouStart.business_rates.covid.para")
     </p>
 
-    <p>
-        <a href=@messages("checkBeforeYouStart.business_rates.run.home.url") target="_self">@messages("checkBeforeYouStart.business_rates.run.home.link")</a>
+    <p class="govuk-body">
+        <a href=@messages("checkBeforeYouStart.business_rates.run.home.url") class="govuk-link" target="_self">@messages("checkBeforeYouStart.business_rates.run.home.link")</a>
         <br>
         @messages("checkBeforeYouStart.business_rates.run.home.para")
     </p>
 
-    <p>
-        <a href=@messages("checkBeforeYouStart.business_rates.holiday.lets.url") target="_self">@messages("checkBeforeYouStart.business_rates.holiday.lets.link")</a>
+    <p class="govuk-body">
+        <a href=@messages("checkBeforeYouStart.business_rates.holiday.lets.url") class="govuk-link" target="_self">@messages("checkBeforeYouStart.business_rates.holiday.lets.link")</a>
         <br>
         @messages("checkBeforeYouStart.business_rates.holiday.lets.para")
     </p>
 
-    <p>
-        <a href=@messages("checkBeforeYouStart.business_rates.url1") target="_self">@messages("checkBeforeYouStart.business_rates.para1")</a>
+    <p class="govuk-body">
+        <a href=@messages("checkBeforeYouStart.business_rates.url1") class="govuk-link" target="_self">@messages("checkBeforeYouStart.business_rates.para1")</a>
         <br>
         @messages("checkBeforeYouStart.business_rates.para2")
     </p>
 
-    <p>
-        <a href=@messages("checkBeforeYouStart.business_rates.url2") target="_self">@messages("checkBeforeYouStart.business_rates.para3")</a>
+    <p class="govuk-body">
+        <a href=@messages("checkBeforeYouStart.business_rates.url2") class="govuk-link" target="_self">@messages("checkBeforeYouStart.business_rates.para3")</a>
         <br>
         @messages("checkBeforeYouStart.business_rates.para4")
     </p>
 
-    <p>
-        <a href=@messages("checkBeforeYouStart.business_rates.url3") target="_self">@messages("checkBeforeYouStart.business_rates.para5")</a>
+    <p class="govuk-body">
+        <a href=@messages("checkBeforeYouStart.business_rates.url3") class="govuk-link" target="_self">@messages("checkBeforeYouStart.business_rates.para5")</a>
         <br>
         @messages("checkBeforeYouStart.business_rates.para6")
     </p>
 
-    <p>
-        <a href=@messages("checkBeforeYouStart.business_rates.url4") target="_self">@messages("checkBeforeYouStart.business_rates.para7")</a>
+    <p class="govuk-body">
+        <a href=@messages("checkBeforeYouStart.business_rates.url4") class="govuk-link" target="_self">@messages("checkBeforeYouStart.business_rates.para7")</a>
         <br>
         @messages("checkBeforeYouStart.business_rates.para8")
     </p>
 
-    <p>
-        <a href=@messages("checkBeforeYouStart.business_rates.url5") target="_self">@messages("checkBeforeYouStart.business_rates.para9")</a>
+    <p class="govuk-body">
+        <a href=@messages("checkBeforeYouStart.business_rates.url5") class="govuk-link" target="_self">@messages("checkBeforeYouStart.business_rates.para9")</a>
         <br>
         @messages("checkBeforeYouStart.business_rates.para10")
     </p>
 
-    <p>@messages("checkBeforeYouStart.business_rates.para11")</p>
+    <p class="govuk-body">@messages("checkBeforeYouStart.business_rates.para11")</p>
 
-    <p>
-        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSmartLinksController.goToBusinessRatesSubcategoryPage().url id="continue" class="button button--get-started">@messages("site.continue")</a>
-
+    <p class="govuk-body">
+    @govukButton(Button(element = Option("a"), name = Option("continue"), content = Text(messages("site.continue")),
+        isStartButton = true,
+        href = Option(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSmartLinksController.goToBusinessRatesSubcategoryPage().url)
+    ))
     </p>
-
-
 }
