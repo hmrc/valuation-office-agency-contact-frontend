@@ -18,9 +18,11 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.councilTaxSmartLinks
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxSmartLinks => council_tax_smart_links}
 
 class CouncilTaxSmartLinksViewSpec extends ViewBehaviours {
+
+  def councilTaxSmartLinks = app.injector.instanceOf[council_tax_smart_links]
 
   def view = () => councilTaxSmartLinks(frontendAppConfig)(fakeRequest, messages)
 
@@ -34,21 +36,21 @@ class CouncilTaxSmartLinksViewSpec extends ViewBehaviours {
 
   "The Continue button links to the goToCouncilTaxSubcategoryPage method" in {
     val doc = asDocument(view())
-    val href = doc.getElementById("continue").attr("href")
+    val href = doc.getElementsByAttributeValue("class", "govuk-button govuk-button--start").first().attr("href")
     assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSmartLinksController.goToCouncilTaxSubcategoryPage().url.toString)
   }
 
   "The Continue button uses the button--get-started class" in {
     val doc = asDocument(view())
-    val button = doc.select("a[class~=button--get-started]")
+    val button = doc.select("a[class~=govuk-button--start]")
     assert(button.size() == 1)
   }
 
   "has a link marked with site.back leading to the Enquiry Category Page" in {
     val doc = asDocument(view())
-    val backlinkText = doc.select("a[class=link-back]").text()
+    val backlinkText = doc.select("a[class=govuk-back-link]").text()
     backlinkText mustBe messages("site.back")
-    val backlinkUrl = doc.select("a[class=link-back]").attr("href")
+    val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
     backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
   }
 
