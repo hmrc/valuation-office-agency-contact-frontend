@@ -16,66 +16,85 @@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukButton, GovukRadios, GovukErrorSummary, GovukFieldset, GovukBackLink}
+@import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
+
+@this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
+        govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
+        govukFieldset: GovukFieldset, govukBackLink: GovukBackLink)
+
 
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
-@main_template(
-    title = messages("checkBeforeYouStart.title"),
-    appConfig = appConfig,
-    bodyClasses = Some("full-width")) {
 
-    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url)
+@beforeBlock = {
+    @govukBackLink(BackLink(content = Text(messages("site.back")), href =
+            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url))
+}
 
-    <h1 class="heading-xlarge">@messages("checkBeforeYouStart.heading")</h1>
+@mainTemplate(
+    beforeContentBlock = Option(beforeBlock),
+    pageTitle = Option(messages("checkBeforeYouStart.title"))) {
 
-    <p>
+    <h1 class="govuk-heading-xl">@messages("checkBeforeYouStart.heading")</h1>
+
+    <p class="govuk-body">
         @messages("checkBeforeYouStart.local_council.part1")
-        <a href=@messages("checkBeforeYouStart.local_council.url") target="_self">
-            @messages("checkBeforeYouStart.local_council.part2")
+        <a href=@messages("checkBeforeYouStart.local_council.url") target="_self" class="govuk-link">
+        @messages("checkBeforeYouStart.local_council.part2")
         </a>
     </p>
 
-    <p>@messages("checkBeforeYouStart.para1")</p>
+    <p class="govuk-body">@messages("checkBeforeYouStart.para1")</p>
 
-            <br>
-            <h2 class="heading-medium">@messages("checkBeforeYouStart.council_tax.subheading")</h2>
+    <h2 class="govuk-heading-l">@messages("checkBeforeYouStart.council_tax.subheading")</h2>
 
-            <p>
-                <a href=@messages("checkBeforeYouStart.council_tax.url5") target="_self">@messages("checkBeforeYouStart.council_tax.para9")</a>
-                <br>
-                @messages("checkBeforeYouStart.council_tax.para10")
-            </p>
-
-            <p>
-                <a href=@messages("checkBeforeYouStart.council_tax.url1") target="_self">@messages("checkBeforeYouStart.council_tax.para1")</a>
-                <br>
-                @messages("checkBeforeYouStart.council_tax.para2")
-            </p>
-
-            <p>
-                <a href=@messages("checkBeforeYouStart.council_tax.url2") target="_self">@messages("checkBeforeYouStart.council_tax.para3")</a>
-                <br>
-                @messages("checkBeforeYouStart.council_tax.para4")
-            </p>
-
-            <p>
-                <a href=@messages("checkBeforeYouStart.council_tax.url3") target="_self">@messages("checkBeforeYouStart.council_tax.para5")</a>
-                <br>
-                @messages("checkBeforeYouStart.council_tax.para6")
-            </p>
-
-            <p>
-                <a href=@messages("checkBeforeYouStart.council_tax.url4") target="_self">@messages("checkBeforeYouStart.council_tax.para7")</a>
-                <br>
-                @messages("checkBeforeYouStart.council_tax.para8")
-            </p>
-
-    <p>@messages("checkBeforeYouStart.council_tax.para11")</p>
-
-    <p>
-        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSmartLinksController.goToCouncilTaxSubcategoryPage().url id="continue" class="button button--get-started">@messages("site.continue")</a>
-
+    <p class="govuk-body">
+        <a href=@messages("checkBeforeYouStart.council_tax.url5") target="_self" class="govuk-link">@messages("checkBeforeYouStart.council_tax.para9")</a>
+        <br>
+        @messages("checkBeforeYouStart.council_tax.para10")
     </p>
 
+    <p class="govuk-body">
+        <a href=@messages("checkBeforeYouStart.council_tax.url1") target="_self" class="govuk-link">@messages("checkBeforeYouStart.council_tax.para1")</a>
+        <br>
+        @messages("checkBeforeYouStart.council_tax.para2")
+    </p>
+
+    <p class="govuk-body">
+        <a href=@messages("checkBeforeYouStart.council_tax.url2") target="_self" class="govuk-link">@messages("checkBeforeYouStart.council_tax.para3")</a>
+        <br>
+        @messages("checkBeforeYouStart.council_tax.para4")
+    </p>
+
+    <p class="govuk-body">
+        <a href=@messages("checkBeforeYouStart.council_tax.url3") target="_self" class="govuk-link">@messages("checkBeforeYouStart.council_tax.para5")</a>
+        <br>
+        @messages("checkBeforeYouStart.council_tax.para6")
+    </p>
+
+    <p class="govuk-body">
+        <a href=@messages("checkBeforeYouStart.council_tax.url4") target="_self" class="govuk-link">@messages("checkBeforeYouStart.council_tax.para7")</a>
+        <br>
+        @messages("checkBeforeYouStart.council_tax.para8")
+    </p>
+
+    <p class="govuk-body">@messages("checkBeforeYouStart.council_tax.para11")</p>
+
+    <p class="govuk-body">
+        @govukButton(Button(element = Option("a"), name=Option("continue"), content = Text(messages("site.continue")),
+            isStartButton = true,
+            href = Option(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSmartLinksController.goToCouncilTaxSubcategoryPage().url)
+        ))
+    </p>
 
 }

@@ -32,11 +32,12 @@ class CouncilTaxSmartLinksController @Inject()(val appConfig: FrontendAppConfig,
                                                navigator: Navigator,
                                                getData: DataRetrievalAction,
                                                requireData: DataRequiredAction,
+                                               council_tax_smartLinks: councilTaxSmartLinks,
                                                cc: MessagesControllerComponents
                                               ) extends FrontendController(cc) with I18nSupport {
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
-    Ok(councilTaxSmartLinks(appConfig))
+    Ok(council_tax_smartLinks(appConfig))
   }
 
   def goToCouncilTaxSubcategoryPage() = (getData andThen requireData) { implicit request =>

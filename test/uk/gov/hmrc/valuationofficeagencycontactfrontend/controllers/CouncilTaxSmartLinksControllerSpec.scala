@@ -21,15 +21,17 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.councilTaxSmartLinks
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxSmartLinks => council_tax_smart_links}
 
 class CouncilTaxSmartLinksControllerSpec extends ControllerSpecBase {
+
+  def councilTaxSmartLinks = app.injector.instanceOf[council_tax_smart_links]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new CouncilTaxSmartLinksController(frontendAppConfig, messagesApi, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      dataRetrievalAction, new DataRequiredActionImpl(ec), councilTaxSmartLinks, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   "Council Tax Smart Links Controller" must {
     "return 200 for a GET" in {
