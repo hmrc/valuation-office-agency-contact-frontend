@@ -30,11 +30,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxSubcateg
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CouncilTaxSubcategoryId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.councilTaxSubcategory
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxSubcategory => council_tax_subcategory}
 
 import scala.concurrent.Future
 
 class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with MockitoSugar {
+
+  def councilTaxSubcategory = app.injector.instanceOf[council_tax_subcategory]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
@@ -43,7 +45,7 @@ class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with Mockit
     when(fakeDataCacheConnector.save(any, any, any)(any))
       .thenReturn(Future.successful(CacheMap("councilTaxSubcategory", Map("councilTaxSubcategory" -> JsString("bar")))))
     new CouncilTaxSubcategoryController(frontendAppConfig, messagesApi, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      dataRetrievalAction, new DataRequiredActionImpl(ec), councilTaxSubcategory, MessageControllerComponentsHelpers.stubMessageControllerComponents)
   }
 
   def viewAsString(form: Form[String] = CouncilTaxSubcategoryForm()) =

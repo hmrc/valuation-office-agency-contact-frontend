@@ -14,41 +14,64 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukBackLink, GovukButton, GovukErrorSummary, GovukFieldset, GovukRadios}
+@import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
-@import uk.gov.hmrc.play.views.html._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxSubcategoryForm
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.FormHelpers
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.InputViewModel
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+@this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
+        govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
+        govukFieldset: GovukFieldset, govukBackLink: GovukBackLink)
+
+
 @(appConfig: FrontendAppConfig, form: Form[String], mode: Mode)(implicit request: Request[_], messages: Messages)
 
-@main_template(
-    title = messages("councilTaxSubcategory.title"),
-    appConfig = appConfig,
-    bodyClasses = None) {
 
-    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSmartLinksController.onPageLoad().url)
-
-    @components.heading("councilTaxSubcategory.heading")
-
-    <p>@messages("councilTaxSubcategory.subheading")</p>
-
-    @helpers.form(action = CouncilTaxSubcategoryController.onSubmit(mode), 'autoComplete -> "off") {
-
-        @components.error_summary_single_input(form.errors)
-
-        @components.input_radio(
-            viewModel = InputViewModel[String]("value", form),
-            legend = messages("councilTaxSubcategory.heading"),
-            legendClass = Some("visually-hidden"),
-            inputs = CouncilTaxSubcategoryForm.options,
-            trackGaId = Some("councilTaxSubcategory")
+@content = {
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">@messages("councilTaxSubcategory.heading")</h1>
+    </legend>
+    @govukRadios(Radios(
+        name = "value",
+        items = CouncilTaxSubcategoryForm.options.map(i => RadioItem(
+            content = Text(messages(i.messageKey)),
+            id = Option(i.id),
+            value = Option(i.value),
+            checked = form("value").value.map(_ == i.value).getOrElse(false)
         )
+        )
+    ))
+    @govukButton(Button(content = Text(messages("site.continue")), attributes = Map("id"-> "submit")))
+}
 
-        @components.continue_button()
+@beforeBlock = {
+    @govukBackLink(BackLink(content = Text(messages("site.back")), href =
+            CouncilTaxSmartLinksController.onPageLoad().url))
+}
 
+@mainTemplate(
+    pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + messages("councilTaxSubcategory.title")) else messages("councilTaxSubcategory.title")),
+    beforeContentBlock = Option(beforeBlock)
+) {
+    @formWithCSFR(action = CouncilTaxSubcategoryController.onSubmit(mode), 'autoComplete -> "off") {
+        @if(form.hasErrors) {
+            @govukErrorSummary(
+                ErrorSummary(
+                    title = Text(messages("error.summary.title")),
+                    description = Text(messages("error.summary.text")),
+                    errorList = form.errors.map(e => ErrorLink(href = Some("#" + e.key), content = HtmlContent(messages(e.messages, e.args))))
+                )
+            )
+        }
+        @govukFieldset(Fieldset(html = content))
     }
 }

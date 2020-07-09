@@ -20,20 +20,18 @@ import play.api.data.Form
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxSubcategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.councilTaxSubcategory
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxSubcategory => council_tax_subcategory}
 
 class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
+
+  def councilTaxSubcategory = app.injector.instanceOf[council_tax_subcategory]
 
   val messageKeyPrefix = "councilTaxSubcategory"
 
   def createView = () => councilTaxSubcategory(frontendAppConfig, CouncilTaxSubcategoryForm(), NormalMode)(fakeRequest, messages)
 
   def createViewUsingForm = (form: Form[String]) => councilTaxSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
-
-  "CouncilTaxSubcategory view" must {
-    behave like normalPage(createView, messageKeyPrefix, "subheading")
-  }
-
+  
   "CouncilTaxSubcategory view" when {
     "rendered" must {
       "contain radio buttons for the value" in {
@@ -75,9 +73,9 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
 
       "has a link marked with site.back leading to the Council Tax Smart Links" in {
         val doc = asDocument(createView())
-        val backlinkText = doc.select("a[class=link-back]").text()
+        val backlinkText = doc.select("a[class=govuk-back-link]").text()
         backlinkText mustBe messages("site.back")
-        val backlinkUrl = doc.select("a[class=link-back]").attr("href")
+        val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
         backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSmartLinksController.onPageLoad().url
       }
     }
