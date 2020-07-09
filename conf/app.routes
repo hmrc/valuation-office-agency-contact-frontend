@@ -2,7 +2,7 @@
 
 ->          /govuk-frontend                        govuk.Routes
 
-GET         /                                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.EnquiryCategoryController.onPageLoad(mode: Mode = NormalMode)
+GET         /                                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.Application.start(mode: Mode = NormalMode)
 
 GET         /assets/*file                          controllers.Assets.versioned(path="/public", file: Asset)
 
