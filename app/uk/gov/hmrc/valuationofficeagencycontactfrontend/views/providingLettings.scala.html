@@ -16,27 +16,40 @@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukButton, GovukBackLink}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
+
+@this(mainTemplate: main_template, formWithCSFR: formWithCSRF, govukBackLink: GovukBackLink, govukButton: GovukButton)
 
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
-@main_template(
-    title = messages("providingLettings.title"),
-    appConfig = appConfig,
-    bodyClasses = None) {
+@beforeBlock = {
+    @govukBackLink(BackLink(content = Text(messages("site.back")),
+        href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url))
+}
 
-    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url)
+@mainTemplate(
+    beforeContentBlock = Option(beforeBlock),
+    pageTitle = Option(messages("providingLettings.title"))) {
 
-    <h1 class="heading-xlarge">@messages("providingLettings.heading")</h1>
+    <h1 class="govuk-heading-xl">@messages("providingLettings.heading")</h1>
 
-    <h2 class="heading-medium">@messages("providingLettings.subheading")</h2>
+    <h2 class="govuk-heading-m">@messages("providingLettings.subheading")</h2>
 
-    <p class="bold">@messages("providingLettings.para1")</p>
+    <p class="govuk-body">@messages("providingLettings.para1")</p>
 
-    <h3 class="heading-small">@messages("providingLettings.email-title")</h3>
+    <h3 class="govuk-heading-m">@messages("providingLettings.email-title")</h3>
 
-    <p><a href="mailto:@messages("providingLettings.email")">@messages("providingLettings.email")</a></p>
+    <p class="govuk-body"><a href="mailto:@messages("providingLettings.email")">@messages("providingLettings.email")</a></p>
 
-    <p>@messages("providingLettings.para2")</p>
-    <p><a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url id="start-again" class="button">@messages("site.start-again")</a></p>
+    <p class="govuk-body">@messages("providingLettings.para2")</p>
+
+    @govukButton(Button(content = Text(messages("site.start-again")),
+        href = Option(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.Application.start().url)
+    ))
 
 }
