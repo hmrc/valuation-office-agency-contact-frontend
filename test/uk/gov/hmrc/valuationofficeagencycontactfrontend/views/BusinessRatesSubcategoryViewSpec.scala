@@ -20,19 +20,17 @@ import play.api.data.Form
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSubcategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.businessRatesSubcategory
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSubcategory => business_rates_subcategory}
 
 class BusinessRatesSubcategoryViewSpec extends ViewBehaviours {
+
+  def businessRatesSubcategory = app.injector.instanceOf[business_rates_subcategory]
 
   val messageKeyPrefix = "businessRatesSubcategory"
 
   def createView = () => businessRatesSubcategory(frontendAppConfig, BusinessRatesSubcategoryForm(), NormalMode)(fakeRequest, messages)
 
   def createViewUsingForm = (form: Form[String]) => businessRatesSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
-
-  "BusinessRatesSubcategory view" must {
-    behave like normalPage(createView, messageKeyPrefix, "subheading")
-  }
 
   "BusinessRatesSubcategory view" when {
     "rendered" must {
@@ -75,9 +73,9 @@ class BusinessRatesSubcategoryViewSpec extends ViewBehaviours {
 
       "has a link marked with site.back leading to the Business Rates Smart Links Page" in {
         val doc = asDocument(createView())
-        val backlinkText = doc.select("a[class=link-back]").text()
+        val backlinkText = doc.select("a[class=govuk-back-link]").text()
         backlinkText mustBe messages("site.back")
-        val backlinkUrl = doc.select("a[class=link-back]").attr("href")
+        val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
         backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSmartLinksController.onPageLoad().url
       }
     }
