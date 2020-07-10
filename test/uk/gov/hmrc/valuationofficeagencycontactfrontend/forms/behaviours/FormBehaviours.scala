@@ -110,6 +110,10 @@ trait FormBehaviours extends FormSpec {
         Try {
           checkForError(form, data, error(field, "error.councilTaxSubcategory.required"))
         }
+      }.orElse {
+        Try {
+          checkForError(form, data, error(field, "error.businessRatesSubcategory.required"))
+        }
       }.getOrElse {
         checkForError(form, data, expectedError)
       }

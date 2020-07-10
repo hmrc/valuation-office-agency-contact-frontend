@@ -74,6 +74,7 @@ error.number = Rhowch rif dilys
 error.required = Mae angen llenwi’r blwch hwn
 error.enquiryCategory.required = Mae angen llenwi’r blwch hwn
 error.councilTaxSubcategory.required = Mae angen llenwi’r blwch hwn
+error.businessRatesSubcategory.required = Mae angen llenwi’r blwch hwn
 error.summary.title = Mae problem wedi codi
 error.summary.text = Gwiriwch y canlynol
 error.email.invalid = Nodwch gyfeiriad e-bost dilys

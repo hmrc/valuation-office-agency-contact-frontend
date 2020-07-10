@@ -31,7 +31,7 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
   def createView = () => councilTaxSubcategory(frontendAppConfig, CouncilTaxSubcategoryForm(), NormalMode)(fakeRequest, messages)
 
   def createViewUsingForm = (form: Form[String]) => councilTaxSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
-  
+
   "CouncilTaxSubcategory view" when {
     "rendered" must {
       "contain radio buttons for the value" in {

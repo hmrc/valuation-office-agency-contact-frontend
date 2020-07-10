@@ -74,6 +74,7 @@ error.number = Please enter a valid number
 error.required = This field is required
 error.enquiryCategory.required = Select what your enquiry is about
 error.councilTaxSubcategory.required = Select what your enquiry is about
+error.businessRatesSubcategory.required = Select what your enquiry is about
 error.summary.title = There’s been a problem
 error.summary.text = Check the following
 error.email.invalid = Enter a valid email address
@@ -190,6 +191,7 @@ councilTaxSubcategory.checkYourAnswersLabel = Enquiry Details
 businessRatesSubcategory.title = What do you want to know about business rates?
 businessRatesSubcategory.heading = What is your business rates enquiry about?
 businessRatesSubcategory.subheading = What do you want to tell us about?
+
 
 businessRatesSubcategory.business_rates_challenge = Challenging my business rates valuation
 businessRatesSubcategory.business_rates_changes = My property or the local area has changed

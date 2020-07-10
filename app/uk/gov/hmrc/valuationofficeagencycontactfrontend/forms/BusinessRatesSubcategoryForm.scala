@@ -26,7 +26,7 @@ object BusinessRatesSubcategoryForm extends FormErrorHelper {
   def BusinessRatesSubcategoryFormatter = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
-      case None => produceError(key, "error.required")
+      case None => produceError(key, "error.businessRatesSubcategory.required")
       case _ => produceError(key, "error.unknown")
     }
 

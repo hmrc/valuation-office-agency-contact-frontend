@@ -28,7 +28,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSubca
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.BusinessRatesSubcategoryId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.businessRatesSubcategory
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSubcategory => business_rates_subcategory}
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -39,6 +39,7 @@ class BusinessRatesSubcategoryController @Inject()(
                                         navigator: Navigator,
                                         getData: DataRetrievalAction,
                                         requireData: DataRequiredAction,
+                                        businessRatesSubcategory: business_rates_subcategory,
                                         cc: MessagesControllerComponents
                                                   ) extends FrontendController(cc) with I18nSupport {
 
