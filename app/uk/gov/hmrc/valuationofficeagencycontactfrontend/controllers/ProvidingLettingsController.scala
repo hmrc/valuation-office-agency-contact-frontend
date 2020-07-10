@@ -21,11 +21,12 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.providingLettings
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{providingLettings => providing_lettings}
 
 @Singleton
 class ProvidingLettingsController @Inject()(val appConfig: FrontendAppConfig,
                                             override val messagesApi: MessagesApi,
+                                            providingLettings: providing_lettings,
                                             cc: MessagesControllerComponents
                                            ) extends FrontendController(cc) with I18nSupport {
 
