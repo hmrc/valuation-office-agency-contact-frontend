@@ -18,9 +18,11 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.providingLettings
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{providingLettings => providing_lettings}
 
 class ProvidingLettingsViewSpec extends ViewBehaviours {
+
+  def providingLettings = app.injector.instanceOf[providing_lettings]
 
   def view = () => providingLettings(frontendAppConfig)(fakeRequest, messages)
 
@@ -38,22 +40,22 @@ class ProvidingLettingsViewSpec extends ViewBehaviours {
 
     "has a link marked with site.back leading to the Enquiry Category Page" in {
       val doc = asDocument(view())
-      val backlinkText = doc.select("a[class=link-back]").text()
+      val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=link-back]").attr("href")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
     }
 
     "contain start again button " in {
       val doc = asDocument(view())
-      val startAgainButton = doc.getElementById("start-again").text()
+      val startAgainButton = doc.getElementsByClass("govuk-button").text()
       assert(startAgainButton == messages("site.start-again"))
     }
 
     "The Start again button links to the Enquiry Category Controller onPageLoad method" in {
       val doc = asDocument(view())
-      val href = doc.getElementById("start-again").attr("href")
-      assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url.toString)
+      val href = doc.getElementsByClass("govuk-button").attr("href")
+      assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.Application.start().url.toString)
     }
   }
 
