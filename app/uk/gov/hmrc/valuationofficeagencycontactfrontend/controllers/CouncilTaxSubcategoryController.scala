@@ -30,7 +30,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxSubcateg
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxChallengeId, CouncilTaxSubcategoryId, Identifier}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.councilTaxSubcategory
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxSubcategory => council_tax_subcategory}
 
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.Success
@@ -42,6 +42,7 @@ class CouncilTaxSubcategoryController @Inject()(
                                         navigator: Navigator,
                                         getData: DataRetrievalAction,
                                         requireData: DataRequiredAction,
+                                        councilTaxSubcategory: council_tax_subcategory,
                                         cc: MessagesControllerComponents
                                                ) extends FrontendController(cc) with I18nSupport {
 

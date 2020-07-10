@@ -106,6 +106,10 @@ trait FormBehaviours extends FormSpec {
       Try {
         //TODO - We need to find better way hot to test this. It works when error key is same for all inputs.
         checkForError(form,data,error(field, "error.enquiryCategory.required"))
+      }.orElse {
+        Try {
+          checkForError(form, data, error(field, "error.councilTaxSubcategory.required"))
+        }
       }.getOrElse {
         checkForError(form, data, expectedError)
       }
