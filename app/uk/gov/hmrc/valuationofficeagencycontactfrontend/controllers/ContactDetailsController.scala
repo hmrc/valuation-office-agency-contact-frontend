@@ -29,7 +29,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.ContactDetailsId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.contactDetails
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{contactDetails => contact_details}
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -39,6 +39,7 @@ class ContactDetailsController @Inject()(appConfig: FrontendAppConfig,
                                          navigator: Navigator,
                                          getData: DataRetrievalAction,
                                          requireData: DataRequiredAction,
+                                         contactDetails: contact_details,
                                          cc: MessagesControllerComponents
                                         ) extends FrontendController(cc) with I18nSupport {
 
