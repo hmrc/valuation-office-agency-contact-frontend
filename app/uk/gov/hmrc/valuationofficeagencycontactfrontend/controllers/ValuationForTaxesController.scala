@@ -21,11 +21,12 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.valuationForTaxes
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{valuationForTaxes => valuation_for_taxes}
 
 @Singleton
 class ValuationForTaxesController @Inject()(val appConfig: FrontendAppConfig,
                                             override val messagesApi: MessagesApi,
+                                            valuationForTaxes: valuation_for_taxes,
                                             cc: MessagesControllerComponents
                                            ) extends FrontendController(cc) with I18nSupport {
 
