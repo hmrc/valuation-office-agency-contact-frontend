@@ -21,13 +21,15 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{ContactDetailsForm, EnquiryCategoryForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.QuestionViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.contactDetails
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{contactDetails => contact_details}
 
 class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
 
+  def contactDetails = app.injector.instanceOf[contact_details]
+
   val messageKeyPrefix = "contactDetails"
-  val ctBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
-  val ndrBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
+  def ctBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
+  def ndrBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
 
   def createNDRViewUsingForm(form: Form[ContactDetails]) = contactDetails(frontendAppConfig, form, NormalMode, ndrBackLink)(fakeRequest, messages)
 
@@ -47,9 +49,9 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
 
     "Contact Details has a link marked with site.back leading to the council tax subcategory page when enquiry category is council_tax" in {
       val doc = asDocument(createCTViewUsingForm(form))
-      val backlinkText = doc.select("a[class=link-back]").text()
+      val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=link-back]").attr("href")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
 
@@ -61,9 +63,9 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
 
     "Contact Details has a link marked with site.back leading to the business rates subcategory page when enquiry category is business_rates" in {
       val doc = asDocument(createNDRViewUsingForm(form))
-      val backlinkText = doc.select("a[class=link-back]").text()
+      val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=link-back]").attr("href")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
     }
 
@@ -71,18 +73,6 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
       val doc = asDocument(createNDRViewUsingForm(ContactDetailsForm()))
       val continueButton = doc.getElementById("submit").text()
       assert(continueButton == messages("site.continue"))
-    }
-
-    "show more that one error next to text input" in {
-      val form = ContactDetailsForm()
-        .withError(FormError("firstName", "error.xss.invalid"))
-        .withError(FormError("firstName", "error.required"))
-
-      val doc = asDocument(createNDRViewUsingForm(form))
-
-      val errorMessageElements = doc.getElementsByAttributeValue("id", "error-message-firstName-input")
-      assert(errorMessageElements.size() == 2)
-
     }
   }
 }

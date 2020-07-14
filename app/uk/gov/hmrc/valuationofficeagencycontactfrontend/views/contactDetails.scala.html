@@ -14,41 +14,79 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukBackLink, GovukButton, GovukErrorSummary, GovukFieldset, GovukInput}
+@import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
-@import uk.gov.hmrc.play.views.html._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.FormHelpers
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, ContactDetails}
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.InputViewModel
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.input.Input
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
+@import uk.gov.hmrc.govukfrontend.views.Implicits._
 
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+@this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
+        govukInput: GovukInput, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
+        govukFieldset: GovukFieldset, govukBackLink: GovukBackLink)
+
+
 @(appConfig: FrontendAppConfig, form: Form[ContactDetails], mode: Mode, backLink: String)(implicit request: Request[_], messages: Messages)
 
-@main_template(
-    title = messages("contactDetails.title"),
-    appConfig = appConfig,
-    bodyClasses = None) {
+@beforeBlock = {
+    @govukBackLink(BackLink(content = Text(messages("site.back")), href = backLink))
+}
 
-    @components.back_link(backLink)
+@textInput(id: String) = {
+    @govukInput(Input(
+        id=id, name=id, inputType = "text", value = form(id).value,
+        label = Label(content = Text(messages(s"contactDetails.${id}"))),
+        errorMessage = form.errors.asTextErrorMessageForField(id)
+    ))
+}
 
-    @helpers.form(action = ContactDetailsController.onSubmit(mode), 'autoComplete -> "off") {
+@content = {
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">@messages("contactDetails.heading")</h1>
+    </legend>
 
-        @components.error_summary(form.errors, "contactDetails")
+    @textInput("firstName")
+    @textInput("lastName")
+    @textInput("email")
+    @textInput("confirmEmail")
+    @textInput("contactNumber")
 
-        @components.heading("contactDetails.heading")
+    @govukButton(Button(content = Text(messages("site.continue")), attributes = Map("id"-> "submit")))
+}
 
-        @components.input_text(InputViewModel[ContactDetails]("firstName", form), label = messages("contactDetails.firstName"))
 
-        @components.input_text(InputViewModel[ContactDetails]("lastName", form), label = messages("contactDetails.lastName"))
+@mainTemplate(
+    pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + messages("contactDetails.title")) else messages("contactDetails.title")),
+    beforeContentBlock = Option(beforeBlock)
+) {
+    @formWithCSFR(action = ContactDetailsController.onSubmit(mode), 'autoComplete -> "off") {
+        @if(form.hasErrors) {
 
-        @components.input_text(InputViewModel[ContactDetails]("email", form), label = messages("contactDetails.email"))
+            @* after text updates please switch to uk.gov.hmrc.govukfrontend.views.Implicits.RichFormErrors#asHtmlErrorLinks()
+                at the moment we must render field name:
+                "First name - This field is required"
+                Should be after text updates :
+                "Please enter first name"
+            *@
 
-        @components.input_text(InputViewModel[ContactDetails]("confirmEmail", form), label = messages("contactDetails.confirmEmail"))
-
-        @components.input_text(InputViewModel[ContactDetails]("contactNumber", form), label = messages("contactDetails.contactNumber"))
-
-        @components.continue_button()
-
+            @govukErrorSummary(
+                ErrorSummary(
+                    title = Text(messages("error.summary.title")),
+                    errorList = form.mapping.mappings.flatMap(x => form.error(x.key).map(e =>
+                            ErrorLink(href = Option(s"#${x.key}"), content = HtmlContent(messages(s"contactDetails.${e.key}") + " - " + messages(e.messages, e.args)))
+                    )), attributes = Map("id" -> "error-summary-heading")
+                )
+            )
+        }
+        @govukFieldset(Fieldset(html = content))
     }
 }
