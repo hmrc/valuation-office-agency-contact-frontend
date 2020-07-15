@@ -165,7 +165,8 @@ contactDetails.confirmEmail = Confirm email
 contactDetails.contactNumber = Phone number
 contactDetails.checkYourAnswersLabel = Contact Details
 
-checkYourTaxBand.title = Challenging my Council Tax band
+checkYourTaxBand.title = Challenging my Council Tax band - Valuation Office Agency contact form - GOV.UK
+checkYourTaxBand.heading = Challenging my Council Tax band
 checkYourTaxBand.p1 = Contact the Valuation Office Agency (VOA) to explain why you think your band is wrong. You must be able to <a href="https://www.gov.uk/challenge-council-tax-band/evidence-supports-your-challenge">provide evidence</a>. The VOA may be able to review and change your band without you needing to challenge it.
 checkYourTaxBand.l1 = Valuation Office Agency
 checkYourTaxBand.l2 = Telephone (England): 03000 501 501

@@ -17,26 +17,37 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukButton, GovukBackLink}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
+
+@this(mainTemplate: main_template, formWithCSFR: formWithCSRF, govukBackLink: GovukBackLink, govukButton: GovukButton)
+
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
-@main_template(
-title = messages("checkYourTaxBand.title"),
-appConfig = appConfig,
-bodyClasses = Some("full-width")) {
+@beforeBlock = {
+    @govukBackLink(BackLink(content = Text(messages("site.back")),
+        href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url))
+}
 
-    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
+@mainTemplate(
+beforeContentBlock = Option(beforeBlock),
+pageTitle = Option(messages("checkYourTaxBand.title"))) {
 
-    <div class="challenge">
-        <h1 class="heading-large">@Messages("checkYourTaxBand.title")</h1>
+    <h1 class="govuk-heading-xl">@Messages("checkYourTaxBand.heading")</h1>
 
-        <p class="challenge-description">
-          @Html(Messages("checkYourTaxBand.p1"))
-        </p>
+    <p class="govuk-body">@Html(Messages("checkYourTaxBand.p1"))</p>
 
-        <h3 class="heading-small">@messages("checkYourTaxBand.email.heading")</h3>
+    <h2 class="govuk-heading-m">@messages("checkYourTaxBand.email.heading")</h2>
 
-        <p><a href="mailto:@messages("checkYourTaxBand.email")">@messages("checkYourTaxBand.email")</a></p>
+    <p class="govuk-body"><a href="mailto:@messages("checkYourTaxBand.email")">@messages("checkYourTaxBand.email")</a></p>
 
-        <p>@messages("checkYourTaxBand.covid.p")</p>
-    </div>
+    <div class="govuk-inset-text">@messages("checkYourTaxBand.covid.p")</div>
+
+    @govukButton(Button(content = Text(messages("site.start-again")),
+        href = Option(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.Application.start().url)
+    ))
 }

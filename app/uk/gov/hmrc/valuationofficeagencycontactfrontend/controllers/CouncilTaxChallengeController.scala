@@ -22,13 +22,14 @@ import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.councilTaxChallenge
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxChallenge => council_tax_challenge}
 
 class CouncilTaxChallengeController @Inject() (appConfig: FrontendAppConfig,
                                                 override val messagesApi: MessagesApi,
                                                 getData: DataRetrievalAction,
                                                 requireData: DataRequiredAction,
-                                               cc: MessagesControllerComponents
+                                                councilTaxChallenge: council_tax_challenge,
+                                                cc: MessagesControllerComponents
                                               ) extends FrontendController(cc) with I18nSupport {
   def onPageLoad() = (getData andThen requireData) {
     implicit request =>
