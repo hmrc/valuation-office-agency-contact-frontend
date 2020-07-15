@@ -108,6 +108,7 @@ site.submit = Cyflwyno
 site.submit.enquiry = Cyflwyno’ch ymholiad
 site.service_name = Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio
 service.name = Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio
+service.homePageUrl = /valuation-office-agency-contact-frontend/
 site.textarea.char_limit = (Y terfyn yw {0} o gymeriadau)
 site.print.button= Argraffwch neu cadwch
 site.govuk= Yn ôl i GOV.UK
