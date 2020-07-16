@@ -63,7 +63,7 @@ GET         /goto-councilTaxSubcategory            uk.gov.hmrc.valuationofficeag
 GET         /businessRatesSmartLinks               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSmartLinksController.onPageLoad()
 GET         /goto-businessRatesSubcategory         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSmartLinksController.goToBusinessRatesSubcategoryPage()
 
-GET         /councilTaxChallenge                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxChallengeController.onPageLoad()
+GET         /challenge-council-tax                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxChallengeController.onPageLoad()
 
 # SURVEY
 GET         /surveyThankyou                        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.surveyThankyou

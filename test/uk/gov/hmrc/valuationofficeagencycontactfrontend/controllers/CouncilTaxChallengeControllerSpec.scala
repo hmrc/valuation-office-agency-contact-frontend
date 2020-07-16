@@ -19,13 +19,15 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.councilTaxChallenge
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxChallenge => council_tax_challenge}
 
 class CouncilTaxChallengeControllerSpec extends ControllerSpecBase {
 
+  def councilTaxChallenge = app.injector.instanceOf[council_tax_challenge]
+
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new CouncilTaxChallengeController(frontendAppConfig, messagesApi,
-      dataRetrievalAction, new DataRequiredActionImpl(ec), MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new CouncilTaxChallengeController(frontendAppConfig, messagesApi, dataRetrievalAction, new DataRequiredActionImpl(ec),
+      councilTaxChallenge, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   "Council Tax Challenge Controller" must {
     "return the correct view for a GET" in {
