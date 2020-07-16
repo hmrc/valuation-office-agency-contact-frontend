@@ -27,15 +27,17 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyAddressFor
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyAddressId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{NormalMode, PropertyAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.propertyAddress
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyAddress => property_address}
 
 class PropertyAddressControllerSpec extends ControllerSpecBase {
+
+  def propertyAddress = app.injector.instanceOf[property_address]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new PropertyAddressController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      dataRetrievalAction, new DataRequiredActionImpl(ec), propertyAddress, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[PropertyAddress] = PropertyAddressForm()) = propertyAddress(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
