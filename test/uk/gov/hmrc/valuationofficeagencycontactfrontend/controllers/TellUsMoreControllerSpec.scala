@@ -30,17 +30,20 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxS
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{internalServerError, tellUsMore}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.internalServerError
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{tellUsMore => tell_us_more}
 
 class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
 
+  def tellUsMore = app.injector.instanceOf[tell_us_more]
+
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new TellUsMoreController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      dataRetrievalAction, new DataRequiredActionImpl(ec), tellUsMore, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[TellUsMore] = TellUsMoreForm(), msg: String = "") = tellUsMore(frontendAppConfig, form, NormalMode, msg)(fakeRequest, messages).toString
 

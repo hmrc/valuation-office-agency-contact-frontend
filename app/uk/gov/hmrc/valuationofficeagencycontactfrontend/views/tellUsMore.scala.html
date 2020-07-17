@@ -14,41 +14,75 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukButton, GovukErrorSummary, GovukFieldset, GovukBackLink}
+@import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
+@import uk.gov.hmrc.govukfrontend.views.html.components.GovukTextarea
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
-@import uk.gov.hmrc.play.views.html._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.FormHelpers
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, TellUsMore}
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.InputViewModel
-
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.TellUsMore
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.textarea.Textarea
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
+@import uk.gov.hmrc.govukfrontend.views.Implicits._
+
+@this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
+        govukTextarea: GovukTextarea, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
+        govukFieldset: GovukFieldset,  govukBackLink: GovukBackLink)
+
+
 @(appConfig: FrontendAppConfig, form: Form[TellUsMore], mode: Mode, enquiryKey: String)(implicit request: Request[_], messages: Messages)
 
-@main_template(
-    title = messages("tellUsMore.title"),
-    appConfig = appConfig,
-    bodyClasses = None) {
 
-    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url)
+@beforeBlock = {
+    @govukBackLink(BackLink(content = Text(messages("site.back")), href =
+            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url))
+}
 
-    @components.heading("tellUsMore.heading")
 
-    <p>@messages("tellUsMore.para")</p>
+@content = {
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">@messages("tellUsMore.heading")</h1>
+    </legend>
 
-    <ul class="bullets">
+    <p class="govuk-body">@messages("tellUsMore.para")</p>
+
+    <ul class="govuk-list govuk-list--bullet">
         <li>@messages("tellUsMore.para1")</li>
         <li>@messages("tellUsMore.para2")</li>
         <li>@messages("tellUsMore.para3")</li>
         <li>@messages("tellUsMore.para4") @messages(enquiryKey)</li>
     </ul>
 
-    @helpers.form(action = TellUsMoreController.onSubmit(mode), 'autoComplete -> "off") {
+    @govukTextarea(Textarea(id="message", name="message", rows=5, value=form("message").value,
+        errorMessage = form.errors.asHtmlErrorMessageForField("message"), label = Label(content = Text(messages("tellUsMore.message")))))
 
-        @components.error_summary_single_input(form.errors)
+    @govukButton(Button(attributes = Map("id" -> "submit"), content = Text(messages("site.continue"))))
 
-        @components.input_textarea(InputViewModel[TellUsMore]("message", form), label = messages("tellUsMore.message"), labelClass = Some("visually-hidden"))
+}
 
-        @components.continue_button(messageKey = "site.continue")
+@mainTemplate(
+    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("tellUsMore.title"))else messages("tellUsMore.title")),
+    beforeContentBlock = Option(beforeBlock)
+) {
+    @formWithCSFR(action = TellUsMoreController.onSubmit(mode), 'autoComplete -> "off") {
+        @if(form.hasErrors) {
+            @govukErrorSummary(
+                ErrorSummary(
+                    attributes = Map("id" -> "error-summary-heading"),
+                    title = Text(messages("error.summary.title")),
+                    errorList = form.errors.take(1).map(e => ErrorLink(href = Some("#" + e.key), content = HtmlContent(messages(e.messages, e.args))))
+                )
+            )
+        }
+        @govukFieldset(Fieldset(html = content ))
     }
-
 }

@@ -21,11 +21,14 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.TellUsMoreForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{NormalMode, TellUsMore}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.QuestionViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.tellUsMore
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{tellUsMore => tell_us_more}
+
 
 class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
 
   val messageKeyPrefix = "tellUsMore"
+
+  def tellUsMore = app.injector.instanceOf[tell_us_more]
 
   def createView = () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.ct-reference")(fakeRequest, messages)
 
@@ -55,21 +58,9 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
 
   "has a link marked with site.back leading to the Contact Details Page" in {
     val doc = asDocument(createView())
-    val backlinkText = doc.select("a[class=link-back]").text()
+    val backlinkText = doc.select("a[class=govuk-back-link]").text()
     backlinkText mustBe messages("site.back")
-    val backlinkUrl = doc.select("a[class=link-back]").attr("href")
+    val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
     backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
-  }
-
-  "show more that one error in text area" in {
-    val form = TellUsMoreForm()
-      .withError("message", "error.message.max_length")
-      .withError("message", "error.message.xss-invalid")
-
-    val doc = asDocument(createViewUsingForm(form))
-
-    val errorMessageElements = doc.getElementsByAttributeValue("id", "error-message-message-input")
-
-    errorMessageElements.size() mustBe 2
   }
 }
