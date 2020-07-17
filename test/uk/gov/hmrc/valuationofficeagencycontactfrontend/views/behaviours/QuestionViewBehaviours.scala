@@ -55,11 +55,12 @@ trait QuestionViewBehaviours[A] extends ViewBehaviours {
           }
 
           s"show an error in the label for field '$field'" in {
+            import collection.JavaConverters._
             val doc = asDocument(createView(form.withError(FormError(field, "error"))))
 
             val labelElement = Option {
               doc.getElementsByClass("govuk-error-message").first
-            }.map(_.previousElementSibling()).getOrElse {
+            }.flatMap(_.siblingNodes().asScala.find(_.nodeName() == "label")).getOrElse {
               val errorSpan = doc.getElementsByClass("error-notification").first
               errorSpan.parent
             }

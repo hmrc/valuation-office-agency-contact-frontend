@@ -28,7 +28,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyAddressFor
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyAddressId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, PropertyAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.propertyAddress
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyAddress => property_address}
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -38,6 +38,7 @@ class PropertyAddressController @Inject()(appConfig: FrontendAppConfig,
                                           navigator: Navigator,
                                           getData: DataRetrievalAction,
                                           requireData: DataRequiredAction,
+                                          propertyAddress: property_address,
                                           cc: MessagesControllerComponents
                                          ) extends FrontendController(cc) with I18nSupport {
 
