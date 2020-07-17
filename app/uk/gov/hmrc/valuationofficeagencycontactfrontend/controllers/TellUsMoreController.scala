@@ -29,7 +29,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.TellUsMoreForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.TellUsMoreId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, TellUsMore}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.tellUsMore
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{tellUsMore => tell_us_more}
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -39,6 +39,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
                                      navigator: Navigator,
                                      getData: DataRetrievalAction,
                                      requireData: DataRequiredAction,
+                                     tellUsMore: tell_us_more,
                                      cc: MessagesControllerComponents
                                     ) extends FrontendController(cc) with I18nSupport {
 
