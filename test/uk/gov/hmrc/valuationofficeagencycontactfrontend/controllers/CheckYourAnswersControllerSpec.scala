@@ -33,11 +33,13 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
   val mockUserAnswers = mock[UserAnswers]
 
+  def checkYourAnswers = app.injector.instanceOf[check_your_answers]
+
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new CheckYourAnswersController(frontendAppConfig, messagesApi, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction,
-      new DataRequiredActionImpl(ec), MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      new DataRequiredActionImpl(ec), checkYourAnswers, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   "Check Your Answers Controller" must {
 

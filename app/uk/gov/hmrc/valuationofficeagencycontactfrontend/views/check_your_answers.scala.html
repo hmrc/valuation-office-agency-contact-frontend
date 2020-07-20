@@ -14,34 +14,44 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukBackLink, GovukButton, GovukSummaryList}
+@import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{Section, AnswerSection, RepeaterAnswerSection}
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.Section
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryList
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.SectionFormatter.formatSections
+
+@this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
+        govukButton: GovukButton, govukBackLink: GovukBackLink, govukSummaryList: GovukSummaryList )
 
 @(appConfig: FrontendAppConfig, answerSections: Seq[Section])(implicit request: Request[_], messages: Messages)
 
-@main_template(
-    title = messages("checkYourAnswers.title"),
-    appConfig = appConfig,
-    bodyClasses = Some("full-width")) {
 
-    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+@beforeBlock = {
+@govukBackLink(BackLink(content = Text(messages("site.back")), href =
+        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url))
+}
 
-    <h1 class="heading-xlarge">@messages("checkYourAnswers.heading")</h1>
+@mainTemplate(
+    beforeContentBlock = Option(beforeBlock),
+    pageTitle = Option(messages("checkYourAnswers.title"))) {
 
-    <p>@messages("checkYourAnswers.guidance")</p>
+    <h1 class="govuk-heading-xl">@messages("checkYourAnswers.heading")</h1>
 
-    <h2 class="heading-medium">@messages("checkYourAnswers.subheading")</h2>
+    <p class="govuk-body">@messages("checkYourAnswers.guidance")</p>
 
-    @for((section, index) <- answerSections.zipWithIndex) {
-        @{
-            section match {
-                case a: AnswerSection => components.answer_section(a)
-                case r: RepeaterAnswerSection => components.repeater_answer_section(r, index)
-            }
-        }
-    }
+    <h2 class="govuk-heading-l">@messages("checkYourAnswers.subheading")</h2>
 
-    @components.button_link(messageKey = "site.submit.enquiry", href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CheckYourAnswersController.goToConfirmationPage().url, id = "submit")
+    @govukSummaryList(SummaryList(rows = formatSections(answerSections)))
+
+    @govukButton(Button(name = Option("continue"), content = Text(messages("site.submit.enquiry")),
+        href = Option(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CheckYourAnswersController.goToConfirmationPage().url),
+        attributes = Map("id" -> "submit")
+    ))
 
 }

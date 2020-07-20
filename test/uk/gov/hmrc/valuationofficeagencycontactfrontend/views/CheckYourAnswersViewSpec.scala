@@ -34,11 +34,13 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
   val userAnswers2= new FakeUserAnswers(cd, "business_rates", "", "business_rates_rateable_value", propertyAddress2, tellUs)
   val checkYourAnswersHelper2 = new CheckYourAnswersHelper(userAnswers2)
 
-  def view1 = () => check_your_answers(frontendAppConfig, Seq(AnswerSection(None, Seq(checkYourAnswersHelper1.enquiryCategory,
+  def checkYourAnswers = app.injector.instanceOf[check_your_answers]
+
+  def view1 = () => checkYourAnswers(frontendAppConfig, Seq(AnswerSection(None, Seq(checkYourAnswersHelper1.enquiryCategory,
     checkYourAnswersHelper1.councilTaxSubcategory, checkYourAnswersHelper1.contactDetails, checkYourAnswersHelper1.propertyAddress,
     checkYourAnswersHelper1.tellUsMore).flatten)))(fakeRequest, messages)
 
-  def view2 = () => check_your_answers(frontendAppConfig, Seq(AnswerSection(None, Seq(checkYourAnswersHelper2.enquiryCategory,
+  def view2 = () => checkYourAnswers(frontendAppConfig, Seq(AnswerSection(None, Seq(checkYourAnswersHelper2.enquiryCategory,
     checkYourAnswersHelper2.businessRatesSubcategory, checkYourAnswersHelper2.contactDetails, checkYourAnswersHelper2.propertyAddress,
     checkYourAnswersHelper2.tellUsMore).flatten)))(fakeRequest, messages)
 
@@ -54,9 +56,9 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
     "has a link marked with site.back leading to the Tell Us More Page" in {
       val doc = asDocument(view1())
-      val backlinkText = doc.select("a[class=link-back]").text()
+      val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=link-back]").attr("href")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
@@ -133,31 +135,31 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
     "has a link marked with site.edit for changing the council tax subcategory option" in {
       val doc = asDocument(view1())
-      val subcategoryLink = doc.getElementById("change-link-1").attr("href")
+      val subcategoryLink = doc.getElementsByClass("change-link-1").first().attr("href")
       subcategoryLink mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(CheckMode).url.toString
     }
 
     "has a link marked with site.edit for changing the contact details" in {
       val doc = asDocument(view1())
-      val contactDetailsLink = doc.getElementById("change-link-2").attr("href")
+      val contactDetailsLink = doc.getElementsByClass("change-link-2").first().attr("href")
       contactDetailsLink mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(CheckMode).url.toString
     }
 
     "has a link marked with site.edit for changing the property details" in {
       val doc = asDocument(view2())
-      val contactDetailsLink = doc.getElementById("change-link-3").attr("href")
+      val contactDetailsLink = doc.getElementsByClass("change-link-3").first().attr("href")
       contactDetailsLink mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(CheckMode).url.toString
     }
 
     "has a link marked with site.edit for changing the enquiry message" in {
       val doc = asDocument(view2())
-      val contactDetailsLink = doc.getElementById("change-link-4").attr("href")
+      val contactDetailsLink = doc.getElementsByClass("change-link-4").first().attr("href")
       contactDetailsLink mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(CheckMode).url.toString
     }
 
     "has a link marked with site.edit for changing the business rates subcategory option" in {
       val doc = asDocument(view2())
-      val subcategoryLink = doc.getElementById("change-link-1").attr("href")
+      val subcategoryLink = doc.getElementsByClass("change-link-1").first().attr("href")
       subcategoryLink mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(CheckMode).url.toString
     }
 
