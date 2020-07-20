@@ -32,6 +32,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
                                            navigator: Navigator,
                                            getData: DataRetrievalAction,
                                            requireData: DataRequiredAction,
+                                           checkYourAnswers: check_your_answers,
                                            cc: MessagesControllerComponents
                                           ) extends FrontendController(cc) with I18nSupport {
 
@@ -52,7 +53,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
     implicit request =>
 
       sections(request.userAnswers) match {
-        case Some(s) => Ok(check_your_answers(appConfig, s))
+        case Some(s) => Ok(checkYourAnswers(appConfig, s))
         case None => {
           Logger.warn("Navigation for Check your answers page reached without selection of enquiry by controller")
           throw new RuntimeException("Navigation for check your anwsers page reached without selection of enquiry by controller")
