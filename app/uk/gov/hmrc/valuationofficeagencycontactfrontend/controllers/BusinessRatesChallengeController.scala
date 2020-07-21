@@ -21,22 +21,23 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{
+  businessRatesChallenge => business_rates_challenge, businessRatesPropertyOrAreaChanged => business_rates_property_or_area_changed}
 
 @Singleton
 class BusinessRatesChallengeController @Inject() (override val messagesApi: MessagesApi,
                                                   val appConfig: FrontendAppConfig,
+                                                  businessRatesChallenge: business_rates_challenge,
+                                                  businessRatesPropertyOrAreaChanged: business_rates_property_or_area_changed,
                                                   cc: MessagesControllerComponents
                                                  ) extends FrontendController(cc) with I18nSupport {
 
 
   def onChallengePageLoad: Action[AnyContent] = Action { implicit request =>
-
     Ok(businessRatesChallenge(appConfig))
   }
 
   def onAreaChangePageLoad: Action[AnyContent] = Action { implicit  request =>
-
     Ok(businessRatesPropertyOrAreaChanged(appConfig))
   }
 

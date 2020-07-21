@@ -15,27 +15,33 @@
  *@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
-@import uk.gov.hmrc.play.views.html._
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSubcategoryForm
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.FormHelpers
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.InputViewModel
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukButton, GovukBackLink}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
+
+@this(mainTemplate: main_template, formWithCSFR: formWithCSRF, govukBackLink: GovukBackLink, govukButton: GovukButton)
 
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
-@main_template(
-    title = messages("businessRatesChallenge.title"),
-    appConfig = appConfig,
-    bodyClasses = None) {
+@beforeBlock = {
+    @govukBackLink(BackLink(content = Text(messages("site.back")),
+        href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url))
+}
 
-    @components.back_link(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
+@mainTemplate(
+    beforeContentBlock = Option(beforeBlock),
+    pageTitle = Option(messages("businessRatesChallenge.title"))) {
 
-    @components.heading("businessRatesChallenge.heading")
+    <h1 class="govuk-heading-xl">@messages("businessRatesChallenge.heading")</h1>
 
-    <p>@Html(Messages("businessRatesChallenge.body"))</p>
+    <p class="govuk-body">@Html(Messages("businessRatesChallenge.body"))</p>
 
+    @govukButton(Button(content = Text(messages("site.start-again")),
+        href = Option(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.Application.start().url)
+    ))
 
 }
