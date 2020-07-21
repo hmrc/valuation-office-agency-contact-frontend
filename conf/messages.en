@@ -202,11 +202,11 @@ businessRatesSubcategory.business_rates_from_home = Running a business from home
 businessRatesSubcategory.business_rates_not_used = My property is no longer used for business
 businessRatesSubcategory.business_rates_other = Any other business rates enquiry
 
-businessRatesChallenge.title = Challenging my business rates valuation
+businessRatesChallenge.title = Challenging my business rates valuation - Valuation Office Agency contact form - GOV.UK
 businessRatesChallenge.heading = Challenging my business rates valuation
 businessRatesChallenge.body = Use the Valuation Office Agency’s <a href="https://www.gov.uk/correct-your-business-rates" target="_self">online service</a> to check and challenge your business rates valuation.<br />If your property is in England, you’ll need to register and claim your property before you can challenge the valuation.
 
-propertyOrAreaChanged.title = My property or the local area has changed
+propertyOrAreaChanged.title = My property or the local area has changed - Valuation Office Agency contact form - GOV.UK
 propertyOrAreaChanged.heading = My property or the local area has changed
 propertyOrAreaChanged.body = Use the Valuation Office Agency’s <a href="https://www.gov.uk/correct-your-business-rates" target="_self">online service</a> to tell us about changes to your property or the surrounding area.<br />If your property is in England, you’ll need to register and claim your property before you can tell us about the changes.
 
