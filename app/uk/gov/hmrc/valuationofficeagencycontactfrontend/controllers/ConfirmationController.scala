@@ -27,7 +27,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{Dat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CheckYourAnswersId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, UserAnswers}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.confirmation
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurveyForm
 
 import scala.concurrent.ExecutionContext
@@ -40,6 +40,7 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
                                        navigator: Navigator,
                                        getData: DataRetrievalAction,
                                        requireData: DataRequiredAction,
+                                       confirmation: Confirmation,
                                        cc: MessagesControllerComponents
                                       ) extends FrontendController(cc) with I18nSupport {
 

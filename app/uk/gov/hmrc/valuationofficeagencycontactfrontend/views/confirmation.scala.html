@@ -14,18 +14,154 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukBackLink, GovukButton, GovukSummaryList, GovukPanel, GovukFieldset}
+@import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms._
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters._
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.ContactFormatter._
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.InputViewModel
-@import uk.gov.hmrc.play.views.html._
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.Section
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryList
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.SectionFormatter.formatSections
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Contact
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurvey
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.panel.Panel
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters.formattedPropertyAddress
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryListRow
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.Key
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.Value
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.ContactFormatter.formattedConfirmedContactDetails
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
+@import uk.gov.hmrc.govukfrontend.views.html.components.GovukRadios
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.Radios
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.RadioItem
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.SatisfactionSurveyController
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurveyForm
+@import uk.gov.hmrc.govukfrontend.views.html.components.GovukTextarea
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.textarea.Textarea
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
+@import uk.gov.hmrc.govukfrontend.views.html.components.GovukErrorSummary
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
+@import uk.gov.hmrc.govukfrontend.views.Implicits._
+
+@this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
+        govukButton: GovukButton, govukSummaryList: GovukSummaryList, govukPanel: GovukPanel,
+        govukFieldset: GovukFieldset, govukRadios: GovukRadios, govukTextarea: GovukTextarea,
+        govukErrorSummary: GovukErrorSummary)
 
 
 @(appConfig: FrontendAppConfig, contact: Contact, date: String, key: String, form: Form[SatisfactionSurvey])(implicit request: Request[_], messages: Messages)
 
+@panelContent = {
+    @messages("confirmation.para1")<br />
+    @Html(formattedPropertyAddress(contact.propertyAddress, ", "))
+}
+
+@surveyContent = {
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h2 class="govuk-fieldset__heading">@messages("confirmation.feedback")</h2>
+    </legend>
+
+    @govukRadios(Radios(
+        name = "satisfaction",
+        errorMessage = form.errors.asHtmlErrorMessageForField("satisfaction"),
+        items = SatisfactionSurveyForm.options.map(i => RadioItem(
+            content = Text(messages(i.messageKey)),
+            id = Option(i.id),
+            value = Option(i.value),
+            checked = form("satisfaction").value.map(_ == i.value).getOrElse(false)
+        ))
+    ))
+
+    @govukTextarea(Textarea(
+        id="details", name="details", rows=5, value=form("details").value,
+        errorMessage = form.errors.asHtmlErrorMessageForField("details"),
+        label = Label(content = Text(messages("confirmation.feedback.improve")))
+    ))
+
+    <p class="govuk-body">@messages("confirmation.feedback.warning")</p>
+
+    @govukButton(Button(attributes = Map("id" -> "submit"), content = Text(messages("confirmation.feedback.submit"))))
+
+}
+
+
+@mainTemplate(
+    pageTitle = Option(messages("confirmation.title"))) {
+
+
+    @govukPanel(Panel(title = Text(messages("confirmation.heading")), headingLevel = 1,
+        content = HtmlContent(panelContent)
+    ))
+
+    <h2 class="govuk-heading-l">@messages("confirmation.enquirySummary")</h2>
+
+
+    @govukSummaryList(SummaryList(
+        rows = Seq(
+            SummaryListRow(key = Key(content = Text(messages("confirmation.section.enquiryType"))), value = Value(
+                content = HtmlContent(messages(s"enquiryCategory.${contact.enquiryCategory}") + "<br />" + messages(s"$key.${contact.subEnquiryCategory}"))
+            )),
+            SummaryListRow(key = Key(content = Text(messages("confirmation.section.yourDetails"))), value = Value(
+                content = HtmlContent(formattedConfirmedContactDetails(contact.contact, "<br/>"))
+            )),
+
+            SummaryListRow(key = Key(content = Text(messages("confirmation.section.propertyAddress"))), value = Value(
+                content = HtmlContent(formattedPropertyAddress(contact.propertyAddress, "<br/>"))
+            )),
+
+            SummaryListRow(key = Key(content = Text(messages("confirmation.section.yourMessage"))), value = Value(
+                content = Text(contact.message)
+            )),
+
+            SummaryListRow(key = Key(content = Text(messages("confirmation.section.date"))), value = Value(
+                content = Text(date)
+            ))
+        )
+    ))
+
+
+    <h2 class="govuk-heading-l">@messages("confirmation.whatHappensnext")</h2>
+    <p class="govuk-body">@messages("confirmation.para2")</p>
+
+
+    @formWithCSFR(action = SatisfactionSurveyController.formCompleteFeedback, 'autoComplete -> "off") {
+        @if(form.hasErrors) {
+
+            @* after text updates please switch to uk.gov.hmrc.govukfrontend.views.Implicits.RichFormErrors#asHtmlErrorLinks()
+            at the moment we must render field name:
+            "First name - This field is required"
+            Should be after text updates :
+            "Please enter first name"
+            *@
+
+            @govukErrorSummary(
+                ErrorSummary(
+                    title = Text(messages("error.summary.title")),
+                    errorList = form.mapping.mappings.flatMap(x => form.error(x.key).map(e =>
+                        ErrorLink(href = Option(s"#${x.key}"), content = HtmlContent(messages(s"satisfactionSurvey.${e.key}") + " - " + messages(e.messages, e.args)))
+                    )), attributes = Map("id" -> "error-summary-heading")
+                )
+            )
+        }
+
+
+        @govukFieldset(Fieldset(html = surveyContent))
+    }
+
+    <p class="govuk-body">
+        <a href="http://www.gov.uk" id="backToGovUk" class="print-hide govuk-link">@messages("site.govuk")</a>
+    </p>
+
+}
+
+
+
+@*
 @main_template(
     title = messages("confirmation.title"),
     appConfig = appConfig,
@@ -107,3 +243,4 @@
     <p><a href="http://www.gov.uk" id="backToGovUk" class="print-hide">@messages("site.govuk")</a></p>
 
 }
+*@
