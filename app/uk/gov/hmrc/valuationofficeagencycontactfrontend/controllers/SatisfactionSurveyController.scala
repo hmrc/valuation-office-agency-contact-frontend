@@ -25,7 +25,8 @@ import uk.gov.hmrc.play.HeaderCarrierConverter
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.AuditingService
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation, satisfactionSurveyThankYou}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.satisfactionSurveyThankYou
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{SatisfactionSurvey, SatisfactionSurveyForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{AddressFormatters, DateFormatter, UserAnswers}
@@ -39,6 +40,7 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
                                              getData: DataRetrievalAction,
                                              requireData: DataRequiredAction,
                                              auditService: AuditingService,
+                                             confirmation: Confirmation,
                                              cc: MessagesControllerComponents)(implicit ec: ExecutionContext) extends FrontendController(cc) with I18nSupport {
 
   implicit def hc(implicit request: Request[_]):HeaderCarrier = HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))
