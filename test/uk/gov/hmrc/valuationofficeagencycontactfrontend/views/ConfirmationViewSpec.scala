@@ -54,7 +54,7 @@ class ConfirmationViewSpec extends ViewBehaviours {
       "section.yourMessage",
       "section.date")
 
-    "contain a print button " ignore {
+    "contain a print button " in {
       val doc = asDocument(view())
       val printButton = doc.getElementById("print-button").text()
       val href = doc.getElementById("print-button").attr("href")
