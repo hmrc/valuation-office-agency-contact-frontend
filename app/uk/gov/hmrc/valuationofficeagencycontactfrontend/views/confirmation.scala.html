@@ -47,6 +47,7 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
 
 @this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
         govukButton: GovukButton, govukSummaryList: GovukSummaryList, govukPanel: GovukPanel,
@@ -78,7 +79,7 @@
     ))
 
     @govukTextarea(Textarea(
-        id="details", name="details", rows=5, value=form("details").value,
+        id="details", name="details", rows=5, value=form("details").value, hint=Option(Hint(content = Text(messages("hintText.optional")))) ,
         errorMessage = form.errors.asHtmlErrorMessageForField("details"),
         label = Label(content = Text(messages("confirmation.feedback.improve")))
     ))

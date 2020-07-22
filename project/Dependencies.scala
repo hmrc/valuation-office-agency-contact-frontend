@@ -17,7 +17,7 @@ object Dependencies {
     private val simpleReactivemongoVersion = "7.30.0-play-26"
     private val playConditionalFormMappingVersion = "1.2.0-play-26"
     private val playLanguageVersion = "4.3.0-play-26"
-    private val bootstrapPlayVersion = "1.11.0"
+    private val bootstrapPlayVersion = "1.14.0"
     private val akkaVersion     = "2.5.23"
     private val akkaHttpVersion = "10.0.15"
 
@@ -34,7 +34,7 @@ object Dependencies {
       "uk.gov.hmrc" %% "bootstrap-play-26" % bootstrapPlayVersion,
       "uk.gov.hmrc" %% "play-language" % playLanguageVersion,
       "uk.gov.hmrc" %% "http-verbs" % "10.7.0-play-26",
-      "uk.gov.hmrc" %% "play-frontend-govuk" % "0.48.0-play-26"
+      "uk.gov.hmrc" %% "play-frontend-govuk" % "0.49.0-play-26"
     )
 
     lazy val appDependencyOverrides: Seq[ModuleID] = Seq(
