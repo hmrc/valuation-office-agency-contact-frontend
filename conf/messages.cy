@@ -259,7 +259,8 @@ confirmation.feedback.submit = Cyflwyno
 
 # SURVEY THANKYOU
 ###############################
-heading.feedback.thankyou=Diolch am eich adborth
+feedback.thankyou.title = Diolch am eich adborth - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+feedback.thankyou.heading = Diolch am eich adborth
 feedback.anotherForm=cyflwyno ffurflen arall
 
 valuationAdvice.title = Cyngor Prisiad
