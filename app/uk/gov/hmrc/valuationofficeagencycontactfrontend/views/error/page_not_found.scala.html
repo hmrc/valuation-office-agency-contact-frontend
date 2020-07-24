@@ -22,10 +22,12 @@
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
 @mainTemplate(
-    pageTitle = Option(messages("feedback.thankyou.title"))) {
+    pageTitle = Option(messages("error400.title"))) {
 
-    <h1 class="govuk-heading-xl">@Messages("feedback.thankyou.heading")</h1>
+    <h1 class="govuk-heading-xl">@Messages("error400.heading")</h1>
 
-    <p class="govuk-body"><a href="./enquiryCategory">@Messages("feedback.anotherForm")</a></p>
+    <p class="govuk-body">@Messages("error400.para1")</p>
+
+    <p class="govuk-body">@Messages("error400.para2")</p>
 
 }

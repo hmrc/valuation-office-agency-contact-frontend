@@ -22,18 +22,23 @@ import play.api.mvc.Request
 import play.twirl.api.Html
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.play.bootstrap.http.FrontendErrorHandler
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error_template
-
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.error_template
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.page_not_found
 
 @Singleton
 class ErrorHandler @Inject()(
                               appConfig: FrontendAppConfig,
                               val messagesApi: MessagesApi,
-                              errorTemplate: error_template
+                              errorTemplate: error_template,
+                              pageNotFound: page_not_found
                             ) extends FrontendErrorHandler with I18nSupport {
 
   override def standardErrorTemplate(pageTitle: String, heading: String, message: String)(implicit rh: Request[_]): Html =
     errorTemplate(pageTitle, heading, message)
+
+  override def badRequestTemplate(implicit request: Request[_]): Html = pageNotFound(appConfig)
+
+  override def notFoundTemplate(implicit request: Request[_]): Html = pageNotFound(appConfig)
 
   override def internalServerErrorTemplate(implicit request: Request[_]): Html =
     uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.internalServerError(appConfig)

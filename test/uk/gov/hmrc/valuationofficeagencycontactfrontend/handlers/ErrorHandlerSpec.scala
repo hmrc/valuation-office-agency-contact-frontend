@@ -37,9 +37,9 @@ class ErrorHandlerSpec extends SpecBase {
 
       val content = contentAsString(result)
 
-      content must include("Page not found - 404")
-      content must include("This page can’t be found")
-      content must include("Please check that you have entered the correct web address.")
+      content must include("Page not found")
+      content must include("If you typed the web address, check it is correct.")
+      content must include("If you pasted the web address, check you copied the entire address.")
 
     }
   }
