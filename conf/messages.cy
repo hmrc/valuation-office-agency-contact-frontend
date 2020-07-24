@@ -318,6 +318,11 @@ providingLettings.phone-title =  Ffôn
 providingLettings.phone-number = 03000 502502
 providingLettings.para2 = Oherwydd yr achosion cyfredol o COVID-19, ni allwn gynnig gwasanaeth teleffoni na derbyn post. Bydd yn cymryd mwy o amser nag arfer i ymateb i’ch ymholiad ac mae’n ddrwg gennym am unrhyw anghyfleustra y gallai hyn ei achosi.
 
+error400.title = Page not found - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+error400.heading = Page not found
+error400.para1 = If you typed the web address, check it is correct.
+error400.para2 = If you pasted the web address, check you copied the entire address.
+
 error500.title = Nid yw’r gwasanaeth ar gael
 error500.heading = Mae’n ddrwg gennym, rydym yn profi anawsterau technegol
 error500.tryagain.para = Rhowch gynnig arall arni yn nes ymlaen
