@@ -27,6 +27,8 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxSubcategoryForm
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
+@import uk.gov.hmrc.govukfrontend.views.Implicits._
 
 @this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
         govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
@@ -35,23 +37,6 @@
 
 @(appConfig: FrontendAppConfig, form: Form[String], mode: Mode)(implicit request: Request[_], messages: Messages)
 
-
-@content = {
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-        <h1 class="govuk-fieldset__heading">@messages("councilTaxSubcategory.heading")</h1>
-    </legend>
-    @govukRadios(Radios(
-        name = "value",
-        items = CouncilTaxSubcategoryForm.options.map(i => RadioItem(
-            content = Text(messages(i.messageKey)),
-            id = Option(i.id),
-            value = Option(i.value),
-            checked = form("value").value.map(_ == i.value).getOrElse(false)
-        )
-        )
-    ))
-    @govukButton(Button(content = Text(messages("site.continue")), attributes = Map("id"-> "submit")))
-}
 
 @beforeBlock = {
     @govukBackLink(BackLink(content = Text(messages("site.back")), href =
@@ -68,10 +53,28 @@
                 ErrorSummary(
                     title = Text(messages("error.summary.title")),
                     description = Text(messages("error.summary.text")),
-                    errorList = form.errors.map(e => ErrorLink(href = Some("#" + e.key), content = HtmlContent(messages(e.messages, e.args))))
+                    errorList = form.errors.map(e => ErrorLink(href = Some("#councilTaxSubcategory-error"), content = HtmlContent(messages(e.messages, e.args))))
                 )
             )
         }
-        @govukFieldset(Fieldset(html = content))
+
+        @govukRadios(Radios(
+            fieldset = Option(Fieldset(legend = Option(
+                Legend(content = Text(messages("councilTaxSubcategory.heading")), isPageHeading = true, classes = "govuk-fieldset__legend--l"
+                )))),
+            idPrefix = Option("councilTaxSubcategory"),
+            name = "value",
+            items = CouncilTaxSubcategoryForm.options.map(i => RadioItem(
+                content = Text(messages(i.messageKey)),
+                id = Option(i.id),
+                value = Option(i.value),
+                checked = form("value").value.map(_ == i.value).getOrElse(false)
+            )
+            ),
+            errorMessage = form.errors.asTextErrorMessageForField("value")
+        ))
+
+
+        @govukButton(Button(content = Text(messages("site.continue")), attributes = Map("id"-> "submit")))
     }
 }
