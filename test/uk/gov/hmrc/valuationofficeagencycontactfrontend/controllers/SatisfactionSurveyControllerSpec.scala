@@ -30,8 +30,9 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{SatisfactionSurve
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, CouncilTaxSubcategoryId, EnquiryCategoryId, PropertyAddressId, TellUsMoreId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode, PropertyAddress, TellUsMore}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{internalServerError, satisfactionSurveyThankYou}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.internalServerError
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{satisfactionSurveyThankYou => satisfaction_Survey_Thank_You}
 
 import scala.concurrent.ExecutionContext
 
@@ -45,10 +46,12 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
   def auditingService = injector.instanceOf[AuditingService]
 
   def confirmation = app.injector.instanceOf[Confirmation]
+  def satisfactionSurveyThankYou = app.injector.instanceOf[satisfaction_Survey_Thank_You]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new SatisfactionSurveyController(frontendAppConfig, messagesApi, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), auditingService, confirmation, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      dataRetrievalAction, new DataRequiredActionImpl(ec), auditingService, confirmation, satisfactionSurveyThankYou,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[SatisfactionSurvey] = SatisfactionSurveyForm()) =
     satisfactionSurveyThankYou(frontendAppConfig)(fakeRequest, messages).toString

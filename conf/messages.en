@@ -262,7 +262,8 @@ confirmation.feedback.submit = Submit
 
 # SURVEY THANKYOU
 ###############################
-heading.feedback.thankyou=Thank you for your feedback
+feedback.thankyou.title = Thank you for your feedback - Valuation Office Agency contact form - GOV.UK
+feedback.thankyou.heading = Thank you for your feedback
 feedback.anotherForm=Submit another form
 
 valuationAdvice.title = Contact details about valuation and property advice - Valuation Office Agency contact form - GOV.UK

@@ -15,24 +15,17 @@
  *@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+
+@this(mainTemplate: main_template)
 
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
-@main_template(
-    title = messages("heading.feedback.thankyou"),
-    appConfig = appConfig,
-    bodyClasses = Some("full-width")) {
+@mainTemplate(
+    pageTitle = Option(messages("feedback.thankyou.title"))) {
 
-    <main id="content" tabindex="-1">
-        <div class="grid-row">
-            <div class="column-two-thirds">
+    <h1 class="govuk-heading-xl">@Messages("feedback.thankyou.heading")</h1>
 
-                <h1 class="form-title heading-large">
-                  @Messages("heading.feedback.thankyou")
-                </h1>
-                <a href="./enquiryCategory">@Messages("feedback.anotherForm")</a>
+    <p class="govuk-body"><a href="./enquiryCategory">@Messages("feedback.anotherForm")</a>
 
-            </div>
-        </div>
-    </main>
 }
