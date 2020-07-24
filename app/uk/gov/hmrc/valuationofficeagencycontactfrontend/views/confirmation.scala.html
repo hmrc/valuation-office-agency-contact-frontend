@@ -84,10 +84,6 @@
         label = Label(content = Text(messages("confirmation.feedback.improve")))
     ))
 
-    <p class="govuk-body">@messages("confirmation.feedback.warning")</p>
-
-    @govukButton(Button(attributes = Map("id" -> "submit"), content = Text(messages("confirmation.feedback.submit"))))
-
 }
 
 
@@ -151,8 +147,11 @@
             )
         }
 
-
         @govukFieldset(Fieldset(html = surveyContent))
+
+        <p class="govuk-body">@messages("confirmation.feedback.warning")</p>
+
+        @govukButton(Button(attributes = Map("id" -> "submit"), content = Text(messages("confirmation.feedback.submit"))))
     }
 
     <p class="govuk-body">

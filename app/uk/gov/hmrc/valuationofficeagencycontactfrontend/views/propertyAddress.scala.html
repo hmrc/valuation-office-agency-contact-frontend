@@ -62,8 +62,6 @@
     @textInput("town")
     @textInput("county", optional = true)
     @textInput("postcode")
-
-    @govukButton(Button(content = Text(messages("site.continue")), attributes = Map("id"-> "submit")))
 }
 
 
@@ -91,5 +89,6 @@
             )
         }
         @govukFieldset(Fieldset(html = content))
+        @govukButton(Button(content = Text(messages("site.continue")), attributes = Map("id"-> "submit")))
     }
 }
