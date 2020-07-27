@@ -17,16 +17,16 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.internalServerError
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
 
 class InternalServerErrorViewSpec extends ViewBehaviours {
+
+  def internalServerError = app.injector.instanceOf[internal_Server_Error]
 
   def view = () => internalServerError(frontendAppConfig)(fakeRequest, messages)
 
   "Internal Server Error view" must {
 
-    behave like normalPage(view, "error500", "tryagain.para", "contact.para", "phone-title", "england", "england.phone-number",
-      "wales", "wales.phone-number", "opening-times.title", "opening-times.paragraph", "call-charges.title", "call-charges.url",
-      "england.phone-number.url", "wales.phone-number.url")
+    behave like normalPage(view, "error500", "tryagain.para")
   }
 }

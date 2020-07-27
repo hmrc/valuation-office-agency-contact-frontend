@@ -28,9 +28,8 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.TellUsMoreForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxSubcategoryId, EnquiryCategoryId, TellUsMoreId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, MessageControllerComponentsHelpers, UserAnswers}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.internalServerError
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{tellUsMore => tell_us_more}
 
 class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
@@ -38,6 +37,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
   val mockUserAnswers = mock[UserAnswers]
 
   def tellUsMore = app.injector.instanceOf[tell_us_more]
+  def internalServerError = app.injector.instanceOf[internal_Server_Error]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 

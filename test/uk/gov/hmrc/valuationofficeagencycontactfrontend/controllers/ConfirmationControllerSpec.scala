@@ -31,11 +31,12 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurvey
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, MessageControllerComponentsHelpers, UserAnswers}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.internalServerError
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
 
 import scala.concurrent.Future
 import scala.util.{Failure, Success}
+
 class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
@@ -45,6 +46,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def confirmation = app.injector.instanceOf[Confirmation]
+  def internalServerError = app.injector.instanceOf[internal_Server_Error]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ConfirmationController(frontendAppConfig, messagesApi, mockConnector, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction,
