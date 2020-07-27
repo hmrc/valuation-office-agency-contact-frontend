@@ -30,7 +30,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{SatisfactionSurve
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, CouncilTaxSubcategoryId, EnquiryCategoryId, PropertyAddressId, TellUsMoreId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode, PropertyAddress, TellUsMore}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.internalServerError
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{satisfactionSurveyThankYou => satisfaction_Survey_Thank_You}
 
@@ -47,6 +47,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
 
   def confirmation = app.injector.instanceOf[Confirmation]
   def satisfactionSurveyThankYou = app.injector.instanceOf[satisfaction_Survey_Thank_You]
+  def internalServerError = app.injector.instanceOf[internal_Server_Error]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new SatisfactionSurveyController(frontendAppConfig, messagesApi, new FakeNavigator(desiredRoute = onwardRoute),

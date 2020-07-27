@@ -25,15 +25,17 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, DateFormatter, MessageControllerComponentsHelpers, RadioOption, UserAnswers}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, DateFormatter, MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{check_your_answers, internalServerError}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_answers
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
 
 class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
 
   def checkYourAnswers = app.injector.instanceOf[check_your_answers]
+  def internalServerError = app.injector.instanceOf[internal_Server_Error]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 

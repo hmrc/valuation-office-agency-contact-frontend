@@ -323,21 +323,9 @@ error400.heading = Page not found
 error400.para1 = If you typed the web address, check it is correct.
 error400.para2 = If you pasted the web address, check you copied the entire address.
 
-error500.title = Nid yw’r gwasanaeth ar gael
-error500.heading = Mae’n ddrwg gennym, rydym yn profi anawsterau technegol
-error500.tryagain.para = Rhowch gynnig arall arni yn nes ymlaen
-error500.contact.para = Os ydych am gysylltu ag Asiantaeth y Swyddfa Brisio, gallwch wneud hynny dros y ffôn.
-error500.phone-title =  Ffôn
-error500.england = England:
-error500.england.phone-number = 03000 501 501
-error500.england.phone-number.url = tel:+443000501501
-error500.wales = Cymru:
-error500.wales.phone-number = 03000 505 505
-error500.wales.phone-number.url = tel:+443000505505
-error500.opening-times.title = Oriau agor
-error500.opening-times.paragraph =  Dydd Llun – Dydd Gwener, 08:30 – 17:00. Ar gau ar wyliau’r banc.
-error500.call-charges.title = Gwybodaeth am gostau galwadau
-error500.call-charges.url = https://www.gov.uk/costau-galwadau
+error500.title = Sorry, there is a problem with the service - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+error500.heading = Sorry, there is a problem with this service
+error500.tryagain.para = Try again later.
 
 footer.links.languale.url = /valuation-office-agency-contact-frontend/language/english
 footer.links.languale.text = English

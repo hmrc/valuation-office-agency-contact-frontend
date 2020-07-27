@@ -1,4 +1,4 @@
-/*
+@*
  * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,21 +12,20 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *@
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
+@this(mainTemplate: main_template)
 
-class InternalServerErrorViewSpec extends ViewBehaviours {
+@(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
-  def internalServerError = app.injector.instanceOf[internal_Server_Error]
+@mainTemplate(
+    pageTitle = Option(messages("error500.title"))) {
 
-  def view = () => internalServerError(frontendAppConfig)(fakeRequest, messages)
+    <h1 class="govuk-heading-xl">@messages("error500.heading")</h1>
 
-  "Internal Server Error view" must {
+    <p class="govuk-body">@messages("error500.tryagain.para")</p>
 
-    behave like normalPage(view, "error500", "tryagain.para")
-  }
 }

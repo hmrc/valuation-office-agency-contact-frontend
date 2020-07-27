@@ -326,21 +326,9 @@ error400.heading = Page not found
 error400.para1 = If you typed the web address, check it is correct.
 error400.para2 = If you pasted the web address, check you copied the entire address.
 
-error500.title = Service unavailable
-error500.heading = Sorry, we are experiencing technical difficulties
-error500.tryagain.para = Please try again later
-error500.contact.para = If you want to contact the VOA, you can do so by phone.
-error500.phone-title = Phone
-error500.england = England:
-error500.england.phone-number = 03000 501 501
-error500.england.phone-number.url = tel:+443000501501
-error500.wales = Wales:
-error500.wales.phone-number = 03000 505 505
-error500.wales.phone-number.url = tel:+443000505505
-error500.opening-times.title = Opening times
-error500.opening-times.paragraph = Monday to Friday, 8:30am to 5:00pm. Closed on bank holidays.
-error500.call-charges.title = Find out about call charges
-error500.call-charges.url = https://www.gov.uk/call-charges
+error500.title = Sorry, there is a problem with the service - Valuation Office Agency contact form - GOV.UK
+error500.heading = Sorry, there is a problem with this service
+error500.tryagain.para = Try again later.
 
 footer.links.languale.url = /valuation-office-agency-contact-frontend/language/cymraeg
 footer.links.languale.text = Cymraeg

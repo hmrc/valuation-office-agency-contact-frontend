@@ -30,11 +30,12 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{contactDetails => contact_details}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.internalServerError
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
 
 class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   def contactDetails = app.injector.instanceOf[contact_details]
+  def internalServerError = app.injector.instanceOf[internal_Server_Error]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
