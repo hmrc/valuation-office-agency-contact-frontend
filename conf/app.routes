@@ -13,8 +13,6 @@ GET         /this-service-has-been-reset           uk.gov.hmrc.valuationofficeag
 GET         /check-your-answers                    uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CheckYourAnswersController.onPageLoad
 GET         /goto-confirmation                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CheckYourAnswersController.goToConfirmationPage()
 
-GET         /unauthorised                          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.UnauthorisedController.onPageLoad
-
 GET         /enquiryCategory                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.EnquiryCategoryController.onPageLoad(mode: Mode = NormalMode)
 POST        /enquiryCategory                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.EnquiryCategoryController.onSubmit(mode: Mode = NormalMode)
 GET         /changeEnquiryCategory                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.EnquiryCategoryController.onPageLoad(mode: Mode = CheckMode)
