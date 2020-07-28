@@ -18,21 +18,23 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.session_expired
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.session_expired
 
 class SessionExpiredControllerSpec extends ControllerSpecBase {
+
+  def sessionExpired = app.injector.instanceOf[session_expired]
 
   "SessionExpired Controller" must {
     "return 200 for a GET" in {
       val result = new SessionExpiredController(frontendAppConfig, messagesApi,
-        MessageControllerComponentsHelpers.stubMessageControllerComponents).onPageLoad()(fakeRequest)
+        MessageControllerComponentsHelpers.stubMessageControllerComponents, sessionExpired).onPageLoad()(fakeRequest)
       status(result) mustBe OK
     }
 
     "return the correct view for a GET" in {
       val result = new SessionExpiredController(frontendAppConfig, messagesApi,
-        MessageControllerComponentsHelpers.stubMessageControllerComponents).onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe session_expired(frontendAppConfig)(fakeRequest, messages).toString
+        MessageControllerComponentsHelpers.stubMessageControllerComponents, sessionExpired).onPageLoad()(fakeRequest)
+      contentAsString(result) mustBe sessionExpired(frontendAppConfig)(fakeRequest, messages).toString
     }
   }
 }
