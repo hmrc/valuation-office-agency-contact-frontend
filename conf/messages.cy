@@ -1,8 +1,8 @@
 checkBeforeYouStart.title = Gwiriwch cyn i chi ddechrau
 checkBeforeYouStart.heading = Gwiriwch cyn i chi ddechrau
-checkBeforeYouStart.local_council.part1 = Gellir datrys rhai ymholiadau drwy gysylltu â'ch cyngor lleol.
+checkBeforeYouStart.local_council.part1 = Gellir datrys rhai ymholiadau drwy gysylltu â’ch cyngor lleol.
 checkBeforeYouStart.local_council.url = https://www.gov.uk/guidance/your-property-and-council-tax
-checkBeforeYouStart.local_council.part2 = Darganfyddwch pryd y dylech chi gysylltu â'ch cyngor lleol am eich eiddo domestig
+checkBeforeYouStart.local_council.part2 = Darganfyddwch pryd y dylech chi gysylltu â’ch cyngor lleol am eich eiddo domestig
 checkBeforeYouStart.para1 = Mae’r cysylltiadau hyn yn cynnwys atebion i’n ymholiadau mwyaf cyffredin. Cyn i chi gyflwyno ymholiad i Asiantaeth y Swyddfa Brisio, gwiriwch ein tudalennau. Mae’n bosibl y byddwch yn dod o hyd i ateb i’ch ymholiad.
 checkBeforeYouStart.council_tax.subheading = Cysylltiadau defnyddiol ar gyfer Treth Gyngor
 checkBeforeYouStart.council_tax.para1 = Gwiriwch fand Treth Gyngor
@@ -59,7 +59,7 @@ date.year = Blwyddyn
  
 hintText.optional = Opsiynol
 
-error.title = Error:
+error.title = Gwall:
 error.boolean = Rhowch ateb
 error.invalid_date = Rhowch ddyddiad cywir
 error.date.day_blank = Nodwch ddiwrnod
@@ -72,7 +72,7 @@ error.integer = Rhowch ateb mewn rhifau cyfan
 error.non_numeric = Rhowch werth gan ddefnyddio rhifau’n unig
 error.number = Rhowch rif dilys
 error.required = Mae angen llenwi’r blwch hwn
-error.enquiryCategory.required = Mae angen llenwi’r blwch hwn
+error.enquiryCategory.required = Dewiswch destun eich ymholiad
 error.councilTaxSubcategory.required = Mae angen llenwi’r blwch hwn
 error.businessRatesSubcategory.required = Mae angen llenwi’r blwch hwn
 error.summary.title = Mae problem wedi codi
@@ -117,8 +117,8 @@ site.new_service = This is a new service
 unauthorised.title = Ni allwch gyrchu’r gwasanaeth gyda’r cyfrif hwn
 unauthorised.heading = Ni allwch gyrchu’r gwasanaeth gyda’r cyfrif hwn
  
-enquiryCategory.title = Ynghylch beth mae’ch ymholiad?
-enquiryCategory.heading = Ynghylch beth mae’ch ymholiad?
+enquiryCategory.title = Beth yw testun eich ymholiad? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+enquiryCategory.heading = Beth yw testun eich ymholiad?
 enquiryCategory.council_tax = Treth Gyngor
 enquiryCategory.business_rates = Ardrethi busnes
 enquiryCategory.housing_benefit = Budd-dal Tai, Lwfansau Tai Lleol, neu renti teg
@@ -167,7 +167,7 @@ contactDetails.contactNumber =  Rhif ffôn
 contactDetails.checkYourAnswersLabel = Manylion cyswllt
 
 checkYourTaxBand.title = Heriwch eich band treth cyngor
-checkYourTaxBand.p1 = Cysylltwch ag Asiantaeth y Swyddfa Brisio (VOA) i egluro pam eich bod yn meddwl bod eich band yn anghywir. Mae''n rhaid i chi allu <a href="https://www.gov.uk/challenge-council-tax-band/evidence-supports-your-challenge">darparu tystiolaeth</a>. Efallai y bydd y VOA yn gallu adolygu a newid eich band heb fod angen i chi ei herio.
+checkYourTaxBand.p1 = Cysylltwch ag Asiantaeth y Swyddfa Brisio (VOA) i egluro pam eich bod yn meddwl bod eich band yn anghywir. Mae’n rhaid i chi allu <a href="https://www.gov.uk/challenge-council-tax-band/evidence-supports-your-challenge">darparu tystiolaeth</a>. Efallai y bydd y VOA yn gallu adolygu a newid eich band heb fod angen i chi ei herio.
 checkYourTaxBand.l1 = Asiantaeth y Swyddfa Brisio
 checkYourTaxBand.l2 = Ffôn (Lloegr): 03000 501 501
 checkYourTaxBand.l3 = Ffôn (Cymru): 03000 505 505
@@ -196,7 +196,7 @@ businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
 
 businessRatesSubcategory.business_rates_challenge = Herio fy mhrisiad ardrethi busnes
 businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu’r ardal lleol wedi newid
-businessRatesSubcategory.business_rates_assessed_for_bus_rates = Mae angen i''m heiddo gael ei asesu ar gyfer ardrethi busnes
+businessRatesSubcategory.business_rates_assessed_for_bus_rates = Mae angen i’m heiddo gael ei asesu ar gyfer ardrethi busnes
 businessRatesSubcategory.business_rates_from_home = Rhedeg busnes o gartref
 businessRatesSubcategory.business_rates_not_used = Nid yw fy eiddo bellach yn cael ei ddefnyddio ar gyfer busnes
 businessRatesSubcategory.business_rates_other = Unrhyw ymholiad ardrethu busnes arall
@@ -205,8 +205,8 @@ businessRatesChallenge.title = Herio fy mhrisiad ardrethi busnes
 businessRatesChallenge.heading = Herio fy mhrisiad ardrethi busnes
 businessRatesChallenge.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self">wasanaeth ar-lein</a> Asiantaeth y Swyddfa Brisio i wirio a herio eich prisiad ardrethi busnes.
 
-propertyOrAreaChanged.title = Mae fy eiddo neu''r ardal lleol wedi newid
-propertyOrAreaChanged.heading = Mae fy eiddo neu''r ardal lleol wedi newid
+propertyOrAreaChanged.title = Mae fy eiddo neu’r ardal lleol wedi newid
+propertyOrAreaChanged.heading = Mae fy eiddo neu’r ardal lleol wedi newid
 propertyOrAreaChanged.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self">wasanaeth ar-lein</a> Asiantaeth y Swyddfa Brisio i ddweud wrthym am newidiadau i’ch eiddo neu’r ardal o’i hamgylch.
 businessRatesSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
  
@@ -251,7 +251,7 @@ satisfaction.satisfied = Bodlon
 satisfaction.neither = Ddim yn fodlon nac yn anfodlon
 satisfaction.dissatisfied = Anfodlon
 satisfaction.veryDissatisfied = Anfodlon iawn
-satisfactionSurvey.satisfaction = Yn gyffredinol, sut y byddech yn disgrifio''ch profiad gyda''r ffurflen hon? - Rhaid i chi ddewis un
+satisfactionSurvey.satisfaction = Yn gyffredinol, sut y byddech yn disgrifio’ch profiad gyda’r ffurflen hon? - Rhaid i chi ddewis un
 satisfactionSurvey.details = Sut y gallwn wella’r gwasanaeth hwn? - Gallwch ond nodi’r cymeriadau hyn: A-Y, a-y, 0-9, -, &, ., £, %, (), ;, :, ?, !, `, ’, comaau, a bylchau
 confirmation.feedback.improve = Sut y gallwn wella’r gwasanaeth hwn?
 confirmation.feedback.warning = Peidiwch â chynnwys unrhyw wybodaeth bersonol nac ariannol, er enghraifft eich rhif Yswiriant Gwladol neu rifau cardiau credyd.

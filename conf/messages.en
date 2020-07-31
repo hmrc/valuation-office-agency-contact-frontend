@@ -117,8 +117,8 @@ site.new_service = This is a new service
 unauthorised.title = You can’t access this service with this account
 unauthorised.heading = You can’t access this service with this account
 
-enquiryCategory.title = What’s your enquiry about?
-enquiryCategory.heading = What’s your enquiry about?
+enquiryCategory.title = What is your enquiry about? - Valuation Office Agency contact form - GOV.UK
+enquiryCategory.heading = What is your enquiry about?
 enquiryCategory.council_tax = Council Tax
 enquiryCategory.business_rates = Business rates
 enquiryCategory.housing_benefit = Housing Benefit, Local Housing Allowances, or fair rents
