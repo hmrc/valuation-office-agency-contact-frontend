@@ -40,7 +40,7 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
 
   "TellUsMore view" must {
 
-    behave like normalPage(createView, messageKeyPrefix, "para", "para1", "para2", "para3", "para4", "ct-reference")
+    behave like normalPage(createView, messageKeyPrefix, "para", "para2", "para3", "para4", "ct-reference")
 
     behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.TellUsMoreController.onSubmit(NormalMode).url, "message")
   }
