@@ -26,7 +26,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.EnquiryCategoryId
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.enquiryCategory
 
@@ -63,5 +63,9 @@ class EnquiryCategoryController @Inject()(
           dataCacheConnector.save[String](request.sessionId, EnquiryCategoryId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(EnquiryCategoryId, mode)(new UserAnswers(cacheMap))))
       )
+  }
+
+  def redirect: Action[AnyContent] = Action {
+    Redirect(routes.EnquiryCategoryController.onPageLoad(NormalMode))
   }
 }

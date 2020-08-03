@@ -71,6 +71,13 @@ class EnquiryCategoryControllerSpec extends ControllerSpecBase {
       redirectLocation(result) mustBe Some(onwardRoute.url)
     }
 
+    "redirect from old URL to new URL" in {
+      val result = controller().redirect()(fakeRequest)
+
+      status(result) mustBe SEE_OTHER
+      redirectLocation(result) mustBe Some(onwardRoute.url)
+    }
+
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm = EnquiryCategoryForm().bind(Map("value" -> "invalid value"))
