@@ -157,12 +157,12 @@ enquiryCategory.valuation_for_public_body.summary = Gallai prisiad ar gyfer cyrf
 enquiryCategory.valuation_for_public_body.about1 = prisiad annibynnol a chyngor proffesiynol ar eiddo ar gyfer cyrff cyhoeddus
 enquiryCategory.valuation_for_public_body.finaltext = Sylwer: mae’r gwasanaeth hwn yn gweithredu’n yr Alban hefyd.
  
-contactDetails.title = Manylion cyswllt
+contactDetails.title = Beth yw’ch manylion cyswllt? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 contactDetails.heading = Beth yw’ch manylion cyswllt?
 contactDetails.firstName = Enw cyntaf
 contactDetails.lastName = Cyfenw
-contactDetails.email = E-bost
-contactDetails.confirmEmail = Cadarnhewch y cyfeiriad e-bost
+contactDetails.email = Cyfeiriad ebost
+contactDetails.confirmEmail = Cadarnhau cyfeiriad ebost
 contactDetails.contactNumber =  Rhif ffôn
 contactDetails.checkYourAnswersLabel = Manylion cyswllt
 

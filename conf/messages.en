@@ -157,12 +157,12 @@ enquiryCategory.valuation_for_public_body.summary = Valuation for public sector 
 enquiryCategory.valuation_for_public_body.about1 = independent valuation and professional property advice for public bodies
 enquiryCategory.valuation_for_public_body.finaltext = Note: this service also operates in Scotland.
 
-contactDetails.title = Contact Details
+contactDetails.title = What are your contact details? - Valuation Office Agency contact form - GOV.UK
 contactDetails.heading = What are your contact details?
 contactDetails.firstName = First name
-contactDetails.lastName = Surname
-contactDetails.email = Email
-contactDetails.confirmEmail = Confirm email
+contactDetails.lastName = Last name
+contactDetails.email = Email address
+contactDetails.confirmEmail = Confirm email address
 contactDetails.contactNumber = Phone number
 contactDetails.checkYourAnswersLabel = Contact Details
 
