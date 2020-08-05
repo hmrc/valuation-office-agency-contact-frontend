@@ -263,11 +263,9 @@ feedback.thankyou.title = Diolch am eich adborth - Ffurflen Gysylltu Asiantaeth 
 feedback.thankyou.heading = Diolch am eich adborth
 feedback.anotherForm=cyflwyno ffurflen arall
 
-valuationAdvice.title = Cyngor Prisiad
-valuationAdvice.heading = Manylion cyswllt
-valuationAdvice.subheading = Prisiad a chyngor ar eiddo ar gyfer cyrff sector cyhoeddus, gan  y Gwasanaethau Prisiwr Dosbarth (GPD)
-valuationAdvice.paragraph =  Defnyddiwch y manylion hyn i gysylltu â ni gyda’ch ymholiad.
-valuationAdvice.email-title = E-bost
+valuationAdvice.title = Manylion cyswllt ar gyfer Gwasanaethau Prisiwr Dosbarth - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+valuationAdvice.heading = Manylion cyswllt ar gyfer Gwasanaethau Prisiwr Dosbarth (GPD)
+valuationAdvice.email-title = E-bost:
 valuationAdvice.email = clientdevelopment@voa.gsi.gov.uk
 valuationAdvice.phone-title =  Ffôn
 valuationAdvice.phone-number = 03000 501501
