@@ -2,8 +2,8 @@ checkBeforeYouStart.title = Gwiriwch cyn i chi ddechrau
 checkBeforeYouStart.heading = Gwiriwch cyn i chi ddechrau
 checkBeforeYouStart.local_council.part1 = Gellir datrys rhai ymholiadau drwy gysylltu â’ch cyngor lleol.
 checkBeforeYouStart.local_council.url = https://www.gov.uk/guidance/your-property-and-council-tax
-checkBeforeYouStart.local_council.part2 = Darganfyddwch pryd y dylech chi gysylltu â’ch cyngor lleol am eich eiddo domestig
-checkBeforeYouStart.para1 = Mae’r cysylltiadau hyn yn cynnwys atebion i’n ymholiadau mwyaf cyffredin. Cyn i chi gyflwyno ymholiad i Asiantaeth y Swyddfa Brisio, gwiriwch ein tudalennau. Mae’n bosibl y byddwch yn dod o hyd i ateb i’ch ymholiad.
+checkBeforeYouStart.local_council.part2 = Darganfyddwch pryd y dylech chi gysylltu â’ch cyngor lleol am eich eiddo domestig.
+checkBeforeYouStart.para1 = Mae’r cysylltiadau hyn yn cynnwys atebion i’n ymholiadau mwyaf cyffredin.
 checkBeforeYouStart.council_tax.subheading = Cysylltiadau defnyddiol ar gyfer Treth Gyngor
 checkBeforeYouStart.council_tax.para1 = Gwiriwch fand Treth Gyngor
 checkBeforeYouStart.council_tax.url1 = https://www.gov.uk/council-tax-bands
@@ -21,6 +21,10 @@ checkBeforeYouStart.council_tax.url5 = https://www.gov.uk/challenge-council-tax-
 checkBeforeYouStart.council_tax.para9 = Herio’ch band Treth Gyngor
 checkBeforeYouStart.council_tax.para10 = Cael gwybod beth allwch ei wneud os ydych yn anghytuno gyda’ch band Treth Gyngor.
 checkBeforeYouStart.council_tax.para11 = Os na allwch gael gafael ar ateb i’ch ymholiad, neu os oes gennych ymholiad ynghylch rhywbeth arall, gallwch fynd yn eich blaen i’n ffurflen gyswllt.
+
+checkBeforeYouStart.business_rates.title = Trethi busnes: gwirio cyn i chi fynd yn eich blaen - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+checkBeforeYouStart.business_rates.heading = Trethi busnes: gwirio cyn i chi fynd yn eich blaen
+checkBeforeYouStart.business_rates.para = Mae’r cysylltiadau hyn yn cynnwys atebion i’n ymholiadau mwyaf cyffredin.
 checkBeforeYouStart.business_rates.subheading = Cysylltiadau defnyddiol ar gyfer ardrethi busnes
 checkBeforeYouStart.business_rates.covid.url = https://llyw.cymru/coronafeirws-covid-19-cefnogaeth-i-fusnesau
 checkBeforeYouStart.business_rates.covid.link = COVID-19: Cefnogaeth i fusnesau
@@ -46,8 +50,8 @@ checkBeforeYouStart.business_rates.para8 = Gall yr arweiniad hwn helpu os ydych 
 checkBeforeYouStart.business_rates.para9 = Mae fy musnes neu’r safle wedi newid
 checkBeforeYouStart.business_rates.url5 = https://www.gov.uk/introduction-to-business-rates/if-your-business-or-premises-change-or-cant-be-used
 checkBeforeYouStart.business_rates.para10 = Cael gwybod sut y gall eich ardrethi busnes newid os yw’r safle’n cael ei altro neu os yw natur eich busnes wedi newid.
-checkBeforeYouStart.business_rates.para11 = Os na allwch gael gafael ar ateb i’ch ymholiad, neu os oes gennych ymholiad am rywbeth arall, gallwch fynd yn eich blaen i’r ffurflen gyswllt.
- 
+checkBeforeYouStart.business_rates.para11 = Os na allwch gael gafael ar ateb i’ch ymholiad, neu os oes gennych ymholiad ynghylch rhywbeth arall, gallwch fynd yn eich blaen i’n ffurflen gyswllt.
+
 checkYourAnswers.title = Crynodeb
 checkYourAnswers.heading = Crynodeb o’ch ymholiad
 checkYourAnswers.guidance = Gwiriwch yr wybodaeth yr ydych wedi’i rhoi i ni cyn ei chyflwyno. Gallwch newid unrhyw fanylion sy’n anghywir.

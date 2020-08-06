@@ -59,7 +59,7 @@ GET         /letting-information                   uk.gov.hmrc.valuationofficeag
 GET         /councilTaxSmartLinks                  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSmartLinksController.onPageLoad()
 GET         /goto-councilTaxSubcategory            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSmartLinksController.goToCouncilTaxSubcategoryPage()
 
-GET         /businessRatesSmartLinks               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSmartLinksController.onPageLoad()
+GET         /check-before-you-continue-rates       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSmartLinksController.onPageLoad()
 GET         /goto-businessRatesSubcategory         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSmartLinksController.goToBusinessRatesSubcategoryPage()
 
 GET         /challenge-council-tax                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxChallengeController.onPageLoad()
