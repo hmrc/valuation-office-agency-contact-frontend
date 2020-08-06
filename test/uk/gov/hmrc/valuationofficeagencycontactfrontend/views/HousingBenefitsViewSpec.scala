@@ -31,8 +31,6 @@ class HousingBenefitsViewSpec extends ViewBehaviours {
     behave like normalPage(view, "housingBenefits",
         "title",
         "heading",
-        "subheading",
-        "para1",
         "email-title",
         "email",
         "para2"
@@ -46,15 +44,15 @@ class HousingBenefitsViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
     }
 
-    "contain start again button " in {
+    "contain start again link " in {
       val doc = asDocument(view())
-      val startAgainButton = doc.getElementsByClass("govuk-button").text()
+      val startAgainButton = doc.getElementsByClass("govuk-link").text()
       assert(startAgainButton == messages("site.start-again"))
     }
 
-    "The Start again button links to the Enquiry Category Controller onPageLoad method" in {
+    "The Start again link links to the Enquiry Category Controller onPageLoad method" in {
       val doc = asDocument(view())
-      val href = doc.getElementsByClass("govuk-button").attr("href")
+      val href = doc.getElementsByClass("govuk-link").attr("href")
       assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.Application.start().url.toString)
     }
   }
