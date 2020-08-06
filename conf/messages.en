@@ -274,11 +274,9 @@ valuationAdvice.phone-title = Telephone
 valuationAdvice.phone-number = 03000 501501
 valuationAdvice.response-paragraph = Due to the current outbreak of Covid-19, we’re unable to offer a telephony service and it will take longer than usual to respond to your query. We’re sorry for any inconvenience this may cause.
 
-valuationForTaxes.title = Contact details about valuation for taxes - Valuation Office Agency contact form - GOV.UK
-valuationForTaxes.heading = Contact details about valuation for taxes
-valuationForTaxes.subheading = Valuations for taxes, Right to Buy, or appeals against Community Infrastructure Levy
-valuationForTaxes.para1 = Use these details to contact us with your enquiry.
-valuationForTaxes.email-title = Email
+valuationForTaxes.title = Contact details for Right to Buy, valuation for taxes, or appeals against Community Infrastructure Levy - Valuation Office Agency contact form - GOV.UK
+valuationForTaxes.heading = Contact details for Right to Buy, valuation for taxes, or appeals against Community Infrastructure Levy
+valuationForTaxes.email-title = Email:
 valuationForTaxes.email = askSVT@voa.gsi.gov.uk
 valuationForTaxes.generalEnquiries-title = General enquiries
 valuationForTaxes.phone1 = Telephone (England) 03000 501501
