@@ -271,11 +271,9 @@ valuationAdvice.phone-title =  Ffôn
 valuationAdvice.phone-number = 03000 501501
 valuationAdvice.response-paragraph = Oherwydd yr achosion cyfredol o Covid-19, ni allwn gynnig gwasanaeth teleffoni a bydd yn cymryd mwy o amser na’r arfer i ymateb i’ch ymholiad. Mae’n ddrwg gennym am unrhyw anghyfleustra y gallai hyn ei achosi.
  
-valuationForTaxes.title = Manylion cyswllt
-valuationForTaxes.heading = Manylion cyswllt
-valuationForTaxes.subheading = Prisio ar gyfer trethi, Hawl i Brynu, neu apeliadau yn erbyn Ardoll Seilwaith Cymunedol
-valuationForTaxes.para1 =  Defnyddiwch y manylion hyn i gysylltu â ni gyda’ch ymholiad.
-valuationForTaxes.email-title = E-bost
+valuationForTaxes.title = Manylion cyswllt ar gyfer Hawl i Brynu, prisiadau trethi, neu apeliadau yn erbyn yr Ardoll Seilwaith Cymunedol - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+valuationForTaxes.heading = Manylion cyswllt ar gyfer Hawl i Brynu, prisiadau trethi, neu apeliadau yn erbyn yr Ardoll Seilwaith Cymunedol
+valuationForTaxes.email-title = E-bost:
 valuationForTaxes.email = askSVT@voa.gsi.gov.uk
 valuationForTaxes.generalEnquiries-title = Ymholiadau cyffredinol
 valuationForTaxes.phone1 = Rhif f ffôn (England) 03000 501501
