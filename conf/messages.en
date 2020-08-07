@@ -1,9 +1,9 @@
-checkBeforeYouStart.title = Check before you start
-checkBeforeYouStart.heading = Check before you start
+checkBeforeYouStart.council_tax.title = Council Tax: check before you continue - Valuation Office Agency contact form - GOV.UK
+checkBeforeYouStart.council_tax.heading = Council Tax: Check before you continue
 checkBeforeYouStart.local_council.part1 = Some enquiries can be resolved by contacting your local council first.
 checkBeforeYouStart.local_council.url = https://www.gov.uk/guidance/your-property-and-council-tax
 checkBeforeYouStart.local_council.part2 = Find out when you should contact your local council about your domestic property.
-checkBeforeYouStart.para1 = These links contain answers to our most common enquiries.
+checkBeforeYouStart.council_tax.para1 = These links contain answers to our most common enquiries.
 checkBeforeYouStart.council_tax.subheading = Useful links for Council Tax
 checkBeforeYouStart.council_tax.para1 = Check a Council Tax band
 checkBeforeYouStart.council_tax.url1 = https://www.gov.uk/council-tax-bands
