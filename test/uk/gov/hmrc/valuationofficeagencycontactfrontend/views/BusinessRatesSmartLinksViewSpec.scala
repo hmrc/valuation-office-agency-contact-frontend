@@ -28,24 +28,21 @@ class BusinessRatesSmartLinksViewSpec extends ViewBehaviours {
 
   "Business Rates Smart Links View" must {
 
-    behave like normalPage(view, "checkBeforeYouStart", "para1", "business_rates.subheading",
-      "business_rates.covid.link", "business_rates.covid.para", "business_rates.run.home.link", "business_rates.run.home.para",
-      "business_rates.holiday.lets.link", "business_rates.holiday.lets.para", "business_rates.para1",
-      "business_rates.para2", "business_rates.para3", "business_rates.para4", "business_rates.para5", "business_rates.para6",
-      "business_rates.para7", "business_rates.para8", "business_rates.para9", "business_rates.para10", "business_rates.para11",
-      "business_rates.covid.url", "business_rates.run.home.url", "business_rates.holiday.lets.url",
-      "business_rates.url1", "business_rates.url2", "business_rates.url3", "business_rates.url4", "business_rates.url5")
+    behave like normalPage(view, "checkBeforeYouStart.business_rates", "para1", "subheading",
+      "covid.link", "covid.para", "run.home.link", "run.home.para", "holiday.lets.link", "holiday.lets.para",
+      "para1", "para2", "para3", "para4", "para5", "para6", "para7", "para8", "para9", "para10", "para11",
+      "covid.url", "run.home.url", "holiday.lets.url", "url1", "url2", "url3", "url4", "url5")
   }
 
   "The Continue button links to the goToBusinessRatesSubcategoryPage method" in {
     val doc = asDocument(view())
-    val href = doc.getElementsByAttributeValue("class", "govuk-button govuk-button--start").first().attr("href")
+    val href = doc.getElementsByAttributeValue("class", "govuk-button").first().attr("href")
     assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSmartLinksController.goToBusinessRatesSubcategoryPage().url.toString)
   }
 
   "The Continue button uses the button--get-started class" in {
     val doc = asDocument(view())
-    val button = doc.select("a[class~=govuk-button--start]")
+    val button = doc.select("a[class~=govuk-button]")
     assert(button.size() == 1)
   }
 

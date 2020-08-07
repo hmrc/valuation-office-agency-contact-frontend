@@ -36,68 +36,87 @@
 
 @mainTemplate(
     beforeContentBlock = Option(beforeBlock),
-    pageTitle = Option(messages("checkBeforeYouStart.title"))) {
+    pageTitle = Option(messages("checkBeforeYouStart.business_rates.title"))) {
 
-    <h1 class="govuk-heading-xl">@messages("checkBeforeYouStart.heading")</h1>
+    <h1 class="govuk-heading-l">@messages("checkBeforeYouStart.business_rates.heading")</h1>
 
-    <p class="govuk-body">@messages("checkBeforeYouStart.para1")</p>
+    <p class="govuk-body">@messages("checkBeforeYouStart.business_rates.para")</p>
 
-    <h2 class="govuk-heading-l">@messages("checkBeforeYouStart.business_rates.subheading")</h2>
+    <h2 class="govuk-heading-m">@messages("checkBeforeYouStart.business_rates.subheading")</h2>
+
+    <ul class="govuk-list">
+        <li>
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <a class="govuk-link" href=@messages("checkBeforeYouStart.business_rates.covid.url") target="_self">@messages("checkBeforeYouStart.business_rates.covid.link")</a>
+            </h3>
+
+            <p class="govuk-body">@messages("checkBeforeYouStart.business_rates.covid.para")</p>
+        </li>
+
+        <li>
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <a class="govuk-link" href=@messages("checkBeforeYouStart.business_rates.run.home.url") target="_self">@messages("checkBeforeYouStart.business_rates.run.home.link")</a>
+            </h3>
+
+            <p class="govuk-body">@messages("checkBeforeYouStart.business_rates.run.home.para")</p>
+        </li>
+
+        <li>
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <a class="govuk-link" href=@messages("checkBeforeYouStart.business_rates.holiday.lets.url") target="_self">@messages("checkBeforeYouStart.business_rates.holiday.lets.link")</a>
+            </h3>
+
+            <p class="govuk-body">@messages("checkBeforeYouStart.business_rates.holiday.lets.para")</p>
+        </li>
+
+        <li>
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <a class="govuk-link" href=@messages("checkBeforeYouStart.business_rates.url1") target="_self">@messages("checkBeforeYouStart.business_rates.para1")</a>
+            </h3>
+
+            <p class="govuk-body">@messages("checkBeforeYouStart.business_rates.para2")</p>
+        </li>
+
+        <li>
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <a class="govuk-link" href=@messages("checkBeforeYouStart.business_rates.url2") target="_self">@messages("checkBeforeYouStart.business_rates.para3")</a>
+            </h3>
+
+            <p class="govuk-body">@messages("checkBeforeYouStart.business_rates.para4")</p>
+        </li>
+
+        <li>
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <a class="govuk-link" href=@messages("checkBeforeYouStart.business_rates.url3") target="_self">@messages("checkBeforeYouStart.business_rates.para5")</a>
+            </h3>
+
+            <p class="govuk-body">@messages("checkBeforeYouStart.business_rates.para6")</p>
+        </li>
+
+        <li>
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <a class="govuk-link" href=@messages("checkBeforeYouStart.business_rates.url4") target="_self">@messages("checkBeforeYouStart.business_rates.para7")</a>
+            </h3>
+
+            <p class="govuk-body">@messages("checkBeforeYouStart.business_rates.para8")</p>
+        </li>
+
+        <li>
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <a class="govuk-link" href=@messages("checkBeforeYouStart.business_rates.url5") target="_self">@messages("checkBeforeYouStart.business_rates.para9")</a>
+            </h3>
+
+            <p class="govuk-body">@messages("checkBeforeYouStart.business_rates.para10")</p>
+        </li>
+    </ul>
+
+    <div class="govuk-inset-text">
+        <p class="govuk-body">@messages("checkBeforeYouStart.business_rates.para11")</p>
+    </div>
 
     <p class="govuk-body">
-        <a href=@messages("checkBeforeYouStart.business_rates.covid.url") class="govuk-link" target="_self">@messages("checkBeforeYouStart.business_rates.covid.link")</a>
-        <br>
-        @messages("checkBeforeYouStart.business_rates.covid.para")
-    </p>
-
-    <p class="govuk-body">
-        <a href=@messages("checkBeforeYouStart.business_rates.run.home.url") class="govuk-link" target="_self">@messages("checkBeforeYouStart.business_rates.run.home.link")</a>
-        <br>
-        @messages("checkBeforeYouStart.business_rates.run.home.para")
-    </p>
-
-    <p class="govuk-body">
-        <a href=@messages("checkBeforeYouStart.business_rates.holiday.lets.url") class="govuk-link" target="_self">@messages("checkBeforeYouStart.business_rates.holiday.lets.link")</a>
-        <br>
-        @messages("checkBeforeYouStart.business_rates.holiday.lets.para")
-    </p>
-
-    <p class="govuk-body">
-        <a href=@messages("checkBeforeYouStart.business_rates.url1") class="govuk-link" target="_self">@messages("checkBeforeYouStart.business_rates.para1")</a>
-        <br>
-        @messages("checkBeforeYouStart.business_rates.para2")
-    </p>
-
-    <p class="govuk-body">
-        <a href=@messages("checkBeforeYouStart.business_rates.url2") class="govuk-link" target="_self">@messages("checkBeforeYouStart.business_rates.para3")</a>
-        <br>
-        @messages("checkBeforeYouStart.business_rates.para4")
-    </p>
-
-    <p class="govuk-body">
-        <a href=@messages("checkBeforeYouStart.business_rates.url3") class="govuk-link" target="_self">@messages("checkBeforeYouStart.business_rates.para5")</a>
-        <br>
-        @messages("checkBeforeYouStart.business_rates.para6")
-    </p>
-
-    <p class="govuk-body">
-        <a href=@messages("checkBeforeYouStart.business_rates.url4") class="govuk-link" target="_self">@messages("checkBeforeYouStart.business_rates.para7")</a>
-        <br>
-        @messages("checkBeforeYouStart.business_rates.para8")
-    </p>
-
-    <p class="govuk-body">
-        <a href=@messages("checkBeforeYouStart.business_rates.url5") class="govuk-link" target="_self">@messages("checkBeforeYouStart.business_rates.para9")</a>
-        <br>
-        @messages("checkBeforeYouStart.business_rates.para10")
-    </p>
-
-    <p class="govuk-body">@messages("checkBeforeYouStart.business_rates.para11")</p>
-
-    <p class="govuk-body">
-    @govukButton(Button(element = Option("a"), name = Option("continue"), content = Text(messages("site.continue")),
-        isStartButton = true,
-        href = Option(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSmartLinksController.goToBusinessRatesSubcategoryPage().url)
-    ))
+        @govukButton(Button(element = Option("a"), name = Option("continue"), content = Text(messages("site.continue")),
+            href = Option(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSmartLinksController.goToBusinessRatesSubcategoryPage().url)
+        ))
     </p>
 }
