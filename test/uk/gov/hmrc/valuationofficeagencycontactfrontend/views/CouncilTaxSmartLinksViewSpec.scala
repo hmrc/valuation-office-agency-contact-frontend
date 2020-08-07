@@ -28,21 +28,19 @@ class CouncilTaxSmartLinksViewSpec extends ViewBehaviours {
 
   "Council Tax Smart Links View" must {
 
-    behave like normalPage(view, "checkBeforeYouStart", "para1", "council_tax.subheading", "council_tax.para1",
-      "council_tax.para2", "council_tax.para3", "council_tax.para4", "council_tax.para5", "council_tax.para6",
-      "council_tax.para7", "council_tax.para8", "council_tax.url1", "council_tax.url2", "council_tax.url3",
-      "council_tax.url4", "council_tax.para9", "council_tax.para10", "council_tax.para11")
+    behave like normalPage(view, "checkBeforeYouStart.council_tax", "para1", "subheading", "para1",
+      "para2", "para3", "para4", "para5", "para6", "para7", "para8", "url1", "url2", "url3", "url4", "para9", "para10", "para11")
   }
 
   "The Continue button links to the goToCouncilTaxSubcategoryPage method" in {
     val doc = asDocument(view())
-    val href = doc.getElementsByAttributeValue("class", "govuk-button govuk-button--start").first().attr("href")
+    val href = doc.getElementsByAttributeValue("class", "govuk-button").first().attr("href")
     assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSmartLinksController.goToCouncilTaxSubcategoryPage().url.toString)
   }
 
   "The Continue button uses the button--get-started class" in {
     val doc = asDocument(view())
-    val button = doc.select("a[class~=govuk-button--start]")
+    val button = doc.select("a[class~=govuk-button]")
     assert(button.size() == 1)
   }
 
