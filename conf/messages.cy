@@ -1,9 +1,9 @@
-checkBeforeYouStart.title = Gwiriwch cyn i chi ddechrau
-checkBeforeYouStart.heading = Gwiriwch cyn i chi ddechrau
+checkBeforeYouStart.council_tax.title = Treth Gyngor: gwirio cyn i chi fynd yn eich blaen - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+checkBeforeYouStart.council_tax.heading = Treth Gyngor: gwirio cyn i chi fynd yn eich blaen
 checkBeforeYouStart.local_council.part1 = Gellir datrys rhai ymholiadau drwy gysylltu â’ch cyngor lleol.
 checkBeforeYouStart.local_council.url = https://www.gov.uk/guidance/your-property-and-council-tax
 checkBeforeYouStart.local_council.part2 = Darganfyddwch pryd y dylech chi gysylltu â’ch cyngor lleol am eich eiddo domestig.
-checkBeforeYouStart.para1 = Mae’r cysylltiadau hyn yn cynnwys atebion i’n ymholiadau mwyaf cyffredin.
+checkBeforeYouStart.council_tax.para = Mae’r cysylltiadau hyn yn cynnwys atebion i’n ymholiadau mwyaf cyffredin.
 checkBeforeYouStart.council_tax.subheading = Cysylltiadau defnyddiol ar gyfer Treth Gyngor
 checkBeforeYouStart.council_tax.para1 = Gwiriwch fand Treth Gyngor
 checkBeforeYouStart.council_tax.url1 = https://www.gov.uk/council-tax-bands

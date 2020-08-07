@@ -43,56 +43,67 @@
 
 @mainTemplate(
     beforeContentBlock = Option(beforeBlock),
-    pageTitle = Option(messages("checkBeforeYouStart.title"))) {
+    pageTitle = Option(messages("checkBeforeYouStart.council_tax.title"))) {
 
-    <h1 class="govuk-heading-xl">@messages("checkBeforeYouStart.heading")</h1>
+    <h1 class="govuk-heading-l">@messages("checkBeforeYouStart.council_tax.heading")</h1>
 
     <p class="govuk-body">
         @messages("checkBeforeYouStart.local_council.part1")
-        <a href=@messages("checkBeforeYouStart.local_council.url") target="_self" class="govuk-link">
-        @messages("checkBeforeYouStart.local_council.part2")
-        </a>
+        <a href=@messages("checkBeforeYouStart.local_council.url") target="_self" class="govuk-link">@messages("checkBeforeYouStart.local_council.part2")</a>
     </p>
 
-    <p class="govuk-body">@messages("checkBeforeYouStart.para1")</p>
+    <p class="govuk-body">@messages("checkBeforeYouStart.council_tax.para")</p>
 
-    <h2 class="govuk-heading-l">@messages("checkBeforeYouStart.council_tax.subheading")</h2>
+    <h2 class="govuk-heading-m">@messages("checkBeforeYouStart.council_tax.subheading")</h2>
 
-    <p class="govuk-body">
-        <a href=@messages("checkBeforeYouStart.council_tax.url5") target="_self" class="govuk-link">@messages("checkBeforeYouStart.council_tax.para9")</a>
-        <br>
-        @messages("checkBeforeYouStart.council_tax.para10")
-    </p>
+    <ul class="govuk-list">
+        <li>
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <a class="govuk-link" href=@messages("checkBeforeYouStart.council_tax.url5") target="_self">@messages("checkBeforeYouStart.council_tax.para9")</a>
+            </h3>
 
-    <p class="govuk-body">
-        <a href=@messages("checkBeforeYouStart.council_tax.url1") target="_self" class="govuk-link">@messages("checkBeforeYouStart.council_tax.para1")</a>
-        <br>
-        @messages("checkBeforeYouStart.council_tax.para2")
-    </p>
+            <p class="govuk-body">@messages("checkBeforeYouStart.council_tax.para10")</p>
+        </li>
 
-    <p class="govuk-body">
-        <a href=@messages("checkBeforeYouStart.council_tax.url2") target="_self" class="govuk-link">@messages("checkBeforeYouStart.council_tax.para3")</a>
-        <br>
-        @messages("checkBeforeYouStart.council_tax.para4")
-    </p>
+        <li>
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <a class="govuk-link" href=@messages("checkBeforeYouStart.council_tax.url1") target="_self">@messages("checkBeforeYouStart.council_tax.para1")</a>
+            </h3>
 
-    <p class="govuk-body">
-        <a href=@messages("checkBeforeYouStart.council_tax.url3") target="_self" class="govuk-link">@messages("checkBeforeYouStart.council_tax.para5")</a>
-        <br>
-        @messages("checkBeforeYouStart.council_tax.para6")
-    </p>
+            <p class="govuk-body">@messages("checkBeforeYouStart.council_tax.para2")</p>
+        </li>
 
-    <p class="govuk-body">
-        <a href=@messages("checkBeforeYouStart.council_tax.url4") target="_self" class="govuk-link">@messages("checkBeforeYouStart.council_tax.para7")</a>
-        <br>
-        @messages("checkBeforeYouStart.council_tax.para8")
-    </p>
+        <li>
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <a class="govuk-link" href=@messages("checkBeforeYouStart.council_tax.url2") target="_self">@messages("checkBeforeYouStart.council_tax.para3")</a>
+            </h3>
 
-    <p class="govuk-body">@messages("checkBeforeYouStart.council_tax.para11")</p>
+            <p class="govuk-body">@messages("checkBeforeYouStart.council_tax.para4")</p>
+        </li>
+
+        <li>
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <a class="govuk-link" href=@messages("checkBeforeYouStart.council_tax.url3") target="_self">@messages("checkBeforeYouStart.council_tax.para5")</a>
+            </h3>
+
+            <p class="govuk-body">@messages("checkBeforeYouStart.council_tax.para6")</p>
+        </li>
+
+        <li>
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <a class="govuk-link" href=@messages("checkBeforeYouStart.council_tax.url4") target="_self">@messages("checkBeforeYouStart.council_tax.para7")</a>
+            </h3>
+
+            <p class="govuk-body">@messages("checkBeforeYouStart.council_tax.para8")</p>
+        </li>
+    </ul>
+
+    <div class="govuk-inset-text">
+        <p class="govuk-body">@messages("checkBeforeYouStart.council_tax.para11")</p>
+    </div>
 
     <p class="govuk-body">
         @govukButton(Button(element = Option("a"), name=Option("continue"), content = Text(messages("site.continue")),
-            isStartButton = true,
             href = Option(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSmartLinksController.goToCouncilTaxSubcategoryPage().url)
         ))
     </p>
