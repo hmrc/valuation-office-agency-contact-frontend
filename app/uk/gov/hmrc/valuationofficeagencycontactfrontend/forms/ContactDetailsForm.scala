@@ -16,29 +16,15 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
-import play.api.data.{Form, FormError}
+import play.api.data.Form
 import play.api.data.Forms._
-import play.api.data.format.Formatter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.FormHelpers.antiXSSRegex
-
-object EmailConstraint extends Formatter[String] {
-  override def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = {
-    if (data.getOrElse(key, "").equals(data.getOrElse("email", ""))) {
-      Right(data.getOrElse(key, ""))
-    } else {
-      Left(List(FormError(key, "error.email.mismatch")))
-    }
-  }
-
-  override def unbind(key: String, value: String) = Map(key -> value)
-}
 
 object ContactDetailsForm {
 
   private val phoneRegex = """^[0-9\s]+$"""
   private val emailRegex = """^[a-zA-Z0-9\.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$""" //scalastyle:ignore
-
 
   def apply(): Form[ContactDetails] = Form(
     mapping(
@@ -47,7 +33,6 @@ object ContactDetailsForm {
       "email" -> nonEmptyText
         .verifying("error.email.max_length", _.length <= 129)
         .verifying("error.email.invalid", _.matches(emailRegex)),
-      "confirmEmail" -> of(EmailConstraint),
       "contactNumber" -> nonEmptyText
         .verifying("error.phone.min_length", _.length >= 11)
         .verifying("error.phone.max_length", _.length <= 20)

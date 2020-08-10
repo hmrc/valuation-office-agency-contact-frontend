@@ -18,7 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
 
 import play.api.libs.json.Json
 
-case class Contact(contact: ConfirmedContactDetails,
+case class Contact(contact: ContactDetails,
                    propertyAddress: PropertyAddress,
                    enquiryCategory: String,
                    subEnquiryCategory: String,
@@ -32,5 +32,5 @@ object Contact {
             subEnquiryCategory: String,
             contact: ContactDetails,
             propertyAddress: PropertyAddress): Contact =
-    Contact(ConfirmedContactDetails(contact), propertyAddress, enquiryCategory, subEnquiryCategory, message)
+    Contact(contact, propertyAddress, enquiryCategory, subEnquiryCategory, message)
 }

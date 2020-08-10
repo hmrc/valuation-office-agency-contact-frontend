@@ -16,9 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
-import play.api.Logger
 import uk.gov.hmrc.http.cache.client.CacheMap
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 
@@ -47,7 +45,7 @@ class UserAnswers(val cacheMap: CacheMap) {
         case _ => None
       }
       tellUs <- tellUsMore
-    } yield Contact(ConfirmedContactDetails(cd), pa, eq, subcategory, tellUs.message)
+    } yield Contact(cd, pa, eq, subcategory, tellUs.message)
 
     optionalContactModel match {
       case Some(c @ Contact(_, _, _, _, _)) => Right(c)

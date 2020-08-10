@@ -16,11 +16,11 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ConfirmedContactDetails, ContactDetails}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
 
 object ContactFormatter {
 
- def formattedConfirmedContactDetails(contact: ConfirmedContactDetails, interstitial: String): String = {
+ def formattedConfirmedContactDetails(contact: ContactDetails, interstitial: String): String = {
     insertInterstitials(Seq(contact.firstName.trim + " " + contact.lastName.trim, contact.email, contact.contactNumber), interstitial)
  }
 
