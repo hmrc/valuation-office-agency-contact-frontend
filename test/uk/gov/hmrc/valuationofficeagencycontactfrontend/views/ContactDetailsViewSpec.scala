@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
-import play.api.data.{Form, FormError}
+import play.api.data.Form
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{ContactDetailsForm, EnquiryCategoryForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode}
@@ -44,7 +44,7 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
     behave like normalPage(createCTView, messageKeyPrefix)
 
     behave like pageWithTextFields(createCTViewUsingForm, messageKeyPrefix, routes.ContactDetailsController.onSubmit(NormalMode).url, "firstName", "lastName",
-      "email", "confirmEmail", "contactNumber")
+      "email", "contactNumber")
 
 
     "Contact Details has a link marked with site.back leading to the council tax subcategory page when enquiry category is council_tax" in {

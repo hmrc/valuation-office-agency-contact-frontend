@@ -22,8 +22,7 @@ class ContactSpec extends SpecBase {
   val message = "message"
   val enquiryCategory = "EC"
   val subEnquiryCategory = "SEC"
-  val contactDetails = ContactDetails("first", "last", "email", "email", "contactNumber")
-  val confirmedContactDetails = ConfirmedContactDetails(contactDetails)
+  val contactDetails = ContactDetails("first", "last", "email", "contactNumber")
 
   "Given a message, enquiryCategory and subEnquiryCategory strings, contact details and a property address produce a " +
     "contact model with the property address" in {
@@ -34,7 +33,7 @@ class ContactSpec extends SpecBase {
     result.message mustBe message
     result.enquiryCategory mustBe enquiryCategory
     result.subEnquiryCategory mustBe subEnquiryCategory
-    result.contact mustBe confirmedContactDetails
+    result.contact mustBe contactDetails
   }
 
   "contact model with the property address containing optional fields as None" in {
@@ -45,7 +44,7 @@ class ContactSpec extends SpecBase {
     result.message mustBe message
     result.enquiryCategory mustBe enquiryCategory
     result.subEnquiryCategory mustBe subEnquiryCategory
-    result.contact mustBe confirmedContactDetails
+    result.contact mustBe contactDetails
   }
 }
 

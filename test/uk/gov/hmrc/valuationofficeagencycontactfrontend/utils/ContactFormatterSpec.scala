@@ -17,7 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ConfirmedContactDetails, ContactDetails}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.ContactFormatter._
 
 class ContactFormatterSpec extends SpecBase {
@@ -25,12 +25,12 @@ class ContactFormatterSpec extends SpecBase {
   "Contact Formatter" must {
 
     "Given a complete Contact Details it should generate a formatted string using the given interstitial" in {
-      val cd = ContactDetails("a", "b", "c", "d", "e")
+      val cd = ContactDetails("a", "b", "c", "e")
       formattedContactDetails(Some(cd), "<br/>") mustBe "a b<br/>c<br/>e"
     }
 
     "Given a Contact Details with elements that have too many spaces it should generate a formatted string using the given interstitial" in {
-      val cd = ContactDetails(" a ", " b ", " c ", " d ", " e ")
+      val cd = ContactDetails(" a ", " b ", " c ", " e ")
       formattedContactDetails(Some(cd), "<br/>") mustBe "a b<br/>c<br/>e"
     }
 
@@ -39,13 +39,13 @@ class ContactFormatterSpec extends SpecBase {
     }
 
     "Given a complete Confirmed Contact Details it should generate a formatted string using the given interstitial" in {
-      val ccd = ConfirmedContactDetails("a", "b", "c", "e")
-      formattedConfirmedContactDetails(ccd, "<br/>") mustBe "a b<br/>c<br/>e"
+      val cd = ContactDetails("a", "b", "c", "e")
+      formattedConfirmedContactDetails(cd, "<br/>") mustBe "a b<br/>c<br/>e"
     }
 
     "Given a Confirmed Contact Details with elements that have too many spaces it should generate a formatted string using the given interstitial" in {
-      val ccd = ConfirmedContactDetails(" a ", " b ", " c ", " e ")
-      formattedConfirmedContactDetails(ccd, "<br/>") mustBe "a b<br/>c<br/>e"
+      val cd = ContactDetails(" a ", " b ", " c ", " e ")
+      formattedConfirmedContactDetails(cd, "<br/>") mustBe "a b<br/>c<br/>e"
     }
 
     "Given a Sequence with three strings insert the interstitials" in {

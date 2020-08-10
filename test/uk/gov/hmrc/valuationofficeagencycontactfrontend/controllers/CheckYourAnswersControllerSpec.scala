@@ -46,18 +46,17 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
   "Check Your Answers Controller" must {
 
     "return 200 for a GET" in {
-      val cd = ContactDetails("a", "b", "c", "d", "e")
+      val contactDetails = ContactDetails("a", "b", "c", "e")
       val ec = "council_tax"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
       val councilTaxSubcategory = "council_tax_poor_repair"
       val tellUs = TellUsMore("Hello")
-      val confirmedContactDetails = ConfirmedContactDetails(cd)
       val date = DateFormatter.todaysDate()
 
-      val contact = Contact(confirmedContactDetails, propertyAddress, ec, councilTaxSubcategory, tellUs.message)
+      val contact = Contact(contactDetails, propertyAddress, ec, councilTaxSubcategory, tellUs.message)
 
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
-        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
@@ -75,7 +74,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
     "The sections function produces sections with the business rates check your answers section when the enquiry category is business_rates" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("a")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
@@ -89,7 +88,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
     "The sections function produces sections with the business rates check your answers section when the enquiry category is business_rates " +
       "and addressLine2 and county are None" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("a")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
@@ -103,7 +102,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
     "The sections function produces sections with the council tax check your answers section when the enquiry category is council_tax" in {
 
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_poor_repair")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
@@ -118,7 +117,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       "and addressLine2 and county are None" in {
 
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "d", "e"))
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_poor_repair")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
@@ -142,14 +141,13 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
     }
 
     "return 500 and the error view for a reaching summary page with wrong enquiry or unknown enquiry" in {
-      val cd = ContactDetails("a", "b", "c", "d", "e")
+      val contactDetails = ContactDetails("a", "b", "c", "e")
       val ec = "other"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
       val councilTaxSubcategory = "council_tax_poor_repair"
       val tellUs = TellUsMore("Hello")
-      val confirmedContactDetails = ConfirmedContactDetails(cd)
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
-        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 

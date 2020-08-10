@@ -24,15 +24,14 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.DateFormatter
 
 class ConfirmationViewSpec extends ViewBehaviours {
 
-  val cd = ContactDetails("c1", "c2", "c3", "c4", "c5")
-  val confirmCd = ConfirmedContactDetails(cd)
+  val contactDetails = ContactDetails("c1", "c2", "c3", "c5")
   val councilTax = "council_tax"
   val address = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
   val alternativeAddress = PropertyAddress("a", None, "c", None, "f")
   val cSub = "council_tax_home_business"
   val tellUs = TellUsMore("Hello")
-  val contact = Contact(confirmCd, address, councilTax, cSub, tellUs.message)
-  val alternativeContact = Contact(confirmCd, alternativeAddress, councilTax, cSub, tellUs.message)
+  val contact = Contact(contactDetails, address, councilTax, cSub, tellUs.message)
+  val alternativeContact = Contact(contactDetails, alternativeAddress, councilTax, cSub, tellUs.message)
   val date = DateFormatter.todaysDate()
 
   def confirmation = app.injector.instanceOf[Confirmation]

@@ -65,12 +65,12 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
 
     "populate the view correctly on a GET when the question has previously been answered and enquiry category is business_rates" in {
       val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"), CouncilTaxSubcategoryId.toString -> JsString("business_rates_other"),
-        ContactDetailsId.toString -> Json.toJson(ContactDetails("a", "b", "a@test.com", "a@test.com", "0847428742424")))
+        ContactDetailsId.toString -> Json.toJson(ContactDetails("a", "b", "a@test.com", "0847428742424")))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsStringNDR(ContactDetailsForm().fill(ContactDetails("a", "b", "a@test.com", "a@test.com", "0847428742424")))
+      contentAsString(result) mustBe viewAsStringNDR(ContactDetailsForm().fill(ContactDetails("a", "b", "a@test.com", "0847428742424")))
     }
 
     "redirect to the next page when valid data is submitted" in {
@@ -160,12 +160,12 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
 
     "populate the view correctly on a GET when the question has previously been answered and enquiry category is council_tax" in {
       val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_poor_repair"),
-        ContactDetailsId.toString -> Json.toJson(ContactDetails("a", "b", "a@test.com", "a@test.com", "0847428742424")))
+        ContactDetailsId.toString -> Json.toJson(ContactDetails("a", "b", "a@test.com", "0847428742424")))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsStringCT(ContactDetailsForm().fill(ContactDetails("a", "b", "a@test.com", "a@test.com", "0847428742424")))
+      contentAsString(result) mustBe viewAsStringCT(ContactDetailsForm().fill(ContactDetails("a", "b", "a@test.com", "0847428742424")))
     }
 
     "return 500 and the error view for a GET with no enquiry type" in {

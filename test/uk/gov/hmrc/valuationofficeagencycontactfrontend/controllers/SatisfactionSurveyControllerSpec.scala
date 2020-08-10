@@ -67,7 +67,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
     }
 
     "feedback submission must be successful for formCompleteFeedback" in {
-      val cd = ContactDetails("a", "b", "c", "d", "e")
+      val cd = ContactDetails("a", "b", "c", "e")
       val ec = "council_tax"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
       val councilTaxSubcategory = "council_tax_poor_repair"
@@ -87,7 +87,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
 
     "feedback submission must fail form data is invalid" in {
 
-      val cd = ContactDetails("a", "b", "c", "d", "e")
+      val cd = ContactDetails("a", "b", "c", "e")
       val ec = "other"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
       val councilTaxSubcategory = "council_tax_poor_repair"
@@ -108,7 +108,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
     }
 
     "feedback submission (council tax) must show form errors if survey incomplete" in {
-      val cd = ContactDetails("a", "b", "c", "d", "e")
+      val cd = ContactDetails("a", "b", "c", "e")
       val ec = "council_tax"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
       val councilTaxSubcategory = "council_tax_poor_repair"
@@ -129,7 +129,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
     }
 
     "feedback submission (business rates) must show form errors if survey incomplete" in {
-      val cd = ContactDetails("a", "b", "c", "d", "e")
+      val cd = ContactDetails("a", "b", "c", "e")
       val ec = "business_rates"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
       val businessSubcategory = "business_rates_other"
