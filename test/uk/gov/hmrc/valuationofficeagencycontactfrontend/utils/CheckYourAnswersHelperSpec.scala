@@ -35,7 +35,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
 
       "tellUsMore function should return an Answer Row containing tellUsMore.checkYourAnswersLabel label and a message" in {
-        val cd = ContactDetails("a", "b", "c", "d", "e")
+        val cd = ContactDetails("a", "b", "c", "e")
         val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
@@ -48,7 +48,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
       }
 
       "tellUsMore function should return an Answer Row containing tellUsMore.checkYourAnswersLabel label and a message when address line 2 and county are None" in {
-        val cd = ContactDetails("a", "b", "c", "d", "e")
+        val cd = ContactDetails("a", "b", "c", "e")
         val propertyAddress = PropertyAddress("a", None, "c", None, "f")
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
@@ -69,7 +69,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
       }
 
       "enquiryCategory function should return an Answer Row containing enquiryCategory.checkYourAnswersLabel label and a enquiry category option" in {
-        val cd = ContactDetails("a", "b", "c", "d", "e")
+        val cd = ContactDetails("a", "b", "c", "e")
         val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
         val ec = "council_tax"
         val councilTaxSubcategory = "council_tax_band"
@@ -83,7 +83,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
       }
 
       "enquiryCategory function should return an Answer Row containing enquiryCategory.checkYourAnswersLabel label and a enquiry category option when address line 2 and county are None" in {
-        val cd = ContactDetails("a", "b", "c", "d", "e")
+        val cd = ContactDetails("a", "b", "c", "e")
         val ec = "council_tax"
         val propertyAddress = PropertyAddress("a", None, "c", None, "f")
         val councilTaxSubcategory = "council_tax_band"
@@ -105,7 +105,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
       }
 
       "councilTaxSubcategory function should return an Answer Row containing councilTaxSubcategory.checkYourAnswersLabel label and a council tax subcategory option" in {
-        val cd = ContactDetails("a", "b", "c", "d", "e")
+        val cd = ContactDetails("a", "b", "c", "e")
         val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
@@ -119,7 +119,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
       "councilTaxSubcategory function should return an Answer Row containing councilTaxSubcategory.checkYourAnswersLabel label " +
         "and a council tax subcategory option when address line 2 and county are None" in {
-        val cd = ContactDetails("a", "b", "c", "d", "e")
+        val cd = ContactDetails("a", "b", "c", "e")
         val propertyAddress = PropertyAddress("a", None, "c", None, "f")
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
@@ -140,7 +140,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
       }
 
       "businessRatesSubcategory function should return an Answer Row containing businessRatesSubcategory.checkYourAnswersLabel label and a business rates subcategory option" in {
-        val cd = ContactDetails("a", "b", "c", "d", "e")
+        val cd = ContactDetails("a", "b", "c", "e")
         val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
@@ -154,7 +154,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
       "businessRatesSubcategory function should return an Answer Row containing businessRatesSubcategory.checkYourAnswersLabel label " +
         "and a business rates subcategory option when address line 2 and county are None" in {
-        val cd = ContactDetails("a", "b", "c", "d", "e")
+        val cd = ContactDetails("a", "b", "c", "e")
         val propertyAddress = PropertyAddress("a", None, "c", None, "f")
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
@@ -175,7 +175,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
       }
 
       "propertyAddress function should return an Answer Row containing propertyAddress.checkYourAnswersLabel label and a council tax address" in {
-        val cd = ContactDetails("a", "b", "c", "d", "e")
+        val cd = ContactDetails("a", "b", "c", "e")
         val address = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
@@ -189,7 +189,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
       "propertyAddress function should return an Answer Row containing propertyAddress.checkYourAnswersLabel label " +
         "and a council tax address when address line 2 and county are None" in {
-        val cd = ContactDetails("a", "b", "c", "d", "e")
+        val cd = ContactDetails("a", "b", "c", "e")
         val address = PropertyAddress("a", None, "c", None, "f")
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
@@ -210,7 +210,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
       }
 
       "contactDetails function should return an Answer Row containing contactDetails.checkYourAnswersLabel label and a contact details object" in {
-        val cd = ContactDetails("a", "b", "c", "d", "e")
+        val cd = ContactDetails("a", "b", "c", "e")
         val address = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
@@ -224,7 +224,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
       "contactDetails function should return an Answer Row containing contactDetails.checkYourAnswersLabel label and a " +
         "contact details object when address line 2 and county are None" in {
-        val cd = ContactDetails("a", "b", "c", "d", "e")
+        val cd = ContactDetails("a", "b", "c", "e")
         val ec = "council_tax"
         val address = PropertyAddress("a", None, "c", None, "f")
         val councilTaxSubcategory = "council_tax_band"

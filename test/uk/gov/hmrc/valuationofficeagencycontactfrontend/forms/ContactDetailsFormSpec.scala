@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
-import play.api.data.FormError
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.behaviours.FormBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
 
@@ -26,14 +25,13 @@ class ContactDetailsFormSpec extends FormBehaviours {
     "firstName" -> "Alex",
     "lastName" -> "Smith",
     "email" -> "a@a",
-    "confirmEmail" -> "a@a",
     "contactNumber" -> "12345678901"
   )
 
   val form = ContactDetailsForm()
 
   "ContactDetails form" must {
-    behave like questionForm(ContactDetails("Alex", "Smith", "a@a", "a@a", "12345678901"))
+    behave like questionForm(ContactDetails("Alex", "Smith", "a@a", "12345678901"))
 
     "fail to bind when email is blank" in {
       val data = validData + ("email" -> "") + ("confirmEmail" -> "")
@@ -48,32 +46,9 @@ class ContactDetailsFormSpec extends FormBehaviours {
     }
 
     "fail to bind when email length is more than 129" in {
-      val data = validData + ("email" -> ("a" * 80 + "@" + "b" * 50)) + ("confirmEmail" -> ("a" * 80 + "@" + "b" * 50))
+      val data = validData + ("email" -> ("a" * 80 + "@" + "b" * 50))// + ("confirmEmail" -> ("a" * 80 + "@" + "b" * 50))
       val expectedError = error("email", "error.email.max_length")
       checkForError(form, data, expectedError)
-    }
-
-    "fail to bind when emails don't match" in {
-      val data = validData + ("confirmEmail" -> "ab@test.com")
-      val expectedError = error("confirmEmail", "error.email.mismatch")
-      checkForError(form, data, expectedError)
-    }
-
-    "fail to bind when emails don't match and second email is blank" in {
-      val data = validData + ("confirmEmail" -> "")
-      val expectedError = error("confirmEmail", "error.email.mismatch")
-      checkForError(form, data, expectedError)
-    }
-
-    "EmailConstraint bind method should return Left(error.email.mismatch) if the emails don't match" in {
-      val data = validData + ("confirmEmail" -> "ab@test.com")
-      val result = EmailConstraint.bind("confirmEmail", data)
-      result shouldBe Left(List(FormError("confirmEmail", "error.email.mismatch")))
-    }
-
-    "EmailConstraint bind method should return Right(email) if the emails are valid and match" in {
-      val result = EmailConstraint.bind("confirmEmail", validData)
-      result shouldBe Right(validData.getOrElse("email", ""))
     }
 
     "fail to bind when contact number is blank" in {

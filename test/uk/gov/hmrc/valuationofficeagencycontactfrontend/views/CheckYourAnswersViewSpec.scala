@@ -25,7 +25,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_an
 class CheckYourAnswersViewSpec extends ViewBehaviours {
 
   val tellUs = TellUsMore("Hello")
-  val cd = ContactDetails("c1", "c2", "c3", "c4", "c5")
+  val cd = ContactDetails("c1", "c2", "c3", "c5")
   val propertyAddress1 = PropertyAddress("a", None, "c", None, "f")
   val userAnswers1 = new FakeUserAnswers(cd, "council_tax", "council_tax_band", "", propertyAddress1, tellUs)
   val checkYourAnswersHelper1 = new CheckYourAnswersHelper(userAnswers1)

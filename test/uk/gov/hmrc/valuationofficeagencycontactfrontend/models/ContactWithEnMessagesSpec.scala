@@ -23,10 +23,9 @@ import org.mockito.Mockito.when
 
 class ContactWithEnMessagesSpec extends SpecBase with MockitoSugar {
   val mockMessages = mock[MessagesApi]
-  val contactDetails = ContactDetails("first", "last", "email", "email", "contactNumber")
-  val confirmedContactDetails = ConfirmedContactDetails(contactDetails)
+  val contactDetails = ContactDetails("first", "last", "email", "contactNumber")
   val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "e")
-  val contact = Contact(confirmedContactDetails, propertyAddress, "council_tax", "council_tax_band", "msg")
+  val contact = Contact(contactDetails, propertyAddress, "council_tax", "council_tax_band", "msg")
 
   "return a ContactWithEnMessages when given a contact with proper keys for the enquiryCategory and subEnquiryCategory" in {
     when(mockMessages.messages) thenReturn Map("en" -> Map("enquiryCategory.council_tax" -> "CT", "councilTaxSubcategory.council_tax_band" -> "TB"))
@@ -44,7 +43,7 @@ class ContactWithEnMessagesSpec extends SpecBase with MockitoSugar {
   }
 
   "throw an exception if the contact contains an enquiry key that is not business_rates or council_tax" in {
-    val contact = Contact(confirmedContactDetails, propertyAddress, "wibble", "council_tax_band", "msg")
+    val contact = Contact(contactDetails, propertyAddress, "wibble", "council_tax_band", "msg")
     when(mockMessages.messages) thenReturn Map("en" -> Map("councilTaxSubcategory.council_tax_band" -> "TB"))
     intercept[Exception] {
       val result = ContactWithEnMessage(contact, mockMessages)

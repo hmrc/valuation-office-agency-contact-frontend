@@ -21,7 +21,7 @@ import play.api.i18n.MessagesApi
 import play.api.libs.json.Json
 import play.api.Logger
 
-case class ContactWithEnMessage (contact: ConfirmedContactDetails,
+case class ContactWithEnMessage (contact: ContactDetails,
                                  propertyAddress: PropertyAddress,
                                  isCouncilTaxEnquiry: Boolean,
                                  enquiryCategoryMsg: String,
@@ -47,8 +47,8 @@ object ContactWithEnMessage {
           case `councilTaxKey` => "councilTaxSubcategory"
           case `businessRatesKey` => "businessRatesSubcategory"
           case err =>
-            Logger.warn("Unown enquiry category key " + ct.enquiryCategory)
-            throw new RuntimeException("Unown enquiry category key " + ct.enquiryCategory)
+            Logger.warn("Unknown enquiry category key " + ct.enquiryCategory)
+            throw new RuntimeException("Unknown enquiry category key " + ct.enquiryCategory)
         }
 
         val subEnquiryCategoryMsg = messageMap.get(enquiryKey + "." + ct.subEnquiryCategory) match {
