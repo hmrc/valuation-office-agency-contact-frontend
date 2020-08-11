@@ -78,7 +78,7 @@ error.number = Please enter a valid number
 error.required = This field is required
 error.enquiryCategory.required = Select what your enquiry is about
 error.councilTaxSubcategory.required = Select what your Council Tax enquiry is about
-error.businessRatesSubcategory.required = Select what your enquiry is about
+error.businessRatesSubcategory.required = Select what your business rates enquiry is about
 error.summary.title = There is a problem
 error.summary.text = Check the following
 error.email.invalid = Enter a valid email address
@@ -194,11 +194,8 @@ councilTaxSubcategory.council_tax_annexe = An annexe at my property
 councilTaxSubcategory.council_tax_other = Any other Council Tax enquiry
 councilTaxSubcategory.checkYourAnswersLabel = Enquiry Details
 
-businessRatesSubcategory.title = What do you want to know about business rates?
+businessRatesSubcategory.title = What is your business rates enquiry about? - Valuation Office Agency contact form - GOV.UK
 businessRatesSubcategory.heading = What is your business rates enquiry about?
-businessRatesSubcategory.subheading = What do you want to tell us about?
-
-
 businessRatesSubcategory.business_rates_challenge = Challenging my business rates valuation
 businessRatesSubcategory.business_rates_changes = My property or the local area has changed
 businessRatesSubcategory.business_rates_assessed_for_bus_rates = I need my property assessed for business rates
