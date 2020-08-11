@@ -78,7 +78,7 @@ error.number = Rhowch rif dilys
 error.required = Mae angen llenwi’r blwch hwn
 error.enquiryCategory.required = Dewiswch destun eich ymholiad
 error.councilTaxSubcategory.required = Dewiswch destun eich ymholiad ynghylch Treth Gyngor
-error.businessRatesSubcategory.required = Mae angen llenwi’r blwch hwn
+error.businessRatesSubcategory.required = Dewiswch destun eich ymholiad ynghylch trethi busnes
 error.summary.title = Mae problem wedi codi
 error.summary.text = Gwiriwch y canlynol
 error.email.invalid = Nodwch gyfeiriad e-bost dilys
@@ -194,10 +194,9 @@ councilTaxSubcategory.council_tax_annexe = Rhandy i’m heiddo
 councilTaxSubcategory.council_tax_other = Unrhyw ymholiad arall ynghylch y Dreth Gyngor
 councilTaxSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
  
-businessRatesSubcategory.title = Beth ydych eisiau gwybod am drethi busnes?
-businessRatesSubcategory.heading = Beth yw eich ymholiad ardrethu busnes?
+businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
-
 businessRatesSubcategory.business_rates_challenge = Herio fy mhrisiad ardrethi busnes
 businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu’r ardal lleol wedi newid
 businessRatesSubcategory.business_rates_assessed_for_bus_rates = Mae angen i’m heiddo gael ei asesu ar gyfer ardrethi busnes
