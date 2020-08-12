@@ -17,13 +17,11 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
-@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukButton, GovukBackLink}
+@import uk.gov.hmrc.govukfrontend.views.html.components.GovukBackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
-@import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
 
-@this(mainTemplate: main_template, formWithCSFR: formWithCSRF, govukBackLink: GovukBackLink, govukButton: GovukButton)
+@this(mainTemplate: main_template, govukBackLink: GovukBackLink)
 
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
@@ -36,12 +34,12 @@
     beforeContentBlock = Option(beforeBlock),
     pageTitle = Option(messages("businessRatesChallenge.title"))) {
 
-    <h1 class="govuk-heading-xl">@messages("businessRatesChallenge.heading")</h1>
+    <h1 class="govuk-heading-l">@messages("businessRatesChallenge.heading")</h1>
 
     <p class="govuk-body">@Html(Messages("businessRatesChallenge.body"))</p>
 
-    @govukButton(Button(content = Text(messages("site.start-again")),
-        href = Option(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.Application.start().url)
-    ))
+    <p class="govuk-body">
+        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.Application.start().url class="govuk-link">@messages("site.start-again")</a>
+    </p>
 
 }

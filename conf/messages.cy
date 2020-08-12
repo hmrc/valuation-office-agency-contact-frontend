@@ -204,8 +204,8 @@ businessRatesSubcategory.business_rates_from_home = Rhedeg busnes o gartref
 businessRatesSubcategory.business_rates_not_used = Nid yw fy eiddo bellach yn cael ei ddefnyddio ar gyfer busnes
 businessRatesSubcategory.business_rates_other = Unrhyw ymholiad ardrethu busnes arall
 
-businessRatesChallenge.title = Herio fy mhrisiad ardrethi busnes
-businessRatesChallenge.heading = Herio fy mhrisiad ardrethi busnes
+businessRatesChallenge.title = Herio fy mhrisiad trethi busnes - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesChallenge.heading = Herio fy mhrisiad trethi busnes
 businessRatesChallenge.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self">wasanaeth ar-lein</a> Asiantaeth y Swyddfa Brisio i wirio a herio eich prisiad ardrethi busnes.
 
 propertyOrAreaChanged.title = Mae fy eiddo neu’r ardal lleol wedi newid
