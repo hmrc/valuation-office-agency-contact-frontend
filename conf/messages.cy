@@ -208,8 +208,8 @@ businessRatesChallenge.title = Herio fy mhrisiad trethi busnes - Ffurflen Gysyll
 businessRatesChallenge.heading = Herio fy mhrisiad trethi busnes
 businessRatesChallenge.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self">wasanaeth ar-lein</a> Asiantaeth y Swyddfa Brisio i wirio a herio eich prisiad ardrethi busnes.
 
-propertyOrAreaChanged.title = Mae fy eiddo neu’r ardal lleol wedi newid
-propertyOrAreaChanged.heading = Mae fy eiddo neu’r ardal lleol wedi newid
+propertyOrAreaChanged.title = Mae fy eiddo neu’r ardal leol wedi newid - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyOrAreaChanged.heading = Mae fy eiddo neu’r ardal leol wedi newid
 propertyOrAreaChanged.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self">wasanaeth ar-lein</a> Asiantaeth y Swyddfa Brisio i ddweud wrthym am newidiadau i’ch eiddo neu’r ardal o’i hamgylch.
 businessRatesSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
  
