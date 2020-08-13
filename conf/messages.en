@@ -209,7 +209,7 @@ businessRatesChallenge.body = Use the Valuation Office Agency’s online service
 
 propertyOrAreaChanged.title = My property or the local area has changed - Valuation Office Agency contact form - GOV.UK
 propertyOrAreaChanged.heading = My property or the local area has changed
-propertyOrAreaChanged.body = Use the Valuation Office Agency’s <a href="https://www.gov.uk/correct-your-business-rates" target="_self">online service</a> to tell us about changes to your property or the surrounding area.<br />If your property is in England, you’ll need to register and claim your property before you can tell us about the changes.
+propertyOrAreaChanged.body = Use the Valuation Office Agency’s <a href="https://www.gov.uk/correct-your-business-rates" target="_self">online service</a> to tell us about changes to your property or the surrounding area.<p class="govuk-body">If your property is in England, you’ll need to register and claim your property before you can challenge the valuation.</p>
 
 
 businessRatesSubcategory.checkYourAnswersLabel = Enquiry Details
