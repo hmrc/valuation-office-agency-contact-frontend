@@ -16,15 +16,12 @@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
-
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
-@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukButton, GovukBackLink}
+@import uk.gov.hmrc.govukfrontend.views.html.components.GovukBackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
-@import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
 
-@this(mainTemplate: main_template, formWithCSFR: formWithCSRF, govukBackLink: GovukBackLink, govukButton: GovukButton)
+@this(mainTemplate: main_template, govukBackLink: GovukBackLink)
 
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
@@ -37,17 +34,45 @@
 beforeContentBlock = Option(beforeBlock),
 pageTitle = Option(messages("checkYourTaxBand.title"))) {
 
-    <h1 class="govuk-heading-xl">@Messages("checkYourTaxBand.heading")</h1>
+    <h1 class="govuk-heading-l">@Messages("checkYourTaxBand.heading")</h1>
 
     <p class="govuk-body">@Html(Messages("checkYourTaxBand.p1"))</p>
 
-    <h2 class="govuk-heading-m">@messages("checkYourTaxBand.email.heading")</h2>
+    <p class="govuk-body">@Html(Messages("checkYourTaxBand.p2"))</p>
 
-    <p class="govuk-body"><a href="mailto:@messages("checkYourTaxBand.email")">@messages("checkYourTaxBand.email")</a></p>
+    <h2 class="govuk-heading-m">@messages("checkYourTaxBand.subheading")</h2>
+
+    <dl class="govuk-summary-list govuk-summary-list--no-border">
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key govuk-!-padding-right-0 govuk-!-display-inline">
+                @messages("checkYourTaxBand.email.heading")
+            </dt>
+            <dd class="govuk-summary-list__value govuk-!-display-inline">
+                <a class="govuk-link" href="mailto:@messages("checkYourTaxBand.email")">@messages("checkYourTaxBand.email")</a>
+            </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key  govuk-!-padding-right-0 govuk-!-display-inline">
+                @messages("checkYourTaxBand.telephone.heading")
+            </dt>
+            <dd class="govuk-summary-list__value  govuk-!-display-inline">
+                @messages("checkYourTaxBand.telephone.number")
+            </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key govuk-!-padding-right-0 govuk-!-display-inline">
+                @messages("checkYourTaxBand.time.heading")
+            </dt>
+            <dd class="govuk-summary-list__value   govuk-!-display-inline">
+                @messages("checkYourTaxBand.time.opening")
+            </dd>
+        </div>
+    </dl>
 
     <div class="govuk-inset-text">@messages("checkYourTaxBand.covid.p")</div>
 
-    @govukButton(Button(content = Text(messages("site.start-again")),
-        href = Option(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.Application.start().url)
-    ))
+    <p class="govuk-body">
+        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.Application.start().url class="govuk-link">@messages("site.start-again")</a>
+    </p>
+
 }
