@@ -170,16 +170,18 @@ contactDetails.confirmEmail = Cadarnhau cyfeiriad ebost
 contactDetails.contactNumber =  Rhif ffôn
 contactDetails.checkYourAnswersLabel = Manylion cyswllt
 
-checkYourTaxBand.title = Heriwch eich band treth cyngor
-checkYourTaxBand.p1 = Cysylltwch ag Asiantaeth y Swyddfa Brisio (VOA) i egluro pam eich bod yn meddwl bod eich band yn anghywir. Mae’n rhaid i chi allu <a href="https://www.gov.uk/challenge-council-tax-band/evidence-supports-your-challenge">darparu tystiolaeth</a>. Efallai y bydd y VOA yn gallu adolygu a newid eich band heb fod angen i chi ei herio.
-checkYourTaxBand.l1 = Asiantaeth y Swyddfa Brisio
-checkYourTaxBand.l2 = Ffôn (Lloegr): 03000 501 501
-checkYourTaxBand.l3 = Ffôn (Cymru): 03000 505 505
-checkYourTaxBand.l4 = <a href="https://www.gov.uk/call-charges">Cael gwybod am gostau galwadau</a>
-councilTaxChallenge.council_tax_challenge = Heriwch eich band treth cyngor
-checkYourTaxBand.email.heading = E-bost
+checkYourTaxBand.title = Herio fy mand Treth Gyngor - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+checkYourTaxBand.heading = Herio fy mand Treth Gyngor
+checkYourTaxBand.p1 = ysylltwch ag Asiantaeth y Swyddfa Brisio (VOA) i egluro pam eich bod yn meddwl bod eich band yn anghywir. Efallai y bydd y VOA yn gallu adolygu a newid eich band heb fod angen i chi ei herio.
+checkYourTaxBand.p2 = Mae'n rhaid i chi allu <a class="govuk-link" target="_blank" href="https://www.gov.uk/challenge-council-tax-band/evidence-supports-your-challenge">darparu tystiolaeth</a>.
+checkYourTaxBand.subheading = Manylion cyswllt
+checkYourTaxBand.email.heading = E-bost:
 checkYourTaxBand.email = ctonline@voa.gsi.gov.uk
-checkYourTaxBand.covid.p = Oherwydd yr achosion cyfredol o COVID-19, ni allwn gynnig gwasanaeth teleffoni na derbyn post. Bydd yn cymryd mwy o amser nag arfer i ymateb i’ch ymholiad ac mae’n ddrwg gennym am unrhyw anghyfleustra y gallai hyn ei achosi.
+checkYourTaxBand.telephone.heading = Rhif ffȏn:
+checkYourTaxBand.telephone.number = 03000 505 505
+checkYourTaxBand.time.heading = Amseroedd agor:
+checkYourTaxBand.time.opening = Dydd Llun i ddydd Gwener: 10yb i 2yp
+checkYourTaxBand.covid.p = Oherwydd y pandemig coronafirws, rydym wedi gorfod addasu ein gwasanaethau a gall gymryd mwy o amser nag arfer i ymateb i’ch ymholiad. Ymddiheurwn am unrhyw anghyfleustra y gallai hyn ei achosi.
 
 councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 councilTaxSubcategory.heading = Beth yw testun eich ymholiad ynghylch Treth Gyngor?

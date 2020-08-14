@@ -172,15 +172,16 @@ contactDetails.checkYourAnswersLabel = Contact Details
 
 checkYourTaxBand.title = Challenging my Council Tax band - Valuation Office Agency contact form - GOV.UK
 checkYourTaxBand.heading = Challenging my Council Tax band
-checkYourTaxBand.p1 = Contact the Valuation Office Agency (VOA) to explain why you think your band is wrong. You must be able to <a href="https://www.gov.uk/challenge-council-tax-band/evidence-supports-your-challenge">provide evidence</a>. The VOA may be able to review and change your band without you needing to challenge it.
-checkYourTaxBand.l1 = Valuation Office Agency
-checkYourTaxBand.l2 = Telephone (England): 03000 501 501
-checkYourTaxBand.l3 = Telephone (Wales): 03000 505 505
-checkYourTaxBand.l4 = <a href="https://www.gov.uk/call-charges">Find out about call charges</a>
-councilTaxChallenge.council_tax_challenge = Challenging my Council Tax band
-checkYourTaxBand.email.heading = Email
+checkYourTaxBand.p1 = Contact the Valuation Office Agency (VOA) to explain why you think your band is wrong. The VOA may be able to review and change your band without you needing to challenge it.
+checkYourTaxBand.p2 = You must be able to <a class="govuk-link" target="_blank" href="https://www.gov.uk/challenge-council-tax-band/evidence-supports-your-challenge">provide evidence</a>.
+checkYourTaxBand.subheading = Contact details
+checkYourTaxBand.email.heading = Email:
 checkYourTaxBand.email = ctonline@voa.gsi.gov.uk
-checkYourTaxBand.covid.p = Due to the current outbreak of COVID-19 we’re unable to offer a telephony service or accept post. It will take longer than usual to respond to your query and we’re sorry for any inconvenience this may cause.
+checkYourTaxBand.telephone.heading = Telephone:
+checkYourTaxBand.telephone.number = 03000 501 501
+checkYourTaxBand.time.heading = Opening times:
+checkYourTaxBand.time.opening = Monday to Friday: 10am to 2pm
+checkYourTaxBand.covid.p = Due to the coronavirus pandemic, we have had to adapt our services and it may take longer than usual to respond to your enquiry. We apologise for any inconvenience this may cause.
 
 councilTaxSubcategory.title = What is your Council Tax enquiry about? - Valuation Office Agency contact form - GOV.UK
 councilTaxSubcategory.heading = What is your Council Tax enquiry about?
