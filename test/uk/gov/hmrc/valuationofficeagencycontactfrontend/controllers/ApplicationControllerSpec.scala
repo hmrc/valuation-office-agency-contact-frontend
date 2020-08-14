@@ -28,10 +28,12 @@ class ApplicationControllerSpec extends ControllerSpecBase {
 
   def enquiryCategory = app.injector.instanceOf[enquiry_category]
 
+  def languageSwitchController = app.injector.instanceOf[LanguageSwitchController]
+
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) = new Application(
-    messagesApi, frontendAppConfig, enquiryCategory, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    messagesApi, frontendAppConfig, enquiryCategory, languageSwitchController, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = EnquiryCategoryForm()) = enquiryCategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 

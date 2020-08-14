@@ -3,6 +3,8 @@
 ->          /govuk-frontend                        govuk.Routes
 
 GET         /                                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.Application.start(mode: Mode = NormalMode)
+# placelholder URL - change after we get welsh translation for "your-enquiry"
+GET         /eich-ymholiad                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.Application.startWelsh()
 
 GET         /assets/*file                          controllers.Assets.versioned(path="/public", file: Asset)
 

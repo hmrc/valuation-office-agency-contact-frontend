@@ -51,6 +51,7 @@
 
 
     <logger name="uk.gov" level="INFO"/>
+    <logger name="uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.Application" level="TRACE"/>
 
     <logger name="application" level="INFO"/>
 
