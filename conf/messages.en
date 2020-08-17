@@ -93,6 +93,7 @@ error.postcode.invalid = Must be a valid postcode
 error.postcode.max_length = Maximum length is 8
 error.message.max_length = Maximum length is 5000 characters
 error.message.xss-invalid = You can only enter these characters: A-Z, a-z, 0-9, -, &, ., £, %, (), ;, :, ?, !, `, ’, commas, and spaces
+error.tell_us_more.invalid = Your enquiry must not include < and >
 
 session_expired.title = For your security, this service has been reset - Valuation Office Agency contact form - GOV.UK
 session_expired.heading = For your security, this service has been reset
