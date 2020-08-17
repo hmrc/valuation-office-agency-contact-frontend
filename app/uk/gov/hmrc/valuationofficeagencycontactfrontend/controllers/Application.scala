@@ -17,26 +17,49 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import javax.inject.{Inject, Singleton}
+import play.api.Logger
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.{Action, MessagesControllerComponents}
+import play.api.mvc.{Action, AnyContent, MessagesControllerComponents, Request}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.enquiryCategory
+
+import scala.concurrent.Future
 
 @Singleton
 class Application @Inject() (override val messagesApi: MessagesApi,
                             val appConfig: FrontendAppConfig,
                              enquiryCategory: enquiryCategory,
+                             languageSwitchController: LanguageSwitchController,
                             cc: MessagesControllerComponents
                            ) extends FrontendController(cc) with I18nSupport {
 
-  def start(mode: Mode) = Action { implicit request =>
-    if(appConfig.startPageRedirect){
-      Redirect(appConfig.govukStartPage)
-    }else{
-      Ok(enquiryCategory(appConfig, EnquiryCategoryForm(), mode))
+  val log = Logger(this.getClass)
+
+  def start(mode: Mode) = Action.async { implicit request =>
+
+    request.headers.get(REFERER).filter(_.contains("https://www.gov.uk/cysylltu-voa")).map { _ =>
+      log.trace("redirect from GOV.UK")
+      val newReq = request.withHeaders(request.headers.replace(REFERER -> createRefererURL))
+      languageSwitchController.switchToLanguage("cymraeg").apply(newReq)
+    }.getOrElse {
+      log.trace("no redirect")
+      if (appConfig.startPageRedirect) {
+        Future.successful(Redirect(appConfig.govukStartPage))
+      } else {
+        Future.successful(Ok(enquiryCategory(appConfig, EnquiryCategoryForm(), mode)))
+      }
     }
+  }
+
+  def startWelsh() = Action.async { implicit request =>
+    val newReq = request.withHeaders(request.headers.replace(REFERER -> createRefererURL))
+    languageSwitchController.switchToLanguage("cymraeg").apply(newReq)
+  }
+
+  def createRefererURL(implicit request: Request[AnyContent]): String = {
+    uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
   }
 }
