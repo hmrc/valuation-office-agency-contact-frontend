@@ -61,7 +61,7 @@ date.day = Day
 date.month = Month
 date.year = Year
 
-hintText.optional = Optional
+hintText.optional = (optional)
 
 error.title = Error:
 error.boolean = Please give an answer
@@ -216,11 +216,11 @@ propertyOrAreaChanged.body = Use the Valuation Office Agency’s <a href="https:
 
 businessRatesSubcategory.checkYourAnswersLabel = Enquiry Details
 
-propertyAddress.title = Property Details
-propertyAddress.heading = Which property are you contacting us about ?
-propertyAddress.addressLine1 = Address Line 1
-propertyAddress.addressLine2 = Address Line 2
-propertyAddress.town = Town
+propertyAddress.title = Which property are you contacting us about? - Valuation Office Agency contact form - GOV.UK
+propertyAddress.heading = Which property are you contacting us about?
+propertyAddress.addressLine1 = Address line 1
+propertyAddress.addressLine2 = Address line 2
+propertyAddress.town = Town or city
 propertyAddress.county = County
 propertyAddress.postcode = Postcode
 propertyAddress.checkYourAnswersLabel = Property Details

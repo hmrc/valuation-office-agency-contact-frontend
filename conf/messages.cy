@@ -61,7 +61,7 @@ date.day = Diwrnod
 date.month = Mis
 date.year = Blwyddyn
  
-hintText.optional = Opsiynol
+hintText.optional = (opsiynol)
 
 error.title = Gwall:
 error.boolean = Rhowch ateb
@@ -216,11 +216,11 @@ propertyOrAreaChanged.heading = Mae fy eiddo neu’r ardal leol wedi newid
 propertyOrAreaChanged.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self">wasanaeth ar-lein</a> Asiantaeth y Swyddfa Brisio i ddweud wrthym am newidiadau i’ch eiddo neu’r ardal o’i hamgylch.
 businessRatesSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
  
-propertyAddress.title = Manylion yr eiddo
+propertyAddress.title = Pa eiddo ydych yn cysylltu â ni yn ei gylch? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 propertyAddress.heading =  Pa eiddo ydych yn cysylltu â ni yn ei gylch?
-propertyAddress.addressLine1 = Cyfeiriad – Llinell 1
-propertyAddress.addressLine2 = Cyfeiriad – Llinell 2
-propertyAddress.town = Tref
+propertyAddress.addressLine1 = Cyfeiriad – llinell 1
+propertyAddress.addressLine2 = Cyfeiriad – llinell 2
+propertyAddress.town = Tref neu ddinas
 propertyAddress.county = Sir
 propertyAddress.postcode = Cod post
 propertyAddress.checkYourAnswersLabel = Manylion yr eiddo
