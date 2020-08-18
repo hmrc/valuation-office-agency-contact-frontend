@@ -43,12 +43,12 @@
     ))
 }
 
-@textInput(id: String, optional: Boolean = false) = {
+@textInput(id: String, optional: Boolean = false, classes: String) = {
     @govukInput(Input(
-        id=id, name=id, inputType = "text", value = form(id).value,
-        label = Label(content = Text(messages(s"propertyAddress.${id}"))),
-        errorMessage = form.errors.asTextErrorMessageForField(id),
-        hint = if(optional)Option(Hint(content = Text(messages("hintText.optional")))) else None
+        id=id, name=id, inputType = "text", value = form(id).value, classes=classes, autocomplete=Some(id),
+        label = if(optional) Label(content = Text(s"${messages(s"propertyAddress.${id}")} ${messages("hintText.optional")}"))
+                    else Label(content = Text(messages(s"propertyAddress.${id}"))),
+        errorMessage = form.errors.asTextErrorMessageForField(id)
     ))
 }
 
@@ -57,11 +57,11 @@
         <h1 class="govuk-fieldset__heading">@messages("propertyAddress.heading")</h1>
     </legend>
 
-    @textInput("addressLine1")
-    @textInput("addressLine2", optional = true)
-    @textInput("town")
-    @textInput("county", optional = true)
-    @textInput("postcode")
+    @textInput("addressLine1", classes = "govuk-input--width-30")
+    @textInput("addressLine2", optional = true, classes = "govuk-input--width-30")
+    @textInput("town", classes = "govuk-!-width-two-thirds")
+    @textInput("county", optional = true, classes = "govuk-!-width-two-thirds")
+    @textInput("postcode", classes = "govuk-input--width-10")
 }
 
 
@@ -69,7 +69,7 @@
     pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + messages("propertyAddress.title")) else messages("propertyAddress.title")),
     beforeContentBlock = Option(beforeBlock)
 ) {
-    @formWithCSFR(action = PropertyAddressController.onSubmit(mode), 'autoComplete -> "off") {
+    @formWithCSFR(action = PropertyAddressController.onSubmit(mode)) {
         @if(form.hasErrors) {
 
             @* after text updates please switch to uk.gov.hmrc.govukfrontend.views.Implicits.RichFormErrors#asHtmlErrorLinks()
