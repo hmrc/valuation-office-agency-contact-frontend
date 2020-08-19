@@ -44,7 +44,7 @@
 @textInput(id: String, classes: String, mode: String = "") = {
     @govukInput(Input(
         id=id, name=id, inputType = "text", value = form(id).value, classes=classes, autocomplete=Some(id),
-        label = Label(content = Text(messages(s"contactDetails.${id}"))), inputmode=Some(mode),
+        label = Label(content = Text(messages(s"contactDetails.${id}"))), inputmode=Some(mode), attributes=Map("spellcheck" -> "false"),
         errorMessage = form.errors.asTextErrorMessageForField(id)
     ))
 }
