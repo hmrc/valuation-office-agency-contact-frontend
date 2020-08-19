@@ -91,9 +91,10 @@ error.addressline.max_length = 80 yw’r uchafswm hyd
 error.xss.invalid = Gallwch ond nodi’r cymeriadau hyn: A-Y, a-y, 0-9, -, &, comaau, a bylchau
 error.postcode.invalid = Rhaid iddo fod yn god post dilys
 error.postcode.max_length = 8 yw’r uchafswm hyd
-error.message.max_length = 5000 o gymeriadau yw’r uchafswm hyd
+error.message.max_length = Rhaid i’ch ymholiad fod yn 5000 nod neu lai
 error.message.xss-invalid = Gallwch ond nodi’r cymeriadau hyn: A-Y, a-y, 0-9, -, &, ., £, %, (), ;, :, ?, !, `, ’, comaau, a bylchau
-error.tell_us_more.invalid = Your enquiry must not include < and >
+error.tell_us_more.required = Nodwch fwy o fanylion am eich ymholiad
+error.tell_us_more.invalid = Ni ddylai eich ymholiad gynnwys < a >
  
 session_expired.title = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 session_expired.heading = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod

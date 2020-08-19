@@ -25,9 +25,9 @@ object TellUsMoreForm {
 
   def apply(): Form[TellUsMore] = Form(
     mapping(
-      "message" -> nonEmptyText
+      "message" -> text.verifying("error.tell_us_more.required", !_.isEmpty)
         .verifying("error.message.max_length", _.length <= 5000)
-        .verifying("error.tell_us_more.invalid", x => !(x.contains('<') || x.contains('>') || x.isEmpty))
+        .verifying("error.tell_us_more.invalid", x => !(x.contains('<') || x.contains('>')))
     )(TellUsMore.apply)(TellUsMore.unapply)
   )
 }
