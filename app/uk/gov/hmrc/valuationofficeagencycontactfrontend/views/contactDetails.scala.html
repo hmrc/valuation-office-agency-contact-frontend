@@ -41,10 +41,10 @@
     @govukBackLink(BackLink(content = Text(messages("site.back")), href = backLink))
 }
 
-@textInput(id: String) = {
+@textInput(id: String, classes: String, mode: String = "") = {
     @govukInput(Input(
-        id=id, name=id, inputType = "text", value = form(id).value,
-        label = Label(content = Text(messages(s"contactDetails.${id}"))),
+        id=id, name=id, inputType = "text", value = form(id).value, classes=classes, autocomplete=Some(id),
+        label = Label(content = Text(messages(s"contactDetails.${id}"))), inputmode=Some(mode),
         errorMessage = form.errors.asTextErrorMessageForField(id)
     ))
 }
@@ -54,10 +54,10 @@
         <h1 class="govuk-fieldset__heading">@messages("contactDetails.heading")</h1>
     </legend>
 
-    @textInput("firstName")
-    @textInput("lastName")
-    @textInput("email")
-    @textInput("contactNumber")
+    @textInput("firstName", "govuk-input--width-20")
+    @textInput("lastName", "govuk-input--width-20")
+    @textInput("email", "govuk-input--width-20", "email" )
+    @textInput("contactNumber", "govuk-input--width-20", "tel")
 }
 
 
@@ -65,7 +65,7 @@
     pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + messages("contactDetails.title")) else messages("contactDetails.title")),
     beforeContentBlock = Option(beforeBlock)
 ) {
-    @formWithCSFR(action = ContactDetailsController.onSubmit(mode), 'autoComplete -> "off") {
+    @formWithCSFR(action = ContactDetailsController.onSubmit(mode)) {
         @if(form.hasErrors) {
 
             @* after text updates please switch to uk.gov.hmrc.govukfrontend.views.Implicits.RichFormErrors#asHtmlErrorLinks()
