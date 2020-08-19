@@ -44,7 +44,7 @@ class TellUsMoreFormSpec extends FormBehaviours {
 
     "fail to bind when message is blank" in {
       val data = validData + ("message" -> "")
-      val expectedError = Seq(error("message", "error.required"), error("message", "error.tell_us_more.invalid")).flatten
+      val expectedError = Seq(error("message", "error.tell_us_more.required")).flatten
       checkForError(form, data, expectedError)
     }
 
