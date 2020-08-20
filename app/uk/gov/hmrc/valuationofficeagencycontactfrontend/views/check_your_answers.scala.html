@@ -41,11 +41,11 @@
     beforeContentBlock = Option(beforeBlock),
     pageTitle = Option(messages("checkYourAnswers.title"))) {
 
-    <h1 class="govuk-heading-xl">@messages("checkYourAnswers.heading")</h1>
+    <h1 class="govuk-heading-l">@messages("checkYourAnswers.heading")</h1>
 
     <p class="govuk-body">@messages("checkYourAnswers.guidance")</p>
 
-    <h2 class="govuk-heading-l">@messages("checkYourAnswers.subheading")</h2>
+    <h2 class="govuk-heading-m">@messages("checkYourAnswers.subheading")</h2>
 
     @govukSummaryList(SummaryList(rows = formatSections(answerSections)))
 
