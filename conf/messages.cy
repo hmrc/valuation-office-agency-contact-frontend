@@ -52,10 +52,8 @@ checkBeforeYouStart.business_rates.url5 = https://www.gov.uk/introduction-to-bus
 checkBeforeYouStart.business_rates.para10 = Cael gwybod sut y gall eich ardrethi busnes newid os yw’r safle’n cael ei altro neu os yw natur eich busnes wedi newid.
 checkBeforeYouStart.business_rates.para11 = Os na allwch gael gafael ar ateb i’ch ymholiad, neu os oes gennych ymholiad ynghylch rhywbeth arall, gallwch fynd yn eich blaen i’n ffurflen gyswllt.
 
-checkYourAnswers.title = Crynodeb
-checkYourAnswers.heading = Crynodeb o’ch ymholiad
-checkYourAnswers.guidance = Gwiriwch yr wybodaeth yr ydych wedi’i rhoi i ni cyn ei chyflwyno. Gallwch newid unrhyw fanylion sy’n anghywir.
-checkYourAnswers.subheading = Crynodeb
+checkYourAnswers.title = Gwiriwch eich atebion - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+checkYourAnswers.heading = Gwiriwch eich atebion
  
 date.day = Diwrnod
 date.month = Mis
