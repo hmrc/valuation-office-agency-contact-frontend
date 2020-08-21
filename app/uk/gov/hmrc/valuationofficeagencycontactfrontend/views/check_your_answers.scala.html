@@ -43,13 +43,9 @@
 
     <h1 class="govuk-heading-l">@messages("checkYourAnswers.heading")</h1>
 
-    <p class="govuk-body">@messages("checkYourAnswers.guidance")</p>
-
-    <h2 class="govuk-heading-m">@messages("checkYourAnswers.subheading")</h2>
-
     @govukSummaryList(SummaryList(rows = formatSections(answerSections)))
 
-    @govukButton(Button(name = Option("continue"), content = Text(messages("site.submit.enquiry")),
+    @govukButton(Button(name = Option("continue"), content = Text(messages("site.submit")),
         href = Option(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CheckYourAnswersController.goToConfirmationPage().url),
         attributes = Map("id" -> "submit")
     ))

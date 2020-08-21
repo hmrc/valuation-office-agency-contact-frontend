@@ -52,10 +52,8 @@ checkBeforeYouStart.business_rates.url5 = https://www.gov.uk/introduction-to-bus
 checkBeforeYouStart.business_rates.para10 = Find out how your business rates could change if the premises is altered or the nature of your business has changed.
 checkBeforeYouStart.business_rates.para11 = If you can’t find an answer to your query, or you have a query about something else, you can continue to our contact form.
 
-checkYourAnswers.title = Summary
-checkYourAnswers.heading = Your enquiry summary
-checkYourAnswers.guidance = Please check the information you have given us before submitting. You can change any details that are incorrect.
-checkYourAnswers.subheading = Summary
+checkYourAnswers.title = Check your answers - Valuation Office Agency contact form - GOV.UK
+checkYourAnswers.heading = Check your answers
 
 date.day = Day
 date.month = Month
@@ -132,7 +130,7 @@ enquiryCategory.providing_lettings = Providing lettings information to, or conta
 enquiryCategory.valuations_for_tax = Right to Buy, Valuations for taxes, or appeals against Community Infrastructure Levy
 enquiryCategory.valuation_for_public_body = Valuation and property advice, for public sector bodies, by District Valuer Services (DVS)
 enquiryCategory.other_business = Other business
-enquiryCategory.checkYourAnswersLabel = Enquiry Type
+enquiryCategory.checkYourAnswersLabel = Enquiry type
 
 enquiryCategory.council_tax.summary = Council Tax enquiries could be about:
 enquiryCategory.council_tax.about1 = your Council Tax band and how it’s assessed
@@ -170,7 +168,7 @@ contactDetails.lastName = Last name
 contactDetails.email = Email address
 contactDetails.confirmEmail = Confirm email address
 contactDetails.contactNumber = Phone number
-contactDetails.checkYourAnswersLabel = Contact Details
+contactDetails.checkYourAnswersLabel = Contact details
 
 checkYourTaxBand.title = Challenging my Council Tax band - Valuation Office Agency contact form - GOV.UK
 checkYourTaxBand.heading = Challenging my Council Tax band
@@ -195,7 +193,7 @@ councilTaxSubcategory.council_tax_ndr_changes = My property has changed from Cou
 councilTaxSubcategory.council_tax_business_uses = My property is now used for business
 councilTaxSubcategory.council_tax_annexe = An annexe at my property
 councilTaxSubcategory.council_tax_other = Any other Council Tax enquiry
-councilTaxSubcategory.checkYourAnswersLabel = Enquiry Details
+councilTaxSubcategory.checkYourAnswersLabel = Enquiry details
 
 businessRatesSubcategory.title = What is your business rates enquiry about? - Valuation Office Agency contact form - GOV.UK
 businessRatesSubcategory.heading = What is your business rates enquiry about?
@@ -215,7 +213,7 @@ propertyOrAreaChanged.heading = My property or the local area has changed
 propertyOrAreaChanged.body = Use the Valuation Office Agency’s <a href="https://www.gov.uk/correct-your-business-rates" target="_self">online service</a> to tell us about changes to your property or the surrounding area.<p class="govuk-body">If your property is in England, you’ll need to register and claim your property before you can challenge the valuation.</p>
 
 
-businessRatesSubcategory.checkYourAnswersLabel = Enquiry Details
+businessRatesSubcategory.checkYourAnswersLabel = Enquiry details
 
 propertyAddress.title = Which property are you contacting us about? - Valuation Office Agency contact form - GOV.UK
 propertyAddress.heading = Which property are you contacting us about?
@@ -224,7 +222,7 @@ propertyAddress.addressLine2 = Address line 2
 propertyAddress.town = Town or city
 propertyAddress.county = County
 propertyAddress.postcode = Postcode
-propertyAddress.checkYourAnswersLabel = Property Details
+propertyAddress.checkYourAnswersLabel = Property details
 
 tellUsMore.title = Tell us more about your enquiry - Valuation Office Agency contact form - GOV.UK
 tellUsMore.heading = Tell us more about your enquiry
