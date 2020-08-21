@@ -46,12 +46,12 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
   "Check Your Answers view" must {
 
-    behave like normalPage(view1, "checkYourAnswers", "guidance", "subheading")
+    behave like normalPage(view1, "checkYourAnswers")
 
     "contain a submit button with the value Submit" in {
       val doc = asDocument(view1())
       val submitButton = doc.getElementById("submit").text()
-      assert(submitButton == messages("site.submit.enquiry"))
+      assert(submitButton == messages("site.submit"))
     }
 
     "has a link marked with site.back leading to the Tell Us More Page" in {
