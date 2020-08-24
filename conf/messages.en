@@ -114,7 +114,7 @@ site.service_name = Valuation Office Agency Contact Form
 service.name = Valuation Office Agency Contact Form
 service.homePageUrl = /valuation-office-agency-contact-frontend/
 site.textarea.char_limit = (Limit is {0} characters)
-site.print.button=Print or save
+site.print.button=Print this page
 site.govuk=Back to GOV.UK
 site.new_service = This is a new service
 
@@ -238,7 +238,7 @@ tellUsMore.checkYourAnswersLabel = Enquiry
 
 # CONFIRMATION
 ###############################
-confirmation.title = Confirmation
+confirmation.title = Thank you for your enquiry - Valuation Office Agency contact form - GOV.UK
 confirmation.heading = Thank you for your enquiry
 confirmation.para1=Your reference is
 confirmation.enquirySummary = Your enquiry summary

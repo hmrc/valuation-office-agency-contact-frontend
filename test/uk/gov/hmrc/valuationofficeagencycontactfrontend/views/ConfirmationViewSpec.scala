@@ -82,13 +82,5 @@ class ConfirmationViewSpec extends ViewBehaviours {
       assert(doc.toString.contains("<br>c5"))
     }
 
-    "contain Back to GOVUK link " in {
-      val doc = asDocument(view())
-      val startAgainButton = doc.getElementById("backToGovUk").text()
-      assert(startAgainButton == messages("site.govuk"))
-      val govukUrl = doc.select("a[id=backToGovUk]").attr("href")
-      govukUrl mustBe "http://www.gov.uk"
-    }
-
   }
 }
