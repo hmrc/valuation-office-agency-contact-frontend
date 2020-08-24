@@ -114,7 +114,7 @@ site.service_name = Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio
 service.name = Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio
 service.homePageUrl = /valuation-office-agency-contact-frontend/
 site.textarea.char_limit = (Y terfyn yw {0} o gymeriadau)
-site.print.button= Argraffwch neu cadwch
+site.print.button= Argraffwch y dudalen hon
 site.govuk= Yn ôl i GOV.UK
 site.new_service = This is a new service
  
@@ -238,7 +238,7 @@ tellUsMore.checkYourAnswersLabel = Ymholiad
 
 # CONFIRMATION
 ###############################
-confirmation.title = Cadarnhad
+confirmation.title = Diolch am eich ymholiad - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 confirmation.heading = Diolch am eich ymholiad
 confirmation.para1= Eich cyfeirnod yw
 confirmation.enquirySummary = Crynodeb o’ch ymholiad
