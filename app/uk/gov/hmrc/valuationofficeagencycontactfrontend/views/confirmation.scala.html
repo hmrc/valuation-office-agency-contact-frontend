@@ -82,9 +82,9 @@
     </div>
 
     <div class="govuk-form-group">
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+        <label class="govuk-label govuk-label--s">
             @messages("confirmation.feedback.improve") @messages("hintText.optional")
-        </legend>
+        </label>
         @govukTextarea(Textarea(
             id="details", name="details", rows=5, value=form("details").value, hint=Option(Hint(content = Text(messages("confirmation.feedback.warning")))) ,
             errorMessage = form.errors.asHtmlErrorMessageForField("details")
@@ -150,7 +150,7 @@
                     ErrorSummary(
                         title = Text(messages("error.summary.title")),
                         errorList = form.mapping.mappings.flatMap(x => form.error(x.key).map(e =>
-                            ErrorLink(href = Option(s"#${x.key}"), content = HtmlContent(messages(s"satisfactionSurvey.${e.key}") + " - " + messages(e.messages, e.args)))
+                            ErrorLink(href = Option(s"#${x.key}"), content = HtmlContent(messages(e.messages, e.args)))
                         )), attributes = Map("id" -> "error-summary-heading")
                     )
                 )

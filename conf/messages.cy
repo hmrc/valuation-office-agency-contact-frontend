@@ -256,11 +256,14 @@ satisfaction.satisfied = Bodlon
 satisfaction.neither = Ddim yn fodlon nac yn anfodlon
 satisfaction.dissatisfied = Anfodlon
 satisfaction.veryDissatisfied = Anfodlon iawn
-satisfactionSurvey.satisfaction = Yn gyffredinol, sut y byddech yn disgrifio’ch profiad gyda’r ffurflen hon? - Rhaid i chi ddewis un
-satisfactionSurvey.details = Sut y gallwn wella’r gwasanaeth hwn? - Gallwch ond nodi’r cymeriadau hyn: A-Y, a-y, 0-9, -, &, ., £, %, (), ;, :, ?, !, `, ’, comaau, a bylchau
+satisfactionSurvey.satisfaction = Dewiswch sut y byddech chi’n disgrifio’ch profiad
+satisfactionSurvey.details = Rhaid i'r adborth gynnwys llythrennau a i z, rhifau 0 i 9, cysylltnodau, bylchau a chollnodau yn unig
 confirmation.feedback.improve = Sut y gallwn wella’r gwasanaeth hwn?
-confirmation.feedback.warning = Peidiwch â chynnwys unrhyw wybodaeth bersonol nac ariannol, er enghraifft eich rhif Yswiriant Gwladol neu rifau cardiau credyd.
+confirmation.feedback.warning = Uchafswm o 1200 nod. Peidiwch â chynnwys unrhyw wybodaeth bersonol nac ariannol, er enghraifft eich rhif Yswiriant Gwladol neu rifau cardiau credyd.
 confirmation.feedback.submit = Cyflwyno
+error.required.feedback = Dewiswch sut y byddech chi’n disgrifio’ch profiad
+error.message.max_length.feedback = Rhaid i'r adborth fod yn 1200 nod neu lai
+error.message.xss-invalid.feedback = Rhaid i'r adborth gynnwys llythrennau a i z, rhifau 0 i 9, cysylltnodau, bylchau a chollnodau yn unig
 
 # SURVEY THANKYOU
 ###############################

@@ -27,11 +27,11 @@ object SatisfactionSurveyForm {
 
   def apply(): Form[SatisfactionSurvey] = Form(
     mapping(
-      "satisfaction" -> nonEmptyText
-        .verifying("error.required", optionIsValid(_)),
+      "satisfaction" -> text.verifying("error.required.feedback", !_.isEmpty)
+        .verifying("error.required.feedback", optionIsValid(_)),
       "details" -> optional(text
-        .verifying("error.message.max_length", _.length <= 1200)
-        .verifying("error.message.xss-invalid", _.matches(antiXSSMessageRegex)))
+        .verifying("error.message.max_length.feedback", _.length <= 1200)
+        .verifying("error.message.xss-invalid.feedback", _.matches(antiXSSMessageRegex)))
     )(SatisfactionSurvey.apply)(SatisfactionSurvey.unapply)
   )
 
