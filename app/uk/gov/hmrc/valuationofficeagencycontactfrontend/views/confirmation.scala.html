@@ -138,20 +138,11 @@
     <section tabindex="0" class="govuk-!-display-none-print">
         @formWithCSFR(action = SatisfactionSurveyController.formCompleteFeedback, 'autoComplete -> "off", 'class -> "govuk-!-display-none-print" ) {
             @if(form.hasErrors) {
-
-                @* after text updates please switch to uk.gov.hmrc.govukfrontend.views.Implicits.RichFormErrors#asHtmlErrorLinks()
-                at the moment we must render field name:
-                "First name - This field is required"
-                Should be after text updates :
-                "Please enter first name"
-                *@
-
                 @govukErrorSummary(
                     ErrorSummary(
                         title = Text(messages("error.summary.title")),
-                        errorList = form.mapping.mappings.flatMap(x => form.error(x.key).map(e =>
-                            ErrorLink(href = Option(s"#${x.key}"), content = HtmlContent(messages(e.messages, e.args)))
-                        )), attributes = Map("id" -> "error-summary-heading")
+                        errorList = form.errors.asHtmlErrorLinks,
+                        attributes = Map("id" -> "error-summary-heading")
                     )
                 )
             }
