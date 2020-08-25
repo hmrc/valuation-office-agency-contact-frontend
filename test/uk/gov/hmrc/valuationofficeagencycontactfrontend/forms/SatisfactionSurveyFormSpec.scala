@@ -38,13 +38,13 @@ class SatisfactionSurveyFormSpec extends FormBehaviours {
 
     s"fail to bind when details length is more than 1200" in {
       val data = validData + ("details" -> "a" * 1201)
-      val expectedError = error("details", "error.message.max_length")
+      val expectedError = error("details", "error.message.max_length.feedback")
       checkForError(form, data, expectedError)
     }
 
     s"fail to bind when details is invalid" in {
       val data = validData + ("details" -> "<script>alert(\"xss\")</script>")
-      val expectedError = error("details", "error.message.xss-invalid")
+      val expectedError = error("details", "error.message.xss-invalid.feedback")
       checkForError(form, data, expectedError)
     }
   }
