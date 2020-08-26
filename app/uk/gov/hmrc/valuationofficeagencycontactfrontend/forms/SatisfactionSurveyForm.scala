@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
-import play.api.Logger
 import play.api.data.Form
 import play.api.data.Forms._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
@@ -25,10 +24,16 @@ object SatisfactionSurveyForm {
 
   private val antiXSSMessageRegex = """^['`A-Za-z0-9\s\-&,\.£\(\)%;:\?\!]+$"""
 
+  def validateSatisfaction(survey: String):Boolean = {
+    survey.isEmpty
+  }
+
   def apply(): Form[SatisfactionSurvey] = Form(
     mapping(
-      "satisfaction" -> text.verifying("error.required.feedback", !_.isEmpty)
-        .verifying("error.required.feedback", optionIsValid(_)),
+      "satisfaction" -> text.verifying("error.required.feedback", validateSatisfaction(_)),
+//        nonEmptyText,
+////        .verifying("error.required.feedback", !_.isEmpty)
+//        .verifying("error.required.feedback", optionIsValid(_)),
       "details" -> optional(text
         .verifying("error.message.max_length.feedback", _.length <= 1200)
         .verifying("error.message.xss-invalid.feedback", _.matches(antiXSSMessageRegex)))
