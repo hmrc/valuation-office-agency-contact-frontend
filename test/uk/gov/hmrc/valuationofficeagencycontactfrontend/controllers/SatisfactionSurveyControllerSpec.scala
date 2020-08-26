@@ -125,7 +125,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
 
       status(result) mustBe OK
       contentAsString(result) must include(
-        "This field is required")
+        "Select how you would describe your experience")
     }
 
     "feedback submission (business rates) must show form errors if survey incomplete" in {
@@ -146,7 +146,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
 
       status(result) mustBe OK
       contentAsString(result) must include(
-        "This field is required")
+        "Select how you would describe your experience")
     }
 
   }
