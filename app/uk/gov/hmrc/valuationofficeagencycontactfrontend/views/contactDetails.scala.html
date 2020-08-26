@@ -41,9 +41,9 @@
     @govukBackLink(BackLink(content = Text(messages("site.back")), href = backLink))
 }
 
-@textInput(id: String, classes: String, mode: String = "") = {
+@textInput(id: String, classes: String, autoCompleteLabel: String, mode: String = "") = {
     @govukInput(Input(
-        id=id, name=id, inputType = "text", value = form(id).value, classes=classes, autocomplete=Some(id),
+        id=id, name=id, inputType = "text", value = form(id).value, classes=classes, autocomplete=Some(autoCompleteLabel),
         label = Label(content = Text(messages(s"contactDetails.${id}"))), inputmode=Some(mode), attributes=Map("spellcheck" -> "false"),
         errorMessage = form.errors.asTextErrorMessageForField(id)
     ))
@@ -54,10 +54,10 @@
         <h1 class="govuk-fieldset__heading">@messages("contactDetails.heading")</h1>
     </legend>
 
-    @textInput("firstName", "govuk-input--width-20")
-    @textInput("lastName", "govuk-input--width-20")
-    @textInput("email", "govuk-input--width-20", "email" )
-    @textInput("contactNumber", "govuk-input--width-20", "tel")
+    @textInput("firstName", "govuk-input--width-20", "given-name")
+    @textInput("lastName", "govuk-input--width-20", "family-name")
+    @textInput("email", "govuk-input--width-20", "email", "email" )
+    @textInput("contactNumber", "govuk-input--width-20", "tel", "tel")
 }
 
 

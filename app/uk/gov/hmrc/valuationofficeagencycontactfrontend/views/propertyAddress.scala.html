@@ -43,9 +43,9 @@
     ))
 }
 
-@textInput(id: String, optional: Boolean = false, classes: String) = {
+@textInput(id: String, optional: Boolean, classes: String, autoCompleteLabel: String) = {
     @govukInput(Input(
-        id=id, name=id, inputType = "text", value = form(id).value, classes=classes, autocomplete=Some(id),
+        id=id, name=id, inputType = "text", value = form(id).value, classes=classes, autocomplete=Some(autoCompleteLabel),
         label = if(optional) Label(content = Text(s"${messages(s"propertyAddress.${id}")} ${messages("hintText.optional")}"))
                     else Label(content = Text(messages(s"propertyAddress.${id}"))),
         errorMessage = form.errors.asTextErrorMessageForField(id)
@@ -57,11 +57,11 @@
         <h1 class="govuk-fieldset__heading">@messages("propertyAddress.heading")</h1>
     </legend>
 
-    @textInput("addressLine1", classes = "govuk-input--width-30")
-    @textInput("addressLine2", optional = true, classes = "govuk-input--width-30")
-    @textInput("town", classes = "govuk-!-width-two-thirds")
-    @textInput("county", optional = true, classes = "govuk-!-width-two-thirds")
-    @textInput("postcode", classes = "govuk-input--width-10")
+    @textInput("addressLine1", false, "govuk-input--width-30", "address-line1")
+    @textInput("addressLine2", true, classes = "govuk-input--width-30", "address-line2")
+    @textInput("town", false, "govuk-!-width-two-thirds", "address-level2")
+    @textInput("county", true, "govuk-!-width-two-thirds", "address-level1")
+    @textInput("postcode", false, "govuk-input--width-10", "postal-code")
 }
 
 
