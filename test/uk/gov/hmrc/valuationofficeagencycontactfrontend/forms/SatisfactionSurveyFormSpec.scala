@@ -32,7 +32,7 @@ class SatisfactionSurveyFormSpec extends FormBehaviours {
 
     "fail to bind when satisfaction is blank" in {
       val data = validData - "satisfaction"
-      val expectedError = error("satisfaction", "error.required")
+      val expectedError = error("satisfaction", "error.required.feedback")
       checkForError(form, data, expectedError)
     }
 
