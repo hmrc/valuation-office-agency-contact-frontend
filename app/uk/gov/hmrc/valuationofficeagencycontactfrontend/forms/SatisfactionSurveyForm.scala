@@ -16,22 +16,29 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
-import play.api.Logger
-import play.api.data.Form
+import play.api.data.{Form, FormError, Mapping}
 import play.api.data.Forms._
+import play.api.data.format.Formatter
+import play.api.data.validation.Constraint
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object SatisfactionSurveyForm {
 
   private val antiXSSMessageRegex = """^['`A-Za-z0-9\s\-&,\.£\(\)%;:\?\!]+$"""
 
+  def satisfactionFormat: Formatter[String] = new Formatter[String] {
+    def bind(key: String, data: Map[String, String]) = data.get(key).toRight(Seq(FormError(key, "error.required.feedback", Nil)))
+    def unbind(key: String, value: String)           = Map(key -> value)
+  }
+
   def apply(): Form[SatisfactionSurvey] = Form(
     mapping(
-      "satisfaction" -> nonEmptyText
-        .verifying("error.required", optionIsValid(_)),
+      "satisfaction" -> of[String](satisfactionFormat)
+        .verifying("error.required.feedback", !_.isEmpty)
+        .verifying("error.required.feedback", optionIsValid(_)),
       "details" -> optional(text
-        .verifying("error.message.max_length", _.length <= 1200)
-        .verifying("error.message.xss-invalid", _.matches(antiXSSMessageRegex)))
+        .verifying("error.message.max_length.feedback", _.length <= 1200)
+        .verifying("error.message.xss-invalid.feedback", _.matches(antiXSSMessageRegex)))
     )(SatisfactionSurvey.apply)(SatisfactionSurvey.unapply)
   )
 

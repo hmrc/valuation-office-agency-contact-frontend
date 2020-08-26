@@ -102,10 +102,8 @@
         <p class="govuk-body">@messages("checkBeforeYouStart.council_tax.para11")</p>
     </div>
 
-    <p class="govuk-body">
-        @govukButton(Button(element = Option("a"), name=Option("continue"), content = Text(messages("site.continue")),
-            href = Option(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSmartLinksController.goToCouncilTaxSubcategoryPage().url)
-        ))
-    </p>
+    <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSmartLinksController.goToCouncilTaxSubcategoryPage().url draggable="false" class="govuk-button" data-module="govuk-button">
+        Continue
+    </a>
 
 }
