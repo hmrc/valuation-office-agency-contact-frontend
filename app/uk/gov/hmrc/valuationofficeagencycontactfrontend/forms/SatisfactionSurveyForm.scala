@@ -26,10 +26,6 @@ object SatisfactionSurveyForm {
 
   private val antiXSSMessageRegex = """^['`A-Za-z0-9\s\-&,\.£\(\)%;:\?\!]+$"""
 
-  def validateSatisfaction(survey: String):Boolean = {
-    !survey.isEmpty
-  }
-
   def satisfactionFormat: Formatter[String] = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key).toRight(Seq(FormError(key, "error.required.feedback", Nil)))
     def unbind(key: String, value: String)           = Map(key -> value)
@@ -38,7 +34,7 @@ object SatisfactionSurveyForm {
   def apply(): Form[SatisfactionSurvey] = Form(
     mapping(
       "satisfaction" -> of[String](satisfactionFormat)
-        .verifying("error.required.feedback", validateSatisfaction(_))
+        .verifying("error.required.feedback", !_.isEmpty)
         .verifying("error.required.feedback", optionIsValid(_)),
       "details" -> optional(text
         .verifying("error.message.max_length.feedback", _.length <= 1200)
