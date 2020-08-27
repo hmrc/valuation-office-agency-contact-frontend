@@ -227,6 +227,7 @@ propertyAddress.checkYourAnswersLabel = Manylion yr eiddo
 tellUsMore.title = Rhowch ragor o wybodaeth i ni am eich ymholiad - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 tellUsMore.heading = Rhowch ragor o wybodaeth i ni am eich ymholiad
 tellUsMore.message = Eich neges
+tellUsMore.hint = Uchafswm o 5000 nod
 tellUsMore.para =  I’n helpu i ddelio â’ch cais, byddwch cystal â rhoi:
 tellUsMore.para1 = Yr hyn y mae’ch ymholiad ynghylch
 tellUsMore.para2 =  Eich perthynas â’r eiddo (er enghraifft, perchennog neu denant)

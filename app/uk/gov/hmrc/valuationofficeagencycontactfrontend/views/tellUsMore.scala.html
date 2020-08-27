@@ -19,6 +19,7 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
 @import uk.gov.hmrc.govukfrontend.views.html.components.GovukTextarea
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
@@ -62,6 +63,7 @@
     </ul>
 
     @govukTextarea(Textarea(id="message", name="message", rows=5, value=form("message").value,
+        hint=Option(Hint(content = Text(messages("tellUsMore.hint")))),
         errorMessage = form.errors.asHtmlErrorMessageForField("message"), label = Label(content = Text(messages("tellUsMore.message")))))
 
 }
