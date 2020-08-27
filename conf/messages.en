@@ -227,6 +227,7 @@ propertyAddress.checkYourAnswersLabel = Property details
 tellUsMore.title = Tell us more about your enquiry - Valuation Office Agency contact form - GOV.UK
 tellUsMore.heading = Tell us more about your enquiry
 tellUsMore.message = Your message
+tellUsMore.hint = Maximum 5,000 characters
 tellUsMore.para = To help us deal with your enquiry, please provide:
 tellUsMore.para1 = What your enquiry is about
 tellUsMore.para2 = Your relationship to the property (for example, owner or tenant)
