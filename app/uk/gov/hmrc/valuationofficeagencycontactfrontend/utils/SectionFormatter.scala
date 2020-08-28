@@ -36,14 +36,22 @@ object SectionFormatter {
         SummaryListRow(
           key = Key(Text(messages(row.label))),
           value = Value(Text(messages(row.answer))),
-          actions = Option(Actions(items = Seq(ActionItem(href=row.changeUrl, classes = s"change-link-${i}", content = Text(messages("site.edit")))).filter(_ => i != 0)))
+          actions = Option(Actions(items = Seq(ActionItem(href=row.changeUrl,
+            classes = s"change-link-${i}",
+            visuallyHiddenText = Some(messages(row.label)),
+            content = Text(messages("site.edit")))).filter(_ => i != 0))
+          )
         )
       }
       case (row:AnswerRow, i: Int) => {
         SummaryListRow(
           key = Key(Text(messages(row.label))),
           value = Value(HtmlContent(row.answer)),
-          actions = Option(Actions(items = Seq(ActionItem(href=row.changeUrl, classes = s"change-link-${i}", content = Text(messages("site.edit")))).filter(_ => i != 0)))
+          actions = Option(Actions(items = Seq(ActionItem(href=row.changeUrl,
+            classes = s"change-link-${i}",
+            visuallyHiddenText = Some(messages(row.label)),
+            content = Text(messages("site.edit")))).filter(_ => i != 0))
+          )
         )
       }
     }
