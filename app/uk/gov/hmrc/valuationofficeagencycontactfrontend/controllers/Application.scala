@@ -39,18 +39,10 @@ class Application @Inject() (override val messagesApi: MessagesApi,
   val log = Logger(this.getClass)
 
   def start(mode: Mode) = Action.async { implicit request =>
-
-    request.headers.get(REFERER).filter(_.contains("https://www.gov.uk/cysylltu-voa")).map { _ =>
-      log.trace("redirect from GOV.UK")
-      val newReq = request.withHeaders(request.headers.replace(REFERER -> createRefererURL))
-      languageSwitchController.switchToLanguage("cymraeg").apply(newReq)
-    }.getOrElse {
-      log.trace("no redirect")
-      if (appConfig.startPageRedirect) {
-        Future.successful(Redirect(appConfig.govukStartPage))
-      } else {
-        Future.successful(Ok(enquiryCategory(appConfig, EnquiryCategoryForm(), mode)))
-      }
+    if (appConfig.startPageRedirect) {
+      Future.successful(Redirect(appConfig.govukStartPage))
+    } else {
+      Future.successful(Ok(enquiryCategory(appConfig, EnquiryCategoryForm(), mode)))
     }
   }
 
