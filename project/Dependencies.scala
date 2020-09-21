@@ -8,16 +8,16 @@ object Dependencies {
 
     private val playHealthVersion = "3.15.0-play-26"
     private val logbackJsonLoggerVersion = "4.8.0"
-    private val govukTemplateVersion = "5.55.0-play-26"
-    private val playUiVersion = "8.11.0-play-26"
+    private val govukTemplateVersion = "5.56.0-play-26"
+    private val playUiVersion = "8.12.0-play-26"
     private val scalaTestVersion = "3.0.8"
     private val scalaTestPlusPlayVersion = "3.1.3"
     private val mockitoAllVersion = "1.10.19"
     private val httpCachingClientVersion = "9.1.0-play-26"
     private val simpleReactivemongoVersion = "7.30.0-play-26"
-    private val playConditionalFormMappingVersion = "1.2.0-play-26"
-    private val playLanguageVersion = "4.3.0-play-26"
-    private val bootstrapPlayVersion = "1.14.0"
+    private val playConditionalFormMappingVersion = "1.3.0-play-26"
+    private val playLanguageVersion = "4.4.0-play-26"
+    private val bootstrapPlayVersion = "1.16.0"
     private val akkaVersion     = "2.5.23"
     private val akkaHttpVersion = "10.0.15"
 
@@ -34,7 +34,9 @@ object Dependencies {
       "uk.gov.hmrc" %% "bootstrap-play-26" % bootstrapPlayVersion,
       "uk.gov.hmrc" %% "play-language" % playLanguageVersion,
       "uk.gov.hmrc" %% "http-verbs" % "10.7.0-play-26",
-      "uk.gov.hmrc" %% "play-frontend-govuk" % "0.49.0-play-26"
+      "uk.gov.hmrc" %% "play-frontend-govuk" % "0.50.0-play-26",
+      "uk.gov.hmrc" %% "play-frontend-hmrc" % "0.19.0-play-26"
+
     )
 
     lazy val appDependencyOverrides: Seq[ModuleID] = Seq(

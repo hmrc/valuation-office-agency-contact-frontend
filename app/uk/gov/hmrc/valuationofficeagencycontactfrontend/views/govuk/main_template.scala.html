@@ -21,13 +21,14 @@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.head
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.scripts
-
+@import uk.gov.hmrc.hmrcfrontend.config.AccessibilityStatementConfig
 
 @this(
         govukLayout: govukLayout,
         head: head,
         scripts: scripts,
-        govukPhaseBanner: govukPhaseBanner
+        govukPhaseBanner: govukPhaseBanner,
+        accessibilityStatementConfig: AccessibilityStatementConfig
 )
 
 @(pageTitle: Option[String] = None,
@@ -53,6 +54,9 @@
         FooterItem(
             href = Some(messages("footer.links.privacy_policy.url")),
             text = Some(messages("footer.links.privacy_policy.text"))),
+        accessibilityStatementConfig.url.map(
+            href => FooterItem(Some(messages("footer.accessibility.text")), Some(href))
+        ).get,
         FooterItem(
             href = Some(messages("footer.links.terms_and_conditions.url")),
             text = Some(messages("footer.links.terms_and_conditions.text"))),
