@@ -79,7 +79,7 @@
                 ErrorSummary(
                     title = Text(messages("error.summary.title")),
                     errorList = form.mapping.mappings.flatMap(x => form.error(x.key).map(e =>
-                            ErrorLink(href = Option(s"#${x.key}"), content = HtmlContent(messages(s"contactDetails.${e.key}") + " - " + messages(e.messages, e.args)))
+                            ErrorLink(href = Option(s"#${x.key}"), content = HtmlContent(messages(e.messages, e.args)))
                     )), attributes = Map("id" -> "error-summary-heading")
                 )
             )
