@@ -28,10 +28,10 @@ object ContactDetailsForm {
 
   def apply(): Form[ContactDetails] = Form(
     mapping(
-      "firstName" -> text.verifying("contactDetails.firstname.required", !_.isEmpty)
-                .verifying("contactDetails.firstname.invalid", _.matches(antiXSSRegex)),
-      "lastName" -> text.verifying("contactDetails.lastname.required", !_.isEmpty)
-                .verifying("contactDetails.lastname.invalid", _.matches(antiXSSRegex)),
+      "firstName" -> text.verifying("contactDetails.firstName.required", !_.isEmpty)
+                .verifying("contactDetails.firstName.invalid", _.matches(antiXSSRegex)),
+      "lastName" -> text.verifying("contactDetails.lastName.required", !_.isEmpty)
+                .verifying("contactDetails.lastName.invalid", _.matches(antiXSSRegex)),
       "email" -> text.verifying("contactDetails.email.required", !_.isEmpty)
                 .verifying("contactDetails.email.invalid", _.matches(emailRegex)),
       "contactNumber" -> text.verifying("contactDetails.contactNumber.required", !_.isEmpty)
