@@ -28,15 +28,16 @@ object ContactDetailsForm {
 
   def apply(): Form[ContactDetails] = Form(
     mapping(
-      "firstName" -> nonEmptyText.verifying("error.xss.invalid", _.matches(antiXSSRegex)),
-      "lastName" -> nonEmptyText.verifying("error.xss.invalid", _.matches(antiXSSRegex)),
-      "email" -> nonEmptyText
-        .verifying("error.email.max_length", _.length <= 129)
-        .verifying("error.email.invalid", _.matches(emailRegex)),
-      "contactNumber" -> nonEmptyText
-        .verifying("error.phone.min_length", _.length >= 11)
-        .verifying("error.phone.max_length", _.length <= 20)
-        .verifying("error.phone.invalid", _ matches (phoneRegex))
+      "firstName" -> text.verifying("contactDetails.firstName.required", !_.isEmpty)
+                .verifying("contactDetails.firstName.invalid", _.matches(antiXSSRegex)),
+      "lastName" -> text.verifying("contactDetails.lastName.required", !_.isEmpty)
+                .verifying("contactDetails.lastName.invalid", _.matches(antiXSSRegex)),
+      "email" -> text.verifying("contactDetails.email.required", !_.isEmpty)
+                .verifying("contactDetails.email.invalid", _.matches(emailRegex)),
+      "contactNumber" -> text.verifying("contactDetails.contactNumber.required", !_.isEmpty)
+                .verifying("contactDetails.contactNumber.length", _.length >= 11)
+                .verifying("contactDetails.contactNumber.length", _.length <= 20)
+                .verifying("contactDetails.contactNumber.invalid", _ matches(phoneRegex))
     )(ContactDetails.apply)(ContactDetails.unapply)
   )
 }
