@@ -27,21 +27,21 @@ object PropertyAddressForm {
 
   def apply(): Form[PropertyAddress] = Form(
     mapping(
-      "addressLine1" -> nonEmptyText
-        .verifying("error.addressline.max_length", _.length <= 80)
-        .verifying("error.xss.invalid", _.matches(antiXSSRegex)),
+      "addressLine1" -> text.verifying("propertyAddress.addressLine1.required", !_.isEmpty)
+        .verifying("propertyAddress.addressLine1.length", _.length <= 80)
+        .verifying("propertyAddress.addressLine1.invalid", _.matches(antiXSSRegex)),
       "addressLine2" -> optional(text
-        .verifying("error.addressline.max_length", _.length <= 80)
-        .verifying("error.xss.invalid", _.matches(antiXSSRegex))),
-      "town" -> nonEmptyText
-        .verifying("error.addressline.max_length", _.length <= 80)
-        .verifying("error.xss.invalid", _.matches(antiXSSRegex)),
+        .verifying("propertyAddress.addressLine2.length", _.length <= 80)
+        .verifying("propertyAddress.addressLine2.invalid", _.matches(antiXSSRegex))),
+      "town" -> text.verifying("propertyAddress.town.required", !_.isEmpty)
+        .verifying("propertyAddress.town.length", _.length <= 80)
+        .verifying("propertyAddress.town.invalid", _.matches(antiXSSRegex)),
       "county" -> optional(text
-        .verifying("error.addressline.max_length", _.length <= 80)
-        .verifying("error.xss.invalid", _.matches(antiXSSRegex))),
-      "postcode" -> nonEmptyText
-        .verifying("error.postcode.max_length", _.length <= 8)
-        .verifying("error.postcode.invalid", _.toUpperCase.matches(postcodeRegex))
+        .verifying("propertyAddress.county.length", _.length <= 80)
+        .verifying("propertyAddress.county.invalid", _.matches(antiXSSRegex))),
+      "postcode" -> text.verifying("propertyAddress.postcode.required", !_.isEmpty)
+        .verifying("propertyAddress.postcode.length", _.length <= 8)
+        .verifying("propertyAddress.postcode.invalid", _.toUpperCase.matches(postcodeRegex))
     )(PropertyAddress.apply)(PropertyAddress.unapply)
   )
 }
