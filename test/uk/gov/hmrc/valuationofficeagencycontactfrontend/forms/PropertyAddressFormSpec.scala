@@ -38,7 +38,7 @@ class PropertyAddressFormSpec extends FormBehaviours {
 
     "fail to bind when address line 1 is blank" in {
       val data = validData + ("addressLine1" -> "")
-      val expectedError = Seq(error("addressLine1", "error.required"), error("addressLine1", "error.xss.invalid")).flatten
+      val expectedError = Seq(error("addressLine1", "propertyAddress.addressLine1.required"), error("addressLine1", "propertyAddress.addressLine1.invalid")).flatten
       checkForError(form, data, expectedError)
     }
 
@@ -50,31 +50,31 @@ class PropertyAddressFormSpec extends FormBehaviours {
 
     s"fail to bind when address line 1 is invalid" in {
       val data = validData + ("addressLine1" -> "1st Line£")
-      val expectedError = error("addressLine1", "error.xss.invalid")
+      val expectedError = error("addressLine1", "propertyAddress.addressLine1.invalid")
       checkForError(form, data, expectedError)
     }
 
     s"fail to bind when address line 1 length is more than 80" in {
       val data = validData + ("addressLine1" -> "aaaaaaaaaaaaaaaaaaaaaa" * 4)
-      val expectedError = error("addressLine1", "error.addressline.max_length")
+      val expectedError = error("addressLine1", "propertyAddress.addressLine1.length")
       checkForError(form, data, expectedError)
     }
 
     s"fail to bind when address line 2 is invalid" in {
       val data = validData + ("addressLine2" -> "2nd Line£")
-      val expectedError = error("addressLine2", "error.xss.invalid")
+      val expectedError = error("addressLine2", "propertyAddress.addressLine2.invalid")
       checkForError(form, data, expectedError)
     }
 
     s"fail to bind when address line 2 length is more than 80" in {
       val data = validData + ("addressLine2" -> "aaaaaaaaaaaaaaaaaaaaaa" * 4)
-      val expectedError = error("addressLine2", "error.addressline.max_length")
+      val expectedError = error("addressLine2", "propertyAddress.addressLine2.length")
       checkForError(form, data, expectedError)
     }
 
     "fail to bind when town is blank" in {
       val data = validData + ("town" -> "")
-      val expectedError = Seq(error("town", "error.required"), error("town", "error.xss.invalid")).flatten
+      val expectedError = Seq(error("town", "propertyAddress.town.required"), error("town", "propertyAddress.town.invalid")).flatten
       checkForError(form, data, expectedError)
     }
 
@@ -86,31 +86,31 @@ class PropertyAddressFormSpec extends FormBehaviours {
 
     s"fail to bind when town is invalid" in {
       val data = validData + ("town" -> "town*")
-      val expectedError = error("town", "error.xss.invalid")
+      val expectedError = error("town", "propertyAddress.town.invalid")
       checkForError(form, data, expectedError)
     }
 
     s"fail to bind when town length is more than 80" in {
       val data = validData + ("town" -> "aaaaaaaaaaaaaaaaaaaaaa" * 4)
-      val expectedError = error("town", "error.addressline.max_length")
+      val expectedError = error("town", "propertyAddress.town.length")
       checkForError(form, data, expectedError)
     }
 
     s"fail to bind when county is invalid" in {
       val data = validData + ("county" -> "county!<>")
-      val expectedError = error("county", "error.xss.invalid")
+      val expectedError = error("county", "propertyAddress.county.invalid")
       checkForError(form, data, expectedError)
     }
 
     s"fail to bind when county length is more than 80" in {
       val data = validData + ("county" -> "aaaaaaaaaaaaaaaaaaaaaa" * 4)
-      val expectedError = error("county", "error.addressline.max_length")
+      val expectedError = error("county", "propertyAddress.county.length")
       checkForError(form, data, expectedError)
     }
 
     "fail to bind when postcode is blank" in {
       val data = validData + ("postcode" -> "")
-      val expectedError = Seq(error("postcode", "error.required"), error("postcode", "error.postcode.invalid")).flatten
+      val expectedError = Seq(error("postcode", "propertyAddress.postcode.required"), error("postcode", "propertyAddress.postcode.invalid")).flatten
       checkForError(form, data, expectedError)
     }
 
@@ -122,13 +122,13 @@ class PropertyAddressFormSpec extends FormBehaviours {
 
     s"fail to bind when postcode is invalid" in {
       val data = validData + ("postcode" -> "AAAAAA")
-      val expectedError = error("postcode", "error.postcode.invalid")
+      val expectedError = error("postcode", "propertyAddress.postcode.invalid")
       checkForError(form, data, expectedError)
     }
 
     s"fail to bind when postcode length is more than 8" in {
       val data = validData + ("postcode" -> "AA1212AAA")
-      val expectedError = Seq(error("postcode", "error.postcode.max_length"), error("postcode", "error.postcode.invalid")).flatten
+      val expectedError = Seq(error("postcode", "propertyAddress.postcode.length"), error("postcode", "propertyAddress.postcode.invalid")).flatten
       checkForError(form, data, expectedError)
     }
 
