@@ -16,10 +16,9 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
-import play.api.data.{Form, FormError, Mapping}
+import play.api.data.{Form, FormError}
 import play.api.data.Forms._
 import play.api.data.format.Formatter
-import play.api.data.validation.Constraint
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object SatisfactionSurveyForm {
