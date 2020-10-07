@@ -20,7 +20,7 @@ import org.mockito.Matchers
 import org.mockito.Mockito._
 import org.scalatest.RecoverMethods
 import org.scalatest.concurrent.ScalaFutures
-import org.scalatest.mockito.MockitoSugar
+import org.scalatestplus.mockito.MockitoSugar
 import play.api.mvc.Request
 import play.api.test.Helpers
 import uk.gov.hmrc.http.SessionKeys
@@ -30,7 +30,6 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.Optional
 import uk.gov.hmrc.http.cache.client.CacheMap
 
 import scala.concurrent.Future
-import scala.concurrent.ExecutionContext.Implicits.global
 
 class DataClearActionSpec extends SpecBase with MockitoSugar with ScalaFutures with RecoverMethods {
 

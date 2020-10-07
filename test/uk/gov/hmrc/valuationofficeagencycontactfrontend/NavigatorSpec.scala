@@ -16,19 +16,15 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend
 
-import org.joda.time.LocalDate
 import org.mockito.Mockito._
-import org.scalacheck.Gen
-import org.scalatest.mockito.MockitoSugar
-import org.scalatest.prop.GeneratorDrivenPropertyChecks
-import play.api.mvc.Call
-import uk.gov.hmrc.http.cache.client.CacheMap
+import org.scalatestplus.mockito.MockitoSugar
+import org.scalatestplus.scalacheck.ScalaCheckDrivenPropertyChecks
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
-class NavigatorSpec extends SpecBase with MockitoSugar with GeneratorDrivenPropertyChecks{
+class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenPropertyChecks{
 
   val navigator = new Navigator
 

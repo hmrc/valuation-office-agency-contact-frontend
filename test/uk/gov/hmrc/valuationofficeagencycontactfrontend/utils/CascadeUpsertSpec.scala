@@ -18,8 +18,6 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
 import play.api.libs.json._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.http.cache.client.CacheMap
 
 class CascadeUpsertSpec extends SpecBase {

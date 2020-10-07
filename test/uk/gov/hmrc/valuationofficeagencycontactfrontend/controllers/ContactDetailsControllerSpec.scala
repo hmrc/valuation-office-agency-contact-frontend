@@ -17,7 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import org.mockito.Mockito.when
-import org.scalatest.mockito.MockitoSugar
+import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.{JsString, Json}
 import uk.gov.hmrc.http.cache.client.CacheMap
@@ -96,7 +96,6 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
 
     "return an error when invalid data is submitted and enquiry category is wrong or unwnown" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm = ContactDetailsForm().bind(Map("value" -> "invalid value"))
       val validData = Map(EnquiryCategoryId.toString -> JsString("other"))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 

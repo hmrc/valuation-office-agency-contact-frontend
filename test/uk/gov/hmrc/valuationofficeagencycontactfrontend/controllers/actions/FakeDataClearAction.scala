@@ -20,10 +20,8 @@ import play.api.mvc.{AnyContent, BodyParser, Request}
 import play.api.test.Helpers
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.OptionalDataRequest
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 import scala.concurrent.{ExecutionContext, Future}
-import scala.concurrent.ExecutionContext.Implicits.global
 
 class FakeDataClearAction(cacheMapToReturn: Option[CacheMap]) extends DataClearAction {
   override protected def transform[A](request: Request[A]): Future[OptionalDataRequest[A]] = Future.successful(OptionalDataRequest(request, "id", None))

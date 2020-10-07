@@ -16,10 +16,9 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
-import akka.actor.{ActorSystem, Props}
-import akka.testkit.{ImplicitSender, TestKit, TestProbe}
-import org.scalatest.{Matchers, WordSpecLike}
-import org.scalatestplus.play.{OneAppPerSuite, PlaySpec}
+import akka.testkit.TestProbe
+import org.scalatestplus.play.guice.GuiceOneAppPerSuite
+import org.scalatestplus.play.PlaySpec
 import play.modules.reactivemongo.ReactiveMongoComponent
 import reactivemongo.api.collections.bson.BSONCollection
 import reactivemongo.bson.{BSONDocument, BSONObjectID, BSONString}
@@ -27,7 +26,7 @@ import play.api.test.{DefaultAwaitTimeout, FutureAwaits}
 
 import scala.concurrent.ExecutionContext
 
-class MongoCleanupActorSpec extends PlaySpec with FutureAwaits with DefaultAwaitTimeout with OneAppPerSuite {
+class MongoCleanupActorSpec extends PlaySpec with FutureAwaits with DefaultAwaitTimeout with GuiceOneAppPerSuite {
 
   implicit def as = app.actorSystem
 

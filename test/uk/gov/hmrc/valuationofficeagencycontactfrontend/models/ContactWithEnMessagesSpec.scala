@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
 
-import org.scalatest.mockito.MockitoSugar
+import org.scalatestplus.mockito.MockitoSugar
 import play.api.i18n.MessagesApi
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
 import org.mockito.Mockito.when
@@ -38,7 +38,7 @@ class ContactWithEnMessagesSpec extends SpecBase with MockitoSugar {
   "throw an exception if the english version of messages is not available" in {
     when(mockMessages.messages) thenReturn Map("fr" -> Map("enquiryCategory.council_tax" -> "CT", "councilTaxSubcategory.council_tax_band" -> "TB"))
     intercept[Exception] {
-      val result = ContactWithEnMessage(contact, mockMessages)
+      ContactWithEnMessage(contact, mockMessages)
     }
   }
 
@@ -46,21 +46,21 @@ class ContactWithEnMessagesSpec extends SpecBase with MockitoSugar {
     val contact = Contact(contactDetails, propertyAddress, "wibble", "council_tax_band", "msg")
     when(mockMessages.messages) thenReturn Map("en" -> Map("councilTaxSubcategory.council_tax_band" -> "TB"))
     intercept[Exception] {
-      val result = ContactWithEnMessage(contact, mockMessages)
+      ContactWithEnMessage(contact, mockMessages)
     }
   }
 
   "throw an exception if the english version of messages does not contain a value for the enquiry category message key" in {
     when(mockMessages.messages) thenReturn Map("en" -> Map("councilTaxSubcategory.council_tax_band" -> "TB"))
     intercept[Exception] {
-      val result = ContactWithEnMessage(contact, mockMessages)
+      ContactWithEnMessage(contact, mockMessages)
     }
   }
 
   "throw an exception if the english version of the messages does not contain a value for the sub enquiry category key" in {
     when(mockMessages.messages) thenReturn Map("fr" -> Map("enquiryCategory.council_tax" -> "CT"))
     intercept[Exception] {
-      val result = ContactWithEnMessage(contact, mockMessages)
+      ContactWithEnMessage(contact, mockMessages)
     }
   }
 }

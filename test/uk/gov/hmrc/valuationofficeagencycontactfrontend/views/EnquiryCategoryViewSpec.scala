@@ -16,12 +16,12 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
-import org.jsoup.select.Elements
 import play.api.data.Form
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{enquiryCategory => enquiry_category}
+
 class EnquiryCategoryViewSpec extends ViewBehaviours {
 
   def enquiryCategory = app.injector.instanceOf[enquiry_category]

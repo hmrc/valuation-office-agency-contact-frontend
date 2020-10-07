@@ -17,7 +17,6 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.behaviours
 
 import play.api.data.Form
-import org.scalatest.prop.TableDrivenPropertyChecks._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.FormSpec
 
 import scala.util.Try
