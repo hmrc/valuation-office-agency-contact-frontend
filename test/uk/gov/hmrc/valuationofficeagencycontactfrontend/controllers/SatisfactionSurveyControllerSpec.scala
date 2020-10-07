@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
-import org.scalatest.mockito.MockitoSugar
+import org.scalatestplus.mockito.MockitoSugar
 import play.api.{Configuration, Environment}
 import play.api.data.Form
 import play.api.libs.json.{JsString, Json}
@@ -33,8 +33,6 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{satisfactionSurveyThankYou => satisfaction_Survey_Thank_You}
-
-import scala.concurrent.ExecutionContext
 
 class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSugar {
 

@@ -16,14 +16,10 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.handlers
 
-import akka.testkit.DefaultTimeout
-import akka.util.Timeout
 import play.api.http.HttpErrorHandler
-import play.api.test.{FakeRequest, FutureAwaits}
+import play.api.test.FakeRequest
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
 import play.api.test.Helpers._
-
-import scala.concurrent.duration._
 
 class ErrorHandlerSpec extends SpecBase {
 

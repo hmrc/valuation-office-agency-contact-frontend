@@ -18,7 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.repositories
 
 import javax.inject.{Inject, Singleton}
 import org.joda.time.{DateTime, DateTimeZone}
-import play.api.{Configuration, Logger, Play}
+import play.api.Configuration
 import play.api.libs.json.{JsValue, Json}
 import play.modules.reactivemongo.ReactiveMongoComponent
 import reactivemongo.api.indexes.{Index, IndexType}
@@ -49,7 +49,7 @@ class SessionRepository @Inject() (config: Configuration, mongo: ReactiveMongoCo
 
   override def indexes: Seq[Index] =  {
     //Must be here. Otherwise is access before is properly initialized
-    val timeToLiveInSeconds: Int = config.getString("mongodb.timeToLiveInSeconds").map(_.toInt).get
+    val timeToLiveInSeconds: Int = config.get[String]("mongodb.timeToLiveInSeconds").toInt
     Seq(
     Index(Seq("lastUpdated" -> IndexType.Ascending), name = Some("lastUpdatedExpiryIndex"),
       options = BSONDocument( "expireAfterSeconds" -> BSONInteger(timeToLiveInSeconds))),

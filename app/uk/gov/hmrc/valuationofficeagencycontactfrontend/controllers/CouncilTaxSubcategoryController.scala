@@ -19,7 +19,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import javax.inject.Inject
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.libs.json.{JsResult, JsString, JsSuccess, JsValue}
+import play.api.libs.json.JsSuccess
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
@@ -33,7 +33,6 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxSubcategory => council_tax_subcategory}
 
 import scala.concurrent.{ExecutionContext, Future}
-import scala.util.Success
 
 class CouncilTaxSubcategoryController @Inject()(
                                         appConfig: FrontendAppConfig,

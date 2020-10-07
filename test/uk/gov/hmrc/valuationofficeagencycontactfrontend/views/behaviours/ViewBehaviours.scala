@@ -18,12 +18,9 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours
 
 import java.util.Locale
 
-import org.scalatest.exceptions.TestFailedException
 import play.api.i18n.Lang
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.ViewSpecBase
-
-import scala.util.Try
 
 trait ViewBehaviours extends ViewSpecBase {
 

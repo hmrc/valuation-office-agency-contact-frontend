@@ -1,10 +1,5 @@
-import Dependencies.{Test, _}
-import sbt.Keys.parallelExecution
-
-lazy val appName = "valuation-office-agency-contact-frontend"
-
-import sbt.Keys._
-import sbt.Tests.{Group, SubProcess}
+import Dependencies._
+import sbt.Keys.{scalaVersion, _}
 import sbt._
 import scoverage.ScoverageKeys
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin._
@@ -18,13 +13,14 @@ import DefaultBuildSettings._
 import uk.gov.hmrc.SbtAutoBuildPlugin
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin
 import uk.gov.hmrc.versioning.SbtGitVersioning
-import uk.gov.hmrc.SbtArtifactory
 
 lazy val plugins : Seq[Plugins] = Seq.empty
 lazy val playSettings : Seq[Setting[_]] = Seq.empty
 
+lazy val appName = "valuation-office-agency-contact-frontend"
+
 lazy val root = Project(appName, file("."))
-  .enablePlugins(Seq(play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin, SbtArtifactory) ++ plugins : _*)
+  .enablePlugins(Seq(play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin) ++ plugins : _*)
   .disablePlugins(JUnitXmlReportPlugin)
   .settings(majorVersion := 1)
   .settings(playSettings : _*)
@@ -46,7 +42,8 @@ lazy val root = Project(appName, file("."))
     dependencyOverrides ++= appDependencyOverrides,
     retrieveManaged := true,
     evictionWarningOptions in update := EvictionWarningOptions.default.withWarnScalaVersionEviction(false),
-    Keys.fork in sbt.Test := true
+    Keys.fork in sbt.Test := true,
+    scalaVersion := "2.12.12"
   )
   .configs(IntegrationTest)
   .settings(integrationTestSettings())

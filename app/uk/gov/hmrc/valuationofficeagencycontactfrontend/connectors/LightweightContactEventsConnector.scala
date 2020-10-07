@@ -17,11 +17,10 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors
 
 import javax.inject.Inject
-import play.api.Mode.Mode
 import play.api.i18n.MessagesApi
 import play.api.libs.json._
-import play.api.{Configuration, Environment, Logger}
-import uk.gov.hmrc.http.HeaderCarrier
+import play.api.{Configuration, Logger}
+import uk.gov.hmrc.http.{HeaderCarrier, HttpResponse}
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 import uk.gov.hmrc.play.bootstrap.http.HttpClient
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Contact, ContactWithEnMessage}
@@ -29,6 +28,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Contact, Contact
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.util.{Failure, Success, Try}
+import uk.gov.hmrc.http.HttpReads.Implicits._
 
 class LightweightContactEventsConnector @Inject()(http: HttpClient,
                                                   val configuration: Configuration,
@@ -40,12 +40,12 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient,
   val baseSegment = "/lightweight-contact-events/"
   val jsonContentTypeHeader = ("Content-Type", "application/json")
 
-  def getStyleGuide = http.GET(s"$serviceUrl${baseSegment}style-guide")
+  def getStyleGuide = http.GET[HttpResponse](s"$serviceUrl${baseSegment}style-guide")
 
   def send(input: Contact, messagesApi: MessagesApi)(implicit hc: HeaderCarrier) = sendJson(Json.toJson(ContactWithEnMessage(input, messagesApi)))
 
   def sendJson(json: JsValue)(implicit hc: HeaderCarrier): Future[Try[Int]] = {
-    http.POST(s"$serviceUrl${baseSegment}create", json, Seq(jsonContentTypeHeader))
+    http.POST[JsValue, HttpResponse](s"$serviceUrl${baseSegment}create", json, Seq(jsonContentTypeHeader))
       .map {
         response =>
           response.status match {

@@ -22,13 +22,12 @@ import java.util.UUID
 import akka.stream.Materializer
 import javax.inject.Inject
 import org.scalatest.{MustMatchers, WordSpec}
-import org.scalatestplus.play.OneAppPerSuite
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.Application
 import play.api.http.{DefaultHttpFilters, HttpFilters}
 import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.libs.json.Json
-import play.api.mvc.{Action, Results}
+import play.api.mvc.{DefaultActionBuilder, Results}
 import play.api.routing.Router
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
@@ -56,8 +55,10 @@ class SessionIdFilterSpec extends WordSpec with MustMatchers with GuiceOneAppPer
 
     import play.api.routing.sird._
 
+    def actionBuilder = app.injector.instanceOf[DefaultActionBuilder]
+
     Router.from {
-      case GET(p"/test") => Action {
+      case GET(p"/test") => actionBuilder {
         implicit request =>
           val fromHeader = request.headers.get(HeaderNames.xSessionId).getOrElse("")
           val fromSession = request.session.get(SessionKeys.sessionId).getOrElse("")
@@ -68,7 +69,7 @@ class SessionIdFilterSpec extends WordSpec with MustMatchers with GuiceOneAppPer
             )
           )
       }
-      case GET(p"/test2") => Action {
+      case GET(p"/test2") => actionBuilder {
         implicit request =>
           Results.Ok.addingToSession("foo" -> "bar")
       }

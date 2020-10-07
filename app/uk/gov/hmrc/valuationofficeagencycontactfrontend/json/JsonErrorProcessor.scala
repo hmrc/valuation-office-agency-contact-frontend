@@ -17,7 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.json
 
 import play.api.data.validation.ValidationError
-import play.api.libs.json.{JsPath, JsValue}
+import play.api.libs.json.JsPath
 
 object JsonErrorProcessor {
   def validationErrorToString(v: ValidationError): String = {

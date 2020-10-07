@@ -61,7 +61,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
       }
   }
 
-  def goToConfirmationPage() = (getData andThen requireData) { implicit request =>
+  def goToConfirmationPage() = (getData andThen requireData) {
     Redirect(routes.ConfirmationController.onPageLoadSendEmail())
   }
 }

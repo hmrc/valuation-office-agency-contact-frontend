@@ -35,7 +35,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors
 import org.mockito.ArgumentCaptor
 import org.mockito.Matchers.{any, anyString}
 import org.mockito.Mockito.{verify, when}
-import org.scalatest.mockito.MockitoSugar
+import org.scalatestplus.mockito.MockitoSugar
 import play.api.libs.json.{JsValue, Json, Writes, _}
 import play.api.test.Helpers._
 import play.api.{Configuration, Environment}
@@ -50,9 +50,9 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
 
   def getHttpMock(returnedStatus: Int) = {
     val httpMock = mock[HttpClient]
-    when(httpMock.POST(anyString, any[JsValue], any[Seq[(String, String)]])(any[Writes[Any]], any[HttpReads[Any]],
+    when(httpMock.POST[JsValue, HttpResponse](anyString, any[JsValue], any[Seq[(String, String)]])(any[Writes[Any]], any[HttpReads[HttpResponse]],
       any[HeaderCarrier], any())) thenReturn Future.successful(HttpResponse(returnedStatus, None))
-    when(httpMock.GET(anyString)(any[HttpReads[Any]], any[HeaderCarrier], any())) thenReturn Future.successful(HttpResponse(returnedStatus, None))
+    when(httpMock.GET[HttpResponse](anyString)(any[HttpReads[HttpResponse]], any[HeaderCarrier], any())) thenReturn Future.successful(HttpResponse(returnedStatus, None))
     httpMock
   }
 

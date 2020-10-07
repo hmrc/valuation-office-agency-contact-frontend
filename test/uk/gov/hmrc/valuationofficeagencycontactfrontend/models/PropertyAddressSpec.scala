@@ -54,7 +54,7 @@ class PropertyAddressSpec extends FlatSpec {
   }
 
   "Property County" should "shouldn't be Cardiff" in{
-    assert(address.county != "Cardiff")
+    assert(address.county != Some("Cardiff"))
   }
 
   "Property Postcode" should "shouldn't be AA11AA" in{
