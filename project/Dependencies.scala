@@ -23,7 +23,7 @@ object Dependencies {
     private val httpVerbsVersion = "10.7.0-play-26"
     private val playFrontendGovUkVersion = "0.51.0-play-26"
     private val playFrontendHmrc = "0.19.0-play-26"
-
+    private val commonTextVersion = "1.9"
 
     val compile: Seq[ModuleID] = Seq(
        ws,
@@ -38,8 +38,8 @@ object Dependencies {
       "uk.gov.hmrc" %% "play-language" % playLanguageVersion,
       "uk.gov.hmrc" %% "http-verbs" % httpVerbsVersion,
       "uk.gov.hmrc" %% "play-frontend-govuk" % playFrontendGovUkVersion,
-      "uk.gov.hmrc" %% "play-frontend-hmrc" % playFrontendHmrc
-
+      "uk.gov.hmrc" %% "play-frontend-hmrc" % playFrontendHmrc,
+      "org.apache.commons" % "commons-text" % commonTextVersion
     )
 
     lazy val appDependencyOverrides: Seq[ModuleID] = Seq(
