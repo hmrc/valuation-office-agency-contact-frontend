@@ -324,7 +324,6 @@ housingBenefits.email-title = E-bost:
 housingBenefits.email = NSOhelpdesk@voa.gov.uk
 housingBenefits.phone-title =  Ffôn
 housingBenefits.phone-number = 03000 502502
-housingBenefits.para2 = Oherwydd yr achosion cyfredol o COVID-19, ni allwn gynnig gwasanaeth teleffoni na derbyn post. Bydd yn cymryd mwy o amser nag arfer i ymateb i’ch ymholiad ac mae’n ddrwg gennym am unrhyw anghyfleustra y gallai hyn ei achosi.
  
 providingLettings.title = Manylion cyswllt ar gyfer y Swyddogion Rhent - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 providingLettings.heading = Manylion cyswllt ar gyfer y Swyddogion Rhent
