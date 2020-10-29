@@ -337,7 +337,6 @@ providingLettings.email-title = E-bost:
 providingLettings.email = NSOhelpdesk@voa.gov.uk
 providingLettings.phone-title =  Ffôn
 providingLettings.phone-number = 03000 502502
-providingLettings.para2 = Oherwydd yr achosion cyfredol o COVID-19, ni allwn gynnig gwasanaeth teleffoni na derbyn post. Bydd yn cymryd mwy o amser nag arfer i ymateb i’ch ymholiad ac mae’n ddrwg gennym am unrhyw anghyfleustra y gallai hyn ei achosi.
 
 error400.title = Page not found - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 error400.heading = Page not found
