@@ -32,8 +32,7 @@ class HousingBenefitsViewSpec extends ViewBehaviours {
         "title",
         "heading",
         "email-title",
-        "email",
-        "para2"
+        "email"
     )
 
     "has a link marked with site.back leading to the Enquiry Category Page" in {
