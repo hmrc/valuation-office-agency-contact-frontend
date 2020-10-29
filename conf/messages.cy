@@ -299,7 +299,6 @@ valuationAdvice.email-title = E-bost:
 valuationAdvice.email = clientdevelopment@voa.gov.uk
 valuationAdvice.phone-title =  Ffôn
 valuationAdvice.phone-number = 03000 501501
-valuationAdvice.response-paragraph = Oherwydd yr achosion cyfredol o Covid-19, ni allwn gynnig gwasanaeth teleffoni a bydd yn cymryd mwy o amser na’r arfer i ymateb i’ch ymholiad. Mae’n ddrwg gennym am unrhyw anghyfleustra y gallai hyn ei achosi.
  
 valuationForTaxes.title = Manylion cyswllt ar gyfer Hawl i Brynu, prisiadau trethi, neu apeliadau yn erbyn yr Ardoll Seilwaith Cymunedol - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 valuationForTaxes.heading = Manylion cyswllt ar gyfer Hawl i Brynu, prisiadau trethi, neu apeliadau yn erbyn yr Ardoll Seilwaith Cymunedol
