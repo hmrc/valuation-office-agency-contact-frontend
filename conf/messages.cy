@@ -309,7 +309,6 @@ valuationForTaxes.phone1 = Rhif f ffôn (England) 03000 501501
 valuationForTaxes.phone2 = Rhif f ffôn (Cymru) 03000 505505
 valuationForTaxes.openingHours-title = Oriau agor
 valuationForTaxes.openingHours =  08:30 – 17:00. Ar gau ar wyliau’r banc.
-valuationForTaxes.para2 = Oherwydd yr achosion cyfredol o Covid-19, ni allwn gynnig gwasanaeth teleffoni a bydd yn cymryd mwy o amser na’r arfer i ymateb i’ch ymholiad. Mae’n ddrwg gennym am unrhyw anghyfleustra y gallai hyn ei achosi.
  
 housingBenefits.title = Manylion cyswllt ar gyfer Budd-dal Tai, Lwfansau Tai Lleol, neu renti teg - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 housingBenefits.heading = Manylion cyswllt ar gyfer Budd-dal Tai, Lwfansau Tai Lleol, neu renti teg
