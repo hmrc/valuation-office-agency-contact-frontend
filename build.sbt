@@ -39,7 +39,6 @@ lazy val root = Project(appName, file("."))
   .settings(
     scalacOptions ++= Seq("-feature"),
     libraryDependencies ++= appDependencies,
-    dependencyOverrides ++= appDependencyOverrides,
     retrieveManaged := true,
     evictionWarningOptions in update := EvictionWarningOptions.default.withWarnScalaVersionEviction(false),
     Keys.fork in sbt.Test := true,

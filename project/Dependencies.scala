@@ -6,22 +6,21 @@ object Dependencies {
     import play.core.PlayVersion
     import play.sbt.PlayImport._
 
-    private val playHealthVersion = "3.15.0-play-26"
-    private val logbackJsonLoggerVersion = "4.8.0"
-    private val govukTemplateVersion = "5.57.0-play-26"
-    private val playUiVersion = "8.12.0-play-26"
+    private val playHealthVersion = "3.16.0-play-26"
+    private val logbackJsonLoggerVersion = "4.9.0"
+    private val govukTemplateVersion = "5.61.0-play-26"
+    private val playUiVersion = "8.20.0-play-26"
     private val scalaTestVersion = "3.0.8"
     private val scalaTestPlusPlayVersion = "3.1.3"
     private val mockitoAllVersion = "1.10.19"
-    private val httpCachingClientVersion = "9.1.0-play-26"
-    private val simpleReactivemongoVersion = "7.30.0-play-26"
-    private val playConditionalFormMappingVersion = "1.3.0-play-26"
-    private val playLanguageVersion = "4.4.0-play-26"
-    private val bootstrapPlayVersion = "1.16.0"
-    private val akkaVersion     = "2.5.23"
-    private val akkaHttpVersion = "10.0.15"
-    private val httpVerbsVersion = "10.7.0-play-26"
-    private val playFrontendGovUkVersion = "0.51.0-play-26"
+    private val httpCachingClientVersion = "9.2.0-play-26"
+    private val simpleReactivemongoVersion = "7.31.0-play-26"
+    private val playConditionalFormMappingVersion = "1.5.0-play-26"
+    private val playLanguageVersion = "4.7.0-play-26"
+    private val bootstrapPlayVersion = "2.3.0"
+    private val akkaVersion     = "2.5.25"
+    private val httpVerbsVersion = "12.3.0"
+    private val playFrontendGovUkVersion = "0.58.0-play-26"
     private val playFrontendHmrc = "0.19.0-play-26"
     private val commonTextVersion = "1.9"
 
@@ -36,18 +35,10 @@ object Dependencies {
       "uk.gov.hmrc" %% "play-conditional-form-mapping" % playConditionalFormMappingVersion,
       "uk.gov.hmrc" %% "bootstrap-play-26" % bootstrapPlayVersion,
       "uk.gov.hmrc" %% "play-language" % playLanguageVersion,
-      "uk.gov.hmrc" %% "http-verbs" % httpVerbsVersion,
+      "uk.gov.hmrc" %% "http-verbs-play-26" % httpVerbsVersion,
       "uk.gov.hmrc" %% "play-frontend-govuk" % playFrontendGovUkVersion,
       "uk.gov.hmrc" %% "play-frontend-hmrc" % playFrontendHmrc,
       "org.apache.commons" % "commons-text" % commonTextVersion
-    )
-
-    lazy val appDependencyOverrides: Seq[ModuleID] = Seq(
-      "com.typesafe.akka" %% "akka-stream"    % akkaVersion     force(),
-      "com.typesafe.akka" %% "akka-protobuf"  % akkaVersion     force(),
-      "com.typesafe.akka" %% "akka-slf4j"     % akkaVersion     force(),
-      "com.typesafe.akka" %% "akka-actor"     % akkaVersion     force(),
-      "com.typesafe.akka" %% "akka-http-core" % akkaHttpVersion force()
     )
 
     trait TestDependencies {
