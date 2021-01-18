@@ -30,7 +30,7 @@ class LanguageSwitchController @Inject()(
                                            languageUtils: LanguageUtils,
                                            cc: MessagesControllerComponents)(
                                            implicit override val messagesApi: MessagesApi
-                                         ) extends LanguageController(configuration, languageUtils, cc) with I18nSupport {
+                                         ) extends LanguageController(languageUtils, cc) with I18nSupport {
 
 
   override protected def fallbackURL: String = routes.EnquiryCategoryController.onPageLoad(NormalMode).url
