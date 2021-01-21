@@ -28,6 +28,18 @@ import play.api.Logger
 @Singleton
 class Navigator @Inject()() {
 
+  val contactReasonRouting: UserAnswers => Call = answers => {
+    answers.contactReason match {
+      case Some("new_enquiry") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
+      case Some("mode_details") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
+      case Some("update_existing") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
+      case Some(option) => {
+        Logger.warn(s"Navigation for contact reason reached with unknown option $option by controller")
+        throw new RuntimeException(s"Navigation for contact reason reached with unknown option $option by controller")
+      }
+    }
+  }
+
   val enquiryRouting: UserAnswers => Call = answers => {
     answers.enquiryCategory match {
       case Some("council_tax") => routes.CouncilTaxSmartLinksController.onPageLoad()
