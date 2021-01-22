@@ -129,6 +129,14 @@ contactReason.mode_details = I want to provide more details for an existing enqu
 contactReason.update_existing = I want to get an update on an existing enquiry
 error.contactReason.required = Select why you want to contact us
 
+enquiryDate.title = Did you make your enquiry before {0}? - Valuation Office Agency contact form - GOV.UK
+enquiryDate.heading = Did you make your enquiry before {0}?
+enquiryDate.yes = Yes
+enquiryDate.no = No
+enquiryDate.notKnow = I don’t know
+error.enquiryDate.required = Select 'Yes' if you made your enquiry before {0}
+
+
 enquiryCategory.title = What is your enquiry about? - Valuation Office Agency contact form - GOV.UK
 enquiryCategory.heading = What is your enquiry about?
 enquiryCategory.council_tax = Council Tax

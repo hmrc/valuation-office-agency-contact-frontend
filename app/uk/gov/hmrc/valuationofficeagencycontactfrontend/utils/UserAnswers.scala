@@ -22,6 +22,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 
 class UserAnswers(val cacheMap: CacheMap) {
 
+  def enquiryDate: Option[String] = cacheMap.getEntry[String](EnquiryDateId.toString)
+
   def contactReason: Option[String] = cacheMap.getEntry[String](ContactReasonId.toString)
 
   def tellUsMore: Option[TellUsMore] = cacheMap.getEntry[TellUsMore](TellUsMoreId.toString)
