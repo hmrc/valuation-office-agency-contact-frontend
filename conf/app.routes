@@ -21,6 +21,9 @@ POST        /your-enquiry                          uk.gov.hmrc.valuationofficeag
 GET         /changeEnquiryCategory                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.EnquiryCategoryController.onPageLoad(mode: Mode = CheckMode)
 POST        /changeEnquiryCategory                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.EnquiryCategoryController.onSubmit(mode: Mode = CheckMode)
 
+GET         /new-or-existing-enquiry               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactReasonController.onPageLoad(mode: Mode = NormalMode)
+POST        /new-or-existing-enquiry               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactReasonController.onSubmit(mode: Mode = NormalMode)
+
 GET         /contact-details                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onPageLoad(mode: Mode = NormalMode)
 POST        /contact-details                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onSubmit(mode: Mode = NormalMode)
 GET         /changeContactDetails                  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onPageLoad(mode: Mode = CheckMode)

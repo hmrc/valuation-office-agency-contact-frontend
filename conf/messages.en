@@ -121,6 +121,14 @@ site.new_service = This is a new service
 unauthorised.title = You can’t access this service with this account
 unauthorised.heading = You can’t access this service with this account
 
+contactReason.title = Why do you want to contact us? - Valuation Office Agency contact form - GOV.UK
+contactReason.heading = Why do you want to contact us?
+
+contactReason.new_enquiry = I want to make a new enquiry
+contactReason.mode_details = I want to provide more details for an existing enquiry
+contactReason.update_existing = I want to get an update on an existing enquiry
+error.contactReason.required = Select why you want to contact us
+
 enquiryCategory.title = What is your enquiry about? - Valuation Office Agency contact form - GOV.UK
 enquiryCategory.heading = What is your enquiry about?
 enquiryCategory.council_tax = Council Tax
