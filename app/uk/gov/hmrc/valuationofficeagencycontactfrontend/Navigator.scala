@@ -28,11 +28,23 @@ import play.api.Logger
 @Singleton
 class Navigator @Inject()() {
 
+  val enquiryDateRouting: UserAnswers => Call = answers => {
+    answers.enquiryDate match {
+      case Some("yes") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
+      case Some("no") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
+      case Some("notKnow") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
+      case (option) => {
+        Logger.warn(s"Navigation enquiry date reached with unknown option $option by controller")
+        throw new RuntimeException(s"Navigation for enquiry date reached with unknown option $option by controller")
+      }
+    }
+  }
+
   val contactReasonRouting: UserAnswers => Call = answers => {
     answers.contactReason match {
       case Some("new_enquiry") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
       case Some("mode_details") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
-      case Some("update_existing") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
+      case Some("update_existing") => routes.EnquiryDateController.onPageLoad()
       case Some(option) => {
         Logger.warn(s"Navigation for contact reason reached with unknown option $option by controller")
         throw new RuntimeException(s"Navigation for contact reason reached with unknown option $option by controller")
@@ -112,6 +124,8 @@ class Navigator @Inject()() {
   }
 
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
+    ContactReasonId -> contactReasonRouting,
+    EnquiryDateId -> enquiryDateRouting,
     EnquiryCategoryId -> enquiryRouting,
     CouncilTaxSubcategoryId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
     BusinessRatesSubcategoryId -> (businessRatesPageRouting),
