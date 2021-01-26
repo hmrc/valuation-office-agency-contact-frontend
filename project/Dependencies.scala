@@ -9,7 +9,7 @@ object Dependencies {
     private val playHealthVersion = "3.16.0-play-26"
     private val logbackJsonLoggerVersion = "4.9.0"
     private val govukTemplateVersion = "5.61.0-play-26"
-    private val playUiVersion = "8.20.0-play-26"
+    private val playUiVersion = "8.21.0-play-26"
     private val scalaTestVersion = "3.0.8"
     private val scalaTestPlusPlayVersion = "3.1.3"
     private val mockitoAllVersion = "1.10.19"
@@ -20,7 +20,7 @@ object Dependencies {
     private val bootstrapPlayVersion = "2.3.0"
     private val akkaVersion     = "2.5.25"
     private val httpVerbsVersion = "12.3.0"
-    private val playFrontendGovUkVersion = "0.58.0-play-26"
+    private val playFrontendGovUkVersion = "0.60.0-play-26"
     private val playFrontendHmrc = "0.19.0-play-26"
     private val commonTextVersion = "1.9"
 
