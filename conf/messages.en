@@ -134,7 +134,7 @@ enquiryDate.heading = Did you make your enquiry before {0}?
 enquiryDate.yes = Yes
 enquiryDate.no = No
 enquiryDate.notKnow = I don’t know
-error.enquiryDate.required = Select 'Yes' if you made your enquiry before {0}
+error.enquiryDate.required = Select ‘Yes’ if you made your enquiry before {0}
 
 expectedUpdate.title = When you can expect an update - Valuation Office Agency contact form - GOV.UK
 expectedUpdate.heading = When you can expect an update

@@ -121,6 +121,22 @@ site.new_service = This is a new service
 unauthorised.title = Ni allwch gyrchu’r gwasanaeth gyda’r cyfrif hwn
 unauthorised.heading = Ni allwch gyrchu’r gwasanaeth gyda’r cyfrif hwn
 
+contactReason.title = Pam ydych chi eisiau cysylltu â ni? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+contactReason.heading = Pam ydych chi eisiau cysylltu â ni?
+
+contactReason.new_enquiry = Rwyf am wneud ymholiad newydd
+contactReason.mode_details = Rwyf am ddarparu mwy o fanylion ar gyfer ymholiad sydd eisoes yn bodoli
+contactReason.update_existing = Rwyf am gael diweddariad ar ymholiad
+error.contactReason.required = Dewiswch pam rydych chi eisiau cysylltu â ni
+
+enquiryDate.title = A wnaethoch chi eich ymholiad cyn {0} - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+enquiryDate.heading = A wnaethoch chi eich ymholiad cyn {0}
+enquiryDate.yes = Do
+enquiryDate.no = Naddo
+enquiryDate.notKnow = Ddim yn siŵr
+error.enquiryDate.required = Dewiswch ‘Do’ os gwnaethoch eich ymholiad cyn {0}
+
+
 expectedUpdate.title = Pryd y gallwch chi ddisgwyl diweddariad - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 expectedUpdate.heading = Pryd y gallwch chi ddisgwyl diweddariad
 expectedUpdate.para1 = Rydym yn ymateb i'r mwyafrif o ymholiadau o fewn ychydig ddyddiau. Fodd bynnag, gall ymholiadau cymhleth gymryd hyd at 30 diwrnod.
