@@ -31,7 +31,7 @@ class Navigator @Inject()() {
   val enquiryDateRouting: UserAnswers => Call = answers => {
     answers.enquiryDate match {
       case Some("yes") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
-      case Some("no") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
+      case Some("no") => routes.ExpectedUpdateController.onPageLoad()
       case Some("notKnow") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
       case (option) => {
         Logger.warn(s"Navigation enquiry date reached with unknown option $option by controller")

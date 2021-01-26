@@ -136,6 +136,11 @@ enquiryDate.no = No
 enquiryDate.notKnow = I don’t know
 error.enquiryDate.required = Select 'Yes' if you made your enquiry before {0}
 
+expectedUpdate.title = When you can expect an update - Valuation Office Agency contact form - GOV.UK
+expectedUpdate.heading = When you can expect an update
+expectedUpdate.para1 = We respond to most enquires within a few days. However, complicated enquiries can take up to 30 days.
+expectedUpdate.para2 = Please do not resubmit your enquiry.
+
 
 enquiryCategory.title = What is your enquiry about? - Valuation Office Agency contact form - GOV.UK
 enquiryCategory.heading = What is your enquiry about?

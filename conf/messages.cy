@@ -120,7 +120,12 @@ site.new_service = This is a new service
  
 unauthorised.title = Ni allwch gyrchu’r gwasanaeth gyda’r cyfrif hwn
 unauthorised.heading = Ni allwch gyrchu’r gwasanaeth gyda’r cyfrif hwn
- 
+
+expectedUpdate.title = Pryd y gallwch chi ddisgwyl diweddariad - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+expectedUpdate.heading = Pryd y gallwch chi ddisgwyl diweddariad
+expectedUpdate.para1 = Rydym yn ymateb i'r mwyafrif o ymholiadau o fewn ychydig ddyddiau. Fodd bynnag, gall ymholiadau cymhleth gymryd hyd at 30 diwrnod.
+expectedUpdate.para2 = Peidiwch â chyflwyno'ch ymholiad eto.
+
 enquiryCategory.title = Beth yw testun eich ymholiad? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 enquiryCategory.heading = Beth yw testun eich ymholiad?
 enquiryCategory.council_tax = Treth Gyngor

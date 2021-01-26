@@ -43,6 +43,12 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxSmartLinksController.onPageLoad()
       }
 
+      "return function that goes 'When you can expect an update' when enquiry was in last 30 days" in {
+        when (mockUserAnswers.enquiryDate) thenReturn Some("no")
+        navigator.nextPage(EnquiryDateId, NormalMode)(mockUserAnswers) mustBe routes.ExpectedUpdateController.onPageLoad()
+      }
+
+
       "return a function that goes to the contact form page when an enquiry category for council tax has been selected" in {
         when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("find")
         navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
