@@ -142,6 +142,16 @@ expectedUpdate.heading = Pryd y gallwch chi ddisgwyl diweddariad
 expectedUpdate.para1 = Rydym yn ymateb i'r mwyafrif o ymholiadau o fewn ychydig ddyddiau. Fodd bynnag, gall ymholiadau cymhleth gymryd hyd at 30 diwrnod.
 expectedUpdate.para2 = Peidiwch â chyflwyno'ch ymholiad eto.
 
+existingEnquiryCategory.title = Am beth wnaethoch chi gysylltu â ni? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+existingEnquiryCategory.heading = Am beth wnaethoch chi gysylltu â ni?
+existingEnquiryCategory.council_tax = Treth y Cyngor
+existingEnquiryCategory.business_rates = Trethi Busnes
+existingEnquiryCategory.housing_allowance = Lwfans Tai neu renti teg
+existingEnquiryCategory.other = Arall
+
+error.existingEnquiryCategory.required = Dewiswch yr hyn y gwnaethoch chi gysylltu â ni amdano
+
+
 enquiryCategory.title = Beth yw testun eich ymholiad? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 enquiryCategory.heading = Beth yw testun eich ymholiad?
 enquiryCategory.council_tax = Treth Gyngor

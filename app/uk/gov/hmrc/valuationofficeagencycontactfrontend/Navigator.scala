@@ -17,7 +17,6 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend
 
 import javax.inject.{Inject, Singleton}
-
 import play.api.mvc.Call
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
@@ -126,6 +125,7 @@ class Navigator @Inject()() {
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     ContactReasonId -> contactReasonRouting,
     EnquiryDateId -> enquiryDateRouting,
+    ExistingEnquiryCategoryId -> (_ => routes.EnquiryCategoryController.onPageLoad(NormalMode)),
     EnquiryCategoryId -> enquiryRouting,
     CouncilTaxSubcategoryId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
     BusinessRatesSubcategoryId -> (businessRatesPageRouting),
