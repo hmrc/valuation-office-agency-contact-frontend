@@ -27,6 +27,9 @@ POST        /new-or-existing-enquiry               uk.gov.hmrc.valuationofficeag
 GET         /date-of-enquiry                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.EnquiryDateController.onPageLoad(mode: Mode = NormalMode)
 POST        /date-of-enquiry                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.EnquiryDateController.onSubmit(mode: Mode = NormalMode)
 
+GET         /what-is-your-existing-enquiry-about   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ExistingEnquiryCategoryController.onPageLoad(mode: Mode = NormalMode)
+POST        /what-is-your-existing-enquiry-about   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ExistingEnquiryCategoryController.onSubmit(mode: Mode = NormalMode)
+
 GET         /when-you-can-expect-an-update          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ExpectedUpdateController.onPageLoad()
 
 GET         /contact-details                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onPageLoad(mode: Mode = NormalMode)
