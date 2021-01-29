@@ -151,6 +151,9 @@ existingEnquiryCategory.other = Arall
 
 error.existingEnquiryCategory.required = Dewiswch yr hyn y gwnaethoch chi gysylltu â ni amdano
 
+refNumber.title = Beth yw eich cyfeirnod? (dewisol) - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+refNumber.value = Beth yw eich cyfeirnod? (dewisol)
+refNumber.hint = Er enghraifft, VOR12345678, CHK76543210.
 
 enquiryCategory.title = Beth yw testun eich ymholiad? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 enquiryCategory.heading = Beth yw testun eich ymholiad?

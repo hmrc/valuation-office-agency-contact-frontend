@@ -30,6 +30,9 @@ POST        /date-of-enquiry                       uk.gov.hmrc.valuationofficeag
 GET         /what-is-your-existing-enquiry-about   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ExistingEnquiryCategoryController.onPageLoad(mode: Mode = NormalMode)
 POST        /what-is-your-existing-enquiry-about   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ExistingEnquiryCategoryController.onSubmit(mode: Mode = NormalMode)
 
+GET         /reference-number                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.RefNumberController.onPageLoad(mode: Mode = NormalMode)
+POST        /reference-number                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.RefNumberController.onSubmit(mode: Mode = NormalMode)
+
 GET         /when-you-can-expect-an-update          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ExpectedUpdateController.onPageLoad()
 
 GET         /contact-details                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onPageLoad(mode: Mode = NormalMode)

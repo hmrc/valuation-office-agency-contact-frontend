@@ -48,6 +48,15 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(EnquiryDateId, NormalMode)(mockUserAnswers) mustBe routes.ExpectedUpdateController.onPageLoad()
       }
 
+      "return function that goes 'What did you contact us about?' when he want to update existing enquiry" in {
+        when (mockUserAnswers.contactReason) thenReturn Some("update_existing")
+        navigator.nextPage(ContactReasonId, NormalMode)(mockUserAnswers) mustBe routes.ExistingEnquiryCategoryController.onPageLoad()
+      }
+
+      "return function that goes 'What is your reference number?' after he select area of contact" in {
+        navigator.nextPage(ExistingEnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.RefNumberController.onPageLoad()
+      }
+
 
       "return a function that goes to the contact form page when an enquiry category for council tax has been selected" in {
         when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("find")

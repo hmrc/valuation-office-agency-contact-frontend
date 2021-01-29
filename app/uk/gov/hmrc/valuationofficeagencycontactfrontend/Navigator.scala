@@ -43,7 +43,7 @@ class Navigator @Inject()() {
     answers.contactReason match {
       case Some("new_enquiry") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
       case Some("mode_details") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
-      case Some("update_existing") => routes.EnquiryDateController.onPageLoad()
+      case Some("update_existing") => routes.ExistingEnquiryCategoryController.onPageLoad()
       case Some(option) => {
         Logger.warn(s"Navigation for contact reason reached with unknown option $option by controller")
         throw new RuntimeException(s"Navigation for contact reason reached with unknown option $option by controller")
@@ -125,7 +125,8 @@ class Navigator @Inject()() {
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     ContactReasonId -> contactReasonRouting,
     EnquiryDateId -> enquiryDateRouting,
-    ExistingEnquiryCategoryId -> (_ => routes.EnquiryCategoryController.onPageLoad(NormalMode)),
+    ExistingEnquiryCategoryId -> (_ => routes.RefNumberController.onPageLoad()),
+    RefNumberId -> (_ => routes.EnquiryCategoryController.onPageLoad(NormalMode)),
     EnquiryCategoryId -> enquiryRouting,
     CouncilTaxSubcategoryId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
     BusinessRatesSubcategoryId -> (businessRatesPageRouting),
