@@ -151,6 +151,10 @@ existingEnquiryCategory.other = Other
 error.existingEnquiryCategory.required = Select what you contacted us about
 
 
+refNumber.title = What is your reference number?(optional) - Valuation Office Agency contact form - GOV.UK
+refNumber.value = What is your reference number?(optional)
+refNumber.hint = For example, VOR12345678, CHK76543210
+
 enquiryCategory.title = What is your enquiry about? - Valuation Office Agency contact form - GOV.UK
 enquiryCategory.heading = What is your enquiry about?
 enquiryCategory.council_tax = Council Tax
