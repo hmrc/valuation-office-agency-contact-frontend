@@ -22,7 +22,7 @@ class ContactSpec extends SpecBase {
   val message = "message"
   val enquiryCategory = "EC"
   val subEnquiryCategory = "SEC"
-  val contactDetails = ContactDetails("first", "last", "email", "contactNumber")
+  val contactDetails = ContactDetails("first", "email", "contactNumber")
 
   "Given a message, enquiryCategory and subEnquiryCategory strings, contact details and a property address produce a " +
     "contact model with the property address" in {

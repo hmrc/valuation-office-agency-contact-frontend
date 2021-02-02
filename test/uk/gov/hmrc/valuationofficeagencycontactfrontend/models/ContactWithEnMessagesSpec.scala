@@ -23,7 +23,7 @@ import org.mockito.Mockito.when
 
 class ContactWithEnMessagesSpec extends SpecBase with MockitoSugar {
   val mockMessages = mock[MessagesApi]
-  val contactDetails = ContactDetails("first", "last", "email", "contactNumber")
+  val contactDetails = ContactDetails("first", "email", "contactNumber")
   val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "e")
   val contact = Contact(contactDetails, propertyAddress, "council_tax", "council_tax_band", "msg")
 

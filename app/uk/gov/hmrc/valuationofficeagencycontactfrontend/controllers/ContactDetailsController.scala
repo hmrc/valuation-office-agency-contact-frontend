@@ -46,10 +46,15 @@ class ContactDetailsController @Inject()(appConfig: FrontendAppConfig,
   implicit val ec: ExecutionContext = cc.executionContext
 
   def enquiryBackLink(answers: UserAnswers): Either[String, String] = {
-    answers.enquiryCategory match {
-      case Some("council_tax") => Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
-      case Some("business_rates") => Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
-      case _ => Left("Unknown enquiry category in enquiry key")
+    answers.contactReason match {
+      case Some("update_existing") => Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.RefNumberController.onPageLoad().url)
+      case _ => {
+        answers.enquiryCategory match {
+          case Some("council_tax") => Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
+          case Some("business_rates") => Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
+          case _ => Left("Unknown enquiry category in enquiry key")
+        }
+      }
     }
   }
 

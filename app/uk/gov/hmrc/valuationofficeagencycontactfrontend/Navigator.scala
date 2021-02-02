@@ -71,16 +71,21 @@ class Navigator @Inject()() {
   }
 
   val contactDetailsRouting: UserAnswers => Call = answers => {
-    answers.enquiryCategory match {
-      case Some("council_tax") => routes.PropertyAddressController.onPageLoad(NormalMode)
-      case Some("business_rates") => routes.PropertyAddressController.onPageLoad(NormalMode)
-      case Some(sel) => {
-        Logger.warn(s"Navigation for contact details page reached with an unknown selection $sel of enquiry by controller")
-        throw new RuntimeException(s"Navigation for contact details page reached unknown selection $sel of enquiry by controller")
-      }
-      case None => {
-        Logger.warn("Navigation for contact details page reached without selection of enquiry by controller")
-        throw new RuntimeException("Navigation for contact details page reached without selection of enquiry by controller")
+    answers.contactReason match {
+      case Some("update_existing") => routes.PropertyAddressController.onPageLoad(NormalMode)
+      case _ => {
+        answers.enquiryCategory match {
+          case Some("council_tax") => routes.PropertyAddressController.onPageLoad(NormalMode)
+          case Some("business_rates") => routes.PropertyAddressController.onPageLoad(NormalMode)
+          case Some(sel) => {
+            Logger.warn(s"Navigation for contact details page reached with an unknown selection $sel of enquiry by controller")
+            throw new RuntimeException(s"Navigation for contact details page reached unknown selection $sel of enquiry by controller")
+          }
+          case None => {
+            Logger.warn("Navigation for contact details page reached without selection of enquiry by controller")
+            throw new RuntimeException("Navigation for contact details page reached without selection of enquiry by controller")
+          }
+        }
       }
     }
   }
@@ -126,7 +131,7 @@ class Navigator @Inject()() {
     ContactReasonId -> contactReasonRouting,
     EnquiryDateId -> enquiryDateRouting,
     ExistingEnquiryCategoryId -> (_ => routes.RefNumberController.onPageLoad()),
-    RefNumberId -> (_ => routes.EnquiryCategoryController.onPageLoad(NormalMode)),
+    RefNumberId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
     EnquiryCategoryId -> enquiryRouting,
     CouncilTaxSubcategoryId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
     BusinessRatesSubcategoryId -> (businessRatesPageRouting),

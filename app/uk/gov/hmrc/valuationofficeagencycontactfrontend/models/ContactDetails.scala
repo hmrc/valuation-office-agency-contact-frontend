@@ -18,8 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
 
 import play.api.libs.json._
 
-case class ContactDetails (firstName: String,
-                           lastName: String,
+case class ContactDetails (fullName: String,
                            email: String,
                            contactNumber: String
                            )

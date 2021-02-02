@@ -22,8 +22,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
 class ContactDetailsFormSpec extends FormBehaviours {
 
   val validData: Map[String, String] = Map(
-    "firstName" -> "Alex",
-    "lastName" -> "Smith",
+    "fullName" -> "Alex",
     "email" -> "a@a",
     "contactNumber" -> "12345678901"
   )
@@ -31,7 +30,7 @@ class ContactDetailsFormSpec extends FormBehaviours {
   val form = ContactDetailsForm()
 
   "ContactDetails form" must {
-    behave like questionForm(ContactDetails("Alex", "Smith", "a@a", "12345678901"))
+    behave like questionForm(ContactDetails("Alex", "a@a", "12345678901"))
 
     "fail to bind when email is blank" in {
       val data = validData + ("email" -> "")
@@ -84,41 +83,22 @@ class ContactDetailsFormSpec extends FormBehaviours {
       checkForError(form, data, expectedError)
     }
 
-    s"fail to bind when First Name is invalid" in {
-      val data = validData + ("firstName" -> "<script>alert(\"xss\")</script>")
-      val expectedError = error("firstName", "contactDetails.firstName.invalid")
+    s"fail to bind when Full Name is invalid" in {
+      val data = validData + ("fullName" -> "<script>alert(\"xss\")</script>")
+      val expectedError = error("fullName", "contactDetails.fullName.invalid")
       checkForError(form, data, expectedError)
     }
 
-    s"fail to bind when Last Name is invalid" in {
-      val data = validData + ("lastName" -> "<script>alert(\"xss\")</script>")
-      val expectedError = error("lastName", "contactDetails.lastName.invalid")
+    "fail to bind when full name is blank" in {
+      val data = validData + ("fullName" -> "")
+      val expectedError = Seq(error("fullName", "contactDetails.fullName.required"),
+        error("fullName", "contactDetails.fullName.invalid")).flatten
       checkForError(form, data, expectedError)
     }
 
-    "fail to bind when first name is blank" in {
-      val data = validData + ("firstName" -> "")
-      val expectedError = Seq(error("firstName", "contactDetails.firstName.required"),
-        error("firstName", "contactDetails.firstName.invalid")).flatten
-      checkForError(form, data, expectedError)
-    }
-
-    "fail to bind when first name is omitted" in {
-      val data = validData - "firstName"
-      val expectedError = error("firstName", "error.required")
-      checkForError(form, data, expectedError)
-    }
-
-    "fail to bind when last name is blank" in {
-      val data = validData + ("lastName" -> "")
-      val expectedError = Seq(error("lastName", "contactDetails.lastName.required"),
-        error("lastName", "contactDetails.lastName.invalid")).flatten
-      checkForError(form, data, expectedError)
-    }
-
-    "fail to bind when last name is omitted" in {
-      val data = validData - "lastName"
-      val expectedError = error("lastName", "error.required")
+    "fail to bind when full name name is omitted" in {
+      val data = validData - "fullName"
+      val expectedError = error("fullName", "error.required")
       checkForError(form, data, expectedError)
     }
   }
