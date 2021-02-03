@@ -38,7 +38,7 @@ object ContactReasonForm extends FormErrorHelper {
 
   def options = Seq(
     RadioOption("contactReason", "new_enquiry"),
-    RadioOption("contactReason", "mode_details"),
+    RadioOption("contactReason", "more_details"),
     RadioOption("contactReason", "update_existing")
   )
 

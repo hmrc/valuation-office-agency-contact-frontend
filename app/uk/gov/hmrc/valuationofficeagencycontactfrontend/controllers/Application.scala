@@ -22,16 +22,16 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactReasonForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.enquiryCategory
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.contactReason
 
 import scala.concurrent.Future
 
 @Singleton
 class Application @Inject() (override val messagesApi: MessagesApi,
                             val appConfig: FrontendAppConfig,
-                             enquiryCategory: enquiryCategory,
+                             contactReason: contactReason,
                              languageSwitchController: LanguageSwitchController,
                             cc: MessagesControllerComponents
                            ) extends FrontendController(cc) with I18nSupport {
@@ -42,7 +42,7 @@ class Application @Inject() (override val messagesApi: MessagesApi,
     if (appConfig.startPageRedirect) {
       Future.successful(Redirect(appConfig.govukStartPage))
     } else {
-      Future.successful(Ok(enquiryCategory(appConfig, EnquiryCategoryForm(), mode)))
+      Future.successful(Ok(contactReason(ContactReasonForm(), NormalMode)))
     }
   }
 

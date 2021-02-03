@@ -29,9 +29,9 @@ class Navigator @Inject()() {
 
   val enquiryDateRouting: UserAnswers => Call = answers => {
     answers.enquiryDate match {
-      case Some("yes") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
+      case Some("yes") => routes.ExistingEnquiryCategoryController.onPageLoad()
       case Some("no") => routes.ExpectedUpdateController.onPageLoad()
-      case Some("notKnow") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
+      case Some("notKnow") => routes.ExistingEnquiryCategoryController.onPageLoad()
       case (option) => {
         Logger.warn(s"Navigation enquiry date reached with unknown option $option by controller")
         throw new RuntimeException(s"Navigation for enquiry date reached with unknown option $option by controller")
@@ -42,8 +42,8 @@ class Navigator @Inject()() {
   val contactReasonRouting: UserAnswers => Call = answers => {
     answers.contactReason match {
       case Some("new_enquiry") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
-      case Some("mode_details") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
-      case Some("update_existing") => routes.ExistingEnquiryCategoryController.onPageLoad()
+      case Some("more_details") => routes.ExistingEnquiryCategoryController.onPageLoad()
+      case Some("update_existing") => routes.EnquiryDateController.onPageLoad()
       case Some(option) => {
         Logger.warn(s"Navigation for contact reason reached with unknown option $option by controller")
         throw new RuntimeException(s"Navigation for contact reason reached with unknown option $option by controller")
@@ -72,7 +72,7 @@ class Navigator @Inject()() {
 
   val contactDetailsRouting: UserAnswers => Call = answers => {
     answers.contactReason match {
-      case Some("update_existing") => routes.PropertyAddressController.onPageLoad(NormalMode)
+      case Some("more_details") => routes.PropertyAddressController.onPageLoad(NormalMode)
       case _ => {
         answers.enquiryCategory match {
           case Some("council_tax") => routes.PropertyAddressController.onPageLoad(NormalMode)

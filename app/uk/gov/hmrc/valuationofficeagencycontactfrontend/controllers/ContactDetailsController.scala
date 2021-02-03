@@ -47,7 +47,7 @@ class ContactDetailsController @Inject()(appConfig: FrontendAppConfig,
 
   def enquiryBackLink(answers: UserAnswers): Either[String, String] = {
     answers.contactReason match {
-      case Some("update_existing") => Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.RefNumberController.onPageLoad().url)
+      case Some("more_details") => Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.RefNumberController.onPageLoad().url)
       case _ => {
         answers.enquiryCategory match {
           case Some("council_tax") => Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)

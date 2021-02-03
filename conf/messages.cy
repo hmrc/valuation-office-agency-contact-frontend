@@ -125,7 +125,7 @@ contactReason.title = Pam ydych chi eisiau cysylltu â ni? - Ffurflen Gysylltu A
 contactReason.heading = Pam ydych chi eisiau cysylltu â ni?
 
 contactReason.new_enquiry = Rwyf am wneud ymholiad newydd
-contactReason.mode_details = Rwyf am ddarparu mwy o fanylion ar gyfer ymholiad sydd eisoes yn bodoli
+contactReason.more_details = Rwyf am ddarparu mwy o fanylion ar gyfer ymholiad sydd eisoes yn bodoli
 contactReason.update_existing = Rwyf am gael diweddariad ar ymholiad
 error.contactReason.required = Dewiswch pam rydych chi eisiau cysylltu â ni
 

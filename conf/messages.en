@@ -125,7 +125,7 @@ contactReason.title = Why do you want to contact us? - Valuation Office Agency c
 contactReason.heading = Why do you want to contact us?
 
 contactReason.new_enquiry = I want to make a new enquiry
-contactReason.mode_details = I want to provide more details for an existing enquiry
+contactReason.more_details = I want to provide more details for an existing enquiry
 contactReason.update_existing = I want to get an update on an existing enquiry
 error.contactReason.required = Select why you want to contact us
 
@@ -257,6 +257,7 @@ businessRatesSubcategory.checkYourAnswersLabel = Enquiry details
 
 propertyAddress.title = Which property are you contacting us about? - Valuation Office Agency contact form - GOV.UK
 propertyAddress.heading = Which property are you contacting us about?
+propertyAddress.existing_address = This must be the same address as your original enquiry.
 propertyAddress.addressLine1 = Address line 1
 propertyAddress.addressLine1.required = Enter the first line of the address
 propertyAddress.addressLine1.invalid = Address line 1 must only contain letters a to z, numbers 0 to 9, hyphens and spaces

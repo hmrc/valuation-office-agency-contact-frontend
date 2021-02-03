@@ -57,8 +57,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
 
   "ContactDetails Controller" must {
 
-    "return OK and the correct view for a GET when Contact Reason is update_existing" in {
-      val validData = Map(ContactReasonId.toString -> JsString("update_existing"))
+    "return OK and the correct view for a GET when Contact Reason is more_details" in {
+      val validData = Map(ContactReasonId.toString -> JsString("more_details"))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 

@@ -37,7 +37,7 @@ class EnquiryCategoryControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new EnquiryCategoryController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, getClearCacheMap, enquiryCategory, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      dataRetrievalAction, new DataRequiredActionImpl(ec), enquiryCategory, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = EnquiryCategoryForm()) = enquiryCategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
@@ -56,7 +56,7 @@ class EnquiryCategoryControllerSpec extends ControllerSpecBase {
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsString()
+      contentAsString(result) mustBe viewAsString(EnquiryCategoryForm().fill(EnquiryCategoryForm.options.head.value))
     }
 
     "redirect to the next page when valid data is submitted" in {
@@ -85,11 +85,9 @@ class EnquiryCategoryControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe viewAsString(boundForm)
     }
 
-    "populate the view correctly if no existing data is found" in {
+    "return eror page if no existing data is found" in {
       val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
-
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+      status(result) mustBe SEE_OTHER
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {

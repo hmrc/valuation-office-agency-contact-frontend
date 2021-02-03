@@ -38,16 +38,16 @@ class EnquiryCategoryController @Inject()(
                                         dataCacheConnector: DataCacheConnector,
                                         navigator: Navigator,
                                         getData: DataRetrievalAction,
-                                        clearData: DataClearAction,
+                                        requireData: DataRequiredAction,
                                         enquiryCategory: enquiryCategory,
                                         cc: MessagesControllerComponents
                                          ) extends FrontendController(cc) with I18nSupport {
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode) = clearData {
+  def onPageLoad(mode: Mode) = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.flatMap(x => x.enquiryCategory) match {
+      val preparedForm = request.userAnswers.enquiryCategory match {
         case None => EnquiryCategoryForm()
         case Some(value) => EnquiryCategoryForm().fill(value)
       }
