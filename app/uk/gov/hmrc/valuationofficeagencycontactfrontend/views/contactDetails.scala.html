@@ -21,6 +21,7 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
@@ -28,6 +29,7 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.input.Input
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
+
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
 
 @this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
@@ -45,7 +47,8 @@
     @govukInput(Input(
         id=id, name=id, inputType = "text", value = form(id).value, classes=classes, autocomplete=Some(autoCompleteLabel),
         label = Label(content = Text(messages(s"contactDetails.${id}"))), inputmode=Some(mode), attributes=Map("spellcheck" -> "false"),
-        errorMessage = form.errors.asTextErrorMessageForField(id)
+        errorMessage = form.errors.asTextErrorMessageForField(id),
+        hint = messages.translate(s"contactDetails.${id}.hint", Seq()).map(hintText => Hint(id=Option(s"${id}-hint"), content=Text(hintText)))
     ))
 }
 
@@ -54,8 +57,7 @@
         <h1 class="govuk-fieldset__heading">@messages("contactDetails.heading")</h1>
     </legend>
 
-    @textInput("firstName", "govuk-input--width-20", "given-name")
-    @textInput("lastName", "govuk-input--width-20", "family-name")
+    @textInput("fullName", "govuk-input--width-30", "given-name")
     @textInput("email", "govuk-input--width-20", "email", "email" )
     @textInput("contactNumber", "govuk-input--width-20", "tel", "tel")
 }

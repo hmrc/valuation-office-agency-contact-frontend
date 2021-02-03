@@ -64,7 +64,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
       }
 
       "return a function that goes to the property address page when the contact form has been submitted without errors and the enquiry is council tax" in {
-        when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "0208382737288"))
+        when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "test@email.com", "0208382737288"))
         navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.PropertyAddressController.onPageLoad(NormalMode)
       }
 
@@ -104,7 +104,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
 
       "return a function that goes to the property address page when the contact form has been submitted without errors and the enquiry is business rates" in {
-        when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "Second", "test@email.com", "0208382737288"))
+        when (mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("First", "test@email.com", "0208382737288"))
         navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.PropertyAddressController.onPageLoad(NormalMode)
       }
 
@@ -124,7 +124,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
       }
 
       "return a function that goes to the confirmation page when the check your answers page has been submitted without errors and the enquiry is about council tax" in {
-        val cd = ContactDetails("a", "b", "c", "e")
+        val cd = ContactDetails("a", "c", "e")
         val ec = "council_tax"
         val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
         val councilTaxSubcategory = "council_tax_home_business"
@@ -137,7 +137,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return a function that goes to the confirmation page when addressLine2 and county are None and" +
         " the check your answers page has been submitted without errors and the enquiry is about council tax" in {
-        val cd = ContactDetails("a", "b", "c", "e")
+        val cd = ContactDetails("a", "c", "e")
         val propertyAddress = PropertyAddress("a", None, "c", None, "f")
         val councilTaxSubcategory = "council_tax_home_business"
         val tellUs = TellUsMore("Hello")
@@ -148,7 +148,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
       }
 
       "return a function that goes to the confirmation page when the check your answers page has been submitted without errors and the enquiry is about business rates" in {
-        val cd = ContactDetails("a", "b", "c", "e")
+        val cd = ContactDetails("a", "c", "e")
         val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
@@ -160,7 +160,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return a function that goes to the confirmation page when addressLine2 and county are None and " +
         "the check your answers page has been submitted without errors and the enquiry is about business rates" in {
-        val cd = ContactDetails("a", "b", "c", "e")
+        val cd = ContactDetails("a", "c", "e")
         val propertyAddress = PropertyAddress("a", None, "c", None, "f")
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")

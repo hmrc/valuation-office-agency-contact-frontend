@@ -25,13 +25,13 @@ class ContactFormatterSpec extends SpecBase {
   "Contact Formatter" must {
 
     "Given a complete Contact Details it should generate a formatted string using the given interstitial" in {
-      val cd = ContactDetails("a", "b", "c", "e")
-      formattedContactDetails(Some(cd), "<br/>") mustBe "a b<br/>c<br/>e"
+      val cd = ContactDetails("a", "c", "e")
+      formattedContactDetails(Some(cd), "<br/>") mustBe "a<br/>c<br/>e"
     }
 
     "Given a Contact Details with elements that have too many spaces it should generate a formatted string using the given interstitial" in {
-      val cd = ContactDetails(" a ", " b ", " c ", " e ")
-      formattedContactDetails(Some(cd), "<br/>") mustBe "a b<br/>c<br/>e"
+      val cd = ContactDetails(" a ", " c ", " e ")
+      formattedContactDetails(Some(cd), "<br/>") mustBe "a<br/>c<br/>e"
     }
 
     "Given no Contact Details it should generate am empty string" in {
@@ -39,13 +39,13 @@ class ContactFormatterSpec extends SpecBase {
     }
 
     "Given a complete Confirmed Contact Details it should generate a formatted string using the given interstitial" in {
-      val cd = ContactDetails("a", "b", "c", "e")
-      formattedConfirmedContactDetails(cd, "<br/>") mustBe "a b<br/>c<br/>e"
+      val cd = ContactDetails("a", "c", "e")
+      formattedConfirmedContactDetails(cd, "<br/>") mustBe "a<br/>c<br/>e"
     }
 
     "Given a Confirmed Contact Details with elements that have too many spaces it should generate a formatted string using the given interstitial" in {
-      val cd = ContactDetails(" a ", " b ", " c ", " e ")
-      formattedConfirmedContactDetails(cd, "<br/>") mustBe "a b<br/>c<br/>e"
+      val cd = ContactDetails(" a ", " c ", " e ")
+      formattedConfirmedContactDetails(cd, "<br/>") mustBe "a<br/>c<br/>e"
     }
 
     "Given a Sequence with three strings insert the interstitials" in {

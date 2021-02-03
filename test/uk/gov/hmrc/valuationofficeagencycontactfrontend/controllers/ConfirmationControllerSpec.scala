@@ -64,7 +64,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
     "return 200 and the correct view for a GET" in {
 
-      val contactDetails = ContactDetails("a", "b", "c", "e")
+      val contactDetails = ContactDetails("a", "c", "e")
       val ec = "council_tax"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
       val councilTaxSubcategory = "council_tax_poor_repair"
@@ -86,7 +86,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
     }
 
     "return 200 and the correct view for a GET when addressLine2 and county are None" in {
-      val contactDetails = ContactDetails("a", "b", "c", "e")
+      val contactDetails = ContactDetails("a", "c", "e")
       val ec = "council_tax"
       val propertyAddress = PropertyAddress("a", None, "c", None, "f")
       val councilTaxSubcategory = "council_tax_poor_repair"
@@ -117,7 +117,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
     "The enquiry key function produces a string with a businessRatesSubcategory string key when the enquiry category is business_rates" +
       " and the business_rates_other has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "e"))
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
 
@@ -129,7 +129,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
     "The enquiry key function produces a string with a councilTaxSubcategory key when the enquiry category is council_tax" +
       " and the council_tax_band has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "e"))
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_poor_repair")
 
@@ -140,7 +140,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn None
-      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "b", "c", "e"))
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
 
@@ -153,7 +153,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
     }
 
     "return 500 and the error view for a GET with unknown or wrong enquiry type" in {
-      val contactDetails = ContactDetails("a", "b", "c", "e")
+      val contactDetails = ContactDetails("a", "c", "e")
       val ec = "other"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
       val councilTaxSubcategory = "council_tax_poor_repair"
@@ -190,7 +190,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
     }
 
     "return 303 and send email when form complete" in {
-      val contactDetails = ContactDetails("a", "b", "c", "e")
+      val contactDetails = ContactDetails("a", "c", "e")
       val ec = "council_tax"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
       val councilTaxSubcategory = "council_tax_poor_repair"

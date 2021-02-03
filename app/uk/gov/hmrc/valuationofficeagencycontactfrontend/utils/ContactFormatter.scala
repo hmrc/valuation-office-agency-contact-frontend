@@ -21,12 +21,12 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
 object ContactFormatter {
 
  def formattedConfirmedContactDetails(contact: ContactDetails, interstitial: String): String = {
-    insertInterstitials(Seq(contact.firstName.trim + " " + contact.lastName.trim, contact.email, contact.contactNumber), interstitial)
+    insertInterstitials(Seq(contact.fullName.trim, contact.email, contact.contactNumber), interstitial)
  }
 
  def formattedContactDetails(contact: Option[ContactDetails], interstitial: String): String = {
   contact.fold("") { con =>
-   insertInterstitials(Seq(con.firstName.trim + " " + con.lastName.trim, con.email, con.contactNumber), interstitial)
+   insertInterstitials(Seq(con.fullName.trim, con.email, con.contactNumber), interstitial)
   }
  }
 

@@ -26,7 +26,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCache
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, CouncilTaxSubcategoryId, EnquiryCategoryId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, ContactReasonId, CouncilTaxSubcategoryId, EnquiryCategoryId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{contactDetails => contact_details}
@@ -45,14 +45,26 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     new ContactDetailsController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl(ec), contactDetails , MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
-  val ctBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
-  val ndrBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
+  def ctBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
+  def ndrBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
+  def refNumberBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.RefNumberController.onPageLoad().url
 
   def viewAsStringCT(form: Form[ContactDetails] = ContactDetailsForm()) = contactDetails(frontendAppConfig, form, NormalMode, ctBackLink)(fakeRequest, messages).toString
 
   def viewAsStringNDR(form: Form[ContactDetails] = ContactDetailsForm()) = contactDetails(frontendAppConfig, form, NormalMode, ndrBackLink)(fakeRequest, messages).toString
 
+  def viewAsStringRefNumber(form: Form[ContactDetails] = ContactDetailsForm()) = contactDetails(frontendAppConfig, form, NormalMode, refNumberBackLink)(fakeRequest, messages).toString
+
   "ContactDetails Controller" must {
+
+    "return OK and the correct view for a GET when Contact Reason is update_existing" in {
+      val validData = Map(ContactReasonId.toString -> JsString("update_existing"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringRefNumber()
+    }
 
     "return OK and the correct view for a GET when enquory category is business_rates" in {
       val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"), BusinessRatesSubcategoryId.toString -> JsString("business_rates_other"))
@@ -65,16 +77,16 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
 
     "populate the view correctly on a GET when the question has previously been answered and enquiry category is business_rates" in {
       val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"), CouncilTaxSubcategoryId.toString -> JsString("business_rates_other"),
-        ContactDetailsId.toString -> Json.toJson(ContactDetails("a", "b", "a@test.com", "0847428742424")))
+        ContactDetailsId.toString -> Json.toJson(ContactDetails("a", "a@test.com", "0847428742424")))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsStringNDR(ContactDetailsForm().fill(ContactDetails("a", "b", "a@test.com", "0847428742424")))
+      contentAsString(result) mustBe viewAsStringNDR(ContactDetailsForm().fill(ContactDetails("a", "a@test.com", "0847428742424")))
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("firstName", "a"), ("lastName", "b"), ("email", "a@test.com"),
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("fullName", "a"), ("email", "a@test.com"),
         ("confirmEmail", "a@test.com"), ("contactNumber", "0487357346776"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
@@ -114,7 +126,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("firstName", "a"), ("lastName", "b"), ("email", "a@test.com"),
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("fullName", "a"), ("email", "a@test.com"),
         ("confirmEmail", "a@test.com"), ("contactNumber", "0493584384343"))
 
       val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
@@ -159,12 +171,12 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
 
     "populate the view correctly on a GET when the question has previously been answered and enquiry category is council_tax" in {
       val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_poor_repair"),
-        ContactDetailsId.toString -> Json.toJson(ContactDetails("a", "b", "a@test.com", "0847428742424")))
+        ContactDetailsId.toString -> Json.toJson(ContactDetails("a", "a@test.com", "0847428742424")))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsStringCT(ContactDetailsForm().fill(ContactDetails("a", "b", "a@test.com", "0847428742424")))
+      contentAsString(result) mustBe viewAsStringCT(ContactDetailsForm().fill(ContactDetails("a", "a@test.com", "0847428742424")))
     }
 
     "return 500 and the error view for a GET with no enquiry type" in {

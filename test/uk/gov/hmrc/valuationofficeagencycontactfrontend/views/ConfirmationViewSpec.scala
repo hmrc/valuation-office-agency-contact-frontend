@@ -24,7 +24,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.DateFormatter
 
 class ConfirmationViewSpec extends ViewBehaviours {
 
-  val contactDetails = ContactDetails("c1", "c2", "c3", "c5")
+  val contactDetails = ContactDetails("c1", "c3", "c5")
   val councilTax = "council_tax"
   val address = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
   val alternativeAddress = PropertyAddress("a", None, "c", None, "f")
@@ -77,7 +77,7 @@ class ConfirmationViewSpec extends ViewBehaviours {
 
     "Given a Contact Details it should contain a formatted Contact Details string with <br/> interstitial" in {
       val doc = asDocument(view())
-      assert(doc.toString.contains("c1 c2"))
+      assert(doc.toString.contains("c1"))
       assert(doc.toString.contains("<br>c3"))
       assert(doc.toString.contains("<br>c5"))
     }

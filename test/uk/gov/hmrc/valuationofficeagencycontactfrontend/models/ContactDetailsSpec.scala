@@ -19,15 +19,12 @@ import org.scalatest.FlatSpec
 
 class ContactDetailsSpec extends FlatSpec {
 
-  val c = ContactDetails("Alex", "Smith", "test@email.com", "02078273278732")
+  val c = ContactDetails("Alex", "test@email.com", "02078273278732")
 
-  "First name " should "be Alex" in {
-    assert(c.firstName === "Alex")
+  "Full name " should "be Alex" in {
+    assert(c.fullName === "Alex")
   }
 
-  "Last name " should "be Smith" in {
-    assert(c.lastName === "Smith")
-  }
 
   "Email address " should "be test@email.com" in {
     assert(c.email === "test@email.com")
@@ -38,12 +35,9 @@ class ContactDetailsSpec extends FlatSpec {
   }
 
   "Wrong First name " should "shouldn't be Alex1" in {
-    assert(c.firstName != "Alex1")
+    assert(c.fullName != "Alex1")
   }
 
-  "Wrong Last name " should "shouldn't be Smith1" in {
-    assert(c.lastName != "Smith1")
-  }
 
   "Wrong Contact number " should "shouldn't be 02078273278735" in {
     assert(c.contactNumber != "02078273278735")
