@@ -276,6 +276,12 @@ propertyAddress.postcode.required = Nodwch y cod post
 propertyAddress.postcode.invalid = Nodwch god post go iawn
 propertyAddress.postcode.length = Rhaid i’r cod post fod yn 8 nod neu lai
 propertyAddress.checkYourAnswersLabel = Manylion yr eiddo
+
+whatElse.title = Beth arall hoffech chi ddweud wrthym am eich ymholiad? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+whatElse.message = Beth arall hoffech chi ddweud wrthym am eich ymholiad?
+error.what_else.required = Nodwch fwy o fanylion am eich ymholiad
+error.what_else.invalid = Ni ddylai eich ymholiad gynnwys < a >
+error.what_else.max_length = Rhaid i’ch ymholiad fod yn 5000 nod neu lai
  
 tellUsMore.title = Rhowch ragor o wybodaeth i ni am eich ymholiad - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 tellUsMore.heading = Rhowch ragor o wybodaeth i ni am eich ymholiad

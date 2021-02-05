@@ -39,6 +39,13 @@ class Navigator @Inject()() {
     }
   }
 
+  val propertyAddressRouting: UserAnswers => Call = answers => {
+    answers.contactReason match {
+      case Some("more_details") => routes.WhatElseController.onPageLoad()
+      case _ => routes.TellUsMoreController.onPageLoad(NormalMode)
+    }
+  }
+
   val contactReasonRouting: UserAnswers => Call = answers => {
     answers.contactReason match {
       case Some("new_enquiry") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
@@ -136,7 +143,8 @@ class Navigator @Inject()() {
     CouncilTaxSubcategoryId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
     BusinessRatesSubcategoryId -> (businessRatesPageRouting),
     ContactDetailsId -> contactDetailsRouting,
-    PropertyAddressId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
+    PropertyAddressId -> propertyAddressRouting,
+    WhatElseId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
     TellUsMoreId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
     CheckYourAnswersId -> confirmationPageRouting,
     CouncilTaxSmartLinksId -> (_ => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)),

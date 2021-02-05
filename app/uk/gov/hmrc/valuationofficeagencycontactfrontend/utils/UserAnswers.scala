@@ -32,6 +32,8 @@ class UserAnswers(val cacheMap: CacheMap) {
 
   def tellUsMore: Option[TellUsMore] = cacheMap.getEntry[TellUsMore](TellUsMoreId.toString)
 
+  def whatElse: Option[String] = cacheMap.getEntry[String](WhatElseId.toString)
+
   def enquiryCategory: Option[String] = cacheMap.getEntry[String](EnquiryCategoryId.toString)
 
   def councilTaxSubcategory: Option[String] = cacheMap.getEntry[String](CouncilTaxSubcategoryId.toString)
