@@ -19,7 +19,6 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import javax.inject.Inject
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.libs.json.JsSuccess
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
@@ -27,7 +26,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConn
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxSubcategoryForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxBillId, CouncilTaxChallengeId, CouncilTaxSubcategoryId, Identifier}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxBillId, CouncilTaxSubcategoryId, Identifier}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxSubcategory => council_tax_subcategory}

@@ -210,19 +210,6 @@ contactDetails.contactNumber.length = Phone number must be between 11 and 20 cha
 contactDetails.contactNumber.invalid = Enter a phone number, like 01632 960 001
 contactDetails.checkYourAnswersLabel = Contact details
 
-checkYourTaxBand.title = Challenging my Council Tax band - Valuation Office Agency contact form - GOV.UK
-checkYourTaxBand.heading = Challenging my Council Tax band
-checkYourTaxBand.p1 = Contact the Valuation Office Agency (VOA) to explain why you think your band is wrong. The VOA may be able to review and change your band without you needing to challenge it.
-checkYourTaxBand.p2 = You must be able to <a class="govuk-link" target="_blank" href="https://www.gov.uk/challenge-council-tax-band/evidence-supports-your-challenge">provide evidence</a>.
-checkYourTaxBand.subheading = Contact details
-checkYourTaxBand.email.heading = Email:
-checkYourTaxBand.email = ctonline@voa.gov.uk
-checkYourTaxBand.telephone.heading = Telephone:
-checkYourTaxBand.telephone.number = 03000 501 501
-checkYourTaxBand.time.heading = Opening times:
-checkYourTaxBand.time.opening = Monday to Friday: 10am to 2pm
-checkYourTaxBand.covid.p = Due to the coronavirus pandemic, we have had to adapt our services and it may take longer than usual to respond to your enquiry. We apologise for any inconvenience this may cause.
-
 # --- Council Tax Bill
 councilTaxBill.title = My Council Tax bill - Valuation Office Agency contact form - GOV.UK
 councilTaxBill.heading = My Council Tax bill
@@ -244,7 +231,6 @@ councilTaxSubcategory.heading = What is your Council Tax enquiry about?
 councilTaxSubcategory.subheading = What do you want to tell us about?
 councilTaxSubcategory.council_tax_band_too_high = My Council Tax band is too high
 councilTaxSubcategory.council_tax_bill = My Council Tax bill
-councilTaxSubcategory.council_tax_challenge = Challenging my Council Tax band
 councilTaxSubcategory.council_tax_poor_repair = My property is in poor repair or uninhabitable
 councilTaxSubcategory.council_tax_changes = My property or the local area has changed
 councilTaxSubcategory.council_tax_ndr_changes = My property has changed from Council Tax to Business Rates
