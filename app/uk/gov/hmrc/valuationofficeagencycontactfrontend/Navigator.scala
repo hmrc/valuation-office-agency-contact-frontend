@@ -160,7 +160,8 @@ class Navigator @Inject()() {
     CheckYourAnswersId -> confirmationPageRouting,
     CouncilTaxSmartLinksId -> (_ => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)),
     BusinessRatesSmartLinksId -> (_ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)),
-    CouncilTaxChallengeId -> (_ => routes.CouncilTaxChallengeController.onPageLoad())
+    CouncilTaxBillId -> (_ => routes.CouncilTaxBillController.onPageLoad()),
+    CouncilTaxChallengeId -> (_ => routes.CouncilTaxChallengeController.onPageLoad()) // to be removed
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()

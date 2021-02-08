@@ -223,10 +223,20 @@ checkYourTaxBand.time.heading = Amseroedd agor:
 checkYourTaxBand.time.opening = Dydd Llun i ddydd Gwener: 10yb i 2yp
 checkYourTaxBand.covid.p = Oherwydd y pandemig coronafirws, rydym wedi gorfod addasu ein gwasanaethau a gall gymryd mwy o amser nag arfer i ymateb i’ch ymholiad. Ymddiheurwn am unrhyw anghyfleustra y gallai hyn ei achosi.
 
+# --- Council Tax Bill
+councilTaxBill.title = My Council Tax bill - Valuation Office Agency contact form - GOV.UK
+councilTaxBill.heading = My Council Tax bill
+councilTaxBill.p1 = <a class="govuk-link" target="_blank" href="https://www.gov.uk/find-local-council">Contact your local council </a> if you have any questions about your Council Tax bill, as they handle billing and payments.
+councilTaxBill.subheading = Other help on GOV.UK
+councilTaxBill.p2 = Check with your council to see if you can <a class="govuk-link" target="_blank" href="https://www.gov.uk/apply-for-council-tax-discount">apply for a discount on your Council Tax bill. </a>
+councilTaxBill.p3 = Or you can check how to <a class="govuk-link" target="_blank" href="https://www.gov.uk/apply-council-tax-reduction">apply for Council Tax Reduction. </a>
+
+# --- Council Tax Subcategories
 councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 councilTaxSubcategory.heading = Beth yw testun eich ymholiad ynghylch Treth Gyngor?
 councilTaxSubcategory.council_tax_challenge = Heriwch eich band treth cyngor
 councilTaxSubcategory.subheading = Am beth ydych am roi gwybod i ni?
+councilTaxSubcategory.council_tax_bill = My Council Tax bill
 councilTaxSubcategory.council_tax_challenge = Heriwch eich band treth cyngor
 councilTaxSubcategory.council_tax_poor_repair = Mae fy eiddo mewn cyflwr gwael neu amreswyliadwy
 councilTaxSubcategory.council_tax_changes = Mae fy eiddo neu’r ardal leol wedi newid

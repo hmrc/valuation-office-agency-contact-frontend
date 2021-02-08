@@ -27,7 +27,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConn
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxSubcategoryForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxChallengeId, CouncilTaxSubcategoryId, Identifier}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxBillId, CouncilTaxChallengeId, CouncilTaxSubcategoryId, Identifier}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxSubcategory => council_tax_subcategory}
@@ -57,12 +57,15 @@ class CouncilTaxSubcategoryController @Inject()(
   }
 
   private def getNextPage(cacheMap: CacheMap): Identifier = {
-    cacheMap.data("councilTaxSubcategory").validate[String] match {
-      case s: JsSuccess[String] => if(s.get == CouncilTaxChallengeId.toString) {
-        CouncilTaxChallengeId
-      } else {
-        CouncilTaxSubcategoryId
-      }
+    cacheMap.data("councilTaxSubcategory")
+      .validate[String]
+      .fold(_ => CouncilTaxSubcategoryId, resolveCouncilIdentifier)
+  }
+
+  private def resolveCouncilIdentifier(councilTaxSubcategory: String): Identifier = {
+    councilTaxSubcategory match {
+      case id if id == CouncilTaxChallengeId.toString => CouncilTaxChallengeId
+      case id if id == CouncilTaxBillId.toString => CouncilTaxBillId
       case _ => CouncilTaxSubcategoryId
     }
   }
