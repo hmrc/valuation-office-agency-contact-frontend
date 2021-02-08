@@ -56,20 +56,6 @@ class CouncilTaxSubcategoryController @Inject()(
       Ok(councilTaxSubcategory(appConfig, preparedForm, mode))
   }
 
-  private def getNextPage(cacheMap: CacheMap): Identifier = {
-    cacheMap.data("councilTaxSubcategory")
-      .validate[String]
-      .fold(_ => CouncilTaxSubcategoryId, resolveCouncilIdentifier)
-  }
-
-  private def resolveCouncilIdentifier(councilTaxSubcategory: String): Identifier = {
-    councilTaxSubcategory match {
-      case id if id == CouncilTaxChallengeId.toString => CouncilTaxChallengeId
-      case id if id == CouncilTaxBillId.toString => CouncilTaxBillId
-      case _ => CouncilTaxSubcategoryId
-    }
-  }
-
   def onSubmit(mode: Mode) = (getData andThen requireData).async {
     implicit request =>
       CouncilTaxSubcategoryForm().bindFromRequest().fold(
@@ -77,7 +63,7 @@ class CouncilTaxSubcategoryController @Inject()(
           Future.successful(BadRequest(councilTaxSubcategory(appConfig, formWithErrors, mode))),
         (value) =>
           dataCacheConnector.save[String](request.sessionId, CouncilTaxSubcategoryId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(getNextPage(cacheMap), mode)(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(CouncilTaxSubcategoryId, mode)(new UserAnswers(cacheMap))))
       )
   }
 }
