@@ -134,13 +134,24 @@ class Navigator @Inject()() {
     }
   }
 
+  val councilTaxPageRouting: UserAnswers => Call = answers => {
+    answers.councilTaxSubcategory match {
+      case Some("council_tax_band_too_high") =>  routes.CouncilTaxBandTooHighController.onPageLoad()
+      case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case None => {
+        Logger.warn(s"Navigation for Council Tax page reached without selection of enquiry by controller ")
+        throw new RuntimeException("Unknown exception in Council Tax Routing")
+      }
+    }
+  }
+
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     ContactReasonId -> contactReasonRouting,
     EnquiryDateId -> enquiryDateRouting,
     ExistingEnquiryCategoryId -> (_ => routes.RefNumberController.onPageLoad()),
     RefNumberId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
     EnquiryCategoryId -> enquiryRouting,
-    CouncilTaxSubcategoryId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
+    CouncilTaxSubcategoryId -> councilTaxPageRouting,
     BusinessRatesSubcategoryId -> (businessRatesPageRouting),
     ContactDetailsId -> contactDetailsRouting,
     PropertyAddressId -> propertyAddressRouting,

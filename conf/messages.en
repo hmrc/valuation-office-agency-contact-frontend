@@ -226,7 +226,7 @@ checkYourTaxBand.covid.p = Due to the coronavirus pandemic, we have had to adapt
 councilTaxSubcategory.title = What is your Council Tax enquiry about? - Valuation Office Agency contact form - GOV.UK
 councilTaxSubcategory.heading = What is your Council Tax enquiry about?
 councilTaxSubcategory.subheading = What do you want to tell us about?
-councilTaxSubcategory.council_tax_challenge = Challenging my Council Tax band
+councilTaxSubcategory.council_tax_band_too_high = My Council Tax band is too high
 councilTaxSubcategory.council_tax_poor_repair = My property is in poor repair or uninhabitable
 councilTaxSubcategory.council_tax_changes = My property or the local area has changed
 councilTaxSubcategory.council_tax_ndr_changes = My property has changed from Council Tax to Business Rates
@@ -234,6 +234,12 @@ councilTaxSubcategory.council_tax_business_uses = My property is now used for bu
 councilTaxSubcategory.council_tax_annexe = An annexe at my property
 councilTaxSubcategory.council_tax_other = Any other Council Tax enquiry
 councilTaxSubcategory.checkYourAnswersLabel = Enquiry details
+
+councilTaxBandTooHigh.title = My Council Tax band is too high - Valuation Office Agency contact form - GOV.UK
+councilTaxBandTooHigh.heading = My Council Tax band is too high
+councilTaxBandTooHigh.body = Check and challenge your Council Tax band using the <a href="https://www.gov.uk/council-tax-bands" target="_self" class="govuk-link">Council Tax service.</a>
+councilTaxBandTooHigh.subHeading = Other pages on GOV.UK
+councilTaxBandTooHigh.subBody = Read about <a href="https://www.gov.uk/challenge-council-tax-band" target="_blank" class="govuk-link">how to challenge your Council Tax band</a> (opens in a new tab), including what evidence you need.<br><br>Find out <a href="https://www.gov.uk/guidance/council-tax-band-changes" target="_blank" class="govuk-link">when your Council Tax band may change</a> (opens in a new tab).
 
 businessRatesSubcategory.title = What is your business rates enquiry about? - Valuation Office Agency contact form - GOV.UK
 businessRatesSubcategory.heading = What is your business rates enquiry about?
