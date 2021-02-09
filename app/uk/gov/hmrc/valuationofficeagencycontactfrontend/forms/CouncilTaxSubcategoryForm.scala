@@ -19,6 +19,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.data.format.Formatter
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CouncilTaxBandTooHighId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object CouncilTaxSubcategoryForm extends FormErrorHelper {
@@ -37,7 +38,7 @@ object CouncilTaxSubcategoryForm extends FormErrorHelper {
     Form(single("value" -> of(CouncilTaxSubcategoryFormatter)))
 
   def options = Seq(
-    RadioOption("councilTaxSubcategory", "council_tax_challenge"),
+    RadioOption("councilTaxSubcategory", CouncilTaxBandTooHighId.toString),
     RadioOption("councilTaxSubcategory", "council_tax_poor_repair"),
     RadioOption("councilTaxSubcategory", "council_tax_changes"),
     RadioOption("councilTaxSubcategory", "council_tax_ndr_changes"),

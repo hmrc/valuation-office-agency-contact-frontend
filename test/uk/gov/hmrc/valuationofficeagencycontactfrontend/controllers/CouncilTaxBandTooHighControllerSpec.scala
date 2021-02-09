@@ -19,6 +19,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.DataRetrievalAction
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBandTooHigh => council_tax_too_high}
 
 class CouncilTaxBandTooHighControllerSpec extends ControllerSpecBase {
 

@@ -18,12 +18,13 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBandTooHigh => council_tax_band_too_high}
 
 class CouncilTaxBandTooHighViewSpec extends ViewBehaviours {
 
-  def valuationAdvice = app.injector.instanceOf[council_tax_band_too_high]
+  def councilTaxBandTooHigh = app.injector.instanceOf[council_tax_band_too_high]
 
-  def view = () => valuationAdvice(frontendAppConfig)(fakeRequest, messages)
+  def view = () => councilTaxBandTooHigh(frontendAppConfig)(fakeRequest, messages)
 
   "Council Tax Band Too High view" must {
     behave like normalPage(view, "councilTaxBandTooHigh", "title", "heading",
