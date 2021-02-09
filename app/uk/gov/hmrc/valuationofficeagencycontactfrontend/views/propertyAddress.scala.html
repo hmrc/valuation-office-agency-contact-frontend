@@ -34,7 +34,7 @@
         govukInput: GovukInput, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
         govukFieldset: GovukFieldset, govukBackLink: GovukBackLink)
 
-@(appConfig: FrontendAppConfig, form: Form[PropertyAddress], mode: Mode)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, form: Form[PropertyAddress], mode: Mode, helpTextKey: Option[String] = None)(implicit request: Request[_], messages: Messages)
 
 @beforeBlock = {
     @govukBackLink(BackLink(content = Text(messages("site.back")),
@@ -55,6 +55,14 @@
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
         <h1 class="govuk-fieldset__heading">@messages("propertyAddress.heading")</h1>
     </legend>
+
+    @helpTextKey.map{key: String =>
+      @messages.translate(key, Seq()).map{text:String =>
+          <p class="govuk-body">
+              @text
+          </p>
+      }
+    }
 
     @textInput("addressLine1", false, "govuk-input--width-30", "address-line1")
     @textInput("addressLine2", true, classes = "govuk-input--width-30", "address-line2")

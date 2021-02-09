@@ -44,20 +44,27 @@ class PropertyAddressController @Inject()(appConfig: FrontendAppConfig,
 
   implicit val ec: ExecutionContext = cc.executionContext
 
+  def helpTextKey(userAnswers: UserAnswers): Option[String] = {
+    userAnswers.contactReason match {
+      case Some("more_details") => Some("propertyAddress.existing_address")
+      case _ => None
+    }
+  }
+
   def onPageLoad(mode: Mode) = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.propertyAddress match {
         case None => PropertyAddressForm()
         case Some(value) => PropertyAddressForm().fill(value)
       }
-      Ok(propertyAddress(appConfig, preparedForm, mode))
+      Ok(propertyAddress(appConfig, preparedForm, mode, helpTextKey(request.userAnswers)))
   }
 
   def onSubmit(mode: Mode) = (getData andThen requireData).async {
     implicit request =>
       PropertyAddressForm().bindFromRequest().fold(
         (formWithErrors: Form[PropertyAddress]) =>
-          Future.successful(BadRequest(propertyAddress(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(propertyAddress(appConfig, formWithErrors, mode, helpTextKey(request.userAnswers)))),
         (value) =>
           dataCacheConnector.save[PropertyAddress](request.sessionId, PropertyAddressId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(PropertyAddressId, mode)(new UserAnswers(cacheMap))))

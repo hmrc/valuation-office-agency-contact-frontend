@@ -22,20 +22,20 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{enquiryCategory => enquiry_category}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{contactReason => contact_reason}
 
 class ApplicationControllerSpec extends ControllerSpecBase {
 
-  def enquiryCategory = app.injector.instanceOf[enquiry_category]
+  def contactReason = app.injector.instanceOf[contact_reason]
 
   def languageSwitchController = app.injector.instanceOf[LanguageSwitchController]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) = new Application(
-    messagesApi, frontendAppConfig, enquiryCategory, languageSwitchController, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    messagesApi, frontendAppConfig, contactReason, languageSwitchController, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
-  def viewAsString(form: Form[String] = EnquiryCategoryForm()) = enquiryCategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = EnquiryCategoryForm()) = contactReason(form, NormalMode)(fakeRequest, messages).toString
 
   "Application Controller" must {
 

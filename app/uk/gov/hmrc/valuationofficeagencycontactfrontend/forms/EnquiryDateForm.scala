@@ -53,7 +53,7 @@ object EnquiryDateForm extends FormErrorHelper {
   val dateFormatter = DateTimeFormatter.ofPattern("d\u00A0MMMM\u00A0yyyy", Locale.UK)
 
   def now(): String = {
-    val now = ZonedDateTime.now(timezone)
+    val now = ZonedDateTime.now(timezone).minusDays(30)
     now.format(dateFormatter)
   }
 
