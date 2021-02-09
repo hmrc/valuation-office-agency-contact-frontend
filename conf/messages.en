@@ -117,6 +117,7 @@ site.textarea.char_limit = (Limit is {0} characters)
 site.print.button=Print this page
 site.govuk=Back to GOV.UK
 site.new_service = This is a new service
+site.not_provided = Not provided
 
 unauthorised.title = You can’t access this service with this account
 unauthorised.heading = You can’t access this service with this account

@@ -23,7 +23,7 @@ import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, UserAnswers}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow, AnswerSection}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_answers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 
@@ -40,13 +40,21 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
 
     val checkYourAnswersHelper = new CheckYourAnswersHelper(answers)
 
-    answers.enquiryCategory match{
-      case Some("business_rates") => Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.businessRatesSubcategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress,
-        checkYourAnswersHelper.tellUsMore).flatten)))
-      case Some("council_tax") => Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.councilTaxSubcategory,checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress,
-        checkYourAnswersHelper.tellUsMore).flatten)))
-      case _ => None
+    answers.contactReason match {
+      case Some("more_details") => Some(Seq(
+        AnswerSection(None, Seq(checkYourAnswersHelper.contactReason, checkYourAnswersHelper.existingEnquiryCategory, checkYourAnswersHelper.refNumber, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress,
+          checkYourAnswersHelper.whatElse).flatten)))
+      case _ => {
+        answers.enquiryCategory match{
+          case Some("business_rates") => Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.businessRatesSubcategory, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress,
+            checkYourAnswersHelper.tellUsMore).flatten)))
+          case Some("council_tax") => Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.councilTaxSubcategory,checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress,
+            checkYourAnswersHelper.tellUsMore).flatten)))
+          case _ => None
+        }
+      }
     }
+
   }
 
   def onPageLoad() = (getData andThen requireData) {
