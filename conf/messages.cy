@@ -213,7 +213,7 @@ contactDetails.checkYourAnswersLabel = Manylion cyswllt
 # --- Council Tax Bill
 councilTaxBill.title = My Council Tax bill - Valuation Office Agency contact form - GOV.UK
 councilTaxBill.heading = My Council Tax bill
-councilTaxBill.p1 = <a class="govuk-link" target="_blank" href="https://www.gov.uk/find-local-council">Contact your local council </a> if you have any questions about your Council Tax bill, as they handle billing and payments.
+councilTaxBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council">Contact your local council </a> if you have any questions about your Council Tax bill, as they handle billing and payments.
 councilTaxBill.subheading = Other help on GOV.UK
 councilTaxBill.p2 = Check with your council to see if you can <a class="govuk-link" target="_blank" href="https://www.gov.uk/apply-for-council-tax-discount">apply for a discount on your Council Tax bill. </a>
 councilTaxBill.p3 = Or you can check how to <a class="govuk-link" target="_blank" href="https://www.gov.uk/apply-council-tax-reduction">apply for Council Tax Reduction. </a>
