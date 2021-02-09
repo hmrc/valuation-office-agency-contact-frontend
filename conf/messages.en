@@ -278,6 +278,12 @@ propertyAddress.postcode.invalid = Enter a real postcode
 propertyAddress.postcode.length = Postcode must be 8 characters or fewer
 propertyAddress.checkYourAnswersLabel = Property details
 
+whatElse.title = What else would you like to tell us? - Valuation Office Agency contact form - GOV.UK
+whatElse.message = What else would you like to tell us about your enquiry?
+error.what_else.required = Enter more details about your enquiry
+error.what_else.invalid = Your enquiry must not include < and >
+error.what_else.max_length = Your enquiry must be 5000 characters or fewer
+
 tellUsMore.title = Tell us more about your enquiry - Valuation Office Agency contact form - GOV.UK
 tellUsMore.heading = Tell us more about your enquiry
 tellUsMore.message = Your message

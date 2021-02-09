@@ -113,6 +113,12 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.TellUsMoreController.onPageLoad(NormalMode)
       }
 
+      "return a function that goes to the 'Tell us more' page when the property address details form has been submitted without errors and I'm udating existing enquiry" in {
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
+        when (mockUserAnswers.contactReason) thenReturn Some("more_details")
+        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.WhatElseController.onPageLoad()
+      }
+
       "return a function that goes to the summary page when the tell us more form has been submitted without errors" in {
         when (mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("Hello"))
         navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()

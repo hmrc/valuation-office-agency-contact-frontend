@@ -1,0 +1,73 @@
+@*
+ * Copyright 2021 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukButton, GovukErrorSummary, GovukFieldset, GovukBackLink}
+@import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.govukfrontend.views.html.components.GovukTextarea
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.textarea.Textarea
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
+@import uk.gov.hmrc.govukfrontend.views.Implicits._
+
+@this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
+        govukTextarea: GovukTextarea, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
+        govukFieldset: GovukFieldset,  govukBackLink: GovukBackLink)
+
+
+@(appConfig: FrontendAppConfig, form: Form[String], mode: Mode)(implicit request: Request[_], messages: Messages)
+
+
+@beforeBlock = {
+    @govukBackLink(BackLink(content = Text(messages("site.back")), href =
+            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url))
+}
+
+@content = {
+
+    @govukTextarea(Textarea(id="message", name="message", rows=5, value=form("message").value,
+        errorMessage = form.errors.asTextErrorMessageForField("message"),
+        label = Label(content = Text(messages("whatElse.message")), isPageHeading = true, classes = "govuk-label--l" )))
+
+}
+
+@mainTemplate(
+    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("whatElse.title"))else messages("whatElse.title")),
+    beforeContentBlock = Option(beforeBlock)
+) {
+    @formWithCSFR(action = WhatElseController.onSubmit(), 'autoComplete -> "off") {
+        @if(form.hasErrors) {
+            @govukErrorSummary(
+                ErrorSummary(
+                    attributes = Map("id" -> "error-summary-heading"),
+                    title = Text(messages("error.summary.title")),
+                    errorList = form.errors.take(1).map(e => ErrorLink(href = Some("#" + e.key), content = Text(messages(e.messages, e.args))))
+                )
+            )
+        }
+        @govukFieldset(Fieldset(html = content ))
+        @govukButton(Button(attributes = Map("id" -> "submit"), content = Text(messages("site.continue"))))
+    }
+}
