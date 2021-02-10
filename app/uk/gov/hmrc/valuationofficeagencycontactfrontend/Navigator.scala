@@ -137,6 +137,7 @@ class Navigator @Inject()() {
   val councilTaxPageRouting: UserAnswers => Call = answers => {
     answers.councilTaxSubcategory match {
       case Some("council_tax_band_too_high") =>  routes.CouncilTaxBandTooHighController.onPageLoad()
+      case Some("council_tax_bill") => routes.CouncilTaxBillController.onPageLoad()
       case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case None => {
         Logger.warn(s"Navigation for Council Tax page reached without selection of enquiry by controller ")
@@ -152,15 +153,14 @@ class Navigator @Inject()() {
     RefNumberId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
     EnquiryCategoryId -> enquiryRouting,
     CouncilTaxSubcategoryId -> councilTaxPageRouting,
-    BusinessRatesSubcategoryId -> (businessRatesPageRouting),
+    BusinessRatesSubcategoryId -> businessRatesPageRouting,
     ContactDetailsId -> contactDetailsRouting,
     PropertyAddressId -> propertyAddressRouting,
     WhatElseId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
     TellUsMoreId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
     CheckYourAnswersId -> confirmationPageRouting,
     CouncilTaxSmartLinksId -> (_ => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)),
-    BusinessRatesSmartLinksId -> (_ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)),
-    CouncilTaxChallengeId -> (_ => routes.CouncilTaxChallengeController.onPageLoad())
+    BusinessRatesSmartLinksId -> (_ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode))
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()

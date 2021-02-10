@@ -210,23 +210,27 @@ contactDetails.contactNumber.length = Phone number must be between 11 and 20 cha
 contactDetails.contactNumber.invalid = Enter a phone number, like 01632 960 001
 contactDetails.checkYourAnswersLabel = Contact details
 
-checkYourTaxBand.title = Challenging my Council Tax band - Valuation Office Agency contact form - GOV.UK
-checkYourTaxBand.heading = Challenging my Council Tax band
-checkYourTaxBand.p1 = Contact the Valuation Office Agency (VOA) to explain why you think your band is wrong. The VOA may be able to review and change your band without you needing to challenge it.
-checkYourTaxBand.p2 = You must be able to <a class="govuk-link" target="_blank" href="https://www.gov.uk/challenge-council-tax-band/evidence-supports-your-challenge">provide evidence</a>.
-checkYourTaxBand.subheading = Contact details
-checkYourTaxBand.email.heading = Email:
-checkYourTaxBand.email = ctonline@voa.gov.uk
-checkYourTaxBand.telephone.heading = Telephone:
-checkYourTaxBand.telephone.number = 03000 501 501
-checkYourTaxBand.time.heading = Opening times:
-checkYourTaxBand.time.opening = Monday to Friday: 10am to 2pm
-checkYourTaxBand.covid.p = Due to the coronavirus pandemic, we have had to adapt our services and it may take longer than usual to respond to your enquiry. We apologise for any inconvenience this may cause.
+# --- Council Tax Bill
+councilTaxBill.title = My Council Tax bill - Valuation Office Agency contact form - GOV.UK
+councilTaxBill.heading = My Council Tax bill
+councilTaxBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council">Contact your local council </a> if you have any questions about your Council Tax bill, as they handle billing and payments.
+councilTaxBill.subheading = Other help on GOV.UK
+councilTaxBill.p2 = Check with your council to see if you can <a class="govuk-link" target="_blank" href="https://www.gov.uk/apply-for-council-tax-discount">apply for a discount on your Council Tax bill. </a>
+councilTaxBill.p3 = Or you can check how to <a class="govuk-link" target="_blank" href="https://www.gov.uk/apply-council-tax-reduction">apply for Council Tax Reduction. </a>
 
+# --- Council Tax Band Too High
+councilTaxBandTooHigh.title = My Council Tax band is too high - Valuation Office Agency contact form - GOV.UK
+councilTaxBandTooHigh.heading = My Council Tax band is too high
+councilTaxBandTooHigh.body = Check and challenge your Council Tax band using the <a href="https://www.gov.uk/council-tax-bands" target="_self" class="govuk-link">Council Tax service.</a>
+councilTaxBandTooHigh.subHeading = Other pages on GOV.UK
+councilTaxBandTooHigh.subBody = Read about <a href="https://www.gov.uk/challenge-council-tax-band" target="_blank" class="govuk-link">how to challenge your Council Tax band</a> (opens in a new tab), including what evidence you need.<br><br>Find out <a href="https://www.gov.uk/guidance/council-tax-band-changes" target="_blank" class="govuk-link">when your Council Tax band may change</a> (opens in a new tab).
+
+# --- Council Tax Subcategories
 councilTaxSubcategory.title = What is your Council Tax enquiry about? - Valuation Office Agency contact form - GOV.UK
 councilTaxSubcategory.heading = What is your Council Tax enquiry about?
 councilTaxSubcategory.subheading = What do you want to tell us about?
 councilTaxSubcategory.council_tax_band_too_high = My Council Tax band is too high
+councilTaxSubcategory.council_tax_bill = My Council Tax bill
 councilTaxSubcategory.council_tax_poor_repair = My property is in poor repair or uninhabitable
 councilTaxSubcategory.council_tax_changes = My property or the local area has changed
 councilTaxSubcategory.council_tax_ndr_changes = My property has changed from Council Tax to Business Rates
@@ -234,12 +238,6 @@ councilTaxSubcategory.council_tax_business_uses = My property is now used for bu
 councilTaxSubcategory.council_tax_annexe = An annexe at my property
 councilTaxSubcategory.council_tax_other = Any other Council Tax enquiry
 councilTaxSubcategory.checkYourAnswersLabel = Enquiry details
-
-councilTaxBandTooHigh.title = My Council Tax band is too high - Valuation Office Agency contact form - GOV.UK
-councilTaxBandTooHigh.heading = My Council Tax band is too high
-councilTaxBandTooHigh.body = Check and challenge your Council Tax band using the <a href="https://www.gov.uk/council-tax-bands" target="_self" class="govuk-link">Council Tax service.</a>
-councilTaxBandTooHigh.subHeading = Other pages on GOV.UK
-councilTaxBandTooHigh.subBody = Read about <a href="https://www.gov.uk/challenge-council-tax-band" target="_blank" class="govuk-link">how to challenge your Council Tax band</a> (opens in a new tab), including what evidence you need.<br><br>Find out <a href="https://www.gov.uk/guidance/council-tax-band-changes" target="_blank" class="govuk-link">when your Council Tax band may change</a> (opens in a new tab).
 
 businessRatesSubcategory.title = What is your business rates enquiry about? - Valuation Office Agency contact form - GOV.UK
 businessRatesSubcategory.heading = What is your business rates enquiry about?

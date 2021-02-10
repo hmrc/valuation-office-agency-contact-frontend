@@ -232,6 +232,16 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(BusinessRatesSmartLinksId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
       }
 
+      "return a function that goes to the council tax bill form page when an enquiry category for council tax has been selected and council_tax_bill option selected" in {
+        when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_bill")
+        navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxBillController.onPageLoad()
+      }
+
+      "throw exception when an enquiry category for council tax has been selected and not other options was selected on next page" in {
+        when (mockUserAnswers.councilTaxSubcategory) thenReturn None
+        an [RuntimeException] should be thrownBy navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers)
+      }
+
     }
   }
 }

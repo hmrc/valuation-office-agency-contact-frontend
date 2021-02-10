@@ -210,24 +210,19 @@ contactDetails.contactNumber.length = Rhaid i’r rhif ffôn fod rhwng 11 ac 20 
 contactDetails.contactNumber.invalid = Nodwch rif ffôn, fel 01632 960 001
 contactDetails.checkYourAnswersLabel = Manylion cyswllt
 
-checkYourTaxBand.title = Herio fy mand Treth Gyngor - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-checkYourTaxBand.heading = Herio fy mand Treth Gyngor
-checkYourTaxBand.p1 = ysylltwch ag Asiantaeth y Swyddfa Brisio (VOA) i egluro pam eich bod yn meddwl bod eich band yn anghywir. Efallai y bydd y VOA yn gallu adolygu a newid eich band heb fod angen i chi ei herio.
-checkYourTaxBand.p2 = Mae'n rhaid i chi allu <a class="govuk-link" target="_blank" href="https://www.gov.uk/challenge-council-tax-band/evidence-supports-your-challenge">darparu tystiolaeth</a>.
-checkYourTaxBand.subheading = Manylion cyswllt
-checkYourTaxBand.email.heading = E-bost:
-checkYourTaxBand.email = ctonline@voa.gov.uk
-checkYourTaxBand.telephone.heading = Rhif ffȏn:
-checkYourTaxBand.telephone.number = 03000 505 505
-checkYourTaxBand.time.heading = Amseroedd agor:
-checkYourTaxBand.time.opening = Dydd Llun i ddydd Gwener: 10yb i 2yp
-checkYourTaxBand.covid.p = Oherwydd y pandemig coronafirws, rydym wedi gorfod addasu ein gwasanaethau a gall gymryd mwy o amser nag arfer i ymateb i’ch ymholiad. Ymddiheurwn am unrhyw anghyfleustra y gallai hyn ei achosi.
+# --- Council Tax Bill
+councilTaxBill.title = My Council Tax bill - Valuation Office Agency contact form - GOV.UK
+councilTaxBill.heading = My Council Tax bill
+councilTaxBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council">Contact your local council </a> if you have any questions about your Council Tax bill, as they handle billing and payments.
+councilTaxBill.subheading = Other help on GOV.UK
+councilTaxBill.p2 = Check with your council to see if you can <a class="govuk-link" target="_blank" href="https://www.gov.uk/apply-for-council-tax-discount">apply for a discount on your Council Tax bill. </a>
+councilTaxBill.p3 = Or you can check how to <a class="govuk-link" target="_blank" href="https://www.gov.uk/apply-council-tax-reduction">apply for Council Tax Reduction. </a>
 
+# --- Council Tax Subcategories
 councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 councilTaxSubcategory.heading = Beth yw testun eich ymholiad ynghylch Treth Gyngor?
-councilTaxSubcategory.council_tax_challenge = Heriwch eich band treth cyngor
 councilTaxSubcategory.subheading = Am beth ydych am roi gwybod i ni?
-councilTaxSubcategory.council_tax_challenge = Heriwch eich band treth cyngor
+councilTaxSubcategory.council_tax_bill = My Council Tax bill
 councilTaxSubcategory.council_tax_poor_repair = Mae fy eiddo mewn cyflwr gwael neu amreswyliadwy
 councilTaxSubcategory.council_tax_changes = Mae fy eiddo neu’r ardal leol wedi newid
 councilTaxSubcategory.council_tax_ndr_changes = Mae fy eiddo wedi newid o Dreth Gyngor i Ardrethi Busnes

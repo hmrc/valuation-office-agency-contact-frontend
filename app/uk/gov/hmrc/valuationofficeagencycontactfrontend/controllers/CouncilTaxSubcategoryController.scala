@@ -19,7 +19,6 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import javax.inject.Inject
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.libs.json.JsSuccess
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
@@ -27,7 +26,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConn
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxSubcategoryForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxChallengeId, CouncilTaxSubcategoryId, Identifier}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CouncilTaxSubcategoryId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxSubcategory => council_tax_subcategory}
@@ -56,17 +55,6 @@ class CouncilTaxSubcategoryController @Inject()(
       Ok(councilTaxSubcategory(appConfig, preparedForm, mode))
   }
 
-  private def getNextPage(cacheMap: CacheMap): Identifier = {
-    cacheMap.data("councilTaxSubcategory").validate[String] match {
-      case s: JsSuccess[String] => if(s.get == CouncilTaxChallengeId.toString) {
-        CouncilTaxChallengeId
-      } else {
-        CouncilTaxSubcategoryId
-      }
-      case _ => CouncilTaxSubcategoryId
-    }
-  }
-
   def onSubmit(mode: Mode) = (getData andThen requireData).async {
     implicit request =>
       CouncilTaxSubcategoryForm().bindFromRequest().fold(
@@ -74,7 +62,7 @@ class CouncilTaxSubcategoryController @Inject()(
           Future.successful(BadRequest(councilTaxSubcategory(appConfig, formWithErrors, mode))),
         (value) =>
           dataCacheConnector.save[String](request.sessionId, CouncilTaxSubcategoryId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(getNextPage(cacheMap), mode)(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(CouncilTaxSubcategoryId, mode)(new UserAnswers(cacheMap))))
       )
   }
 }

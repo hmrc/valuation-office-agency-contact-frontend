@@ -18,21 +18,21 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import javax.inject.Inject
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.MessagesControllerComponents
+import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxChallenge => council_tax_challenge}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBill => council_tax_bill}
 
-class CouncilTaxChallengeController @Inject() (appConfig: FrontendAppConfig,
-                                                override val messagesApi: MessagesApi,
-                                                getData: DataRetrievalAction,
-                                                requireData: DataRequiredAction,
-                                                councilTaxChallenge: council_tax_challenge,
-                                                cc: MessagesControllerComponents
-                                              ) extends FrontendController(cc) with I18nSupport {
-  def onPageLoad() = (getData andThen requireData) {
+class CouncilTaxBillController @Inject() (appConfig: FrontendAppConfig,
+                                          override val messagesApi: MessagesApi,
+                                          getData: DataRetrievalAction,
+                                          requireData: DataRequiredAction,
+                                          councilTaxBill: council_tax_bill,
+                                          cc: MessagesControllerComponents
+                                         ) extends FrontendController(cc) with I18nSupport {
+  def onPageLoad(): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      Ok(councilTaxChallenge(appConfig))
+      Ok(councilTaxBill(appConfig))
   }
 }
