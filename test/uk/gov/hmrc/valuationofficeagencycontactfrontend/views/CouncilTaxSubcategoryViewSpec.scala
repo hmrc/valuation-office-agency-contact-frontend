@@ -41,12 +41,12 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
         }
       }
 
-      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_challenge and that it is used once" in {
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_band_too_high and that it is used once" in {
         labelDefinedAndUsedOnce("council_tax_band_too_high", messageKeyPrefix, createView)
       }
 
-      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_poor_repair and that it is used once" in {
-        labelDefinedAndUsedOnce("council_tax_poor_repair", messageKeyPrefix, createView)
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_band_for_new and that it is used once" in {
+        labelDefinedAndUsedOnce("council_tax_band_for_new", messageKeyPrefix, createView)
       }
 
       "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_changes and that it is used once" in {
