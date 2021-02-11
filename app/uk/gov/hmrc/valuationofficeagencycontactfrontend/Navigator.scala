@@ -139,6 +139,7 @@ class Navigator @Inject()() {
       case Some("council_tax_band_too_high") =>  routes.CouncilTaxBandTooHighController.onPageLoad()
       case Some("council_tax_bill") => routes.CouncilTaxBillController.onPageLoad()
       case Some("council_tax_band_for_new") => routes.CouncilTaxBandForNewController.onPageLoad()
+      case Some("council_tax_property_empty") => routes.CouncilTaxPropertyEmptyController.onPageLoad()
       case Some("property_demolished") => routes.PropertyDemolishedController.onPageLoad()
       case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case None => {
