@@ -45,8 +45,6 @@ POST        /councilTaxSubcategory                 uk.gov.hmrc.valuationofficeag
 GET         /changeCouncilTaxSubcategory           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onPageLoad(mode: Mode = CheckMode)
 POST        /changeCouncilTaxSubcategory           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onSubmit(mode: Mode = CheckMode)
 
-GET         /council-tax-band-is-too-high          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBandTooHighController.onPageLoad()
-
 GET         /about-business-rates                  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onPageLoad(mode: Mode = NormalMode)
 POST        /businessRatesSubcategory              uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onSubmit(mode: Mode = NormalMode)
 GET         /changeBusinessRatesSubcategory        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onPageLoad(mode: Mode = CheckMode)
@@ -84,6 +82,8 @@ GET         /check-before-you-continue-rates       uk.gov.hmrc.valuationofficeag
 GET         /goto-businessRatesSubcategory         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSmartLinksController.goToBusinessRatesSubcategoryPage()
 
 GET         /billing-and-reliefs                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBillController.onPageLoad()
+GET         /council-tax-band-is-too-high          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBandTooHighController.onPageLoad()
+GET         /council-tax-band-for-my-new-property  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBandForNewController.onPageLoad()
 
 # SURVEY
 GET         /survey-thanks                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.surveyThankyou
