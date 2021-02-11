@@ -139,6 +139,7 @@ class Navigator @Inject()() {
       case Some("council_tax_band_too_high") =>  routes.CouncilTaxBandTooHighController.onPageLoad()
       case Some("council_tax_bill") => routes.CouncilTaxBillController.onPageLoad()
       case Some("council_tax_band_for_new") => routes.CouncilTaxBandForNewController.onPageLoad()
+      case Some("property_demolished") => routes.PropertyDemolishedController.onPageLoad()
       case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case None => {
         Logger.warn(s"Navigation for Council Tax page reached without selection of enquiry by controller ")

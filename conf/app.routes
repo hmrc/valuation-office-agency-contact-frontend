@@ -84,6 +84,7 @@ GET         /goto-businessRatesSubcategory         uk.gov.hmrc.valuationofficeag
 GET         /billing-and-reliefs                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBillController.onPageLoad()
 GET         /council-tax-band-is-too-high          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBandTooHighController.onPageLoad()
 GET         /council-tax-band-for-my-new-property  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBandForNewController.onPageLoad()
+GET         /property-demolished                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyDemolishedController.onPageLoad()
 
 # SURVEY
 GET         /survey-thanks                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.surveyThankyou
