@@ -16,7 +16,8 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
-import org.mockito.Mockito.when
+import org.mockito.Mockito.{reset, when}
+import org.scalatest.BeforeAndAfterEach
 import org.scalatestplus.mockito.MockitoSugar
 import play.api.libs.json.{JsString, Json}
 import play.api.test.Helpers._
@@ -30,7 +31,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_answers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
 
-class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSugar {
+class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSugar with BeforeAndAfterEach {
 
   val mockUserAnswers = mock[UserAnswers]
 
@@ -42,6 +43,8 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new CheckYourAnswersController(frontendAppConfig, messagesApi, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction,
       new DataRequiredActionImpl(ec), checkYourAnswers, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+
+
 
   "Check Your Answers Controller" must {
 
@@ -67,6 +70,20 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad().url)
+    }
+
+    "The sections function produces sections for existing enquiry" in {
+      when(mockUserAnswers.contactReason) thenReturn Some("more_details")
+      when(mockUserAnswers.existingEnquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.refNumber) thenReturn None
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+      when(mockUserAnswers.whatElse) thenReturn Some("a")
+
+      val result = controller().sections(mockUserAnswers)
+      val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
+      result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.contactReason, checkYourAnswersHelper.existingEnquiryCategory,
+        checkYourAnswersHelper.refNumber, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress, checkYourAnswersHelper.whatElse).flatten)))
     }
 
     "The sections function produces sections with the business rates check your answers section when the enquiry category is business_rates" in {
@@ -164,6 +181,11 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       }
     }
 
+  }
+
+  override protected def beforeEach(): Unit = {
+    reset(mockUserAnswers)
+    when(mockUserAnswers.contactReason) thenReturn(None) //Backward compatibility
   }
 }
 

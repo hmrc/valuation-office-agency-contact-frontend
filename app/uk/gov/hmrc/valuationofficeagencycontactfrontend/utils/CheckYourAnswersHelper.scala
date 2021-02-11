@@ -28,6 +28,25 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
     x => AnswerRow("tellUsMore.checkYourAnswersLabel", s"${x.message}", false, routes.TellUsMoreController.onPageLoad(CheckMode).url)
   }
 
+  def contactReason: Option[AnswerRow] = userAnswers.contactReason map {
+    x => AnswerRow("contactReason.heading", s"contactReason.$x", true, routes.ContactReasonController.onPageLoad().url)
+  }
+
+  def existingEnquiryCategory: Option[AnswerRow] = userAnswers.existingEnquiryCategory map {
+    x => AnswerRow("existingEnquiryCategory.heading", s"existingEnquiryCategory.$x", true, routes.ExistingEnquiryCategoryController.onPageLoad().url)
+  }
+
+  def refNumber: Option[AnswerRow] =  {
+    val ref = userAnswers.refNumber.map(_.trim).filter(_ != "")
+    Option(
+      AnswerRow("refNumber.value", ref.getOrElse("site.not_provided"), ref.isEmpty, routes.RefNumberController.onPageLoad().url)
+    )
+  }
+
+  def whatElse: Option[AnswerRow] = userAnswers.whatElse map {
+    x => AnswerRow("whatElse.message", x, false, routes.WhatElseController.onPageLoad().url)
+  }
+
   def enquiryCategory: Option[AnswerRow] = userAnswers.enquiryCategory map {
     x => AnswerRow("enquiryCategory.checkYourAnswersLabel", s"enquiryCategory.$x", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url)
   }

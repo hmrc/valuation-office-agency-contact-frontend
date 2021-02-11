@@ -117,6 +117,7 @@ site.textarea.char_limit = (Y terfyn yw {0} o gymeriadau)
 site.print.button= Argraffwch y dudalen hon
 site.govuk= Yn ôl i GOV.UK
 site.new_service = This is a new service
+site.not_provided = Not provided
  
 unauthorised.title = Ni allwch gyrchu’r gwasanaeth gyda’r cyfrif hwn
 unauthorised.heading = Ni allwch gyrchu’r gwasanaeth gyda’r cyfrif hwn
