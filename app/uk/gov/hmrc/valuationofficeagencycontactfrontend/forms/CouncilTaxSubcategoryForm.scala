@@ -19,7 +19,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.data.format.Formatter
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxBandForNewId, CouncilTaxBandTooHighId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object CouncilTaxSubcategoryForm extends FormErrorHelper {
@@ -41,6 +41,7 @@ object CouncilTaxSubcategoryForm extends FormErrorHelper {
     RadioOption("councilTaxSubcategory", CouncilTaxBandTooHighId.toString),
     RadioOption("councilTaxSubcategory", "council_tax_bill"),
     RadioOption("councilTaxSubcategory", CouncilTaxBandForNewId.toString),
+    RadioOption("councilTaxSubcategory", PropertyDemolishedId.toString),
     RadioOption("councilTaxSubcategory", "council_tax_changes"),
     RadioOption("councilTaxSubcategory", "council_tax_ndr_changes"),
     RadioOption("councilTaxSubcategory", "council_tax_business_uses"),

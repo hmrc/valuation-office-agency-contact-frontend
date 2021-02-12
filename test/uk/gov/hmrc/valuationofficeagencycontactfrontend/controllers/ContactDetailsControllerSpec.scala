@@ -146,7 +146,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
 
     "The enquiry key function produces a string with a Council Tax subcategory back link when the enquiry category is council_tax" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_poor_repair")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("property_demolished")
       val result = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection mustBe true
@@ -161,7 +161,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "return OK and the correct view for a GET when enquiry category is council_tax" in {
-      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_poor_repair"))
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("property_demolished"))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
@@ -170,7 +170,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "populate the view correctly on a GET when the question has previously been answered and enquiry category is council_tax" in {
-      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_poor_repair"),
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("property_demolished"),
         ContactDetailsId.toString -> Json.toJson(ContactDetails("a", "a@test.com", "0847428742424")))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
