@@ -270,7 +270,6 @@ councilTaxSubcategory.council_tax_band_too_high = My Council Tax band is too hig
 councilTaxSubcategory.council_tax_bill = My Council Tax bill
 councilTaxSubcategory.council_tax_band_for_new = I need a Council Tax band for my new property
 councilTaxSubcategory.council_tax_property_empty = My property is empty
-councilTaxSubcategory.council_tax_poor_repair = My property is in poor repair or uninhabitable
 councilTaxSubcategory.property_demolished = My property has been partially or fully demolished
 councilTaxSubcategory.council_tax_changes = My property or the local area has changed
 councilTaxSubcategory.council_tax_ndr_changes = My property has changed from Council Tax to Business Rates
