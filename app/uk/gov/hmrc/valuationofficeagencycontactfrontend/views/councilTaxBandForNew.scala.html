@@ -26,8 +26,8 @@
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
 @beforeBlock = {
-    @govukBackLink(BackLink(content = Text(messages("site.back")),
-        href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url))
+@govukBackLink(BackLink(content = Text(messages("site.back")),
+    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url))
 }
 
 @mainTemplate(
@@ -37,12 +37,34 @@
 
     <h1 class="govuk-heading-l">@messages("councilTaxBandForNew.heading")</h1>
 
-    <p class="govuk-body">@Html(Messages("councilTaxBandForNew.p1"))</p>
-    <p class="govuk-body">@Html(Messages("councilTaxBandForNew.p2"))</p>
+    <p class="govuk-body">
+        <a class="govuk-link" target="_self" href=@messages("councilTaxBandForNew.p1.url")>
+        @messages("councilTaxBandForNew.p1.part1")
+        </a>
+        @messages("councilTaxBandForNew.p1.part2")
+    </p>
 
-    <h2 class="govuk-heading-m">@messages("councilTaxBandForNew.subHeading")</h2>
+    <ul class="govuk-list govuk-list--bullet">
+        <li>@messages("councilTaxBandForNew.li1")</li>
+        <li>@messages("councilTaxBandForNew.li2")</li>
+        <li>@messages("councilTaxBandForNew.li3")</li>
+    </ul>
 
-    <p class="govuk-body">@Html(Messages("councilTaxBandForNew.p3"))</p>
-    <p class="govuk-body">@Html(Messages("councilTaxBandForNew.p4"))</p>
+    <p class="govuk-body">@messages("councilTaxBandForNew.p2")</p>
+
+    <h2 class="govuk-heading-m">@messages("councilTaxBandForNew.subheading")</h2>
+
+    <p class="govuk-body">
+        <a class="govuk-link" target="_blank" href=@messages("councilTaxBandForNew.p3.url")>
+        @messages("councilTaxBandForNew.p3.part1")
+        </a>
+        @messages("councilTaxBandForNew.p3.part2")
+    </p>
+    <p class="govuk-body">
+        <a class="govuk-link" target="_blank" href=@messages("councilTaxBandForNew.p4.url")>
+        @messages("councilTaxBandForNew.p4.part1")
+        </a>
+        @messages("councilTaxBandForNew.p4.part2")
+    </p>
 
 }
