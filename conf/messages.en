@@ -256,12 +256,11 @@ propertyDemolished.p2.part1 = When to contact your council about Council Tax
 propertyDemolished.p2.part2 = (opens in a new tab).
 
 # --- Council Tax My Property Empty
-councilTaxPropertyEmpty.title = My property is empty - Valuation Office Agency contact form - GOV.UK
-councilTaxPropertyEmpty.heading = My property is empty
-councilTaxPropertyEmpty.p1 = A property being empty does not affect the Council Tax band.
-councilTaxPropertyEmpty.p2 = <a class="govuk-link" href="https://www.gov.uk/find-local-council" target="_self"> Contact your local council </a> to see if you may get relief on your bill.
+councilTaxPropertyEmpty.title = The Council Tax band is not affected if a property is empty - Valuation Office Agency contact form - GOV.UK
+councilTaxPropertyEmpty.heading = The Council Tax band is not affected if a property is empty
+councilTaxPropertyEmpty.p1 = <a class="govuk-link" href="https://www.gov.uk/find-local-council" target="_self"> Contact your local council </a> to see if you may get relief on your bill.
 councilTaxPropertyEmpty.subHeading = Other help on GOV.UK
-councilTaxPropertyEmpty.p3 = <a class="govuk-link" href="https://www.gov.uk/council-tax/second-homes-and-empty-properties" target="_blank"> Read more about Council Tax for empty properties </a> (opens in a new tab).
+councilTaxPropertyEmpty.p2 = <a class="govuk-link" href="https://www.gov.uk/council-tax/second-homes-and-empty-properties" target="_self"> Council Tax for empty properties </a>
 
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = What is your Council Tax enquiry about? - Valuation Office Agency contact form - GOV.UK

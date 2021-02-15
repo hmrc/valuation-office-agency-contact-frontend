@@ -16,8 +16,24 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
-import org.scalatest.FunSuite
+import play.api.test.Helpers._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxPropertyEmpty => council_tax_property_empty}
 
-class CouncilTaxPropertyEmptyControllerSpec extends FunSuite {
 
+class CouncilTaxPropertyEmptyControllerSpec extends ControllerSpecBase {
+
+  def councilPropertyEmpty = app.injector.instanceOf[council_tax_property_empty]
+
+  def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
+    new CouncilTaxPropertyEmptyController(frontendAppConfig, messagesApi, dataRetrievalAction, new DataRequiredActionImpl(ec),
+      councilPropertyEmpty, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+
+  "Council Tax Property Empty Controller" must {
+    "return the correct view for a GET" in {
+      val result = controller().onPageLoad()(fakeRequest)
+      contentAsString(result) mustBe councilPropertyEmpty(frontendAppConfig)(fakeRequest, messages).toString
+    }
+  }
 }

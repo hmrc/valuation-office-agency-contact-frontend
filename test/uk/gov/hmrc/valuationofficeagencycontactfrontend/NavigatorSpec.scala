@@ -237,12 +237,15 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxBillController.onPageLoad()
       }
 
+      "return a function that goes to the council tax property empty form page when an enquiry category for council tax has been selected and council_tax_property_empty option selected" in {
+        when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_empty")
+        navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxPropertyEmptyController.onPageLoad()
+      }
+
       "throw exception when an enquiry category for council tax has been selected and not other options was selected on next page" in {
         when (mockUserAnswers.councilTaxSubcategory) thenReturn None
         an [RuntimeException] should be thrownBy navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers)
       }
-
-      //TODO - add tests for new council tax page
     }
   }
 }
