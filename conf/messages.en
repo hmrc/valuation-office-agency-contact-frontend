@@ -226,7 +226,7 @@ councilTaxBandTooHigh.body = Check and challenge your Council Tax band using the
 councilTaxBandTooHigh.subHeading = Other pages on GOV.UK
 councilTaxBandTooHigh.subBody = Read about <a class="govuk-link" href="https://www.gov.uk/challenge-council-tax-band" target="_blank">how to challenge your Council Tax band</a> (opens in a new tab), including what evidence you need.<br><br>Find out <a class="govuk-link" href="https://www.gov.uk/guidance/council-tax-band-changes" target="_blank" >when your Council Tax band may change</a> (opens in a new tab).
 
-# --- Council Tax band for my new property'
+# --- Council Tax band for my new property
 councilTaxBandForNew.title = I need a Council Tax band for my new property - Valuation Office Agency contact form - GOV.UK
 councilTaxBandForNew.heading = I need a Council Tax band for my new property
 councilTaxBandForNew.p1.part1 = Contact your local council
@@ -244,7 +244,7 @@ councilTaxBandForNew.p4.part1 = When to contact your council about Council Tax
 councilTaxBandForNew.p4.url = https://www.gov.uk/guidance/your-property-and-council-tax
 councilTaxBandForNew.p4.part2 = (opens in a new tab).
 
-# --- My property has been partly or fully demolished'
+# --- My property has been partly or fully demolished
 propertyDemolished.title = My property has been partly or fully demolished - Valuation Office Agency contact form - GOV.UK
 propertyDemolished.heading = My property has been partially or fully demolished
 propertyDemolished.p1.url = https://www.gov.uk/find-local-council
@@ -254,6 +254,14 @@ propertyDemolished.subheading = Other help on GOV.UK
 propertyDemolished.p2.url = https://www.gov.uk/guidance/your-property-and-council-tax
 propertyDemolished.p2.part1 = When to contact your council about Council Tax
 propertyDemolished.p2.part2 = (opens in a new tab).
+
+# --- The Council Tax band cannot be reduced or removed
+propertyWindWater.title = The Council Tax band cannot be reduced or removed - Valuation Office Agency contact form - GOV.UK
+propertyWindWater.heading = The Council Tax band cannot be reduced or removed
+propertyWindWater.p1 = If the property is wind and watertight then it is not considered to be in poor repair. The Council Tax band cannot be removed if someone could still live at the property.
+propertyWindWater.subheading = Other help on GOV.UK
+propertyWindWater.p2.url = https://www.gov.uk/government/publications/council-tax-domestic-properties-in-disrepair-or-derelict/council-tax-domestic-properties-which-are-in-disrepair-or-are-derelict
+propertyWindWater.p2 = When a Council Tax band would be affected by poor repair
 
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = What is your Council Tax enquiry about? - Valuation Office Agency contact form - GOV.UK
