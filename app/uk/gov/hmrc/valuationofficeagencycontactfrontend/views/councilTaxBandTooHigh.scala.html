@@ -26,8 +26,8 @@
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
 @beforeBlock = {
-    @govukBackLink(BackLink(content = Text(messages("site.back")),
-        href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url))
+@govukBackLink(BackLink(content = Text(messages("site.back")),
+    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url))
 }
 
 @mainTemplate(
@@ -37,10 +37,29 @@
 
     <h1 class="govuk-heading-l">@messages("councilTaxBandTooHigh.heading")</h1>
 
-    <p class="govuk-body">@Html(Messages("councilTaxBandTooHigh.body"))</p>
+    <p class="govuk-body">
+        @messages("councilTaxBandTooHigh.p1.part1")
+        <a class="govuk-link" target="_self" href=@messages("councilTaxBandTooHigh.p1.url")>
+        @messages("councilTaxBandTooHigh.p1.part2")
+        </a>
+    </p>
 
-    <h2 class="govuk-heading-m">@messages("councilTaxBandTooHigh.subHeading")</h2>
+    <h2 class="govuk-heading-m">@messages("councilTaxBandTooHigh.subheading")</h2>
 
-    <p class="govuk-body">@Html(Messages("councilTaxBandTooHigh.subBody"))</p>
+    <p class="govuk-body">
+        @messages("councilTaxBandTooHigh.p2.part1")
+        <a class="govuk-link" target="_blank" href=@messages("councilTaxBandTooHigh.p2.url")>
+        @messages("councilTaxBandTooHigh.p2.part2")
+        </a>
+        @messages("councilTaxBandTooHigh.p2.part3")
+    </p>
+
+    <p class="govuk-body">
+        @messages("councilTaxBandTooHigh.p3.part1")
+        <a class="govuk-link" target="_blank" href=@messages("councilTaxBandTooHigh.p3.url")>
+        @messages("councilTaxBandTooHigh.p3.part2")
+        </a>
+        @messages("councilTaxBandTooHigh.p3.part3")
+    </p>
 
 }

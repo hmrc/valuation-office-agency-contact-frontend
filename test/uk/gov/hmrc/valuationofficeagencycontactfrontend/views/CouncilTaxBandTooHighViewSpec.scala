@@ -18,20 +18,19 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBandForNew => council_tax_band_for_new}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBandTooHigh => council_tax_band_too_high}
 
-class CouncilTaxBandForNewViewSpec extends ViewBehaviours {
+class CouncilTaxBandTooHighViewSpec extends ViewBehaviours {
 
-  def councilTaxBandForNew = app.injector.instanceOf[council_tax_band_for_new]
+  def councilTaxBandTooHigh = app.injector.instanceOf[council_tax_band_too_high]
 
-  def view = () => councilTaxBandForNew(frontendAppConfig)(fakeRequest, messages)
+  def view = () => councilTaxBandTooHigh(frontendAppConfig)(fakeRequest, messages)
 
-  "Council Tax Band For A New Property view" must {
-    behave like normalPage(view, "councilTaxBandForNew", "title", "heading",
-      "subheading", "p1.part1", "p1.url", "p1.part2", "li1", "li2", "li3", "p2", "p3.part1", "p3.part2", "p3.url",
-      "p4.part1", "p4.url", "p4.part2")
+  "Council Tax Band Too High view" must {
+    behave like normalPage(view, "councilTaxBandTooHigh", "title", "heading",
+      "p1.part1", "p1.part2", "p1.url", "subheading", "p2.part1", "p2.url", "p2.part2", "p2.part3")
 
-    "has a link marked with site.back leading to the Council Tax Band For A New Property" in {
+    "has a link marked with site.back leading to the Council Tax Band Too High Page" in {
       val doc = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
