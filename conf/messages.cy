@@ -249,7 +249,10 @@ propertyOrAreaChanged.title = Mae fy eiddo neu’r ardal leol wedi newid - Ffurf
 propertyOrAreaChanged.heading = Mae fy eiddo neu’r ardal leol wedi newid
 propertyOrAreaChanged.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self">wasanaeth ar-lein</a> Asiantaeth y Swyddfa Brisio i ddweud wrthym am newidiadau i’ch eiddo neu’r ardal o’i hamgylch.
 businessRatesSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
- 
+
+# --- Property address
+propertyAddress.title = Beth yw cyfeiriad yr eiddo? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyAddress.heading = Beth yw cyfeiriad yr eiddo?
 propertyAddress.addressLine1 = Cyfeiriad – llinell 1
 propertyAddress.addressLine1.required = Nodwch linell gyntaf y cyfeiriad
 propertyAddress.addressLine1.invalid = Rhaid i linell 1 y cyfeiriad cynnwys llythrennau a i z, rhifau 0 i 9, cysylltnodau a bylchau yn unig

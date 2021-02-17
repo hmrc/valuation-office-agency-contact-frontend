@@ -307,6 +307,7 @@ propertyOrAreaChanged.body = Use the Valuation Office Agency’s <a href="https:
 
 businessRatesSubcategory.checkYourAnswersLabel = Enquiry details
 
+# --- Property address
 propertyAddress.title = What is the property address? - Valuation Office Agency contact form - GOV.UK
 propertyAddress.heading = What is the property address?
 propertyAddress.existing_address = This must be the same address as your original enquiry.
