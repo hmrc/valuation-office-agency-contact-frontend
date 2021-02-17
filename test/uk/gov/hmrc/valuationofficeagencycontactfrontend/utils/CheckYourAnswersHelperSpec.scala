@@ -184,7 +184,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.propertyAddress
-        result mustBe Some(AnswerRow("propertyAddress.checkYourAnswersLabel", formattedPropertyAddress(address, "<br>"), false, routes.PropertyAddressController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("propertyAddress.heading", formattedPropertyAddress(address, "<br>"), false, routes.PropertyAddressController.onPageLoad(CheckMode).url))
       }
 
       "propertyAddress function should return an Answer Row containing propertyAddress.checkYourAnswersLabel label " +
@@ -198,7 +198,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.propertyAddress
-        result mustBe Some(AnswerRow("propertyAddress.checkYourAnswersLabel", formattedPropertyAddress(address, "<br>"), false, routes.PropertyAddressController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("propertyAddress.heading", formattedPropertyAddress(address, "<br>"), false, routes.PropertyAddressController.onPageLoad(CheckMode).url))
       }
 
       "propertyAddress function should return a None if no property address is found in the User Answers" in {
@@ -219,7 +219,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.contactDetails
-        result mustBe Some(AnswerRow("contactDetails.checkYourAnswersLabel", formattedContactDetails(userAnswers.contactDetails, "<br>"), false, routes.ContactDetailsController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("contactDetails.heading", formattedContactDetails(userAnswers.contactDetails, "<br>"), false, routes.ContactDetailsController.onPageLoad(CheckMode).url))
       }
 
       "contactDetails function should return an Answer Row containing contactDetails.checkYourAnswersLabel label and a " +
@@ -234,7 +234,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.contactDetails
-        result mustBe Some(AnswerRow("contactDetails.checkYourAnswersLabel", formattedContactDetails(userAnswers.contactDetails, "<br>"), false, routes.ContactDetailsController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("contactDetails.heading", formattedContactDetails(userAnswers.contactDetails, "<br>"), false, routes.ContactDetailsController.onPageLoad(CheckMode).url))
       }
 
       "contactDetails function should return a None if no contact details is found in the User Answers" in {

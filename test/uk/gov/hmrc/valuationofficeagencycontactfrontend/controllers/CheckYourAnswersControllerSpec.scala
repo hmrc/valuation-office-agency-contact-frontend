@@ -41,7 +41,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new CheckYourAnswersController(frontendAppConfig, messagesApi, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction,
+    new CheckYourAnswersController(frontendAppConfig, messagesApi, dataRetrievalAction,
       new DataRequiredActionImpl(ec), checkYourAnswers, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
 
@@ -72,7 +72,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad().url)
     }
 
-    "The sections function produces sections for existing enquiry" in {
+    "The user answers section builder produces sections for existing enquiry" in {
       when(mockUserAnswers.contactReason) thenReturn Some("more_details")
       when(mockUserAnswers.existingEnquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.refNumber) thenReturn None
@@ -80,26 +80,26 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
       when(mockUserAnswers.whatElse) thenReturn Some("a")
 
-      val result = controller().sections(mockUserAnswers)
+      val result = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
-      result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.contactReason, checkYourAnswersHelper.existingEnquiryCategory,
-        checkYourAnswersHelper.refNumber, checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress, checkYourAnswersHelper.whatElse).flatten)))
+      result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.existingEnquiryCategory, checkYourAnswersHelper.refNumber,
+        checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress, checkYourAnswersHelper.whatElse).flatten)))
     }
 
-    "The sections function produces sections with the business rates check your answers section when the enquiry category is business_rates" in {
+    "The user answers section builder produces sections with the business rates check your answers section when the enquiry category is business_rates" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("a")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
-      val result = controller().sections(mockUserAnswers)
+      val result = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
       result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.businessRatesSubcategory,
         checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress, checkYourAnswersHelper.tellUsMore).flatten)))
     }
 
-    "The sections function produces sections with the business rates check your answers section when the enquiry category is business_rates " +
+    "The user answers section builder produces sections with the business rates check your answers section when the enquiry category is business_rates " +
       "and addressLine2 and county are None" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
@@ -107,13 +107,13 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("a")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
-      val result = controller().sections(mockUserAnswers)
+      val result = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
       result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.businessRatesSubcategory,
         checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress, checkYourAnswersHelper.tellUsMore).flatten)))
     }
 
-    "The sections function produces sections with the council tax check your answers section when the enquiry category is council_tax" in {
+    "The user answers section builder produces sections with the council tax check your answers section when the enquiry category is council_tax" in {
 
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
@@ -121,13 +121,13 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("property_demolished")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
-      val result = controller().sections(mockUserAnswers)
+      val result = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
       result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.councilTaxSubcategory,
         checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress, checkYourAnswersHelper.tellUsMore).flatten)))
     }
 
-    "The sections function produces sections with the council tax check your answers section when the enquiry category is council_tax " +
+    "The user answers section builder produces sections with the council tax check your answers section when the enquiry category is council_tax " +
       "and addressLine2 and county are None" in {
 
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
@@ -136,21 +136,21 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("property_demolished")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
-      val result = controller().sections(mockUserAnswers)
+      val result = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
       result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.councilTaxSubcategory,
         checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress, checkYourAnswersHelper.tellUsMore).flatten)))
     }
 
-    "The sections function returns None when giving an unrecognized enquiry category" in {
+    "The user answers section builder returns None when giving an unrecognized enquiry category" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("adsada")
-      val result = controller().sections(mockUserAnswers)
+      val result = controller().userAnswersSectionBuilder(mockUserAnswers)
       result mustBe None
     }
 
-    "The sections function returns None when the enquiry category is None" in {
+    "The user answers section builder returns None when the enquiry category is None" in {
       when(mockUserAnswers.enquiryCategory) thenReturn None
-      val result = controller().sections(mockUserAnswers)
+      val result = controller().userAnswersSectionBuilder(mockUserAnswers)
       result mustBe None
     }
 
