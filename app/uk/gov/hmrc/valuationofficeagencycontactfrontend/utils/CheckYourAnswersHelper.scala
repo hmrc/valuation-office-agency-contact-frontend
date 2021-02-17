@@ -47,6 +47,10 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
     x => AnswerRow("whatElse.message", x, false, routes.WhatElseController.onPageLoad().url)
   }
 
+  def anythingElse: Option[AnswerRow] = userAnswers.whatElse map {
+    answer => AnswerRow("anythingElse.heading", answer, false, ???) //TODO - to be completed as part of VOA-2575
+  }
+
   def enquiryCategory: Option[AnswerRow] = userAnswers.enquiryCategory map {
     x => AnswerRow("enquiryCategory.checkYourAnswersLabel", s"enquiryCategory.$x", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url)
   }
@@ -60,11 +64,10 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
   }
 
   def propertyAddress: Option[AnswerRow] = userAnswers.propertyAddress map {
-    addr => AnswerRow("propertyAddress.checkYourAnswersLabel", formattedPropertyAddress(addr, "<br>"), false, routes.PropertyAddressController.onPageLoad(CheckMode).url)
+    addr => AnswerRow("propertyAddress.heading", formattedPropertyAddress(addr, "<br>"), false, routes.PropertyAddressController.onPageLoad(CheckMode).url)
   }
 
   def contactDetails: Option[AnswerRow] = userAnswers.contactDetails map {
-    x => AnswerRow("contactDetails.checkYourAnswersLabel", formattedContactDetails(userAnswers.contactDetails, "<br>"), false, routes.ContactDetailsController.onPageLoad(CheckMode).url)
+    _ => AnswerRow("contactDetails.heading", formattedContactDetails(userAnswers.contactDetails, "<br>"), false, routes.ContactDetailsController.onPageLoad(CheckMode).url)
   }
-
 }

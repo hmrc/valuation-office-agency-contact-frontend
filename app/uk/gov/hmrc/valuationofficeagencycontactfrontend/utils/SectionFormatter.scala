@@ -26,11 +26,11 @@ object SectionFormatter {
   def formatSections(answerSections: Seq[Section])(implicit messages: Messages): Seq[SummaryListRow] = {
     answerSections.flatMap {
       case a: AnswerSection => formatAnswerSection(a)
-      case r: RepeaterAnswerSection => formatRepeaterAnswerSection(r)
+      case _: RepeaterAnswerSection => throw new NotImplementedError("Not used anywhere in code.")
     }
   }
 
-  def formatAnswerSection(section: AnswerSection)(implicit messages: Messages): Seq[SummaryListRow] = {
+  private def formatAnswerSection(section: AnswerSection)(implicit messages: Messages): Seq[SummaryListRow] = {
     section.rows.zipWithIndex.map {
       case (row:AnswerRow, i: Int) if row.answerIsMessageKey  => {
         SummaryListRow(
@@ -57,10 +57,5 @@ object SectionFormatter {
     }
 
   }
-
-  def formatRepeaterAnswerSection(section: RepeaterAnswerSection): Seq[SummaryListRow] = {
-    throw new NotImplementedError("Not used anywhere in code.")
-  }
-
 
 }
