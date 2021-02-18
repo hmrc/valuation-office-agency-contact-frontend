@@ -41,7 +41,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
   val mockConnector = mock[LightweightContactEventsConnector]
-  when (mockConnector.send(any[Contact], any[MessagesApi])(any[HeaderCarrier])) thenReturn Future.successful(Success(200))
+  when (mockConnector.send(any[Contact], any[MessagesApi], mockUserAnswers)(any[HeaderCarrier])) thenReturn Future.successful(Success(200))
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
@@ -53,7 +53,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       new DataRequiredActionImpl(ec), confirmation, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   val mockConnectorF = mock[LightweightContactEventsConnector]
-  when (mockConnectorF.send(any[Contact], any[MessagesApi])(any[HeaderCarrier])) thenReturn
+  when (mockConnectorF.send(any[Contact], any[MessagesApi], mockUserAnswers)(any[HeaderCarrier])) thenReturn
     Future.successful(Failure(new RuntimeException("Received exception from upstream service")))
 
   def controllerF(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
