@@ -34,15 +34,25 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
   val userAnswers2= new FakeUserAnswers(cd, "business_rates", "", "business_rates_rateable_value", propertyAddress2, tellUs)
   val checkYourAnswersHelper2 = new CheckYourAnswersHelper(userAnswers2)
 
+  val anythingElse = "AnythingElse"
+  val userAnswers3 = new FakeUserAnswers(cd, "council_tax", "council_tax_band", "", propertyAddress1, tellUs, anythingElse)
+  val checkYourAnswersHelper3 = new CheckYourAnswersHelper(userAnswers3)
+
+  val backlinkUrl = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
+  val backlinkUrlAE = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.AnythingElseTellUsController.onPageLoad().url
   def checkYourAnswers = app.injector.instanceOf[check_your_answers]
 
   def view1 = () => checkYourAnswers(frontendAppConfig, Seq(AnswerSection(None, Seq(checkYourAnswersHelper1.enquiryCategory,
     checkYourAnswersHelper1.councilTaxSubcategory, checkYourAnswersHelper1.contactDetails, checkYourAnswersHelper1.propertyAddress,
-    checkYourAnswersHelper1.tellUsMore).flatten)))(fakeRequest, messages)
+    checkYourAnswersHelper1.tellUsMore).flatten)),backlinkUrl)(fakeRequest, messages)
 
   def view2 = () => checkYourAnswers(frontendAppConfig, Seq(AnswerSection(None, Seq(checkYourAnswersHelper2.enquiryCategory,
     checkYourAnswersHelper2.businessRatesSubcategory, checkYourAnswersHelper2.contactDetails, checkYourAnswersHelper2.propertyAddress,
-    checkYourAnswersHelper2.tellUsMore).flatten)))(fakeRequest, messages)
+    checkYourAnswersHelper2.tellUsMore).flatten)),backlinkUrl)(fakeRequest, messages)
+
+  def view3 = () => checkYourAnswers(frontendAppConfig, Seq(AnswerSection(None, Seq(checkYourAnswersHelper3.enquiryCategory,
+    checkYourAnswersHelper3.existingEnquiryCategory, checkYourAnswersHelper3.refNumber, checkYourAnswersHelper3.contactDetails,
+    checkYourAnswersHelper3.propertyAddress, checkYourAnswersHelper3.anythingElse).flatten)),backlinkUrlAE)(fakeRequest, messages)
 
   "Check Your Answers view" must {
 

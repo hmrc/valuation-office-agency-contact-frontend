@@ -19,7 +19,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import play.api.data.Form
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.DataRetrievalAction
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryDateForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
@@ -35,32 +35,31 @@ class EnquiryDateControllerSpec extends ControllerSpecBase {
   def onwardRoute = routes.EnquiryDateController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new EnquiryDateController(messagesApi, getClearCacheMap, dataRetrievalAction, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+    new EnquiryDateController(messagesApi, new DataRequiredActionImpl(ec), dataRetrievalAction, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       enquiryDate, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = EnquiryDateForm()) = enquiryDate(form, EnquiryDateForm.now(), NormalMode)(fakeRequest, messages).toString()
 
 
-    "EnquiryDateController Controller" must {
+  "EnquiryDateController Controller" must {
 
-      "return OK and the correct view for a GET" in {
-        val result = controller().onPageLoad(NormalMode)(fakeRequest)
+    "return OK and the correct view for a GET" in {
+      val result = controller().onPageLoad(NormalMode)(fakeRequest)
 
-        status(result) mustBe OK
+      status(result) mustBe OK
 
-        contentAsString(result) mustBe viewAsString()
+      contentAsString(result) mustBe viewAsString()
 
-      }
-
-      "redirect to the next page when valid data is submitted" in {
-        val postRequest = fakeRequest.withFormUrlEncodedBody(("value", EnquiryDateForm.options.head.value))
-        val result = controller().onSubmit(NormalMode)(postRequest)
-
-        status(result) mustBe SEE_OTHER
-        redirectLocation(result) mustBe Some(onwardRoute.url)
-
-      }
     }
 
+    "redirect to the next page when valid data is submitted" in {
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", EnquiryDateForm.options.head.value))
+      val result = controller().onSubmit(NormalMode)(postRequest)
+
+      status(result) mustBe SEE_OTHER
+      redirectLocation(result) mustBe Some(onwardRoute.url)
+
+    }
+  }
 
 }

@@ -29,13 +29,12 @@
 @this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
         govukButton: GovukButton, govukBackLink: GovukBackLink, govukSummaryList: GovukSummaryList )
 
-@(appConfig: FrontendAppConfig, answerSections: Seq[Section])(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, answerSections: Seq[Section], backLink: String)(implicit request: Request[_], messages: Messages)
 
 
-@beforeBlock = {
-@govukBackLink(BackLink(content = Text(messages("site.back")), href =
-        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url))
-}
+    @beforeBlock = {
+    @govukBackLink(BackLink(content = Text(messages("site.back")), href = backLink))
+    }
 
 @mainTemplate(
     beforeContentBlock = Option(beforeBlock),

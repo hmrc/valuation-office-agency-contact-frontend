@@ -16,9 +16,8 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
-import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.{ControllerComponents, MessagesControllerComponents}
+import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
@@ -27,10 +26,10 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactReasonForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.ContactReasonId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.contactReason
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.contactReason
 
 
 class ContactReasonController @Inject()( override val messagesApi: MessagesApi,

@@ -51,6 +51,7 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
                         brs: String,
                         address: PropertyAddress,
                         tum: TellUsMore,
+                        ae: String = "",
                         cacheMap: CacheMap = new CacheMap("", Map())) extends UserAnswers(cacheMap) {
 
     override def tellUsMore: Option[TellUsMore] = Some(tum)
@@ -64,5 +65,7 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
     override def businessRatesSubcategory: Option[String] = Some(brs)
 
     override def propertyAddress: Option[PropertyAddress] = Some(address)
+
+    override def anythingElse: Option[String] = Some(ae)
   }
 }

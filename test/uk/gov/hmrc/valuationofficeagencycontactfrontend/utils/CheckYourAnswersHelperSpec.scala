@@ -201,6 +201,20 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         result mustBe Some(AnswerRow("propertyAddress.heading", formattedPropertyAddress(address, "<br>"), false, routes.PropertyAddressController.onPageLoad(CheckMode).url))
       }
 
+      "anythingElse function should return an Answer Row containing anythingElse.checkYourAnswersLabel label and an anythingElse text" in {
+        val cd = ContactDetails("a", "c", "e")
+        val address = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+        val councilTaxSubcategory = "council_tax_band"
+        val tellUs = TellUsMore("")
+        val anythingElse = "AnythingElseTellUs"
+
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", address, tellUs, anythingElse)
+        val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
+
+        val result = checkYourAnswers.anythingElse
+        result mustBe Some(AnswerRow("anythingElse.checkYourAnswersLabel", anythingElse, false, routes.AnythingElseTellUsController.onPageLoad().url))
+      }
+
       "propertyAddress function should return a None if no property address is found in the User Answers" in {
         val userA = new UserAnswers(new CacheMap("", Map()))
         val checkYourAnswers = new CheckYourAnswersHelper(userA)
@@ -245,8 +259,6 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         result mustBe None
       }
 
-
     }
-
   }
 }

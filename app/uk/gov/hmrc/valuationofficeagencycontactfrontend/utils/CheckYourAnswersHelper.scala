@@ -17,10 +17,10 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CheckMode}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.CheckMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.ContactFormatter._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerRow
 
 class CheckYourAnswersHelper(userAnswers: UserAnswers) {
 
@@ -47,8 +47,8 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
     x => AnswerRow("whatElse.message", x, false, routes.WhatElseController.onPageLoad().url)
   }
 
-  def anythingElse: Option[AnswerRow] = userAnswers.whatElse map {
-    answer => AnswerRow("anythingElse.heading", answer, false, ???) //TODO - to be completed as part of VOA-2575
+  def anythingElse: Option[AnswerRow] = userAnswers.anythingElse map {
+    answer => AnswerRow("anythingElse.checkYourAnswersLabel", answer, false, routes.AnythingElseTellUsController.onPageLoad().url)
   }
 
   def enquiryCategory: Option[AnswerRow] = userAnswers.enquiryCategory map {
@@ -70,4 +70,5 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
   def contactDetails: Option[AnswerRow] = userAnswers.contactDetails map {
     _ => AnswerRow("contactDetails.heading", formattedContactDetails(userAnswers.contactDetails, "<br>"), false, routes.ContactDetailsController.onPageLoad(CheckMode).url)
   }
+
 }
