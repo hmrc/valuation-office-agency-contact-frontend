@@ -109,6 +109,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
       }
 
       "return a function that goes to the tell us more page when the property address details form has been submitted without errors" in {
+        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
         when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
         navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.TellUsMoreController.onPageLoad(NormalMode)
       }
@@ -117,6 +118,20 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
         when (mockUserAnswers.contactReason) thenReturn Some("more_details")
         navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.WhatElseController.onPageLoad()
+      }
+
+      "return a function that goes to the 'Anything Else' page when the property address details form has been submitted without errors" in {
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
+        when (mockUserAnswers.contactReason) thenReturn Some("update_existing")
+        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.AnythingElseTellUsController.onPageLoad()
+      }
+
+      "return an exception when the property address details form has been submitted with a wrong reason" in {
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
+        when (mockUserAnswers.contactReason) thenReturn Some("wrong")
+        intercept[Exception] {
+          navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers)
+        }
       }
 
       "return a function that goes to the summary page when the tell us more form has been submitted without errors" in {

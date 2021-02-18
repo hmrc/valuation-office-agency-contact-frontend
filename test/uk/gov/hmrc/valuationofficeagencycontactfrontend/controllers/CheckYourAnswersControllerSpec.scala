@@ -22,7 +22,6 @@ import org.scalatestplus.mockito.MockitoSugar
 import play.api.libs.json.{JsString, Json}
 import play.api.test.Helpers._
 import uk.gov.hmrc.http.cache.client.CacheMap
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
@@ -51,11 +50,13 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
     "return 200 for a GET" in {
       val contactDetails = ContactDetails("a", "c", "e")
       val ec = "council_tax"
+      val contactReason = "new_enquiry"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
       val councilTaxSubcategory = "property_demolished"
       val tellUs = TellUsMore("Hello")
 
-      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
         ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
@@ -84,6 +85,21 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
       result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.existingEnquiryCategory, checkYourAnswersHelper.refNumber,
         checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress, checkYourAnswersHelper.whatElse).flatten)))
+    }
+
+    "The user answers section builder produces sections for update existing enquiry" in {
+      when(mockUserAnswers.contactReason) thenReturn Some("update_existing")
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.existingEnquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.refNumber) thenReturn None
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+      when(mockUserAnswers.anythingElse) thenReturn Some("a")
+
+      val result = controller().userAnswersSectionBuilder(mockUserAnswers)
+      val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
+      result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.existingEnquiryCategory,
+        checkYourAnswersHelper.refNumber,checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress, checkYourAnswersHelper.anythingElse).flatten)))
     }
 
     "The user answers section builder produces sections with the business rates check your answers section when the enquiry category is business_rates" in {

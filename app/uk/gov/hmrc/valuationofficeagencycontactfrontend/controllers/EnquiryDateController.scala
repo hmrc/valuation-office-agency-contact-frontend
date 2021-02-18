@@ -21,7 +21,7 @@ import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataClearAction, DataRetrievalAction}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryDateForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.EnquiryDateId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
@@ -33,15 +33,15 @@ import scala.concurrent.{ExecutionContext, Future}
 
 
 class EnquiryDateController @Inject()(override val messagesApi: MessagesApi,
-                                      clearData: DataClearAction,
+                                      requireData: DataRequiredAction,
                                       getData: DataRetrievalAction,
                                       dataCacheConnector: DataCacheConnector,
                                       navigator: Navigator,
                                       enquiry_date: enquiryDate,
                                       cc: MessagesControllerComponents
-                                       )(implicit ec: ExecutionContext) extends FrontendController(cc) with I18nSupport {
+                                     )(implicit ec: ExecutionContext) extends FrontendController(cc) with I18nSupport {
 
-  def onPageLoad(mode: Mode) = clearData { implicit request =>
+  def onPageLoad(mode: Mode) = (getData andThen requireData) { implicit request =>
     Ok(enquiry_date(EnquiryDateForm(), EnquiryDateForm.now(), NormalMode))
   }
 
@@ -54,7 +54,5 @@ class EnquiryDateController @Inject()(override val messagesApi: MessagesApi,
       }
     )
   }
-
-
 
 }

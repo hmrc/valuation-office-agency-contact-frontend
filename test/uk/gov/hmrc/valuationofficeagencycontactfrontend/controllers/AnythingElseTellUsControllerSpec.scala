@@ -18,55 +18,59 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
-import play.api.libs.json.{JsString, Json}
-import play.api.test.Helpers._
+import play.api.libs.json.JsString
+import play.api.test.Helpers.{contentAsString, status, _}
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.WhatElseForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.WhatElseId
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{AnythingElseForm, TellUsMoreForm}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{AnythingElseId, EnquiryCategoryId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{whatElse => what_else}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{anythingElseTellUs => anything_else}
 
-class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar {
+class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
-
-  def whatElse = app.injector.instanceOf[what_else]
+  def anythingElse = app.injector.instanceOf[anything_else]
   def internalServerError = app.injector.instanceOf[internal_Server_Error]
 
-  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+  def onwardRoute = routes.CheckYourAnswersController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new WhatElseController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), whatElse, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new AnythingElseTellUsController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction, new DataRequiredActionImpl(ec), anythingElse, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
-  def viewAsString(form: Form[String] = WhatElseForm()) = whatElse(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = AnythingElseForm(), msg: String = "") =
+    anythingElse(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
-  "TellUsMore Controller" must {
+  "AnythingElseTellUsMore Controller" must {
 
     "return OK and the correct view for a GET" in {
-      val validData: Map[String, JsString] = Map()
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString(WhatElseForm())
+      contentAsString(result) mustBe viewAsString(AnythingElseForm())
     }
 
-    "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(
-        WhatElseId.toString -> Json.toJson("value 1"))
+    "populate the view correctly on a GET when the anything else has previously been filled" in {
+      val anythingElseString = "Anything else"
+
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"),
+        AnythingElseId.toString -> JsString(anythingElseString))
+
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsString(WhatElseForm().fill("value 1"))
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsString(AnythingElseForm().fill(anythingElseString))
     }
 
     "redirect to the next page when valid data is submitted" in {
@@ -79,29 +83,13 @@ class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar {
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("message", "<>"))
-      val boundForm = WhatElseForm().bind(Map("message" -> "<>"))
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
+      val boundForm = AnythingElseForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe BAD_REQUEST
       contentAsString(result) mustBe viewAsString(boundForm)
     }
-
-    "redirect to Session Expired for a GET if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
-
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad().url)
-    }
-
-    "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("message", "value 1"))
-      val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
-
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad().url)
-    }
-
   }
 }

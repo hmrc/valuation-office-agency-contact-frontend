@@ -45,19 +45,6 @@ class ContactDetailsController @Inject()(appConfig: FrontendAppConfig,
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def enquiryBackLink(answers: UserAnswers): Either[String, String] = {
-    answers.contactReason match {
-      case Some("more_details") => Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.RefNumberController.onPageLoad().url)
-      case _ => {
-        answers.enquiryCategory match {
-          case Some("council_tax") => Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
-          case Some("business_rates") => Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
-          case _ => Left("Unknown enquiry category in enquiry key")
-        }
-      }
-    }
-  }
-
   def onPageLoad(mode: Mode) = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.contactDetails match {
@@ -90,4 +77,15 @@ class ContactDetailsController @Inject()(appConfig: FrontendAppConfig,
             Redirect(navigator.nextPage(ContactDetailsId, mode)(new UserAnswers(cacheMap))))
       )
   }
+
+  private[controllers] def enquiryBackLink(answers: UserAnswers): Either[String, String] = {
+    (answers.contactReason, answers.enquiryCategory) match {
+      case (Some("more_details"), _) => Right(routes.RefNumberController.onPageLoad().url)
+      case (Some("update_existing"), _) => Right(routes.RefNumberController.onPageLoad().url)
+      case (_, Some("council_tax")) => Right(routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
+      case (_, Some("business_rates")) => Right(routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
+      case _ => Left(s"Unknown enquiry category in enquiry key")
+    }
+  }
+
 }

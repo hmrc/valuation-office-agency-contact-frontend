@@ -87,6 +87,9 @@ GET         /council-tax-band-for-my-new-property  uk.gov.hmrc.valuationofficeag
 GET         /property-demolished                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyDemolishedController.onPageLoad()
 GET         /property-empty                        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxPropertyEmptyController.onPageLoad()
 
+GET         /anything-else-tell-us                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.AnythingElseTellUsController.onPageLoad(mode: Mode = NormalMode)
+POST        /anything-else-tell-us                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.AnythingElseTellUsController.onSubmit(mode: Mode = NormalMode)
+
 # SURVEY
 GET         /survey-thanks                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.surveyThankyou
 POST        /survey 				               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.formCompleteFeedback

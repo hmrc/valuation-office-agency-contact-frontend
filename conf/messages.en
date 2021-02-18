@@ -350,8 +350,12 @@ tellUsMore.para4 = Property reference number
 tellUsMore.ct-reference = (this can be found on your Council Tax bill)
 tellUsMore.ndr-reference = (this can be found on your business rates bill)
 tellUsMore.checkYourAnswersLabel = Enquiry
+tellUsMore.anythingElse = Is there anything else you would like to tell us about?
 
-anythingElse.heading = Is there anything else you would like to tell us about?
+anythingElse.title = Is there anything else you would like to tell us about? - Valuation Office Agency contact form - GOV.UK
+anythingElse.heading = Is there anything else you would like to tell us about? (optional)
+anythingElse.checkYourAnswersLabel = Is there anything else you would like to tell us about?
+
 
 # CONFIRMATION
 ###############################

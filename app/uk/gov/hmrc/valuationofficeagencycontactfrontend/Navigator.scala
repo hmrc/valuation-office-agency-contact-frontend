@@ -41,8 +41,13 @@ class Navigator @Inject()() {
 
   val propertyAddressRouting: UserAnswers => Call = answers => {
     answers.contactReason match {
+      case Some("new_enquiry") => routes.TellUsMoreController.onPageLoad(NormalMode)
       case Some("more_details") => routes.WhatElseController.onPageLoad()
-      case _ => routes.TellUsMoreController.onPageLoad(NormalMode)
+      case Some("update_existing") => routes.AnythingElseTellUsController.onPageLoad()
+      case Some(option) => {
+        Logger.warn(s"Navigation for contact reason reached with unknown option $option by controller")
+        throw new RuntimeException(s"Navigation for contact reason reached with unknown option $option by controller")
+      }
     }
   }
 
@@ -78,21 +83,18 @@ class Navigator @Inject()() {
   }
 
   val contactDetailsRouting: UserAnswers => Call = answers => {
-    answers.contactReason match {
-      case Some("more_details") => routes.PropertyAddressController.onPageLoad(NormalMode)
+    (answers.contactReason, answers.enquiryCategory) match {
+      case (Some("more_details"), _) => routes.PropertyAddressController.onPageLoad(NormalMode)
+      case (Some("update_existing"), _) => routes.PropertyAddressController.onPageLoad(NormalMode)
+      case (_, Some("council_tax")) => routes.PropertyAddressController.onPageLoad(NormalMode)
+      case (_, Some("business_rates")) => routes.PropertyAddressController.onPageLoad(NormalMode)
+      case (_, Some(sel)) => {
+        Logger.warn(s"Navigation for contact details page reached with an unknown selection $sel of enquiry by controller")
+        throw new RuntimeException(s"Navigation for contact details page reached unknown selection $sel of enquiry by controller")
+      }
       case _ => {
-        answers.enquiryCategory match {
-          case Some("council_tax") => routes.PropertyAddressController.onPageLoad(NormalMode)
-          case Some("business_rates") => routes.PropertyAddressController.onPageLoad(NormalMode)
-          case Some(sel) => {
-            Logger.warn(s"Navigation for contact details page reached with an unknown selection $sel of enquiry by controller")
-            throw new RuntimeException(s"Navigation for contact details page reached unknown selection $sel of enquiry by controller")
-          }
-          case None => {
-            Logger.warn("Navigation for contact details page reached without selection of enquiry by controller")
-            throw new RuntimeException("Navigation for contact details page reached without selection of enquiry by controller")
-          }
-        }
+        Logger.warn("Navigation for contact details page reached without selection of enquiry by controller")
+        throw new RuntimeException("Navigation for contact details page reached without selection of enquiry by controller")
       }
     }
   }
@@ -161,6 +163,7 @@ class Navigator @Inject()() {
     PropertyAddressId -> propertyAddressRouting,
     WhatElseId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
     TellUsMoreId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
+    AnythingElseId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
     CheckYourAnswersId -> confirmationPageRouting,
     CouncilTaxSmartLinksId -> (_ => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)),
     BusinessRatesSmartLinksId -> (_ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode))
