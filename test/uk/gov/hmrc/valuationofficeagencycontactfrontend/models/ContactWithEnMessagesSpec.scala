@@ -36,12 +36,13 @@ class ContactWithEnMessagesSpec extends SpecBase with MockitoSugar {
     result.subEnquiryCategoryMsg mustBe "TB"
   }
 
-  "return a ContactWithEnMessages when given a contact with proper keys for the enquiryCategory and subEnquiryCategory" in {
+  "return a ContactWithEnMessages when given a contact with proper keys for the existingEnquiryCategory and subEnquiryCategory" in {
     when(mockMessages.messages) thenReturn Map("en" -> Map("enquiryCategory.council_tax" -> "CT", "councilTaxSubcategory.council_tax_band" -> "TB"))
+    val userAnswers = new FakeUserAnswers(contactDetails, "", "council_tax", "", propertyAddress, TellUsMore("message"), ee = Some("council_tax"))
     val result = ContactWithEnMessage(contact, mockMessages, userAnswers)
     result.enquiryCategoryMsg mustBe "CT"
     result.isCouncilTaxEnquiry mustBe true
-    result.subEnquiryCategoryMsg mustBe "TB"
+    result.subEnquiryCategoryMsg mustBe "Existing Enquiry"
   }
 
   "throw an exception if the english version of messages is not available" in {

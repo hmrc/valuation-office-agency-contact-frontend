@@ -68,7 +68,6 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
           checkYourAnswersHelper.whatElse).flatten)))
       case (Some("update_existing"), _) => Some(Seq(
         AnswerSection(None, Seq(
-          checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.existingEnquiryCategory,
           checkYourAnswersHelper.refNumber,
           checkYourAnswersHelper.contactDetails,
@@ -97,7 +96,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
       case Some("new_enquiry") => routes.TellUsMoreController.onPageLoad(NormalMode).url
       case Some("more_details")  => routes.WhatElseController.onPageLoad().url
       case Some("update_existing")  => routes.AnythingElseTellUsController.onPageLoad().url
-      case Some(reason) => {
+      case Some(_) => {
         Logger.warn("Navigation for Check your answers page reached without selection of contact reason by controller")
         throw new RuntimeException("Navigation for check your anwsers page reached without selection of contact reason by controller")
       }
