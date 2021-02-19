@@ -100,27 +100,19 @@ class Navigator @Inject()() {
   }
 
   val confirmationPageRouting: UserAnswers => Call = answers => {
-    answers.contact match {
-      case Left(msg) => {
-        Logger.warn(msg)
-        throw new RuntimeException(msg)
-      }
-      case Right(addr) => answers.enquiryCategory match {
-        case Some("council_tax") | Some("business_rates") => routes.ConfirmationController.onPageLoad()
-        case Some(sel) => {
-          Logger.warn(s"Navigation for confirmation page reached with an unknown selection $sel of enquiry by controller")
-          throw new RuntimeException(s"Navigation for confirmation page reached unknown selection $sel of enquiry by controller")
-        }
-        case None => {
-          Logger.warn("Navigation for confirmation page reached without selection of enquiry by controller")
-          throw new RuntimeException("Navigation for confirmation page reached without selection of enquiry by controller")
-        }
-      }
-      case _ => {
-        Logger.warn("Unknown exception in Confirmation Page Routing")
-        throw new RuntimeException("Unknown exception in Confirmation Page Routing")
-      }
-    }
+    answers.contact().fold(msg => {
+      Logger.warn(msg)
+      throw new RuntimeException(msg)
+    }, _ => answers.enquiryCategory.orElse(answers.existingEnquiryCategory) match {
+      case Some("council_tax") | Some("business_rates") => routes.ConfirmationController.onPageLoad()
+      case Some("housing_allowance") | Some("other") => routes.ConfirmationController.onPageLoad()
+      case Some(sel) =>
+        Logger.warn(s"Navigation for confirmation page reached with an unknown selection $sel of enquiry by controller")
+        throw new RuntimeException(s"Navigation for confirmation page reached unknown selection $sel of enquiry by controller")
+      case None =>
+        Logger.warn("Navigation for confirmation page reached without selection of enquiry by controller")
+        throw new RuntimeException("Navigation for confirmation page reached without selection of enquiry by controller")
+    })
   }
 
   val businessRatesPageRouting: UserAnswers => Call = answers => {
@@ -138,7 +130,7 @@ class Navigator @Inject()() {
 
   val councilTaxPageRouting: UserAnswers => Call = answers => {
     answers.councilTaxSubcategory match {
-      case Some("council_tax_band_too_high") =>  routes.CouncilTaxBandTooHighController.onPageLoad()
+      case Some("council_tax_band_too_high") => routes.CouncilTaxBandTooHighController.onPageLoad()
       case Some("council_tax_bill") => routes.CouncilTaxBillController.onPageLoad()
       case Some("council_tax_band_for_new") => routes.CouncilTaxBandForNewController.onPageLoad()
       case Some("council_tax_property_empty") => routes.CouncilTaxPropertyEmptyController.onPageLoad()

@@ -52,11 +52,14 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
                         address: PropertyAddress,
                         tum: TellUsMore,
                         ae: String = "",
+                        ee: Option[String] = None,
                         cacheMap: CacheMap = new CacheMap("", Map())) extends UserAnswers(cacheMap) {
 
     override def tellUsMore: Option[TellUsMore] = Some(tum)
 
     override def enquiryCategory: Option[String] = Some(eq)
+
+    override def existingEnquiryCategory: Option[String] = ee
 
     override def councilTaxSubcategory: Option[String] = Some(cts)
 

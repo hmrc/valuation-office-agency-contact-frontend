@@ -41,7 +41,6 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
   val mockConnector = mock[LightweightContactEventsConnector]
-  when (mockConnector.send(any[Contact], any[MessagesApi])(any[HeaderCarrier])) thenReturn Future.successful(Success(200))
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
@@ -53,8 +52,6 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       new DataRequiredActionImpl(ec), confirmation, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   val mockConnectorF = mock[LightweightContactEventsConnector]
-  when (mockConnectorF.send(any[Contact], any[MessagesApi])(any[HeaderCarrier])) thenReturn
-    Future.successful(Failure(new RuntimeException("Received exception from upstream service")))
 
   def controllerF(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ConfirmationController(frontendAppConfig, messagesApi, mockConnectorF, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction,
@@ -198,6 +195,8 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
         ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      when (mockConnector.send(any[Contact], any[MessagesApi], any[UserAnswers])(any[HeaderCarrier])) thenReturn Future.successful(Success(200))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 

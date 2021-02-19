@@ -20,43 +20,52 @@ import org.apache.commons.text.StringEscapeUtils
 import play.api.i18n.MessagesApi
 import play.api.libs.json.Json
 import play.api.Logger
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
-case class ContactWithEnMessage (contact: ContactDetails,
-                                 propertyAddress: PropertyAddress,
-                                 isCouncilTaxEnquiry: Boolean,
-                                 enquiryCategoryMsg: String,
-                                 subEnquiryCategoryMsg: String,
-                                 message: String)
+case class ContactWithEnMessage(contact: ContactDetails,
+                                propertyAddress: PropertyAddress,
+                                isCouncilTaxEnquiry: Boolean,
+                                enquiryCategoryMsg: String,
+                                subEnquiryCategoryMsg: String,
+                                message: String)
 
 object ContactWithEnMessage {
   implicit val format = Json.format[ContactWithEnMessage]
   val councilTaxKey = "council_tax"
   val businessRatesKey = "business_rates"
 
-  def apply(ct: Contact, messagesApi: MessagesApi): ContactWithEnMessage = {
+  def apply(ct: Contact, messagesApi: MessagesApi, userAnswers: UserAnswers): ContactWithEnMessage = {
     messagesApi.messages.get("en") match {
       case Some(messageMap) =>
-        val enquiryCategoryMsg = messageMap.get("enquiryCategory." + ct.enquiryCategory) match {
-          case Some(msg) => msg
-          case None =>
+        val enquiryCategoryMsg = {
+          (messageMap.get("enquiryCategory." + ct.enquiryCategory), messageMap.get("existingEnquiryCategory." + ct.enquiryCategory)) match {
+          case (Some(msg), _) => msg
+          case (_, Some(msg)) => msg
+          case _ =>
             Logger.warn("Unable to find key " + ct.enquiryCategory + " in en messages")
             throw new RuntimeException("Unable to find key " + ct.enquiryCategory + " in en messages")
+          }
         }
 
         val enquiryKey = ct.enquiryCategory match {
           case `councilTaxKey` => "councilTaxSubcategory"
           case `businessRatesKey` => "businessRatesSubcategory"
-          case err =>
+          case "housing_allowance" => "housingAllowanceSubcategory"
+          case "other" => "other"
+          case _ =>
             Logger.warn("Unknown enquiry category key " + ct.enquiryCategory)
             throw new RuntimeException("Unknown enquiry category key " + ct.enquiryCategory)
         }
 
-        val subEnquiryCategoryMsg = messageMap.get(enquiryKey + "." + ct.subEnquiryCategory) match {
-          case Some(msg) => msg
-          case None =>
-            Logger.warn("Unable to find key " + enquiryKey + ct.subEnquiryCategory + " in en messages")
-            throw new RuntimeException("Unable to find key " + enquiryKey + ct.subEnquiryCategory + " in en messages")
+        val subEnquiryCategoryMsg = if (userAnswers.existingEnquiryCategory.isDefined) "Existing Enquiry" else {
+          messageMap.get(enquiryKey + "." + ct.subEnquiryCategory) match {
+            case Some(msg) => msg
+            case None =>
+              Logger.warn(s"Unable to find key $enquiryKey.${ct.subEnquiryCategory} in en messages")
+              throw new RuntimeException(s"Unable to find key $enquiryKey.${ct.subEnquiryCategory} in en messages")
+          }
         }
+
         ContactWithEnMessage(ct.contact, ct.propertyAddress, ct.enquiryCategory == councilTaxKey, enquiryCategoryMsg,
           subEnquiryCategoryMsg, StringEscapeUtils.escapeJava(ct.message))
       case None =>

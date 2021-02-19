@@ -46,36 +46,28 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def enquiryKey(answers: UserAnswers): Either[String, String] = {
-    answers.enquiryCategory match {
-      case Some("council_tax") => Right("councilTaxSubcategory")
-      case Some("business_rates") => Right("businessRatesSubcategory")
-      case _ => Left("Unknown enquiry category in enquiry key")
-    }
-  }
-
   def onPageLoadSendEmail = (getData andThen requireData).async { implicit request =>
 
     val contact = request.userAnswers.contact() match {
       case Right(ct) => ct
       case Left(msg) =>
-        Logger.warn(s"Navigation for Confirmation page reached without a contact and error $msg")
-        throw new RuntimeException(s"Navigation for Confirmation page reached without a contact and error $msg")
+        Logger.warn(s"On Sending Email - Navigation for Confirmation page reached without a contact and error $msg")
+        throw new RuntimeException(s"On Sending Email - Navigation for Confirmation page reached without a contact and error $msg")
     }
 
-    val result = connector.send(contact, messagesApi)
+    val result = connector.send(contact, messagesApi, request.userAnswers)
 
     result map {
-      case Success(s) =>
+      case Success(_) =>
         enquiryKey(request.userAnswers) match {
-          case Right(key) =>
+          case Right(_) =>
             Redirect(navigator.nextPage(CheckYourAnswersId, NormalMode)(request.userAnswers))
           case Left(msg) => {
-            Logger.warn(s"Navigation for Confirmation page reached with error $msg")
-            throw new RuntimeException(s"Navigation for Confirmation page reached with error $msg")
+            Logger.warn(s"Obtaining enquiry value - Navigation for Confirmation page reached with error $msg")
+            throw new RuntimeException(s"Obtaining enquiry value - Navigation for Confirmation page reached with error $msg")
           }
         }
-      case Failure(ex) => throw new RuntimeException(s"Navigation for Confirmation page reached with error")
+      case Failure(ex) => throw new RuntimeException(s"Navigation for Confirmation page reached with error - ${ex.getMessage}")
     }
   }
 
@@ -84,11 +76,23 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
     val contact = request.userAnswers.contact() match {
       case Right(ct) => ct
       case Left(msg) =>
-        Logger.warn(s"Navigation for Confirmation page reached without a contact and error $msg")
-        throw new RuntimeException(s"Navigation for Confirmation page reached without a contact and error $msg")
+        Logger.warn(s"On Page load - Navigation for Confirmation page reached without a contact and error $msg")
+        throw new RuntimeException(s"On Page load - Navigation for Confirmation page reached without a contact and error $msg")
     }
 
     val date = DateFormatter.todaysDate()
     Ok(confirmation(appConfig, contact, date, enquiryKey(request.userAnswers).right.get, SatisfactionSurveyForm.apply))
+  }
+
+  private[controllers] def enquiryKey(answers: UserAnswers): Either[String, String] = {
+    (answers.enquiryCategory, answers.existingEnquiryCategory) match {
+      case (Some("council_tax"), _) => Right("councilTaxSubcategory")
+      case (Some("business_rates"), _) => Right("businessRatesSubcategory")
+      case (_, Some("council_tax")) => Right("councilTaxSubcategory")
+      case (_, Some("business_rates")) => Right("businessRatesSubcategory")
+      case (_, Some("housing_allowance")) => Right("housingAllowanceSubcategory")
+      case (_, Some("other")) => Right("other")
+      case _ => Left("Unknown enquiry category in enquiry key")
+    }
   }
 }

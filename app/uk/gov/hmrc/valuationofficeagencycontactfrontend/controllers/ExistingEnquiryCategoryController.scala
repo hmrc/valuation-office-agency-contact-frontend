@@ -23,7 +23,7 @@ import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ExistingEnquiryCategoryForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.ExistingEnquiryCategoryId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, CouncilTaxSubcategoryId, ExistingEnquiryCategoryId, HousingAllowanceSubcategoryId, OtherSubcategoryId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.existingEnquiryCategory
@@ -57,13 +57,26 @@ class ExistingEnquiryCategoryController @Inject()(
       ExistingEnquiryCategoryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(existingEnquiryCategory(appConfig, formWithErrors, mode))),
-        (value) =>
-          dataCacheConnector.save[String](request.sessionId, ExistingEnquiryCategoryId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(ExistingEnquiryCategoryId, mode)(new UserAnswers(cacheMap))))
+        value => {
+          for {
+            _ <- saveSubCategoryInCache(value, request.sessionId)
+            cacheMap <- dataCacheConnector.save[String](request.sessionId, ExistingEnquiryCategoryId.toString, value)
+          } yield Redirect(navigator.nextPage(ExistingEnquiryCategoryId, mode)(new UserAnswers(cacheMap)))
+        }
       )
   }
 
   def redirect: Action[AnyContent] = Action {
     Redirect(routes.EnquiryCategoryController.onPageLoad(NormalMode))
+  }
+
+  private def saveSubCategoryInCache(subcategory: String, sessionId: String) = {
+    subcategory match {
+      case "council_tax"       => dataCacheConnector.save[String](sessionId, CouncilTaxSubcategoryId.toString, subcategory)
+      case "business_rates"    => dataCacheConnector.save[String](sessionId, BusinessRatesSubcategoryId.toString, subcategory)
+      case "housing_allowance" => dataCacheConnector.save[String](sessionId, HousingAllowanceSubcategoryId.toString, subcategory)
+      case "other"             => dataCacheConnector.save[String](sessionId, OtherSubcategoryId.toString, subcategory)
+      case _                   => Future.unit
+    }
   }
 }

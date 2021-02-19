@@ -89,7 +89,6 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
     "The user answers section builder produces sections for update existing enquiry" in {
       when(mockUserAnswers.contactReason) thenReturn Some("update_existing")
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.existingEnquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.refNumber) thenReturn None
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
@@ -98,7 +97,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val result = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
-      result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.existingEnquiryCategory,
+      result mustBe Some(Seq(AnswerSection(None, Seq(checkYourAnswersHelper.existingEnquiryCategory,
         checkYourAnswersHelper.refNumber,checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress, checkYourAnswersHelper.anythingElse).flatten)))
     }
 

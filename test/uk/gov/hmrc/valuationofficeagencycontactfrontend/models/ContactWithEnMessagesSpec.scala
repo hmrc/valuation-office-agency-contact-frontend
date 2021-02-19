@@ -26,19 +26,29 @@ class ContactWithEnMessagesSpec extends SpecBase with MockitoSugar {
   val contactDetails = ContactDetails("first", "email", "contactNumber")
   val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "e")
   val contact = Contact(contactDetails, propertyAddress, "council_tax", "council_tax_band", "msg")
+  val userAnswers = new FakeUserAnswers(contactDetails, "council_tax", "council_tax", "", propertyAddress, TellUsMore("message"))
 
   "return a ContactWithEnMessages when given a contact with proper keys for the enquiryCategory and subEnquiryCategory" in {
     when(mockMessages.messages) thenReturn Map("en" -> Map("enquiryCategory.council_tax" -> "CT", "councilTaxSubcategory.council_tax_band" -> "TB"))
-    val result = ContactWithEnMessage(contact, mockMessages)
+    val result = ContactWithEnMessage(contact, mockMessages, userAnswers)
     result.enquiryCategoryMsg mustBe "CT"
     result.isCouncilTaxEnquiry mustBe true
     result.subEnquiryCategoryMsg mustBe "TB"
   }
 
+  "return a ContactWithEnMessages when given a contact with proper keys for the existingEnquiryCategory and subEnquiryCategory" in {
+    when(mockMessages.messages) thenReturn Map("en" -> Map("enquiryCategory.council_tax" -> "CT", "councilTaxSubcategory.council_tax_band" -> "TB"))
+    val userAnswers = new FakeUserAnswers(contactDetails, "", "council_tax", "", propertyAddress, TellUsMore("message"), ee = Some("council_tax"))
+    val result = ContactWithEnMessage(contact, mockMessages, userAnswers)
+    result.enquiryCategoryMsg mustBe "CT"
+    result.isCouncilTaxEnquiry mustBe true
+    result.subEnquiryCategoryMsg mustBe "Existing Enquiry"
+  }
+
   "throw an exception if the english version of messages is not available" in {
     when(mockMessages.messages) thenReturn Map("fr" -> Map("enquiryCategory.council_tax" -> "CT", "councilTaxSubcategory.council_tax_band" -> "TB"))
     intercept[Exception] {
-      ContactWithEnMessage(contact, mockMessages)
+      ContactWithEnMessage(contact, mockMessages, userAnswers)
     }
   }
 
@@ -46,21 +56,21 @@ class ContactWithEnMessagesSpec extends SpecBase with MockitoSugar {
     val contact = Contact(contactDetails, propertyAddress, "wibble", "council_tax_band", "msg")
     when(mockMessages.messages) thenReturn Map("en" -> Map("councilTaxSubcategory.council_tax_band" -> "TB"))
     intercept[Exception] {
-      ContactWithEnMessage(contact, mockMessages)
+      ContactWithEnMessage(contact, mockMessages, userAnswers)
     }
   }
 
   "throw an exception if the english version of messages does not contain a value for the enquiry category message key" in {
     when(mockMessages.messages) thenReturn Map("en" -> Map("councilTaxSubcategory.council_tax_band" -> "TB"))
     intercept[Exception] {
-      ContactWithEnMessage(contact, mockMessages)
+      ContactWithEnMessage(contact, mockMessages, userAnswers)
     }
   }
 
   "throw an exception if the english version of the messages does not contain a value for the sub enquiry category key" in {
     when(mockMessages.messages) thenReturn Map("fr" -> Map("enquiryCategory.council_tax" -> "CT"))
     intercept[Exception] {
-      ContactWithEnMessage(contact, mockMessages)
+      ContactWithEnMessage(contact, mockMessages, userAnswers)
     }
   }
 }

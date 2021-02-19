@@ -46,19 +46,25 @@ class UserAnswers(val cacheMap: CacheMap) {
 
   def propertyAddress: Option[PropertyAddress] = cacheMap.getEntry[PropertyAddress](PropertyAddressId.toString)
 
+  def housingAllowanceSubcategory: Option[String] = cacheMap.getEntry[String](HousingAllowanceSubcategoryId.toString)
+
+  def otherSubcategory: Option[String] = cacheMap.getEntry[String](OtherSubcategoryId.toString)
+
   def contact(): Either[String, Contact] = {
 
     val optionalContactModel = for {
       cd <- contactDetails
       pa <- propertyAddress
-      eq <- enquiryCategory
+      eq <- enquiryCategory orElse existingEnquiryCategory
       subcategory <- eq match {
         case "council_tax" => councilTaxSubcategory
         case "business_rates" => businessRatesSubcategory
+        case "housing_allowance" => housingAllowanceSubcategory
+        case "other" => otherSubcategory
         case _ => None
       }
-      tellUs <- tellUsMore
-    } yield Contact(cd, pa, eq, subcategory, tellUs.message)
+      message <- tellUsMore.map(_.message).orElse(whatElse).orElse(anythingElse)
+    } yield Contact(cd, pa, eq, subcategory, message)
 
     optionalContactModel match {
       case Some(c @ Contact(_, _, _, _, _)) => Right(c)

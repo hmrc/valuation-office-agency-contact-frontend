@@ -59,5 +59,13 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe viewAsString(ExistingEnquiryCategoryForm().fill(ExistingEnquiryCategoryForm.options.head.value))
     }
 
+    "redirect to the next page when valid data is submitted" in {
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "council_tax"))
+
+      val result = controller().onSubmit(NormalMode)(postRequest)
+
+      status(result) mustBe SEE_OTHER
+      redirectLocation(result) mustBe Some(onwardRoute.url)
+    }
   }
 }

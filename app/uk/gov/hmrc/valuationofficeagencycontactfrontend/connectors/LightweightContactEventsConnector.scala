@@ -29,6 +29,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.util.{Failure, Success, Try}
 import uk.gov.hmrc.http.HttpReads.Implicits._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 class LightweightContactEventsConnector @Inject()(http: HttpClient,
                                                   val configuration: Configuration,
@@ -42,7 +43,8 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient,
 
   def getStyleGuide = http.GET[HttpResponse](s"$serviceUrl${baseSegment}style-guide")
 
-  def send(input: Contact, messagesApi: MessagesApi)(implicit hc: HeaderCarrier) = sendJson(Json.toJson(ContactWithEnMessage(input, messagesApi)))
+  def send(input: Contact, messagesApi: MessagesApi, userAnswers: UserAnswers)(implicit hc: HeaderCarrier) =
+    sendJson(Json.toJson(ContactWithEnMessage(input, messagesApi, userAnswers)))
 
   def sendJson(json: JsValue)(implicit hc: HeaderCarrier): Future[Try[Int]] = {
     http.POST[JsValue, HttpResponse](s"$serviceUrl${baseSegment}create", json, Seq(jsonContentTypeHeader))
