@@ -58,9 +58,10 @@ class ExistingEnquiryCategoryController @Inject()(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(existingEnquiryCategory(appConfig, formWithErrors, mode))),
         value => {
-          saveSubCategoryInCache(value, request.sessionId)
-          dataCacheConnector.save[String](request.sessionId, ExistingEnquiryCategoryId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(ExistingEnquiryCategoryId, mode)(new UserAnswers(cacheMap))))
+          for {
+            _ <- saveSubCategoryInCache(value, request.sessionId)
+            cacheMap <- dataCacheConnector.save[String](request.sessionId, ExistingEnquiryCategoryId.toString, value)
+          } yield Redirect(navigator.nextPage(ExistingEnquiryCategoryId, mode)(new UserAnswers(cacheMap)))
         }
       )
   }

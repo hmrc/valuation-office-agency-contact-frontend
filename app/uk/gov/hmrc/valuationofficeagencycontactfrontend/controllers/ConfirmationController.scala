@@ -90,6 +90,8 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
       case (Some("business_rates"), _) => Right("businessRatesSubcategory")
       case (_, Some("council_tax")) => Right("councilTaxSubcategory")
       case (_, Some("business_rates")) => Right("businessRatesSubcategory")
+      case (_, Some("housing_allowance")) => Right("housingAllowanceSubcategory")
+      case (_, Some("other")) => Right("other")
       case _ => Left("Unknown enquiry category in enquiry key")
     }
   }
