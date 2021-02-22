@@ -130,8 +130,8 @@ contactReason.more_details = Rwyf am ddarparu mwy o fanylion ar gyfer ymholiad s
 contactReason.update_existing = Rwyf am gael diweddariad ar ymholiad
 error.contactReason.required = Dewiswch pam rydych chi eisiau cysylltu â ni
 
-enquiryDate.title = A wnaethoch chi eich ymholiad cyn {0} - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-enquiryDate.heading = A wnaethoch chi eich ymholiad cyn {0}
+enquiryDate.title = A wnaethoch chi eich ymholiad cyn {0}? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+enquiryDate.heading = A wnaethoch chi eich ymholiad cyn {0}?
 enquiryDate.yes = Do
 enquiryDate.no = Naddo
 enquiryDate.notKnow = Ddim yn siŵr
