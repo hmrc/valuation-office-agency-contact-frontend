@@ -30,12 +30,13 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryDateForm
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 
 @this(mainTemplate: main_template, formWithCSFR: formWithCSRF, govukBackLink: GovukBackLink,
         govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary, govukFieldset: GovukFieldset)
 
 
-@(form: Form[String], formattedDate: String, mode: Mode)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, form: Form[String], formattedDate: String, mode: Mode)(implicit request: Request[_], messages: Messages)
 
 
 @beforeBlock = {

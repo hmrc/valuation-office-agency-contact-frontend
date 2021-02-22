@@ -17,29 +17,31 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.data.Form
+import play.api.libs.json.JsString
+import play.api.test.Helpers._
+import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryDateForm
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.EnquiryDateId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{enquiryDate => enquiry_date}
-import play.api.test.Helpers._
-
 
 class EnquiryDateControllerSpec extends ControllerSpecBase {
-
 
   def enquiryDate = inject[enquiry_date]
 
   def onwardRoute = routes.EnquiryDateController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new EnquiryDateController(messagesApi, new DataRequiredActionImpl(ec), dataRetrievalAction, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      enquiryDate, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new EnquiryDateController(frontendAppConfig, messagesApi, new DataRequiredActionImpl(ec), dataRetrievalAction,
+                              FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+                              enquiryDate, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
-  def viewAsString(form: Form[String] = EnquiryDateForm()) = enquiryDate(form, EnquiryDateForm.now(), NormalMode)(fakeRequest, messages).toString()
-
+  def viewAsString(form: Form[String] = EnquiryDateForm()) =
+    enquiryDate(frontendAppConfig, form, EnquiryDateForm.now(), NormalMode)(fakeRequest, messages).toString()
 
   "EnquiryDateController Controller" must {
 
@@ -50,6 +52,15 @@ class EnquiryDateControllerSpec extends ControllerSpecBase {
 
       contentAsString(result) mustBe viewAsString()
 
+    }
+
+    "populate the view correctly on a GET when the question has previously been answered" in {
+      val validData = Map(EnquiryDateId.toString -> JsString(EnquiryDateForm.options.head.value))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      contentAsString(result) mustBe viewAsString(EnquiryDateForm().fill(EnquiryDateForm.options.head.value))
     }
 
     "redirect to the next page when valid data is submitted" in {

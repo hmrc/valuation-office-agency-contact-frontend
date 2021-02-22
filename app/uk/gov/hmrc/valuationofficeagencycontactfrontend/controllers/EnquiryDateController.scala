@@ -19,7 +19,6 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryDateForm
@@ -27,12 +26,14 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.EnquiryDateI
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.enquiryDate
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
 
-class EnquiryDateController @Inject()(override val messagesApi: MessagesApi,
+class EnquiryDateController @Inject()(appConfig: FrontendAppConfig,
+                                      override val messagesApi: MessagesApi,
                                       requireData: DataRequiredAction,
                                       getData: DataRetrievalAction,
                                       dataCacheConnector: DataCacheConnector,
@@ -42,12 +43,16 @@ class EnquiryDateController @Inject()(override val messagesApi: MessagesApi,
                                      )(implicit ec: ExecutionContext) extends FrontendController(cc) with I18nSupport {
 
   def onPageLoad(mode: Mode) = (getData andThen requireData) { implicit request =>
-    Ok(enquiry_date(EnquiryDateForm(), EnquiryDateForm.now(), NormalMode))
+    val preparedForm = request.userAnswers.enquiryDate match {
+      case None => EnquiryDateForm()
+      case Some(value) => EnquiryDateForm().fill(value)
+    }
+    Ok(enquiry_date(appConfig, preparedForm, EnquiryDateForm.now(), NormalMode))
   }
 
   def onSubmit(mode: Mode) = getData.async { implicit request =>
     EnquiryDateForm().bindFromRequest().fold(
-      formWithErrors =>Future.successful(BadRequest(enquiry_date(formWithErrors, EnquiryDateForm.now(), NormalMode))),
+      formWithErrors =>Future.successful(BadRequest(enquiry_date(appConfig, formWithErrors, EnquiryDateForm.now(), NormalMode))),
       value => {
         dataCacheConnector.save[String](request.sessionId, EnquiryDateId.toString, value).map(cacheMap =>
           Redirect(navigator.nextPage(EnquiryDateId, mode)(new UserAnswers(cacheMap))))
