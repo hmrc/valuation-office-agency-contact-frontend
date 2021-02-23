@@ -64,7 +64,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       val contactDetails = ContactDetails("a", "c", "e")
       val ec = "council_tax"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
-      val councilTaxSubcategory = "property_demolished"
+      val councilTaxSubcategory = "council_tax_property_demolished"
       val tellUs = TellUsMore("Hello")
       val date = DateFormatter.todaysDate()
 
@@ -86,7 +86,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       val contactDetails = ContactDetails("a", "c", "e")
       val ec = "council_tax"
       val propertyAddress = PropertyAddress("a", None, "c", None, "f")
-      val councilTaxSubcategory = "property_demolished"
+      val councilTaxSubcategory = "council_tax_property_demolished"
       val tellUs = TellUsMore("Hello")
       val date = DateFormatter.todaysDate()
 
@@ -128,7 +128,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("property_demolished")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_demolished")
 
       val result = controller().enquiryKey(mockUserAnswers)
       val isCouncilTaxSelection = result.right.get.startsWith("councilTaxSubcategory")
@@ -153,7 +153,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       val contactDetails = ContactDetails("a", "c", "e")
       val ec = "other"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
-      val councilTaxSubcategory = "property_demolished"
+      val councilTaxSubcategory = "council_tax_property_demolished"
       val tellUs = TellUsMore("Hello")
 
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
@@ -190,7 +190,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       val contactDetails = ContactDetails("a", "c", "e")
       val ec = "council_tax"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
-      val councilTaxSubcategory = "property_demolished"
+      val councilTaxSubcategory = "council_tax_property_demolished"
       val tellUs = TellUsMore("Hello")
 
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
