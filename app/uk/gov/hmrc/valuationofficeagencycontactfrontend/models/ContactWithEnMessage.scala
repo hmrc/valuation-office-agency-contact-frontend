@@ -24,7 +24,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 case class ContactWithEnMessage(contact: ContactDetails,
                                 propertyAddress: PropertyAddress,
-                                isCouncilTaxEnquiry: Boolean,
+                                contactReason: Option[String],
                                 enquiryCategoryMsg: String,
                                 subEnquiryCategoryMsg: String,
                                 message: String)
@@ -65,9 +65,9 @@ object ContactWithEnMessage {
               throw new RuntimeException(s"Unable to find key $enquiryKey.${ct.subEnquiryCategory} in en messages")
           }
         }
-
-        ContactWithEnMessage(ct.contact, ct.propertyAddress, ct.enquiryCategory == councilTaxKey, enquiryCategoryMsg,
+        ContactWithEnMessage(ct.contact, ct.propertyAddress, userAnswers.contactReason, enquiryCategoryMsg,
           subEnquiryCategoryMsg, StringEscapeUtils.escapeJava(ct.message))
+
       case None =>
         Logger.warn("Unable to find en messages when creating message map")
         throw new RuntimeException("Unable to find en messages when creating message map")

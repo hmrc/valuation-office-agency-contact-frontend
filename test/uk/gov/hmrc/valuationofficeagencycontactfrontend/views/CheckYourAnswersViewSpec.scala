@@ -34,7 +34,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
   val userAnswers2= new FakeUserAnswers(cd, "business_rates", "", "business_rates_rateable_value", propertyAddress2, tellUs)
   val checkYourAnswersHelper2 = new CheckYourAnswersHelper(userAnswers2)
 
-  val anythingElse = "AnythingElse"
+  val anythingElse = Some("AnythingElse")
   val userAnswers3 = new FakeUserAnswers(cd, "council_tax", "council_tax_band", "", propertyAddress1, tellUs, anythingElse)
   val checkYourAnswersHelper3 = new CheckYourAnswersHelper(userAnswers3)
 
