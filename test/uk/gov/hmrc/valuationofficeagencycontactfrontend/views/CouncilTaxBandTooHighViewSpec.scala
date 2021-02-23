@@ -28,7 +28,7 @@ class CouncilTaxBandTooHighViewSpec extends ViewBehaviours {
 
   "Council Tax Band Too High view" must {
     behave like normalPage(view, "councilTaxBandTooHigh", "title", "heading",
-      "p1.part1", "p1.part2", "p1.url", "subheading", "p2.part1", "p2.url", "p2.part2", "p2.part3")
+      "p1.part1", "p1.part2", "p1.url", "subheading", "p2", "p2.url", "p3", "p3.url", "p4", "p4.url")
 
     "has a link marked with site.back leading to the Council Tax Band Too High Page" in {
       val doc = asDocument(view())

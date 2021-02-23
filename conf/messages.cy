@@ -212,12 +212,33 @@ contactDetails.contactNumber.invalid = Nodwch rif ffôn, fel 01632 960 001
 contactDetails.checkYourAnswersLabel = Manylion cyswllt
 
 # --- Council Tax Bill
-councilTaxBill.title = My Council Tax bill - Valuation Office Agency contact form - GOV.UK
-councilTaxBill.heading = My Council Tax bill
-councilTaxBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council">Contact your local council </a> if you have any questions about your Council Tax bill, as they handle billing and payments.
-councilTaxBill.subheading = Other help on GOV.UK
-councilTaxBill.p2 = Check with your council to see if you can <a class="govuk-link" target="_blank" href="https://www.gov.uk/apply-for-council-tax-discount">apply for a discount on your Council Tax bill. </a>
-councilTaxBill.p3 = Or you can check how to <a class="govuk-link" target="_blank" href="https://www.gov.uk/apply-council-tax-reduction">apply for Council Tax Reduction. </a>
+councilTaxBill.title = Siaradwch â'ch cyngor lleol am eich bil treth gyngor - Valuation Office Agency contact form - GOV.UK
+councilTaxBill.heading = Siaradwch â'ch cyngor lleol am eich bil treth gyngor
+councilTaxBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council">Cysylltwch â'ch cyngor lleol </a> os oes gennych unrhyw gwestiynau am eich bil Treth Gyngor, gan eu bod yn delio â biliau a thaliadau.
+councilTaxBill.subheading = Cymorth arall ar GOV.UK
+councilTaxBill.p2 = <a class="govuk-link" target="_blank" href="https://www.gov.uk/apply-for-council-tax-discount">Gwnewch gais am ostyngiad ar eich bil Treth Gyngor</a>
+councilTaxBill.p3 = <a class="govuk-link" target="_blank" href="https://www.gov.uk/apply-council-tax-reduction">Gwnewch gais am Leihad Treth Gyngor</a>
+
+# --- Council Tax Band Too High
+councilTaxBandTooHigh.title = Gallwch herio'ch band Treth Gyngor ar-lein - Valuation Office Agency contact form - GOV.UK
+councilTaxBandTooHigh.heading = Gallwch herio'ch band Treth Gyngor ar-lein
+councilTaxBandTooHigh.p1.part1 = Defnyddiwch y gwasanaeth Treth Gyngor
+councilTaxBandTooHigh.p1.part2 = i wirio a herio'ch band Treth Gyngor.
+councilTaxBandTooHigh.p1.url = https://www.gov.uk/challenge-council-tax-band
+councilTaxBandTooHigh.subheading = Cymorth arall ar GOV.UK
+councilTaxBandTooHigh.p2 = Sut i herio'ch band Treth Gyngor
+councilTaxBandTooHigh.p2.url = https://www.gov.uk/challenge-council-tax-band
+councilTaxBandTooHigh.p3 = Pryd y gall eich band Treth Gyngor newid
+councilTaxBandTooHigh.p3.url = https://www.gov.uk/guidance/council-tax-band-changes
+councilTaxBandTooHigh.p4 = Sut mae eiddo'n cael eu prisio ar gyfer Treth Gyngor
+councilTaxBandTooHigh.p4.url = https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed
+
+# --- Council Tax My Property Empty
+councilTaxPropertyEmpty.title = Nid yw’r band Treth Gyngor yn cael ei effeithio os yw’r eiddo'n wag - Valuation Office Agency contact form - GOV.UK
+councilTaxPropertyEmpty.heading = Nid yw’r band Treth Gyngor yn cael ei effeithio os yw’r eiddo'n wag
+councilTaxPropertyEmpty.p1 = <a class="govuk-link" href="https://www.gov.uk/find-local-council" target="_self"> Cysylltwch â'ch cyngor lleol </a> i weld a allwch gael rhyddhad ar eich bil.
+councilTaxPropertyEmpty.subHeading = Cymorth arall ar GOV.UK
+councilTaxPropertyEmpty.p2 = <a class="govuk-link" href="https://www.gov.uk/council-tax/second-homes-and-empty-properties" target="_self"> Treth Gyngor ar gyfer eiddo gwag </a>
 
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
