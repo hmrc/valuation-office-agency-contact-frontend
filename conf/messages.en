@@ -354,6 +354,12 @@ anythingElse.title = Is there anything else you would like to tell us about? - V
 anythingElse.heading = Is there anything else you would like to tell us about? (optional)
 anythingElse.checkYourAnswersLabel = Is there anything else you would like to tell us about?
 
+# --- Confirmation for Existing Enquiries
+existingConfirmation.title = Enquiry submitted - Valuation Office Agency contact form - GOV.UK
+existingConfirmation.heading = Enquiry submitted
+# existingConfirmation.p1 = We have sent you a confirmation email to .
+existingConfirmation.p2 = We will add any new details you have given us to your enquiry.
+existingConfirmation.p3 = We will contact you with an update to your enquiry using the contact details you have supplied.
 
 # CONFIRMATION
 ###############################

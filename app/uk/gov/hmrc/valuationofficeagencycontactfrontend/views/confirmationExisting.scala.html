@@ -1,0 +1,103 @@
+@*
+ * Copyright 2021 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukButton, GovukSummaryList, GovukPanel, GovukFieldset}
+@import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryList
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Contact
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurvey
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.panel.Panel
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters.formattedPropertyAddress
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryListRow
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.Key
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.Value
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.ContactFormatter.formattedConfirmedContactDetails
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
+@import uk.gov.hmrc.govukfrontend.views.html.components.GovukRadios
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.Radios
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.RadioItem
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurveyForm
+@import uk.gov.hmrc.govukfrontend.views.html.components.GovukTextarea
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.textarea.Textarea
+@import uk.gov.hmrc.govukfrontend.views.html.components.GovukErrorSummary
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
+@import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
+
+@this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
+        govukButton: GovukButton, govukSummaryList: GovukSummaryList, govukPanel: GovukPanel,
+        govukFieldset: GovukFieldset, govukRadios: GovukRadios, govukTextarea: GovukTextarea,
+        govukErrorSummary: GovukErrorSummary)
+
+@(appConfig: FrontendAppConfig, contact: Contact)(implicit request: Request[_], messages: Messages)
+
+@panelContent = {
+    @messages("confirmation.para1") <br />
+    @Html(formattedPropertyAddress(contact.propertyAddress, ", "))
+}
+
+@mainTemplate(
+ pageTitle = Option(messages("existingConfirmation.title"))) {
+
+    <section tabindex="0">
+      @govukPanel(Panel(title = Text(messages("existingConfirmation.heading")), headingLevel = 1,
+          content = HtmlContent(panelContent)
+      ))
+    </section>
+@*    <p class="govuk-body">@Html(Messages("existingConfirmation.p1"))</p>*@
+
+     <h2 class="govuk-heading-m">@messages("confirmation.whatHappensnext")</h2>
+     <p class="govuk-body">@Html(Messages("existingConfirmation.p2"))</p>
+     <p class="govuk-body">@Html(Messages("existingConfirmation.p3"))</p>
+     <p class="govuk-body js-hidden"><a id="print-button" rel="nofollow" href="javascript:window.print()" class="govuk-link print-link">@messages("site.print.button")</a></p>
+
+}
+
+
+@*@surveyContent = {*@
+@* <h3 class="govuk-heading-m">@messages("confirmation.feedback")</h3>*@
+
+@* <div class="govuk-form-group">*@
+@*  <fieldset class="govuk-fieldset">*@
+@*   <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">@messages("confirmation.feedback.subheading")</legend>*@
+@*   @govukRadios(Radios(*@
+@*    name = "satisfaction",*@
+@*    errorMessage = form.errors.asHtmlErrorMessageForField("satisfaction"),*@
+@*    items = SatisfactionSurveyForm.options.map(i => RadioItem(*@
+@*     content = Text(messages(i.messageKey)),*@
+@*     id = Option(i.id),*@
+@*     value = Option(i.value),*@
+@*     checked = form("satisfaction").value.map(_ == i.value).getOrElse(false)*@
+@*    ))*@
+@*   ))*@
+@*  </fieldset>*@
+@* </div>*@
+
+@* <div class="govuk-form-group">*@
+@*  <label class="govuk-label govuk-label--s">*@
+@*   @messages("confirmation.feedback.improve") @messages("hintText.optional")*@
+@*  </label>*@
+@*  @govukTextarea(Textarea(*@
+@*   id="details", name="details", rows=5, value=form("details").value, hint=Option(Hint(content = Text(messages("confirmation.feedback.warning")))) ,*@
+@*   errorMessage = form.errors.asHtmlErrorMessageForField("details")*@
+@*  ))*@
+@* </div>*@
+@*}*@

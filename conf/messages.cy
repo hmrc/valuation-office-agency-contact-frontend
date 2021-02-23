@@ -314,6 +314,13 @@ tellUsMore.ct-reference = (fe welwch hwn ar waelod eich bil Treth Gyngor)
 tellUsMore.ndr-reference = (fe welwch hwn ar eich bil ardrethi busnes)
 tellUsMore.checkYourAnswersLabel = Ymholiad
 
+# --- Confirmation for Existing Enquiries
+existingConfirmation.title = Enquiry submitted - Valuation Office Agency contact form - GOV.UK
+existingConfirmation.heading = Enquiry submitted
+# existingConfirmation.p1 = We have sent you a confirmation email to .
+existingConfirmation.p2 = Byddwn yn ychwanegu unrhyw fanylion newydd rydych chi wedi'u rhoi i ni i'ch ymholiad.
+existingConfirmation.p3 = Byddwn yn cysylltu â chi gyda diweddariad i'ch ymholiad gan ddefnyddio'r manylion cyswllt rydych chi wedi'u darparu.
+
 # CONFIRMATION
 ###############################
 confirmation.title = Diolch am eich ymholiad - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK

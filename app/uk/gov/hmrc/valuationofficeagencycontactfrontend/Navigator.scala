@@ -100,19 +100,30 @@ class Navigator @Inject()() {
   }
 
   val confirmationPageRouting: UserAnswers => Call = answers => {
-    answers.contact().fold(msg => {
+    import answers._
+    contact().fold(msg => {
       Logger.warn(msg)
       throw new RuntimeException(msg)
-    }, _ => answers.enquiryCategory.orElse(answers.existingEnquiryCategory) match {
-      case Some("council_tax") | Some("business_rates") => routes.ConfirmationController.onPageLoad()
-      case Some("housing_allowance") | Some("other") => routes.ConfirmationController.onPageLoad()
+    }, _ =>
+      (enquiryCategory.isDefined, existingEnquiryCategory.isDefined) match {
+        case (true, false) => enquiryRouting(enquiryCategory, routes.ConfirmationController.onPageLoad())
+        case (false, true) => enquiryRouting(existingEnquiryCategory, routes.ConfirmationController.onExistingPageLoad())
+        case _ => Logger.warn("Navigation for confirmation page - Enquiry or Existing Enquiry Subcategory not defined")
+          throw new RuntimeException("Navigation for confirmation page - Enquiry or Existing Enquiry Subcategory not defined")
+      })
+  }
+
+  private def enquiryRouting(enquiry: Option[String], confirmationCall: Call): Call = {
+    enquiry match {
+      case Some("council_tax") | Some("business_rates") => confirmationCall
+      case Some("housing_allowance") | Some("other") => confirmationCall
       case Some(sel) =>
         Logger.warn(s"Navigation for confirmation page reached with an unknown selection $sel of enquiry by controller")
         throw new RuntimeException(s"Navigation for confirmation page reached unknown selection $sel of enquiry by controller")
       case None =>
         Logger.warn("Navigation for confirmation page reached without selection of enquiry by controller")
         throw new RuntimeException("Navigation for confirmation page reached without selection of enquiry by controller")
-    })
+    }
   }
 
   val businessRatesPageRouting: UserAnswers => Call = answers => {

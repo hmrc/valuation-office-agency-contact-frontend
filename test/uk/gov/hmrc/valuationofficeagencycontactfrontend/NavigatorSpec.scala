@@ -191,6 +191,31 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmationController.onPageLoad()
       }
 
+      "return a function that goes to the existing enquiry confirmation page when the check your answers page " +
+        "has been submitted without errors and the enquiry is about council tax" in {
+        val cd = ContactDetails("a", "c", "e")
+        val ee = "council_tax"
+        val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+        val councilTaxSubcategory = "council_tax_home_business"
+        val tellUs = TellUsMore("Hello")
+
+        val userAnswers = new FakeUserAnswers(cd, "", councilTaxSubcategory, "", propertyAddress, tellUs, ee = Some(ee))
+
+        navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmationController.onExistingPageLoad()
+      }
+
+      "return a function that goes to the existing enquiry confirmation page when the check your answers page " +
+        "has been submitted without errors and the enquiry is about housing allowance" in {
+        val cd = ContactDetails("a", "c", "e")
+        val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+        val housingAllowance = "housing_allowance"
+        val message = "Hello"
+
+        val userAnswers = new FakeUserAnswers(cd, "", "", "", propertyAddress, ha = Some(housingAllowance), ee = Some(housingAllowance), ae = message)
+
+        navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmationController.onExistingPageLoad()
+      }
+
       "return a function that throws a runtime exception if no property address is in the model" in {
         when (mockUserAnswers.propertyAddress) thenReturn None
 

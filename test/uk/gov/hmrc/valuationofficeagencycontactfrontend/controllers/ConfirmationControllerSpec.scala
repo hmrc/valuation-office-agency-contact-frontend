@@ -33,9 +33,10 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmationExisting => ConfirmationExisting}
 
 import scala.concurrent.Future
-import scala.util.{Failure, Success}
+import scala.util.Success
 
 class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
@@ -45,17 +46,18 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def confirmation = app.injector.instanceOf[Confirmation]
+  def confirmationExisting = app.injector.instanceOf[ConfirmationExisting]
   def internalServerError = app.injector.instanceOf[internal_Server_Error]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ConfirmationController(frontendAppConfig, messagesApi, mockConnector, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction,
-      new DataRequiredActionImpl(ec), confirmation, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      new DataRequiredActionImpl(ec), confirmation, confirmationExisting, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   val mockConnectorF = mock[LightweightContactEventsConnector]
 
   def controllerF(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ConfirmationController(frontendAppConfig, messagesApi, mockConnectorF, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction,
-      new DataRequiredActionImpl(ec), confirmation, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      new DataRequiredActionImpl(ec), confirmation, confirmationExisting, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   "Confirmation Controller" must {
 
@@ -80,6 +82,28 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       status(result) mustBe OK
 
       contentAsString(result) mustBe confirmation(frontendAppConfig, contact, date, "councilTaxSubcategory", SatisfactionSurveyForm.apply())(fakeRequest, messages).toString
+    }
+
+    "return 200 and the correct view for a existing enquiry GET" in {
+
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "council_tax"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "property_demolished"
+      val message = "Hello"
+
+      val contact = Contact(contactDetails, propertyAddress, ec, councilTaxSubcategory, message)
+
+      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), AnythingElseId.toString -> Json.toJson(message))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onExistingPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+
+      contentAsString(result) mustBe confirmationExisting(frontendAppConfig, contact)(fakeRequest, messages).toString
     }
 
     "return 200 and the correct view for a GET when addressLine2 and county are None" in {
@@ -163,6 +187,27 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
       intercept[Exception] {
         val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+        status(result) mustBe INTERNAL_SERVER_ERROR
+
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+      }
+    }
+
+    "return 500 and the error view for a existing enquiry GET with unknown or wrong enquiry type" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "other"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "property_demolished"
+      val message = "Hello"
+
+      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), AnythingElseId.toString -> Json.toJson(message))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      intercept[Exception] {
+        val result = controller(getRelevantData).onExistingPageLoad()(fakeRequest)
 
         status(result) mustBe INTERNAL_SERVER_ERROR
 
