@@ -346,7 +346,7 @@ error.message.xss-invalid.feedback = Rhaid i'r adborth gynnwys llythrennau a i z
 ###############################
 feedback.thankyou.title = Diolch am eich adborth - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 feedback.thankyou.heading = Diolch am eich adborth
-feedback.anotherForm=cyflwyno ffurflen arall
+feedback.anotherForm=Cyflwyno ffurflen arall
 
 valuationAdvice.title = Manylion cyswllt ar gyfer Gwasanaethau Prisiwr Dosbarth - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 valuationAdvice.heading = Manylion cyswllt ar gyfer Gwasanaethau Prisiwr Dosbarth (GPD)

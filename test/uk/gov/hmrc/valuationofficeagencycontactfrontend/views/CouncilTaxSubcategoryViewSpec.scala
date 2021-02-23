@@ -49,8 +49,8 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
         labelDefinedAndUsedOnce("council_tax_band_for_new", messageKeyPrefix, createView)
       }
 
-      "has a radio button with the label set to the message with key councilTaxSubcategory.property_demolished and that it is used once" in {
-        labelDefinedAndUsedOnce("property_demolished", messageKeyPrefix, createView)
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_property_demolished and that it is used once" in {
+        labelDefinedAndUsedOnce("council_tax_property_demolished", messageKeyPrefix, createView)
       }
 
       "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_changes and that it is used once" in {

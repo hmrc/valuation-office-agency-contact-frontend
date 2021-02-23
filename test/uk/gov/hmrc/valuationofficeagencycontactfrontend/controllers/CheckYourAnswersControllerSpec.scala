@@ -52,7 +52,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       val ec = "council_tax"
       val contactReason = "new_enquiry"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
-      val councilTaxSubcategory = "property_demolished"
+      val councilTaxSubcategory = "council_tax_property_demolished"
       val tellUs = TellUsMore("Hello")
 
       val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
@@ -133,7 +133,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("property_demolished")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_demolished")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
       val result = controller().userAnswersSectionBuilder(mockUserAnswers)
@@ -148,7 +148,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("property_demolished")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_demolished")
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("message"))
 
       val result = controller().userAnswersSectionBuilder(mockUserAnswers)
@@ -173,7 +173,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       val contactDetails = ContactDetails("a", "c", "e")
       val ec = "other"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
-      val councilTaxSubcategory = "property_demolished"
+      val councilTaxSubcategory = "council_tax_property_demolished"
       val tellUs = TellUsMore("Hello")
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
         ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))

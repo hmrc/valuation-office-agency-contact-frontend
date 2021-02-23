@@ -68,7 +68,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
       val cd = ContactDetails("a", "c", "e")
       val ec = "council_tax"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
-      val councilTaxSubcategory = "property_demolished"
+      val councilTaxSubcategory = "council_tax_property_demolished"
       val tellUs = TellUsMore("Hello")
 
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
@@ -88,7 +88,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
       val cd = ContactDetails("a", "c", "e")
       val ec = "other"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
-      val councilTaxSubcategory = "property_demolished"
+      val councilTaxSubcategory = "council_tax_property_demolished"
       val tellUs = TellUsMore("Hello")
 
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
@@ -109,7 +109,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
       val cd = ContactDetails("a", "c", "e")
       val ec = "council_tax"
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
-      val councilTaxSubcategory = "property_demolished"
+      val councilTaxSubcategory = "council_tax_property_demolished"
       val tellUs = TellUsMore("Hello")
 
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
