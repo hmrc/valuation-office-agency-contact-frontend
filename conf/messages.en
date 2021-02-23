@@ -213,28 +213,26 @@ contactDetails.contactNumber.invalid = Enter a phone number, like 01632 960 001
 contactDetails.checkYourAnswersLabel = Contact details
 
 # --- Council Tax Bill
-councilTaxBill.title = My Council Tax bill - Valuation Office Agency contact form - GOV.UK
-councilTaxBill.heading = My Council Tax bill
+councilTaxBill.title = Speak to your local council about your council tax bill - Valuation Office Agency contact form - GOV.UK
+councilTaxBill.heading = Speak to your local council about your council tax bill
 councilTaxBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council">Contact your local council </a> if you have any questions about your Council Tax bill, as they handle billing and payments.
 councilTaxBill.subheading = Other help on GOV.UK
-councilTaxBill.p2 = Check with your council to see if you can <a class="govuk-link" target="_blank" href="https://www.gov.uk/apply-for-council-tax-discount">apply for a discount on your Council Tax bill. </a>
-councilTaxBill.p3 = Or you can check how to <a class="govuk-link" target="_blank" href="https://www.gov.uk/apply-council-tax-reduction">apply for Council Tax Reduction. </a>
+councilTaxBill.p2 = <a class="govuk-link" target="_blank" href="https://www.gov.uk/apply-for-council-tax-discount">Apply for discount on your Council Tax bill</a>
+councilTaxBill.p3 = <a class="govuk-link" target="_blank" href="https://www.gov.uk/apply-council-tax-reduction">Apply for Council Tax Reduction</a>
 
 # --- Council Tax Band Too High
-councilTaxBandTooHigh.title = My Council Tax band is too high - Valuation Office Agency contact form - GOV.UK
-councilTaxBandTooHigh.heading = My Council Tax band is too high
-councilTaxBandTooHigh.p1.part1 = Check and challenge your Council Tax band using the
-councilTaxBandTooHigh.p1.part2 = Council Tax service.
-councilTaxBandTooHigh.p1.url = https://www.gov.uk/council-tax-bands
+councilTaxBandTooHigh.title = You can challenge your Council Tax band online - Valuation Office Agency contact form - GOV.UK
+councilTaxBandTooHigh.heading = You can challenge your Council Tax band online
+councilTaxBandTooHigh.p1.part1 = Use the Council Tax service
+councilTaxBandTooHigh.p1.part2 = to check and challenge your Council Tax band.
+councilTaxBandTooHigh.p1.url = https://www.gov.uk/challenge-council-tax-band
 councilTaxBandTooHigh.subheading = Other help on GOV.UK
-councilTaxBandTooHigh.p2.part1 = Read about
+councilTaxBandTooHigh.p2 = How to challenge your Council Tax band
 councilTaxBandTooHigh.p2.url = https://www.gov.uk/challenge-council-tax-band
-councilTaxBandTooHigh.p2.part2 = how to challenge your Council Tax band
-councilTaxBandTooHigh.p2.part3 = (opens in a new tab), including what evidence you need.
-councilTaxBandTooHigh.p3.part1 = Find out
+councilTaxBandTooHigh.p3 = When your Council Tax band may change
 councilTaxBandTooHigh.p3.url = https://www.gov.uk/guidance/council-tax-band-changes
-councilTaxBandTooHigh.p3.part2 = when your Council Tax band may change
-councilTaxBandTooHigh.p3.part3 = (opens in a new tab).
+councilTaxBandTooHigh.p4 = How properties are valued for Council Tax
+councilTaxBandTooHigh.p4.url = https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed
 
 # --- Council Tax band for my new property'
 councilTaxBandForNew.title = I need a Council Tax band for my new property - Valuation Office Agency contact form - GOV.UK
