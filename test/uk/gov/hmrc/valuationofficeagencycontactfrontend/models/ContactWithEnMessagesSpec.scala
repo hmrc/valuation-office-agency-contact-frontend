@@ -26,22 +26,24 @@ class ContactWithEnMessagesSpec extends SpecBase with MockitoSugar {
   val contactDetails = ContactDetails("first", "email", "contactNumber")
   val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "e")
   val contact = Contact(contactDetails, propertyAddress, "council_tax", "council_tax_band", "msg")
-  val userAnswers = new FakeUserAnswers(contactDetails, "council_tax", "council_tax", "", propertyAddress, TellUsMore("message"))
+  val userAnswers = new FakeUserAnswers(contactDetails, "council_tax", "council_tax", "", propertyAddress,
+    TellUsMore("message"), cr = Some("more_details"))
 
   "return a ContactWithEnMessages when given a contact with proper keys for the enquiryCategory and subEnquiryCategory" in {
     when(mockMessages.messages) thenReturn Map("en" -> Map("enquiryCategory.council_tax" -> "CT", "councilTaxSubcategory.council_tax_band" -> "TB"))
     val result = ContactWithEnMessage(contact, mockMessages, userAnswers)
     result.enquiryCategoryMsg mustBe "CT"
-    result.isCouncilTaxEnquiry mustBe true
+    result.contactReason mustBe userAnswers.contactReason
     result.subEnquiryCategoryMsg mustBe "TB"
   }
 
   "return a ContactWithEnMessages when given a contact with proper keys for the existingEnquiryCategory and subEnquiryCategory" in {
     when(mockMessages.messages) thenReturn Map("en" -> Map("enquiryCategory.council_tax" -> "CT", "councilTaxSubcategory.council_tax_band" -> "TB"))
-    val userAnswers = new FakeUserAnswers(contactDetails, "", "council_tax", "", propertyAddress, TellUsMore("message"), ee = Some("council_tax"))
+    val userAnswers = new FakeUserAnswers(contactDetails, "", "council_tax", "", propertyAddress, TellUsMore("message"), ee = Some("council_tax"),
+      cr = Some("more_details"))
     val result = ContactWithEnMessage(contact, mockMessages, userAnswers)
     result.enquiryCategoryMsg mustBe "CT"
-    result.isCouncilTaxEnquiry mustBe true
+    result.contactReason mustBe userAnswers.contactReason
     result.subEnquiryCategoryMsg mustBe "Existing Enquiry"
   }
 
