@@ -274,6 +274,7 @@ businessRatesSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
 # --- Property address
 propertyAddress.title = Beth yw cyfeiriad yr eiddo? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 propertyAddress.heading = Beth yw cyfeiriad yr eiddo?
+propertyAddress.existing_address = Rhaid i hwn fod yr un cyfeiriad â'ch ymholiad gwreiddiol.
 propertyAddress.addressLine1 = Cyfeiriad – llinell 1
 propertyAddress.addressLine1.required = Nodwch linell gyntaf y cyfeiriad
 propertyAddress.addressLine1.invalid = Rhaid i linell 1 y cyfeiriad cynnwys llythrennau a i z, rhifau 0 i 9, cysylltnodau a bylchau yn unig
