@@ -33,6 +33,7 @@ class ContactWithEnMessagesSpec extends SpecBase with MockitoSugar {
     when(mockMessages.messages) thenReturn Map("en" -> Map("enquiryCategory.council_tax" -> "CT", "councilTaxSubcategory.council_tax_band" -> "TB"))
     val result = ContactWithEnMessage(contact, mockMessages, userAnswers)
     result.enquiryCategoryMsg mustBe "CT"
+    result.isCouncilTaxEnquiry mustBe true
     result.contactReason mustBe userAnswers.contactReason
     result.subEnquiryCategoryMsg mustBe "TB"
   }
@@ -43,6 +44,7 @@ class ContactWithEnMessagesSpec extends SpecBase with MockitoSugar {
       cr = Some("more_details"))
     val result = ContactWithEnMessage(contact, mockMessages, userAnswers)
     result.enquiryCategoryMsg mustBe "CT"
+    result.isCouncilTaxEnquiry mustBe true
     result.contactReason mustBe userAnswers.contactReason
     result.subEnquiryCategoryMsg mustBe "Existing Enquiry"
   }
