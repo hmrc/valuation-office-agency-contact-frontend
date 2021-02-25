@@ -314,28 +314,20 @@ tellUsMore.ct-reference = (fe welwch hwn ar waelod eich bil Treth Gyngor)
 tellUsMore.ndr-reference = (fe welwch hwn ar eich bil ardrethi busnes)
 tellUsMore.checkYourAnswersLabel = Ymholiad
 
-# --- Confirmation for Existing Enquiries
-existingConfirmation.title = Enquiry submitted - Valuation Office Agency contact form - GOV.UK
-existingConfirmation.heading = Enquiry submitted
-# existingConfirmation.p1 = We have sent you a confirmation email to .
-existingConfirmation.p2 = Byddwn yn ychwanegu unrhyw fanylion newydd rydych chi wedi'u rhoi i ni i'ch ymholiad.
-existingConfirmation.p3 = Byddwn yn cysylltu â chi gyda diweddariad i'ch ymholiad gan ddefnyddio'r manylion cyswllt rydych chi wedi'u darparu.
-
-# CONFIRMATION
-###############################
-confirmation.title = Diolch am eich ymholiad - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-confirmation.heading = Diolch am eich ymholiad
-confirmation.para1= Eich cyfeirnod yw
+# --- Confirmation for new and existing enquiries
+confirmation.title = Enquiry submitted - Valuation Office Agency contact form - GOV.UK
+confirmation.heading = Enquiry submitted
 confirmation.enquirySummary = Crynodeb o’ch ymholiad
+confirmation.para1= Eich cyfeirnod yw
+# confirmation.p1 = Rydym wedi anfon e-bost cadarnhaol i .
+confirmation.new.p1 = We usually respond to enquiries within a few days. However, complex enquiries can take up to 30 days.
+confirmation.existing.p1 = Byddwn yn ychwanegu unrhyw fanylion newydd rydych chi wedi'u rhoi i ni i'ch ymholiad.
+confirmation.existing.p2 = Byddwn yn cysylltu â chi gyda diweddariad i'ch ymholiad gan ddefnyddio'r manylion cyswllt rydych chi wedi'u darparu.
 confirmation.whatHappensnext = Yr hyn sy’n digwydd nesaf
-confirmation.para2 = Byddwn yn ymchwilio i’ch ymholiad ac yn cysylltu â chi cyn gynted ag y gallwn. Ein nod yw ymateb o fewn 20 diwrnod gwaith, er ein bod fel arfer yn ymateb yn gynt o lawer. Peidiwch ag ailgyflwyno eich ymholiad yn ystod yr amser hwn.
-confirmation.section.enquiryType = Math o ymholiad
-confirmation.section.yourDetails = Eich manylion
-confirmation.section.propertyAddress = Cyfeiriad yr eiddo
-confirmation.section.yourMessage = Eich neges
-confirmation.section.date = Dyddiad pan y’i anfonwyd
 confirmation.feedback = Adborth
 confirmation.feedback.subheading = Yn gyffredinol, sut y byddech yn disgrifio’ch profiad gyda’r ffurflen hon?
+confirmation.feedback.improve = Sut y gallwn wella’r gwasanaeth hwn?
+confirmation.feedback.warning = Do not include personal or financial information like your National Insurance number or credit card details.
 satisfaction.verySatisfied = Bodlon iawn
 satisfaction.satisfied = Bodlon
 satisfaction.neither = Ddim yn fodlon nac yn anfodlon
@@ -343,8 +335,6 @@ satisfaction.dissatisfied = Anfodlon
 satisfaction.veryDissatisfied = Anfodlon iawn
 satisfactionSurvey.satisfaction = Dewiswch sut y byddech chi’n disgrifio’ch profiad
 satisfactionSurvey.details = Rhaid i'r adborth gynnwys llythrennau a i z, rhifau 0 i 9, cysylltnodau, bylchau a chollnodau yn unig
-confirmation.feedback.improve = Sut y gallwn wella’r gwasanaeth hwn?
-confirmation.feedback.warning = Uchafswm o 1200 nod. Peidiwch â chynnwys unrhyw wybodaeth bersonol nac ariannol, er enghraifft eich rhif Yswiriant Gwladol neu rifau cardiau credyd.
 confirmation.feedback.submit = Cyflwyno
 error.required.feedback = Dewiswch sut y byddech chi’n disgrifio’ch profiad
 error.message.max_length.feedback = Rhaid i'r adborth fod yn 1200 nod neu lai

@@ -25,7 +25,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerRow
 class CheckYourAnswersHelper(userAnswers: UserAnswers) {
 
   def tellUsMore: Option[AnswerRow] = userAnswers.tellUsMore map {
-    x => AnswerRow("tellUsMore.checkYourAnswersLabel", s"${x.message}", false, routes.TellUsMoreController.onPageLoad(CheckMode).url)
+    x => AnswerRow("tellUsMore.heading", s"${x.message}", false, routes.TellUsMoreController.onPageLoad(CheckMode).url)
   }
 
   def contactReason: Option[AnswerRow] = userAnswers.contactReason map {
@@ -52,15 +52,15 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
   }
 
   def enquiryCategory: Option[AnswerRow] = userAnswers.enquiryCategory map {
-    x => AnswerRow("enquiryCategory.checkYourAnswersLabel", s"enquiryCategory.$x", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url)
+    x => AnswerRow("enquiryCategory.heading", s"enquiryCategory.$x", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url)
   }
 
   def councilTaxSubcategory: Option[AnswerRow] = userAnswers.councilTaxSubcategory map {
-    x => AnswerRow("councilTaxSubcategory.checkYourAnswersLabel", s"councilTaxSubcategory.$x", true, routes.CouncilTaxSubcategoryController.onPageLoad(CheckMode).url)
+    x => AnswerRow("councilTaxSubcategory.heading", s"councilTaxSubcategory.$x", true, routes.CouncilTaxSubcategoryController.onPageLoad(CheckMode).url)
   }
 
   def businessRatesSubcategory: Option[AnswerRow] = userAnswers.businessRatesSubcategory map {
-    x => AnswerRow("businessRatesSubcategory.checkYourAnswersLabel", s"businessRatesSubcategory.$x", true, routes.BusinessRatesSubcategoryController.onPageLoad(CheckMode).url)
+    x => AnswerRow("businessRatesSubcategory.heading", s"businessRatesSubcategory.$x", true, routes.BusinessRatesSubcategoryController.onPageLoad(CheckMode).url)
   }
 
   def propertyAddress: Option[AnswerRow] = userAnswers.propertyAddress map {

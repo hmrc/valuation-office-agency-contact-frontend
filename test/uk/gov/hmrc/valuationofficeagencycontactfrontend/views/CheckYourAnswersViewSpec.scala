@@ -69,17 +69,17 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
+      backlinkUrl mustBe "/tell-us-more"
     }
 
-    "contain Enquiry Type label" in {
+    "contain Enquiry Type heading" in {
       val doc = asDocument(view1())
-      assert(doc.toString.contains(messages("enquiryCategory.checkYourAnswersLabel")))
+      assert(doc.toString.contains(messages("enquiryCategory.heading")))
     }
 
-    "contain Enquiry Details label" in {
+    "contain Enquiry Details heading" in {
       val doc = asDocument(view1())
-      assert(doc.toString.contains(messages("councilTaxSubcategory.checkYourAnswersLabel")))
+      assert(doc.toString.contains(messages("councilTaxSubcategory.heading")))
     }
 
     "contain Contact Details label" in {
@@ -92,9 +92,9 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
       assert(doc.toString.contains(messages("propertyAddress.heading")))
     }
 
-    "contain Enquiry label" in {
+    "contain Enquiry heading" in {
       val doc = asDocument(view1())
-      assert(doc.toString.contains(messages("tellUsMore.checkYourAnswersLabel")))
+      assert(doc.toString.contains(messages("tellUsMore.heading")))
     }
 
     "contain Council Tax string if the council_tax enquiry category has been selected" in {

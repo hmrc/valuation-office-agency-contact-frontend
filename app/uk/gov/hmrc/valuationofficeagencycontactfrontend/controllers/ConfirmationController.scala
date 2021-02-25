@@ -23,12 +23,12 @@ import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ConfirmationController._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CheckYourAnswersId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmationExisting => confirmation_existing}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurveyForm
 
 import scala.concurrent.ExecutionContext
@@ -42,7 +42,6 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
                                        getData: DataRetrievalAction,
                                        requireData: DataRequiredAction,
                                        confirmation: Confirmation,
-                                       confirmationExisting: confirmation_existing,
                                        cc: MessagesControllerComponents
                                       ) extends FrontendController(cc) with I18nSupport {
 
@@ -75,29 +74,19 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
 
   def onPageLoad = (getData andThen requireData) { implicit request =>
 
-    val contact = request.userAnswers.contact() match {
-      case Right(ct) => ct
-      case Left(msg) =>
+    val (contact, answerSections) = (request.userAnswers.contact(), request.userAnswers.answerSection) match {
+      case (Right(ct), Some(as)) => (ct, as)
+      case (Left(msg), _) =>
         Logger.warn(s"On Page load - Navigation for Confirmation page reached without a contact and error $msg")
         throw new RuntimeException(s"On Page load - Navigation for Confirmation page reached without a contact and error $msg")
     }
 
-    val date = DateFormatter.todaysDate()
-    Ok(confirmation(appConfig, contact, date, enquiryKey(request.userAnswers).right.get, SatisfactionSurveyForm.apply))
-  }
-
-  def onExistingPageLoad =  (getData andThen requireData) { implicit request =>
-
-    val contact = request.userAnswers.contact() match {
-      case Right(ct) => ct
-      case Left(msg) =>
-        Logger.warn(s"On Page load - Navigation for Confirmation page reached without a contact and error $msg")
-        throw new RuntimeException(s"On Page load - Navigation for Confirmation page reached without a contact and error $msg")
-    }
-
-    Ok(confirmationExisting(appConfig, contact))
+    Ok(confirmation(appConfig, contact, answerSections, whatHappensNextMessages(request.userAnswers), SatisfactionSurveyForm.apply))
 
   }
+}
+
+object ConfirmationController {
 
   private[controllers] def enquiryKey(answers: UserAnswers): Either[String, String] = {
     (answers.enquiryCategory, answers.existingEnquiryCategory) match {
@@ -108,6 +97,14 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
       case (_, Some("housing_allowance")) => Right("housingAllowanceSubcategory")
       case (_, Some("other")) => Right("other")
       case _ => Left("Unknown enquiry category in enquiry key")
+    }
+  }
+
+  private[controllers] def whatHappensNextMessages(answers: UserAnswers): Seq[String] = {
+    (answers.enquiryCategory.isDefined, answers.existingEnquiryCategory.isDefined) match {
+      case (true, false) => Seq("confirmation.new.p1")
+      case (false, true) => Seq("confirmation.existing.p1", "confirmation.existing.p2")
+      case _ => Seq.empty[String]
     }
   }
 }

@@ -27,9 +27,10 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.AuditingService
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{SatisfactionSurvey, SatisfactionSurveyForm}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, CouncilTaxSubcategoryId, EnquiryCategoryId, PropertyAddressId, TellUsMoreId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{AnswerSectionId, BusinessRatesSubcategoryId, ContactDetailsId, CouncilTaxSubcategoryId, EnquiryCategoryId, PropertyAddressId, TellUsMoreId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode, PropertyAddress, TellUsMore}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow, AnswerSection}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{satisfactionSurveyThankYou => satisfaction_Survey_Thank_You}
@@ -37,14 +38,24 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{satisfaction
 class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+
   val mockUserAnswers = mock[UserAnswers]
   val configuration = injector.instanceOf[Configuration]
   val environment = injector.instanceOf[Environment]
 
+  val answerSectionNew = AnswerSection(None, List(
+    AnswerRow("enquiryCategory.checkYourAnswersLabel", "enquiryCategory.council_tax", true, ""),
+    AnswerRow("councilTaxSubcategory.checkYourAnswersLabel", "councilTaxSubcategory.council_tax_changes", true, ""),
+    AnswerRow("contactDetails.heading", "Test<br>test123@test.com<br>077777777777", false, ""),
+    AnswerRow("propertyAddress.heading", "123 test<br>london<br>bn12 2kj", false, ""),
+    AnswerRow("tellUsMore.checkYourAnswersLabel", "some message", false, "")))
+
   def auditingService = injector.instanceOf[AuditingService]
 
   def confirmation = app.injector.instanceOf[Confirmation]
+
   def satisfactionSurveyThankYou = app.injector.instanceOf[satisfaction_Survey_Thank_You]
+
   def internalServerError = app.injector.instanceOf[internal_Server_Error]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
@@ -71,7 +82,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
       val councilTaxSubcategory = "council_tax_property_demolished"
       val tellUs = TellUsMore("Hello")
 
-      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory), AnswerSectionId.toString -> Json.toJson(answerSectionNew),
         ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
@@ -92,7 +103,8 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
       val tellUs = TellUsMore("Hello")
 
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
-        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress),
+        TellUsMoreId.toString -> Json.toJson(tellUs), AnswerSectionId.toString -> Json.toJson(answerSectionNew))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
@@ -113,7 +125,8 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
       val tellUs = TellUsMore("Hello")
 
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
-        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress),
+        TellUsMoreId.toString -> Json.toJson(tellUs), AnswerSectionId.toString -> Json.toJson(answerSectionNew))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
@@ -134,7 +147,8 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
       val tellUs = TellUsMore("Hello")
 
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), BusinessRatesSubcategoryId.toString -> JsString(businessSubcategory),
-        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs),
+        AnswerSectionId.toString -> Json.toJson(answerSectionNew))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 

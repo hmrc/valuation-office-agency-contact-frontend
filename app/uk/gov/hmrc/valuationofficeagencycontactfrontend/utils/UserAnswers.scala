@@ -19,6 +19,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 
 class UserAnswers(val cacheMap: CacheMap) {
 
@@ -49,6 +50,8 @@ class UserAnswers(val cacheMap: CacheMap) {
   def housingAllowanceSubcategory: Option[String] = cacheMap.getEntry[String](HousingAllowanceSubcategoryId.toString)
 
   def otherSubcategory: Option[String] = cacheMap.getEntry[String](OtherSubcategoryId.toString)
+
+  def answerSection: Option[AnswerSection] = cacheMap.getEntry[AnswerSection](AnswerSectionId.toString)
 
   def contact(): Either[String, Contact] = {
 

@@ -201,7 +201,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
         val userAnswers = new FakeUserAnswers(cd, "", councilTaxSubcategory, "", propertyAddress, tellUs, ee = Some(ee))
 
-        navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmationController.onExistingPageLoad()
+        navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmationController.onPageLoad()
       }
 
       "return a function that goes to the existing enquiry confirmation page when the check your answers page " +
@@ -211,9 +211,9 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         val housingAllowance = "housing_allowance"
         val message = "Hello"
 
-        val userAnswers = new FakeUserAnswers(cd, "", "", "", propertyAddress, ha = Some(housingAllowance), ee = Some(housingAllowance), ae = message)
+        val userAnswers = new FakeUserAnswers(cd, "", "", "", propertyAddress, ha = Some(housingAllowance), ee = Some(housingAllowance), ae = Some(message))
 
-        navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmationController.onExistingPageLoad()
+        navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmationController.onPageLoad()
       }
 
       "return a function that throws a runtime exception if no property address is in the model" in {

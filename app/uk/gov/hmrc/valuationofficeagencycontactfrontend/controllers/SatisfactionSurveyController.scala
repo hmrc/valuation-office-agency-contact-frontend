@@ -30,6 +30,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{satisfaction
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{SatisfactionSurvey, SatisfactionSurveyForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{AddressFormatters, DateFormatter, UserAnswers}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ConfirmationController.whatHappensNextMessages
 
 import scala.concurrent.ExecutionContext
 
@@ -56,9 +57,9 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
 
   def formCompleteFeedback  = (getData andThen requireData) { implicit request =>
 
-    val contact = request.userAnswers.contact() match {
-      case Right(ct) => ct
-      case Left(msg) =>
+    val (contact, answerSections) = (request.userAnswers.contact(), request.userAnswers.answerSection) match {
+      case (Right(ct), Some(as)) => (ct, as)
+      case (Left(msg), _) =>
         Logger.warn(s"Navigation for Survey page reached without a contact and error $msg")
         throw new RuntimeException(s"Navigation for Survey page reached without a contact and error $msg")
     }
@@ -66,7 +67,7 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
     SatisfactionSurveyForm().bindFromRequest().fold(
       formWithErrors => {
         val date = DateFormatter.todaysDate()
-        Ok(confirmation(appConfig, contact, date, enquiryKey(request.userAnswers).right.get, formWithErrors))
+        Ok(confirmation(appConfig, contact, answerSections, whatHappensNextMessages(request.userAnswers), formWithErrors))
       },
       success => {
         sendFeedback(success, AddressFormatters.formattedPropertyAddress(contact.propertyAddress, ", "))

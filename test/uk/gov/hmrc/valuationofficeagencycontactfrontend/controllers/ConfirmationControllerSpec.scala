@@ -26,14 +26,15 @@ import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ConfirmationController.{enquiryKey, whatHappensNextMessages}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurveyForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, MessageControllerComponentsHelpers, UserAnswers}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow, AnswerSection}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmationExisting => ConfirmationExisting}
 
 import scala.concurrent.Future
 import scala.util.Success
@@ -42,22 +43,35 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
   val mockConnector = mock[LightweightContactEventsConnector]
+  val whatHappensExisting = Seq("confirmation.existing.p1","confirmation.existing.p2")
+  val whatHappensNew = Seq("confirmation.new.p1")
+  val answerSectionExisting = AnswerSection(None,List(
+    AnswerRow("existingEnquiryCategory.heading","existingEnquiryCategory.council_tax",true,""),
+    AnswerRow("refNumber.value","VOA1238983",true,""),
+    AnswerRow("contactDetails.heading","Test<br>test123@test.com<br>077777777777",false,""),
+    AnswerRow("propertyAddress.heading","123 test<br>someCity<br>bn12 2kj",false,""),
+    AnswerRow("anythingElse.checkYourAnswersLabel","some message",false,"")))
+  val answerSectionNew = AnswerSection(None,List(
+    AnswerRow("enquiryCategory.checkYourAnswersLabel","enquiryCategory.council_tax",true,""),
+    AnswerRow("councilTaxSubcategory.checkYourAnswersLabel","councilTaxSubcategory.council_tax_changes",true,""),
+    AnswerRow("contactDetails.heading","Test<br>test123@test.com<br>077777777777",false,""),
+    AnswerRow("propertyAddress.heading","123 test<br>london<br>bn12 2kj",false,""),
+    AnswerRow("tellUsMore.checkYourAnswersLabel","some message",false,"")))
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def confirmation = app.injector.instanceOf[Confirmation]
-  def confirmationExisting = app.injector.instanceOf[ConfirmationExisting]
   def internalServerError = app.injector.instanceOf[internal_Server_Error]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ConfirmationController(frontendAppConfig, messagesApi, mockConnector, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction,
-      new DataRequiredActionImpl(ec), confirmation, confirmationExisting, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      new DataRequiredActionImpl(ec), confirmation, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   val mockConnectorF = mock[LightweightContactEventsConnector]
 
   def controllerF(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ConfirmationController(frontendAppConfig, messagesApi, mockConnectorF, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction,
-      new DataRequiredActionImpl(ec), confirmation, confirmationExisting, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      new DataRequiredActionImpl(ec), confirmation, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   "Confirmation Controller" must {
 
@@ -68,12 +82,12 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
       val councilTaxSubcategory = "council_tax_property_demolished"
       val tellUs = TellUsMore("Hello")
-      val date = DateFormatter.todaysDate()
 
       val contact = Contact(contactDetails, propertyAddress, ec, councilTaxSubcategory, tellUs.message)
 
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
-        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs),
+        AnswerSectionId.toString -> Json.toJson(answerSectionNew))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
@@ -81,7 +95,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
       status(result) mustBe OK
 
-      contentAsString(result) mustBe confirmation(frontendAppConfig, contact, date, "councilTaxSubcategory", SatisfactionSurveyForm.apply())(fakeRequest, messages).toString
+      contentAsString(result) mustBe confirmation(frontendAppConfig, contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(fakeRequest, messages).toString
     }
 
     "return 200 and the correct view for a existing enquiry GET" in {
@@ -94,16 +108,17 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
       val contact = Contact(contactDetails, propertyAddress, ec, councilTaxSubcategory, message)
 
-      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
-        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), AnythingElseId.toString -> Json.toJson(message))
+      val validData = Map(ExistingEnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), AnythingElseId.toString -> Json.toJson(message),
+        AnswerSectionId.toString -> Json.toJson(answerSectionExisting))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onExistingPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
 
       status(result) mustBe OK
 
-      contentAsString(result) mustBe confirmationExisting(frontendAppConfig, contact)(fakeRequest, messages).toString
+      contentAsString(result) mustBe confirmation(frontendAppConfig, contact, answerSectionExisting, whatHappensExisting, SatisfactionSurveyForm.apply())(fakeRequest, messages).toString
     }
 
     "return 200 and the correct view for a GET when addressLine2 and county are None" in {
@@ -112,12 +127,12 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       val propertyAddress = PropertyAddress("a", None, "c", None, "f")
       val councilTaxSubcategory = "council_tax_property_demolished"
       val tellUs = TellUsMore("Hello")
-      val date = DateFormatter.todaysDate()
 
       val contact = Contact(contactDetails, propertyAddress, ec, councilTaxSubcategory, tellUs.message)
 
       val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
-        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs),
+        AnswerSectionId.toString -> Json.toJson(answerSectionNew))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
@@ -125,7 +140,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
       status(result) mustBe OK
 
-      contentAsString(result) mustBe confirmation(frontendAppConfig, contact, date, "councilTaxSubcategory", SatisfactionSurveyForm.apply)(fakeRequest, messages).toString
+      contentAsString(result) mustBe confirmation(frontendAppConfig, contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(fakeRequest, messages).toString
     }
 
     "redirect to Session Expired for a GET if not existing data is found" in {
@@ -142,7 +157,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
 
-      val result = controller().enquiryKey(mockUserAnswers)
+      val result = enquiryKey(mockUserAnswers)
       val isBusinessRatesSelection = result.right.get.startsWith("businessRatesSubcategory")
       isBusinessRatesSelection mustBe true
     }
@@ -154,7 +169,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_demolished")
 
-      val result = controller().enquiryKey(mockUserAnswers)
+      val result = enquiryKey(mockUserAnswers)
       val isCouncilTaxSelection = result.right.get.startsWith("councilTaxSubcategory")
       isCouncilTaxSelection mustBe true
     }
@@ -165,7 +180,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
 
-      val result = controller().enquiryKey(mockUserAnswers)
+      val result = enquiryKey(mockUserAnswers)
       result mustBe Left("Unknown enquiry category in enquiry key")
     }
 
@@ -207,7 +222,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       intercept[Exception] {
-        val result = controller(getRelevantData).onExistingPageLoad()(fakeRequest)
+        val result = controller(getRelevantData).onPageLoad()(fakeRequest)
 
         status(result) mustBe INTERNAL_SERVER_ERROR
 
@@ -248,6 +263,33 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       val result = controller(getRelevantData).onPageLoadSendEmail()(fakeRequest)
 
       status(result) mustBe SEE_OTHER
+    }
+
+    "will return correct messages if a new enquiry" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.existingEnquiryCategory) thenReturn None
+
+      val result = whatHappensNextMessages(mockUserAnswers)
+
+      result mustBe whatHappensNew
+    }
+
+    "will return correct messages if an existing enquiry" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn None
+      when(mockUserAnswers.existingEnquiryCategory) thenReturn Some("council_tax")
+
+      val result = whatHappensNextMessages(mockUserAnswers)
+
+      result mustBe whatHappensExisting
+    }
+
+    "will return empty string if new and existing enquiry are both defined in the cache" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.existingEnquiryCategory) thenReturn Some("council_tax")
+
+      val result = whatHappensNextMessages(mockUserAnswers)
+
+      result mustBe Seq.empty[String]
     }
   }
 }

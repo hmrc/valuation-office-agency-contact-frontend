@@ -21,6 +21,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBeh
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.DateFormatter
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow, AnswerSection}
 
 class ConfirmationViewSpec extends ViewBehaviours {
 
@@ -33,12 +34,19 @@ class ConfirmationViewSpec extends ViewBehaviours {
   val contact = Contact(contactDetails, address, councilTax, cSub, tellUs.message)
   val alternativeContact = Contact(contactDetails, alternativeAddress, councilTax, cSub, tellUs.message)
   val date = DateFormatter.todaysDate()
+  val whatHappensNew = Seq("confirmation.new.p1")
+  val answerSectionNew = AnswerSection(None, List(
+    AnswerRow("enquiryCategory.checkYourAnswersLabel", "enquiryCategory.council_tax", true, ""),
+    AnswerRow("councilTaxSubcategory.checkYourAnswersLabel", "councilTaxSubcategory.council_tax_changes", true, ""),
+    AnswerRow("contactDetails.heading", "c1<br>c3<br>c5", false, ""),
+    AnswerRow("propertyAddress.heading", "a<br>b<br>c<br>d<br>f", false, ""),
+    AnswerRow("tellUsMore.checkYourAnswersLabel", "some message", false, "")))
 
   def confirmation = app.injector.instanceOf[Confirmation]
 
-  def view = () => confirmation(frontendAppConfig, contact, date, "councilTaxSubcategory", SatisfactionSurveyForm.apply)(fakeRequest, messages)
+  def view = () => confirmation(frontendAppConfig, contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(fakeRequest, messages)
 
-  def alternativeView = () => confirmation(frontendAppConfig, alternativeContact, date, "councilTaxSubcategory", SatisfactionSurveyForm.apply)(fakeRequest, messages)
+  def alternativeView = () => confirmation(frontendAppConfig, alternativeContact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(fakeRequest, messages)
 
   "Confirmation view" must {
 
@@ -46,12 +54,15 @@ class ConfirmationViewSpec extends ViewBehaviours {
       "para1",
       "enquirySummary",
       "whatHappensnext",
-      "para2",
-      "section.enquiryType",
-      "section.yourDetails",
-      "section.propertyAddress",
-      "section.yourMessage",
-      "section.date")
+      "title",
+      "heading",
+      "enquirySummary",
+      "para1",
+      "new.p1",
+      "feedback.subheading",
+      "feedback.improve",
+      "feedback.warning"
+    )
 
     "contain a print button " in {
       val doc = asDocument(view())

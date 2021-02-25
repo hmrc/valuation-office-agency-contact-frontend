@@ -14,12 +14,8 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers
 
-import play.api.libs.json.Json
-
-case class AnswerRow(label: String, answer: String, answerIsMessageKey: Boolean, changeUrl: String)
-
-object AnswerRow {
-  implicit val format = Json.format[AnswerRow]
+case object AnswerSectionId extends Identifier {
+  override def toString: String = "answerSection"
 }

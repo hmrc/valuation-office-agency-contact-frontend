@@ -107,7 +107,7 @@ class Navigator @Inject()() {
     }, _ =>
       (enquiryCategory.isDefined, existingEnquiryCategory.isDefined) match {
         case (true, false) => enquiryRouting(enquiryCategory, routes.ConfirmationController.onPageLoad())
-        case (false, true) => enquiryRouting(existingEnquiryCategory, routes.ConfirmationController.onExistingPageLoad())
+        case (false, true) => enquiryRouting(existingEnquiryCategory, routes.ConfirmationController.onPageLoad)
         case _ => Logger.warn("Navigation for confirmation page - Enquiry or Existing Enquiry Subcategory not defined")
           throw new RuntimeException("Navigation for confirmation page - Enquiry or Existing Enquiry Subcategory not defined")
       })

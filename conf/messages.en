@@ -354,28 +354,20 @@ anythingElse.title = Is there anything else you would like to tell us about? - V
 anythingElse.heading = Is there anything else you would like to tell us about? (optional)
 anythingElse.checkYourAnswersLabel = Is there anything else you would like to tell us about?
 
-# --- Confirmation for Existing Enquiries
-existingConfirmation.title = Enquiry submitted - Valuation Office Agency contact form - GOV.UK
-existingConfirmation.heading = Enquiry submitted
-# existingConfirmation.p1 = We have sent you a confirmation email to .
-existingConfirmation.p2 = We will add any new details you have given us to your enquiry.
-existingConfirmation.p3 = We will contact you with an update to your enquiry using the contact details you have supplied.
-
-# CONFIRMATION
-###############################
-confirmation.title = Thank you for your enquiry - Valuation Office Agency contact form - GOV.UK
-confirmation.heading = Thank you for your enquiry
-confirmation.para1=Your reference is
+# --- Confirmation for new and existing enquiries
+confirmation.title = Enquiry submitted - Valuation Office Agency contact form - GOV.UK
+confirmation.heading = Enquiry submitted
 confirmation.enquirySummary = Your enquiry summary
+confirmation.para1=Your reference is
+# confirmation.p1 = We have sent you a confirmation email to .
+confirmation.new.p1 = We usually respond to enquiries within a few days. However, complex enquiries can take up to 30 days.
+confirmation.existing.p1 = We will add any new details you have given us to your enquiry.
+confirmation.existing.p2 = We will contact you with an update to your enquiry using the contact details you have supplied.
 confirmation.whatHappensnext = What happens next
-confirmation.para2 = We will look into your query and get back to you as soon as we can. We aim to respond within 20 working days, though we usually respond much quicker. Please do not resubmit your query within this time.
-confirmation.section.enquiryType = Enquiry type
-confirmation.section.yourDetails = Your details
-confirmation.section.propertyAddress = Property address
-confirmation.section.yourMessage = Your message
-confirmation.section.date = Date submitted
 confirmation.feedback = Feedback
 confirmation.feedback.subheading = Overall, how would you describe your experience with the form?
+confirmation.feedback.improve = How could we improve this service?
+confirmation.feedback.warning = Do not include personal or financial information like your National Insurance number or credit card details.
 satisfaction.verySatisfied = Very satisfied
 satisfaction.satisfied = Satisfied
 satisfaction.neither = Neither satisfied or dissatisfied
@@ -383,8 +375,6 @@ satisfaction.dissatisfied = Dissatisfied
 satisfaction.veryDissatisfied = Very dissatisfied
 satisfactionSurvey.satisfaction = Select how you would describe your experience
 satisfactionSurvey.details = Feedback must only contain letters a to z, numbers 0 to 9, hyphens, spaces and apostrophes
-confirmation.feedback.improve = How can we improve this service?
-confirmation.feedback.warning = Maximum 1,200 characters. Do not include any personal or financial information, for example your National Insurance or credit card numbers.
 confirmation.feedback.submit = Submit
 error.required.feedback = Select how you would describe your experience
 error.message.max_length.feedback = Feedback must be 1200 characters or fewer

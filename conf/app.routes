@@ -70,7 +70,6 @@ POST        /what-else-tell-us                     uk.gov.hmrc.valuationofficeag
 
 GET         /confirmationSend                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ConfirmationController.onPageLoadSendEmail()
 GET         /confirmation                          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ConfirmationController.onPageLoad()
-GET         /confirmation-existing-enquiry         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ConfirmationController.onExistingPageLoad()
 
 GET         /valuation-for-taxes                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ValuationForTaxesController.onPageLoad()
 GET         /contact-details-housing               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.HousingBenefitsController.onPageLoad()
