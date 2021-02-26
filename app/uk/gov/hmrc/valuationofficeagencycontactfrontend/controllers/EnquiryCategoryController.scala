@@ -68,6 +68,6 @@ class EnquiryCategoryController @Inject()(
   }
 
   def redirect: Action[AnyContent] = Action {
-    Redirect(routes.EnquiryCategoryController.onPageLoad(NormalMode))
+    Redirect(routes.ContactReasonController.onPageLoad())
   }
 }

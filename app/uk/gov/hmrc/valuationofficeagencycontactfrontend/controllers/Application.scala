@@ -52,6 +52,6 @@ class Application @Inject() (override val messagesApi: MessagesApi,
   }
 
   def createRefererURL(): String = {
-    uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
+    uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactReasonController.onPageLoad().url
   }
 }
