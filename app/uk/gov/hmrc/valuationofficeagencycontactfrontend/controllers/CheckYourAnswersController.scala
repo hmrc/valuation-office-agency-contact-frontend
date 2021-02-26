@@ -21,28 +21,37 @@ import play.api.Logger
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.AnswerSectionId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_answers
 
+import scala.concurrent.ExecutionContext
+
 class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
                                            override val messagesApi: MessagesApi,
+                                           dataCacheConnector: DataCacheConnector,
                                            getData: DataRetrievalAction,
                                            requireData: DataRequiredAction,
                                            checkYourAnswers: check_your_answers,
                                            cc: MessagesControllerComponents
                                           ) extends FrontendController(cc) with I18nSupport {
 
+  implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoad() = (getData andThen requireData) {
     implicit request =>
       val link = enquiryBackLink(request.userAnswers)
 
       userAnswersSectionBuilder(request.userAnswers) match {
-        case Some(s) => Ok(checkYourAnswers(appConfig, s, link))
+        case Some(answerSection) => {
+          dataCacheConnector.save[AnswerSection](request.sessionId, AnswerSectionId.toString, answerSection).isCompleted
+          Ok(checkYourAnswers(appConfig, Seq(answerSection), link))
+        }
         case None => {
           Logger.warn("Navigation for Check your answers page reached without selection of enquiry by controller")
           throw new RuntimeException("Navigation for check your anwsers page reached without selection of enquiry by controller")
@@ -54,39 +63,39 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
     Redirect(routes.ConfirmationController.onPageLoadSendEmail())
   }
 
-  private[controllers] def userAnswersSectionBuilder(answers: UserAnswers): Option[Seq[AnswerSection]] = {
+  private[controllers] def userAnswersSectionBuilder(answers: UserAnswers): Option[AnswerSection] = {
     import answers._
     val checkYourAnswersHelper = new CheckYourAnswersHelper(answers)
 
     (contactReason, enquiryCategory) match {
-      case (Some("more_details"), _) => Some(Seq(
+      case (Some("more_details"), _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.existingEnquiryCategory,
           checkYourAnswersHelper.refNumber,
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress,
-          checkYourAnswersHelper.whatElse).flatten)))
-      case (Some("update_existing"), _) => Some(Seq(
+          checkYourAnswersHelper.whatElse).flatten))
+      case (Some("update_existing"), _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.existingEnquiryCategory,
           checkYourAnswersHelper.refNumber,
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress,
-          checkYourAnswersHelper.anythingElse).flatten)))
-      case (_, Some("business_rates")) => Some(Seq(
+          checkYourAnswersHelper.anythingElse).flatten))
+      case (_, Some("business_rates")) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.businessRatesSubcategory,
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress,
-          checkYourAnswersHelper.tellUsMore).flatten)))
-      case (_, Some("council_tax")) => Some(Seq(
+          checkYourAnswersHelper.tellUsMore).flatten))
+      case (_, Some("council_tax")) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.councilTaxSubcategory,
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress,
-          checkYourAnswersHelper.tellUsMore).flatten)))
+          checkYourAnswersHelper.tellUsMore).flatten))
       case _ => None
     }
   }
@@ -94,9 +103,9 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
   private[controllers] def enquiryBackLink(answers: UserAnswers): String = {
     answers.contactReason match {
       case Some("new_enquiry") => routes.TellUsMoreController.onPageLoad(NormalMode).url
-      case Some("more_details")  => routes.WhatElseController.onPageLoad().url
-      case Some("update_existing")  => routes.AnythingElseTellUsController.onPageLoad().url
-      case Some(_) => {
+      case Some("more_details") => routes.WhatElseController.onPageLoad().url
+      case Some("update_existing") => routes.AnythingElseTellUsController.onPageLoad().url
+      case _ => {
         Logger.warn("Navigation for Check your answers page reached without selection of contact reason by controller")
         throw new RuntimeException("Navigation for check your anwsers page reached without selection of contact reason by controller")
       }

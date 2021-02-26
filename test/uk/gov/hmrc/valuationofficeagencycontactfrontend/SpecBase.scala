@@ -50,15 +50,16 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
                         cts: String,
                         brs: String,
                         address: PropertyAddress,
-                        tum: TellUsMore,
+                        tum: TellUsMore = TellUsMore(""),
                         ae: Option[String] = None,
                         ee: Option[String] = None,
                         cr: Option[String] = None,
+                        ha: Option[String] = None,
                         cacheMap: CacheMap = new CacheMap("", Map())) extends UserAnswers(cacheMap) {
 
     override def tellUsMore: Option[TellUsMore] = Some(tum)
 
-    override def enquiryCategory: Option[String] = Some(eq)
+    override def enquiryCategory: Option[String] = if(eq.isEmpty) None else Some(eq)
 
     override def existingEnquiryCategory: Option[String] = ee
 
@@ -67,6 +68,8 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
     override def contactDetails: Option[ContactDetails] = Some(cd)
 
     override def businessRatesSubcategory: Option[String] = Some(brs)
+
+    override def housingAllowanceSubcategory: Option[String] = ha
 
     override def propertyAddress: Option[PropertyAddress] = Some(address)
 

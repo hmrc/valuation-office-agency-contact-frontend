@@ -44,7 +44,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.tellUsMore
-        result mustBe Some(AnswerRow("tellUsMore.checkYourAnswersLabel", "Hello", false, routes.TellUsMoreController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("tellUsMore.heading", "Hello", false, routes.TellUsMoreController.onPageLoad(CheckMode).url))
       }
 
       "tellUsMore function should return an Answer Row containing tellUsMore.checkYourAnswersLabel label and a message when address line 2 and county are None" in {
@@ -57,7 +57,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.tellUsMore
-        result mustBe Some(AnswerRow("tellUsMore.checkYourAnswersLabel", "Hello", false, routes.TellUsMoreController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("tellUsMore.heading", "Hello", false, routes.TellUsMoreController.onPageLoad(CheckMode).url))
       }
 
       "tellUsMore function should return a None if no TellUsMore object is found in the User Answers" in {
@@ -79,7 +79,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.enquiryCategory
-        result mustBe Some(AnswerRow("enquiryCategory.checkYourAnswersLabel", s"enquiryCategory.$ec", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("enquiryCategory.heading", s"enquiryCategory.$ec", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url))
       }
 
       "enquiryCategory function should return an Answer Row containing enquiryCategory.checkYourAnswersLabel label and a enquiry category option when address line 2 and county are None" in {
@@ -93,7 +93,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.enquiryCategory
-        result mustBe Some(AnswerRow("enquiryCategory.checkYourAnswersLabel", s"enquiryCategory.$ec", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("enquiryCategory.heading", s"enquiryCategory.$ec", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url))
       }
 
       "enquiryCategory function should return a None if no enquiry category option is found in the User Answers" in {
@@ -114,7 +114,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.councilTaxSubcategory
-        result mustBe Some(AnswerRow("councilTaxSubcategory.checkYourAnswersLabel", s"councilTaxSubcategory.$councilTaxSubcategory", true, routes.CouncilTaxSubcategoryController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("councilTaxSubcategory.heading", s"councilTaxSubcategory.$councilTaxSubcategory", true, routes.CouncilTaxSubcategoryController.onPageLoad(CheckMode).url))
       }
 
       "councilTaxSubcategory function should return an Answer Row containing councilTaxSubcategory.checkYourAnswersLabel label " +
@@ -128,7 +128,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.councilTaxSubcategory
-        result mustBe Some(AnswerRow("councilTaxSubcategory.checkYourAnswersLabel", s"councilTaxSubcategory.$councilTaxSubcategory", true, routes.CouncilTaxSubcategoryController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("councilTaxSubcategory.heading", s"councilTaxSubcategory.$councilTaxSubcategory", true, routes.CouncilTaxSubcategoryController.onPageLoad(CheckMode).url))
       }
 
       "councilTaxSubcategory function should return a None if no council tax sub category option is found in the User Answers" in {
@@ -149,7 +149,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.businessRatesSubcategory
-        result mustBe Some(AnswerRow("businessRatesSubcategory.checkYourAnswersLabel", s"businessRatesSubcategory.$businessSubcategory", true, routes.BusinessRatesSubcategoryController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("businessRatesSubcategory.heading", s"businessRatesSubcategory.$businessSubcategory", true, routes.BusinessRatesSubcategoryController.onPageLoad(CheckMode).url))
       }
 
       "businessRatesSubcategory function should return an Answer Row containing businessRatesSubcategory.checkYourAnswersLabel label " +
@@ -163,7 +163,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.businessRatesSubcategory
-        result mustBe Some(AnswerRow("businessRatesSubcategory.checkYourAnswersLabel", s"businessRatesSubcategory.$businessSubcategory", true, routes.BusinessRatesSubcategoryController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("businessRatesSubcategory.heading", s"businessRatesSubcategory.$businessSubcategory", true, routes.BusinessRatesSubcategoryController.onPageLoad(CheckMode).url))
       }
 
       "businessRatesSubcategory function should return a None if no business rates sub category option is found in the User Answers" in {

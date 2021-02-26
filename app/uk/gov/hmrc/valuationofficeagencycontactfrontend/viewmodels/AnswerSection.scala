@@ -16,4 +16,10 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels
 
+import play.api.libs.json.Json
+
 case class AnswerSection(headingKey: Option[String], rows: Seq[AnswerRow]) extends Section
+
+object AnswerSection {
+  implicit val format = Json.format[AnswerSection]
+}

@@ -25,7 +25,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConn
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.EnquiryCategoryId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{EnquiryCategoryId, ExistingEnquiryCategoryId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.enquiryCategory
@@ -59,9 +59,11 @@ class EnquiryCategoryController @Inject()(
       EnquiryCategoryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(enquiryCategory(appConfig, formWithErrors, mode))),
-        (value) =>
-          dataCacheConnector.save[String](request.sessionId, EnquiryCategoryId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(EnquiryCategoryId, mode)(new UserAnswers(cacheMap))))
+        value =>
+          for {
+            _ <- dataCacheConnector.remove(request.sessionId, ExistingEnquiryCategoryId.toString)
+            cacheMap <- dataCacheConnector.save[String](request.sessionId, EnquiryCategoryId.toString, value)
+          } yield Redirect(navigator.nextPage(EnquiryCategoryId, mode)(new UserAnswers(cacheMap)))
       )
   }
 

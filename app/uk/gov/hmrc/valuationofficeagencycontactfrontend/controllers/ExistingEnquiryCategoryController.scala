@@ -24,7 +24,7 @@ import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ExistingEnquiryCategoryForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, CouncilTaxSubcategoryId, ExistingEnquiryCategoryId, HousingAllowanceSubcategoryId, OtherSubcategoryId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, CouncilTaxSubcategoryId, EnquiryCategoryId, ExistingEnquiryCategoryId, HousingAllowanceSubcategoryId, OtherSubcategoryId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.existingEnquiryCategory
@@ -68,6 +68,7 @@ class ExistingEnquiryCategoryController @Inject()(
         value => {
           for {
             _ <- saveSubCategoryInCache(value, request.sessionId)
+            _ <- dataCacheConnector.remove(request.sessionId, EnquiryCategoryId.toString)
             cacheMap <- dataCacheConnector.save[String](request.sessionId, ExistingEnquiryCategoryId.toString, value)
           } yield Redirect(navigator.nextPage(ExistingEnquiryCategoryId, mode)(new UserAnswers(cacheMap)))
         }
