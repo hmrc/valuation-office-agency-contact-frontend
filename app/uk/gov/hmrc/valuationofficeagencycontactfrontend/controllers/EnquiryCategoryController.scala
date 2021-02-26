@@ -66,8 +66,4 @@ class EnquiryCategoryController @Inject()(
           } yield Redirect(navigator.nextPage(EnquiryCategoryId, mode)(new UserAnswers(cacheMap)))
       )
   }
-
-  def redirect: Action[AnyContent] = Action {
-    Redirect(routes.ContactReasonController.onPageLoad())
-  }
 }

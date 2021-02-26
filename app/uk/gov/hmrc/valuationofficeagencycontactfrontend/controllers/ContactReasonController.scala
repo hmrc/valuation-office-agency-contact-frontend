@@ -17,7 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.MessagesControllerComponents
+import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
@@ -53,6 +53,10 @@ class ContactReasonController @Inject()( override val messagesApi: MessagesApi,
           Redirect(navigator.nextPage(ContactReasonId, mode)(new UserAnswers(cacheMap))))
       }
     )
+  }
+
+  def redirect: Action[AnyContent] = Action {
+    Redirect(routes.ContactReasonController.onPageLoad())
   }
 
 }
