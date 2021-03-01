@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWindWatertight => property_wind}
 
@@ -35,7 +34,7 @@ class PropertyWindWatertightViewSpec extends ViewBehaviours {
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
+      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWindWaterController.onEnquiryLoad().url
     }
   }
 }

@@ -15,7 +15,6 @@
  *@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 @import uk.gov.hmrc.govukfrontend.views.html.components.GovukBackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
@@ -27,7 +26,7 @@
 
 @beforeBlock = {
 @govukBackLink(BackLink(content = Text(messages("site.back")),
-    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url))
+    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWindWaterController.onEnquiryLoad().url))
 }
 
 @mainTemplate(

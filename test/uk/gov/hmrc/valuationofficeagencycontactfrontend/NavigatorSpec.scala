@@ -247,6 +247,22 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         when (mockUserAnswers.enquiryCategory) thenReturn Some("providing_lettings")
         navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.ProvidingLettingsController.onPageLoad()
       }
+
+      "return a function that goes to the council tax property empty form page when an enquiry category for council tax has been selected and council_tax_property_empty option selected" in {
+        when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_empty")
+        navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxPropertyEmptyController.onPageLoad()
+      }
+
+      "return a function that goes to the council tax property wind and water page when an enquiry category for council tax has been selected and council_tax_property_poor_repair option selected" in {
+        when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_poor_repair")
+        navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.PropertyWindWaterController.onEnquiryLoad()
+      }
+
+      "return function that goes 'The Council Tax band cannot be reduced or removed' when property is property wind and watertight" in {
+        when (mockUserAnswers.propertyWindEnquiry) thenReturn Some("yes")
+        navigator.nextPage(CouncilTaxPropertyPoorRepairId, NormalMode)(mockUserAnswers) mustBe routes.PropertyWindWaterController.onPageLoad()
+      }
+
     }
 
     "in Check mode" must {
@@ -275,11 +291,6 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
       "return a function that goes to the council tax bill form page when an enquiry category for council tax has been selected and council_tax_bill option selected" in {
         when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_bill")
         navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxBillController.onPageLoad()
-      }
-
-      "return a function that goes to the council tax property empty form page when an enquiry category for council tax has been selected and council_tax_property_empty option selected" in {
-        when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_empty")
-        navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxPropertyEmptyController.onPageLoad()
       }
 
       "throw exception when an enquiry category for council tax has been selected and not other options was selected on next page" in {

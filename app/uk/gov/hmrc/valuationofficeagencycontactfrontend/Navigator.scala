@@ -145,12 +145,22 @@ class Navigator @Inject()() {
       case Some("council_tax_bill") => routes.CouncilTaxBillController.onPageLoad()
       case Some("council_tax_band_for_new") => routes.CouncilTaxBandForNewController.onPageLoad()
       case Some("council_tax_property_empty") => routes.CouncilTaxPropertyEmptyController.onPageLoad()
+      case Some("council_tax_property_poor_repair") => routes.PropertyWindWaterController.onEnquiryLoad()
       case Some("council_tax_property_demolished") => routes.PropertyDemolishedController.onPageLoad()
       case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case None => {
         Logger.warn(s"Navigation for Council Tax page reached without selection of enquiry by controller ")
         throw new RuntimeException("Unknown exception in Council Tax Routing")
       }
+    }
+  }
+
+  val propertyWindWaterRouting: UserAnswers => Call = answers => {
+    answers.propertyWindEnquiry match {
+      case Some("yes") => routes.PropertyWindWaterController.onPageLoad()
+      case _ =>
+        Logger.warn(s"Navigation for Property wind and water reached without selection of enquiry by controller ")
+        throw new RuntimeException("Unknown exception in property wind and water routing")
     }
   }
 
@@ -169,7 +179,8 @@ class Navigator @Inject()() {
     AnythingElseId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
     CheckYourAnswersId -> confirmationPageRouting,
     CouncilTaxSmartLinksId -> (_ => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)),
-    BusinessRatesSmartLinksId -> (_ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode))
+    BusinessRatesSmartLinksId -> (_ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)),
+    CouncilTaxPropertyPoorRepairId -> propertyWindWaterRouting
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()
