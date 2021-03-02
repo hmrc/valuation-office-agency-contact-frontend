@@ -235,22 +235,17 @@ councilTaxBandTooHigh.p4 = How properties are valued for Council Tax
 councilTaxBandTooHigh.p4.url = https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed
 
 # --- Council Tax band for my new property'
-councilTaxBandForNew.title = I need a Council Tax band for my new property - Valuation Office Agency contact form - GOV.UK
-councilTaxBandForNew.heading = I need a Council Tax band for my new property
+councilTaxBandForNew.title = Speak to your local council about Council Tax bands for new properties - Valuation Office Agency contact form - GOV.UK
+councilTaxBandForNew.heading = Speak to your local council about Council Tax bands for new properties
 councilTaxBandForNew.p1.part1 = Contact your local council
 councilTaxBandForNew.p1.url = https://www.gov.uk/find-local-council
-councilTaxBandForNew.p1.part2 = as they need to provide us with:
-councilTaxBandForNew.li1 = the correct address
-councilTaxBandForNew.li2 = a unique reference number
-councilTaxBandForNew.li3 = the date from which we need to value it
+councilTaxBandForNew.p1.part2 =  as they need to provide us with all the details we need, including a unique reference number.
 councilTaxBandForNew.p2 = We will only be able to let you know the new band once they have sent us that information.
 councilTaxBandForNew.subheading = Other help on GOV.UK
-councilTaxBandForNew.p3.part1 = How new properties are assessed for Council Tax
-councilTaxBandForNew.p3.part2 = (opens in a new tab).
+councilTaxBandForNew.p3 = How new properties are assessed for Council Tax
 councilTaxBandForNew.p3.url = https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#new-properties
-councilTaxBandForNew.p4.part1 = When to contact your council about Council Tax
+councilTaxBandForNew.p4 = When to contact your council about Council Tax
 councilTaxBandForNew.p4.url = https://www.gov.uk/guidance/your-property-and-council-tax
-councilTaxBandForNew.p4.part2 = (opens in a new tab).
 
 # --- My property has been partly or fully demolished'
 propertyDemolished.title = My property has been partly or fully demolished - Valuation Office Agency contact form - GOV.UK
@@ -375,7 +370,7 @@ satisfaction.dissatisfied = Dissatisfied
 satisfaction.veryDissatisfied = Very dissatisfied
 satisfactionSurvey.satisfaction = Select how you would describe your experience
 satisfactionSurvey.details = Feedback must only contain letters a to z, numbers 0 to 9, hyphens, spaces and apostrophes
-confirmation.feedback.submit = Submit
+confirmation.feedback.submit = Send feedback
 error.required.feedback = Select how you would describe your experience
 error.message.max_length.feedback = Feedback must be 1200 characters or fewer
 error.message.xss-invalid.feedback = Feedback must only contain letters a to z, numbers 0 to 9, hyphens, spaces and apostrophes
