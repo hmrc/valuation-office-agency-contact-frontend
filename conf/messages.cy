@@ -233,6 +233,19 @@ councilTaxBandTooHigh.p3.url = https://www.gov.uk/guidance/council-tax-band-chan
 councilTaxBandTooHigh.p4 = Sut mae eiddo'n cael eu prisio ar gyfer Treth Gyngor
 councilTaxBandTooHigh.p4.url = https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed
 
+# --- Council Tax band for my new property'
+councilTaxBandForNew.title = Siaradwch â’ch cyngor lleol am fandiau Treth Gyngor ar gyfer eiddo newydd - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+councilTaxBandForNew.heading = Siaradwch â’ch cyngor lleol am fandiau Treth Gyngor ar gyfer eiddo newydd
+councilTaxBandForNew.p1.part1 = Cysylltwch â'ch cyngor lleol
+councilTaxBandForNew.p1.url = https://www.gov.uk/find-local-council
+councilTaxBandForNew.p1.part2 = gan fod angen iddynt roi’r holl fanylion sydd eu hangen arnom, gan gynnwys cyfeirnod unigryw.
+councilTaxBandForNew.p2 = Dim ond ar ôl iddynt anfon y wybodaeth honno atom y byddwn yn gallu rhoi gwybod ichi am y band newydd.
+councilTaxBandForNew.subheading = Cymorth arall ar GOV.UK.
+councilTaxBandForNew.p3 = Sut mae eiddo newydd yn cael eu hasesu ar gyfer Treth Gyngor
+councilTaxBandForNew.p3.url = https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#new-properties
+councilTaxBandForNew.p4 = Pryd i gysylltu â’ch cyngor ynghylch Treth Gyngor
+councilTaxBandForNew.p4.url = https://www.gov.uk/guidance/your-property-and-council-tax
+
 # --- Council Tax My Property Empty
 councilTaxPropertyEmpty.title = Nid yw’r band Treth Gyngor yn cael ei effeithio os yw’r eiddo'n wag - Valuation Office Agency contact form - GOV.UK
 councilTaxPropertyEmpty.heading = Nid yw’r band Treth Gyngor yn cael ei effeithio os yw’r eiddo'n wag
@@ -315,8 +328,8 @@ tellUsMore.ndr-reference = (fe welwch hwn ar eich bil ardrethi busnes)
 tellUsMore.checkYourAnswersLabel = Ymholiad
 
 # --- Confirmation for new and existing enquiries
-confirmation.title = Enquiry submitted - Valuation Office Agency contact form - GOV.UK
-confirmation.heading = Enquiry submitted
+confirmation.title = Ymchwiliad wedi’i gyflwyno - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+confirmation.heading = Ymchwiliad wedi’i gyflwyno
 confirmation.enquirySummary = Crynodeb o’ch ymholiad
 confirmation.para1= Eich cyfeirnod yw
 # confirmation.p1 = Rydym wedi anfon e-bost cadarnhaol i .
@@ -335,7 +348,7 @@ satisfaction.dissatisfied = Anfodlon
 satisfaction.veryDissatisfied = Anfodlon iawn
 satisfactionSurvey.satisfaction = Dewiswch sut y byddech chi’n disgrifio’ch profiad
 satisfactionSurvey.details = Rhaid i'r adborth gynnwys llythrennau a i z, rhifau 0 i 9, cysylltnodau, bylchau a chollnodau yn unig
-confirmation.feedback.submit = Cyflwyno
+confirmation.feedback.submit = Anfon adborth
 error.required.feedback = Dewiswch sut y byddech chi’n disgrifio’ch profiad
 error.message.max_length.feedback = Rhaid i'r adborth fod yn 1200 nod neu lai
 error.message.xss-invalid.feedback = Rhaid i'r adborth gynnwys llythrennau a i z, rhifau 0 i 9, cysylltnodau, bylchau a chollnodau yn unig
