@@ -45,38 +45,46 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def enquiryKey(answers: UserAnswers): Either[String, String] = {
-    answers.enquiryCategory match {
-      case Some("council_tax") => Right("tellUsMore.ct-reference")
-      case Some("business_rates") => Right("tellUsMore.ndr-reference")
-      case _ => Left("Unknown enquiry category in enquiry key")
-    }
-  }
-
   def onPageLoad(mode: Mode) = (getData andThen requireData) {
     implicit request =>
+      val key = requiredErrorMessage(request.userAnswers)
+
       val preparedForm = request.userAnswers.tellUsMore match {
-        case None => TellUsMoreForm()
-        case Some(value) => TellUsMoreForm().fill(value)
+        case None => TellUsMoreForm(key)
+        case Some(value) => TellUsMoreForm(key).fill(value)
       }
 
-      enquiryKey(request.userAnswers) match {
-        case Right(key) => Ok(tellUsMore(appConfig, preparedForm, mode, key))
-        case Left(msg) => {
-          Logger.warn(s"Navigation for Tell us more page reached with error $msg")
-          throw new RuntimeException(s"Navigation for Tell us more page reached with error $msg")
-        }
-      }
+      Ok(tellUsMore(appConfig, preparedForm, mode, getEnquiryKey(request.userAnswers)))
   }
 
   def onSubmit(mode: Mode) = (getData andThen requireData).async {
     implicit request =>
-      TellUsMoreForm().bindFromRequest().fold(
+      TellUsMoreForm(requiredErrorMessage(request.userAnswers)).bindFromRequest().fold(
         (formWithErrors: Form[TellUsMore]) =>
-          Future.successful(BadRequest(tellUsMore(appConfig, formWithErrors, mode, ""))),
+          Future.successful(BadRequest(tellUsMore(appConfig, formWithErrors, mode, getEnquiryKey(request.userAnswers)))),
         (value) =>
           dataCacheConnector.save[TellUsMore](request.sessionId, TellUsMoreId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(TellUsMoreId, mode)(new UserAnswers(cacheMap))))
       )
   }
+
+  private def requiredErrorMessage(userAnswers: UserAnswers): String =
+    if(userAnswers.propertyWindEnquiry.isDefined) "error.tellUsMore.poorRepair.required" else "error.tell_us_more.required"
+
+  private def getEnquiryKey(answers: UserAnswers): String = {
+    enquiryKey(answers).getOrElse{
+      Logger.warn(s"Navigation for Tell us more page reached with error - Unknown enquiry category in enquiry key")
+      throw new RuntimeException(s"Navigation for Tell us more page reached with error Unknown enquiry category in enquiry key")
+    }
+  }
+
+  private[controllers] def enquiryKey(answers: UserAnswers): Either[String, String] = {
+    (answers.enquiryCategory, answers.councilTaxSubcategory) match {
+      case (Some("council_tax"), Some("council_tax_property_poor_repair")) => Right("tellUsMore.poorRepair")
+      case (Some("council_tax"), _) => Right("tellUsMore.ct-reference")
+      case (Some("business_rates"), _) => Right("tellUsMore.ndr-reference")
+      case _ => Left("Unknown enquiry category in enquiry key")
+    }
+  }
+
 }
