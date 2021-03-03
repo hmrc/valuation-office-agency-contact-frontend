@@ -45,6 +45,15 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
     behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.TellUsMoreController.onSubmit(NormalMode).url, "message")
   }
 
+  "TellUsMore view for property poor repair" must {
+    def view = () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.poorRepair")(fakeRequest, messages)
+
+    behave like normalPage(view, "tellUsMore.poorRepair", "hint", "inset")
+
+    behave like pageWithTextFields(createViewUsingForm, "tellUsMore.poorRepair", routes.TellUsMoreController.onSubmit(NormalMode).url, "message")
+
+  }
+
   "contain continue button with the value Continue" in {
     val doc = asDocument(createViewUsingForm(TellUsMoreForm()))
     val continueButton = doc.getElementById("submit").text()
