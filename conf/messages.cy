@@ -153,7 +153,8 @@ existingEnquiryCategory.other = Arall
 error.existingEnquiryCategory.required = Dewiswch yr hyn y gwnaethoch chi gysylltu â ni amdano
 
 refNumber.title = Beth yw eich cyfeirnod? (dewisol) - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-refNumber.value = Beth yw eich cyfeirnod? (dewisol)
+refNumber.value = Beth yw eich cyfeirnod?
+refNumber.value.optional = Beth yw eich cyfeirnod? (dewisol)
 refNumber.hint = Er enghraifft, VOR12345678, CHK76543210.
 
 enquiryCategory.title = Beth yw testun eich ymholiad? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
@@ -233,6 +234,30 @@ councilTaxBandTooHigh.p3.url = https://www.gov.uk/guidance/council-tax-band-chan
 councilTaxBandTooHigh.p4 = Sut mae eiddo'n cael eu prisio ar gyfer Treth Gyngor
 councilTaxBandTooHigh.p4.url = https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed
 
+# --- Council Tax band for my new property'
+councilTaxBandForNew.title = Siaradwch â’ch cyngor lleol am fandiau Treth Gyngor ar gyfer eiddo newydd - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+councilTaxBandForNew.heading = Siaradwch â’ch cyngor lleol am fandiau Treth Gyngor ar gyfer eiddo newydd
+councilTaxBandForNew.p1.part1 = Cysylltwch â'ch cyngor lleol
+councilTaxBandForNew.p1.url = https://www.gov.uk/find-local-council
+councilTaxBandForNew.p1.part2 = gan fod angen iddynt roi’r holl fanylion sydd eu hangen arnom, gan gynnwys cyfeirnod unigryw.
+councilTaxBandForNew.p2 = Dim ond ar ôl iddynt anfon y wybodaeth honno atom y byddwn yn gallu rhoi gwybod ichi am y band newydd.
+councilTaxBandForNew.subheading = Cymorth arall ar GOV.UK.
+councilTaxBandForNew.p3 = Sut mae eiddo newydd yn cael eu hasesu ar gyfer Treth Gyngor
+councilTaxBandForNew.p3.url = https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#new-properties
+councilTaxBandForNew.p4 = Pryd i gysylltu â’ch cyngor ynghylch Treth Gyngor
+councilTaxBandForNew.p4.url = https://www.gov.uk/guidance/your-property-and-council-tax
+
+# --- My property has been partly or fully demolished'
+propertyDemolished.title = My property has been partly or fully demolished - Valuation Office Agency contact form - GOV.UK
+propertyDemolished.heading = My property has been partially or fully demolished
+propertyDemolished.p1.url = https://www.gov.uk/find-local-council
+propertyDemolished.p1.part1 = Contact your local council
+propertyDemolished.p1.part2 = to tell them that the property has been demolished.
+propertyDemolished.subheading = Other help on GOV.UK
+propertyDemolished.p2.url = https://www.gov.uk/guidance/your-property-and-council-tax
+propertyDemolished.p2.part1 = When to contact your council about Council Tax
+propertyDemolished.p2.part2 = (opens in a new tab).
+
 # --- Council Tax My Property Empty
 councilTaxPropertyEmpty.title = Nid yw’r band Treth Gyngor yn cael ei effeithio os yw’r eiddo'n wag - Valuation Office Agency contact form - GOV.UK
 councilTaxPropertyEmpty.heading = Nid yw’r band Treth Gyngor yn cael ei effeithio os yw’r eiddo'n wag
@@ -257,7 +282,11 @@ error.propertyWindWater.required = Dewiswch ‘Ydy’ os yw eich eiddo wedi’i 
 councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 councilTaxSubcategory.heading = Beth yw testun eich ymholiad ynghylch Treth Gyngor?
 councilTaxSubcategory.subheading = Am beth ydych am roi gwybod i ni?
+councilTaxSubcategory.council_tax_band_too_high = My Council Tax band is too high
 councilTaxSubcategory.council_tax_bill = My Council Tax bill
+councilTaxSubcategory.council_tax_band_for_new = I need a Council Tax band for my new property
+councilTaxSubcategory.council_tax_property_empty = My property is empty
+councilTaxSubcategory.council_tax_property_demolished = My property has been partially or fully demolished
 councilTaxSubcategory.council_tax_changes = Mae fy eiddo neu’r ardal leol wedi newid
 councilTaxSubcategory.council_tax_ndr_changes = Mae fy eiddo wedi newid o Dreth Gyngor i Ardrethi Busnes
 councilTaxSubcategory.council_tax_business_uses = Defnyddir fy eiddo ar gyfer busnes erbyn hyn
@@ -326,10 +355,15 @@ tellUsMore.para4 = Cyfeirnod yr eiddo
 tellUsMore.ct-reference = (fe welwch hwn ar waelod eich bil Treth Gyngor)
 tellUsMore.ndr-reference = (fe welwch hwn ar eich bil ardrethi busnes)
 tellUsMore.checkYourAnswersLabel = Ymholiad
+tellUsMore.anythingElse = Is there anything else you would like to tell us about?
+
+anythingElse.title = Is there anything else you would like to tell us about? - Valuation Office Agency contact form - GOV.UK
+anythingElse.heading = Is there anything else you would like to tell us about? (optional)
+anythingElse.checkYourAnswersLabel = Is there anything else you would like to tell us about?
 
 # --- Confirmation for new and existing enquiries
-confirmation.title = Enquiry submitted - Valuation Office Agency contact form - GOV.UK
-confirmation.heading = Enquiry submitted
+confirmation.title = Ymchwiliad wedi’i gyflwyno - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+confirmation.heading = Ymchwiliad wedi’i gyflwyno
 confirmation.enquirySummary = Crynodeb o’ch ymholiad
 confirmation.para1= Eich cyfeirnod yw
 # confirmation.p1 = Rydym wedi anfon e-bost cadarnhaol i .
@@ -340,7 +374,7 @@ confirmation.whatHappensnext = Yr hyn sy’n digwydd nesaf
 confirmation.feedback = Adborth
 confirmation.feedback.subheading = Yn gyffredinol, sut y byddech yn disgrifio’ch profiad gyda’r ffurflen hon?
 confirmation.feedback.improve = Sut y gallwn wella’r gwasanaeth hwn?
-confirmation.feedback.warning = Do not include personal or financial information like your National Insurance number or credit card details.
+confirmation.feedback.warning = Peidiwch â chynnwys unrhyw wybodaeth bersonol nac ariannol, er enghraifft eich rhif Yswiriant Gwladol neu rifau cardiau credyd.
 satisfaction.verySatisfied = Bodlon iawn
 satisfaction.satisfied = Bodlon
 satisfaction.neither = Ddim yn fodlon nac yn anfodlon
@@ -348,7 +382,7 @@ satisfaction.dissatisfied = Anfodlon
 satisfaction.veryDissatisfied = Anfodlon iawn
 satisfactionSurvey.satisfaction = Dewiswch sut y byddech chi’n disgrifio’ch profiad
 satisfactionSurvey.details = Rhaid i'r adborth gynnwys llythrennau a i z, rhifau 0 i 9, cysylltnodau, bylchau a chollnodau yn unig
-confirmation.feedback.submit = Cyflwyno
+confirmation.feedback.submit = Anfon adborth
 error.required.feedback = Dewiswch sut y byddech chi’n disgrifio’ch profiad
 error.message.max_length.feedback = Rhaid i'r adborth fod yn 1200 nod neu lai
 error.message.xss-invalid.feedback = Rhaid i'r adborth gynnwys llythrennau a i z, rhifau 0 i 9, cysylltnodau, bylchau a chollnodau yn unig
