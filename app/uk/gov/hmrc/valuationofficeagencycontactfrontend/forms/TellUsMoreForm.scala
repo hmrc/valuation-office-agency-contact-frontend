@@ -22,10 +22,9 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.TellUsMore
 
 object TellUsMoreForm {
 
-
-  def apply(): Form[TellUsMore] = Form(
+  def apply(errorRequiredMessage: String = "error.tell_us_more.required"): Form[TellUsMore] = Form(
     mapping(
-      "message" -> text.verifying("error.tell_us_more.required", !_.isEmpty)
+      "message" -> text.verifying(errorRequiredMessage, !_.isEmpty)
         .verifying("error.message.max_length", _.length <= 5000)
         .verifying("error.tell_us_more.invalid", x => !(x.contains('<') || x.contains('>')))
     )(TellUsMore.apply)(TellUsMore.unapply)

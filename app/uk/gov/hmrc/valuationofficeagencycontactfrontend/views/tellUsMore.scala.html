@@ -50,39 +50,55 @@
 
 
 @content = {
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-        <h1 class="govuk-fieldset__heading">@messages("tellUsMore.heading")</h1>
-    </legend>
 
-    <p class="govuk-body">@messages("tellUsMore.para")</p>
+    @if(enquiryKey == "tellUsMore.poorRepair") {
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">@messages(s"$enquiryKey.heading")</h1>
+        </legend>
 
-    <ul class="govuk-list govuk-list--bullet">
-        <li>@messages("tellUsMore.para2")</li>
-        <li>@messages("tellUsMore.para3")</li>
-        <li>@messages("tellUsMore.para4") @messages(enquiryKey)</li>
-    </ul>
+        @govukTextarea(Textarea(id = "message", name = "message", rows = 5, value = form("message").value,
+            hint = Option(Hint(content = Text(messages(s"$enquiryKey.hint")))),
+            errorMessage = form.errors.asHtmlErrorMessageForField("message")))
 
-    @govukTextarea(Textarea(id="message", name="message", rows=5, value=form("message").value,
-        hint=Option(Hint(content = Text(messages("tellUsMore.hint")))),
-        errorMessage = form.errors.asHtmlErrorMessageForField("message"), label = Label(content = Text(messages("tellUsMore.message")))))
+        <div class="govuk-inset-text">@messages(s"$enquiryKey.inset")</div>
 
+    } else {
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">@messages("tellUsMore.heading")</h1>
+        </legend>
+
+        <p class="govuk-body">@messages("tellUsMore.para")</p>
+
+        <ul class="govuk-list govuk-list--bullet">
+            <li>@messages("tellUsMore.para2")</li>
+            <li>@messages("tellUsMore.para3")</li>
+            <li>@messages("tellUsMore.para4") @messages(enquiryKey)</li>
+        </ul>
+
+        @govukTextarea(Textarea(id = "message", name = "message", rows = 5, value = form("message").value,
+            hint = Option(Hint(content = Text(messages("tellUsMore.hint")))),
+            errorMessage = form.errors.asHtmlErrorMessageForField("message"), label = Label(content = Text(messages("tellUsMore.message")))))
+    }
 }
 
-@mainTemplate(
-    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("tellUsMore.title"))else messages("tellUsMore.title")),
-    beforeContentBlock = Option(beforeBlock)
-) {
-    @formWithCSFR(action = TellUsMoreController.onSubmit(mode), 'autoComplete -> "off") {
-        @if(form.hasErrors) {
-            @govukErrorSummary(
-                ErrorSummary(
-                    attributes = Map("id" -> "error-summary-heading"),
-                    title = Text(messages("error.summary.title")),
-                    errorList = form.errors.take(1).map(e => ErrorLink(href = Some("#" + e.key), content = HtmlContent(messages(e.messages, e.args))))
+@defining(if(enquiryKey == "tellUsMore.poorRepair") messages(s"$enquiryKey.title") else messages("tellUsMore.title")) { title =>
+
+    @mainTemplate(
+        pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + title) else title),
+        beforeContentBlock = Option(beforeBlock)
+    ) {
+        @formWithCSFR(action = TellUsMoreController.onSubmit(mode), 'autoComplete -> "off") {
+            @if(form.hasErrors) {
+                @govukErrorSummary(
+                    ErrorSummary(
+                        attributes = Map("id" -> "error-summary-heading"),
+                        title = Text(messages("error.summary.title")),
+                        errorList = form.errors.take(1).map(e => ErrorLink(href = Some("#" + e.key), content = HtmlContent(messages(e.messages, e.args))))
+                    )
                 )
-            )
+            }
+            @govukFieldset(Fieldset(html = content))
+            @govukButton(Button(attributes = Map("id" -> "submit"), content = Text(messages("site.continue"))))
         }
-        @govukFieldset(Fieldset(html = content ))
-        @govukButton(Button(attributes = Map("id" -> "submit"), content = Text(messages("site.continue"))))
     }
 }

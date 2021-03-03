@@ -93,6 +93,7 @@ error.message.max_length = Your enquiry must be 5000 characters or fewer
 error.message.xss-invalid = You can only enter these characters: A-Z, a-z, 0-9, -, &, ., £, %, (), ;, :, ?, !, `, ’, commas, and spaces
 error.tell_us_more.required = Enter more details about your enquiry
 error.tell_us_more.invalid = Your enquiry must not include < and >
+error.tellUsMore.poorRepair.required = Enter details of the condition of your property
 
 session_expired.title = For your security, this service has been reset - Valuation Office Agency contact form - GOV.UK
 session_expired.heading = For your security, this service has been reset
@@ -348,6 +349,7 @@ error.what_else.required = Enter more details about your enquiry
 error.what_else.invalid = Your enquiry must not include < and >
 error.what_else.max_length = Your enquiry must be 5000 characters or fewer
 
+# --- Tell Us more
 tellUsMore.title = Tell us more about your enquiry - Valuation Office Agency contact form - GOV.UK
 tellUsMore.heading = Tell us more about your enquiry
 tellUsMore.message = Your message
@@ -361,6 +363,12 @@ tellUsMore.ct-reference = (this can be found on your Council Tax bill)
 tellUsMore.ndr-reference = (this can be found on your business rates bill)
 tellUsMore.checkYourAnswersLabel = Enquiry
 tellUsMore.anythingElse = Is there anything else you would like to tell us about?
+
+# --- Tell Us More Property Wind water journey
+tellUsMore.poorRepair.title = Tell us more about the condition of the property - - Valuation Office Agency contact form - GOV.UK
+tellUsMore.poorRepair.heading = Tell us more about the condition of the property
+tellUsMore.poorRepair.hint = For example, if the property has a roof or windows.
+tellUsMore.poorRepair.inset = You will need to supply evidence when we reply to you, such as photos or plans of the property.
 
 anythingElse.title = Is there anything else you would like to tell us about? - Valuation Office Agency contact form - GOV.UK
 anythingElse.heading = Is there anything else you would like to tell us about? (optional)

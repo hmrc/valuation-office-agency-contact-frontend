@@ -93,6 +93,7 @@ error.message.max_length = Rhaid i’ch ymholiad fod yn 5000 nod neu lai
 error.message.xss-invalid = Gallwch ond nodi’r cymeriadau hyn: A-Y, a-y, 0-9, -, &, ., £, %, (), ;, :, ?, !, `, ’, comaau, a bylchau
 error.tell_us_more.required = Nodwch fwy o fanylion am eich ymholiad
 error.tell_us_more.invalid = Ni ddylai eich ymholiad gynnwys < a >
+error.tellUsMore.poorRepair.required = Rhowch fanylion am gyflwr eich eiddo
  
 session_expired.title = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 session_expired.heading = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod
@@ -342,7 +343,8 @@ whatElse.message = Beth arall hoffech chi ddweud wrthym am eich ymholiad?
 error.what_else.required = Nodwch fwy o fanylion am eich ymholiad
 error.what_else.invalid = Ni ddylai eich ymholiad gynnwys < a >
 error.what_else.max_length = Rhaid i’ch ymholiad fod yn 5000 nod neu lai
- 
+
+# --- Tell Us more
 tellUsMore.title = Rhowch ragor o wybodaeth i ni am eich ymholiad - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 tellUsMore.heading = Rhowch ragor o wybodaeth i ni am eich ymholiad
 tellUsMore.message = Eich neges
@@ -360,6 +362,12 @@ tellUsMore.anythingElse = Is there anything else you would like to tell us about
 anythingElse.title = Is there anything else you would like to tell us about? - Valuation Office Agency contact form - GOV.UK
 anythingElse.heading = Is there anything else you would like to tell us about? (optional)
 anythingElse.checkYourAnswersLabel = Is there anything else you would like to tell us about?
+
+# --- Tell Us More Property Wind water journey
+tellUsMore.poorRepair.title = Dywedwch fwy wrthym am gyflwr eich eiddo - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+tellUsMore.poorRepair.heading = Dywedwch fwy wrthym am gyflwr eich eiddo
+tellUsMore.poorRepair.hint = Er enghraifft, os oes gan yr eiddo do neu ffenestri.
+tellUsMore.poorRepair.inset = Bydd angen i chi ddarparu tystiolaeth pan fyddwn yn ymateb i chi, megis lluniau neu gynlluniau o’r eiddo.
 
 # --- Confirmation for new and existing enquiries
 confirmation.title = Ymchwiliad wedi’i gyflwyno - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK

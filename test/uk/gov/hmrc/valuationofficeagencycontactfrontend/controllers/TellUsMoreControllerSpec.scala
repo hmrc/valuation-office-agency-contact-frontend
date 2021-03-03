@@ -96,6 +96,18 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       isCouncilTaxSelection mustBe true
     }
 
+    "The enquiry key function produces a string with a tell us more poorRepair key when the enquiry category is council_tax" +
+      " and the council_tax_property_poor_repair has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_poor_repair")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.poorRepair")
+      isCouncilTaxSelection mustBe true
+    }
+
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn None
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
@@ -116,13 +128,16 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_calculated"))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm = TellUsMoreForm().bind(Map("value" -> "invalid value"))
 
-      val result = controller().onSubmit(NormalMode)(postRequest)
+      val result = controller(getRelevantData).onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe BAD_REQUEST
-      contentAsString(result) mustBe viewAsString(boundForm)
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {
