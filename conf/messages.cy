@@ -265,6 +265,19 @@ councilTaxPropertyEmpty.p1 = <a class="govuk-link" href="https://www.gov.uk/find
 councilTaxPropertyEmpty.subHeading = Cymorth arall ar GOV.UK
 councilTaxPropertyEmpty.p2 = <a class="govuk-link" href="https://www.gov.uk/council-tax/second-homes-and-empty-properties" target="_self"> Treth Gyngor ar gyfer eiddo gwag </a>
 
+# --- The Council Tax band cannot be reduced or removed
+propertyWindWater.title = Ni ellir lleihau na dileu’r band Treth Gyngor - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyWindWater.heading = Ni ellir lleihau na dileu’r band Treth Gyngor
+propertyWindWater.p1 = Os yw’r eiddo’n atal gwynt a dŵr, yna ni ystyrir ei fod mewn cyflwr gwael. Ni ellir dileu’r band Treth Gyngor pe gallai rhywun ddal i fyw yn yr eiddo.
+propertyWindWater.subheading = Cymorth arall ar GOV.UK
+propertyWindWater.p2.url = https://www.gov.uk/government/publications/council-tax-domestic-properties-in-disrepair-or-derelict/council-tax-domestic-properties-which-are-in-disrepair-or-are-derelict
+propertyWindWater.p2 = Pryd fyddai atgyweiriad gwael yn effeithio ar fand Treth Gyngor.
+
+# -------- Council Tax protected from wind and water form
+propertyWindWater.form.yes = Do
+propertyWindWater.form.no = Naddo
+error.propertyWindWater.required = Dewiswch ‘Ydy’ os yw eich eiddo wedi’i amddiffyn rhag gwynt a dŵr
+
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 councilTaxSubcategory.heading = Beth yw testun eich ymholiad ynghylch Treth Gyngor?

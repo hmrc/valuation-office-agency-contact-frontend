@@ -53,6 +53,8 @@ class UserAnswers(val cacheMap: CacheMap) {
 
   def answerSection: Option[AnswerSection] = cacheMap.getEntry[AnswerSection](AnswerSectionId.toString)
 
+  def propertyWindEnquiry: Option[String] = cacheMap.getEntry[String](CouncilTaxPropertyPoorRepairId.toString)
+
   def contact(): Either[String, Contact] = {
 
     val optionalContactModel = for {
