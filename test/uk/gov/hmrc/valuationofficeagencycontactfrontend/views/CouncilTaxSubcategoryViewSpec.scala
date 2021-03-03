@@ -75,12 +75,12 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
         assert(continueButton == messages("site.continue"))
       }
 
-      "has a link marked with site.back leading to the Council Tax Smart Links" in {
+      "has a link marked with site.back leading to the Enquiry page" in {
         val doc = asDocument(createView())
         val backlinkText = doc.select("a[class=govuk-back-link]").text()
         backlinkText mustBe messages("site.back")
         val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
-        backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSmartLinksController.onPageLoad().url
+        backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
       }
     }
 

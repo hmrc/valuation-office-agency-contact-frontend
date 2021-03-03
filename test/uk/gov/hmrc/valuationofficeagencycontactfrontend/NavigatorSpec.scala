@@ -38,9 +38,9 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(UnknownIdentifier, NormalMode)(mockUserAnswers) mustBe routes.EnquiryCategoryController.onPageLoad(NormalMode)
       }
 
-      "return a function that goes to the Council Tax Smart Links page when an enquiry category has been selected and the selection is council tax" in {
+      "return a function that goes to the Council Tax Sub Category page when an enquiry category has been selected and the selection is council tax" in {
         when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxSmartLinksController.onPageLoad()
+        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
       }
 
       "return function that goes 'When you can expect an update' when enquiry was in last 30 days" in {
@@ -276,11 +276,6 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         intercept[Exception] {
           navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers)
         }
-      }
-
-      "return a function that goes to the council tax subcategory page when an enquiry category has been selected and the selection is council_tax" in {
-        when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-        navigator.nextPage(CouncilTaxSmartLinksId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
       }
 
       "return a function that goes to the business rates subcategory page when an enquiry category has been selected and the selection is business_rates" in {

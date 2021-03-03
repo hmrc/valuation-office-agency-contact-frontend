@@ -65,7 +65,7 @@ class Navigator @Inject()() {
 
   val enquiryRouting: UserAnswers => Call = answers => {
     answers.enquiryCategory match {
-      case Some("council_tax") => routes.CouncilTaxSmartLinksController.onPageLoad()
+      case Some("council_tax") => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
       case Some("business_rates") => routes.BusinessRatesSmartLinksController.onPageLoad()
       case Some("housing_benefit") => routes.HousingBenefitsController.onPageLoad()
       case Some("valuations_for_tax") => routes.ValuationForTaxesController.onPageLoad()
@@ -178,7 +178,6 @@ class Navigator @Inject()() {
     TellUsMoreId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
     AnythingElseId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
     CheckYourAnswersId -> confirmationPageRouting,
-    CouncilTaxSmartLinksId -> (_ => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)),
     BusinessRatesSmartLinksId -> (_ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)),
     CouncilTaxPropertyPoorRepairId -> propertyWindWaterRouting
   )
