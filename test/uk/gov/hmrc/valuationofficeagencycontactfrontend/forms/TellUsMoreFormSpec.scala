@@ -54,6 +54,13 @@ class TellUsMoreFormSpec extends FormBehaviours {
       checkForError(form, data, expectedError)
     }
 
+    "fail to bind when message is blank and is for poor repair" in {
+      val form = TellUsMoreForm("error.tellUsMore.poorRepair.required")
+      val data = validData + ("message" -> "")
+      val expectedError = Seq(error("message", "error.tellUsMore.poorRepair.required")).flatten
+      checkForError(form, data, expectedError)
+    }
+
   }
 
 }

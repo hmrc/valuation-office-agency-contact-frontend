@@ -1,27 +1,3 @@
-checkBeforeYouStart.council_tax.title = Council Tax: check before you continue - Valuation Office Agency contact form - GOV.UK
-checkBeforeYouStart.council_tax.heading = Council Tax: Check before you continue
-checkBeforeYouStart.local_council.part1 = Some enquiries can be resolved by contacting your local council first.
-checkBeforeYouStart.local_council.url = https://www.gov.uk/guidance/your-property-and-council-tax
-checkBeforeYouStart.local_council.part2 = Find out when you should contact your local council about your domestic property.
-checkBeforeYouStart.council_tax.para = These links contain answers to our most common enquiries.
-checkBeforeYouStart.council_tax.subheading = Useful links for Council Tax
-checkBeforeYouStart.council_tax.para1 = Check a Council Tax band
-checkBeforeYouStart.council_tax.url1 = https://www.gov.uk/council-tax-bands
-checkBeforeYouStart.council_tax.para2 = Find out the Council Tax band for a home in England or Wales.
-checkBeforeYouStart.council_tax.para3 = Changes to your property
-checkBeforeYouStart.council_tax.url2 = https://www.gov.uk/guidance/council-tax-band-changes
-checkBeforeYouStart.council_tax.para4 = Your Council Tax band may change if your property has been altered, such as demolished or divided into flats.
-checkBeforeYouStart.council_tax.para5 = How Council Tax bands are assessed
-checkBeforeYouStart.council_tax.url3 = https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed
-checkBeforeYouStart.council_tax.para6 = How domestic properties are valued for Council Tax bands.
-checkBeforeYouStart.council_tax.para7 = Pay your Council Tax
-checkBeforeYouStart.council_tax.url4 = https://www.gov.uk/pay-council-tax
-checkBeforeYouStart.council_tax.para8 = Search for your local authority and pay your Council Tax online.
-checkBeforeYouStart.council_tax.url5 = https://www.gov.uk/challenge-council-tax-band
-checkBeforeYouStart.council_tax.para9 = Challenge your Council Tax band
-checkBeforeYouStart.council_tax.para10 = Find out what you can do if you disagree with your Council Tax band.
-checkBeforeYouStart.council_tax.para11 = If you cannot find an answer to your query, or you have a query about something else, you can continue to our contact form.
-
 checkBeforeYouStart.business_rates.title = Business Rates: Check before you continue - Valuation Office Agency contact form - GOV.UK
 checkBeforeYouStart.business_rates.heading = Business rates: check before you continue
 checkBeforeYouStart.business_rates.para = These links contain answers to our most common enquiries.

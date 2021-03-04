@@ -40,7 +40,7 @@
 
 @beforeBlock = {
     @govukBackLink(BackLink(content = Text(messages("site.back")), href =
-            CouncilTaxSmartLinksController.onPageLoad().url))
+            EnquiryCategoryController.onPageLoad(mode).url))
 }
 
 @mainTemplate(

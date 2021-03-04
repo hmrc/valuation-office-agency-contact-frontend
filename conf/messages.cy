@@ -1,27 +1,3 @@
-checkBeforeYouStart.council_tax.title = Treth Gyngor: gwirio cyn i chi fynd yn eich blaen - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-checkBeforeYouStart.council_tax.heading = Treth Gyngor: gwirio cyn i chi fynd yn eich blaen
-checkBeforeYouStart.local_council.part1 = Gellir datrys rhai ymholiadau drwy gysylltu â’ch cyngor lleol.
-checkBeforeYouStart.local_council.url = https://www.gov.uk/guidance/your-property-and-council-tax
-checkBeforeYouStart.local_council.part2 = Darganfyddwch pryd y dylech chi gysylltu â’ch cyngor lleol am eich eiddo domestig.
-checkBeforeYouStart.council_tax.para = Mae’r cysylltiadau hyn yn cynnwys atebion i’n ymholiadau mwyaf cyffredin.
-checkBeforeYouStart.council_tax.subheading = Cysylltiadau defnyddiol ar gyfer Treth Gyngor
-checkBeforeYouStart.council_tax.para1 = Gwiriwch fand Treth Gyngor
-checkBeforeYouStart.council_tax.url1 = https://www.gov.uk/council-tax-bands
-checkBeforeYouStart.council_tax.para2 = Cael gwybod beth yw’r band Treth Gyngor am gartref yng Nghymru neu Lloegr.
-checkBeforeYouStart.council_tax.para3 = Newidiadau i’ch eiddo
-checkBeforeYouStart.council_tax.url2 = https://www.gov.uk/guidance/council-tax-band-changes
-checkBeforeYouStart.council_tax.para4 = Mae’n bosibl bydd eich band Treth Gyngor yn newid os yw’ch eiddo wedi’i newid, er enghraifft, wedi’i ddymchwel neu ei rannu i mewn i fflatiau.
-checkBeforeYouStart.council_tax.para5 = Sut mae’r bandiau Treth Gyngor yn cael eu hasesu
-checkBeforeYouStart.council_tax.url3 = https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed
-checkBeforeYouStart.council_tax.para6 = Sut mae eiddo domestig yn cael eu prisio ar gyfer bandiau Treth Gyngor.
-checkBeforeYouStart.council_tax.para7 = Talu’ch Treth Gyngor
-checkBeforeYouStart.council_tax.url4 = https://www.gov.uk/pay-council-tax
-checkBeforeYouStart.council_tax.para8 = Chwilio am eich awdurdod lleol a thalu’ch Treth Gyngor ar-lein.
-checkBeforeYouStart.council_tax.url5 = https://www.gov.uk/challenge-council-tax-band
-checkBeforeYouStart.council_tax.para9 = Herio’ch band Treth Gyngor
-checkBeforeYouStart.council_tax.para10 = Cael gwybod beth allwch ei wneud os ydych yn anghytuno gyda’ch band Treth Gyngor.
-checkBeforeYouStart.council_tax.para11 = Os na allwch gael gafael ar ateb i’ch ymholiad, neu os oes gennych ymholiad ynghylch rhywbeth arall, gallwch fynd yn eich blaen i’n ffurflen gyswllt.
-
 checkBeforeYouStart.business_rates.title = Trethi busnes: gwirio cyn i chi fynd yn eich blaen - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 checkBeforeYouStart.business_rates.heading = Trethi busnes: gwirio cyn i chi fynd yn eich blaen
 checkBeforeYouStart.business_rates.para = Mae’r cysylltiadau hyn yn cynnwys atebion i’n ymholiadau mwyaf cyffredin.
