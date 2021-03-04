@@ -251,8 +251,8 @@ propertyWindWater.p2.url = https://www.gov.uk/government/publications/council-ta
 propertyWindWater.p2 = When a Council Tax band would be affected by poor repair
 
 # -------- Council Tax protected from wind and water form
-propertyWindWater.form.title = Is your property wind and watertight?  - Valuation Office Agency contact form - GOV.UK
-propertyWindWater.form.heading = Is your property wind and watertight?
+propertyWindWater.form.title = Is the property protected from wind and water?  - Valuation Office Agency contact form - GOV.UK
+propertyWindWater.form.heading = Is the property protected from wind and water?
 propertyWindWater.form.p1 = Read about <a class="govuk-link" target="_blank" href="https://www.gov.uk/government/publications/council-tax-domestic-properties-in-disrepair-or-derelict/council-tax-domestic-properties-which-are-in-disrepair-or-are-derelict"> when a Council Tax band would be affected by poor repair </a> (opens in a new tab).
 propertyWindWater.form.yes = Yes
 propertyWindWater.form.no = No
