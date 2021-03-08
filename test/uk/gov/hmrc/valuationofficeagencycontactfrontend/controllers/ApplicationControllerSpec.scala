@@ -46,5 +46,9 @@ class ApplicationControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe viewAsString()
     }
 
+    "return the contact reason controller url" in {
+      controller().createRefererURL() mustBe
+        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactReasonController.onPageLoad().url
+    }
   }
 }

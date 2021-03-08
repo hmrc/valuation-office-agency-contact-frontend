@@ -126,6 +126,11 @@ class LocalDateFormatterSpec extends SpecBase {
         List(FormError(keyValue, yearNumber),FormError(keyValue, year))
     }
 
+    "returns the list of FormErrors with correct message when the date is invalid" in {
+      formatter.bind(keyValue,Map(inputDay -> "31", inputMonth -> "02", inputYear -> "2021")).left.get mustBe
+        List(FormError(keyValue, invalidDate),FormError(keyValue, day),FormError(keyValue, month),FormError(keyValue, year))
+    }
+
     "returns the correct Local date when the date is correct" in {
       formatter.bind(keyValue,Map(inputDay -> "4", inputMonth -> "01", inputYear -> "2020")).right.get mustBe
         Some(LocalDate.of(2020,1,4))
