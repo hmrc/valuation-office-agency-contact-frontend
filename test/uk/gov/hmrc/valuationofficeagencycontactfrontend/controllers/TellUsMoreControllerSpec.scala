@@ -36,6 +36,8 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
 
+  val backLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
+
   def tellUsMore = app.injector.instanceOf[tell_us_more]
   def internalServerError = app.injector.instanceOf[internal_Server_Error]
 
@@ -45,7 +47,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
     new TellUsMoreController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl(ec), tellUsMore, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
-  def viewAsString(form: Form[TellUsMore] = TellUsMoreForm(), msg: String = "") = tellUsMore(frontendAppConfig, form, NormalMode, msg)(fakeRequest, messages).toString
+  def viewAsString(form: Form[TellUsMore] = TellUsMoreForm(), msg: String = "") = tellUsMore(frontendAppConfig, form, NormalMode, msg, backLink)(fakeRequest, messages).toString
 
   "TellUsMore Controller" must {
 

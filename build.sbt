@@ -28,7 +28,7 @@ lazy val root = Project(appName, file("."))
   .settings(
     ScoverageKeys.coverageExcludedFiles := "<empty>;Reverse.*;.*filters.*;.*handlers.*;.*components.*;.*models.*;" +
       ".*BuildInfo.*;.*javascript.*;.*FrontendAuditConnector.*;.*Routes.*;.*GuiceInjector;.*DataCacheConnector;" +
-      ".*ControllerConfiguration;.*LanguageSwitchController;.*MongoCleanupActor",
+      ".*ControllerConfiguration;.*LanguageSwitchController;.*MongoCleanupActor;.*identifiers;.*FrontendAppConfig",
     ScoverageKeys.coverageMinimum := 90,
     ScoverageKeys.coverageFailOnMinimum := true,
     ScoverageKeys.coverageHighlighting := true,

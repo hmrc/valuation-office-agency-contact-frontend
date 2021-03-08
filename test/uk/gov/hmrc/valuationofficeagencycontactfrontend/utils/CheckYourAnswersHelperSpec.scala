@@ -43,7 +43,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", propertyAddress, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
-        val result = checkYourAnswers.tellUsMore
+        val result = checkYourAnswers.tellUsMore()
         result mustBe Some(AnswerRow("tellUsMore.heading", "Hello", false, routes.TellUsMoreController.onPageLoad(CheckMode).url))
       }
 
@@ -56,7 +56,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", propertyAddress, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
-        val result = checkYourAnswers.tellUsMore
+        val result = checkYourAnswers.tellUsMore()
         result mustBe Some(AnswerRow("tellUsMore.heading", "Hello", false, routes.TellUsMoreController.onPageLoad(CheckMode).url))
       }
 
@@ -64,7 +64,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val userA = new UserAnswers(new CacheMap("", Map()))
         val checkYourAnswers = new CheckYourAnswersHelper(userA)
 
-        val result = checkYourAnswers.tellUsMore
+        val result = checkYourAnswers.tellUsMore()
         result mustBe None
       }
 
