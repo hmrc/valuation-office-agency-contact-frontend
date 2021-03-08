@@ -292,6 +292,11 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         when (mockUserAnswers.councilTaxSubcategory) thenReturn None
         an [RuntimeException] should be thrownBy navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers)
       }
+
+      "return a function that goes to the property wind and water page when the  form has been submitted without errors" in {
+        when (mockUserAnswers.propertyWindEnquiry) thenReturn Some("no")
+        navigator.nextPage(CouncilTaxPropertyPoorRepairId, NormalMode)(mockUserAnswers) mustBe routes.DatePropertyChangedController.onPageLoad()
+      }
     }
   }
 }

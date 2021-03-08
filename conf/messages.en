@@ -425,6 +425,27 @@ providingLettings.email = NSOhelpdesk@voa.gov.uk
 providingLettings.phone-title = Phone
 providingLettings.phone-number = 03000 502502
 
+datePropertyChanged.title = When did your property start to be in poor repair? - Valuation Office Agency contact form - GOV.UK
+datePropertyChanged.heading = When did this happen? (optional)
+datePropertyChanged.hint = For example, 28 3 2021
+datePropertyChanged.error.invalidDate = Enter a real date
+datePropertyChanged.error.mandatory.dayMonth = Date must include a day and month
+datePropertyChanged.error.mandatory.dayYear = Date must include a day and year
+datePropertyChanged.error.mandatory.monthYear = Date must include a month and year
+datePropertyChanged.error.mandatory.day = Date must include a day
+datePropertyChanged.error.mandatory.month = Date must include a month
+datePropertyChanged.error.mandatory.year = Date must include a year
+
+datePropertyChanged.error.day.number = Date must have a day that is a number
+datePropertyChanged.error.day.range = Date must have a day that is a number between 1 and 31
+
+datePropertyChanged.error.month.number = Date must have a month that is a number
+datePropertyChanged.error.month.range = Date must have a month that is a number between 1 and 12
+
+datePropertyChanged.error.year.number = Date must have a year that is a number
+datePropertyChanged.error.year.range = Date must be on or after 1 january 1900
+
+
 error400.title = Page not found - Valuation Office Agency contact form - GOV.UK
 error400.heading = Page not found
 error400.para1 = If you typed the web address, check it is correct.

@@ -90,6 +90,9 @@ GET         /is-property-wind-and-watertight       uk.gov.hmrc.valuationofficeag
 POST        /is-property-wind-and-watertight       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyWindWaterController.onSubmit()
 GET         /property-is-wind-watertight           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyWindWaterController.onPageLoad()
 
+GET         /date-property-changed                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.DatePropertyChangedController.onPageLoad(mode: Mode = NormalMode)
+POST        /date-property-changed                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.DatePropertyChangedController.onSubmit(mode: Mode = NormalMode)
+
 GET         /anything-else-tell-us                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.AnythingElseTellUsController.onPageLoad(mode: Mode = NormalMode)
 POST        /anything-else-tell-us                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.AnythingElseTellUsController.onSubmit(mode: Mode = NormalMode)
 

@@ -158,6 +158,7 @@ class Navigator @Inject()() {
   val propertyWindWaterRouting: UserAnswers => Call = answers => {
     answers.propertyWindEnquiry match {
       case Some("yes") => routes.PropertyWindWaterController.onPageLoad()
+      case Some("no") => routes.DatePropertyChangedController.onPageLoad()
       case _ =>
         Logger.warn(s"Navigation for Property wind and water reached without selection of enquiry by controller ")
         throw new RuntimeException("Unknown exception in property wind and water routing")
