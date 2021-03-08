@@ -48,15 +48,34 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(EnquiryDateId, NormalMode)(mockUserAnswers) mustBe routes.ExpectedUpdateController.onPageLoad()
       }
 
+      "return function that goes ExpectedUpdateController.onPageLoad when the enquiryDate return notKnow" in {
+        when (mockUserAnswers.enquiryDate) thenReturn Some("notKnow")
+        navigator.nextPage(EnquiryDateId, NormalMode)(mockUserAnswers) mustBe routes.ExistingEnquiryCategoryController.onPageLoad()
+      }
+
+      "return function that goes ExpectedUpdateController.onPageLoad when the enquiryDate return yes" in {
+        when (mockUserAnswers.enquiryDate) thenReturn Some("yes")
+        navigator.nextPage(EnquiryDateId, NormalMode)(mockUserAnswers) mustBe routes.ExistingEnquiryCategoryController.onPageLoad()
+      }
+
       "return function that goes on 'date oage' when he want update about existing enquiry" in {
         when (mockUserAnswers.contactReason) thenReturn Some("update_existing")
         navigator.nextPage(ContactReasonId, NormalMode)(mockUserAnswers) mustBe routes.EnquiryDateController.onPageLoad()
       }
 
+      "return function that goes on Enquiry Category page when he want select a new enquiry" in {
+        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+        navigator.nextPage(ContactReasonId, NormalMode)(mockUserAnswers) mustBe routes.EnquiryCategoryController.onPageLoad(NormalMode)
+      }
+
+      "return function that goes on Existing Enquiry Category page when he want update more details" in {
+        when (mockUserAnswers.contactReason) thenReturn Some("more_details")
+        navigator.nextPage(ContactReasonId, NormalMode)(mockUserAnswers) mustBe routes.ExistingEnquiryCategoryController.onPageLoad()
+      }
+
       "return function that goes 'What is your reference number?' after he select area of contact" in {
         navigator.nextPage(ExistingEnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.RefNumberController.onPageLoad()
       }
-
 
       "return a function that goes to the contact form page when an enquiry category for council tax has been selected" in {
         when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("find")
@@ -296,6 +315,26 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
       "return a function that goes to the property wind and water page when the  form has been submitted without errors" in {
         when (mockUserAnswers.propertyWindEnquiry) thenReturn Some("no")
         navigator.nextPage(CouncilTaxPropertyPoorRepairId, NormalMode)(mockUserAnswers) mustBe routes.DatePropertyChangedController.onPageLoad()
+      }
+
+      "return a function that throws a runtime exception if unknown option is selected on the Property Wind Enquiry page" in {
+        when (mockUserAnswers.propertyWindEnquiry) thenReturn Some("error")
+        an [RuntimeException] should be thrownBy navigator.nextPage(CouncilTaxPropertyPoorRepairId, NormalMode)(mockUserAnswers)
+      }
+
+      "return an exception when the enquiryDate return error " in {
+        when (mockUserAnswers.enquiryDate) thenReturn Some("error")
+        an [RuntimeException] should be thrownBy navigator.nextPage(EnquiryDateId, NormalMode)(mockUserAnswers)
+      }
+
+      "return function that goes on Property Address page when he want update exiting enquiry" in {
+        when (mockUserAnswers.contactReason) thenReturn Some("update_existing")
+        navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.PropertyAddressController.onPageLoad(NormalMode)
+      }
+
+      "return a exception when enquiryCategory return None" in {
+        when (mockUserAnswers.enquiryCategory) thenReturn None
+        an [RuntimeException] should be thrownBy navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers)
       }
     }
   }

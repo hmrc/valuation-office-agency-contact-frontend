@@ -54,6 +54,13 @@ class PropertyWindWaterControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe propertyWindWatertight(frontendAppConfig)(fakeRequest, messages).toString
     }
 
+    "return OK and the correct view for a GET" in {
+      val result = controller().onEnquiryLoad()(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsString()
+    }
+
     "populate the view correctly on a GET when the question has previously been answered" in {
       val validData = Map(CouncilTaxPropertyPoorRepairId.toString -> JsString(PropertyWindWaterForm.options.head.value))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
