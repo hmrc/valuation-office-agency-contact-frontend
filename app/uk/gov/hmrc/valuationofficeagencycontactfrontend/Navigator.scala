@@ -27,7 +27,7 @@ import play.api.Logger
 @Singleton
 class Navigator @Inject()() {
 
-  val enquiryDateRouting: UserAnswers => Call = answers => {
+  private val enquiryDateRouting: UserAnswers => Call = answers => {
     answers.enquiryDate match {
       case Some("yes") => routes.ExistingEnquiryCategoryController.onPageLoad()
       case Some("no") => routes.ExpectedUpdateController.onPageLoad()
@@ -39,19 +39,20 @@ class Navigator @Inject()() {
     }
   }
 
-  val propertyAddressRouting: UserAnswers => Call = answers => {
-    answers.contactReason match {
-      case Some("new_enquiry") => routes.TellUsMoreController.onPageLoad(NormalMode)
-      case Some("more_details") => routes.WhatElseController.onPageLoad()
-      case Some("update_existing") => routes.AnythingElseTellUsController.onPageLoad()
-      case Some(option) => {
+  private val propertyAddressRouting: UserAnswers => Call = answers => {
+    (answers.contactReason, answers.councilTaxSubcategory) match {
+      case (Some("new_enquiry"), Some("council_tax_property_poor_repair")) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _) => routes.TellUsMoreController.onPageLoad(NormalMode)
+      case (Some("more_details"), _) => routes.WhatElseController.onPageLoad()
+      case (Some("update_existing"), _) => routes.AnythingElseTellUsController.onPageLoad()
+      case (Some(option), _) => {
         Logger.warn(s"Navigation for contact reason reached with unknown option $option by controller")
         throw new RuntimeException(s"Navigation for contact reason reached with unknown option $option by controller")
       }
     }
   }
 
-  val contactReasonRouting: UserAnswers => Call = answers => {
+  private val contactReasonRouting: UserAnswers => Call = answers => {
     answers.contactReason match {
       case Some("new_enquiry") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
       case Some("more_details") => routes.ExistingEnquiryCategoryController.onPageLoad()
@@ -63,7 +64,7 @@ class Navigator @Inject()() {
     }
   }
 
-  val enquiryRouting: UserAnswers => Call = answers => {
+  private val enquiryRouting: UserAnswers => Call = answers => {
     answers.enquiryCategory match {
       case Some("council_tax") => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
       case Some("business_rates") => routes.BusinessRatesSmartLinksController.onPageLoad()
@@ -82,7 +83,7 @@ class Navigator @Inject()() {
     }
   }
 
-  val contactDetailsRouting: UserAnswers => Call = answers => {
+  private val contactDetailsRouting: UserAnswers => Call = answers => {
     (answers.contactReason, answers.enquiryCategory) match {
       case (Some("more_details"), _) => routes.PropertyAddressController.onPageLoad(NormalMode)
       case (Some("update_existing"), _) => routes.PropertyAddressController.onPageLoad(NormalMode)
@@ -99,7 +100,7 @@ class Navigator @Inject()() {
     }
   }
 
-  val confirmationPageRouting: UserAnswers => Call = answers => {
+  private val confirmationPageRouting: UserAnswers => Call = answers => {
     import answers._
     contact().fold(msg => {
       Logger.warn(msg)
@@ -126,7 +127,7 @@ class Navigator @Inject()() {
     }
   }
 
-  val businessRatesPageRouting: UserAnswers => Call = answers => {
+  private val businessRatesPageRouting: UserAnswers => Call = answers => {
     answers.businessRatesSubcategory match {
       case Some("business_rates_challenge") => routes.BusinessRatesChallengeController.onChallengePageLoad()
       case Some("business_rates_changes") => routes.BusinessRatesChallengeController.onAreaChangePageLoad()
@@ -139,7 +140,7 @@ class Navigator @Inject()() {
     }
   }
 
-  val councilTaxPageRouting: UserAnswers => Call = answers => {
+  private val councilTaxPageRouting: UserAnswers => Call = answers => {
     answers.councilTaxSubcategory match {
       case Some("council_tax_band_too_high") => routes.CouncilTaxBandTooHighController.onPageLoad()
       case Some("council_tax_bill") => routes.CouncilTaxBillController.onPageLoad()
@@ -155,13 +156,23 @@ class Navigator @Inject()() {
     }
   }
 
-  val propertyWindWaterRouting: UserAnswers => Call = answers => {
+  private val propertyWindWaterRouting: UserAnswers => Call = answers => {
     answers.propertyWindEnquiry match {
       case Some("yes") => routes.PropertyWindWaterController.onPageLoad()
       case Some("no") => routes.DatePropertyChangedController.onPageLoad()
       case _ =>
         Logger.warn(s"Navigation for Property wind and water reached without selection of enquiry by controller ")
         throw new RuntimeException("Unknown exception in property wind and water routing")
+    }
+  }
+
+  private val tellUsMoreRouting: UserAnswers => Call = answers => {
+    answers.councilTaxSubcategory match {
+      case Some("council_tax_property_poor_repair") => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case Some(_) => routes.CheckYourAnswersController.onPageLoad()
+      case _ =>
+        Logger.warn(s"Navigation for tell us more reached without selection of enquiry by controller ")
+        throw new RuntimeException("Unknown exception in tell us more routing")
     }
   }
 
@@ -176,7 +187,7 @@ class Navigator @Inject()() {
     ContactDetailsId -> contactDetailsRouting,
     PropertyAddressId -> propertyAddressRouting,
     WhatElseId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
-    TellUsMoreId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
+    TellUsMoreId -> tellUsMoreRouting,
     AnythingElseId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
     CheckYourAnswersId -> confirmationPageRouting,
     BusinessRatesSmartLinksId -> (_ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)),

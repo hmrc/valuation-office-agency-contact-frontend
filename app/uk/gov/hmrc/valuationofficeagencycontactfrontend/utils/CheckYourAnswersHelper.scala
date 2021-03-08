@@ -24,8 +24,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerRow
 
 class CheckYourAnswersHelper(userAnswers: UserAnswers) {
 
-  def tellUsMore: Option[AnswerRow] = userAnswers.tellUsMore map {
-    x => AnswerRow("tellUsMore.heading", s"${x.message}", false, routes.TellUsMoreController.onPageLoad(CheckMode).url)
+  def tellUsMore(keyMessage: String = "tellUsMore.heading"): Option[AnswerRow] = userAnswers.tellUsMore map {
+    x => AnswerRow(keyMessage, s"${x.message}", false, routes.TellUsMoreController.onPageLoad(CheckMode).url)
   }
 
   def contactReason: Option[AnswerRow] = userAnswers.contactReason map {

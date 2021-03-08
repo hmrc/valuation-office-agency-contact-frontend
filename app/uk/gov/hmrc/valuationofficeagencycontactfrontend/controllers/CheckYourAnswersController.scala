@@ -67,35 +67,42 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
     import answers._
     val checkYourAnswersHelper = new CheckYourAnswersHelper(answers)
 
-    (contactReason, enquiryCategory) match {
-      case (Some("more_details"), _) => Some(
+    (contactReason, enquiryCategory, councilTaxSubcategory) match {
+      case (Some("more_details"), _, _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.existingEnquiryCategory,
           checkYourAnswersHelper.refNumber,
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress,
           checkYourAnswersHelper.whatElse).flatten))
-      case (Some("update_existing"), _) => Some(
+      case (Some("update_existing"), _, _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.existingEnquiryCategory,
           checkYourAnswersHelper.refNumber,
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress,
           checkYourAnswersHelper.anythingElse).flatten))
-      case (_, Some("business_rates")) => Some(
+      case (_, Some("business_rates"), _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.businessRatesSubcategory,
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress,
-          checkYourAnswersHelper.tellUsMore).flatten))
-      case (_, Some("council_tax")) => Some(
+          checkYourAnswersHelper.tellUsMore()).flatten))
+      case (_, Some("council_tax"), Some("council_tax_property_poor_repair")) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.councilTaxSubcategory,
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress,
-          checkYourAnswersHelper.tellUsMore).flatten))
+          checkYourAnswersHelper.tellUsMore("tellUsMore.poorRepair.heading")).flatten))
+      case (_, Some("council_tax"), _) => Some(
+        AnswerSection(None, Seq(
+          checkYourAnswersHelper.enquiryCategory,
+          checkYourAnswersHelper.councilTaxSubcategory,
+          checkYourAnswersHelper.contactDetails,
+          checkYourAnswersHelper.propertyAddress,
+          checkYourAnswersHelper.tellUsMore()).flatten))
       case _ => None
     }
   }

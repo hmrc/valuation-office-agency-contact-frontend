@@ -79,11 +79,12 @@ class ContactDetailsController @Inject()(appConfig: FrontendAppConfig,
   }
 
   private[controllers] def enquiryBackLink(answers: UserAnswers): Either[String, String] = {
-    (answers.contactReason, answers.enquiryCategory) match {
-      case (Some("more_details"), _) => Right(routes.RefNumberController.onPageLoad().url)
-      case (Some("update_existing"), _) => Right(routes.RefNumberController.onPageLoad().url)
-      case (_, Some("council_tax")) => Right(routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
-      case (_, Some("business_rates")) => Right(routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
+    (answers.contactReason, answers.enquiryCategory, answers.councilTaxSubcategory) match {
+      case (Some("more_details"), _, _) => Right(routes.RefNumberController.onPageLoad().url)
+      case (Some("update_existing"), _, _) => Right(routes.RefNumberController.onPageLoad().url)
+      case (_, Some("council_tax"), Some("council_tax_property_poor_repair")) => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      case (_, Some("council_tax"), _) => Right(routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
+      case (_, Some("business_rates"), _) => Right(routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
       case _ => Left(s"Unknown enquiry category in enquiry key")
     }
   }
