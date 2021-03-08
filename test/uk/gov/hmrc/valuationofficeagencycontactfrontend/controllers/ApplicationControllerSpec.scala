@@ -46,6 +46,12 @@ class ApplicationControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe viewAsString()
     }
 
+    "return OK and the correct welsh view for a GET" in {
+      val result = controller().startWelsh()(fakeRequest)
+
+      status(result) mustBe SEE_OTHER
+    }
+
     "return the contact reason controller url" in {
       controller().createRefererURL() mustBe
         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactReasonController.onPageLoad().url
