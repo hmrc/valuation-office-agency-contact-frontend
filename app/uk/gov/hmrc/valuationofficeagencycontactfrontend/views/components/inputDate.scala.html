@@ -1,0 +1,69 @@
+@*
+ * Copyright 2021 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import play.api.data.Form
+@import play.api.i18n.Messages
+@import uk.gov.hmrc.govukfrontend.views.html.components.GovukDateInput
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.dateinput.{DateInput, InputItem}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.{Fieldset, Legend}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errormessage.ErrorMessage
+
+@this(govukDateInput: GovukDateInput)
+
+@(
+        form: Form[_],
+        legend: String,
+        legendClass: Option[String] = None,
+        hint: Option[String] = None,
+        id: String,
+        headingIsLegend: Boolean = false
+)(implicit messages: Messages)
+
+@govukDateInput(DateInput(
+    id,
+    namePrefix = Some(form(id).name),
+    errorMessage = form(id).error.map(err => ErrorMessage(content = Text(messages(err.message, err.args: _*)))),
+    hint = if(hint.isDefined) Some(Hint(content = Text(hint.get))) else None,
+    fieldset = Some(Fieldset(
+        legend = Some(Legend(
+            content = Text(legend),
+            isPageHeading = headingIsLegend,
+            classes = legendClass.getOrElse("govuk-fieldset__legend--l")
+        ))
+    )),
+    items = Seq(
+        InputItem(
+            name = form("day").name,
+            label = Some(messages("date.day")),
+            value = form(s"$id-day").value,
+            classes = s"govuk-input--width-2 ${form(id).errors.find(_.message == s"$id.day").map(_ => " govuk-input--error").getOrElse("")}"
+        ),
+        InputItem(
+            name = form("month").name,
+            label = Some(messages("date.month")),
+            value = form(s"$id-month").value,
+            classes = s"govuk-input--width-2 ${form(id).errors.find(_.message == s"$id.month").map(_ => " govuk-input--error").getOrElse("")}"
+        ),
+        InputItem(
+            name = form("year").name,
+            label = Some(messages("date.year")),
+            value = form(s"$id-year").value,
+            classes = s"govuk-input--width-4 ${form(id).errors.find(_.message == s"$id.year").map(_ => " govuk-input--error").getOrElse("")}"
+        )
+    )
+))

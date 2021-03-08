@@ -263,6 +263,7 @@ councilTaxSubcategory.council_tax_band_too_high = My Council Tax band is too hig
 councilTaxSubcategory.council_tax_bill = My Council Tax bill
 councilTaxSubcategory.council_tax_band_for_new = I need a Council Tax band for my new property
 councilTaxSubcategory.council_tax_property_empty = My property is empty
+councilTaxSubcategory.council_tax_property_poor_repair = My property is in poor repair
 councilTaxSubcategory.council_tax_property_demolished = My property has been partially or fully demolished
 councilTaxSubcategory.council_tax_changes = Mae fy eiddo neu’r ardal leol wedi newid
 councilTaxSubcategory.council_tax_ndr_changes = Mae fy eiddo wedi newid o Dreth Gyngor i Ardrethi Busnes
@@ -419,6 +420,26 @@ providingLettings.email-title = E-bost:
 providingLettings.email = NSOhelpdesk@voa.gov.uk
 providingLettings.phone-title =  Ffôn
 providingLettings.phone-number = 03000 502502
+
+datePropertyChanged.title = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+datePropertyChanged.heading = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael (dewisol)
+datePropertyChanged.hint = Er enghraifft, 28 3 2021
+datePropertyChanged.error.invalidDate = Rhowch ddyddiad go iawn
+datePropertyChanged.error.mandatory.dayMonth = Rhaid i’r dyddiad gynnwys dydd a mis
+datePropertyChanged.error.mandatory.dayYear = Rhaid i’r dyddiad gynnwys dydd a blwyddyn
+datePropertyChanged.error.mandatory.monthYear = Rhaid i’r dyddiad gynnwys mis a blwyddyn
+datePropertyChanged.error.mandatory.day = Rhaid i’r dyddiad gynnwys dydd
+datePropertyChanged.error.mandatory.month = Rhaid i’r dyddiad gynnwys mis
+datePropertyChanged.error.mandatory.year = Rhaid i'r dyddiad gynnwys blwyddyn
+
+datePropertyChanged.error.day.number = Rhaid i’r dyddiad gael dydd sy’n rhif
+datePropertyChanged.error.day.range = Rhaid i’r dyddiad gael dydd sy’n rhif rhwng 1 a 31
+
+datePropertyChanged.error.month.number = Rhaid i’r dyddiad gael mis sy’n rhif
+datePropertyChanged.error.month.range = Rhaid i’r dyddiad gael mis sy’n rhif rhwng 1 a 12
+
+datePropertyChanged.error.year.number = Rhaid i’r dyddiad gael blwyddyn sy’n rhif
+datePropertyChanged.error.year.range = Rhaid i’r dyddiad fod ar neu ar ôl 1 Ionawr 1900
 
 error400.title = Page not found - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 error400.heading = Page not found

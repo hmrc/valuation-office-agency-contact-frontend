@@ -21,6 +21,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 
+import java.time.LocalDate
+
 class UserAnswers(val cacheMap: CacheMap) {
 
   def enquiryDate: Option[String] = cacheMap.getEntry[String](EnquiryDateId.toString)
@@ -54,6 +56,8 @@ class UserAnswers(val cacheMap: CacheMap) {
   def answerSection: Option[AnswerSection] = cacheMap.getEntry[AnswerSection](AnswerSectionId.toString)
 
   def propertyWindEnquiry: Option[String] = cacheMap.getEntry[String](CouncilTaxPropertyPoorRepairId.toString)
+
+  def datePropertyChanged: Option[LocalDate] = cacheMap.getEntry[LocalDate](DatePropertyChangedId.toString)
 
   def contact(): Either[String, Contact] = {
 
