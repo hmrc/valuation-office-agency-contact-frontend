@@ -27,7 +27,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.TellUsMoreForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.TellUsMoreId
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, TellUsMore}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode, TellUsMore}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{tellUsMore => tell_us_more}
 
@@ -54,14 +54,14 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
         case Some(value) => TellUsMoreForm(key).fill(value)
       }
 
-      Ok(tellUsMore(appConfig, preparedForm, mode, getEnquiryKey(request.userAnswers)))
+      Ok(tellUsMore(appConfig, preparedForm, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers)))
   }
 
   def onSubmit(mode: Mode) = (getData andThen requireData).async {
     implicit request =>
       TellUsMoreForm(requiredErrorMessage(request.userAnswers)).bindFromRequest().fold(
         (formWithErrors: Form[TellUsMore]) =>
-          Future.successful(BadRequest(tellUsMore(appConfig, formWithErrors, mode, getEnquiryKey(request.userAnswers)))),
+          Future.successful(BadRequest(tellUsMore(appConfig, formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers)))),
         (value) =>
           dataCacheConnector.save[TellUsMore](request.sessionId, TellUsMoreId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(TellUsMoreId, mode)(new UserAnswers(cacheMap))))
@@ -69,10 +69,10 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
   }
 
   private def requiredErrorMessage(userAnswers: UserAnswers): String =
-    if(userAnswers.propertyWindEnquiry.isDefined) "error.tellUsMore.poorRepair.required" else "error.tell_us_more.required"
+    if (userAnswers.propertyWindEnquiry.isDefined) "error.tellUsMore.poorRepair.required" else "error.tell_us_more.required"
 
   private def getEnquiryKey(answers: UserAnswers): String = {
-    enquiryKey(answers).getOrElse{
+    enquiryKey(answers).getOrElse {
       Logger.warn(s"Navigation for Tell us more page reached with error - Unknown enquiry category in enquiry key")
       throw new RuntimeException(s"Navigation for Tell us more page reached with error Unknown enquiry category in enquiry key")
     }
@@ -84,6 +84,13 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
       case (Some("council_tax"), _) => Right("tellUsMore.ct-reference")
       case (Some("business_rates"), _) => Right("tellUsMore.ndr-reference")
       case _ => Left("Unknown enquiry category in enquiry key")
+    }
+  }
+
+  private def backLink(answers: UserAnswers) = {
+    answers.councilTaxSubcategory match {
+      case Some("council_tax_property_poor_repair") => routes.DatePropertyChangedController.onPageLoad().url
+      case _ => routes.PropertyAddressController.onPageLoad(NormalMode).url
     }
   }
 

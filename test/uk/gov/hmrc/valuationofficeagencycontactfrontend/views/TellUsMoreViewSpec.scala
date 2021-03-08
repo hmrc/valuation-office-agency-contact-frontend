@@ -28,13 +28,16 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
 
   val messageKeyPrefix = "tellUsMore"
 
+  val backLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
+  val poorRepairBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.DatePropertyChangedController.onPageLoad().url
+
   def tellUsMore = app.injector.instanceOf[tell_us_more]
 
-  def createView = () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.ct-reference")(fakeRequest, messages)
+  def createView = () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.ct-reference", backLink)(fakeRequest, messages)
 
-  def createAlternativeView = () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.ndr-reference")(fakeRequest, messages)
+  def createAlternativeView = () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.ndr-reference", backLink)(fakeRequest, messages)
 
-  def createViewUsingForm = (form: Form[TellUsMore]) => tellUsMore(frontendAppConfig, form, NormalMode, "")(fakeRequest, messages)
+  def createViewUsingForm = (form: Form[TellUsMore]) => tellUsMore(frontendAppConfig, form, NormalMode, "", backLink)(fakeRequest, messages)
 
   override val form = TellUsMoreForm()
 
@@ -46,7 +49,7 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
   }
 
   "TellUsMore view for property poor repair" must {
-    def view = () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.poorRepair")(fakeRequest, messages)
+    def view = () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.poorRepair", poorRepairBackLink)(fakeRequest, messages)
 
     behave like normalPage(view, "tellUsMore.poorRepair", "hint", "inset")
 

@@ -84,7 +84,7 @@ class Navigator @Inject()() {
   }
 
   private val contactDetailsRouting: UserAnswers => Call = answers => {
-    (answers.contactReason, answers.enquiryCategory) match {
+    (answers.contactReason, answers.enquiryCategory)match {
       case (Some("more_details"), _) => routes.PropertyAddressController.onPageLoad(NormalMode)
       case (Some("update_existing"), _) => routes.PropertyAddressController.onPageLoad(NormalMode)
       case (_, Some("council_tax")) => routes.PropertyAddressController.onPageLoad(NormalMode)
@@ -192,7 +192,7 @@ class Navigator @Inject()() {
     CheckYourAnswersId -> confirmationPageRouting,
     BusinessRatesSmartLinksId -> (_ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)),
     CouncilTaxPropertyPoorRepairId -> propertyWindWaterRouting,
-    DatePropertyChangedId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode))
+    DatePropertyChangedId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode))
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()

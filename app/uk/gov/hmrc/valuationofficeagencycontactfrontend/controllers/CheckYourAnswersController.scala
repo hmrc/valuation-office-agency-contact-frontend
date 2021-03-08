@@ -108,10 +108,11 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
   }
 
   private[controllers] def enquiryBackLink(answers: UserAnswers): String = {
-    answers.contactReason match {
-      case Some("new_enquiry") => routes.TellUsMoreController.onPageLoad(NormalMode).url
-      case Some("more_details") => routes.WhatElseController.onPageLoad().url
-      case Some("update_existing") => routes.AnythingElseTellUsController.onPageLoad().url
+    (answers.contactReason, answers.councilTaxSubcategory) match {
+      case (Some("new_enquiry"), Some("council_tax_property_poor_repair")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), _) => routes.TellUsMoreController.onPageLoad(NormalMode).url
+      case (Some("more_details"), _) => routes.WhatElseController.onPageLoad().url
+      case (Some("update_existing"), _) => routes.AnythingElseTellUsController.onPageLoad().url
       case _ => {
         Logger.warn("Navigation for Check your answers page reached without selection of contact reason by controller")
         throw new RuntimeException("Navigation for check your anwsers page reached without selection of contact reason by controller")

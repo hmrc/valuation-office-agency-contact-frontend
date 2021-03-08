@@ -40,12 +40,11 @@
         govukFieldset: GovukFieldset,  govukBackLink: GovukBackLink)
 
 
-@(appConfig: FrontendAppConfig, form: Form[TellUsMore], mode: Mode, enquiryKey: String)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, form: Form[TellUsMore], mode: Mode, enquiryKey: String, backlink: String)(implicit request: Request[_], messages: Messages)
 
 
 @beforeBlock = {
-    @govukBackLink(BackLink(content = Text(messages("site.back")), href =
-            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url))
+    @govukBackLink(BackLink(content = Text(messages("site.back")), href = backlink))
 }
 
 
