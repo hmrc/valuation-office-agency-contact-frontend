@@ -226,15 +226,14 @@ councilTaxBandForNew.p4 = Pryd i gysylltu â’ch cyngor ynghylch Treth Gyngor
 councilTaxBandForNew.p4.url = https://www.gov.uk/guidance/your-property-and-council-tax
 
 # --- My property has been partly or fully demolished'
-propertyDemolished.title = My property has been partly or fully demolished - Valuation Office Agency contact form - GOV.UK
-propertyDemolished.heading = My property has been partially or fully demolished
+propertyDemolished.title = Siaradwch gyda’ch cyngor lleol os yw eich eiddo wedi’i ddymchwel - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyDemolished.heading = Siaradwch gyda’ch cyngor lleol os yw eich eiddo wedi’i ddymchwel
 propertyDemolished.p1.url = https://www.gov.uk/find-local-council
-propertyDemolished.p1.part1 = Contact your local council
-propertyDemolished.p1.part2 = to tell them that the property has been demolished.
-propertyDemolished.subheading = Other help on GOV.UK
+propertyDemolished.p1.part1 = Cysylltwch gyda’ch cyngor lleol
+propertyDemolished.p1.part2 = i ddweud wrthyn nhw fod yr eiddo wedi’i ddymchwel
+propertyDemolished.subheading = Cymorth arall ar GOV.UK
 propertyDemolished.p2.url = https://www.gov.uk/guidance/your-property-and-council-tax
-propertyDemolished.p2.part1 = When to contact your council about Council Tax
-propertyDemolished.p2.part2 = (opens in a new tab).
+propertyDemolished.p2.part1 = Pryd i gysylltu gyda’ch cyngor ynglŷn â Threth Gyngor
 
 # --- Council Tax My Property Empty
 councilTaxPropertyEmpty.title = Nid yw’r band Treth Gyngor yn cael ei effeithio os yw’r eiddo'n wag - Valuation Office Agency contact form - GOV.UK

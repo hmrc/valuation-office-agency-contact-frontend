@@ -28,7 +28,7 @@ class PropertyDemolishedViewSpec extends ViewBehaviours {
 
   "Property Demolished view" must {
     behave like normalPage(view, "propertyDemolished", "title", "heading",
-      "p1.part1", "p1.part2", "p1.url", "subheading", "p2.part1", "p2.url", "p2.part2")
+      "p1.part1", "p1.part2", "p1.url", "subheading", "p2.part1", "p2.url")
 
     "has a link marked with site.back leading to the Property Demolished Page" in {
       val doc = asDocument(view())
