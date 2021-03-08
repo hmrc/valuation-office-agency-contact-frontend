@@ -71,7 +71,7 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
             else {
               dataCacheConnector.save[String](request.sessionId, "", "")
             }
-          } yield Redirect(navigator.nextPage(ContactDetailsId, mode)(new UserAnswers(cacheMap)))
+          } yield Redirect(navigator.nextPage(DatePropertyChangedId, mode)(new UserAnswers(cacheMap)))
       )
   }
 }

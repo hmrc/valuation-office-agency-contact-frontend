@@ -180,7 +180,8 @@ class Navigator @Inject()() {
     AnythingElseId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
     CheckYourAnswersId -> confirmationPageRouting,
     BusinessRatesSmartLinksId -> (_ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)),
-    CouncilTaxPropertyPoorRepairId -> propertyWindWaterRouting
+    CouncilTaxPropertyPoorRepairId -> propertyWindWaterRouting,
+    DatePropertyChangedId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode))
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()

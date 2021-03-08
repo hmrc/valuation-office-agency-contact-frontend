@@ -35,7 +35,7 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase {
 
   def datePropertyChanged = inject[date_property_changed]
 
-  def route = routes.DatePropertyChangedController.onPageLoad() // TODO change it after completed journey
+  def route = routes.DatePropertyChangedController.onPageLoad()
 
   def dateForm: Form[Option[LocalDate]] = new DatePropertyChangedForm().apply()
 
@@ -63,27 +63,27 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe viewAsString(dateForm.fill(Option(LocalDate.of(2021,1,1))))
     }
 
-    /*    "redirect to the next page when valid data is submitted" in {
-          val postRequest = fakeRequest.withFormUrlEncodedBody(("value", LocalDate.of(2021,1,1).toString))
+    "redirect to the next page when valid data is submitted" in {
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", LocalDate.of(2021,1,1).toString))
 
-          val result = controller().onSubmit(NormalMode)(postRequest)
+      val result = controller().onSubmit(NormalMode)(postRequest)
 
-          status(result) mustBe SEE_OTHER
-          redirectLocation(result) mustBe Some(route.url)
-        }*/
+      status(result) mustBe SEE_OTHER
+      redirectLocation(result) mustBe Some(route.url)
+    }
 
-    "return eror page if no existing data is found" in {
+    "return error page if no existing data is found" in {
       val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
       status(result) mustBe SEE_OTHER
     }
 
-    /*    "redirect to Session Expired for a POST if no existing data is found" in {
-          val postRequest = fakeRequest.withFormUrlEncodedBody(("value", LocalDate.of(2021,1,1).toString))
-          val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
+    "redirect to Session Expired for a POST if no existing data is found" in {
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", LocalDate.of(2021,1,1).toString))
+      val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
-          status(result) mustBe SEE_OTHER
-          redirectLocation(result) mustBe Some(route.url)
-        }*/
+      status(result) mustBe SEE_OTHER
+      redirectLocation(result) mustBe Some(route.url)
+    }
   }
 
 }
