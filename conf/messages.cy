@@ -203,7 +203,7 @@ councilTaxBandTooHigh.title = Gallwch herio'ch band Treth Gyngor ar-lein - Valua
 councilTaxBandTooHigh.heading = Gallwch herio'ch band Treth Gyngor ar-lein
 councilTaxBandTooHigh.p1.part1 = Defnyddiwch y gwasanaeth Treth Gyngor
 councilTaxBandTooHigh.p1.part2 = i wirio a herio'ch band Treth Gyngor.
-councilTaxBandTooHigh.p1.url = https://www.gov.uk/challenge-council-tax-band
+councilTaxBandTooHigh.p1.url = https://www.gov.uk/council-tax-band
 councilTaxBandTooHigh.subheading = Cymorth arall ar GOV.UK
 councilTaxBandTooHigh.p2 = Sut i herio'ch band Treth Gyngor
 councilTaxBandTooHigh.p2.url = https://www.gov.uk/challenge-council-tax-band
@@ -252,8 +252,11 @@ propertyWindWater.p2.url = https://www.gov.uk/government/publications/council-ta
 propertyWindWater.p2 = Pryd fyddai atgyweiriad gwael yn effeithio ar fand Treth Gyngor.
 
 # -------- Council Tax protected from wind and water form
-propertyWindWater.form.yes = Do
-propertyWindWater.form.no = Naddo
+propertyWindWater.form.title = Ydy’r eiddo wedi’i warchod rhag gwynt a dŵr? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyWindWater.form.heading = Ydy’r eiddo wedi’i warchod rhag gwynt a dŵr?
+propertyWindWater.form.p1 = Darllenwch am <a class="govuk-link" target="_blank" href="https://www.gov.uk/government/publications/council-tax-domestic-properties-in-disrepair-or-derelict/council-tax-domestic-properties-which-are-in-disrepair-or-are-derelict"> bryd y byddai atgyweiriad gwael yn effeithio ar fand Treth Gyngor </a> (yn agor mewn tab newydd).
+propertyWindWater.form.yes = Ydy
+propertyWindWater.form.no = Nag ydy
 error.propertyWindWater.required = Dewiswch ‘Ydy’ os yw eich eiddo wedi’i amddiffyn rhag gwynt a dŵr
 
 # --- Council Tax Subcategories
