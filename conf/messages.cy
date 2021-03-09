@@ -117,7 +117,7 @@ error.enquiryDate.required = Dewiswch ‘Do’ os gwnaethoch eich ymholiad cyn {
 
 expectedUpdate.title = Pryd y gallwch chi ddisgwyl diweddariad - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 expectedUpdate.heading = Pryd y gallwch chi ddisgwyl diweddariad
-expectedUpdate.para1 = Rydym yn ymateb i'r mwyafrif o ymholiadau o fewn ychydig ddyddiau. Fodd bynnag, gall ymholiadau cymhleth gymryd hyd at 30 diwrnod.
+expectedUpdate.para1 = Rydym yn ymateb i'r mwyafrif o ymholiadau o fewn ychydig ddyddiau. Fodd bynnag, gall ymholiadau cymhleth gymryd hyd at 28 diwrnod.
 expectedUpdate.para2 = Peidiwch â chyflwyno'ch ymholiad eto.
 
 existingEnquiryCategory.title = Am beth wnaethoch chi gysylltu â ni? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
@@ -355,7 +355,7 @@ confirmation.heading = Ymchwiliad wedi’i gyflwyno
 confirmation.enquirySummary = Crynodeb o’ch ymholiad
 confirmation.para1= Eich cyfeirnod yw
 confirmation.p1 = Rydym wedi anfon e-bost cadarnhaol i {0}
-confirmation.new.p1 = We usually respond to enquiries within a few days. However, complex enquiries can take up to 30 days.
+confirmation.new.p1 = We usually respond to enquiries within a few days. However, complex enquiries can take up to 28 days.
 confirmation.existing.p1 = Byddwn yn ychwanegu unrhyw fanylion newydd rydych chi wedi'u rhoi i ni i'ch ymholiad.
 confirmation.existing.p2 = Byddwn yn cysylltu â chi gyda diweddariad i'ch ymholiad gan ddefnyddio'r manylion cyswllt rydych chi wedi'u darparu.
 confirmation.whatHappensnext = Yr hyn sy’n digwydd nesaf
