@@ -48,15 +48,9 @@
 
     <h2 class="govuk-heading-m">@messages("councilTaxBandForNew.subheading")</h2>
 
-    <p class="govuk-body">
-        <a class="govuk-link" target="_blank" href=@messages("councilTaxBandForNew.p3.url")>
-        @messages("councilTaxBandForNew.p3")
-        </a>
-    </p>
-    <p class="govuk-body">
-        <a class="govuk-link" target="_blank" href=@messages("councilTaxBandForNew.p4.url")>
-        @messages("councilTaxBandForNew.p4")
-        </a>
-    </p>
+    <ul class="govuk-list">
+        <li><a class="govuk-link" target="_self" href=@messages("councilTaxBandForNew.p3.url")>@messages("councilTaxBandForNew.p3")</a></li>
+        <li><a class="govuk-link" target="_self" href=@messages("councilTaxBandForNew.p4.url")>@messages("councilTaxBandForNew.p4")</a></li>
+    </ul>
 
 }
