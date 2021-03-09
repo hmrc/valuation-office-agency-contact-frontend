@@ -169,10 +169,7 @@ class Navigator @Inject()() {
   private val tellUsMoreRouting: UserAnswers => Call = answers => {
     answers.councilTaxSubcategory match {
       case Some("council_tax_property_poor_repair") => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case Some(_) => routes.CheckYourAnswersController.onPageLoad()
-      case _ =>
-        Logger.warn(s"Navigation for tell us more reached without selection of enquiry by controller ")
-        throw new RuntimeException("Unknown exception in tell us more routing")
+      case _ => routes.CheckYourAnswersController.onPageLoad()
     }
   }
 
