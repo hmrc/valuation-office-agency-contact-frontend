@@ -339,9 +339,9 @@ tellUsMore.ndr-reference = (fe welwch hwn ar eich bil ardrethi busnes)
 tellUsMore.checkYourAnswersLabel = Ymholiad
 tellUsMore.anythingElse = Is there anything else you would like to tell us about?
 
-anythingElse.title = Is there anything else you would like to tell us about? - Valuation Office Agency contact form - GOV.UK
-anythingElse.heading = Is there anything else you would like to tell us about? (optional)
-anythingElse.checkYourAnswersLabel = Is there anything else you would like to tell us about?
+anythingElse.title = Oes yna unrhyw beth arall yr hoffech chi ddweud wrthym? (dewisol) - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+anythingElse.heading = Oes yna unrhyw beth arall yr hoffech chi ddweud wrthym? (dewisol)
+anythingElse.checkYourAnswersLabel = Oes yna unrhyw beth arall yr hoffech chi ddweud wrthym?
 
 # --- Tell Us More Property Wind water journey
 tellUsMore.poorRepair.title = Dywedwch fwy wrthym am gyflwr eich eiddo - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
