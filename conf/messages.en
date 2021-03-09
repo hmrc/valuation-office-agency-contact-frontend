@@ -116,7 +116,7 @@ error.enquiryDate.required = Select ‘Yes’ if you made your enquiry before {0
 
 expectedUpdate.title = When you can expect an update - Valuation Office Agency contact form - GOV.UK
 expectedUpdate.heading = When you can expect an update
-expectedUpdate.para1 = We respond to most enquires within a few days. However, complicated enquiries can take up to 30 days.
+expectedUpdate.para1 = We respond to most enquires within a few days. However, complicated enquiries can take up to 28 days.
 expectedUpdate.para2 = Please do not resubmit your enquiry.
 
 existingEnquiryCategory.title = What did you contact us about? - Valuation Office Agency contact form - GOV.UK
@@ -356,7 +356,7 @@ confirmation.heading = Enquiry submitted
 confirmation.enquirySummary = Your enquiry summary
 confirmation.para1=Your reference is
 confirmation.p1 = We have sent you a confirmation email to {0}
-confirmation.new.p1 = We usually respond to enquiries within a few days. However, complex enquiries can take up to 30 days.
+confirmation.new.p1 = We usually respond to enquiries within a few days. However, complex enquiries can take up to 28 days.
 confirmation.existing.p1 = We will add any new details you have given us to your enquiry.
 confirmation.existing.p2 = We will contact you with an update to your enquiry using the contact details you have supplied.
 confirmation.whatHappensnext = What happens next
