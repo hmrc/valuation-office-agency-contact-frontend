@@ -195,8 +195,8 @@ councilTaxBill.title = Siaradwch â'ch cyngor lleol am eich bil treth gyngor - V
 councilTaxBill.heading = Siaradwch â'ch cyngor lleol am eich bil treth gyngor
 councilTaxBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council">Cysylltwch â'ch cyngor lleol </a> os oes gennych unrhyw gwestiynau am eich bil Treth Gyngor, gan eu bod yn delio â biliau a thaliadau.
 councilTaxBill.subheading = Cymorth arall ar GOV.UK
-councilTaxBill.p2 = <a class="govuk-link" target="_blank" href="https://www.gov.uk/apply-for-council-tax-discount">Gwnewch gais am ostyngiad ar eich bil Treth Gyngor</a>
-councilTaxBill.p3 = <a class="govuk-link" target="_blank" href="https://www.gov.uk/apply-council-tax-reduction">Gwnewch gais am Leihad Treth Gyngor</a>
+councilTaxBill.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-council-tax-discount">Gwnewch gais am ostyngiad ar eich bil Treth Gyngor</a>
+councilTaxBill.p3 = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-council-tax-reduction">Gwnewch gais am Leihad Treth Gyngor</a>
 
 # --- Council Tax Band Too High
 councilTaxBandTooHigh.title = Gallwch herio'ch band Treth Gyngor ar-lein - Valuation Office Agency contact form - GOV.UK
