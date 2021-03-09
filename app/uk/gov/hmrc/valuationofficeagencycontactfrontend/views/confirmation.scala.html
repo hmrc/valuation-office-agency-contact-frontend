@@ -53,7 +53,7 @@
         content = HtmlContent(panelContent)
     ))
     </section>
-    @* <p class="govuk-body">@Html(Messages("existingConfirmation.p1"))</p>*@
+    <p class="govuk-body">@Html(Messages("confirmation.p1", contact.contact.email))</p>
     <h2 class="govuk-heading-m">@messages("confirmation.whatHappensnext")</h2>
 
     @for(message <- whatHappensNextMessages) {
