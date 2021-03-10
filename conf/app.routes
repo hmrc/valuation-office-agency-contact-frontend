@@ -96,6 +96,8 @@ POST        /date-property-changed                 uk.gov.hmrc.valuationofficeag
 GET         /anything-else-tell-us                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.AnythingElseTellUsController.onPageLoad(mode: Mode = NormalMode)
 POST        /anything-else-tell-us                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.AnythingElseTellUsController.onSubmit(mode: Mode = NormalMode)
 
+GET         /annexe                                uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxAnnexController.onPageLoad()
+
 # SURVEY
 GET         /survey-thanks                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.surveyThankyou
 POST        /survey 				               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.formCompleteFeedback
