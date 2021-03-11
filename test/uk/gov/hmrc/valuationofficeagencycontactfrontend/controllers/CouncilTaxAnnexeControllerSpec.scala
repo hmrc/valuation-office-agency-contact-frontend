@@ -33,6 +33,9 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerC
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxAnnexe => council_tax_annexe}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeSelfContainedEnquiry => annexe_self_contained_enquiry}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeNotSelfContained => annexe_not_self_contained}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeNoFacilities => annexe_no_facilities}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeSelfContained => annexe_self_contained}
+
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeCookingWashingEnquiry => annexe_cooking_washing_enquiry}
 
 import scala.concurrent.Future
@@ -42,6 +45,8 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
   def councilTaxAnnexe = app.injector.instanceOf[council_tax_annexe]
   def councilTaxAnnexeSelfContainedEnquiry = app.injector.instanceOf[annexe_self_contained_enquiry]
   def councilTaxAnnexeNotSelfContained = app.injector.instanceOf[annexe_not_self_contained]
+  def councilTaxAnnexeNoFacilities = app.injector.instanceOf[annexe_no_facilities]
+  def councilTaxAnnexeSelfContained = app.injector.instanceOf[annexe_self_contained]
   def annexeCookingWashingEnquiry = app.injector.instanceOf[annexe_cooking_washing_enquiry]
 
   val fakeDataCacheConnector = mock[DataCacheConnector]
@@ -50,6 +55,8 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new CouncilTaxAnnexeController(frontendAppConfig, messagesApi, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction, new DataRequiredActionImpl(ec), councilTaxAnnex, councilTaxAnnexeSelfContainedEnquiry, councilTaxAnnexeNotSelfContained,
+      councilTaxAnnexeNoFacilities, councilTaxAnnexeSelfContained, MessageControllerComponentsHelpers.stubMessageControllerComponents)
       dataRetrievalAction, new DataRequiredActionImpl(ec), councilTaxAnnexe, councilTaxAnnexeSelfContainedEnquiry, councilTaxAnnexeNotSelfContained,
       annexeCookingWashingEnquiry, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
@@ -131,6 +138,20 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
 
       status(result) mustBe BAD_REQUEST
       contentAsString(result) mustBe councilTaxAnnexeSelfContainedEnquiry(frontendAppConfig, boundForm)(fakeRequest, messages).toString()
+    }
+
+    "return OK and the correct view for a no cooking and washing facilities GET" in {
+      val result = controller().onFacilitiesPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe councilTaxAnnexeNoFacilities(frontendAppConfig)(fakeRequest, messages).toString()
+    }
+
+    "return OK and the correct view for annexe self contained GET" in {
+      val result = controller().onSelfContainedPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe councilTaxAnnexeSelfContained(frontendAppConfig)(fakeRequest, messages).toString()
     }
 
     "return OK and the correct view when onHaveCookingWashingPageLoad is called" in {

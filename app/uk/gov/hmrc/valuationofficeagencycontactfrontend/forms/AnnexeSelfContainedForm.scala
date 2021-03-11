@@ -26,7 +26,7 @@ object AnnexeSelfContainedForm extends FormErrorHelper {
   def AnnexeSelfContainedFormatter: Formatter[String] = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
-      case None => produceError(key, "annexeSelfContained.form.error")
+      case None => produceError(key, "annexeSelfContainedEnquiry.form.error")
       case _ => produceError(key, "error.unknown")
     }
 
@@ -37,8 +37,8 @@ object AnnexeSelfContainedForm extends FormErrorHelper {
     Form(single("value" -> of(AnnexeSelfContainedFormatter)))
 
   def options = Seq(
-    RadioOption("annexeSelfContained.form", "yes"),
-    RadioOption("annexeSelfContained.form", "no")
+    RadioOption("annexeSelfContainedEnquiry.form", "yes"),
+    RadioOption("annexeSelfContainedEnquiry.form", "no")
   )
 
   def optionIsValid(value: String) = options.exists(o => o.value == value)

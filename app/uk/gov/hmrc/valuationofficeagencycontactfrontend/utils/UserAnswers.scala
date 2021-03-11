@@ -61,7 +61,7 @@ class UserAnswers(val cacheMap: CacheMap) {
 
   def annexeEnquiry: Option[String] = cacheMap.getEntry[String](CouncilTaxAnnexeEnquiryId.toString)
 
-  def annexeSelfContained: Option[String] = cacheMap.getEntry[String](CouncilTaxAnnexeSelfContainedId.toString)
+  def annexeSelfContainedEnquiry: Option[String] = cacheMap.getEntry[String](CouncilTaxAnnexeSelfContainedEnquiryId.toString)
 
   def annexeHaveCookingWashing: Option[String] = cacheMap.getEntry[String](CouncilTaxAnnexeHaveCookingId.toString)
 

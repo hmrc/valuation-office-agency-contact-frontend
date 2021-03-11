@@ -266,12 +266,12 @@ annexe.removed = Wedi’i dileu
 error.annexe.required = Dewiswch a yw’r rhandy wedi’i ychwanegu neu ei dileu
 
 # -------- Is the annexe self-contained?
-annexeSelfContained.title = A yw’r rhandy yn hunangynhwysol? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-annexeSelfContained.heading = A yw’r rhandy yn hunangynhwysol?
-annexeSelfContained.hint = Mae hyn yn golygu ei fod yn cael ei ddefnyddio fel ardal fyw ar wahân.
-annexeSelfContained.form.yes = Ydy
-annexeSelfContained.form.no = Nac ydy
-annexeSelfContained.form.error = Dewiswch ‘Ydy’ os yw’r rhandy yn hunangynhwysol
+annexeSelfContainedEnquiry.title = A yw’r rhandy yn hunangynhwysol? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+annexeSelfContainedEnquiry.heading = A yw’r rhandy yn hunangynhwysol?
+annexeSelfContainedEnquiry.hint = Mae hyn yn golygu ei fod yn cael ei ddefnyddio fel ardal fyw ar wahân.
+annexeSelfContainedEnquiry.form.yes = Ydy
+annexeSelfContainedEnquiry.form.no = Nac ydy
+annexeSelfContainedEnquiry.form.error = Dewiswch ‘Ydy’ os yw’r rhandy yn hunangynhwysol
 
 # -------- Annexe is not self-contained
 annexeNotSelfContained.title = Ni fydd eich rhandy yn effeithio ar eich band Treth Gyngor - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
@@ -279,6 +279,20 @@ annexeNotSelfContained.heading = Ni fydd eich rhandy yn effeithio ar eich band T
 annexeNotSelfContained.p1 = Ni fydd eich band Treth Gyngor yn cael ei effeithio oherwydd nad yw’r rhandy yn hunangynhwysol gyda chyfleusterau coginio ac ymolchi ei hun.
 annexeNotSelfContained.subheading = Cymorth arall ar GOV.UK
 annexeNotSelfContained.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> Sut mae rhandai yn effeithio ar fandiau Treth Gyngor </a>
+
+# -------- Annexe no cooking and washing facilities
+annexeNoFacilities.title = Ni fydd eich rhandy hunangynhwysol yn effeithio ar eich band Treth Gyngor - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+annexeNoFacilities.heading = Ni fydd eich rhandy hunangynhwysol yn effeithio ar eich band Treth Gyngor
+annexeNoFacilities.p1 = Ni fydd eich band treth gyngor yn cael ei effeithio oherwydd nad oes gan y rhandy gyfleusterau coginio ac ymolchi ei hun.
+annexeNoFacilities.subheading = Cymorth arall ar GOV.UK
+annexeNoFacilities.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> Sut mae rhandai yn effeithio ar fandiau </a>
+
+# -------- Annexe self contained
+annexeSelfContained.title = Siaradwch gyda’ch cyngor lleol am eich rhandy - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+annexeSelfContained.heading = Siaradwch gyda’ch cyngor lleol am eich rhandy
+annexeSelfContained.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council"> Cysylltwch gyda’ch cyngor lleol</a> i ddarparu manylion llawn yr atodiad, gan gynnwys yr holl ystafelloedd a sut maen nhw wedi’u cysylltu â’r prif eiddo.
+annexeSelfContained.subheading = Cymorth arall ar GOV.UK
+annexeSelfContained.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> Sut mae rhandai yn effeithio ar fandiau Treth Gyngor </a>
 
 # -------- Does the annexe have both cooking and washing facilities?
 annexeCookingWashing.title = A oes gan yr atodiad gyfleusterau coginio ac ymolchi? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK

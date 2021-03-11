@@ -27,7 +27,7 @@ class AnnexeSelfContainedEnquiryViewSpec extends ViewBehaviours {
   def view = () => councilTaxAnnexSelfContained(frontendAppConfig, AnnexeSelfContainedForm())(fakeRequest, messages)
 
   "Council Tax Bill view" must {
-    behave like normalPage(view, "annexeSelfContained", "title", "heading",
+    behave like normalPage(view, "annexeSelfContainedEnquiry", "title", "heading",
       "hint", "form.yes", "form.no")
 
     "has a link marked with site.back leading to the Council Tax annexe self contained Page" in {

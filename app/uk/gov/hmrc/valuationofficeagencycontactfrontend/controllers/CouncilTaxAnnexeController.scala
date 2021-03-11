@@ -23,6 +23,8 @@ import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{AnnexeForm, AnnexeSelfContainedForm}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxAnnexId, CouncilTaxAnnexeSelfContainedEnquiryId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{AnnexeCookingWashingForm, AnnexeForm, AnnexeSelfContainedForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxAnnexeEnquiryId, CouncilTaxAnnexeHaveCookingId, CouncilTaxAnnexeSelfContainedId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
@@ -30,6 +32,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxAnnexe => council_tax_annexe}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeSelfContainedEnquiry => annexe_self_contained_enquiry}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeNotSelfContained => annexe_not_self_contained}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeNoFacilities => annexe_no_facilities}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeSelfContained => annexe_self_contained}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeCookingWashingEnquiry => annexe_cooking_washing_enquiry}
 
 import javax.inject.{Inject, Singleton}
@@ -45,6 +49,8 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
                                            councilTaxAnnexe: council_tax_annexe,
                                            annexeSelfContainedEnquiry: annexe_self_contained_enquiry,
                                            annexeNotSelfContained: annexe_not_self_contained,
+                                           annexeNoFacilities: annexe_no_facilities,
+                                           annexeSelfContained: annexe_self_contained,
                                            annexeCookingWashingEnquiry: annexe_cooking_washing_enquiry,
                                            cc: MessagesControllerComponents
                                          ) extends FrontendController(cc) with I18nSupport {
@@ -73,9 +79,9 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
       )
   }
 
-  def onSelfContainedPageLoad: Action[AnyContent] = (getData andThen requireData) {
+  def onSelfContainedEnquiryPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.annexeSelfContained match {
+      val preparedForm = request.userAnswers.annexeSelfContainedEnquiry match {
         case None => AnnexeSelfContainedForm()
         case Some(value) => AnnexeSelfContainedForm().fill(value)
       }
@@ -88,14 +94,24 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(annexeSelfContainedEnquiry(appConfig, formWithErrors))),
         value =>
-          dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeSelfContainedId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(CouncilTaxAnnexeSelfContainedId, NormalMode)(new UserAnswers(cacheMap))))
+          dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeSelfContainedEnquiryId.toString, value).map(cacheMap =>
+            Redirect(navigator.nextPage(CouncilTaxAnnexeSelfContainedEnquiryId, NormalMode)(new UserAnswers(cacheMap))))
       )
   }
 
   def onNotSelfContainedPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(annexeNotSelfContained(appConfig))
+  }
+
+  def onFacilitiesPageLoad: Action[AnyContent] = (getData andThen requireData) {
+    implicit request =>
+      Ok(annexeNoFacilities(appConfig))
+  }
+
+  def onSelfContainedPageLoad: Action[AnyContent] = (getData andThen requireData) {
+    implicit request =>
+      Ok(annexeSelfContained(appConfig))
   }
 
   def onHaveCookingWashingPageLoad:Action[AnyContent] = (getData andThen requireData) {
