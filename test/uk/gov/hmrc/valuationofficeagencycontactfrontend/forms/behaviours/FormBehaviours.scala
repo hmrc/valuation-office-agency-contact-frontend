@@ -117,6 +117,10 @@ trait FormBehaviours extends FormSpec {
         Try {
           checkForError(form, data, error(field, "error.annexe.required"))
         }
+      }.orElse {
+        Try {
+          checkForError(form, data, error(field, "annexeCookingWashing.form.error"))
+        }
       }.getOrElse {
         checkForError(form, data, expectedError)
       }

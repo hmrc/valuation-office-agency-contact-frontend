@@ -23,13 +23,14 @@ import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{AnnexeForm, AnnexeSelfContainedForm}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxAnnexId, CouncilTaxAnnexeSelfContainedId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{AnnexeCookingWashingForm, AnnexeForm, AnnexeSelfContainedForm}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxAnnexeEnquiryId, CouncilTaxAnnexeHaveCookingId, CouncilTaxAnnexeSelfContainedId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxAnnex => council_tax_annex}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxAnnexe => council_tax_annexe}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeSelfContainedEnquiry => annexe_self_contained_enquiry}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeNotSelfContained => annexe_not_self_contained}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeCookingWashingEnquiry => annexe_cooking_washing_enquiry}
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
@@ -41,9 +42,10 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
                                            navigator: Navigator,
                                            getData: DataRetrievalAction,
                                            requireData: DataRequiredAction,
-                                           councilTaxAnnex: council_tax_annex,
+                                           councilTaxAnnexe: council_tax_annexe,
                                            annexeSelfContainedEnquiry: annexe_self_contained_enquiry,
                                            annexeNotSelfContained: annexe_not_self_contained,
+                                           annexeCookingWashingEnquiry: annexe_cooking_washing_enquiry,
                                            cc: MessagesControllerComponents
                                          ) extends FrontendController(cc) with I18nSupport {
 
@@ -55,19 +57,19 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
         case None => AnnexeForm()
         case Some(value) => AnnexeForm().fill(value)
       }
-      Ok(councilTaxAnnex(appConfig, preparedForm, mode))
+      Ok(councilTaxAnnexe(appConfig, preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = getData.async {
     implicit request =>
       AnnexeForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(councilTaxAnnex(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(councilTaxAnnexe(appConfig, formWithErrors, mode))),
         value =>
           for {
-            _ <- dataCacheConnector.remove(request.sessionId, CouncilTaxAnnexId.toString)
-            cacheMap <- dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexId.toString, value)
-          } yield Redirect(navigator.nextPage(CouncilTaxAnnexId, mode)(new UserAnswers(cacheMap)))
+            _ <- dataCacheConnector.remove(request.sessionId, CouncilTaxAnnexeEnquiryId.toString)
+            cacheMap <- dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeEnquiryId.toString, value)
+          } yield Redirect(navigator.nextPage(CouncilTaxAnnexeEnquiryId, mode)(new UserAnswers(cacheMap)))
       )
   }
 
@@ -94,5 +96,25 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
   def onNotSelfContainedPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(annexeNotSelfContained(appConfig))
+  }
+
+  def onHaveCookingWashingPageLoad:Action[AnyContent] = (getData andThen requireData) {
+    implicit request =>
+      val preparedForm = request.userAnswers.annexeHaveCookingWashing match {
+        case None => AnnexeCookingWashingForm()
+        case Some(value) => AnnexeCookingWashingForm().fill(value)
+      }
+      Ok(annexeCookingWashingEnquiry(appConfig, preparedForm))
+  }
+
+  def onHaveCookingWashingSubmit: Action[AnyContent] = (getData andThen requireData).async {
+    implicit request =>
+      AnnexeCookingWashingForm().bindFromRequest.fold(
+        (formWithErrors: Form[String]) =>
+          Future.successful(BadRequest(annexeCookingWashingEnquiry(appConfig, formWithErrors))),
+        value =>
+          dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeHaveCookingId.toString, value).map(cacheMap =>
+            Redirect(navigator.nextPage(CouncilTaxAnnexeHaveCookingId, NormalMode)(new UserAnswers(cacheMap))))
+      )
   }
 }

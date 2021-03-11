@@ -304,12 +304,17 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return a function that goes to the council tax is annexe self contained page when an annexe enquiry 'added' has been selected" in {
         when (mockUserAnswers.annexeEnquiry) thenReturn Some("added")
-        navigator.nextPage(CouncilTaxAnnexId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAnnexeController.onSelfContainedPageLoad()
+        navigator.nextPage(CouncilTaxAnnexeEnquiryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAnnexeController.onSelfContainedPageLoad()
       }
 
       "return a function that goes to the council tax annexe is not self contained page when an enquiry 'no' has been selected" in {
         when (mockUserAnswers.annexeSelfContained) thenReturn Some("no")
         navigator.nextPage(CouncilTaxAnnexeSelfContainedId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAnnexeController.onNotSelfContainedPageLoad()
+      }
+
+      "return a function that goes to the council tax annexe have cooking washing enquiry page when an enquiry 'yes' has been selected" in {
+        when (mockUserAnswers.annexeSelfContained) thenReturn Some("yes")
+        navigator.nextPage(CouncilTaxAnnexeSelfContainedId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAnnexeController.onHaveCookingWashingPageLoad()
       }
 
       "throw an exception when is annexe self contained selects an unexpected response" in {

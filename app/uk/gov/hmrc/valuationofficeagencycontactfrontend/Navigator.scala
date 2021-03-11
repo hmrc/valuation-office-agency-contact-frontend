@@ -186,11 +186,21 @@ class Navigator @Inject()() {
 
   private val annexeSelfContainedRouting: UserAnswers => Call = answers => {
     answers.annexeSelfContained match {
-      case Some("yes") => ???
+      case Some("yes") => routes.CouncilTaxAnnexeController.onHaveCookingWashingPageLoad()
       case Some("no") => routes.CouncilTaxAnnexeController.onNotSelfContainedPageLoad()
       case _ =>
         Logger.warn(s"Navigation for is annexe self contained without selection of enquiry by controller ")
         throw new RuntimeException("Unknown exception for is annexe self contained routing")
+    }
+  }
+
+  private val annexeCookingWashingRouting: UserAnswers => Call = answers => {
+    answers.annexeHaveCookingWashing match {
+      case Some("yes") => ???
+      case Some("no") => ???
+      case _ =>
+        Logger.warn(s"Navigation for is annexe cooking washing without selection of enquiry by controller ")
+        throw new RuntimeException("Unknown exception for is annexe cooking washing routing")
     }
   }
 
@@ -211,8 +221,9 @@ class Navigator @Inject()() {
     BusinessRatesSmartLinksId -> (_ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)),
     CouncilTaxPropertyPoorRepairId -> propertyWindWaterRouting,
     DatePropertyChangedId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
-    CouncilTaxAnnexId -> councilTaxAnnexeRouting,
-    CouncilTaxAnnexeSelfContainedId -> annexeSelfContainedRouting
+    CouncilTaxAnnexeEnquiryId -> councilTaxAnnexeRouting,
+    CouncilTaxAnnexeSelfContainedId -> annexeSelfContainedRouting,
+    CouncilTaxAnnexeHaveCookingId -> annexeCookingWashingRouting
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()

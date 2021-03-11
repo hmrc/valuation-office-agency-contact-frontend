@@ -14,21 +14,8 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers
 
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.behaviours.FormBehaviours
-
-class AnnexeFormSpec extends FormBehaviours {
-
-  val validData: Map[String, String] = Map(
-    "value" -> AnnexeForm.options.head.value
-  )
-
-  val form = AnnexeForm()
-
-  "Annexe form" must {
-    behave like questionForm[String](AnnexeForm.options.head.value)
-
-    behave like formWithOptionField("value", AnnexeForm.options.map{x => x.value}:_*)
-  }
+case object CouncilTaxAnnexeHaveCookingId extends Identifier {
+  override def toString: String = "annexeHaveCookingWashing"
 }
