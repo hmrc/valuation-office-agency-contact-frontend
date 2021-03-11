@@ -38,7 +38,7 @@ object AnnexeForm extends FormErrorHelper {
 
   def options = Seq(
     RadioOption("annexe", "added"),
-    RadioOption("annexe", "removed"),
+    RadioOption("annexe", "removed")
   )
 
   def optionIsValid(value: String) = options.exists(o => o.value == value)
