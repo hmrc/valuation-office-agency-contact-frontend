@@ -16,22 +16,54 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
+import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.AnnexeForm
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CouncilTaxAnnexId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxAnnex => council_tax_annex}
 
 import javax.inject.{Inject, Singleton}
+import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
 class CouncilTaxAnnexController @Inject()(val appConfig: FrontendAppConfig,
                                           override val messagesApi: MessagesApi,
+                                          dataCacheConnector: DataCacheConnector,
+                                          navigator: Navigator,
+                                          getData: DataRetrievalAction,
+                                          requireData: DataRequiredAction,
                                           councilTaxAnnex: council_tax_annex,
                                           cc: MessagesControllerComponents
                                          ) extends FrontendController(cc) with I18nSupport {
 
-  def onPageLoad: Action[AnyContent] = Action { implicit request =>
-    Ok(councilTaxAnnex(appConfig))
+  implicit val ec: ExecutionContext = cc.executionContext
+
+  def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+    implicit request =>
+      val preparedForm = request.userAnswers.annexeEnquiry match {
+        case None => AnnexeForm()
+        case Some(value) => AnnexeForm().fill(value)
+      }
+    Ok(councilTaxAnnex(appConfig, preparedForm, mode))
+  }
+
+  def onSubmit(mode: Mode): Action[AnyContent] = getData.async {
+    implicit request =>
+      AnnexeForm().bindFromRequest().fold(
+        (formWithErrors: Form[String]) =>
+          Future.successful(BadRequest(councilTaxAnnex(appConfig, formWithErrors, mode))),
+        value =>
+          for {
+            _ <- dataCacheConnector.remove(request.sessionId, CouncilTaxAnnexId.toString)
+            cacheMap <- dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexId.toString, value)
+          } yield Redirect(navigator.nextPage(CouncilTaxAnnexId, mode)(new UserAnswers(cacheMap)))
+      )
   }
 }

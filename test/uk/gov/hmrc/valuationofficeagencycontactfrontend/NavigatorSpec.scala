@@ -58,9 +58,14 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(EnquiryDateId, NormalMode)(mockUserAnswers) mustBe routes.ExistingEnquiryCategoryController.onPageLoad()
       }
 
-      "return function that goes on 'date oage' when he want update about existing enquiry" in {
+      "return function that goes on 'date page' when he want update about existing enquiry" in {
         when (mockUserAnswers.contactReason) thenReturn Some("update_existing")
         navigator.nextPage(ContactReasonId, NormalMode)(mockUserAnswers) mustBe routes.EnquiryDateController.onPageLoad()
+      }
+
+      "return an exception when the contact reason returns other" in {
+        when (mockUserAnswers.contactReason) thenReturn Some("error")
+        an [RuntimeException] should be thrownBy navigator.nextPage(ContactReasonId, NormalMode)(mockUserAnswers)
       }
 
       "return function that goes on Enquiry Category page when he want select a new enquiry" in {
@@ -276,6 +281,17 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_poor_repair")
         navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.PropertyWindWaterController.onEnquiryLoad()
       }
+
+      "return a function that goes to the council tax property demolished page when an enquiry category for council tax has been selected and council_tax_property_demolished option selected" in {
+        when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_demolished")
+        navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.PropertyDemolishedController.onPageLoad()
+      }
+
+      "return a function that goes to the council tax annexe page when an enquiry category for council tax has been selected and council_tax_annexe option selected" in {
+        when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_annexe")
+        navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAnnexController.onPageLoad()
+      }
+
 
       "return function that goes 'The Council Tax band cannot be reduced or removed' when property is property wind and watertight" in {
         when (mockUserAnswers.propertyWindEnquiry) thenReturn Some("yes")
