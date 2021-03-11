@@ -148,7 +148,7 @@ class Navigator @Inject()() {
       case Some("council_tax_property_empty") => routes.CouncilTaxPropertyEmptyController.onPageLoad()
       case Some("council_tax_property_poor_repair") => routes.PropertyWindWaterController.onEnquiryLoad()
       case Some("council_tax_property_demolished") => routes.PropertyDemolishedController.onPageLoad()
-      case Some("council_tax_annexe") => routes.CouncilTaxAnnexController.onPageLoad()
+      case Some("council_tax_annexe") => routes.CouncilTaxAnnexeController.onPageLoad()
       case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case None => {
         Logger.warn(s"Navigation for Council Tax page reached without selection of enquiry by controller ")
@@ -174,6 +174,26 @@ class Navigator @Inject()() {
     }
   }
 
+  private val councilTaxAnnexeRouting: UserAnswers => Call = answers => {
+    answers.annexeEnquiry match {
+      case Some("added") => routes.CouncilTaxAnnexeController.onSelfContainedPageLoad()
+      case Some("remove") => ???
+      case _ =>
+        Logger.warn(s"Navigation for annexe without selection of enquiry by controller ")
+        throw new RuntimeException("Unknown exception for annexe routing")
+    }
+  }
+
+  private val annexeSelfContainedRouting: UserAnswers => Call = answers => {
+    answers.annexeSelfContained match {
+      case Some("yes") => ???
+      case Some("no") => routes.CouncilTaxAnnexeController.onNotSelfContainedPageLoad()
+      case _ =>
+        Logger.warn(s"Navigation for is annexe self contained without selection of enquiry by controller ")
+        throw new RuntimeException("Unknown exception for is annexe self contained routing")
+    }
+  }
+
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     ContactReasonId -> contactReasonRouting,
     EnquiryDateId -> enquiryDateRouting,
@@ -190,7 +210,9 @@ class Navigator @Inject()() {
     CheckYourAnswersId -> confirmationPageRouting,
     BusinessRatesSmartLinksId -> (_ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)),
     CouncilTaxPropertyPoorRepairId -> propertyWindWaterRouting,
-    DatePropertyChangedId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode))
+    DatePropertyChangedId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
+    CouncilTaxAnnexId -> councilTaxAnnexeRouting,
+    CouncilTaxAnnexeSelfContainedId -> annexeSelfContainedRouting
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()

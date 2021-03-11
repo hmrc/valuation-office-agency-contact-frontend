@@ -265,6 +265,22 @@ annexe.added = Added
 annexe.removed = Removed
 error.annexe.required = Select if the annexe has been added or removed
 
+# -------- Is the annexe self-contained?
+annexeSelfContained.title = Is the annexe self-contained? - Valuation Office Agency contact form - GOV.UK
+annexeSelfContained.heading = Is the annexe self-contained?
+annexeSelfContained.hint = This means it is used as a separate living area.
+annexeSelfContained.form.yes = Yes
+annexeSelfContained.form.no = No
+annexeSelfContained.form.error = Select ‘Yes’ if the annexe is self-contained
+
+# -------- Annexe is not self-contained
+annexeNotSelfContained.title = Your annexe will not affect your Council Tax band - Valuation Office Agency contact form - GOV.UK
+annexeNotSelfContained.heading = Your annexe will not affect your Council Tax band
+annexeNotSelfContained.p1 = Your Council Tax band will not be affected because the annexe is not self-contained with its own cooking and washing facilities.
+annexeNotSelfContained.subheading = Other help on GOV.UK
+annexeNotSelfContained.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> How annexes affect Council Tax bands </a>
+
+
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = What is your Council Tax enquiry about? - Valuation Office Agency contact form - GOV.UK
 councilTaxSubcategory.heading = What is your Council Tax enquiry about?
