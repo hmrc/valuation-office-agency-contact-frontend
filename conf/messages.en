@@ -377,7 +377,6 @@ confirmation.title = Enquiry submitted - Valuation Office Agency contact form - 
 confirmation.heading = Enquiry submitted
 confirmation.enquirySummary = Your enquiry summary
 confirmation.para1=Your reference is
-confirmation.p1 = We have sent you a confirmation email to {0}
 confirmation.new.p1 = We usually respond to enquiries within a few days. However, complex enquiries can take up to 28 days.
 confirmation.existing.p1 = We will add any new details you have given us to your enquiry.
 confirmation.existing.p2 = We will contact you with an update to your enquiry using the contact details you have supplied.
@@ -449,7 +448,7 @@ providingLettings.phone-number = 03000 502502
 
 datePropertyChanged.title = When did your property start to be in poor repair? - Valuation Office Agency contact form - GOV.UK
 datePropertyChanged.heading = When did your property start to be in poor repair? (optional)
-datePropertyChanged.hint = For example, 28 3 2021
+datePropertyChanged.hint = For example, 27 2 2021
 datePropertyChanged.error.invalidDate = Enter a real date
 datePropertyChanged.error.mandatory.dayMonth = Date must include a day and month
 datePropertyChanged.error.mandatory.dayYear = Date must include a day and year
