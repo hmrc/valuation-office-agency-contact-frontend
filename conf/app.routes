@@ -98,7 +98,7 @@ POST        /anything-else-tell-us                 uk.gov.hmrc.valuationofficeag
 
 GET         /annexe                                uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxAnnexeController.onPageLoad(mode: Mode = NormalMode)
 POST        /annexe                                uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxAnnexeController.onSubmit(mode: Mode = NormalMode)
-GET         /annexe-added                          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxAnnexeController.onSelfContainedPageLoad()
+GET         /annexe-added                          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxAnnexeController.onSelfContainedEnquiryPageLoad()
 POST        /annexe-added                          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxAnnexeController.onSelfContainedSubmit()
 GET         /annexe-not-self-contained             uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxAnnexeController.onNotSelfContainedPageLoad()
 GET         /annexe-no-cooking-washing-facilities  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxAnnexeController.onFacilitiesPageLoad()
