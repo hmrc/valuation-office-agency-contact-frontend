@@ -18,54 +18,57 @@
 @import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.AnnexeForm
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
-
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyWindWaterForm
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
 
 @this(mainTemplate: main_template, formWithCSFR: formWithCSRF, govukBackLink: GovukBackLink,
         govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary, govukFieldset: GovukFieldset)
 
-@(appConfig: FrontendAppConfig, form: Form[String], mode: Mode)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, form: Form[String])(implicit request: Request[_], messages: Messages)
 
 
 @beforeBlock = {
 @govukBackLink(BackLink(content = Text(messages("site.back")),
-    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
+    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxAnnexeController.onPageLoad().url)
 ))
 }
 
 @mainTemplate(
-    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("annexe.title"))else messages("annexe.title")),
-    beforeContentBlock = Some(beforeBlock)
+    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("annexeSelfContained.title"))else messages("annexeSelfContained.title")),
+    beforeContentBlock = Option(beforeBlock)
 ) {
-    @formWithCSFR(action = CouncilTaxAnnexeController.onSubmit(), 'autoComplete -> "off") {
+    @formWithCSFR(action = CouncilTaxAnnexeController.onSelfContainedSubmit(), 'autoComplete -> "off") {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(
                     title = Text(messages("error.summary.title")),
-                    errorList = form.errors.map(e => ErrorLink(href = Some("#annexe-error"), content = HtmlContent(messages(e.messages, e.args))))
+                    errorList = form.errors.map(e => ErrorLink(href = Some("#annexSelfContained-error"), content = HtmlContent(messages(e.messages, e.args :_*))))
                 )
             )
         }
 
         @govukRadios(Radios(
             fieldset = Option(Fieldset(legend = Option(
-                Legend(content = Text(messages("annexe.heading")), isPageHeading = true, classes = "govuk-fieldset__legend--l"
+                Legend(content = Text(messages("annexeSelfContained.heading")), isPageHeading = true, classes = "govuk-fieldset__legend--l"
                 )))),
-            idPrefix = Option("annexe"),
+            idPrefix = Option("annexeSelfContained.form"),
             name = "value",
-            items = AnnexeForm.options.map(i => RadioItem(
+            hint = Some(Hint(content = Text(messages("annexeSelfContained.hint")))),
+            formGroupClasses = "govuk-radios--inline",
+            items = PropertyWindWaterForm.options.map(i => RadioItem(
                 content = Text(messages(i.messageKey)),
                 id = Option(i.id),
                 value = Option(i.value),
