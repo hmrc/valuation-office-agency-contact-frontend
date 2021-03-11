@@ -265,6 +265,21 @@ annexe.added = Wedi’i ychwanegu
 annexe.removed = Wedi’i dileu
 error.annexe.required = Dewiswch a yw’r rhandy wedi’i ychwanegu neu ei dileu
 
+# -------- Is the annexe self-contained?
+annexeSelfContained.title = A yw’r rhandy yn hunangynhwysol? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+annexeSelfContained.heading = A yw’r rhandy yn hunangynhwysol?
+annexeSelfContained.hint = Mae hyn yn golygu ei fod yn cael ei ddefnyddio fel ardal fyw ar wahân.
+annexeSelfContained.form.yes = Ydy
+annexeSelfContained.form.no = Nac ydy
+annexeSelfContained.form.error = Dewiswch ‘Ydy’ os yw’r rhandy yn hunangynhwysol
+
+# -------- Annexe is not self-contained
+annexeNotSelfContained.title = Ni fydd eich rhandy yn effeithio ar eich band Treth Gyngor - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+annexeNotSelfContained.heading = Ni fydd eich rhandy yn effeithio ar eich band Treth Gyngor
+annexeNotSelfContained.p1 = Ni fydd eich band Treth Gyngor yn cael ei effeithio oherwydd nad yw’r rhandy yn hunangynhwysol gyda chyfleusterau coginio ac ymolchi ei hun.
+annexeNotSelfContained.subheading = Cymorth arall ar GOV.UK
+annexeNotSelfContained.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> Sut mae rhandai yn effeithio ar fandiau Treth Gyngor </a>
+
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 councilTaxSubcategory.heading = Beth yw testun eich ymholiad ynghylch Treth Gyngor?
@@ -281,21 +296,6 @@ councilTaxSubcategory.council_tax_business_uses = Defnyddir fy eiddo ar gyfer bu
 councilTaxSubcategory.council_tax_annexe = Rwyf wedi ychwanegu neu dileu rhandy
 councilTaxSubcategory.council_tax_other = Unrhyw ymholiad arall ynghylch y Dreth Gyngor
 councilTaxSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
-
-# ---- Is the annexe self-contained?
-annexeSelfContained.title = A yw’r rhandy yn hunangynhwysol? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-annexeSelfContained.heading = A yw’r rhandy yn hunangynhwysol?
-annexeSelfContained.hint = Mae hyn yn golygu ei fod yn cael ei ddefnyddio fel ardal fyw ar wahân.
-annexeSelfContained.form.yes = Ydy
-annexeSelfContained.form.no = Nac ydy
-annexeSelfContained.form.error = Dewiswch ‘Ydy’ os yw’r rhandy yn hunangynhwysol
-
-# ------ Annexe is not self-contained
-annexeNotSelfContained.title = Ni fydd eich rhandy yn effeithio ar eich band Treth Gyngor - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-annexeNotSelfContained.heading = Ni fydd eich rhandy yn effeithio ar eich band Treth Gyngor
-annexeNotSelfContained.p1 = Ni fydd eich band Treth Gyngor yn cael ei effeithio oherwydd nad yw’r rhandy yn hunangynhwysol gyda chyfleusterau coginio ac ymolchi ei hun.
-annexeNotSelfContained.subheading = Cymorth arall ar GOV.UK
-annexeNotSelfContained.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> Sut mae rhandai yn effeithio ar fandiau Treth Gyngor </a>
 
 businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?

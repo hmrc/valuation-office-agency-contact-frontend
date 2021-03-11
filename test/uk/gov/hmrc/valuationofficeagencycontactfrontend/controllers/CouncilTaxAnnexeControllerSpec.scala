@@ -131,20 +131,3 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
     }
   }
 }
-
-/*
-
- def viewAsString(form: Form[String] = CouncilTaxSubcategoryForm()) =
-    councilTaxSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
-
-    "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(CouncilTaxSubcategoryId.toString -> JsString(CouncilTaxSubcategoryForm.options.head.value))
-      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
-
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
-
-      contentAsString(result) mustBe viewAsString(CouncilTaxSubcategoryForm().fill(CouncilTaxSubcategoryForm.options.head.value))
-    }
-
-
- */
