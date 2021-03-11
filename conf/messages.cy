@@ -425,7 +425,7 @@ providingLettings.phone-number = 03000 502502
 
 datePropertyChanged.title = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 datePropertyChanged.heading = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol)
-datePropertyChanged.hint = Er enghraifft, 28 3 2021
+datePropertyChanged.hint = Er enghraifft, 27 2 2021
 datePropertyChanged.error.invalidDate = Rhowch ddyddiad go iawn
 datePropertyChanged.error.mandatory.dayMonth = Rhaid i’r dyddiad gynnwys dydd a mis
 datePropertyChanged.error.mandatory.dayYear = Rhaid i’r dyddiad gynnwys dydd a blwyddyn

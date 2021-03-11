@@ -426,7 +426,7 @@ providingLettings.phone-number = 03000 502502
 
 datePropertyChanged.title = When did your property start to be in poor repair? - Valuation Office Agency contact form - GOV.UK
 datePropertyChanged.heading = When did your property start to be in poor repair? (optional)
-datePropertyChanged.hint = For example, 28 3 2021
+datePropertyChanged.hint = For example, 27 2 2021
 datePropertyChanged.error.invalidDate = Enter a real date
 datePropertyChanged.error.mandatory.dayMonth = Date must include a day and month
 datePropertyChanged.error.mandatory.dayYear = Date must include a day and year
