@@ -33,6 +33,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerC
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxAnnex => council_tax_annex}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeSelfContainedEnquiry => annexe_self_contained_enquiry}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeNotSelfContained => annexe_not_self_contained}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeNoFacilities => annexe_no_facilities}
 
 import scala.concurrent.Future
 
@@ -41,6 +42,7 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
   def councilTaxAnnex = app.injector.instanceOf[council_tax_annex]
   def councilTaxAnnexeSelfContainedEnquiry = app.injector.instanceOf[annexe_self_contained_enquiry]
   def councilTaxAnnexeNotSelfContained = app.injector.instanceOf[annexe_not_self_contained]
+  def councilTaxAnnexeNoFacilities = app.injector.instanceOf[annexe_no_facilities]
 
   val fakeDataCacheConnector = mock[DataCacheConnector]
 
@@ -49,7 +51,7 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new CouncilTaxAnnexeController(frontendAppConfig, messagesApi, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl(ec), councilTaxAnnex, councilTaxAnnexeSelfContainedEnquiry, councilTaxAnnexeNotSelfContained,
-      MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      councilTaxAnnexeNoFacilities, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = AnnexeForm()) = councilTaxAnnex(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
@@ -128,6 +130,13 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
 
       status(result) mustBe BAD_REQUEST
       contentAsString(result) mustBe councilTaxAnnexeSelfContainedEnquiry(frontendAppConfig, boundForm)(fakeRequest, messages).toString()
+    }
+
+    "return OK and the correct view for a no cooking and washing facilities GET" in {
+      val result = controller().onFacilitiesPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe councilTaxAnnexeNoFacilities(frontendAppConfig)(fakeRequest, messages).toString()
     }
   }
 }

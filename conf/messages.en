@@ -280,6 +280,12 @@ annexeNotSelfContained.p1 = Your Council Tax band will not be affected because t
 annexeNotSelfContained.subheading = Other help on GOV.UK
 annexeNotSelfContained.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> How annexes affect Council Tax bands </a>
 
+# -------- Annexe no cooking and washing facilities
+annexeNoFacilities.title = Your self-contained annexe will not affect your Council Tax band - Valuation Office Agency contact form - GOV.UK
+annexeNoFacilities.heading = Your self-contained annexe will not affect your Council Tax band
+annexeNoFacilities.p1 = Your Council Tax band will not be affected because the annexe does not have its own cooking and washing facilities.
+annexeNoFacilities.subheading = Other help on GOV.UK
+annexeNoFacilities.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> How annexes affect Council Tax bands </a>
 
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = What is your Council Tax enquiry about? - Valuation Office Agency contact form - GOV.UK

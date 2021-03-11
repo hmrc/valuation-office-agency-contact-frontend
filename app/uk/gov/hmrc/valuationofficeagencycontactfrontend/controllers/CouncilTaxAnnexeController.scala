@@ -30,6 +30,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxAnnex => council_tax_annex}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeSelfContainedEnquiry => annexe_self_contained_enquiry}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeNotSelfContained => annexe_not_self_contained}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeNoFacilities => annexe_no_facilities}
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
@@ -44,6 +45,7 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
                                            councilTaxAnnex: council_tax_annex,
                                            annexeSelfContainedEnquiry: annexe_self_contained_enquiry,
                                            annexeNotSelfContained: annexe_not_self_contained,
+                                           annexeNoFacilities: annexe_no_facilities,
                                            cc: MessagesControllerComponents
                                          ) extends FrontendController(cc) with I18nSupport {
 
@@ -94,5 +96,10 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
   def onNotSelfContainedPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(annexeNotSelfContained(appConfig))
+  }
+
+  def onFacilitiesPageLoad: Action[AnyContent] = (getData andThen requireData) {
+    implicit request =>
+      Ok(annexeNoFacilities(appConfig))
   }
 }

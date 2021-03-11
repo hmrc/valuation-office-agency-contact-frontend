@@ -280,6 +280,13 @@ annexeNotSelfContained.p1 = Ni fydd eich band Treth Gyngor yn cael ei effeithio 
 annexeNotSelfContained.subheading = Cymorth arall ar GOV.UK
 annexeNotSelfContained.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> Sut mae rhandai yn effeithio ar fandiau Treth Gyngor </a>
 
+# -------- Annexe no cooking and washing facilities
+annexeNoFacilities.title = Ni fydd eich rhandy hunangynhwysol yn effeithio ar eich band Treth Gyngor - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+annexeNoFacilities.heading = Ni fydd eich rhandy hunangynhwysol yn effeithio ar eich band Treth Gyngor
+annexeNoFacilities.p1 = Ni fydd eich band treth gyngor yn cael ei effeithio oherwydd nad oes gan y rhandy gyfleusterau coginio ac ymolchi ei hun.
+annexeNoFacilities.subheading = Cymorth arall ar GOV.UK
+annexeNoFacilities.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> Sut mae rhandai yn effeithio ar fandiau </a>
+
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 councilTaxSubcategory.heading = Beth yw testun eich ymholiad ynghylch Treth Gyngor?
