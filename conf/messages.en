@@ -266,12 +266,12 @@ annexe.removed = Removed
 error.annexe.required = Select if the annexe has been added or removed
 
 # -------- Is the annexe self-contained?
-annexeSelfContained.title = Is the annexe self-contained? - Valuation Office Agency contact form - GOV.UK
-annexeSelfContained.heading = Is the annexe self-contained?
-annexeSelfContained.hint = This means it is used as a separate living area.
-annexeSelfContained.form.yes = Yes
-annexeSelfContained.form.no = No
-annexeSelfContained.form.error = Select ‘Yes’ if the annexe is self-contained
+annexeSelfContainedEnquiry.title = Is the annexe self-contained? - Valuation Office Agency contact form - GOV.UK
+annexeSelfContainedEnquiry.heading = Is the annexe self-contained?
+annexeSelfContainedEnquiry.hint = This means it is used as a separate living area.
+annexeSelfContainedEnquiry.form.yes = Yes
+annexeSelfContainedEnquiry.form.no = No
+annexeSelfContainedEnquiry.form.error = Select ‘Yes’ if the annexe is self-contained
 
 # -------- Annexe is not self-contained
 annexeNotSelfContained.title = Your annexe will not affect your Council Tax band - Valuation Office Agency contact form - GOV.UK
@@ -286,6 +286,13 @@ annexeNoFacilities.heading = Your self-contained annexe will not affect your Cou
 annexeNoFacilities.p1 = Your Council Tax band will not be affected because the annexe does not have its own cooking and washing facilities.
 annexeNoFacilities.subheading = Other help on GOV.UK
 annexeNoFacilities.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> How annexes affect Council Tax bands </a>
+
+# -------- Annexe self contained
+annexeSelfContained.title = Speak to your local council about your annexe - Valuation Office Agency contact form - GOV.UK
+annexeSelfContained.heading = Speak to your local council about your annexe
+annexeSelfContained.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council"> Contact your local council</a> to provide full details of the annexe, including all the rooms and how they are connected to the main property.
+annexeSelfContained.subheading = Other help on GOV.UK
+annexeSelfContained.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> How annexes affect Council Tax bands </a>
 
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = What is your Council Tax enquiry about? - Valuation Office Agency contact form - GOV.UK

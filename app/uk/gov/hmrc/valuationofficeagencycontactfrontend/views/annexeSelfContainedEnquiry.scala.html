@@ -45,7 +45,7 @@
 }
 
 @mainTemplate(
-    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("annexeSelfContained.title"))else messages("annexeSelfContained.title")),
+    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("annexeSelfContainedEnquiry.title"))else messages("annexeSelfContainedEnquiry.title")),
     beforeContentBlock = Option(beforeBlock)
 ) {
     @formWithCSFR(action = CouncilTaxAnnexeController.onSelfContainedSubmit(), 'autoComplete -> "off") {
@@ -53,18 +53,18 @@
             @govukErrorSummary(
                 ErrorSummary(
                     title = Text(messages("error.summary.title")),
-                    errorList = form.errors.map(e => ErrorLink(href = Some("#annexSelfContained-error"), content = HtmlContent(messages(e.messages, e.args :_*))))
+                    errorList = form.errors.map(e => ErrorLink(href = Some("#annexeSelfContainedEnquiry-error"), content = HtmlContent(messages(e.messages, e.args :_*))))
                 )
             )
         }
 
         @govukRadios(Radios(
             fieldset = Option(Fieldset(legend = Option(
-                Legend(content = Text(messages("annexeSelfContained.heading")), isPageHeading = true, classes = "govuk-fieldset__legend--l"
+                Legend(content = Text(messages("annexeSelfContainedEnquiry.heading")), isPageHeading = true, classes = "govuk-fieldset__legend--l"
                 )))),
-            idPrefix = Option("annexeSelfContained.form"),
+            idPrefix = Option("annexeSelfContainedEnquiry.form"),
             name = "value",
-            hint = Some(Hint(content = Text(messages("annexeSelfContained.hint")))),
+            hint = Some(Hint(content = Text(messages("annexeSelfContainedEnquiry.hint")))),
             formGroupClasses = "govuk-radios--inline",
             items = AnnexeSelfContainedForm.options.map(i => RadioItem(
                 content = Text(messages(i.messageKey)),

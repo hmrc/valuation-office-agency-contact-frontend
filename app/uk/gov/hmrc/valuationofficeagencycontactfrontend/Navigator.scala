@@ -176,7 +176,7 @@ class Navigator @Inject()() {
 
   private val councilTaxAnnexeRouting: UserAnswers => Call = answers => {
     answers.annexeEnquiry match {
-      case Some("added") => routes.CouncilTaxAnnexeController.onSelfContainedPageLoad()
+      case Some("added") => routes.CouncilTaxAnnexeController.onSelfContainedEnquiryPageLoad()
       case Some("remove") => ???
       case _ =>
         Logger.warn(s"Navigation for annexe without selection of enquiry by controller ")
@@ -185,7 +185,7 @@ class Navigator @Inject()() {
   }
 
   private val annexeSelfContainedRouting: UserAnswers => Call = answers => {
-    answers.annexeSelfContained match {
+    answers.annexeSelfContainedEnquiry match {
       case Some("yes") => ???
       case Some("no") => routes.CouncilTaxAnnexeController.onNotSelfContainedPageLoad()
       case _ =>
@@ -212,7 +212,7 @@ class Navigator @Inject()() {
     CouncilTaxPropertyPoorRepairId -> propertyWindWaterRouting,
     DatePropertyChangedId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
     CouncilTaxAnnexId -> councilTaxAnnexeRouting,
-    CouncilTaxAnnexeSelfContainedId -> annexeSelfContainedRouting
+    CouncilTaxAnnexeSelfContainedEnquiryId -> annexeSelfContainedRouting
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()

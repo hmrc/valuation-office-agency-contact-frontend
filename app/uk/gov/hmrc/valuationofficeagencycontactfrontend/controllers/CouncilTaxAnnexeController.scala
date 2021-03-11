@@ -24,13 +24,14 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConn
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{AnnexeForm, AnnexeSelfContainedForm}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxAnnexId, CouncilTaxAnnexeSelfContainedId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxAnnexId, CouncilTaxAnnexeSelfContainedEnquiryId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxAnnex => council_tax_annex}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeSelfContainedEnquiry => annexe_self_contained_enquiry}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeNotSelfContained => annexe_not_self_contained}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeNoFacilities => annexe_no_facilities}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeSelfContained => annexe_self_contained}
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
@@ -46,6 +47,7 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
                                            annexeSelfContainedEnquiry: annexe_self_contained_enquiry,
                                            annexeNotSelfContained: annexe_not_self_contained,
                                            annexeNoFacilities: annexe_no_facilities,
+                                           annexeSelfContained: annexe_self_contained,
                                            cc: MessagesControllerComponents
                                          ) extends FrontendController(cc) with I18nSupport {
 
@@ -73,9 +75,9 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
       )
   }
 
-  def onSelfContainedPageLoad: Action[AnyContent] = (getData andThen requireData) {
+  def onSelfContainedEnquiryPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.annexeSelfContained match {
+      val preparedForm = request.userAnswers.annexeSelfContainedEnquiry match {
         case None => AnnexeSelfContainedForm()
         case Some(value) => AnnexeSelfContainedForm().fill(value)
       }
@@ -88,8 +90,8 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(annexeSelfContainedEnquiry(appConfig, formWithErrors))),
         value =>
-          dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeSelfContainedId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(CouncilTaxAnnexeSelfContainedId, NormalMode)(new UserAnswers(cacheMap))))
+          dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeSelfContainedEnquiryId.toString, value).map(cacheMap =>
+            Redirect(navigator.nextPage(CouncilTaxAnnexeSelfContainedEnquiryId, NormalMode)(new UserAnswers(cacheMap))))
       )
   }
 
@@ -101,5 +103,10 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
   def onFacilitiesPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(annexeNoFacilities(appConfig))
+  }
+
+  def onSelfContainedPageLoad: Action[AnyContent] = (getData andThen requireData) {
+    implicit request =>
+      Ok(annexeSelfContained(appConfig))
   }
 }
