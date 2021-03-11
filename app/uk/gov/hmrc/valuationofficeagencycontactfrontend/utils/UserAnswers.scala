@@ -59,6 +59,8 @@ class UserAnswers(val cacheMap: CacheMap) {
 
   def datePropertyChanged: Option[LocalDate] = cacheMap.getEntry[LocalDate](DatePropertyChangedId.toString)
 
+  def annexeEnquiry: Option[String] = cacheMap.getEntry[String](CouncilTaxAnnexId.toString)
+
   def contact(): Either[String, Contact] = {
 
     val optionalContactModel = for {
