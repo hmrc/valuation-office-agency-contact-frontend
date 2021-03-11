@@ -25,14 +25,12 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyWindWaterForm
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.AnnexeSelfContainedForm
 
 @this(mainTemplate: main_template, formWithCSFR: formWithCSRF, govukBackLink: GovukBackLink,
         govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary, govukFieldset: GovukFieldset)
@@ -47,7 +45,7 @@
 }
 
 @mainTemplate(
-    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("annexeSelfContained.title"))else messages("annexeSelfContained.title")),
+    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("annexeSelfContainedEnquiry.title"))else messages("annexeSelfContainedEnquiry.title")),
     beforeContentBlock = Option(beforeBlock)
 ) {
     @formWithCSFR(action = CouncilTaxAnnexeController.onSelfContainedSubmit(), 'autoComplete -> "off") {
@@ -55,20 +53,20 @@
             @govukErrorSummary(
                 ErrorSummary(
                     title = Text(messages("error.summary.title")),
-                    errorList = form.errors.map(e => ErrorLink(href = Some("#annexSelfContained-error"), content = HtmlContent(messages(e.messages, e.args :_*))))
+                    errorList = form.errors.map(e => ErrorLink(href = Some("#annexeSelfContainedEnquiry-error"), content = HtmlContent(messages(e.messages, e.args :_*))))
                 )
             )
         }
 
         @govukRadios(Radios(
             fieldset = Option(Fieldset(legend = Option(
-                Legend(content = Text(messages("annexeSelfContained.heading")), isPageHeading = true, classes = "govuk-fieldset__legend--l"
+                Legend(content = Text(messages("annexeSelfContainedEnquiry.heading")), isPageHeading = true, classes = "govuk-fieldset__legend--l"
                 )))),
-            idPrefix = Option("annexeSelfContained.form"),
+            idPrefix = Option("annexeSelfContainedEnquiry.form"),
             name = "value",
-            hint = Some(Hint(content = Text(messages("annexeSelfContained.hint")))),
+            hint = Some(Hint(content = Text(messages("annexeSelfContainedEnquiry.hint")))),
             formGroupClasses = "govuk-radios--inline",
-            items = PropertyWindWaterForm.options.map(i => RadioItem(
+            items = AnnexeSelfContainedForm.options.map(i => RadioItem(
                 content = Text(messages(i.messageKey)),
                 id = Option(i.id),
                 value = Option(i.value),

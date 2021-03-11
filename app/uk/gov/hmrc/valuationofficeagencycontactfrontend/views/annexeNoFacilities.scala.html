@@ -27,19 +27,19 @@
 
 @beforeBlock = {
 @govukBackLink(BackLink(content = Text(messages("site.back")),
-    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxAnnexeController.onSelfContainedEnquiryPageLoad().url))
+    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url))
 }
 
 @mainTemplate(
     beforeContentBlock = Option(beforeBlock),
-    pageTitle = Option(messages("annexeNotSelfContained.title"))) {
+    pageTitle = Option(messages("annexeNoFacilities.title"))) {
 
-    <h1 class="govuk-heading-l">@Messages("annexeNotSelfContained.heading")</h1>
+    <h1 class="govuk-heading-l">@Messages("annexeNoFacilities.heading")</h1>
 
-    <p class="govuk-body">@Html(Messages("annexeNotSelfContained.p1"))</p>
+    <p class="govuk-body">@Html(Messages("annexeNoFacilities.p1"))</p>
 
-    <h2 class="govuk-heading-m">@messages("annexeNotSelfContained.subheading")</h2>
+    <h2 class="govuk-heading-m">@messages("annexeNoFacilities.subheading")</h2>
 
-    <p class="govuk-body">@Html(Messages("annexeNotSelfContained.p2"))</p>
+    <p class="govuk-body">@Html(Messages("annexeNoFacilities.p2"))</p>
 
 }
