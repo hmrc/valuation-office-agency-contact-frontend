@@ -258,6 +258,13 @@ propertyWindWater.form.yes = Ydy
 propertyWindWater.form.no = Nag ydy
 error.propertyWindWater.required = Dewiswch ‘Ydy’ os yw eich eiddo wedi’i amddiffyn rhag gwynt a dŵr
 
+# -------- I have added or removed an annexe
+annexe.title = A yw’r rhandy wedi’i ychwanegu neu ei dileu? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+annexe.heading = A yw’r rhandy wedi’i ychwanegu neu ei dileu?
+annexe.added = Wedi’i ychwanegu
+annexe.removed = Wedi’i dileu
+error.annexe.required = Dewiswch a yw’r rhandy wedi’i ychwanegu neu ei dileu
+
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 councilTaxSubcategory.heading = Beth yw testun eich ymholiad ynghylch Treth Gyngor?
@@ -271,7 +278,7 @@ councilTaxSubcategory.council_tax_property_demolished = Mae fy eiddo wedi’i dd
 councilTaxSubcategory.council_tax_changes = Mae fy eiddo neu’r ardal leol wedi newid
 councilTaxSubcategory.council_tax_ndr_changes = Mae fy eiddo wedi newid o Dreth Gyngor i Ardrethi Busnes
 councilTaxSubcategory.council_tax_business_uses = Defnyddir fy eiddo ar gyfer busnes erbyn hyn
-councilTaxSubcategory.council_tax_annexe = Rhandy i’m heiddo
+councilTaxSubcategory.council_tax_annexe = Rwyf wedi ychwanegu neu dileu rhandy
 councilTaxSubcategory.council_tax_other = Unrhyw ymholiad arall ynghylch y Dreth Gyngor
 councilTaxSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
  
@@ -425,7 +432,7 @@ providingLettings.phone-number = 03000 502502
 
 datePropertyChanged.title = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 datePropertyChanged.heading = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol)
-datePropertyChanged.hint = Er enghraifft, 28 3 2021
+datePropertyChanged.hint = Er enghraifft, 27 2 2021
 datePropertyChanged.error.invalidDate = Rhowch ddyddiad go iawn
 datePropertyChanged.error.mandatory.dayMonth = Rhaid i’r dyddiad gynnwys dydd a mis
 datePropertyChanged.error.mandatory.dayYear = Rhaid i’r dyddiad gynnwys dydd a blwyddyn

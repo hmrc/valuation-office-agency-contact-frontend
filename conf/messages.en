@@ -258,6 +258,13 @@ propertyWindWater.form.yes = Yes
 propertyWindWater.form.no = No
 error.propertyWindWater.required = Select 'Yes' if the property is protected from wind and water
 
+# -------- I have added or removed an annexe
+annexe.title = Has the annexe been added or removed - Valuation Office Agency contact form - GOV.UK
+annexe.heading = Has the annexe been added or removed?
+annexe.added = Added
+annexe.removed = Removed
+error.annexe.required = Select if the annexe has been added or removed
+
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = What is your Council Tax enquiry about? - Valuation Office Agency contact form - GOV.UK
 councilTaxSubcategory.heading = What is your Council Tax enquiry about?
@@ -271,7 +278,7 @@ councilTaxSubcategory.council_tax_property_demolished = My property has been par
 councilTaxSubcategory.council_tax_changes = My property or the local area has changed
 councilTaxSubcategory.council_tax_ndr_changes = My property has changed from Council Tax to Business Rates
 councilTaxSubcategory.council_tax_business_uses = My property is now used for business
-councilTaxSubcategory.council_tax_annexe = An annexe at my property
+councilTaxSubcategory.council_tax_annexe = I have added or removed an annexe
 councilTaxSubcategory.council_tax_other = Any other Council Tax enquiry
 councilTaxSubcategory.checkYourAnswersLabel = Enquiry details
 
@@ -426,7 +433,7 @@ providingLettings.phone-number = 03000 502502
 
 datePropertyChanged.title = When did your property start to be in poor repair? - Valuation Office Agency contact form - GOV.UK
 datePropertyChanged.heading = When did your property start to be in poor repair? (optional)
-datePropertyChanged.hint = For example, 28 3 2021
+datePropertyChanged.hint = For example, 27 2 2021
 datePropertyChanged.error.invalidDate = Enter a real date
 datePropertyChanged.error.mandatory.dayMonth = Date must include a day and month
 datePropertyChanged.error.mandatory.dayYear = Date must include a day and year
