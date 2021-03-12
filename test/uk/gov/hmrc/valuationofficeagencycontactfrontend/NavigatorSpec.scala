@@ -307,6 +307,11 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(CouncilTaxAnnexeEnquiryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAnnexeController.onSelfContainedEnquiryPageLoad()
       }
 
+      "return a function that goes to the council tax is annexe removed page when an annexe enquiry 'removed' has been selected" in {
+        when (mockUserAnswers.annexeEnquiry) thenReturn Some("removed")
+        navigator.nextPage(CouncilTaxAnnexeEnquiryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAnnexeController.onRemovedPageLoad()
+      }
+
       "return an exception  when an annexe enquiry other has been selected" in {
         when (mockUserAnswers.annexeEnquiry) thenReturn Some("error")
         an [RuntimeException] should be thrownBy navigator.nextPage(CouncilTaxAnnexeEnquiryId, NormalMode)(mockUserAnswers)

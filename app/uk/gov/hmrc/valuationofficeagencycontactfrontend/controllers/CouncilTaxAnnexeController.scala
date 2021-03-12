@@ -35,6 +35,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeNotSel
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeNoFacilities => annexe_no_facilities}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeSelfContained => annexe_self_contained}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeCookingWashingEnquiry => annexe_cooking_washing_enquiry}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeRemoved => annexe_removed}
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
@@ -52,6 +53,7 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
                                            annexeNoFacilities: annexe_no_facilities,
                                            annexeSelfContained: annexe_self_contained,
                                            annexeCookingWashingEnquiry: annexe_cooking_washing_enquiry,
+                                           annexeRemoved: annexe_removed,
                                            cc: MessagesControllerComponents
                                          ) extends FrontendController(cc) with I18nSupport {
 
@@ -77,6 +79,11 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
             cacheMap <- dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeEnquiryId.toString, value)
           } yield Redirect(navigator.nextPage(CouncilTaxAnnexeEnquiryId, mode)(new UserAnswers(cacheMap)))
       )
+  }
+
+  def onRemovedPageLoad: Action[AnyContent] = (getData andThen requireData) {
+    implicit request =>
+      Ok(annexeRemoved(appConfig))
   }
 
   def onSelfContainedEnquiryPageLoad: Action[AnyContent] = (getData andThen requireData) {

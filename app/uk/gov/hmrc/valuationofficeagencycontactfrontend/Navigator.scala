@@ -177,7 +177,7 @@ class Navigator @Inject()() {
   private val councilTaxAnnexeRouting: UserAnswers => Call = answers => {
     answers.annexeEnquiry match {
       case Some("added") => routes.CouncilTaxAnnexeController.onSelfContainedEnquiryPageLoad()
-      case Some("remove") => ???
+      case Some("removed") => routes.CouncilTaxAnnexeController.onRemovedPageLoad()
       case _ =>
         Logger.warn(s"Navigation for annexe without selection of enquiry by controller ")
         throw new RuntimeException("Unknown exception for annexe routing")

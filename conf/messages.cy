@@ -301,6 +301,15 @@ annexeCookingWashing.form.yes = Oes
 annexeCookingWashing.form.no = Nac oes
 annexeCookingWashing.form.error = Dewiswch ‘Oes’ os oes gan yr rhandy gyfleusterau coginio ac ymolchi
 
+# -------- Tell us you have removed an annexe
+annexeRemoved.title = Dywedwch wrthym eich bod wedi dileu rhandy - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+annexeRemoved.heading = Dywedwch wrthym eich bod wedi dileu rhandy
+annexeRemoved.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council">Defnyddiwch y gwasanaeth Treth Gyngor</a> a heriwch eich band Treth Gyngor i ddweud wrthym eich bod wedi dileu rhandy.
+annexeRemoved.subheading = Cymorth arall ar GOV.UK
+annexeRemoved.url1 = <a class="govuk-link" target="_self" href="http://gov.uk/challenge-council-tax-band">Sut i herio’ch Band Treth Gyngor</a>
+annexeRemoved.url2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/council-tax/second-homes-and-empty-properties">Pryd y gall eich band Treth Gyngor newid</a>
+annexeRemoved.url3 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed">Sut mae eiddo’n cael eu prisio ar gyfer Treth Gyngor</a>
+
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 councilTaxSubcategory.heading = Beth yw testun eich ymholiad ynghylch Treth Gyngor?
