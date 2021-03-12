@@ -21,6 +21,7 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.charactercount.CharacterCount
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.panel.Panel
@@ -47,7 +48,7 @@
 
 @mainTemplate(
     pageTitle = Option(messages("confirmation.title"))) {
-
+    @if(form.hasErrors){<script type="text/javascript"> window.location='#error-summary-heading'</script>}
     <section tabindex="0">
     @govukPanel(Panel(title = Text(messages("confirmation.heading")), headingLevel = 1,
         content = HtmlContent(panelContent)
@@ -85,7 +86,9 @@
             @govukErrorSummary(
                 ErrorSummary(
                     title = Text(messages("error.summary.title")),
-                    errorList = form.errors.asHtmlErrorLinks,
+                    errorList = form.mapping.mappings.flatMap(x => form.error(x.key).map(e =>
+                        ErrorLink(href = Option("#satisfaction.verySatisfied"), content = HtmlContent(messages(e.messages, e.args)))
+                    )),
                     attributes = Map("id" -> "error-summary-heading")
                 )
             )
