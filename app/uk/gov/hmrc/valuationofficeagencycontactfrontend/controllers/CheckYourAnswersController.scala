@@ -93,9 +93,10 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.councilTaxSubcategory,
+          checkYourAnswersHelper.datePropertyChanged,
+          checkYourAnswersHelper.tellUsMore("tellUsMore.poorRepair.heading"),
           checkYourAnswersHelper.contactDetails,
-          checkYourAnswersHelper.propertyAddress,
-          checkYourAnswersHelper.tellUsMore("tellUsMore.poorRepair.heading")).flatten))
+          checkYourAnswersHelper.propertyAddress).flatten))
       case (_, Some("council_tax"), _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,

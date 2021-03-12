@@ -20,7 +20,10 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.CheckMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.ContactFormatter._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.DateFormatter.formattedLocalDate
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerRow
+
+import java.time.LocalDate
 
 class CheckYourAnswersHelper(userAnswers: UserAnswers) {
 
@@ -69,6 +72,10 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
 
   def contactDetails: Option[AnswerRow] = userAnswers.contactDetails map {
     _ => AnswerRow("contactDetails.heading", formattedContactDetails(userAnswers.contactDetails, "<br>"), false, routes.ContactDetailsController.onPageLoad(CheckMode).url)
+  }
+
+  def datePropertyChanged: Option[AnswerRow] = userAnswers.datePropertyChanged map {
+    date => AnswerRow("datePropertyChanged.heading", formattedLocalDate(date), false, routes.DatePropertyChangedController.onPageLoad().url)
   }
 
 }

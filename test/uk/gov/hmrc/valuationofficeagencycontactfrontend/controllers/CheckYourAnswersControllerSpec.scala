@@ -31,6 +31,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_answers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
 
+import java.time.LocalDate
+
 class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSugar with BeforeAndAfterEach {
 
   val mockUserAnswers = mock[UserAnswers]
@@ -81,12 +83,13 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("a"))
+      when(mockUserAnswers.datePropertyChanged) thenReturn Some(LocalDate.of(2021, 1, 1))
 
       val result = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
       result mustBe Some(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.councilTaxSubcategory,
-        checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress,
-        checkYourAnswersHelper.tellUsMore("tellUsMore.poorRepair.heading")).flatten))
+        checkYourAnswersHelper.datePropertyChanged, checkYourAnswersHelper.tellUsMore("tellUsMore.poorRepair.heading"),
+        checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress).flatten))
     }
 
     "The user answers section builder produces sections for existing enquiry" in {
