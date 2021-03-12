@@ -37,6 +37,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeNoFaci
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeSelfContained => annexe_self_contained}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeNotSelfContained => annexe_not_self_contained}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeCookingWashingEnquiry => annexe_cooking_washing_enquiry}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeRemoved => annexe_removed}
 
 import scala.concurrent.Future
 
@@ -49,6 +50,7 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
   def councilTaxAnnexeSelfContained = app.injector.instanceOf[annexe_self_contained]
   def annexeCookingWashingEnquiry = app.injector.instanceOf[annexe_cooking_washing_enquiry]
   def annexeNotSelfContained = app.injector.instanceOf[annexe_not_self_contained]
+  def annexeRemoved = app.injector.instanceOf[annexe_removed]
 
   val fakeDataCacheConnector = mock[DataCacheConnector]
 
@@ -57,7 +59,7 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new CouncilTaxAnnexeController(frontendAppConfig, messagesApi, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl(ec), councilTaxAnnexe, councilTaxAnnexeSelfContainedEnquiry, councilTaxAnnexeNotSelfContained,
-      councilTaxAnnexeNoFacilities, councilTaxAnnexeSelfContained, annexeCookingWashingEnquiry, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      councilTaxAnnexeNoFacilities, councilTaxAnnexeSelfContained, annexeCookingWashingEnquiry, annexeRemoved, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = AnnexeForm()) = councilTaxAnnexe(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
   def viewCookingWashingAsString(form: Form[String] = AnnexeCookingWashingForm()) = annexeCookingWashingEnquiry(frontendAppConfig, form)(fakeRequest, messages).toString
@@ -115,6 +117,13 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(onwardRoute.url)
+    }
+
+    "return OK and the correct view for a annex removed GET" in {
+      val result = controller().onRemovedPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe annexeRemoved(frontendAppConfig)(fakeRequest, messages).toString()
     }
 
     "redirect to the next page when valid data is submitted for annexe self contained" in {
