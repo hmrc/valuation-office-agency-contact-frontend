@@ -17,17 +17,16 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
 import play.api.data.Form
-import play.api.data.Forms._
+import play.api.data.Forms.{of, single}
 import play.api.data.format.Formatter
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
-object CouncilTaxSubcategoryForm extends FormErrorHelper {
+object AnnexeCookingWashingForm extends FormErrorHelper {
 
-  def CouncilTaxSubcategoryFormatter = new Formatter[String] {
+  def AnnexeCookingWashingFormatter = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
-      case None => produceError(key, "error.councilTaxSubcategory.required")
+      case None => produceError(key, "annexeCookingWashing.form.error")
       case _ => produceError(key, "error.unknown")
     }
 
@@ -35,20 +34,11 @@ object CouncilTaxSubcategoryForm extends FormErrorHelper {
   }
 
   def apply(): Form[String] =
-    Form(single("value" -> of(CouncilTaxSubcategoryFormatter)))
+    Form(single("value" -> of(AnnexeCookingWashingFormatter)))
 
   def options = Seq(
-    RadioOption("councilTaxSubcategory", CouncilTaxBandTooHighId.toString),
-    RadioOption("councilTaxSubcategory", CouncilTaxBillId.toString),
-    RadioOption("councilTaxSubcategory", CouncilTaxBandForNewId.toString),
-    RadioOption("councilTaxSubcategory", CouncilTaxPropertyEmptyId.toString),
-    RadioOption("councilTaxSubcategory", CouncilTaxPropertyPoorRepairId.toString),
-    RadioOption("councilTaxSubcategory", CouncilTaxPropertyDemolishedId.toString),
-    RadioOption("councilTaxSubcategory", "council_tax_changes"),
-    RadioOption("councilTaxSubcategory", "council_tax_ndr_changes"),
-    RadioOption("councilTaxSubcategory", "council_tax_business_uses"),
-    RadioOption("councilTaxSubcategory", CouncilTaxAnnexeEnquiryId.toString),
-    RadioOption("councilTaxSubcategory", "council_tax_other")
+    RadioOption("annexeCookingWashing.form", "yes"),
+    RadioOption("annexeCookingWashing.form", "no")
   )
 
   def optionIsValid(value: String) = options.exists(o => o.value == value)

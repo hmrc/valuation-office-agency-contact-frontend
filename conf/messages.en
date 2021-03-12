@@ -259,7 +259,7 @@ propertyWindWater.form.no = No
 error.propertyWindWater.required = Select 'Yes' if the property is protected from wind and water
 
 # -------- I have added or removed an annexe
-annexe.title = Has the annexe been added or removed - Valuation Office Agency contact form - GOV.UK
+annexe.title = Has the annexe been added or removed? - Valuation Office Agency contact form - GOV.UK
 annexe.heading = Has the annexe been added or removed?
 annexe.added = Added
 annexe.removed = Removed
@@ -293,6 +293,13 @@ annexeSelfContained.heading = Speak to your local council about your annexe
 annexeSelfContained.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council"> Contact your local council</a> to provide full details of the annexe, including all the rooms and how they are connected to the main property.
 annexeSelfContained.subheading = Other help on GOV.UK
 annexeSelfContained.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> How annexes affect Council Tax bands </a>
+
+# -------- Does the annexe have both cooking and washing facilities?
+annexeCookingWashing.title = Does the annexe have both cooking and washing facilities? - Valuation Office Agency contact form - GOV.UK
+annexeCookingWashing.heading = Does the annexe have both cooking and washing facilities?
+annexeCookingWashing.form.yes = Yes
+annexeCookingWashing.form.no = No
+annexeCookingWashing.form.error = Select ‘Yes’ if the annexe has both cooking and washing facilities
 
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = What is your Council Tax enquiry about? - Valuation Office Agency contact form - GOV.UK

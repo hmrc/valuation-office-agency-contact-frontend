@@ -304,7 +304,12 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return a function that goes to the council tax is annexe self contained page when an annexe enquiry 'added' has been selected" in {
         when (mockUserAnswers.annexeEnquiry) thenReturn Some("added")
-        navigator.nextPage(CouncilTaxAnnexId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAnnexeController.onSelfContainedEnquiryPageLoad()
+        navigator.nextPage(CouncilTaxAnnexeEnquiryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAnnexeController.onSelfContainedEnquiryPageLoad()
+      }
+
+      "return an exception  when an annexe enquiry other has been selected" in {
+        when (mockUserAnswers.annexeEnquiry) thenReturn Some("error")
+        an [RuntimeException] should be thrownBy navigator.nextPage(CouncilTaxAnnexeEnquiryId, NormalMode)(mockUserAnswers)
       }
 
       "return a function that goes to the council tax annexe is not self contained page when an enquiry 'no' has been selected" in {
@@ -312,10 +317,32 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(CouncilTaxAnnexeSelfContainedEnquiryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAnnexeController.onNotSelfContainedPageLoad()
       }
 
+      "return a function that goes to the council tax annexe have cooking washing enquiry page when an enquiry 'yes' has been selected" in {
+        when (mockUserAnswers.annexeSelfContainedEnquiry) thenReturn Some("yes")
+        navigator.nextPage(CouncilTaxAnnexeSelfContainedEnquiryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAnnexeController.onHaveCookingWashingPageLoad()
+      }
+
       "throw an exception when is annexe self contained selects an unexpected response" in {
         when (mockUserAnswers.annexeSelfContainedEnquiry) thenReturn Some("foo")
         intercept[Exception] {
           navigator.nextPage(CouncilTaxAnnexeSelfContainedEnquiryId, NormalMode)(mockUserAnswers)
+        }
+      }
+
+      "return a function that goes to Your self-contained annexe will not affect your Council Tax band page when an enquiry 'no' has been selected" in {
+        when (mockUserAnswers.annexeHaveCookingWashing) thenReturn Some("no")
+        navigator.nextPage(CouncilTaxAnnexeHaveCookingId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAnnexeController.onFacilitiesPageLoad()
+      }
+
+      "return a function that goes to Speak to your local council about your annexe page when an enquiry 'yes' has been selected" in {
+        when (mockUserAnswers.annexeHaveCookingWashing) thenReturn Some("yes")
+        navigator.nextPage(CouncilTaxAnnexeHaveCookingId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAnnexeController.onSelfContainedPageLoad()
+      }
+
+      "throw an exception when is annexe have cooking washing selects an unexpected response" in {
+        when (mockUserAnswers.annexeHaveCookingWashing) thenReturn Some("error")
+        intercept[Exception] {
+          navigator.nextPage(CouncilTaxAnnexeHaveCookingId, NormalMode)(mockUserAnswers)
         }
       }
 

@@ -59,9 +59,11 @@ class UserAnswers(val cacheMap: CacheMap) {
 
   def datePropertyChanged: Option[LocalDate] = cacheMap.getEntry[LocalDate](DatePropertyChangedId.toString)
 
-  def annexeEnquiry: Option[String] = cacheMap.getEntry[String](CouncilTaxAnnexId.toString)
+  def annexeEnquiry: Option[String] = cacheMap.getEntry[String](CouncilTaxAnnexeEnquiryId.toString)
 
   def annexeSelfContainedEnquiry: Option[String] = cacheMap.getEntry[String](CouncilTaxAnnexeSelfContainedEnquiryId.toString)
+
+  def annexeHaveCookingWashing: Option[String] = cacheMap.getEntry[String](CouncilTaxAnnexeHaveCookingId.toString)
 
   def contact(): Either[String, Contact] = {
 

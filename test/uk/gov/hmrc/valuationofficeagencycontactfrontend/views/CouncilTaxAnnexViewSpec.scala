@@ -20,17 +20,17 @@ import play.api.data.Form
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{AnnexeForm, EnquiryCategoryForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxAnnex => council_tax_annex}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxAnnexe => council_tax_annexe}
 
 class CouncilTaxAnnexViewSpec extends ViewBehaviours {
 
-  def councilTaxAnnex = app.injector.instanceOf[council_tax_annex]
+  def councilTaxAnnexe = app.injector.instanceOf[council_tax_annexe]
 
   val messageKeyPrefix = "annexe"
 
-  def createView = () => councilTaxAnnex(frontendAppConfig, AnnexeForm(), NormalMode)(fakeRequest, messages)
+  def createView = () => councilTaxAnnexe(frontendAppConfig, AnnexeForm(), NormalMode)(fakeRequest, messages)
 
-  def createViewUsingForm = (form: Form[String]) => councilTaxAnnex(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+  def createViewUsingForm = (form: Form[String]) => councilTaxAnnexe(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
   "CouncilTaxAnnex view" must {
     behave like normalPage(createView, messageKeyPrefix)

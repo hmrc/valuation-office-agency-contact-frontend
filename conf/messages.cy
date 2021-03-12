@@ -294,6 +294,13 @@ annexeSelfContained.p1 = <a class="govuk-link" target="_self" href="https://www.
 annexeSelfContained.subheading = Cymorth arall ar GOV.UK
 annexeSelfContained.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> Sut mae rhandai yn effeithio ar fandiau Treth Gyngor </a>
 
+# -------- Does the annexe have both cooking and washing facilities?
+annexeCookingWashing.title = A oes gan yr atodiad gyfleusterau coginio ac ymolchi? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+annexeCookingWashing.heading = A oes gan yr atodiad gyfleusterau coginio ac ymolchi?
+annexeCookingWashing.form.yes = Oes
+annexeCookingWashing.form.no = Nac oes
+annexeCookingWashing.form.error = Dewiswch ‘Oes’ os oes gan yr rhandy gyfleusterau coginio ac ymolchi
+
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 councilTaxSubcategory.heading = Beth yw testun eich ymholiad ynghylch Treth Gyngor?
