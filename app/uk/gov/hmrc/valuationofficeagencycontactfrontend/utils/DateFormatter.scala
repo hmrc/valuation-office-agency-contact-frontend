@@ -24,4 +24,9 @@ object DateFormatter{
         val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
         date.format(formatter)
     }
+
+    def formattedLocalDate(date: LocalDate): String = {
+        val formatter = DateTimeFormatter.ofPattern("d MMMM yyyy")
+        date.format(formatter)
+    }
 }
