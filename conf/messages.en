@@ -259,7 +259,7 @@ propertyWindWater.form.no = No
 error.propertyWindWater.required = Select 'Yes' if the property is protected from wind and water
 
 # -------- I have added or removed an annexe
-annexe.title = Has the annexe been added or removed - Valuation Office Agency contact form - GOV.UK
+annexe.title = Has the annexe been added or removed? - Valuation Office Agency contact form - GOV.UK
 annexe.heading = Has the annexe been added or removed?
 annexe.added = Added
 annexe.removed = Removed
