@@ -70,7 +70,7 @@
                 content = Text(messages(i.messageKey)),
                 id = Option(i.id),
                 value = Option(i.value),
-                hint = Some(Hint(content = Text(messages(s"councilTaxBusinessEnquiry.hint.${i.value}")))),
+                hint = i.hintKey.map(hint => Hint(content = Text(messages(hint)))),
                 checked = form("value").value.map(_ == i.value).getOrElse(false)
             )
             ),

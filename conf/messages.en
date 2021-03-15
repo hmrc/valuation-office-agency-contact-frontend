@@ -318,13 +318,10 @@ annexeRemoved.url3 = <a class="govuk-link" target="_self" href="https://www.gov.
 # -------- Business Enquiry
 councilTaxBusinessEnquiry.title = How much of your property is used for business? - Valuation Office Agency contact form - GOV.UK
 councilTaxBusinessEnquiry.heading = How much of your property is used for business?
-councilTaxBusinessEnquiry.form.large_property = A large part of the property is used for business
-councilTaxBusinessEnquiry.form.small_property = A small part of the property is used for business
 councilTaxBusinessEnquiry.form.all_property = All of the property is used for business
+councilTaxBusinessEnquiry.form.large_property = A large part of the property is used for business
 councilTaxBusinessEnquiry.hint.large_property = For example, part of the property is used as a shop
-councilTaxBusinessEnquiry.hint.small_property = For example one room used as an office, garden studio or selling goods by post
-# (hint.all_property) has to be empty
-councilTaxBusinessEnquiry.hint.all_property =
+councilTaxBusinessEnquiry.form.small_property = A small part of the property is used for business
 councilTaxBusinessEnquiry.form.error = Select how much of your property is used for business
 # ---- Property Used For business end ----
 

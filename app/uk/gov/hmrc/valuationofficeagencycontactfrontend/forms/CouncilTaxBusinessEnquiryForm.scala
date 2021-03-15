@@ -37,7 +37,7 @@ object CouncilTaxBusinessEnquiryForm extends FormErrorHelper {
 
   def options = Seq(
     RadioOption("councilTaxBusinessEnquiry.form", "all_property"),
-    RadioOption("councilTaxBusinessEnquiry.form", "large_property"),
+    RadioOption("councilTaxBusinessEnquiry.form", "large_property").copy(hintKey = Some("councilTaxBusinessEnquiry.hint.large_property")),
     RadioOption("councilTaxBusinessEnquiry.form", "small_property")
   )
 

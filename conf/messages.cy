@@ -318,13 +318,10 @@ annexeRemoved.url3 = <a class="govuk-link" target="_self" href="https://www.gov.
 # -------- Business Enquiry
 councilTaxBusinessEnquiry.title = Faint o’ch eiddo sy’n cael ei ddefnyddio ar gyfer busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 councilTaxBusinessEnquiry.heading = Faint o’ch eiddo sy’n cael ei ddefnyddio ar gyfer busnes?
-councilTaxBusinessEnquiry.form.large_property = Defnyddir rhan fawr o’r eiddo ar gyfer busnes
-councilTaxBusinessEnquiry.form.small_property = Defnyddir rhan fach o’r eiddo ar gyfer busnes
 councilTaxBusinessEnquiry.form.all_property = Defnyddir yr holl eiddo ar gyfer busnes
+councilTaxBusinessEnquiry.form.large_property = Defnyddir rhan fawr o’r eiddo ar gyfer busnes
 councilTaxBusinessEnquiry.hint.large_property = Er enghraifft, defnyddir rhan o’r eiddo fel siop
-councilTaxBusinessEnquiry.hint.small_property = Er enghraifft, defnyddir un ystafell fel swyddfa, stiwdio ardd neu ar gyfer gwerthu nwyddau trwy’r post
-# (hint.all_property) has to be empty
-councilTaxBusinessEnquiry.hint.all_property =
+councilTaxBusinessEnquiry.form.small_property = Defnyddir rhan fach o’r eiddo ar gyfer busnes
 councilTaxBusinessEnquiry.form.error = Dewiswch faint o’ch eiddo sy’n cael ei ddefnyddio ar gyfer busnes
 
 # ---- Property Used For business end ----
