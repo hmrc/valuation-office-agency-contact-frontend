@@ -258,6 +258,8 @@ propertyWindWater.form.yes = Yes
 propertyWindWater.form.no = No
 error.propertyWindWater.required = Select 'Yes' if the property is protected from wind and water
 
+# ---- Annexe Journey Messages start ----
+
 # -------- I have added or removed an annexe
 annexe.title = Has the annexe been added or removed? - Valuation Office Agency contact form - GOV.UK
 annexe.heading = Has the annexe been added or removed?
@@ -309,6 +311,22 @@ annexeRemoved.subheading = Other help on GOV.UK
 annexeRemoved.url1 = <a class="govuk-link" target="_self" href="http://gov.uk/challenge-council-tax-band">How to challenge your Council Tax band</a>
 annexeRemoved.url2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/council-tax/second-homes-and-empty-properties">When your Council Tax band may change</a>
 annexeRemoved.url3 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed">How properties are valued for Council Tax</a>
+# ---- Annexe Journey Ends ----
+
+# ---- Property Used For business Journey Messages start ----
+
+# -------- Business Enquiry
+councilTaxBusinessEnquiry.title = How much of your property is used for business? - Valuation Office Agency contact form - GOV.UK
+councilTaxBusinessEnquiry.heading = How much of your property is used for business?
+councilTaxBusinessEnquiry.form.large_property = A large part of the property is used for business
+councilTaxBusinessEnquiry.form.small_property = A small part of the property is used for business
+councilTaxBusinessEnquiry.form.all_property = All of the property is used for business
+councilTaxBusinessEnquiry.hint.large_property = For example, part of the property is used as a shop
+councilTaxBusinessEnquiry.hint.small_property = For example one room used as an office, garden studio or selling goods by post
+# (hint.all_property) has to be empty
+councilTaxBusinessEnquiry.hint.all_property =
+councilTaxBusinessEnquiry.form.error = Select how much of your property is used for business
+# ---- Property Used For business end ----
 
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = What is your Council Tax enquiry about? - Valuation Office Agency contact form - GOV.UK
@@ -322,7 +340,7 @@ councilTaxSubcategory.council_tax_property_poor_repair = My property is in poor 
 councilTaxSubcategory.council_tax_property_demolished = My property has been partially or fully demolished
 councilTaxSubcategory.council_tax_changes = My property or the local area has changed
 councilTaxSubcategory.council_tax_ndr_changes = My property has changed from Council Tax to Business Rates
-councilTaxSubcategory.council_tax_business_uses = My property is now used for business
+councilTaxSubcategory.council_tax_business_uses = My property is used for business
 councilTaxSubcategory.council_tax_annexe = I have added or removed an annexe
 councilTaxSubcategory.council_tax_other = Any other Council Tax enquiry
 councilTaxSubcategory.checkYourAnswersLabel = Enquiry details

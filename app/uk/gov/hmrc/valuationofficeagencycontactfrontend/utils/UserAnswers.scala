@@ -65,6 +65,8 @@ class UserAnswers(val cacheMap: CacheMap) {
 
   def annexeHaveCookingWashing: Option[String] = cacheMap.getEntry[String](CouncilTaxAnnexeHaveCookingId.toString)
 
+  def councilTaxBusinessEnquiry: Option[String] = cacheMap.getEntry[String](CouncilTaxBusinessEnquiryId.toString)
+
   def contact(): Either[String, Contact] = {
 
     val optionalContactModel = for {

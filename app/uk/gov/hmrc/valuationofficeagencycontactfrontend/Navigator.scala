@@ -149,6 +149,7 @@ class Navigator @Inject()() {
       case Some("council_tax_property_poor_repair") => routes.PropertyWindWaterController.onEnquiryLoad()
       case Some("council_tax_property_demolished") => routes.PropertyDemolishedController.onPageLoad()
       case Some("council_tax_annexe") => routes.CouncilTaxAnnexeController.onPageLoad()
+      case Some("council_tax_business_uses") => routes.CouncilTaxBusinessController.onPageLoad()
       case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case None => {
         Logger.warn(s"Navigation for Council Tax page reached without selection of enquiry by controller ")
@@ -204,6 +205,17 @@ class Navigator @Inject()() {
     }
   }
 
+  private val councilTaxBusinessEnquiryRouting: UserAnswers => Call = answers => {
+    answers.councilTaxBusinessEnquiry match {
+      case Some("all_property") => ???
+      case Some("large_property") => ???
+      case Some("small_property") => ???
+      case _ =>
+        Logger.warn(s"Navigation for is council tax business enquiry reached without selection of enquiry by controller")
+        throw new RuntimeException("Unknown exception for is council tax business enquiry routing")
+    }
+  }
+
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     ContactReasonId -> contactReasonRouting,
     EnquiryDateId -> enquiryDateRouting,
@@ -223,7 +235,8 @@ class Navigator @Inject()() {
     DatePropertyChangedId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
     CouncilTaxAnnexeSelfContainedEnquiryId -> annexeSelfContainedRouting,
     CouncilTaxAnnexeEnquiryId -> councilTaxAnnexeRouting,
-    CouncilTaxAnnexeHaveCookingId -> annexeCookingWashingRouting
+    CouncilTaxAnnexeHaveCookingId -> annexeCookingWashingRouting,
+    CouncilTaxBusinessEnquiryId -> councilTaxBusinessEnquiryRouting,
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()
