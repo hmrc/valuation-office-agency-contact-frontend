@@ -427,6 +427,12 @@ tellUsMore.poorRepair.heading = Tell us more about the condition of the property
 tellUsMore.poorRepair.hint = For example, if the property has a roof or windows.
 tellUsMore.poorRepair.inset = You will need to supply evidence when we reply to you, such as photos or plans of the property.
 
+# --- Tell Us More CT Business uses journey
+tellUsMore.business.title = Tell us more about your property - Valuation Office Agency contact form - GOV.UK
+tellUsMore.business.heading = Tell us more about your property
+tellUsMore.business.hint = Provide details such as the number of rooms used for business and what they are used for.
+tellUsMore.business.inset = You will need to supply evidence when we reply to you, such as photos or plans of the property.
+
 anythingElse.title = Is there anything else you would like to tell us about? - Valuation Office Agency contact form - GOV.UK
 anythingElse.heading = Is there anything else you would like to tell us about? (optional)
 anythingElse.checkYourAnswersLabel = Is there anything else you would like to tell us about?
