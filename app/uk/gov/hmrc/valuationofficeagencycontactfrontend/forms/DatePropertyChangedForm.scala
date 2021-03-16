@@ -17,14 +17,15 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
 import play.api.data.Form
+import play.api.data.Forms.{of, single}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.mappings.Mappings
 
 import java.time.LocalDate
 import javax.inject.Inject
 
-class DatePropertyChangedForm @Inject() extends Mappings {
+object DatePropertyChangedForm extends Mappings {
 
   private val key = "datePropertyChanged"
 
-  def apply(): Form[Option[LocalDate]] = Form(key -> localDate(key))
+  def apply(): Form[Option[LocalDate]] = Form(single(key -> localDate(key)))
 }

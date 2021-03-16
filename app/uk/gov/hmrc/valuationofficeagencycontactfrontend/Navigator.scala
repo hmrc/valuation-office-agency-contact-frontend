@@ -207,8 +207,8 @@ class Navigator @Inject()() {
 
   private val councilTaxBusinessEnquiryRouting: UserAnswers => Call = answers => {
     answers.councilTaxBusinessEnquiry match {
-      case Some("all_property") => ???
-      case Some("large_property") => ???
+      case Some("all_property") => routes.CouncilTaxBusinessController.onDateChangedPageLoad()
+      case Some("large_property") => routes.CouncilTaxBusinessController.onDateChangedPageLoad()
       case Some("small_property") => routes.CouncilTaxBusinessController.onSmallPartUsedPageLoad()
       case _ =>
         Logger.warn(s"Navigation for is council tax business enquiry reached without selection of enquiry by controller")

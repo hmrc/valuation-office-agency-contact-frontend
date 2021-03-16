@@ -16,28 +16,28 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
-import play.api.data.Form
+import play.api.data.{Form, FormError}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.DatePropertyChangedForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{datePropertyChanged => date_property_changed}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{datePropertyBusinessChanged => date_property_bus_changed}
 
 import java.time.LocalDate
 
-class DatePropertyChangedViewSpec extends ViewBehaviours {
+class DatePropertyBusinessChangedViewSpec extends ViewBehaviours {
 
-  def datePropertyChanged = app.injector.instanceOf[date_property_changed]
+  def datePropertyBusinessChanged = app.injector.instanceOf[date_property_bus_changed]
 
-  val messageKeyPrefix = "datePropertyChanged"
+  val messageKeyPrefix = "datePropertyBusChanged"
 
-  val backUrl = routes.PropertyWindWaterController.onPageLoad().url
+  val backUrl = routes.CouncilTaxBusinessController.onPageLoad().url
 
   def dateForm= DatePropertyChangedForm()
 
-  def createView = () => datePropertyChanged(frontendAppConfig, dateForm, NormalMode)(fakeRequest, messages)
+  def createView = () => datePropertyBusinessChanged(frontendAppConfig, dateForm, NormalMode)(fakeRequest, messages)
 
-  def createViewUsingForm = (form: Form[Option[LocalDate]]) => datePropertyChanged(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+  def createViewUsingForm = (form: Form[Option[LocalDate]]) => datePropertyBusinessChanged(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
   "DatePropertyChanged view" must {
     behave like normalPage(createView, messageKeyPrefix)

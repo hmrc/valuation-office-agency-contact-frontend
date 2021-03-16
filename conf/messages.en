@@ -335,6 +335,10 @@ propertySmallPartUsed.p2 = Working at home
 propertySmallPartUsed.p3.url = https://www.gov.uk/run-business-from-home
 propertySmallPartUsed.p3 = Running a business from home
 
+# -------- When did you start using your property for business
+datePropertyBusChanged.title = When did you start using your property for business? - Valuation Office Agency contact form - GOV.UK
+datePropertyBusChanged.heading = When did you start using your property for business? (optional)
+
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = What is your Council Tax enquiry about? - Valuation Office Agency contact form - GOV.UK
 councilTaxSubcategory.heading = What is your Council Tax enquiry about?

@@ -40,18 +40,15 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
                                               getData: DataRetrievalAction,
                                               requireData: DataRequiredAction,
                                               datePropertyChanged: datePropertyChanged,
-                                              form: DatePropertyChangedForm,
                                               cc: MessagesControllerComponents
                                              ) extends FrontendController(cc) with I18nSupport {
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  private def dateForm: Form[Option[LocalDate]] = form()
-
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) { implicit request =>
     val preparedForm = request.userAnswers.datePropertyChanged match {
-      case None => dateForm
-      case Some(value) => dateForm.fill(Some(value))
+      case None => DatePropertyChangedForm()
+      case Some(value) => DatePropertyChangedForm().fill(Some(value))
     }
 
     Ok(datePropertyChanged(appConfig, preparedForm, mode))
@@ -59,7 +56,7 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
 
   def onSubmit(mode: Mode) = getData.async {
     implicit request =>
-      dateForm.bindFromRequest().fold(
+      DatePropertyChangedForm().bindFromRequest().fold(
         (formWithErrors: Form[Option[LocalDate]]) =>
           Future.successful(BadRequest(datePropertyChanged(appConfig, formWithErrors, mode))),
         value =>

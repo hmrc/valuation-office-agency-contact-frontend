@@ -74,7 +74,7 @@ private[mappings] class LocalDateFormatter(key: String) extends Formatter[Option
         ).toEither.left.map(_ =>
           List(FormError(key, invalidDate),FormError(key, dayMsg),FormError(key, monthMsg),FormError(key, yearMsg))
         ).right.flatMap { date =>
-          if(date.isBefore(earliestEffectiveDate) || date.isAfter(LocalDate.now())) {
+          if(date.isBefore(earliestEffectiveDate)) {
             Left(List(FormError(key, yearRange),FormError(key, dayMsg),FormError(key, monthMsg),FormError(key, yearMsg)))
           }else {
             Right(Some(date))
@@ -115,7 +115,7 @@ private[mappings] class LocalDateFormatter(key: String) extends Formatter[Option
   def validateYear(key: String, year: String): Either[Seq[FormError], Int] = {
     if(testRegex.matcher(year).matches()) {
       val intYear = year.toInt
-      if(intYear < 1900 || intYear > LocalDate.now().getYear() ) {
+      if(intYear < 1900) {
         Left(List(FormError(key, yearRange),FormError(key, yearMsg)))
       }else {
         Right(intYear)

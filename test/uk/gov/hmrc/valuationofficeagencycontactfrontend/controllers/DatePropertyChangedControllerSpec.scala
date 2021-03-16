@@ -37,13 +37,12 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase {
 
   def route = routes.DatePropertyChangedController.onPageLoad()
 
-  def dateForm: Form[Option[LocalDate]] = new DatePropertyChangedForm().apply()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new DatePropertyChangedController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = route),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), datePropertyChanged, new DatePropertyChangedForm, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      dataRetrievalAction, new DataRequiredActionImpl(ec), datePropertyChanged, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
-  def viewAsString(form: Form[Option[LocalDate]] = dateForm) = datePropertyChanged(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()) = datePropertyChanged(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
   "DatePropertyChangedController Controller" must {
 
@@ -60,7 +59,7 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase {
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsString(dateForm.fill(Option(LocalDate.of(2021,1,1))))
+      contentAsString(result) mustBe viewAsString(DatePropertyChangedForm().fill(Option(LocalDate.of(2021,1,1))))
     }
 
     "redirect to the next page when valid data is submitted" in {
