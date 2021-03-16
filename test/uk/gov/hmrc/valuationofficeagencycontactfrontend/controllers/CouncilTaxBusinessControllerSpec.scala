@@ -43,7 +43,7 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
   def councilTaxBusinessEnquiry = app.injector.instanceOf[council_tax_business_enquiry]
   def propertySmallPartUsed = app.injector.instanceOf[small_part_used]
 
-  def onwardRoute = routes.CouncilTaxBusinessController.onPageLoad()
+  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   when(fakeDataCacheConnector.save(any, any, any)(any))
     .thenReturn(Future.successful(CacheMap("council_tax_business_uses", Map("council_tax_business_uses" -> JsString("bar")))))
