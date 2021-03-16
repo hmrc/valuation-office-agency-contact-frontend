@@ -209,7 +209,7 @@ class Navigator @Inject()() {
     answers.councilTaxBusinessEnquiry match {
       case Some("all_property") => ???
       case Some("large_property") => ???
-      case Some("small_property") => ???
+      case Some("small_property") => routes.CouncilTaxBusinessController.onSmallPartUsedPageLoad()
       case _ =>
         Logger.warn(s"Navigation for is council tax business enquiry reached without selection of enquiry by controller")
         throw new RuntimeException("Unknown exception for is council tax business enquiry routing")
@@ -236,7 +236,7 @@ class Navigator @Inject()() {
     CouncilTaxAnnexeSelfContainedEnquiryId -> annexeSelfContainedRouting,
     CouncilTaxAnnexeEnquiryId -> councilTaxAnnexeRouting,
     CouncilTaxAnnexeHaveCookingId -> annexeCookingWashingRouting,
-    CouncilTaxBusinessEnquiryId -> councilTaxBusinessEnquiryRouting,
+    CouncilTaxBusinessEnquiryId -> councilTaxBusinessEnquiryRouting
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()

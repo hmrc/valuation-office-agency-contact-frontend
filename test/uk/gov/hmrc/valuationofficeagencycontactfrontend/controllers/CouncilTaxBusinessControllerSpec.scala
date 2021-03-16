@@ -32,6 +32,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CouncilTaxBu
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBusinessEnquiry => council_tax_business_enquiry}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertySmallPartUsed => small_part_used}
 
 import scala.concurrent.Future
 
@@ -40,15 +41,17 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
   val fakeDataCacheConnector = mock[DataCacheConnector]
 
   def councilTaxBusinessEnquiry = app.injector.instanceOf[council_tax_business_enquiry]
+  def propertySmallPartUsed = app.injector.instanceOf[small_part_used]
 
-  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+  def onwardRoute = routes.CouncilTaxBusinessController.onPageLoad()
 
   when(fakeDataCacheConnector.save(any, any, any)(any))
     .thenReturn(Future.successful(CacheMap("council_tax_business_uses", Map("council_tax_business_uses" -> JsString("bar")))))
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) = {
     new CouncilTaxBusinessController(frontendAppConfig, messagesApi, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), councilTaxBusinessEnquiry, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      dataRetrievalAction, new DataRequiredActionImpl(ec), councilTaxBusinessEnquiry, propertySmallPartUsed,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents)
   }
 
   def viewAsString(form: Form[String] = CouncilTaxBusinessEnquiryForm()) = councilTaxBusinessEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
@@ -98,6 +101,13 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad().url)
+    }
+
+    "return OK and the small part of the property is used for business page for GET" in {
+      val result = controller().onSmallPartUsedPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe propertySmallPartUsed(frontendAppConfig)(fakeRequest, messages).toString
     }
   }
 

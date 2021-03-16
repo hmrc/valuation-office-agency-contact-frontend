@@ -326,6 +326,16 @@ councilTaxBusinessEnquiry.form.error = Dewiswch faint o’ch eiddo sy’n cael e
 
 # ---- Property Used For business end ----
 
+# -------- Your Council Tax will not be affected
+propertySmallPartUsed.title = Ni fydd eich Treth Gyngor yn cael ei heffeithio - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+propertySmallPartUsed.heading = Ni fydd eich Treth Gyngor yn cael ei heffeithio
+propertySmallPartUsed.p1 = Os ydych chi’n defnyddio ystafell fel swyddfa neu ar gyfer gwerthu nwyddau trwy’r post, ni fydd hyn yn effeithio ar eich band Treth Gyngor. Ni fydd yn rhaid i chi dalu ardrethi busnes.
+propertySmallPartUsed.subheading = Cymorth arall ar GOV.UK
+propertySmallPartUsed.p2.url = https://www.gov.uk/introduction-to-business-rates/working-at-home
+propertySmallPartUsed.p2 = Gweithio gartref
+propertySmallPartUsed.p3.url = https://www.gov.uk/run-business-from-home
+propertySmallPartUsed.p3 = Rhedeg busnes o gartref
+
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 councilTaxSubcategory.heading = Beth yw testun eich ymholiad ynghylch Treth Gyngor?

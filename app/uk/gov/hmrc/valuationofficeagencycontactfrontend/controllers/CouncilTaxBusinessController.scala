@@ -28,19 +28,21 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CouncilTaxBu
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBusinessEnquiry => council_tax_business_enquiry}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertySmallPartUsed => small_part_used}
 
 import javax.inject.Inject
 import scala.concurrent.Future
 
-class CouncilTaxBusinessController @Inject() (appConfig: FrontendAppConfig,
-                                              override val messagesApi: MessagesApi,
-                                              dataCacheConnector: DataCacheConnector,
-                                              navigator: Navigator,
-                                              getData: DataRetrievalAction,
-                                              requireData: DataRequiredAction,
-                                              councilTaxBusinessEnquiry: council_tax_business_enquiry,
-                                              cc: MessagesControllerComponents
-                                             ) extends FrontendController(cc) with I18nSupport {
+class CouncilTaxBusinessController @Inject()(appConfig: FrontendAppConfig,
+                                             override val messagesApi: MessagesApi,
+                                             dataCacheConnector: DataCacheConnector,
+                                             navigator: Navigator,
+                                             getData: DataRetrievalAction,
+                                             requireData: DataRequiredAction,
+                                             councilTaxBusinessEnquiry: council_tax_business_enquiry,
+                                             propertySmallPartUsed: small_part_used,
+                                             cc: MessagesControllerComponents
+                                            ) extends FrontendController(cc) with I18nSupport {
 
   implicit val ec = cc.executionContext
 
@@ -66,4 +68,8 @@ class CouncilTaxBusinessController @Inject() (appConfig: FrontendAppConfig,
       )
   }
 
+  def onSmallPartUsedPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+    implicit request =>
+      Ok(propertySmallPartUsed(appConfig))
+  }
 }
