@@ -427,6 +427,12 @@ tellUsMore.poorRepair.heading = Dywedwch fwy wrthym am gyflwr eich eiddo
 tellUsMore.poorRepair.hint = Er enghraifft, os oes gan yr eiddo do neu ffenestri.
 tellUsMore.poorRepair.inset = Bydd angen i chi ddarparu tystiolaeth pan fyddwn yn ymateb i chi, megis lluniau neu gynlluniau o’r eiddo.
 
+# --- Tell Us More CT Business uses journey
+tellUsMore.business.title = Dywedwch fwy wrthym am eich eiddo- Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+tellUsMore.business.heading = Dywedwch fwy wrthym am eich eiddo
+tellUsMore.business.hint = Rhowch fanylion fel nifer yr ystafelloedd a ddefnyddir ar gyfer busnes a’r hyn y maent yn cael ei ddefnyddio ar eu cyfer.
+tellUsMore.business.inset = Bydd angen i chi ddarparu tystiolaeth pan fyddwn yn ymateb i chi, megis lluniau neu gynlluniau o’r eiddo.
+
 # --- Confirmation for new and existing enquiries
 confirmation.title = Ymchwiliad wedi’i gyflwyno - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 confirmation.heading = Ymchwiliad wedi’i gyflwyno

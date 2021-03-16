@@ -42,6 +42,7 @@ class Navigator @Inject()() {
   private val propertyAddressRouting: UserAnswers => Call = answers => {
     (answers.contactReason, answers.councilTaxSubcategory) match {
       case (Some("new_enquiry"), Some("council_tax_property_poor_repair")) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_business_uses")) => routes.CheckYourAnswersController.onPageLoad()
       case (Some("new_enquiry"), _) => routes.TellUsMoreController.onPageLoad(NormalMode)
       case (Some("more_details"), _) => routes.WhatElseController.onPageLoad()
       case (Some("update_existing"), _) => routes.AnythingElseTellUsController.onPageLoad()
@@ -171,6 +172,7 @@ class Navigator @Inject()() {
   private val tellUsMoreRouting: UserAnswers => Call = answers => {
     answers.councilTaxSubcategory match {
       case Some("council_tax_property_poor_repair") => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case Some("council_tax_business_uses") => routes.ContactDetailsController.onPageLoad(NormalMode)
       case _ => routes.CheckYourAnswersController.onPageLoad()
     }
   }

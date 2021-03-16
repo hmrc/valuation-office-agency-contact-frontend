@@ -168,6 +168,18 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
       }
 
+      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and council tax subcategory is council_tax_business_uses" in {
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
+        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+        when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_business_uses")
+        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
+      }
+
+      "return a function that goes to the 'contact details' page when the council tax subcategory is council_tax_business_uses" in {
+        when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_business_uses")
+        navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
+      }
+
       "return a function that goes to the valuation advice page when an enquiry category for valuation and property advice has been selected" in {
         when (mockUserAnswers.enquiryCategory) thenReturn Some("valuation_for_public_body")
         navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.ValuationAdviceController.onPageLoad()
