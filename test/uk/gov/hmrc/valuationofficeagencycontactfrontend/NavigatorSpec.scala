@@ -410,6 +410,16 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         when (mockUserAnswers.enquiryCategory) thenReturn None
         an [RuntimeException] should be thrownBy navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers)
       }
+
+      "return function that goes on a small part of the property used for business page when councilTaxBusinessEnquiry is small_property" in {
+        when (mockUserAnswers.councilTaxBusinessEnquiry) thenReturn Some("small_property")
+        navigator.nextPage(CouncilTaxBusinessEnquiryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxBusinessController.onSmallPartUsedPageLoad()
+      }
+
+      "return a exception when councilTaxBusinessEnquiry returns None" in {
+        when (mockUserAnswers.councilTaxBusinessEnquiry) thenReturn None
+        an [RuntimeException] should be thrownBy navigator.nextPage(CouncilTaxBusinessEnquiryId, NormalMode)(mockUserAnswers)
+      }
     }
   }
 }

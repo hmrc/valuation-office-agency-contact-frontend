@@ -325,6 +325,16 @@ councilTaxBusinessEnquiry.form.small_property = A small part of the property is 
 councilTaxBusinessEnquiry.form.error = Select how much of your property is used for business
 # ---- Property Used For business end ----
 
+# -------- Your Council Tax will not be affected
+propertySmallPartUsed.title = Your Council Tax will not be affected - Valuation Office Agency contact form - GOV.UK
+propertySmallPartUsed.heading = Your Council Tax will not be affected
+propertySmallPartUsed.p1 = If you use a room as an office or sell goods by post this will not affect your Council Tax band. You will not have to pay business rates.
+propertySmallPartUsed.subheading =Other help on GOV.UK
+propertySmallPartUsed.p2.url = https://www.gov.uk/introduction-to-business-rates/working-at-home
+propertySmallPartUsed.p2 = Working at home
+propertySmallPartUsed.p3.url = https://www.gov.uk/run-business-from-home
+propertySmallPartUsed.p3 = Running a business from home
+
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = What is your Council Tax enquiry about? - Valuation Office Agency contact form - GOV.UK
 councilTaxSubcategory.heading = What is your Council Tax enquiry about?
