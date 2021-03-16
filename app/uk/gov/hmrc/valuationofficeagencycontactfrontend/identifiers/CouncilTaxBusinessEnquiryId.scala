@@ -14,14 +14,8 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers
 
-case class RadioOption(id: String, value: String, messageKey: String, hintKey: Option[String] = None)
-
-object RadioOption {
-  def apply(keyPrefix: String, option: String): RadioOption = RadioOption(
-    s"$keyPrefix.$option",
-    option,
-    s"$keyPrefix.$option"
-  )
+case object CouncilTaxBusinessEnquiryId extends Identifier {
+  override def toString: String = "council_tax_business_uses"
 }

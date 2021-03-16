@@ -258,6 +258,8 @@ propertyWindWater.form.yes = Ydy
 propertyWindWater.form.no = Nag ydy
 error.propertyWindWater.required = Dewiswch ‘Ydy’ os yw eich eiddo wedi’i amddiffyn rhag gwynt a dŵr
 
+# ---- Annexe Journey Messages start ----
+
 # -------- I have added or removed an annexe
 annexe.title = A yw’r rhandy wedi’i ychwanegu neu ei dileu? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 annexe.heading = A yw’r rhandy wedi’i ychwanegu neu ei dileu?
@@ -309,6 +311,20 @@ annexeRemoved.subheading = Cymorth arall ar GOV.UK
 annexeRemoved.url1 = <a class="govuk-link" target="_self" href="http://gov.uk/challenge-council-tax-band">Sut i herio’ch Band Treth Gyngor</a>
 annexeRemoved.url2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/council-tax/second-homes-and-empty-properties">Pryd y gall eich band Treth Gyngor newid</a>
 annexeRemoved.url3 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed">Sut mae eiddo’n cael eu prisio ar gyfer Treth Gyngor</a>
+# ---- Annexe Journey Ends ----
+
+# ---- Property Used For business Journey Messages start ----
+
+# -------- Business Enquiry
+councilTaxBusinessEnquiry.title = Faint o’ch eiddo sy’n cael ei ddefnyddio ar gyfer busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+councilTaxBusinessEnquiry.heading = Faint o’ch eiddo sy’n cael ei ddefnyddio ar gyfer busnes?
+councilTaxBusinessEnquiry.form.all_property = Defnyddir yr holl eiddo ar gyfer busnes
+councilTaxBusinessEnquiry.form.large_property = Defnyddir rhan fawr o’r eiddo ar gyfer busnes
+councilTaxBusinessEnquiry.hint.large_property = Er enghraifft, defnyddir rhan o’r eiddo fel siop
+councilTaxBusinessEnquiry.form.small_property = Defnyddir rhan fach o’r eiddo ar gyfer busnes
+councilTaxBusinessEnquiry.form.error = Dewiswch faint o’ch eiddo sy’n cael ei ddefnyddio ar gyfer busnes
+
+# ---- Property Used For business end ----
 
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
@@ -322,7 +338,7 @@ councilTaxSubcategory.council_tax_property_poor_repair = Mae fy eiddo mewn cyflw
 councilTaxSubcategory.council_tax_property_demolished = Mae fy eiddo wedi’i ddymchwel yn rhannol neu’n gyfan gwbl
 councilTaxSubcategory.council_tax_changes = Mae fy eiddo neu’r ardal leol wedi newid
 councilTaxSubcategory.council_tax_ndr_changes = Mae fy eiddo wedi newid o Dreth Gyngor i Ardrethi Busnes
-councilTaxSubcategory.council_tax_business_uses = Defnyddir fy eiddo ar gyfer busnes erbyn hyn
+councilTaxSubcategory.council_tax_business_uses = Defnyddir fy eiddo ar gyfer busnes
 councilTaxSubcategory.council_tax_annexe = Rwyf wedi ychwanegu neu dileu rhandy
 councilTaxSubcategory.council_tax_other = Unrhyw ymholiad arall ynghylch y Dreth Gyngor
 councilTaxSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
