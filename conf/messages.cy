@@ -340,6 +340,10 @@ propertySmallPartUsed.p3 = Rhedeg busnes o gartref
 datePropertyChanged.business.title = Pryd wnaethoch chi ddechrau defnyddio’ch eiddo ar gyfer busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 datePropertyChanged.business.heading = Pryd wnaethoch chi ddechrau defnyddio’ch eiddo ar gyfer busnes? (dewisol)
 
+# -------- Permanent changes in the local area that affect the value of my property
+datePropertyChanged.areaChange.title = Pryd ddigwyddodd y newid i’r ardal? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+datePropertyChanged.areaChange.heading = Pryd ddigwyddodd y newid i’r ardal? (dewisol)
+
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 councilTaxSubcategory.heading = Beth yw testun eich ymholiad ynghylch Treth Gyngor?
@@ -354,6 +358,7 @@ councilTaxSubcategory.council_tax_changes = Mae fy eiddo neu’r ardal leol wedi
 councilTaxSubcategory.council_tax_ndr_changes = Mae fy eiddo wedi newid o Dreth Gyngor i Ardrethi Busnes
 councilTaxSubcategory.council_tax_business_uses = Defnyddir fy eiddo ar gyfer busnes
 councilTaxSubcategory.council_tax_annexe = Rwyf wedi ychwanegu neu dileu rhandy
+councilTaxSubcategory.council_tax_area_change = Newidiadau parhaol yn yr ardal leol sy’n effeithio ar werth fy eiddo
 councilTaxSubcategory.council_tax_other = Unrhyw ymholiad arall ynghylch y Dreth Gyngor
 councilTaxSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
 

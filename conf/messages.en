@@ -339,6 +339,10 @@ propertySmallPartUsed.p3 = Running a business from home
 datePropertyChanged.business.title = When did you start using your property for business? - Valuation Office Agency contact form - GOV.UK
 datePropertyChanged.business.heading = When did you start using your property for business? (optional)
 
+# -------- Permanent changes in the local area that affect the value of my property
+datePropertyChanged.areaChange.title = When did the change in the area happen? - Valuation Office Agency contact form - GOV.UK
+datePropertyChanged.areaChange.heading = When did the change in the area happen? (optional)
+
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = What is your Council Tax enquiry about? - Valuation Office Agency contact form - GOV.UK
 councilTaxSubcategory.heading = What is your Council Tax enquiry about?
@@ -353,6 +357,7 @@ councilTaxSubcategory.council_tax_changes = My property or the local area has ch
 councilTaxSubcategory.council_tax_ndr_changes = My property has changed from Council Tax to Business Rates
 councilTaxSubcategory.council_tax_business_uses = My property is used for business
 councilTaxSubcategory.council_tax_annexe = I have added or removed an annexe
+councilTaxSubcategory.council_tax_area_change = Permanent changes in the local area that affect the value of my property
 councilTaxSubcategory.council_tax_other = Any other Council Tax enquiry
 councilTaxSubcategory.checkYourAnswersLabel = Enquiry details
 
