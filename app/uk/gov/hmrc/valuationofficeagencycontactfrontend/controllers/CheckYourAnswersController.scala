@@ -106,6 +106,14 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
           checkYourAnswersHelper.tellUsMore("tellUsMore.business.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress).flatten))
+      case (_, Some("council_tax"), Some("council_tax_area_change")) => Some(
+        AnswerSection(None, Seq(
+          checkYourAnswersHelper.enquiryCategory,
+          checkYourAnswersHelper.councilTaxSubcategory,
+          checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.areaChange.heading"),
+          checkYourAnswersHelper.tellUsMore("tellUsMore.areaChange.heading"),
+          checkYourAnswersHelper.contactDetails,
+          checkYourAnswersHelper.propertyAddress).flatten))
       case (_, Some("council_tax"), _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
@@ -121,6 +129,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
     (answers.contactReason, answers.councilTaxSubcategory) match {
       case (Some("new_enquiry"), Some("council_tax_property_poor_repair")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), Some("council_tax_business_uses")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), Some("council_tax_area_change")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _) => routes.TellUsMoreController.onPageLoad(NormalMode).url
       case (Some("more_details"), _) => routes.WhatElseController.onPageLoad().url
       case (Some("update_existing"), _) => routes.AnythingElseTellUsController.onPageLoad().url

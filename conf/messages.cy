@@ -70,7 +70,8 @@ error.message.xss-invalid = Gallwch ond nodi’r cymeriadau hyn: A-Y, a-y, 0-9, 
 error.tell_us_more.required = Nodwch fwy o fanylion am eich ymholiad
 error.tell_us_more.invalid = Ni ddylai eich ymholiad gynnwys < a >
 error.tellUsMore.poorRepair.required = Rhowch fanylion am gyflwr eich eiddo
- 
+error.tellUsMore.areaChanged.required = Rhowch fanylion y newidiadau i’r ardal
+
 session_expired.title = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 session_expired.heading = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod
 session_expired.guidance = Mae’r gwasanaeth wedi bennu oherwydd ei fod yn anweithgar am 60 munud. Nad yw eich gwybodaeth wedi’i gyflwyno.
@@ -441,6 +442,12 @@ tellUsMore.business.title = Dywedwch fwy wrthym am eich eiddo- Ffurflen Gysylltu
 tellUsMore.business.heading = Dywedwch fwy wrthym am eich eiddo
 tellUsMore.business.hint = Rhowch fanylion fel nifer yr ystafelloedd a ddefnyddir ar gyfer busnes a’r hyn y maent yn cael ei ddefnyddio ar eu cyfer.
 tellUsMore.business.inset = Bydd angen i chi ddarparu tystiolaeth pan fyddwn yn ymateb i chi, megis lluniau neu gynlluniau o’r eiddo.
+
+# --- Tell Us More CT area changes journey
+tellUsMore.areaChange.title = Dywedwch fwy wrthym am y newidiadau parhaol i’r ardal- Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+tellUsMore.areaChange.heading = Dywedwch fwy wrthym am y newidiadau parhaol i’r ardal
+tellUsMore.areaChange.hint = Megis archfarchnad newydd neu brif ffordd.
+tellUsMore.areaChange.inset = Bydd angen i chi ddarparu tystiolaeth pan fyddwn yn ymateb i chi, megis lluniau neu gynlluniau o’r eiddo.
 
 # --- Confirmation for new and existing enquiries
 confirmation.title = Ymchwiliad wedi’i gyflwyno - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
