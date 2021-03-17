@@ -78,4 +78,8 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
     date => AnswerRow(keyMessage, formattedLocalDate(date), false, routes.DatePropertyChangedController.onPageLoad().url)
   }
 
+  def councilTaxBusinessEnquiry: Option[AnswerRow] = userAnswers.councilTaxBusinessEnquiry.map {
+    x => AnswerRow("councilTaxBusinessEnquiry.heading", s"councilTaxBusinessEnquiry.form.$x", true, routes.CouncilTaxBusinessController.onPageLoad().url)
+  }
+
 }
