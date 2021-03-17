@@ -52,14 +52,14 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
       case Some(value) => DatePropertyChangedForm().fill(Some(value))
     }
 
-    Ok(datePropertyChanged(appConfig, preparedForm, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers)))
+    Ok(datePropertyChanged(appConfig, preparedForm, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))
   }
 
   def onSubmit(mode: Mode) = (getData andThen requireData).async {
     implicit request =>
       DatePropertyChangedForm().bindFromRequest().fold(
         (formWithErrors: Form[Option[LocalDate]]) =>
-          Future.successful(BadRequest(datePropertyChanged(appConfig, formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers)))),
+          Future.successful(BadRequest(datePropertyChanged(appConfig, formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))),
         value =>
           for {
             _ <- dataCacheConnector.remove(request.sessionId, DatePropertyChangedId.toString)
@@ -84,14 +84,16 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
     answers.councilTaxSubcategory match {
       case Some("council_tax_property_poor_repair") => Right("datePropertyChanged.poorRepair")
       case Some("council_tax_business_uses") => Right("datePropertyChanged.business")
+      case Some("council_tax_area_change") => Right("datePropertyChanged.areaChange")
       case _ => Left("Unknown enquiry category in enquiry key")
     }
   }
 
-  private def backLink(answers: UserAnswers) = {
+  private def backLink(answers: UserAnswers, mode: Mode) = {
     answers.councilTaxSubcategory match {
       case Some("council_tax_property_poor_repair") => routes.PropertyWindWaterController.onEnquiryLoad().url
       case Some("council_tax_business_uses") => routes.CouncilTaxBusinessController.onPageLoad().url
+      case Some("council_tax_area_change") => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
       case _ => routes.PropertyWindWaterController.onEnquiryLoad().url
     }
   }
