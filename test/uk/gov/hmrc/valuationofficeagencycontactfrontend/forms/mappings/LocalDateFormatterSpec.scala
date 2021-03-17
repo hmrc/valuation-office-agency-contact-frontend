@@ -116,11 +116,6 @@ class LocalDateFormatterSpec extends SpecBase {
         List(FormError(keyValue, yearRange),FormError(keyValue, year))
     }
 
-    "returns the list of FormErrors with correct message when year is greater then now" in {
-      formatter.bind(keyValue,Map(inputDay -> "1", inputMonth -> "12", inputYear -> "3000")).left.get mustBe
-        List(FormError(keyValue, yearRange),FormError(keyValue, year))
-    }
-
     "returns the list of FormErrors with correct message when year is not number" in {
       formatter.bind(keyValue,Map(inputDay -> "1", inputMonth -> "12", inputYear -> "yyyy")).left.get mustBe
         List(FormError(keyValue, yearNumber),FormError(keyValue, year))

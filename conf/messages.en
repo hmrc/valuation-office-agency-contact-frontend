@@ -335,6 +335,10 @@ propertySmallPartUsed.p2 = Working at home
 propertySmallPartUsed.p3.url = https://www.gov.uk/run-business-from-home
 propertySmallPartUsed.p3 = Running a business from home
 
+# -------- When did you start using your property for business
+datePropertyChanged.business.title = When did you start using your property for business? - Valuation Office Agency contact form - GOV.UK
+datePropertyChanged.business.heading = When did you start using your property for business? (optional)
+
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = What is your Council Tax enquiry about? - Valuation Office Agency contact form - GOV.UK
 councilTaxSubcategory.heading = What is your Council Tax enquiry about?
@@ -507,8 +511,8 @@ providingLettings.email = NSOhelpdesk@voa.gov.uk
 providingLettings.phone-title = Phone
 providingLettings.phone-number = 03000 502502
 
-datePropertyChanged.title = When did your property start to be in poor repair? - Valuation Office Agency contact form - GOV.UK
-datePropertyChanged.heading = When did your property start to be in poor repair? (optional)
+datePropertyChanged.poorRepair.title = When did your property start to be in poor repair? - Valuation Office Agency contact form - GOV.UK
+datePropertyChanged.poorRepair.heading = When did your property start to be in poor repair? (optional)
 datePropertyChanged.hint = For example, 27 2 2021
 datePropertyChanged.error.invalidDate = Enter a real date
 datePropertyChanged.error.mandatory.dayMonth = Date must include a day and month
@@ -526,6 +530,10 @@ datePropertyChanged.error.month.range = Date must have a month that is a number 
 
 datePropertyChanged.error.year.number = Date must have a year that is a number
 datePropertyChanged.error.year.range = Date must be on or after 1 january 1900
+
+datePropertyChanged.date.day = Day
+datePropertyChanged.date.month = Month
+datePropertyChanged.date.year = Year
 
 
 error400.title = Page not found - Valuation Office Agency contact form - GOV.UK

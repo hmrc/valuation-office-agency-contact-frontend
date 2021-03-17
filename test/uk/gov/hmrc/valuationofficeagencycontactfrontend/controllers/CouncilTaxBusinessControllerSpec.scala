@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
-import org.mockito.Matchers.any
+import org.mockito.Matchers.{any, anyString}
 import org.mockito.Mockito.when
 import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
@@ -43,10 +43,12 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
   def councilTaxBusinessEnquiry = app.injector.instanceOf[council_tax_business_enquiry]
   def propertySmallPartUsed = app.injector.instanceOf[small_part_used]
 
-  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+  def onwardRoute = routes.DatePropertyChangedController.onPageLoad()
 
   when(fakeDataCacheConnector.save(any, any, any)(any))
     .thenReturn(Future.successful(CacheMap("council_tax_business_uses", Map("council_tax_business_uses" -> JsString("bar")))))
+
+  when(fakeDataCacheConnector.remove(anyString, anyString)).thenReturn(Future.successful(true))
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) = {
     new CouncilTaxBusinessController(frontendAppConfig, messagesApi, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
@@ -75,7 +77,12 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
     }
 
     "redirect to the next page when valid data is submitted" in {
-      pending
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", CouncilTaxBusinessEnquiryForm.options.head.value))
+
+      val result = controller().onEnquirySubmit(NormalMode)(postRequest)
+
+      status(result) mustBe SEE_OTHER
+      redirectLocation(result) mustBe Some(onwardRoute.url)
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
@@ -108,7 +115,7 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
 
       status(result) mustBe OK
       contentAsString(result) mustBe propertySmallPartUsed(frontendAppConfig)(fakeRequest, messages).toString
+
     }
   }
-
 }

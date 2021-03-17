@@ -88,7 +88,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       val result = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
       result mustBe Some(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.councilTaxSubcategory,
-        checkYourAnswersHelper.datePropertyChanged, checkYourAnswersHelper.tellUsMore("tellUsMore.poorRepair.heading"),
+        checkYourAnswersHelper.datePropertyChanged(), checkYourAnswersHelper.tellUsMore("tellUsMore.poorRepair.heading"),
         checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress).flatten))
     }
 

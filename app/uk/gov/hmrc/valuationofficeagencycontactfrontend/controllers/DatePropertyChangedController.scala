@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
+import play.api.Logger
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
@@ -40,28 +41,25 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
                                               getData: DataRetrievalAction,
                                               requireData: DataRequiredAction,
                                               datePropertyChanged: datePropertyChanged,
-                                              form: DatePropertyChangedForm,
                                               cc: MessagesControllerComponents
                                              ) extends FrontendController(cc) with I18nSupport {
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  private def dateForm: Form[Option[LocalDate]] = form()
-
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) { implicit request =>
     val preparedForm = request.userAnswers.datePropertyChanged match {
-      case None => dateForm
-      case Some(value) => dateForm.fill(Some(value))
+      case None => DatePropertyChangedForm()
+      case Some(value) => DatePropertyChangedForm().fill(Some(value))
     }
 
-    Ok(datePropertyChanged(appConfig, preparedForm, mode))
+    Ok(datePropertyChanged(appConfig, preparedForm, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers)))
   }
 
-  def onSubmit(mode: Mode) = getData.async {
+  def onSubmit(mode: Mode) = (getData andThen requireData).async {
     implicit request =>
-      dateForm.bindFromRequest().fold(
+      DatePropertyChangedForm().bindFromRequest().fold(
         (formWithErrors: Form[Option[LocalDate]]) =>
-          Future.successful(BadRequest(datePropertyChanged(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(datePropertyChanged(appConfig, formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers)))),
         value =>
           for {
             _ <- dataCacheConnector.remove(request.sessionId, DatePropertyChangedId.toString)
@@ -73,5 +71,28 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
             }
           } yield Redirect(navigator.nextPage(DatePropertyChangedId, mode)(new UserAnswers(cacheMap)))
       )
+  }
+
+  private def getEnquiryKey(answers: UserAnswers): String = {
+    enquiryKey(answers).getOrElse {
+      Logger.warn(s"Navigation for Date Property Changed page reached with error - Unknown enquiry category in enquiry key")
+      throw new RuntimeException(s"Navigation for  Date Property Changed page reached with error Unknown enquiry category in enquiry key")
+    }
+  }
+
+  private[controllers] def enquiryKey(answers: UserAnswers): Either[String, String] = {
+    answers.councilTaxSubcategory match {
+      case Some("council_tax_property_poor_repair") => Right("datePropertyChanged.poorRepair")
+      case Some("council_tax_business_uses") => Right("datePropertyChanged.business")
+      case _ => Left("Unknown enquiry category in enquiry key")
+    }
+  }
+
+  private def backLink(answers: UserAnswers) = {
+    answers.councilTaxSubcategory match {
+      case Some("council_tax_property_poor_repair") => routes.PropertyWindWaterController.onEnquiryLoad().url
+      case Some("council_tax_business_uses") => routes.CouncilTaxBusinessController.onPageLoad().url
+      case _ => routes.PropertyWindWaterController.onEnquiryLoad().url
+    }
   }
 }

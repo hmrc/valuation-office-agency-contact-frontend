@@ -93,7 +93,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.councilTaxSubcategory,
-          checkYourAnswersHelper.datePropertyChanged,
+          checkYourAnswersHelper.datePropertyChanged(),
           checkYourAnswersHelper.tellUsMore("tellUsMore.poorRepair.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress).flatten))
@@ -101,7 +101,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.councilTaxSubcategory,
-          checkYourAnswersHelper.datePropertyChanged,
+          checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.business.heading"),
           checkYourAnswersHelper.tellUsMore("tellUsMore.business.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress).flatten))

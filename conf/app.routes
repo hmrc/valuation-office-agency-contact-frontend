@@ -110,6 +110,8 @@ POST        /annexe-cooking-washing                uk.gov.hmrc.valuationofficeag
 GET         /property-used-for-business            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBusinessController.onPageLoad(mode: Mode = NormalMode)
 POST        /property-used-for-business            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBusinessController.onEnquirySubmit(mode: Mode = NormalMode)
 GET         /small-part-of-property-used-for-business uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBusinessController.onSmallPartUsedPageLoad(mode: Mode = NormalMode)
+GET         /date-property-business-changed        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.DatePropertyChangedController.onPageLoad(mode: Mode = NormalMode)
+POST        /date-property-business-changed        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.DatePropertyChangedController.onSubmit(mode: Mode = NormalMode)
 
 # SURVEY
 GET         /survey-thanks                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.surveyThankyou

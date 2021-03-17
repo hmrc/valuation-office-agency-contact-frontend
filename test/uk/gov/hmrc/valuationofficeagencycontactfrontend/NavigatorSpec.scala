@@ -418,6 +418,30 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.PropertyAddressController.onPageLoad(NormalMode)
       }
 
+      "return function that goes on Property Address page when he want update exiting enquiry with council_tax" in {
+        when (mockUserAnswers.contactReason) thenReturn Some("_")
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+        navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.PropertyAddressController.onPageLoad(NormalMode)
+      }
+
+      "return function that goes on Property Address page when he want update exiting enquiry with business_rates" in {
+        when (mockUserAnswers.contactReason) thenReturn Some("_")
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+        navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.PropertyAddressController.onPageLoad(NormalMode)
+      }
+
+      "return function that goes on Property Address page when he want update exiting enquiry with something else" in {
+        when (mockUserAnswers.contactReason) thenReturn Some("_")
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("_")
+        an [RuntimeException] should be thrownBy navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers)
+      }
+
+      "return a exception when enquiryCategory and contactReason return None" in {
+        when (mockUserAnswers.contactReason) thenReturn None
+        when (mockUserAnswers.enquiryCategory) thenReturn None
+        an [RuntimeException] should be thrownBy navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers)
+      }
+
       "return a exception when enquiryCategory return None" in {
         when (mockUserAnswers.enquiryCategory) thenReturn None
         an [RuntimeException] should be thrownBy navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers)
@@ -426,6 +450,16 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
       "return function that goes on a small part of the property used for business page when councilTaxBusinessEnquiry is small_property" in {
         when (mockUserAnswers.councilTaxBusinessEnquiry) thenReturn Some("small_property")
         navigator.nextPage(CouncilTaxBusinessEnquiryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxBusinessController.onSmallPartUsedPageLoad()
+      }
+
+      "return function that goes on a small part of the property used for business page when councilTaxBusinessEnquiry is large_property" in {
+        when (mockUserAnswers.councilTaxBusinessEnquiry) thenReturn Some("large_property")
+        navigator.nextPage(CouncilTaxBusinessEnquiryId, NormalMode)(mockUserAnswers) mustBe routes.DatePropertyChangedController.onPageLoad()
+      }
+
+      "return function that goes on a small part of the property used for business page when councilTaxBusinessEnquiry is all_property" in {
+        when (mockUserAnswers.councilTaxBusinessEnquiry) thenReturn Some("all_property")
+        navigator.nextPage(CouncilTaxBusinessEnquiryId, NormalMode)(mockUserAnswers) mustBe routes.DatePropertyChangedController.onPageLoad()
       }
 
       "return a exception when councilTaxBusinessEnquiry returns None" in {
