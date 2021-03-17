@@ -74,8 +74,8 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
     _ => AnswerRow("contactDetails.heading", formattedContactDetails(userAnswers.contactDetails, "<br>"), false, routes.ContactDetailsController.onPageLoad(CheckMode).url)
   }
 
-  def datePropertyChanged: Option[AnswerRow] = userAnswers.datePropertyChanged map {
-    date => AnswerRow("datePropertyChanged.heading", formattedLocalDate(date), false, routes.DatePropertyChangedController.onPageLoad().url)
+  def datePropertyChanged(keyMessage: String = "datePropertyChanged.poorRepair.heading"): Option[AnswerRow] = userAnswers.datePropertyChanged map {
+    date => AnswerRow(keyMessage, formattedLocalDate(date), false, routes.DatePropertyChangedController.onPageLoad().url)
   }
 
 }
