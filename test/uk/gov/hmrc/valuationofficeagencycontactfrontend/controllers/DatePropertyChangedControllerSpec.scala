@@ -16,6 +16,8 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
+import org.mockito.Mockito.when
+import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.JsString
 import play.api.test.Helpers._
@@ -24,64 +26,92 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.DatePropertyChangedForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.DatePropertyChangedId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxSubcategoryId, DatePropertyChangedId, EnquiryCategoryId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{datePropertyChanged => date_property_changed}
 
 import java.time.LocalDate
 
-class DatePropertyChangedControllerSpec extends ControllerSpecBase {
+class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoSugar{
+
+  val mockUserAnswers = mock[UserAnswers]
 
   def datePropertyChanged = inject[date_property_changed]
 
-  def route = routes.DatePropertyChangedController.onPageLoad()
+  def routePoorRepair = routes.PropertyWindWaterController.onEnquiryLoad()
+  def routeBusiness = routes.CouncilTaxBusinessController.onPageLoad()
 
-
-  def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new DatePropertyChangedController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = route),
+  def controllerPoorRepair(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
+    new DatePropertyChangedController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = routePoorRepair),
       dataRetrievalAction, new DataRequiredActionImpl(ec), datePropertyChanged, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
-  def viewAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()) = datePropertyChanged(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def controllerBusiness(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
+    new DatePropertyChangedController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = routeBusiness),
+      dataRetrievalAction, new DataRequiredActionImpl(ec), datePropertyChanged, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+
+  def viewPoorRepairAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()) =
+    datePropertyChanged(frontendAppConfig, form, NormalMode, "datePropertyChanged.poorRepair", routePoorRepair.url)(fakeRequest, messages).toString
+
+  def viewBusinessAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()) =
+    datePropertyChanged(frontendAppConfig, form, NormalMode, "datePropertyChanged.business", routeBusiness.url)(fakeRequest, messages).toString
 
   "DatePropertyChangedController Controller" must {
 
-    "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(NormalMode)(fakeRequest)
+    "return OK and the date view for poor repair sub category" in {
+      val validData = Map(CouncilTaxSubcategoryId.toString -> JsString("council_tax_property_poor_repair"))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controllerPoorRepair(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+      contentAsString(result) mustBe viewPoorRepairAsString()
+    }
+
+    "return OK and the date view for business sub category" in {
+      val validData = Map(CouncilTaxSubcategoryId.toString -> JsString("council_tax_business_uses"))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controllerBusiness(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewBusinessAsString()
     }
 
     "populate the view correctly on a GET when the date has previously been inserted" in {
-      val validData = Map(DatePropertyChangedId.toString -> JsString(LocalDate.of(2021,1,1).toString))
+      val validData = Map(CouncilTaxSubcategoryId.toString -> JsString("council_tax_property_poor_repair"),
+        DatePropertyChangedId.toString -> JsString(LocalDate.of(2021,1,1).toString))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controllerPoorRepair(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsString(DatePropertyChangedForm().fill(Option(LocalDate.of(2021,1,1))))
+      contentAsString(result) mustBe viewPoorRepairAsString(DatePropertyChangedForm().fill(Option(LocalDate.of(2021,1,1))))
     }
 
     "redirect to the next page when valid data is submitted" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", LocalDate.of(2021,1,1).toString))
 
-      val result = controller().onSubmit(NormalMode)(postRequest)
+      val result = controllerPoorRepair().onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(route.url)
+      redirectLocation(result) mustBe Some(routePoorRepair.url)
     }
 
     "return error page if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controllerPoorRepair(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
       status(result) mustBe SEE_OTHER
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", LocalDate.of(2021,1,1).toString))
-      val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
+      val validData = Map(CouncilTaxSubcategoryId.toString -> JsString("error"))
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(route.url)
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controllerPoorRepair(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      an[RuntimeException] should be thrownBy status(result)
     }
   }
 

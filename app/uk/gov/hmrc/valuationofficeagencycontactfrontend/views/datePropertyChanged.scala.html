@@ -31,16 +31,15 @@
         input_date: inputDate, formWithCSFR: formWithCSRF, govukErrorSummary: GovukErrorSummary)
 
 
-@(appConfig: FrontendAppConfig, form: Form[_], mode: Mode)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, form: Form[_], mode: Mode, enquiryKey: String, backlink: String)(implicit request: Request[_], messages: Messages)
 
 @beforeBlock = {
-@govukBackLink(BackLink(content = Text(messages("site.back")),
-    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWindWaterController.onEnquiryLoad().url))
+    @govukBackLink(BackLink(content = Text(messages("site.back")), href = backlink))
 }
 
 @mainTemplate(
     beforeContentBlock = Option(beforeBlock),
-    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("datePropertyChanged.title"))else messages("datePropertyChanged.title")),
+    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages(s"$enquiryKey.title"))else messages(s"$enquiryKey.title")),
 ) {
 
     @formWithCSFR(action = DatePropertyChangedController.onSubmit(), 'autoComplete -> "off") {
@@ -55,7 +54,7 @@
             )
         }
 
-        <h1 class="govuk-heading-l">@messages("datePropertyChanged.heading")</h1>
+        <h1 class="govuk-heading-l">@messages(s"$enquiryKey.heading")</h1>
         @input_date(
             id = "datePropertyChanged",
             form = form,

@@ -337,8 +337,8 @@ propertySmallPartUsed.p3.url = https://www.gov.uk/run-business-from-home
 propertySmallPartUsed.p3 = Rhedeg busnes o gartref
 
 # -------- When did you start using your property for business
-datePropertyBusChanged.title = Pryd wnaethoch chi ddechrau defnyddio’ch eiddo ar gyfer busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-datePropertyBusChanged.heading = Pryd wnaethoch chi ddechrau defnyddio’ch eiddo ar gyfer busnes? (dewisol)
+datePropertyChanged.business.title = Pryd wnaethoch chi ddechrau defnyddio’ch eiddo ar gyfer busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+datePropertyChanged.business.heading = Pryd wnaethoch chi ddechrau defnyddio’ch eiddo ar gyfer busnes? (dewisol)
 
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
@@ -511,8 +511,8 @@ providingLettings.email = NSOhelpdesk@voa.gov.uk
 providingLettings.phone-title =  Ffôn
 providingLettings.phone-number = 03000 502502
 
-datePropertyChanged.title = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-datePropertyChanged.heading = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol)
+datePropertyChanged.poorRepair.title = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+datePropertyChanged.poorRepair.heading = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol)
 datePropertyChanged.hint = Er enghraifft, 27 2 2021
 datePropertyChanged.error.invalidDate = Rhowch ddyddiad go iawn
 datePropertyChanged.error.mandatory.dayMonth = Rhaid i’r dyddiad gynnwys dydd a mis
@@ -530,6 +530,10 @@ datePropertyChanged.error.month.range = Rhaid i’r dyddiad gael mis sy’n rhif
 
 datePropertyChanged.error.year.number = Rhaid i’r dyddiad gael blwyddyn sy’n rhif
 datePropertyChanged.error.year.range = Rhaid i’r dyddiad fod ar neu ar ôl 1 Ionawr 1900
+
+datePropertyChanged.date.day = Dydd
+datePropertyChanged.date.month = Mis
+datePropertyChanged.date.year = Blwyddyn
 
 error400.title = Page not found - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 error400.heading = Page not found

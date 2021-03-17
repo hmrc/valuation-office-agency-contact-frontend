@@ -35,9 +35,9 @@ class DatePropertyChangedViewSpec extends ViewBehaviours {
 
   def dateForm= DatePropertyChangedForm()
 
-  def createView = () => datePropertyChanged(frontendAppConfig, dateForm, NormalMode)(fakeRequest, messages)
+  def createView = () => datePropertyChanged(frontendAppConfig, dateForm, NormalMode, messageKeyPrefix, "test")(fakeRequest, messages)
 
-  def createViewUsingForm = (form: Form[Option[LocalDate]]) => datePropertyChanged(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+  def createViewUsingForm = (form: Form[Option[LocalDate]]) => datePropertyChanged(frontendAppConfig, form, NormalMode, "test", "test")(fakeRequest, messages)
 
   "DatePropertyChanged view" must {
     behave like normalPage(createView, messageKeyPrefix)
