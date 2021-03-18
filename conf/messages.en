@@ -316,7 +316,7 @@ annexeRemoved.url3 = <a class="govuk-link" target="_self" href="https://www.gov.
 
 # ---- Property Used For business Journey Messages start ----
 
-# -------- Business Enquiry
+# -------- Council Tax Business Enquiry
 councilTaxBusinessEnquiry.title = How much of your property is used for business? - Valuation Office Agency contact form - GOV.UK
 councilTaxBusinessEnquiry.heading = How much of your property is used for business?
 councilTaxBusinessEnquiry.form.all_property = All of the property is used for business
@@ -362,6 +362,13 @@ councilTaxSubcategory.council_tax_area_change = Permanent changes in the local a
 councilTaxSubcategory.council_tax_other = Other
 councilTaxSubcategory.checkYourAnswersLabel = Enquiry details
 
+# --- Business Rates Self Catering
+businessRatesSelfCatering.title = Is your property or holiday let in England or Wales? - Valuation Office Agency contact form - GOV.UK
+businessRatesSelfCatering.heading = Is your property or holiday let in England or Wales?
+businessRatesSelfCatering.england = England
+businessRatesSelfCatering.wales = Wales
+error.businessRatesSelfCatering.required = Select if your property is in England or Wales
+
 # --- Self-catering properties or holiday lets in England
 propertyEnglandLets.title = Self-catering properties or holiday lets in England - Valuation Office Agency contact form - GOV.UK
 propertyEnglandLets.heading = Self-catering properties or holiday lets in England
@@ -373,6 +380,7 @@ propertyEnglandLets.subheading = Other help on GOV.UK
 propertyEnglandLets.p3.url = https://www.gov.uk/introduction-to-business-rates/self-catering-and-holiday-let-accommodation
 propertyEnglandLets.p3 = Self-catering and holiday lets
 
+# --- Business Rates Subcategories
 businessRatesSubcategory.title = What is your business rates enquiry about? - Valuation Office Agency contact form - GOV.UK
 businessRatesSubcategory.heading = What is your business rates enquiry about?
 businessRatesSubcategory.business_rates_challenge = Challenging my business rates valuation
@@ -380,6 +388,7 @@ businessRatesSubcategory.business_rates_changes = My property or the local area 
 businessRatesSubcategory.business_rates_assessed_for_bus_rates = I need my property assessed for business rates
 businessRatesSubcategory.business_rates_from_home = Running a business from home
 businessRatesSubcategory.business_rates_not_used = My property is no longer used for business
+businessRatesSubcategory.business_rates_self_catering = A self-catering property or holiday let
 businessRatesSubcategory.business_rates_other = Any other business rates enquiry
 
 businessRatesChallenge.title = Challenging my business rates valuation - Valuation Office Agency contact form - GOV.UK

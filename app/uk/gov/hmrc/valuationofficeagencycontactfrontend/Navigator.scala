@@ -134,6 +134,7 @@ class Navigator @Inject()() {
     answers.businessRatesSubcategory match {
       case Some("business_rates_challenge") => routes.BusinessRatesChallengeController.onChallengePageLoad()
       case Some("business_rates_changes") => routes.BusinessRatesChallengeController.onAreaChangePageLoad()
+      case Some("business_rates_self_catering") => routes.BusinessRatesSelfCateringController.onPageLoad()
       case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case None => {
         Logger.warn(s"Navigation for Business Rates page reached without selection of enquiry by controller ")
@@ -224,6 +225,16 @@ class Navigator @Inject()() {
     }
   }
 
+  private val selfCateringPageRouting: UserAnswers => Call = answers => {
+    answers.businessRatesSelfCateringEnquiry match {
+      case Some("england") => ???
+      case Some("wales") => ???
+      case _ =>
+        Logger.warn(s"Navigation for is business rates self catering enquiry reached without selection of enquiry by controller")
+        throw new RuntimeException("Unknown exception for is business rates self catering routing")
+    }
+  }
+
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     ContactReasonId -> contactReasonRouting,
     EnquiryDateId -> enquiryDateRouting,
@@ -244,7 +255,8 @@ class Navigator @Inject()() {
     CouncilTaxAnnexeSelfContainedEnquiryId -> annexeSelfContainedRouting,
     CouncilTaxAnnexeEnquiryId -> councilTaxAnnexeRouting,
     CouncilTaxAnnexeHaveCookingId -> annexeCookingWashingRouting,
-    CouncilTaxBusinessEnquiryId -> councilTaxBusinessEnquiryRouting
+    CouncilTaxBusinessEnquiryId -> councilTaxBusinessEnquiryRouting,
+    BusinessRatesSelfCateringId -> selfCateringPageRouting
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()
