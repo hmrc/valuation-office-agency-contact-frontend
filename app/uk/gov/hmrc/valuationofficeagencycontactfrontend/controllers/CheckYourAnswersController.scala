@@ -118,7 +118,6 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.councilTaxSubcategory,
-          checkYourAnswersHelper.datePropertyChanged(),
           checkYourAnswersHelper.tellUsMore("tellUsMore.other.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress).flatten))

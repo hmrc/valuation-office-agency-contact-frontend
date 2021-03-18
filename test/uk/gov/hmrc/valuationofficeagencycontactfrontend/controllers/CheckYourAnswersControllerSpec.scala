@@ -46,8 +46,6 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
     new CheckYourAnswersController(frontendAppConfig, messagesApi, FakeDataCacheConnector, dataRetrievalAction,
       new DataRequiredActionImpl(ec), checkYourAnswers, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
-
-
   "Check Your Answers Controller" must {
 
     "return 200 for a GET" in {
@@ -133,12 +131,11 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
       when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("a"))
-      when(mockUserAnswers.datePropertyChanged) thenReturn Some(LocalDate.of(2021, 1, 1))
 
       val result = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
       result mustBe Some(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.councilTaxSubcategory,
-        checkYourAnswersHelper.datePropertyChanged(), checkYourAnswersHelper.tellUsMore("tellUsMore.other.heading"),
+         checkYourAnswersHelper.tellUsMore("tellUsMore.other.heading"),
         checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress).flatten))
     }
 
