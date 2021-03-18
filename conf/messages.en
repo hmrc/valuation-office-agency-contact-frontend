@@ -70,6 +70,7 @@ error.message.xss-invalid = You can only enter these characters: A-Z, a-z, 0-9, 
 error.tell_us_more.required = Enter more details about your enquiry
 error.tell_us_more.invalid = Your enquiry must not include < and >
 error.tellUsMore.poorRepair.required = Enter details of the condition of your property
+error.tellUsMore.areaChanged.required = Enter details of the changes to the area
 
 session_expired.title = For your security, this service has been reset - Valuation Office Agency contact form - GOV.UK
 session_expired.heading = For your security, this service has been reset
@@ -437,6 +438,12 @@ tellUsMore.business.title = Tell us more about your property - Valuation Office 
 tellUsMore.business.heading = Tell us more about your property
 tellUsMore.business.hint = Provide details such as the number of rooms used for business and what they are used for.
 tellUsMore.business.inset = You will need to supply evidence when we reply to you, such as photos or plans of the property.
+
+# --- Tell Us More CT area changes journey
+tellUsMore.areaChange.title = Tell us more about the permanent changes to the area - Valuation Office Agency contact form - GOV.UK
+tellUsMore.areaChange.heading = Tell us more about the permanent changes to the area
+tellUsMore.areaChange.hint = Such as a new supermarket or a major road.
+tellUsMore.areaChange.inset = You will need to supply evidence when we reply to you, such as photos or plans of the property.
 
 anythingElse.title = Is there anything else you would like to tell us about? - Valuation Office Agency contact form - GOV.UK
 anythingElse.heading = Is there anything else you would like to tell us about? (optional)

@@ -69,7 +69,9 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
   }
 
   private def requiredErrorMessage(userAnswers: UserAnswers): String =
-    if (userAnswers.propertyWindEnquiry.isDefined) "error.tellUsMore.poorRepair.required" else "error.tell_us_more.required"
+    if (userAnswers.propertyWindEnquiry.isDefined) "error.tellUsMore.poorRepair.required"
+    else if(userAnswers.councilTaxSubcategory.contains("council_tax_area_change")) "error.tellUsMore.areaChanged.required"
+    else "error.tell_us_more.required"
 
   private def getEnquiryKey(answers: UserAnswers): String = {
     enquiryKey(answers).getOrElse {
@@ -82,6 +84,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
     (answers.enquiryCategory, answers.councilTaxSubcategory) match {
       case (Some("council_tax"), Some("council_tax_property_poor_repair")) => Right("tellUsMore.poorRepair")
       case (Some("council_tax"), Some("council_tax_business_uses")) => Right("tellUsMore.business")
+      case (Some("council_tax"), Some("council_tax_area_change")) => Right("tellUsMore.areaChange")
       case (Some("council_tax"), _) => Right("tellUsMore.ct-reference")
       case (Some("business_rates"), _) => Right("tellUsMore.ndr-reference")
       case _ => Left("Unknown enquiry category in enquiry key")
@@ -92,6 +95,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
     answers.councilTaxSubcategory match {
       case Some("council_tax_property_poor_repair") => routes.DatePropertyChangedController.onPageLoad().url
       case Some("council_tax_business_uses") => routes.DatePropertyChangedController.onPageLoad().url
+      case Some("council_tax_area_change") => routes.DatePropertyChangedController.onPageLoad().url
       case _ => routes.PropertyAddressController.onPageLoad(NormalMode).url
     }
   }
