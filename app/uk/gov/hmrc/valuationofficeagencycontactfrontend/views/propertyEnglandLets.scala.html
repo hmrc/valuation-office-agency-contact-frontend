@@ -26,31 +26,31 @@
 
 @beforeBlock = {
 @govukBackLink(BackLink(content = Text(messages("site.back")),
-    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxBusinessController.onPageLoad().url
+    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSelfCateringController.onPageLoad().url
 ))
 }
 
 @mainTemplate(
     beforeContentBlock = Option(beforeBlock),
-    pageTitle = Option(messages("propertySmallPartUsed.title"))
+    pageTitle = Option(messages("propertyEnglandLets.title"))
 ) {
 
     <h1 class="govuk-heading-l">@messages("propertyEnglandLets.heading")</h1>
 
-    <p class="govuk-body">@messages("propertySmallPartUsed.p1")</p>
+    <p class="govuk-body">@messages("propertyEnglandLets.p1")</p>
 
     <p class="govuk-body">
-        <a class="govuk-link" target="_self" href=@messages("propertySmallPartUsed.p2.url")>
-            @messages("propertySmallPartUsed.p2.part1")
+        <a class="govuk-link" target="_self" href=@messages("propertyEnglandLets.p2.url")>
+            @messages("propertyEnglandLets.p2.part1")
         </a>
-        @messages("propertySmallPartUsed.p2.part2")
+        @messages("propertyEnglandLets.p2.part2")
     </p>
 
     <h2 class="govuk-heading-m">@messages("propertyEnglandLets.subheading")</h2>
 
     <p class="govuk-body">
-        <a class="govuk-link" target="_self" href=@messages("propertySmallPartUsed.p3.url")>
-            @messages("propertySmallPartUsed.p3")
+        <a class="govuk-link" target="_self" href=@messages("propertyEnglandLets.p3.url")>
+            @messages("propertyEnglandLets.p3")
         </a>
     </p>
 

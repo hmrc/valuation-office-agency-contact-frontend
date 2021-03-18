@@ -499,6 +499,16 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         when (mockUserAnswers.councilTaxBusinessEnquiry) thenReturn None
         an [RuntimeException] should be thrownBy navigator.nextPage(CouncilTaxBusinessEnquiryId, NormalMode)(mockUserAnswers)
       }
+
+      "return function that goes on england lents page when businessRatesSelfCateringEnquiry is england" in {
+        when (mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("england")
+        navigator.nextPage(BusinessRatesSelfCateringId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
+      }
+
+      "return a exception when businessRatesSelfCateringEnquiry returns None" in {
+        when (mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn None
+        an [RuntimeException] should be thrownBy navigator.nextPage(BusinessRatesSelfCateringId, NormalMode)(mockUserAnswers)
+      }
     }
   }
 }

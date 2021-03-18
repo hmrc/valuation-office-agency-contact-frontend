@@ -28,6 +28,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.BusinessRate
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSelfCateringEnquiry => business_rates_self_catering_enquiry}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLets => england_lets}
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
@@ -40,6 +41,7 @@ class BusinessRatesSelfCateringController @Inject()(
                                                 getData: DataRetrievalAction,
                                                 requireData: DataRequiredAction,
                                                 businessRatesSelfCateringEnquiry: business_rates_self_catering_enquiry,
+                                                propertyEnglandLets: england_lets,
                                                 cc: MessagesControllerComponents
                                               ) extends FrontendController(cc) with I18nSupport {
 
@@ -64,6 +66,11 @@ class BusinessRatesSelfCateringController @Inject()(
           dataCacheConnector.save[String](request.sessionId, BusinessRatesSelfCateringId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(BusinessRatesSelfCateringId, mode)(new UserAnswers(cacheMap))))
       )
+  }
+
+  def onEngLetsPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+      implicit request =>
+        Ok(propertyEnglandLets(appConfig))
   }
 
 }
