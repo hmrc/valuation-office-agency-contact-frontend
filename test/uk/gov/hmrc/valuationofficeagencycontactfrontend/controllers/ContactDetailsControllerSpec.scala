@@ -153,6 +153,42 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
       assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
     }
 
+    "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_property_poor_repair" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_poor_repair")
+      val result = controller().enquiryBackLink(mockUserAnswers)
+      val isCouncilTaxSelection = result.isRight
+      isCouncilTaxSelection mustBe true
+      assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    }
+
+    "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_business_uses" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_business_uses")
+      val result = controller().enquiryBackLink(mockUserAnswers)
+      val isCouncilTaxSelection = result.isRight
+      isCouncilTaxSelection mustBe true
+      assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    }
+
+    "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_area_change" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_area_change")
+      val result = controller().enquiryBackLink(mockUserAnswers)
+      val isCouncilTaxSelection = result.isRight
+      isCouncilTaxSelection mustBe true
+      assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    }
+
+    "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_other" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_other")
+      val result = controller().enquiryBackLink(mockUserAnswers)
+      val isCouncilTaxSelection = result.isRight
+      isCouncilTaxSelection mustBe true
+      assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    }
+
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn None
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")

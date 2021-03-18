@@ -359,7 +359,7 @@ councilTaxSubcategory.council_tax_ndr_changes = My property has changed from Cou
 councilTaxSubcategory.council_tax_business_uses = My property is used for business
 councilTaxSubcategory.council_tax_annexe = I have added or removed an annexe
 councilTaxSubcategory.council_tax_area_change = Permanent changes in the local area that affect the value of my property
-councilTaxSubcategory.council_tax_other = Any other Council Tax enquiry
+councilTaxSubcategory.council_tax_other = Other
 councilTaxSubcategory.checkYourAnswersLabel = Enquiry details
 
 businessRatesSubcategory.title = What is your business rates enquiry about? - Valuation Office Agency contact form - GOV.UK
@@ -444,6 +444,11 @@ tellUsMore.areaChange.title = Tell us more about the permanent changes to the ar
 tellUsMore.areaChange.heading = Tell us more about the permanent changes to the area
 tellUsMore.areaChange.hint = Such as a new supermarket or a major road.
 tellUsMore.areaChange.inset = You will need to supply evidence when we reply to you, such as photos or plans of the property.
+
+# --- Tell Us More CT other journey
+tellUsMore.other.title = What is your other Council Tax enquiry? - Valuation Office Agency contact form - GOV.UK
+tellUsMore.other.heading = What is your other Council Tax enquiry?
+tellUsMore.other.hint = Include details such as case reference numbers and dates
 
 anythingElse.title = Is there anything else you would like to tell us about? - Valuation Office Agency contact form - GOV.UK
 anythingElse.heading = Is there anything else you would like to tell us about? (optional)
