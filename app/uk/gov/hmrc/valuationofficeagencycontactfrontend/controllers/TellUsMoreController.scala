@@ -54,14 +54,14 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
         case Some(value) => TellUsMoreForm(key).fill(value)
       }
 
-      Ok(tellUsMore(appConfig, preparedForm, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers)))
+      Ok(tellUsMore(appConfig, preparedForm, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))
   }
 
   def onSubmit(mode: Mode) = (getData andThen requireData).async {
     implicit request =>
       TellUsMoreForm(requiredErrorMessage(request.userAnswers)).bindFromRequest().fold(
         (formWithErrors: Form[TellUsMore]) =>
-          Future.successful(BadRequest(tellUsMore(appConfig, formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers)))),
+          Future.successful(BadRequest(tellUsMore(appConfig, formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))),
         (value) =>
           dataCacheConnector.save[TellUsMore](request.sessionId, TellUsMoreId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(TellUsMoreId, mode)(new UserAnswers(cacheMap))))
@@ -85,17 +85,19 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
       case (Some("council_tax"), Some("council_tax_property_poor_repair")) => Right("tellUsMore.poorRepair")
       case (Some("council_tax"), Some("council_tax_business_uses")) => Right("tellUsMore.business")
       case (Some("council_tax"), Some("council_tax_area_change")) => Right("tellUsMore.areaChange")
+      case (Some("council_tax"), Some("council_tax_other")) => Right("tellUsMore.other")
       case (Some("council_tax"), _) => Right("tellUsMore.ct-reference")
       case (Some("business_rates"), _) => Right("tellUsMore.ndr-reference")
       case _ => Left("Unknown enquiry category in enquiry key")
     }
   }
 
-  private def backLink(answers: UserAnswers) = {
+  private def backLink(answers: UserAnswers, mode: Mode) = {
     answers.councilTaxSubcategory match {
       case Some("council_tax_property_poor_repair") => routes.DatePropertyChangedController.onPageLoad().url
       case Some("council_tax_business_uses") => routes.DatePropertyChangedController.onPageLoad().url
       case Some("council_tax_area_change") => routes.DatePropertyChangedController.onPageLoad().url
+      case Some("council_tax_other") => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
       case _ => routes.PropertyAddressController.onPageLoad(NormalMode).url
     }
   }

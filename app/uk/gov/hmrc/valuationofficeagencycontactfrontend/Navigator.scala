@@ -44,6 +44,7 @@ class Navigator @Inject()() {
       case (Some("new_enquiry"), Some("council_tax_property_poor_repair")) => routes.CheckYourAnswersController.onPageLoad()
       case (Some("new_enquiry"), Some("council_tax_business_uses")) => routes.CheckYourAnswersController.onPageLoad()
       case (Some("new_enquiry"), Some("council_tax_area_change")) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_other")) => routes.CheckYourAnswersController.onPageLoad()
       case (Some("new_enquiry"), _) => routes.TellUsMoreController.onPageLoad(NormalMode)
       case (Some("more_details"), _) => routes.WhatElseController.onPageLoad()
       case (Some("update_existing"), _) => routes.AnythingElseTellUsController.onPageLoad()
@@ -153,6 +154,7 @@ class Navigator @Inject()() {
       case Some("council_tax_annexe") => routes.CouncilTaxAnnexeController.onPageLoad()
       case Some("council_tax_business_uses") => routes.CouncilTaxBusinessController.onPageLoad()
       case Some("council_tax_area_change") => routes.DatePropertyChangedController.onPageLoad()
+      case Some("council_tax_other") => routes.TellUsMoreController.onPageLoad(NormalMode)
       case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case None => {
         Logger.warn(s"Navigation for Council Tax page reached without selection of enquiry by controller ")
@@ -176,6 +178,7 @@ class Navigator @Inject()() {
       case Some("council_tax_property_poor_repair") => routes.ContactDetailsController.onPageLoad(NormalMode)
       case Some("council_tax_business_uses") => routes.ContactDetailsController.onPageLoad(NormalMode)
       case Some("council_tax_area_change") => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case Some("council_tax_other") => routes.ContactDetailsController.onPageLoad(NormalMode)
       case _ => routes.CheckYourAnswersController.onPageLoad()
     }
   }

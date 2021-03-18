@@ -192,6 +192,11 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
       }
 
+      "return a function that goes to the 'contact details' page when the council tax subcategory is council_tax_other" in {
+        when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_other")
+        navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
+      }
+
       "return a function that goes to the valuation advice page when an enquiry category for valuation and property advice has been selected" in {
         when (mockUserAnswers.enquiryCategory) thenReturn Some("valuation_for_public_body")
         navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.ValuationAdviceController.onPageLoad()
@@ -330,6 +335,12 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_area_change")
         navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.DatePropertyChangedController.onPageLoad()
       }
+
+      "return a function that goes to the council tax area change page when an enquiry category for council tax has been selected and council_tax_other option selected" in {
+        when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_other")
+        navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.TellUsMoreController.onPageLoad(NormalMode)
+      }
+
 
       "return function that goes 'The Council Tax band cannot be reduced or removed' when property is property wind and watertight" in {
         when (mockUserAnswers.propertyWindEnquiry) thenReturn Some("yes")

@@ -110,6 +110,42 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       isCouncilTaxSelection mustBe true
     }
 
+    "The enquiry key function produces a string with a tell us more other key when the enquiry category is council_tax" +
+      " and the council_tax_other has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_other")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.other")
+      isCouncilTaxSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more areaChange key when the enquiry category is council_tax" +
+      " and the council_tax_area_change has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_area_change")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.areaChange")
+      isCouncilTaxSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more business key when the enquiry category is council_tax" +
+      " and the council_tax_business_uses has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_business_uses")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.business")
+      isCouncilTaxSelection mustBe true
+    }
+
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn None
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))

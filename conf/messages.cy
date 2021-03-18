@@ -360,7 +360,7 @@ councilTaxSubcategory.council_tax_ndr_changes = Mae fy eiddo wedi newid o Dreth 
 councilTaxSubcategory.council_tax_business_uses = Defnyddir fy eiddo ar gyfer busnes
 councilTaxSubcategory.council_tax_annexe = Rwyf wedi ychwanegu neu dileu rhandy
 councilTaxSubcategory.council_tax_area_change = Newidiadau parhaol yn yr ardal leol sy’n effeithio ar werth fy eiddo
-councilTaxSubcategory.council_tax_other = Unrhyw ymholiad arall ynghylch y Dreth Gyngor
+councilTaxSubcategory.council_tax_other = Arall
 councilTaxSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
 
 businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
@@ -448,6 +448,11 @@ tellUsMore.areaChange.title = Dywedwch fwy wrthym am y newidiadau parhaol i’r 
 tellUsMore.areaChange.heading = Dywedwch fwy wrthym am y newidiadau parhaol i’r ardal
 tellUsMore.areaChange.hint = Megis archfarchnad newydd neu brif ffordd.
 tellUsMore.areaChange.inset = Bydd angen i chi ddarparu tystiolaeth pan fyddwn yn ymateb i chi, megis lluniau neu gynlluniau o’r eiddo.
+
+# --- Tell Us More CT other journey
+tellUsMore.other.title = Beth yw eich ymholiad Treth Gyngor arall? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+tellUsMore.other.heading = Beth yw eich ymholiad Treth Gyngor arall?
+tellUsMore.other.hint = Darparwch fanylion megis cyfeirnodau achos a dyddiadau.
 
 # --- Confirmation for new and existing enquiries
 confirmation.title = Ymchwiliad wedi’i gyflwyno - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK

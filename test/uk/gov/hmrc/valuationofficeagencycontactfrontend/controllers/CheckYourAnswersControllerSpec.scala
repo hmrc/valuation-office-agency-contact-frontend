@@ -92,6 +92,56 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
         checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress).flatten))
     }
 
+    "The user answers section builder produces sections for new enquiry for business" in {
+      when(mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_business_uses")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+      when(mockUserAnswers.councilTaxBusinessEnquiry) thenReturn Some("")
+      when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("a"))
+      when(mockUserAnswers.datePropertyChanged) thenReturn Some(LocalDate.of(2021, 1, 1))
+
+      val result = controller().userAnswersSectionBuilder(mockUserAnswers)
+      val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
+      result mustBe Some(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.councilTaxSubcategory,
+        checkYourAnswersHelper.councilTaxBusinessEnquiry, checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.business.heading"),
+        checkYourAnswersHelper.tellUsMore("tellUsMore.business.heading"),
+        checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress).flatten))
+    }
+
+    "The user answers section builder produces sections for new enquiry for change area" in {
+      when(mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_area_change")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+      when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("a"))
+      when(mockUserAnswers.datePropertyChanged) thenReturn Some(LocalDate.of(2021, 1, 1))
+
+      val result = controller().userAnswersSectionBuilder(mockUserAnswers)
+      val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
+      result mustBe Some(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.councilTaxSubcategory,
+        checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.areaChange.heading"), checkYourAnswersHelper.tellUsMore("tellUsMore.areaChange.heading"),
+        checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress).flatten))
+    }
+
+    "The user answers section builder produces sections for new enquiry for other" in {
+      when(mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_other")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+      when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("a"))
+      when(mockUserAnswers.datePropertyChanged) thenReturn Some(LocalDate.of(2021, 1, 1))
+
+      val result = controller().userAnswersSectionBuilder(mockUserAnswers)
+      val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
+      result mustBe Some(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.councilTaxSubcategory,
+        checkYourAnswersHelper.datePropertyChanged(), checkYourAnswersHelper.tellUsMore("tellUsMore.other.heading"),
+        checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress).flatten))
+    }
+
     "The user answers section builder produces sections for existing enquiry" in {
       when(mockUserAnswers.contactReason) thenReturn Some("more_details")
       when(mockUserAnswers.existingEnquiryCategory) thenReturn Some("council_tax")
