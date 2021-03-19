@@ -112,6 +112,11 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesChallengeController.onAreaChangePageLoad()
       }
 
+      "return a function that goes to the property demolished page when an enquiry category for business rates has been selected and business_rates_demolished option selected" in {
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_demolished")
+        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesSubcategoryController.onDemolishedPageLoad()
+      }
+
       "throw exception when an enquiry category for business rates has been selected and not other options was selected on next page" in {
         when (mockUserAnswers.businessRatesSubcategory) thenReturn None
         an [RuntimeException] should be thrownBy navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers)

@@ -363,6 +363,19 @@ councilTaxSubcategory.council_tax_area_change = Newidiadau parhaol yn yr ardal l
 councilTaxSubcategory.council_tax_other = Arall
 councilTaxSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
 
+# ---  Tell us that your property has been demolished
+brPropertyDemolished.title = Tell us that your property has been demolished - Valuation Office Agency contact form - GOV.UK
+brPropertyDemolished.heading = Tell us that your property has been demolished
+brPropertyDemolished.p1.url =  https://www.gov.uk/correct-your-business-rates
+brPropertyDemolished.p1.part1 = Use the Valuation Office Agency''s online service
+brPropertyDemolished.p1.part2 =  to tell us that your property has been demolished.
+brPropertyDemolished.p2 = For properties in England, you will need to sign in and submit a 'check'.
+brPropertyDemolished.subheading = Other help on GOV.UK
+brPropertyDemolished.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
+brPropertyDemolished.p3 = A step by step guide to check and challenge
+brPropertyDemolished.p4.url = https://www.gov.uk/guidance/how-to-check-and-challenge-your-rateable-value-in-wales
+brPropertyDemolished.p4 = How to check and challenge your business rates valuation in Wales
+
 businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
@@ -372,6 +385,7 @@ businessRatesSubcategory.business_rates_assessed_for_bus_rates = Mae angen i’m
 businessRatesSubcategory.business_rates_from_home = Rhedeg busnes o gartref
 businessRatesSubcategory.business_rates_not_used = Nid yw fy eiddo bellach yn cael ei ddefnyddio ar gyfer busnes
 businessRatesSubcategory.business_rates_other = Unrhyw ymholiad ardrethu busnes arall
+businessRatesSubcategory.business_rates_demolished = Mae fy eiddo wedi cael ei ddymchwel
 
 businessRatesChallenge.title = Herio fy mhrisiad trethi busnes - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesChallenge.heading = Herio fy mhrisiad trethi busnes
