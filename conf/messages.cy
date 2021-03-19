@@ -377,6 +377,19 @@ propertyEnglandLets.subheading = Other help on GOV.UK
 propertyEnglandLets.p3.url = https://www.gov.uk/introduction-to-business-rates/self-catering-and-holiday-let-accommodation
 propertyEnglandLets.p3 = Self-catering and holiday lets
 
+# --- Self-catering properties or holiday lets in Wales
+propertyWalesLets.title = Self-catering properties or holiday lets in Wales - Valuation Office Agency contact form - GOV.UK
+propertyWalesLets.heading = Self-catering properties or holiday lets in Wales
+propertyWalesLets.p1 = If your property is in Wales, it will be valued for business rates if it is both:
+propertyWalesLets.p1.bl1 = available to let for short periods that total 140 days or more per year
+propertyWalesLets.p1.bl2 = actually let for at least 70 days
+propertyWalesLets.p2.url = https://www.gov.uk/find-local-council
+propertyWalesLets.p2.part1 = Contact your local council
+propertyWalesLets.p2.part2 = and let them know the details of the property. They will then pass on what we need to value the property.
+propertyWalesLets.subheading = Other help on GOV.UK
+propertyWalesLets.p3.url = https://www.gov.uk/introduction-to-business-rates/self-catering-and-holiday-let-accommodation
+propertyWalesLets.p3 = Self-catering and holiday lets
+
 businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
