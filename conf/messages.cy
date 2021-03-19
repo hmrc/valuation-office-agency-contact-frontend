@@ -390,6 +390,20 @@ propertyWalesLets.subheading = Other help on GOV.UK
 propertyWalesLets.p3.url = https://www.gov.uk/introduction-to-business-rates/self-catering-and-holiday-let-accommodation
 propertyWalesLets.p3 = Self-catering and holiday lets
 
+# --- Check and challenge your business rates valuation online
+valuationOnline.title = Check and challenge your business rates valuation online - Valuation Office Agency contact form - GOV.UK
+valuationOnline.heading = Check and challenge your business rates valuation online
+valuationOnline.p1.url = https://www.gov.uk/correct-your-business-rates
+valuationOnline.p1.part1 = Use the Valuation Office Agency's online service
+valuationOnline.p1.part2 = if you think there should be a change to your business rates valuation.
+valuationOnline.subheading1 = For properties in England
+valuationOnline.p2 = Submit a check to make any changes to physical details, or confirm them if there are no changes to make. You can challenge the valuation after the check has been resolved.
+valuationOnline.subheading2 = Other help on GOV.UK
+valuationOnline.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
+valuationOnline.p3 = How to check and challenge your business rates valuation
+valuationOnline.p4.url = https://www.gov.uk/introduction-to-business-rates
+valuationOnline.p4 = More about business rates and how they are calculated
+
 businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
@@ -400,6 +414,7 @@ businessRatesSubcategory.business_rates_from_home = Rhedeg busnes o gartref
 businessRatesSubcategory.business_rates_not_used = Nid yw fy eiddo bellach yn cael ei ddefnyddio ar gyfer busnes
 businessRatesSubcategory.business_rates_self_catering = Eiddo hunanarlwyo neu osodiad gwyliau
 businessRatesSubcategory.business_rates_other = Unrhyw ymholiad ardrethu busnes arall
+businessRatesSubcategory.business_rates_change_valuation = Rwy’n credu bod fy mhrisiad ardrethi busnes yn anghywir
 
 businessRatesChallenge.title = Herio fy mhrisiad trethi busnes - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesChallenge.heading = Herio fy mhrisiad trethi busnes

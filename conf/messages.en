@@ -393,6 +393,20 @@ propertyWalesLets.subheading = Other help on GOV.UK
 propertyWalesLets.p3.url = https://www.gov.uk/introduction-to-business-rates/self-catering-and-holiday-let-accommodation
 propertyWalesLets.p3 = Self-catering and holiday lets
 
+# --- Check and challenge your business rates valuation online
+valuationOnline.title = Check and challenge your business rates valuation online - Valuation Office Agency contact form - GOV.UK
+valuationOnline.heading = Check and challenge your business rates valuation online
+valuationOnline.p1.url = https://www.gov.uk/correct-your-business-rates
+valuationOnline.p1.part1 = Use the Valuation Office Agency's online service
+valuationOnline.p1.part2 = if you think there should be a change to your business rates valuation.
+valuationOnline.subheading1 = For properties in England
+valuationOnline.p2 = Submit a check to make any changes to physical details, or confirm them if there are no changes to make. You can challenge the valuation after the check has been resolved.
+valuationOnline.subheading2 = Other help on GOV.UK
+valuationOnline.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
+valuationOnline.p3 = How to check and challenge your business rates valuation
+valuationOnline.p4.url = https://www.gov.uk/introduction-to-business-rates
+valuationOnline.p4 = More about business rates and how they are calculated
+
 # --- Business Rates Subcategories
 businessRatesSubcategory.title = What is your business rates enquiry about? - Valuation Office Agency contact form - GOV.UK
 businessRatesSubcategory.heading = What is your business rates enquiry about?
@@ -403,6 +417,7 @@ businessRatesSubcategory.business_rates_from_home = Running a business from home
 businessRatesSubcategory.business_rates_not_used = My property is no longer used for business
 businessRatesSubcategory.business_rates_self_catering = A self-catering property or holiday let
 businessRatesSubcategory.business_rates_other = Any other business rates enquiry
+businessRatesSubcategory.business_rates_change_valuation = I think my business rates valuation is wrong
 
 businessRatesChallenge.title = Challenging my business rates valuation - Valuation Office Agency contact form - GOV.UK
 businessRatesChallenge.heading = Challenging my business rates valuation
