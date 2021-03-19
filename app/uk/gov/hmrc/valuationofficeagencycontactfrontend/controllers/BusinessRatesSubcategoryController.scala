@@ -25,7 +25,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConn
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSubcategoryForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.BusinessRatesSubcategoryId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, CouncilTaxSubcategoryId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSubcategory => business_rates_subcategory}
@@ -59,9 +59,11 @@ class BusinessRatesSubcategoryController @Inject()(
       BusinessRatesSubcategoryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(businessRatesSubcategory(appConfig, formWithErrors, mode))),
-        (value) =>
-          dataCacheConnector.save[String](request.sessionId, BusinessRatesSubcategoryId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(BusinessRatesSubcategoryId, mode)(new UserAnswers(cacheMap))))
+        value =>
+          for {
+            _ <- dataCacheConnector.remove(request.sessionId, CouncilTaxSubcategoryId.toString)
+            cacheMap <- dataCacheConnector.save[String](request.sessionId, BusinessRatesSubcategoryId.toString, value)
+          } yield Redirect(navigator.nextPage(BusinessRatesSubcategoryId, mode)(new UserAnswers(cacheMap)))
       )
   }
 }

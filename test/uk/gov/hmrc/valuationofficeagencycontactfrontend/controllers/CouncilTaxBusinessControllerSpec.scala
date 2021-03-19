@@ -33,6 +33,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBusinessEnquiry => council_tax_business_enquiry}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertySmallPartUsed => small_part_used}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesNoNeedToPay => business_rates_no_need_to_pay}
 
 import scala.concurrent.Future
 
@@ -42,6 +43,7 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
 
   def councilTaxBusinessEnquiry = app.injector.instanceOf[council_tax_business_enquiry]
   def propertySmallPartUsed = app.injector.instanceOf[small_part_used]
+  def businessRatesNoNeedToPay = app.injector.instanceOf[business_rates_no_need_to_pay]
 
   def onwardRoute = routes.DatePropertyChangedController.onPageLoad()
 
@@ -52,11 +54,11 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) = {
     new CouncilTaxBusinessController(frontendAppConfig, messagesApi, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), councilTaxBusinessEnquiry, propertySmallPartUsed,
+      dataRetrievalAction, new DataRequiredActionImpl(ec), councilTaxBusinessEnquiry, propertySmallPartUsed, businessRatesNoNeedToPay,
       MessageControllerComponentsHelpers.stubMessageControllerComponents)
   }
 
-  def viewAsString(form: Form[String] = CouncilTaxBusinessEnquiryForm()) = councilTaxBusinessEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = CouncilTaxBusinessEnquiryForm()) = councilTaxBusinessEnquiry(frontendAppConfig, form, NormalMode,  routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)(fakeRequest, messages).toString
 
   "CouncilTaxBusiness Controller" must {
 
@@ -115,6 +117,14 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
 
       status(result) mustBe OK
       contentAsString(result) mustBe propertySmallPartUsed(frontendAppConfig)(fakeRequest, messages).toString
+
+    }
+
+    "return OK and the small part of the property is used for business rates page for GET" in {
+      val result = controller().onSmallPartUsedBusinessRatesPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe businessRatesNoNeedToPay(frontendAppConfig)(fakeRequest, messages).toString
 
     }
   }
