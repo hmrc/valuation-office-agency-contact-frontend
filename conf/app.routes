@@ -116,6 +116,8 @@ POST        /date-property-business-changed        uk.gov.hmrc.valuationofficeag
 GET         /date-property-business-area-changed   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.DatePropertyChangedController.onPageLoad(mode: Mode = NormalMode)
 POST        /date-property-business-area-changed   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.DatePropertyChangedController.onSubmit(mode: Mode = NormalMode)
 
+GET         /property-needs-assessment-business-rates uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onValuationPageLoad(mode: Mode = NormalMode)
+
 # SURVEY
 GET         /survey-thanks                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.surveyThankyou
 POST        /survey 				               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.formCompleteFeedback

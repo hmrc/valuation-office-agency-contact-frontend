@@ -29,6 +29,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.BusinessRate
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSubcategory => business_rates_subcategory}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesValuation => business_rates_valuation}
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -40,6 +41,7 @@ class BusinessRatesSubcategoryController @Inject()(
                                         getData: DataRetrievalAction,
                                         requireData: DataRequiredAction,
                                         businessRatesSubcategory: business_rates_subcategory,
+                                        businessRatesValuation: business_rates_valuation,
                                         cc: MessagesControllerComponents
                                                   ) extends FrontendController(cc) with I18nSupport {
 
@@ -63,5 +65,10 @@ class BusinessRatesSubcategoryController @Inject()(
           dataCacheConnector.save[String](request.sessionId, BusinessRatesSubcategoryId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(BusinessRatesSubcategoryId, mode)(new UserAnswers(cacheMap))))
       )
+  }
+
+  def onValuationPageLoad(mode: Mode)= (getData andThen requireData) {
+    implicit request =>
+      Ok(businessRatesValuation(appConfig))
   }
 }

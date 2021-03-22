@@ -134,6 +134,7 @@ class Navigator @Inject()() {
     answers.businessRatesSubcategory match {
       case Some("business_rates_challenge") => routes.BusinessRatesChallengeController.onChallengePageLoad()
       case Some("business_rates_changes") => routes.BusinessRatesChallengeController.onAreaChangePageLoad()
+      case Some("business_rates_valuation") => routes.BusinessRatesSubcategoryController.onValuationPageLoad()
       case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case None => {
         Logger.warn(s"Navigation for Business Rates page reached without selection of enquiry by controller ")

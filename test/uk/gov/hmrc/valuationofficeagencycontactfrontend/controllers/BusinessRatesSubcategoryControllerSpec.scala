@@ -28,16 +28,19 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.BusinessRate
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSubcategory => business_rates_subcategory}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesValuation => business_rates_valuation}
 
 class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase {
 
   def businessRatesSubcategory = app.injector.instanceOf[business_rates_subcategory]
+  def businessRatesValuation = app.injector.instanceOf[business_rates_valuation]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new BusinessRatesSubcategoryController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSubcategory, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSubcategory, businessRatesValuation,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = BusinessRatesSubcategoryForm()) = businessRatesSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
@@ -77,6 +80,14 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase {
       status(result) mustBe BAD_REQUEST
       contentAsString(result) mustBe viewAsString(boundForm)
     }
+
+    "return OK and the correct view for valuation" in {
+      val result = controller().onValuationPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe businessRatesValuation(frontendAppConfig)(fakeRequest, messages).toString()
+    }
+
 
     "redirect to Session Expired for a GET if no existing data is found" in {
       val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)

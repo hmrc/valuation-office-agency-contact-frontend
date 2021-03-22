@@ -363,6 +363,19 @@ councilTaxSubcategory.council_tax_area_change = Newidiadau parhaol yn yr ardal l
 councilTaxSubcategory.council_tax_other = Arall
 councilTaxSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
 
+# --- My property needs a business rates valuation
+businessRatesValuation.title = Speak to your local council first about getting a business rates valuation - Valuation Office Agency contact form - GOV.UK
+businessRatesValuation.heading = Speak to your local council first about getting a business rates valuation
+businessRatesValuation.p1.url = https://www.gov.uk/contact-your-local-council-about-business-rates
+businessRatesValuation.p1.part1 = Contact your local council
+businessRatesValuation.p1.part2 = as they need to provide us with all the details we need, including a unique reference number.
+businessRatesValuation.p2 = We will only be able to value the property once they have sent us that information.
+businessRatesValuation.subheading = Other help on GOV.UK
+businessRatesValuation.p3.url = https://www.gov.uk/guidance/how-non-domestic-property-including-plant-and-machinery-is-valued
+businessRatesValuation.p3 = How properties are valued for business rates
+businessRatesValuation.p4.url = https://www.gov.uk/calculate-your-business-rates
+businessRatesValuation.p4 = Estimate your business rates
+
 businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
@@ -372,6 +385,7 @@ businessRatesSubcategory.business_rates_assessed_for_bus_rates = Mae angen i’m
 businessRatesSubcategory.business_rates_from_home = Rhedeg busnes o gartref
 businessRatesSubcategory.business_rates_not_used = Nid yw fy eiddo bellach yn cael ei ddefnyddio ar gyfer busnes
 businessRatesSubcategory.business_rates_other = Unrhyw ymholiad ardrethu busnes arall
+businessRatesSubcategory.business_rates_valuation = Mae angen prisiad ardrethi busnes ar fy eiddo
 
 businessRatesChallenge.title = Herio fy mhrisiad trethi busnes - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesChallenge.heading = Herio fy mhrisiad trethi busnes
