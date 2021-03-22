@@ -1,33 +1,3 @@
-checkBeforeYouStart.business_rates.title = Trethi busnes: gwirio cyn i chi fynd yn eich blaen - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-checkBeforeYouStart.business_rates.heading = Trethi busnes: gwirio cyn i chi fynd yn eich blaen
-checkBeforeYouStart.business_rates.para = Mae’r cysylltiadau hyn yn cynnwys atebion i’n ymholiadau mwyaf cyffredin.
-checkBeforeYouStart.business_rates.subheading = Cysylltiadau defnyddiol ar gyfer ardrethi busnes
-checkBeforeYouStart.business_rates.covid.url = https://llyw.cymru/coronafeirws-covid-19-cefnogaeth-i-fusnesau
-checkBeforeYouStart.business_rates.covid.link = COVID-19: Cefnogaeth i fusnesau
-checkBeforeYouStart.business_rates.covid.para = Gwybodaeth am gefnogaeth y llywodraeth i fusnesau y mae coronafirws yn effeithio arnynt (COVID-19).
-checkBeforeYouStart.business_rates.run.home.url = https://llyw.cymru/Ardrethi-busnes-canllaw
-checkBeforeYouStart.business_rates.run.home.link = Rhedeg busnes o gartref
-checkBeforeYouStart.business_rates.run.home.para = Darganfyddwch pryd oes angen i chi dalu ardrethi busnes os ydych yn gweithio o gartref.
-checkBeforeYouStart.business_rates.holiday.lets.url = https://llyw.cymru/Ardrethi-busnes-canllaw
-checkBeforeYouStart.business_rates.holiday.lets.link = Llety hunan-arlwyo a gosod gwyliau
-checkBeforeYouStart.business_rates.holiday.lets.para = Gwybodaeth am ba bryd y mae Asiantaeth y Swyddfa Briso (VOA) yn prisio eiddo fel eiddo hunan-arlwyo.
-checkBeforeYouStart.business_rates.para1 = Gwirio a herio’ch prisiad ardrethi busnes
-checkBeforeYouStart.business_rates.url1 = https://www.gov.uk/correct-your-business-rates
-checkBeforeYouStart.business_rates.para2 = Gallwch wirio, cymharu a chadarnhau’ch manylion eiddo busnes a herio os ydynt yn anghywir.
-checkBeforeYouStart.business_rates.para3 = Cynnig i newid rhestr ardrethu 2017 Cymru
-checkBeforeYouStart.business_rates.url2 = https://www.gov.uk/government/publications/business-rates-proposal-to-alter-the-2017-rating-list-for-wales
-checkBeforeYouStart.business_rates.para4 = Mae’n bosibl y gallwch wneud apel i altro cofnod yn rhestr ardrethu 2017 Cymru.
-checkBeforeYouStart.business_rates.para5 = Gwerth ardrethol ac amcangyfrif eich ardrethi busnes
-checkBeforeYouStart.business_rates.url3 = https://www.gov.uk/calculate-your-business-rates
-checkBeforeYouStart.business_rates.para6 = Gallwch wirio’r gwerth ardrethol, sut y cyfrifwyd eich prisiad, a defnyddio hyn i amcangyfrif eich ardrethi busnes.
-checkBeforeYouStart.business_rates.para7 = Yn fy marn i mae’r prisiad yn rhy uchel
-checkBeforeYouStart.business_rates.url4 = https://www.gov.uk/guidance/how-to-check-your-rateable-value-is-correct
-checkBeforeYouStart.business_rates.para8 = Gall yr arweiniad hwn helpu os ydych yn anghytuno gyda’r prisiad o’ch eiddo.
-checkBeforeYouStart.business_rates.para9 = Mae fy musnes neu’r safle wedi newid
-checkBeforeYouStart.business_rates.url5 = https://www.gov.uk/introduction-to-business-rates/if-your-business-or-premises-change-or-cant-be-used
-checkBeforeYouStart.business_rates.para10 = Cael gwybod sut y gall eich ardrethi busnes newid os yw’r safle’n cael ei altro neu os yw natur eich busnes wedi newid.
-checkBeforeYouStart.business_rates.para11 = Os na allwch gael gafael ar ateb i’ch ymholiad, neu os oes gennych ymholiad ynghylch rhywbeth arall, gallwch fynd yn eich blaen i’n ffurflen gyswllt.
-
 checkYourAnswers.title = Gwiriwch eich atebion - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 checkYourAnswers.heading = Gwiriwch eich atebion
  

@@ -77,9 +77,6 @@ GET         /valuation-for-taxes                   uk.gov.hmrc.valuationofficeag
 GET         /contact-details-housing               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.HousingBenefitsController.onPageLoad()
 GET         /letting-information                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ProvidingLettingsController.onPageLoad()
 
-GET         /check-before-you-continue-rates       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSmartLinksController.onPageLoad()
-GET         /goto-businessRatesSubcategory         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSmartLinksController.goToBusinessRatesSubcategoryPage()
-
 GET         /my-council-tax-bill                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBillController.onPageLoad()
 GET         /council-tax-band-is-too-high          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBandTooHighController.onPageLoad()
 GET         /council-tax-band-for-my-new-property  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBandForNewController.onPageLoad()
