@@ -368,7 +368,6 @@ businessRatesSelfCatering.england = Lloegr
 businessRatesSelfCatering.wales = Cymru
 error.businessRatesSelfCatering.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
 
-# --- Business Rates Subcategories
 # --- Self-catering properties or holiday lets in England
 propertyEnglandLets.title = Eiddo hunanarlwyo neu osodiadau gwyliau yn Lloegr - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 propertyEnglandLets.heading = Eiddo hunanarlwyo neu osodiadau gwyliau yn Lloegr
@@ -448,11 +447,20 @@ businessRatesPropertyEmpty.p1 = <a class="govuk-link" target="_self" href="https
 businessRatesPropertyEmpty.subheading = Cymorth arall ar GOV.UK
 businessRatesPropertyEmpty.url = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-business-rate-relief">Gostyngiadau a disgowntiau ardrethi busnes</a>
 
+# -------- Business rates bill
+businessRatesBill.title = Siaradwch â'ch cyngor lleol am eich bil ardrethi busnes - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesBill.heading = Siaradwch â'ch cyngor lleol am eich bil ardrethi busnes
+businessRatesBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/contact-your-local-council-about-business-rates">Cysylltwch â'ch cyngor lleo</a> os oes gennych unrhyw gwestiynau am eich bil ardrethi busnes, gan mai nhw sy'n delio â biliau a thaliadau.
+businessRatesBill.subheading = Cymorth arall ar GOV.UK
+businessRatesBill.url = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-business-rate-relief">Gostyngiadau a disgowntiau ardrethi busnes</a>
+businessRatesBill.url1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/government/collections/financial-support-for-businesses-during-coronavirus-covid-19">Cefnogaeth i fusnesau yn ystod coronafirws (COVID-19)</a>
+
 # --- Business Rates Subcategories
 businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
 businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu fy ardal wedi newid
+businessRatesSubcategory.business_rates_bill = Fy mil ardrethi busnes
 businessRatesSubcategory.business_rates_assessed_for_bus_rates = Mae angen i’m heiddo gael ei asesu ar gyfer ardrethi busnes
 businessRatesSubcategory.business_rates_property_empty = Mae fy eiddo yn wag
 businessRatesSubcategory.business_rates_from_home = Rhedeg busnes o gartref
