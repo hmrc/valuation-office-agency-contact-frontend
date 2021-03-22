@@ -448,7 +448,7 @@ tellUsMore.areaChange.inset = You will need to supply evidence when we reply to 
 # --- Tell Us More CT other journey
 tellUsMore.other.title = What is your other Council Tax enquiry? - Valuation Office Agency contact form - GOV.UK
 tellUsMore.other.heading = What is your other Council Tax enquiry?
-tellUsMore.other.hint = Include details such as case reference numbers and dates
+tellUsMore.other.hint = Include details such as case reference numbers and dates.
 
 anythingElse.title = Is there anything else you would like to tell us about? - Valuation Office Agency contact form - GOV.UK
 anythingElse.heading = Is there anything else you would like to tell us about? (optional)
