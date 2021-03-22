@@ -408,7 +408,7 @@ businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi bu
 businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
 businessRatesSubcategory.business_rates_challenge = Herio fy mhrisiad ardrethi busnes
-businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu’r ardal lleol wedi newid
+businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu fy ardal wedi newid
 businessRatesSubcategory.business_rates_assessed_for_bus_rates = Mae angen i’m heiddo gael ei asesu ar gyfer ardrethi busnes
 businessRatesSubcategory.business_rates_from_home = Rhedeg busnes o gartref
 businessRatesSubcategory.business_rates_not_used = Nid yw fy eiddo bellach yn cael ei ddefnyddio ar gyfer busnes
@@ -419,11 +419,19 @@ businessRatesSubcategory.business_rates_change_valuation = Rwy’n credu bod fy 
 businessRatesChallenge.title = Herio fy mhrisiad trethi busnes - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesChallenge.heading = Herio fy mhrisiad trethi busnes
 businessRatesChallenge.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self">wasanaeth ar-lein</a> Asiantaeth y Swyddfa Brisio i wirio a herio eich prisiad ardrethi busnes.
-
-propertyOrAreaChanged.title = Mae fy eiddo neu’r ardal leol wedi newid - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-propertyOrAreaChanged.heading = Mae fy eiddo neu’r ardal leol wedi newid
-propertyOrAreaChanged.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self">wasanaeth ar-lein</a> Asiantaeth y Swyddfa Brisio i ddweud wrthym am newidiadau i’ch eiddo neu’r ardal o’i hamgylch.
 businessRatesSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
+
+propertyOrAreaChanged.title = Tell us about changes to your property or area - Valuation Office Agency contact form - GOV.UK
+propertyOrAreaChanged.heading = Tell us about changes to your property or area
+propertyOrAreaChanged.p1.url = https://www.gov.uk/correct-your-business-rates
+propertyOrAreaChanged.p1.part1 = Use the Valuation Office Agency''s online service
+propertyOrAreaChanged.p1.part2 = to tell us about changes to your property or the surrounding area.
+propertyOrAreaChanged.p2 = For properties in England, you will need to sign in and submit a 'check'.
+propertyOrAreaChanged.subheading = Other help on GOV.UK
+propertyOrAreaChanged.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
+propertyOrAreaChanged.p3 = A step by step guide to check and challenge your business rates in England
+propertyOrAreaChanged.p4.url = https://www.gov.uk/guidance/how-to-check-and-challenge-your-rateable-value-in-wales
+propertyOrAreaChanged.p4 = How to check and challenge your business rates valuation in Wales
 
 # --- Property address
 propertyAddress.title = Beth yw cyfeiriad yr eiddo? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
