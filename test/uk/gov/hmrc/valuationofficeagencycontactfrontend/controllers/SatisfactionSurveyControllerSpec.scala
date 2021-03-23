@@ -45,7 +45,6 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
 
   val answerSectionNew = AnswerSection(None, List(
     AnswerRow("enquiryCategory.checkYourAnswersLabel", "enquiryCategory.council_tax", true, ""),
-    AnswerRow("councilTaxSubcategory.checkYourAnswersLabel", "councilTaxSubcategory.council_tax_changes", true, ""),
     AnswerRow("contactDetails.heading", "Test<br>test123@test.com<br>077777777777", false, ""),
     AnswerRow("propertyAddress.heading", "123 test<br>london<br>bn12 2kj", false, ""),
     AnswerRow("tellUsMore.checkYourAnswersLabel", "some message", false, "")))
