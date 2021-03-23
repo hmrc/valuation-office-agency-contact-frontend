@@ -366,6 +366,9 @@ councilTaxSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
 # --- Business Rates Self Catering
 
 # --- Business Rates Subcategories
+# --- Business Rates Self Catering
+
+# --- Business Rates Subcategories
 # --- Self-catering properties or holiday lets in England
 propertyEnglandLets.title = Self-catering properties or holiday lets in England - Valuation Office Agency contact form - GOV.UK
 propertyEnglandLets.heading = Self-catering properties or holiday lets in England

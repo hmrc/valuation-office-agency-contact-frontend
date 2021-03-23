@@ -369,6 +369,14 @@ businessRatesSelfCatering.england = England
 businessRatesSelfCatering.wales = Wales
 error.businessRatesSelfCatering.required = Select if your property is in England or Wales
 
+# --- Business Rates Subcategories
+# --- Business Rates Self Catering
+businessRatesSelfCatering.title = Is your property or holiday let in England or Wales? - Valuation Office Agency contact form - GOV.UK
+businessRatesSelfCatering.heading = Is your property or holiday let in England or Wales?
+businessRatesSelfCatering.england = England
+businessRatesSelfCatering.wales = Wales
+error.businessRatesSelfCatering.required = Select if your property is in England or Wales
+
 # --- Self-catering properties or holiday lets in England
 propertyEnglandLets.title = Self-catering properties or holiday lets in England - Valuation Office Agency contact form - GOV.UK
 propertyEnglandLets.heading = Self-catering properties or holiday lets in England
@@ -468,7 +476,7 @@ tellUsMore.areaChange.inset = You will need to supply evidence when we reply to 
 # --- Tell Us More CT other journey
 tellUsMore.other.title = What is your other Council Tax enquiry? - Valuation Office Agency contact form - GOV.UK
 tellUsMore.other.heading = What is your other Council Tax enquiry?
-tellUsMore.other.hint = Include details such as case reference numbers and dates
+tellUsMore.other.hint = Include details such as case reference numbers and dates.
 
 anythingElse.title = Is there anything else you would like to tell us about? - Valuation Office Agency contact form - GOV.UK
 anythingElse.heading = Is there anything else you would like to tell us about? (optional)

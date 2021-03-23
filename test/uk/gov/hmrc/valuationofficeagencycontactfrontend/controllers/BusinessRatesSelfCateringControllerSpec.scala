@@ -40,8 +40,8 @@ class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
   new BusinessRatesSelfCateringController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-  dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSelfCateringEnquiry, propertyEnglandLets ,stubMessageControllerComponents)
-
+  dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSelfCateringEnquiry, stubMessageControllerComponents)
+ 
   def viewAsString(form: Form[String] = BusinessRatesSelfCateringForm()) = businessRatesSelfCateringEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
   "BusinessRatesSelfCateringController" must {
