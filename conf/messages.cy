@@ -364,6 +364,28 @@ councilTaxSubcategory.council_tax_other = Arall
 councilTaxSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
 
 # --- Business Rates Self Catering
+businessRatesSelfCatering.title = A yw eich eiddo neu osodiad gwyliau yng Nghymru neu Lloegr? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesSelfCatering.heading = A yw eich eiddo neu osodiad gwyliau yng Nghymru neu Lloegr?
+businessRatesSelfCatering.england = Lloegr
+businessRatesSelfCatering.wales = Cymru
+error.businessRatesSelfCatering.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
+
+# --- Business Rates Subcategories
+# --- Business Rates Self Catering
+
+# --- Business Rates Subcategories
+# --- Self-catering properties or holiday lets in England
+propertyEnglandLets.title = Self-catering properties or holiday lets in England - Valuation Office Agency contact form - GOV.UK
+propertyEnglandLets.heading = Self-catering properties or holiday lets in England
+propertyEnglandLets.p1 = If your property is in England and available to let for short periods that total 140 days or more per year, it will be valued for business rates.
+propertyEnglandLets.p2.url = https://www.gov.uk/find-local-council
+propertyEnglandLets.p2.part1 = Contact your local council
+propertyEnglandLets.p2.part2 = and let them know the details of the property. They will then pass on what we need to value the property.
+propertyEnglandLets.subheading = Other help on GOV.UK
+propertyEnglandLets.p3.url = https://www.gov.uk/introduction-to-business-rates/self-catering-and-holiday-let-accommodation
+propertyEnglandLets.p3 = Self-catering and holiday lets
+
+# --- Business Rates Self Catering
 
 # --- Business Rates Subcategories
 # --- Self-catering properties or holiday lets in England
@@ -398,7 +420,6 @@ businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu’r ardal lle
 businessRatesSubcategory.business_rates_assessed_for_bus_rates = Mae angen i’m heiddo gael ei asesu ar gyfer ardrethi busnes
 businessRatesSubcategory.business_rates_from_home = Rhedeg busnes o gartref
 businessRatesSubcategory.business_rates_not_used = Nid yw fy eiddo bellach yn cael ei ddefnyddio ar gyfer busnes
-businessRatesSubcategory.business_rates_self_catering = Eiddo hunanarlwyo neu osodiad gwyliau
 businessRatesSubcategory.business_rates_other = Unrhyw ymholiad ardrethu busnes arall
 
 businessRatesChallenge.title = Herio fy mhrisiad trethi busnes - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK

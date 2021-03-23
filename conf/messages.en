@@ -369,6 +369,33 @@ businessRatesSelfCatering.england = England
 businessRatesSelfCatering.wales = Wales
 error.businessRatesSelfCatering.required = Select if your property is in England or Wales
 
+# --- Business Rates Subcategories
+# --- Business Rates Self Catering
+businessRatesSelfCatering.title = Is your property or holiday let in England or Wales? - Valuation Office Agency contact form - GOV.UK
+businessRatesSelfCatering.heading = Is your property or holiday let in England or Wales?
+businessRatesSelfCatering.england = England
+businessRatesSelfCatering.wales = Wales
+error.businessRatesSelfCatering.required = Select if your property is in England or Wales
+
+# --- Self-catering properties or holiday lets in England
+propertyEnglandLets.title = Self-catering properties or holiday lets in England - Valuation Office Agency contact form - GOV.UK
+propertyEnglandLets.heading = Self-catering properties or holiday lets in England
+propertyEnglandLets.p1 = If your property is in England and available to let for short periods that total 140 days or more per year, it will be valued for business rates.
+propertyEnglandLets.p2.url = https://www.gov.uk/find-local-council
+propertyEnglandLets.p2.part1 = Contact your local council
+propertyEnglandLets.p2.part2 = and let them know the details of the property. They will then pass on what we need to value the property.
+propertyEnglandLets.subheading = Other help on GOV.UK
+propertyEnglandLets.p3.url = https://www.gov.uk/introduction-to-business-rates/self-catering-and-holiday-let-accommodation
+propertyEnglandLets.p3 = Self-catering and holiday lets
+
+# --- Business Rates Subcategories
+# --- Business Rates Self Catering
+businessRatesSelfCatering.title = Is your property or holiday let in England or Wales? - Valuation Office Agency contact form - GOV.UK
+businessRatesSelfCatering.heading = Is your property or holiday let in England or Wales?
+businessRatesSelfCatering.england = England
+businessRatesSelfCatering.wales = Wales
+error.businessRatesSelfCatering.required = Select if your property is in England or Wales
+
 # --- Self-catering properties or holiday lets in England
 propertyEnglandLets.title = Self-catering properties or holiday lets in England - Valuation Office Agency contact form - GOV.UK
 propertyEnglandLets.heading = Self-catering properties or holiday lets in England
@@ -401,7 +428,6 @@ businessRatesSubcategory.business_rates_changes = My property or the local area 
 businessRatesSubcategory.business_rates_assessed_for_bus_rates = I need my property assessed for business rates
 businessRatesSubcategory.business_rates_from_home = Running a business from home
 businessRatesSubcategory.business_rates_not_used = My property is no longer used for business
-businessRatesSubcategory.business_rates_self_catering = A self-catering property or holiday let
 businessRatesSubcategory.business_rates_other = Any other business rates enquiry
 
 businessRatesChallenge.title = Challenging my business rates valuation - Valuation Office Agency contact form - GOV.UK
@@ -481,7 +507,7 @@ tellUsMore.areaChange.inset = You will need to supply evidence when we reply to 
 # --- Tell Us More CT other journey
 tellUsMore.other.title = What is your other Council Tax enquiry? - Valuation Office Agency contact form - GOV.UK
 tellUsMore.other.heading = What is your other Council Tax enquiry?
-tellUsMore.other.hint = Include details such as case reference numbers and dates
+tellUsMore.other.hint = Include details such as case reference numbers and dates.
 
 anythingElse.title = Is there anything else you would like to tell us about? - Valuation Office Agency contact form - GOV.UK
 anythingElse.heading = Is there anything else you would like to tell us about? (optional)

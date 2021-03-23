@@ -228,7 +228,7 @@ class Navigator @Inject()() {
   private val selfCateringPageRouting: UserAnswers => Call = answers => {
     answers.businessRatesSelfCateringEnquiry match {
       case Some("england") => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
-      case Some("wales") => routes.BusinessRatesSelfCateringController.onWalLetsPageLoad()
+      case Some("wales") => ???
       case _ =>
         Logger.warn(s"Navigation for is business rates self catering enquiry reached without selection of enquiry by controller")
         throw new RuntimeException("Unknown exception for is business rates self catering routing")
