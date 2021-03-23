@@ -364,6 +364,11 @@ councilTaxSubcategory.council_tax_other = Arall
 councilTaxSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
 
 # --- Business Rates Self Catering
+businessRatesSelfCatering.title = A yw eich eiddo neu osodiad gwyliau yng Nghymru neu Lloegr? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesSelfCatering.heading = A yw eich eiddo neu osodiad gwyliau yng Nghymru neu Lloegr?
+businessRatesSelfCatering.england = Lloegr
+businessRatesSelfCatering.wales = Cymru
+error.businessRatesSelfCatering.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
 
 # --- Business Rates Subcategories
 businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
