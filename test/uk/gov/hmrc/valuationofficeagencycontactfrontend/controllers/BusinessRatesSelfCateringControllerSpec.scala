@@ -40,8 +40,8 @@ class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
   new BusinessRatesSelfCateringController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-  dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSelfCateringEnquiry, stubMessageControllerComponents)
- 
+  dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSelfCateringEnquiry, propertyEnglandLets,  stubMessageControllerComponents)
+
   def viewAsString(form: Form[String] = BusinessRatesSelfCateringForm()) = businessRatesSelfCateringEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
   "BusinessRatesSelfCateringController" must {
@@ -53,7 +53,7 @@ class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe viewAsString()
     }
 
-    "populate the view correctly on a GET when the question has previously been answered" in {
+    "populate the view correctly on a GET when thNavigatorSpece question has previously been answered" in {
       val validData = Map(BusinessRatesSelfCateringId.toString -> JsString(BusinessRatesSelfCateringForm.options.head.value))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
