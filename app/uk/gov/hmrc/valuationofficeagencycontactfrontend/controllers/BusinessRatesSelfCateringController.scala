@@ -29,6 +29,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSelfCateringEnquiry => business_rates_self_catering_enquiry}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLets => england_lets}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets => wales_lets}
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
@@ -42,6 +43,7 @@ class BusinessRatesSelfCateringController @Inject()(
                                                 requireData: DataRequiredAction,
                                                 businessRatesSelfCateringEnquiry: business_rates_self_catering_enquiry,
                                                 propertyEnglandLets: england_lets,
+                                                propertyWalesLets: wales_lets,
                                                 cc: MessagesControllerComponents
                                               ) extends FrontendController(cc) with I18nSupport {
 
@@ -71,6 +73,11 @@ class BusinessRatesSelfCateringController @Inject()(
   def onEngLetsPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
       implicit request =>
         Ok(propertyEnglandLets(appConfig))
+  }
+
+  def onWalLetsPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+    implicit request =>
+      Ok(propertyWalesLets(appConfig))
   }
 
 }

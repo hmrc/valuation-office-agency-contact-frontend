@@ -17,19 +17,19 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLets => england_lets}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets => wales_lets}
 
-class PropertyEnglandLetsViewSpec  extends ViewBehaviours {
+class PropertyWalesLetsViewSpec  extends ViewBehaviours {
 
-  def propertyEnglandLets = app.injector.instanceOf[england_lets]
+  def propertyWalesLets = app.injector.instanceOf[wales_lets]
 
-  def view = () => propertyEnglandLets(frontendAppConfig)(fakeRequest, messages)
+  def view = () => propertyWalesLets(frontendAppConfig)(fakeRequest, messages)
 
   "Property England Lets view" must {
-    behave like normalPage(view, "propertyEnglandLets", "title", "heading",
-      "p1", "p2.url", "p2.part1", "p2.part2", "subheading", "p3", "p3.url")
+    behave like normalPage(view, "propertyWalesLets", "title", "heading",
+      "p1", "p1.bl1", "p1.bl2", "p2.url", "p2.part1", "p2.part2", "subheading", "p3", "p3.url")
 
-    "has a link marked with site.back leading to the Property England Lets Page" in {
+    "has a link marked with site.back leading to the Property Wales Lets Page" in {
       val doc = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
