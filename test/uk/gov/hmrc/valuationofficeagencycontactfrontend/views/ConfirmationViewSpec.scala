@@ -37,7 +37,6 @@ class ConfirmationViewSpec extends ViewBehaviours {
   val whatHappensNew = Seq("confirmation.new.p1")
   val answerSectionNew = AnswerSection(None, List(
     AnswerRow("enquiryCategory.checkYourAnswersLabel", "enquiryCategory.council_tax", true, ""),
-    AnswerRow("councilTaxSubcategory.checkYourAnswersLabel", "councilTaxSubcategory.council_tax_changes", true, ""),
     AnswerRow("contactDetails.heading", "c1<br>c3<br>c5", false, ""),
     AnswerRow("propertyAddress.heading", "a<br>b<br>c<br>d<br>f", false, ""),
     AnswerRow("tellUsMore.checkYourAnswersLabel", "some message", false, "")))
