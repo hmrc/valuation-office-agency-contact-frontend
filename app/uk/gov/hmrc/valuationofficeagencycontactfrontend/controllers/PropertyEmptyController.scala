@@ -22,19 +22,26 @@ import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxPropertyEmpty => council_tax_property_empty}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesPropertyEmpty => business_rates_property_empty}
 
 import javax.inject.Inject
 
-class CouncilTaxPropertyEmptyController @Inject() (appConfig: FrontendAppConfig,
-                                                    override val messagesApi: MessagesApi,
-                                                    getData: DataRetrievalAction,
-                                                    requireData: DataRequiredAction,
-                                                    councilTaxPropertyEmpty: council_tax_property_empty,
-                                                    cc: MessagesControllerComponents
+class PropertyEmptyController @Inject()(appConfig: FrontendAppConfig,
+                                        override val messagesApi: MessagesApi,
+                                        getData: DataRetrievalAction,
+                                        requireData: DataRequiredAction,
+                                        councilTaxPropertyEmpty: council_tax_property_empty,
+                                        businessRatesPropertyEmpty: business_rates_property_empty,
+                                        cc: MessagesControllerComponents
                                                    ) extends FrontendController(cc) with I18nSupport {
   def onPageLoad(): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(councilTaxPropertyEmpty(appConfig))
+  }
+
+  def onBusinessRatesPageLoad(): Action[AnyContent] = (getData andThen requireData) {
+    implicit request =>
+      Ok(businessRatesPropertyEmpty(appConfig))
   }
 
 }

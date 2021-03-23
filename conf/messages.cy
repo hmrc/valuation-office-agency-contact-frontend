@@ -369,9 +369,6 @@ businessRatesSelfCatering.wales = Cymru
 error.businessRatesSelfCatering.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
 
 # --- Business Rates Subcategories
-# --- Business Rates Self Catering
-
-# --- Business Rates Subcategories
 # --- Self-catering properties or holiday lets in England
 propertyEnglandLets.title = Eiddo hunanarlwyo neu osodiadau gwyliau yn Lloegr - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 propertyEnglandLets.heading = Eiddo hunanarlwyo neu osodiadau gwyliau yn Lloegr
@@ -444,12 +441,21 @@ businessRatesValuation.p3 = Sut mae eiddo''n cael ei brisio ar gyfer ardrethi bu
 businessRatesValuation.p4.url = https://www.gov.uk/calculate-your-business-rates
 businessRatesValuation.p4 = Amcangyfrifwch eich ardrethi busnes
 
+# -------- Business Rates Property Empty
+businessRatesPropertyEmpty.title = Nid yw ardrethi busnes yn cael eu heffeithio os yw eiddo'n wag - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesPropertyEmpty.heading = Nid yw ardrethi busnes yn cael eu heffeithio os yw eiddo'n wag
+businessRatesPropertyEmpty.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/contact-your-local-council-about-business-rates">Cysylltwch â'ch cyngor lleol</a> i ddarganfod a allwch gael unrhyw ostyngiadau neu ddisgowntiau ar eich bil.
+businessRatesPropertyEmpty.subheading = Cymorth arall ar GOV.UK
+businessRatesPropertyEmpty.url = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-business-rate-relief">Gostyngiadau a disgowntiau ardrethi busnes</a>
+
 # --- Business Rates Subcategories
 businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
 businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu fy ardal wedi newid
 businessRatesSubcategory.business_rates_assessed_for_bus_rates = Mae angen i’m heiddo gael ei asesu ar gyfer ardrethi busnes
+businessRatesSubcategory.business_rates_property_empty = Mae fy eiddo yn wag
+businessRatesSubcategory.business_rates_from_home = Rhedeg busnes o gartref
 businessRatesSubcategory.business_rates_from_home = Rwy’n defnyddio fy nghartref ar gyfer busnes
 businessRatesSubcategory.business_rates_not_used = Nid yw fy eiddo bellach yn cael ei ddefnyddio ar gyfer busnes
 businessRatesSubcategory.business_rates_self_catering = Eiddo hunanarlwyo neu osodiad gwyliau
