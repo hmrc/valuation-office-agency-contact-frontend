@@ -371,6 +371,20 @@ businessRatesSelfCatering.wales = Cymru
 error.businessRatesSelfCatering.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
 
 # --- Business Rates Subcategories
+# --- Business Rates Self Catering
+
+# --- Business Rates Subcategories
+# --- Self-catering properties or holiday lets in England
+propertyEnglandLets.title = Self-catering properties or holiday lets in England - Valuation Office Agency contact form - GOV.UK
+propertyEnglandLets.heading = Self-catering properties or holiday lets in England
+propertyEnglandLets.p1 = If your property is in England and available to let for short periods that total 140 days or more per year, it will be valued for business rates.
+propertyEnglandLets.p2.url = https://www.gov.uk/find-local-council
+propertyEnglandLets.p2.part1 = Contact your local council
+propertyEnglandLets.p2.part2 = and let them know the details of the property. They will then pass on what we need to value the property.
+propertyEnglandLets.subheading = Other help on GOV.UK
+propertyEnglandLets.p3.url = https://www.gov.uk/introduction-to-business-rates/self-catering-and-holiday-let-accommodation
+propertyEnglandLets.p3 = Self-catering and holiday lets
+
 businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?

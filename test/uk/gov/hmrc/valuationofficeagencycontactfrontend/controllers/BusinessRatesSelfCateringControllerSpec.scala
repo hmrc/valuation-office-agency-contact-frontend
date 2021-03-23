@@ -1,3 +1,19 @@
+/*
+ * Copyright 2021 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.data.Form
@@ -13,16 +29,18 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSelfCateringEnquiry => business_rates_self_catering_enquiry}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLets => england_lets}
 
 class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
 
   def businessRatesSelfCateringEnquiry = app.injector.instanceOf[business_rates_self_catering_enquiry]
+  def propertyEnglandLets = app.injector.instanceOf[england_lets]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
   new BusinessRatesSelfCateringController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-  dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSelfCateringEnquiry, stubMessageControllerComponents)
+  dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSelfCateringEnquiry, propertyEnglandLets,  stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = BusinessRatesSelfCateringForm()) = businessRatesSelfCateringEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
@@ -35,7 +53,7 @@ class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe viewAsString()
     }
 
-    "populate the view correctly on a GET when the question has previously been answered" in {
+    "populate the view correctly on a GET when thNavigatorSpece question has previously been answered" in {
       val validData = Map(BusinessRatesSelfCateringId.toString -> JsString(BusinessRatesSelfCateringForm.options.head.value))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
@@ -60,6 +78,13 @@ class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
 
       status(result) mustBe BAD_REQUEST
       contentAsString(result) mustBe viewAsString(boundForm)
+    }
+
+    "return OK and the correct view for england lets page GET" in {
+      val result = controller().onEngLetsPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe propertyEnglandLets(frontendAppConfig)(fakeRequest, messages).toString()
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {

@@ -118,6 +118,7 @@ POST        /date-property-business-area-changed   uk.gov.hmrc.valuationofficeag
 
 GET         /self-catering-holiday-let             uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onPageLoad(mode: Mode = NormalMode)
 POST        /self-catering-holiday-let             uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onSubmit(mode: Mode = NormalMode)
+GET         /property-england-lets                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onEngLetsPageLoad(mode: Mode = NormalMode)
 
 # SURVEY
 GET         /survey-thanks                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.surveyThankyou
