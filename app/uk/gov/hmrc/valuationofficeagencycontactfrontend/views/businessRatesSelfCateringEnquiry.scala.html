@@ -45,7 +45,7 @@ govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErro
 }
 
 @mainTemplate(
-    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("annexeSelfContainedEnquiry.title"))else messages("annexeSelfContainedEnquiry.title")),
+    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("businessRatesSelfCatering.title"))else messages("businessRatesSelfCatering.title")),
     beforeContentBlock = Option(beforeBlock)
 ) {
     @formWithCSFR(action = BusinessRatesSelfCateringController.onSubmit(), 'autoComplete -> "off") {
