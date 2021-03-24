@@ -424,6 +424,13 @@ businessRatesPropertyEnquiry.england = England
 businessRatesPropertyEnquiry.wales = Wales
 error.businessRatesPropertyEnquiry.required = Select if your property is in England or Wales
 
+# --- Business Rates Property Enquiry
+businessRatesPropertyEnquiry.title = Is your property in England or Wales? - Valuation Office Agency contact form - GOV.UK
+businessRatesPropertyEnquiry.heading = Is your property in England or Wales?
+businessRatesPropertyEnquiry.england = England
+businessRatesPropertyEnquiry.wales = Wales
+error.businessRatesPropertyEnquiry.required = Select if your property is in England or Wales
+
 # --- Business Rates Subcategories
 businessRatesSubcategory.title = What is your business rates enquiry about? - Valuation Office Agency contact form - GOV.UK
 businessRatesSubcategory.heading = What is your business rates enquiry about?

@@ -433,6 +433,14 @@ businessRatesPropertyEnquiry.wales = Cymru
 error.businessRatesPropertyEnquiry.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
 
 # --- Business Rates Subcategories
+# --- Business Rates Property Enquiry
+businessRatesPropertyEnquiry.title = A yw eich eiddo yng Nghymru neu Lloegr? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesPropertyEnquiry.heading = A yw eich eiddo yng Nghymru neu Lloegr?
+businessRatesPropertyEnquiry.england = Lloegr
+businessRatesPropertyEnquiry.wales = Cymru
+error.businessRatesPropertyEnquiry.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
+
+# --- Business Rates Subcategories
 businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
