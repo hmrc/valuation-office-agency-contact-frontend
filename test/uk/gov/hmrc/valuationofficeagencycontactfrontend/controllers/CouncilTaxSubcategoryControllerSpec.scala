@@ -44,6 +44,8 @@ class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with Mockit
     val fakeDataCacheConnector = mock[DataCacheConnector]
     when(fakeDataCacheConnector.save(any, any, any)(any))
       .thenReturn(Future.successful(CacheMap("councilTaxSubcategory", Map("councilTaxSubcategory" -> JsString("bar")))))
+    when(fakeDataCacheConnector.remove(any[String], any[String]))
+      .thenReturn(Future.successful(true))
     new CouncilTaxSubcategoryController(frontendAppConfig, messagesApi, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl(ec), councilTaxSubcategory, MessageControllerComponentsHelpers.stubMessageControllerComponents)
   }
