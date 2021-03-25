@@ -41,13 +41,11 @@ object CouncilTaxSubcategoryForm extends FormErrorHelper {
     RadioOption("councilTaxSubcategory", CouncilTaxBandTooHighId.toString),
     RadioOption("councilTaxSubcategory", CouncilTaxBillId.toString),
     RadioOption("councilTaxSubcategory", CouncilTaxBandForNewId.toString),
+    RadioOption("councilTaxSubcategory", "council_tax_business_uses"),
     RadioOption("councilTaxSubcategory", CouncilTaxPropertyEmptyId.toString),
     RadioOption("councilTaxSubcategory", CouncilTaxPropertyPoorRepairId.toString),
-    RadioOption("councilTaxSubcategory", CouncilTaxPropertyDemolishedId.toString),
-    RadioOption("councilTaxSubcategory", "council_tax_changes"),
-    RadioOption("councilTaxSubcategory", "council_tax_ndr_changes"),
-    RadioOption("councilTaxSubcategory", "council_tax_business_uses"),
     RadioOption("councilTaxSubcategory", CouncilTaxAnnexeEnquiryId.toString),
+    RadioOption("councilTaxSubcategory", CouncilTaxPropertyDemolishedId.toString),
     RadioOption("councilTaxSubcategory", CouncilTaxAreaChangeId.toString),
     RadioOption("councilTaxSubcategory", "council_tax_other")
   )

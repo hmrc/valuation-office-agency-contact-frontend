@@ -23,9 +23,11 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBu
 
 class CouncilTaxBusinessEnquiryViewSpec extends ViewBehaviours {
 
+  val backlink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
+
   def councilTaxBusinessEnquiry = app.injector.instanceOf[council_tax_business_enquiry]
 
-  def view = () => councilTaxBusinessEnquiry(frontendAppConfig, CouncilTaxBusinessEnquiryForm(), NormalMode)(fakeRequest, messages)
+  def view = () => councilTaxBusinessEnquiry(frontendAppConfig, CouncilTaxBusinessEnquiryForm(), NormalMode, backlink)(fakeRequest, messages)
 
   "Council Tax Bill view" must {
     behave like normalPage(view, "councilTaxBusinessEnquiry", "title", "heading",
@@ -36,7 +38,7 @@ class CouncilTaxBusinessEnquiryViewSpec extends ViewBehaviours {
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
+      backlinkUrl mustBe backlink
     }
   }
 

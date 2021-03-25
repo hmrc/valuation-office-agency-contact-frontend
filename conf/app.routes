@@ -107,11 +107,12 @@ GET         /annexe-self-contained                 uk.gov.hmrc.valuationofficeag
 GET         /annexe-cooking-washing                uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxAnnexeController.onHaveCookingWashingPageLoad()
 POST        /annexe-cooking-washing                uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxAnnexeController.onHaveCookingWashingSubmit()
 
-GET         /property-used-for-business            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBusinessController.onPageLoad(mode: Mode = NormalMode)
-POST        /property-used-for-business            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBusinessController.onEnquirySubmit(mode: Mode = NormalMode)
-GET         /small-part-of-property-used-for-business uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBusinessController.onSmallPartUsedPageLoad(mode: Mode = NormalMode)
-GET         /date-property-business-changed        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.DatePropertyChangedController.onPageLoad(mode: Mode = NormalMode)
-POST        /date-property-business-changed        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.DatePropertyChangedController.onSubmit(mode: Mode = NormalMode)
+GET         /property-used-for-business                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBusinessController.onPageLoad(mode: Mode = NormalMode)
+POST        /property-used-for-business                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBusinessController.onEnquirySubmit(mode: Mode = NormalMode)
+GET         /small-part-of-property-used-for-business           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBusinessController.onSmallPartUsedPageLoad(mode: Mode = NormalMode)
+GET         /small-part-of-property-used-for-business-rates     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBusinessController.onSmallPartUsedBusinessRatesPageLoad()
+GET         /date-property-business-changed                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.DatePropertyChangedController.onPageLoad(mode: Mode = NormalMode)
+POST        /date-property-business-changed                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.DatePropertyChangedController.onSubmit(mode: Mode = NormalMode)
 
 GET         /date-property-business-area-changed   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.DatePropertyChangedController.onPageLoad(mode: Mode = NormalMode)
 POST        /date-property-business-area-changed   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.DatePropertyChangedController.onSubmit(mode: Mode = NormalMode)
@@ -121,7 +122,6 @@ POST        /self-catering-holiday-let             uk.gov.hmrc.valuationofficeag
 GET         /property-england-lets                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onEngLetsPageLoad(mode: Mode = NormalMode)
 GET         /property-wales-lets                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onWalLetsPageLoad(mode: Mode = NormalMode)
 GET         /change-valuation                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onChangeValuationPageLoad(mode: Mode = NormalMode)
-
 
 # SURVEY
 GET         /survey-thanks                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.surveyThankyou

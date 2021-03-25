@@ -16,11 +16,14 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
+import org.mockito.Matchers.any
+import org.mockito.Mockito.when
+import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.JsString
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSubcategoryForm
@@ -30,12 +33,21 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerC
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSubcategory => business_rates_subcategory}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesChangeValuation => business_rates_change_valuation}
 
-class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase {
+import scala.concurrent.Future
+
+class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with MockitoSugar {
+  val fakeDataCacheConnector = mock[DataCacheConnector]
 
   def businessRatesSubcategory = app.injector.instanceOf[business_rates_subcategory]
   def businessRatesChangeValuation = app.injector.instanceOf[business_rates_change_valuation]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+
+  when(fakeDataCacheConnector.remove(any[String], any[String]))
+    .thenReturn(Future.successful(true))
+
+  when(fakeDataCacheConnector.save(any, any, any)(any))
+    .thenReturn(Future.successful(CacheMap("businessRatesSubcategory", Map("businessRatesSubcategory" -> JsString("bar")))))
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new BusinessRatesSubcategoryController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
