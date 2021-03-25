@@ -27,7 +27,7 @@ class BusinessRatesChangeValuationViewSpec extends ViewBehaviours {
   def view = () => businessRatesChangeValuation(frontendAppConfig, NormalMode)(fakeRequest, messages)
 
   "Business rates change valuation online view" must {
-    behave like normalPage(view, "valuationOnline", "title", "heading",
+    behave like normalPage(view, "businessRatesValuationOnline", "title", "heading",
       "p1.url", "p1.part1", "p1.part2", "subheading1", "p2", "subheading1", "p3.url", "p3", "p4.url", "p4")
 
     "has a link marked with site.back leading to the Business Rates change valuation page" in {

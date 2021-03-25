@@ -50,7 +50,7 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
     .thenReturn(Future.successful(CacheMap("businessRatesSubcategory", Map("businessRatesSubcategory" -> JsString("bar")))))
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new BusinessRatesSubcategoryController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+    new BusinessRatesSubcategoryController(frontendAppConfig, messagesApi, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSubcategory, businessRatesChangeValuation,
       MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
