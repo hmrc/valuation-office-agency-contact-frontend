@@ -429,6 +429,7 @@ businessRatesSubcategory.business_rates_from_home = Rwy’n defnyddio fy nghartr
 businessRatesSubcategory.business_rates_not_used = Nid yw fy eiddo bellach yn cael ei ddefnyddio ar gyfer busnes
 businessRatesSubcategory.business_rates_self_catering = Eiddo hunanarlwyo neu osodiad gwyliau
 businessRatesSubcategory.business_rates_other = Unrhyw ymholiad ardrethu busnes arall
+businessRatesSubcategory.business_rates_change_valuation = Rwy’n credu bod fy mhrisiad ardrethi busnes yn anghywir
 
 businessRatesChallenge.title = Herio fy mhrisiad trethi busnes - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesChallenge.heading = Herio fy mhrisiad trethi busnes
