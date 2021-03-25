@@ -31,6 +31,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.BusinessRate
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSubcategory => business_rates_subcategory}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesChangeValuation => business_rates_change_valuation}
 
 import scala.concurrent.Future
 
@@ -38,6 +39,7 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
   val fakeDataCacheConnector = mock[DataCacheConnector]
 
   def businessRatesSubcategory = app.injector.instanceOf[business_rates_subcategory]
+  def businessRatesChangeValuation = app.injector.instanceOf[business_rates_change_valuation]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
@@ -49,7 +51,8 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new BusinessRatesSubcategoryController(frontendAppConfig, messagesApi, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSubcategory, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSubcategory, businessRatesChangeValuation,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = BusinessRatesSubcategoryForm()) = businessRatesSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
@@ -88,6 +91,13 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
 
       status(result) mustBe BAD_REQUEST
       contentAsString(result) mustBe viewAsString(boundForm)
+    }
+
+    "return OK and the correct view for change valuation" in {
+      val result = controller().onChangeValuationPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe businessRatesChangeValuation(frontendAppConfig,NormalMode)(fakeRequest, messages).toString()
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {

@@ -404,6 +404,20 @@ businessRatesNoNeedToPay.subheading = Cymorth arall ar GOV.UK
 businessRatesNoNeedToPay.url = <a href="https://www.gov.uk/introduction-to-business-rates/working-at-home" target="_self">Gweithio gartref</a>
 businessRatesNoNeedToPay.url1 = <a href="https://www.gov.uk/run-business-from-home" target="_self">Rhedeg busnes o gartref</a>
 
+# --- Check and challenge your business rates valuation online
+businessRatesValuationOnline.title = Gwirio a herio eich prisiad ardrethi busnes ar-lein - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesValuationOnline.heading = Gwirio a herio eich prisiad ardrethi busnes ar-lein
+businessRatesValuationOnline.p1.url = https://www.gov.uk/correct-your-business-rates
+businessRatesValuationOnline.p1.part1 = Defnyddiwch wasanaeth ar-lein Asiantaeth y Swyddfa Brisio
+businessRatesValuationOnline.p1.part2 = os ydych chi''n credu y dylid newid eich prisiad ardrethi busnes.
+businessRatesValuationOnline.subheading1 = For properties in England
+businessRatesValuationOnline.p2 = Cyflwynwch wiriad i wneud unrhyw newidiadau i fanylion ffisegol, neu eu cadarnhau os nad oes unrhyw newidiadau i''w gwneud. Gallwch herio''r prisiad ar ôl i''r gwiriad gael ei ddatrys.
+businessRatesValuationOnline.subheading2 = Cymorth arall ar GOV.UK
+businessRatesValuationOnline.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
+businessRatesValuationOnline.p3 = Sut i wirio a herio eich prisiad ardrethi busnes
+businessRatesValuationOnline.p4.url = https://www.gov.uk/introduction-to-business-rates
+businessRatesValuationOnline.p4 = Mwy am ardrethi busnes a sut maent yn cael eu cyfrifo
+
 # --- Business Rates Subcategories
 businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?
