@@ -396,6 +396,15 @@ propertyWalesLets.subheading = Cymorth arall ar GOV.UK
 propertyWalesLets.p3.url = https://www.gov.uk/introduction-to-business-rates/self-catering-and-holiday-let-accommodation
 propertyWalesLets.p3 = Eiddo hunanarlwyo a gosodiadau gwyliau
 
+# --- Not need to pay business rates
+businessRatesNoNeedToPay.title = Ni fydd angen i chi dalu ardrethi busnes - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesNoNeedToPay.heading = Ni fydd angen i chi dalu ardrethi busnes
+businessRatesNoNeedToPay.p1 = Os ydych chi’n defnyddio ystafell fel swyddfa yn unig neu’n gwerthu nwyddau trwy’r post, ni fydd angen i chi dalu ardrethi busnes. Ni fydd eich band Treth Gyngor yn cael ei effeithio.
+businessRatesNoNeedToPay.subheading = Cymorth arall ar GOV.UK
+businessRatesNoNeedToPay.url = <a href="https://www.gov.uk/introduction-to-business-rates/working-at-home" target="_self">Gweithio gartref</a>
+businessRatesNoNeedToPay.url1 = <a href="https://www.gov.uk/run-business-from-home" target="_self">Rhedeg busnes o gartref</a>
+
+# --- Business Rates Subcategories
 businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
