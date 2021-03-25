@@ -59,7 +59,7 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoS
     datePropertyChanged(frontendAppConfig, form, NormalMode, "datePropertyChanged.poorRepair", routePoorRepair.url)(fakeRequest, messages).toString
 
   def viewBusinessAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()) =
-    datePropertyChanged(frontendAppConfig, form, NormalMode, "datePropertyChanged.business", routeBusiness.url)(fakeRequest, messages).toString
+    datePropertyChanged(frontendAppConfig, form, NormalMode, "datePropertyChanged.business", routeAreaChange.url)(fakeRequest, messages).toString
 
   def viewAreaChangeAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()) =
     datePropertyChanged(frontendAppConfig, form, NormalMode, "datePropertyChanged.areaChange", routeAreaChange.url)(fakeRequest, messages).toString

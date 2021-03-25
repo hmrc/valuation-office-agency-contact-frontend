@@ -122,9 +122,9 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesSelfCateringController.onPageLoad()
       }
 
-      "return a function that goes to the council tax business enquiry when an enquiry category for business rates has been selected and business_rates_from_home option selected" in {
+      "return a function that goes to the date property changed when an enquiry category for business rates has been selected and business_rates_from_home option selected" in {
         when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_from_home")
-        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxBusinessController.onPageLoad()
+        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.DatePropertyChangedController.onPageLoad()
       }
 
       "throw exception when an enquiry category for business rates has been selected and not other options was selected on next page" in {
@@ -348,9 +348,9 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAnnexeController.onPageLoad()
       }
 
-      "return a function that goes to the council tax business property page when an enquiry category for council tax has been selected and council_tax_business_uses option selected" in {
+      "return a function that goes to the council tax date property changed page when an enquiry category for council tax has been selected and council_tax_business_uses option selected" in {
         when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_business_uses")
-        navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxBusinessController.onPageLoad()
+        navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.DatePropertyChangedController.onPageLoad()
       }
 
       "return a function that goes to the council tax area change page when an enquiry category for council tax has been selected and council_tax_area_change option selected" in {
