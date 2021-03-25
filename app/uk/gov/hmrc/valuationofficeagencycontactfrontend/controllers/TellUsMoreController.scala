@@ -85,6 +85,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
       case (Some("council_tax"), Some("council_tax_property_poor_repair"), _) => Right("tellUsMore.poorRepair")
       case (Some("council_tax"), Some("council_tax_business_uses"), _) => Right("tellUsMore.business")
       case (Some("business_rates"), _, Some("business_rates_from_home")) => Right("tellUsMore.business")
+      case (Some("business_rates"), _, Some("business_rates_not_used")) => Right("tellUsMore.notUsed")
       case (Some("business_rates"), _, Some("business_rates_other")) => Right("tellUsMore.business.other")
       case (Some("council_tax"), Some("council_tax_area_change"), _) => Right("tellUsMore.areaChange")
       case (Some("council_tax"), Some("council_tax_other"), _) => Right("tellUsMore.other")
@@ -101,6 +102,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
       case (Some("council_tax_area_change"), _) => routes.DatePropertyChangedController.onPageLoad().url
       case (Some("council_tax_other"), _) => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
       case (_, Some("business_rates_from_home")) => routes.DatePropertyChangedController.onPageLoad().url
+      case (_, Some("business_rates_not_used")) => routes.DatePropertyChangedController.onPageLoad().url
       case (_, Some("business_rates_other")) => routes.BusinessRatesSubcategoryController.onPageLoad(mode).url
       case _ => routes.PropertyAddressController.onPageLoad(NormalMode).url
     }

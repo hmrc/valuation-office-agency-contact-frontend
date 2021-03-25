@@ -190,6 +190,7 @@ class Navigator @Inject()() {
       case (Some("council_tax_area_change"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (Some("council_tax_other"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (_, Some("business_rates_from_home")) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_not_used")) => ???
       case (_, Some("business_rates_other")) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case _ => routes.CheckYourAnswersController.onPageLoad()
     }
@@ -250,7 +251,7 @@ class Navigator @Inject()() {
   private val businessRatesPropertyEnquiryRouting: UserAnswers => Call = answers => {
     answers.businessRatesPropertyEnquiry match {
       case Some("england") => ???
-      case Some("wales") => ???
+      case Some("wales") => routes.DatePropertyChangedController.onPageLoad()
       case _ =>
         Logger.warn(s"Navigation for is business rates property enquiry reached without selection of enquiry by controller")
         throw new RuntimeException("Unknown exception for is business rates self catering routing")
