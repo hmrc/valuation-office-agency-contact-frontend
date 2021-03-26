@@ -17,16 +17,16 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
 import play.api.data.Form
-import play.api.data.Forms._
+import play.api.data.Forms.{of, single}
 import play.api.data.format.Formatter
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSubcategoryForm.produceError
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
-object BusinessRatesSubcategoryForm extends FormErrorHelper {
-
-  def BusinessRatesSubcategoryFormatter = new Formatter[String] {
+object BusinessRatesSelfCateringForm {
+  def BusinessRatesSelfCateringFormatter = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
-      case None => produceError(key, "error.businessRatesSubcategory.required")
+      case None => produceError(key, "error.businessRatesSelfCatering.required")
       case _ => produceError(key, "error.unknown")
     }
 
@@ -34,17 +34,11 @@ object BusinessRatesSubcategoryForm extends FormErrorHelper {
   }
 
   def apply(): Form[String] =
-    Form(single("value" -> of(BusinessRatesSubcategoryFormatter)))
+    Form(single("value" -> of(BusinessRatesSelfCateringFormatter)))
 
   def options = Seq(
-    RadioOption("businessRatesSubcategory", "business_rates_change_valuation"),
-    RadioOption("businessRatesSubcategory", "business_rates_changes"),
-    RadioOption("businessRatesSubcategory", "business_rates_assessed_for_bus_rates"),
-    RadioOption("businessRatesSubcategory", "business_rates_from_home"),
-    RadioOption("businessRatesSubcategory", "business_rates_not_used"),
-    RadioOption("businessRatesSubcategory", "business_rates_self_catering"),
-    RadioOption("businessRatesSubcategory", "business_rates_other"),
-    RadioOption("businessRatesSubcategory", "business_rates_demolished")
+    RadioOption("businessRatesSelfCatering", "england"),
+    RadioOption("businessRatesSelfCatering", "wales")
   )
 
   def optionIsValid(value: String) = options.exists(o => o.value == value)

@@ -40,15 +40,16 @@ class Navigator @Inject()() {
   }
 
   private val propertyAddressRouting: UserAnswers => Call = answers => {
-    (answers.contactReason, answers.councilTaxSubcategory) match {
-      case (Some("new_enquiry"), Some("council_tax_property_poor_repair")) => routes.CheckYourAnswersController.onPageLoad()
-      case (Some("new_enquiry"), Some("council_tax_business_uses")) => routes.CheckYourAnswersController.onPageLoad()
-      case (Some("new_enquiry"), Some("council_tax_area_change")) => routes.CheckYourAnswersController.onPageLoad()
-      case (Some("new_enquiry"), Some("council_tax_other")) => routes.CheckYourAnswersController.onPageLoad()
-      case (Some("new_enquiry"), _) => routes.TellUsMoreController.onPageLoad(NormalMode)
-      case (Some("more_details"), _) => routes.WhatElseController.onPageLoad()
-      case (Some("update_existing"), _) => routes.AnythingElseTellUsController.onPageLoad()
-      case (Some(option), _) => {
+    (answers.contactReason, answers.councilTaxSubcategory, answers.businessRatesSubcategory) match {
+      case (Some("new_enquiry"), Some("council_tax_property_poor_repair"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_business_uses"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_area_change"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_other"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_from_home")) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, _) => routes.TellUsMoreController.onPageLoad(NormalMode)
+      case (Some("more_details"), _, _) => routes.WhatElseController.onPageLoad()
+      case (Some("update_existing"), _, _) => routes.AnythingElseTellUsController.onPageLoad()
+      case (Some(option), _, _) => {
         Logger.warn(s"Navigation for contact reason reached with unknown option $option by controller")
         throw new RuntimeException(s"Navigation for contact reason reached with unknown option $option by controller")
       }
@@ -132,8 +133,10 @@ class Navigator @Inject()() {
 
   private val businessRatesPageRouting: UserAnswers => Call = answers => {
     answers.businessRatesSubcategory match {
-      case Some("business_rates_challenge") => routes.BusinessRatesChallengeController.onChallengePageLoad()
       case Some("business_rates_changes") => routes.BusinessRatesChallengeController.onAreaChangePageLoad()
+      case Some("business_rates_self_catering") => routes.BusinessRatesSelfCateringController.onPageLoad()
+      case Some("business_rates_from_home") => routes.DatePropertyChangedController.onPageLoad()
+      case Some("business_rates_change_valuation")  => routes.BusinessRatesSubcategoryController.onChangeValuationPageLoad()
       case Some("business_rates_demolished")  => routes.BusinessRatesSubcategoryController.onDemolishedPageLoad()
       case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case None => {
@@ -153,7 +156,7 @@ class Navigator @Inject()() {
       case Some("council_tax_property_poor_repair") => routes.PropertyWindWaterController.onEnquiryLoad()
       case Some("council_tax_property_demolished") => routes.PropertyDemolishedController.onPageLoad()
       case Some("council_tax_annexe") => routes.CouncilTaxAnnexeController.onPageLoad()
-      case Some("council_tax_business_uses") => routes.CouncilTaxBusinessController.onPageLoad()
+      case Some("council_tax_business_uses") => routes.DatePropertyChangedController.onPageLoad()
       case Some("council_tax_area_change") => routes.DatePropertyChangedController.onPageLoad()
       case Some("council_tax_other") => routes.TellUsMoreController.onPageLoad(NormalMode)
       case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
@@ -175,11 +178,12 @@ class Navigator @Inject()() {
   }
 
   private val tellUsMoreRouting: UserAnswers => Call = answers => {
-    answers.councilTaxSubcategory match {
-      case Some("council_tax_property_poor_repair") => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case Some("council_tax_business_uses") => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case Some("council_tax_area_change") => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case Some("council_tax_other") => routes.ContactDetailsController.onPageLoad(NormalMode)
+    (answers.councilTaxSubcategory, answers.businessRatesSubcategory) match {
+      case (Some("council_tax_property_poor_repair"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_business_uses"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_area_change"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_other"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_from_home")) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case _ => routes.CheckYourAnswersController.onPageLoad()
     }
   }
@@ -215,13 +219,24 @@ class Navigator @Inject()() {
   }
 
   private val councilTaxBusinessEnquiryRouting: UserAnswers => Call = answers => {
-    answers.councilTaxBusinessEnquiry match {
-      case Some("all_property") => routes.DatePropertyChangedController.onPageLoad()
-      case Some("large_property") => routes.DatePropertyChangedController.onPageLoad()
-      case Some("small_property") => routes.CouncilTaxBusinessController.onSmallPartUsedPageLoad()
+    (answers.councilTaxBusinessEnquiry, answers.businessRatesSubcategory) match {
+      case (Some("all_property"), _) => routes.DatePropertyChangedController.onPageLoad()
+      case (Some("large_property"), _) => routes.DatePropertyChangedController.onPageLoad()
+      case (Some("small_property"), Some("business_rates_from_home")) => routes.CouncilTaxBusinessController.onSmallPartUsedBusinessRatesPageLoad()
+      case (Some("small_property"), _) => routes.CouncilTaxBusinessController.onSmallPartUsedPageLoad()
       case _ =>
         Logger.warn(s"Navigation for is council tax business enquiry reached without selection of enquiry by controller")
         throw new RuntimeException("Unknown exception for is council tax business enquiry routing")
+    }
+  }
+
+  private val selfCateringPageRouting: UserAnswers => Call = answers => {
+    answers.businessRatesSelfCateringEnquiry match {
+      case Some("england") => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
+      case Some("wales") => routes.BusinessRatesSelfCateringController.onWalLetsPageLoad()
+      case _ =>
+        Logger.warn(s"Navigation for is business rates self catering enquiry reached without selection of enquiry by controller")
+        throw new RuntimeException("Unknown exception for is business rates self catering routing")
     }
   }
 
@@ -245,7 +260,8 @@ class Navigator @Inject()() {
     CouncilTaxAnnexeSelfContainedEnquiryId -> annexeSelfContainedRouting,
     CouncilTaxAnnexeEnquiryId -> councilTaxAnnexeRouting,
     CouncilTaxAnnexeHaveCookingId -> annexeCookingWashingRouting,
-    CouncilTaxBusinessEnquiryId -> councilTaxBusinessEnquiryRouting
+    CouncilTaxBusinessEnquiryId -> councilTaxBusinessEnquiryRouting,
+    BusinessRatesSelfCateringId -> selfCateringPageRouting
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()

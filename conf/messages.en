@@ -307,7 +307,7 @@ annexeCookingWashing.form.error = Select ‘Yes’ if the annexe has both cookin
 # -------- Tell us you have removed an annexe
 annexeRemoved.title = Tell us you have removed an annexe - Valuation Office Agency contact form - GOV.UK
 annexeRemoved.heading = Tell us you have removed an annexe
-annexeRemoved.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council">Use the Council Tax service</a> and challenge your Council Tax band to tell us that you have removed an annexe.
+annexeRemoved.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/council-tax-bands">Use the Council Tax service</a> and challenge your Council Tax band to tell us that you have removed an annexe.
 annexeRemoved.subheading = Other help on GOV.UK
 annexeRemoved.url1 = <a class="govuk-link" target="_self" href="http://gov.uk/challenge-council-tax-band">How to challenge your Council Tax band</a>
 annexeRemoved.url2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/council-tax/second-homes-and-empty-properties">When your Council Tax band may change</a>
@@ -316,7 +316,7 @@ annexeRemoved.url3 = <a class="govuk-link" target="_self" href="https://www.gov.
 
 # ---- Property Used For business Journey Messages start ----
 
-# -------- Business Enquiry
+# -------- Council Tax Business Enquiry
 councilTaxBusinessEnquiry.title = How much of your property is used for business? - Valuation Office Agency contact form - GOV.UK
 councilTaxBusinessEnquiry.heading = How much of your property is used for business?
 councilTaxBusinessEnquiry.form.all_property = All of the property is used for business
@@ -354,38 +354,75 @@ councilTaxSubcategory.council_tax_band_for_new = I need a Council Tax band for m
 councilTaxSubcategory.council_tax_property_empty = My property is empty
 councilTaxSubcategory.council_tax_property_poor_repair = My property is in poor repair
 councilTaxSubcategory.council_tax_property_demolished = My property has been partially or fully demolished
-councilTaxSubcategory.council_tax_changes = My property or the local area has changed
-councilTaxSubcategory.council_tax_ndr_changes = My property has changed from Council Tax to Business Rates
 councilTaxSubcategory.council_tax_business_uses = My property is used for business
 councilTaxSubcategory.council_tax_annexe = I have added or removed an annexe
 councilTaxSubcategory.council_tax_area_change = Permanent changes in the local area that affect the value of my property
 councilTaxSubcategory.council_tax_other = Other
 councilTaxSubcategory.checkYourAnswersLabel = Enquiry details
 
+# --- Business Rates Self Catering
+businessRatesSelfCatering.title = Is your property or holiday let in England or Wales? - Valuation Office Agency contact form - GOV.UK
+businessRatesSelfCatering.heading = Is your property or holiday let in England or Wales?
+businessRatesSelfCatering.england = England
+businessRatesSelfCatering.wales = Wales
+error.businessRatesSelfCatering.required = Select if your property is in England or Wales
 
-# ---  Tell us that your property has been demolished
-brPropertyDemolished.title = Tell us that your property has been demolished - Valuation Office Agency contact form - GOV.UK
-brPropertyDemolished.heading = Tell us that your property has been demolished
-brPropertyDemolished.p1.url =  https://www.gov.uk/correct-your-business-rates
-brPropertyDemolished.p1.part1 = Use the Valuation Office Agency''s online service
-brPropertyDemolished.p1.part2 =  to tell us that your property has been demolished.
-brPropertyDemolished.p2 = For properties in England, you will need to sign in and submit a 'check'.
-brPropertyDemolished.subheading = Other help on GOV.UK
-brPropertyDemolished.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
-brPropertyDemolished.p3 = A step by step guide to check and challenge
-brPropertyDemolished.p4.url = https://www.gov.uk/guidance/how-to-check-and-challenge-your-rateable-value-in-wales
-brPropertyDemolished.p4 = How to check and challenge your business rates valuation in Wales
+# --- Self-catering properties or holiday lets in England
+propertyEnglandLets.title = Self-catering properties or holiday lets in England - Valuation Office Agency contact form - GOV.UK
+propertyEnglandLets.heading = Self-catering properties or holiday lets in England
+propertyEnglandLets.p1 = If your property is in England and available to let for short periods that total 140 days or more per year, it will be valued for business rates.
+propertyEnglandLets.p2.url = https://www.gov.uk/find-local-council
+propertyEnglandLets.p2.part1 = Contact your local council
+propertyEnglandLets.p2.part2 = and let them know the details of the property. They will then pass on what we need to value the property.
+propertyEnglandLets.subheading = Other help on GOV.UK
+propertyEnglandLets.p3.url = https://www.gov.uk/introduction-to-business-rates/self-catering-and-holiday-let-accommodation
+propertyEnglandLets.p3 = Self-catering and holiday lets
 
+# --- Self-catering properties or holiday lets in Wales
+propertyWalesLets.title = Self-catering properties or holiday lets in Wales - Valuation Office Agency contact form - GOV.UK
+propertyWalesLets.heading = Self-catering properties or holiday lets in Wales
+propertyWalesLets.p1 = If your property is in Wales, it will be valued for business rates if it is both:
+propertyWalesLets.p1.bl1 = available to let for short periods that total 140 days or more per year
+propertyWalesLets.p1.bl2 = actually let for at least 70 days
+propertyWalesLets.p2.url = https://www.gov.uk/find-local-council
+propertyWalesLets.p2.part1 = Contact your local council
+propertyWalesLets.p2.part2 = and let them know the details of the property. They will then pass on what we need to value the property.
+propertyWalesLets.subheading = Other help on GOV.UK
+propertyWalesLets.p3.url = https://www.gov.uk/introduction-to-business-rates/self-catering-and-holiday-let-accommodation
+propertyWalesLets.p3 = Self-catering and holiday lets
 
+# --- Not need to pay business rates
+businessRatesNoNeedToPay.title = You will not need to pay business rates - Valuation Office Agency contact form - GOV.UK
+businessRatesNoNeedToPay.heading = You will not need to pay business rates
+businessRatesNoNeedToPay.p1 = If you only use a room as an office or sell goods by post, you will not need to pay business rates. Your Council Tax band will not be affected.
+businessRatesNoNeedToPay.subheading = Other help on GOV.UK
+businessRatesNoNeedToPay.url = <a href="https://www.gov.uk/introduction-to-business-rates/working-at-home" target="_self">Working at home </a>
+businessRatesNoNeedToPay.url1 = <a href="https://www.gov.uk/run-business-from-home" target="_self">Running a business from home </a>
+
+# --- Check and challenge your business rates valuation online
+businessRatesValuationOnline.title = Check and challenge your business rates valuation online - Valuation Office Agency contact form - GOV.UK
+businessRatesValuationOnline.heading = Check and challenge your business rates valuation online
+businessRatesValuationOnline.p1.url = https://www.gov.uk/correct-your-business-rates
+businessRatesValuationOnline.p1.part1 = Use the Valuation Office Agency''s online service
+businessRatesValuationOnline.p1.part2 = if you think there should be a change to your business rates valuation.
+businessRatesValuationOnline.subheading1 = For properties in England
+businessRatesValuationOnline.p2 = Submit a check to make any changes to physical details, or confirm them if there are no changes to make. You can challenge the valuation after the check has been resolved.
+businessRatesValuationOnline.subheading2 = Other help on GOV.UK
+businessRatesValuationOnline.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
+businessRatesValuationOnline.p3 = How to check and challenge your business rates valuation
+businessRatesValuationOnline.p4.url = https://www.gov.uk/introduction-to-business-rates
+businessRatesValuationOnline.p4 = More about business rates and how they are calculated
+
+# --- Business Rates Subcategories
 businessRatesSubcategory.title = What is your business rates enquiry about? - Valuation Office Agency contact form - GOV.UK
 businessRatesSubcategory.heading = What is your business rates enquiry about?
-businessRatesSubcategory.business_rates_challenge = Challenging my business rates valuation
 businessRatesSubcategory.business_rates_changes = My property or the local area has changed
 businessRatesSubcategory.business_rates_assessed_for_bus_rates = I need my property assessed for business rates
-businessRatesSubcategory.business_rates_from_home = Running a business from home
+businessRatesSubcategory.business_rates_from_home = I use my home for business
 businessRatesSubcategory.business_rates_not_used = My property is no longer used for business
+businessRatesSubcategory.business_rates_self_catering = A self-catering property or holiday let
 businessRatesSubcategory.business_rates_other = Any other business rates enquiry
-businessRatesSubcategory.business_rates_demolished = My property has been demolished
+businessRatesSubcategory.business_rates_change_valuation = I think my business rates valuation is wrong
 
 businessRatesChallenge.title = Challenging my business rates valuation - Valuation Office Agency contact form - GOV.UK
 businessRatesChallenge.heading = Challenging my business rates valuation
@@ -464,7 +501,7 @@ tellUsMore.areaChange.inset = You will need to supply evidence when we reply to 
 # --- Tell Us More CT other journey
 tellUsMore.other.title = What is your other Council Tax enquiry? - Valuation Office Agency contact form - GOV.UK
 tellUsMore.other.heading = What is your other Council Tax enquiry?
-tellUsMore.other.hint = Include details such as case reference numbers and dates
+tellUsMore.other.hint = Include details such as case reference numbers and dates.
 
 anythingElse.title = Is there anything else you would like to tell us about? - Valuation Office Agency contact form - GOV.UK
 anythingElse.heading = Is there anything else you would like to tell us about? (optional)
