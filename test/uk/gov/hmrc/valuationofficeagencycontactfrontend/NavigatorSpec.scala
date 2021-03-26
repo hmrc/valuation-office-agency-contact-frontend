@@ -102,11 +102,6 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
       }
 
-      "return a function that goes to the challange form page when an enquiry category for business rates has been selected and business_rates_challenge option selected" in {
-        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_challenge")
-        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesChallengeController.onChallengePageLoad()
-      }
-
       "return a function that goes to the challange form page when an enquiry category for business rates has been selected and business_rates_changes option selected" in {
         when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_changes")
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesChallengeController.onAreaChangePageLoad()

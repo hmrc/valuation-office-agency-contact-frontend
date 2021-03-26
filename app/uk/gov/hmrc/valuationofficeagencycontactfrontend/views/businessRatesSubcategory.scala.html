@@ -52,7 +52,7 @@
             @govukErrorSummary(
                 ErrorSummary(
                     title = Text(messages("error.summary.title")),
-                    errorList = form.errors.map(e => ErrorLink(href = Some("#businessRatesSubcategory.business_rates_challenge"), content = HtmlContent(messages(e.messages, e.args))))
+                    errorList = form.errors.map(e => ErrorLink(href = Some("#businessRatesSubcategory.business_rates_change_valuation"), content = HtmlContent(messages(e.messages, e.args))))
                 )
             )
         }
