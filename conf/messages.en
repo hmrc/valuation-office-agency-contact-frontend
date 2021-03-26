@@ -426,6 +426,19 @@ businessRatesPropertyDemolished.p3 = A step by step guide to check and challenge
 businessRatesPropertyDemolished.p4.url = https://www.gov.uk/guidance/how-to-check-and-challenge-your-rateable-value-in-wales
 businessRatesPropertyDemolished.p4 = How to check and challenge your business rates valuation in Wales
 
+# --- My property needs a business rates valuation
+businessRatesValuation.title = Speak to your local council first about getting a business rates valuation - Valuation Office Agency contact form - GOV.UK
+businessRatesValuation.heading = Speak to your local council first about getting a business rates valuation
+businessRatesValuation.p1.url = https://www.gov.uk/contact-your-local-council-about-business-rates
+businessRatesValuation.p1.part1 = Contact your local council
+businessRatesValuation.p1.part2 = as they need to provide us with all the details we need, including a unique reference number.
+businessRatesValuation.p2 = We will only be able to value the property once they have sent us that information.
+businessRatesValuation.subheading = Other help on GOV.UK
+businessRatesValuation.p3.url = https://www.gov.uk/guidance/how-non-domestic-property-including-plant-and-machinery-is-valued
+businessRatesValuation.p3 = How properties are valued for business rates
+businessRatesValuation.p4.url = https://www.gov.uk/calculate-your-business-rates
+businessRatesValuation.p4 = Estimate your business rates
+
 # --- Business Rates Subcategories
 businessRatesSubcategory.title = What is your business rates enquiry about? - Valuation Office Agency contact form - GOV.UK
 businessRatesSubcategory.heading = What is your business rates enquiry about?
@@ -437,6 +450,7 @@ businessRatesSubcategory.business_rates_self_catering = A self-catering property
 businessRatesSubcategory.business_rates_other = Any other business rates enquiry
 businessRatesSubcategory.business_rates_change_valuation = I think my business rates valuation is wrong
 businessRatesSubcategory.business_rates_demolished = My property has been demolished
+businessRatesSubcategory.business_rates_valuation = My property needs a business rates valuation
 businessRatesSubcategory.checkYourAnswersLabel = Enquiry details
 
 businessRatesChallenge.title = Challenging my business rates valuation - Valuation Office Agency contact form - GOV.UK
