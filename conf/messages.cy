@@ -418,6 +418,19 @@ businessRatesValuationOnline.p3 = Sut i wirio a herio eich prisiad ardrethi busn
 businessRatesValuationOnline.p4.url = https://www.gov.uk/introduction-to-business-rates
 businessRatesValuationOnline.p4 = Mwy am ardrethi busnes a sut maent yn cael eu cyfrifo
 
+# ---  Tell us that your property has been demolished
+businessRatesPropertyDemolished.title = Dywedwch wrthym fod eich eiddo wedi''i ddymchwel - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesPropertyDemolished.heading = Dywedwch wrthym fod eich eiddo wedi''i ddymchwel
+businessRatesPropertyDemolished.p1.url =  https://www.gov.uk/correct-your-business-rates
+businessRatesPropertyDemolished.p1.part1 = Defnyddiwch wasanaeth Asiantaeth y Swyddfa Brisio
+businessRatesPropertyDemolished.p1.part2 =  i ddweud wrthym fod eich eiddo wedi''i ddymchwel.
+businessRatesPropertyDemolished.p2 = Ar gyfer eiddo yn Lloegr, bydd angen i chi fewngofnodi a chyflwyno ‘gwiriad’.
+businessRatesPropertyDemolished.subheading = Cymorth arall ar GOV.UK
+businessRatesPropertyDemolished.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
+businessRatesPropertyDemolished.p3 = Canllaw cam wrth gam i wirio a herio eich cyfraddau busnes
+businessRatesPropertyDemolished.p4.url = https://www.gov.uk/guidance/how-to-check-and-challenge-your-rateable-value-in-wales
+businessRatesPropertyDemolished.p4 = Sut i wirio a herio eich prisiad ardrethi busnes yng Nghymru
+
 # --- Business Rates Subcategories
 businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?
@@ -429,6 +442,7 @@ businessRatesSubcategory.business_rates_not_used = Nid yw fy eiddo bellach yn ca
 businessRatesSubcategory.business_rates_self_catering = Eiddo hunanarlwyo neu osodiad gwyliau
 businessRatesSubcategory.business_rates_other = Unrhyw ymholiad ardrethu busnes arall
 businessRatesSubcategory.business_rates_change_valuation = Rwy’n credu bod fy mhrisiad ardrethi busnes yn anghywir
+businessRatesSubcategory.business_rates_demolished = Mae fy eiddo wedi cael ei ddymchwel
 
 businessRatesChallenge.title = Herio fy mhrisiad trethi busnes - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesChallenge.heading = Herio fy mhrisiad trethi busnes

@@ -27,7 +27,7 @@ class BusinessRatesPropertyDemolishedViewSpec extends ViewBehaviours {
   def view = () => businessRatesPropertyDemolished(frontendAppConfig, NormalMode)(fakeRequest, messages)
 
   "Business Rates Property Demolished view" must {
-    behave like normalPage(view, "brPropertyDemolished", "title", "heading",
+    behave like normalPage(view, "businessRatesPropertyDemolished", "title", "heading",
       "p1.part1", "p1.part2", "p1.url", "p2", "subheading", "p3", "p3.url", "p4", "p4.url")
 
     "has a link marked with site.back leading to the Business Rates Property Demolished Page" in {

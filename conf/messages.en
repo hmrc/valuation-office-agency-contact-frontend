@@ -413,6 +413,19 @@ businessRatesValuationOnline.p3 = How to check and challenge your business rates
 businessRatesValuationOnline.p4.url = https://www.gov.uk/introduction-to-business-rates
 businessRatesValuationOnline.p4 = More about business rates and how they are calculated
 
+# ---  Tell us that your property has been demolished
+businessRatesPropertyDemolished.title = Tell us that your property has been demolished - Valuation Office Agency contact form - GOV.UK
+businessRatesPropertyDemolished.heading = Tell us that your property has been demolished
+businessRatesPropertyDemolished.p1.url =  https://www.gov.uk/correct-your-business-rates
+businessRatesPropertyDemolished.p1.part1 = Use the Valuation Office Agency''s online service
+businessRatesPropertyDemolished.p1.part2 =  to tell us that your property has been demolished.
+businessRatesPropertyDemolished.p2 = For properties in England, you will need to sign in and submit a ''check''.
+businessRatesPropertyDemolished.subheading = Other help on GOV.UK
+businessRatesPropertyDemolished.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
+businessRatesPropertyDemolished.p3 = A step by step guide to check and challenge
+businessRatesPropertyDemolished.p4.url = https://www.gov.uk/guidance/how-to-check-and-challenge-your-rateable-value-in-wales
+businessRatesPropertyDemolished.p4 = How to check and challenge your business rates valuation in Wales
+
 # --- Business Rates Subcategories
 businessRatesSubcategory.title = What is your business rates enquiry about? - Valuation Office Agency contact form - GOV.UK
 businessRatesSubcategory.heading = What is your business rates enquiry about?
@@ -423,6 +436,7 @@ businessRatesSubcategory.business_rates_not_used = My property is no longer used
 businessRatesSubcategory.business_rates_self_catering = A self-catering property or holiday let
 businessRatesSubcategory.business_rates_other = Any other business rates enquiry
 businessRatesSubcategory.business_rates_change_valuation = I think my business rates valuation is wrong
+businessRatesSubcategory.business_rates_demolished = My property has been demolished
 
 businessRatesChallenge.title = Challenging my business rates valuation - Valuation Office Agency contact form - GOV.UK
 businessRatesChallenge.heading = Challenging my business rates valuation
