@@ -18,19 +18,19 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesChangeValuation => change_valuation}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesPropertyDemolished => property_demolished}
 
-class BusinessRatesChangeValuationViewSpec extends ViewBehaviours {
+class BusinessRatesPropertyDemolishedViewSpec extends ViewBehaviours {
 
-  def businessRatesChangeValuation = app.injector.instanceOf[change_valuation]
+  def businessRatesPropertyDemolished = app.injector.instanceOf[property_demolished]
 
-  def view = () => businessRatesChangeValuation(frontendAppConfig, NormalMode)(fakeRequest, messages)
+  def view = () => businessRatesPropertyDemolished(frontendAppConfig, NormalMode)(fakeRequest, messages)
 
-  "Business rates change valuation online view" must {
-    behave like normalPage(view, "businessRatesValuationOnline", "title", "heading",
-      "p1.url", "p1.part1", "p1.part2", "subheading1", "p2", "subheading1", "p3.url", "p3", "p4.url", "p4")
+  "Business Rates Property Demolished view" must {
+    behave like normalPage(view, "businessRatesPropertyDemolished", "title", "heading",
+      "p1.part1", "p1.part2", "p1.url", "p2", "subheading", "p3", "p3.url", "p4", "p4.url")
 
-    "has a link marked with site.back leading to the Business Rates change valuation page" in {
+    "has a link marked with site.back leading to the Business Rates Property Demolished Page" in {
       val doc = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")

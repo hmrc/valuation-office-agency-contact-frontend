@@ -29,6 +29,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBusinessEnquiry => council_tax_business_enquiry}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertySmallPartUsed => small_part_used}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesNoNeedToPay => business_rates_no_need_to_pay}
 
 import java.time.LocalDate
 import javax.inject.Inject
@@ -42,6 +43,7 @@ class CouncilTaxBusinessController @Inject()(appConfig: FrontendAppConfig,
                                              requireData: DataRequiredAction,
                                              councilTaxBusinessEnquiry: council_tax_business_enquiry,
                                              propertySmallPartUsed: small_part_used,
+                                             businessRatesNoNeedToPay: business_rates_no_need_to_pay,
                                              cc: MessagesControllerComponents
                                             ) extends FrontendController(cc) with I18nSupport {
 
@@ -54,14 +56,14 @@ class CouncilTaxBusinessController @Inject()(appConfig: FrontendAppConfig,
         case Some(value) => CouncilTaxBusinessEnquiryForm().fill(value)
       }
 
-      Ok(councilTaxBusinessEnquiry(appConfig, preparedForm, mode))
+      Ok(councilTaxBusinessEnquiry(appConfig, preparedForm, mode, backLink(request.userAnswers, mode)))
   }
 
   def onEnquirySubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData) async {
     implicit request =>
       CouncilTaxBusinessEnquiryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(councilTaxBusinessEnquiry(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(councilTaxBusinessEnquiry(appConfig, formWithErrors, mode, backLink(request.userAnswers, mode)))),
         value =>
           for {
             cacheMap <- dataCacheConnector.save[String](request.sessionId, CouncilTaxBusinessEnquiryId.toString, value)
@@ -72,5 +74,17 @@ class CouncilTaxBusinessController @Inject()(appConfig: FrontendAppConfig,
   def onSmallPartUsedPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(propertySmallPartUsed(appConfig))
+  }
+
+  def onSmallPartUsedBusinessRatesPageLoad: Action[AnyContent] = (getData andThen requireData) {
+    implicit request =>
+      Ok(businessRatesNoNeedToPay(appConfig))
+  }
+
+  private def backLink(answers: UserAnswers, mode: Mode): String = {
+    answers.businessRatesSubcategory match {
+      case Some("business_rates_from_home") => routes.BusinessRatesSubcategoryController.onPageLoad(mode).url
+      case _ => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
+    }
   }
 }

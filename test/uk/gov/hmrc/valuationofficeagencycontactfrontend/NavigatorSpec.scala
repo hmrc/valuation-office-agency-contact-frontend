@@ -102,11 +102,6 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
       }
 
-      "return a function that goes to the challange form page when an enquiry category for business rates has been selected and business_rates_challenge option selected" in {
-        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_challenge")
-        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesChallengeController.onChallengePageLoad()
-      }
-
       "return a function that goes to the challange form page when an enquiry category for business rates has been selected and business_rates_changes option selected" in {
         when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_changes")
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesChallengeController.onAreaChangePageLoad()
@@ -120,6 +115,16 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
       "return a function that goes to the self catering form page when an enquiry category for business rates has been selected and business_rates_self_catering option selected" in {
         when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesSelfCateringController.onPageLoad()
+      }
+
+      "return a function that goes to the date property changed when an enquiry category for business rates has been selected and business_rates_from_home option selected" in {
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_from_home")
+        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.DatePropertyChangedController.onPageLoad()
+      }
+
+      "return a function that goes to the property demolished page when an enquiry category for business rates has been selected and business_rates_demolished option selected" in {
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_demolished")
+        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesSubcategoryController.onDemolishedPageLoad()
       }
 
       "throw exception when an enquiry category for business rates has been selected and not other options was selected on next page" in {
@@ -189,6 +194,13 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
         when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
         when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_area_change")
+        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
+      }
+
+      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_from_home" in {
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
+        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_from_home")
         navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
       }
 
@@ -336,9 +348,9 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxAnnexeController.onPageLoad()
       }
 
-      "return a function that goes to the council tax business property page when an enquiry category for council tax has been selected and council_tax_business_uses option selected" in {
+      "return a function that goes to the council tax date property changed page when an enquiry category for council tax has been selected and council_tax_business_uses option selected" in {
         when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_business_uses")
-        navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxBusinessController.onPageLoad()
+        navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.DatePropertyChangedController.onPageLoad()
       }
 
       "return a function that goes to the council tax area change page when an enquiry category for council tax has been selected and council_tax_area_change option selected" in {
@@ -487,6 +499,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return function that goes on a small part of the property used for business page when councilTaxBusinessEnquiry is small_property" in {
         when (mockUserAnswers.councilTaxBusinessEnquiry) thenReturn Some("small_property")
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn None
         navigator.nextPage(CouncilTaxBusinessEnquiryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxBusinessController.onSmallPartUsedPageLoad()
       }
 
