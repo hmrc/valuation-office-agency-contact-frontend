@@ -133,7 +133,6 @@ class Navigator @Inject()() {
 
   private val businessRatesPageRouting: UserAnswers => Call = answers => {
     answers.businessRatesSubcategory match {
-      case Some("business_rates_challenge") => routes.BusinessRatesChallengeController.onChallengePageLoad()
       case Some("business_rates_changes") => routes.BusinessRatesChallengeController.onAreaChangePageLoad()
       case Some("business_rates_self_catering") => routes.BusinessRatesSelfCateringController.onPageLoad()
       case Some("business_rates_from_home") => routes.DatePropertyChangedController.onPageLoad()
