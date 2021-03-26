@@ -17,17 +17,16 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
 import play.api.data.Form
-import play.api.data.Forms._
+import play.api.data.Forms.{of, single}
 import play.api.data.format.Formatter
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSubcategoryForm.produceError
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
-object CouncilTaxSubcategoryForm extends FormErrorHelper {
-
-  def CouncilTaxSubcategoryFormatter = new Formatter[String] {
+object BusinessRatesSelfCateringForm {
+  def BusinessRatesSelfCateringFormatter = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
-      case None => produceError(key, "error.councilTaxSubcategory.required")
+      case None => produceError(key, "error.businessRatesSelfCatering.required")
       case _ => produceError(key, "error.unknown")
     }
 
@@ -35,19 +34,11 @@ object CouncilTaxSubcategoryForm extends FormErrorHelper {
   }
 
   def apply(): Form[String] =
-    Form(single("value" -> of(CouncilTaxSubcategoryFormatter)))
+    Form(single("value" -> of(BusinessRatesSelfCateringFormatter)))
 
   def options = Seq(
-    RadioOption("councilTaxSubcategory", CouncilTaxBandTooHighId.toString),
-    RadioOption("councilTaxSubcategory", CouncilTaxBillId.toString),
-    RadioOption("councilTaxSubcategory", CouncilTaxBandForNewId.toString),
-    RadioOption("councilTaxSubcategory", "council_tax_business_uses"),
-    RadioOption("councilTaxSubcategory", CouncilTaxPropertyEmptyId.toString),
-    RadioOption("councilTaxSubcategory", CouncilTaxPropertyPoorRepairId.toString),
-    RadioOption("councilTaxSubcategory", CouncilTaxAnnexeEnquiryId.toString),
-    RadioOption("councilTaxSubcategory", CouncilTaxPropertyDemolishedId.toString),
-    RadioOption("councilTaxSubcategory", CouncilTaxAreaChangeId.toString),
-    RadioOption("councilTaxSubcategory", "council_tax_other")
+    RadioOption("businessRatesSelfCatering", "england"),
+    RadioOption("businessRatesSelfCatering", "wales")
   )
 
   def optionIsValid(value: String) = options.exists(o => o.value == value)

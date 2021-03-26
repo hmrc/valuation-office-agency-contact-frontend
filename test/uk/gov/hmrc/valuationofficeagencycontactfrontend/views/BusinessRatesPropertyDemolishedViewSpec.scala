@@ -16,30 +16,27 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxBusinessEnquiryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBusinessEnquiry => council_tax_business_enquiry}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesPropertyDemolished => property_demolished}
 
-class CouncilTaxBusinessEnquiryViewSpec extends ViewBehaviours {
+class BusinessRatesPropertyDemolishedViewSpec extends ViewBehaviours {
 
-  val backlink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
+  def businessRatesPropertyDemolished = app.injector.instanceOf[property_demolished]
 
-  def councilTaxBusinessEnquiry = app.injector.instanceOf[council_tax_business_enquiry]
+  def view = () => businessRatesPropertyDemolished(frontendAppConfig, NormalMode)(fakeRequest, messages)
 
-  def view = () => councilTaxBusinessEnquiry(frontendAppConfig, CouncilTaxBusinessEnquiryForm(), NormalMode, backlink)(fakeRequest, messages)
+  "Business Rates Property Demolished view" must {
+    behave like normalPage(view, "businessRatesPropertyDemolished", "title", "heading",
+      "p1.part1", "p1.part2", "p1.url", "p2", "subheading", "p3", "p3.url", "p4", "p4.url")
 
-  "Council Tax Bill view" must {
-    behave like normalPage(view, "councilTaxBusinessEnquiry", "title", "heading",
-      "form.all_property", "form.large_property", "form.small_property")
-
-    "has a link marked with site.back leading to the Council Tax Property Empty Page" in {
+    "has a link marked with site.back leading to the Business Rates Property Demolished Page" in {
       val doc = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe backlink
+      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
     }
   }
-
 }
+

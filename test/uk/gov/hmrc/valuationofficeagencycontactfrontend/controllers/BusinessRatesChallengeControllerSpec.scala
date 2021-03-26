@@ -17,21 +17,22 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.test.Helpers._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{
-  businessRatesChallenge => business_rates_challenge, businessRatesPropertyOrAreaChanged => business_rates_property_or_area_changed}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesChallenge => business_rates_challenge, businessRatesPropertyOrAreaChanged => business_rates_property_or_area_changed}
 
 class BusinessRatesChallengeControllerSpec extends ControllerSpecBase {
 
   def businessRatesChallenge = app.injector.instanceOf[business_rates_challenge]
   def businessRatesPropertyOrAreaChanged = app.injector.instanceOf[business_rates_property_or_area_changed]
 
+
   "BusinessRatesChallengeController" must {
     "return 200 for GET on AreaChangePageLoad" in {
-      val resutl = new BusinessRatesChallengeController(messagesApi, frontendAppConfig, businessRatesChallenge, businessRatesPropertyOrAreaChanged,
+      val result = new BusinessRatesChallengeController(messagesApi, frontendAppConfig, businessRatesChallenge, businessRatesPropertyOrAreaChanged,
         MessageControllerComponentsHelpers.stubMessageControllerComponents).onAreaChangePageLoad(fakeRequest)
-      status(resutl) mustBe OK
-      contentAsString(resutl) must include ("My property or the local area has changed")
+      status(result) mustBe OK
+      contentAsString(result) mustBe businessRatesPropertyOrAreaChanged(frontendAppConfig)(fakeRequest, messages).toString()
     }
 
     "return 200 for GET on ChallengePageLoad" in {

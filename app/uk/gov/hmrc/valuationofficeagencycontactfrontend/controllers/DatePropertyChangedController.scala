@@ -24,7 +24,7 @@ import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.DatePropertyChangedForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{ContactDetailsId, DatePropertyChangedId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, CouncilTaxSubcategoryId, DatePropertyChangedId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.datePropertyChanged
@@ -81,20 +81,28 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
   }
 
   private[controllers] def enquiryKey(answers: UserAnswers): Either[String, String] = {
-    answers.councilTaxSubcategory match {
-      case Some("council_tax_property_poor_repair") => Right("datePropertyChanged.poorRepair")
-      case Some("council_tax_business_uses") => Right("datePropertyChanged.business")
-      case Some("council_tax_area_change") => Right("datePropertyChanged.areaChange")
+    (answers.councilTaxSubcategory, answers.businessRatesSubcategory) match {
+      case (Some("council_tax_property_poor_repair"), None) => Right("datePropertyChanged.poorRepair")
+      case (Some("council_tax_business_uses"), None) => Right("datePropertyChanged.business")
+      case (Some("council_tax_area_change"), None) => Right("datePropertyChanged.areaChange")
+      case (None, Some("business_rates_from_home")) => Right("datePropertyChanged.business")
       case _ => Left("Unknown enquiry category in enquiry key")
     }
   }
 
   private def backLink(answers: UserAnswers, mode: Mode) = {
-    answers.councilTaxSubcategory match {
-      case Some("council_tax_property_poor_repair") => routes.PropertyWindWaterController.onEnquiryLoad().url
-      case Some("council_tax_business_uses") => routes.CouncilTaxBusinessController.onPageLoad().url
-      case Some("council_tax_area_change") => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
+    (answers.councilTaxSubcategory, answers.businessRatesSubcategory) match {
+      case (Some("council_tax_property_poor_repair"), None)  => routes.PropertyWindWaterController.onEnquiryLoad().url
+      case (Some("council_tax_business_uses"), None) => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
+      case (Some("council_tax_area_change"), None) => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
+      case (None, Some("business_rates_from_home")) => routes.BusinessRatesSubcategoryController.onPageLoad(mode).url
       case _ => routes.PropertyWindWaterController.onEnquiryLoad().url
     }
   }
+
+  private def clearCache(sessionId: String, dataCacheConnector: DataCacheConnector): Future[Unit] =
+    for {
+      _ <- dataCacheConnector.remove(sessionId, CouncilTaxSubcategoryId.toString)
+      _ <- dataCacheConnector.remove(sessionId, BusinessRatesSubcategoryId.toString)
+    } yield ()
 }

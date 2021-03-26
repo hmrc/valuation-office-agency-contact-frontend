@@ -16,11 +16,14 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
+import org.mockito.Matchers.any
+import org.mockito.Mockito.when
+import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.JsString
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSubcategoryForm
@@ -28,19 +31,32 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.BusinessRate
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSubcategory => business_rates_subcategory}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesChangeValuation => business_rates_change_valuation}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesPropertyDemolished => business_rates_property_demolished}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesValuation => business_rates_valuation}
 
-class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase {
+import scala.concurrent.Future
+
+class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with MockitoSugar {
+  val fakeDataCacheConnector = mock[DataCacheConnector]
 
   def businessRatesSubcategory = app.injector.instanceOf[business_rates_subcategory]
+  def businessRatesChangeValuation = app.injector.instanceOf[business_rates_change_valuation]
+  def businessRatesPropertyDemolished = app.injector.instanceOf[business_rates_property_demolished]
   def businessRatesValuation = app.injector.instanceOf[business_rates_valuation]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
+  when(fakeDataCacheConnector.remove(any[String], any[String]))
+    .thenReturn(Future.successful(true))
+
+  when(fakeDataCacheConnector.save(any, any, any)(any))
+    .thenReturn(Future.successful(CacheMap("businessRatesSubcategory", Map("businessRatesSubcategory" -> JsString("bar")))))
+
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new BusinessRatesSubcategoryController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSubcategory, businessRatesValuation,
-      MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new BusinessRatesSubcategoryController(frontendAppConfig, messagesApi, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSubcategory, businessRatesChangeValuation, businessRatesPropertyDemolished,
+      businessRatesValuation, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = BusinessRatesSubcategoryForm()) = businessRatesSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
@@ -81,13 +97,26 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe viewAsString(boundForm)
     }
 
+    "return OK and the correct view for change valuation" in {
+      val result = controller().onChangeValuationPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe businessRatesChangeValuation(frontendAppConfig,NormalMode)(fakeRequest, messages).toString()
+    }
+
+    "return OK and the correct view for property demolished" in {
+      val result = controller().onDemolishedPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe businessRatesPropertyDemolished(frontendAppConfig,NormalMode)(fakeRequest, messages).toString()
+    }
+
     "return OK and the correct view for valuation" in {
       val result = controller().onValuationPageLoad(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe businessRatesValuation(frontendAppConfig)(fakeRequest, messages).toString()
     }
-
 
     "redirect to Session Expired for a GET if no existing data is found" in {
       val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)

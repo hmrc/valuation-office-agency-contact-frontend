@@ -25,10 +25,12 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConn
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSubcategoryForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.BusinessRatesSubcategoryId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, CouncilTaxSubcategoryId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSubcategory => business_rates_subcategory}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesChangeValuation => business_rates_change_valuation}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesPropertyDemolished => business_rates_demolished}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesValuation => business_rates_valuation}
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -41,6 +43,8 @@ class BusinessRatesSubcategoryController @Inject()(
                                         getData: DataRetrievalAction,
                                         requireData: DataRequiredAction,
                                         businessRatesSubcategory: business_rates_subcategory,
+                                        businessRatesChangeValuation: business_rates_change_valuation,
+                                        businessRatesPropertyDemolished: business_rates_demolished,
                                         businessRatesValuation: business_rates_valuation,
                                         cc: MessagesControllerComponents
                                                   ) extends FrontendController(cc) with I18nSupport {
@@ -61,10 +65,22 @@ class BusinessRatesSubcategoryController @Inject()(
       BusinessRatesSubcategoryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(businessRatesSubcategory(appConfig, formWithErrors, mode))),
-        (value) =>
-          dataCacheConnector.save[String](request.sessionId, BusinessRatesSubcategoryId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(BusinessRatesSubcategoryId, mode)(new UserAnswers(cacheMap))))
+        value =>
+          for {
+            _ <- dataCacheConnector.remove(request.sessionId, CouncilTaxSubcategoryId.toString)
+            cacheMap <- dataCacheConnector.save[String](request.sessionId, BusinessRatesSubcategoryId.toString, value)
+          } yield Redirect(navigator.nextPage(BusinessRatesSubcategoryId, mode)(new UserAnswers(cacheMap)))
       )
+  }
+
+  def onChangeValuationPageLoad(mode: Mode) = (getData andThen requireData) {
+    implicit request =>
+      Ok(businessRatesChangeValuation(appConfig,mode))
+  }
+
+  def onDemolishedPageLoad(mode: Mode) = (getData andThen requireData) {
+    implicit request =>
+      Ok(businessRatesPropertyDemolished(appConfig,mode))
   }
 
   def onValuationPageLoad(mode: Mode)= (getData andThen requireData) {

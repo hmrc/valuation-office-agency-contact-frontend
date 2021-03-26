@@ -307,7 +307,7 @@ annexeCookingWashing.form.error = Dewiswch ‘Oes’ os oes gan yr rhandy gyfleu
 # -------- Tell us you have removed an annexe
 annexeRemoved.title = Dywedwch wrthym eich bod wedi dileu rhandy - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 annexeRemoved.heading = Dywedwch wrthym eich bod wedi dileu rhandy
-annexeRemoved.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council">Defnyddiwch y gwasanaeth Treth Gyngor</a> a heriwch eich band Treth Gyngor i ddweud wrthym eich bod wedi dileu rhandy.
+annexeRemoved.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/council-tax-bands">Defnyddiwch y gwasanaeth Treth Gyngor</a> a heriwch eich band Treth Gyngor i ddweud wrthym eich bod wedi dileu rhandy.
 annexeRemoved.subheading = Cymorth arall ar GOV.UK
 annexeRemoved.url1 = <a class="govuk-link" target="_self" href="http://gov.uk/challenge-council-tax-band">Sut i herio’ch Band Treth Gyngor</a>
 annexeRemoved.url2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/council-tax/second-homes-and-empty-properties">Pryd y gall eich band Treth Gyngor newid</a>
@@ -355,46 +355,111 @@ councilTaxSubcategory.council_tax_band_for_new = Mae angen band Treth Gyngor arn
 councilTaxSubcategory.council_tax_property_empty = Mae fy eiddo yn wag
 councilTaxSubcategory.council_tax_property_poor_repair = Mae fy eiddo mewn cyflwr gwael
 councilTaxSubcategory.council_tax_property_demolished = Mae fy eiddo wedi’i ddymchwel yn rhannol neu’n gyfan gwbl
-councilTaxSubcategory.council_tax_changes = Mae fy eiddo neu’r ardal leol wedi newid
-councilTaxSubcategory.council_tax_ndr_changes = Mae fy eiddo wedi newid o Dreth Gyngor i Ardrethi Busnes
 councilTaxSubcategory.council_tax_business_uses = Defnyddir fy eiddo ar gyfer busnes
 councilTaxSubcategory.council_tax_annexe = Rwyf wedi ychwanegu neu dileu rhandy
 councilTaxSubcategory.council_tax_area_change = Newidiadau parhaol yn yr ardal leol sy’n effeithio ar werth fy eiddo
 councilTaxSubcategory.council_tax_other = Arall
 councilTaxSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
 
-# --- My property needs a business rates valuation
-businessRatesValuation.title = Speak to your local council first about getting a business rates valuation - Valuation Office Agency contact form - GOV.UK
-businessRatesValuation.heading = Speak to your local council first about getting a business rates valuation
-businessRatesValuation.p1.url = https://www.gov.uk/contact-your-local-council-about-business-rates
-businessRatesValuation.p1.part1 = Contact your local council
-businessRatesValuation.p1.part2 = as they need to provide us with all the details we need, including a unique reference number.
-businessRatesValuation.p2 = We will only be able to value the property once they have sent us that information.
-businessRatesValuation.subheading = Other help on GOV.UK
-businessRatesValuation.p3.url = https://www.gov.uk/guidance/how-non-domestic-property-including-plant-and-machinery-is-valued
-businessRatesValuation.p3 = How properties are valued for business rates
-businessRatesValuation.p4.url = https://www.gov.uk/calculate-your-business-rates
-businessRatesValuation.p4 = Estimate your business rates
+# --- Business Rates Self Catering
+businessRatesSelfCatering.title = A yw eich eiddo neu osodiad gwyliau yng Nghymru neu Lloegr? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesSelfCatering.heading = A yw eich eiddo neu osodiad gwyliau yng Nghymru neu Lloegr?
+businessRatesSelfCatering.england = Lloegr
+businessRatesSelfCatering.wales = Cymru
+error.businessRatesSelfCatering.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
 
+# --- Business Rates Subcategories
+# --- Business Rates Self Catering
+
+# --- Business Rates Subcategories
+# --- Self-catering properties or holiday lets in England
+propertyEnglandLets.title = Eiddo hunanarlwyo neu osodiadau gwyliau yn Lloegr - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyEnglandLets.heading = Eiddo hunanarlwyo neu osodiadau gwyliau yn Lloegr
+propertyEnglandLets.p1 = Os yw eich eiddo yn Lloegr ac ar gael i’w osod am gyfnodau byr am gyfanswm o 140 diwrnod neu fwy bob blwyddyn, bydd yn cael ei brisio ar gyfer ardrethi busnes.
+propertyEnglandLets.p2.url = https://www.gov.uk/find-local-council
+propertyEnglandLets.p2.part1 = Cysylltwch â’ch cyngor lleol
+propertyEnglandLets.p2.part2 = a gadewch iddyn nhw wybod manylion yr eiddo. Yna byddant yn trosglwyddo’r hyn sydd ei angen arnom i brisio’r eiddo.
+propertyEnglandLets.subheading = Cymorth arall ar GOV.UK
+propertyEnglandLets.p3.url = https://www.gov.uk/introduction-to-business-rates/self-catering-and-holiday-let-accommodation
+propertyEnglandLets.p3 = Eiddo hunanarlwyo a gosodiadau gwyliau
+
+# --- Self-catering properties or holiday lets in Wales
+propertyWalesLets.title = Eiddo hunanarlwyo neu osodiadau gwyliau yng Nghymru - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyWalesLets.heading = Eiddo hunanarlwyo neu osodiadau gwyliau yng Nghymru
+propertyWalesLets.p1 = Os yw eich eiddo yng Nghymru, bydd yn cael ei brisio ar gyfer ardrethi busnes os yw:
+propertyWalesLets.p1.bl1 = ar gael i’w osod am gyfnodau byr sy’n dod i gyfanswm o 140 diwrnod neu fwy bob blwyddyn
+propertyWalesLets.p1.bl2 = wedi gosod mewn gwirionedd am o leiaf 70 diwrnod
+propertyWalesLets.p2.url = https://www.gov.uk/find-local-council
+propertyWalesLets.p2.part1 = Cysylltwch â’ch cyngor lleol
+propertyWalesLets.p2.part2 = a gadewch iddyn nhw wybod manylion yr eiddo. Yna byddant yn trosglwyddo’r hyn sydd ei angen arnom i brisio’r eiddo.
+propertyWalesLets.subheading = Cymorth arall ar GOV.UK
+propertyWalesLets.p3.url = https://www.gov.uk/introduction-to-business-rates/self-catering-and-holiday-let-accommodation
+propertyWalesLets.p3 = Eiddo hunanarlwyo a gosodiadau gwyliau
+
+# --- Not need to pay business rates
+businessRatesNoNeedToPay.title = Ni fydd angen i chi dalu ardrethi busnes - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesNoNeedToPay.heading = Ni fydd angen i chi dalu ardrethi busnes
+businessRatesNoNeedToPay.p1 = Os ydych chi’n defnyddio ystafell fel swyddfa yn unig neu’n gwerthu nwyddau trwy’r post, ni fydd angen i chi dalu ardrethi busnes. Ni fydd eich band Treth Gyngor yn cael ei effeithio.
+businessRatesNoNeedToPay.subheading = Cymorth arall ar GOV.UK
+businessRatesNoNeedToPay.url = <a href="https://www.gov.uk/introduction-to-business-rates/working-at-home" target="_self">Gweithio gartref</a>
+businessRatesNoNeedToPay.url1 = <a href="https://www.gov.uk/run-business-from-home" target="_self">Rhedeg busnes o gartref</a>
+
+# --- Check and challenge your business rates valuation online
+businessRatesValuationOnline.title = Gwirio a herio eich prisiad ardrethi busnes ar-lein - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesValuationOnline.heading = Gwirio a herio eich prisiad ardrethi busnes ar-lein
+businessRatesValuationOnline.p1.url = https://www.gov.uk/correct-your-business-rates
+businessRatesValuationOnline.p1.part1 = Defnyddiwch wasanaeth ar-lein Asiantaeth y Swyddfa Brisio
+businessRatesValuationOnline.p1.part2 = os ydych chi''n credu y dylid newid eich prisiad ardrethi busnes.
+businessRatesValuationOnline.subheading1 = Ar gyfer eiddo yn Lloegr
+businessRatesValuationOnline.p2 = Cyflwynwch wiriad i wneud unrhyw newidiadau i fanylion ffisegol, neu eu cadarnhau os nad oes unrhyw newidiadau i''w gwneud. Gallwch herio''r prisiad ar ôl i''r gwiriad gael ei ddatrys.
+businessRatesValuationOnline.subheading2 = Cymorth arall ar GOV.UK
+businessRatesValuationOnline.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
+businessRatesValuationOnline.p3 = Sut i wirio a herio eich prisiad ardrethi busnes
+businessRatesValuationOnline.p4.url = https://www.gov.uk/introduction-to-business-rates
+businessRatesValuationOnline.p4 = Mwy am ardrethi busnes a sut maent yn cael eu cyfrifo
+
+# ---  Tell us that your property has been demolished
+businessRatesPropertyDemolished.title = Dywedwch wrthym fod eich eiddo wedi''i ddymchwel - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesPropertyDemolished.heading = Dywedwch wrthym fod eich eiddo wedi''i ddymchwel
+businessRatesPropertyDemolished.p1.url =  https://www.gov.uk/correct-your-business-rates
+businessRatesPropertyDemolished.p1.part1 = Defnyddiwch wasanaeth Asiantaeth y Swyddfa Brisio
+businessRatesPropertyDemolished.p1.part2 =  i ddweud wrthym fod eich eiddo wedi''i ddymchwel.
+businessRatesPropertyDemolished.p2 = Ar gyfer eiddo yn Lloegr, bydd angen i chi fewngofnodi a chyflwyno ‘gwiriad’.
+businessRatesPropertyDemolished.subheading = Cymorth arall ar GOV.UK
+businessRatesPropertyDemolished.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
+businessRatesPropertyDemolished.p3 = Canllaw cam wrth gam i wirio a herio eich cyfraddau busnes
+businessRatesPropertyDemolished.p4.url = https://www.gov.uk/guidance/how-to-check-and-challenge-your-rateable-value-in-wales
+businessRatesPropertyDemolished.p4 = Sut i wirio a herio eich prisiad ardrethi busnes yng Nghymru
+
+# --- Business Rates Subcategories
 businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
-businessRatesSubcategory.business_rates_challenge = Herio fy mhrisiad ardrethi busnes
-businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu’r ardal lleol wedi newid
+businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu fy ardal wedi newid
 businessRatesSubcategory.business_rates_assessed_for_bus_rates = Mae angen i’m heiddo gael ei asesu ar gyfer ardrethi busnes
-businessRatesSubcategory.business_rates_from_home = Rhedeg busnes o gartref
+businessRatesSubcategory.business_rates_from_home = Rwy’n defnyddio fy nghartref ar gyfer busnes
 businessRatesSubcategory.business_rates_not_used = Nid yw fy eiddo bellach yn cael ei ddefnyddio ar gyfer busnes
+businessRatesSubcategory.business_rates_self_catering = Eiddo hunanarlwyo neu osodiad gwyliau
 businessRatesSubcategory.business_rates_other = Unrhyw ymholiad ardrethu busnes arall
-businessRatesSubcategory.business_rates_valuation = Mae angen prisiad ardrethi busnes ar fy eiddo
+businessRatesSubcategory.business_rates_change_valuation = Rwy’n credu bod fy mhrisiad ardrethi busnes yn anghywir
+businessRatesSubcategory.business_rates_demolished = Mae fy eiddo wedi cael ei ddymchwel
+businessRatesSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
 
 businessRatesChallenge.title = Herio fy mhrisiad trethi busnes - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesChallenge.heading = Herio fy mhrisiad trethi busnes
 businessRatesChallenge.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self">wasanaeth ar-lein</a> Asiantaeth y Swyddfa Brisio i wirio a herio eich prisiad ardrethi busnes.
 
-propertyOrAreaChanged.title = Mae fy eiddo neu’r ardal leol wedi newid - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-propertyOrAreaChanged.heading = Mae fy eiddo neu’r ardal leol wedi newid
-propertyOrAreaChanged.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self">wasanaeth ar-lein</a> Asiantaeth y Swyddfa Brisio i ddweud wrthym am newidiadau i’ch eiddo neu’r ardal o’i hamgylch.
-businessRatesSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
+propertyOrAreaChanged.title = Dywedwch wrthym am newidiadau i''ch eiddo neu''ch ardal - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyOrAreaChanged.heading = Dywedwch wrthym am newidiadau i''ch eiddo neu''ch ardal
+propertyOrAreaChanged.p1.url = https://www.gov.uk/correct-your-business-rates
+propertyOrAreaChanged.p1.part1 = Defnyddiwch wasanaeth Asiantaeth y Swyddfa Brisio
+propertyOrAreaChanged.p1.part2 = i ddweud wrthym am newidiadau i''ch eiddo neu''r ardal gyfagos.
+propertyOrAreaChanged.p2 = Ar gyfer eiddo yn Lloegr, bydd angen i chi fewngofnodi a chyflwyno ‘gwiriad’.
+propertyOrAreaChanged.subheading = Cymorth arall ar GOV.UK
+propertyOrAreaChanged.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
+propertyOrAreaChanged.p3 = Canllaw cam wrth gam i wirio a herio eich cyfraddau busnes yn Lloegr
+propertyOrAreaChanged.p4.url = https://www.gov.uk/guidance/how-to-check-and-challenge-your-rateable-value-in-wales
+propertyOrAreaChanged.p4 = Sut i wirio a herio eich prisiad ardrethi busnes yng Nghymru
 
 # --- Property address
 propertyAddress.title = Beth yw cyfeiriad yr eiddo? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
