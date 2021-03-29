@@ -92,9 +92,9 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.PropertyAddressController.onPageLoad(NormalMode)
       }
 
-      "return a function that goes to the business rates smart links page when an enquiry category has been selected and the selection is business rates" in {
+      "return a function that goes to the business rates enquiry page when an enquiry category has been selected and the selection is business rates" in {
         when (mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesSmartLinksController.onPageLoad()
+        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
       }
 
       "return a function that goes to the contact form page when an enquiry category for business rates has been selected" in {

@@ -71,7 +71,7 @@ class Navigator @Inject()() {
   private val enquiryRouting: UserAnswers => Call = answers => {
     answers.enquiryCategory match {
       case Some("council_tax") => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
-      case Some("business_rates") => routes.BusinessRatesSmartLinksController.onPageLoad()
+      case Some("business_rates") => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
       case Some("housing_benefit") => routes.HousingBenefitsController.onPageLoad()
       case Some("valuations_for_tax") => routes.ValuationForTaxesController.onPageLoad()
       case Some("providing_lettings") => routes.ProvidingLettingsController.onPageLoad()
