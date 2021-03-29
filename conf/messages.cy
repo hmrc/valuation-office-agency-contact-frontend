@@ -425,6 +425,13 @@ businessRatesBill.subheading = Cymorth arall ar GOV.UK
 businessRatesBill.url = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-business-rate-relief">Gostyngiadau a disgowntiau ardrethi busnes</a>
 businessRatesBill.url1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/government/collections/financial-support-for-businesses-during-coronavirus-covid-19">Cefnogaeth i fusnesau yn ystod coronafirws (COVID-19)</a>
 
+# --- Business Rates Property Enquiry
+businessRatesPropertyEnquiry.title = A yw eich eiddo yng Nghymru neu Lloegr? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesPropertyEnquiry.heading = A yw eich eiddo yng Nghymru neu Lloegr?
+businessRatesPropertyEnquiry.england = Lloegr
+businessRatesPropertyEnquiry.wales = Cymru
+error.businessRatesPropertyEnquiry.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
+
 # --- Business Rates Subcategories
 businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?
@@ -435,7 +442,7 @@ businessRatesSubcategory.business_rates_assessed_for_bus_rates = Mae angen i’m
 businessRatesSubcategory.business_rates_property_empty = Mae fy eiddo yn wag
 businessRatesSubcategory.business_rates_from_home = Rhedeg busnes o gartref
 businessRatesSubcategory.business_rates_from_home = Rwy’n defnyddio fy nghartref ar gyfer busnes
-businessRatesSubcategory.business_rates_not_used = Nid yw fy eiddo bellach yn cael ei ddefnyddio ar gyfer busnes
+businessRatesSubcategory.business_rates_not_used = Ni ddefnyddir fy eiddo bellach ar gyfer busnes
 businessRatesSubcategory.business_rates_self_catering = Eiddo hunanarlwyo neu osodiad gwyliau
 businessRatesSubcategory.business_rates_other = Unrhyw ymholiad ardrethu busnes arall
 businessRatesSubcategory.business_rates_change_valuation = Rwy’n credu bod fy mhrisiad ardrethi busnes yn anghywir

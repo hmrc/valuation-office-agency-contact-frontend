@@ -124,6 +124,9 @@ GET         /change-valuation                            uk.gov.hmrc.valuationof
 GET         /demolished                                  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onDemolishedPageLoad(mode: Mode = NormalMode)
 GET         /property-needs-assessment-business-rates    uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onValuationPageLoad(mode: Mode = NormalMode)
 
+GET         /no-longer-used-for-business           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesPropertyController.onPageLoad(mode: Mode = NormalMode)
+POST        /no-longer-used-for-business           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesPropertyController.onSubmit(mode: Mode = NormalMode)
+
 # SURVEY
 GET         /survey-thanks                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.surveyThankyou
 POST        /survey 				               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.formCompleteFeedback
