@@ -139,6 +139,7 @@ class Navigator @Inject()() {
       case Some("business_rates_change_valuation")  => routes.BusinessRatesSubcategoryController.onChangeValuationPageLoad()
       case Some("business_rates_demolished")  => routes.BusinessRatesSubcategoryController.onDemolishedPageLoad()
       case Some("business_rates_valuation") => routes.BusinessRatesSubcategoryController.onValuationPageLoad()
+      case Some("business_rates_property_empty") => routes.PropertyEmptyController.onBusinessRatesPageLoad()
       case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case None => {
         Logger.warn(s"Navigation for Business Rates page reached without selection of enquiry by controller ")
@@ -153,7 +154,7 @@ class Navigator @Inject()() {
       case Some("council_tax_band_too_high") => routes.CouncilTaxBandTooHighController.onPageLoad()
       case Some("council_tax_bill") => routes.CouncilTaxBillController.onPageLoad()
       case Some("council_tax_band_for_new") => routes.CouncilTaxBandForNewController.onPageLoad()
-      case Some("council_tax_property_empty") => routes.CouncilTaxPropertyEmptyController.onPageLoad()
+      case Some("council_tax_property_empty") => routes.PropertyEmptyController.onPageLoad()
       case Some("council_tax_property_poor_repair") => routes.PropertyWindWaterController.onEnquiryLoad()
       case Some("council_tax_property_demolished") => routes.PropertyDemolishedController.onPageLoad()
       case Some("council_tax_annexe") => routes.CouncilTaxAnnexeController.onPageLoad()

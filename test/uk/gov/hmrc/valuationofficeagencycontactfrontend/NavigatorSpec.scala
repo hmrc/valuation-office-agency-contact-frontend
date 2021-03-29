@@ -107,6 +107,11 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesChallengeController.onAreaChangePageLoad()
       }
 
+      "return a function that goes to the property empty page when an enquiry category for business rates has been selected and business_rates_property_empty option selected" in {
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_property_empty")
+        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.PropertyEmptyController.onBusinessRatesPageLoad()
+      }
+
       "return a function that goes to the change valuation page when an enquiry category for business rates has been selected and business_rates_change_valuation option selected" in {
         when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_change_valuation")
         navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesSubcategoryController.onChangeValuationPageLoad()
@@ -335,7 +340,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return a function that goes to the council tax property empty form page when an enquiry category for council tax has been selected and council_tax_property_empty option selected" in {
         when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_empty")
-        navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.CouncilTaxPropertyEmptyController.onPageLoad()
+        navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.PropertyEmptyController.onPageLoad()
       }
 
       "return a function that goes to the council tax property wind and water page when an enquiry category for council tax has been selected and council_tax_property_poor_repair option selected" in {
