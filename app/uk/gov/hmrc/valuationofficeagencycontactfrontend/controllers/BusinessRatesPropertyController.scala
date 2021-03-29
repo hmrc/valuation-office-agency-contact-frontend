@@ -28,6 +28,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.BusinessRate
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesPropertyEnquiry => business_rates_property_enquiry}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesNonBusiness => business_rates_non_business}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 
 import javax.inject.Inject
@@ -41,6 +42,7 @@ class BusinessRatesPropertyController @Inject()(
                                                  getData: DataRetrievalAction,
                                                  requireData: DataRequiredAction,
                                                  businessRatesPropertyEnquiry: business_rates_property_enquiry,
+                                                 businessRatesNonBusiness: business_rates_non_business,
                                                  cc: MessagesControllerComponents
                                                ) extends FrontendController(cc) with I18nSupport {
 
@@ -67,4 +69,8 @@ class BusinessRatesPropertyController @Inject()(
       )
   }
 
+  def onNonBusinessPageLoad: Action[AnyContent] = (getData andThen requireData) {
+    implicit request =>
+      Ok(businessRatesNonBusiness(appConfig))
+  }
 }

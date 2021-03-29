@@ -28,16 +28,18 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.BusinessRate
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesPropertyEnquiry => business_rates_property_enquiry}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesNonBusiness => business_rates_non_business}
 
 class BusinessRatesPropertyControllerSpec extends ControllerSpecBase {
 
   def businessRatesPropertyEnquiry = app.injector.instanceOf[business_rates_property_enquiry]
+  def businessRatesNonBusiness = app.injector.instanceOf[business_rates_non_business]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new BusinessRatesPropertyController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesPropertyEnquiry, stubMessageControllerComponents)
+      dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesPropertyEnquiry, businessRatesNonBusiness, stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = BusinessRatesPropertyForm()) = businessRatesPropertyEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
@@ -77,5 +79,11 @@ class BusinessRatesPropertyControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe viewAsString(boundForm)
     }
 
+    "return OK and the correct view when onNonBusinessPageLoad is called" in {
+      val result = controller().onNonBusinessPageLoad(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe businessRatesNonBusiness(frontendAppConfig)(fakeRequest, messages).toString()
+    }
   }
 }
