@@ -117,6 +117,7 @@ POST        /date-property-business-changed                     uk.gov.hmrc.valu
 GET         /date-property-business-area-changed   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.DatePropertyChangedController.onPageLoad(mode: Mode = NormalMode)
 POST        /date-property-business-area-changed   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.DatePropertyChangedController.onSubmit(mode: Mode = NormalMode)
 
+GET         /billing-and-reliefs                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesBillController.onPageLoad()
 GET         /business-rates-property-empty               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyEmptyController.onBusinessRatesPageLoad()
 GET         /self-catering-holiday-let                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onPageLoad(mode: Mode = NormalMode)
 POST        /self-catering-holiday-let                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onSubmit(mode: Mode = NormalMode)

@@ -140,6 +140,7 @@ class Navigator @Inject()() {
       case Some("business_rates_demolished")  => routes.BusinessRatesSubcategoryController.onDemolishedPageLoad()
       case Some("business_rates_valuation") => routes.BusinessRatesSubcategoryController.onValuationPageLoad()
       case Some("business_rates_property_empty") => routes.PropertyEmptyController.onBusinessRatesPageLoad()
+      case Some("business_rates_bill") => routes.BusinessRatesBillController.onPageLoad()
       case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case None => {
         Logger.warn(s"Navigation for Business Rates page reached without selection of enquiry by controller ")

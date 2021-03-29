@@ -38,6 +38,7 @@ object BusinessRatesSubcategoryForm extends FormErrorHelper {
 
   def options = Seq(
     RadioOption("businessRatesSubcategory", "business_rates_change_valuation"),
+    RadioOption("businessRatesSubcategory", "business_rates_bill"),
     RadioOption("businessRatesSubcategory", "business_rates_changes"),
     RadioOption("businessRatesSubcategory", "business_rates_assessed_for_bus_rates"),
     RadioOption("businessRatesSubcategory", "business_rates_property_empty"),
