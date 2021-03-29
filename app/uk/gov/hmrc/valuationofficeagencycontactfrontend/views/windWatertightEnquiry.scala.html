@@ -54,7 +54,7 @@
             @govukErrorSummary(
                 ErrorSummary(
                     title = Text(messages("error.summary.title")),
-                    errorList = form.errors.map(e => ErrorLink(href = Some("#windWater-error"), content = HtmlContent(messages(e.messages, e.args :_*))))
+                    errorList = form.errors.map(e => ErrorLink(href = Some("#propertyWindWater.form-error"), content = HtmlContent(messages(e.messages, e.args :_*))))
                 )
             )
         }
