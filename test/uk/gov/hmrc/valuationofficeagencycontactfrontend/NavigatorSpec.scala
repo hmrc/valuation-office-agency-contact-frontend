@@ -569,6 +569,11 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         when (mockUserAnswers.businessRatesPropertyEnquiry) thenReturn Some("england")
         navigator.nextPage(BusinessRatesPropertyEnquiryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesPropertyController.onNonBusinessPageLoad()
       }
+
+      "return a function that goes to the contact details when an enquiry category for business rates has been selected and business_rates_not_used option selected" in {
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_not_used")
+        navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
+      }
     }
   }
 }

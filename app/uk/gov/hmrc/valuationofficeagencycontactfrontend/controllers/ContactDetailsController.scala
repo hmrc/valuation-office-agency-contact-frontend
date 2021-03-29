@@ -87,6 +87,7 @@ class ContactDetailsController @Inject()(appConfig: FrontendAppConfig,
       case (_, Some("council_tax"), Some("council_tax_area_change"), _) => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("council_tax"), Some("council_tax_other"), _) => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("business_rates"), _, Some("business_rates_from_home")) => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      case (_, Some("business_rates"), _, Some("business_rates_not_used")) => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("council_tax"), _, _) => Right(routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
       case (_, Some("business_rates"), _, _) => Right(routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
       case _ => Left(s"Unknown enquiry category in enquiry key")
