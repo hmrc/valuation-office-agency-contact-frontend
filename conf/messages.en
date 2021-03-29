@@ -434,7 +434,7 @@ businessRatesSubcategory.business_rates_property_empty = My property is empty
 businessRatesSubcategory.business_rates_from_home = I use my home for business
 businessRatesSubcategory.business_rates_not_used = My property is no longer used for business
 businessRatesSubcategory.business_rates_self_catering = A self-catering property or holiday let
-businessRatesSubcategory.business_rates_other = Any other business rates enquiry
+businessRatesSubcategory.business_rates_other = Other
 businessRatesSubcategory.business_rates_change_valuation = I think my business rates valuation is wrong
 businessRatesSubcategory.business_rates_demolished = My property has been demolished
 businessRatesSubcategory.business_rates_valuation = My property needs a business rates valuation
@@ -530,6 +530,11 @@ tellUsMore.areaChange.inset = You will need to supply evidence when we reply to 
 tellUsMore.other.title = What is your other Council Tax enquiry? - Valuation Office Agency contact form - GOV.UK
 tellUsMore.other.heading = What is your other Council Tax enquiry?
 tellUsMore.other.hint = Include details such as case reference numbers and dates.
+
+# --- Tell Us More BR other journey
+tellUsMore.business.other.title = What is your other business rates enquiry? - Valuation Office Agency contact form - GOV.UK
+tellUsMore.business.other.heading = What is your other business rates enquiry?
+tellUsMore.business.other.hint = Include details such as case reference numbers and dates.
 
 anythingElse.title = Is there anything else you would like to tell us about? - Valuation Office Agency contact form - GOV.UK
 anythingElse.heading = Is there anything else you would like to tell us about? (optional)

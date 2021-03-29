@@ -74,7 +74,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       contentAsString(result) mustBe viewAsString(TellUsMoreForm().fill(TellUsMore("value 1")), "tellUsMore.ct-reference")
     }
 
-    "The enquiry key function produces a string with a tell us more ndr-reference key when the enquiry category is business_rates" +
+    "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
       " and the business_rates_other has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
@@ -82,7 +82,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.ndr-reference")
+      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
       isBusinessRatesSelection mustBe true
     }
 

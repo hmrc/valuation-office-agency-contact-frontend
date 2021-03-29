@@ -90,6 +90,13 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
           checkYourAnswersHelper.tellUsMore("tellUsMore.business.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress).flatten))
+      case (Some("new_enquiry"), Some("business_rates"), _, Some("business_rates_other")) => Some(
+        AnswerSection(None, Seq(
+          checkYourAnswersHelper.enquiryCategory,
+          checkYourAnswersHelper.businessRatesSubcategory,
+          checkYourAnswersHelper.tellUsMore("tellUsMore.business.other.heading"),
+          checkYourAnswersHelper.contactDetails,
+          checkYourAnswersHelper.propertyAddress).flatten))
       case (_, Some("business_rates"), _, _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
