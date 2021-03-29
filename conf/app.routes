@@ -129,6 +129,7 @@ POST        /no-longer-used-for-business           uk.gov.hmrc.valuationofficeag
 
 GET         /no-longer-used-for-business           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesPropertyController.onPageLoad(mode: Mode = NormalMode)
 POST        /no-longer-used-for-business           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesPropertyController.onSubmit(mode: Mode = NormalMode)
+GET         /non-business                          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesPropertyController.onNonBusinessPageLoad()
 
 # SURVEY
 GET         /survey-thanks                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.surveyThankyou

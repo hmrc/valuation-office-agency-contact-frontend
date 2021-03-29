@@ -435,6 +435,13 @@ businessRatesPropertyEnquiry.england = England
 businessRatesPropertyEnquiry.wales = Wales
 error.businessRatesPropertyEnquiry.required = Select if your property is in England or Wales
 
+# --- Tell us that your property is no longer used for business
+businessRatesNonBusiness.title = Tell us that your property is no longer used for business - Valuation Office Agency contact form - GOV.UK
+businessRatesNonBusiness.heading = Tell us that your property is no longer used for business
+businessRatesNonBusiness.p1 = <a href="https://www.gov.uk/correct-your-business-rates" target="_self">Use the Valuation Office Agency''s online service</a> and submit a ''check'' to tell us that your property is not being used for business.
+businessRatesNonBusiness.subheading = Other help on GOV.UK
+businessRatesNonBusiness.p2 = <a href="https://www.gov.uk/government/collections/check-and-challenge-step-by-step" target="_self">How to check and challenge your business rates valuation</a>
+
 # --- Business Rates Subcategories
 businessRatesSubcategory.title = What is your business rates enquiry about? - Valuation Office Agency contact form - GOV.UK
 businessRatesSubcategory.heading = What is your business rates enquiry about?

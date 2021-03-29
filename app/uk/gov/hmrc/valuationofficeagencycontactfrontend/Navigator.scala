@@ -250,7 +250,7 @@ class Navigator @Inject()() {
 
   private val businessRatesPropertyEnquiryRouting: UserAnswers => Call = answers => {
     answers.businessRatesPropertyEnquiry match {
-      case Some("england") => ???
+      case Some("england") => routes.BusinessRatesPropertyController.onNonBusinessPageLoad()
       case Some("wales") => routes.DatePropertyChangedController.onPageLoad()
       case _ =>
         Logger.warn(s"Navigation for is business rates property enquiry reached without selection of enquiry by controller")
