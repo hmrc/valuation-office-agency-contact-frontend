@@ -444,7 +444,7 @@ businessRatesSubcategory.business_rates_from_home = Rhedeg busnes o gartref
 businessRatesSubcategory.business_rates_from_home = Rwy’n defnyddio fy nghartref ar gyfer busnes
 businessRatesSubcategory.business_rates_not_used = Ni ddefnyddir fy eiddo bellach ar gyfer busnes
 businessRatesSubcategory.business_rates_self_catering = Eiddo hunanarlwyo neu osodiad gwyliau
-businessRatesSubcategory.business_rates_other = Unrhyw ymholiad ardrethu busnes arall
+businessRatesSubcategory.business_rates_other = Arall
 businessRatesSubcategory.business_rates_change_valuation = Rwy’n credu bod fy mhrisiad ardrethi busnes yn anghywir
 businessRatesSubcategory.business_rates_demolished = Mae fy eiddo wedi cael ei ddymchwel
 businessRatesSubcategory.business_rates_valuation = Mae angen prisiad ardrethi busnes ar fy eiddo
@@ -537,6 +537,11 @@ tellUsMore.areaChange.inset = Bydd angen i chi ddarparu tystiolaeth pan fyddwn y
 tellUsMore.other.title = Beth yw eich ymholiad Treth Gyngor arall? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 tellUsMore.other.heading = Beth yw eich ymholiad Treth Gyngor arall?
 tellUsMore.other.hint = Darparwch fanylion megis cyfeirnodau achos a dyddiadau.
+
+# --- Tell Us More BR other journey
+tellUsMore.business.other.title = Beth yw eich ymholiad ardrethi busnes arall? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+tellUsMore.business.other.heading = Beth yw eich ymholiad ardrethi busnes arall?
+tellUsMore.business.other.hint = Darparwch fanylion megis cyfeirnodau achos a dyddiadau.
 
 # --- Confirmation for new and existing enquiries
 confirmation.title = Ymchwiliad wedi’i gyflwyno - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK

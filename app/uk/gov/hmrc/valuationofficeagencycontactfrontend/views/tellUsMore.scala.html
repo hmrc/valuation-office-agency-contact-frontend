@@ -50,7 +50,8 @@
 
 @content = {
 
-    @if(enquiryKey == "tellUsMore.poorRepair" || enquiryKey == "tellUsMore.business" || enquiryKey == "tellUsMore.areaChange" || enquiryKey == "tellUsMore.other") {
+    @if(enquiryKey == "tellUsMore.poorRepair" || enquiryKey == "tellUsMore.business"
+            || enquiryKey == "tellUsMore.areaChange" || enquiryKey == "tellUsMore.other" || enquiryKey == "tellUsMore.business.other") {
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">@messages(s"$enquiryKey.heading")</h1>
         </legend>
@@ -58,7 +59,7 @@
         @govukTextarea(Textarea(id = "message", name = "message", rows = 5, value = form("message").value,
             hint = Option(Hint(content = Text(messages(s"$enquiryKey.hint")))),
             errorMessage = form.errors.asHtmlErrorMessageForField("message")))
-        @if(enquiryKey != "tellUsMore.other") {
+        @if(enquiryKey != "tellUsMore.other" && enquiryKey != "tellUsMore.business.other") {
             <div class="govuk-inset-text">@messages(s"$enquiryKey.inset")</div>
         }
 
