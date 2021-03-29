@@ -47,6 +47,7 @@ class Navigator @Inject()() {
       case (Some("new_enquiry"), Some("council_tax_other"), _) => routes.CheckYourAnswersController.onPageLoad()
       case (Some("new_enquiry"), _, Some("business_rates_from_home")) => routes.CheckYourAnswersController.onPageLoad()
       case (Some("new_enquiry"), _, Some("business_rates_other")) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_not_used")) => routes.CheckYourAnswersController.onPageLoad()
       case (Some("new_enquiry"), _, _) => routes.TellUsMoreController.onPageLoad(NormalMode)
       case (Some("more_details"), _, _) => routes.WhatElseController.onPageLoad()
       case (Some("update_existing"), _, _) => routes.AnythingElseTellUsController.onPageLoad()
@@ -190,7 +191,7 @@ class Navigator @Inject()() {
       case (Some("council_tax_area_change"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (Some("council_tax_other"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (_, Some("business_rates_from_home")) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (_, Some("business_rates_not_used")) => ???
+      case (_, Some("business_rates_not_used")) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (_, Some("business_rates_other")) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case _ => routes.CheckYourAnswersController.onPageLoad()
     }
