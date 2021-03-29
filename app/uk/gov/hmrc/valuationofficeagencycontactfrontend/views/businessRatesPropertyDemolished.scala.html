@@ -20,41 +20,42 @@
 @import uk.gov.hmrc.govukfrontend.views.html.components.GovukBackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 
 @this(mainTemplate: main_template, govukBackLink: GovukBackLink)
 
-@(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, mode: Mode)(implicit request: Request[_], messages: Messages)
 
 @beforeBlock = {
-    @govukBackLink(BackLink(content = Text(messages("site.back")),
-        href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url))
+@govukBackLink(BackLink(content = Text(messages("site.back")),
+    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(mode).url))
 }
 
 @mainTemplate(
     beforeContentBlock = Option(beforeBlock),
-    pageTitle = Option(messages("propertyOrAreaChanged.title"))) {
+    pageTitle = Option(messages("businessRatesPropertyDemolished.title"))
+) {
 
-    <h1 class="govuk-heading-l">@messages("propertyOrAreaChanged.heading")</h1>
-
+    <h1 class="govuk-heading-l">@messages("businessRatesPropertyDemolished.heading")</h1>
 
     <p class="govuk-body">
-        <a class="govuk-link" target="_self" href=@messages("propertyOrAreaChanged.p1.url")>
-            @messages("propertyOrAreaChanged.p1.part1")
+        <a class="govuk-link" target="_self" href=@messages("businessRatesPropertyDemolished.p1.url")>
+            @messages("businessRatesPropertyDemolished.p1.part1")
         </a>
-        @messages("propertyOrAreaChanged.p1.part2")
+        @messages("businessRatesPropertyDemolished.p1.part2")
     </p>
 
-    <p class="govuk-body">@messages("propertyOrAreaChanged.p2")</p>
+    <p class="govuk-body">@messages("businessRatesPropertyDemolished.p2")</p>
 
-    <h2 class="govuk-heading-m">@messages("propertyOrAreaChanged.subheading")</h2>
+    <h2 class="govuk-heading-m">@messages("businessRatesPropertyDemolished.subheading")</h2>
 
     <p class="govuk-body">
-        <a class="govuk-link" target="_self" href=@messages("propertyOrAreaChanged.p3.url")>
-            @messages("propertyOrAreaChanged.p3")
+        <a class="govuk-link" target="_self" href=@messages("businessRatesPropertyDemolished.p3.url")>
+            @messages("businessRatesPropertyDemolished.p3")
         </a>
-        <br/>
-        <a class="govuk-link" target="_self" href=@messages("propertyOrAreaChanged.p4.url")>
-            @messages("propertyOrAreaChanged.p4")
+        </br>
+        <a class="govuk-link" target="_self" href=@messages("businessRatesPropertyDemolished.p4.url")>
+            @messages("businessRatesPropertyDemolished.p4")
         </a>
     </p>
 

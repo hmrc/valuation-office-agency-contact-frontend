@@ -32,6 +32,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSubcategory => business_rates_subcategory}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesChangeValuation => business_rates_change_valuation}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesPropertyDemolished => business_rates_property_demolished}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesValuation => business_rates_valuation}
 
 import scala.concurrent.Future
 
@@ -40,6 +42,8 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
 
   def businessRatesSubcategory = app.injector.instanceOf[business_rates_subcategory]
   def businessRatesChangeValuation = app.injector.instanceOf[business_rates_change_valuation]
+  def businessRatesPropertyDemolished = app.injector.instanceOf[business_rates_property_demolished]
+  def businessRatesValuation = app.injector.instanceOf[business_rates_valuation]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
@@ -51,8 +55,8 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new BusinessRatesSubcategoryController(frontendAppConfig, messagesApi, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSubcategory, businessRatesChangeValuation,
-      MessageControllerComponentsHelpers.stubMessageControllerComponents)
+      dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSubcategory, businessRatesChangeValuation, businessRatesPropertyDemolished,
+      businessRatesValuation, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = BusinessRatesSubcategoryForm()) = businessRatesSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
@@ -98,6 +102,20 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
 
       status(result) mustBe OK
       contentAsString(result) mustBe businessRatesChangeValuation(frontendAppConfig,NormalMode)(fakeRequest, messages).toString()
+    }
+
+    "return OK and the correct view for property demolished" in {
+      val result = controller().onDemolishedPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe businessRatesPropertyDemolished(frontendAppConfig,NormalMode)(fakeRequest, messages).toString()
+    }
+
+    "return OK and the correct view for valuation" in {
+      val result = controller().onValuationPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe businessRatesValuation(frontendAppConfig)(fakeRequest, messages).toString()
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {

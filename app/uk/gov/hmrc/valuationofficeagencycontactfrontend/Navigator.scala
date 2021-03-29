@@ -137,6 +137,8 @@ class Navigator @Inject()() {
       case Some("business_rates_self_catering") => routes.BusinessRatesSelfCateringController.onPageLoad()
       case Some("business_rates_from_home") => routes.DatePropertyChangedController.onPageLoad()
       case Some("business_rates_change_valuation")  => routes.BusinessRatesSubcategoryController.onChangeValuationPageLoad()
+      case Some("business_rates_demolished")  => routes.BusinessRatesSubcategoryController.onDemolishedPageLoad()
+      case Some("business_rates_valuation") => routes.BusinessRatesSubcategoryController.onValuationPageLoad()
       case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case None => {
         Logger.warn(s"Navigation for Business Rates page reached without selection of enquiry by controller ")

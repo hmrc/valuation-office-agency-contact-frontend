@@ -117,11 +117,13 @@ POST        /date-property-business-changed                     uk.gov.hmrc.valu
 GET         /date-property-business-area-changed   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.DatePropertyChangedController.onPageLoad(mode: Mode = NormalMode)
 POST        /date-property-business-area-changed   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.DatePropertyChangedController.onSubmit(mode: Mode = NormalMode)
 
-GET         /self-catering-holiday-let             uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onPageLoad(mode: Mode = NormalMode)
-POST        /self-catering-holiday-let             uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onSubmit(mode: Mode = NormalMode)
-GET         /property-england-lets                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onEngLetsPageLoad(mode: Mode = NormalMode)
-GET         /property-wales-lets                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onWalLetsPageLoad(mode: Mode = NormalMode)
-GET         /change-valuation                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onChangeValuationPageLoad(mode: Mode = NormalMode)
+GET         /self-catering-holiday-let                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onPageLoad(mode: Mode = NormalMode)
+POST        /self-catering-holiday-let                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onSubmit(mode: Mode = NormalMode)
+GET         /property-england-lets                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onEngLetsPageLoad(mode: Mode = NormalMode)
+GET         /property-wales-lets                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onWalLetsPageLoad(mode: Mode = NormalMode)
+GET         /change-valuation                            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onChangeValuationPageLoad(mode: Mode = NormalMode)
+GET         /demolished                                  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onDemolishedPageLoad(mode: Mode = NormalMode)
+GET         /property-needs-assessment-business-rates    uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onValuationPageLoad(mode: Mode = NormalMode)
 
 # SURVEY
 GET         /survey-thanks                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.surveyThankyou
