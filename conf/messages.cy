@@ -315,6 +315,10 @@ datePropertyChanged.business.heading = Pryd wnaethoch chi ddechrau defnyddio’c
 datePropertyChanged.areaChange.title = Pryd ddigwyddodd y newid i’r ardal? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 datePropertyChanged.areaChange.heading = Pryd ddigwyddodd y newid i’r ardal? (dewisol)
 
+# -------- When did you stop using your property for business
+datePropertyChanged.notUsed.title = Pryd wnaethoch chi stopio defnyddio'ch eiddo ar gyfer busnes? (dewisol) - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+datePropertyChanged.notUsed.heading = Pryd wnaethoch chi stopio defnyddio'ch eiddo ar gyfer busnes? (dewisol)
+
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 councilTaxSubcategory.heading = Beth yw testun eich ymholiad ynghylch Treth Gyngor?
@@ -432,6 +436,13 @@ businessRatesPropertyEnquiry.england = Lloegr
 businessRatesPropertyEnquiry.wales = Cymru
 error.businessRatesPropertyEnquiry.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
 
+# --- Business Rates Property Enquiry
+businessRatesPropertyEnquiry.title = A yw eich eiddo yng Nghymru neu Lloegr? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesPropertyEnquiry.heading = A yw eich eiddo yng Nghymru neu Lloegr?
+businessRatesPropertyEnquiry.england = Lloegr
+businessRatesPropertyEnquiry.wales = Cymru
+error.businessRatesPropertyEnquiry.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
+
 # --- Business Rates Subcategories
 businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?
@@ -537,6 +548,11 @@ tellUsMore.areaChange.inset = Bydd angen i chi ddarparu tystiolaeth pan fyddwn y
 tellUsMore.other.title = Beth yw eich ymholiad Treth Gyngor arall? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 tellUsMore.other.heading = Beth yw eich ymholiad Treth Gyngor arall?
 tellUsMore.other.hint = Darparwch fanylion megis cyfeirnodau achos a dyddiadau.
+
+# --- Tell Us More BR Property not used journey
+tellUsMore.notUsed.title = Am beth ddefnyddir yr eiddo? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+tellUsMore.notUsed.heading = Am beth ddefnyddir yr eiddo?
+tellUsMore.notUsed.inset = Bydd angen i chi ddarparu tystiolaeth pan fyddwn yn ymateb i chi, megis lluniau neu gynlluniau o’r eiddo.
 
 # --- Tell Us More BR other journey
 tellUsMore.business.other.title = Beth yw eich ymholiad ardrethi busnes arall? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK

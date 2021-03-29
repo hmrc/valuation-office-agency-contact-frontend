@@ -314,6 +314,10 @@ datePropertyChanged.business.heading = When did you start using your property fo
 datePropertyChanged.areaChange.title = When did the change in the area happen? - Valuation Office Agency contact form - GOV.UK
 datePropertyChanged.areaChange.heading = When did the change in the area happen? (optional)
 
+# -------- When did you stop using your property for business
+datePropertyChanged.notUsed.title = When did you stop using your property for business? (optional) - Valuation Office Agency contact form - GOV.UK
+datePropertyChanged.notUsed.heading = When did you stop using your property for business? (optional)
+
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = What is your Council Tax enquiry about? - Valuation Office Agency contact form - GOV.UK
 councilTaxSubcategory.heading = What is your Council Tax enquiry about?
@@ -416,6 +420,13 @@ businessRatesBill.p1 = <a class="govuk-link" target="_self" href="https://www.go
 businessRatesBill.subheading = Other help on GOV.UK
 businessRatesBill.url = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-business-rate-relief">Business rates relief and discounts</a>
 businessRatesBill.url1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/government/collections/financial-support-for-businesses-during-coronavirus-covid-19">Support for businesses during coronavirus (COVID-19)</a>
+
+# --- Business Rates Property Enquiry
+businessRatesPropertyEnquiry.title = Is your property in England or Wales? - Valuation Office Agency contact form - GOV.UK
+businessRatesPropertyEnquiry.heading = Is your property in England or Wales?
+businessRatesPropertyEnquiry.england = England
+businessRatesPropertyEnquiry.wales = Wales
+error.businessRatesPropertyEnquiry.required = Select if your property is in England or Wales
 
 # --- Business Rates Property Enquiry
 businessRatesPropertyEnquiry.title = Is your property in England or Wales? - Valuation Office Agency contact form - GOV.UK
@@ -530,6 +541,11 @@ tellUsMore.areaChange.inset = You will need to supply evidence when we reply to 
 tellUsMore.other.title = What is your other Council Tax enquiry? - Valuation Office Agency contact form - GOV.UK
 tellUsMore.other.heading = What is your other Council Tax enquiry?
 tellUsMore.other.hint = Include details such as case reference numbers and dates.
+
+# --- Tell Us More BR Property not used journey
+tellUsMore.notUsed.title = What is the property used for? - Valuation Office Agency contact form - GOV.UK
+tellUsMore.notUsed.heading = What is the property used for?
+tellUsMore.notUsed.inset = You will need to supply evidence when we reply to you, such as photos or plans of the property.
 
 # --- Tell Us More BR other journey
 tellUsMore.business.other.title = What is your other business rates enquiry? - Valuation Office Agency contact form - GOV.UK
