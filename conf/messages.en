@@ -227,7 +227,7 @@ propertyWindWater.form.heading = Is the property protected from wind and water?
 propertyWindWater.form.p1 = Read about <a class="govuk-link" target="_blank" href="https://www.gov.uk/government/publications/council-tax-domestic-properties-in-disrepair-or-derelict/council-tax-domestic-properties-which-are-in-disrepair-or-are-derelict"> when a Council Tax band would be affected by poor repair </a> (opens in a new tab).
 propertyWindWater.form.yes = Yes
 propertyWindWater.form.no = No
-error.propertyWindWater.required = Select 'Yes' if the property is protected from wind and water
+error.propertyWindWater.required = Select ''Yes'' if the property is protected from wind and water
 
 # ---- Annexe Journey Messages start ----
 
