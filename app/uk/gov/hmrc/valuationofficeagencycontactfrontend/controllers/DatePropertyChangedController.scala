@@ -96,7 +96,7 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
       case (Some("council_tax_property_poor_repair"), None)  => routes.PropertyWindWaterController.onEnquiryLoad().url
       case (Some("council_tax_business_uses"), None) => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
       case (Some("council_tax_area_change"), None) => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
-      case (None, Some("business_rates_from_home")) => routes.CouncilTaxBusinessController.onPageLoad().url
+      case (None, Some("business_rates_from_home")) => routes.BusinessRatesSubcategoryController.onPageLoad(mode).url
       case (None, Some("business_rates_not_used")) => routes.BusinessRatesPropertyController.onPageLoad().url
       case _ => routes.PropertyWindWaterController.onEnquiryLoad().url
     }
