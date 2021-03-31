@@ -316,8 +316,8 @@ datePropertyChanged.areaChange.title = Pryd ddigwyddodd y newid i’r ardal? - F
 datePropertyChanged.areaChange.heading = Pryd ddigwyddodd y newid i’r ardal? (dewisol)
 
 # -------- When did you stop using your property for business
-datePropertyChanged.notUsed.title = Pryd wnaethoch chi stopio defnyddio'ch eiddo ar gyfer busnes? (dewisol) - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-datePropertyChanged.notUsed.heading = Pryd wnaethoch chi stopio defnyddio'ch eiddo ar gyfer busnes? (dewisol)
+datePropertyChanged.notUsed.title = Pryd wnaethoch chi stopio defnyddio''ch eiddo ar gyfer busnes? (dewisol) - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+datePropertyChanged.notUsed.heading = Pryd wnaethoch chi stopio defnyddio''ch eiddo ar gyfer busnes? (dewisol)
 
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
@@ -417,14 +417,14 @@ businessRatesValuation.p4 = Amcangyfrifwch eich ardrethi busnes
 # -------- Business Rates Property Empty
 businessRatesPropertyEmpty.title = Nid yw ardrethi busnes yn cael eu heffeithio os yw eiddo'n wag - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesPropertyEmpty.heading = Nid yw ardrethi busnes yn cael eu heffeithio os yw eiddo'n wag
-businessRatesPropertyEmpty.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/contact-your-local-council-about-business-rates">Cysylltwch â'ch cyngor lleol</a> i ddarganfod a allwch gael unrhyw ostyngiadau neu ddisgowntiau ar eich bil.
+businessRatesPropertyEmpty.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/contact-your-local-council-about-business-rates">Cysylltwch â''ch cyngor lleol</a> i ddarganfod a allwch gael unrhyw ostyngiadau neu ddisgowntiau ar eich bil.
 businessRatesPropertyEmpty.subheading = Cymorth arall ar GOV.UK
 businessRatesPropertyEmpty.url = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-business-rate-relief">Gostyngiadau a disgowntiau ardrethi busnes</a>
 
 # -------- Business rates bill
-businessRatesBill.title = Siaradwch â'ch cyngor lleol am eich bil ardrethi busnes - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-businessRatesBill.heading = Siaradwch â'ch cyngor lleol am eich bil ardrethi busnes
-businessRatesBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/contact-your-local-council-about-business-rates">Cysylltwch â'ch cyngor lleol</a> os oes gennych unrhyw gwestiynau am eich bil ardrethi busnes, gan mai nhw sy'n delio â biliau a thaliadau.
+businessRatesBill.title = Siaradwch â''ch cyngor lleol am eich bil ardrethi busnes - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesBill.heading = Siaradwch â''ch cyngor lleol am eich bil ardrethi busnes
+businessRatesBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/contact-your-local-council-about-business-rates">Cysylltwch â''ch cyngor lleol</a> os oes gennych unrhyw gwestiynau am eich bil ardrethi busnes, gan mai nhw sy''n delio â biliau a thaliadau.
 businessRatesBill.subheading = Cymorth arall ar GOV.UK
 businessRatesBill.url = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-business-rate-relief">Gostyngiadau a disgowntiau ardrethi busnes</a>
 businessRatesBill.url1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/government/collections/financial-support-for-businesses-during-coronavirus-covid-19">Cefnogaeth i fusnesau yn ystod coronafirws (COVID-19)</a>
