@@ -87,7 +87,8 @@
     }
 }
 
-@defining(if(enquiryKey == "tellUsMore.poorRepair") messages(s"$enquiryKey.title") else messages("tellUsMore.title")) { title =>
+@defining(if(enquiryKey == "tellUsMore.poorRepair" || enquiryKey == "tellUsMore.business" || enquiryKey == "tellUsMore.areaChange" || enquiryKey == "tellUsMore.other"
+|| enquiryKey == "tellUsMore.notUsed" || enquiryKey == "tellUsMore.business.other") messages(s"$enquiryKey.title") else messages("tellUsMore.title")) { title =>
 
     @mainTemplate(
         pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + title) else title),
