@@ -35,21 +35,21 @@
     pageTitle = Option(messages("propertyDemolished.title"))
 ) {
 
-    <h1 class="govuk-heading-l">@messages("propertyDemolished.heading")</h1>
+    <h1 class="govuk-heading-l">@messages("propertyDemolished.heading2")</h1>
 
     <p class="govuk-body">
-        <a class="govuk-link" target="_self" href=@messages("propertyDemolished.p1.url")>
-            @messages("propertyDemolished.p1.part1")
+        <a class="govuk-link" target="_self" href=@messages("propertyDemolished.p3.url")>
+            @messages("propertyDemolished.p2.part1")
         </a>
-        @messages("propertyDemolished.p1.part2")
+        @messages("propertyDemolished.p2.part2")
     </p>
 
     <h2 class="govuk-heading-m">@messages("propertyDemolished.subheading")</h2>
 
-    <p class="govuk-body">
-        <a class="govuk-link" target="_self" href=@messages("propertyDemolished.p2.url")>
-            @messages("propertyDemolished.p2.part1")
-        </a>
-    </p>
+    <ul class='govuk-list'>
+        <li><a class="govuk-link" target="_self" href=@messages("propertyDemolished.p3.url")>@messages("propertyDemolished.p3.part1")</a></li>
+        <li><a class="govuk-link" target="_self" href=@messages("propertyDemolished.p4.url")>@messages("propertyDemolished.p4.part1")</a></li>
+        <li><a class="govuk-link" target="_self" href=@messages("propertyDemolished.p5.url")>@messages("propertyDemolished.p5.part1")</a></li>
+    </ul>
 
 }

@@ -199,12 +199,20 @@ councilTaxBandForNew.p4.url = https://www.gov.uk/guidance/your-property-and-coun
 # --- My property has been partly or fully demolished
 propertyDemolished.title = Speak to your local council if your property has been demolished - Valuation Office Agency contact form - GOV.UK
 propertyDemolished.heading = Speak to your local council if your property has been demolished
+propertyDemolished.heading2 = Tell us if your property has been demolished.
 propertyDemolished.p1.url = https://www.gov.uk/find-local-council
 propertyDemolished.p1.part1 = Contact your local council
 propertyDemolished.p1.part2 = to tell them that the property has been demolished.
 propertyDemolished.subheading = Other help on GOV.UK
-propertyDemolished.p2.url = https://www.gov.uk/guidance/your-property-and-council-tax
-propertyDemolished.p2.part1 = When to contact your council about Council Tax
+propertyDemolished.p2.url = https://www.gov.uk/council-tax-bands
+propertyDemolished.p2.part1 = Use the Council Tax service
+propertyDemolished.p2.part2 = and challenge your Council Tax band to tell us that your property has been demolished.
+propertyDemolished.p3.url = https://www.gov.uk/challenge-council-tax-band
+propertyDemolished.p3.part1 = How to challenge your Council Tax band
+propertyDemolished.p4.url = https://www.gov.uk/guidance/council-tax-band-changes
+propertyDemolished.p4.part1 = When your Council Tax band may change
+propertyDemolished.p5.url = https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed
+propertyDemolished.p5.part1 = How properties are valued for Council Tax
 
 # --- Council Tax My Property Empty
 councilTaxPropertyEmpty.title = The Council Tax band is not affected if a property is empty - Valuation Office Agency contact form - GOV.UK
