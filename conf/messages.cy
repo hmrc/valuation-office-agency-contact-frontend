@@ -199,12 +199,21 @@ councilTaxBandForNew.p4.url = https://www.gov.uk/guidance/your-property-and-coun
 # --- My property has been partly or fully demolished'
 propertyDemolished.title = Siaradwch gyda’ch cyngor lleol os yw eich eiddo wedi’i ddymchwel - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 propertyDemolished.heading = Siaradwch gyda’ch cyngor lleol os yw eich eiddo wedi’i ddymchwel
+propertyDemolished.heading2 = Dywedwch wrthym os yw eich eiddo wedi’i ddymchwel
 propertyDemolished.p1.url = https://www.gov.uk/find-local-council
 propertyDemolished.p1.part1 = Cysylltwch gyda’ch cyngor lleol
 propertyDemolished.p1.part2 = i ddweud wrthyn nhw fod yr eiddo wedi’i ddymchwel
 propertyDemolished.subheading = Cymorth arall ar GOV.UK
-propertyDemolished.p2.url = https://www.gov.uk/guidance/your-property-and-council-tax
-propertyDemolished.p2.part1 = Pryd i gysylltu gyda’ch cyngor ynglŷn â Threth Gyngor
+propertyDemolished.p2.url = https://www.gov.uk/council-tax-bands
+propertyDemolished.p2.part1 = Defnyddiwch y gwasanaeth Treth Gyngor
+propertyDemolished.p2.part2 = a herio'ch band Treth Gyngor i ddweud wrthym fod eich eiddo wedi'i ddymchwel
+propertyDemolished.p3.url = https://www.gov.uk/challenge-council-tax-band
+propertyDemolished.p3.part1 = Sut i herio'ch band Treth Gyngor
+propertyDemolished.p4.url = https://www.gov.uk/guidance/council-tax-band-changes
+propertyDemolished.p4.part1 = Pryd y gall eich band Treth Gyngor newid
+propertyDemolished.p5.url = https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed
+propertyDemolished.p5.part1 = Sut mae eiddo'n cael eu prisio ar gyfer Treth Gyngor
+
 
 # --- Council Tax My Property Empty
 councilTaxPropertyEmpty.title = Nid yw’r band Treth Gyngor yn cael ei effeithio os yw’r eiddo'n wag - Valuation Office Agency contact form - GOV.UK
