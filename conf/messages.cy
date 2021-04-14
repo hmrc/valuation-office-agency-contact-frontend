@@ -465,7 +465,6 @@ businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi 
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
 businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu fy ardal wedi newid
 businessRatesSubcategory.business_rates_bill = Fy mil ardrethi busnes
-businessRatesSubcategory.business_rates_assessed_for_bus_rates = Mae angen i’m heiddo gael ei asesu ar gyfer ardrethi busnes
 businessRatesSubcategory.business_rates_property_empty = Mae fy eiddo yn wag
 businessRatesSubcategory.business_rates_from_home = Rhedeg busnes o gartref
 businessRatesSubcategory.business_rates_from_home = Rwy’n defnyddio fy nghartref ar gyfer busnes
