@@ -531,7 +531,7 @@ tellUsMore.checkYourAnswersLabel = Enquiry
 tellUsMore.anythingElse = Is there anything else you would like to tell us about?
 
 # --- Tell Us More Property Wind water journey
-tellUsMore.poorRepair.title = Tell us more about the condition of the property - - Valuation Office Agency contact form - GOV.UK
+tellUsMore.poorRepair.title = Tell us more about the condition of the property - Valuation Office Agency contact form - GOV.UK
 tellUsMore.poorRepair.heading = Tell us more about the condition of the property
 tellUsMore.poorRepair.hint = For example, if the property has a roof or windows.
 tellUsMore.poorRepair.inset = You will need to supply evidence when we reply to you, such as photos or plans of the property.
