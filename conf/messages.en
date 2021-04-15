@@ -197,7 +197,7 @@ councilTaxBandForNew.p4 = When to contact your council about Council Tax
 councilTaxBandForNew.p4.url = https://www.gov.uk/guidance/your-property-and-council-tax
 
 # --- My property has been partly or fully demolished
-propertyDemolished.title = Speak to your local council if your property has been demolished - Valuation Office Agency contact form - GOV.UK
+propertyDemolished.title = Tell us if your property has been demolished - Valuation Office Agency contact form - GOV.UK
 propertyDemolished.heading = Tell us if your property has been demolished.
 propertyDemolished.p2.url = https://www.gov.uk/council-tax-bands
 propertyDemolished.p2.part1 = Use the Council Tax service

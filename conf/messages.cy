@@ -197,9 +197,8 @@ councilTaxBandForNew.p4 = Pryd i gysylltu â’ch cyngor ynghylch Treth Gyngor
 councilTaxBandForNew.p4.url = https://www.gov.uk/guidance/your-property-and-council-tax
 
 # --- My property has been partly or fully demolished'
-propertyDemolished.title = Siaradwch gyda’ch cyngor lleol os yw eich eiddo wedi’i ddymchwel - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-propertyDemolished.heading = Siaradwch gyda’ch cyngor lleol os yw eich eiddo wedi’i ddymchwel
-propertyDemolished.heading2 = Dywedwch wrthym os yw eich eiddo wedi’i ddymchwel
+propertyDemolished.title = Dywedwch wrthym os yw eich eiddo wedi’i ddymchwel - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyDemolished.heading = Dywedwch wrthym os yw eich eiddo wedi’i ddymchwel
 propertyDemolished.p1.url = https://www.gov.uk/find-local-council
 propertyDemolished.p1.part1 = Cysylltwch gyda’ch cyngor lleol
 propertyDemolished.p1.part2 = i ddweud wrthyn nhw fod yr eiddo wedi’i ddymchwel
