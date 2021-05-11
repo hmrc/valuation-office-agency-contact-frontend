@@ -60,6 +60,13 @@
         <p class="govuk-body">@Html(Messages(message))</p>
     }
 
+<noscript>
+    <style>
+        #no-javascript-remove-link {display: none;}
+        #no-hr {display: none;}
+    </style>
+</noscript>
+
     <section>
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
         <h2 class="govuk-heading-m">@Html(Messages("confirmation.enquirySummary"))</h2>
@@ -75,10 +82,13 @@
                 </div>
             }
         </dl>
-
-        <p class="govuk-body"><a id="print-button" rel="nofollow" href="javascript:window.print()" class="govuk-link print-link govuk-!-display-none-print">@messages("site.print.button")</a></p>
-
     </section>
+
+<div id="no-javascript-remove-link">
+    <p class="govuk-body">
+        <a href="javascript:window.print();" class="govuk-link print-link">@messages("site.print.button")</a>
+    </p>
+</div>
 
     <section class="govuk-!-display-none-print">
     @formWithCSFR(action = SatisfactionSurveyController.formCompleteFeedback, 'autoComplete -> "off", 'class -> "govuk-!-display-none-print") {
@@ -102,7 +112,10 @@
 }
 @surveyContent = {
 
+<div id="no-hr">
     <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+</div>
+
     <h3 class="govuk-heading-l">@messages("confirmation.feedback") @messages("hintText.optional") </h3>
 
     <div class="govuk-form-group">
