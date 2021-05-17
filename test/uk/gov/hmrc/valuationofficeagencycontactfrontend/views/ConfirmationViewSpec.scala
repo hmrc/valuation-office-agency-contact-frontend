@@ -63,14 +63,6 @@ class ConfirmationViewSpec extends ViewBehaviours {
       "feedback.warning"
     )
 
-    "contain a print button " in {
-      val doc = asDocument(view())
-      val printButton = doc.getElementById("print-button").text()
-      val href = doc.getElementById("print-button").attr("href")
-      assert(printButton == messages("site.print.button"))
-      assert(href == "javascript:window.print()")
-    }
-
     "Given a property address with address line 2 and county as None it should contain a formatted address string with <br/> interstitial" in {
       val doc = asDocument(alternativeView())
       assert(doc.toString.contains("<br>c"))
