@@ -43,10 +43,16 @@
     @govukBackLink(BackLink(content = Text(messages("site.back")), href = backLink))
 }
 
-@textInput(id: String, classes: String, autoCompleteLabel: String, mode: String = "") = {
+@textInput(id: String, inputType: String, classes: String, autoCompleteLabel: String, mode: String = "") = {
     @govukInput(Input(
-        id=id, name=id, inputType = id, value = form(id).value, classes=classes, autocomplete=Some(autoCompleteLabel),
-        label = Label(content = Text(messages(s"contactDetails.${id}"))), inputmode=Some(mode), attributes=Map("spellcheck" -> "false"),
+        id=id,
+        name=id,
+        inputType = inputType,
+        value = form(id).value,
+        classes=classes,
+        autocomplete=Some(autoCompleteLabel),
+        label = Label(content = Text(messages(s"contactDetails.${id}"))), inputmode=Some(mode),
+        attributes=Map("spellcheck" -> "false"),
         errorMessage = form.errors.asTextErrorMessageForField(id),
         hint = messages.translate(s"contactDetails.${id}.hint", Seq()).map(hintText => Hint(id=Option(s"${id}-hint"), content=Text(hintText)))
     ))
@@ -59,9 +65,9 @@
     <br>
     <p class="govuk-body">@messages("contactDetails.hint")</p>
 
-    @textInput("fullName", "govuk-input--width-30", "name")
-    @textInput("email", "govuk-input--width-20", "email")
-    @textInput("tel", "govuk-input--width-20", "tel")
+    @textInput("fullName", "text", "govuk-input--width-30", "name")
+    @textInput("email", "email", "govuk-input--width-20", "email")
+    @textInput("tel", "tel", "govuk-input--width-20", "tel")
 }
 
 
