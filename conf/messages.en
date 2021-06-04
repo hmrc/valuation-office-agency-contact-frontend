@@ -154,11 +154,11 @@ contactDetails.fullName.invalid = Full name must only contain letters a to z, hy
 contactDetails.email = Email address
 contactDetails.email.required = Enter your email address
 contactDetails.email.invalid = Enter an email in the correct format, like name@example.com
-contactDetails.contactNumber = Telephone number
-contactDetails.contactNumber.hint = For international numbers include the country code.
-contactDetails.contactNumber.required = Enter your phone number
-contactDetails.contactNumber.length = Phone number must be between 11 and 20 characters
-contactDetails.contactNumber.invalid = Enter a phone number, like 01632 960 001
+contactDetails.tel = Telephone number
+contactDetails.tel.hint = For international numbers include the country code.
+contactDetails.tel.required = Enter your phone number
+contactDetails.tel.length = Phone number must be between 11 and 20 characters
+contactDetails.tel.invalid = Enter a phone number, like 01632 960 001
 contactDetails.checkYourAnswersLabel = Contact details
 
 # --- Council Tax Bill

@@ -154,11 +154,11 @@ contactDetails.fullName.invalid = Rhaid i’r enw cyntaf gynnwys llythrennau a i
 contactDetails.email = Cyfeiriad ebost
 contactDetails.email.required = Nodwch eich cyfeiriad ebost
 contactDetails.email.invalid = Nodwch gyfeiriad ebost yn y fformat cywir, fel enw@enghraifft.com
-contactDetails.contactNumber =  Rhif ffôn
-contactDetails.contactNumber.hint = Ar gyfer rhifau rhyngwladol, dylech gynnwys cod y wlad.
-contactDetails.contactNumber.required = Nodwch eich rhif ffôn
-contactDetails.contactNumber.length = Rhaid i’r rhif ffôn fod rhwng 11 ac 20 nod
-contactDetails.contactNumber.invalid = Nodwch rif ffôn, fel 01632 960 001
+contactDetails.tel =  Rhif ffôn
+contactDetails.tel.hint = Ar gyfer rhifau rhyngwladol, dylech gynnwys cod y wlad.
+contactDetails.tel.required = Nodwch eich rhif ffôn
+contactDetails.tel.length = Rhaid i’r rhif ffôn fod rhwng 11 ac 20 nod
+contactDetails.tel.invalid = Nodwch rif ffôn, fel 01632 960 001
 contactDetails.checkYourAnswersLabel = Manylion cyswllt
 
 # --- Council Tax Bill
