@@ -14,13 +14,14 @@
  * limitations under the License.
  *@
 
+@import models._
 @import uk.gov.hmrc.govukfrontend.views.html.components.{GovukButton, GovukErrorSummary, GovukFieldset, GovukBackLink}
 @import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
-@import uk.gov.hmrc.govukfrontend.views.html.components.GovukTextarea
+@import uk.gov.hmrc.govukfrontend.views.html.components._
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
@@ -35,9 +36,13 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
 
-@this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
-        govukTextarea: GovukTextarea, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
-        govukFieldset: GovukFieldset,  govukBackLink: GovukBackLink)
+@this(  mainTemplate: main_template,
+        formWithCSFR: formWithCSRF,
+        govukButton: GovukButton,
+        govukErrorSummary: GovukErrorSummary,
+        govukFieldset: GovukFieldset,
+        govukBackLink: GovukBackLink,
+        govukCharacterCount: GovukCharacterCount)
 
 
 @(appConfig: FrontendAppConfig, form: Form[TellUsMore], mode: Mode, enquiryKey: String, backlink: String)(implicit request: Request[_], messages: Messages)
@@ -57,7 +62,13 @@
             <h1 class="govuk-fieldset__heading">@messages(s"$enquiryKey.heading")</h1>
         </legend>
 
-        @govukTextarea(Textarea(id = "message", name = "message", rows = 5, value = form("message").value,
+        @govukCharacterCount(
+            CharacterCount(
+                id = "message",
+                name = "message",
+                value = form("message").value,
+                rows = 5,
+                maxLength = Some(5000),
             hint = {
                 if(enquiryKey != "tellUsMore.notUsed") {
                     Option(Hint(content = Text(messages(s"$enquiryKey.hint"))))
@@ -81,7 +92,7 @@
             <li>@messages("tellUsMore.para4") @messages(enquiryKey)</li>
         </ul>
 
-        @govukTextarea(Textarea(id = "message", name = "message", rows = 5, value = form("message").value,
+        @govukCharacterCount(CharacterCount(id = "message", name = "message", rows = 5, maxLength = Some(5000), value = form("message").value,
             hint = Option(Hint(content = Text(messages("tellUsMore.hint")))),
             errorMessage = form.errors.asHtmlErrorMessageForField("message"), label = Label(content = Text(messages("tellUsMore.message")))))
     }
