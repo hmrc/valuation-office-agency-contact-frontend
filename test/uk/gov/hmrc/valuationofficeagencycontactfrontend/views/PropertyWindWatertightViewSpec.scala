@@ -27,7 +27,7 @@ class PropertyWindWatertightViewSpec extends ViewBehaviours {
 
   "The Council Tax band cannot be reduced or removed view" must {
     behave like normalPage(view, "propertyWindWater", "title", "heading",
-      "p1", "subheading", "p2.url")
+      "p1", "subheading", "p2")
 
     "has a link marked with site.back leading to the Council Tax band cannot be reduced or removed" in {
       val doc = asDocument(view())
