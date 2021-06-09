@@ -47,7 +47,7 @@
    @govukErrorSummary(
     ErrorSummary(
      title = Text(messages("error.summary.title")),
-     errorList = form.errors.map(e => ErrorLink(href = Some("#enquiryCategory-error"), content = HtmlContent(messages(e.messages, e.args))))
+     errorList = form.errors.map(e => ErrorLink(href = Some("#contactReason.new_enquiry"), content = HtmlContent(messages(e.messages, e.args))))
     )
    )
   }
