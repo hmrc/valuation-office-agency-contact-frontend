@@ -23,7 +23,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.FormHelpers.antiXS
 
 object ContactDetailsForm {
 
-  private val phoneRegex = """^(\d{1}|\+)?[-\s\./0-9]*(\d{1,3}|\d{1}\-\d{1,3})[-\s\./0-9]*(\(?[-\s\./0-9]*\d{1,3}[-\s\./0-9]*\)?|\d{1,3})[-\s\./0-9]*(\d{1,4}[-\s\./0-9]*\d{1,4})[-\s\./0-9]*"""
+  private val phoneRegex = """^(\d{1}|\+)?[-\s\./0-9]*(\d{1,3}|\d{1}\-\d{1,3})[-\s\./0-9]*\(?([-\s\./0-9]*\d{1,3}[-\s\./0-9]*|\d{1,3})\)[-\s\./0-9]*(\d{1,4}[-\s\./0-9]*\d{1,4})[-\s\./0-9]*"""
   private val emailRegex = """^[a-zA-Z0-9\.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$""" //scalastyle:ignore
 
   def apply(): Form[ContactDetails] = Form(
