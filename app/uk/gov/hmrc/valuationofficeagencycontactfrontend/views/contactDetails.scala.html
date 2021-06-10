@@ -43,11 +43,12 @@
     @govukBackLink(BackLink(content = Text(messages("site.back")), href = backLink))
 }
 
-@textInput(id: String, inputType: String, classes: String, autoCompleteLabel: String, mode: String = "") = {
+@textInput(id: String, inputType: String, classes: String, autoCompleteLabel: String, mode: String = "", pattern: String = "") = {
     @govukInput(Input(
         id=id,
         name=id,
         inputType = inputType,
+        pattern = Some(pattern),
         value = form(id).value,
         classes=classes,
         autocomplete=Some(autoCompleteLabel),
@@ -67,7 +68,7 @@
 
     @textInput("fullName", "text", "govuk-input--width-30", "name")
     @textInput("email", "email", "govuk-input--width-20", "email")
-    @textInput("tel", "tel", "govuk-input--width-20", "tel")
+    @textInput("contactNumber", "text", "govuk-input--width-20", "contactNumber", "numeric", "[0-9]*")
 }
 
 
