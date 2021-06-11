@@ -34,8 +34,11 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.hmrcfrontend.views.html.components.implicits._
+@import uk.gov.hmrc.govukfrontend.views.html.components.GovukCharacterCount
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.charactercount.CharacterCount
 
-@this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
+@this(mainTemplate: main_template, formWithCSFR: formWithCSRF, govukCharacterCount: GovukCharacterCount,
         govukTextarea: GovukTextarea, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
         govukFieldset: GovukFieldset,  govukBackLink: GovukBackLink)
 
@@ -57,16 +60,17 @@
             <h1 class="govuk-fieldset__heading">@messages(s"$enquiryKey.heading")</h1>
         </legend>
 
-        @govukTextarea(Textarea(id = "message", name = "message", rows = 5, value = form("message").value,
-            hint = {
-                if(enquiryKey != "tellUsMore.notUsed") {
-                    Option(Hint(content = Text(messages(s"$enquiryKey.hint"))))
-                } else None
-            },
-            errorMessage = form.errors.asHtmlErrorMessageForField("message")))
-        @if(enquiryKey != "tellUsMore.other" && enquiryKey != "tellUsMore.business.other") {
-            <div class="govuk-inset-text">@messages(s"$enquiryKey.inset")</div>
-        }
+        @govukCharacterCount(
+            CharacterCount(
+                id = "message",
+                name = "message",
+                value = form("message").value,
+                rows = 4,
+                maxLength = Some(100)
+            )
+        )
+
+
 
     } else {
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -81,9 +85,9 @@
             <li>@messages("tellUsMore.para4") @messages(enquiryKey)</li>
         </ul>
 
-        @govukTextarea(Textarea(id = "message", name = "message", rows = 5, value = form("message").value,
-            hint = Option(Hint(content = Text(messages("tellUsMore.hint")))),
-            errorMessage = form.errors.asHtmlErrorMessageForField("message"), label = Label(content = Text(messages("tellUsMore.message")))))
+
+
+
     }
 }
 
