@@ -31,6 +31,7 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import controllers.routes._
 
 
 @this(mainTemplate: main_template, formWithCSFR: formWithCSRF, govukBackLink: GovukBackLink,
@@ -40,9 +41,7 @@
 
 
 @beforeBlock = {
-@govukBackLink(BackLink(content = Text(messages("site.back")),
-    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactReasonController.onPageLoad().url
-))
+    @govukBackLink(BackLink(content = Text(messages("site.back")), href = ContactReasonController.onPageLoad().url))
 }
 
 @mainTemplate(
