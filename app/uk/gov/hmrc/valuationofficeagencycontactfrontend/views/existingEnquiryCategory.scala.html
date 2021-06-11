@@ -39,7 +39,7 @@
 @(appConfig: FrontendAppConfig, form: Form[String], mode: Mode, backLink: String)(implicit request: Request[_], messages: Messages)
 
 @beforeBlock = {
-    @govukBackLink(BackLink(content = Text(messages("site.back")), href = backLink))
+    @govukBackLink(BackLink(content = Text(messages("site.back")), href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactReasonController.onPageLoad().url))
 }
 
 @mainTemplate(
