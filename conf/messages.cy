@@ -647,7 +647,7 @@ providingLettings.email = NSOhelpdesk@voa.gov.uk
 providingLettings.phone-title =  Ffôn
 providingLettings.phone-number = 03000 502502
 
-datePropertyChanged.poorRepair.title = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+datePropertyChanged.poorRepair.title = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol) - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 datePropertyChanged.poorRepair.heading = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol)
 datePropertyChanged.hint = Er enghraifft, 27 2 2021
 datePropertyChanged.error.invalidDate = Rhowch ddyddiad go iawn

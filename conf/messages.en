@@ -640,7 +640,7 @@ providingLettings.email = NSOhelpdesk@voa.gov.uk
 providingLettings.phone-title = Phone
 providingLettings.phone-number = 03000 502502
 
-datePropertyChanged.poorRepair.title = When did your property start to be in poor repair? - Valuation Office Agency contact form - GOV.UK
+datePropertyChanged.poorRepair.title = When did your property start to be in poor repair? (optional) - Valuation Office Agency contact form - GOV.UK
 datePropertyChanged.poorRepair.heading = When did your property start to be in poor repair? (optional)
 datePropertyChanged.hint = For example, 27 2 2021
 datePropertyChanged.error.invalidDate = Enter a real date
