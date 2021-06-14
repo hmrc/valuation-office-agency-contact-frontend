@@ -35,10 +35,10 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
 @import uk.gov.hmrc.hmrcfrontend.views.html.components.implicits._
-@import uk.gov.hmrc.govukfrontend.views.html.components.GovukCharacterCount
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.charactercount.CharacterCount
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.charactercount.CharacterCount
+@import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
 
-@this(mainTemplate: main_template, formWithCSFR: formWithCSRF, govukCharacterCount: GovukCharacterCount,
+@this(mainTemplate: main_template, formWithCSFR: formWithCSRF, hmrcCharacterCount: HmrcCharacterCount,
         govukTextarea: GovukTextarea, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
         govukFieldset: GovukFieldset,  govukBackLink: GovukBackLink)
 
@@ -60,7 +60,7 @@
             <h1 class="govuk-fieldset__heading">@messages(s"$enquiryKey.heading")</h1>
         </legend>
 
-        @govukCharacterCount(
+        @hmrcCharacterCount(
             CharacterCount(
                 id = "message",
                 name = "message",

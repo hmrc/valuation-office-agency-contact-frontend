@@ -21,5 +21,7 @@
 @* I'm leaving some code commented because we may need this later. Once template wil be stabilised, we can remove it*@
 @*<script src='@routes.Assets.versioned("javascripts/jquery-2.2.4.js")'></script>*@
 <script src='@controllers.routes.Assets.versioned("lib/govuk-frontend/govuk/all.js")'></script>
+<script src='@routes.Assets.versioned("lib/hmrc-frontend/hmrc/all.js")'></script>
 @*<script src='@routes.Assets.versioned("javascripts/voabarxmlfrontend-app.min.js")'></script>*@
-@*<script>window.GOVUKFrontend.initAll();</script>*@
+<script>window.GOVUKFrontend.initAll();</script>
+<script>window.HMRCFrontend.initAll();</script>
