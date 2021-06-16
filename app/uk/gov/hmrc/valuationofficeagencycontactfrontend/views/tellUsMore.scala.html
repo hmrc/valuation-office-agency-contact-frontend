@@ -14,13 +14,14 @@
  * limitations under the License.
  *@
 
+@import models._
 @import uk.gov.hmrc.govukfrontend.views.html.components.{GovukButton, GovukErrorSummary, GovukFieldset, GovukBackLink}
 @import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
-@import uk.gov.hmrc.govukfrontend.views.html.components.GovukTextarea
+@import uk.gov.hmrc.govukfrontend.views.html.components._
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
@@ -29,16 +30,16 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.TellUsMore
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.textarea.Textarea
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.charactercount.CharacterCount
+@import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
 
 @this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
-        govukTextarea: GovukTextarea, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
+        hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
         govukFieldset: GovukFieldset,  govukBackLink: GovukBackLink)
-
 
 @(appConfig: FrontendAppConfig, form: Form[TellUsMore], mode: Mode, enquiryKey: String, backlink: String)(implicit request: Request[_], messages: Messages)
 
@@ -57,13 +58,22 @@
             <h1 class="govuk-fieldset__heading">@messages(s"$enquiryKey.heading")</h1>
         </legend>
 
-        @govukTextarea(Textarea(id = "message", name = "message", rows = 5, value = form("message").value,
+    @hmrcCharacterCount(
+        CharacterCount(
+            id = "message",
+            name = "message",
+            value = form("message").value,
             hint = {
                 if(enquiryKey != "tellUsMore.notUsed") {
                     Option(Hint(content = Text(messages(s"$enquiryKey.hint"))))
-                } else None
-            },
-            errorMessage = form.errors.asHtmlErrorMessageForField("message")))
+                    } else None
+                },
+            rows = 4,
+            maxLength = Some(5000),
+            errorMessage = form.errors.asHtmlErrorMessageForField("message")
+        )
+    )
+
         @if(enquiryKey != "tellUsMore.other" && enquiryKey != "tellUsMore.business.other") {
             <div class="govuk-inset-text">@messages(s"$enquiryKey.inset")</div>
         }
@@ -81,9 +91,20 @@
             <li>@messages("tellUsMore.para4") @messages(enquiryKey)</li>
         </ul>
 
-        @govukTextarea(Textarea(id = "message", name = "message", rows = 5, value = form("message").value,
+    @hmrcCharacterCount(
+        CharacterCount(
+            id = "message",
+            name = "message",
+            value = form("message").value,
+            rows = 4,
+            maxLength = Some(5000),
             hint = Option(Hint(content = Text(messages("tellUsMore.hint")))),
-            errorMessage = form.errors.asHtmlErrorMessageForField("message"), label = Label(content = Text(messages("tellUsMore.message")))))
+            errorMessage = form.errors.asHtmlErrorMessageForField("message"),
+            label = Label(content = Text(messages("tellUsMore.message"))
+        )
+    )
+)
+
     }
 }
 
