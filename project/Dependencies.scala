@@ -20,8 +20,8 @@ object Dependencies {
     private val bootstrapPlayVersion = "2.3.0"
     private val akkaVersion     = "2.5.25"
     private val httpVerbsVersion = "12.3.0"
-    private val playFrontendGovUkVersion = "0.63.0-play-26"
-    private val playFrontendHmrc = "0.49.0-play-26"
+    private val playFrontendGovUkVersion = "0.75.0-play-26"
+    private val playFrontendHmrc = "0.71.0-play-26"
     private val commonTextVersion = "1.9"
 
     val compile: Seq[ModuleID] = Seq(

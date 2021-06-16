@@ -30,20 +30,16 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.TellUsMore
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.textarea.Textarea
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.charactercount.CharacterCount
+@import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
 
-@this(  mainTemplate: main_template,
-        formWithCSFR: formWithCSRF,
-        govukButton: GovukButton,
-        govukErrorSummary: GovukErrorSummary,
-        govukFieldset: GovukFieldset,
-        govukBackLink: GovukBackLink,
-        govukCharacterCount: GovukCharacterCount)
-
+@this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
+        hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
+        govukFieldset: GovukFieldset,  govukBackLink: GovukBackLink)
 
 @(appConfig: FrontendAppConfig, form: Form[TellUsMore], mode: Mode, enquiryKey: String, backlink: String)(implicit request: Request[_], messages: Messages)
 
@@ -62,19 +58,22 @@
             <h1 class="govuk-fieldset__heading">@messages(s"$enquiryKey.heading")</h1>
         </legend>
 
-        @govukCharacterCount(
-            CharacterCount(
-                id = "message",
-                name = "message",
-                value = form("message").value,
-                rows = 5,
-                maxLength = Some(5000),
+    @hmrcCharacterCount(
+        CharacterCount(
+            id = "message",
+            name = "message",
+            value = form("message").value,
             hint = {
                 if(enquiryKey != "tellUsMore.notUsed") {
                     Option(Hint(content = Text(messages(s"$enquiryKey.hint"))))
-                } else None
-            },
-            errorMessage = form.errors.asHtmlErrorMessageForField("message")))
+                    } else None
+                },
+            rows = 4,
+            maxLength = Some(5000),
+            errorMessage = form.errors.asHtmlErrorMessageForField("message")
+        )
+    )
+
         @if(enquiryKey != "tellUsMore.other" && enquiryKey != "tellUsMore.business.other") {
             <div class="govuk-inset-text">@messages(s"$enquiryKey.inset")</div>
         }
@@ -92,9 +91,20 @@
             <li>@messages("tellUsMore.para4") @messages(enquiryKey)</li>
         </ul>
 
-        @govukCharacterCount(CharacterCount(id = "message", name = "message", rows = 5, maxLength = Some(5000), value = form("message").value,
+    @hmrcCharacterCount(
+        CharacterCount(
+            id = "message",
+            name = "message",
+            value = form("message").value,
+            rows = 4,
+            maxLength = Some(5000),
             hint = Option(Hint(content = Text(messages("tellUsMore.hint")))),
-            errorMessage = form.errors.asHtmlErrorMessageForField("message"), label = Label(content = Text(messages("tellUsMore.message")))))
+            errorMessage = form.errors.asHtmlErrorMessageForField("message"),
+            label = Label(content = Text(messages("tellUsMore.message"))
+        )
+    )
+)
+
     }
 }
 
