@@ -100,7 +100,7 @@ existingEnquiryCategory.other = Other
 error.existingEnquiryCategory.required = Select what you contacted us about
 
 
-refNumber.title = What is your reference number?(optional) - Valuation Office Agency contact form - GOV.UK
+refNumber.title = What is your reference number? (optional) - Valuation Office Agency contact form - GOV.UK
 refNumber.value = What is your reference number?
 refNumber.value.optional = What is your reference number?(optional)
 refNumber.hint = For example, VOR12345678, CHK76543210
@@ -311,11 +311,11 @@ propertySmallPartUsed.p3.url = https://www.gov.uk/run-business-from-home
 propertySmallPartUsed.p3 = Running a business from home
 
 # -------- When did you start using your property for business
-datePropertyChanged.business.title = When did you start using your property for business? - Valuation Office Agency contact form - GOV.UK
+datePropertyChanged.business.title = When did you start using your property for business? (optional) - Valuation Office Agency contact form - GOV.UK
 datePropertyChanged.business.heading = When did you start using your property for business? (optional)
 
 # -------- Permanent changes in the local area that affect the value of my property
-datePropertyChanged.areaChange.title = When did the change in the area happen? - Valuation Office Agency contact form - GOV.UK
+datePropertyChanged.areaChange.title = When did the change in the area happen? (optional) - Valuation Office Agency contact form - GOV.UK
 datePropertyChanged.areaChange.heading = When did the change in the area happen? (optional)
 
 # -------- When did you stop using your property for business
@@ -562,7 +562,7 @@ tellUsMore.business.other.title = What is your other business rates enquiry? - V
 tellUsMore.business.other.heading = What is your other business rates enquiry?
 tellUsMore.business.other.hint = Include details such as case reference numbers and dates.
 
-anythingElse.title = Is there anything else you would like to tell us about? - Valuation Office Agency contact form - GOV.UK
+anythingElse.title = Is there anything else you would like to tell us about? (optional) - Valuation Office Agency contact form - GOV.UK
 anythingElse.heading = Is there anything else you would like to tell us about? (optional)
 anythingElse.checkYourAnswersLabel = Is there anything else you would like to tell us about?
 

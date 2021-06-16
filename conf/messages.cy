@@ -316,11 +316,11 @@ propertySmallPartUsed.p3.url = https://www.gov.uk/run-business-from-home
 propertySmallPartUsed.p3 = Rhedeg busnes o gartref
 
 # -------- When did you start using your property for business
-datePropertyChanged.business.title = Pryd wnaethoch chi ddechrau defnyddio’ch eiddo ar gyfer busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+datePropertyChanged.business.title = Pryd wnaethoch chi ddechrau defnyddio’ch eiddo ar gyfer busnes? (dewisol) - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 datePropertyChanged.business.heading = Pryd wnaethoch chi ddechrau defnyddio’ch eiddo ar gyfer busnes? (dewisol)
 
 # -------- Permanent changes in the local area that affect the value of my property
-datePropertyChanged.areaChange.title = Pryd ddigwyddodd y newid i’r ardal? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+datePropertyChanged.areaChange.title = Pryd ddigwyddodd y newid i’r ardal? (dewisol) - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 datePropertyChanged.areaChange.heading = Pryd ddigwyddodd y newid i’r ardal? (dewisol)
 
 # -------- When did you stop using your property for business
