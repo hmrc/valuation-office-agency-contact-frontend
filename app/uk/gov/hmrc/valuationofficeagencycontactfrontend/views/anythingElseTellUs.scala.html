@@ -22,14 +22,15 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.textarea.Textarea
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.charactercount.CharacterCount
+@import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
 
 @this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
-        govukTextarea: GovukTextarea, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
+hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
         govukFieldset: GovukFieldset,  govukBackLink: GovukBackLink)
 
 
@@ -46,8 +47,16 @@
 
     <h1 class="govuk-heading-l">@messages("anythingElse.heading")</h1>
 
-@govukTextarea(Textarea(id="message", name="message", rows=5, value=form("message").value,
-    errorMessage = form.errors.asHtmlErrorMessageForField("message")))
+    @hmrcCharacterCount(
+        CharacterCount(
+            id = "message",
+            name = "message",
+            value=form("message").value,
+            rows = 5,
+            maxLength = Some(5000),
+            errorMessage = form.errors.asHtmlErrorMessageForField("message")
+                )
+            )
 
 }
 
