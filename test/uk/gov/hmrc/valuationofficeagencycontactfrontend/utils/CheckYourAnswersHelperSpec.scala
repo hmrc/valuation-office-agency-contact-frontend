@@ -114,7 +114,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.councilTaxSubcategory
-        result mustBe Some(AnswerRow("councilTaxSubcategory.heading", s"councilTaxSubcategory.$councilTaxSubcategory", true, routes.CouncilTaxSubcategoryController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("councilTaxSubcategory.heading", s"councilTaxSubcategory.$councilTaxSubcategory", true, routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url))
       }
 
       "councilTaxSubcategory function should return an Answer Row containing councilTaxSubcategory.checkYourAnswersLabel label " +
@@ -128,7 +128,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.councilTaxSubcategory
-        result mustBe Some(AnswerRow("councilTaxSubcategory.heading", s"councilTaxSubcategory.$councilTaxSubcategory", true, routes.CouncilTaxSubcategoryController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("councilTaxSubcategory.heading", s"councilTaxSubcategory.$councilTaxSubcategory", true, routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url))
       }
 
       "councilTaxSubcategory function should return a None if no council tax sub category option is found in the User Answers" in {
@@ -149,7 +149,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.businessRatesSubcategory
-        result mustBe Some(AnswerRow("businessRatesSubcategory.heading", s"businessRatesSubcategory.$businessSubcategory", true, routes.BusinessRatesSubcategoryController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("businessRatesSubcategory.heading", s"businessRatesSubcategory.$businessSubcategory", true, routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url))
       }
 
       "businessRatesSubcategory function should return an Answer Row containing businessRatesSubcategory.checkYourAnswersLabel label " +
@@ -163,7 +163,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.businessRatesSubcategory
-        result mustBe Some(AnswerRow("businessRatesSubcategory.heading", s"businessRatesSubcategory.$businessSubcategory", true, routes.BusinessRatesSubcategoryController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("businessRatesSubcategory.heading", s"businessRatesSubcategory.$businessSubcategory", true, routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url))
       }
 
       "businessRatesSubcategory function should return a None if no business rates sub category option is found in the User Answers" in {

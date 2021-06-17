@@ -17,7 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.CheckMode
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CheckMode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.ContactFormatter._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.DateFormatter.formattedLocalDate
@@ -59,11 +59,11 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
   }
 
   def councilTaxSubcategory: Option[AnswerRow] = userAnswers.councilTaxSubcategory map {
-    x => AnswerRow("councilTaxSubcategory.heading", s"councilTaxSubcategory.$x", true, routes.CouncilTaxSubcategoryController.onPageLoad(CheckMode).url)
+    x => AnswerRow("councilTaxSubcategory.heading", s"councilTaxSubcategory.$x", true, routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
   }
 
   def businessRatesSubcategory: Option[AnswerRow] = userAnswers.businessRatesSubcategory map {
-    x => AnswerRow("businessRatesSubcategory.heading", s"businessRatesSubcategory.$x", true, routes.BusinessRatesSubcategoryController.onPageLoad(CheckMode).url)
+    x => AnswerRow("businessRatesSubcategory.heading", s"businessRatesSubcategory.$x", true, routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
   }
 
   def propertyAddress: Option[AnswerRow] = userAnswers.propertyAddress map {
