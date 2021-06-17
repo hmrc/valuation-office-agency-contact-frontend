@@ -146,7 +146,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
     "has a link marked with site.edit for changing the council tax subcategory option" in {
       val doc = asDocument(view1())
       val subcategoryLink = doc.getElementsByClass("change-link-1").first().attr("href")
-      subcategoryLink mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(CheckMode).url.toString
+      subcategoryLink mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url.toString
     }
 
     "has a link marked with site.edit for changing the contact details" in {
@@ -170,7 +170,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
     "has a link marked with site.edit for changing the business rates subcategory option" in {
       val doc = asDocument(view2())
       val subcategoryLink = doc.getElementsByClass("change-link-1").first().attr("href")
-      subcategoryLink mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(CheckMode).url.toString
+      subcategoryLink mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url.toString
     }
 
     "it shouldn't have a href element with id change-link-0 so the user cannot change the enquiry type" in {
