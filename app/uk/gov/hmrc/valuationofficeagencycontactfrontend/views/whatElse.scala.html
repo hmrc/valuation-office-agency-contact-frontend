@@ -26,14 +26,15 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.textarea.Textarea
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.charactercount.CharacterCount
+@import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
 
 @this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
-        govukTextarea: GovukTextarea, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
+        hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
         govukFieldset: GovukFieldset,  govukBackLink: GovukBackLink)
 
 
@@ -47,10 +48,15 @@
 
 @content = {
 
-    @govukTextarea(Textarea(id="message", name="message", rows=5, value=form("message").value,
-        errorMessage = form.errors.asTextErrorMessageForField("message"),
-        label = Label(content = Text(messages("whatElse.message")), isPageHeading = true, classes = "govuk-label--l" )))
-
+@hmrcCharacterCount(
+    CharacterCount(
+    id = "message",
+    name = "message",
+    value = form("message").value,
+    rows = 5,
+    maxLength = Some(5000),
+    errorMessage = form.errors.asHtmlErrorMessageForField("message"),
+    label = Label(content = Text(messages("whatElse.message")), isPageHeading = true, classes = "govuk-label--l" )))
 }
 
 @mainTemplate(
