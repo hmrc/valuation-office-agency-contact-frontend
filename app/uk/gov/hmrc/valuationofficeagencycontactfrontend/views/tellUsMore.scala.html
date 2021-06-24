@@ -55,7 +55,9 @@
             || enquiryKey == "tellUsMore.areaChange" || enquiryKey == "tellUsMore.other"
             || enquiryKey == "tellUsMore.notUsed" || enquiryKey == "tellUsMore.business.other") {
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-            <h1 class="govuk-fieldset__heading">@messages(s"$enquiryKey.heading")</h1>
+            <label class="govuk-label govuk-label--l">
+                <h1 class="govuk-fieldset__heading">@messages(s"$enquiryKey.heading")</h1>
+            </label>
         </legend>
 
     @hmrcCharacterCount(
@@ -80,7 +82,9 @@
 
     } else {
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-            <h1 class="govuk-fieldset__heading">@messages("tellUsMore.heading")</h1>
+                <h1 class="govuk-fieldset__heading">
+                    <label class="govuk-label govuk-label--l">@messages("tellUsMore.heading")</label>
+                </h1>
         </legend>
 
         <p class="govuk-body">@messages("tellUsMore.para")</p>
