@@ -54,14 +54,12 @@
             )
         }
 
-        <h1 class="govuk-heading-l">@messages(s"$enquiryKey.heading")</h1>
         @input_date(
             id = "datePropertyChanged",
             form = form,
-            legend = messages("datePropertyChanged.heading"),
+            legend = messages(s"$enquiryKey.heading"),
             hint = Some(messages("datePropertyChanged.hint")),
-            headingIsLegend = false,
-            legendClass = Some("govuk-visually-hidden")
+            headingIsLegend = true
         )
 
         @govukButton(Button(content = Text(messages("site.continue"))))
