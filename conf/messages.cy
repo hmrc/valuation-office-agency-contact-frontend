@@ -147,7 +147,7 @@ enquiryCategory.valuation_for_public_body.finaltext = Sylwer: mae’r gwasanaeth
  
 contactDetails.title = Beth yw’ch manylion cyswllt? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 contactDetails.heading = Beth yw’ch manylion cyswllt?
-contactDetails.hint = Byddwn ond yn defnyddio'r manylion hyn i'ch diweddaru am eich ymholiad.
+contactDetails.hint = Byddwn ond yn defnyddio’r manylion hyn i gysylltu â chi ynglŷn â’ch ymholiad.
 contactDetails.fullName = Enw llawn
 contactDetails.fullName.required = Rhowch eich enw llawn
 contactDetails.fullName.invalid = Rhaid i’r enw cyntaf gynnwys llythrennau a i z, cysylltnodau, bylchau a chollnodau yn unig

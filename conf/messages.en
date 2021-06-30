@@ -147,7 +147,7 @@ enquiryCategory.valuation_for_public_body.finaltext = Note: this service also op
 
 contactDetails.title = What are your contact details? - Valuation Office Agency contact form - GOV.UK
 contactDetails.heading = What are your contact details?
-contactDetails.hint = We will only use these details to update you about your enquiry.
+contactDetails.hint = We will only use these details to contact you about your enquiry.
 contactDetails.fullName = Full name
 contactDetails.fullName.required = Enter your full name
 contactDetails.fullName.invalid = Full name must only contain letters a to z, hyphens, spaces and apostrophes
