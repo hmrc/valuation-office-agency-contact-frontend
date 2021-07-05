@@ -45,7 +45,7 @@
 
     <logger name="com.google.inject" level="INFO"/>
 
-    <logger name="reactivemongo" level="DEBUG">
+    <logger name="reactivemongo" level="INFO">
         <appender-ref ref="STDOUT" />
     </logger>
 
