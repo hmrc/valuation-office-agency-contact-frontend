@@ -23,7 +23,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.FormHelpers.antiXS
 
 object PropertyAddressForm {
 
-  private val postcodeRegex = """(GIR ?0AA)|((([A-Z-[QVX]][0-9][0-9]?)|(([A-Z-[QVX]][A-Z-[IJZ]][0-9][0-9]?)|(([A-Z-[QVX]][0-9][A-HJKPSTUW])|([A-Z-[QVX]][A-Z-[IJZ]][0-9][ABEHMNPRVWXY])))) ?[0-9][A-Z-[CIKMOV]]{2})""" //scalastyle:ignore
+  private val postcodeRegex = """^[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}$""" //scalastyle:ignore
 
   def apply(): Form[PropertyAddress] = Form(
     mapping(
