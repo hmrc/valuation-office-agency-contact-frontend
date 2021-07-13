@@ -40,7 +40,7 @@ class Application @Inject() (override val messagesApi: MessagesApi,
 
   def start(mode: Mode) = Action.async { implicit request =>
     if (appConfig.startPageRedirect) {
-      Future.successful(Redirect(appConfig.govukStartPage))
+      Future.successful(Redirect(appConfig.govukStartPage).withNewSession)
     } else {
       Future.successful(Ok(contactReason(ContactReasonForm(), NormalMode)))
     }
