@@ -18,6 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.data.Form
 import play.api.test.Helpers._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
@@ -30,10 +31,14 @@ class ApplicationControllerSpec extends ControllerSpecBase {
 
   def languageSwitchController = app.injector.instanceOf[LanguageSwitchController]
 
+  def dataRetrievalAction = app.injector.instanceOf[DataRetrievalAction]
+
+  def dataCacheConnector = app.injector.instanceOf[DataCacheConnector]
+
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) = new Application(
-    messagesApi, frontendAppConfig, contactReason, languageSwitchController, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    messagesApi, frontendAppConfig, contactReason, languageSwitchController, dataRetrievalAction, dataCacheConnector, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = EnquiryCategoryForm()) = contactReason(form, NormalMode)(fakeRequest, messages).toString
 
