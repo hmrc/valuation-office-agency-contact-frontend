@@ -52,7 +52,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
     val httpMock = mock[HttpClient]
     when(httpMock.POST[JsValue, HttpResponse](anyString, any[JsValue], any[Seq[(String, String)]])(any[Writes[Any]], any[HttpReads[HttpResponse]],
       any[HeaderCarrier], any())) thenReturn Future.successful(HttpResponse(returnedStatus, None))
-    when(httpMock.GET[HttpResponse](anyString)(any[HttpReads[HttpResponse]], any[HeaderCarrier], any())) thenReturn Future.successful(HttpResponse(returnedStatus, None))
+    when(httpMock.GET[HttpResponse](anyString, any[Seq[(String,String)]], any[Seq[(String,String)]])(any[HttpReads[HttpResponse]], any[HeaderCarrier], any())) thenReturn Future.successful(HttpResponse(returnedStatus, None))
     httpMock
   }
 
