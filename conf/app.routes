@@ -5,6 +5,8 @@
 
 GET         /                                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.Application.start(mode: Mode = NormalMode)
 
+GET         /logout                                uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.Application.logout(mode: Mode = NormalMode)
+
 GET         /eich-ymholiad                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.Application.startWelsh()
 GET         /dechrau-nawr                          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.Application.startWelsh()
 

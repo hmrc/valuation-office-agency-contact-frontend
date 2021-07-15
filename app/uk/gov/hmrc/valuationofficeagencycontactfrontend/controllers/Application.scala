@@ -25,6 +25,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactReasonForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.contactReason
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 
 import scala.concurrent.Future
 
@@ -33,6 +34,7 @@ class Application @Inject() (override val messagesApi: MessagesApi,
                             val appConfig: FrontendAppConfig,
                              contactReason: contactReason,
                              languageSwitchController: LanguageSwitchController,
+                             dataCacheConnector: DataCacheConnector,
                             cc: MessagesControllerComponents
                            ) extends FrontendController(cc) with I18nSupport {
 
@@ -40,6 +42,15 @@ class Application @Inject() (override val messagesApi: MessagesApi,
 
   def start(mode: Mode) = Action.async { implicit request =>
     if (appConfig.startPageRedirect) {
+      Future.successful(Redirect(appConfig.govukStartPage))
+    } else {
+      Future.successful(Ok(contactReason(ContactReasonForm(), NormalMode)))
+    }
+  }
+
+  def logout(mode: Mode) = Action.async { implicit request =>
+    if (appConfig.startPageRedirect) {
+      dataCacheConnector.clear()
       Future.successful(Redirect(appConfig.govukStartPage).withNewSession)
     } else {
       Future.successful(Ok(contactReason(ContactReasonForm(), NormalMode)))

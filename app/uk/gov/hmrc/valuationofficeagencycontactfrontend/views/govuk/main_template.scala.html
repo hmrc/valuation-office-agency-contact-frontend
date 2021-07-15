@@ -47,7 +47,7 @@
 @govukLayout(
     pageTitle = pageTitle,
     headBlock = Some(hmrcHead(
-        headBlock = Some(hmrcTimeoutDialogHelper(signOutUrl = routes.Application.start().url)))
+        headBlock = Some(hmrcTimeoutDialogHelper(signOutUrl = routes.Application.logout.url)))
     ),
     scriptsBlock = Some(hmrcScripts()),
     beforeContentBlock = Option(beforeBLock),
