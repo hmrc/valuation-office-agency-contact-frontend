@@ -25,16 +25,20 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactReasonForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.contactReason
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.DataRetrievalAction
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
 class Application @Inject() (override val messagesApi: MessagesApi,
                             val appConfig: FrontendAppConfig,
                              contactReason: contactReason,
                              languageSwitchController: LanguageSwitchController,
+                             getData: DataRetrievalAction,
+                             dataCacheConnector: DataCacheConnector,
                             cc: MessagesControllerComponents
-                           ) extends FrontendController(cc) with I18nSupport {
+                           )(implicit ec: ExecutionContext) extends FrontendController(cc) with I18nSupport {
 
   val log = Logger(this.getClass)
 
@@ -44,6 +48,12 @@ class Application @Inject() (override val messagesApi: MessagesApi,
     } else {
       Future.successful(Ok(contactReason(ContactReasonForm(), NormalMode)))
     }
+  }
+
+  def logout() = getData.async { implicit request =>
+      dataCacheConnector.clear(request.sessionId).map { _ =>
+        Redirect(routes.ContactReasonController.onPageLoad()).withNewSession
+      }
   }
 
   def startWelsh() = Action.async { implicit request =>

@@ -1,8 +1,11 @@
 # microservice specific routes
 
 ->          /govuk-frontend                        govuk.Routes
+->          /hmrc-frontend                         hmrcfrontend.Routes
 
 GET         /                                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.Application.start(mode: Mode = NormalMode)
+
+GET         /logout                                uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.Application.logout()
 
 GET         /eich-ymholiad                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.Application.startWelsh()
 GET         /dechrau-nawr                          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.Application.startWelsh()

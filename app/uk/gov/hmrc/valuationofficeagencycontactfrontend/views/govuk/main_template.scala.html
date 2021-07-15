@@ -16,11 +16,16 @@
 
 @import uk.gov.hmrc.govukfrontend.views.html.layouts.govukLayout
 @import uk.gov.hmrc.govukfrontend.views.html.components._
+@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.{HmrcStandardFooter, HmrcStandardHeader, HmrcHead, HmrcScripts, HmrcTimeoutDialogHelper}
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 
 @import uk.gov.hmrc.hmrcfrontend.config.AccessibilityStatementConfig
 
 @this(
         govukLayout: govukLayout,
+        hmrcHead: HmrcHead,
+        hmrcScripts: HmrcScripts,
+        hmrcTimeoutDialogHelper: HmrcTimeoutDialogHelper,
         head: head,
         scripts: scripts,
         govukPhaseBanner: govukPhaseBanner,
@@ -41,7 +46,10 @@
 
 @govukLayout(
     pageTitle = pageTitle,
-    headBlock = Some(head()),
+    headBlock = Some(hmrcHead(
+        headBlock = Some(hmrcTimeoutDialogHelper(signOutUrl = routes.Application.logout.url)))
+    ),
+    scriptsBlock = Some(hmrcScripts()),
     beforeContentBlock = Option(beforeBLock),
     footerItems = Seq(
         FooterItem(
