@@ -45,7 +45,11 @@ hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSumm
 
 @content = {
 
-    <h1 class="govuk-heading-l">@messages("anythingElse.heading")</h1>
+    <h1 class="govuk-heading-l govuk-label-wrapper">
+        <label class="govuk-label govuk-label--l" for="message">
+            @messages("anythingElse.heading")
+        </label>
+    </h1>
 
     @hmrcCharacterCount(
         CharacterCount(
@@ -74,7 +78,7 @@ hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSumm
                 )
             )
         }
-        @govukFieldset(Fieldset(html = content ))
+        @content
         @govukButton(Button(attributes = Map("id" -> "submit"), content = Text(messages("site.continue"))))
     }
 }
