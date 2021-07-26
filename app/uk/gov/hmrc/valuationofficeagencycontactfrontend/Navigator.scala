@@ -241,7 +241,7 @@ class Navigator @Inject()() {
 
   private val selfCateringPageRouting: UserAnswers => Call = answers => {
     answers.businessRatesSelfCateringEnquiry match {
-      case Some("england") => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
+      case Some("england") => routes.PropertyEnglandLets140DaysController.onPageLoad()
       case Some("wales") => routes.BusinessRatesSelfCateringController.onWalLetsPageLoad()
       case _ =>
         Logger.warn(s"Navigation for is business rates self catering enquiry reached without selection of enquiry by controller")
@@ -253,6 +253,16 @@ class Navigator @Inject()() {
     answers.businessRatesPropertyEnquiry match {
       case Some("england") => routes.BusinessRatesPropertyController.onNonBusinessPageLoad()
       case Some("wales") => routes.DatePropertyChangedController.onPageLoad()
+      case _ =>
+        Logger.warn(s"Navigation for is business rates property enquiry reached without selection of enquiry by controller")
+        throw new RuntimeException("Unknown exception for is business rates self catering routing")
+    }
+  }
+
+  private val propertyEnglandLets140DaysRouting: UserAnswers => Call = answers => {
+    answers.propertyEnglandLets140DaysEnquiry match {
+      case Some("yes") => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
+      case Some("no") => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
       case _ =>
         Logger.warn(s"Navigation for is business rates property enquiry reached without selection of enquiry by controller")
         throw new RuntimeException("Unknown exception for is business rates self catering routing")
@@ -281,7 +291,10 @@ class Navigator @Inject()() {
     CouncilTaxAnnexeHaveCookingId -> annexeCookingWashingRouting,
     CouncilTaxBusinessEnquiryId -> councilTaxBusinessEnquiryRouting,
     BusinessRatesSelfCateringId -> selfCateringPageRouting,
-    BusinessRatesPropertyEnquiryId -> businessRatesPropertyEnquiryRouting
+    BusinessRatesPropertyEnquiryId -> businessRatesPropertyEnquiryRouting,
+    PropertyEnglandLets140DaysId -> propertyEnglandLets140DaysRouting
+
+
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()
