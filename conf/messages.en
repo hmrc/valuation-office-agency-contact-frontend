@@ -211,8 +211,8 @@ propertyDemolished.p5.url = https://www.gov.uk/guidance/understand-how-council-t
 propertyDemolished.p5.part1 = How properties are valued for Council Tax
 
 # --- Council Tax My Property Empty
-councilTaxPropertyEmpty.title = The Council Tax band is not affected if a property is empty - Valuation Office Agency contact form - GOV.UK
-councilTaxPropertyEmpty.heading = The Council Tax band is not affected if a property is empty
+councilTaxPropertyEmpty.title = The Council Tax band is not affected if no one is living in the property - Valuation Office Agency contact form - GOV.UK
+councilTaxPropertyEmpty.heading = The Council Tax band is not affected if no one is living in the property
 councilTaxPropertyEmpty.p1 = <a class="govuk-link" href="https://www.gov.uk/find-local-council" target="_self"> Contact your local council </a> to see if you may get relief on your bill.
 councilTaxPropertyEmpty.subHeading = Other help on GOV.UK
 councilTaxPropertyEmpty.p2 = <a class="govuk-link" href="https://www.gov.uk/council-tax/second-homes-and-empty-properties" target="_self"> Council Tax for empty properties </a>
@@ -329,7 +329,7 @@ councilTaxSubcategory.subheading = What do you want to tell us about?
 councilTaxSubcategory.council_tax_band_too_high = My Council Tax band is too high
 councilTaxSubcategory.council_tax_bill = My Council Tax bill
 councilTaxSubcategory.council_tax_band_for_new = I need a Council Tax band for my new property
-councilTaxSubcategory.council_tax_property_empty = My property is empty
+councilTaxSubcategory.council_tax_property_empty = There is no longer anyone living in the property
 councilTaxSubcategory.council_tax_property_poor_repair = My property is in poor repair
 councilTaxSubcategory.council_tax_property_demolished = My property has been partially or fully demolished
 councilTaxSubcategory.council_tax_business_uses = My property is used for business
