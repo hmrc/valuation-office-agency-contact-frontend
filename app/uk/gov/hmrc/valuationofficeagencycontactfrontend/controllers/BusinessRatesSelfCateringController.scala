@@ -45,7 +45,6 @@ class BusinessRatesSelfCateringController @Inject()(
                                                 businessRatesSelfCateringEnquiry: business_rates_self_catering_enquiry,
                                                 propertyEnglandLets: england_lets,
                                                 propertyWalesLets: wales_lets,
-                                                propertyEnglandLets140Days: property_england_lets_140_days,
                                                 cc: MessagesControllerComponents
                                               ) extends FrontendController(cc) with I18nSupport {
 

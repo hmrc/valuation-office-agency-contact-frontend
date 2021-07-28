@@ -264,8 +264,8 @@ class Navigator @Inject()() {
       case Some("yes") => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
       case Some("no") => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
       case _ =>
-        Logger.warn(s"Navigation for is business rates property enquiry reached without selection of enquiry by controller")
-        throw new RuntimeException("Unknown exception for is business rates self catering routing")
+        Logger.warn(s"Navigation for is 140 day lets property enquiry reached without selection of enquiry by controller")
+        throw new RuntimeException("Unknown exception for 140 day lets routing")
     }
   }
 
