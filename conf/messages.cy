@@ -362,14 +362,14 @@ propertyEnglandLets.p3.url = https://www.gov.uk/introduction-to-business-rates/s
 propertyEnglandLets.p3 = Eiddo hunanarlwyo a gosodiadau gwyliau
 
 # --- Self-catering properties or holiday lets in Wales
-propertyWalesLets.title = Eiddo hunanarlwyo neu osodiadau gwyliau yng Nghymru - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-propertyWalesLets.heading = Eiddo hunanarlwyo neu osodiadau gwyliau yng Nghymru
+propertyWalesLets.title = Dywedwch wrthym am eich bwthyn gwyliau neu llety hunanarlwyo yng Nghymru - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyWalesLets.heading = Dywedwch wrthym am eich bwthyn gwyliau neu llety hunanarlwyo yng Nghymru
 propertyWalesLets.p1 = Os yw eich eiddo yng Nghymru, bydd yn cael ei brisio ar gyfer ardrethi busnes os yw:
 propertyWalesLets.p1.bl1 = ar gael i’w osod am gyfnodau byr sy’n dod i gyfanswm o 140 diwrnod neu fwy bob blwyddyn
 propertyWalesLets.p1.bl2 = wedi gosod mewn gwirionedd am o leiaf 70 diwrnod
-propertyWalesLets.p2.url = https://www.gov.uk/find-local-council
-propertyWalesLets.p2.part1 = Cysylltwch â’ch cyngor lleol
-propertyWalesLets.p2.part2 = a gadewch iddyn nhw wybod manylion yr eiddo. Yna byddant yn trosglwyddo’r hyn sydd ei angen arnom i brisio’r eiddo.
+propertyWalesLets.p2.url = https://www.gov.uk/government/publications/request-for-rental-information-self-catering-holiday-homes
+propertyWalesLets.p2.part1 = Cwblhewch y ffurflen manylion rhent
+propertyWalesLets.p2.part2 = i ddweud wrthym am eich bwthyn gwyliau neu llety hunanarlwyo.
 propertyWalesLets.subheading = Cymorth arall ar GOV.UK
 propertyWalesLets.p3.url = https://www.gov.uk/introduction-to-business-rates/self-catering-and-holiday-let-accommodation
 propertyWalesLets.p3 = Eiddo hunanarlwyo a gosodiadau gwyliau
