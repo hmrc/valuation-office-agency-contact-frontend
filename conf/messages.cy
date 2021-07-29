@@ -350,6 +350,13 @@ businessRatesSelfCatering.england = Lloegr
 businessRatesSelfCatering.wales = Cymru
 error.businessRatesSelfCatering.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
 
+# --- Added the below for messaging on page
+businessRatesSelfCatering140Days.title = A yw eich eiddo ar gael i’w osod am o leiaf 140 diwrnod y flwyddyn? - Valuation Office Agency contact form - GOV.UK
+businessRatesSelfCatering140Days.heading = A yw eich eiddo ar gael i’w osod am o leiaf 140 diwrnod y flwyddyn?
+businessRatesSelfCatering140Days.yes = Ydy
+businessRatesSelfCatering140Days.no = Nag ydy
+error.businessRatesSelfCatering140Days.required = Dewiswch ‘Ydy’ os yw eich eiddo ar gael i’w osod am o leiaf 140 diwrnod y flwyddyn
+
 # --- Self-catering properties or holiday lets in England
 propertyEnglandLets.title = Eiddo hunanarlwyo neu osodiadau gwyliau yn Lloegr - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 propertyEnglandLets.heading = Eiddo hunanarlwyo neu osodiadau gwyliau yn Lloegr
