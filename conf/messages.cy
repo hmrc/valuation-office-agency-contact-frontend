@@ -366,7 +366,6 @@ businessRatesSelfCateringNoBusinessRate.p2.url = https://www.gov.uk/correct-your
 businessRatesSelfCateringNoBusinessRate.p2.part2 = defnyddio'r gwasanaeth ar-lein
 businessRatesSelfCateringNoBusinessRate.p2.part3 = a chwblhewch ‘Gwiriad’ i ddweud wrth Asiantaeth y Swyddfa Brisio.
 
-
 # --- Self-catering properties or holiday lets in England
 propertyEnglandLets.title = Eiddo hunanarlwyo neu osodiadau gwyliau yn Lloegr - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 propertyEnglandLets.heading = Eiddo hunanarlwyo neu osodiadau gwyliau yn Lloegr
