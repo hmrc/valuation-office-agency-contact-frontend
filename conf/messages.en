@@ -632,8 +632,9 @@ housingBenefits.address.4 =  Durham
 housingBenefits.address.5 =  DH1 3UW
 housingBenefits.email-title =  Email:
 housingBenefits.email = NSOhelpdesk@voa.gov.uk
-housingBenefits.phone-title = Phone
+housingBenefits.phone-title = Telephone:
 housingBenefits.phone-number = 03000 502502
+housingBenefits.opening-hours = Our telephone service is available between 9.00am and 4.30pm, Monday to Friday.
 
 providingLettings.title = Contact details for the Rent Officers - Valuation Office Agency contact form - GOV.UK
 providingLettings.heading = Contact details for the Rent Officers
