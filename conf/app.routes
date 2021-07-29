@@ -124,7 +124,7 @@ POST        /self-catering-holiday-let                   uk.gov.hmrc.valuationof
 
 GET         /property-england-lets-140-days              uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyEnglandLets140DaysController.onPageLoad(mode: Mode = NormalMode)
 POST        /property-england-lets-140-days              uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyEnglandLets140DaysController.onSubmit(mode: Mode = NormalMode)
-#Added a GET and a POST request for 140 days. POST request is for further work on further pages
+GET         /property-england-lets-no-action             uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad(mode: Mode = NormalMode)
 
 GET         /property-england-lets                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onEngLetsPageLoad(mode: Mode = NormalMode)
 GET         /property-wales-lets                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onWalLetsPageLoad(mode: Mode = NormalMode)
