@@ -350,6 +350,23 @@ businessRatesSelfCatering.england = Lloegr
 businessRatesSelfCatering.wales = Cymru
 error.businessRatesSelfCatering.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
 
+# --- Property let for at least 140 days
+businessRatesSelfCatering140Days.title = A yw eich eiddo ar gael i’w osod am o leiaf 140 diwrnod y flwyddyn? - Valuation Office Agency contact form - GOV.UK
+businessRatesSelfCatering140Days.heading = A yw eich eiddo ar gael i’w osod am o leiaf 140 diwrnod y flwyddyn?
+businessRatesSelfCatering140Days.yes = Ydy
+businessRatesSelfCatering140Days.no = Nag ydy
+error.businessRatesSelfCatering140Days.required = Dewiswch ‘Ydy’ os yw eich eiddo ar gael i’w osod am o leiaf 140 diwrnod y flwyddyn
+
+# --- No business rates are required
+businessRatesSelfCateringNoBusinessRate.title = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yn Lloegr - Valuation Office Agency contact form - GOV.UK
+businessRatesSelfCateringNoBusinessRate.heading = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yn Lloegr
+businessRatesSelfCateringNoBusinessRate.p1 = Os yw eich eiddo yn Lloegr, dim ond os yw ar gael y gellir ei brisio am gyfnodau byr sy'n gyfanswm o 140 diwrnod neu fwy y flwyddyn y bydd yn cael ei brisio.
+businessRatesSelfCateringNoBusinessRate.p2.part1 = Os ydych eisoes yn talu ardrethi busnes am yr eiddo hwn, ac yn credu na ddylech fod,
+businessRatesSelfCateringNoBusinessRate.p2.url = https://www.gov.uk/correct-your-business-rates
+businessRatesSelfCateringNoBusinessRate.p2.part2 = defnyddio'r gwasanaeth ar-lein
+businessRatesSelfCateringNoBusinessRate.p2.part3 = a chwblhewch ‘Gwiriad’ i ddweud wrth Asiantaeth y Swyddfa Brisio.
+
+
 # --- Self-catering properties or holiday lets in England
 propertyEnglandLets.title = Eiddo hunanarlwyo neu osodiadau gwyliau yn Lloegr - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 propertyEnglandLets.heading = Eiddo hunanarlwyo neu osodiadau gwyliau yn Lloegr

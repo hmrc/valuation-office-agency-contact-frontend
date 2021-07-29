@@ -23,14 +23,14 @@ import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{BusinessRatesSelfCateringForm, PropertyEnglandLets140DaysForm}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSelfCateringId, PropertyEnglandLets140DaysId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{PropertyEnglandLets140DaysForm}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{PropertyEnglandLets140DaysId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSelfCateringEnquiry => business_rates_self_catering_enquiry}
-  import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLets140Days => property_england_lets_140_days}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLets => england_lets}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLets140Days => property_england_lets_140_days}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLetsNoAction => property_england_lets_no_action}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets => wales_lets}
+
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
@@ -43,6 +43,8 @@ class PropertyEnglandLets140DaysController @Inject()(
                                                      getData: DataRetrievalAction,
                                                      requireData: DataRequiredAction,
                                                      propertyEnglandLets140Days: property_england_lets_140_days,
+                                                     propertyEnglandLetsNoAction: property_england_lets_no_action,
+                                                     propertyWalesLets: wales_lets,
                                                      cc: MessagesControllerComponents
                                                    ) extends FrontendController(cc) with I18nSupport {
 
@@ -67,5 +69,17 @@ class PropertyEnglandLets140DaysController @Inject()(
             Redirect(navigator.nextPage(PropertyEnglandLets140DaysId, mode)(new UserAnswers(cacheMap))))
       )
   }
+
+  def onEngLetsNoActionPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+    implicit request =>
+      Ok(propertyEnglandLetsNoAction(appConfig))
+  }
+
+  def onWalLetsPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+    implicit request =>
+      Ok(propertyWalesLets(appConfig))
+  }
+
+
 
 }
