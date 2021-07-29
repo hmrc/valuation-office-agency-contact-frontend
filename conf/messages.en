@@ -345,13 +345,12 @@ businessRatesSelfCatering.england = England
 businessRatesSelfCatering.wales = Wales
 error.businessRatesSelfCatering.required = Select if your property is in England or Wales
 
-#Added the below for messaging on page
-businessRatesSelfCatering140Days.title = Is your property or holiday let in England or Wales? - Valuation Office Agency contact form - GOV.UK
+# --- Added the below for messaging on page
+businessRatesSelfCatering140Days.title = Is your property available to let for at least 140 days per year? - Valuation Office Agency contact form - GOV.UK
 businessRatesSelfCatering140Days.heading = Is your property available to let for at least 140 days per year?
 businessRatesSelfCatering140Days.yes = Yes
 businessRatesSelfCatering140Days.no = No
 error.businessRatesSelfCatering140Days.required = Select 'Yes' if your property is available to let for at least 140 days per year
-
 
 # --- Self-catering properties or holiday lets in England
 propertyEnglandLets.title = Self-catering properties or holiday lets in England - Valuation Office Agency contact form - GOV.UK
