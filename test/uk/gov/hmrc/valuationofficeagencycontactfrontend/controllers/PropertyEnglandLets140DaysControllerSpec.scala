@@ -54,6 +54,13 @@ class PropertyEnglandLets140DaysControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe viewAsString()
     }
 
+    "return OK and the correct view for england lets no business rates page GET" in {
+      val result = controller().onEngLetsNoActionPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe propertyEnglandLetsNoAction(frontendAppConfig)(fakeRequest, messages).toString()
+    }
+
     "populate the view correctly on a GET when the question has previously been answered" in {
       val validData = Map(PropertyEnglandLets140DaysId.toString -> JsString(PropertyEnglandLets140DaysForm.options.head.value))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
@@ -61,6 +68,14 @@ class PropertyEnglandLets140DaysControllerSpec extends ControllerSpecBase {
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
       contentAsString(result) mustBe viewAsString(PropertyEnglandLets140DaysForm().fill(PropertyEnglandLets140DaysForm.options.head.value))
+    }
+
+    "redirect to no action page when valid data is submitted" in {
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", PropertyEnglandLets140DaysForm.options.head.value))
+
+      val result = controller().onEngLetsNoActionPageLoad(NormalMode)(postRequest)
+
+      status(result) mustBe OK
     }
 
     "redirect to the next page when valid data is submitted" in {
@@ -95,6 +110,7 @@ class PropertyEnglandLets140DaysControllerSpec extends ControllerSpecBase {
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad().url)
     }
+
   }
 
 }
