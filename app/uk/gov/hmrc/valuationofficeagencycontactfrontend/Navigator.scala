@@ -261,8 +261,9 @@ class Navigator @Inject()() {
 
   private val propertyEnglandLets140DaysRouting: UserAnswers => Call = answers => {
     answers.propertyEnglandLets140DaysEnquiry match {
-      case Some("yes") => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()
-      case Some("no") => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
+      case Some("yes") => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
+      case Some("no") => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()
+
       case _ =>
         Logger.warn(s"Navigation for is 140 day lets property enquiry reached without selection of enquiry by controller")
         throw new RuntimeException("Unknown exception for 140 day lets routing")
