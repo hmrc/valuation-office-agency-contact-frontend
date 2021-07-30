@@ -28,16 +28,20 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyEngl
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLets140Days => property_england_lets_140_days}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLetsNoAction => property_england_lets_no_action}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets => wales_lets}
 
 class PropertyEnglandLets140DaysControllerSpec extends ControllerSpecBase {
 
   def propertyEnglandLets140DaysEnquiry = app.injector.instanceOf[property_england_lets_140_days]
+  def propertyEnglandLetsNoAction = app.injector.instanceOf[property_england_lets_no_action]
+  def propertyWalesLets = app.injector.instanceOf[wales_lets]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
   new PropertyEnglandLets140DaysController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-  dataRetrievalAction, new DataRequiredActionImpl(ec), propertyEnglandLets140DaysEnquiry, stubMessageControllerComponents)
+  dataRetrievalAction, new DataRequiredActionImpl(ec), propertyEnglandLets140DaysEnquiry, propertyEnglandLetsNoAction, propertyWalesLets, stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = PropertyEnglandLets140DaysForm()) = propertyEnglandLets140DaysEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
