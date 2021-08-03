@@ -73,6 +73,8 @@ class UserAnswers(val cacheMap: CacheMap) {
 
   def propertyEnglandLets140DaysEnquiry: Option[String] = cacheMap.getEntry[String](PropertyEnglandLets140DaysId.toString)
 
+  def propertyWalesLets140DaysEnquiry: Option[String] = cacheMap.getEntry[String](PropertyWalesLets140DaysId.toString)
+
   def contact(): Either[String, Contact] = {
 
     val optionalContactModel = for {
