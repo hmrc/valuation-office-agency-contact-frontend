@@ -647,8 +647,9 @@ housingBenefits.address.4 = Y Rhyl
 housingBenefits.address.5 = LL18 3NB
 housingBenefits.email-title = E-bost:
 housingBenefits.email = NSOhelpdesk@voa.gov.uk
-housingBenefits.phone-title =  Ffôn
+housingBenefits.phone-title =  Ffôn:
 housingBenefits.phone-number = 03000 502502
+housingBenefits.opening-hours = Our telephone service is available between 9.00am and 4.30pm, Monday to Friday.
  
 providingLettings.title = Manylion cyswllt ar gyfer y Swyddogion Rhent - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 providingLettings.heading = Manylion cyswllt ar gyfer y Swyddogion Rhent
