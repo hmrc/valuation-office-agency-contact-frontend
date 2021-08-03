@@ -63,7 +63,7 @@ govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErro
             fieldset = Option(Fieldset(legend = Option(
                 Legend(content = Text(messages("businessRatesSelfCatering70Days.heading")), isPageHeading = true, classes = "govuk-fieldset__legend--l"
                 )))),
-            idPrefix = Option("businessRatesSelfCatering140Days"),
+            idPrefix = Option("businessRatesSelfCatering70Days"),
             name = "value",
             items = PropertyWalesLets70DaysForm.options.map(i => RadioItem(
                 content = Text(messages(i.messageKey)),
