@@ -357,6 +357,13 @@ businessRatesSelfCatering140Days.yes = Ydy
 businessRatesSelfCatering140Days.no = Nag ydy
 error.businessRatesSelfCatering140Days.required = Dewiswch ''Ydy'' os yw eich eiddo ar gael i’w osod am o leiaf 140 diwrnod y flwyddyn
 
+# --- Property let for at least 70 days
+businessRatesSelfCatering70Days.title = A yw eich eiddo mewn gwirionedd yn cael ei osod am o leiaf 70 diwrnod y flwyddyn? - Valuation Office Agency contact form - GOV.UK
+businessRatesSelfCatering70Days.heading = A yw eich eiddo mewn gwirionedd yn cael ei osod am o leiaf 70 diwrnod y flwyddyn??
+businessRatesSelfCatering70Days.yes = Ydy
+businessRatesSelfCatering70Days.no = Nag ydy
+error.businessRatesSelfCatering70Days.required = Dewiswch ''Ydy'' os yw eich eiddo mewn gwirionedd yn cael ei osod am o leiaf 70 diwrnod y flwyddyn
+
 # --- No business rates are required
 businessRatesSelfCateringNoBusinessRate.title = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yn Lloegr - Valuation Office Agency contact form - GOV.UK
 businessRatesSelfCateringNoBusinessRate.heading = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yn Lloegr

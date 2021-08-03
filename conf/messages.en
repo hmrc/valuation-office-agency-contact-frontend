@@ -352,6 +352,13 @@ businessRatesSelfCatering140Days.yes = Yes
 businessRatesSelfCatering140Days.no = No
 error.businessRatesSelfCatering140Days.required = Select ''Yes'' if your property is available to let for at least 140 days per year
 
+# --- Property let for at least 70 days
+businessRatesSelfCatering70Days.title = Is your property available to let for at least 70 days per year? - Valuation Office Agency contact form - GOV.UK
+businessRatesSelfCatering70Days.heading = Is your property available to let for at least 70 days per year?
+businessRatesSelfCatering70Days.yes = Yes
+businessRatesSelfCatering70Days.no = No
+error.businessRatesSelfCatering70Days.required = Select ''Yes'' if your property is available to let for at least 70 days per year
+
 # --- No business rates are required
 businessRatesSelfCateringNoBusinessRate.title = You will not have to pay business rates for your property in England - Valuation Office Agency contact form - GOV.UK
 businessRatesSelfCateringNoBusinessRate.heading = You will not have to pay business rates for your property in England

@@ -22,24 +22,24 @@ import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{PropertyWalesLets140DaysForm, PropertyWalesLets70DaysForm}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyWalesLets140DaysId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{ PropertyWalesLets70DaysForm}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyWalesLets70DaysId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets70Days => property_wales_lets_70_days}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets140Days => property_wales_lets_140_days}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class PropertyWalesLets140DaysController @Inject()(
+class PropertyWalesLets70DaysController @Inject()(
                                                      appConfig: FrontendAppConfig,
                                                      override val messagesApi: MessagesApi,
                                                      dataCacheConnector: DataCacheConnector,
                                                      navigator: Navigator,
                                                      getData: DataRetrievalAction,
                                                      requireData: DataRequiredAction,
-                                                     propertyWalesLets140Days: property_wales_lets_140_days,
+                                                     propertyWalesLets70Days: property_wales_lets_70_days,
                                                      cc: MessagesControllerComponents
                                                    ) extends FrontendController(cc) with I18nSupport {
 
@@ -47,21 +47,21 @@ class PropertyWalesLets140DaysController @Inject()(
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.propertyWalesLets140DaysEnquiry match {
-        case None => PropertyWalesLets140DaysForm()
-        case Some(value) => PropertyWalesLets140DaysForm().fill(value)
+      val preparedForm = request.userAnswers.propertyWalesLets70DaysEnquiry match {
+        case None => PropertyWalesLets70DaysForm()
+        case Some(value) => PropertyWalesLets70DaysForm().fill(value)
       }
-      Ok(propertyWalesLets140Days(appConfig, preparedForm, mode))
+      Ok(propertyWalesLets70Days(appConfig, preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       PropertyWalesLets70DaysForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(propertyWalesLets140Days(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(propertyWalesLets70Days(appConfig, formWithErrors, mode))),
         (value) =>
-          dataCacheConnector.save[String](request.sessionId, PropertyWalesLets140DaysId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(PropertyWalesLets140DaysId, mode)(new UserAnswers(cacheMap))))
+          dataCacheConnector.save[String](request.sessionId, PropertyWalesLets70DaysId.toString, value).map(cacheMap =>
+            Redirect(navigator.nextPage(PropertyWalesLets70DaysId, mode)(new UserAnswers(cacheMap))))
       )
   }
 }

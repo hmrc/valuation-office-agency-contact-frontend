@@ -272,12 +272,23 @@ class Navigator @Inject()() {
 
   private val propertyWalesLets140DaysRouting: UserAnswers => Call = answers => {
     answers.propertyWalesLets140DaysEnquiry match {
-      case Some("yes") => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()
+      case Some("yes") => routes.PropertyWalesLets70DaysController.onPageLoad()
       case Some("no") => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()
 
       case _ =>
         Logger.warn(s"Navigation for is 140 day lets property enquiry reached without selection of enquiry by controller")
         throw new RuntimeException("Unknown exception for 140 day lets routing")
+    }
+  }
+
+  private val propertyWalesLets70DaysRouting: UserAnswers => Call = answers => {
+    answers.propertyWalesLets70DaysEnquiry match {
+      case Some("yes") => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()
+      case Some("no") => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()
+
+      case _ =>
+        Logger.warn(s"Navigation for is 70 day lets property enquiry reached without selection of enquiry by controller")
+        throw new RuntimeException("Unknown exception for 70 day lets routing")
     }
   }
 
@@ -305,7 +316,8 @@ class Navigator @Inject()() {
     BusinessRatesSelfCateringId -> selfCateringPageRouting,
     BusinessRatesPropertyEnquiryId -> businessRatesPropertyEnquiryRouting,
     PropertyEnglandLets140DaysId -> propertyEnglandLets140DaysRouting,
-    PropertyWalesLets140DaysId -> propertyWalesLets140DaysRouting
+    PropertyWalesLets140DaysId -> propertyWalesLets140DaysRouting,
+    PropertyWalesLets70DaysId -> propertyWalesLets70DaysRouting
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()
