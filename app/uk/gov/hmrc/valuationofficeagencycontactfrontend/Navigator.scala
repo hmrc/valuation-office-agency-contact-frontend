@@ -273,7 +273,7 @@ class Navigator @Inject()() {
   private val propertyWalesLets140DaysRouting: UserAnswers => Call = answers => {
     answers.propertyWalesLets140DaysEnquiry match {
       case Some("yes") => routes.PropertyWalesLets70DaysController.onPageLoad()
-      case Some("no") => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()
+      case Some("no") => routes.PropertyWalesLets140DaysController.onWalLetsNoActionPageLoad()
 
       case _ =>
         Logger.warn(s"Navigation for is 140 day lets property enquiry reached without selection of enquiry by controller")
@@ -283,8 +283,8 @@ class Navigator @Inject()() {
 
   private val propertyWalesLets70DaysRouting: UserAnswers => Call = answers => {
     answers.propertyWalesLets70DaysEnquiry match {
-      case Some("yes") => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()
-      case Some("no") => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()
+      case Some("yes") => routes.BusinessRatesSelfCateringController.onWalLetsPageLoad()
+      case Some("no") => routes.PropertyWalesLets140DaysController.onWalLetsNoActionPageLoad()
 
       case _ =>
         Logger.warn(s"Navigation for is 70 day lets property enquiry reached without selection of enquiry by controller")

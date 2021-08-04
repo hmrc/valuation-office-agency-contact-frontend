@@ -28,16 +28,18 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyWale
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets70Days => property_wales_lets_70_days}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets => wales_lets}
 
 class PropertyWalesLets70DaysControllerSpec extends ControllerSpecBase {
 
   def propertyWalesLets70DaysEnquiry = app.injector.instanceOf[property_wales_lets_70_days]
+  def propertyWalesLets = app.injector.instanceOf[wales_lets]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
   new PropertyWalesLets70DaysController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-  dataRetrievalAction, new DataRequiredActionImpl(ec), propertyWalesLets70DaysEnquiry, stubMessageControllerComponents)
+  dataRetrievalAction, new DataRequiredActionImpl(ec), propertyWalesLets70DaysEnquiry, propertyWalesLets, stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = PropertyWalesLets70DaysForm()) = propertyWalesLets70DaysEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 

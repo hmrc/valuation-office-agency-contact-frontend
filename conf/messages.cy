@@ -397,13 +397,24 @@ propertyWalesLets.subheading = Cymorth arall ar GOV.UK
 propertyWalesLets.p3.url = https://www.gov.uk/introduction-to-business-rates/self-catering-and-holiday-let-accommodation
 propertyWalesLets.p3 = Eiddo hunanarlwyo a gosodiadau gwyliau
 
-# --- Not need to pay business rates
+# --- Not need to pay business rates in England
 businessRatesNoNeedToPay.title = Ni fydd angen i chi dalu ardrethi busnes - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesNoNeedToPay.heading = Ni fydd angen i chi dalu ardrethi busnes
 businessRatesNoNeedToPay.p1 = Os ydych chi’n defnyddio ystafell fel swyddfa yn unig neu’n gwerthu nwyddau trwy’r post, ni fydd angen i chi dalu ardrethi busnes. Ni fydd eich band Treth Gyngor yn cael ei effeithio.
 businessRatesNoNeedToPay.subheading = Cymorth arall ar GOV.UK
 businessRatesNoNeedToPay.url = <a href="https://www.gov.uk/introduction-to-business-rates/working-at-home" target="_self">Gweithio gartref</a>
 businessRatesNoNeedToPay.url1 = <a href="https://www.gov.uk/run-business-from-home" target="_self">Rhedeg busnes o gartref</a>
+
+# --- No business rates are required in Wales
+businessRatesSelfCateringNoBusinessRateWales.title = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yng Nghymru - Valuation Office Agency contact form - GOV.UK
+businessRatesSelfCateringNoBusinessRateWales.heading = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yng Nghymru
+businessRatesSelfCateringNoBusinessRateWales.p1 = Os yw eich eiddo yng Nghymru, bydd yn cael ei brisio ar gyfer ardrethi busnes os yw:
+businessRatesSelfCateringNoBusinessRateWales.p2 = ar gael i’w osod am gyfnodau byr sy’n dod i gyfanswm o 140 diwrnod neu fwy bob blwyddyn
+businessRatesSelfCateringNoBusinessRateWales.p3 = wedi gosod mewn gwirionedd am o leiaf 70 diwrnod
+businessRatesSelfCateringNoBusinessRateWales.p4.part1 = Os ydych eisoes yn talu ardrethi busnes am yr eiddo hwn, ac yn credu na ddylech fod,
+businessRatesSelfCateringNoBusinessRateWales.p4.part1.url = https://www.gov.uk/government/publications/business-rates-proposal-to-alter-the-2017-rating-list-for-wales
+businessRatesSelfCateringNoBusinessRateWales.p4.part2 =  cwblhewch ffurflen gynnig
+businessRatesSelfCateringNoBusinessRateWales.p4.part3 = i ddweud wrth Asiantaeth y Swyddfa Brisio.
 
 # --- Check and challenge your business rates valuation online
 businessRatesValuationOnline.title = Gwirio a herio eich prisiad ardrethi busnes ar-lein - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
