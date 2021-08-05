@@ -1,0 +1,62 @@
+@*
+ * Copyright 2021 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+@import uk.gov.hmrc.govukfrontend.views.html.components.GovukBackLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+
+@this(mainTemplate: main_template, govukBackLink: GovukBackLink)
+
+@(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
+
+@beforeBlock = {
+@govukBackLink(BackLink(content = Text(messages("site.back")),
+    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesLets140DaysController.onPageLoad().url
+))
+}
+
+@mainTemplate(
+    beforeContentBlock = Option(beforeBlock),
+    pageTitle = Option(messages("businessRatesSelfCateringNoBusinessRateWales.title"))
+) {
+
+    <h1 class="govuk-heading-l">@messages("businessRatesSelfCateringNoBusinessRateWales.heading")</h1>
+
+    <p class="govuk-body">@messages("businessRatesSelfCateringNoBusinessRateWales.p1")</p>
+    <ul class="govuk-list govuk-list--bullet">
+        <li>@messages("businessRatesSelfCateringNoBusinessRateWales.p2")</li>
+        <li>@messages("businessRatesSelfCateringNoBusinessRateWales.p3")</li>
+    </ul>
+
+    <p class="govuk-body">
+        @messages("businessRatesSelfCateringNoBusinessRateWales.p4.part1")
+        <a class="govuk-link" target="_self" href=@messages("businessRatesSelfCateringNoBusinessRateWales.p4.part1.url")>
+        @messages("businessRatesSelfCateringNoBusinessRateWales.p4.part2")
+        </a>
+        @messages("businessRatesSelfCateringNoBusinessRateWales.p4.part3")
+    </p>
+
+    <h2 class="govuk-heading-m">@messages("propertyEnglandLets.subheading")</h2>
+
+    <p class="govuk-body">
+        <a class="govuk-link" target="_self" href=@messages("propertyEnglandLets.p3.url")>
+            @messages("propertyEnglandLets.p3")
+        </a>
+    </p>
+
+}

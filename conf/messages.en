@@ -359,7 +359,7 @@ businessRatesSelfCatering70Days.yes = Yes
 businessRatesSelfCatering70Days.no = No
 error.businessRatesSelfCatering70Days.required = Select ''Yes'' if your property is available to let for at least 70 days per year
 
-# --- No business rates are required
+# --- No business rates are required in England
 businessRatesSelfCateringNoBusinessRate.title = You will not have to pay business rates for your property in England - Valuation Office Agency contact form - GOV.UK
 businessRatesSelfCateringNoBusinessRate.heading = You will not have to pay business rates for your property in England
 businessRatesSelfCateringNoBusinessRate.p1 = If your property is in England, it will only be valued for business rates if it is available to let for short periods that total 140 days or more per year.
@@ -367,6 +367,17 @@ businessRatesSelfCateringNoBusinessRate.p2.part1 = If you are already paying bus
 businessRatesSelfCateringNoBusinessRate.p2.url = https://www.gov.uk/correct-your-business-rates
 businessRatesSelfCateringNoBusinessRate.p2.part2 = use the online service
 businessRatesSelfCateringNoBusinessRate.p2.part3 =and complete a ‘check’ to tell the Valuation Office Agency.
+
+# --- No business rates are required in Wales
+businessRatesSelfCateringNoBusinessRateWales.title = You will not have to pay business rates for your property in Wales - Valuation Office Agency contact form - GOV.UK
+businessRatesSelfCateringNoBusinessRateWales.heading = You will not have to pay business rates for your property in Wales
+businessRatesSelfCateringNoBusinessRateWales.p1 = If your property is in Wales, it will only be valued for business rates if it is both:
+businessRatesSelfCateringNoBusinessRateWales.p2 = available to let for short periods that total 140 days or more per year
+businessRatesSelfCateringNoBusinessRateWales.p3 = actually let for at least 70 days
+businessRatesSelfCateringNoBusinessRateWales.p4.part1 = If you are already paying business rates for this property, and you think you should not be,
+businessRatesSelfCateringNoBusinessRateWales.p4.part1.url = https://www.gov.uk/government/publications/business-rates-proposal-to-alter-the-2017-rating-list-for-wales
+businessRatesSelfCateringNoBusinessRateWales.p4.part2 =  complete a proposal form
+businessRatesSelfCateringNoBusinessRateWales.p4.part3 = to tell the Valuation Office Agency.
 
 # --- Self-catering properties or holiday lets in England
 propertyEnglandLets.title = Self-catering properties or holiday lets in England - Valuation Office Agency contact form - GOV.UK

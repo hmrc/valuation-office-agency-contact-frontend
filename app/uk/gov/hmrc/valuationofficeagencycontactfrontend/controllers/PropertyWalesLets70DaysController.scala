@@ -25,6 +25,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{Dat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{ PropertyWalesLets70DaysForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyWalesLets70DaysId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets70Days => property_wales_lets_70_days}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets => wales_lets}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
@@ -40,6 +41,7 @@ class PropertyWalesLets70DaysController @Inject()(
                                                      getData: DataRetrievalAction,
                                                      requireData: DataRequiredAction,
                                                      propertyWalesLets70Days: property_wales_lets_70_days,
+                                                     propertyWalesLets: wales_lets,
                                                      cc: MessagesControllerComponents
                                                    ) extends FrontendController(cc) with I18nSupport {
 

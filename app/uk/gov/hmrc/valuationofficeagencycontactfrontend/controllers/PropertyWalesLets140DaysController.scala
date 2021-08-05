@@ -27,6 +27,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyWale
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets140Days => property_wales_lets_140_days}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLetsNoAction => property_wales_lets_no_action}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 
 import javax.inject.Inject
@@ -40,6 +41,7 @@ class PropertyWalesLets140DaysController @Inject()(
                                                      getData: DataRetrievalAction,
                                                      requireData: DataRequiredAction,
                                                      propertyWalesLets140Days: property_wales_lets_140_days,
+                                                     propertyWalesLetsNoAction: property_wales_lets_no_action,
                                                      cc: MessagesControllerComponents
                                                    ) extends FrontendController(cc) with I18nSupport {
 
@@ -63,5 +65,10 @@ class PropertyWalesLets140DaysController @Inject()(
           dataCacheConnector.save[String](request.sessionId, PropertyWalesLets140DaysId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(PropertyWalesLets140DaysId, mode)(new UserAnswers(cacheMap))))
       )
+  }
+
+  def onWalLetsNoActionPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+    implicit request =>
+      Ok(propertyWalesLetsNoAction(appConfig))
   }
 }
