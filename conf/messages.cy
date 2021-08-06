@@ -633,7 +633,7 @@ housingBenefits.email-title = E-bost:
 housingBenefits.email = NSOhelpdesk@voa.gov.uk
 housingBenefits.phone-title =  Ffôn:
 housingBenefits.phone-number = 03000 502502
-housingBenefits.opening-hours = Our telephone service is available between 9.00am and 4.30pm, Monday to Friday.
+housingBenefits.opening-hours = Mae ein gwasanaeth ffôn ar gael rhwng 9.00am a 4.30pm, o Ddydd Llun i Ddydd Gwener.
  
 providingLettings.title = Manylion cyswllt ar gyfer y Swyddogion Rhent - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 providingLettings.heading = Manylion cyswllt ar gyfer y Swyddogion Rhent
