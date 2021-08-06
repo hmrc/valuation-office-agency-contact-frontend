@@ -19,30 +19,32 @@
 @import uk.gov.hmrc.govukfrontend.views.html.components.GovukBackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 
 @this(mainTemplate: main_template, govukBackLink: GovukBackLink)
 
-@(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, mode:Mode)(implicit request: Request[_], messages: Messages)
 
 @beforeBlock = {
 @govukBackLink(BackLink(content = Text(messages("site.back")),
-    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWindWaterController.onPageLoad().url))
+    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
+))
 }
 
 @mainTemplate(
     beforeContentBlock = Option(beforeBlock),
-    pageTitle = Option(messages("propertyWindWater.title"))
+    pageTitle = Option(messages("propertyWindWaterEnd.title"))
 ) {
 
-    <h1 class="govuk-heading-l">@messages("propertyWindWater.heading")</h1>
+    <h1 class="govuk-heading-l">@messages("propertyWindWaterEnd.heading")</h1>
 
-    <p class="govuk-body">@messages("propertyWindWater.p1")</p>
+    <p class="govuk-body">@messages("propertyWindWaterEnd.p1")</p>
 
-    <h2 class="govuk-heading-m">@messages("propertyWindWater.subheading")</h2>
+    <h2 class="govuk-heading-m">@messages("propertyWalesLets.subheading")</h2>
 
     <p class="govuk-body">
-        <a class="govuk-link" target="_self" href=@messages("propertyWindWater.p2.url")>
-            @messages("propertyWindWater.p2")
+        <a class="govuk-link" target="_self" href=@messages("propertyWindWaterEnd.p2.url")>
+            @messages("propertyWindWaterEnd.p2")
         </a>
     </p>
 

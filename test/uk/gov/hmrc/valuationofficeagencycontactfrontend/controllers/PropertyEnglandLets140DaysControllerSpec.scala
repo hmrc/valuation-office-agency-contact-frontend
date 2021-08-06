@@ -61,6 +61,14 @@ class PropertyEnglandLets140DaysControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe propertyEnglandLetsNoAction(frontendAppConfig)(fakeRequest, messages).toString()
     }
 
+
+    "return OK and the correct view for wales lets rates page GET" in {
+      val result = controller().onWalLetsPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe propertyWalesLets(frontendAppConfig)(fakeRequest, messages).toString()
+    }
+
     "populate the view correctly on a GET when the question has previously been answered" in {
       val validData = Map(PropertyEnglandLets140DaysId.toString -> JsString(PropertyEnglandLets140DaysForm.options.head.value))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))

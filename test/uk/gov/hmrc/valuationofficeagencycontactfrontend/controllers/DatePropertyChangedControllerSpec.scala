@@ -39,7 +39,7 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoS
 
   def datePropertyChanged = inject[date_property_changed]
 
-  def routePoorRepair = routes.PropertyWindWaterController.onEnquiryLoad()
+  def routePoorRepair = routes.PropertyWindWaterController.onPageLoad()
   def routeBusiness = routes.CouncilTaxBusinessController.onPageLoad()
   def routeAreaChange = routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
 
@@ -55,9 +55,6 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoS
     new DatePropertyChangedController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = routeAreaChange),
       dataRetrievalAction, new DataRequiredActionImpl(ec), datePropertyChanged, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
-  def viewPoorRepairAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()) =
-    datePropertyChanged(frontendAppConfig, form, NormalMode, "datePropertyChanged.poorRepair", routePoorRepair.url)(fakeRequest, messages).toString
-
   def viewBusinessAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()) =
     datePropertyChanged(frontendAppConfig, form, NormalMode, "datePropertyChanged.business", routeAreaChange.url)(fakeRequest, messages).toString
 
@@ -66,16 +63,6 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoS
 
   "DatePropertyChangedController Controller" must {
 
-    "return OK and the date view for poor repair sub category" in {
-      val validData = Map(CouncilTaxSubcategoryId.toString -> JsString("council_tax_property_poor_repair"))
-
-      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
-
-      val result = controllerPoorRepair(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
-
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewPoorRepairAsString()
-    }
 
     "return OK and the date view for business sub category" in {
       val validData = Map(CouncilTaxSubcategoryId.toString -> JsString("council_tax_business_uses"))
@@ -97,16 +84,6 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoS
 
       status(result) mustBe OK
       contentAsString(result) mustBe viewAreaChangeAsString()
-    }
-
-    "populate the view correctly on a GET when the date has previously been inserted" in {
-      val validData = Map(CouncilTaxSubcategoryId.toString -> JsString("council_tax_property_poor_repair"),
-        DatePropertyChangedId.toString -> JsString(LocalDate.of(2021,1,1).toString))
-      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
-
-      val result = controllerPoorRepair(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
-
-      contentAsString(result) mustBe viewPoorRepairAsString(DatePropertyChangedForm().fill(Option(LocalDate.of(2021,1,1))))
     }
 
     "redirect to the next page when valid data is submitted" in {
