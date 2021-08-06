@@ -86,8 +86,6 @@ GET         /council-tax-band-for-my-new-property  uk.gov.hmrc.valuationofficeag
 GET         /property-demolished                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyDemolishedController.onPageLoad()
 GET         /property-empty                        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyEmptyController.onPageLoad()
 
-GET         /is-property-wind-and-watertight       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyWindWaterController.onEnquiryLoad()
-POST        /is-property-wind-and-watertight       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyWindWaterController.onSubmit()
 GET         /property-is-wind-watertight           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyWindWaterController.onPageLoad()
 
 GET         /date-property-changed                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.DatePropertyChangedController.onPageLoad(mode: Mode = NormalMode)

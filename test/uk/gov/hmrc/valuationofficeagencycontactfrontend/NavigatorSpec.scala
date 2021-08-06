@@ -367,7 +367,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return a function that goes to the council tax property wind and water page when an enquiry category for council tax has been selected and council_tax_property_poor_repair option selected" in {
         when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_poor_repair")
-        navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.PropertyWindWaterController.onEnquiryLoad()
+        navigator.nextPage(CouncilTaxSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.PropertyWindWaterController.onPageLoad()
       }
 
       "return a function that goes to the council tax property demolished page when an enquiry category for council tax has been selected and council_tax_property_demolished option selected" in {

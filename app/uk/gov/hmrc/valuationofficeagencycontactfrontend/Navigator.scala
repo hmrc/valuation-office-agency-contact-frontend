@@ -160,7 +160,7 @@ class Navigator @Inject()() {
       case Some("council_tax_bill") => routes.CouncilTaxBillController.onPageLoad()
       case Some("council_tax_band_for_new") => routes.CouncilTaxBandForNewController.onPageLoad()
       case Some("council_tax_property_empty") => routes.PropertyEmptyController.onPageLoad()
-      case Some("council_tax_property_poor_repair") => routes.PropertyWindWaterController.onEnquiryLoad()
+      case Some("council_tax_property_poor_repair") => routes.PropertyWindWaterController.onPageLoad()
       case Some("council_tax_property_demolished") => routes.PropertyDemolishedController.onPageLoad()
       case Some("council_tax_annexe") => routes.CouncilTaxAnnexeController.onPageLoad()
       case Some("council_tax_business_uses") => routes.DatePropertyChangedController.onPageLoad()

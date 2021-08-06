@@ -237,6 +237,14 @@ propertyWindWater.form.yes = Ydy
 propertyWindWater.form.no = Nag ydy
 error.propertyWindWater.required = Dewiswch ‘Ydy’ os yw eich eiddo wedi’i amddiffyn rhag gwynt a dŵr
 
+# -------- End of wind and water journey
+propertyWindWaterEnd.title = Ni ellir lleihau na dileu’r band Treth Gyngor  - Valuation Office Agency contact form - GOV.UK
+propertyWindWaterEnd.heading = Ni ellir lleihau na dileu’r band Treth Gyngor
+propertyWindWaterEnd.p1 = Os yw’r eiddo’n atal gwynt a dŵr, yna ni ystyrir ei fod mewn cyflwr gwael. Ni ellir dileu’r band Treth Gyngor pe gallai rhywun ddal i fyw yn yr eiddo.
+propertyWindWaterEnd.subheading = Cymorth arall ar GOV.UK
+propertyWindWaterEnd.p2.url = https://www.gov.uk/government/publications/council-tax-domestic-properties-in-disrepair-or-derelict/council-tax-domestic-properties-which-are-in-disrepair-or-are-derelict
+propertyWindWaterEnd.p2 = Pryd fyddai atgyweiriad gwael yn effeithio ar fand Treth Gyngor.
+
 # ---- Annexe Journey Messages start ----
 
 # -------- I have added or removed an annexe

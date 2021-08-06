@@ -16,17 +16,18 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWindWatertight => property_wind}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{windWatertightCannotBeReduced => wind_watertight_cannot_be_reduced}
 
-class PropertyWindWatertightViewSpec extends ViewBehaviours {
+class PropertyWindWatertightCannotBeReducedViewSpec extends ViewBehaviours {
 
-  def propertyWindWatertight = app.injector.instanceOf[property_wind]
+  def PropertyWindWatertightCannotBeReduced = app.injector.instanceOf[wind_watertight_cannot_be_reduced]
 
-  def view = () => propertyWindWatertight(frontendAppConfig)(fakeRequest, messages)
+  def view = () => PropertyWindWatertightCannotBeReduced(frontendAppConfig, NormalMode)(fakeRequest, messages)
 
-  "The Council Tax band cannot be reduced or removed view" must {
-    behave like normalPage(view, "propertyWindWater", "title", "heading",
+  "The Property wind and water cannot be reduced or removed view" must {
+    behave like normalPage(view, "propertyWindWaterEnd", "title", "heading",
       "p1", "subheading", "p2")
 
     "has a link marked with site.back leading to the Council Tax band cannot be reduced or removed" in {
@@ -34,7 +35,7 @@ class PropertyWindWatertightViewSpec extends ViewBehaviours {
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWindWaterController.onEnquiryLoad().url
+      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
   }
 }

@@ -82,7 +82,6 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
 
   private[controllers] def enquiryKey(answers: UserAnswers): Either[String, String] = {
     (answers.councilTaxSubcategory, answers.businessRatesSubcategory) match {
-      case (Some("council_tax_property_poor_repair"), None) => Right("datePropertyChanged.poorRepair")
       case (Some("council_tax_business_uses"), None) => Right("datePropertyChanged.business")
       case (Some("council_tax_area_change"), None) => Right("datePropertyChanged.areaChange")
       case (None, Some("business_rates_from_home")) => Right("datePropertyChanged.business")
@@ -93,12 +92,10 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
 
   private def backLink(answers: UserAnswers, mode: Mode) = {
     (answers.councilTaxSubcategory, answers.businessRatesSubcategory) match {
-      case (Some("council_tax_property_poor_repair"), None)  => routes.PropertyWindWaterController.onEnquiryLoad().url
       case (Some("council_tax_business_uses"), None) => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
       case (Some("council_tax_area_change"), None) => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
       case (None, Some("business_rates_from_home")) => routes.BusinessRatesSubcategoryController.onPageLoad(mode).url
       case (None, Some("business_rates_not_used")) => routes.BusinessRatesPropertyController.onPageLoad().url
-      case _ => routes.PropertyWindWaterController.onEnquiryLoad().url
     }
   }
 

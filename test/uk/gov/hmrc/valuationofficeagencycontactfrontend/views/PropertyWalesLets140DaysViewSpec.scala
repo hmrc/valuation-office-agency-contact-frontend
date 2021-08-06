@@ -17,7 +17,9 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import play.api.data.Form
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyWalesLets140DaysForm
+import play.api.test.Helpers.{redirectLocation, status}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{ContactReasonForm, CouncilTaxSubcategoryForm, PropertyWalesLets140DaysForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets140Days => property_wales_lets_140_days}
@@ -25,6 +27,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWale
 class PropertyWalesLets140DaysViewSpec extends ViewBehaviours {
 
   def propertyWalesLets140DaysSubcategory = app.injector.instanceOf[property_wales_lets_140_days]
+
+  def onwardRoute = routes.PropertyWalesLets70DaysController.onPageLoad()
 
   val messageKeyPrefix = "businessRatesSelfCatering140Days"
 
@@ -56,6 +60,7 @@ class PropertyWalesLets140DaysViewSpec extends ViewBehaviours {
         val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
         backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSelfCateringController.onPageLoad().url
       }
+
     }
 
     for(option <- PropertyWalesLets140DaysForm.options) {

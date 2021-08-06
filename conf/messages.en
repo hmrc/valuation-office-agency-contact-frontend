@@ -233,6 +233,14 @@ propertyWindWater.form.yes = Yes
 propertyWindWater.form.no = No
 error.propertyWindWater.required = Select ''Yes'' if the property is protected from wind and water
 
+# -------- End of wind and water journey
+propertyWindWaterEnd.title = The Council Tax band cannot be reduced or removed  - Valuation Office Agency contact form - GOV.UK
+propertyWindWaterEnd.heading = The Council Tax band cannot be reduced or removed
+propertyWindWaterEnd.p1 = If the property is wind and watertight then it is not considered to be in poor repair. The Council Tax band cannot be removed if someone could still live at the property.
+propertyWindWaterEnd.subheading = Other help on GOV.UK
+propertyWindWaterEnd.p2.url = https://www.gov.uk/government/publications/council-tax-domestic-properties-in-disrepair-or-derelict/council-tax-domestic-properties-which-are-in-disrepair-or-are-derelict
+propertyWindWaterEnd.p2 = When a Council Tax band would be affected by poor repair
+
 # ---- Annexe Journey Messages start ----
 
 # -------- I have added or removed an annexe
