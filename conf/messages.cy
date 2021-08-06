@@ -215,8 +215,8 @@ propertyDemolished.p5.part1 = Sut mae eiddo'n cael eu prisio ar gyfer Treth Gyng
 
 
 # --- Council Tax My Property Empty
-councilTaxPropertyEmpty.title = Nid yw’r band Treth Gyngor yn cael ei effeithio os yw’r eiddo'n wag - Valuation Office Agency contact form - GOV.UK
-councilTaxPropertyEmpty.heading = Nid yw’r band Treth Gyngor yn cael ei effeithio os yw’r eiddo'n wag
+councilTaxPropertyEmpty.title = Nid yw band Treth y Cyngor yn cael ei effeithio os nad oes unrhyw un yn byw yn yr eiddo - Valuation Office Agency contact form - GOV.UK
+councilTaxPropertyEmpty.heading = Nid yw band Treth y Cyngor yn cael ei effeithio os nad oes unrhyw un yn byw yn yr eiddo
 councilTaxPropertyEmpty.p1 = <a class="govuk-link" href="https://www.gov.uk/find-local-council" target="_self"> Cysylltwch â'ch cyngor lleol </a> i weld a allwch gael rhyddhad ar eich bil.
 councilTaxPropertyEmpty.subHeading = Cymorth arall ar GOV.UK
 councilTaxPropertyEmpty.p2 = <a class="govuk-link" href="https://www.gov.uk/council-tax/second-homes-and-empty-properties" target="_self"> Treth Gyngor ar gyfer eiddo gwag </a>
@@ -342,7 +342,7 @@ councilTaxSubcategory.subheading = Am beth ydych am roi gwybod i ni?
 councilTaxSubcategory.council_tax_band_too_high = Mae fy mand Treth Gyngor yn rhy uchel
 councilTaxSubcategory.council_tax_bill = Fy mil Treth Gyngor
 councilTaxSubcategory.council_tax_band_for_new = Mae angen band Treth Gyngor arnaf ar gyfer fy eiddo newydd
-councilTaxSubcategory.council_tax_property_empty = Mae fy eiddo yn wag
+councilTaxSubcategory.council_tax_property_empty = Nid oes unrhyw un yn byw yn yr eiddo rhagor
 councilTaxSubcategory.council_tax_property_poor_repair = Mae fy eiddo mewn cyflwr gwael
 councilTaxSubcategory.council_tax_property_demolished = Mae fy eiddo wedi’i ddymchwel yn rhannol neu’n gyfan gwbl
 councilTaxSubcategory.council_tax_business_uses = Defnyddir fy eiddo ar gyfer busnes
