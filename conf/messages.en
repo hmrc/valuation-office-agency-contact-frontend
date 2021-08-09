@@ -339,6 +339,7 @@ councilTaxSubcategory.council_tax_bill = My Council Tax bill
 councilTaxSubcategory.council_tax_band_for_new = I need a Council Tax band for my new property
 councilTaxSubcategory.council_tax_property_empty = There is no longer anyone living in the property
 councilTaxSubcategory.council_tax_property_poor_repair = My property is in poor repair
+councilTaxSubcategory.council_tax_property_split_merge =  I have split or merged my property (not including an annexe)
 councilTaxSubcategory.council_tax_property_demolished = My property has been partially or fully demolished
 councilTaxSubcategory.council_tax_business_uses = My property is used for business
 councilTaxSubcategory.council_tax_annexe = I have added or removed an annexe
@@ -366,6 +367,14 @@ businessRatesSelfCatering70Days.heading = Is your property available to let for 
 businessRatesSelfCatering70Days.yes = Yes
 businessRatesSelfCatering70Days.no = No
 error.businessRatesSelfCatering70Days.required = Select ''Yes'' if your property is available to let for at least 70 days per year
+
+# --- Property merged or split
+propertyMergeSplit.title = Speak to your local council if you have split or merged your property - Valuation Office Agency contact form - GOV.UK
+propertyMergeSplit.heading = Speak to your local council if you have split or merged your property
+propertyMergeSplit.p1.url = https://www.gov.uk/find-local-council
+propertyMergeSplit.p1.part1 = Contact your local council
+propertyMergeSplit.p1.part2 = as they need to provide us with all the details we need, including a unique reference number.
+propertyMergeSplit.p2 = We will only be able to update your Council Tax band once they have sent us that information.
 
 # --- No business rates are required in England
 businessRatesSelfCateringNoBusinessRate.title = You will not have to pay business rates for your property in England - Valuation Office Agency contact form - GOV.UK

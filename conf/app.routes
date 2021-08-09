@@ -105,6 +105,8 @@ GET         /annexe-self-contained                 uk.gov.hmrc.valuationofficeag
 GET         /annexe-cooking-washing                uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxAnnexeController.onHaveCookingWashingPageLoad()
 POST        /annexe-cooking-washing                uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxAnnexeController.onHaveCookingWashingSubmit()
 
+GET         /split-merged                          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertySplitMergeController.onPageLoad()
+
 GET         /property-used-for-business                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBusinessController.onPageLoad(mode: Mode = NormalMode)
 POST        /property-used-for-business                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBusinessController.onEnquirySubmit(mode: Mode = NormalMode)
 GET         /small-part-of-property-used-for-business           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBusinessController.onSmallPartUsedPageLoad(mode: Mode = NormalMode)
