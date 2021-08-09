@@ -344,6 +344,7 @@ councilTaxSubcategory.council_tax_bill = Fy mil Treth Gyngor
 councilTaxSubcategory.council_tax_band_for_new = Mae angen band Treth Gyngor arnaf ar gyfer fy eiddo newydd
 councilTaxSubcategory.council_tax_property_empty = Nid oes unrhyw un yn byw yn yr eiddo rhagor
 councilTaxSubcategory.council_tax_property_poor_repair = Mae fy eiddo mewn cyflwr gwael
+councilTaxSubcategory.council_tax_property_split_merge =  Rwyf wedi rhannu neu uno fy eiddo (heb gynnwys anecs)
 councilTaxSubcategory.council_tax_property_demolished = Mae fy eiddo wedi’i ddymchwel yn rhannol neu’n gyfan gwbl
 councilTaxSubcategory.council_tax_business_uses = Defnyddir fy eiddo ar gyfer busnes
 councilTaxSubcategory.council_tax_annexe = Rwyf wedi ychwanegu neu dileu rhandy
@@ -371,6 +372,14 @@ businessRatesSelfCatering70Days.heading = A yw eich eiddo mewn gwirionedd yn cae
 businessRatesSelfCatering70Days.yes = Ydy
 businessRatesSelfCatering70Days.no = Nag ydy
 error.businessRatesSelfCatering70Days.required = Dewiswch ''Ydy'' os yw eich eiddo mewn gwirionedd yn cael ei osod am o leiaf 70 diwrnod y flwyddyn
+
+# --- Property merged or split
+propertyMergeSplit.title = Siaradwch â'ch cyngor lleol os ydych chi wedi rhannu neu uno'ch eiddo - Valuation Office Agency contact form - GOV.UK
+propertyMergeSplit.heading = Siaradwch â'ch cyngor lleol os ydych chi wedi rhannu neu uno'ch eiddo
+propertyMergeSplit.p1.url = https://www.gov.uk/find-local-council
+propertyMergeSplit.p1.part1 = Cysylltwch â'ch cyngor lleol
+propertyMergeSplit.p1.part2 = gan fod angen iddynt roi'r holl fanylion sydd eu hangen arnom, gan gynnwys cyfeirnod unigryw.
+propertyMergeSplit.p2 = Dim ond ar ôl iddynt anfon y wybodaeth honno y byddwn yn gallu diweddaru eich band Treth Gyngor.
 
 # --- No business rates are required
 businessRatesSelfCateringNoBusinessRate.title = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yn Lloegr - Valuation Office Agency contact form - GOV.UK
