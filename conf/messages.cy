@@ -162,7 +162,7 @@ contactDetails.contactNumber.invalid = Nodwch rif ffôn, fel 01632 960 001
 contactDetails.checkYourAnswersLabel = Manylion cyswllt
 
 # --- Council Tax Bill
-councilTaxBill.title = Siaradwch â'ch cyngor lleol am eich bil treth gyngor - Valuation Office Agency contact form - GOV.UK
+councilTaxBill.title = Siaradwch â'ch cyngor lleol am eich bil treth gyngor - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 councilTaxBill.heading = Siaradwch â'ch cyngor lleol am eich bil treth gyngor
 councilTaxBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council">Cysylltwch â'ch cyngor lleol </a> os oes gennych unrhyw gwestiynau am eich bil Treth Gyngor, gan eu bod yn delio â biliau a thaliadau.
 councilTaxBill.subheading = Cymorth arall ar GOV.UK
@@ -170,7 +170,7 @@ councilTaxBill.p2 = <a class="govuk-link" target="_self" href="https://www.gov.u
 councilTaxBill.p3 = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-council-tax-reduction">Gwnewch gais am Leihad Treth Gyngor</a>
 
 # --- Council Tax Band Too High
-councilTaxBandTooHigh.title = Gallwch herio'ch band Treth Gyngor ar-lein - Valuation Office Agency contact form - GOV.UK
+councilTaxBandTooHigh.title = Gallwch herio'ch band Treth Gyngor ar-lein - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 councilTaxBandTooHigh.heading = Gallwch herio'ch band Treth Gyngor ar-lein
 councilTaxBandTooHigh.p1.part1 = Defnyddiwch y gwasanaeth Treth Gyngor
 councilTaxBandTooHigh.p1.part2 = i wirio a herio'ch band Treth Gyngor.
@@ -215,7 +215,7 @@ propertyDemolished.p5.part1 = Sut mae eiddo'n cael eu prisio ar gyfer Treth Gyng
 
 
 # --- Council Tax My Property Empty
-councilTaxPropertyEmpty.title = Nid yw band Treth y Cyngor yn cael ei effeithio os nad oes unrhyw un yn byw yn yr eiddo - Valuation Office Agency contact form - GOV.UK
+councilTaxPropertyEmpty.title = Nid yw band Treth y Cyngor yn cael ei effeithio os nad oes unrhyw un yn byw yn yr eiddo - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 councilTaxPropertyEmpty.heading = Nid yw band Treth y Cyngor yn cael ei effeithio os nad oes unrhyw un yn byw yn yr eiddo
 councilTaxPropertyEmpty.p1 = <a class="govuk-link" href="https://www.gov.uk/find-local-council" target="_self"> Cysylltwch â'ch cyngor lleol </a> i weld a allwch gael rhyddhad ar eich bil.
 councilTaxPropertyEmpty.subHeading = Cymorth arall ar GOV.UK
@@ -238,12 +238,22 @@ propertyWindWater.form.no = Nag ydy
 error.propertyWindWater.required = Dewiswch ‘Ydy’ os yw eich eiddo wedi’i amddiffyn rhag gwynt a dŵr
 
 # -------- End of wind and water journey
-propertyWindWaterEnd.title = Ni ellir lleihau na dileu’r band Treth Gyngor  - Valuation Office Agency contact form - GOV.UK
+propertyWindWaterEnd.title = Ni ellir lleihau na dileu’r band Treth Gyngor - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 propertyWindWaterEnd.heading = Ni ellir lleihau na dileu’r band Treth Gyngor
 propertyWindWaterEnd.p1 = Os yw’r eiddo’n atal gwynt a dŵr, yna ni ystyrir ei fod mewn cyflwr gwael. Ni ellir dileu’r band Treth Gyngor pe gallai rhywun ddal i fyw yn yr eiddo.
 propertyWindWaterEnd.subheading = Cymorth arall ar GOV.UK
 propertyWindWaterEnd.p2.url = https://www.gov.uk/government/publications/council-tax-domestic-properties-in-disrepair-or-derelict/council-tax-domestic-properties-which-are-in-disrepair-or-are-derelict
 propertyWindWaterEnd.p2 = Pryd fyddai atgyweiriad gwael yn effeithio ar fand Treth Gyngor.
+
+# -------- End of Permanent Changes journey
+propertyPermanentChanges.title = Dywedwch wrthym am newidiadau parhaol i'r ardal leol ar-lein - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyPermanentChanges.heading = Dywedwch wrthym am newidiadau parhaol i'r ardal leol ar-lein
+propertyPermanentChanges.p1.url = https://www.gov.uk/council-tax-bands
+propertyPermanentChanges.p1.part1 = Defnyddiwch y gwasanaeth Treth Gyngor
+propertyPermanentChanges.p1.part2 = i wirio a herio'ch band Treth Gyngor.
+propertyPermanentChanges.subheading = Cymorth arall ar GOV.UK
+propertyPermanentChanges.p2.url = https://www.gov.uk/challenge-council-tax-band
+propertyPermanentChanges.p2 = Heriwch eich band Treth Gyngor
 
 # ---- Annexe Journey Messages start ----
 
@@ -360,21 +370,21 @@ businessRatesSelfCatering.wales = Cymru
 error.businessRatesSelfCatering.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
 
 # --- Property let for at least 140 days
-businessRatesSelfCatering140Days.title = A yw eich eiddo ar gael i’w osod am o leiaf 140 diwrnod y flwyddyn? - Valuation Office Agency contact form - GOV.UK
+businessRatesSelfCatering140Days.title = A yw eich eiddo ar gael i’w osod am o leiaf 140 diwrnod y flwyddyn? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSelfCatering140Days.heading = A yw eich eiddo ar gael i’w osod am o leiaf 140 diwrnod y flwyddyn?
 businessRatesSelfCatering140Days.yes = Ydy
 businessRatesSelfCatering140Days.no = Nag ydy
 error.businessRatesSelfCatering140Days.required = Dewiswch ''Ydy'' os yw eich eiddo ar gael i’w osod am o leiaf 140 diwrnod y flwyddyn
 
 # --- Property let for at least 70 days
-businessRatesSelfCatering70Days.title = A yw eich eiddo mewn gwirionedd yn cael ei osod am o leiaf 70 diwrnod y flwyddyn? - Valuation Office Agency contact form - GOV.UK
+businessRatesSelfCatering70Days.title = A yw eich eiddo mewn gwirionedd yn cael ei osod am o leiaf 70 diwrnod y flwyddyn? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSelfCatering70Days.heading = A yw eich eiddo mewn gwirionedd yn cael ei osod am o leiaf 70 diwrnod y flwyddyn??
 businessRatesSelfCatering70Days.yes = Ydy
 businessRatesSelfCatering70Days.no = Nag ydy
 error.businessRatesSelfCatering70Days.required = Dewiswch ''Ydy'' os yw eich eiddo mewn gwirionedd yn cael ei osod am o leiaf 70 diwrnod y flwyddyn
 
 # --- Property merged or split
-propertyMergeSplit.title = Siaradwch â'ch cyngor lleol os ydych chi wedi rhannu neu uno'ch eiddo - Valuation Office Agency contact form - GOV.UK
+propertyMergeSplit.title = Siaradwch â'ch cyngor lleol os ydych chi wedi rhannu neu uno'ch eiddo - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 propertyMergeSplit.heading = Siaradwch â'ch cyngor lleol os ydych chi wedi rhannu neu uno'ch eiddo
 propertyMergeSplit.p1.url = https://www.gov.uk/find-local-council
 propertyMergeSplit.p1.part1 = Cysylltwch â'ch cyngor lleol
@@ -382,7 +392,7 @@ propertyMergeSplit.p1.part2 = gan fod angen iddynt roi'r holl fanylion sydd eu h
 propertyMergeSplit.p2 = Dim ond ar ôl iddynt anfon y wybodaeth honno y byddwn yn gallu diweddaru eich band Treth Gyngor.
 
 # --- No business rates are required
-businessRatesSelfCateringNoBusinessRate.title = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yn Lloegr - Valuation Office Agency contact form - GOV.UK
+businessRatesSelfCateringNoBusinessRate.title = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yn Lloegr - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSelfCateringNoBusinessRate.heading = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yn Lloegr
 businessRatesSelfCateringNoBusinessRate.p1 = Os yw eich eiddo yn Lloegr, dim ond os yw ar gael y gellir ei brisio am gyfnodau byr sy'n gyfanswm o 140 diwrnod neu fwy y flwyddyn y bydd yn cael ei brisio.
 businessRatesSelfCateringNoBusinessRate.p2.part1 = Os ydych eisoes yn talu ardrethi busnes am yr eiddo hwn, ac yn credu na ddylech fod,
@@ -423,7 +433,7 @@ businessRatesNoNeedToPay.url = <a href="https://www.gov.uk/introduction-to-busin
 businessRatesNoNeedToPay.url1 = <a href="https://www.gov.uk/run-business-from-home" target="_self">Rhedeg busnes o gartref</a>
 
 # --- No business rates are required in Wales
-businessRatesSelfCateringNoBusinessRateWales.title = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yng Nghymru - Valuation Office Agency contact form - GOV.UK
+businessRatesSelfCateringNoBusinessRateWales.title = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yng Nghymru - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSelfCateringNoBusinessRateWales.heading = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yng Nghymru
 businessRatesSelfCateringNoBusinessRateWales.p1 = Os yw eich eiddo yng Nghymru, bydd yn cael ei brisio ar gyfer ardrethi busnes os yw:
 businessRatesSelfCateringNoBusinessRateWales.p2 = ar gael i’w osod am gyfnodau byr sy’n dod i gyfanswm o 140 diwrnod neu fwy bob blwyddyn
