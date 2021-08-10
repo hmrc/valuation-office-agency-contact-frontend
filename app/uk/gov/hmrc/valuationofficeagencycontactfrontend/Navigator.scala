@@ -242,11 +242,43 @@ class Navigator @Inject()() {
 
   private val selfCateringPageRouting: UserAnswers => Call = answers => {
     answers.businessRatesSelfCateringEnquiry match {
-      case Some("england") => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
-      case Some("wales") => routes.BusinessRatesSelfCateringController.onWalLetsPageLoad()
+      case Some("england") => routes.PropertyEnglandLets140DaysController.onPageLoad()
+      case Some("wales") => routes.PropertyWalesLets140DaysController.onPageLoad()
       case _ =>
         Logger.warn(s"Navigation for is business rates self catering enquiry reached without selection of enquiry by controller")
         throw new RuntimeException("Unknown exception for is business rates self catering routing")
+    }
+  }
+
+  private val propertyEnglandLets140DaysRouting: UserAnswers => Call = answers => {
+    answers.propertyEnglandLets140DaysEnquiry match {
+      case Some("yes") => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
+      case Some("no") => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()
+      case _ =>
+        Logger.warn(s"Navigation for is business rates property enquiry reached without selection of enquiry by controller")
+        throw new RuntimeException("Unknown exception for is business rates self catering routing")
+    }
+  }
+
+  private val propertyWalesLets140DaysRouting: UserAnswers => Call = answers => {
+    answers.propertyWalesLets140DaysEnquiry match {
+      case Some("yes") => routes.PropertyWalesLets70DaysController.onPageLoad()
+      case Some("no") => routes.PropertyWalesLets140DaysController.onWalLetsNoActionPageLoad()
+
+      case _ =>
+        Logger.warn(s"Navigation for is 140 day lets property enquiry reached without selection of enquiry by controller")
+        throw new RuntimeException("Unknown exception for 140 day lets routing")
+    }
+  }
+
+  private val propertyWalesLets70DaysRouting: UserAnswers => Call = answers => {
+    answers.propertyWalesLets70DaysEnquiry match {
+      case Some("yes") => routes.BusinessRatesSelfCateringController.onWalLetsPageLoad()
+      case Some("no") => routes.PropertyWalesLets140DaysController.onWalLetsNoActionPageLoad()
+
+      case _ =>
+        Logger.warn(s"Navigation for is 70 day lets property enquiry reached without selection of enquiry by controller")
+        throw new RuntimeException("Unknown exception for 70 day lets routing")
     }
   }
 
@@ -259,6 +291,8 @@ class Navigator @Inject()() {
         throw new RuntimeException("Unknown exception for is business rates self catering routing")
     }
   }
+
+
 
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     ContactReasonId -> contactReasonRouting,
@@ -282,7 +316,10 @@ class Navigator @Inject()() {
     CouncilTaxAnnexeHaveCookingId -> annexeCookingWashingRouting,
     CouncilTaxBusinessEnquiryId -> councilTaxBusinessEnquiryRouting,
     BusinessRatesSelfCateringId -> selfCateringPageRouting,
-    BusinessRatesPropertyEnquiryId -> businessRatesPropertyEnquiryRouting
+    BusinessRatesPropertyEnquiryId -> businessRatesPropertyEnquiryRouting,
+    PropertyEnglandLets140DaysId -> propertyEnglandLets140DaysRouting,
+    PropertyWalesLets140DaysId -> propertyWalesLets140DaysRouting,
+    PropertyWalesLets70DaysId -> propertyWalesLets70DaysRouting
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()
