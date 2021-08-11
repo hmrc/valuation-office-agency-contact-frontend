@@ -241,6 +241,16 @@ propertyWindWaterEnd.subheading = Other help on GOV.UK
 propertyWindWaterEnd.p2.url = https://www.gov.uk/government/publications/council-tax-domestic-properties-in-disrepair-or-derelict/council-tax-domestic-properties-which-are-in-disrepair-or-are-derelict
 propertyWindWaterEnd.p2 = When a Council Tax band would be affected by poor repair
 
+# -------- End of Permanent Changes journey
+propertyPermanentChanges.title = Tell us about permanent changes to the local area online  - Valuation Office Agency contact form - GOV.UK
+propertyPermanentChanges.heading = Tell us about permanent changes to the local area online
+propertyPermanentChanges.p1.url = https://www.gov.uk/council-tax-bands
+propertyPermanentChanges.p1.part1 = Use the Council Tax service
+propertyPermanentChanges.p1.part2 = to check and challenge your Council Tax band.
+propertyPermanentChanges.subheading = Other help on GOV.UK
+propertyPermanentChanges.p2.url = https://www.gov.uk/challenge-council-tax-band
+propertyPermanentChanges.p2 = Challenge your Council Tax band
+
 # ---- Annexe Journey Messages start ----
 
 # -------- I have added or removed an annexe

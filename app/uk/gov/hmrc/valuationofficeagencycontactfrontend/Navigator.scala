@@ -165,7 +165,7 @@ class Navigator @Inject()() {
       case Some("council_tax_property_demolished") => routes.PropertyDemolishedController.onPageLoad()
       case Some("council_tax_annexe") => routes.CouncilTaxAnnexeController.onPageLoad()
       case Some("council_tax_business_uses") => routes.DatePropertyChangedController.onPageLoad()
-      case Some("council_tax_area_change") => routes.DatePropertyChangedController.onPageLoad()
+      case Some("council_tax_area_change") => routes.PropertyPermanentChangesController.onPageLoad()
       case Some("council_tax_other") => routes.TellUsMoreController.onPageLoad(NormalMode)
       case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case None => {
