@@ -238,9 +238,12 @@ propertyWindWater.form.no = Nag ydy
 error.propertyWindWater.required = Dewiswch ‘Ydy’ os yw eich eiddo wedi’i amddiffyn rhag gwynt a dŵr
 
 # -------- End of wind and water journey
-propertyWindWaterEnd.title = Ni ellir lleihau na dileu’r band Treth Gyngor - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-propertyWindWaterEnd.heading = Ni ellir lleihau na dileu’r band Treth Gyngor
-propertyWindWaterEnd.p1 = Os yw’r eiddo’n atal gwynt a dŵr, yna ni ystyrir ei fod mewn cyflwr gwael. Ni ellir dileu’r band Treth Gyngor pe gallai rhywun ddal i fyw yn yr eiddo.
+
+propertyWindWaterEnd.title = Dywedwch wrthym am gyflwr eich eiddo ar-lein - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyWindWaterEnd.heading = Dywedwch wrthym am gyflwr eich eiddo ar-lein
+propertyWindWaterEnd.p1.url = https://www.gov.uk/council-tax-bands
+propertyWindWaterEnd.p1.part1 = Defnyddiwch y gwasanaeth Treth Gyngor
+propertyWindWaterEnd.p1.part2 = i wirio a herio'ch band Treth Gyngor.
 propertyWindWaterEnd.subheading = Cymorth arall ar GOV.UK
 propertyWindWaterEnd.p2.url = https://www.gov.uk/government/publications/council-tax-domestic-properties-in-disrepair-or-derelict/council-tax-domestic-properties-which-are-in-disrepair-or-are-derelict
 propertyWindWaterEnd.p2 = Pryd fyddai atgyweiriad gwael yn effeithio ar fand Treth Gyngor.
