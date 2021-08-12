@@ -16,13 +16,14 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
+import play.api.Logger
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{PropertyWalesLets140DaysForm, PropertyWalesLets70DaysForm}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{ContactDetailsForm, PropertyWalesLets140DaysForm, PropertyWalesLets70DaysForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyWalesLets140DaysId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
@@ -67,8 +68,24 @@ class PropertyWalesLets140DaysController @Inject()(
       )
   }
 
-  def onWalLetsNoActionPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+  def onWalLetsNoActionPageLoad(mode: Mode) = (getData andThen requireData) {
     implicit request =>
-      Ok(propertyWalesLetsNoAction(appConfig))
+      enquiryBackLink(request.userAnswers) match {
+        case Right(link) => Ok(propertyWalesLetsNoAction(appConfig, link))
+        case Left(msg) => {
+          Logger.warn(s"Navigation for Contact Details page reached with error $msg")
+          throw new RuntimeException(s"Navigation for Contact Details page reached with error $msg")
+        }
+      }
+
   }
+
+  private[controllers] def enquiryBackLink(answers: UserAnswers): Either[String, String] = {
+    (answers.contactReason, answers.enquiryCategory, answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.businessRatesSelfCateringEnquiry, answers.propertyWalesLets140DaysEnquiry, answers.propertyWalesLets70DaysEnquiry) match {
+      case (_, Some("business_rates"), _, Some("business_rate_self_catering"),Some("Wales"), Some("yes"), Some("no")) => Right(routes.PropertyWalesLets70DaysController.onPageLoad().url)
+      case (_, Some("business_rates"), _, Some("business_rate_self_catering"),Some("Wales"), Some("no"), _) => Right(routes.PropertyWalesLets140DaysController.onPageLoad().url)
+      case _ => Left(s"Unknown enquiry category in enquiry key")
+    }
+  }
+
 }

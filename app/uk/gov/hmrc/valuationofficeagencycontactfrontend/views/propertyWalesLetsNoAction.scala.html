@@ -22,11 +22,10 @@
 
 @this(mainTemplate: main_template, govukBackLink: GovukBackLink)
 
-@(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, backLink: String)(implicit request: Request[_], messages: Messages)
 
 @beforeBlock = {
-@govukBackLink(BackLink(content = Text(messages("site.back")),
-    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesLets140DaysController.onPageLoad().url
+@govukBackLink(BackLink(content = Text(messages("site.back")), href = backLink))
 ))
 }
 
