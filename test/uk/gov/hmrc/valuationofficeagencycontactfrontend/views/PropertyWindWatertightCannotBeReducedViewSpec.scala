@@ -28,7 +28,7 @@ class PropertyWindWatertightCannotBeReducedViewSpec extends ViewBehaviours {
 
   "The Property wind and water cannot be reduced or removed view" must {
     behave like normalPage(view, "propertyWindWaterEnd", "title", "heading",
-      "p1", "subheading", "p2")
+      "p1.part1", "p1.part2", "subheading", "p2")
 
     "has a link marked with site.back leading to the Council Tax band cannot be reduced or removed" in {
       val doc = asDocument(view())
