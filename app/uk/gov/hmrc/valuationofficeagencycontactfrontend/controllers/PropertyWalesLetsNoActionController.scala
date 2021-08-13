@@ -18,12 +18,12 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.Logger
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
+import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{ContactDetailsForm, PropertyWalesLets70DaysForm}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLetsNoAction => property_wales_lets_no_action}
 
@@ -33,9 +33,11 @@ import scala.concurrent.ExecutionContext
 @Singleton
 class PropertyWalesLetsNoActionController @Inject()(val appConfig: FrontendAppConfig,
                                                     override val messagesApi: MessagesApi,
-                                                    propertyWalesLetsNoAction: property_wales_lets_no_action,
+                                                    dataCacheConnector: DataCacheConnector,
+                                                    navigator: Navigator,
                                                     getData: DataRetrievalAction,
                                                     requireData: DataRequiredAction,
+                                                    propertyWalesLetsNoAction: property_wales_lets_no_action,
                                                     cc: MessagesControllerComponents
                                             ) extends FrontendController(cc) with I18nSupport {
 
@@ -46,17 +48,24 @@ class PropertyWalesLetsNoActionController @Inject()(val appConfig: FrontendAppCo
       enquiryBackLink(request.userAnswers) match {
         case Right(link) => Ok(propertyWalesLetsNoAction(appConfig, link))
         case Left(msg) => {
-          Logger.warn(s"Navigation for Contact Details page reached with error $msg")
-          throw new RuntimeException(s"Navigation for Contact Details page reached with error $msg")
+          Logger.warn(s"Navigation for Wales No Action page reached with error $msg")
+          throw new RuntimeException(s"Navigation for Wales No Action page reached with error $msg")
         }
       }
 
   }
 
   private[controllers] def enquiryBackLink(answers: UserAnswers): Either[String, String] = {
-    (answers.contactReason, answers.enquiryCategory, answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.businessRatesSelfCateringEnquiry, answers.propertyWalesLets140DaysEnquiry, answers.propertyWalesLets70DaysEnquiry) match {
-      case (_, Some("business_rates"), _, Some("business_rate_self_catering"),Some("Wales"), Some("yes"), Some("no")) => Right(routes.PropertyWalesLets70DaysController.onPageLoad().url)
-      case (_, Some("business_rates"), _, Some("business_rate_self_catering"),Some("Wales"), Some("no"), _) => Right(routes.PropertyWalesLets140DaysController.onPageLoad().url)
+    (answers.contactReason,
+      answers.enquiryCategory,
+      answers.businessRatesSubcategory,
+      answers.businessRatesSelfCateringEnquiry,
+      answers.propertyWalesLets140DaysEnquiry,
+      answers.propertyWalesLets70DaysEnquiry) match {
+      case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("wales"), Some("yes"), Some("no")) =>
+        Right(routes.PropertyWalesLets70DaysController.onPageLoad().url)
+      case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("wales"), Some("no"), _) =>
+        Right(routes.PropertyWalesLets140DaysController.onPageLoad().url)
       case _ => Left(s"Unknown enquiry category in enquiry key")
     }
   }

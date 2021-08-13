@@ -73,17 +73,24 @@ class PropertyWalesLets140DaysController @Inject()(
       enquiryBackLink(request.userAnswers) match {
         case Right(link) => Ok(propertyWalesLetsNoAction(appConfig, link))
         case Left(msg) => {
-          Logger.warn(s"Navigation for Contact Details page reached with error $msg")
-          throw new RuntimeException(s"Navigation for Contact Details page reached with error $msg")
+          Logger.warn(s"Navigation for Wales No Action page reached with error $msg")
+          throw new RuntimeException(s"Navigation for Wales No Action page reached with error $msg")
         }
       }
 
   }
 
   private[controllers] def enquiryBackLink(answers: UserAnswers): Either[String, String] = {
-    (answers.contactReason, answers.enquiryCategory, answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.businessRatesSelfCateringEnquiry, answers.propertyWalesLets140DaysEnquiry, answers.propertyWalesLets70DaysEnquiry) match {
-      case (_, Some("business_rates"), _, Some("business_rate_self_catering"),Some("Wales"), Some("yes"), Some("no")) => Right(routes.PropertyWalesLets70DaysController.onPageLoad().url)
-      case (_, Some("business_rates"), _, Some("business_rate_self_catering"),Some("Wales"), Some("no"), _) => Right(routes.PropertyWalesLets140DaysController.onPageLoad().url)
+    (answers.contactReason,
+      answers.enquiryCategory,
+      answers.businessRatesSubcategory,
+      answers.businessRatesSelfCateringEnquiry,
+      answers.propertyWalesLets140DaysEnquiry,
+      answers.propertyWalesLets70DaysEnquiry) match {
+      case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("wales"), Some("yes"), Some("no")) =>
+        Right(routes.PropertyWalesLets70DaysController.onPageLoad().url)
+      case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("wales"), Some("no"), _) =>
+        Right(routes.PropertyWalesLets140DaysController.onPageLoad().url)
       case _ => Left(s"Unknown enquiry category in enquiry key")
     }
   }
