@@ -132,7 +132,7 @@ GET         /property-wales-lets-70-days                 uk.gov.hmrc.valuationof
 POST        /property-wales-lets-70-days                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyWalesLets70DaysController.onSubmit(mode: Mode = NormalMode)
 
 GET         /property-england-lets-no-action             uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad(mode: Mode = NormalMode)
-GET         /property-wales-lets-no-action               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyWalesLets140DaysController.onWalLetsNoActionPageLoad(mode: Mode = NormalMode)
+GET         /property-wales-lets-no-action               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyWalesLetsNoActionController.onPageLoad(mode: Mode = NormalMode)
 
 GET         /property-england-lets                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onEngLetsPageLoad(mode: Mode = NormalMode)
 GET         /property-wales-lets                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onWalLetsPageLoad(mode: Mode = NormalMode)
