@@ -404,12 +404,12 @@ businessRatesSelfCateringNoBusinessRate.p2.part2 = defnyddio'r gwasanaeth ar-lei
 businessRatesSelfCateringNoBusinessRate.p2.part3 = a chwblhewch ‘Gwiriad’ i ddweud wrth Asiantaeth y Swyddfa Brisio.
 
 # --- Self-catering properties or holiday lets in England
-propertyEnglandLets.title = Eiddo hunanarlwyo neu osodiadau gwyliau yn Lloegr - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-propertyEnglandLets.heading = Eiddo hunanarlwyo neu osodiadau gwyliau yn Lloegr
+propertyEnglandLets.title = Dywedwch wrthym am eich bwthyn gwyliau neu llety hunanarlwyo yn Lloegr - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyEnglandLets.heading = Dywedwch wrthym am eich bwthyn gwyliau neu llety hunanarlwyo yn Lloegr
 propertyEnglandLets.p1 = Os yw eich eiddo yn Lloegr ac ar gael i’w osod am gyfnodau byr am gyfanswm o 140 diwrnod neu fwy bob blwyddyn, bydd yn cael ei brisio ar gyfer ardrethi busnes.
-propertyEnglandLets.p2.url = https://www.gov.uk/find-local-council
-propertyEnglandLets.p2.part1 = Cysylltwch â’ch cyngor lleol
-propertyEnglandLets.p2.part2 = a gadewch iddyn nhw wybod manylion yr eiddo. Yna byddant yn trosglwyddo’r hyn sydd ei angen arnom i brisio’r eiddo.
+propertyEnglandLets.p2.url = https://www.gov.uk/government/publications/self-catering-holiday-homes-questionnaire
+propertyEnglandLets.p2.part1 = Cwblhewch y ffurflen manylion rhent
+propertyEnglandLets.p2.part2 = i ddweud wrthym am eich bwthyn gwyliau neu llety hunanarlwyo.
 propertyEnglandLets.subheading = Cymorth arall ar GOV.UK
 propertyEnglandLets.p3.url = https://www.gov.uk/introduction-to-business-rates/self-catering-and-holiday-let-accommodation
 propertyEnglandLets.p3 = Eiddo hunanarlwyo a gosodiadau gwyliau
