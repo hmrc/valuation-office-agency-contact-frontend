@@ -174,7 +174,7 @@ councilTaxBandTooHigh.title = Gallwch herio'ch band Treth Gyngor ar-lein - Ffurf
 councilTaxBandTooHigh.heading = Gallwch herio'ch band Treth Gyngor ar-lein
 councilTaxBandTooHigh.p1.part1 = Defnyddiwch y gwasanaeth Treth Gyngor
 councilTaxBandTooHigh.p1.part2 = i wirio a herio'ch band Treth Gyngor.
-councilTaxBandTooHigh.p1.url = https://www.gov.uk/council-tax-bands
+councilTaxBandTooHigh.p1.url = https://www.tax.service.gov.uk/check-council-tax-band/search
 councilTaxBandTooHigh.subheading = Cymorth arall ar GOV.UK
 councilTaxBandTooHigh.p2 = Sut i herio'ch band Treth Gyngor
 councilTaxBandTooHigh.p2.url = https://www.gov.uk/challenge-council-tax-band
@@ -203,7 +203,7 @@ propertyDemolished.p1.url = https://www.gov.uk/find-local-council
 propertyDemolished.p1.part1 = Cysylltwch gyda’ch cyngor lleol
 propertyDemolished.p1.part2 = i ddweud wrthyn nhw fod yr eiddo wedi’i ddymchwel
 propertyDemolished.subheading = Cymorth arall ar GOV.UK
-propertyDemolished.p2.url = https://www.gov.uk/council-tax-bands
+propertyDemolished.p2.url = https://www.tax.service.gov.uk/check-council-tax-band/search
 propertyDemolished.p2.part1 = Defnyddiwch y gwasanaeth Treth Gyngor
 propertyDemolished.p2.part2 = a herio'ch band Treth Gyngor i ddweud wrthym fod eich eiddo wedi'i ddymchwel
 propertyDemolished.p3.url = https://www.gov.uk/challenge-council-tax-band
@@ -241,7 +241,7 @@ error.propertyWindWater.required = Dewiswch ‘Ydy’ os yw eich eiddo wedi’i 
 
 propertyWindWaterEnd.title = Dywedwch wrthym am gyflwr eich eiddo ar-lein - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 propertyWindWaterEnd.heading = Dywedwch wrthym am gyflwr eich eiddo ar-lein
-propertyWindWaterEnd.p1.url = https://www.gov.uk/council-tax-bands
+propertyWindWaterEnd.p1.url = https://www.tax.service.gov.uk/check-council-tax-band/search
 propertyWindWaterEnd.p1.part1 = Defnyddiwch y gwasanaeth Treth Gyngor
 propertyWindWaterEnd.p1.part2 = i wirio a herio'ch band Treth Gyngor.
 propertyWindWaterEnd.subheading = Cymorth arall ar GOV.UK
@@ -251,7 +251,7 @@ propertyWindWaterEnd.p2 = Pryd fyddai atgyweiriad gwael yn effeithio ar fand Tre
 # -------- End of Permanent Changes journey
 propertyPermanentChanges.title = Dywedwch wrthym am newidiadau parhaol i'r ardal leol ar-lein - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 propertyPermanentChanges.heading = Dywedwch wrthym am newidiadau parhaol i'r ardal leol ar-lein
-propertyPermanentChanges.p1.url = https://www.gov.uk/council-tax-bands
+propertyPermanentChanges.p1.url = https://www.tax.service.gov.uk/check-council-tax-band/search
 propertyPermanentChanges.p1.part1 = Defnyddiwch y gwasanaeth Treth Gyngor
 propertyPermanentChanges.p1.part2 = i wirio a herio'ch band Treth Gyngor.
 propertyPermanentChanges.subheading = Cymorth arall ar GOV.UK
@@ -306,7 +306,7 @@ annexeCookingWashing.form.error = Dewiswch ‘Oes’ os oes gan yr rhandy gyfleu
 # -------- Tell us you have removed an annexe
 annexeRemoved.title = Dywedwch wrthym eich bod wedi dileu rhandy - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 annexeRemoved.heading = Dywedwch wrthym eich bod wedi dileu rhandy
-annexeRemoved.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/council-tax-bands">Defnyddiwch y gwasanaeth Treth Gyngor</a> a heriwch eich band Treth Gyngor i ddweud wrthym eich bod wedi dileu rhandy.
+annexeRemoved.p1 = <a class="govuk-link" target="_self" href="https://www.tax.service.gov.uk/check-council-tax-band/search">Defnyddiwch y gwasanaeth Treth Gyngor</a> a heriwch eich band Treth Gyngor i ddweud wrthym eich bod wedi dileu rhandy.
 annexeRemoved.subheading = Cymorth arall ar GOV.UK
 annexeRemoved.url1 = <a class="govuk-link" target="_self" href="http://gov.uk/challenge-council-tax-band">Sut i herio’ch Band Treth Gyngor</a>
 annexeRemoved.url2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/council-tax/second-homes-and-empty-properties">Pryd y gall eich band Treth Gyngor newid</a>
