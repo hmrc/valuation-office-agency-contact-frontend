@@ -32,7 +32,7 @@ class PropertyWalesLetsNoActionViewSpec  extends ViewBehaviours {
 
   "Property Wales Lets No Action view" must {
     behave like normalPage(view140Days, "businessRatesSelfCateringNoBusinessRateWales", "title", "heading",
-      "p1", "p2", "p3", "p4.part1", "p4.part1.url", "p4.part2", "p4.part3")
+      "p1", "p2", "p3", "p4", "p5.part1", "p5.part1.url", "p5.part2", "p5.part3")
 
     "has a link marked with site.back leading to the Property Wales Lets 140 Page" in {
       val doc = asDocument(view140Days())
