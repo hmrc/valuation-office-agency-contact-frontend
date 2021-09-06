@@ -42,8 +42,12 @@
 
 
 @beforeBlock = {
-    @govukBackLink(BackLink(content = Text(messages("site.back")), href =
-            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url))
+    @govukBackLink(
+        BackLink(
+            content = Text(messages("site.back")),
+            href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url,
+            classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
+    )
 }
 
 @content = {

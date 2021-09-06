@@ -39,9 +39,12 @@ govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErro
 
 
 @beforeBlock = {
-@govukBackLink(BackLink(content = Text(messages("site.back")),
-    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesLets140DaysController.onPageLoad().url
-))
+@govukBackLink(
+    BackLink(
+        content = Text(messages("site.back")),
+        href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesLets140DaysController.onPageLoad().url,
+        classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
+    )
 }
 
 @mainTemplate(

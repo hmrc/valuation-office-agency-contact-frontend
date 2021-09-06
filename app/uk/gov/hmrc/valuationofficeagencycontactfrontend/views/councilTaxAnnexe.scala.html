@@ -40,10 +40,13 @@
 
 
 @beforeBlock = {
-@govukBackLink(BackLink(content = Text(messages("site.back")),
-    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
-))
-}
+    @govukBackLink(
+        BackLink(
+            content = Text(messages("site.back")),
+            href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(mode).url,
+            classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
+        )
+    }
 
 @mainTemplate(
     pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("annexe.title"))else messages("annexe.title")),

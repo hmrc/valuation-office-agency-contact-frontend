@@ -25,8 +25,12 @@
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
 @beforeBlock = {
-@govukBackLink(BackLink(content = Text(messages("site.back")),
-    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWindWaterController.onPageLoad().url))
+@govukBackLink(
+    BackLink(
+        content = Text(messages("site.back")),
+        href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWindWaterController.onPageLoad().url,
+        classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
+    )
 }
 
 @mainTemplate(

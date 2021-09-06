@@ -25,9 +25,13 @@
 @(appConfig: FrontendAppConfig, backLink: String)(implicit request: Request[_], messages: Messages)
 
 @beforeBlock = {
-@govukBackLink(BackLink(content = Text(messages("site.back")), href = backLink))
-
-}
+    @govukBackLink(
+        BackLink(
+            content = Text(messages("site.back")),
+            href = backLink,
+            classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
+        )
+    }
 
 @mainTemplate(
     beforeContentBlock = Option(beforeBlock),

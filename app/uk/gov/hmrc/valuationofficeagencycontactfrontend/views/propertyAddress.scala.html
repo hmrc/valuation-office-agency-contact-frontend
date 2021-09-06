@@ -37,10 +37,13 @@
 @(appConfig: FrontendAppConfig, form: Form[PropertyAddress], mode: Mode, helpTextKey: Option[String] = None)(implicit request: Request[_], messages: Messages)
 
 @beforeBlock = {
-    @govukBackLink(BackLink(content = Text(messages("site.back")),
-        href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(mode).url
-    ))
-}
+    @govukBackLink(
+        BackLink(
+            content = Text(messages("site.back")),
+            href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(mode).url,
+            classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
+        )
+    }
 
 @textInput(id: String, optional: Boolean, classes: String, autoCompleteLabel: String) = {
     @govukInput(Input(
