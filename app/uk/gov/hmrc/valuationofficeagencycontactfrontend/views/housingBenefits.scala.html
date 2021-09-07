@@ -52,8 +52,13 @@
         @messages("housingBenefits.opening-hours")
     </p>
 
+    @if(messages("callcharges.link") == "Find out about call charges") {
     <p class="govuk-body">
-        <a href=@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.Application.start().url class="govuk-link">@messages("site.start-again")</a>
+        <a href="https://www.gov.uk/call-charges" class="govuk-link">@messages("callcharges.link")</a>
     </p>
-
+    } else {
+    <p class="govuk-body">
+        <a href="https://www.gov.uk/costau-galwadau" class="govuk-link">@messages("callcharges.link")</a>
+        </p>
+    }
 }
