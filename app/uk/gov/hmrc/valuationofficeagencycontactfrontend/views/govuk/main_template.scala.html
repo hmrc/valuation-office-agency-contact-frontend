@@ -18,6 +18,7 @@
 @import uk.gov.hmrc.govukfrontend.views.html.components._
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.{HmrcStandardFooter, HmrcStandardHeader, HmrcHead, HmrcScripts, HmrcTimeoutDialogHelper}
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+@import uk.gov.hmrc.hmrcfrontend.views.html.deprecated.helpers.HmrcLanguageSelectHelper
 
 @import uk.gov.hmrc.hmrcfrontend.config.AccessibilityStatementConfig
 
@@ -29,6 +30,7 @@
         head: head,
         scripts: scripts,
         govukPhaseBanner: govukPhaseBanner,
+        hmrcLanguageSelectHelper: HmrcLanguageSelectHelper,
         accessibilityStatementConfig: AccessibilityStatementConfig
 )
 
@@ -37,10 +39,12 @@
 )(contentBlock: Html)(implicit request: Request[_], messages: Messages)
 
 @beforeBLock = {
-    @govukPhaseBanner(PhaseBanner(tag = Option(Tag(Text("BETA"))),
-        content = HtmlContent(messages("site.new_service"))))
-    @beforeContentBlock
-
+@govukPhaseBanner(PhaseBanner(tag = Option(Tag(Text("BETA"))),
+    content = HtmlContent(messages("site.new_service"))))
+    <div class="govuk-!-margin-0 govuk-!-margin-bottom-0">
+    @hmrcLanguageSelectHelper()
+    </div>
+@beforeContentBlock
 }
 
 
@@ -67,9 +71,5 @@
         FooterItem(
             href = Some(messages("footer.links.help_page.url")),
             text = Some(messages("footer.links.help_page.text"))),
-        FooterItem(
-            href = Some(messages("footer.links.languale.url")),
-            text = Some(messages("footer.links.languale.text")))
-
     ),
     bodyEndBlock = Some(scripts()))(contentBlock)

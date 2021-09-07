@@ -26,9 +26,13 @@
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
 @beforeBlock = {
-@govukBackLink(BackLink(content = Text(messages("site.back")),
-    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxAnnexeController.onHaveCookingWashingPageLoad().url))
-}
+    @govukBackLink(
+        BackLink(
+            content = Text(messages("site.back")),
+            href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxAnnexeController.onHaveCookingWashingPageLoad().url,
+            classes = "govuk-!-margin-top-0 govuk-!-margin-bottom-0")
+        )
+    }
 
 @mainTemplate(
     beforeContentBlock = Option(beforeBlock),

@@ -38,9 +38,13 @@
 @(appConfig: FrontendAppConfig, form: Form[String], mode: Mode)(implicit request: Request[_], messages: Messages)
 
 @beforeBlock = {
-    @govukBackLink(BackLink(content = Text(messages("site.back")), href =
-        EnquiryCategoryController.onPageLoad(mode).url))
-}
+    @govukBackLink(
+        BackLink(
+            content = Text(messages("site.back")),
+            href = EnquiryCategoryController.onPageLoad(mode).url,
+            classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
+        )
+    }
 
 
 @mainTemplate(

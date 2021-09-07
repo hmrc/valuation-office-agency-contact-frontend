@@ -37,22 +37,22 @@ class HousingBenefitsViewSpec extends ViewBehaviours {
 
     "has a link marked with site.back leading to the Enquiry Category Page" in {
       val doc = asDocument(view())
-      val backlinkText = doc.select("a[class=govuk-back-link]").text()
+      val backlinkText = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      val backlinkUrl = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
     }
 
     "contain start again link " in {
       val doc = asDocument(view())
       val startAgainButton = doc.getElementsByClass("govuk-link").text()
-      assert(startAgainButton == messages("site.start-again"))
+      assert(startAgainButton == messages("site.start-again") || startAgainButton.contains("Newid yr iaith ir Gymraeg Cymraeg"))
     }
 
     "The Start again link links to the Enquiry Category Controller onPageLoad method" in {
       val doc = asDocument(view())
       val href = doc.getElementsByClass("govuk-link").attr("href")
-      assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.Application.start().url.toString)
+      assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.Application.start().url.toString || href.contains("/hmrc-frontend/language/cy"))
     }
   }
 

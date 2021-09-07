@@ -27,9 +27,13 @@
 @(appConfig: FrontendAppConfig, mode: Mode)(implicit request: Request[_], messages: Messages)
 
 @beforeBlock = {
-@govukBackLink(BackLink(content = Text(messages("site.back")),
-    href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(mode).url))
-}
+    @govukBackLink(
+        BackLink(
+            content = Text(messages("site.back")),
+            href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(mode).url,
+            classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
+        )
+    }
 
 @mainTemplate(
     beforeContentBlock = Option(beforeBlock),

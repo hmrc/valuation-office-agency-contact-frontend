@@ -40,8 +40,13 @@
 @(appConfig: FrontendAppConfig, form: Form[ContactDetails], mode: Mode, backLink: String)(implicit request: Request[_], messages: Messages)
 
 @beforeBlock = {
-    @govukBackLink(BackLink(content = Text(messages("site.back")), href = backLink))
-}
+    @govukBackLink(
+        BackLink(
+            content = Text(messages("site.back")),
+            href = backLink,
+            classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
+        )
+    }
 
 @textInput(id: String, inputType: String, classes: String, autoCompleteLabel: String, mode: String = "", pattern: String = "") = {
     @govukInput(Input(
