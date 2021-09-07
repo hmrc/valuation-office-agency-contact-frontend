@@ -33,9 +33,9 @@ class PropertyEnglandLetsNoActionViewSpec  extends ViewBehaviours {
 
     "has a link marked with site.back leading to the Property England Lets 140 Page" in {
       val doc = asDocument(view140Days())
-      val backlinkText = doc.select("a[class=govuk-back-link]").text()
+      val backlinkText = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      val backlinkUrl = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyEnglandLets140DaysController.onPageLoad().url
     }
   }
