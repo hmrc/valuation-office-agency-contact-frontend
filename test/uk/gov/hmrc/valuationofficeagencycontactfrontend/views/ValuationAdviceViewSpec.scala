@@ -44,12 +44,5 @@ class ValuationAdviceViewSpec extends ViewBehaviours {
       val startAgainButton = doc.getElementsByClass("govuk-link").text()
       assert(startAgainButton == messages("site.start-again") || startAgainButton.contains("Newid yr iaith ir Gymraeg Cymraeg"))
     }
-
-    "The Start again link links to the Enquiry Category Controller onPageLoad method" in {
-      val doc = asDocument(view())
-      val href = doc.getElementsByClass("govuk-link").attr("href")
-      assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.Application.start().url || href.contains("/hmrc-frontend/language/cy"))
-    }
   }
-
 }
