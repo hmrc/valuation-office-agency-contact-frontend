@@ -35,7 +35,7 @@ class DatePropertyChangedViewSpec extends ViewBehaviours {
 
   def dateForm= DatePropertyChangedForm()
 
-  def createView = () => datePropertyChanged(frontendAppConfig, dateForm, NormalMode, messageKeyPrefix, "test")(fakeRequest, messages)
+  def createView = () => datePropertyChanged(frontendAppConfig, dateForm, NormalMode, messageKeyPrefix, "/valuation-office-agency-contact-frontend/about-business-rates")(fakeRequest, messages)
 
   def createViewUsingForm = (form: Form[Option[LocalDate]]) => datePropertyChanged(frontendAppConfig, form, NormalMode, "test", "test")(fakeRequest, messages)
 
@@ -49,6 +49,14 @@ class DatePropertyChangedViewSpec extends ViewBehaviours {
         val doc = asDocument(createViewUsingForm(dateForm))
         val continueButton = doc.getElementsByClass("govuk-button").first().text()
         assert(continueButton == messages("site.continue"))
+      }
+
+      "have a link marked with site.back leading to the Business Rates Subcategory Page" in {
+        val doc = asDocument(createView())
+        val backlinkText = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").text()
+        backlinkText mustBe messages("site.back")
+        val backlinkUrl = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").attr("href")
+        backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
       }
     }
   }

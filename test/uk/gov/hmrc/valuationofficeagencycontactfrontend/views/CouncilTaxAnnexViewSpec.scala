@@ -59,6 +59,13 @@ class CouncilTaxAnnexViewSpec extends ViewBehaviours {
         labelDefinedAndUsedOnce("removed", messageKeyPrefix, createView)
       }
 
+      "have a link marked with site.back leading to the Business Rates Subcategory Page" in {
+        val doc = asDocument(createView())
+        val backlinkText = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").text()
+        backlinkText mustBe messages("site.back")
+        val backlinkUrl = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").attr("href")
+        backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
+      }
     }
 
     for(option <- AnnexeForm.options) {
