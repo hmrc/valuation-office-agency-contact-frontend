@@ -42,13 +42,7 @@ class ValuationForTaxesViewSpec extends ViewBehaviours {
       val backlinkUrl = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
     }
-
-    "contain start again link " in {
-      val doc = asDocument(view())
-      val startAgainButton = doc.getElementsByClass("govuk-link").text()
-      assert(startAgainButton == messages("site.start-again") || startAgainButton.contains("Newid yr iaith ir Gymraeg Cymraeg") )
-    }
-
+    
     "The Start again link links to the Enquiry Category Controller onPageLoad method" in {
       val doc = asDocument(view())
       val href = doc.getElementsByClass("govuk-link").attr("href")
