@@ -391,7 +391,7 @@ propertyMergeSplit.p2 = We will only be able to update your Council Tax band onc
 # --- No business rates are required in England
 businessRatesSelfCateringNoBusinessRate.title = You will not have to pay business rates for your property in England - Valuation Office Agency contact form - GOV.UK
 businessRatesSelfCateringNoBusinessRate.heading = You will not have to pay business rates for your property in England
-businessRatesSelfCateringNoBusinessRate.p1 = You may still need to pay Council Tax
+businessRatesSelfCateringNoBusinessRate.p1 = You may still need to pay Council Tax.
 businessRatesSelfCateringNoBusinessRate.p2 = If your property is in England, it will only be valued for business rates if it is available to let for short periods that total 140 days or more per year.
 businessRatesSelfCateringNoBusinessRate.p3.part1 = If you are already paying business rates for this property, and you think you should not be,
 businessRatesSelfCateringNoBusinessRate.p3.url = https://www.gov.uk/correct-your-business-rates
