@@ -400,7 +400,7 @@ propertyMergeSplit.p2 = Dim ond ar ôl iddynt anfon y wybodaeth honno y byddwn y
 # --- No business rates are required
 businessRatesSelfCateringNoBusinessRate.title = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yn Lloegr - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSelfCateringNoBusinessRate.heading = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yn Lloegr
-businessRatesSelfCateringNoBusinessRate.p1 = Efallai y bydd angen i chi dalu'r Dreth Gyngor o hyd
+businessRatesSelfCateringNoBusinessRate.p1 = Efallai y bydd angen i chi dalu'r Dreth Gyngor o hyd.
 businessRatesSelfCateringNoBusinessRate.p2 = Os yw eich eiddo yn Lloegr, dim ond os yw ar gael y gellir ei brisio am gyfnodau byr sy'n gyfanswm o 140 diwrnod neu fwy y flwyddyn y bydd yn cael ei brisio.
 businessRatesSelfCateringNoBusinessRate.p3.part1 = Os ydych eisoes yn talu ardrethi busnes am yr eiddo hwn, ac yn credu na ddylech fod,
 businessRatesSelfCateringNoBusinessRate.p3.url = https://www.gov.uk/correct-your-business-rates
