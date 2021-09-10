@@ -90,6 +90,22 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
         checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress).flatten))
     }
 
+    "The user answers section builder produces sections for new enquiry for business rate from home" in {
+      when(mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_from_home")
+      when(mockUserAnswers.datePropertyChanged) thenReturn Some(LocalDate.of(2021, 1, 1))
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+      when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("a"))
+
+      val result = controller().userAnswersSectionBuilder(mockUserAnswers)
+      val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
+      result mustBe Some(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.businessRatesSubcategory,
+        checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.business.heading"), checkYourAnswersHelper.tellUsMore("tellUsMore.business.heading"),
+        checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress).flatten))
+      }
+
     "The user answers section builder produces sections for new enquiry for business rate not used" in {
       when(mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
