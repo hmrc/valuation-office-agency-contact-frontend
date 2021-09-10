@@ -115,6 +115,9 @@ enquiryCategory.valuations_for_tax = Hawl i Brynu, Prisio ar gyfer trethi, neu a
 enquiryCategory.valuation_for_public_body = Prisio a chyngor ar eiddo, ar gyfer cyrff sector cyhoeddus, gan y Gwasanaethau Prisiwr Dosbarth (GPD)
 enquiryCategory.other_business = Busnes arall
 enquiryCategory.checkYourAnswersLabel = Math o ymholiad
+
+# --- Call Charges
+callcharges.link = Gwybodaeth am brisiau galwadau ffôn
  
 enquiryCategory.council_tax.summary = Gall ymholiadau Treth Gyngor fod ynghylch:
 enquiryCategory.council_tax.about1 = eich band Treth Gyngor a sut y caiff ei asesu

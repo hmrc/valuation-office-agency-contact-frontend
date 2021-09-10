@@ -631,6 +631,9 @@ anythingElse.title = Is there anything else you would like to tell us about? (op
 anythingElse.heading = Is there anything else you would like to tell us about? (optional)
 anythingElse.checkYourAnswersLabel = Is there anything else you would like to tell us about?
 
+# --- Call Charges
+callcharges.link = Find out about call charges
+
 # --- Confirmation for new and existing enquiries
 confirmation.title = Enquiry submitted - Valuation Office Agency contact form - GOV.UK
 confirmation.heading = Enquiry submitted
