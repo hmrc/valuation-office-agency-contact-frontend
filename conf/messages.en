@@ -627,6 +627,17 @@ tellUsMore.business.other.title = What is your other business rates enquiry? - V
 tellUsMore.business.other.heading = What is your other business rates enquiry?
 tellUsMore.business.other.hint = Include details such as case reference numbers and dates.
 
+
+# --- General Enquiries journey
+generalEnquiries.h2Heading = If you still need to contact us
+generalEnquiries.url =
+generalEnquiries.p1.part1 = Use our general enquiries form
+generalEnquiries.p1.part2 = or you can call us.
+generalEnquiries.p2 = If you have a reference number, have it with you when you call.
+generalEnquiries.telephoneEng.p3 = Telephone: 03000 501501 (England)
+generalEnquiries.telephoneWal.p3 = Telephone: 03000 505505 (Wales / Cymru)
+generalEnquiries.days.p3 = Monday to Friday, 9am to 4:30pm
+
 anythingElse.title = Is there anything else you would like to tell us about? (optional) - Valuation Office Agency contact form - GOV.UK
 anythingElse.heading = Is there anything else you would like to tell us about? (optional)
 anythingElse.checkYourAnswersLabel = Is there anything else you would like to tell us about?
