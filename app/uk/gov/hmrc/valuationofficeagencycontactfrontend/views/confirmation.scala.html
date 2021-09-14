@@ -33,6 +33,8 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.SatisfactionSurveyController
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 
 @this(mainTemplate: main_template, formWithCSFR: formWithCSRF,
         govukButton: GovukButton, govukSummaryList: GovukSummaryList, govukPanel: GovukPanel,
@@ -107,6 +109,42 @@
         @govukFieldset(Fieldset(html = surveyContent))
 
         @govukButton(Button(attributes = Map("id" -> "submit"), content = Text(messages("confirmation.feedback.submit"))))
+
+        <hr>
+
+        <p class="govuk-header">
+    <h2 class="govuk-heading-s">
+        @messages("generalEnquiries.h2Heading")
+    </h2>
+        </p>
+
+        <p class="govuk-body-s">
+            <a class="govuk-link" href=@routes.TellUsMoreController.onPageLoad(NormalMode).url>
+            @messages("generalEnquiries.p1.part1")
+            </a>
+            @messages("generalEnquiries.p1.part2")
+        </p>
+
+        <p class="govuk-body-s">
+        @messages("generalEnquiries.p2")
+        </p>
+
+        <ul class="govuk-list govuk-!-font-size-16">
+            <li>@messages("generalEnquiries.telephoneEng.p3")</li>
+            <li>@messages("generalEnquiries.telephoneWal.p3")</li>
+            <li>@messages("generalEnquiries.days.p3")</li>
+        </ul>
+
+
+        @if(messages("callcharges.link") == "Find out about call charges") {
+            <p class="govuk-body-s">
+                <a href="https://www.gov.uk/call-charges" class="govuk-link">@messages("callcharges.link")</a>
+            </p>
+        } else {
+            <p class="govuk-body">
+                <a href="https://www.gov.uk/costau-galwadau" class="govuk-link">@messages("callcharges.link")</a>
+            </p>
+        }
     </section>
 }
 }
@@ -143,4 +181,6 @@
             errorMessage = form.errors.asHtmlErrorMessageForField("details")
         ))
     </div>
+
+
 }

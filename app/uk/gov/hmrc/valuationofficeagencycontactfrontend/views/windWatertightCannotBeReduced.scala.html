@@ -20,6 +20,7 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 
 @this(mainTemplate: main_template, govukBackLink: GovukBackLink)
 
@@ -55,5 +56,41 @@
             @messages("propertyWindWaterEnd.p2")
         </a>
     </p>
+
+    <hr>
+
+    <p class="govuk-header">
+        <h2 class="govuk-heading-s">
+            @messages("generalEnquiries.h2Heading")
+        </h2>
+    </p>
+
+    <p class="govuk-body-s">
+        <a class="govuk-link" href=@routes.TellUsMoreController.onPageLoad(mode).url>
+        @messages("generalEnquiries.p1.part1")
+        </a>
+        @messages("generalEnquiries.p1.part2")
+    </p>
+
+    <p class="govuk-body-s">
+    @messages("generalEnquiries.p2")
+    </p>
+
+    <ul class="govuk-list govuk-!-font-size-16">
+        <li>@messages("generalEnquiries.telephoneEng.p3")</li>
+        <li>@messages("generalEnquiries.telephoneWal.p3")</li>
+        <li>@messages("generalEnquiries.days.p3")</li>
+    </ul>
+
+
+    @if(messages("callcharges.link") == "Find out about call charges") {
+        <p class="govuk-body-s">
+            <a href="https://www.gov.uk/call-charges" class="govuk-link">@messages("callcharges.link")</a>
+        </p>
+    } else {
+        <p class="govuk-body">
+            <a href="https://www.gov.uk/costau-galwadau" class="govuk-link">@messages("callcharges.link")</a>
+        </p>
+    }
 
 }
