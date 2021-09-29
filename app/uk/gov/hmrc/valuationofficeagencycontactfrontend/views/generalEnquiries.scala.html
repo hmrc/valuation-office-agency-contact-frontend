@@ -1,0 +1,88 @@
+@*
+ * Copyright 2021 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukBackLink, GovukButton, GovukRadios, GovukErrorSummary, GovukFieldset}
+@import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
+@import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.charactercount.CharacterCount
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
+@import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.govukfrontend.views.Aliases.Hint
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+
+@this(mainTemplate: main_template, formWithCSFR: formWithCSRF, govukBackLink: GovukBackLink,
+govukRadios: GovukRadios, hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary, govukFieldset: GovukFieldset)
+
+
+@(appConfig: FrontendAppConfig, form: Form[String], mode: Mode)(implicit request: Request[_], messages: Messages)
+
+
+@beforeBlock = {
+@govukBackLink(
+    BackLink(
+        content = Text(messages("site.back")),
+        href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url,
+        classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
+    )
+}
+
+@mainTemplate(
+    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("tellUsMore.other.title"))else messages("tellUsMore.other.title")),
+    beforeContentBlock = Option(beforeBlock)
+) {
+    @formWithCSFR(action = GeneralEnquiriesController.onSubmit(), 'autoComplete -> "off") {
+        @if(form.hasErrors) {
+            @govukErrorSummary(
+                ErrorSummary(
+                    attributes = Map("id" -> "error-summary-heading"),
+                    title = Text(messages("error.summary.title")),
+                    errorList = form.errors.map(e => ErrorLink(href = Some("#message"), content = HtmlContent(messages(e.messages, e.args :_*))))
+                )
+            )
+        }
+
+        <h1 class="govuk-label-wrapper">
+            <label class="govuk-label govuk-label--l" for="message">
+            @messages("tellUsMore.other.heading")
+            </label>
+        </h1>
+
+        @hmrcCharacterCount(
+            CharacterCount(
+                id = "message",
+                name = "message",
+                value = form("message").value,
+                rows = 4,
+                maxLength = Some(5000),
+                errorMessage = form.errors.asHtmlErrorMessageForField("message")
+            )
+        )
+
+
+
+        @govukButton(Button(content = Text(messages("site.continue"))))
+    }
+}

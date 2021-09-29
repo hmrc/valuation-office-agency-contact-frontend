@@ -70,6 +70,9 @@ POST        /tell-us-more                          uk.gov.hmrc.valuationofficeag
 GET         /changeTellUsMore                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onPageLoad(mode: Mode = CheckMode)
 POST        /changeTellUsMore                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onSubmit(mode: Mode = CheckMode)
 
+GET         /general-enquiries                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.GeneralEnquiriesController.onPageLoad(mode: Mode = NormalMode)
+POST        /general-enquiries                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.GeneralEnquiriesController.onSubmit(mode: Mode = NormalMode)
+
 GET         /what-else-tell-us                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.WhatElseController.onPageLoad(mode: Mode = NormalMode)
 POST        /what-else-tell-us                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.WhatElseController.onSubmit(mode: Mode = NormalMode)
 
