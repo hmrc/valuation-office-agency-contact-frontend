@@ -160,6 +160,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
       case (Some("new_enquiry"), Some("council_tax_business_uses"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), Some("council_tax_area_change"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), Some("council_tax_other"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), Some("council_tax_annexe"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _, Some("business_rates_from_home")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _, Some("business_rates_not_used")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _, _) => routes.TellUsMoreController.onPageLoad(NormalMode).url

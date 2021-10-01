@@ -642,6 +642,15 @@ tellUsMore.business.other.title = Beth yw eich ymholiad ardrethi busnes arall? -
 tellUsMore.business.other.heading = Beth yw eich ymholiad ardrethi busnes arall?
 tellUsMore.business.other.hint = Darparwch fanylion megis cyfeirnodau achos a dyddiadau.
 
+# --- General Enquiries journey
+generalEnquiries.h2Heading = Os oes dal angen i chi gysylltu â ni
+generalEnquiries.p1.part1 = Defnyddiwch ein ffurflen ymholiadau cyffredinol
+generalEnquiries.p1.part2 = neu gallwch ein ffonio.
+generalEnquiries.p2 = Os oes gennych gyfeirnod, gwnewch yn siŵr fod hwnnw wrth law pan fyddwch yn ffonio.
+generalEnquiries.telephoneEng.p3 =
+generalEnquiries.telephoneWal.p3 = Ffôn: 03000 505505
+generalEnquiries.days.p3 = Dydd Llun i ddydd Gwener, 9yb tan 4:30yh
+
 # --- Confirmation for new and existing enquiries
 confirmation.title = Ymchwiliad wedi’i gyflwyno - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 confirmation.heading = Ymchwiliad wedi’i gyflwyno
