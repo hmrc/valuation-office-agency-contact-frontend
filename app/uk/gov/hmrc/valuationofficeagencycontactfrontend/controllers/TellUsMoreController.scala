@@ -82,14 +82,27 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
 
   private[controllers] def enquiryKey(answers: UserAnswers): Either[String, String] = {
     (answers.enquiryCategory, answers.councilTaxSubcategory, answers.businessRatesSubcategory) match {
-      case (Some("council_tax"), Some("council_tax_property_poor_repair"), _) => Right("tellUsMore.poorRepair")
       case (Some("council_tax"), Some("council_tax_business_uses"), _) => Right("tellUsMore.business")
       case (Some("business_rates"), _, Some("business_rates_from_home")) => Right("tellUsMore.business")
-      case (Some("business_rates"), _, Some("business_rates_not_used")) => Right("tellUsMore.notUsed")
       case (Some("business_rates"), _, Some("business_rates_other")) => Right("tellUsMore.business.other")
-      case (Some("council_tax"), Some("council_tax_area_change"), _) => Right("tellUsMore.areaChange")
+      case (Some("business_rates"), _, Some("business_rates_change_valuation")) => Right("tellUsMore.business.other")
+      case (Some("business_rates"), _, Some("business_rates_bill")) => Right("tellUsMore.business.other")
+      case (Some("business_rates"), _, Some("business_rates_changes")) => Right("tellUsMore.business.other")
+      case (Some("business_rates"), _, Some("business_rates_property_empty")) => Right("tellUsMore.business.other")
+      case (Some("business_rates"), _, Some("business_rates_valuation")) => Right("tellUsMore.business.other")
+      case (Some("business_rates"), _, Some("business_rates_demolished")) => Right("tellUsMore.business.other")
+      case (Some("business_rates"), _, Some("business_rates_not_used")) => Right("tellUsMore.business.other")
+      case (Some("business_rates"), _, Some("business_rates_self_catering")) => Right("tellUsMore.business.other")
       case (Some("council_tax"), Some("council_tax_other"), _) => Right("tellUsMore.other")
       case (Some("council_tax"), Some("council_tax_annexe"), _) => Right("tellUsMore.general")
+      case (Some("council_tax"), Some("council_tax_bill"), _) => Right("tellUsMore.general")
+      case (Some("council_tax"), Some("council_tax_band_too_high"), _) => Right("tellUsMore.general")
+      case (Some("council_tax"), Some("council_tax_band_for_new"), _) => Right("tellUsMore.general")
+      case (Some("council_tax"), Some("council_tax_property_empty"), _) => Right("tellUsMore.general")
+      case (Some("council_tax"), Some("council_tax_property_poor_repair"), _) => Right("tellUsMore.general")
+      case (Some("council_tax"), Some("council_tax_property_split_merge"), _) => Right("tellUsMore.general")
+      case (Some("council_tax"), Some("council_tax_property_demolished"), _) => Right("tellUsMore.general")
+      case (Some("council_tax"), Some("council_tax_area_change"), _) => Right("tellUsMore.general")
       case (Some("council_tax"), _, _) => Right("tellUsMore.ct-reference")
       case (Some("business_rates"), _, _) => Right("tellUsMore.ndr-reference")
       case _ => Left("Unknown enquiry category in enquiry key")
@@ -98,13 +111,26 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
 
   private def backLink(answers: UserAnswers, mode: Mode) = {
     (answers.councilTaxSubcategory, answers.businessRatesSubcategory) match {
-      case (Some("council_tax_property_poor_repair"), _) => routes.DatePropertyChangedController.onPageLoad().url
       case (Some("council_tax_business_uses"), _) => routes.DatePropertyChangedController.onPageLoad().url
-      case (Some("council_tax_area_change"), _) => routes.DatePropertyChangedController.onPageLoad().url
       case (Some("council_tax_other"), _) => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
       case (Some("council_tax_annexe"), _) => routes.CouncilTaxAnnexeController.onRemovedPageLoad().url
+      case (Some("council_tax_bill"), _) => routes.CouncilTaxBillController.onPageLoad().url
+      case (Some("council_tax_band_too_high"), _) => routes.CouncilTaxBandTooHighController.onPageLoad().url
+      case (Some("council_tax_band_for_new"), _) => routes.CouncilTaxBandForNewController.onPageLoad().url
+      case (Some("council_tax_property_empty"), _) => routes.PropertyEmptyController.onPageLoad().url
+      case (Some("council_tax_property_poor_repair"), _) => routes.PropertyWindWaterController.onPageLoad().url
+      case (Some("council_tax_property_split_merge"), _) => routes.PropertySplitMergeController.onPageLoad().url
+      case (Some("council_tax_property_demolished"), _) => routes.PropertyDemolishedController.onPageLoad().url
+      case (Some("council_tax_area_change"), _) => routes.PropertyPermanentChangesController.onPageLoad().url
+      case (_, Some("business_rates_change_valuation")) => routes.BusinessRatesSubcategoryController.onChangeValuationPageLoad().url
       case (_, Some("business_rates_from_home")) => routes.DatePropertyChangedController.onPageLoad().url
-      case (_, Some("business_rates_not_used")) => routes.DatePropertyChangedController.onPageLoad().url
+      case (_, Some("business_rates_not_used")) => routes.BusinessRatesPropertyController.onNonBusinessPageLoad().url
+      case (_, Some("business_rates_bill")) => routes.BusinessRatesBillController.onPageLoad().url
+      case (_, Some("business_rates_self_catering")) => routes.BusinessRatesSelfCateringController.onPageLoad().url
+      case (_, Some("business_rates_changes")) => routes.BusinessRatesBillController.onPageLoad().url
+      case (_, Some("business_rates_demolished")) => routes.BusinessRatesSubcategoryController.onDemolishedPageLoad().url
+      case (_, Some("business_rates_valuation")) => routes.BusinessRatesSubcategoryController.onValuationPageLoad().url
+      case (_, Some("business_rates_property_empty")) => routes.PropertyEmptyController.onBusinessRatesPageLoad().url
       case (_, Some("business_rates_other")) => routes.BusinessRatesSubcategoryController.onPageLoad(mode).url
       case _ => routes.PropertyAddressController.onPageLoad(NormalMode).url
     }
