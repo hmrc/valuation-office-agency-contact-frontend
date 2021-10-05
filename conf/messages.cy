@@ -117,7 +117,7 @@ enquiryCategory.other_business = Busnes arall
 enquiryCategory.checkYourAnswersLabel = Math o ymholiad
 
 # --- Call Charges
-callcharges.link = Gwybodaeth am brisiau galwadau ffôn
+callcharges.page = <a href="https://www.gov.uk/costau-galwadau" target="_self">Gwybodaeth am brisiau galwadau ffôn
  
 enquiryCategory.council_tax.summary = Gall ymholiadau Treth Gyngor fod ynghylch:
 enquiryCategory.council_tax.about1 = eich band Treth Gyngor a sut y caiff ei asesu
