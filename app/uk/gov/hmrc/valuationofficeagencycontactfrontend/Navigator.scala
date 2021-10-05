@@ -45,9 +45,23 @@ class Navigator @Inject()() {
       case (Some("new_enquiry"), Some("council_tax_business_uses"), _) => routes.CheckYourAnswersController.onPageLoad()
       case (Some("new_enquiry"), Some("council_tax_area_change"), _) => routes.CheckYourAnswersController.onPageLoad()
       case (Some("new_enquiry"), Some("council_tax_other"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_annexe"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_bill"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_band_too_high"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_band_for_new"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_property_empty"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_property_split_merge"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_property_demolished"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_change_valuation")) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_bill")) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_changes")) => routes.CheckYourAnswersController.onPageLoad()
       case (Some("new_enquiry"), _, Some("business_rates_from_home")) => routes.CheckYourAnswersController.onPageLoad()
       case (Some("new_enquiry"), _, Some("business_rates_other")) => routes.CheckYourAnswersController.onPageLoad()
       case (Some("new_enquiry"), _, Some("business_rates_not_used")) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_self_catering")) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_property_empty")) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_valuation")) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_demolished")) => routes.CheckYourAnswersController.onPageLoad()
       case (Some("new_enquiry"), _, _) => routes.TellUsMoreController.onPageLoad(NormalMode)
       case (Some("more_details"), _, _) => routes.WhatElseController.onPageLoad()
       case (Some("update_existing"), _, _) => routes.AnythingElseTellUsController.onPageLoad()
@@ -175,24 +189,28 @@ class Navigator @Inject()() {
     }
   }
 
-  private val propertyWindWaterRouting: UserAnswers => Call = answers => {
-    answers.propertyWindEnquiry match {
-      case Some("yes") => routes.PropertyWindWaterController.onPageLoad()
-      case Some("no") => routes.DatePropertyChangedController.onPageLoad()
-      case _ =>
-        Logger.warn(s"Navigation for Property wind and water reached without selection of enquiry by controller ")
-        throw new RuntimeException("Unknown exception in property wind and water routing")
-    }
-  }
-
   private val tellUsMoreRouting: UserAnswers => Call = answers => {
     (answers.councilTaxSubcategory, answers.businessRatesSubcategory) match {
       case (Some("council_tax_property_poor_repair"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (Some("council_tax_business_uses"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (Some("council_tax_area_change"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (Some("council_tax_other"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_annexe"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_bill"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_band_too_high"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_band_for_new"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_property_empty"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_property_split_merge"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_property_demolished"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (_, Some("business_rates_from_home")) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_bill")) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_changes")) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_change_valuation")) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_property_empty")) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (_, Some("business_rates_not_used")) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_self_catering")) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_valuation")) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_demolished")) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (_, Some("business_rates_other")) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case _ => routes.CheckYourAnswersController.onPageLoad()
     }
@@ -309,7 +327,6 @@ class Navigator @Inject()() {
     AnythingElseId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
     CheckYourAnswersId -> confirmationPageRouting,
     BusinessRatesSmartLinksId -> (_ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)),
-    CouncilTaxPropertyPoorRepairId -> propertyWindWaterRouting,
     DatePropertyChangedId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
     CouncilTaxAnnexeSelfContainedEnquiryId -> annexeSelfContainedRouting,
     CouncilTaxAnnexeEnquiryId -> councilTaxAnnexeRouting,

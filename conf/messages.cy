@@ -117,7 +117,7 @@ enquiryCategory.other_business = Busnes arall
 enquiryCategory.checkYourAnswersLabel = Math o ymholiad
 
 # --- Call Charges
-callcharges.link = Gwybodaeth am brisiau galwadau ffôn
+callcharges.page = <a href="https://www.gov.uk/costau-galwadau" target="_self">Gwybodaeth am brisiau galwadau ffôn</a>
  
 enquiryCategory.council_tax.summary = Gall ymholiadau Treth Gyngor fod ynghylch:
 enquiryCategory.council_tax.about1 = eich band Treth Gyngor a sut y caiff ei asesu
@@ -641,6 +641,15 @@ tellUsMore.notUsed.inset = Bydd angen i chi ddarparu tystiolaeth pan fyddwn yn y
 tellUsMore.business.other.title = Beth yw eich ymholiad ardrethi busnes arall? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 tellUsMore.business.other.heading = Beth yw eich ymholiad ardrethi busnes arall?
 tellUsMore.business.other.hint = Darparwch fanylion megis cyfeirnodau achos a dyddiadau.
+
+# --- General Enquiries journey
+generalEnquiries.h2Heading = Os oes dal angen i chi gysylltu â ni
+generalEnquiries.p1.part1 = Defnyddiwch ein ffurflen ymholiadau cyffredinol
+generalEnquiries.p1.part2 = neu gallwch ein ffonio.
+generalEnquiries.p2 = Os oes gennych gyfeirnod, gwnewch yn siŵr fod hwnnw wrth law pan fyddwch yn ffonio.
+generalEnquiries.telephoneEng.p3 =
+generalEnquiries.telephoneWal.p3 = Ffôn: 03000 505505
+generalEnquiries.days.p3 = Dydd Llun i ddydd Gwener, 9yb tan 4:30yh
 
 # --- Confirmation for new and existing enquiries
 confirmation.title = Ymchwiliad wedi’i gyflwyno - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK

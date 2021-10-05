@@ -19,8 +19,10 @@
 @import uk.gov.hmrc.govukfrontend.views.html.components.GovukBackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 
 @this(mainTemplate: main_template, govukBackLink: GovukBackLink)
+
 
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
@@ -59,5 +61,8 @@
             @messages("propertyEnglandLets.p3")
         </a>
     </p>
+
+    @components.general_enquires(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+
 
 }

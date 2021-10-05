@@ -617,6 +617,11 @@ tellUsMore.other.title = What is your other Council Tax enquiry? - Valuation Off
 tellUsMore.other.heading = What is your other Council Tax enquiry?
 tellUsMore.other.hint = Include details such as case reference numbers and dates.
 
+# --- Tell Us More CT other journey
+tellUsMore.general.title = What is your Council Tax enquiry? - Valuation Office Agency contact form - GOV.UK
+tellUsMore.general.heading = What is your Council Tax enquiry?
+tellUsMore.general.hint = Include details such as case reference numbers and dates.
+
 # --- Tell Us More BR Property not used journey
 tellUsMore.notUsed.title = What is the property used for? - Valuation Office Agency contact form - GOV.UK
 tellUsMore.notUsed.heading = What is the property used for?
@@ -627,12 +632,21 @@ tellUsMore.business.other.title = What is your other business rates enquiry? - V
 tellUsMore.business.other.heading = What is your other business rates enquiry?
 tellUsMore.business.other.hint = Include details such as case reference numbers and dates.
 
+# --- General Enquiries journey
+generalEnquiries.h2Heading = If you still need to contact us
+generalEnquiries.p1.part1 = Use our general enquiries form
+generalEnquiries.p1.part2 = or you can call us.
+generalEnquiries.p2 = If you have a reference number, have it with you when you call.
+generalEnquiries.telephoneEng.p3 = Telephone: 03000 501501 (England)
+generalEnquiries.telephoneWal.p3 = Telephone: 03000 505505 (Wales / Cymru)
+generalEnquiries.days.p3 = Monday to Friday, 9am to 4:30pm
+
 anythingElse.title = Is there anything else you would like to tell us about? (optional) - Valuation Office Agency contact form - GOV.UK
 anythingElse.heading = Is there anything else you would like to tell us about? (optional)
 anythingElse.checkYourAnswersLabel = Is there anything else you would like to tell us about?
 
 # --- Call Charges
-callcharges.link = Find out about call charges
+callcharges.page = <a href="https://www.gov.uk/call-charges" target="_self">Find out about call charges</a>
 
 # --- Confirmation for new and existing enquiries
 confirmation.title = Enquiry submitted - Valuation Office Agency contact form - GOV.UK

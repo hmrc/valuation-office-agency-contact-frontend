@@ -19,6 +19,7 @@
 @import uk.gov.hmrc.govukfrontend.views.html.components.GovukBackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 
 @this(mainTemplate: main_template, govukBackLink: GovukBackLink)
 
@@ -49,4 +50,5 @@
         <li>@Html(Messages("annexeRemoved.url3"))</li>
     </ul>
 
+    @components.general_enquires(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
 }
