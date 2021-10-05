@@ -646,7 +646,7 @@ anythingElse.heading = Is there anything else you would like to tell us about? (
 anythingElse.checkYourAnswersLabel = Is there anything else you would like to tell us about?
 
 # --- Call Charges
-callcharges.page = <a href="https://www.gov.uk/call-charges" target="_self">Find out about call charges
+callcharges.page = <a href="https://www.gov.uk/call-charges" target="_self">Find out about call charges</a>
 
 # --- Confirmation for new and existing enquiries
 confirmation.title = Enquiry submitted - Valuation Office Agency contact form - GOV.UK
