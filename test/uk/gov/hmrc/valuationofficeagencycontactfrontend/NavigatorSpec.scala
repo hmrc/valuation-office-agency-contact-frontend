@@ -285,75 +285,75 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
       }
 
-//      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_from_home" in {
-//        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
-//        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
-//        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_from_home")
-//        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
-//      }
-//
-//      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_other" in {
-//        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
-//        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
-//        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
-//        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
-//      }
-//
+      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_from_home" in {
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
+        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_from_home")
+        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
+      }
+
+      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_other" in {
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
+        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
+        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
+      }
+
       "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_change_valuation" in {
         when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
         when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
         when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_change_valuation")
         navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
       }
-//
-//      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_bill" in {
-//        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
-//        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
-//        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_bill")
-//        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
-//      }
-//
-//      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_changes" in {
-//        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
-//        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
-//        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_changes")
-//        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
-//      }
-//
-//      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_not_used" in {
-//        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
-//        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
-//        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_not_used")
-//        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
-//      }
-//
-//      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_self_catering" in {
-//        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
-//        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
-//        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
-//        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
-//      }
-//
-//      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_property_empty" in {
-//        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
-//        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
-//        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_property_empty")
-//        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
-//      }
-//
-//      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_valuation" in {
-//        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
-//        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
-//        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_valuation")
-//        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
-//      }
-//
-//      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_demolished" in {
-//        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
-//        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
-//        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_demolished")
-//        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
-//      }
+
+      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_bill" in {
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
+        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_bill")
+        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
+      }
+
+      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_changes" in {
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
+        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_changes")
+        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
+      }
+
+      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_not_used" in {
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
+        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_not_used")
+        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
+      }
+
+      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_self_catering" in {
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
+        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
+        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
+      }
+
+      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_property_empty" in {
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
+        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_property_empty")
+        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
+      }
+
+      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_valuation" in {
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
+        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_valuation")
+        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
+      }
+
+      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_demolished" in {
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
+        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_demolished")
+        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad()
+      }
 
       "return a function that goes to the 'contact details' page when the council tax subcategory is council_tax_business_uses" in {
         when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_business_uses")
