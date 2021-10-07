@@ -36,7 +36,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
 
-  val backLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
+  val backLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
 
   def tellUsMore = app.injector.instanceOf[tell_us_more]
   def internalServerError = app.injector.instanceOf[internal_Server_Error]
@@ -53,26 +53,12 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
 
     "return OK and the correct view for a GET" in {
       val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_calculated"))
-
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
-
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString(TellUsMoreForm(), "tellUsMore.ct-reference")
     }
 
-    "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(
-        EnquiryCategoryId.toString -> JsString("council_tax"),
-        CouncilTaxSubcategoryId.toString -> JsString("council_tax_calculated"),
-        TellUsMoreId.toString -> Json.toJson(TellUsMore("value 1")))
-      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
-
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
-
-      contentAsString(result) mustBe viewAsString(TellUsMoreForm().fill(TellUsMore("value 1")), "tellUsMore.ct-reference")
-    }
 
     "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
       " and the business_rates_other has been selected" in {
@@ -80,6 +66,114 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
+      isBusinessRatesSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
+      " and the business_rates_from_home has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_from_home")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business")
+      isBusinessRatesSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
+      " and the business_rates_change_valuation has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_change_valuation")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
+      isBusinessRatesSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
+      " and the business_rates_bill has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_bill")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
+      isBusinessRatesSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
+      " and the business_rates_changes has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_changes")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
+      isBusinessRatesSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
+      " and the business_rates_property_empty has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_property_empty")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
+      isBusinessRatesSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
+      " and the business_rates_valuation has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_valuation")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
+      isBusinessRatesSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
+      " and the business_rates_demolished has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_demolished")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
+      isBusinessRatesSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
+      " and the business_rates_not_used has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_not_used")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
+      isBusinessRatesSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
+      " and the business_rates_self_catering has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
 
       val result = controller().enquiryKey(mockUserAnswers)
       val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
@@ -106,7 +200,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_poor_repair")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.poorRepair")
+      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
       isCouncilTaxSelection mustBe true
     }
 
@@ -130,7 +224,92 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_area_change")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.areaChange")
+      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
+      isCouncilTaxSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more areaChange key when the enquiry category is council_tax" +
+      " and the council_tax_annexe has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_annexe")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
+      isCouncilTaxSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more areaChange key when the enquiry category is council_tax" +
+      " and the council_tax_bill has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_bill")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
+      isCouncilTaxSelection mustBe true
+    }
+
+
+    "The enquiry key function produces a string with a tell us more areaChange key when the enquiry category is council_tax" +
+      " and the council_tax_band_too_high has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_band_too_high")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
+      isCouncilTaxSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more areaChange key when the enquiry category is council_tax" +
+      " and the council_tax_band_for_new has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_band_for_new")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
+      isCouncilTaxSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more areaChange key when the enquiry category is council_tax" +
+      " and the council_tax_property_empty has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_empty")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
+      isCouncilTaxSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more areaChange key when the enquiry category is council_tax" +
+      " and the council_tax_property_split_merge has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_split_merge")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
+      isCouncilTaxSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more areaChange key when the enquiry category is council_tax" +
+      " and the council_tax_property_demolished has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_demolished")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
       isCouncilTaxSelection mustBe true
     }
 
