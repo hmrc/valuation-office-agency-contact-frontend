@@ -122,6 +122,21 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
         checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress).flatten))
     }
 
+    "The user answers section builder produces sections for new enquiry for business rates other" in {
+      when(mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
+      when(mockUserAnswers.tellUsMore) thenReturn Some(TellUsMore("a"))
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+
+      val result = controller().userAnswersSectionBuilder(mockUserAnswers)
+      val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
+      result mustBe Some(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.businessRatesSubcategory,
+        checkYourAnswersHelper.tellUsMore("tellUsMore.business.other.heading"),
+        checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress).flatten))
+    }
+
     "The user answers section builder produces sections for new enquiry for business" in {
       when(mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
