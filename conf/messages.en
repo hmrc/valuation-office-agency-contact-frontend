@@ -648,6 +648,9 @@ anythingElse.checkYourAnswersLabel = Is there anything else you would like to te
 # --- Call Charges
 callcharges.page = <a href="https://www.gov.uk/call-charges" target="_self">Find out about call charges</a>
 
+# --- Help With Service
+helpwithservice.title = Help using this service
+
 # --- Confirmation for new and existing enquiries
 confirmation.title = Enquiry submitted - Valuation Office Agency contact form - GOV.UK
 confirmation.heading = Enquiry submitted

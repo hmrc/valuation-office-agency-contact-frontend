@@ -102,5 +102,7 @@
         }
         @govukFieldset(Fieldset(html = content))
         @govukButton(Button(content = Text(messages("site.continue")), attributes = Map("id"-> "submit")))
+
+        @components.help_with_service()
     }
 }
