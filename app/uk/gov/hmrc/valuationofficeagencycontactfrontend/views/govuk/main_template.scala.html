@@ -16,26 +16,37 @@
 
 @import uk.gov.hmrc.govukfrontend.views.html.layouts.govukLayout
 @import uk.gov.hmrc.govukfrontend.views.html.components._
-@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.{HmrcStandardFooter, HmrcStandardHeader, HmrcHead, HmrcScripts, HmrcTimeoutDialogHelper}
+@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcStandardFooter
+@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcStandardHeader
+@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcHead
+@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcScripts
+@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcTimeoutDialogHelper
+@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcLayout
+@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcTrackingConsentSnippet
+
+@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcLanguageSelectHelper
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
-@import uk.gov.hmrc.hmrcfrontend.views.html.deprecated.helpers.HmrcLanguageSelectHelper
 
 @import uk.gov.hmrc.hmrcfrontend.config.AccessibilityStatementConfig
 
 @this(
-        govukLayout: govukLayout,
+        hmrcLayout: HmrcLayout,
         hmrcHead: HmrcHead,
         hmrcScripts: HmrcScripts,
         hmrcTimeoutDialogHelper: HmrcTimeoutDialogHelper,
+        govukBackLink: GovukBackLink,
         head: head,
         scripts: scripts,
         govukPhaseBanner: govukPhaseBanner,
         hmrcLanguageSelectHelper: HmrcLanguageSelectHelper,
+        hmrcStandardFooter: HmrcStandardFooter,
         accessibilityStatementConfig: AccessibilityStatementConfig
 )
 
-@(pageTitle: Option[String] = None,
-        beforeContentBlock: Option[Html] = None
+@(
+        pageTitle: Option[String] = None,
+        beforeContentBlock: Option[Html] = None,
+        backLinkUrl: Option[String] = None,
 )(contentBlock: Html)(implicit request: Request[_], messages: Messages)
 
 @beforeBLock = {
@@ -44,32 +55,28 @@
     <div class="govuk-!-margin-0 govuk-!-margin-bottom-0">
     @hmrcLanguageSelectHelper()
     </div>
+
+@backLinkUrl.map{ url =>
+    <div>@govukBackLink(
+        BackLink(
+            href = url,
+            content = Text(messages("enquiryCategory.checkYourAnswersLabel"))
+        )
+    )
+    </div>
+}
 @beforeContentBlock
 }
 
 
-@govukLayout(
+@hmrcLayout(
     pageTitle = pageTitle,
-    headBlock = Some(hmrcHead(
+    additionalHeadBlock = Some(hmrcHead(
         headBlock = Some(hmrcTimeoutDialogHelper(signOutUrl = routes.Application.logout.url)))
     ),
-    scriptsBlock = Some(hmrcScripts()),
+    isWelshTranslationAvailable = true,
+    additionalScriptsBlock = Some(hmrcScripts()),
     beforeContentBlock = Option(beforeBLock),
-    footerItems = Seq(
-        FooterItem(
-            href = Some(messages("footer.links.cookies.url")),
-            text = Some(messages("footer.links.cookies.text"))),
-        FooterItem(
-            href = Some(messages("footer.links.privacy_policy.url")),
-            text = Some(messages("footer.links.privacy_policy.text"))),
-        accessibilityStatementConfig.url.map(
-            href => FooterItem(Some(messages("footer.accessibility.text")), Some(href))
-        ).get,
-        FooterItem(
-            href = Some(messages("footer.links.terms_and_conditions.url")),
-            text = Some(messages("footer.links.terms_and_conditions.text"))),
-        FooterItem(
-            href = Some(messages("footer.links.help_page.url")),
-            text = Some(messages("footer.links.help_page.text"))),
-    ),
-    bodyEndBlock = Some(scripts()))(contentBlock)
+
+
+)(contentBlock)
