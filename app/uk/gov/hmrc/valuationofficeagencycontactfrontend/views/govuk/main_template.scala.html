@@ -14,55 +14,35 @@
  * limitations under the License.
  *@
 
+@*import views.html.helper.CSPNonce*@
 @import uk.gov.hmrc.govukfrontend.views.html.components._
-@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcStandardFooter
-@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcHead
-@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcScripts
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcTimeoutDialogHelper
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcLayout
-
+@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcHead
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcLanguageSelectHelper
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
-
-@import uk.gov.hmrc.hmrcfrontend.config.AccessibilityStatementConfig
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.scripts
 
 @this(
-        hmrcLayout: HmrcLayout,
-        hmrcHead: HmrcHead,
-        hmrcScripts: HmrcScripts,
-        hmrcTimeoutDialogHelper: HmrcTimeoutDialogHelper,
-        govukBackLink: GovukBackLink,
-        head: head,
-        scripts: scripts,
-        govukPhaseBanner: GovukPhaseBanner,
-        hmrcLanguageSelectHelper: HmrcLanguageSelectHelper,
-        hmrcStandardFooter: HmrcStandardFooter,
-        accessibilityStatementConfig: AccessibilityStatementConfig
+    hmrcLayout: HmrcLayout,
+    hmrcHead: HmrcHead,
+    hmrcTimeoutDialogHelper: HmrcTimeoutDialogHelper,
+    scripts: scripts,
+    govukPhaseBanner: GovukPhaseBanner,
+    hmrcLanguageSelectHelper: HmrcLanguageSelectHelper,
 )
 
-@(
-        pageTitle: Option[String] = None,
-        beforeContentBlock: Option[Html] = None,
-        backLinkUrl: Option[String] = None,
-)(contentBlock: Html)(implicit request: Request[_], messages: Messages)
+@(pageTitle: Option[String] = None, beforeContentBlock: Option[Html] = None, backLinkUrl: Option[String] = None,
+    )(contentBlock: Html)(implicit request: Request[_], messages: Messages)
 
 @beforeBLock = {
-@govukPhaseBanner(PhaseBanner(tag = Option(Tag(Text("BETA"))),
-    content = HtmlContent(messages("site.new_service"))))
-    <div class="govuk-!-margin-0 govuk-!-margin-bottom-0">
-    @hmrcLanguageSelectHelper()
-    </div>
+    @govukPhaseBanner(PhaseBanner(tag = Option(Tag(Text("BETA"))),
+        content = HtmlContent(messages("site.new_service"))))
+        <div class="govuk-!-margin-0 govuk-!-margin-bottom-0">
+        @hmrcLanguageSelectHelper()
+        </div>
 
-@backLinkUrl.map{ url =>
-    <div>@govukBackLink(
-        BackLink(
-            href = url,
-            content = Text(messages("enquiryCategory.checkYourAnswersLabel"))
-        )
-    )
-    </div>
-}
-@beforeContentBlock
+    @beforeContentBlock
 }
 
 @hmrcLayout(
@@ -73,6 +53,7 @@
     additionalHeadBlock = Some(hmrcHead(
         headBlock = Some(hmrcTimeoutDialogHelper(signOutUrl = routes.Application.logout.url)))
     ),
-    additionalScriptsBlock = Some(hmrcScripts()),
+//    nonce = CSPNonce.get, Play 2.8?
+    additionalScriptsBlock = Some(scripts()),
     beforeContentBlock = Option(beforeBLock)
 )(contentBlock)
