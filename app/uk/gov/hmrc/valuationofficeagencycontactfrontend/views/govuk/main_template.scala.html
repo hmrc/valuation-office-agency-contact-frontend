@@ -14,15 +14,12 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.html.layouts.govukLayout
 @import uk.gov.hmrc.govukfrontend.views.html.components._
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcStandardFooter
-@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcStandardHeader
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcHead
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcScripts
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcTimeoutDialogHelper
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcLayout
-@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcTrackingConsentSnippet
 
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcLanguageSelectHelper
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
@@ -37,7 +34,7 @@
         govukBackLink: GovukBackLink,
         head: head,
         scripts: scripts,
-        govukPhaseBanner: govukPhaseBanner,
+        govukPhaseBanner: GovukPhaseBanner,
         hmrcLanguageSelectHelper: HmrcLanguageSelectHelper,
         hmrcStandardFooter: HmrcStandardFooter,
         accessibilityStatementConfig: AccessibilityStatementConfig
@@ -68,15 +65,14 @@
 @beforeContentBlock
 }
 
-
 @hmrcLayout(
     pageTitle = pageTitle,
+    serviceName = Some(messages("site.service_name")),
+    serviceUrl= Some(routes.Application.start.url),
+    isWelshTranslationAvailable = true,
     additionalHeadBlock = Some(hmrcHead(
         headBlock = Some(hmrcTimeoutDialogHelper(signOutUrl = routes.Application.logout.url)))
     ),
-    isWelshTranslationAvailable = true,
     additionalScriptsBlock = Some(hmrcScripts()),
-    beforeContentBlock = Option(beforeBLock),
-
-
+    beforeContentBlock = Option(beforeBLock)
 )(contentBlock)
