@@ -14,21 +14,20 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukBackLink, GovukButton, GovukDateInput, GovukErrorSummary}
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukBackLink, GovukButton, GovukDateInput, GovukErrorSummary}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.components.inputDate
-@import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
 
 @this(mainTemplate: main_template, govukBackLink: GovukBackLink,govukDateInput: GovukDateInput, govukButton: GovukButton,
-        input_date: inputDate, formWithCSFR: formWithCSRF, govukErrorSummary: GovukErrorSummary)
+        input_date: inputDate, formWithCSFR: FormWithCSRF, govukErrorSummary: GovukErrorSummary)
 
 
 @(appConfig: FrontendAppConfig, form: Form[_], mode: Mode, enquiryKey: String, backlink: String)(implicit request: Request[_], messages: Messages)
