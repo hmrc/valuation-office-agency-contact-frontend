@@ -67,6 +67,386 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       status(result) mustBe OK
     }
 
+    "return 200 for a GET if subcategory is blank" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "council_tax"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = ""
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is council_tax_business_uses" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "council_tax"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_business_uses"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is council_tax_area_change" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "council_tax"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_area_change"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is council_tax_other" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "council_tax"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_other"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is council_tax_annexe" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "council_tax"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_annexe"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is council_tax_band_too_high" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "council_tax"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_band_too_high"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is council_tax_bill" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "council_tax"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_bill"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is council_tax_band_for_new" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "council_tax"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_band_for_new"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is council_tax_property_empty" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "council_tax"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_property_empty"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is council_tax_property_poor_repair" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "council_tax"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_property_poor_repair"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is council_tax_property_split_merge" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "council_tax"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "council_tax_property_split_merge"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is business_rates_from_home" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "business_rates"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "business_rates_from_home"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        BusinessRatesSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is business_rates_bill" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "business_rates"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "business_rates_bill"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        BusinessRatesSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is business_rates_property_empty" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "business_rates"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "business_rates_property_empty"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        BusinessRatesSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is business_rates_changes" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "business_rates"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "business_rates_changes"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        BusinessRatesSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is business_rates_change_valuation" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "business_rates"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "business_rates_change_valuation"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        BusinessRatesSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is business_rates_valuation" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "business_rates"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "business_rates_valuation"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        BusinessRatesSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is business_rates_demolished" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "business_rates"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "business_rates_demolished"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        BusinessRatesSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is business_rates_not_used" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "business_rates"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "business_rates_not_used"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        BusinessRatesSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is business_rates_self_catering" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "business_rates"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val councilTaxSubcategory = "business_rates_self_catering"
+      val tellUs = TellUsMore("Hello")
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason) ,EnquiryCategoryId.toString -> JsString(ec),
+        BusinessRatesSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+    }
+
     "redirect to Session Expired for a GET if not existing data is found" in {
       val result = controller(dontGetAnyData).onPageLoad()(fakeRequest)
 
@@ -104,7 +484,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       result mustBe Some(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.businessRatesSubcategory,
         checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.business.heading"), checkYourAnswersHelper.tellUsMore("tellUsMore.business.heading"),
         checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress).flatten))
-      }
+    }
 
     "The user answers section builder produces sections for new enquiry for business rate not used" in {
       when(mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
@@ -182,7 +562,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       val result = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = new CheckYourAnswersHelper(mockUserAnswers)
       result mustBe Some(AnswerSection(None, Seq(checkYourAnswersHelper.enquiryCategory, checkYourAnswersHelper.councilTaxSubcategory,
-         checkYourAnswersHelper.tellUsMore("tellUsMore.other.heading"),
+        checkYourAnswersHelper.tellUsMore("tellUsMore.other.heading"),
         checkYourAnswersHelper.contactDetails, checkYourAnswersHelper.propertyAddress).flatten))
     }
 
