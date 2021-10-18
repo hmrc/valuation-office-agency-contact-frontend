@@ -14,11 +14,9 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukBackLink, GovukButton, GovukRadios, GovukErrorSummary, GovukFieldset}
-@import uk.gov.hmrc.govukfrontend.views.html.helpers.formWithCSRF
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukBackLink, GovukButton, GovukRadios, GovukErrorSummary, GovukFieldset}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink._
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
@@ -30,23 +28,23 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
+@import uk.gov.hmrc.govukfrontend.views.Aliases.BackLink
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
-@import controllers.routes._
 
-
-@this(mainTemplate: main_template, formWithCSFR: formWithCSRF, govukBackLink: GovukBackLink,
+@this(mainTemplate: main_template, formWithCSFR: FormWithCSRF, govukBackLink: GovukBackLink,
         govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary, govukFieldset: GovukFieldset)
+
 
 @(appConfig: FrontendAppConfig, form: Form[String], mode: Mode)(implicit request: Request[_], messages: Messages)
 
 
 @beforeBlock = {
-    @govukBackLink(
-        BackLink(
-            content = Text(messages("site.back")),
-            href = ContactReasonController.onPageLoad().url,
-            classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
-        )
+@govukBackLink(
+    BackLink(
+        content = Text(messages("site.back")),
+        href = ContactReasonController.onPageLoad().url,
+        classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
+)
 }
 
 @mainTemplate(

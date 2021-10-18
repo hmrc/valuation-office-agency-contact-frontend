@@ -42,7 +42,7 @@ trait ViewBehaviours extends ViewSpecBase {
           val nav = Option {
             doc.getElementById("proposition-menu")
           }.getOrElse(
-            doc.getElementsByAttributeValue("class", "govuk-header__link govuk-header__link--service-name").first().parent()
+            doc.getElementsByAttributeValue("class", "hmrc-header__service-name hmrc-header__service-name--linked").first().parent()
           )
           val span = nav.children.first
           span.text mustBe messagesApi("site.service_name")(Lang(Locale.UK))

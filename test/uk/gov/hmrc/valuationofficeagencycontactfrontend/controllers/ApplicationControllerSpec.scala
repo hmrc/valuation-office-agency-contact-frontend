@@ -51,6 +51,12 @@ class ApplicationControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe viewAsString()
     }
 
+    "return OK and the correct view for a GET1" in {
+      val result = controller().logout()(fakeRequest)
+
+      status(result) mustBe SEE_OTHER
+    }
+
     "return OK and the correct welsh view for a GET" in {
       val result = controller().startWelsh()(fakeRequest)
 

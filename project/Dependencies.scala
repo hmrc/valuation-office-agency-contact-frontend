@@ -21,7 +21,7 @@ object Dependencies {
     private val akkaVersion     = "2.5.25"
     private val httpVerbsVersion = "13.8.0"
     private val playFrontendGovUkVersion = "0.80.0-play-26"
-    private val playFrontendHmrc = "0.83.0-play-26"
+    private val playFrontendHmrc = "1.19.0-play-26"
     private val commonTextVersion = "1.9"
 
     val compile: Seq[ModuleID] = Seq(
@@ -36,7 +36,6 @@ object Dependencies {
       "uk.gov.hmrc" %% "bootstrap-play-26" % bootstrapPlayVersion,
       "uk.gov.hmrc" %% "play-language" % playLanguageVersion,
       "uk.gov.hmrc" %% "http-verbs-play-26" % httpVerbsVersion,
-      "uk.gov.hmrc" %% "play-frontend-govuk" % playFrontendGovUkVersion,
       "uk.gov.hmrc" %% "play-frontend-hmrc" % playFrontendHmrc,
       "org.apache.commons" % "commons-text" % commonTextVersion
     )
