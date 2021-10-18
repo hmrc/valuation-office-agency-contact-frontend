@@ -43,7 +43,6 @@
 @(
         pageTitle: Option[String] = None,
         beforeContentBlock: Option[Html] = None,
-        backLinkUrl: Option[String] = None,
 )(contentBlock: Html)(implicit request: Request[_], messages: Messages)
 
 @beforeBLock = {
@@ -53,15 +52,6 @@
     @hmrcLanguageSelectHelper()
     </div>
 
-@backLinkUrl.map{ url =>
-    <div>@govukBackLink(
-        BackLink(
-            href = url,
-            content = Text(messages("enquiryCategory.checkYourAnswersLabel"))
-        )
-    )
-    </div>
-}
 @beforeContentBlock
 }
 
