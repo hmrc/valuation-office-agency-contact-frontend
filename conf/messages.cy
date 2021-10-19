@@ -194,7 +194,7 @@ councilTaxBandForNew.title = Siaradwch â’ch cyngor lleol am fandiau Treth Gyn
 councilTaxBandForNew.heading = Siaradwch â’ch cyngor lleol am fandiau Treth Gyngor ar gyfer eiddo newydd
 councilTaxBandForNew.p1.part1 = Cysylltwch â'ch cyngor lleol
 councilTaxBandForNew.p1.url = https://www.gov.uk/find-local-council
-councilTaxBandForNew.p1.part2 = gan fod angen iddynt roi’r holl fanylion sydd eu hangen arnom, gan gynnwys cyfeirnod unigryw.
+councilTaxBandForNew.p1.part2 = gan fod angen iddynt roi’r holl fanylion sydd eu hangen arnom, gan gynnwys cyfeirnod.
 councilTaxBandForNew.p2 = Dim ond ar ôl iddynt anfon y wybodaeth honno atom y byddwn yn gallu rhoi gwybod ichi am y band newydd.
 councilTaxBandForNew.subheading = Cymorth arall ar GOV.UK.
 councilTaxBandForNew.p3 = Sut mae eiddo newydd yn cael eu hasesu ar gyfer Treth Gyngor
@@ -397,7 +397,7 @@ propertyMergeSplit.title = Siaradwch â'ch cyngor lleol os ydych chi wedi rhannu
 propertyMergeSplit.heading = Siaradwch â'ch cyngor lleol os ydych chi wedi rhannu neu uno'ch eiddo
 propertyMergeSplit.p1.url = https://www.gov.uk/find-local-council
 propertyMergeSplit.p1.part1 = Cysylltwch â'ch cyngor lleol
-propertyMergeSplit.p1.part2 = gan fod angen iddynt roi'r holl fanylion sydd eu hangen arnom, gan gynnwys cyfeirnod unigryw.
+propertyMergeSplit.p1.part2 = gan fod angen iddynt roi'r holl fanylion sydd eu hangen arnom, gan gynnwys cyfeirnod.
 propertyMergeSplit.p2 = Dim ond ar ôl iddynt anfon y wybodaeth honno y byddwn yn gallu diweddaru eich band Treth Gyngor.
 
 # --- No business rates are required
@@ -486,7 +486,7 @@ businessRatesValuation.title = Siaradwch â''ch cyngor lleol yn gyntaf am gael p
 businessRatesValuation.heading = Siaradwch â''ch cyngor lleol yn gyntaf am gael prisiad ardrethi busnes
 businessRatesValuation.p1.url = https://www.gov.uk/contact-your-local-council-about-business-rates
 businessRatesValuation.p1.part1 = Cysylltwch â''ch cyngor lleol
-businessRatesValuation.p1.part2 = gan fod angen iddynt roi’r holl fanylion sydd eu hangen arnom, gan gynnwys cyfeirnod unigryw.
+businessRatesValuation.p1.part2 = gan fod angen iddynt roi’r holl fanylion sydd eu hangen arnom, gan gynnwys cyfeirnod.
 businessRatesValuation.p2 = Dim ond ar ôl iddynt anfon y wybodaeth honno atom y byddwn yn gallu gwerthfawrogi''r eiddo.
 businessRatesValuation.subheading = Cymorth arall ar GOV.UK
 businessRatesValuation.p3.url = https://www.gov.uk/guidance/how-non-domestic-property-including-plant-and-machinery-is-valued

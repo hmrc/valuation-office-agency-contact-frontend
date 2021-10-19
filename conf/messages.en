@@ -188,7 +188,7 @@ councilTaxBandForNew.title = Speak to your local council about Council Tax bands
 councilTaxBandForNew.heading = Speak to your local council about Council Tax bands for new properties
 councilTaxBandForNew.p1.part1 = Contact your local council
 councilTaxBandForNew.p1.url = https://www.gov.uk/find-local-council
-councilTaxBandForNew.p1.part2 =  as they need to provide us with all the details we need, including a unique reference number.
+councilTaxBandForNew.p1.part2 =  as they need to provide us with all the details we need, including a reference number.
 councilTaxBandForNew.p2 = We will only be able to let you know the new band once they have sent us that information.
 councilTaxBandForNew.subheading = Other help on GOV.UK
 councilTaxBandForNew.p3 = How new properties are assessed for Council Tax
@@ -385,7 +385,7 @@ propertyMergeSplit.title = Speak to your local council if you have split or merg
 propertyMergeSplit.heading = Speak to your local council if you have split or merged your property
 propertyMergeSplit.p1.url = https://www.gov.uk/find-local-council
 propertyMergeSplit.p1.part1 = Contact your local council
-propertyMergeSplit.p1.part2 = as they need to provide us with all the details we need, including a unique reference number.
+propertyMergeSplit.p1.part2 = as they need to provide us with all the details we need, including a reference number.
 propertyMergeSplit.p2 = We will only be able to update your Council Tax band once they have sent us that information.
 
 # --- No business rates are required in England
@@ -474,7 +474,7 @@ businessRatesValuation.title = Speak to your local council first about getting a
 businessRatesValuation.heading = Speak to your local council first about getting a business rates valuation
 businessRatesValuation.p1.url = https://www.gov.uk/contact-your-local-council-about-business-rates
 businessRatesValuation.p1.part1 = Contact your local council
-businessRatesValuation.p1.part2 = as they need to provide us with all the details we need, including a unique reference number.
+businessRatesValuation.p1.part2 = as they need to provide us with all the details we need, including a reference number.
 businessRatesValuation.p2 = We will only be able to value the property once they have sent us that information.
 businessRatesValuation.subheading = Other help on GOV.UK
 businessRatesValuation.p3.url = https://www.gov.uk/guidance/how-non-domestic-property-including-plant-and-machinery-is-valued
