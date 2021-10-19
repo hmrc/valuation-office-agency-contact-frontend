@@ -1,4 +1,4 @@
-unigrywcheckYourAnswers.title = Gwiriwch eich atebion - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+checkYourAnswers.title = Gwiriwch eich atebion - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 checkYourAnswers.heading = Gwiriwch eich atebion
  
 date.day = Diwrnod
