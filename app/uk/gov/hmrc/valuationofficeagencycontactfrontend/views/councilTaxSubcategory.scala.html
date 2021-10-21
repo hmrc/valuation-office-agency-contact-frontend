@@ -47,7 +47,7 @@
     }
 
 @mainTemplate(
-    pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + messages("councilTaxSubcategory.title")) else messages("councilTaxSubcategory.title")),
+    pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("service.title", messages("councilTaxSubcategory.title")) else messages("service.title", messages("councilTaxSubcategory.title"))),
     beforeContentBlock = Option(beforeBlock)
 ) {
     @formWithCSFR(action = CouncilTaxSubcategoryController.onSubmit(mode), 'autoComplete -> "off") {

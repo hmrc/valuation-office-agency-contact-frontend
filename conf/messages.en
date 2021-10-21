@@ -7,7 +7,9 @@ date.year = Year
 
 hintText.optional = (optional)
 
-error.title = Error:
+service.title = {0} - Valuation Office Agency Contact Form - GOV.UK
+
+error.title = 'Error: '
 error.boolean = Please give an answer
 error.invalid_date = Give a correct date
 error.date.day_blank = Enter a day
@@ -70,9 +72,7 @@ site.not_provided = Not provided
 unauthorised.title = You can’t access this service with this account
 unauthorised.heading = You can’t access this service with this account
 
-contactReason.title = Why do you want to contact us? - Valuation Office Agency contact form - GOV.UK
 contactReason.heading = Why do you want to contact us?
-
 contactReason.new_enquiry = I want to make a new enquiry
 contactReason.more_details = I want to provide more details for an existing enquiry
 contactReason.update_existing = I want to get an update on an existing enquiry
@@ -343,7 +343,7 @@ datePropertyChanged.notUsed.title = When did you stop using your property for bu
 datePropertyChanged.notUsed.heading = When did you stop using your property for business? (optional)
 
 # --- Council Tax Subcategories
-councilTaxSubcategory.title = What is your Council Tax enquiry about? - Valuation Office Agency contact form - GOV.UK
+councilTaxSubcategory.title = What is your Council Tax enquiry about? - Valuation Office Agency Contact Form - GOV.UK
 councilTaxSubcategory.heading = What is your Council Tax enquiry about?
 councilTaxSubcategory.subheading = What do you want to tell us about?
 councilTaxSubcategory.council_tax_band_too_high = My Council Tax band is too high
