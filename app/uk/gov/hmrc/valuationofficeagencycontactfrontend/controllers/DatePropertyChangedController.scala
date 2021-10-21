@@ -24,7 +24,7 @@ import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.DatePropertyChangedForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, CouncilTaxSubcategoryId, DatePropertyChangedId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.DatePropertyChangedId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.datePropertyChanged
@@ -43,6 +43,8 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
                                               datePropertyChanged: datePropertyChanged,
                                               cc: MessagesControllerComponents
                                              ) extends FrontendController(cc) with I18nSupport {
+
+  private val log = Logger(this.getClass)
 
   implicit val ec: ExecutionContext = cc.executionContext
 
@@ -75,7 +77,7 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
 
   private def getEnquiryKey(answers: UserAnswers): String = {
     enquiryKey(answers).getOrElse {
-      Logger.warn(s"Navigation for Date Property Changed page reached with error - Unknown enquiry category in enquiry key")
+      log.warn(s"Navigation for Date Property Changed page reached with error - Unknown enquiry category in enquiry key")
       throw new RuntimeException(s"Navigation for  Date Property Changed page reached with error Unknown enquiry category in enquiry key")
     }
   }
@@ -99,9 +101,10 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
     }
   }
 
-  private def clearCache(sessionId: String, dataCacheConnector: DataCacheConnector): Future[Unit] =
-    for {
-      _ <- dataCacheConnector.remove(sessionId, CouncilTaxSubcategoryId.toString)
-      _ <- dataCacheConnector.remove(sessionId, BusinessRatesSubcategoryId.toString)
-    } yield ()
+    // TODO remove once confirmed not required
+//  private def clearCache(sessionId: String, dataCacheConnector: DataCacheConnector): Future[Unit] =
+//    for {
+//      _ <- dataCacheConnector.remove(sessionId, CouncilTaxSubcategoryId.toString)
+//      _ <- dataCacheConnector.remove(sessionId, BusinessRatesSubcategoryId.toString)
+//    } yield ()
 }

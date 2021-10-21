@@ -36,6 +36,7 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient,
                                                    auditService: AuditingService,
                                                   servicesConfig: ServicesConfig) {
 
+  private val log = Logger(this.getClass)
   implicit val hc: HeaderCarrier = HeaderCarrier()
   val serviceUrl = servicesConfig.baseUrl("lightweight-contact-events")
   val baseSegment = "/lightweight-contact-events/"
@@ -55,13 +56,13 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient,
               auditService.sendEvent("sendenquirytoVOA", json)
               Success(200)
             case status => {
-              Logger.warn("Received status of " + status + " from upstream service")
+              log.warn("Received status of " + status + " from upstream service")
               Failure(new RuntimeException("Received status of " + status + " from upstream service"))
             }
           }
       } recover {
       case e =>
-        Logger.warn("Received exception " + e.getMessage + " from upstream service")
+        log.warn("Received exception " + e.getMessage + " from upstream service")
         Failure(new RuntimeException("Received exception " + e.getMessage + " from upstream service"))
     }
   }

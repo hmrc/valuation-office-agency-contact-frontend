@@ -18,9 +18,6 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
 import play.api.data.Form
 import play.api.data.Forms._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ExistingEnquiryCategoryForm.ExistingEnquiryCategoryFormatter
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.FormHelpers.antiXSSRegex
 
 object RefNumberForm {
 

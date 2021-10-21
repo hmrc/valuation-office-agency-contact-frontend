@@ -17,11 +17,10 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
 import play.api.data.Form
-import play.api.data.Forms.{of, single}
+import play.api.data.Forms.single
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.mappings.Mappings
 
 import java.time.LocalDate
-import javax.inject.Inject
 
 object DatePropertyChangedForm extends Mappings {
 

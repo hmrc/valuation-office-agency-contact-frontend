@@ -43,6 +43,8 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
                                      cc: MessagesControllerComponents
                                     ) extends FrontendController(cc) with I18nSupport {
 
+  private val log = Logger(this.getClass)
+
   implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode) = (getData andThen requireData) {
@@ -75,7 +77,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
 
   private def getEnquiryKey(answers: UserAnswers): String = {
     enquiryKey(answers).getOrElse {
-      Logger.warn(s"Navigation for Tell us more page reached with error - Unknown enquiry category in enquiry key")
+      log.warn(s"Navigation for Tell us more page reached with error - Unknown enquiry category in enquiry key")
       throw new RuntimeException(s"Navigation for Tell us more page reached with error Unknown enquiry category in enquiry key")
     }
   }

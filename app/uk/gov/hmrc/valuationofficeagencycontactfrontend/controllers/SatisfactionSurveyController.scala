@@ -45,6 +45,8 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
                                              satisfactionSurveyThankYou: satisfaction_Survey_Thank_You,
                                              cc: MessagesControllerComponents)(implicit ec: ExecutionContext) extends FrontendController(cc) with I18nSupport {
 
+  private val log = Logger(this.getClass)
+
   implicit def hc(implicit request: Request[_]):HeaderCarrier = HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))
 
   def enquiryKey(answers: UserAnswers): Either[String, String] = {
@@ -60,7 +62,7 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
     val (contact, answerSections) = (request.userAnswers.contact(), request.userAnswers.answerSection) match {
       case (Right(ct), Some(as)) => (ct, as)
       case (Left(msg), _) =>
-        Logger.warn(s"Navigation for Survey page reached without a contact and error $msg")
+        log.warn(s"Navigation for Survey page reached without a contact and error $msg")
         throw new RuntimeException(s"Navigation for Survey page reached without a contact and error $msg")
     }
 
@@ -71,7 +73,7 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
       },
       success => {
         sendFeedback(success, AddressFormatters.formattedPropertyAddress(contact.propertyAddress, ", "))
-        Redirect(routes.SatisfactionSurveyController.surveyThankyou())
+        Redirect(routes.SatisfactionSurveyController.surveyThankyou)
       }
     )
   }

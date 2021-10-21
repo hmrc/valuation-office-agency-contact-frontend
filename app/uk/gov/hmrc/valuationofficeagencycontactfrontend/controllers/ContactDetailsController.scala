@@ -43,6 +43,8 @@ class ContactDetailsController @Inject()(appConfig: FrontendAppConfig,
                                          cc: MessagesControllerComponents
                                         ) extends FrontendController(cc) with I18nSupport {
 
+  private val log = Logger(this.getClass)
+
   implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode) = (getData andThen requireData) {
@@ -54,7 +56,7 @@ class ContactDetailsController @Inject()(appConfig: FrontendAppConfig,
       enquiryBackLink(request.userAnswers) match {
         case Right(link) => Ok(contactDetails(appConfig, preparedForm, mode, link))
         case Left(msg) => {
-          Logger.warn(s"Navigation for Contact Details page reached with error $msg")
+          log.warn(s"Navigation for Contact Details page reached with error $msg")
           throw new RuntimeException(s"Navigation for Contact Details page reached with error $msg")
         }
       }
@@ -68,7 +70,7 @@ class ContactDetailsController @Inject()(appConfig: FrontendAppConfig,
           Future.successful(enquiryBackLink(request.userAnswers) match {
             case Right(link) => BadRequest(contactDetails(appConfig, formWithErrors, mode, link))
             case Left(msg) => {
-              Logger.warn(s"Navigation for Contact Details page reached with error $msg")
+              log.warn(s"Navigation for Contact Details page reached with error $msg")
               throw new RuntimeException(s"Navigation for Contact Details page reached with error $msg")
             }
           }),
