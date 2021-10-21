@@ -15,9 +15,9 @@
  */
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.TellUsMore
-import org.scalatest.FlatSpec
+import org.scalatest.flatspec.AnyFlatSpec
 
-class TellUsMoreSpec extends FlatSpec {
+class TellUsMoreSpec extends AnyFlatSpec {
 
   val m = TellUsMore("Hello")
 

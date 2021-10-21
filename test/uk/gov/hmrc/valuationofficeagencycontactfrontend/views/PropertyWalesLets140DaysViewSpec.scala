@@ -17,9 +17,8 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import play.api.data.Form
-import play.api.test.Helpers.{redirectLocation, status}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{ContactReasonForm, CouncilTaxSubcategoryForm, PropertyWalesLets140DaysForm}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyWalesLets140DaysForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets140Days => property_wales_lets_140_days}

@@ -17,7 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import play.api.data.Form
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{AnnexeForm, EnquiryCategoryForm}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.AnnexeForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxAnnexe => council_tax_annexe}

@@ -15,9 +15,9 @@
  */
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.PropertyAddress
-import org.scalatest.FlatSpec
+import org.scalatest.flatspec.AnyFlatSpec
 
-class PropertyAddressSpec extends FlatSpec {
+class PropertyAddressSpec extends AnyFlatSpec {
 
    val address = PropertyAddress("1", Some("High Street"), "London", Some("London"), "ZZ11ZZ")
 
