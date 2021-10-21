@@ -174,7 +174,7 @@ councilTaxBandTooHigh.title = You can challenge your Council Tax band online - V
 councilTaxBandTooHigh.heading = You can challenge your Council Tax band online
 councilTaxBandTooHigh.p1.part1 = Use the Council Tax service
 councilTaxBandTooHigh.p1.part2 = to check and challenge your Council Tax band.
-councilTaxBandTooHigh.p1.url = https://www.tax.service.gov.uk/check-council-tax-band/search
+councilTaxBandTooHigh.p1.url = https://www.gov.uk/council-tax-bands
 councilTaxBandTooHigh.subheading = Other help on GOV.UK
 councilTaxBandTooHigh.p2 = How to challenge your Council Tax band
 councilTaxBandTooHigh.p2.url = https://www.gov.uk/challenge-council-tax-band
@@ -199,7 +199,7 @@ councilTaxBandForNew.p4.url = https://www.gov.uk/guidance/your-property-and-coun
 # --- My property has been partly or fully demolished
 propertyDemolished.title = Tell us if your property has been demolished - Valuation Office Agency contact form - GOV.UK
 propertyDemolished.heading = Tell us if your property has been demolished.
-propertyDemolished.p2.url = https://www.tax.service.gov.uk/check-council-tax-band/search
+propertyDemolished.p2.url = https://www.gov.uk/council-tax-bands
 propertyDemolished.p2.part1 = Use the Council Tax service
 propertyDemolished.p2.part2 = and challenge your Council Tax band to tell us that your property has been demolished.
 propertyDemolished.subheading = Other help on GOV.UK
@@ -236,7 +236,7 @@ error.propertyWindWater.required = Select ''Yes'' if the property is protected f
 # -------- End of wind and water journey
 propertyWindWaterEnd.title = Tell us about the condition of your property online  - Valuation Office Agency contact form - GOV.UK
 propertyWindWaterEnd.heading = Tell us about the condition of your property online
-propertyWindWaterEnd.p1.url = https://www.tax.service.gov.uk/check-council-tax-band/search
+propertyWindWaterEnd.p1.url = https://www.gov.uk/council-tax-bands
 propertyWindWaterEnd.p1.part1 = Use the Council Tax service
 propertyWindWaterEnd.p1.part2 = to check and challenge your Council Tax band.
 propertyWindWaterEnd.subheading = Other help on GOV.UK
@@ -246,7 +246,7 @@ propertyWindWaterEnd.p2 = When a Council Tax band would be affected by poor repa
 # -------- End of Permanent Changes journey
 propertyPermanentChanges.title = Tell us about permanent changes to the local area online  - Valuation Office Agency contact form - GOV.UK
 propertyPermanentChanges.heading = Tell us about permanent changes to the local area online
-propertyPermanentChanges.p1.url = https://www.tax.service.gov.uk/check-council-tax-band/search
+propertyPermanentChanges.p1.url = https://www.gov.uk/council-tax-bands
 propertyPermanentChanges.p1.part1 = Use the Council Tax service
 propertyPermanentChanges.p1.part2 = to check and challenge your Council Tax band.
 propertyPermanentChanges.subheading = Other help on GOV.UK
@@ -301,7 +301,7 @@ annexeCookingWashing.form.error = Select ‘Yes’ if the annexe has both cookin
 # -------- Tell us you have removed an annexe
 annexeRemoved.title = Tell us you have removed an annexe - Valuation Office Agency contact form - GOV.UK
 annexeRemoved.heading = Tell us you have removed an annexe
-annexeRemoved.p1 = <a class="govuk-link" target="_self" href="https://www.tax.service.gov.uk/check-council-tax-band/search">Use the Council Tax service</a> and challenge your Council Tax band to tell us that you have removed an annexe.
+annexeRemoved.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/council-tax-bands">Use the Council Tax service</a> and challenge your Council Tax band to tell us that you have removed an annexe.
 annexeRemoved.subheading = Other help on GOV.UK
 annexeRemoved.url1 = <a class="govuk-link" target="_self" href="http://gov.uk/challenge-council-tax-band">How to challenge your Council Tax band</a>
 annexeRemoved.url2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/council-tax/second-homes-and-empty-properties">When your Council Tax band may change</a>
