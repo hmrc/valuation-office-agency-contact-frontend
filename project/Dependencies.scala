@@ -6,7 +6,6 @@ object Dependencies {
     import play.core.PlayVersion
     import play.sbt.PlayImport._
 
-    private val playHealthVersion = "3.16.0-play-27"
     private val logbackJsonLoggerVersion = "5.1.0"
     private val govukTemplateVersion = "5.72.0-play-28"
     private val playUiVersion = "9.7.0-play-28"
@@ -28,7 +27,6 @@ object Dependencies {
       "uk.gov.hmrc" %% "simple-reactivemongo" % simpleReactivemongoVersion,
       "uk.gov.hmrc" %% "logback-json-logger" % logbackJsonLoggerVersion,
       "uk.gov.hmrc" %% "govuk-template" % govukTemplateVersion,
-      "uk.gov.hmrc" %% "play-health" % playHealthVersion,
       "uk.gov.hmrc" %% "play-ui" % playUiVersion,
       "uk.gov.hmrc" %% "http-caching-client" % httpCachingClientVersion,
       "uk.gov.hmrc" %% "play-conditional-form-mapping" % playConditionalFormMappingVersion,
