@@ -24,7 +24,7 @@ import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{AnythingElseForm, TellUsMoreForm}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.AnythingElseForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{AnythingElseId, EnquiryCategoryId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
@@ -37,7 +37,7 @@ class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSu
   def anythingElse = app.injector.instanceOf[anything_else]
   def internalServerError = app.injector.instanceOf[internal_Server_Error]
 
-  def onwardRoute = routes.CheckYourAnswersController.onPageLoad()
+  def onwardRoute = routes.CheckYourAnswersController.onPageLoad
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new AnythingElseTellUsController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),

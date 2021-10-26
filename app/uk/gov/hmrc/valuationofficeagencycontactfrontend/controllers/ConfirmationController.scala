@@ -27,7 +27,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.Confirmation
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CheckYourAnswersId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateFormatter, UserAnswers}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurveyForm
 
@@ -45,6 +45,8 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
                                        cc: MessagesControllerComponents
                                       ) extends FrontendController(cc) with I18nSupport {
 
+  private val log = Logger(this.getClass)
+
   implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoadSendEmail = (getData andThen requireData).async { implicit request =>
@@ -52,7 +54,7 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
     val contact = request.userAnswers.contact() match {
       case Right(ct) => ct
       case Left(msg) =>
-        Logger.warn(s"On Sending Email - Navigation for Confirmation page reached without a contact and error $msg")
+        log.warn(s"On Sending Email - Navigation for Confirmation page reached without a contact and error $msg")
         throw new RuntimeException(s"On Sending Email - Navigation for Confirmation page reached without a contact and error $msg")
     }
 
@@ -64,7 +66,7 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
           case Right(_) =>
             Redirect(navigator.nextPage(CheckYourAnswersId, NormalMode)(request.userAnswers))
           case Left(msg) => {
-            Logger.warn(s"Obtaining enquiry value - Navigation for Confirmation page reached with error $msg")
+            log.warn(s"Obtaining enquiry value - Navigation for Confirmation page reached with error $msg")
             throw new RuntimeException(s"Obtaining enquiry value - Navigation for Confirmation page reached with error $msg")
           }
         }
@@ -77,7 +79,7 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
     val (contact, answerSections) = (request.userAnswers.contact(), request.userAnswers.answerSection) match {
       case (Right(ct), Some(as)) => (ct, as)
       case (Left(msg), _) =>
-        Logger.warn(s"On Page load - Navigation for Confirmation page reached without a contact and error $msg")
+        log.warn(s"On Page load - Navigation for Confirmation page reached without a contact and error $msg")
         throw new RuntimeException(s"On Page load - Navigation for Confirmation page reached without a contact and error $msg")
     }
 

@@ -31,7 +31,6 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBu
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertySmallPartUsed => small_part_used}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesNoNeedToPay => business_rates_no_need_to_pay}
 
-import java.time.LocalDate
 import javax.inject.Inject
 import scala.concurrent.Future
 

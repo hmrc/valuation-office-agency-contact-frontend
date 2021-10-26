@@ -17,12 +17,9 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.data.Form
-import play.api.libs.json.JsString
 import play.api.test.Helpers._
-import uk.gov.hmrc.http.cache.client.CacheMap
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRetrievalAction, FakeDataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{PropertyWalesLets70DaysForm, PropertyWindWaterForm}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CouncilTaxPropertyPoorRepairId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.DataRetrievalAction
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyWindWaterForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{windWatertightCannotBeReduced => wind_watertight_cannot_be_reduced}

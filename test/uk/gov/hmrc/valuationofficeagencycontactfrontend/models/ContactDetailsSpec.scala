@@ -15,9 +15,9 @@
  */
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
-import org.scalatest.FlatSpec
+import org.scalatest.flatspec.AnyFlatSpec
 
-class ContactDetailsSpec extends FlatSpec {
+class ContactDetailsSpec extends AnyFlatSpec {
 
   val c = ContactDetails("Alex", "test@email.com", "02078273278732")
 

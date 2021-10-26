@@ -21,7 +21,6 @@ import java.util.UUID
 
 import akka.stream.Materializer
 import javax.inject.Inject
-import org.scalatest.{MustMatchers, WordSpec}
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.Application
 import play.api.http.{DefaultHttpFilters, HttpFilters}
@@ -34,6 +33,8 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.http.{HeaderNames, SessionKeys}
 
 import scala.concurrent.ExecutionContext
+import org.scalatest.matchers.must.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
 object SessionIdFilterSpec {
 
@@ -47,7 +48,7 @@ object SessionIdFilterSpec {
                                       ) extends SessionIdFilter(mat, UUID.fromString(sessionId), ec)
 }
 
-class SessionIdFilterSpec extends WordSpec with MustMatchers with GuiceOneAppPerSuite {
+class SessionIdFilterSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite {
 
   import SessionIdFilterSpec._
 

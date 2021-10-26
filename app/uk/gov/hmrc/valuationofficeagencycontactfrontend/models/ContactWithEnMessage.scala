@@ -32,6 +32,7 @@ case class ContactWithEnMessage(contact: ContactDetails,
 
 object ContactWithEnMessage {
   implicit val format = Json.format[ContactWithEnMessage]
+  private val log = Logger(this.getClass)
   val councilTaxKey = "council_tax"
   val businessRatesKey = "business_rates"
 
@@ -43,7 +44,7 @@ object ContactWithEnMessage {
           case (Some(msg), _) => msg
           case (_, Some(msg)) => msg
           case _ =>
-            Logger.warn("Unable to find key " + ct.enquiryCategory + " in en messages")
+            log.warn("Unable to find key " + ct.enquiryCategory + " in en messages")
             throw new RuntimeException("Unable to find key " + ct.enquiryCategory + " in en messages")
           }
         }
@@ -54,7 +55,7 @@ object ContactWithEnMessage {
           case "housing_allowance" => "housingAllowanceSubcategory"
           case "other" => "other"
           case _ =>
-            Logger.warn("Unknown enquiry category key " + ct.enquiryCategory)
+            log.warn("Unknown enquiry category key " + ct.enquiryCategory)
             throw new RuntimeException("Unknown enquiry category key " + ct.enquiryCategory)
         }
 
@@ -62,7 +63,7 @@ object ContactWithEnMessage {
           messageMap.get(enquiryKey + "." + ct.subEnquiryCategory) match {
             case Some(msg) => msg
             case None =>
-              Logger.warn(s"Unable to find key $enquiryKey.${ct.subEnquiryCategory} in en messages")
+              log.warn(s"Unable to find key $enquiryKey.${ct.subEnquiryCategory} in en messages")
               throw new RuntimeException(s"Unable to find key $enquiryKey.${ct.subEnquiryCategory} in en messages")
           }
         }
@@ -70,7 +71,7 @@ object ContactWithEnMessage {
           userAnswers.contactReason, enquiryCategoryMsg, subEnquiryCategoryMsg, StringEscapeUtils.escapeJava(ct.message))
 
       case None =>
-        Logger.warn("Unable to find en messages when creating message map")
+        log.warn("Unable to find en messages when creating message map")
         throw new RuntimeException("Unable to find en messages when creating message map")
     }
   }

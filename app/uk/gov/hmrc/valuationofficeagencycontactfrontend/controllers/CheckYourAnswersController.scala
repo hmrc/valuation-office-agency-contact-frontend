@@ -22,7 +22,7 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.AnswerSectionId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
@@ -41,6 +41,8 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
                                            cc: MessagesControllerComponents
                                           ) extends FrontendController(cc) with I18nSupport {
 
+  private val log = Logger(this.getClass)
+
   implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoad() = (getData andThen requireData) {
@@ -53,7 +55,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
           Ok(checkYourAnswers(appConfig, Seq(answerSection), link))
         }
         case None => {
-          Logger.warn("Navigation for Check your answers page reached without selection of enquiry by controller")
+          log.warn("Navigation for Check your answers page reached without selection of enquiry by controller")
           throw new RuntimeException("Navigation for check your anwsers page reached without selection of enquiry by controller")
         }
       }
@@ -181,7 +183,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
       case (Some("more_details"), _, _) => routes.WhatElseController.onPageLoad().url
       case (Some("update_existing"), _, _) => routes.AnythingElseTellUsController.onPageLoad().url
       case _ => {
-        Logger.warn("Navigation for Check your answers page reached without selection of contact reason by controller")
+        log.warn("Navigation for Check your answers page reached without selection of contact reason by controller")
         throw new RuntimeException("Navigation for check your anwsers page reached without selection of contact reason by controller")
       }
     }

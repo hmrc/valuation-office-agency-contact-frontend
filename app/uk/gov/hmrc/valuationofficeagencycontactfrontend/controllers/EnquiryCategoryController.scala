@@ -19,14 +19,14 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import javax.inject.Inject
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
+import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{EnquiryCategoryId, ExistingEnquiryCategoryId}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.enquiryCategory
 

@@ -17,7 +17,6 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.test.Helpers._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesChallenge => business_rates_challenge, businessRatesPropertyOrAreaChanged => business_rates_property_or_area_changed}
 

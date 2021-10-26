@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertySmallPartUsed => property_small_part}
 

@@ -18,7 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import play.api.data.Form
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{AnythingElseForm, TellUsMoreForm}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.AnythingElseForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.QuestionViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{anythingElseTellUs => anything_else}

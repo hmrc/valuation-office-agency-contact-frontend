@@ -23,7 +23,7 @@ import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{ContactDetailsForm, PropertyWalesLets140DaysForm, PropertyWalesLets70DaysForm}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{PropertyWalesLets140DaysForm, PropertyWalesLets70DaysForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyWalesLets140DaysId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
@@ -45,6 +45,8 @@ class PropertyWalesLets140DaysController @Inject()(
                                                      propertyWalesLetsNoAction: property_wales_lets_no_action,
                                                      cc: MessagesControllerComponents
                                                    ) extends FrontendController(cc) with I18nSupport {
+
+  private val log = Logger(this.getClass)
 
   implicit val ec: ExecutionContext = cc.executionContext
 
@@ -73,7 +75,7 @@ class PropertyWalesLets140DaysController @Inject()(
       enquiryBackLink(request.userAnswers) match {
         case Right(link) => Ok(propertyWalesLetsNoAction(appConfig, link))
         case Left(msg) => {
-          Logger.warn(s"Navigation for Wales No Action page reached with error $msg")
+          log.warn(s"Navigation for Wales No Action page reached with error $msg")
           throw new RuntimeException(s"Navigation for Wales No Action page reached with error $msg")
         }
       }

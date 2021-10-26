@@ -23,8 +23,6 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.ContactFormatter._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.DateFormatter.formattedLocalDate
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerRow
 
-import java.time.LocalDate
-
 class CheckYourAnswersHelper(userAnswers: UserAnswers) {
 
   def tellUsMore(keyMessage: String = "tellUsMore.heading"): Option[AnswerRow] = userAnswers.tellUsMore map {

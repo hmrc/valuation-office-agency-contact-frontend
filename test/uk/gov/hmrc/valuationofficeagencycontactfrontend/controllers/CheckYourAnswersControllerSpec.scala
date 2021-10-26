@@ -451,7 +451,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       val result = controller(dontGetAnyData).onPageLoad()(fakeRequest)
 
       status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad().url)
+      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
     "The user answers section builder produces sections for new enquiry for poor repair" in {

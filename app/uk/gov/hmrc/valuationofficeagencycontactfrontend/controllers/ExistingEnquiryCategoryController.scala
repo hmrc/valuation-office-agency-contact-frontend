@@ -44,6 +44,8 @@ class ExistingEnquiryCategoryController @Inject()(
                                                    cc: MessagesControllerComponents
                                                  ) extends FrontendController(cc) with I18nSupport {
 
+  private val log = Logger(this.getClass)
+
   implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode) = (getData andThen requireData) { implicit request =>
@@ -54,7 +56,7 @@ class ExistingEnquiryCategoryController @Inject()(
     enquiryBackLink(request.userAnswers) match {
       case Right(link) => Ok(existingEnquiryCategory(appConfig, preparedForm, mode, link))
       case Left(msg) => {
-        Logger.warn(s"Navigation for Existing Enquiry Category page reached with error $msg")
+        log.warn(s"Navigation for Existing Enquiry Category page reached with error $msg")
         throw new RuntimeException(s"Navigation for Existing Enquiry Category page reached with error $msg")
       }
     }

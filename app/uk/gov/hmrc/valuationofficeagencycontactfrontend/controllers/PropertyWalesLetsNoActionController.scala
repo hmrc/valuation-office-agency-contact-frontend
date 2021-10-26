@@ -41,6 +41,8 @@ class PropertyWalesLetsNoActionController @Inject()(val appConfig: FrontendAppCo
                                                     cc: MessagesControllerComponents
                                             ) extends FrontendController(cc) with I18nSupport {
 
+  private val log = Logger(this.getClass)
+
   implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode) = (getData andThen requireData) {
@@ -48,7 +50,7 @@ class PropertyWalesLetsNoActionController @Inject()(val appConfig: FrontendAppCo
       enquiryBackLink(request.userAnswers) match {
         case Right(link) => Ok(propertyWalesLetsNoAction(appConfig, link))
         case Left(msg) => {
-          Logger.warn(s"Navigation for Wales No Action page reached with error $msg")
+          log.warn(s"Navigation for Wales No Action page reached with error $msg")
           throw new RuntimeException(s"Navigation for Wales No Action page reached with error $msg")
         }
       }

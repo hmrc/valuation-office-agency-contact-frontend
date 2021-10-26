@@ -16,10 +16,12 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
-import org.scalatest.{Matchers, OptionValues, WordSpecLike}
+import org.scalatest.OptionValues
 import play.api.data.{Form, FormError}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpecLike
 
-trait FormSpec extends WordSpecLike with Matchers with OptionValues {
+trait FormSpec extends AnyWordSpecLike with Matchers with OptionValues {
   def checkForError(form: Form[_], data: Map[String, String], expectedErrors: Seq[FormError]) = {
     form.bind(data).fold(
       formWithErrors => {

@@ -50,7 +50,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
 
   def getHttpMock(returnedStatus: Int) = {
     val httpMock = mock[HttpClient]
-    when(httpMock.POST[JsValue, HttpResponse](anyString, any[JsValue], any[Seq[(String, String)]])(any[Writes[Any]], any[HttpReads[HttpResponse]],
+    when(httpMock.POST[JsValue, HttpResponse](anyString, any[JsValue], any[Seq[(String, String)]])(any[Writes[JsValue]], any[HttpReads[HttpResponse]],
       any[HeaderCarrier], any())) thenReturn Future.successful(HttpResponse(returnedStatus, None))
     when(httpMock.GET[HttpResponse](anyString, any[Seq[(String,String)]], any[Seq[(String,String)]])(any[HttpReads[HttpResponse]], any[HeaderCarrier], any())) thenReturn Future.successful(HttpResponse(returnedStatus, None))
     httpMock
@@ -81,7 +81,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
       "call the Microservice with the given JSON for propertyAddress" in {
         implicit val headerCarrierNapper = ArgumentCaptor.forClass(classOf[HeaderCarrier])
         implicit val httpReadsNapper = ArgumentCaptor.forClass(classOf[HttpReads[Any]])
-        implicit val jsonWritesNapper = ArgumentCaptor.forClass(classOf[Writes[Any]])
+        implicit val jsonWritesNapper = ArgumentCaptor.forClass(classOf[Writes[JsValue]])
         val urlCaptor = ArgumentCaptor.forClass(classOf[String])
         val bodyCaptor = ArgumentCaptor.forClass(classOf[JsValue])
         val headersCaptor = ArgumentCaptor.forClass(classOf[Seq[(String, String)]])
@@ -107,7 +107,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
       "call the Microservice with the given JSON for alternativePropertyAddress" in {
         implicit val headerCarrierNapper = ArgumentCaptor.forClass(classOf[HeaderCarrier])
         implicit val httpReadsNapper = ArgumentCaptor.forClass(classOf[HttpReads[Any]])
-        implicit val jsonWritesNapper = ArgumentCaptor.forClass(classOf[Writes[Any]])
+        implicit val jsonWritesNapper = ArgumentCaptor.forClass(classOf[Writes[JsValue]])
         val urlCaptor = ArgumentCaptor.forClass(classOf[String])
         val bodyCaptor = ArgumentCaptor.forClass(classOf[JsValue])
         val headersCaptor = ArgumentCaptor.forClass(classOf[Seq[(String, String)]])
@@ -151,7 +151,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
       "call the Microservice with the given JSON" in {
         implicit val headerCarrierNapper = ArgumentCaptor.forClass(classOf[HeaderCarrier])
         implicit val httpReadsNapper = ArgumentCaptor.forClass(classOf[HttpReads[Any]])
-        implicit val jsonWritesNapper = ArgumentCaptor.forClass(classOf[Writes[Any]])
+        implicit val jsonWritesNapper = ArgumentCaptor.forClass(classOf[Writes[JsValue]])
         val urlCaptor = ArgumentCaptor.forClass(classOf[String])
         val bodyCaptor = ArgumentCaptor.forClass(classOf[JsValue])
         val headersCaptor = ArgumentCaptor.forClass(classOf[Seq[(String, String)]])
