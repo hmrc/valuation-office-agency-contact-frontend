@@ -90,7 +90,7 @@ class Navigator @Inject()() {
     answers.enquiryCategory match {
       case Some("council_tax") => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
       case Some("business_rates") => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
-      case Some("housing_benefit") => routes.HousingBenefitsController.onPageLoad()
+      case Some("housing_benefit") => routes.FairRentEnquiryController.onPageLoad()
       case Some("valuations_for_tax") => routes.ValuationForTaxesController.onPageLoad()
       case Some("providing_lettings") => routes.ProvidingLettingsController.onPageLoad()
       case Some("valuation_for_public_body") => routes.ValuationAdviceController.onPageLoad()
