@@ -708,17 +708,10 @@ valuationForTaxes.openingHours-title = Opening hours
 valuationForTaxes.openingHours = 8:30am to 5:00pm. Closed on bank holidays.
 
 providingLettings.title = Contact details for the Rent Officers - Valuation Office Agency contact form - GOV.UK
-providingLettings.heading = Contact details for the Rent Officers
-providingLettings.address.heading =  VOA Rent Officers: public
-providingLettings.address.1 =  Network Support Office - Housing Allowances
-providingLettings.address.2 =  Wycliffe House
-providingLettings.address.3 =  Green Lane
-providingLettings.address.4 =  Durham
-providingLettings.address.5 =  DH1 3UW
-providingLettings.email-title =  Email:
-providingLettings.email = NSOhelpdesk@voa.gov.uk
-providingLettings.phone-title = Phone
-providingLettings.phone-number = 03000 502502
+providingLettings.heading = Provide information to the Rent Officers online
+providingLettings.p1 = Download and complete the form on GOV.UK.
+providingLettings.p1.url = https://www.gov.uk/government/publications/local-housing-allowance-and-statistics-on-private-rent-levels
+providingLettings.p2 = You can then send it to the Rent Officers using the details provided with the form.
 
 datePropertyChanged.poorRepair.title = When did your property start to be in poor repair? (optional) - Valuation Office Agency contact form - GOV.UK
 datePropertyChanged.poorRepair.heading = When did your property start to be in poor repair? (optional)
