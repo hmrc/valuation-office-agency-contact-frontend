@@ -711,7 +711,13 @@ providingLettings.title = Contact details for the Rent Officers - Valuation Offi
 providingLettings.heading = Provide information to the Rent Officers online
 providingLettings.p1 = Download and complete the form on GOV.UK.
 providingLettings.p1.url = https://www.gov.uk/government/publications/local-housing-allowance-and-statistics-on-private-rent-levels
-providingLettings.p2 = You can then send it to the Rent Officers using the details provided with the form.
+providingLettings.p2 = on the GOV.UK website.
+
+fairRentApplication.title = Submit a fair rent application using the application form - Valuation Office Agency contact form - GOV.UK
+fairRentApplication.heading = Submit a fair rent application using the application form
+fairRentApplication.p1 = Download the fair rent application forms and read guidance
+fairRentApplication.p1.url = https://www.gov.uk/government/publications/fair-rent-forms
+fairRentApplication.p2 = You can then send it to the Rent Officers using the details provided with the form.
 
 datePropertyChanged.poorRepair.title = When did your property start to be in poor repair? (optional) - Valuation Office Agency contact form - GOV.UK
 datePropertyChanged.poorRepair.heading = When did your property start to be in poor repair? (optional)

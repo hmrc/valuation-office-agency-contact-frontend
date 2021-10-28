@@ -312,6 +312,17 @@ class Navigator @Inject()() {
     }
   }
 
+    private val FairRentEnquiryRouting: UserAnswers => Call = answers => {
+      answers.fairRentEnquiryEnquiry match {
+        case Some("new") => routes.FairRentEnquiryController.onFairRentEnquiryNew()
+        case Some("change") => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()
+        case Some("other") => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()
+        case _ =>
+          log.warn(s"Navigation for is business rates property enquiry reached without selection of enquiry by controller")
+          throw new RuntimeException("Unknown exception for is business rates self catering routing")
+      }
+  }
+
 
 
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
@@ -338,7 +349,8 @@ class Navigator @Inject()() {
     BusinessRatesPropertyEnquiryId -> businessRatesPropertyEnquiryRouting,
     PropertyEnglandLets140DaysId -> propertyEnglandLets140DaysRouting,
     PropertyWalesLets140DaysId -> propertyWalesLets140DaysRouting,
-    PropertyWalesLets70DaysId -> propertyWalesLets70DaysRouting
+    PropertyWalesLets70DaysId -> propertyWalesLets70DaysRouting,
+    FairRentEnquiryId -> FairRentEnquiryRouting
   )
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()
