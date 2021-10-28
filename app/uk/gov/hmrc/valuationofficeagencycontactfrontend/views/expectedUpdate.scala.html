@@ -19,6 +19,7 @@
 @import uk.gov.hmrc.govukfrontend.views.Aliases.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 
 @this(mainTemplate: main_template, backLink: GovukBackLink)
 
@@ -49,6 +50,5 @@
  @messages("expectedUpdate.para2")
  </p>
 
- @components.help_with_service()
-
+ @components.general_enquires(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
 }
