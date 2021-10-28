@@ -641,6 +641,14 @@ generalEnquiries.telephoneEng.p3 = Telephone: 03000 501501 (England)
 generalEnquiries.telephoneWal.p3 = Telephone: 03000 505505 (Wales / Cymru)
 generalEnquiries.days.p3 = Monday to Friday, 9am to 4:30pm
 
+# --- Housing Benefit, Local Housing Allowances, or fair rents journey
+housingBenefits.title = What is your fair rent enquiry about? - Valuation Office Agency contact form - GOV.UK
+housingBenefits.heading = What is your fair rent enquiry about?
+housingBenefits.new = I want to submit a new application
+housingBenefits.check = I want to check the fair rent register
+housingBenefits.other = Other
+error.housingBenefits.required = Select what your fair rent enquiry is about
+
 anythingElse.title = Is there anything else you would like to tell us about? (optional) - Valuation Office Agency contact form - GOV.UK
 anythingElse.heading = Is there anything else you would like to tell us about? (optional)
 anythingElse.checkYourAnswersLabel = Is there anything else you would like to tell us about?
@@ -698,20 +706,6 @@ valuationForTaxes.phone1 = Telephone (England) 03000 501501
 valuationForTaxes.phone2 = Telephone (Wales) 03000 505505
 valuationForTaxes.openingHours-title = Opening hours
 valuationForTaxes.openingHours = 8:30am to 5:00pm. Closed on bank holidays.
-
-housingBenefits.title = Contact details for Housing Benefit, Local Housing Allowances or fair rents - Valuation Office Agency contact form - GOV.UK
-housingBenefits.heading = Contact details for Housing Benefit, Local Housing Allowances or fair rents
-housingBenefits.address.heading =  VOA Rent Officers: public
-housingBenefits.address.1 =  Network Support Office - Housing Allowances
-housingBenefits.address.2 =  Wycliffe House
-housingBenefits.address.3 =  Green Lane
-housingBenefits.address.4 =  Durham
-housingBenefits.address.5 =  DH1 3UW
-housingBenefits.email-title =  Email:
-housingBenefits.email = NSOhelpdesk@voa.gov.uk
-housingBenefits.phone-title = Telephone:
-housingBenefits.phone-number = 03000 502502
-housingBenefits.opening-hours = Our telephone service is available between 9.00am and 4.30pm, Monday to Friday.
 
 providingLettings.title = Contact details for the Rent Officers - Valuation Office Agency contact form - GOV.UK
 providingLettings.heading = Contact details for the Rent Officers

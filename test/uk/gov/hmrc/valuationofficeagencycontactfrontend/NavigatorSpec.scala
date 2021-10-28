@@ -516,7 +516,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return a function that goes to the housing benefits page when an enquiry category for housing benefits has been selected" in {
         when (mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
-        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.HousingBenefitsController.onPageLoad
+        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.FairRentEnquiryController.onPageLoad
       }
 
       "return a function that goes to the providing lettings page when an enquiry category for providing lettings has been selected" in {

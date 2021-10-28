@@ -148,8 +148,8 @@ GET         /non-business                                uk.gov.hmrc.valuationof
 
 GET         /permanent-changes                           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyPermanentChangesController.onPageLoad()
 
-GET         /fair-rent-enquiry                           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyEnglandLets140DaysController.onPageLoad(mode: Mode = NormalMode)
-POST        /fair-rent-enquiry                           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyEnglandLets140DaysController.onSubmit(mode: Mode = NormalMode)
+GET         /fair-rent-enquiry                           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.FairRentEnquiryController.onPageLoad(mode: Mode = NormalMode)
+POST        /fair-rent-enquiry                           uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.FairRentEnquiryController.onSubmit(mode: Mode = NormalMode)
 
 
 

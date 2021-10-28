@@ -22,11 +22,11 @@ import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyEnglandLets140DaysForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyEnglandLets140DaysId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.FairRentEnquiryForm
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.FairRentEnquiryId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLets140Days => property_england_lets_140_days, propertyEnglandLetsNoAction => property_england_lets_no_action, propertyWalesLets => wales_lets}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{fairRentEnquiry => fair_rent_enquiry, propertyEnglandLetsNoAction => property_england_lets_no_action, propertyWalesLets => wales_lets}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 
 import javax.inject.Inject
@@ -39,7 +39,7 @@ class FairRentEnquiryController @Inject()(
                                                      navigator: Navigator,
                                                      getData: DataRetrievalAction,
                                                      requireData: DataRequiredAction,
-                                                     propertyEnglandLets140Days: property_england_lets_140_days,
+                                                     fairRentEnquiry: fair_rent_enquiry,
                                                      propertyEnglandLetsNoAction: property_england_lets_no_action,
                                                      propertyWalesLets: wales_lets,
                                                      cc: MessagesControllerComponents
@@ -49,34 +49,21 @@ class FairRentEnquiryController @Inject()(
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.propertyEnglandLets140DaysEnquiry match {
-        case None => PropertyEnglandLets140DaysForm()
-        case Some(value) => PropertyEnglandLets140DaysForm().fill(value)
+      val preparedForm = request.userAnswers.fairRentEnquiryEnquiry match {
+        case None => FairRentEnquiryForm()
+        case Some(value) => FairRentEnquiryForm().fill(value)
       }
-      Ok(propertyEnglandLets140Days(appConfig, preparedForm, mode))
+      Ok(fairRentEnquiry(appConfig, preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
-      PropertyEnglandLets140DaysForm().bindFromRequest().fold(
+      FairRentEnquiryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(propertyEnglandLets140Days(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(fairRentEnquiry(appConfig, formWithErrors, mode))),
         (value) =>
-          dataCacheConnector.save[String](request.sessionId, PropertyEnglandLets140DaysId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(PropertyEnglandLets140DaysId, mode)(new UserAnswers(cacheMap))))
+          dataCacheConnector.save[String](request.sessionId, FairRentEnquiryId.toString, value).map(cacheMap =>
+            Redirect(navigator.nextPage(FairRentEnquiryId, mode)(new UserAnswers(cacheMap))))
       )
   }
-
-  def onEngLetsNoActionPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
-    implicit request =>
-      Ok(propertyEnglandLetsNoAction(appConfig))
-  }
-
-  def onWalLetsPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
-    implicit request =>
-      Ok(propertyWalesLets(appConfig))
-  }
-
-
-
 }

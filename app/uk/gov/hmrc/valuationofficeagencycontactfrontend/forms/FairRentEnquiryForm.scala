@@ -23,10 +23,10 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSubca
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object FairRentEnquiryForm {
-  def PropertyEnglandLets140DaysFormatter = new Formatter[String] {
+  def FairRentEnquiryFormatter = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
-      case None => produceError(key, "error.businessRatesSelfCatering140Days.required")
+      case None => produceError(key, "error.housingBenefits.required")
       case _ => produceError(key, "error.unknown")
     }
 
@@ -34,11 +34,12 @@ object FairRentEnquiryForm {
   }
 
   def apply(): Form[String] =
-    Form(single("value" -> of(PropertyEnglandLets140DaysFormatter)))
+    Form(single("value" -> of(FairRentEnquiryFormatter)))
 
   def options = Seq(
-    RadioOption("businessRatesSelfCatering140Days", "yes"),
-    RadioOption("businessRatesSelfCatering140Days", "no")
+    RadioOption("housingBenefits", "new"),
+    RadioOption("housingBenefits", "check"),
+    RadioOption("housingBenefits", "other")
   )
 
   def optionIsValid(value: String) = options.exists(o => o.value == value)
