@@ -84,6 +84,16 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
 
   private[controllers] def enquiryKey(answers: UserAnswers): Either[String, String] = {
     (answers.enquiryCategory, answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.fairRentEnquiryEnquiry) match {
+      case (Some("business_rates"), _, Some("business_rates_from_home"), _) => Right("tellUsMore.business")
+      case (Some("business_rates"), _, Some("business_rates_other"), _) => Right("tellUsMore.business.other")
+      case (Some("business_rates"), _, Some("business_rates_change_valuation"), _) => Right("tellUsMore.business.other")
+      case (Some("business_rates"), _, Some("business_rates_bill"), _) => Right("tellUsMore.business.other")
+      case (Some("business_rates"), _, Some("business_rates_changes"), _) => Right("tellUsMore.business.other")
+      case (Some("business_rates"), _, Some("business_rates_property_empty"), _) => Right("tellUsMore.business.other")
+      case (Some("business_rates"), _, Some("business_rates_valuation"), _) => Right("tellUsMore.business.other")
+      case (Some("business_rates"), _, Some("business_rates_demolished"), _) => Right("tellUsMore.business.other")
+      case (Some("business_rates"), _, Some("business_rates_not_used"), _) => Right("tellUsMore.business.other")
+      case (Some("business_rates"), _, Some("business_rates_self_catering"), _) => Right("tellUsMore.business.other")
       case (Some("council_tax"), Some("council_tax_business_uses"), _, _) => Right("tellUsMore.business")
       case (Some("council_tax"), Some("council_tax_other"), _, _) => Right("tellUsMore.other")
       case (Some("council_tax"), Some("council_tax_annexe"), _, _) => Right("tellUsMore.general")
@@ -97,16 +107,6 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
       case (Some("council_tax"), Some("council_tax_area_change"), _, _) => Right("tellUsMore.general")
       case (Some("council_tax"), _, _, _) => Right("tellUsMore.ct-reference")
       case (Some("business_rates"), _, _, _) => Right("tellUsMore.ndr-reference")
-      case (Some("business_rates"), _, Some("business_rates_from_home"), _) => Right("tellUsMore.business")
-      case (Some("business_rates"), _, Some("business_rates_other"), _) => Right("tellUsMore.business.other")
-      case (Some("business_rates"), _, Some("business_rates_change_valuation"), _) => Right("tellUsMore.business.other")
-      case (Some("business_rates"), _, Some("business_rates_bill"), _) => Right("tellUsMore.business.other")
-      case (Some("business_rates"), _, Some("business_rates_changes"), _) => Right("tellUsMore.business.other")
-      case (Some("business_rates"), _, Some("business_rates_property_empty"), _) => Right("tellUsMore.business.other")
-      case (Some("business_rates"), _, Some("business_rates_valuation"), _) => Right("tellUsMore.business.other")
-      case (Some("business_rates"), _, Some("business_rates_demolished"), _) => Right("tellUsMore.business.other")
-      case (Some("business_rates"), _, Some("business_rates_not_used"), _) => Right("tellUsMore.business.other")
-      case (Some("business_rates"), _, Some("business_rates_self_catering"), _) => Right("tellUsMore.business.other")
       case (Some("housing_benefit"), _, _, Some("submit_new_application")) => Right("tellUsMore.general")
       case _ => Left("Unknown enquiry category in enquiry key")
     }
