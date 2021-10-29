@@ -635,11 +635,6 @@ tellUsMore.business.other.title = What is your other business rates enquiry? - V
 tellUsMore.business.other.heading = What is your other business rates enquiry?
 tellUsMore.business.other.hint = Include details such as case reference numbers and dates.
 
-# --- Tell Us More Fair Rent Journey
-tellUsMore.fairRent.title = What is your other business rates enquiry? - Valuation Office Agency contact form - GOV.UK
-tellUsMore.fairRent.heading = What is your other business rates enquiry?
-tellUsMore.fairRent.hint = Include details such as case reference numbers and dates.
-
 # --- General Enquiries journey
 generalEnquiries.h2Heading = If you still need to contact us
 generalEnquiries.p1.part1 = Use our general enquiries form
