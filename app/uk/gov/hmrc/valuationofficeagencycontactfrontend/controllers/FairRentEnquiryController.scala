@@ -26,7 +26,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.FairRentEnquiryFor
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.FairRentEnquiryId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{fairRentEnquiry => fair_rent_enquiry, propertyEnglandLetsNoAction => property_england_lets_no_action, propertyWalesLets => wales_lets}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{fairRentEnquiry => fair_rent_enquiry, submitFairRentApplication => submit_fair_rent_application}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 
 import javax.inject.Inject
@@ -40,8 +40,7 @@ class FairRentEnquiryController @Inject()(
                                                      getData: DataRetrievalAction,
                                                      requireData: DataRequiredAction,
                                                      fairRentEnquiry: fair_rent_enquiry,
-                                                     propertyEnglandLetsNoAction: property_england_lets_no_action,
-                                                     propertyWalesLets: wales_lets,
+                                                     submitFairRentApplication: submit_fair_rent_application,
                                                      cc: MessagesControllerComponents
                                                    ) extends FrontendController(cc) with I18nSupport {
 
@@ -66,4 +65,11 @@ class FairRentEnquiryController @Inject()(
             Redirect(navigator.nextPage(FairRentEnquiryId, mode)(new UserAnswers(cacheMap))))
       )
   }
+
+  def onFairRentEnquiryNew(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+    implicit request =>
+      Ok(submitFairRentApplication())
+  }
+
+
 }
