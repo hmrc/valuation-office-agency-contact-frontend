@@ -49,5 +49,11 @@
   @messages("fairRentApplication.p2")
  </p>
 
+ <h2 class="govuk-heading-m">@messages("fairRentApplication.subheading")</h2>
+
+ <ul class="govuk-list">
+  <li><a class="govuk-link" target="_self" href=@messages("fairRentApplication.p3.url")>@messages("fairRentApplication.p3")</a></li>
+ </ul>
+
  @components.general_enquires(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
 }

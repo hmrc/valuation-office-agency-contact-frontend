@@ -80,4 +80,7 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
     x => AnswerRow("councilTaxBusinessEnquiry.heading", s"councilTaxBusinessEnquiry.form.$x", true, routes.CouncilTaxBusinessController.onPageLoad().url)
   }
 
+  def fairRentEnquiryEnquiry: Option[AnswerRow] = userAnswers.fairRentEnquiryEnquiry.map {
+    x => AnswerRow("housingBenefits.heading", s"housingBenefits.form.$x", false, routes.FairRentEnquiryController.onPageLoad().url)
+  }
 }

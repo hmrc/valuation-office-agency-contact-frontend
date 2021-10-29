@@ -617,6 +617,9 @@ tellUsMore.other.title = What is your other Council Tax enquiry? - Valuation Off
 tellUsMore.other.heading = What is your other Council Tax enquiry?
 tellUsMore.other.hint = Include details such as case reference numbers and dates.
 
+# --- Tell Us More Housing Benefit journey
+tellUsMore.housingBenefit.other.heading = What is your other Housing Benefit, Local Housing Allowances, or fair rents enquiry?
+
 # --- Tell Us More CT other journey
 tellUsMore.general.title = What is your Council Tax enquiry? - Valuation Office Agency contact form - GOV.UK
 tellUsMore.general.heading = What is your Council Tax enquiry?
@@ -632,6 +635,11 @@ tellUsMore.business.other.title = What is your other business rates enquiry? - V
 tellUsMore.business.other.heading = What is your other business rates enquiry?
 tellUsMore.business.other.hint = Include details such as case reference numbers and dates.
 
+# --- Tell Us More Fair Rent Journey
+tellUsMore.fairRent.title = What is your other business rates enquiry? - Valuation Office Agency contact form - GOV.UK
+tellUsMore.fairRent.heading = What is your other business rates enquiry?
+tellUsMore.fairRent.hint = Include details such as case reference numbers and dates.
+
 # --- General Enquiries journey
 generalEnquiries.h2Heading = If you still need to contact us
 generalEnquiries.p1.part1 = Use our general enquiries form
@@ -644,9 +652,9 @@ generalEnquiries.days.p3 = Monday to Friday, 9am to 4:30pm
 # --- Housing Benefit, Local Housing Allowances, or fair rents journey
 housingBenefits.title = What is your fair rent enquiry about? - Valuation Office Agency contact form - GOV.UK
 housingBenefits.heading = What is your fair rent enquiry about?
-housingBenefits.new = I want to submit a new application
-housingBenefits.check = I want to check the fair rent register
-housingBenefits.other = Other
+housingBenefits.submit_new_application = I want to submit a new application
+housingBenefits.check_fair_rent_register = I want to check the fair rent register
+housingBenefits.other_request = Other
 error.housingBenefits.required = Select what your fair rent enquiry is about
 
 anythingElse.title = Is there anything else you would like to tell us about? (optional) - Valuation Office Agency contact form - GOV.UK
@@ -715,9 +723,12 @@ providingLettings.p2 = on the GOV.UK website.
 
 fairRentApplication.title = Submit a fair rent application using the application form - Valuation Office Agency contact form - GOV.UK
 fairRentApplication.heading = Submit a fair rent application using the application form
-fairRentApplication.p1 = Download the fair rent application forms and read guidance
+fairRentApplication.p1 = Download the fair rent application forms and read guidance.
 fairRentApplication.p1.url = https://www.gov.uk/government/publications/fair-rent-forms
 fairRentApplication.p2 = You can then send it to the Rent Officers using the details provided with the form.
+fairRentApplication.subheading = Other help on GOV.UK
+fairRentApplication.p3 = About fair rents
+fairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
 
 datePropertyChanged.poorRepair.title = When did your property start to be in poor repair? (optional) - Valuation Office Agency contact form - GOV.UK
 datePropertyChanged.poorRepair.heading = When did your property start to be in poor repair? (optional)

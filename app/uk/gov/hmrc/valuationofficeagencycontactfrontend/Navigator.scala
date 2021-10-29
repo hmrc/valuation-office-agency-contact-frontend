@@ -42,32 +42,33 @@ class Navigator @Inject()() {
   }
 
   private val propertyAddressRouting: UserAnswers => Call = answers => {
-    (answers.contactReason, answers.councilTaxSubcategory, answers.businessRatesSubcategory) match {
-      case (Some("new_enquiry"), Some("council_tax_property_poor_repair"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_business_uses"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_area_change"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_other"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_annexe"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_bill"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_band_too_high"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_band_for_new"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_property_empty"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_property_split_merge"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_property_demolished"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_change_valuation")) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_bill")) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_changes")) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_from_home")) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_other")) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_not_used")) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_self_catering")) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_property_empty")) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_valuation")) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_demolished")) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, _) => routes.TellUsMoreController.onPageLoad(NormalMode)
-      case (Some("more_details"), _, _) => routes.WhatElseController.onPageLoad()
-      case (Some("update_existing"), _, _) => routes.AnythingElseTellUsController.onPageLoad()
-      case (Some(option), _, _) => {
+    (answers.contactReason, answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.fairRentEnquiryEnquiry) match {
+      case (Some("new_enquiry"), Some("council_tax_property_poor_repair"), _, _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), Some("council_tax_business_uses"), _, _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), Some("council_tax_area_change"), _, _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), Some("council_tax_other"), _, _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), Some("council_tax_annexe"), _, _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), Some("council_tax_bill"), _, _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), Some("council_tax_band_too_high"), _, _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), Some("council_tax_band_for_new"), _, _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), Some("council_tax_property_empty"), _, _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), Some("council_tax_property_split_merge"), _, _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), Some("council_tax_property_demolished"), _, _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), _, Some("business_rates_change_valuation"), _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), _, Some("business_rates_bill"), _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), _, Some("business_rates_changes"), _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), _, Some("business_rates_from_home"), _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), _, Some("business_rates_other"), _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), _, Some("business_rates_not_used"), _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), _, Some("business_rates_self_catering"), _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), _, Some("business_rates_property_empty"), _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), _, Some("business_rates_valuation"), _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), _, Some("business_rates_demolished"), _) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), _, _, Some("submit_new_application")) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), _, _, _) => routes.TellUsMoreController.onPageLoad(NormalMode)
+      case (Some("more_details"), _, _, _) => routes.WhatElseController.onPageLoad()
+      case (Some("update_existing"), _, _, _) => routes.AnythingElseTellUsController.onPageLoad()
+      case (Some(option), _, _, _) => {
         log.warn(s"Navigation for contact reason reached with unknown option $option by controller")
         throw new RuntimeException(s"Navigation for contact reason reached with unknown option $option by controller")
       }
@@ -111,6 +112,7 @@ class Navigator @Inject()() {
       case (Some("update_existing"), _) => routes.PropertyAddressController.onPageLoad(NormalMode)
       case (_, Some("council_tax")) => routes.PropertyAddressController.onPageLoad(NormalMode)
       case (_, Some("business_rates")) => routes.PropertyAddressController.onPageLoad(NormalMode)
+      case (_, Some("housing_benefit")) => routes.PropertyAddressController.onPageLoad(NormalMode)
       case (_, Some(sel)) => {
         log.warn(s"Navigation for contact details page reached with an unknown selection $sel of enquiry by controller")
         throw new RuntimeException(s"Navigation for contact details page reached unknown selection $sel of enquiry by controller")
@@ -192,28 +194,29 @@ class Navigator @Inject()() {
   }
 
   private val tellUsMoreRouting: UserAnswers => Call = answers => {
-    (answers.councilTaxSubcategory, answers.businessRatesSubcategory) match {
-      case (Some("council_tax_property_poor_repair"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (Some("council_tax_business_uses"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (Some("council_tax_area_change"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (Some("council_tax_other"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (Some("council_tax_annexe"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (Some("council_tax_bill"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (Some("council_tax_band_too_high"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (Some("council_tax_band_for_new"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (Some("council_tax_property_empty"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (Some("council_tax_property_split_merge"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (Some("council_tax_property_demolished"), _) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (_, Some("business_rates_from_home")) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (_, Some("business_rates_bill")) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (_, Some("business_rates_changes")) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (_, Some("business_rates_change_valuation")) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (_, Some("business_rates_property_empty")) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (_, Some("business_rates_not_used")) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (_, Some("business_rates_self_catering")) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (_, Some("business_rates_valuation")) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (_, Some("business_rates_demolished")) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (_, Some("business_rates_other")) => routes.ContactDetailsController.onPageLoad(NormalMode)
+    (answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.fairRentEnquiryEnquiry) match {
+      case (Some("council_tax_property_poor_repair"), _ , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_business_uses"), _ , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_area_change"), _ , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_other"), _ , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_annexe"), _ , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_bill"), _ , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_band_too_high"), _ , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_band_for_new"), _ , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_property_empty"), _ , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_property_split_merge"), _ , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (Some("council_tax_property_demolished"), _ , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_from_home") , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_bill") , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_changes") , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_change_valuation") , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_property_empty") , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_not_used") , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_self_catering") , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_valuation") , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_demolished") , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, Some("business_rates_other") , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_ , _, Some("submit_new_application")) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case _ => routes.CheckYourAnswersController.onPageLoad
     }
   }
@@ -312,18 +315,16 @@ class Navigator @Inject()() {
     }
   }
 
-    private val FairRentEnquiryRouting: UserAnswers => Call = answers => {
-      answers.fairRentEnquiryEnquiry match {
-        case Some("new") => routes.FairRentEnquiryController.onFairRentEnquiryNew()
-        case Some("change") => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()
-        case Some("other") => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()
-        case _ =>
-          log.warn(s"Navigation for is business rates property enquiry reached without selection of enquiry by controller")
-          throw new RuntimeException("Unknown exception for is business rates self catering routing")
-      }
+  private val FairRentEnquiryRouting: UserAnswers => Call = answers => {
+    answers.fairRentEnquiryEnquiry match {
+      case Some("submit_new_application") => routes.FairRentEnquiryController.onFairRentEnquiryNew()
+      case Some("check_fair_rent_register") => routes.FairRentEnquiryController.onPageLoad()
+      case Some("other_request") => routes.FairRentEnquiryController.onPageLoad()
+      case _ =>
+        log.warn(s"Navigation for fair rent enquiry reached without selection of enquiry by controller")
+        throw new RuntimeException("Unknown exception for fair rent enquiry routing")
+    }
   }
-
-
 
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     ContactReasonId -> contactReasonRouting,
