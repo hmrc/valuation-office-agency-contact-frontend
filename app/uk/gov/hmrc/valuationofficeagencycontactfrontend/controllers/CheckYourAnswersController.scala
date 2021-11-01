@@ -187,6 +187,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
       case (Some("new_enquiry"), _, Some("business_rates_not_used"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _, Some("business_rates_self_catering"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _, _, Some("submit_new_application")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), _, _, Some("other_request")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _, _, _) => routes.TellUsMoreController.onPageLoad(NormalMode).url
       case (Some("more_details"), _, _, _) => routes.WhatElseController.onPageLoad().url
       case (Some("update_existing"), _, _, _) => routes.AnythingElseTellUsController.onPageLoad().url
