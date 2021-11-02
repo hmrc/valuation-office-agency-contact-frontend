@@ -673,11 +673,11 @@ satisfaction.neither = Ddim yn fodlon nac yn anfodlon
 satisfaction.dissatisfied = Anfodlon
 satisfaction.veryDissatisfied = Anfodlon iawn
 satisfactionSurvey.satisfaction = Dewiswch sut y byddech chi’n disgrifio’ch profiad
-satisfactionSurvey.details = Rhaid i'r adborth gynnwys llythrennau a i z, rhifau 0 i 9, cysylltnodau, bylchau a chollnodau yn unig
+satisfactionSurvey.details = Rhaid i'''r adborth gynnwys llythrennau a i z, rhifau 0 i 9, cysylltnodau, bylchau a chollnodau yn unig
 confirmation.feedback.submit = Anfon adborth
 error.required.feedback = Dewiswch sut y byddech chi’n disgrifio’ch profiad
-error.message.max_length.feedback = Rhaid i'r adborth fod yn 1200 nod neu lai
-error.message.xss-invalid.feedback = Rhaid i'r adborth gynnwys llythrennau a i z, rhifau 0 i 9, cysylltnodau, bylchau a chollnodau yn unig
+error.message.max_length.feedback = Rhaid i'''r adborth fod yn 1200 nod neu lai
+error.message.xss-invalid.feedback = Rhaid i'''r adborth gynnwys llythrennau a i z, rhifau 0 i 9, cysylltnodau, bylchau a chollnodau yn unig
 
 # SURVEY THANKYOU
 ###############################
