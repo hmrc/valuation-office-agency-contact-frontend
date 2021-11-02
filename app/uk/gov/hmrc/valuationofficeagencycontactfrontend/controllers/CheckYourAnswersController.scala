@@ -159,6 +159,13 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
           checkYourAnswersHelper.tellUsMore("tellUsMore.housingBenefit.other.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress).flatten))
+      case (_, Some("housing_benefit"), _, _, Some("other_request")) => Some(
+        AnswerSection(None, Seq(
+          checkYourAnswersHelper.enquiryCategory,
+          checkYourAnswersHelper.datePropertyChanged(),
+          checkYourAnswersHelper.tellUsMore("tellUsMore.housingBenefit.other.heading"),
+          checkYourAnswersHelper.contactDetails,
+          checkYourAnswersHelper.propertyAddress).flatten))
       case _ => None
     }
   }
