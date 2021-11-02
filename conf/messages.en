@@ -621,8 +621,10 @@ tellUsMore.other.hint = Include details such as case reference numbers and dates
 tellUsMore.housingBenefit.other.heading = What is your other Housing Benefit, Local Housing Allowances, or fair rents enquiry?
 
 # --- Tell Us More Fair Rents other journey
-tellUsMore.fairRent.other.title = What is your other fair rents enquiry? - Valuation Office Agency contact form - GOV.UK
-tellUsMore.fairRent.other.heading = What is your other fair rents enquiry?
+tellUsMore.fairRent.title = What is your other fair rents enquiry? - Valuation Office Agency contact form - GOV.UK
+tellUsMore.fairRent.heading = What is your other fair rents enquiry?
+tellUsMore.fairRent.hint =
+# --- tellUsMore.fairRent.hint is intentionally left blank as this route does not need a hint!
 
 # --- Tell Us More CT other journey
 tellUsMore.general.title = What is your Council Tax enquiry? - Valuation Office Agency contact form - GOV.UK
