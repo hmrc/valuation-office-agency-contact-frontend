@@ -54,7 +54,7 @@
     @if(enquiryKey == "tellUsMore.poorRepair" || enquiryKey == "tellUsMore.business"
             || enquiryKey == "tellUsMore.areaChange" || enquiryKey == "tellUsMore.other"
             || enquiryKey == "tellUsMore.general" || enquiryKey == "tellUsMore.notUsed"
-            || enquiryKey == "tellUsMore.business.other") {
+            || enquiryKey == "tellUsMore.business.other" || enquiryKey == "tellUsMore.fairRent") {
             <h1 class="govuk-label-wrapper">
                 <label class="govuk-label govuk-label--l" for="message">
                     @messages(s"$enquiryKey.heading")
@@ -77,7 +77,7 @@
         )
     )
 
-        @if(enquiryKey != "tellUsMore.other" && enquiryKey != "tellUsMore.general" && enquiryKey != "tellUsMore.business.other") {
+        @if(enquiryKey != "tellUsMore.other" && enquiryKey != "tellUsMore.general" && enquiryKey != "tellUsMore.business.other" && enquiryKey != "tellUsMore.fairRent") {
             <div class="govuk-inset-text">@messages(s"$enquiryKey.inset")</div>
         }
 
@@ -112,7 +112,7 @@
 }
 
 @defining(if(enquiryKey == "tellUsMore.poorRepair" || enquiryKey == "tellUsMore.business" || enquiryKey == "tellUsMore.areaChange" || enquiryKey == "tellUsMore.other"
-|| enquiryKey == "tellUsMore.notUsed" || enquiryKey == "tellUsMore.business.other") messages(s"$enquiryKey.title") else messages("tellUsMore.title")) { title =>
+|| enquiryKey == "tellUsMore.notUsed" || enquiryKey == "tellUsMore.business.other" || enquiryKey == "tellUsMore.fairRent") messages(s"$enquiryKey.title") else messages("tellUsMore.title")) { title =>
 
     @mainTemplate(
         pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + title) else title),
