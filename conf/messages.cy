@@ -715,6 +715,15 @@ housingBenefits.email = NSOhelpdesk@voa.gov.uk
 housingBenefits.phone-title =  Ffôn:
 housingBenefits.phone-number = 03000 502502
 housingBenefits.opening-hours = Mae ein gwasanaeth ffôn ar gael rhwng 9.00am a 4.30pm, o Ddydd Llun i Ddydd Gwener.
+
+fairRentApplication.title = Submit a fair rent application using the application form - Valuation Office Agency contact form - GOV.UK
+fairRentApplication.heading = Submit a fair rent application using the application form
+fairRentApplication.p1 = Download the fair rent application forms and read guidance.
+fairRentApplication.p1.url = https://www.gov.uk/government/publications/fair-rent-forms
+fairRentApplication.p2 = You can then send it to the Rent Officers using the details provided with the form.
+fairRentApplication.subheading = Other help on GOV.UK
+fairRentApplication.p3 = About fair rents
+fairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
  
 providingLettings.title = Manylion cyswllt ar gyfer y Swyddogion Rhent - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 providingLettings.heading = Manylion cyswllt ar gyfer y Swyddogion Rhent
@@ -728,6 +737,15 @@ providingLettings.email-title = E-bost:
 providingLettings.email = NSOhelpdesk@voa.gov.uk
 providingLettings.phone-title =  Ffôn
 providingLettings.phone-number = 03000 502502
+
+checkFairRentApplication.title = Gwiriwch y gofrestr rhenti teg ar-lein - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+checkFairRentApplication.heading = Gwiriwch y gofrestr rhenti teg ar-lein
+checkFairRentApplication.p1 = Defnyddiwch wasanaeth Asiantaeth y Swyddfa Brisio
+checkFairRentApplication.p1.url = https://www.gov.uk/check-register-rents
+checkFairRentApplication.p2 = i wirio’r gofrestr rhenti teg.
+checkFairRentApplication.subheading = Cymorth arall ar GOV.UK
+checkFairRentApplication.p3 = Ynglŷn â rhenti teg
+checkFairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
 
 datePropertyChanged.poorRepair.title = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol) - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 datePropertyChanged.poorRepair.heading = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol)

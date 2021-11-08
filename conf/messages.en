@@ -726,10 +726,10 @@ fairRentApplication.p3 = About fair rents
 fairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
 
 checkFairRentApplication.title = Check the register of fair rents online - Valuation Office Agency contact form - GOV.UK
-checkFairRentApplication.heading = Submit a fair rent application using the application form
-checkFairRentApplication.p1 = Download the fair rent application forms and read guidance.
-checkFairRentApplication.p1.url = https://www.gov.uk/government/publications/fair-rent-forms
-checkFairRentApplication.p2 = You can then send it to the Rent Officers using the details provided with the form.
+checkFairRentApplication.heading = Check the register of fair rents online
+checkFairRentApplication.p1 = Use the Valuation Office Agency’s service
+checkFairRentApplication.p1.url = https://www.gov.uk/check-register-rents
+checkFairRentApplication.p2 = to check the register of fair rents.
 checkFairRentApplication.subheading = Other help on GOV.UK
 checkFairRentApplication.p3 = About fair rents
 checkFairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents

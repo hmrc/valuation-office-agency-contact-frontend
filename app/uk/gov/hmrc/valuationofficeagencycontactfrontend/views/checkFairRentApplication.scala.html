@@ -35,24 +35,24 @@
 }
 
 @mainTemplate(
- pageTitle = Some(messages("fairRentApplication.title")),
+ pageTitle = Some(messages("checkFairRentApplication.title")),
  beforeContentBlock = Some(beforeContent)
 ) {
 
 
- <h1 class="govuk-heading-l">@messages("fairRentApplication.heading")</h1>
+ <h1 class="govuk-heading-l">@messages("checkFairRentApplication.heading")</h1>
 
  <p class="govuk-body">
-  <a class="govuk-link" target="_self" href=@messages("fairRentApplication.p1.url")>
-  @messages("fairRentApplication.p1")
+  <a class="govuk-link" target="_self" href=@messages("checkFairRentApplication.p1.url")>
+  @messages("checkFairRentApplication.p1")
   </a>
-  @messages("fairRentApplication.p2")
+  @messages("checkFairRentApplication.p2")
  </p>
 
- <h2 class="govuk-heading-m">@messages("fairRentApplication.subheading")</h2>
+ <h2 class="govuk-heading-m">@messages("checkFairRentApplication.subheading")</h2>
 
  <ul class="govuk-list">
-  <li><a class="govuk-link" target="_self" href=@messages("fairRentApplication.p3.url")>@messages("fairRentApplication.p3")</a></li>
+  <li><a class="govuk-link" target="_self" href=@messages("checkFairRentApplication.p3.url")>@messages("checkFairRentApplication.p3")</a></li>
  </ul>
 
  @components.general_enquires(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
