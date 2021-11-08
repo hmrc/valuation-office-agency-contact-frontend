@@ -654,6 +654,14 @@ generalEnquiries.telephoneEng.p3 =
 generalEnquiries.telephoneWal.p3 = Ffôn: 03000 505505
 generalEnquiries.days.p3 = Dydd Llun i ddydd Gwener, 9yb tan 4:30yh
 
+# --- Housing Benefit, Local Housing Allowances, or fair rents journey
+housingBenefits.title = Ynglŷn â beth yw eich ymholiad rhent teg? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+housingBenefits.heading = Ynglŷn â beth yw eich ymholiad rhent teg?
+housingBenefits.new = Rwyf am gyflwyno cais newydd
+housingBenefits.check = Rwyf am wirio’r gofrestr rhent deg
+housingBenefits.other = Arall
+error.housingBenefits.required = Dewiswch beth yw pwrpas eich ymholiad rhent teg
+
 # --- Confirmation for new and existing enquiries
 confirmation.title = Ymchwiliad wedi’i gyflwyno - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 confirmation.heading = Ymchwiliad wedi’i gyflwyno
