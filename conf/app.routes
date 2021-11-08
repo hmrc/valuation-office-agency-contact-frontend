@@ -153,6 +153,8 @@ POST        /fair-rent-enquiry                           uk.gov.hmrc.valuationof
 
 GET         /submit-fair-rent-application                uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.FairRentEnquiryController.onFairRentEnquiryNew(mode: Mode = NormalMode)
 
+GET         /check-fair-rents-register                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.FairRentEnquiryController.onFairRentEnquiryCheck(mode: Mode = NormalMode)
+
 # SURVEY
 GET         /survey-thanks                               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.surveyThankyou
 POST        /survey 				                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.formCompleteFeedback

@@ -318,7 +318,7 @@ class Navigator @Inject()() {
   private val FairRentEnquiryRouting: UserAnswers => Call = answers => {
     answers.fairRentEnquiryEnquiry match {
       case Some("submit_new_application") => routes.FairRentEnquiryController.onFairRentEnquiryNew()
-      case Some("check_fair_rent_register") => routes.FairRentEnquiryController.onPageLoad()
+      case Some("check_fair_rent_register") => routes.FairRentEnquiryController.onFairRentEnquiryCheck()
       case Some("other_request") => routes.FairRentEnquiryController.onPageLoad()
       case _ =>
         log.warn(s"Navigation for fair rent enquiry reached without selection of enquiry by controller")
