@@ -156,7 +156,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.datePropertyChanged(),
-          checkYourAnswersHelper.tellUsMore("tellUsMore.housingBenefit.other.heading"),
+          checkYourAnswersHelper.tellUsMore("tellUsMore.fairRent.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress).flatten))
       case _ => None

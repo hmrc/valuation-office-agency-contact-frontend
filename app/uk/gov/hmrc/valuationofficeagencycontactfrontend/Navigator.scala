@@ -141,7 +141,7 @@ class Navigator @Inject()() {
   private def enquiryRouting(enquiry: Option[String], confirmationCall: Call): Call = {
     enquiry match {
       case Some("council_tax") | Some("business_rates") => confirmationCall
-      case Some("housing_allowance") | Some("other") => confirmationCall
+      case Some("housing_benefit") | Some("other") => confirmationCall
       case Some(sel) =>
         log.warn(s"Navigation for confirmation page reached with an unknown selection $sel of enquiry by controller")
         throw new RuntimeException(s"Navigation for confirmation page reached unknown selection $sel of enquiry by controller")

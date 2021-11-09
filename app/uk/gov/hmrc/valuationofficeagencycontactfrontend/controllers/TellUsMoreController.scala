@@ -107,7 +107,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
       case (Some("council_tax"), Some("council_tax_area_change"), _, _) => Right("tellUsMore.general")
       case (Some("council_tax"), _, _, _) => Right("tellUsMore.ct-reference")
       case (Some("business_rates"), _, _, _) => Right("tellUsMore.ndr-reference")
-      case (Some("housing_benefit"), _, _, Some("submit_new_application")) => Right("tellUsMore.general")
+      case (Some("housing_benefit"), _, _, Some("submit_new_application")) => Right("tellUsMore.fairRent")
       case _ => Left("Unknown enquiry category in enquiry key")
     }
   }

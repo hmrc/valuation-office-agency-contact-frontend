@@ -484,10 +484,10 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         "has been submitted without errors and the enquiry is about housing allowance" in {
         val cd = ContactDetails("a", "c", "e")
         val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
-        val housingAllowance = "housing_allowance"
+        val housingBenefit = "housing_benefit"
         val message = "Hello"
 
-        val userAnswers = new FakeUserAnswers(cd, "", "", "", propertyAddress, ha = Some(housingAllowance), ee = Some(housingAllowance), ae = Some(message))
+        val userAnswers = new FakeUserAnswers(cd, "", "", "", propertyAddress, ha = Some(housingBenefit), ee = Some(housingBenefit), ae = Some(message))
 
         navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmationController.onPageLoad
       }

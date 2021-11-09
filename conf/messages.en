@@ -617,9 +617,6 @@ tellUsMore.other.title = What is your other Council Tax enquiry? - Valuation Off
 tellUsMore.other.heading = What is your other Council Tax enquiry?
 tellUsMore.other.hint = Include details such as case reference numbers and dates.
 
-# --- Tell Us More Housing Benefit journey
-tellUsMore.housingBenefit.other.heading = What is your other Housing Benefit, Local Housing Allowances, or fair rents enquiry?
-
 # --- Tell Us More CT other journey
 tellUsMore.general.title = What is your Council Tax enquiry? - Valuation Office Agency contact form - GOV.UK
 tellUsMore.general.heading = What is your Council Tax enquiry?
@@ -634,6 +631,12 @@ tellUsMore.notUsed.inset = You will need to supply evidence when we reply to you
 tellUsMore.business.other.title = What is your other business rates enquiry? - Valuation Office Agency contact form - GOV.UK
 tellUsMore.business.other.heading = What is your other business rates enquiry?
 tellUsMore.business.other.hint = Include details such as case reference numbers and dates.
+
+# --- Tell Us More Fair Rents other journey
+tellUsMore.fairRent.title = What is your other fair rents enquiry? - Valuation Office Agency contact form - GOV.UK
+tellUsMore.fairRent.heading = What is your other fair rents enquiry?
+tellUsMore.fairRent.hint =
+# --- tellUsMore.fairRent.hint is intentionally left blank as this route does not need a hint!
 
 # --- General Enquiries journey
 generalEnquiries.h2Heading = If you still need to contact us
