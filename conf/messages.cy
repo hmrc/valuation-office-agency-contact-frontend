@@ -737,6 +737,15 @@ providingLettings.email = NSOhelpdesk@voa.gov.uk
 providingLettings.phone-title =  Ffôn
 providingLettings.phone-number = 03000 502502
 
+fairRentApplication.title = Cyflwyno cais rhent teg gan ddefnyddio’r ffurflen gais - Valuation Office Agency contact form - GOV.UK
+fairRentApplication.heading = Cyflwyno cais rhent teg gan ddefnyddio’r ffurflen gais
+fairRentApplication.p1 = Dadlwythwch y ffurflenni cais rhent teg a darllenwch ganllaw
+fairRentApplication.p1.url = https://www.gov.uk/government/publications/fair-rent-forms
+fairRentApplication.p2 = ar wefan GOV.UK.
+fairRentApplication.subheading = Cymorth arall ar GOV.UK
+fairRentApplication.p3 = Ynglŷn â rhenti teg
+fairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
+
 datePropertyChanged.poorRepair.title = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol) - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 datePropertyChanged.poorRepair.heading = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol)
 datePropertyChanged.hint = Er enghraifft, 27 2 2021

@@ -718,9 +718,9 @@ providingLettings.p2 = on the GOV.UK website.
 
 fairRentApplication.title = Submit a fair rent application using the application form - Valuation Office Agency contact form - GOV.UK
 fairRentApplication.heading = Submit a fair rent application using the application form
-fairRentApplication.p1 = Download the fair rent application forms and read guidance.
+fairRentApplication.p1 = Download the fair rent application forms and read guidance
 fairRentApplication.p1.url = https://www.gov.uk/government/publications/fair-rent-forms
-fairRentApplication.p2 = You can then send it to the Rent Officers using the details provided with the form.
+fairRentApplication.p2 = on the GOV.UK website.
 fairRentApplication.subheading = Other help on GOV.UK
 fairRentApplication.p3 = About fair rents
 fairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
