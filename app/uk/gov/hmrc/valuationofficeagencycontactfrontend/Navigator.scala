@@ -65,6 +65,7 @@ class Navigator @Inject()() {
       case (Some("new_enquiry"), _, Some("business_rates_valuation"), _) => routes.CheckYourAnswersController.onPageLoad
       case (Some("new_enquiry"), _, Some("business_rates_demolished"), _) => routes.CheckYourAnswersController.onPageLoad
       case (Some("new_enquiry"), _, _, Some("submit_new_application")) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), _, _, Some("check_fair_rent_register")) => routes.CheckYourAnswersController.onPageLoad
       case (Some("new_enquiry"), _, _, _) => routes.TellUsMoreController.onPageLoad(NormalMode)
       case (Some("more_details"), _, _, _) => routes.WhatElseController.onPageLoad()
       case (Some("update_existing"), _, _, _) => routes.AnythingElseTellUsController.onPageLoad()
@@ -217,6 +218,7 @@ class Navigator @Inject()() {
       case (_, Some("business_rates_demolished") , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (_, Some("business_rates_other") , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (_ , _, Some("submit_new_application")) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_ , _, Some("check_fair_rent_register")) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case _ => routes.CheckYourAnswersController.onPageLoad
     }
   }

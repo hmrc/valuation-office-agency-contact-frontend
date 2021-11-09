@@ -108,6 +108,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
       case (Some("council_tax"), _, _, _) => Right("tellUsMore.ct-reference")
       case (Some("business_rates"), _, _, _) => Right("tellUsMore.ndr-reference")
       case (Some("housing_benefit"), _, _, Some("submit_new_application")) => Right("tellUsMore.general")
+      case (Some("housing_benefit"), _, _, Some("check_fair_rent_register")) => Right("tellUsMore.general")
       case _ => Left("Unknown enquiry category in enquiry key")
     }
   }
@@ -152,6 +153,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
       case (_, Some("business_rates_property_empty"), _, _, _, _, _, _, _, _) => routes.PropertyEmptyController.onBusinessRatesPageLoad().url
       case (_, Some("business_rates_other"), _, _, _, _, _, _, _, _) => routes.BusinessRatesSubcategoryController.onPageLoad(mode).url
       case (_, _, Some("submit_new_application"), _, _, _, _, _, _, _) => routes.FairRentEnquiryController.onFairRentEnquiryNew().url
+      case (_, _, Some("check_fair_rent_register"), _, _, _, _, _, _, _) => routes.FairRentEnquiryController.onFairRentEnquiryCheck().url
       case _ => routes.PropertyAddressController.onPageLoad(NormalMode).url
     }
   }
