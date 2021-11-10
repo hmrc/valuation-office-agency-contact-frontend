@@ -683,11 +683,11 @@ satisfaction.neither = Ddim yn fodlon nac yn anfodlon
 satisfaction.dissatisfied = Anfodlon
 satisfaction.veryDissatisfied = Anfodlon iawn
 satisfactionSurvey.satisfaction = Dewiswch sut y byddech chi’n disgrifio’ch profiad
-satisfactionSurvey.details = Rhaid i'r adborth gynnwys llythrennau a i z, rhifau 0 i 9, cysylltnodau, bylchau a chollnodau yn unig
+satisfactionSurvey.details = Rhaid i'''r adborth gynnwys llythrennau a i z, rhifau 0 i 9, cysylltnodau, bylchau a chollnodau yn unig
 confirmation.feedback.submit = Anfon adborth
 error.required.feedback = Dewiswch sut y byddech chi’n disgrifio’ch profiad
-error.message.max_length.feedback = Rhaid i'r adborth fod yn 1200 nod neu lai
-error.message.xss-invalid.feedback = Rhaid i'r adborth gynnwys llythrennau a i z, rhifau 0 i 9, cysylltnodau, bylchau a chollnodau yn unig
+error.message.max_length.feedback = Rhaid i'''r adborth fod yn 1200 nod neu lai
+error.message.xss-invalid.feedback = Rhaid i'''r adborth gynnwys llythrennau a i z, rhifau 0 i 9, cysylltnodau, bylchau a chollnodau yn unig
 
 # SURVEY THANKYOU
 ###############################
@@ -738,6 +738,15 @@ providingLettings.email-title = E-bost:
 providingLettings.email = NSOhelpdesk@voa.gov.uk
 providingLettings.phone-title =  Ffôn
 providingLettings.phone-number = 03000 502502
+
+fairRentApplication.title = Cyflwyno cais rhent teg gan ddefnyddio’r ffurflen gais - Valuation Office Agency contact form - GOV.UK
+fairRentApplication.heading = Cyflwyno cais rhent teg gan ddefnyddio’r ffurflen gais
+fairRentApplication.p1 = Dadlwythwch y ffurflenni cais rhent teg a darllenwch ganllaw
+fairRentApplication.p1.url = https://www.gov.uk/government/publications/fair-rent-forms
+fairRentApplication.p2 = ar wefan GOV.UK.
+fairRentApplication.subheading = Cymorth arall ar GOV.UK
+fairRentApplication.p3 = Ynglŷn â rhenti teg
+fairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
 
 datePropertyChanged.poorRepair.title = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol) - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 datePropertyChanged.poorRepair.heading = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol)

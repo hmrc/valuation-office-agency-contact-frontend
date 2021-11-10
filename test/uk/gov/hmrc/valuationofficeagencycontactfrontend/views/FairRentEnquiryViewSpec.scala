@@ -42,15 +42,15 @@ class FairRentEnquiryViewSpec extends ViewBehaviours {
       }
 
       "has a radio button with the label set to the message with key housingBenefits.new and that it is used once" in {
-        labelDefinedAndUsedOnce("new", messageKeyPrefix, createView)
+        labelDefinedAndUsedOnce("submit_new_application", messageKeyPrefix, createView)
       }
 
       "has a radio button with the label set to the message with key housingBenefits.check and that it is used once" in {
-        labelDefinedAndUsedOnce("check", messageKeyPrefix, createView)
+        labelDefinedAndUsedOnce("check_fair_rent_register", messageKeyPrefix, createView)
       }
 
       "has a radio button with the label set to the message with key housingBenefits.other and that it is used once" in {
-        labelDefinedAndUsedOnce("other", messageKeyPrefix, createView)
+        labelDefinedAndUsedOnce("other_request", messageKeyPrefix, createView)
       }
 
       "has a link marked with site.back leading to the Enquiry Page" in {

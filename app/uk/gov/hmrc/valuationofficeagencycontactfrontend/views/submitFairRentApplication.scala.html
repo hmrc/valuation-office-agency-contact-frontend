@@ -29,26 +29,31 @@
 @beforeContent = {
  @backLink(
   BackLink(
-   href=routes.EnquiryDateController.onPageLoad().url,
+   href=routes.FairRentEnquiryController.onPageLoad().url,
    content = Text(messages("site.back")),
    classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0"))
 }
 
 @mainTemplate(
- pageTitle = Some(messages("expectedUpdate.title")),
+ pageTitle = Some(messages("fairRentApplication.title")),
  beforeContentBlock = Some(beforeContent)
 ) {
 
 
- <h1 class="govuk-heading-l">@messages("expectedUpdate.heading")</h1>
+ <h1 class="govuk-heading-l">@messages("fairRentApplication.heading")</h1>
 
  <p class="govuk-body">
- @messages("expectedUpdate.para1")
+  <a class="govuk-link" target="_self" href=@messages("fairRentApplication.p1.url")>
+  @messages("fairRentApplication.p1")
+  </a>
+  @messages("fairRentApplication.p2")
  </p>
 
- <p class="govuk-body">
- @messages("expectedUpdate.para2")
- </p>
+ <h2 class="govuk-heading-m">@messages("fairRentApplication.subheading")</h2>
+
+ <ul class="govuk-list">
+  <li><a class="govuk-link" target="_self" href=@messages("fairRentApplication.p3.url")>@messages("fairRentApplication.p3")</a></li>
+ </ul>
 
  @components.general_enquires(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
 }

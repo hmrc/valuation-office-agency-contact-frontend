@@ -31,8 +31,8 @@ class ProvidingLettingsViewSpec extends ViewBehaviours {
     behave like normalPage(view, "providingLettings",
         "title",
         "heading",
-        "email-title",
-        "email"
+        "p1",
+        "p2"
     )
 
     "has a link marked with site.back leading to the Enquiry Category Page" in {

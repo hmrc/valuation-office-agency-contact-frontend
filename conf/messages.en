@@ -617,6 +617,9 @@ tellUsMore.other.title = What is your other Council Tax enquiry? - Valuation Off
 tellUsMore.other.heading = What is your other Council Tax enquiry?
 tellUsMore.other.hint = Include details such as case reference numbers and dates.
 
+# --- Tell Us More Housing Benefit journey
+tellUsMore.housingBenefit.other.heading = What is your other Housing Benefit, Local Housing Allowances, or fair rents enquiry?
+
 # --- Tell Us More CT other journey
 tellUsMore.general.title = What is your Council Tax enquiry? - Valuation Office Agency contact form - GOV.UK
 tellUsMore.general.heading = What is your Council Tax enquiry?
@@ -709,17 +712,19 @@ valuationForTaxes.openingHours-title = Opening hours
 valuationForTaxes.openingHours = 8:30am to 5:00pm. Closed on bank holidays.
 
 providingLettings.title = Contact details for the Rent Officers - Valuation Office Agency contact form - GOV.UK
-providingLettings.heading = Contact details for the Rent Officers
-providingLettings.address.heading =  VOA Rent Officers: public
-providingLettings.address.1 =  Network Support Office - Housing Allowances
-providingLettings.address.2 =  Wycliffe House
-providingLettings.address.3 =  Green Lane
-providingLettings.address.4 =  Durham
-providingLettings.address.5 =  DH1 3UW
-providingLettings.email-title =  Email:
-providingLettings.email = NSOhelpdesk@voa.gov.uk
-providingLettings.phone-title = Phone
-providingLettings.phone-number = 03000 502502
+providingLettings.heading = Provide information to the Rent Officers online
+providingLettings.p1 = Download and complete the form on GOV.UK.
+providingLettings.p1.url = https://www.gov.uk/government/publications/local-housing-allowance-and-statistics-on-private-rent-levels
+providingLettings.p2 = on the GOV.UK website.
+
+fairRentApplication.title = Submit a fair rent application using the application form - Valuation Office Agency contact form - GOV.UK
+fairRentApplication.heading = Submit a fair rent application using the application form
+fairRentApplication.p1 = Download the fair rent application forms and read guidance
+fairRentApplication.p1.url = https://www.gov.uk/government/publications/fair-rent-forms
+fairRentApplication.p2 = on the GOV.UK website.
+fairRentApplication.subheading = Other help on GOV.UK
+fairRentApplication.p3 = About fair rents
+fairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
 
 datePropertyChanged.poorRepair.title = When did your property start to be in poor repair? (optional) - Valuation Office Agency contact form - GOV.UK
 datePropertyChanged.poorRepair.heading = When did your property start to be in poor repair? (optional)

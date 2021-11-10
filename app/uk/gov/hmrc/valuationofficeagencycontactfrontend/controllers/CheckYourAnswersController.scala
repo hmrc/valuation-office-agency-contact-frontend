@@ -69,22 +69,22 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
     import answers._
     val checkYourAnswersHelper = new CheckYourAnswersHelper(answers)
 
-    (contactReason, enquiryCategory, councilTaxSubcategory, businessRatesSubcategory) match {
-      case (Some("more_details"), _, _, _) => Some(
+    (contactReason, enquiryCategory, councilTaxSubcategory, businessRatesSubcategory, fairRentEnquiryEnquiry) match {
+      case (Some("more_details"), _, _, _, _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.existingEnquiryCategory,
           checkYourAnswersHelper.refNumber,
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress,
           checkYourAnswersHelper.whatElse).flatten))
-      case (Some("update_existing"), _, _, _) => Some(
+      case (Some("update_existing"), _, _, _, _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.existingEnquiryCategory,
           checkYourAnswersHelper.refNumber,
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress,
           checkYourAnswersHelper.anythingElse).flatten))
-      case (Some("new_enquiry"), Some("business_rates"), _, Some("business_rates_from_home")) => Some(
+      case (Some("new_enquiry"), Some("business_rates"), _, Some("business_rates_from_home"), _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.businessRatesSubcategory,
@@ -92,7 +92,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
           checkYourAnswersHelper.tellUsMore("tellUsMore.business.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress).flatten))
-      case (Some("new_enquiry"), Some("business_rates"), _, Some("business_rates_not_used")) => Some(
+      case (Some("new_enquiry"), Some("business_rates"), _, Some("business_rates_not_used"), _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.businessRatesSubcategory,
@@ -100,21 +100,21 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
           checkYourAnswersHelper.tellUsMore("tellUsMore.notUsed.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress).flatten))
-      case (Some("new_enquiry"), Some("business_rates"), _, Some("business_rates_other")) => Some(
+      case (Some("new_enquiry"), Some("business_rates"), _, Some("business_rates_other"), _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.businessRatesSubcategory,
           checkYourAnswersHelper.tellUsMore("tellUsMore.business.other.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress).flatten))
-      case (_, Some("business_rates"), _, _) => Some(
+      case (_, Some("business_rates"), _, _, _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.businessRatesSubcategory,
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress,
           checkYourAnswersHelper.tellUsMore()).flatten))
-      case (_, Some("council_tax"), Some("council_tax_property_poor_repair"), _) => Some(
+      case (_, Some("council_tax"), Some("council_tax_property_poor_repair"), _, _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.councilTaxSubcategory,
@@ -122,7 +122,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
           checkYourAnswersHelper.tellUsMore("tellUsMore.poorRepair.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress).flatten))
-      case (_, Some("council_tax"), Some("council_tax_business_uses"), _) => Some(
+      case (_, Some("council_tax"), Some("council_tax_business_uses"), _, _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.councilTaxSubcategory,
@@ -130,7 +130,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
           checkYourAnswersHelper.tellUsMore("tellUsMore.business.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress).flatten))
-      case (_, Some("council_tax"), Some("council_tax_area_change"), _) => Some(
+      case (_, Some("council_tax"), Some("council_tax_area_change"), _, _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.councilTaxSubcategory,
@@ -138,50 +138,58 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
           checkYourAnswersHelper.tellUsMore("tellUsMore.areaChange.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress).flatten))
-      case (_, Some("council_tax"), Some("council_tax_other"), _) => Some(
+      case (_, Some("council_tax"), Some("council_tax_other"), _, _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.councilTaxSubcategory,
           checkYourAnswersHelper.tellUsMore("tellUsMore.other.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress).flatten))
-      case (_, Some("council_tax"), _, _) => Some(
+      case (_, Some("council_tax"), _, _, _) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.councilTaxSubcategory,
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress,
           checkYourAnswersHelper.tellUsMore()).flatten))
+      case (_, Some("housing_benefit"), _, _, Some("submit_new_application")) => Some(
+        AnswerSection(None, Seq(
+          checkYourAnswersHelper.enquiryCategory,
+          checkYourAnswersHelper.datePropertyChanged(),
+          checkYourAnswersHelper.tellUsMore("tellUsMore.housingBenefit.other.heading"),
+          checkYourAnswersHelper.contactDetails,
+          checkYourAnswersHelper.propertyAddress).flatten))
       case _ => None
     }
   }
 
   private[controllers] def enquiryBackLink(answers: UserAnswers): String = {
-    (answers.contactReason, answers.councilTaxSubcategory, answers.businessRatesSubcategory) match {
-      case (Some("new_enquiry"), Some("council_tax_property_poor_repair"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), Some("council_tax_business_uses"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), Some("council_tax_area_change"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), Some("council_tax_other"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), Some("council_tax_annexe"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), Some("council_tax_band_too_high"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), Some("council_tax_bill"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), Some("council_tax_band_for_new"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), Some("council_tax_property_empty"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), Some("council_tax_property_poor_repair"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), Some("council_tax_property_split_merge"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), Some("council_tax_property_demolished"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), _, Some("business_rates_from_home")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), _, Some("business_rates_bill")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), _, Some("business_rates_property_empty")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), _, Some("business_rates_changes")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), _, Some("business_rates_change_valuation")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), _, Some("business_rates_valuation")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), _, Some("business_rates_demolished")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), _, Some("business_rates_not_used")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), _, Some("business_rates_self_catering")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), _, _) => routes.TellUsMoreController.onPageLoad(NormalMode).url
-      case (Some("more_details"), _, _) => routes.WhatElseController.onPageLoad().url
-      case (Some("update_existing"), _, _) => routes.AnythingElseTellUsController.onPageLoad().url
+    (answers.contactReason, answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.fairRentEnquiryEnquiry) match {
+      case (Some("new_enquiry"), Some("council_tax_property_poor_repair"), _, _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), Some("council_tax_business_uses"), _, _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), Some("council_tax_area_change"), _, _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), Some("council_tax_other"), _, _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), Some("council_tax_annexe"), _, _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), Some("council_tax_band_too_high"), _, _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), Some("council_tax_bill"), _, _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), Some("council_tax_band_for_new"), _, _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), Some("council_tax_property_empty"), _, _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), Some("council_tax_property_poor_repair"), _, _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), Some("council_tax_property_split_merge"), _, _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), Some("council_tax_property_demolished"), _, _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), _, Some("business_rates_from_home"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), _, Some("business_rates_bill"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), _, Some("business_rates_property_empty"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), _, Some("business_rates_changes"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), _, Some("business_rates_change_valuation"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), _, Some("business_rates_valuation"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), _, Some("business_rates_demolished"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), _, Some("business_rates_not_used"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), _, Some("business_rates_self_catering"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), _, _, Some("submit_new_application")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), _, _, _) => routes.TellUsMoreController.onPageLoad(NormalMode).url
+      case (Some("more_details"), _, _, _) => routes.WhatElseController.onPageLoad().url
+      case (Some("update_existing"), _, _, _) => routes.AnythingElseTellUsController.onPageLoad().url
       case _ => {
         log.warn("Navigation for Check your answers page reached without selection of contact reason by controller")
         throw new RuntimeException("Navigation for check your anwsers page reached without selection of contact reason by controller")
