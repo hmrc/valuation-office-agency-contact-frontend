@@ -105,9 +105,10 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
       case (Some("council_tax"), Some("council_tax_property_split_merge"), _, _) => Right("tellUsMore.general")
       case (Some("council_tax"), Some("council_tax_property_demolished"), _, _) => Right("tellUsMore.general")
       case (Some("council_tax"), Some("council_tax_area_change"), _, _) => Right("tellUsMore.general")
+      case (Some("housing_benefit"), _, _, Some("submit_new_application")) => Right("tellUsMore.fairRent")
+      case (Some("housing_benefit"), _, _, Some("other_request")) => Right("tellUsMore.fairRent")
       case (Some("council_tax"), _, _, _) => Right("tellUsMore.ct-reference")
       case (Some("business_rates"), _, _, _) => Right("tellUsMore.ndr-reference")
-      case (Some("housing_benefit"), _, _, Some("submit_new_application")) => Right("tellUsMore.fairRent")
       case _ => Left("Unknown enquiry category in enquiry key")
     }
   }
@@ -152,6 +153,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
       case (_, Some("business_rates_property_empty"), _, _, _, _, _, _, _, _) => routes.PropertyEmptyController.onBusinessRatesPageLoad().url
       case (_, Some("business_rates_other"), _, _, _, _, _, _, _, _) => routes.BusinessRatesSubcategoryController.onPageLoad(mode).url
       case (_, _, Some("submit_new_application"), _, _, _, _, _, _, _) => routes.FairRentEnquiryController.onFairRentEnquiryNew().url
+      case (_, _, Some("other_request"), _, _, _, _, _, _, _) => routes.FairRentEnquiryController.onPageLoad().url
       case _ => routes.PropertyAddressController.onPageLoad(NormalMode).url
     }
   }
