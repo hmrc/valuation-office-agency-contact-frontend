@@ -55,7 +55,6 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
                         ae: Option[String] = None,
                         ee: Option[String] = None,
                         cr: Option[String] = None,
-                        ha: Option[String] = None,
                         cacheMap: CacheMap = new CacheMap("", Map())) extends UserAnswers(cacheMap) {
 
     override def tellUsMore: Option[TellUsMore] = Some(tum)
