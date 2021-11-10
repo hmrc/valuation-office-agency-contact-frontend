@@ -27,15 +27,15 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
   val tellUs = TellUsMore("Hello")
   val cd = ContactDetails("c1", "c3", "c5")
   val propertyAddress1 = PropertyAddress("a", None, "c", None, "f")
-  val userAnswers1 = new FakeUserAnswers(cd, "council_tax", "council_tax_band", "", propertyAddress1, tellUs)
+  val userAnswers1 = new FakeUserAnswers(cd, "council_tax", "council_tax_band", "",  "", propertyAddress1, tellUs)
   val checkYourAnswersHelper1 = new CheckYourAnswersHelper(userAnswers1)
 
   val propertyAddress2 = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
-  val userAnswers2= new FakeUserAnswers(cd, "business_rates", "", "business_rates_rateable_value", propertyAddress2, tellUs)
+  val userAnswers2= new FakeUserAnswers(cd, "business_rates", "", "business_rates_rateable_value",  "", propertyAddress2, tellUs)
   val checkYourAnswersHelper2 = new CheckYourAnswersHelper(userAnswers2)
 
   val anythingElse = Some("AnythingElse")
-  val userAnswers3 = new FakeUserAnswers(cd, "council_tax", "council_tax_band", "", propertyAddress1, tellUs, anythingElse)
+  val userAnswers3 = new FakeUserAnswers(cd, "council_tax", "council_tax_band", "",  "", propertyAddress1, tellUs, anythingElse)
   val checkYourAnswersHelper3 = new CheckYourAnswersHelper(userAnswers3)
 
   val backlinkUrl = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url

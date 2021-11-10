@@ -40,7 +40,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "",  "", propertyAddress, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.tellUsMore()
@@ -53,7 +53,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "",  "", propertyAddress, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.tellUsMore()
@@ -75,7 +75,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "",  "", propertyAddress, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.enquiryCategory
@@ -89,7 +89,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "",  "", propertyAddress, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.enquiryCategory
@@ -110,7 +110,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "",  "", propertyAddress, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.councilTaxSubcategory
@@ -124,7 +124,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "",  "", propertyAddress, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.councilTaxSubcategory
@@ -145,7 +145,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, "business_rates", "", businessSubcategory, propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "business_rates", "", businessSubcategory,  "", propertyAddress, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.businessRatesSubcategory
@@ -159,7 +159,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val businessSubcategory = "business_rates_rateable_value"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, "business_rates", "", businessSubcategory, propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "business_rates", "", businessSubcategory,  "", propertyAddress, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.businessRatesSubcategory
@@ -180,7 +180,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", address, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "",  "", address, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.propertyAddress
@@ -194,7 +194,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", address, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "",  "", address, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.propertyAddress
@@ -208,7 +208,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val tellUs = TellUsMore("")
         val anythingElse = Some("AnythingElseTellUs")
 
-        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", address, tellUs, anythingElse)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "",  "", address, tellUs, anythingElse)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.anythingElse
@@ -229,7 +229,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "", address, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "council_tax", councilTaxSubcategory, "",  "", address, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.contactDetails
@@ -244,7 +244,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val councilTaxSubcategory = "council_tax_band"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "", address, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, ec, councilTaxSubcategory, "",  "", address, tellUs)
         val checkYourAnswers = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.contactDetails
