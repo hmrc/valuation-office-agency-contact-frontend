@@ -660,7 +660,9 @@ housingBenefits.heading = Ynglŷn â beth yw eich ymholiad rhent teg?
 housingBenefits.new = Rwyf am gyflwyno cais newydd
 housingBenefits.check = Rwyf am wirio’r gofrestr rhent deg
 housingBenefits.other = Arall
+housingBenefits.fairRentTelephone = Ffôn: 03000 502502
 error.housingBenefits.required = Dewiswch beth yw pwrpas eich ymholiad rhent teg
+
 
 # --- Confirmation for new and existing enquiries
 confirmation.title = Ymchwiliad wedi’i gyflwyno - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK

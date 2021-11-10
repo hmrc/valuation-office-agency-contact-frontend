@@ -647,6 +647,7 @@ housingBenefits.heading = What is your fair rent enquiry about?
 housingBenefits.new = I want to submit a new application
 housingBenefits.check = I want to check the fair rent register
 housingBenefits.other = Other
+housingBenefits.fairRentTelephone = Telephone: 03000 502502
 error.housingBenefits.required = Select what your fair rent enquiry is about
 
 anythingElse.title = Is there anything else you would like to tell us about? (optional) - Valuation Office Agency contact form - GOV.UK
