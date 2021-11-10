@@ -37,9 +37,9 @@ object FairRentEnquiryForm {
     Form(single("value" -> of(FairRentEnquiryFormatter)))
 
   def options = Seq(
-    RadioOption("housingBenefits", "new"),
-    RadioOption("housingBenefits", "check"),
-    RadioOption("housingBenefits", "other")
+    RadioOption("housingBenefits", "submit_new_application"),
+    RadioOption("housingBenefits", "check_fair_rent_register"),
+    RadioOption("housingBenefits", "other_request")
   )
 
   def optionIsValid(value: String) = options.exists(o => o.value == value)
