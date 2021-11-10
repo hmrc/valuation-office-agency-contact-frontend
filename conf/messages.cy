@@ -645,6 +645,12 @@ tellUsMore.business.other.title = Beth yw eich ymholiad ardrethi busnes arall? -
 tellUsMore.business.other.heading = Beth yw eich ymholiad ardrethi busnes arall?
 tellUsMore.business.other.hint = Darparwch fanylion megis cyfeirnodau achos a dyddiadau.
 
+# --- Tell Us More Fair Rents other journey
+tellUsMore.fairRent.title = Beth yw eich ymholiad arall ynglŷn â rhenti teg? - Valuation Office Agency contact form - GOV.UK
+tellUsMore.fairRent.heading = Beth yw eich ymholiad arall ynglŷn â rhenti teg?
+tellUsMore.fairRent.hint =
+# --- tellUsMore.fairRent.hint is intentionally left blank as this route does not need a hint!
+
 # --- General Enquiries journey
 generalEnquiries.h2Heading = Os oes dal angen i chi gysylltu â ni
 generalEnquiries.p1.part1 = Defnyddiwch ein ffurflen ymholiadau cyffredinol
@@ -662,7 +668,6 @@ housingBenefits.check_fair_rent_register = Rwyf am wirio’r gofrestr rhent deg
 housingBenefits.other_request = Arall
 housingBenefits.fairRentTelephone = Ffôn: 03000 502502
 error.housingBenefits.required = Dewiswch beth yw pwrpas eich ymholiad rhent teg
-
 
 # --- Confirmation for new and existing enquiries
 confirmation.title = Ymchwiliad wedi’i gyflwyno - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK

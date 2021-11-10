@@ -88,7 +88,7 @@ class UserAnswers(val cacheMap: CacheMap) {
       subcategory <- eq match {
         case "council_tax" => councilTaxSubcategory
         case "business_rates" => businessRatesSubcategory
-        case "housing_allowance" => housingAllowanceSubcategory
+        case "housing_benefit" => fairRentEnquiryEnquiry
         case "other" => otherSubcategory
         case _ => None
       }

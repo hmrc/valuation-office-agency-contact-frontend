@@ -36,7 +36,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
 
       val expectedResult = Contact(contactDetails, propertyAddress, ec, councilTaxSubcategory, tellUs.message)
 
-      val userAnswers = new FakeUserAnswers(contactDetails, ec, councilTaxSubcategory, "", propertyAddress, tellUs)
+      val userAnswers = new FakeUserAnswers(contactDetails, ec, councilTaxSubcategory, "",  "", propertyAddress, tellUs)
 
       val result = userAnswers.contact()
 
@@ -52,7 +52,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
 
       val expectedResult = Contact(contactDetails, propertyAddress, ec, councilTaxSubcategory, tellUs.message)
 
-      val userAnswers = new FakeUserAnswers(contactDetails, ec, councilTaxSubcategory, "", propertyAddress, tellUs)
+      val userAnswers = new FakeUserAnswers(contactDetails, ec, councilTaxSubcategory, "",  "", propertyAddress, tellUs)
 
       val result = userAnswers.contact()
 
@@ -68,7 +68,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
 
       val expectedResult = Contact(contactDetails, propertyAddress, ec, businessSubcategory, tellUs.message)
 
-      val userAnswers = new FakeUserAnswers(contactDetails, ec, "", businessSubcategory, propertyAddress, tellUs)
+      val userAnswers = new FakeUserAnswers(contactDetails, ec, "", businessSubcategory,  "", propertyAddress, tellUs)
 
       val result = userAnswers.contact()
 
@@ -84,7 +84,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
 
       val expectedResult = Contact(contactDetails, propertyAddress, ec, businessSubcategory, tellUs.message)
 
-      val userAnswers = new FakeUserAnswers(contactDetails, ec, "", businessSubcategory, propertyAddress, tellUs)
+      val userAnswers = new FakeUserAnswers(contactDetails, ec, "", businessSubcategory,  "", propertyAddress, tellUs)
 
       val result = userAnswers.contact()
 
