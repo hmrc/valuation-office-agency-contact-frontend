@@ -77,6 +77,14 @@ class FairRentEnquiryControllerSpec extends ControllerSpecBase {
       status(result) mustBe OK
     }
 
+    "redirect to no action page when valid data for check is submitted" in {
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", FairRentEnquiryForm.options.head.value))
+
+      val result = controller().onFairRentEnquiryCheck(NormalMode)(postRequest)
+
+      status(result) mustBe OK
+    }
+
     "redirect to the next page when valid data is submitted" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", FairRentEnquiryForm.options.head.value))
 
