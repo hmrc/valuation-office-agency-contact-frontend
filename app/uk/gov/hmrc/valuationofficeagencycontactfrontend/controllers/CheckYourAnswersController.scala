@@ -159,6 +159,13 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
           checkYourAnswersHelper.tellUsMore("tellUsMore.fairRent.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress).flatten))
+      case (_, Some("housing_benefit"), _, _, Some("check_fair_rent_register")) => Some(
+        AnswerSection(None, Seq(
+          checkYourAnswersHelper.enquiryCategory,
+          checkYourAnswersHelper.datePropertyChanged(),
+          checkYourAnswersHelper.tellUsMore("tellUsMore.fairRent.heading"),
+          checkYourAnswersHelper.contactDetails,
+          checkYourAnswersHelper.propertyAddress).flatten))
       case (_, Some("housing_benefit"), _, _, Some("other_request")) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
@@ -194,6 +201,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
       case (Some("new_enquiry"), _, Some("business_rates_not_used"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _, Some("business_rates_self_catering"), _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _, _, Some("submit_new_application")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), _, _, Some("check_fair_rent_register")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _, _, Some("other_request")) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _, _, _) => routes.TellUsMoreController.onPageLoad(NormalMode).url
       case (Some("more_details"), _, _, _) => routes.WhatElseController.onPageLoad().url

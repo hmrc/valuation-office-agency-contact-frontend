@@ -744,6 +744,7 @@ providingLettings.email = NSOhelpdesk@voa.gov.uk
 providingLettings.phone-title =  Ffôn
 providingLettings.phone-number = 03000 502502
 
+
 fairRentApplication.title = Cyflwyno cais rhent teg gan ddefnyddio’r ffurflen gais - Valuation Office Agency contact form - GOV.UK
 fairRentApplication.heading = Cyflwyno cais rhent teg gan ddefnyddio’r ffurflen gais
 fairRentApplication.p1 = Dadlwythwch y ffurflenni cais rhent teg a darllenwch ganllaw
@@ -752,6 +753,15 @@ fairRentApplication.p2 = ar wefan GOV.UK.
 fairRentApplication.subheading = Cymorth arall ar GOV.UK
 fairRentApplication.p3 = Ynglŷn â rhenti teg
 fairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
+
+checkFairRentApplication.title = Gwiriwch y gofrestr rhenti teg ar-lein - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+checkFairRentApplication.heading = Gwiriwch y gofrestr rhenti teg ar-lein
+checkFairRentApplication.p1 = Defnyddiwch wasanaeth Asiantaeth y Swyddfa Brisio
+checkFairRentApplication.p1.url = https://www.gov.uk/check-register-rents
+checkFairRentApplication.p2 = i wirio’r gofrestr rhenti teg.
+checkFairRentApplication.subheading = Cymorth arall ar GOV.UK
+checkFairRentApplication.p3 = Ynglŷn â rhenti teg
+checkFairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
 
 datePropertyChanged.poorRepair.title = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol) - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 datePropertyChanged.poorRepair.heading = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol)

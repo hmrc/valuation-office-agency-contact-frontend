@@ -1,0 +1,59 @@
+@*
+ * Copyright 2021 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.govukfrontend.views.html.components.GovukBackLink
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+@import uk.gov.hmrc.govukfrontend.views.Aliases.Text
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+
+@this(mainTemplate: main_template, backLink: GovukBackLink)
+
+
+@()(implicit request: Request[_], messages: Messages)
+
+@beforeContent = {
+@backLink(
+ BackLink(
+  href=routes.FairRentEnquiryController.onPageLoad().url,
+  content = Text(messages("site.back")),
+  classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0"))
+}
+
+@mainTemplate(
+ pageTitle = Some(messages("checkFairRentApplication.title")),
+ beforeContentBlock = Some(beforeContent)
+) {
+
+
+ <h1 class="govuk-heading-l">@messages("checkFairRentApplication.heading")</h1>
+
+ <p class="govuk-body">
+  <a class="govuk-link" target="_self" href=@messages("checkFairRentApplication.p1.url")>
+  @messages("checkFairRentApplication.p1")
+  </a>
+  @messages("checkFairRentApplication.p2")
+ </p>
+
+ <h2 class="govuk-heading-m">@messages("checkFairRentApplication.subheading")</h2>
+
+ <ul class="govuk-list">
+  <li><a class="govuk-link" target="_self" href=@messages("checkFairRentApplication.p3.url")>@messages("checkFairRentApplication.p3")</a></li>
+ </ul>
+
+ @components.general_enquires(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+}
