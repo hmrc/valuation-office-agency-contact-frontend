@@ -728,6 +728,7 @@ fairRentApplication.p2 = on the GOV.UK website.
 fairRentApplication.subheading = Other help on GOV.UK
 fairRentApplication.p3 = About fair rents
 fairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
+fairRent.telephone = Telephone: 03000 502502
 
 checkFairRentApplication.title = Check the register of fair rents online - Valuation Office Agency contact form - GOV.UK
 checkFairRentApplication.heading = Check the register of fair rents online

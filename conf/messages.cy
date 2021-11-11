@@ -753,6 +753,7 @@ fairRentApplication.p2 = ar wefan GOV.UK.
 fairRentApplication.subheading = Cymorth arall ar GOV.UK
 fairRentApplication.p3 = Ynglŷn â rhenti teg
 fairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
+fairRent.telephone = Ffôn: 03000 502502
 
 checkFairRentApplication.title = Gwiriwch y gofrestr rhenti teg ar-lein - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 checkFairRentApplication.heading = Gwiriwch y gofrestr rhenti teg ar-lein
