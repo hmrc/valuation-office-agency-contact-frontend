@@ -728,6 +728,16 @@ fairRentApplication.p2 = on the GOV.UK website.
 fairRentApplication.subheading = Other help on GOV.UK
 fairRentApplication.p3 = About fair rents
 fairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
+fairRent.telephone = Telephone: 03000 502502
+
+checkFairRentApplication.title = Check the register of fair rents online - Valuation Office Agency contact form - GOV.UK
+checkFairRentApplication.heading = Check the register of fair rents online
+checkFairRentApplication.p1 = Use the Valuation Office Agency’s service
+checkFairRentApplication.p1.url = https://www.gov.uk/check-register-rents
+checkFairRentApplication.p2 = to check the register of fair rents.
+checkFairRentApplication.subheading = Other help on GOV.UK
+checkFairRentApplication.p3 = About fair rents
+checkFairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
 
 datePropertyChanged.poorRepair.title = When did your property start to be in poor repair? (optional) - Valuation Office Agency contact form - GOV.UK
 datePropertyChanged.poorRepair.heading = When did your property start to be in poor repair? (optional)

@@ -65,6 +65,7 @@ class Navigator @Inject()() {
       case (Some("new_enquiry"), _, Some("business_rates_valuation"), _) => routes.CheckYourAnswersController.onPageLoad
       case (Some("new_enquiry"), _, Some("business_rates_demolished"), _) => routes.CheckYourAnswersController.onPageLoad
       case (Some("new_enquiry"), _, _, Some("submit_new_application")) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), _, _, Some("check_fair_rent_register")) => routes.CheckYourAnswersController.onPageLoad
       case (Some("new_enquiry"), _, _, Some("other_request")) => routes.CheckYourAnswersController.onPageLoad
       case (Some("new_enquiry"), _, _, _) => routes.TellUsMoreController.onPageLoad(NormalMode)
       case (Some("more_details"), _, _, _) => routes.WhatElseController.onPageLoad()
@@ -218,6 +219,7 @@ class Navigator @Inject()() {
       case (_, Some("business_rates_demolished") , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (_, Some("business_rates_other") , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (_ , _, Some("submit_new_application")) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_ , _, Some("check_fair_rent_register")) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (_ , _, Some("other_request")) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case _ => routes.CheckYourAnswersController.onPageLoad
     }
@@ -320,7 +322,7 @@ class Navigator @Inject()() {
   private val FairRentEnquiryRouting: UserAnswers => Call = answers => {
     answers.fairRentEnquiryEnquiry match {
       case Some("submit_new_application") => routes.FairRentEnquiryController.onFairRentEnquiryNew()
-      case Some("check_fair_rent_register") => routes.FairRentEnquiryController.onPageLoad()
+      case Some("check_fair_rent_register") => routes.FairRentEnquiryController.onFairRentEnquiryCheck()
       case Some("other_request") => routes.TellUsMoreController.onPageLoad(NormalMode)
       case _ =>
         log.warn(s"Navigation for fair rent enquiry reached without selection of enquiry by controller")

@@ -28,18 +28,19 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.FairRentEnqu
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{fairRentEnquiry => fair_rent_enquiry}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{submitFairRentApplication => submit_fair_rent_application}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{submitFairRentApplication => submit_fair_rent_application, checkFairRentApplication => check_fair_rent_application}
 
 class FairRentEnquiryControllerSpec extends ControllerSpecBase {
 
   def fairRentEnquiryEnquiry = app.injector.instanceOf[fair_rent_enquiry]
   def onFairRentEnquiryNew = app.injector.instanceOf[submit_fair_rent_application]
+  def onFairRentEnquiryCheck = app.injector.instanceOf[check_fair_rent_application]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
   new FairRentEnquiryController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-  dataRetrievalAction, new DataRequiredActionImpl(ec), fairRentEnquiryEnquiry, onFairRentEnquiryNew, stubMessageControllerComponents)
+  dataRetrievalAction, new DataRequiredActionImpl(ec), fairRentEnquiryEnquiry, onFairRentEnquiryNew, onFairRentEnquiryCheck, stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = FairRentEnquiryForm()) = fairRentEnquiryEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
@@ -72,6 +73,14 @@ class FairRentEnquiryControllerSpec extends ControllerSpecBase {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", FairRentEnquiryForm.options.head.value))
 
       val result = controller().onFairRentEnquiryNew(NormalMode)(postRequest)
+
+      status(result) mustBe OK
+    }
+
+    "redirect to no action page when valid data for check is submitted" in {
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", FairRentEnquiryForm.options.head.value))
+
+      val result = controller().onFairRentEnquiryCheck(NormalMode)(postRequest)
 
       status(result) mustBe OK
     }
