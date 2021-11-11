@@ -712,20 +712,6 @@ valuationForTaxes.phone2 = Rhif f ffôn (Cymru) 03000 505505
 valuationForTaxes.openingHours-title = Oriau agor
 valuationForTaxes.openingHours =  08:30 – 17:00. Ar gau ar wyliau’r banc.
  
-housingBenefits.title = Manylion cyswllt ar gyfer Budd-dal Tai, Lwfansau Tai Lleol, neu renti teg - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-housingBenefits.heading = Manylion cyswllt ar gyfer Budd-dal Tai, Lwfansau Tai Lleol, neu renti teg
-housingBenefits.address.heading = Swyddogion Rhent Asiantaeth y Swyddfa Brisio: cyhoeddus
-housingBenefits.address.1 = Swyddfa Cymorth Rhwydwaith - Lwfansau Tai
-housingBenefits.address.2 = Llys Anwyl
-housingBenefits.address.3 = Ffordd Churton
-housingBenefits.address.4 = Y Rhyl
-housingBenefits.address.5 = LL18 3NB
-housingBenefits.email-title = E-bost:
-housingBenefits.email = NSOhelpdesk@voa.gov.uk
-housingBenefits.phone-title =  Ffôn:
-housingBenefits.phone-number = 03000 502502
-housingBenefits.opening-hours = Mae ein gwasanaeth ffôn ar gael rhwng 9.00am a 4.30pm, o Ddydd Llun i Ddydd Gwener.
- 
 providingLettings.title = Manylion cyswllt ar gyfer y Swyddogion Rhent - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 providingLettings.heading = Manylion cyswllt ar gyfer y Swyddogion Rhent
 providingLettings.address.heading = Swyddogion Rhent Asiantaeth y Swyddfa Brisio: cyhoeddus
