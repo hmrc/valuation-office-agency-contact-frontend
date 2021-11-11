@@ -49,11 +49,11 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
   def ndrBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
   def refNumberBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.RefNumberController.onPageLoad().url
 
-  def viewAsStringCT(form: Form[ContactDetails] = ContactDetailsForm()) = contactDetails(frontendAppConfig, form, NormalMode, ctBackLink)(fakeRequest, messages).toString
+  def viewAsStringCT(form: Form[ContactDetails] = ContactDetailsForm(), msg: String = "tellUsMore.business") = contactDetails(frontendAppConfig, form, NormalMode, msg, ctBackLink)(fakeRequest, messages).toString
 
-  def viewAsStringNDR(form: Form[ContactDetails] = ContactDetailsForm()) = contactDetails(frontendAppConfig, form, NormalMode, ndrBackLink)(fakeRequest, messages).toString
+  def viewAsStringNDR(form: Form[ContactDetails] = ContactDetailsForm(), msg: String = "tellUsMore.business") = contactDetails(frontendAppConfig, form, NormalMode, msg, ndrBackLink)(fakeRequest, messages).toString
 
-  def viewAsStringRefNumber(form: Form[ContactDetails] = ContactDetailsForm()) = contactDetails(frontendAppConfig, form, NormalMode, refNumberBackLink)(fakeRequest, messages).toString
+  def viewAsStringRefNumber(form: Form[ContactDetails] = ContactDetailsForm(), msg: String = "tellUsMore.business") = contactDetails(frontendAppConfig, form, NormalMode, msg, refNumberBackLink)(fakeRequest, messages).toString
 
   "ContactDetails Controller" must {
 

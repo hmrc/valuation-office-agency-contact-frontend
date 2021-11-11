@@ -24,6 +24,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_an
 
 class CheckYourAnswersViewSpec extends ViewBehaviours {
 
+  def msg = "tellUsMore.business"
+
   val tellUs = TellUsMore("Hello")
   val cd = ContactDetails("c1", "c3", "c5")
   val propertyAddress1 = PropertyAddress("a", None, "c", None, "f")
@@ -44,15 +46,15 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
   def view1 = () => checkYourAnswers(frontendAppConfig, Seq(AnswerSection(None, Seq(checkYourAnswersHelper1.enquiryCategory,
     checkYourAnswersHelper1.councilTaxSubcategory, checkYourAnswersHelper1.contactDetails, checkYourAnswersHelper1.propertyAddress,
-    checkYourAnswersHelper1.tellUsMore()).flatten)),backlinkUrl)(fakeRequest, messages)
+    checkYourAnswersHelper1.tellUsMore()).flatten)),backlinkUrl, msg)(fakeRequest, messages)
 
   def view2 = () => checkYourAnswers(frontendAppConfig, Seq(AnswerSection(None, Seq(checkYourAnswersHelper2.enquiryCategory,
     checkYourAnswersHelper2.businessRatesSubcategory, checkYourAnswersHelper2.contactDetails, checkYourAnswersHelper2.propertyAddress,
-    checkYourAnswersHelper2.tellUsMore()).flatten)),backlinkUrl)(fakeRequest, messages)
+    checkYourAnswersHelper2.tellUsMore()).flatten)),backlinkUrl, msg)(fakeRequest, messages)
 
   def view3 = () => checkYourAnswers(frontendAppConfig, Seq(AnswerSection(None, Seq(checkYourAnswersHelper3.enquiryCategory,
     checkYourAnswersHelper3.existingEnquiryCategory, checkYourAnswersHelper3.refNumber, checkYourAnswersHelper3.contactDetails,
-    checkYourAnswersHelper3.propertyAddress, checkYourAnswersHelper3.anythingElse).flatten)),backlinkUrlAE)(fakeRequest, messages)
+    checkYourAnswersHelper3.propertyAddress, checkYourAnswersHelper3.anythingElse).flatten)),backlinkUrlAE, msg)(fakeRequest, messages)
 
   "Check Your Answers view" must {
 

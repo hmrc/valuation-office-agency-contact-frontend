@@ -39,7 +39,7 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
     new PropertyAddressController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl(ec), propertyAddress, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
-  def viewAsString(form: Form[PropertyAddress] = PropertyAddressForm()) = propertyAddress(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[PropertyAddress] = PropertyAddressForm(), msg: String = "tellUsMore.general") = propertyAddress(frontendAppConfig, form, NormalMode, msg)(fakeRequest, messages).toString
 
   "Property Address Controller" must {
 

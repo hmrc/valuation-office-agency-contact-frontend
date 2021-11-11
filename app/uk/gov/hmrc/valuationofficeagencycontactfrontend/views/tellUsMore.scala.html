@@ -131,7 +131,11 @@
             @content
             @govukButton(Button(attributes = Map("id" -> "submit"), content = Text(messages("site.continue"))))
 
-            @components.help_with_service()
+            @if(enquiryKey == "tellUsMore.fairRent") {
+                @components.help_with_service_fair_rent()
+            } else {
+                @components.help_with_service()
+            }
         }
     }
 }
