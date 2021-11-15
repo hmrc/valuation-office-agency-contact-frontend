@@ -717,19 +717,11 @@ valuationForTaxes.phone2 = Rhif f ffôn (Cymru) 03000 505505
 valuationForTaxes.openingHours-title = Oriau agor
 valuationForTaxes.openingHours =  08:30 – 17:00. Ar gau ar wyliau’r banc.
  
-providingLettings.title = Manylion cyswllt ar gyfer y Swyddogion Rhent - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-providingLettings.heading = Manylion cyswllt ar gyfer y Swyddogion Rhent
-providingLettings.address.heading = Swyddogion Rhent Asiantaeth y Swyddfa Brisio: cyhoeddus
-providingLettings.address.1 = Swyddfa Cymorth Rhwydwaith - Lwfansau Tai
-providingLettings.address.2 = Llys Anwyl
-providingLettings.address.3 = Ffordd Churton
-providingLettings.address.4 = Y Rhyl
-providingLettings.address.5 = LL18 3NB
-providingLettings.email-title = E-bost:
-providingLettings.email = NSOhelpdesk@voa.gov.uk
-providingLettings.phone-title =  Ffôn
-providingLettings.phone-number = 03000 502502
-
+providingLettings.title = Darparwch wybodaeth i’r Swyddogion Rhent ar-lein - Valuation Office Agency contact form - GOV.UK
+providingLettings.heading = Darparwch wybodaeth i’r Swyddogion Rhent ar-lein
+providingLettings.p1 = Dadlwythwch a chwblhewch y ffurflen ar GOV.UK.
+providingLettings.p1.url = https://www.gov.uk/government/publications/local-housing-allowance-and-statistics-on-private-rent-levels
+providingLettings.p2 = Yna gallwch ei anfon at y Swyddogion Rhent gan ddefnyddio’r manylion a ddarperir gyda’r ffurflen.
 
 fairRentApplication.title = Cyflwyno cais rhent teg gan ddefnyddio’r ffurflen gais - Valuation Office Agency contact form - GOV.UK
 fairRentApplication.heading = Cyflwyno cais rhent teg gan ddefnyddio’r ffurflen gais

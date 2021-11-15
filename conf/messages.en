@@ -714,11 +714,11 @@ valuationForTaxes.phone2 = Telephone (Wales) 03000 505505
 valuationForTaxes.openingHours-title = Opening hours
 valuationForTaxes.openingHours = 8:30am to 5:00pm. Closed on bank holidays.
 
-providingLettings.title = Contact details for the Rent Officers - Valuation Office Agency contact form - GOV.UK
+providingLettings.title = Provide information to the Rent Officers online - Valuation Office Agency contact form - GOV.UK
 providingLettings.heading = Provide information to the Rent Officers online
 providingLettings.p1 = Download and complete the form on GOV.UK.
 providingLettings.p1.url = https://www.gov.uk/government/publications/local-housing-allowance-and-statistics-on-private-rent-levels
-providingLettings.p2 = on the GOV.UK website.
+providingLettings.p2 = You can then send it to the Rent Officers using the details provided with the form.
 
 fairRentApplication.title = Submit a fair rent application using the application form - Valuation Office Agency contact form - GOV.UK
 fairRentApplication.heading = Submit a fair rent application using the application form
