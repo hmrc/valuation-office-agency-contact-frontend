@@ -646,7 +646,7 @@ tellUsMore.business.other.heading = Beth yw eich ymholiad ardrethi busnes arall?
 tellUsMore.business.other.hint = Darparwch fanylion megis cyfeirnodau achos a dyddiadau.
 
 # --- Tell Us More Fair Rents other journey
-tellUsMore.fairRent.title = Beth yw eich ymholiad arall ynglŷn â rhenti teg? - Valuation Office Agency contact form - GOV.UK
+tellUsMore.fairRent.title = Beth yw eich ymholiad arall ynglŷn â rhenti teg? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 tellUsMore.fairRent.heading = Beth yw eich ymholiad arall ynglŷn â rhenti teg?
 tellUsMore.fairRent.hint =
 # --- tellUsMore.fairRent.hint is intentionally left blank as this route does not need a hint!
@@ -717,13 +717,13 @@ valuationForTaxes.phone2 = Rhif f ffôn (Cymru) 03000 505505
 valuationForTaxes.openingHours-title = Oriau agor
 valuationForTaxes.openingHours =  08:30 – 17:00. Ar gau ar wyliau’r banc.
  
-providingLettings.title = Darparwch wybodaeth i’r Swyddogion Rhent ar-lein - Valuation Office Agency contact form - GOV.UK
+providingLettings.title = Darparwch wybodaeth i’r Swyddogion Rhent ar-lein - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 providingLettings.heading = Darparwch wybodaeth i’r Swyddogion Rhent ar-lein
 providingLettings.p1 = Dadlwythwch a chwblhewch y ffurflen ar GOV.UK.
 providingLettings.p1.url = https://www.gov.uk/government/publications/local-housing-allowance-and-statistics-on-private-rent-levels
 providingLettings.p2 = Yna gallwch ei anfon at y Swyddogion Rhent gan ddefnyddio’r manylion a ddarperir gyda’r ffurflen.
 
-fairRentApplication.title = Cyflwyno cais rhent teg gan ddefnyddio’r ffurflen gais - Valuation Office Agency contact form - GOV.UK
+fairRentApplication.title = Cyflwyno cais rhent teg gan ddefnyddio’r ffurflen gais - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 fairRentApplication.heading = Cyflwyno cais rhent teg gan ddefnyddio’r ffurflen gais
 fairRentApplication.p1 = Dadlwythwch y ffurflenni cais rhent teg a darllenwch ganllaw
 fairRentApplication.p1.url = https://www.gov.uk/government/publications/fair-rent-forms
