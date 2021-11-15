@@ -226,6 +226,39 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
       assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
+    "The enquiry key function produces a string with a Fair Rent subcategory back link when the enquiry category is submit_new_application" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("")
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("")
+      when(mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("submit_new_application")
+      val result = controller().enquiryBackLink(mockUserAnswers)
+      val isCouncilTaxSelection = result.isRight
+      isCouncilTaxSelection mustBe true
+      assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    }
+
+    "The enquiry key function produces a string with a Fair Rent subcategory back link when the enquiry category is check_fair_rent_register" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("")
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("")
+      when(mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("check_fair_rent_register")
+      val result = controller().enquiryBackLink(mockUserAnswers)
+      val isCouncilTaxSelection = result.isRight
+      isCouncilTaxSelection mustBe true
+      assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    }
+
+    "The enquiry key function produces a string with a Fair Rent subcategory back link when the enquiry category is other_request" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("")
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("")
+      when(mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("other_request")
+      val result = controller().enquiryBackLink(mockUserAnswers)
+      val isCouncilTaxSelection = result.isRight
+      isCouncilTaxSelection mustBe true
+      assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    }
+
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_property_poor_repair" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_poor_repair")
