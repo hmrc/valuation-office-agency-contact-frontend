@@ -29,9 +29,11 @@ class PropertyAddressViewSpec extends QuestionViewBehaviours[PropertyAddress] {
 
   def propertyAddress = app.injector.instanceOf[property_address]
 
-  def createView = () => propertyAddress(frontendAppConfig, PropertyAddressForm(), NormalMode)(fakeRequest, messages)
+  val msg = ""
 
-  def createViewUsingForm = (form: Form[PropertyAddress]) => propertyAddress(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+  def createView = () => propertyAddress(frontendAppConfig, PropertyAddressForm(), NormalMode, msg)(fakeRequest, messages)
+
+  def createViewUsingForm = (form: Form[PropertyAddress]) => propertyAddress(frontendAppConfig, form, NormalMode, msg)(fakeRequest, messages)
 
   override val form = PropertyAddressForm()
 

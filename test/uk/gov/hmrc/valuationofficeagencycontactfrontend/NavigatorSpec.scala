@@ -842,6 +842,19 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
         navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
       }
+
+      "return a function that goes to the contact details when an enquiry category for business rates has been selected and submit_new_application option selected1" in {
+        when (mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("submit_new_application")
+        navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
+      }
+      "return a function that goes to the contact details when an enquiry category for business rates has been selected and check_fair_rent_register option selected" in {
+        when (mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("check_fair_rent_register")
+        navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
+      }
+      "return a function that goes to the contact details when an enquiry category for business rates has been selected and other_request option selected" in {
+        when (mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("other_request")
+        navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
+      }
     }
   }
 }
