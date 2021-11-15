@@ -365,6 +365,33 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad
       }
 
+      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and business rates subcategory is business_rates_demolished1" in {
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
+        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+        when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("")
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("")
+        when (mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("submit_new_application")
+        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad
+      }
+
+      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and fair rent enquiry is check_fair_rent_register" in {
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
+        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+        when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("")
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("")
+        when (mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("check_fair_rent_register")
+        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad
+      }
+
+      "return a function that goes to the 'Check your answers' page when the property address details form has been submitted without errors and fair rent enquiry is other_request" in {
+        when (mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
+        when (mockUserAnswers.contactReason) thenReturn Some("new_enquiry")
+        when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("")
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("")
+        when (mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("other_request")
+        navigator.nextPage(PropertyAddressId, NormalMode)(mockUserAnswers) mustBe routes.CheckYourAnswersController.onPageLoad
+      }
+
       "return a function that goes to the 'contact details' page when the council tax subcategory is council_tax_business_uses" in {
         when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_business_uses")
         navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
@@ -680,6 +707,12 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.PropertyAddressController.onPageLoad(NormalMode)
       }
 
+      "return function that goes on Property Address page when he want update exiting enquiry with business_rates1" in {
+        when (mockUserAnswers.contactReason) thenReturn Some("_")
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
+        navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.PropertyAddressController.onPageLoad(NormalMode)
+      }
+
       "return function that goes on Property Address page when he want update exiting enquiry with something else" in {
         when (mockUserAnswers.contactReason) thenReturn Some("_")
         when (mockUserAnswers.enquiryCategory) thenReturn Some("_")
@@ -793,6 +826,28 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         an[RuntimeException] should be thrownBy navigator.nextPage(BusinessRatesPropertyEnquiryId, NormalMode)(mockUserAnswers)
       }
 
+
+      "return function that goes on the non-business page when fairRentEnquiryEnquiry is submit_new_application" in {
+        when (mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("submit_new_application")
+        navigator.nextPage(FairRentEnquiryId, NormalMode)(mockUserAnswers) mustBe routes.FairRentEnquiryController.onFairRentEnquiryNew
+      }
+
+      "return function that goes on the non-business page when fairRentEnquiryEnquiry is check_fair_rent_register" in {
+        when (mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("check_fair_rent_register")
+        navigator.nextPage(FairRentEnquiryId, NormalMode)(mockUserAnswers) mustBe routes.FairRentEnquiryController.onFairRentEnquiryCheck
+      }
+
+      "return function that goes on the non-business page when fairRentEnquiryEnquiry is other_request" in {
+        when (mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("other_request")
+        navigator.nextPage(FairRentEnquiryId, NormalMode)(mockUserAnswers) mustBe routes.TellUsMoreController.onPageLoad(NormalMode)
+      }
+
+      "return a exception when fairRentEnquiryEnquiry returns None" in {
+        when (mockUserAnswers.fairRentEnquiryEnquiry) thenReturn None
+        an[RuntimeException] should be thrownBy navigator.nextPage(FairRentEnquiryId, NormalMode)(mockUserAnswers)
+      }
+
+
       "return a function that goes to the contact details when an enquiry category for business rates has been selected and business_rates_not_used option selected" in {
         when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_not_used")
         navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
@@ -840,6 +895,21 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return a function that goes to the contact details when an enquiry category for business rates has been selected and business_rates_other option selected" in {
         when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
+        navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
+      }
+
+      "return a function that goes to the contact details when an enquiry category for business rates has been selected and submit_new_application option selected1" in {
+        when (mockUserAnswers.councilTaxSubcategory) thenReturn Some("")
+        when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("")
+        when (mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("submit_new_application")
+        navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
+      }
+      "return a function that goes to the contact details when an enquiry category for business rates has been selected and check_fair_rent_register option selected" in {
+        when (mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("check_fair_rent_register")
+        navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
+      }
+      "return a function that goes to the contact details when an enquiry category for business rates has been selected and other_request option selected" in {
+        when (mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("other_request")
         navigator.nextPage(TellUsMoreId, NormalMode)(mockUserAnswers) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
       }
     }

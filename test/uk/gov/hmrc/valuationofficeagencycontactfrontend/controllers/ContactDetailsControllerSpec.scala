@@ -26,7 +26,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCache
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, ContactReasonId, CouncilTaxSubcategoryId, EnquiryCategoryId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, FairRentEnquiryId, CouncilTaxSubcategoryId, EnquiryCategoryId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{contactDetails => contact_details}
@@ -40,6 +40,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   val mockUserAnswers = mock[UserAnswers]
+  val msg: String = ""
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ContactDetailsController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
@@ -49,22 +50,13 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
   def ndrBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
   def refNumberBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.RefNumberController.onPageLoad().url
 
-  def viewAsStringCT(form: Form[ContactDetails] = ContactDetailsForm()) = contactDetails(frontendAppConfig, form, NormalMode, ctBackLink)(fakeRequest, messages).toString
+  def viewAsStringCT(form: Form[ContactDetails] = ContactDetailsForm()) = contactDetails(frontendAppConfig, form, NormalMode, msg, ctBackLink)(fakeRequest, messages).toString
 
-  def viewAsStringNDR(form: Form[ContactDetails] = ContactDetailsForm()) = contactDetails(frontendAppConfig, form, NormalMode, ndrBackLink)(fakeRequest, messages).toString
+  def viewAsStringNDR(form: Form[ContactDetails] = ContactDetailsForm()) = contactDetails(frontendAppConfig, form, NormalMode, msg, ndrBackLink)(fakeRequest, messages).toString
 
-  def viewAsStringRefNumber(form: Form[ContactDetails] = ContactDetailsForm()) = contactDetails(frontendAppConfig, form, NormalMode, refNumberBackLink)(fakeRequest, messages).toString
+  def viewAsStringRefNumber(form: Form[ContactDetails] = ContactDetailsForm()) = contactDetails(frontendAppConfig, form, NormalMode, msg, refNumberBackLink)(fakeRequest, messages).toString
 
   "ContactDetails Controller" must {
-
-    "return OK and the correct view for a GET when Contact Reason is more_details" in {
-      val validData = Map(ContactReasonId.toString -> JsString("more_details"))
-      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
-
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsStringRefNumber()
-    }
 
     "return OK and the correct view for a GET when enquiry category is business_rates" in {
       val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"), BusinessRatesSubcategoryId.toString -> JsString("business_rates_other"))
@@ -234,6 +226,39 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
       assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
+    "The enquiry key function produces a string with a Fair Rent subcategory back link when the enquiry category is submit_new_application" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("")
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("")
+      when(mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("submit_new_application")
+      val result = controller().enquiryBackLink(mockUserAnswers)
+      val isCouncilTaxSelection = result.isRight
+      isCouncilTaxSelection mustBe true
+      assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    }
+
+    "The enquiry key function produces a string with a Fair Rent subcategory back link when the enquiry category is check_fair_rent_register" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("")
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("")
+      when(mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("check_fair_rent_register")
+      val result = controller().enquiryBackLink(mockUserAnswers)
+      val isCouncilTaxSelection = result.isRight
+      isCouncilTaxSelection mustBe true
+      assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    }
+
+    "The enquiry key function produces a string with a Fair Rent subcategory back link when the enquiry category is other_request" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("")
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("")
+      when(mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("other_request")
+      val result = controller().enquiryBackLink(mockUserAnswers)
+      val isCouncilTaxSelection = result.isRight
+      isCouncilTaxSelection mustBe true
+      assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    }
+
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_property_poor_repair" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_poor_repair")
@@ -325,6 +350,22 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
       assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
+    "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_area_change1" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_area_change")
+      val result = controller().enquiryBackLink(mockUserAnswers)
+      val isCouncilTaxSelection = result.isRight
+      isCouncilTaxSelection mustBe true
+      assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    }
+
+    "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected1" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn None
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_other")
+      val result = controller().enquiryBackLink(mockUserAnswers)
+      result mustBe Left("Unknown enquiry category in enquiry key")
+    }
+
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn None
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
@@ -332,8 +373,179 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
       result mustBe Left("Unknown enquiry category in enquiry key")
     }
 
-    "return OK and the correct view for a GET when enquiry category is council_tax" in {
+    "return OK and the correct view for a GET when enquiry category is council_tax_business_uses" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_business_uses"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is council_tax_other" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_other"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is council_tax_annexe" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_annexe"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is council_tax_bill" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_bill"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is council_tax_band_too_high" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_band_too_high"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is council_tax_band_for_new" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_band_for_new"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is council_tax_property_empty" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_property_empty"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is council_tax_property_poor_repair" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_property_poor_repair"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is council_tax_property_demolished" in {
       val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_property_demolished"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is council_tax_property_split_merge" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_property_split_merge"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is council_tax_area_change" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_area_change"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is business_rates_from_home" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"), BusinessRatesSubcategoryId.toString -> JsString("business_rates_from_home"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is business_rates_change_valuation" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"), BusinessRatesSubcategoryId.toString -> JsString("business_rates_change_valuation"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is business_rates_bill" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"), BusinessRatesSubcategoryId.toString -> JsString("business_rates_bill"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is business_rates_changes" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"), BusinessRatesSubcategoryId.toString -> JsString("business_rates_changes"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is business_rates_property_empty" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"), BusinessRatesSubcategoryId.toString -> JsString("business_rates_property_empty"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is business_rates_valuation" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"), BusinessRatesSubcategoryId.toString -> JsString("business_rates_valuation"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is business_rates_demolished" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"), BusinessRatesSubcategoryId.toString -> JsString("business_rates_demolished"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is business_rates_not_used" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"), BusinessRatesSubcategoryId.toString -> JsString("business_rates_not_used"))
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is business_rates_self_catering" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"), BusinessRatesSubcategoryId.toString -> JsString("business_rates_self_catering"))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 

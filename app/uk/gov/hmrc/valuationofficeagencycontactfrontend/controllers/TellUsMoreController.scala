@@ -114,7 +114,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
     }
   }
 
-  private def backLink(answers: UserAnswers, mode: Mode) = {
+  private[controllers] def backLink(answers: UserAnswers, mode: Mode) = {
     (answers.councilTaxSubcategory,
       answers.businessRatesSubcategory,
       answers.fairRentEnquiryEnquiry,
