@@ -59,6 +59,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       status(result) mustBe OK
     }
 
+
     "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
       " and the business_rates_other has been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
@@ -310,42 +311,6 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       val result = controller().enquiryKey(mockUserAnswers)
       val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
       isCouncilTaxSelection mustBe true
-    }
-
-    "The enquiry key function produces a string with a tell us more  key when the enquiry category is housing_benefit" +
-      " and the submit_new_application has been selected" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
-      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
-      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
-      when(mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("submit_new_application")
-
-      val result = controller().enquiryKey(mockUserAnswers)
-      val isHousingBenefitSelection = result.right.get.endsWith("tellUsMore.fairRent")
-      isHousingBenefitSelection mustBe true
-    }
-
-    "The enquiry key function produces a string with a tell us more key when the enquiry category is housing_benefit" +
-      " and the check_fair_rent_register has been selected" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
-      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
-      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
-      when(mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("check_fair_rent_register")
-
-      val result = controller().enquiryKey(mockUserAnswers)
-      val isHousingBenefitSelection = result.right.get.endsWith("tellUsMore.fairRent")
-      isHousingBenefitSelection mustBe true
-    }
-
-    "The enquiry key function produces a string with a tell us more key when the enquiry category is housing_benefit" +
-      " and the other_request has been selected" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
-      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
-      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
-      when(mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("other_request")
-
-      val result = controller().enquiryKey(mockUserAnswers)
-      val isHousingBenefitSelection = result.right.get.endsWith("tellUsMore.fairRent")
-      isHousingBenefitSelection mustBe true
     }
 
     "The enquiry key function produces a string with a tell us more business key when the enquiry category is council_tax" +
