@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
-import play.api.Logger
 import javax.inject.Inject
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
@@ -45,8 +44,6 @@ class PropertyAddressController @Inject()(appConfig: FrontendAppConfig,
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  private val log = Logger(this.getClass)
-
   def helpTextKey(userAnswers: UserAnswers): Option[String] = {
     userAnswers.contactReason match {
       case Some("more_details") => Some("propertyAddress.existing_address")
@@ -60,56 +57,17 @@ class PropertyAddressController @Inject()(appConfig: FrontendAppConfig,
         case None => PropertyAddressForm()
         case Some(value) => PropertyAddressForm().fill(value)
       }
-      Ok(propertyAddress(appConfig, preparedForm, mode, getEnquiryKey(request.userAnswers), helpTextKey(request.userAnswers)))
+      Ok(propertyAddress(appConfig, preparedForm, mode, helpTextKey(request.userAnswers)))
   }
 
   def onSubmit(mode: Mode) = (getData andThen requireData).async {
     implicit request =>
       PropertyAddressForm().bindFromRequest().fold(
         (formWithErrors: Form[PropertyAddress]) =>
-          Future.successful(BadRequest(propertyAddress(appConfig, formWithErrors, mode, getEnquiryKey(request.userAnswers), helpTextKey(request.userAnswers)))),
+          Future.successful(BadRequest(propertyAddress(appConfig, formWithErrors, mode, helpTextKey(request.userAnswers)))),
         (value) =>
           dataCacheConnector.save[PropertyAddress](request.sessionId, PropertyAddressId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(PropertyAddressId, mode)(new UserAnswers(cacheMap))))
       )
-  }
-
-  private def getEnquiryKey(answers: UserAnswers): String = {
-    enquiryKey(answers).getOrElse {
-      log.warn(s"Navigation for Tell us more page reached with error - Unknown enquiry category in enquiry key")
-      throw new RuntimeException(s"Navigation for Tell us more page reached with error Unknown enquiry category in enquiry key")
-    }
-  }
-
-  private[controllers] def enquiryKey(answers: UserAnswers): Either[String, String] = {
-    (answers.enquiryCategory, answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.fairRentEnquiryEnquiry) match {
-      case (Some("business_rates"), _, Some("business_rates_from_home"), _) => Right("tellUsMore.business")
-      case (Some("business_rates"), _, Some("business_rates_other"), _) => Right("tellUsMore.business.other")
-      case (Some("business_rates"), _, Some("business_rates_change_valuation"), _) => Right("tellUsMore.business.other")
-      case (Some("business_rates"), _, Some("business_rates_bill"), _) => Right("tellUsMore.business.other")
-      case (Some("business_rates"), _, Some("business_rates_changes"), _) => Right("tellUsMore.business.other")
-      case (Some("business_rates"), _, Some("business_rates_property_empty"), _) => Right("tellUsMore.business.other")
-      case (Some("business_rates"), _, Some("business_rates_valuation"), _) => Right("tellUsMore.business.other")
-      case (Some("business_rates"), _, Some("business_rates_demolished"), _) => Right("tellUsMore.business.other")
-      case (Some("business_rates"), _, Some("business_rates_not_used"), _) => Right("tellUsMore.business.other")
-      case (Some("business_rates"), _, Some("business_rates_self_catering"), _) => Right("tellUsMore.business.other")
-      case (Some("council_tax"), Some("council_tax_business_uses"), _, _) => Right("tellUsMore.business")
-      case (Some("council_tax"), Some("council_tax_other"), _, _) => Right("tellUsMore.other")
-      case (Some("council_tax"), Some("council_tax_annexe"), _, _) => Right("tellUsMore.general")
-      case (Some("council_tax"), Some("council_tax_bill"), _, _) => Right("tellUsMore.general")
-      case (Some("council_tax"), Some("council_tax_band_too_high"), _, _) => Right("tellUsMore.general")
-      case (Some("council_tax"), Some("council_tax_band_for_new"), _, _) => Right("tellUsMore.general")
-      case (Some("council_tax"), Some("council_tax_property_empty"), _, _) => Right("tellUsMore.general")
-      case (Some("council_tax"), Some("council_tax_property_poor_repair"), _, _) => Right("tellUsMore.general")
-      case (Some("council_tax"), Some("council_tax_property_split_merge"), _, _) => Right("tellUsMore.general")
-      case (Some("council_tax"), Some("council_tax_property_demolished"), _, _) => Right("tellUsMore.general")
-      case (Some("council_tax"), Some("council_tax_area_change"), _, _) => Right("tellUsMore.general")
-      case (Some("housing_benefit"), _, _, Some("submit_new_application")) => Right("tellUsMore.fairRent")
-      case (Some("housing_benefit"), _, _, Some("check_fair_rent_register")) => Right("tellUsMore.fairRent")
-      case (Some("housing_benefit"), _, _, Some("other_request")) => Right("tellUsMore.fairRent")
-      case (Some("council_tax"), _, _, _) => Right("tellUsMore.ct-reference")
-      case (Some("business_rates"), _, _, _) => Right("tellUsMore.ndr-reference")
-      case _ => Left("Unknown enquiry category in enquiry key")
-    }
   }
 }

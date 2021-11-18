@@ -27,7 +27,7 @@
 @this(mainTemplate: main_template, formWithCSFR: FormWithCSRF,
         govukButton: GovukButton, govukBackLink: GovukBackLink, govukSummaryList: GovukSummaryList )
 
-@(appConfig: FrontendAppConfig, answerSections: Seq[Section], enquiryKey: String, backLink: String)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, answerSections: Seq[Section], backLink: String)(implicit request: Request[_], messages: Messages)
 
 
     @beforeBlock = {
@@ -52,10 +52,6 @@
         attributes = Map("id" -> "submit")
     ))
 
-    @if(enquiryKey == "tellUsMore.fairRent") {
-        @components.help_with_service_fair_rent()
-    } else {
-        @components.help_with_service()
-    }
+    @components.help_with_service()
 
 }

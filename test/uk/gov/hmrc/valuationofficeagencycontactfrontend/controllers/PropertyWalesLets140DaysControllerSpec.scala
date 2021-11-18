@@ -46,7 +46,6 @@ class PropertyWalesLets140DaysControllerSpec extends ControllerSpecBase {
   def wales140DaysBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesLets70DaysController.onPageLoad().url
 
   def viewAsString(form: Form[String] = PropertyEnglandLets140DaysForm()) = propertyWalesLets140DaysEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
-  def viewAsStringTwo(form: Form[String] = PropertyWalesLets140DaysForm()) = propertyWalesLets140DaysEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
   "PropertyWalesLets140DaysController" must {
 
