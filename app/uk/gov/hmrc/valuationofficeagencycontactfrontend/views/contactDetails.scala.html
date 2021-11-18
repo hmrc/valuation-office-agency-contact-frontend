@@ -36,7 +36,7 @@
         govukFieldset: GovukFieldset, govukBackLink: GovukBackLink)
 
 
-@(appConfig: FrontendAppConfig, form: Form[ContactDetails], mode: Mode, enquiryKey: String, backLink: String)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, form: Form[ContactDetails], mode: Mode, backLink: String)(implicit request: Request[_], messages: Messages)
 
 @beforeBlock = {
     @govukBackLink(
@@ -102,10 +102,6 @@
         @govukFieldset(Fieldset(html = content))
         @govukButton(Button(content = Text(messages("site.continue")), attributes = Map("id"-> "submit")))
 
-        @if(enquiryKey == "tellUsMore.fairRent") {
-            @components.help_with_service_fair_rent()
-        } else {
-            @components.help_with_service()
-        }
+        @components.help_with_service()
     }
 }
