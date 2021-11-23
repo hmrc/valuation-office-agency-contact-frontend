@@ -48,7 +48,7 @@ govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErro
     }
 
 @mainTemplate(
-    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("housingBenefits.title"))else messages("housingBenefits.title")),
+    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("fairRents.title"))else messages("fairRents.title")),
     beforeContentBlock = Option(beforeBlock)
 ) {
     @formWithCSFR(action = FairRentEnquiryController.onSubmit(), 'autoComplete -> "off") {
@@ -57,16 +57,16 @@ govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErro
                 ErrorSummary(
                     attributes = Map("id" -> "error-summary-heading"),
                     title = Text(messages("error.summary.title")),
-                    errorList = form.errors.map(e => ErrorLink(href = Some("#housingBenefits.new"), content = HtmlContent(messages(e.messages, e.args :_*))))
+                    errorList = form.errors.map(e => ErrorLink(href = Some("#fairRents.new"), content = HtmlContent(messages(e.messages, e.args :_*))))
                 )
             )
         }
 
         @govukRadios(Radios(
             fieldset = Option(Fieldset(legend = Option(
-                Legend(content = Text(messages("housingBenefits.heading")), isPageHeading = true, classes = "govuk-fieldset__legend--l"
+                Legend(content = Text(messages("fairRents.heading")), isPageHeading = true, classes = "govuk-fieldset__legend--l"
                 )))),
-            idPrefix = Option("housingBenefits"),
+            idPrefix = Option("fairRents"),
             name = "value",
             items = FairRentEnquiryForm.options.map(i => RadioItem(
                 content = Text(messages(i.messageKey)),

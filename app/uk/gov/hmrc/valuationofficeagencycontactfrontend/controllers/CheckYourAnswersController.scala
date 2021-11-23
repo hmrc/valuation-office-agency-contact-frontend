@@ -152,21 +152,21 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress,
           checkYourAnswersHelper.tellUsMore()).flatten))
-      case (_, Some("housing_benefit"), _, _, Some("submit_new_application")) => Some(
+      case (_, Some("fair_rent"), _, _, Some("submit_new_application")) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.datePropertyChanged(),
           checkYourAnswersHelper.tellUsMore("tellUsMore.fairRent.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress).flatten))
-      case (_, Some("housing_benefit"), _, _, Some("check_fair_rent_register")) => Some(
+      case (_, Some("fair_rent"), _, _, Some("check_fair_rent_register")) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.datePropertyChanged(),
           checkYourAnswersHelper.tellUsMore("tellUsMore.fairRent.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress).flatten))
-      case (_, Some("housing_benefit"), _, _, Some("other_request")) => Some(
+      case (_, Some("fair_rent"), _, _, Some("other_request")) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.datePropertyChanged(),

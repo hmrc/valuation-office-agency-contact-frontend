@@ -26,7 +26,7 @@ class FairRentEnquiryViewSpec extends ViewBehaviours {
 
   def fairRentEnquirySubcategory = app.injector.instanceOf[fair_rent_enquiry]
 
-  val messageKeyPrefix = "housingBenefits"
+  val messageKeyPrefix = "fairRents"
 
   def createView = () => fairRentEnquirySubcategory(frontendAppConfig, FairRentEnquiryForm(), NormalMode)(fakeRequest, messages)
 

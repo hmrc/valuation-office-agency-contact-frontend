@@ -491,7 +491,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         val housingBenefitSubcategory = "submit_new_application"
         val tellUs = TellUsMore("Hello")
 
-        val userAnswers = new FakeUserAnswers(cd, "housing_benefit", "", "",  housingBenefitSubcategory, propertyAddress, tellUs)
+        val userAnswers = new FakeUserAnswers(cd, "fair_rent", "", "",  housingBenefitSubcategory, propertyAddress, tellUs)
 
         navigator.nextPage(CheckYourAnswersId, NormalMode)(userAnswers) mustBe routes.ConfirmationController.onPageLoad
       }
@@ -520,7 +520,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return a function that goes to the housing benefits page when an enquiry category for housing benefits has been selected" in {
         when (mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
-        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.FairRentEnquiryController.onPageLoad
+        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.HousingBenefitsController.onPageLoad
       }
 
       "return a function that goes to the providing lettings page when an enquiry category for providing lettings has been selected" in {
@@ -682,7 +682,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return function that goes on Property Address page when he want update exiting enquiry with business_rates1" in {
         when (mockUserAnswers.contactReason) thenReturn Some("_")
-        when (mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
+        when (mockUserAnswers.enquiryCategory) thenReturn Some("fair_rent")
         navigator.nextPage(ContactDetailsId, NormalMode)(mockUserAnswers) mustBe routes.PropertyAddressController.onPageLoad(NormalMode)
       }
 

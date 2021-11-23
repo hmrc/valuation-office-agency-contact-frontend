@@ -26,7 +26,7 @@ object FairRentEnquiryForm {
   def FairRentEnquiryFormatter = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
-      case None => produceError(key, "error.housingBenefits.required")
+      case None => produceError(key, "error.fairRents.required")
       case _ => produceError(key, "error.unknown")
     }
 
@@ -37,9 +37,9 @@ object FairRentEnquiryForm {
     Form(single("value" -> of(FairRentEnquiryFormatter)))
 
   def options = Seq(
-    RadioOption("housingBenefits", "submit_new_application"),
-    RadioOption("housingBenefits", "check_fair_rent_register"),
-    RadioOption("housingBenefits", "other_request")
+    RadioOption("fairRents", "submit_new_application"),
+    RadioOption("fairRents", "check_fair_rent_register"),
+    RadioOption("fairRents", "other_request")
   )
 
   def optionIsValid(value: String) = options.exists(o => o.value == value)
