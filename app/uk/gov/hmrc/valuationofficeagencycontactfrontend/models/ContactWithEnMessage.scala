@@ -52,7 +52,7 @@ object ContactWithEnMessage {
         val enquiryKey = ct.enquiryCategory match {
           case `councilTaxKey` => "councilTaxSubcategory"
           case `businessRatesKey` => "businessRatesSubcategory"
-          case "housing_benefit" => "housingBenefits"
+          case "fair_rent" => "fairRents"
           case "other" => "other"
           case _ =>
             log.warn("Unknown enquiry category key " + ct.enquiryCategory)

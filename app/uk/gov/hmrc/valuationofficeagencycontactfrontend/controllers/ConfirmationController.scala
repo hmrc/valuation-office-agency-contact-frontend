@@ -94,7 +94,7 @@ object ConfirmationController {
     (answers.enquiryCategory, answers.existingEnquiryCategory) match {
       case (Some("council_tax"), _) => Right("councilTaxSubcategory")
       case (Some("business_rates"), _) => Right("businessRatesSubcategory")
-      case (Some("housing_benefit"), _) => Right("housingAllowanceSubcategory")
+      case (Some("fair_rent"), _) => Right("housingAllowanceSubcategory")
       case (_, Some("council_tax")) => Right("councilTaxSubcategory")
       case (_, Some("business_rates")) => Right("businessRatesSubcategory")
       case (_, Some("housing_allowance")) => Right("housingAllowanceSubcategory")

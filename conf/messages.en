@@ -109,7 +109,8 @@ enquiryCategory.title = What is your enquiry about? - Valuation Office Agency co
 enquiryCategory.heading = What is your enquiry about?
 enquiryCategory.council_tax = Council Tax
 enquiryCategory.business_rates = Business rates
-enquiryCategory.housing_benefit = Housing Benefit, Local Housing Allowances, or fair rents
+enquiryCategory.fair_rent = Fair rents
+enquiryCategory.housing_benefit = Housing Benefit, Local Housing Allowances
 enquiryCategory.providing_lettings = Providing lettings information to, or contacting, the Rent Officers
 enquiryCategory.valuations_for_tax = Right to Buy, Valuations for taxes, or appeals against Community Infrastructure Levy
 enquiryCategory.valuation_for_public_body = Valuation and property advice, for public sector bodies, by District Valuer Services (DVS)
@@ -647,14 +648,23 @@ generalEnquiries.telephoneEng.p3 = Telephone: 03000 501501 (England)
 generalEnquiries.telephoneWal.p3 = Telephone: 03000 505505 (Wales / Cymru)
 generalEnquiries.days.p3 = Monday to Friday, 9am to 4:30pm
 
-# --- Housing Benefit, Local Housing Allowances, or fair rents journey
-housingBenefits.title = What is your fair rent enquiry about? - Valuation Office Agency contact form - GOV.UK
-housingBenefits.heading = What is your fair rent enquiry about?
-housingBenefits.submit_new_application = I want to submit a new application
-housingBenefits.check_fair_rent_register = I want to check the fair rent register
-housingBenefits.other_request = Other
-housingBenefits.fairRentTelephone = Telephone: 03000 502502
-error.housingBenefits.required = Select what your fair rent enquiry is about
+# --- Housing Benefit, Local Housing Allowances journey
+housingBenefits.title = Contact details for Housing Benefit, Local Housing Allowances or fair rents - Valuation Office Agency contact form - GOV.UK
+housingBenefits.heading = Contact details for Housing Benefit, Local Housing Allowances or fair rents
+housingBenefits.email-title = Email:
+housingBenefits.email = NSOhelpdesk@voa.gov.uk
+housingBenefits.phone-title = Telephone:
+housingBenefits.phone-number = 03000 502502
+housingBenefits.opening-hours = Our telephone service is available between 9.00am and 4.30pm, Monday to Friday.
+
+# --- Fair Rents journey
+fairRents.title = What is your fair rent enquiry about? - Valuation Office Agency contact form - GOV.UK
+fairRents.heading = What is your fair rent enquiry about?
+fairRents.submit_new_application = I want to submit a new application
+fairRents.check_fair_rent_register = I want to check the fair rent register
+fairRents.other_request = Other
+fairRents.fairRentTelephone = Telephone: 03000 502502
+error.fairRents.required = Select what your fair rent enquiry is about
 
 anythingElse.title = Is there anything else you would like to tell us about? (optional) - Valuation Office Agency contact form - GOV.UK
 anythingElse.heading = Is there anything else you would like to tell us about? (optional)

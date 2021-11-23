@@ -109,7 +109,8 @@ enquiryCategory.title = Beth yw testun eich ymholiad? - Ffurflen Gysylltu Asiant
 enquiryCategory.heading = Beth yw testun eich ymholiad?
 enquiryCategory.council_tax = Treth Gyngor
 enquiryCategory.business_rates = Ardrethi busnes
-enquiryCategory.housing_benefit = Budd-dal Tai, Lwfansau Tai Lleol, neu renti teg
+enquiryCategory.fair_rent = Rhenti teg
+enquiryCategory.housing_benefit = Budd-dal Tai a Lwfans Tai Lleol
 enquiryCategory.providing_lettings =  Darparu gwybodaeth am y gosod i’r, neu gysylltu â’r, Swyddogion Rhent
 enquiryCategory.valuations_for_tax = Hawl i Brynu, Prisio ar gyfer trethi, neu apeliadau yn erbyn Ardoll Seilwaith Cymunedol
 enquiryCategory.valuation_for_public_body = Prisio a chyngor ar eiddo, ar gyfer cyrff sector cyhoeddus, gan y Gwasanaethau Prisiwr Dosbarth (GPD)
@@ -660,14 +661,24 @@ generalEnquiries.telephoneEng.p3 =
 generalEnquiries.telephoneWal.p3 = Ffôn: 03000 505505
 generalEnquiries.days.p3 = Dydd Llun i ddydd Gwener, 9yb tan 4:30yh
 
-# --- Housing Benefit, Local Housing Allowances, or fair rents journey
-housingBenefits.title = Ynglŷn â beth yw eich ymholiad rhent teg? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-housingBenefits.heading = Ynglŷn â beth yw eich ymholiad rhent teg?
-housingBenefits.submit_new_application = Rwyf am gyflwyno cais newydd
-housingBenefits.check_fair_rent_register = Rwyf am wirio’r gofrestr rhent deg
-housingBenefits.other_request = Arall
-housingBenefits.fairRentTelephone = Ffôn: 03000 502502
-error.housingBenefits.required = Dewiswch beth yw pwrpas eich ymholiad rhent teg
+# --- Housing Benefit, Local Housing Allowances journey
+housingBenefits.title = Manylion cyswllt ar gyfer Budd-dal Tai, Lwfansau Tai Lleol, neu renti teg - Valuation Office Agency contact form - GOV.UK
+housingBenefits.heading = Manylion cyswllt ar gyfer Budd-dal Tai, Lwfansau Tai Lleol, neu renti teg
+housingBenefits.email-title = E-bost:
+housingBenefits.email = NSOhelpdesk@voa.gov.uk
+housingBenefits.phone-title = Ffôn:
+housingBenefits.phone-number = 03000 502502
+housingBenefits.opening-hours = Mae ein gwasanaeth ffôn ar gael rhwng 9.00am a 4.30pm, o Ddydd Llun i Ddydd Gwener.
+
+# --- Fair Rents journey
+fairRents.title = Ynglŷn â beth yw eich ymholiad rhent teg? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+fairRents.heading = Ynglŷn â beth yw eich ymholiad rhent teg?
+fairRents.submit_new_application = Rwyf am gyflwyno cais newydd
+fairRents.check_fair_rent_register = Rwyf am wirio’r gofrestr rhent deg
+fairRents.other_request = Arall
+fairRents.fairRentTelephone = Ffôn: 03000 502502
+error.fairRents.required = Dewiswch beth yw pwrpas eich ymholiad rhent teg
+
 
 # --- Confirmation for new and existing enquiries
 confirmation.title = Ymchwiliad wedi’i gyflwyno - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK

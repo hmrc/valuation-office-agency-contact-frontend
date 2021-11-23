@@ -40,6 +40,7 @@ object EnquiryCategoryForm extends FormErrorHelper {
     RadioOption("enquiryCategory", "council_tax"),
     RadioOption("enquiryCategory", "business_rates"),
     RadioOption("enquiryCategory", "housing_benefit"),
+    RadioOption("enquiryCategory", "fair_rent"),
     RadioOption("enquiryCategory", "providing_lettings"),
     RadioOption("enquiryCategory", "valuations_for_tax"),
     RadioOption("enquiryCategory", "valuation_for_public_body")

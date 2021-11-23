@@ -93,7 +93,8 @@ class Navigator @Inject()() {
     answers.enquiryCategory match {
       case Some("council_tax") => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
       case Some("business_rates") => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
-      case Some("housing_benefit") => routes.FairRentEnquiryController.onPageLoad()
+      case Some("housing_benefit") => routes.HousingBenefitsController.onPageLoad()
+      case Some("fair_rent") => routes.FairRentEnquiryController.onPageLoad()
       case Some("valuations_for_tax") => routes.ValuationForTaxesController.onPageLoad()
       case Some("providing_lettings") => routes.ProvidingLettingsController.onPageLoad()
       case Some("valuation_for_public_body") => routes.ValuationAdviceController.onPageLoad()
@@ -114,7 +115,7 @@ class Navigator @Inject()() {
       case (Some("update_existing"), _) => routes.PropertyAddressController.onPageLoad(NormalMode)
       case (_, Some("council_tax")) => routes.PropertyAddressController.onPageLoad(NormalMode)
       case (_, Some("business_rates")) => routes.PropertyAddressController.onPageLoad(NormalMode)
-      case (_, Some("housing_benefit")) => routes.PropertyAddressController.onPageLoad(NormalMode)
+      case (_, Some("fair_rent")) => routes.PropertyAddressController.onPageLoad(NormalMode)
       case (_, Some(sel)) => {
         log.warn(s"Navigation for contact details page reached with an unknown selection $sel of enquiry by controller")
         throw new RuntimeException(s"Navigation for contact details page reached unknown selection $sel of enquiry by controller")
@@ -143,7 +144,7 @@ class Navigator @Inject()() {
   private def enquiryRouting(enquiry: Option[String], confirmationCall: Call): Call = {
     enquiry match {
       case Some("council_tax") | Some("business_rates") => confirmationCall
-      case Some("housing_benefit") | Some("other") => confirmationCall
+      case Some("fair_rent") | Some("other") => confirmationCall
       case Some(sel) =>
         log.warn(s"Navigation for confirmation page reached with an unknown selection $sel of enquiry by controller")
         throw new RuntimeException(s"Navigation for confirmation page reached unknown selection $sel of enquiry by controller")
@@ -218,9 +219,9 @@ class Navigator @Inject()() {
       case (_, Some("business_rates_valuation") , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (_, Some("business_rates_demolished") , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (_, Some("business_rates_other") , _) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (_ , _, Some("submit_new_application")) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (_ , _, Some("check_fair_rent_register")) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case (_ , _, Some("other_request")) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, _, Some("submit_new_application")) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, _, Some("check_fair_rent_register")) => routes.ContactDetailsController.onPageLoad(NormalMode)
+      case (_, _, Some("other_request")) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case _ => routes.CheckYourAnswersController.onPageLoad
     }
   }
