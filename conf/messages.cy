@@ -662,7 +662,7 @@ generalEnquiries.telephoneWal.p3 = Ffôn: 03000 505505
 generalEnquiries.days.p3 = Dydd Llun i ddydd Gwener, 9yb tan 4:30yh
 
 # --- Housing Benefit, Local Housing Allowances journey
-housingBenefits.title = Manylion cyswllt ar gyfer Budd-dal Tai, Lwfansau Tai Lleol, neu renti teg - Valuation Office Agency contact form - GOV.UK
+housingBenefits.title = Manylion cyswllt ar gyfer Budd-dal Tai, Lwfansau Tai Lleol, neu renti teg - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 housingBenefits.heading = Manylion cyswllt ar gyfer Budd-dal Tai, Lwfansau Tai Lleol, neu renti teg
 housingBenefits.email-title = E-bost:
 housingBenefits.email = NSOhelpdesk@voa.gov.uk
