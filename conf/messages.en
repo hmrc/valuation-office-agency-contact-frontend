@@ -110,7 +110,7 @@ enquiryCategory.heading = What is your enquiry about?
 enquiryCategory.council_tax = Council Tax
 enquiryCategory.business_rates = Business rates
 enquiryCategory.fair_rent = Fair rents
-enquiryCategory.housing_benefit = Housing Benefit, Local Housing Allowances
+enquiryCategory.housing_benefit = Housing Benefit and Local Housing Allowances
 enquiryCategory.providing_lettings = Providing lettings information to, or contacting, the Rent Officers
 enquiryCategory.valuations_for_tax = Right to Buy, Valuations for taxes, or appeals against Community Infrastructure Levy
 enquiryCategory.valuation_for_public_body = Valuation and property advice, for public sector bodies, by District Valuer Services (DVS)
@@ -163,8 +163,8 @@ contactDetails.contactNumber.invalid = Enter a phone number, like 01632 960 001
 contactDetails.checkYourAnswersLabel = Contact details
 
 # --- Council Tax Bill
-councilTaxBill.title = Speak to your local council about your council tax bill - Valuation Office Agency contact form - GOV.UK
-councilTaxBill.heading = Speak to your local council about your council tax bill
+councilTaxBill.title = Speak to your local council about your Council Tax bill - Valuation Office Agency contact form - GOV.UK
+councilTaxBill.heading = Speak to your local council about your Council Tax bill
 councilTaxBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council">Contact your local council </a> if you have any questions about your Council Tax bill, as they handle billing and payments.
 councilTaxBill.subheading = Other help on GOV.UK
 councilTaxBill.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-council-tax-discount">Apply for discount on your Council Tax bill</a>
@@ -574,7 +574,7 @@ propertyAddress.postcode.invalid = Enter a real postcode
 propertyAddress.postcode.length = Postcode must be 8 characters or fewer
 propertyAddress.checkYourAnswersLabel = Property details
 
-whatElse.title = What else would you like to tell us? - Valuation Office Agency contact form - GOV.UK
+whatElse.title = What else would you like to tell us about your enquiry? - Valuation Office Agency contact form - GOV.UK
 whatElse.message = What else would you like to tell us about your enquiry?
 error.what_else.required = Enter more details about your enquiry
 error.what_else.invalid = Your enquiry must not include < and >

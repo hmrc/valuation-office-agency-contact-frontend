@@ -169,8 +169,8 @@ contactDetails.contactNumber.invalid = Nodwch rif ffôn, fel 01632 960 001
 contactDetails.checkYourAnswersLabel = Manylion cyswllt
 
 # --- Council Tax Bill
-councilTaxBill.title = Siaradwch â'ch cyngor lleol am eich bil treth gyngor - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-councilTaxBill.heading = Siaradwch â'ch cyngor lleol am eich bil treth gyngor
+councilTaxBill.title = Siaradwch â''ch cyngor lleol am eich bil Treth Gyngor - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+councilTaxBill.heading = Siaradwch â''ch cyngor lleol am eich bil Treth Gyngor
 councilTaxBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council">Cysylltwch â'ch cyngor lleol </a> os oes gennych unrhyw gwestiynau am eich bil Treth Gyngor, gan eu bod yn delio â biliau a thaliadau.
 councilTaxBill.subheading = Cymorth arall ar GOV.UK
 councilTaxBill.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-council-tax-discount">Gwnewch gais am ostyngiad ar eich bil Treth Gyngor</a>
@@ -532,8 +532,8 @@ businessRatesNonBusiness.subheading = Cymorth arall ar GOV.UK
 businessRatesNonBusiness.p2 = <a href="https://www.gov.uk/government/collections/check-and-challenge-step-by-step" target="_self">Sut i wirio a herio eich prisiad ardrethi busnes</a>
 
 # --- Business Rates Subcategories
-businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?
+businessRatesSubcategory.title = Ynglŷn â beth yw eich ymholiad ardrethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesSubcategory.heading = Ynglŷn â beth yw eich ymholiad ardrethi busnes?
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
 businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu fy ardal wedi newid
 businessRatesSubcategory.business_rates_bill = Fy mil ardrethi busnes
@@ -662,7 +662,7 @@ generalEnquiries.telephoneWal.p3 = Ffôn: 03000 505505
 generalEnquiries.days.p3 = Dydd Llun i ddydd Gwener, 9yb tan 4:30yh
 
 # --- Housing Benefit, Local Housing Allowances journey
-housingBenefits.title = Manylion cyswllt ar gyfer Budd-dal Tai, Lwfansau Tai Lleol, neu renti teg - Valuation Office Agency contact form - GOV.UK
+housingBenefits.title = Manylion cyswllt ar gyfer Budd-dal Tai, Lwfansau Tai Lleol, neu renti teg - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 housingBenefits.heading = Manylion cyswllt ar gyfer Budd-dal Tai, Lwfansau Tai Lleol, neu renti teg
 housingBenefits.email-title = E-bost:
 housingBenefits.email = NSOhelpdesk@voa.gov.uk
