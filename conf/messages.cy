@@ -532,8 +532,8 @@ businessRatesNonBusiness.subheading = Cymorth arall ar GOV.UK
 businessRatesNonBusiness.p2 = <a href="https://www.gov.uk/government/collections/check-and-challenge-step-by-step" target="_self">Sut i wirio a herio eich prisiad ardrethi busnes</a>
 
 # --- Business Rates Subcategories
-businessRatesSubcategory.title = Beth yw testun eich ymholiad ynghylch trethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-businessRatesSubcategory.heading = Beth yw testun eich ymholiad ynghylch trethi busnes?
+businessRatesSubcategory.title = Ynglŷn â beth yw eich ymholiad ardrethi busnes? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesSubcategory.heading = Ynglŷn â beth yw eich ymholiad ardrethi busnes?
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
 businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu fy ardal wedi newid
 businessRatesSubcategory.business_rates_bill = Fy mil ardrethi busnes
