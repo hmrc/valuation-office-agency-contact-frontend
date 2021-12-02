@@ -169,8 +169,8 @@ contactDetails.contactNumber.invalid = Nodwch rif ffôn, fel 01632 960 001
 contactDetails.checkYourAnswersLabel = Manylion cyswllt
 
 # --- Council Tax Bill
-councilTaxBill.title = Siaradwch â'ch cyngor lleol am eich bil treth gyngor - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
-councilTaxBill.heading = Siaradwch â'ch cyngor lleol am eich bil treth gyngor
+councilTaxBill.title = Siaradwch â'ch cyngor lleol am eich bil Treth Gyngor - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+councilTaxBill.heading = Siaradwch â'ch cyngor lleol am eich bil Treth Gyngor
 councilTaxBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council">Cysylltwch â'ch cyngor lleol </a> os oes gennych unrhyw gwestiynau am eich bil Treth Gyngor, gan eu bod yn delio â biliau a thaliadau.
 councilTaxBill.subheading = Cymorth arall ar GOV.UK
 councilTaxBill.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-council-tax-discount">Gwnewch gais am ostyngiad ar eich bil Treth Gyngor</a>

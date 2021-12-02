@@ -163,8 +163,8 @@ contactDetails.contactNumber.invalid = Enter a phone number, like 01632 960 001
 contactDetails.checkYourAnswersLabel = Contact details
 
 # --- Council Tax Bill
-councilTaxBill.title = Speak to your local council about your council tax bill - Valuation Office Agency contact form - GOV.UK
-councilTaxBill.heading = Speak to your local council about your council tax bill
+councilTaxBill.title = Speak to your local council about your Council Tax bill - Valuation Office Agency contact form - GOV.UK
+councilTaxBill.heading = Speak to your local council about your Council Tax bill
 councilTaxBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council">Contact your local council </a> if you have any questions about your Council Tax bill, as they handle billing and payments.
 councilTaxBill.subheading = Other help on GOV.UK
 councilTaxBill.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-council-tax-discount">Apply for discount on your Council Tax bill</a>
