@@ -66,6 +66,7 @@ site.print.button=Print this page
 site.govuk=Back to GOV.UK
 site.new_service = This is a new service
 site.not_provided = Not provided
+page.not-implemented = Not Implemented
 
 unauthorised.title = You can’t access this service with this account
 unauthorised.heading = You can’t access this service with this account
@@ -656,6 +657,12 @@ housingBenefits.email = NSOhelpdesk@voa.gov.uk
 housingBenefits.phone-title = Telephone:
 housingBenefits.phone-number = 03000 502502
 housingBenefits.opening-hours = Our telephone service is available between 9.00am and 4.30pm, Monday to Friday.
+
+housingBenefitAllowances.heading = What is your Housing Benefit or Local Housing Allowance enquiry about?
+housingBenefitAllowances.local-housing-allowance-rates = I want to find out about Local Housing Allowance rates
+housingBenefitAllowances.hb-enquiry = I am asking about a Housing Benefit decision
+housingBenefitAllowances.other-ha-hb-enquiry = Other
+error.housingBenefitAllowances.required = Select what is your Housing Benefit or Local Housing Allowances enquiry about
 
 # --- Fair Rents journey
 fairRents.title = What is your fair rent enquiry about? - Valuation Office Agency contact form - GOV.UK
