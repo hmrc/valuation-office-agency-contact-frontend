@@ -17,12 +17,15 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.data.Form
+import play.api.i18n.{DefaultMessagesApi, Lang, Messages, MessagesImpl}
 import play.api.libs.json.JsString
+import play.api.mvc.{Call, Request}
 import play.api.test.Helpers._
+import sttp.model.StatusCode.NotImplemented
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.JourneyMap
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.{JourneyMap, NotImplemented, Page}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.HousingBenefitAllowancesRouter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
@@ -34,7 +37,7 @@ class JourneyControllerSpec extends ControllerSpecBase {
   val form = HousingBenefitAllowancesRouter.form
 
   def journeyView = app.injector.instanceOf[journeyView]
-
+  def notImplemented = app.injector.instanceOf[notImplemented]
   def journeyMap = app.injector.instanceOf[JourneyMap]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
@@ -45,8 +48,6 @@ class JourneyControllerSpec extends ControllerSpecBase {
     journeyView(form, pageKey, new UserAnswers(emptyCacheMap))(fakeRequest, messages, HousingBenefitAllowancesRouter).toString
 
   "JourneyController" must {
-
-    app.injector.instanceOf[notImplemented]
 
     "return OK and the correct view for a GET" in {
       val result = controller().onPageLoad(pageKey)(fakeRequest)
@@ -101,6 +102,17 @@ class JourneyControllerSpec extends ControllerSpecBase {
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+    }
+
+    "handle notImplemented page" in {
+      object NotImplementedPage extends NotImplemented("some-not-implemented-key") {
+        override def previousPage: UserAnswers => Call = _ => startPage
+      }
+      implicit val request: Request[_] = fakeRequest
+      implicit val messages: Messages = MessagesImpl(Lang("en"), new DefaultMessagesApi)
+      implicit val page: Page[String] = NotImplementedPage
+
+      notImplemented(pageKey, "/back/url").toString()
     }
 
   }
