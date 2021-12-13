@@ -23,10 +23,10 @@ import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.JourneyMap
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.{HousingBenefitAllowancesRouter, LocalHousingAllowanceRates}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.HousingBenefitAllowancesRouter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.journeyView
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.{journeyView, notImplemented}
 
 class JourneyControllerSpec extends ControllerSpecBase {
 
@@ -45,6 +45,8 @@ class JourneyControllerSpec extends ControllerSpecBase {
     journeyView(form, pageKey, new UserAnswers(emptyCacheMap))(fakeRequest, messages, HousingBenefitAllowancesRouter).toString
 
   "JourneyController" must {
+
+    app.injector.instanceOf[notImplemented]
 
     "return OK and the correct view for a GET" in {
       val result = controller().onPageLoad(pageKey)(fakeRequest)
