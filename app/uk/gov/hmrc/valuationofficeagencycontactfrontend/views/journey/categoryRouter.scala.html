@@ -18,7 +18,6 @@
 @import uk.gov.hmrc.govukfrontend.views.html.components._
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.CategoryRouter
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.CategoryRouter.valueField
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.formTemplate
 
 @this(
@@ -30,23 +29,23 @@
 
 @(form: Form[String], key: String, backUrl: String, categoryRouter: CategoryRouter)(implicit request: Request[_], messages: Messages)
 
-@formTemplate(form, key, backUrl, categoryRouter) {
+@formTemplate(form, key, backUrl, messages(categoryRouter.heading)) {
 
     @govukRadios(Radios(
         fieldset = Some(Fieldset(legend = Some(
             Legend(Text(messages(categoryRouter.heading)), "govuk-fieldset__legend--l", isPageHeading = true)
         ))),
         idPrefix = Option(categoryRouter.fieldId),
-        name = valueField,
+        name = categoryRouter.fieldId,
         items = categoryRouter.options.zipWithIndex.map { case (option, idx) =>
             RadioItem(
                 id = Some(categoryRouter.fieldId + (if (idx == 0) "" else "-" + (idx + 1))),
                 value = Some(option),
                 content = Text(messages(s"${categoryRouter.fieldId}.$option")),
-                checked = form(valueField).value.contains(option)
+                checked = form(categoryRouter.fieldId).value.contains(option)
             )
         },
-        errorMessage = form.errors.asTextErrorMessageForField(valueField)
+        errorMessage = form.errors.asTextErrorMessageForField(categoryRouter.fieldId)
     ))
 
 }

@@ -20,7 +20,6 @@ import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc.Call
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.CategoryRouter.valueField
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{StringValue, UserAnswers}
 
 /**
@@ -33,12 +32,8 @@ abstract class CategoryRouter(val key: String,
                               val errorRequired: String,
                               val getValue: UserAnswers => Option[String]) extends Page[String] {
 
-  val form: Form[String] = Form(single(valueField -> of(StringValue)
+  val form: Form[String] = Form(single(fieldId -> of(StringValue)
     .verifying(errorRequired, options.contains(_))))
 
   override def nextPage: UserAnswers => Call = getValue(_).fold(startPage)(routes.JourneyController.onPageLoad)
-}
-
-object CategoryRouter {
-  val valueField = "value"
 }

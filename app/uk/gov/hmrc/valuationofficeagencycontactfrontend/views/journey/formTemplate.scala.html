@@ -28,10 +28,10 @@
         govukErrorSummary: GovukErrorSummary
 )
 
-@(form: Form[_], key: String, backUrl: String, page: Page[String])(formFields: Html)(implicit request: Request[_], messages: Messages)
+@(form: Form[_], key: String, backUrl: String, title: String)(formFields: Html)(implicit request: Request[_], messages: Messages)
 
 @pageTemplate(
-    title = form.errors.headOption.fold("")(_ => s"${messages("error.title")} ") + messages(page.heading),
+    title = form.errors.headOption.fold("")(_ => s"${messages("error.title")} ") + title,
     backUrl = backUrl
 ) {
 
@@ -40,7 +40,7 @@
             ErrorSummary(
                 title = Text(messages("error.summary.title")),
                 errorList = form.errors.map(e =>
-                    ErrorLink(href = Some(s"#${page.fieldId}"), content = HtmlContent(messages(e.messages, e.args))))
+                    ErrorLink(href = Some(s"#${e.key}"), content = HtmlContent(messages(e.messages, e.args))))
             )
         )
     }
