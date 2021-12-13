@@ -41,7 +41,10 @@ class JourneyMap @Inject()(pageNotFound: page_not_found,
     HousingBenefitAllowancesRouter,
     LocalHousingAllowanceRates,
     HousingBenefitEnquiry,
-    OtherHAHBEnquiry
+    OtherHAHBEnquiry,
+    HousingBenefitAppeals,
+    HBTellUsMore,
+    OtherHBEnquiry
   )
 
   val journeyMap: Map[String, Page[String]] = pages.map(page => page.key -> page).toMap
@@ -58,7 +61,5 @@ class JourneyMap @Inject()(pageNotFound: page_not_found,
         .toRight(NotFound(pageNotFound(appConfig)))
     }
   }
-
-  case class JourneyPageRequest[A](page: Page[String], request: Request[A], sessionId: String, userAnswers: UserAnswers) extends WrappedRequest[A](request)
 
 }

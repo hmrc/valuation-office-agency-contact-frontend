@@ -16,14 +16,16 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
+import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
+import play.twirl.api.HtmlFormat.Appendable
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.{JourneyMap, Page}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.{CategoryRouter, JourneyMap, JourneyPageRequest, Page}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.journeyView
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.{categoryRouter, notImplemented}
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
@@ -35,7 +37,8 @@ class JourneyController @Inject()(journeyMap: JourneyMap,
                                   dataCacheConnector: DataCacheConnector,
                                   getData: DataRetrievalAction,
                                   requireData: DataRequiredAction,
-                                  journeyView: journeyView,
+                                  categoryRouterTemplate: categoryRouter,
+                                  notImplementedTemplate: notImplemented,
                                   cc: MessagesControllerComponents,
                                   override val messagesApi: MessagesApi
                                  )(implicit ec: ExecutionContext) extends FrontendController(cc) with I18nSupport {
@@ -43,13 +46,13 @@ class JourneyController @Inject()(journeyMap: JourneyMap,
   def onPageLoad(key: String) = getAnswersAndPage(key) { implicit request =>
     implicit val page: Page[String] = request.page
     val value = page.getValue(request.userAnswers).getOrElse("")
-    Ok(journeyView(page.form.fill(value), key, request.userAnswers))
+    Ok(journeyView(page.form.fill(value), key))
   }
 
   def onSubmit(key: String) = getAnswersAndPage(key).async { implicit request =>
     implicit val page: Page[String] = request.page
     page.form.bindFromRequest().fold(
-      formWithErrors => Future.successful(BadRequest(journeyView(formWithErrors, key, request.userAnswers))),
+      formWithErrors => Future.successful(BadRequest(journeyView(formWithErrors, key))),
       value =>
         for {
           cacheMap <- dataCacheConnector.save[String](request.sessionId, page.key, value)
@@ -59,5 +62,16 @@ class JourneyController @Inject()(journeyMap: JourneyMap,
 
   private def getAnswersAndPage(key: String) =
     getData andThen requireData andThen journeyMap.getPage(key)
+
+  private def journeyView(form: Form[String], key: String)
+                         (implicit request: JourneyPageRequest[_], page: Page[String]): Appendable = {
+
+    val backLinkUrl = page.previousPage(request.userAnswers).url
+
+    page match {
+      case categoryRouter: CategoryRouter => categoryRouterTemplate(form, key, backLinkUrl, categoryRouter)
+      case _ => notImplementedTemplate(key, backLinkUrl)
+    }
+  }
 
 }

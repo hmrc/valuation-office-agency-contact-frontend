@@ -18,19 +18,12 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages
 
 import play.api.mvc.Call
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.CategoryRouter
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.NotImplemented
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 /**
  * @author Yuriy Tumakha
  */
-object HousingBenefitEnquiry extends CategoryRouter(
-  key = "hb-enquiry",
-  heading = "housingBenefitEnquiry.heading",
-  fieldId = "housingBenefitEnquiry",
-  options = Seq(HousingBenefitAppeals.key, HBTellUsMore.key, OtherHBEnquiry.key),
-  errorRequired = "error.housingBenefitEnquiry.required",
-  getValue = _.housingBenefitCategory
-) {
-  override def previousPage: UserAnswers => Call = _ => routes.JourneyController.onPageLoad(HousingBenefitAllowancesRouter.key)
+object HousingBenefitAppeals extends NotImplemented("housing-benefit-appeals") {
+  override def previousPage: UserAnswers => Call = _ => routes.JourneyController.onPageLoad(HousingBenefitEnquiry.key)
 }

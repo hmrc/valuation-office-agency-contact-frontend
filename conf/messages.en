@@ -664,6 +664,13 @@ housingBenefitAllowances.hb-enquiry = I am asking about a Housing Benefit decisi
 housingBenefitAllowances.other-ha-hb-enquiry = Other
 error.housingBenefitAllowances.required = Select what is your Housing Benefit or Local Housing Allowances enquiry about
 
+housingBenefitEnquiry.heading = What is your Housing Benefit enquiry about?
+housingBenefitEnquiry.housing-benefit-appeals = I want to appeal a Housing Benefit award decision
+housingBenefitEnquiry.hb-tell-us-more = I want to find out the valuation details behind my Housing Benefit decision
+housingBenefitEnquiry.other-hb-enquiry = Other
+error.housingBenefitEnquiry.required = Select what is your Housing Benefit enquiry about
+
+
 # --- Fair Rents journey
 fairRents.title = What is your fair rent enquiry about? - Valuation Office Agency contact form - GOV.UK
 fairRents.heading = What is your fair rent enquiry about?

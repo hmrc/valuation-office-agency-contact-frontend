@@ -677,6 +677,13 @@ housingBenefitAllowances.hb-enquiry = Rwy’n gofyn am benderfyniad Budd-dal Tai
 housingBenefitAllowances.other-ha-hb-enquiry = Arall
 error.housingBenefitAllowances.required = Dewiswch beth yw pwrpas eich ymholiad Budd-dal Tai neu Lwfans Tai Lleol
 
+housingBenefitEnquiry.heading = Ynglŷn â beth yw eich ymholiad Budd-dal Tai?
+housingBenefitEnquiry.housing-benefit-appeals = Rwyf am apelio yn erbyn penderfyniad dyfarnu Budd-dal Tai
+housingBenefitEnquiry.hb-tell-us-more = Rwyf am ddarganfod y manylion prisio y tu ôl i’m penderfyniad Budd-dal Tai
+housingBenefitEnquiry.other-hb-enquiry = Arall
+error.housingBenefitEnquiry.required = Dewiswch beth yw pwrpas eich ymholiad Budd-dal Tai
+
+
 # --- Fair Rents journey
 fairRents.title = Ynglŷn â beth yw eich ymholiad rhent teg? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
 fairRents.heading = Ynglŷn â beth yw eich ymholiad rhent teg?
