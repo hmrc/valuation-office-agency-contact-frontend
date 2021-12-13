@@ -61,6 +61,11 @@ class JourneyControllerSpec extends ControllerSpecBase {
       }
     }
 
+    "return NOT_FOUND for unknown page key" in {
+      val result = controller().onPageLoad("unknown-page-key")(fakeRequest)
+      status(result) mustBe NOT_FOUND
+    }
+
     "populate the view correctly on a GET when the question has previously been answered" in {
       val validData = Map(HousingBenefitAllowancesRouter.key -> JsString(HousingBenefitAllowancesRouter.options.head))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
@@ -113,11 +118,21 @@ class JourneyControllerSpec extends ControllerSpecBase {
       object NotImplementedPage extends NotImplemented("some-not-implemented-key") {
         override def previousPage: UserAnswers => Call = _ => startPage
       }
+
       implicit val request: Request[_] = fakeRequest
       implicit val messages: Messages = MessagesImpl(Lang("en"), new DefaultMessagesApi)
       implicit val page: Page[String] = NotImplementedPage
+      val userAnswers = new UserAnswers(emptyCacheMap)
 
-      notImplemented(pageKey, "/back/url").toString()
+      NotImplementedPage.previousPage(userAnswers).url mustBe NotImplementedPage.startPage.url
+
+      assertThrows[NotImplementedError] {
+        NotImplementedPage.nextPage(userAnswers).url
+      }
+
+      val html = notImplemented(NotImplementedPage.key, "/back/url").toString()
+      html must include(NotImplementedPage.key)
+      html must include("/back/url")
     }
 
   }
