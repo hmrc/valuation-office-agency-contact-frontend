@@ -41,7 +41,10 @@ class JourneyMap @Inject()(pageNotFound: page_not_found,
     HousingBenefitAllowancesRouter,
     LocalHousingAllowanceRates,
     HousingBenefitEnquiry,
-    OtherHAHBEnquiry
+    OtherHAHBEnquiry,
+    HousingBenefitAppeals,
+    HBTellUsMore,
+    OtherHBEnquiry
   )
 
   val journeyMap: Map[String, Page[String]] = pages.map(page => page.key -> page).toMap

@@ -29,7 +29,7 @@ object HousingBenefitAllowancesRouter extends CategoryRouter(
   key = "ha-hb-enquiry",
   heading = "housingBenefitAllowances.heading",
   fieldId = "housingBenefitAllowances",
-  options = Seq("local-housing-allowance-rates", "hb-enquiry", "other-ha-hb-enquiry"),
+  options = Seq(LocalHousingAllowanceRates.key, HousingBenefitEnquiry.key, OtherHAHBEnquiry.key),
   errorRequired = "error.housingBenefitAllowances.required",
   getValue = _.housingBenefitAllowancesCategory
 ) {
