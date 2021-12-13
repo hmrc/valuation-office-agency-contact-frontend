@@ -21,6 +21,7 @@ import org.scalatestplus.mockito.MockitoSugar
 import org.scalatestplus.scalacheck.ScalaCheckDrivenPropertyChecks
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.HousingBenefitAllowancesRouter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
@@ -518,9 +519,9 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
         navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.ValuationForTaxesController.onPageLoad
       }
 
-      "return a function that goes to the housing benefits page when an enquiry category for housing benefits has been selected" in {
+      "return a function that goes to the HousingBenefitAllowances journey when an enquiry category for housing benefits has been selected" in {
         when (mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
-        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.HousingBenefitsController.onPageLoad
+        navigator.nextPage(EnquiryCategoryId, NormalMode)(mockUserAnswers) mustBe routes.JourneyController.onPageLoad(HousingBenefitAllowancesRouter.key)
       }
 
       "return a function that goes to the providing lettings page when an enquiry category for providing lettings has been selected" in {

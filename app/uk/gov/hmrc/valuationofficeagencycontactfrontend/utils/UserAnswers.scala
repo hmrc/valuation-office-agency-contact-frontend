@@ -18,6 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.HousingBenefitAllowancesRouter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 
@@ -50,6 +51,8 @@ class UserAnswers(val cacheMap: CacheMap) {
   def propertyAddress: Option[PropertyAddress] = cacheMap.getEntry[PropertyAddress](PropertyAddressId.toString)
 
   def housingAllowanceSubcategory: Option[String] = cacheMap.getEntry[String](HousingAllowanceSubcategoryId.toString)
+
+  def housingBenefitAllowancesCategory: Option[String] = cacheMap.getEntry[String](HousingBenefitAllowancesRouter.key)
 
   def otherSubcategory: Option[String] = cacheMap.getEntry[String](OtherSubcategoryId.toString)
 

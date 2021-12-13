@@ -158,3 +158,7 @@ GET         /check-fair-rents-register                   uk.gov.hmrc.valuationof
 # SURVEY
 GET         /survey-thanks                               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.surveyThankyou
 POST        /survey 				                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SatisfactionSurveyController.formCompleteFeedback
+
+# !!! JourneyController routes must be last as any single path segment will match pattern /:key
+GET         /:key                                        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.JourneyController.onPageLoad(key)
+POST        /:key                                        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.JourneyController.onSubmit(key)
