@@ -19,6 +19,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey
 import play.api.data.Form
 import play.api.mvc.Call
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 /**
@@ -26,7 +27,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
  */
 trait Page[T] {
 
-  val startPage: Call = routes.ContactReasonController.onPageLoad()
+  def startPage: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def key: String
 
