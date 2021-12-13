@@ -54,6 +54,11 @@ class JourneyControllerSpec extends ControllerSpecBase {
 
       status(result) mustBe OK
       contentAsString(result) mustBe viewAsString()
+
+      journeyMap.journeyMap.values.map(_.key).foreach { key =>
+        val result = controller().onPageLoad(key)(fakeRequest)
+        status(result) mustBe OK
+      }
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
