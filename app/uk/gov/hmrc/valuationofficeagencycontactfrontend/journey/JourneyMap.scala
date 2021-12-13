@@ -59,6 +59,4 @@ class JourneyMap @Inject()(pageNotFound: page_not_found,
     }
   }
 
-  case class JourneyPageRequest[A](page: Page[String], request: Request[A], sessionId: String, userAnswers: UserAnswers) extends WrappedRequest[A](request)
-
 }

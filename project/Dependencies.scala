@@ -8,18 +8,17 @@ object Dependencies {
 
     private val logbackJsonLoggerVersion = "5.1.0"
     private val govukTemplateVersion = "5.72.0-play-28"
-    private val playUiVersion = "9.7.0-play-28"
+    private val playUiVersion = "9.8.0-play-28"
     private val scalaTestVersion = "3.2.9"
     private val scalaTestPlusPlayVersion = "5.1.0"
     private val mockitoAllVersion = "1.10.19"
     private val httpCachingClientVersion = "9.5.0-play-28"
     private val simpleReactivemongoVersion = "8.0.0-play-28"
-    private val playConditionalFormMappingVersion = "1.9.0-play-28"
+    private val playConditionalFormMappingVersion = "1.10.0-play-28"
     private val playLanguageVersion = "5.1.0-play-28"
-    private val bootstrapPlayVersion = "5.16.0"
-    private val akkaVersion     = "2.6.16"
+    private val bootstrapPlayVersion = "5.18.0"
     private val httpVerbsVersion = "13.10.0"
-    private val playFrontendHmrc = "1.21.0-play-28"
+    private val playFrontendHmrc = "1.31.0-play-28"
     private val commonTextVersion = "1.9"
 
     val compile: Seq[ModuleID] = Seq(
@@ -54,12 +53,12 @@ object Dependencies {
             "com.typesafe.play" %% "play-test" % PlayVersion.current % scope,
             "org.mockito" % "mockito-all" % mockitoAllVersion % scope,
             "org.scalacheck" %% "scalacheck" % "1.15.4" % scope,
-            "com.typesafe.akka" %% "akka-testkit" % akkaVersion % scope,
-            "com.typesafe.akka" %% "akka-slf4j" % akkaVersion % scope,
-            "com.typesafe.akka" %% "akka-protobuf-v3" % akkaVersion % scope,
-            "com.typesafe.akka" %% "akka-serialization-jackson" % akkaVersion % scope,
-            "com.typesafe.akka" %% "akka-stream" % akkaVersion % scope,
-            "com.typesafe.akka" %% "akka-actor-typed" % akkaVersion % scope
+            "com.typesafe.akka" %% "akka-testkit" % PlayVersion.akkaVersion % scope,
+            "com.typesafe.akka" %% "akka-slf4j" % PlayVersion.akkaVersion % scope,
+            "com.typesafe.akka" %% "akka-protobuf-v3" % PlayVersion.akkaVersion % scope,
+            "com.typesafe.akka" %% "akka-serialization-jackson" % PlayVersion.akkaVersion % scope,
+            "com.typesafe.akka" %% "akka-stream" % PlayVersion.akkaVersion % scope,
+            "com.typesafe.akka" %% "akka-actor-typed" % PlayVersion.akkaVersion % scope
         )
       }.test
 

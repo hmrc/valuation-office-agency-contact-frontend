@@ -21,7 +21,6 @@ import play.api.i18n.{DefaultMessagesApi, Lang, Messages, MessagesImpl}
 import play.api.libs.json.JsString
 import play.api.mvc.{Call, Request}
 import play.api.test.Helpers._
-import sttp.model.StatusCode.NotImplemented
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
@@ -29,23 +28,26 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.{JourneyMap, Not
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.HousingBenefitAllowancesRouter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.{journeyView, notImplemented}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.{categoryRouter, notImplemented}
 
 class JourneyControllerSpec extends ControllerSpecBase {
 
   val pageKey = HousingBenefitAllowancesRouter.key
   val form = HousingBenefitAllowancesRouter.form
 
-  def journeyView = app.injector.instanceOf[journeyView]
-  def notImplemented = app.injector.instanceOf[notImplemented]
+  def userAnswers = new UserAnswers(emptyCacheMap)
+  def categoryRouterTemplate: categoryRouter = app.injector.instanceOf[categoryRouter]
+  def notImplementedTemplate: notImplemented = app.injector.instanceOf[notImplemented]
   def journeyMap = app.injector.instanceOf[JourneyMap]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new JourneyController(journeyMap, FakeDataCacheConnector,
-      dataRetrievalAction, new DataRequiredActionImpl(ec), journeyView, MessageControllerComponentsHelpers.stubMessageControllerComponents, messagesApi)
+      dataRetrievalAction, new DataRequiredActionImpl(ec), categoryRouterTemplate, notImplementedTemplate,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents, messagesApi)
 
   def viewAsString(form: Form[String] = form) =
-    journeyView(form, pageKey, new UserAnswers(emptyCacheMap))(fakeRequest, messages, HousingBenefitAllowancesRouter).toString
+    categoryRouterTemplate(form, pageKey,
+      HousingBenefitAllowancesRouter.previousPage(userAnswers).url, HousingBenefitAllowancesRouter)(fakeRequest, messages).toString
 
   "JourneyController" must {
 
@@ -122,7 +124,6 @@ class JourneyControllerSpec extends ControllerSpecBase {
       implicit val request: Request[_] = fakeRequest
       implicit val messages: Messages = MessagesImpl(Lang("en"), new DefaultMessagesApi)
       implicit val page: Page[String] = NotImplementedPage
-      val userAnswers = new UserAnswers(emptyCacheMap)
 
       NotImplementedPage.previousPage(userAnswers).url mustBe NotImplementedPage.startPage.url
 
@@ -130,7 +131,7 @@ class JourneyControllerSpec extends ControllerSpecBase {
         NotImplementedPage.nextPage(userAnswers).url
       }
 
-      val html = notImplemented(NotImplementedPage.key, "/back/url").toString()
+      val html = notImplementedTemplate(NotImplementedPage.key, "/back/url").toString()
       html must include(NotImplementedPage.key)
       html must include("/back/url")
     }
