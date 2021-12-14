@@ -688,6 +688,11 @@ error.housingBenefitTellUsMore.required = Nodwch fwy o fanylion am eich ymholiad
 error.housingBenefitTellUsMore.pattern = Ni ddylai eich ymholiad gynnwys < a >
 error.housingBenefitTellUsMore.maxLength = Rhaid i’ch ymholiad fod yn 5000 nod neu lai
 
+otherHAHBTellUsMore.heading = Beth yw eich ymholiad Budd-dal Tai neu Lwfans Tai Lleol arall?
+error.otherHAHBTellUsMore.required = Nodwch fwy o fanylion am eich ymholiad
+error.otherHAHBTellUsMore.pattern = Ni ddylai eich ymholiad gynnwys < a >
+error.otherHAHBTellUsMore.maxLength = Rhaid i’ch ymholiad fod yn 5000 nod neu lai
+
 
 # --- Fair Rents journey
 fairRents.title = Ynglŷn â beth yw eich ymholiad rhent teg? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
