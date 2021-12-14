@@ -1,0 +1,54 @@
+@*
+ * Copyright 2021 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey._
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.charactercount.CharacterCount
+@import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.{Page, TellUsMorePage}
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.language.En
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.language.Cy
+
+
+@this(
+        formTemplate: formTemplate,
+        hmrcCharacterCount: HmrcCharacterCount
+)
+
+@(form: Form[String], key: String, backUrl: String, page: Page[String])(implicit request: Request[_], messages: Messages)
+
+@formTemplate(form, key, backUrl, messages(page.heading)) {
+
+    <h1 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--l" for="@page.fieldId">
+        @messages(page.heading)
+        </label>
+    </h1>
+
+    @hmrcCharacterCount(
+        CharacterCount(
+            id = page.fieldId,
+            name = page.fieldId,
+            value = form(page.fieldId).value,
+            rows = 5,
+            maxLength = Some(TellUsMorePage.maxChars),
+            errorMessage = form.errors.asTextErrorMessageForField(page.fieldId),
+            language = if(messages.lang.language == "cy") Cy else En,
+            spellcheck = Some(true)
+        )
+    )
+
+}

@@ -26,7 +26,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
  */
 abstract class NotImplemented(val key: String) extends Page[String] {
 
-  val heading: String = "page.not-implemented"
+  override def heading: String = "page.not-implemented"
 
   val fieldId: String = "field"
 

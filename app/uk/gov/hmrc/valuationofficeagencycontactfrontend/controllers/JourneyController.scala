@@ -23,9 +23,9 @@ import play.twirl.api.HtmlFormat.Appendable
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.{CategoryRouter, JourneyMap, JourneyPageRequest, Page}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.{CategoryRouter, JourneyMap, JourneyPageRequest, Page, TellUsMorePage}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.{categoryRouter, notImplemented}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.{categoryRouter, notImplemented, singleTextarea}
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
@@ -38,6 +38,7 @@ class JourneyController @Inject()(journeyMap: JourneyMap,
                                   getData: DataRetrievalAction,
                                   requireData: DataRequiredAction,
                                   categoryRouterTemplate: categoryRouter,
+                                  singleTextareaTemplate: singleTextarea,
                                   notImplementedTemplate: notImplemented,
                                   cc: MessagesControllerComponents,
                                   override val messagesApi: MessagesApi
@@ -55,6 +56,7 @@ class JourneyController @Inject()(journeyMap: JourneyMap,
       formWithErrors => Future.successful(BadRequest(journeyView(formWithErrors, key))),
       value =>
         for {
+          _ <- page.beforeSaveAnswers(dataCacheConnector, request)
           cacheMap <- dataCacheConnector.save[String](request.sessionId, page.key, value)
         } yield Redirect(page.nextPage(new UserAnswers(cacheMap)))
     )
@@ -70,6 +72,7 @@ class JourneyController @Inject()(journeyMap: JourneyMap,
 
     page match {
       case categoryRouter: CategoryRouter => categoryRouterTemplate(form, key, backLinkUrl, categoryRouter)
+      case tellUsMorePage: TellUsMorePage => singleTextareaTemplate(form, key, backLinkUrl, tellUsMorePage)
       case _ => notImplementedTemplate(key, backLinkUrl)
     }
   }

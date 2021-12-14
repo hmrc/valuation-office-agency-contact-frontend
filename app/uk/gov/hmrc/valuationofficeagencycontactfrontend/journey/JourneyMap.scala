@@ -18,11 +18,10 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey
 
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.Results.NotFound
-import play.api.mvc.{ActionRefiner, Request, Result, WrappedRequest}
+import play.api.mvc.{ActionRefiner, Request, Result}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.DataRequest
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.page_not_found
 
 import javax.inject.{Inject, Singleton}
@@ -44,7 +43,9 @@ class JourneyMap @Inject()(pageNotFound: page_not_found,
     OtherHAHBEnquiry,
     HousingBenefitAppeals,
     HBTellUsMore,
-    OtherHBEnquiry
+    OtherHBEnquiry,
+
+    ContactDetailsStub
   )
 
   val journeyMap: Map[String, Page[String]] = pages.map(page => page.key -> page).toMap

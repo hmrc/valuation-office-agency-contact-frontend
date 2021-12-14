@@ -18,12 +18,15 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages
 
 import play.api.mvc.Call
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.NotImplemented
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.TellUsMorePage
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 /**
  * @author Yuriy Tumakha
  */
-object HBTellUsMore extends NotImplemented("hb-tell-us-more") {
+object HBTellUsMore extends TellUsMorePage(
+  key = "hb-tell-us-more",
+  fieldId = "housingBenefitTellUsMore"
+) {
   override def previousPage: UserAnswers => Call = _ => routes.JourneyController.onPageLoad(HousingBenefitEnquiry.key)
 }

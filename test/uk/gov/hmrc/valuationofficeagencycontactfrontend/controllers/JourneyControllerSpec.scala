@@ -28,7 +28,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.{JourneyMap, Not
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.HousingBenefitAllowancesRouter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.{categoryRouter, notImplemented}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.{categoryRouter, notImplemented, singleTextarea}
 
 class JourneyControllerSpec extends ControllerSpecBase {
 
@@ -37,12 +37,14 @@ class JourneyControllerSpec extends ControllerSpecBase {
 
   def userAnswers = new UserAnswers(emptyCacheMap)
   def categoryRouterTemplate: categoryRouter = app.injector.instanceOf[categoryRouter]
+  def singleTextareaTemplate: singleTextarea = app.injector.instanceOf[singleTextarea]
   def notImplementedTemplate: notImplemented = app.injector.instanceOf[notImplemented]
   def journeyMap = app.injector.instanceOf[JourneyMap]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new JourneyController(journeyMap, FakeDataCacheConnector,
-      dataRetrievalAction, new DataRequiredActionImpl(ec), categoryRouterTemplate, notImplementedTemplate,
+      dataRetrievalAction, new DataRequiredActionImpl(ec),
+      categoryRouterTemplate, singleTextareaTemplate, notImplementedTemplate,
       MessageControllerComponentsHelpers.stubMessageControllerComponents, messagesApi)
 
   def viewAsString(form: Form[String] = form) =
@@ -118,14 +120,14 @@ class JourneyControllerSpec extends ControllerSpecBase {
 
     "handle notImplemented page" in {
       object NotImplementedPage extends NotImplemented("some-not-implemented-key") {
-        override def previousPage: UserAnswers => Call = _ => startPage
+        override def previousPage: UserAnswers => Call = _ => appStartPage
       }
 
       implicit val request: Request[_] = fakeRequest
       implicit val messages: Messages = MessagesImpl(Lang("en"), new DefaultMessagesApi)
       implicit val page: Page[String] = NotImplementedPage
 
-      NotImplementedPage.previousPage(userAnswers).url mustBe NotImplementedPage.startPage.url
+      NotImplementedPage.previousPage(userAnswers).url mustBe NotImplementedPage.appStartPage.url
 
       assertThrows[NotImplementedError] {
         NotImplementedPage.nextPage(userAnswers).url

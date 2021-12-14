@@ -27,11 +27,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
  */
 object HousingBenefitAllowancesRouter extends CategoryRouter(
   key = "ha-hb-enquiry",
-  heading = "housingBenefitAllowances.heading",
   fieldId = "housingBenefitAllowances",
-  options = Seq(LocalHousingAllowanceRates.key, HousingBenefitEnquiry.key, OtherHAHBEnquiry.key),
-  errorRequired = "error.housingBenefitAllowances.required",
-  getValue = _.housingBenefitAllowancesCategory
+  options = Seq(LocalHousingAllowanceRates.key, HousingBenefitEnquiry.key, OtherHAHBEnquiry.key)
 ) {
   override def previousPage: UserAnswers => Call = _ => routes.EnquiryCategoryController.onPageLoad(NormalMode)
 }

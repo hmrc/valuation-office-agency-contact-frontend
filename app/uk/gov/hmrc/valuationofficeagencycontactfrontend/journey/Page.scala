@@ -18,20 +18,19 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey
 
 import play.api.data.Form
 import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
+
+import scala.concurrent.Future
 
 /**
  * @author Yuriy Tumakha
  */
 trait Page[T] {
 
-  def startPage: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
-
   def key: String
-
-  def heading: String
 
   def fieldId: String
 
@@ -42,5 +41,17 @@ trait Page[T] {
   def previousPage: UserAnswers => Call
 
   def nextPage: UserAnswers => Call
+
+  def heading= s"$fieldId.heading"
+
+  def errorRequired = s"error.$fieldId.required"
+
+  def errorPattern = s"error.$fieldId.pattern"
+
+  def errorMaxLength = s"error.$fieldId.maxLength"
+
+  def appStartPage: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+
+  def beforeSaveAnswers: (DataCacheConnector, JourneyPageRequest[_]) => Future[_] = (_, _) => Future.successful(())
 
 }

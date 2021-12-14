@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages
 
-import play.api.data.Form
+import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.{NotImplemented, TellUsMorePage}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 /**
  * @author Yuriy Tumakha
  */
-abstract class SingleTextarea(val key: String,
-                              val heading: String,
-                              val fieldId: String,
-                              val form: Form[String],
-                              val getValue: UserAnswers => Option[String]) extends Page[String]
+object ContactDetailsStub extends NotImplemented("contact-details-stub") {
+  override def previousPage: UserAnswers => Call =
+    _.getString(TellUsMorePage.lastTellUsMorePage).fold(appStartPage)(routes.JourneyController.onPageLoad)
+}

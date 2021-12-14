@@ -670,6 +670,10 @@ housingBenefitEnquiry.hb-tell-us-more = I want to find out the valuation details
 housingBenefitEnquiry.other-hb-enquiry = Other
 error.housingBenefitEnquiry.required = Select what your Housing Benefit enquiry is about
 
+housingBenefitTellUsMore.heading = Tell us more about your enquiry
+error.housingBenefitTellUsMore.required = Enter more details about your enquiry
+error.housingBenefitTellUsMore.pattern = Your enquiry must not include < and >
+error.housingBenefitTellUsMore.maxLength = Your enquiry must be 5000 characters or fewer
 
 # --- Fair Rents journey
 fairRents.title = What is your fair rent enquiry about? - Valuation Office Agency contact form - GOV.UK

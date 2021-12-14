@@ -683,6 +683,11 @@ housingBenefitEnquiry.hb-tell-us-more = Rwyf am ddarganfod y manylion prisio y t
 housingBenefitEnquiry.other-hb-enquiry = Arall
 error.housingBenefitEnquiry.required = Dewiswch beth yw pwrpas eich ymholiad Budd-dal Tai
 
+housingBenefitTellUsMore.heading = Rhowch ragor o wybodaeth i ni am eich ymholiad
+error.housingBenefitTellUsMore.required = Nodwch fwy o fanylion am eich ymholiad
+error.housingBenefitTellUsMore.pattern = Ni ddylai eich ymholiad gynnwys < a >
+error.housingBenefitTellUsMore.maxLength = Rhaid i’ch ymholiad fod yn 5000 nod neu lai
+
 
 # --- Fair Rents journey
 fairRents.title = Ynglŷn â beth yw eich ymholiad rhent teg? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK

@@ -18,13 +18,14 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.{HousingBenefitAllowancesRouter, HousingBenefitEnquiry}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 
 import java.time.LocalDate
 
 class UserAnswers(val cacheMap: CacheMap) {
+
+  def getString(key: String): Option[String] = cacheMap.getEntry[String](key)
 
   def enquiryDate: Option[String] = cacheMap.getEntry[String](EnquiryDateId.toString)
 
@@ -51,10 +52,6 @@ class UserAnswers(val cacheMap: CacheMap) {
   def propertyAddress: Option[PropertyAddress] = cacheMap.getEntry[PropertyAddress](PropertyAddressId.toString)
 
   def housingAllowanceSubcategory: Option[String] = cacheMap.getEntry[String](HousingAllowanceSubcategoryId.toString)
-
-  def housingBenefitAllowancesCategory: Option[String] = cacheMap.getEntry[String](HousingBenefitAllowancesRouter.key)
-
-  def housingBenefitCategory: Option[String] = cacheMap.getEntry[String](HousingBenefitEnquiry.key)
 
   def otherSubcategory: Option[String] = cacheMap.getEntry[String](OtherSubcategoryId.toString)
 

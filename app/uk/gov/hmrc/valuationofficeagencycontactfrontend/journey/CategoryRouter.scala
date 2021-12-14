@@ -26,14 +26,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{StringValue, User
  * @author Yuriy Tumakha
  */
 abstract class CategoryRouter(val key: String,
-                              val heading: String,
                               val fieldId: String,
-                              val options: Seq[String],
-                              val errorRequired: String,
-                              val getValue: UserAnswers => Option[String]) extends Page[String] {
+                              val options: Seq[String]) extends Page[String] {
 
   val form: Form[String] = Form(single(fieldId -> of(StringValue)
     .verifying(errorRequired, options.contains(_))))
 
-  override def nextPage: UserAnswers => Call = getValue(_).fold(startPage)(routes.JourneyController.onPageLoad)
+  def getValue: UserAnswers => Option[String] = _.getString(key)
+
+  override def nextPage: UserAnswers => Call = getValue(_).fold(appStartPage)(routes.JourneyController.onPageLoad)
 }
