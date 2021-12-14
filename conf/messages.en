@@ -662,7 +662,7 @@ housingBenefitAllowances.heading = What is your Housing Benefit or Local Housing
 housingBenefitAllowances.local-housing-allowance-rates = I want to find out about Local Housing Allowance rates
 housingBenefitAllowances.hb-enquiry = I am asking about a Housing Benefit decision
 housingBenefitAllowances.other-ha-hb-enquiry = Other
-error.housingBenefitAllowances.required = Select what is your Housing Benefit or Local Housing Allowances enquiry about
+error.housingBenefitAllowances.required = Select what your Housing Benefit or Local Housing Allowances enquiry is about
 
 housingBenefitEnquiry.heading = What is your Housing Benefit enquiry about?
 housingBenefitEnquiry.housing-benefit-appeals = I want to appeal a Housing Benefit award decision
