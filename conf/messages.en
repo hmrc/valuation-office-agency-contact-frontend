@@ -668,7 +668,7 @@ housingBenefitEnquiry.heading = What is your Housing Benefit enquiry about?
 housingBenefitEnquiry.housing-benefit-appeals = I want to appeal a Housing Benefit award decision
 housingBenefitEnquiry.hb-tell-us-more = I want to find out the valuation details behind my Housing Benefit decision
 housingBenefitEnquiry.other-hb-enquiry = Other
-error.housingBenefitEnquiry.required = Select what is your Housing Benefit enquiry about
+error.housingBenefitEnquiry.required = Select what your Housing Benefit enquiry is about
 
 
 # --- Fair Rents journey
