@@ -671,7 +671,7 @@ housingBenefits.phone-title = Ffôn:
 housingBenefits.phone-number = 03000 502502
 housingBenefits.opening-hours = Mae ein gwasanaeth ffôn ar gael rhwng 9.00am a 4.30pm, o Ddydd Llun i Ddydd Gwener.
 
-housingBenefitAllowances.heading = Beth yw eich ymholiad Budd-dal Tai neu Lwfans Tai Lleol arall?
+housingBenefitAllowances.heading = Ynglŷn â beth yw eich ymholiad Budd-dal Tai neu Lwfansau Tai Lleol?
 housingBenefitAllowances.local-housing-allowance-rates = Rwyf am gael gwybod am gyfraddau Lwfans Tai Lleol
 housingBenefitAllowances.hb-enquiry = Rwy’n gofyn am benderfyniad Budd-dal Tai
 housingBenefitAllowances.other-ha-hb-enquiry = Arall
