@@ -680,6 +680,11 @@ error.otherHAHBTellUsMore.required = Enter more details about your enquiry
 error.otherHAHBTellUsMore.pattern = Your enquiry must not include < and >
 error.otherHAHBTellUsMore.maxLength = Your enquiry must be 5000 characters or fewer
 
+otherHBTellUsMore.heading = What is your other Housing Benefit enquiry?
+error.otherHBTellUsMore.required = Enter more details about your enquiry
+error.otherHBTellUsMore.pattern = Your enquiry must not include < and >
+error.otherHBTellUsMore.maxLength = Your enquiry must be 5000 characters or fewer
+
 
 # --- Fair Rents journey
 fairRents.title = What is your fair rent enquiry about? - Valuation Office Agency contact form - GOV.UK
