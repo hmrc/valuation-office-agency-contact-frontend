@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model
 
 import play.api.data.Form
 import play.api.data.Forms._
@@ -22,7 +22,8 @@ import play.api.data.validation.Constraints
 import play.api.mvc.Call
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.TellUsMorePage.{lastTellUsMorePage, maxChars, textareaRegex}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.JourneyPageRequest
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage.{lastTellUsMorePage, maxChars, textareaRegex}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.ContactDetailsStub
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 

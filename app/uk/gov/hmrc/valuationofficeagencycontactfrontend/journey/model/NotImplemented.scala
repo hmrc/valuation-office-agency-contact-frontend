@@ -14,13 +14,25 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model
 
-import play.api.mvc.{Request, WrappedRequest}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.Page
+import play.api.data.Form
+import play.api.data.Forms.{single, text}
+import play.api.mvc.Call
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 /**
  * @author Yuriy Tumakha
  */
-case class JourneyPageRequest[A](page: Page[String], request: Request[A], sessionId: String, userAnswers: UserAnswers) extends WrappedRequest[A](request)
+abstract class NotImplemented(val key: String) extends Page[String] {
+
+  override def heading: String = "page.not-implemented"
+
+  val fieldId: String = "field"
+
+  val form: Form[String] = Form(single("value" -> text))
+
+  val getValue: UserAnswers => Option[String] = _ => None
+
+  override def nextPage: UserAnswers => Call = ???
+}

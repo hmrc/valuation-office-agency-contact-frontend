@@ -18,7 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages
 
 import play.api.mvc.Call
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.TellUsMorePage
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 /**

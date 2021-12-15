@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model
 
 import play.api.data.Form
 import play.api.data.Forms.{single, text}
@@ -24,11 +24,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 /**
  * @author Yuriy Tumakha
  */
-abstract class NotImplemented(val key: String) extends Page[String] {
-
-  override def heading: String = "page.not-implemented"
-
-  val fieldId: String = "field"
+abstract class CustomizedContent(val key: String,
+                                 val fieldId: String) extends Page[String] {
 
   val form: Form[String] = Form(single("value" -> text))
 
