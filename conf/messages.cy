@@ -698,6 +698,12 @@ error.otherHBTellUsMore.required = Nodwch fwy o fanylion am eich ymholiad
 error.otherHBTellUsMore.pattern = Ni ddylai eich ymholiad gynnwys < a >
 error.otherHBTellUsMore.maxLength = Rhaid i’ch ymholiad fod yn 5000 nod neu lai
 
+localHousingAllowanceRates.heading = Chwilio am gyfraddau Lwfans Tai Lleol ar-lein
+localHousingAllowanceRates.link1.text = Defnyddiwch wasanaeth ar-lein Asiantaeth y Swyddfa Brisio
+localHousingAllowanceRates.p1 = i chwilio am gyfraddau Lwfans Tai Lleol yn eich ardal chi.
+localHousingAllowanceRates.subheading = Cymorth arall ar GOV.UK
+localHousingAllowanceRates.link2.text = Sut mae cyfraddau Lwfans Tai Lleol yn cael eu gosod
+
 
 # --- Fair Rents journey
 fairRents.title = Ynglŷn â beth yw eich ymholiad rhent teg? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK

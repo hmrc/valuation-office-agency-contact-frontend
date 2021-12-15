@@ -18,12 +18,15 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages
 
 import play.api.mvc.Call
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.NotImplemented
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.CustomizedContent
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 /**
  * @author Yuriy Tumakha
  */
-object LocalHousingAllowanceRates extends NotImplemented("local-housing-allowance-rates") {
+object LocalHousingAllowanceRates extends CustomizedContent(
+  key = "local-housing-allowance-rates",
+  fieldId = "localHousingAllowanceRates"
+) {
   override def previousPage: UserAnswers => Call = _ => routes.JourneyController.onPageLoad(HousingBenefitAllowancesRouter.key)
 }

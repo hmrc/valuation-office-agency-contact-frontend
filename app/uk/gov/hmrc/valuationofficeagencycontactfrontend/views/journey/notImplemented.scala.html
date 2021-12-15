@@ -16,7 +16,7 @@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components._
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.Page
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.Page
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey._
 
 @this(
@@ -24,7 +24,7 @@
         govukSummaryList: GovukSummaryList
 )
 
-@(key: String, backUrl: String)(implicit request: Request[_], messages: Messages, page: Page[String])
+@(key: String, backUrl: String, page: Page[String])(implicit request: Request[_], messages: Messages)
 
 @pageTemplate(
     title = messages(page.heading),
@@ -32,13 +32,17 @@
 ) {
     <h1 class="govuk-heading-l">@messages(page.heading)</h1>
 
-    @govukSummaryList(SummaryList(
-        rows = Seq(
-            SummaryListRow(
-                Key(content = Text("Journey Page Key")),
-                Value(content = Text(key))
+        @govukSummaryList(SummaryList(
+            rows = Seq(
+                SummaryListRow(
+                    Key(content = Text("Journey Page Key")),
+                    Value(content = Text(key))
+                ),
+                SummaryListRow(
+                    Key(content = Text("Page Object")),
+                    Value(content = Text(page.getClass.getSimpleName.replace("$", "")))
+                )
             )
-        )
-    ))
+        ))
 
 }

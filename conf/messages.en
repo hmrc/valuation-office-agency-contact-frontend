@@ -685,6 +685,12 @@ error.otherHBTellUsMore.required = Enter more details about your enquiry
 error.otherHBTellUsMore.pattern = Your enquiry must not include < and >
 error.otherHBTellUsMore.maxLength = Your enquiry must be 5000 characters or fewer
 
+localHousingAllowanceRates.heading = Search for Local Housing Allowance rates online
+localHousingAllowanceRates.link1.text = Use the Valuation Office Agency’s online service
+localHousingAllowanceRates.p1 = to search for Local Housing Allowance Rates in your area.
+localHousingAllowanceRates.subheading = Other help on GOV.UK
+localHousingAllowanceRates.link2.text = How Local Housing Allowance rates are set
+
 
 # --- Fair Rents journey
 fairRents.title = What is your fair rent enquiry about? - Valuation Office Agency contact form - GOV.UK

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model
 
 import play.api.data.Form
 import play.api.data.Forms._

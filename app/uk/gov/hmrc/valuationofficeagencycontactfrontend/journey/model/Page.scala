@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model
 
 import play.api.data.Form
 import play.api.mvc.Call
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.JourneyPageRequest
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
@@ -42,7 +43,7 @@ trait Page[T] {
 
   def nextPage: UserAnswers => Call
 
-  def heading= s"$fieldId.heading"
+  def heading = s"$fieldId.heading"
 
   def errorRequired = s"error.$fieldId.required"
 
