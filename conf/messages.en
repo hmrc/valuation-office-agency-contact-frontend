@@ -691,6 +691,12 @@ localHousingAllowanceRates.p1 = to search for Local Housing Allowance Rates in y
 localHousingAllowanceRates.subheading = Other help on GOV.UK
 localHousingAllowanceRates.link2.text = How Local Housing Allowance rates are set
 
+housingBenefitAppeals.heading = Speak to your local council about appealing a Housing Benefit decision
+housingBenefitAppeals.link1.text = Contact your local council
+housingBenefitAppeals.p1 = to appeal a Housing Benefit decision.
+housingBenefitAppeals.subheading = Other help on GOV.UK
+housingBenefitAppeals.link2.text = About Housing benefit
+
 
 # --- Fair Rents journey
 fairRents.title = What is your fair rent enquiry about? - Valuation Office Agency contact form - GOV.UK

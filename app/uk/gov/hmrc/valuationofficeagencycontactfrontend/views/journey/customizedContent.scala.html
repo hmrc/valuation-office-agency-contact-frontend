@@ -14,10 +14,10 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.CustomizedContent
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.{HousingBenefitAppeals, LocalHousingAllowanceRates}
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.customized._
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.CustomizedContent
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.LocalHousingAllowanceRates
 
 @this(
         pageTemplate: pageTemplate,
@@ -34,6 +34,7 @@
     @{
         customizedContent match {
             case LocalHousingAllowanceRates => localHousingAllowanceRates(customizedContent)
+            case HousingBenefitAppeals => housingBenefitAppeals(customizedContent)
             case _ => notImplementedCustomizedContent(key, customizedContent)
         }
     }
