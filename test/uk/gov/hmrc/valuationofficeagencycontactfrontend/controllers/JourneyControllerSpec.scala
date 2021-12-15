@@ -25,7 +25,7 @@ import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.JourneyMap
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.{NotImplemented, Page}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.{CustomizedContent, NotImplemented, Page}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.HousingBenefitAllowancesRouter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
@@ -120,7 +120,7 @@ class JourneyControllerSpec extends ControllerSpecBase {
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
-    "handle notImplemented page" in {
+    "handle NotImplemented page" in {
       object NotImplementedPage extends NotImplemented("some-not-implemented-key") {
         override def previousPage: UserAnswers => Call = _ => appStartPage
       }
@@ -140,4 +140,26 @@ class JourneyControllerSpec extends ControllerSpecBase {
     }
 
   }
+
+  "handle not implemented CustomizedContent" in {
+    object CustomizedContentPage extends CustomizedContent("some-customized-content", "customizedPrefix") {
+      override def previousPage: UserAnswers => Call = _ => appStartPage
+    }
+
+    implicit val request: Request[_] = fakeRequest
+    implicit val messages: Messages = MessagesImpl(Lang("en"), new DefaultMessagesApi)
+
+    CustomizedContentPage.previousPage(userAnswers).url mustBe CustomizedContentPage.appStartPage.url
+
+    assertThrows[NotImplementedError] {
+      CustomizedContentPage.nextPage(userAnswers).url
+    }
+
+    val html = customizedContentTemplate(CustomizedContentPage.key, "/back/url", CustomizedContentPage).toString()
+    html must include("Not Implemented Customized Content")
+    html must include(CustomizedContentPage.key)
+    html must include("/back/url")
+    html must include("CustomizedContentPage")
+  }
+
 }
