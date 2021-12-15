@@ -29,7 +29,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.{NotImplem
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.HousingBenefitAllowancesRouter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.{categoryRouter, notImplemented, singleTextarea}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.{categoryRouter, customizedContent, notImplemented, singleTextarea}
 
 class JourneyControllerSpec extends ControllerSpecBase {
 
@@ -39,13 +39,14 @@ class JourneyControllerSpec extends ControllerSpecBase {
   def userAnswers = new UserAnswers(emptyCacheMap)
   def categoryRouterTemplate: categoryRouter = app.injector.instanceOf[categoryRouter]
   def singleTextareaTemplate: singleTextarea = app.injector.instanceOf[singleTextarea]
+  def customizedContentTemplate: customizedContent = app.injector.instanceOf[customizedContent]
   def notImplementedTemplate: notImplemented = app.injector.instanceOf[notImplemented]
   def journeyMap = app.injector.instanceOf[JourneyMap]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new JourneyController(journeyMap, FakeDataCacheConnector,
       dataRetrievalAction, new DataRequiredActionImpl(ec),
-      categoryRouterTemplate, singleTextareaTemplate, notImplementedTemplate,
+      categoryRouterTemplate, singleTextareaTemplate, customizedContentTemplate, notImplementedTemplate,
       MessageControllerComponentsHelpers.stubMessageControllerComponents, messagesApi)
 
   def viewAsString(form: Form[String] = form) =
