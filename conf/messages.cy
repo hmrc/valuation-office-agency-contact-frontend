@@ -704,6 +704,12 @@ localHousingAllowanceRates.p1 = i chwilio am gyfraddau Lwfans Tai Lleol yn eich 
 localHousingAllowanceRates.subheading = Cymorth arall ar GOV.UK
 localHousingAllowanceRates.link2.text = Sut mae cyfraddau Lwfans Tai Lleol yn cael eu gosod
 
+housingBenefitAppeals.heading = Siaradwch gyda’ch cyngor lleol am apelio yn erbyn penderfyniad Budd-dal Tai
+housingBenefitAppeals.link1.text = Cysylltwch â’ch cyngor lleol
+housingBenefitAppeals.p1 = i apelio yn erbyn penderfyniad Budd-dal Tai.
+housingBenefitAppeals.subheading = Cymorth arall ar GOV.UK
+housingBenefitAppeals.link2.text = Ynglŷn â Budd-dal Tai
+
 
 # --- Fair Rents journey
 fairRents.title = Ynglŷn â beth yw eich ymholiad rhent teg? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK

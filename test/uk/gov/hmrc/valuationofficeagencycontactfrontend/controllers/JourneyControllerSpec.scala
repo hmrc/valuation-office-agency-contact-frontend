@@ -127,7 +127,6 @@ class JourneyControllerSpec extends ControllerSpecBase {
 
       implicit val request: Request[_] = fakeRequest
       implicit val messages: Messages = MessagesImpl(Lang("en"), new DefaultMessagesApi)
-      implicit val page: Page[String] = NotImplementedPage
 
       NotImplementedPage.previousPage(userAnswers).url mustBe NotImplementedPage.appStartPage.url
 
