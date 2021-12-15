@@ -135,7 +135,7 @@ class JourneyControllerSpec extends ControllerSpecBase {
         NotImplementedPage.nextPage(userAnswers).url
       }
 
-      val html = notImplementedTemplate(NotImplementedPage.key, "/back/url").toString()
+      val html = notImplementedTemplate(NotImplementedPage.key, "/back/url", NotImplementedPage).toString()
       html must include(NotImplementedPage.key)
       html must include("/back/url")
     }
