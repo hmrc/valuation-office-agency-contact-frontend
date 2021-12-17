@@ -17,8 +17,12 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
 import org.scalatestplus.mockito.MockitoSugar
+import play.api.libs.json.{JsString, Json}
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.FakeDataRetrievalAction
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{ContactDetailsId, ContactReasonId, EnquiryCategoryId, PropertyAddressId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 
 class UserAnswersSpec extends SpecBase with MockitoSugar {
@@ -85,6 +89,28 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
       val expectedResult = Contact(contactDetails, propertyAddress, ec, businessSubcategory, tellUs.message)
 
       val userAnswers = new FakeUserAnswers(contactDetails, ec, "", businessSubcategory,  "", propertyAddress, tellUs)
+
+      val result = userAnswers.contact()
+
+      result mustBe Right(expectedResult)
+    }
+
+    "Return a ContactModel object containing a Property Address if address line 2 and county are None and the enquiry selected is housing_benefit" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "housing_benefit"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", None, "c", None, "f")
+      val housingBenefitSubcategory = "other-ha-hb-enquiry"
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason), EnquiryCategoryId.toString -> JsString(ec),
+        TellUsMorePage.lastTellUsMorePage -> JsString(housingBenefitSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress),
+        housingBenefitSubcategory -> JsString("Enquiry details"))
+
+      val expectedResult = Contact(contactDetails, propertyAddress, ec, housingBenefitSubcategory, "Enquiry details")
+
+      val userAnswers = new FakeUserAnswers(contactDetails, ec, "", housingBenefitSubcategory,  "", propertyAddress,
+        cacheMap = CacheMap("", validData))
 
       val result = userAnswers.contact()
 

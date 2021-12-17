@@ -21,12 +21,14 @@ import play.api.Logger
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
-import uk.gov.hmrc.play.bootstrap.controller.FrontendController
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.ContactDetailsId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage.lastTellUsMorePage
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.HBTellUsMore.appStartPage
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{contactDetails => contact_details}
@@ -105,6 +107,7 @@ class ContactDetailsController @Inject()(appConfig: FrontendAppConfig,
       case (_, Some("business_rates"), _, Some("business_rates_demolished"), _) => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("business_rates"), _, Some("business_rates_property_empty"), _) => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("business_rates"), _, Some("business_rates_valuation"), _) => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      case (_, Some("housing_benefit"), _, _, _) => Right(answers.getString(lastTellUsMorePage).fold(appStartPage)(routes.JourneyController.onPageLoad).url)
       case (_, Some("fair_rent"), _, _, Some("submit_new_application")) => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("fair_rent"), _, _, Some("check_fair_rent_register")) => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("fair_rent"), _, _, Some("other_request")) => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)

@@ -20,7 +20,7 @@ import com.google.inject.Inject
 import play.api.Logger
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
-import uk.gov.hmrc.play.bootstrap.controller.FrontendController
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
@@ -152,6 +152,12 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress,
           checkYourAnswersHelper.tellUsMore()).flatten))
+      case (_, Some("housing_benefit"), _, _, _) => Some(
+        AnswerSection(None, Seq(
+          checkYourAnswersHelper.enquiryCategory,
+          checkYourAnswersHelper.housingBenefitTellUsMore,
+          checkYourAnswersHelper.contactDetails,
+          checkYourAnswersHelper.propertyAddress).flatten))
       case (_, Some("fair_rent"), _, _, Some("submit_new_application")) => Some(
         AnswerSection(None, Seq(
           checkYourAnswersHelper.enquiryCategory,
@@ -179,6 +185,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
 
   private[controllers] def enquiryBackLink(answers: UserAnswers): String = {
     (answers.contactReason, answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.fairRentEnquiryEnquiry) match {
+      case (_, _, _, _) if answers.enquiryCategory.contains("housing_benefit") => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), Some("council_tax_property_poor_repair"), _, _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), Some("council_tax_business_uses"), _, _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), Some("council_tax_area_change"), _, _) => routes.PropertyAddressController.onPageLoad(NormalMode).url

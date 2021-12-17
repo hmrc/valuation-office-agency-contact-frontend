@@ -26,8 +26,9 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCache
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, ContactReasonId, CouncilTaxSubcategoryId, EnquiryCategoryId}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, ContactReasonId, CouncilTaxSubcategoryId, EnquiryCategoryId, PropertyAddressId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode, PropertyAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{contactDetails => contact_details}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
@@ -339,6 +340,24 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
 
       status(result) mustBe OK
       contentAsString(result) mustBe viewAsStringCT()
+    }
+
+    "return OK and the correct view for a GET when enquiry category is housing_benefit" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "housing_benefit"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val housingBenefitSubcategory = "hb-tell-us-more"
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason), EnquiryCategoryId.toString -> JsString(ec),
+        TellUsMorePage.lastTellUsMorePage -> JsString(housingBenefitSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress),
+        housingBenefitSubcategory -> JsString("Enquiry details"))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
     }
 
     "populate the view correctly on a GET when the question has previously been answered and enquiry category is council_tax" in {

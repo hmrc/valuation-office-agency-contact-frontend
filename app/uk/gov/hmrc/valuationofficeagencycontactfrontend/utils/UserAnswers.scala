@@ -18,6 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage.lastTellUsMorePage
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 
@@ -82,25 +83,24 @@ class UserAnswers(val cacheMap: CacheMap) {
   def fairRentEnquiryEnquiry: Option[String] = cacheMap.getEntry[String](FairRentEnquiryId.toString)
 
   def contact(): Either[String, Contact] = {
-
-    val optionalContactModel = for {
+    (for {
       cd <- contactDetails
       pa <- propertyAddress
       eq <- enquiryCategory orElse existingEnquiryCategory
       subcategory <- eq match {
         case "council_tax" => councilTaxSubcategory
         case "business_rates" => businessRatesSubcategory
+        case "housing_benefit" => getString(lastTellUsMorePage)
         case "fair_rent" => fairRentEnquiryEnquiry
         case "other" => otherSubcategory
         case _ => None
       }
-      message <- tellUsMore.map(_.message).orElse(whatElse).orElse(anythingElse)
-    } yield Contact(cd, pa, eq, subcategory, message)
-
-    optionalContactModel match {
-      case Some(c @ Contact(_, _, _, _, _)) => Right(c)
-      case None => Left("Unable to parse")
-    }
+      message <- eq match {
+        case "housing_benefit" => getString(subcategory)
+        case _ => tellUsMore.map(_.message).orElse(whatElse).orElse(anythingElse)
+      }
+    } yield Contact(cd, pa, eq, subcategory, message))
+      .toRight("Unable to parse")
   }
-}
 
+}
