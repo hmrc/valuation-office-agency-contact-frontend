@@ -17,6 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage.lastTellUsMorePage
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CheckMode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.ContactFormatter._
@@ -83,4 +84,10 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
   def fairRentEnquiryEnquiry: Option[AnswerRow] = userAnswers.fairRentEnquiryEnquiry.map {
     x => AnswerRow("housingBenefits.heading", s"housingBenefits.form.$x", false, routes.FairRentEnquiryController.onPageLoad().url)
   }
+
+  def housingBenefitTellUsMore: Option[AnswerRow] = userAnswers.getString(lastTellUsMorePage) map {
+    pageKey => AnswerRow(s"housingBenefitSubcategory.$pageKey", userAnswers.getString(pageKey).getOrElse(""), answerIsMessageKey = false,
+      routes.JourneyController.onPageLoad(pageKey).url)
+  }
+
 }

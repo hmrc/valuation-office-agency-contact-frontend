@@ -174,6 +174,12 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       isCouncilTaxSelection mustBe true
     }
 
+    "enquiryKey returns a string with a housingBenefitSubcategory key prefix when the enquiry category is housing_benefit" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
+
+      enquiryKey(mockUserAnswers) mustBe Right("housingBenefitSubcategory")
+    }
+
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn None
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))

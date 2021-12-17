@@ -24,7 +24,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConn
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.JourneyPageRequest
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage.{lastTellUsMorePage, maxChars, textareaRegex}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.ContactDetailsStub
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 import scala.concurrent.Future
@@ -47,7 +47,7 @@ abstract class TellUsMorePage(val key: String,
   override def beforeSaveAnswers: (DataCacheConnector, JourneyPageRequest[_]) => Future[_] =
     (dataCacheConnector, request) => dataCacheConnector.save[String](request.sessionId, lastTellUsMorePage, key)
 
-  override def nextPage: UserAnswers => Call = _ => routes.JourneyController.onPageLoad(ContactDetailsStub.key)
+  override def nextPage: UserAnswers => Call = _ => routes.ContactDetailsController.onPageLoad(NormalMode)
 }
 
 object TellUsMorePage {

@@ -52,6 +52,7 @@ object ContactWithEnMessage {
         val enquiryKey = ct.enquiryCategory match {
           case `councilTaxKey` => "councilTaxSubcategory"
           case `businessRatesKey` => "businessRatesSubcategory"
+          case "housing_benefit" => "housingBenefitSubcategory"
           case "fair_rent" => "fairRents"
           case "other" => "other"
           case _ =>

@@ -17,8 +17,10 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend
 
 import org.scalatestplus.mockito.MockitoSugar
+import play.api.libs.json.JsString
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerRow
@@ -257,6 +259,20 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
         val result = checkYourAnswers.contactDetails
         result mustBe None
+      }
+
+      "housingBenefitTellUsMore function should return an Answer Row containing label and a message" in {
+        val cd = ContactDetails("a", "c", "e")
+        val propertyAddress = PropertyAddress("a", None, "c", None, "f")
+        val pageKey = "other-hb-enquiry"
+        val subcategory = "other-hb-enquiry"
+
+        val userAnswers = new FakeUserAnswers(cd, "housing_benefit", pageKey, "",  "", propertyAddress,
+          cacheMap = new CacheMap("", Map(TellUsMorePage.lastTellUsMorePage -> JsString(subcategory), subcategory -> JsString("Enquiry details"))))
+        val checkYourAnswersHelper = new CheckYourAnswersHelper(userAnswers)
+
+        val result = checkYourAnswersHelper.housingBenefitTellUsMore
+        result mustBe Some(AnswerRow("housingBenefitSubcategory.other-hb-enquiry", "Enquiry details", false, routes.JourneyController.onPageLoad(pageKey).url))
       }
 
     }

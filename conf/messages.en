@@ -697,6 +697,10 @@ housingBenefitAppeals.p1 = to appeal a Housing Benefit decision.
 housingBenefitAppeals.subheading = Other help on GOV.UK
 housingBenefitAppeals.link2.text = About Housing benefit
 
+housingBenefitSubcategory.hb-tell-us-more = I want to find out the valuation details behind my Housing Benefit decision
+housingBenefitSubcategory.other-hb-enquiry = What is your other Housing Benefit enquiry?
+housingBenefitSubcategory.other-ha-hb-enquiry = What is your other Housing Benefit or Local Housing Allowances enquiry?
+
 
 # --- Fair Rents journey
 fairRents.title = What is your fair rent enquiry about? - Valuation Office Agency contact form - GOV.UK

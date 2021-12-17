@@ -20,7 +20,7 @@ import javax.inject.{Inject, Singleton}
 import play.api.Logger
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
-import uk.gov.hmrc.play.bootstrap.controller.FrontendController
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ConfirmationController._
@@ -31,8 +31,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurveyForm
 
-import scala.concurrent.ExecutionContext
-import scala.util.{Failure, Success}
+import scala.concurrent.{ExecutionContext, Future}
+import scala.util.{Failure, Success, Try}
 
 @Singleton()
 class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
@@ -58,7 +58,8 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
         throw new RuntimeException(s"On Sending Email - Navigation for Confirmation page reached without a contact and error $msg")
     }
 
-    val result = connector.send(contact, messagesApi, request.userAnswers)
+    val result = if (request.userAnswers.enquiryCategory.contains("housing_benefit")) Future.successful(Try(1)) //TODO: Sending email is not implemented
+                 else connector.send(contact, messagesApi, request.userAnswers)
 
     result map {
       case Success(_) =>
@@ -94,6 +95,7 @@ object ConfirmationController {
     (answers.enquiryCategory, answers.existingEnquiryCategory) match {
       case (Some("council_tax"), _) => Right("councilTaxSubcategory")
       case (Some("business_rates"), _) => Right("businessRatesSubcategory")
+      case (Some("housing_benefit"), _) => Right("housingBenefitSubcategory")
       case (Some("fair_rent"), _) => Right("housingAllowanceSubcategory")
       case (_, Some("council_tax")) => Right("councilTaxSubcategory")
       case (_, Some("business_rates")) => Right("businessRatesSubcategory")

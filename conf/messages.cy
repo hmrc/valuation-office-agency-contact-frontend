@@ -710,6 +710,10 @@ housingBenefitAppeals.p1 = i apelio yn erbyn penderfyniad Budd-dal Tai.
 housingBenefitAppeals.subheading = Cymorth arall ar GOV.UK
 housingBenefitAppeals.link2.text = Ynglŷn â Budd-dal Tai
 
+housingBenefitSubcategory.hb-tell-us-more = Rwyf am ddarganfod y manylion prisio y tu ôl i’m penderfyniad Budd-dal Tai
+housingBenefitSubcategory.other-hb-enquiry = Beth yw eich ymholiad Budd-dal Tai arall?
+housingBenefitSubcategory.other-ha-hb-enquiry = Beth yw eich ymholiad Budd-dal Tai neu Lwfans Tai Lleol arall?
+
 
 # --- Fair Rents journey
 fairRents.title = Ynglŷn â beth yw eich ymholiad rhent teg? - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK

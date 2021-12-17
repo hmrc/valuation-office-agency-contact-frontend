@@ -25,6 +25,7 @@ import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
@@ -445,6 +446,50 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       val result = controller(getRelevantData).onPageLoad()(fakeRequest)
 
       status(result) mustBe OK
+    }
+
+    "return 200 for a GET if subcategory is other-ha-hb-enquiry" in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "housing_benefit"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val housingBenefitSubcategory = "other-ha-hb-enquiry"
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason), EnquiryCategoryId.toString -> JsString(ec),
+        TellUsMorePage.lastTellUsMorePage -> JsString(housingBenefitSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress),
+        housingBenefitSubcategory -> JsString("Enquiry details"))
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+
+      status(result) mustBe OK
+
+      val content = contentAsString(result)
+      content must include("What is your enquiry about?")
+      content must include("Housing Benefit and Local Housing Allowances")
+      content must include("What is your other Housing Benefit or Local Housing Allowances enquiry?")
+      content must include("Enquiry details")
+    }
+
+    "use backLink to PropertyAddress for Housing Benefit category " in {
+      val contactDetails = ContactDetails("a", "c", "e")
+      val ec = "housing_benefit"
+      val contactReason = "new_enquiry"
+      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val housingBenefitSubcategory = "other-ha-hb-enquiry"
+
+      val validData = Map(ContactReasonId.toString -> JsString(contactReason), EnquiryCategoryId.toString -> JsString(ec),
+        TellUsMorePage.lastTellUsMorePage -> JsString(housingBenefitSubcategory),
+        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress),
+        housingBenefitSubcategory -> JsString("Enquiry details"))
+
+      val cacheMap = CacheMap(cacheMapId, validData)
+
+      val getRelevantData = new FakeDataRetrievalAction(Some(cacheMap))
+
+      controller(getRelevantData).enquiryBackLink(new UserAnswers(cacheMap)) mustBe routes.PropertyAddressController.onPageLoad(NormalMode).url
     }
 
     "redirect to Session Expired for a GET if not existing data is found" in {
