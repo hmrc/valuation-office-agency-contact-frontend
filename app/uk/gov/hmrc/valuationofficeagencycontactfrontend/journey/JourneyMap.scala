@@ -20,6 +20,7 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.Results.NotFound
 import play.api.mvc.{ActionRefiner, Request, Result}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.JourneyMap.changeModePrefix
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.Page
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.DataRequest
@@ -47,6 +48,8 @@ class JourneyMap @Inject()(pageNotFound: page_not_found,
     OtherHBEnquiry
   )
 
+  private val changeModeKeyPattern = s"""$changeModePrefix(.*)""".r
+
   val journeyMap: Map[String, Page[String]] = pages.map(page => page.key -> page).toMap
 
   def getPage(key: String) = new ActionRefiner[DataRequest, JourneyPageRequest] {
@@ -55,11 +58,22 @@ class JourneyMap @Inject()(pageNotFound: page_not_found,
     def refine[A](request: DataRequest[A]): Future[Either[Result, JourneyPageRequest[A]]] = Future.successful {
       implicit val req: Request[A] = request.request
 
-      journeyMap
-        .get(key)
-        .map(JourneyPageRequest(_, request.request, request.sessionId, request.userAnswers))
+      getPageInChangeMode(key)
+        .orElse(journeyMap.get(key).map((_, false)))
+        .map(t => JourneyPageRequest(t._1, request.request, request.sessionId, request.userAnswers, t._2))
         .toRight(NotFound(pageNotFound(appConfig)))
     }
   }
 
+  private def getPageInChangeMode(key: String): Option[(Page[String], Boolean)] =
+    changeModeKeyPattern
+      .findFirstMatchIn(key)
+      .map(_.group(1))
+      .flatMap(journeyMap.get)
+      .map((_, true))
+
+}
+
+object JourneyMap {
+  val changeModePrefix = "change-"
 }

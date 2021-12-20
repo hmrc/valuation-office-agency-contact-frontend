@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.JourneyMap.changeModePrefix
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage.lastTellUsMorePage
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CheckMode, NormalMode}
@@ -87,7 +88,7 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
 
   def housingBenefitTellUsMore: Option[AnswerRow] = userAnswers.getString(lastTellUsMorePage) map {
     pageKey => AnswerRow(s"housingBenefitSubcategory.$pageKey", userAnswers.getString(pageKey).getOrElse(""), answerIsMessageKey = false,
-      routes.JourneyController.onPageLoad(pageKey).url)
+      routes.JourneyController.onPageLoad(changeModePrefix + pageKey).url)
   }
 
 }

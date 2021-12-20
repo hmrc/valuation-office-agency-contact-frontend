@@ -60,7 +60,14 @@ class JourneyController @Inject()(journeyMap: JourneyMap,
         for {
           _ <- page.beforeSaveAnswers(dataCacheConnector, request)
           cacheMap <- dataCacheConnector.save[String](request.sessionId, page.key, value)
-        } yield Redirect(page.nextPage(new UserAnswers(cacheMap)))
+        } yield {
+          val call = if (request.changeMode) {
+            routes.CheckYourAnswersController.onPageLoad
+          } else {
+            page.nextPage(new UserAnswers(cacheMap))
+          }
+          Redirect(call)
+        }
     )
   }
 

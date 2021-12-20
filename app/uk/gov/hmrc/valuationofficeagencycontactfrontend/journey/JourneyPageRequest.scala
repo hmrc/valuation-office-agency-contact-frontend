@@ -23,4 +23,9 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 /**
  * @author Yuriy Tumakha
  */
-case class JourneyPageRequest[A](page: Page[String], request: Request[A], sessionId: String, userAnswers: UserAnswers) extends WrappedRequest[A](request)
+case class JourneyPageRequest[A](page: Page[String],
+                                 request: Request[A],
+                                 sessionId: String,
+                                 userAnswers: UserAnswers,
+                                 changeMode: Boolean = false)
+  extends WrappedRequest[A](request)
