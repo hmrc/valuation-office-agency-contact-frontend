@@ -95,10 +95,11 @@ object ConfirmationController {
       case (Some("council_tax"), _) => Right("councilTaxSubcategory")
       case (Some("business_rates"), _) => Right("businessRatesSubcategory")
       case (Some("housing_benefit"), _) => Right("housingBenefitSubcategory")
-      case (Some("fair_rent"), _) => Right("housingAllowanceSubcategory")
+      case (Some("fair_rent"), _) => Right("fairRents")
       case (_, Some("council_tax")) => Right("councilTaxSubcategory")
       case (_, Some("business_rates")) => Right("businessRatesSubcategory")
-      case (_, Some("housing_allowance")) => Right("housingAllowanceSubcategory")
+      case (_, Some("housing_benefit")) => Right("housingBenefitSubcategory")
+      case (_, Some("fair_rent")) => Right("fairRents")
       case (_, Some("other")) => Right("other")
       case _ => Left("Unknown enquiry category in enquiry key")
     }

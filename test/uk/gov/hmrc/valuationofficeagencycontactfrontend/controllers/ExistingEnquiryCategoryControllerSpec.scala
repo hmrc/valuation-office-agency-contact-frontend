@@ -131,8 +131,17 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
       redirectLocation(result) mustBe Some(contactReasonRoute.url)
     }
 
-    "redirect to the next page when valid data is submitted with housing_allowance" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "housing_allowance"))
+    "redirect to the next page when valid data is submitted with housing_benefit" in {
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "housing_benefit"))
+
+      val result = controller().onSubmit(NormalMode)(postRequest)
+
+      status(result) mustBe SEE_OTHER
+      redirectLocation(result) mustBe Some(contactReasonRoute.url)
+    }
+
+    "redirect to the next page when valid data is submitted with fair_rent" in {
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "fair_rent"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 

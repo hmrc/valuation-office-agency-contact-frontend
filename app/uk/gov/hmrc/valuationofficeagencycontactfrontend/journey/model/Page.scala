@@ -53,6 +53,6 @@ trait Page[T] {
 
   def appStartPage: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
-  def beforeSaveAnswers: (DataCacheConnector, JourneyPageRequest[_]) => Future[_] = (_, _) => Future.successful(())
+  def beforeSaveAnswers: (DataCacheConnector, JourneyPageRequest[_]) => Future[_] = (_, _) => Future.unit
 
 }

@@ -20,11 +20,13 @@ import play.api.Logger
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.play.bootstrap.controller.FrontendController
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ExistingEnquiryCategoryForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, CouncilTaxSubcategoryId, EnquiryCategoryId, ExistingEnquiryCategoryId, HousingAllowanceSubcategoryId, OtherSubcategoryId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, CouncilTaxSubcategoryId, EnquiryCategoryId, ExistingEnquiryCategoryId, FairRentEnquiryId, OtherSubcategoryId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage.lastTellUsMorePage
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.OtherHAHBEnquiry
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.existingEnquiryCategory
@@ -85,7 +87,8 @@ class ExistingEnquiryCategoryController @Inject()(
     subcategory match {
       case "council_tax"       => dataCacheConnector.save[String](sessionId, CouncilTaxSubcategoryId.toString, subcategory)
       case "business_rates"    => dataCacheConnector.save[String](sessionId, BusinessRatesSubcategoryId.toString, subcategory)
-      case "housing_allowance" => dataCacheConnector.save[String](sessionId, HousingAllowanceSubcategoryId.toString, subcategory)
+      case "housing_benefit"   => dataCacheConnector.save[String](sessionId, lastTellUsMorePage, OtherHAHBEnquiry.key)
+      case "fair_rent"         => dataCacheConnector.save[String](sessionId, FairRentEnquiryId.toString, "other_request")
       case "other"             => dataCacheConnector.save[String](sessionId, OtherSubcategoryId.toString, subcategory)
       case _                   => Future.unit
     }

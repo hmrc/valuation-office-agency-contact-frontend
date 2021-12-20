@@ -52,8 +52,6 @@ class UserAnswers(val cacheMap: CacheMap) {
 
   def propertyAddress: Option[PropertyAddress] = cacheMap.getEntry[PropertyAddress](PropertyAddressId.toString)
 
-  def housingAllowanceSubcategory: Option[String] = cacheMap.getEntry[String](HousingAllowanceSubcategoryId.toString)
-
   def otherSubcategory: Option[String] = cacheMap.getEntry[String](OtherSubcategoryId.toString)
 
   def answerSection: Option[AnswerSection] = cacheMap.getEntry[AnswerSection](AnswerSectionId.toString)
@@ -95,8 +93,8 @@ class UserAnswers(val cacheMap: CacheMap) {
         case "other" => otherSubcategory
         case _ => None
       }
-      message <- eq match {
-        case "housing_benefit" => getString(subcategory)
+      message <- enquiryCategory match {
+        case Some("housing_benefit") => getString(subcategory)
         case _ => tellUsMore.map(_.message).orElse(whatElse).orElse(anythingElse)
       }
     } yield Contact(cd, pa, eq, subcategory, message))

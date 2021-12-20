@@ -62,8 +62,12 @@ class ExistingEnquiryCategoryViewSpec extends ViewBehaviours {
         labelDefinedAndUsedOnce("business_rates", messageKeyPrefix, createView)
       }
 
-      "has a radio button with the label set to the message with key existingEnquiryCategory.housing_allowance and that it is used once" in {
-        labelDefinedAndUsedOnce("housing_allowance", messageKeyPrefix, createView)
+      "has a radio button with the label set to the message with key existingEnquiryCategory.housing_benefit and that it is used once" in {
+        labelDefinedAndUsedOnce("housing_benefit", messageKeyPrefix, createView)
+      }
+
+      "has a radio button with the label set to the message with key existingEnquiryCategory.fair_rent and that it is used once" in {
+        labelDefinedAndUsedOnce("fair_rent", messageKeyPrefix, createView)
       }
 
       "has a radio button with the label set to the message with key existingEnquiryCategory.other and that it is used once" in {

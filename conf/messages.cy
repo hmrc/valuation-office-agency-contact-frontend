@@ -96,7 +96,8 @@ existingEnquiryCategory.title = Am beth wnaethoch chi gysylltu â ni? - Ffurflen
 existingEnquiryCategory.heading = Am beth wnaethoch chi gysylltu â ni?
 existingEnquiryCategory.council_tax = Treth y Cyngor
 existingEnquiryCategory.business_rates = Trethi Busnes
-existingEnquiryCategory.housing_allowance = Lwfans Tai neu renti teg
+existingEnquiryCategory.housing_benefit = Budd-dal Tai a Lwfans Tai Lleol
+existingEnquiryCategory.fair_rent = Rhenti teg
 existingEnquiryCategory.other = Arall
 
 error.existingEnquiryCategory.required = Dewiswch yr hyn y gwnaethoch chi gysylltu â ni amdano
