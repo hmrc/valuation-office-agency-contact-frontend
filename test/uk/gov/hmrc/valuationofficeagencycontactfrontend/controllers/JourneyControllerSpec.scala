@@ -139,27 +139,27 @@ class JourneyControllerSpec extends ControllerSpecBase {
       html must include("/back/url")
     }
 
-  }
+    "handle not implemented CustomizedContent" in {
+      object CustomizedContentPage extends CustomizedContent("some-customized-content", "customizedPrefix") {
+        override def previousPage: UserAnswers => Call = _ => appStartPage
+      }
 
-  "handle not implemented CustomizedContent" in {
-    object CustomizedContentPage extends CustomizedContent("some-customized-content", "customizedPrefix") {
-      override def previousPage: UserAnswers => Call = _ => appStartPage
+      implicit val request: Request[_] = fakeRequest
+      implicit val messages: Messages = MessagesImpl(Lang("en"), new DefaultMessagesApi)
+
+      CustomizedContentPage.previousPage(userAnswers).url mustBe CustomizedContentPage.appStartPage.url
+
+      assertThrows[NotImplementedError] {
+        CustomizedContentPage.nextPage(userAnswers).url
+      }
+
+      val html = customizedContentTemplate(CustomizedContentPage.key, "/back/url", CustomizedContentPage).toString()
+      html must include("Not Implemented Customized Content")
+      html must include(CustomizedContentPage.key)
+      html must include("/back/url")
+      html must include("CustomizedContentPage")
     }
 
-    implicit val request: Request[_] = fakeRequest
-    implicit val messages: Messages = MessagesImpl(Lang("en"), new DefaultMessagesApi)
-
-    CustomizedContentPage.previousPage(userAnswers).url mustBe CustomizedContentPage.appStartPage.url
-
-    assertThrows[NotImplementedError] {
-      CustomizedContentPage.nextPage(userAnswers).url
-    }
-
-    val html = customizedContentTemplate(CustomizedContentPage.key, "/back/url", CustomizedContentPage).toString()
-    html must include("Not Implemented Customized Content")
-    html must include(CustomizedContentPage.key)
-    html must include("/back/url")
-    html must include("CustomizedContentPage")
   }
 
 }

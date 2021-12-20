@@ -58,8 +58,7 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
         throw new RuntimeException(s"On Sending Email - Navigation for Confirmation page reached without a contact and error $msg")
     }
 
-    val result = if (request.userAnswers.enquiryCategory.contains("housing_benefit")) Future.successful(Try(1)) //TODO: Sending email is not implemented
-                 else connector.send(contact, messagesApi, request.userAnswers)
+    val result = connector.send(contact, messagesApi, request.userAnswers)
 
     result map {
       case Success(_) =>
