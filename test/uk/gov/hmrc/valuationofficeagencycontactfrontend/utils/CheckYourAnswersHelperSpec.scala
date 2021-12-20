@@ -20,6 +20,7 @@ import org.scalatestplus.mockito.MockitoSugar
 import play.api.libs.json.JsString
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.JourneyMap.changeModePrefix
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, UserAnswers}
@@ -272,7 +273,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswersHelper = new CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswersHelper.housingBenefitTellUsMore
-        result mustBe Some(AnswerRow("housingBenefitSubcategory.other-hb-enquiry", "Enquiry details", false, routes.JourneyController.onPageLoad(pageKey).url))
+        result mustBe Some(AnswerRow("housingBenefitSubcategory.other-hb-enquiry", "Enquiry details", false, routes.JourneyController.onPageLoad(changeModePrefix + pageKey).url))
       }
 
     }
