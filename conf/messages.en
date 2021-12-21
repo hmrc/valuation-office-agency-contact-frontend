@@ -95,7 +95,8 @@ existingEnquiryCategory.title = What did you contact us about? - Valuation Offic
 existingEnquiryCategory.heading = What did you contact us about?
 existingEnquiryCategory.council_tax = Council Tax
 existingEnquiryCategory.business_rates = Business rates
-existingEnquiryCategory.housing_allowance = Housing Allowance or fair rents
+existingEnquiryCategory.housing_benefit = Housing Benefit and Local Housing Allowances
+existingEnquiryCategory.fair_rent = Fair rents
 existingEnquiryCategory.other = Other
 
 error.existingEnquiryCategory.required = Select what you contacted us about
