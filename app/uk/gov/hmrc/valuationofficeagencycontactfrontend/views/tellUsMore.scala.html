@@ -25,6 +25,7 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.components.help_with_service_fair_rent
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.TellUsMore
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
@@ -131,7 +132,9 @@
             @content
             @govukButton(Button(attributes = Map("id" -> "submit"), content = Text(messages("site.continue"))))
 
-
+            @if(enquiryKey == "tellUsMore.fairRent") {
+                @help_with_service_fair_rent()
+            }
         }
     }
 }

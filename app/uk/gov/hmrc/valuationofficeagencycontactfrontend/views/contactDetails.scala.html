@@ -28,6 +28,8 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.input.Input
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.components.help_with_service_fair_rent
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.DataRequestUtil.isEnquiryCategoryOneOf
 
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
 
@@ -102,6 +104,8 @@
         @govukFieldset(Fieldset(html = content))
         @govukButton(Button(content = Text(messages("site.continue")), attributes = Map("id"-> "submit")))
 
-
+        @if(isEnquiryCategoryOneOf("housing_benefit","fair_rent")) {
+            @help_with_service_fair_rent()
+        }
     }
 }

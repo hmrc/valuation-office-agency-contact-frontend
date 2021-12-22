@@ -23,6 +23,8 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.Section
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryList
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.SectionFormatter.formatSections
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.components.help_with_service_fair_rent
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.DataRequestUtil.isEnquiryCategoryOneOf
 
 @this(mainTemplate: main_template, formWithCSFR: FormWithCSRF,
         govukButton: GovukButton, govukBackLink: GovukBackLink, govukSummaryList: GovukSummaryList )
@@ -52,6 +54,8 @@
         attributes = Map("id" -> "submit")
     ))
 
-
+    @if(isEnquiryCategoryOneOf("housing_benefit","fair_rent")) {
+        @help_with_service_fair_rent()
+    }
 
 }
