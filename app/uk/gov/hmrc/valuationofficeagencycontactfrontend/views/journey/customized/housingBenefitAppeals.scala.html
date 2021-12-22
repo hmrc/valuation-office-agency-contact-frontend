@@ -14,7 +14,11 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.CustomizedContent
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.OtherHBEnquiry
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.components.general_enquires_fair_rent
+
 
 @(customizedContent: CustomizedContent)(implicit messages: Messages)
 
@@ -30,3 +34,5 @@
 <p class="govuk-body">
  <a class="govuk-link" href="https://www.gov.uk/housing-benefit">@messages("housingBenefitAppeals.link2.text")</a>
 </p>
+
+@general_enquires_fair_rent(routes.JourneyController.onPageLoad(OtherHBEnquiry.key).url)
