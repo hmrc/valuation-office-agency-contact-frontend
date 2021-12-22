@@ -19,6 +19,7 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey._
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.components.help_with_service_fair_rent
 
 @this(
         pageTemplate: pageTemplate,
@@ -51,4 +52,5 @@
         @govukButton(Button(content = Text(messages("site.continue"))))
     }
 
+    @help_with_service_fair_rent()
 }
