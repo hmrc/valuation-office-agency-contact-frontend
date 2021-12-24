@@ -23,7 +23,7 @@
 
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcLanguageSelectHelper
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
-
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.head
 @import uk.gov.hmrc.hmrcfrontend.config.AccessibilityStatementConfig
 
 @this(
@@ -32,7 +32,7 @@
         hmrcScripts: HmrcScripts,
         hmrcTimeoutDialogHelper: HmrcTimeoutDialogHelper,
         govukBackLink: GovukBackLink,
-        head: head,
+        headTemplate: head,
         govukPhaseBanner: GovukPhaseBanner,
         hmrcLanguageSelectHelper: HmrcLanguageSelectHelper,
         hmrcStandardFooter: HmrcStandardFooter,
@@ -59,7 +59,7 @@
     serviceName = Some(messages("site.service_name")),
     serviceUrl= Some(routes.Application.start.url),
     isWelshTranslationAvailable = true,
-    additionalHeadBlock = Some(hmrcHead(
+    additionalHeadBlock = Some(headTemplate(
         headBlock = Some(hmrcTimeoutDialogHelper(signOutUrl = routes.Application.logout.url)))
     ),
     additionalScriptsBlock = Some(hmrcScripts()),
