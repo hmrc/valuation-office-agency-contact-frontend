@@ -20,11 +20,13 @@
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcScripts
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcTimeoutDialogHelper
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcLayout
-
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcLanguageSelectHelper
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.head
 @import uk.gov.hmrc.hmrcfrontend.config.AccessibilityStatementConfig
+
+@import play.api.i18n.Messages
+@import play.api.mvc.Request
 
 @this(
         hmrcLayout: HmrcLayout,
@@ -59,9 +61,7 @@
     serviceName = Some(messages("site.service_name")),
     serviceUrl= Some(routes.Application.start.url),
     isWelshTranslationAvailable = true,
-    additionalHeadBlock = Some(headTemplate(
-        headBlock = Some(hmrcTimeoutDialogHelper(signOutUrl = routes.Application.logout.url)))
-    ),
+    additionalHeadBlock = Some(headTemplate()),
     additionalScriptsBlock = Some(hmrcScripts()),
     beforeContentBlock = Option(beforeBLock)
 )(contentBlock)

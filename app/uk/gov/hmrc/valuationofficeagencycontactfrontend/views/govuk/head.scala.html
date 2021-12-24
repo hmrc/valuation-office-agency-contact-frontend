@@ -14,13 +14,16 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcTrackingConsentSnippet
-@this(hmrcTrackingConsentSnippet: HmrcTrackingConsentSnippet)
+@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcTimeoutDialogHelper
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+@import play.api.i18n.Messages
+@import play.api.mvc.Request
 
-@(headBlock: Option[Html] = None)(implicit messages: Messages)
-@hmrcTrackingConsentSnippet()
+@this(hmrcTimeoutDialogHelper: HmrcTimeoutDialogHelper)
+
+@()(implicit request: Request[_], messages: Messages)
 
 <!--[if lte IE 8]><link href='@controllers.routes.Assets.versioned("stylesheets/application-ie-8.css")' rel="stylesheet" type="text/css" /><![endif]-->
 <!--[if gt IE 8]><!--><link href='@controllers.routes.Assets.versioned("stylesheets/application.css")' media="all" rel="stylesheet" type="text/css" /><!--<![endif]-->
 
-@headBlock
+@hmrcTimeoutDialogHelper(signOutUrl = routes.Application.logout.url)
