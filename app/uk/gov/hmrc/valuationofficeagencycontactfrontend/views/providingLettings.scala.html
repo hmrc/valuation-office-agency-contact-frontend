@@ -20,6 +20,8 @@
 @import uk.gov.hmrc.govukfrontend.views.html.components.GovukBackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.components.general_enquires_fair_rent
 
 @this(mainTemplate: main_template, govukBackLink: GovukBackLink)
 
@@ -46,4 +48,6 @@
         </a>
         @messages("providingLettings.p2")
     </p>
+
+    @general_enquires_fair_rent(routes.ProvidingLettingsController.toEnquiryForm.url)
 }

@@ -77,6 +77,7 @@ GET         /confirmation                          uk.gov.hmrc.valuationofficeag
 
 GET         /valuation-for-taxes                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ValuationForTaxesController.onPageLoad()
 GET         /letting-information                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ProvidingLettingsController.onPageLoad()
+GET         /letting-information-enquiry-form      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ProvidingLettingsController.toEnquiryForm
 
 GET         /my-council-tax-bill                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBillController.onPageLoad()
 GET         /council-tax-band-is-too-high          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxBandTooHighController.onPageLoad()
