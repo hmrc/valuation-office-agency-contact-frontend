@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 HM Revenue & Customs
+ * Copyright 2022 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,8 +47,7 @@ class ApplicationControllerSpec extends ControllerSpecBase {
     "return OK and the correct view for a GET" in {
       val result = controller().start(NormalMode)(fakeRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+      status(result) mustBe SEE_OTHER
     }
 
     "return OK and the correct view for a GET1" in {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 HM Revenue & Customs
+ * Copyright 2022 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -184,10 +184,22 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
       when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
       when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_band")
+      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("business_rates_change_valuation")
 
       val result = controller().enquiryKey(mockUserAnswers)
       val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.ct-reference")
+      isCouncilTaxSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more ct-reference key when the enquiry category is council_tax" +
+      " and the council_tax_band has been selected1" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
+      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("council_tax_band")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.ndr-reference")
       isCouncilTaxSelection mustBe true
     }
 
@@ -322,6 +334,42 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       val result = controller().enquiryKey(mockUserAnswers)
       val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.business")
       isCouncilTaxSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more fair rent key when the enquiry category is fair rent" +
+      " and the submit new application has been selected1" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("fair_rent")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
+      when(mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("submit_new_application")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isFairRentSelection = result.right.get.endsWith("tellUsMore.fairRent")
+      isFairRentSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more fair rent key when the enquiry category is fair rent" +
+      " and the check fair rent register has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("fair_rent")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
+      when(mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("check_fair_rent_register")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isFairRentSelection = result.right.get.endsWith("tellUsMore.fairRent")
+      isFairRentSelection mustBe true
+    }
+
+    "The enquiry key function produces a string with a tell us more fair rent key when the enquiry category is fair rent" +
+      " and the other request has been selected" in {
+      when(mockUserAnswers.enquiryCategory) thenReturn Some("fair_rent")
+      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", None, "a", None, "a"))
+      when(mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("other_request")
+
+      val result = controller().enquiryKey(mockUserAnswers)
+      val isFairRentSelection = result.right.get.endsWith("tellUsMore.fairRent")
+      isFairRentSelection mustBe true
     }
 
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
