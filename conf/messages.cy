@@ -1,4 +1,4 @@
-checkYourAnswers.title = Gwiriwch eich atebion - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+checkYourAnswers.title = Gwiriwch eich atebion - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
 checkYourAnswers.heading = Gwiriwch eich atebion
  
 date.day = Diwrnod
@@ -42,7 +42,7 @@ error.tell_us_more.invalid = Ni ddylai eich ymholiad gynnwys < a >
 error.tellUsMore.poorRepair.required = Rhowch fanylion am gyflwr eich eiddo
 error.tellUsMore.areaChanged.required = Rhowch fanylion y newidiadau i’r ardal
 
-session_expired.title = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod - Ffurflen Gysylltu Asiantaeth y Swyddfa Brisio - GOV.UK
+session_expired.title = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
 session_expired.heading = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod
 session_expired.guidance = Mae’r gwasanaeth wedi bennu oherwydd ei fod yn anweithgar am 60 munud. Nad yw eich gwybodaeth wedi’i gyflwyno.
  
