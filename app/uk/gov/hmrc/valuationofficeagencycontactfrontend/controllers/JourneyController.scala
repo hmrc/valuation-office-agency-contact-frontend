@@ -21,7 +21,7 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import play.twirl.api.HtmlFormat.Appendable
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.{CategoryRouter, CustomizedContent, Page, TellUsMorePage}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.{JourneyMap, JourneyPageRequest}
@@ -35,6 +35,7 @@ import scala.concurrent.{ExecutionContext, Future}
  * @author Yuriy Tumakha
  */
 class JourneyController @Inject()(journeyMap: JourneyMap,
+                                  auditService: AuditingService,
                                   dataCacheConnector: DataCacheConnector,
                                   getData: DataRetrievalAction,
                                   requireData: DataRequiredAction,
@@ -61,6 +62,11 @@ class JourneyController @Inject()(journeyMap: JourneyMap,
           _ <- page.beforeSaveAnswers(dataCacheConnector, request)
           cacheMap <- dataCacheConnector.save[String](request.sessionId, page.key, value)
         } yield {
+          page match {
+            case categoryRouter: CategoryRouter =>
+              auditService.sendRadioButtonSelection(request.uri, categoryRouter.fieldId -> value)
+            case _ =>
+          }
           val call = if (request.changeMode) {
             routes.CheckYourAnswersController.onPageLoad
           } else {
