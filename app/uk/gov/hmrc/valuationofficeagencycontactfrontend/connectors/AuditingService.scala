@@ -38,7 +38,7 @@ class AuditingService @Inject()(auditConnector: AuditConnector)  {
 
   def sendRadioButtonSelection(uri: String, nameValuePair: (String, String))(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit = {
     val detail = Map("path" -> uri, "radioButton" -> nameValuePair._1, "optionSelected" -> nameValuePair._2)
-    val de = DataEvent(auditSource = auditSource, auditType = "radioButtonSelection", tags = hc.toAuditTags(), detail = detail)
+    val de = DataEvent(auditSource = auditSource, auditType = "RadioButtonSelection", tags = hc.toAuditTags(), detail = detail)
     auditConnector.sendEvent(de)
   }
 
