@@ -18,9 +18,9 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.play.bootstrap.controller.FrontendController
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataClearAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactReasonForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.ContactReasonId
@@ -35,6 +35,7 @@ import scala.concurrent.{ExecutionContext, Future}
 class ContactReasonController @Inject()( override val messagesApi: MessagesApi,
                                          clearData: DataClearAction,
                                          getData: DataRetrievalAction,
+                                         auditService: AuditingService,
                                          dataCacheConnector: DataCacheConnector,
                                          navigator: Navigator,
                                          contact_reason: contactReason,
@@ -49,6 +50,7 @@ class ContactReasonController @Inject()( override val messagesApi: MessagesApi,
     ContactReasonForm().bindFromRequest().fold(
       formWithErrors =>Future.successful(BadRequest(contact_reason(formWithErrors, NormalMode))),
       value => {
+        auditService.sendRadioButtonSelection(request.uri, "contactReason" -> value)
         dataCacheConnector.save[String](request.sessionId, ContactReasonId.toString, value).map(cacheMap =>
           Redirect(navigator.nextPage(ContactReasonId, mode)(new UserAnswers(cacheMap))))
       }

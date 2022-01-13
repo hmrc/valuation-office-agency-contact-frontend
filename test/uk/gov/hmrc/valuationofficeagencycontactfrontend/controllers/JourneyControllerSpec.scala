@@ -22,7 +22,7 @@ import play.api.libs.json.JsString
 import play.api.mvc.{Call, Request}
 import play.api.test.Helpers._
 import uk.gov.hmrc.http.cache.client.CacheMap
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.JourneyMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.{CustomizedContent, NotImplemented, Page}
@@ -37,14 +37,15 @@ class JourneyControllerSpec extends ControllerSpecBase {
   val form = HousingBenefitAllowancesRouter.form
 
   def userAnswers = new UserAnswers(emptyCacheMap)
-  def categoryRouterTemplate: categoryRouter = app.injector.instanceOf[categoryRouter]
-  def singleTextareaTemplate: singleTextarea = app.injector.instanceOf[singleTextarea]
-  def customizedContentTemplate: customizedContent = app.injector.instanceOf[customizedContent]
-  def notImplementedTemplate: notImplemented = app.injector.instanceOf[notImplemented]
-  def journeyMap = app.injector.instanceOf[JourneyMap]
+  def categoryRouterTemplate: categoryRouter = inject[categoryRouter]
+  def singleTextareaTemplate: singleTextarea = inject[singleTextarea]
+  def customizedContentTemplate: customizedContent = inject[customizedContent]
+  def notImplementedTemplate: notImplemented = inject[notImplemented]
+  def journeyMap = inject[JourneyMap]
+  def auditService = inject[AuditingService]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new JourneyController(journeyMap, FakeDataCacheConnector,
+    new JourneyController(journeyMap, auditService, FakeDataCacheConnector,
       dataRetrievalAction, new DataRequiredActionImpl(ec),
       categoryRouterTemplate, singleTextareaTemplate, customizedContentTemplate, notImplementedTemplate,
       MessageControllerComponentsHelpers.stubMessageControllerComponents, messagesApi)
