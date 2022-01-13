@@ -18,7 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.data.Form
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.DataRetrievalAction
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
@@ -33,9 +33,11 @@ class ContactReasonControllerSpec extends ControllerSpecBase {
 
   def onwardRoute = routes.ContactReasonController.onPageLoad()
 
+  def auditService = inject[AuditingService]
+
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new ContactReasonController(messagesApi, getClearCacheMap, dataRetrievalAction, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      contactReason, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new ContactReasonController(messagesApi, getClearCacheMap, dataRetrievalAction, auditService, FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = onwardRoute), contactReason, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = ContactReasonForm()) = contactReason(form, NormalMode)(fakeRequest, messages).toString()
 

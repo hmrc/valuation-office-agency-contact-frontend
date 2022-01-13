@@ -22,20 +22,29 @@ import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.audit.http.connector.{AuditConnector, AuditResult}
 import uk.gov.hmrc.play.audit.model.ExtendedDataEvent
 import uk.gov.hmrc.play.audit.model.DataEvent
+import uk.gov.hmrc.play.audit.AuditExtensions._
 
 import scala.concurrent.{ExecutionContext, Future}
 
 
 class AuditingService @Inject()(auditConnector: AuditConnector)  {
 
+  val auditSource = "digital-contact-centre"
+
   def sendEvent(auditType: String, json: JsValue)(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit = {
     val event = eventFor(auditType, json)
     auditConnector.sendExtendedEvent(event)
   }
 
+  def sendRadioButtonSelection(uri: String, nameValuePair: (String, String))(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit = {
+    val detail = Map("path" -> uri, nameValuePair)
+    val de = DataEvent(auditSource = auditSource, auditType = "radioButtonSelection", tags = hc.toAuditTags(), detail = detail)
+    auditConnector.sendEvent(de)
+  }
+
   private def eventFor(auditType: String, json: JsValue)(implicit hc: HeaderCarrier) = {
     ExtendedDataEvent(
-      auditSource = "digital-contact-centre",
+      auditSource = auditSource,
       auditType = auditType,
       tags = (Seq.empty[(String, String)] :+ "transactionName" -> "submit-contact-to-VOA"
         :+ "clientIP" -> hc.trueClientIp.getOrElse("")
@@ -49,7 +58,8 @@ class AuditingService @Inject()(auditConnector: AuditConnector)  {
 
   def sendSatisfactionSurvey (event: String, detail: Map[String, String], tags: Map[String, String] = Map.empty)
                    (implicit ec: ExecutionContext, hc: HeaderCarrier): Future[AuditResult] = {
-    val de = DataEvent(auditSource = "digital-contact-centre", auditType = event, tags = tags, detail = detail)
+    val de = DataEvent(auditSource = auditSource, auditType = event, tags = tags, detail = detail)
     auditConnector.sendEvent(de)
   }
+
 }
