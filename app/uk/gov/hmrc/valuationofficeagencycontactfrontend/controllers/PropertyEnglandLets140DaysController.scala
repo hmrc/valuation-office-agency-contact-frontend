@@ -19,18 +19,17 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.play.bootstrap.controller.FrontendController
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{PropertyEnglandLets140DaysForm}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{PropertyEnglandLets140DaysId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyEnglandLets140DaysForm
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyEnglandLets140DaysId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLets140Days => property_england_lets_140_days}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLetsNoAction => property_england_lets_no_action}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets => wales_lets}
-
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
@@ -38,6 +37,7 @@ import scala.concurrent.{ExecutionContext, Future}
 class PropertyEnglandLets140DaysController @Inject()(
                                                      appConfig: FrontendAppConfig,
                                                      override val messagesApi: MessagesApi,
+                                                     auditService: AuditingService,
                                                      dataCacheConnector: DataCacheConnector,
                                                      navigator: Navigator,
                                                      getData: DataRetrievalAction,
@@ -64,9 +64,11 @@ class PropertyEnglandLets140DaysController @Inject()(
       PropertyEnglandLets140DaysForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(propertyEnglandLets140Days(appConfig, formWithErrors, mode))),
-        (value) =>
+        value => {
+          auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering140Days" -> value)
           dataCacheConnector.save[String](request.sessionId, PropertyEnglandLets140DaysId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(PropertyEnglandLets140DaysId, mode)(new UserAnswers(cacheMap))))
+        }
       )
   }
 
@@ -79,7 +81,5 @@ class PropertyEnglandLets140DaysController @Inject()(
     implicit request =>
       Ok(propertyWalesLets(appConfig))
   }
-
-
 
 }

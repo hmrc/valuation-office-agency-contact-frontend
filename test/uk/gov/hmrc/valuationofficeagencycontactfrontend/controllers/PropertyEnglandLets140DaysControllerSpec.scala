@@ -21,7 +21,7 @@ import play.api.libs.json.JsString
 import play.api.test.Helpers.{contentAsString, redirectLocation, status, _}
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyEnglandLets140DaysForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyEnglandLets140DaysId
@@ -33,15 +33,17 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWale
 
 class PropertyEnglandLets140DaysControllerSpec extends ControllerSpecBase {
 
-  def propertyEnglandLets140DaysEnquiry = app.injector.instanceOf[property_england_lets_140_days]
-  def propertyEnglandLetsNoAction = app.injector.instanceOf[property_england_lets_no_action]
-  def propertyWalesLets = app.injector.instanceOf[wales_lets]
+  def propertyEnglandLets140DaysEnquiry = inject[property_england_lets_140_days]
+  def propertyEnglandLetsNoAction = inject[property_england_lets_no_action]
+  def propertyWalesLets = inject[wales_lets]
+  def auditService = inject[AuditingService]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-  new PropertyEnglandLets140DaysController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-  dataRetrievalAction, new DataRequiredActionImpl(ec), propertyEnglandLets140DaysEnquiry, propertyEnglandLetsNoAction, propertyWalesLets, stubMessageControllerComponents)
+    new PropertyEnglandLets140DaysController(frontendAppConfig, messagesApi, auditService, FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction, new DataRequiredActionImpl(ec),
+      propertyEnglandLets140DaysEnquiry, propertyEnglandLetsNoAction, propertyWalesLets, stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = PropertyEnglandLets140DaysForm()) = propertyEnglandLets140DaysEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 

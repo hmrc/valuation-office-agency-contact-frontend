@@ -25,7 +25,7 @@ import play.api.test.Helpers.{contentAsString, status}
 import uk.gov.hmrc.http.cache.client.CacheMap
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{CouncilTaxBusinessEnquiryForm, CouncilTaxSubcategoryForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CouncilTaxBusinessEnquiryId
@@ -41,9 +41,10 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
 
   val fakeDataCacheConnector = mock[DataCacheConnector]
 
-  def councilTaxBusinessEnquiry = app.injector.instanceOf[council_tax_business_enquiry]
-  def propertySmallPartUsed = app.injector.instanceOf[small_part_used]
-  def businessRatesNoNeedToPay = app.injector.instanceOf[business_rates_no_need_to_pay]
+  def councilTaxBusinessEnquiry = inject[council_tax_business_enquiry]
+  def propertySmallPartUsed = inject[small_part_used]
+  def businessRatesNoNeedToPay = inject[business_rates_no_need_to_pay]
+  def auditService = inject[AuditingService]
 
   def onwardRoute = routes.DatePropertyChangedController.onPageLoad()
 
@@ -52,11 +53,10 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
 
   when(fakeDataCacheConnector.remove(anyString, anyString)).thenReturn(Future.successful(true))
 
-  def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) = {
-    new CouncilTaxBusinessController(frontendAppConfig, messagesApi, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+  def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
+    new CouncilTaxBusinessController(frontendAppConfig, messagesApi, auditService, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl(ec), councilTaxBusinessEnquiry, propertySmallPartUsed, businessRatesNoNeedToPay,
       MessageControllerComponentsHelpers.stubMessageControllerComponents)
-  }
 
   def viewAsString(form: Form[String] = CouncilTaxBusinessEnquiryForm()) = councilTaxBusinessEnquiry(frontendAppConfig, form, NormalMode,  routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)(fakeRequest, messages).toString
 

@@ -21,7 +21,7 @@ import play.api.libs.json.JsString
 import uk.gov.hmrc.http.cache.client.CacheMap
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesPropertyForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.BusinessRatesPropertyEnquiryId
@@ -32,13 +32,14 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRate
 
 class BusinessRatesPropertyControllerSpec extends ControllerSpecBase {
 
-  def businessRatesPropertyEnquiry = app.injector.instanceOf[business_rates_property_enquiry]
-  def businessRatesNonBusiness = app.injector.instanceOf[business_rates_non_business]
+  def businessRatesPropertyEnquiry = inject[business_rates_property_enquiry]
+  def businessRatesNonBusiness = inject[business_rates_non_business]
+  def auditService = inject[AuditingService]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new BusinessRatesPropertyController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+    new BusinessRatesPropertyController(frontendAppConfig, messagesApi, auditService, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesPropertyEnquiry, businessRatesNonBusiness, stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = BusinessRatesPropertyForm()) = businessRatesPropertyEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString

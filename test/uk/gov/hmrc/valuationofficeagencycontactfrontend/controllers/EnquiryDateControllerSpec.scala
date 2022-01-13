@@ -21,7 +21,7 @@ import play.api.libs.json.JsString
 import play.api.test.Helpers._
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryDateForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.EnquiryDateId
@@ -32,12 +32,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{enquiryDate 
 class EnquiryDateControllerSpec extends ControllerSpecBase {
 
   def enquiryDate = inject[enquiry_date]
+  def auditService = inject[AuditingService]
 
   def onwardRoute = routes.EnquiryDateController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new EnquiryDateController(frontendAppConfig, messagesApi, new DataRequiredActionImpl(ec), dataRetrievalAction,
-                              FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+                              auditService, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
                               enquiryDate, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = EnquiryDateForm()) =

@@ -20,7 +20,7 @@ import play.api.data.Form
 import play.api.libs.json.JsString
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
@@ -31,12 +31,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{enquiryCateg
 
 class EnquiryCategoryControllerSpec extends ControllerSpecBase {
 
-  def enquiryCategory = app.injector.instanceOf[enquiry_category]
+  def enquiryCategory = inject[enquiry_category]
+  def auditService = inject[AuditingService]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new EnquiryCategoryController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+    new EnquiryCategoryController(frontendAppConfig, messagesApi, auditService, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl(ec), enquiryCategory, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = EnquiryCategoryForm()) = enquiryCategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString

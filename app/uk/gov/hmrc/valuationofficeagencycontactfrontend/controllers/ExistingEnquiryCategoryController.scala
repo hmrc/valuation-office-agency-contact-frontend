@@ -21,7 +21,7 @@ import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ExistingEnquiryCategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, CouncilTaxSubcategoryId, EnquiryCategoryId, ExistingEnquiryCategoryId, FairRentEnquiryId, OtherSubcategoryId}
@@ -38,6 +38,7 @@ import scala.concurrent.{ExecutionContext, Future}
 class ExistingEnquiryCategoryController @Inject()(
                                                    appConfig: FrontendAppConfig,
                                                    override val messagesApi: MessagesApi,
+                                                   auditService: AuditingService,
                                                    dataCacheConnector: DataCacheConnector,
                                                    navigator: Navigator,
                                                    getData: DataRetrievalAction,
@@ -74,7 +75,10 @@ class ExistingEnquiryCategoryController @Inject()(
             _ <- saveSubCategoryInCache(value, request.sessionId)
             _ <- dataCacheConnector.remove(request.sessionId, EnquiryCategoryId.toString)
             cacheMap <- dataCacheConnector.save[String](request.sessionId, ExistingEnquiryCategoryId.toString, value)
-          } yield Redirect(navigator.nextPage(ExistingEnquiryCategoryId, mode)(new UserAnswers(cacheMap)))
+          } yield {
+            auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering140Days" -> value)
+            Redirect(navigator.nextPage(ExistingEnquiryCategoryId, mode)(new UserAnswers(cacheMap)))
+          }
         }
       )
   }
