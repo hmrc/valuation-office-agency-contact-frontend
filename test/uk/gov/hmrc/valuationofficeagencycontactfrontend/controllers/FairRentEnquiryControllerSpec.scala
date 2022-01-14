@@ -21,7 +21,7 @@ import play.api.libs.json.JsString
 import play.api.test.Helpers.{contentAsString, redirectLocation, status, _}
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.FairRentEnquiryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.FairRentEnquiryId
@@ -32,15 +32,16 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{submitFairRe
 
 class FairRentEnquiryControllerSpec extends ControllerSpecBase {
 
-  def fairRentEnquiryEnquiry = app.injector.instanceOf[fair_rent_enquiry]
-  def onFairRentEnquiryNew = app.injector.instanceOf[submit_fair_rent_application]
-  def onFairRentEnquiryCheck = app.injector.instanceOf[check_fair_rent_application]
+  def fairRentEnquiryEnquiry = inject[fair_rent_enquiry]
+  def onFairRentEnquiryNew = inject[submit_fair_rent_application]
+  def onFairRentEnquiryCheck = inject[check_fair_rent_application]
+  def auditService = inject[AuditingService]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-  new FairRentEnquiryController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-  dataRetrievalAction, new DataRequiredActionImpl(ec), fairRentEnquiryEnquiry, onFairRentEnquiryNew, onFairRentEnquiryCheck, stubMessageControllerComponents)
+    new FairRentEnquiryController(frontendAppConfig, messagesApi, auditService, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction, new DataRequiredActionImpl(ec), fairRentEnquiryEnquiry, onFairRentEnquiryNew, onFairRentEnquiryCheck, stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = FairRentEnquiryForm()) = fairRentEnquiryEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 

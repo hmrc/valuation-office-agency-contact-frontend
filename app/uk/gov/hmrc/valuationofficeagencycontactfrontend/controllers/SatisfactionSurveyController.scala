@@ -21,10 +21,10 @@ import play.api.Logger
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{MessagesControllerComponents, Request}
 import uk.gov.hmrc.http.HeaderCarrier
-import uk.gov.hmrc.play.HeaderCarrierConverter
-import uk.gov.hmrc.play.bootstrap.controller.FrontendController
+import uk.gov.hmrc.play.http.HeaderCarrierConverter
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.AuditingService
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{satisfactionSurveyThankYou => satisfaction_Survey_Thank_You}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
@@ -37,7 +37,6 @@ import scala.concurrent.ExecutionContext
 @Singleton()
 class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
                                              override val messagesApi: MessagesApi,
-                                             navigator: Navigator,
                                              getData: DataRetrievalAction,
                                              requireData: DataRequiredAction,
                                              auditService: AuditingService,
@@ -47,7 +46,7 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
 
   private val log = Logger(this.getClass)
 
-  implicit def hc(implicit request: Request[_]):HeaderCarrier = HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))
+  implicit def hc(implicit request: Request[_]):HeaderCarrier = HeaderCarrierConverter.fromRequestAndSession(request, request.session)
 
   def enquiryKey(answers: UserAnswers): Either[String, String] = {
     answers.enquiryCategory match {
@@ -72,6 +71,7 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
         Ok(confirmation(appConfig, contact, answerSections, whatHappensNextMessages(request.userAnswers), formWithErrors))
       },
       success => {
+        auditService.sendRadioButtonSelection(request.uri, "satisfaction" -> success.satisfaction)
         sendFeedback(success, AddressFormatters.formattedPropertyAddress(contact.propertyAddress, ", "))
         Redirect(routes.SatisfactionSurveyController.surveyThankyou)
       }

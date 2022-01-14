@@ -20,8 +20,8 @@ import javax.inject.Inject
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
-import uk.gov.hmrc.play.bootstrap.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxSubcategoryForm
@@ -35,6 +35,7 @@ import scala.concurrent.{ExecutionContext, Future}
 class CouncilTaxSubcategoryController @Inject()(
                                         appConfig: FrontendAppConfig,
                                         override val messagesApi: MessagesApi,
+                                        auditService: AuditingService,
                                         dataCacheConnector: DataCacheConnector,
                                         navigator: Navigator,
                                         getData: DataRetrievalAction,
@@ -63,7 +64,10 @@ class CouncilTaxSubcategoryController @Inject()(
           for {
             _ <- dataCacheConnector.remove(request.sessionId, BusinessRatesSubcategoryId.toString)
             cacheMap <- dataCacheConnector.save[String](request.sessionId, CouncilTaxSubcategoryId.toString, value)
-          } yield Redirect(navigator.nextPage(CouncilTaxSubcategoryId, mode)(new UserAnswers(cacheMap)))
+          } yield {
+            auditService.sendRadioButtonSelection(request.uri, "councilTaxSubcategory" -> value)
+            Redirect(navigator.nextPage(CouncilTaxSubcategoryId, mode)(new UserAnswers(cacheMap)))
+          }
       )
   }
 }

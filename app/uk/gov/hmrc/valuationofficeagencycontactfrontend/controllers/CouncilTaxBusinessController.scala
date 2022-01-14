@@ -19,8 +19,8 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.play.bootstrap.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxBusinessEnquiryForm
@@ -36,6 +36,7 @@ import scala.concurrent.Future
 
 class CouncilTaxBusinessController @Inject()(appConfig: FrontendAppConfig,
                                              override val messagesApi: MessagesApi,
+                                             auditService: AuditingService,
                                              dataCacheConnector: DataCacheConnector,
                                              navigator: Navigator,
                                              getData: DataRetrievalAction,
@@ -66,7 +67,10 @@ class CouncilTaxBusinessController @Inject()(appConfig: FrontendAppConfig,
         value =>
           for {
             cacheMap <- dataCacheConnector.save[String](request.sessionId, CouncilTaxBusinessEnquiryId.toString, value)
-          } yield Redirect(navigator.nextPage(CouncilTaxBusinessEnquiryId, mode)(new UserAnswers(cacheMap)))
+          } yield {
+            auditService.sendRadioButtonSelection(request.uri, "councilTaxBusinessEnquiry" -> value)
+            Redirect(navigator.nextPage(CouncilTaxBusinessEnquiryId, mode)(new UserAnswers(cacheMap)))
+          }
       )
   }
 

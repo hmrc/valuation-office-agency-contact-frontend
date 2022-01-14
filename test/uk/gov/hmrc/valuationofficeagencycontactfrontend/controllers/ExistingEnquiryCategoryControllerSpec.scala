@@ -21,7 +21,7 @@ import play.api.libs.json.JsString
 import play.api.test.Helpers._
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{ContactReasonForm, ExistingEnquiryCategoryForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{ContactReasonId, ExistingEnquiryCategoryId}
@@ -31,14 +31,15 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{existingEnqu
 
 class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
 
-  def existingEnquiryCategory = app.injector.instanceOf[existing_enquiry_category]
+  def existingEnquiryCategory = inject[existing_enquiry_category]
+  def auditService = inject[AuditingService]
 
   def contactReasonRoute = routes.ContactReasonController.onPageLoad()
   def enquiryDateRoute = routes.EnquiryDateController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new ExistingEnquiryCategoryController(frontendAppConfig, messagesApi, FakeDataCacheConnector,
-      new FakeNavigator(desiredRoute = contactReasonRoute),dataRetrievalAction, new DataRequiredActionImpl(ec),
+    new ExistingEnquiryCategoryController(frontendAppConfig, messagesApi, auditService, FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = contactReasonRoute), dataRetrievalAction, new DataRequiredActionImpl(ec),
       existingEnquiryCategory, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = ExistingEnquiryCategoryForm()) =

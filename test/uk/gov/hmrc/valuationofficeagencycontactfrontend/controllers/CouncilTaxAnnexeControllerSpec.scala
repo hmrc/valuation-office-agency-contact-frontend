@@ -24,7 +24,7 @@ import play.api.libs.json.JsString
 import play.api.test.Helpers._
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{AnnexeCookingWashingForm, AnnexeForm, AnnexeSelfContainedForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxAnnexeEnquiryId, CouncilTaxAnnexeHaveCookingId, CouncilTaxAnnexeSelfContainedEnquiryId}
@@ -32,7 +32,6 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxAnnexe => council_tax_annexe}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeSelfContainedEnquiry => annexe_self_contained_enquiry}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeNotSelfContained => annexe_not_self_contained}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeNoFacilities => annexe_no_facilities}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeSelfContained => annexe_self_contained}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeNotSelfContained => annexe_not_self_contained}
@@ -43,21 +42,22 @@ import scala.concurrent.Future
 
 class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
 
-  def councilTaxAnnexe = app.injector.instanceOf[council_tax_annexe]
-  def councilTaxAnnexeSelfContainedEnquiry = app.injector.instanceOf[annexe_self_contained_enquiry]
-  def councilTaxAnnexeNotSelfContained = app.injector.instanceOf[annexe_not_self_contained]
-  def councilTaxAnnexeNoFacilities = app.injector.instanceOf[annexe_no_facilities]
-  def councilTaxAnnexeSelfContained = app.injector.instanceOf[annexe_self_contained]
-  def annexeCookingWashingEnquiry = app.injector.instanceOf[annexe_cooking_washing_enquiry]
-  def annexeNotSelfContained = app.injector.instanceOf[annexe_not_self_contained]
-  def annexeRemoved = app.injector.instanceOf[annexe_removed]
+  def councilTaxAnnexe = inject[council_tax_annexe]
+  def councilTaxAnnexeSelfContainedEnquiry = inject[annexe_self_contained_enquiry]
+  def councilTaxAnnexeNotSelfContained = inject[annexe_not_self_contained]
+  def councilTaxAnnexeNoFacilities = inject[annexe_no_facilities]
+  def councilTaxAnnexeSelfContained = inject[annexe_self_contained]
+  def annexeCookingWashingEnquiry = inject[annexe_cooking_washing_enquiry]
+  def annexeNotSelfContained = inject[annexe_not_self_contained]
+  def annexeRemoved = inject[annexe_removed]
+  def auditService = inject[AuditingService]
 
   val fakeDataCacheConnector = mock[DataCacheConnector]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new CouncilTaxAnnexeController(frontendAppConfig, messagesApi, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+    new CouncilTaxAnnexeController(frontendAppConfig, messagesApi, auditService, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl(ec), councilTaxAnnexe, councilTaxAnnexeSelfContainedEnquiry, councilTaxAnnexeNotSelfContained,
       councilTaxAnnexeNoFacilities, councilTaxAnnexeSelfContained, annexeCookingWashingEnquiry, annexeRemoved, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 

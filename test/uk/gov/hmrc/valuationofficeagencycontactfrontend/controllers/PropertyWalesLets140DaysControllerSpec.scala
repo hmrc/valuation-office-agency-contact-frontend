@@ -21,7 +21,7 @@ import play.api.libs.json.JsString
 import play.api.test.Helpers.{contentAsString, redirectLocation, status, _}
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{PropertyEnglandLets140DaysForm, PropertyWalesLets140DaysForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyWalesLets140DaysId
@@ -33,15 +33,16 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWale
 
 class PropertyWalesLets140DaysControllerSpec extends ControllerSpecBase {
 
-  def propertyWalesLets140DaysEnquiry = app.injector.instanceOf[property_wales_lets_140_days]
-  def propertyWalesLets = app.injector.instanceOf[wales_lets]
-  def propertyWalesLetsNoAction = app.injector.instanceOf[property_wales_lets_no_action]
+  def propertyWalesLets140DaysEnquiry = inject[property_wales_lets_140_days]
+  def propertyWalesLets = inject[wales_lets]
+  def propertyWalesLetsNoAction = inject[property_wales_lets_no_action]
+  def auditService = inject[AuditingService]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-  new PropertyWalesLets140DaysController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-  dataRetrievalAction, new DataRequiredActionImpl(ec), propertyWalesLets140DaysEnquiry, propertyWalesLetsNoAction, stubMessageControllerComponents)
+    new PropertyWalesLets140DaysController(frontendAppConfig, messagesApi, auditService, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction, new DataRequiredActionImpl(ec), propertyWalesLets140DaysEnquiry, propertyWalesLetsNoAction, stubMessageControllerComponents)
 
   def wales140DaysBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesLets70DaysController.onPageLoad().url
 

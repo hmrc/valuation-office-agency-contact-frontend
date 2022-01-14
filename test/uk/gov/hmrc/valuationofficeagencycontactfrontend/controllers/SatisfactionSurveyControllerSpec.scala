@@ -23,7 +23,6 @@ import play.api.libs.json.{JsString, Json}
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.http.cache.client.CacheMap
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.AuditingService
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{SatisfactionSurvey, SatisfactionSurveyForm}
@@ -58,7 +57,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
   def internalServerError = app.injector.instanceOf[internal_Server_Error]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new SatisfactionSurveyController(frontendAppConfig, messagesApi, new FakeNavigator(desiredRoute = onwardRoute),
+    new SatisfactionSurveyController(frontendAppConfig, messagesApi,
       dataRetrievalAction, new DataRequiredActionImpl(ec), auditingService, confirmation, satisfactionSurveyThankYou,
       MessageControllerComponentsHelpers.stubMessageControllerComponents)
 

@@ -19,10 +19,10 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.play.bootstrap.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{ PropertyWalesLets70DaysForm}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyWalesLets70DaysForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyWalesLets70DaysId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets70Days => property_wales_lets_70_days}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets => wales_lets}
@@ -36,6 +36,7 @@ import scala.concurrent.{ExecutionContext, Future}
 class PropertyWalesLets70DaysController @Inject()(
                                                      appConfig: FrontendAppConfig,
                                                      override val messagesApi: MessagesApi,
+                                                     auditService: AuditingService,
                                                      dataCacheConnector: DataCacheConnector,
                                                      navigator: Navigator,
                                                      getData: DataRetrievalAction,
@@ -61,9 +62,11 @@ class PropertyWalesLets70DaysController @Inject()(
       PropertyWalesLets70DaysForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(propertyWalesLets70Days(appConfig, formWithErrors, mode))),
-        (value) =>
+        value => {
+          auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering70Days" -> value)
           dataCacheConnector.save[String](request.sessionId, PropertyWalesLets70DaysId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(PropertyWalesLets70DaysId, mode)(new UserAnswers(cacheMap))))
+        }
       )
   }
 }

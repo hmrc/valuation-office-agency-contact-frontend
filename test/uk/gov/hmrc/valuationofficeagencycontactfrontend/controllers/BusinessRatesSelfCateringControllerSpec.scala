@@ -22,7 +22,7 @@ import play.api.test.Helpers.{contentAsString, redirectLocation, status}
 import uk.gov.hmrc.http.cache.client.CacheMap
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSelfCateringForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.BusinessRatesSelfCateringId
@@ -34,14 +34,15 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWale
 
 class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
 
-  def businessRatesSelfCateringEnquiry = app.injector.instanceOf[business_rates_self_catering_enquiry]
-  def propertyEnglandLets = app.injector.instanceOf[england_lets]
-  def propertyWalesLets = app.injector.instanceOf[wales_lets]
+  def businessRatesSelfCateringEnquiry = inject[business_rates_self_catering_enquiry]
+  def propertyEnglandLets = inject[england_lets]
+  def propertyWalesLets = inject[wales_lets]
+  def auditService = inject[AuditingService]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-  new BusinessRatesSelfCateringController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+  new BusinessRatesSelfCateringController(frontendAppConfig, messagesApi, auditService, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
   dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSelfCateringEnquiry, propertyEnglandLets ,propertyWalesLets, stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = BusinessRatesSelfCateringForm()) = businessRatesSelfCateringEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString

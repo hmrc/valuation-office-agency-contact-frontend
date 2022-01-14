@@ -20,10 +20,10 @@ import play.api.Logger
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.play.bootstrap.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{PropertyWalesLets140DaysForm, PropertyWalesLets70DaysForm}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyWalesLets140DaysForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyWalesLets140DaysId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
@@ -37,6 +37,7 @@ import scala.concurrent.{ExecutionContext, Future}
 class PropertyWalesLets140DaysController @Inject()(
                                                      appConfig: FrontendAppConfig,
                                                      override val messagesApi: MessagesApi,
+                                                     auditService: AuditingService,
                                                      dataCacheConnector: DataCacheConnector,
                                                      navigator: Navigator,
                                                      getData: DataRetrievalAction,
@@ -61,12 +62,14 @@ class PropertyWalesLets140DaysController @Inject()(
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
-      PropertyWalesLets70DaysForm().bindFromRequest().fold(
+      PropertyWalesLets140DaysForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(propertyWalesLets140Days(appConfig, formWithErrors, mode))),
-        (value) =>
+        value => {
+          auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering140Days" -> value)
           dataCacheConnector.save[String](request.sessionId, PropertyWalesLets140DaysId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(PropertyWalesLets140DaysId, mode)(new UserAnswers(cacheMap))))
+        }
       )
   }
 

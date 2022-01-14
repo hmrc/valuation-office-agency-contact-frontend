@@ -23,7 +23,7 @@ import play.api.data.Form
 import play.api.libs.json.JsString
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxSubcategoryForm
@@ -36,7 +36,8 @@ import scala.concurrent.Future
 
 class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with MockitoSugar {
 
-  def councilTaxSubcategory = app.injector.instanceOf[council_tax_subcategory]
+  def councilTaxSubcategory = inject[council_tax_subcategory]
+  def auditService = inject[AuditingService]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
@@ -46,7 +47,7 @@ class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with Mockit
       .thenReturn(Future.successful(CacheMap("councilTaxSubcategory", Map("councilTaxSubcategory" -> JsString("bar")))))
     when(fakeDataCacheConnector.remove(any[String], any[String]))
       .thenReturn(Future.successful(true))
-    new CouncilTaxSubcategoryController(frontendAppConfig, messagesApi, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+    new CouncilTaxSubcategoryController(frontendAppConfig, messagesApi, auditService, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl(ec), councilTaxSubcategory, MessageControllerComponentsHelpers.stubMessageControllerComponents)
   }
 
