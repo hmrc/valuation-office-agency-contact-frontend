@@ -1,5 +1,4 @@
 import sbt._
-import sbt.Keys._
 
 object Dependencies {
 
@@ -7,16 +6,14 @@ object Dependencies {
     import play.sbt.PlayImport._
 
     private val logbackJsonLoggerVersion = "5.1.0"
-    private val govukTemplateVersion = "5.72.0-play-28"
-    private val playUiVersion = "9.8.0-play-28"
-    private val scalaTestVersion = "3.2.9"
+    private val scalaTestVersion = "3.2.10"
     private val scalaTestPlusPlayVersion = "5.1.0"
     private val mockitoAllVersion = "1.10.19"
     private val httpCachingClientVersion = "9.5.0-play-28"
     private val simpleReactivemongoVersion = "8.0.0-play-28"
     private val playConditionalFormMappingVersion = "1.10.0-play-28"
     private val playLanguageVersion = "5.1.0-play-28"
-    private val bootstrapPlayVersion = "5.18.0"
+    private val bootstrapPlayVersion = "5.19.0"
     private val httpVerbsVersion = "13.10.0"
     private val playFrontendHmrc = "1.31.0-play-28"
     private val commonTextVersion = "1.9"
@@ -25,8 +22,6 @@ object Dependencies {
        ws,
       "uk.gov.hmrc" %% "simple-reactivemongo" % simpleReactivemongoVersion,
       "uk.gov.hmrc" %% "logback-json-logger" % logbackJsonLoggerVersion,
-      "uk.gov.hmrc" %% "govuk-template" % govukTemplateVersion,
-      "uk.gov.hmrc" %% "play-ui" % playUiVersion,
       "uk.gov.hmrc" %% "http-caching-client" % httpCachingClientVersion,
       "uk.gov.hmrc" %% "play-conditional-form-mapping" % playConditionalFormMappingVersion,
       "uk.gov.hmrc" %% "bootstrap-frontend-play-28" % bootstrapPlayVersion,
@@ -44,8 +39,7 @@ object Dependencies {
     lazy val Test = new TestDependencies {
         override lazy val test = Seq(
             "org.scalatest" %% "scalatest" % scalaTestVersion % scope,
-            "com.vladsch.flexmark" % "flexmark-all" % "0.35.10" % scope,
-            "org.pegdown" % "pegdown" % "1.6.0" % scope,
+            "com.vladsch.flexmark" % "flexmark-all" % "0.62.2" % scope,
             "org.scalatestplus.play" %% "scalatestplus-play" % scalaTestPlusPlayVersion % scope,
             "org.scalatestplus" %% "mockito-3-4" % "3.2.9.0" % scope,
             "org.scalatestplus" %% "scalacheck-1-15" % "3.2.9.0" % scope,
