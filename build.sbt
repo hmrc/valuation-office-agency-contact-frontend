@@ -42,7 +42,7 @@ lazy val root = Project(appName, file("."))
     retrieveManaged := true,
     evictionWarningOptions in update := EvictionWarningOptions.default.withWarnScalaVersionEviction(false),
     Keys.fork in sbt.Test := true,
-    scalaVersion := "2.12.12"
+    scalaVersion := "2.12.15"
   )
   .configs(IntegrationTest)
   .settings(integrationTestSettings())
