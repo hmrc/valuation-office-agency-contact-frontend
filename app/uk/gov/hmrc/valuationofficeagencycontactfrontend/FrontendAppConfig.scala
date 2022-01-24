@@ -37,6 +37,7 @@ class FrontendAppConfig @Inject() (val configuration: Configuration, servicesCon
   lazy val GTM = loadConfig(s"google-analytics.GTM")
   lazy val startPageRedirect = loadConfig(s"startPageRedirect").toBoolean
   lazy val govukStartPage = loadConfig(s"govukStartPage")
+  lazy val govukStartPageWelsh = loadConfig(s"govukStartPageWelsh")
   lazy val reportAProblemPartialUrl = s"$contactHost/contact/problem_reports_ajax?service=$contactFormServiceIdentifier"
   lazy val reportAProblemNonJSUrl = s"$contactHost/contact/problem_reports_nonjs?service=$contactFormServiceIdentifier"
   //$COVERAGE-OFF$

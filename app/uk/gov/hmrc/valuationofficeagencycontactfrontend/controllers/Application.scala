@@ -18,7 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import javax.inject.{Inject, Singleton}
 import play.api.Logger
-import play.api.i18n.{I18nSupport, MessagesApi}
+import play.api.i18n.{I18nSupport, Lang, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
@@ -43,10 +43,12 @@ class Application @Inject() (override val messagesApi: MessagesApi,
   val log = Logger(this.getClass)
 
   def start(mode: Mode) = Action.async { implicit request =>
-    if (appConfig.startPageRedirect) {
-      Future.successful(Redirect(appConfig.govukStartPage))
-    } else {
-      Future.successful(Ok(contactReason(ContactReasonForm(), NormalMode)))
+    appConfig.startPageRedirect match {
+      case true => cc.messagesApi.preferred(request).lang match {
+        case eng if eng == Lang("en") => Future.successful(Redirect(appConfig.govukStartPage))
+        case wel if wel == Lang("cy") => Future.successful(Redirect(appConfig.govukStartPageWelsh))
+      }
+      case false => Future.successful(Ok(contactReason(ContactReasonForm(), NormalMode)))
     }
   }
 
