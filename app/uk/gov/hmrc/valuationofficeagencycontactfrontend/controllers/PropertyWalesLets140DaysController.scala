@@ -66,7 +66,7 @@ class PropertyWalesLets140DaysController @Inject()(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(propertyWalesLets140Days(appConfig, formWithErrors, mode))),
         value => {
-          auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering140Days" -> value)
+          auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering140DaysCY" -> value)
           dataCacheConnector.save[String](request.sessionId, PropertyWalesLets140DaysId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(PropertyWalesLets140DaysId, mode)(new UserAnswers(cacheMap))))
         }
