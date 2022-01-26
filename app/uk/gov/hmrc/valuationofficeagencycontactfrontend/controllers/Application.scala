@@ -17,7 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import javax.inject.{Inject, Singleton}
-import play.api.Logger
+import play.api.{Configuration, Logger}
 import play.api.i18n.{I18nSupport, Lang, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
@@ -33,6 +33,7 @@ import scala.concurrent.{ExecutionContext, Future}
 @Singleton
 class Application @Inject() (override val messagesApi: MessagesApi,
                             val appConfig: FrontendAppConfig,
+                             configuration: Configuration,
                              contactReason: contactReason,
                              languageSwitchController: LanguageSwitchController,
                              getData: DataRetrievalAction,
@@ -40,15 +41,12 @@ class Application @Inject() (override val messagesApi: MessagesApi,
                             cc: MessagesControllerComponents
                            )(implicit ec: ExecutionContext) extends FrontendController(cc) with I18nSupport {
 
-  val log = Logger(this.getClass)
-
   def start(mode: Mode) = Action.async { implicit request =>
-    appConfig.startPageRedirect match {
-      case true => cc.messagesApi.preferred(request).lang match {
-        case eng if eng == Lang("en") => Future.successful(Redirect(appConfig.govukStartPage))
-        case wel if wel == Lang("cy") => Future.successful(Redirect(appConfig.govukStartPageWelsh))
-      }
-      case false => Future.successful(Ok(contactReason(ContactReasonForm(), NormalMode)))
+    val defaultPage = Ok(contactReason(ContactReasonForm(), NormalMode))
+
+    cc.messagesApi.preferred(request).lang match {
+      case e if e == Lang("en") => Future.successful(configuration.getOptional[String]("govukStartPage").fold(defaultPage)(Redirect(_)))
+      case c if c == Lang("cy") => Future.successful(configuration.getOptional[String]("govukStartPageWelsh").fold(defaultPage)(Redirect(_)))
     }
   }
 
