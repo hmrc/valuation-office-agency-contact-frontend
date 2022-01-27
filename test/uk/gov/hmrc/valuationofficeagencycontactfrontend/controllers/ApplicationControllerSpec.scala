@@ -17,53 +17,44 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.data.Form
+import play.api.test.FakeRequest
 import play.api.test.Helpers._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{contactReason => contact_reason}
 
 class ApplicationControllerSpec extends ControllerSpecBase {
 
-  def contactReason = app.injector.instanceOf[contact_reason]
+  def appController = inject[Application]
 
-  def languageSwitchController = app.injector.instanceOf[LanguageSwitchController]
-
-  def dataRetrievalAction = app.injector.instanceOf[DataRetrievalAction]
-
-  def dataCacheConnector = app.injector.instanceOf[DataCacheConnector]
-
-  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
-
-  def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) = new Application(
-    messagesApi, frontendAppConfig, contactReason, languageSwitchController, dataRetrievalAction, dataCacheConnector, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+  def contactReason = inject[contact_reason]
 
   def viewAsString(form: Form[String] = EnquiryCategoryForm()) = contactReason(form, NormalMode)(fakeRequest, messages).toString
 
+  override val fakeRequest = FakeRequest("GET", "/").withHeaders(("X-Session-ID", "id"))
+  
   "Application Controller" must {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().start(NormalMode)(fakeRequest)
+      val result = appController.start(NormalMode)(fakeRequest)
 
       status(result) mustBe SEE_OTHER
     }
 
     "return OK and the correct view for a GET1" in {
-      val result = controller().logout()(fakeRequest)
+      val result = appController.logout()(fakeRequest)
 
       status(result) mustBe SEE_OTHER
     }
 
     "return OK and the correct welsh view for a GET" in {
-      val result = controller().startWelsh()(fakeRequest)
+      val result = appController.startWelsh()(fakeRequest)
 
       status(result) mustBe SEE_OTHER
     }
 
     "return the contact reason controller url" in {
-      controller().createRefererURL() mustBe
+      appController.createRefererURL() mustBe
         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactReasonController.onPageLoad().url
     }
   }
