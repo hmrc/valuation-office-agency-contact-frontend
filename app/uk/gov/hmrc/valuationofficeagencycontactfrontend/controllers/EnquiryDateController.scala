@@ -48,12 +48,12 @@ class EnquiryDateController @Inject()(appConfig: FrontendAppConfig,
       case None => EnquiryDateForm()
       case Some(value) => EnquiryDateForm().fill(value)
     }
-    Ok(enquiry_date(appConfig, preparedForm, EnquiryDateForm.now(), NormalMode))
+    Ok(enquiry_date(appConfig, preparedForm, EnquiryDateForm.beforeDate, NormalMode))
   }
 
   def onSubmit(mode: Mode) = getData.async { implicit request =>
     EnquiryDateForm().bindFromRequest().fold(
-      formWithErrors =>Future.successful(BadRequest(enquiry_date(appConfig, formWithErrors, EnquiryDateForm.now(), NormalMode))),
+      formWithErrors => Future.successful(BadRequest(enquiry_date(appConfig, formWithErrors, EnquiryDateForm.beforeDate, NormalMode))),
       value => {
         auditService.sendRadioButtonSelection(request.uri, "enquiryDate" -> value)
         dataCacheConnector.save[String](request.sessionId, EnquiryDateId.toString, value).map(cacheMap =>

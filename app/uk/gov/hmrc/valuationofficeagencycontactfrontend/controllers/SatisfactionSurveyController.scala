@@ -67,7 +67,7 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
 
     SatisfactionSurveyForm().bindFromRequest().fold(
       formWithErrors => {
-        val date = DateFormatter.todaysDate()
+        val date = DateFormatter.satisfactionSurveyTodayDate
         Ok(confirmation(appConfig, contact, answerSections, whatHappensNextMessages(request.userAnswers), formWithErrors))
       },
       success => {

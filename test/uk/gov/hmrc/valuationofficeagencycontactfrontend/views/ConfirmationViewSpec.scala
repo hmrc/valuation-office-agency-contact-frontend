@@ -33,7 +33,7 @@ class ConfirmationViewSpec extends ViewBehaviours {
   val tellUs = TellUsMore("Hello")
   val contact = Contact(contactDetails, address, councilTax, cSub, tellUs.message)
   val alternativeContact = Contact(contactDetails, alternativeAddress, councilTax, cSub, tellUs.message)
-  val date = DateFormatter.todaysDate()
+  val date = DateFormatter.satisfactionSurveyTodayDate
   val whatHappensNew = Seq("confirmation.new.p1")
   val answerSectionNew = AnswerSection(None, List(
     AnswerRow("enquiryCategory.checkYourAnswersLabel", "enquiryCategory.council_tax", true, ""),
