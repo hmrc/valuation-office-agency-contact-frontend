@@ -38,7 +38,7 @@ class ApplicationControllerSpec extends ControllerSpecBase {
     "return OK and the correct view for a GET" in {
       val result = appController.start(NormalMode)(fakeRequest)
 
-      status(result) mustBe SEE_OTHER
+      status(result) mustBe OK
     }
 
     "return OK and the correct view for a GET1" in {
