@@ -43,7 +43,7 @@ lazy val root = Project(appName, file("."))
     update / evictionWarningOptions := EvictionWarningOptions.default.withWarnScalaVersionEviction(false),
     Test / fork := true,
     scalaVersion := "2.12.15",
-    maintainer := "voa.service.optimisation@digital.hmrc.gov.uk",
+    maintainer := "voa.service.optimisation@digital.hmrc.gov.uk"
   )
   .configs(IntegrationTest)
   .settings(integrationTestSettings())
