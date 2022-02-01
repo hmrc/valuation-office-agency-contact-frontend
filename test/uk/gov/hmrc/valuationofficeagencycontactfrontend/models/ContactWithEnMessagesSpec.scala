@@ -40,7 +40,9 @@ class ContactWithEnMessagesSpec extends SpecBase {
   }
 
   "return a ContactWithEnMessages when given a contact with proper keys for the existingEnquiryCategory and subEnquiryCategory" in {
-    val msgApi = mockMsgApi(Map("en" -> Map("enquiryCategory.council_tax" -> "CT", "councilTaxSubcategory.council_tax_band" -> "TB")))
+    val msgApi = mockMsgApi(Map("en" -> Map("enquiryCategory.council_tax" -> "CT",
+      "councilTaxSubcategory.council_tax_band" -> "TB",
+      "existing.enquiry" -> "Existing Enquiry")))
     val userAnswers = new FakeUserAnswers(contactDetails, "", "council_tax", "", "", propertyAddress, TellUsMore("message"), ee = Some("council_tax"),
       cr = Some("more_details"))
     val result = ContactWithEnMessage(contact, msgApi, userAnswers)
