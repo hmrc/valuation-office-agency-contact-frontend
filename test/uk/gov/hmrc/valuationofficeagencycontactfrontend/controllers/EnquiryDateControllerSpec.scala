@@ -42,7 +42,7 @@ class EnquiryDateControllerSpec extends ControllerSpecBase {
                               enquiryDate, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString(form: Form[String] = EnquiryDateForm()) =
-    enquiryDate(frontendAppConfig, form, EnquiryDateForm.now(), NormalMode)(fakeRequest, messages).toString()
+    enquiryDate(frontendAppConfig, form, EnquiryDateForm.beforeDate, NormalMode)(fakeRequest, messages).toString()
 
   "EnquiryDateController Controller" must {
 

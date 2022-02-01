@@ -91,6 +91,7 @@ expectedUpdate.heading = When you can expect an update
 expectedUpdate.para1 = We respond to most enquires within a few days. However, complicated enquiries can take up to 28 days.
 expectedUpdate.para2 = Please do not resubmit your enquiry.
 
+existing.enquiry=Existing Enquiry
 existingEnquiryCategory.title = What did you contact us about? - Valuation Office Agency contact form - GOV.UK
 existingEnquiryCategory.heading = What did you contact us about?
 existingEnquiryCategory.council_tax = Council Tax

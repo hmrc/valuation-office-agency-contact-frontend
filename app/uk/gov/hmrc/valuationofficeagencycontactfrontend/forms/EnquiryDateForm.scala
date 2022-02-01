@@ -19,18 +19,17 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 import play.api.data.Forms.{of, single}
 import play.api.data.format.Formatter
 import play.api.data.{Form, FormError}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.DateFormatter.{dateFormatter, nowInUK}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
-import java.time.{ZoneId, ZonedDateTime}
-import java.time.format.DateTimeFormatter
-import java.util.Locale
-
 object EnquiryDateForm extends FormErrorHelper {
+
+  private val minusDays = 28
 
   def EnquiryDateFormatter = new Formatter[String] {
     override def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
-      case None => Left(Seq(FormError(key, "error.enquiryDate.required", Seq(now()))))
+      case None => Left(Seq(FormError(key, "error.enquiryDate.required", Seq(beforeDate))))
       case _ => produceError(key, "error.unknown")
     }
 
@@ -49,12 +48,6 @@ object EnquiryDateForm extends FormErrorHelper {
 
   def optionIsValid(value: String) = options.exists(o => o.value == value)
 
-  val timezone = ZoneId.of("Europe/London")
-  val dateFormatter = DateTimeFormatter.ofPattern("d\u00A0MMMM\u00A0yyyy", Locale.UK)
-
-  def now(): String = {
-    val now = ZonedDateTime.now(timezone).minusDays(28)
-    now.format(dateFormatter)
-  }
+  def beforeDate: String = nowInUK.minusDays(minusDays).format(dateFormatter)
 
 }

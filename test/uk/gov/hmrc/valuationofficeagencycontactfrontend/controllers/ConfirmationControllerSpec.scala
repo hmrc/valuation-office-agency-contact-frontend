@@ -25,7 +25,7 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{EmailConnector, LightweightContactEventsConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ConfirmationController.{enquiryKey, whatHappensNextMessages}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurveyForm
@@ -43,6 +43,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
   val mockConnector = mock[LightweightContactEventsConnector]
+  val emailConnector = inject[EmailConnector]
   val whatHappensExisting = Seq("confirmation.existing.p1","confirmation.existing.p2")
   val whatHappensNew = Seq("confirmation.new.p1")
   val answerSectionExisting = AnswerSection(None,List(
@@ -64,13 +65,13 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
   def internalServerError = app.injector.instanceOf[internal_Server_Error]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new ConfirmationController(frontendAppConfig, messagesApi, mockConnector, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction,
+    new ConfirmationController(frontendAppConfig, messagesApi, mockConnector, emailConnector, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction,
       new DataRequiredActionImpl(ec), confirmation, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   val mockConnectorF = mock[LightweightContactEventsConnector]
 
   def controllerF(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new ConfirmationController(frontendAppConfig, messagesApi, mockConnectorF, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction,
+    new ConfirmationController(frontendAppConfig, messagesApi, mockConnectorF, emailConnector, new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction,
       new DataRequiredActionImpl(ec), confirmation, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   "Confirmation Controller" must {

@@ -22,7 +22,7 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.LightweightContactEventsConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{EmailConnector, LightweightContactEventsConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ConfirmationController._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CheckYourAnswersId
@@ -38,6 +38,7 @@ import scala.util.{Failure, Success, Try}
 class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
                                        override val messagesApi: MessagesApi,
                                        val connector: LightweightContactEventsConnector,
+                                       emailConnector: EmailConnector,
                                        navigator: Navigator,
                                        getData: DataRetrievalAction,
                                        requireData: DataRequiredAction,
@@ -64,6 +65,7 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
       case Success(_) =>
         enquiryKey(request.userAnswers) match {
           case Right(_) =>
+            emailConnector.sendEnquiryConfirmation(contact)
             Redirect(navigator.nextPage(CheckYourAnswersId, NormalMode)(request.userAnswers))
           case Left(msg) => {
             log.warn(s"Obtaining enquiry value - Navigation for Confirmation page reached with error $msg")

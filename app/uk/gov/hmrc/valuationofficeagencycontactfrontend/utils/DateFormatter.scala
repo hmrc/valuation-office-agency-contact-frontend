@@ -15,18 +15,25 @@
  */
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
-import java.time.LocalDate
+
+import java.time.{LocalDate, ZoneId, ZonedDateTime}
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
-object DateFormatter{
-    def todaysDate(): String = {
-        val date = LocalDate.now()
-        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-        date.format(formatter)
-    }
+/**
+ * @author Yuriy Tumakha
+ */
+object DateFormatter {
 
-    def formattedLocalDate(date: LocalDate): String = {
-        val formatter = DateTimeFormatter.ofPattern("d MMMM yyyy")
-        date.format(formatter)
-    }
+    val ukTimezone: ZoneId = ZoneId.of("Europe/London")
+    val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.UK)
+    val shortDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.UK)
+    val timeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.UK)
+
+    def nowInUK: ZonedDateTime = ZonedDateTime.now(ukTimezone)
+
+    def formattedLocalDate(date: LocalDate): String = date.format(dateFormatter)
+
+    def satisfactionSurveyTodayDate: String = nowInUK.format(shortDateFormatter)
+
 }
