@@ -22,6 +22,7 @@ import play.api.i18n.{Lang, Messages, MessagesApi}
 import play.api.libs.json.{JsObject, JsValue, Json}
 import uk.gov.hmrc.http.{HeaderCarrier, HttpClient, HttpReads, HttpResponse}
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.DataRequest
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Contact, ContactWithEnMessage}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.DateFormatter.{dateFormatter, nowInUK, timeFormatter}
 
@@ -43,7 +44,7 @@ class EmailConnector @Inject()(servicesConfig: ServicesConfig,
   private val cf_enquiry_confirmation = "cf_enquiry_confirmation"
   private val cf_enquiry_confirmation_cy = "cf_enquiry_confirmation" // TODO: replace value with cf_enquiry_confirmation_cy when template is ready
 
-  def sendEnquiryConfirmation(contact: Contact)(implicit messages: Messages, hc: HeaderCarrier): Future[HttpResponse] = {
+  def sendEnquiryConfirmation(contact: Contact)(implicit request: DataRequest[_], messages: Messages, hc: HeaderCarrier): Future[HttpResponse] = {
     val contactDetails = contact.contact
     val submissionDate = nowInUK
     val parameters = Json.obj(
@@ -60,12 +61,13 @@ class EmailConnector @Inject()(servicesConfig: ServicesConfig,
     sendEmail(contactDetails.email, templateId, parameters)
   }
 
-  private def getEnquirySubject(contact: Contact)(implicit messages: Messages): String = {
+  private def getEnquirySubject(contact: Contact)(implicit request: DataRequest[_], messages: Messages): String = {
     // TODO: remove overriding $messages with $messagesEN when template cf_enquiry_confirmation_cy is ready
     val messagesEN: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
 
+    val isUpdateExistingEnquiry = request.userAnswers.existingEnquiryCategory.isDefined
     val category = ContactWithEnMessage.enquiryCategory(contact)(messagesEN)
-    val subCategory = ContactWithEnMessage.enquirySubCategoryForUser(contact)(messagesEN)
+    val subCategory = ContactWithEnMessage.enquirySubCategory(contact, isUpdateExistingEnquiry)(messagesEN)
     s"$category - $subCategory"
   }
 
@@ -80,6 +82,7 @@ class EmailConnector @Inject()(servicesConfig: ServicesConfig,
     // The default HttpReads will wrap the response in an exception and make the body inaccessible
     implicit val responseReads: HttpReads[HttpResponse] = (_, _, response: HttpResponse) => response
 
+    println(Json.prettyPrint(json))
     http.POST[JsValue, HttpResponse](sendEmailUrl, json, headers).map { res =>
       res.status match {
         case OK | ACCEPTED => logger.info(s"Send email to user successful: ${res.status}")

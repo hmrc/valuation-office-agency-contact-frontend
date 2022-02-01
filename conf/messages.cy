@@ -92,6 +92,7 @@ expectedUpdate.heading = Pryd y gallwch chi ddisgwyl diweddariad
 expectedUpdate.para1 = Rydym yn ymateb i'r mwyafrif o ymholiadau o fewn ychydig ddyddiau. Fodd bynnag, gall ymholiadau cymhleth gymryd hyd at 28 diwrnod.
 expectedUpdate.para2 = Peidiwch â chyflwyno'ch ymholiad eto.
 
+existing.enquiry=Ymholiad Bodoli
 existingEnquiryCategory.title = Am beth wnaethoch chi gysylltu â ni? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
 existingEnquiryCategory.heading = Am beth wnaethoch chi gysylltu â ni?
 existingEnquiryCategory.council_tax = Treth y Cyngor

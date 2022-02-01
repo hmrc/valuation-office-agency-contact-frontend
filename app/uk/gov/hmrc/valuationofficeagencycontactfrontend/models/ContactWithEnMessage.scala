@@ -43,7 +43,7 @@ object ContactWithEnMessage {
     implicit val messagesEN: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
 
     val enquiryCategoryMsg = enquiryCategory(contact)
-    val subEnquiryCategoryMsg = enquirySubCategoryForVOA(contact, userAnswers.existingEnquiryCategory.isDefined)
+    val subEnquiryCategoryMsg = enquirySubCategory(contact, userAnswers.existingEnquiryCategory.isDefined)
 
     ContactWithEnMessage(contact.contact, contact.propertyAddress, contact.enquiryCategory == councilTaxKey,
       userAnswers.contactReason, enquiryCategoryMsg, subEnquiryCategoryMsg, StringEscapeUtils.escapeJava(contact.message))
@@ -59,19 +59,19 @@ object ContactWithEnMessage {
     }
   }
 
-  def enquirySubCategoryForVOA(contact: Contact, isUpdateExistingEnquiry: Boolean)(implicit messages: Messages): String =
-    if (isUpdateExistingEnquiry) "Existing Enquiry" else enquirySubCategoryForUser(contact)
-
-  def enquirySubCategoryForUser(contact: Contact)(implicit messages: Messages): String = {
-    val lang = messages.lang.language
-    val categoryPrefix = categoryKeyPrefix(contact)
-    messages.translate(categoryPrefix + "." + contact.subEnquiryCategory, Seq.empty) match {
-      case Some(msg) => msg
-      case None =>
-        log.warn(s"Unable to find key $categoryPrefix.${contact.subEnquiryCategory} in $lang messages")
-        throw new RuntimeException(s"Unable to find key $categoryPrefix.${contact.subEnquiryCategory} in $lang messages")
+  def enquirySubCategory(contact: Contact, isUpdateExistingEnquiry: Boolean)(implicit messages: Messages): String =
+    if (isUpdateExistingEnquiry) {
+      messages("existing.enquiry")
+    } else {
+      val lang = messages.lang.language
+      val categoryPrefix = categoryKeyPrefix(contact)
+      messages.translate(categoryPrefix + "." + contact.subEnquiryCategory, Seq.empty) match {
+        case Some(msg) => msg
+        case None =>
+          log.warn(s"Unable to find key $categoryPrefix.${contact.subEnquiryCategory} in $lang messages")
+          throw new RuntimeException(s"Unable to find key $categoryPrefix.${contact.subEnquiryCategory} in $lang messages")
+      }
     }
-  }
 
   private def categoryKeyPrefix(contact: Contact): String =
     contact.enquiryCategory match {
