@@ -27,7 +27,7 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
 
 @this(mainTemplate: main_template, govukBackLink: GovukBackLink,govukDateInput: GovukDateInput, govukButton: GovukButton,
-        input_date: inputDate, formWithCSFR: FormWithCSRF, govukErrorSummary: GovukErrorSummary)
+        input_date: inputDate, formWithCSRF: FormWithCSRF, govukErrorSummary: GovukErrorSummary)
 
 
 @(appConfig: FrontendAppConfig, form: Form[_], mode: Mode, enquiryKey: String, backlink: String)(implicit request: Request[_], messages: Messages)
@@ -46,7 +46,7 @@
     pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages(s"$enquiryKey.title"))else messages(s"$enquiryKey.title")),
 ) {
 
-    @formWithCSFR(action = DatePropertyChangedController.onSubmit(), 'autoComplete -> "off") {
+    @formWithCSRF(action = DatePropertyChangedController.onSubmit(), 'autoComplete -> "off") {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(

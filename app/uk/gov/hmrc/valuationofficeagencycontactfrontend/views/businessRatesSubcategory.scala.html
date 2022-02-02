@@ -29,7 +29,7 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
 
-@this(mainTemplate: main_template, formWithCSFR: FormWithCSRF,
+@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
         govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
         govukFieldset: GovukFieldset, govukBackLink: GovukBackLink)
 
@@ -50,7 +50,7 @@
     pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + messages("businessRatesSubcategory.title")) else messages("businessRatesSubcategory.title")),
     beforeContentBlock = Option(beforeBlock)
 ) {
-    @formWithCSFR(action = BusinessRatesSubcategoryController.onSubmit(mode), 'autoComplete -> "off") {
+    @formWithCSRF(action = BusinessRatesSubcategoryController.onSubmit(mode), 'autoComplete -> "off") {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(

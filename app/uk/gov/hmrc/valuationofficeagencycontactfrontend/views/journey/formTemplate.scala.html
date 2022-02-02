@@ -23,7 +23,7 @@
 
 @this(
         pageTemplate: pageTemplate,
-        formWithCSFR: FormWithCSRF,
+        formWithCSRF: FormWithCSRF,
         govukButton: GovukButton,
         govukErrorSummary: GovukErrorSummary
 )
@@ -45,7 +45,7 @@
         )
     }
 
-    @formWithCSFR(action = routes.JourneyController.onSubmit(key), 'autoComplete -> "off") {
+    @formWithCSRF(action = routes.JourneyController.onSubmit(key), 'autoComplete -> "off") {
 
         @formFields
 

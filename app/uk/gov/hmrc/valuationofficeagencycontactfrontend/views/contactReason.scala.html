@@ -30,7 +30,7 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactReasonForm
 
 
-@this(mainTemplate: main_template, formWithCSFR: FormWithCSRF,
+@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
         govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary, govukFieldset: GovukFieldset)
 
 
@@ -39,7 +39,7 @@
 @mainTemplate(
  pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("contactReason.title"))else messages("contactReason.title"))
 ) {
- @formWithCSFR(action = ContactReasonController.onSubmit(), 'autoComplete -> "off") {
+ @formWithCSRF(action = ContactReasonController.onSubmit(), 'autoComplete -> "off") {
   @if(form.hasErrors) {
    @govukErrorSummary(
     ErrorSummary(

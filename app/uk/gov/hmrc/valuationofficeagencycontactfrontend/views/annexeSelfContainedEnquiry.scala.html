@@ -31,7 +31,7 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.AnnexeSelfContainedForm
 
-@this(mainTemplate: main_template, formWithCSFR: FormWithCSRF, govukBackLink: GovukBackLink,
+@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF, govukBackLink: GovukBackLink,
         govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary, govukFieldset: GovukFieldset)
 
 @(appConfig: FrontendAppConfig, form: Form[String])(implicit request: Request[_], messages: Messages)
@@ -50,7 +50,7 @@
     pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("annexeSelfContainedEnquiry.title"))else messages("annexeSelfContainedEnquiry.title")),
     beforeContentBlock = Option(beforeBlock)
 ) {
-    @formWithCSFR(action = CouncilTaxAnnexeController.onSelfContainedSubmit(), 'autoComplete -> "off") {
+    @formWithCSRF(action = CouncilTaxAnnexeController.onSelfContainedSubmit(), 'autoComplete -> "off") {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(

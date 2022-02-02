@@ -33,7 +33,7 @@
 @import uk.gov.hmrc.hmrcfrontend.views.viewmodels.charactercount.CharacterCount
 @import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
 
-@this(mainTemplate: main_template, formWithCSFR: FormWithCSRF,
+@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
         hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
         govukFieldset: GovukFieldset,  govukBackLink: GovukBackLink)
 
@@ -119,7 +119,7 @@
         pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + title) else title),
         beforeContentBlock = Option(beforeBlock)
     ) {
-        @formWithCSFR(action = TellUsMoreController.onSubmit(mode), 'autoComplete -> "off") {
+        @formWithCSRF(action = TellUsMoreController.onSubmit(mode), 'autoComplete -> "off") {
             @if(form.hasErrors) {
                 @govukErrorSummary(
                     ErrorSummary(
