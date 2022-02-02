@@ -33,7 +33,7 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.SatisfactionSurveyController
 
-@this(mainTemplate: main_template, formWithCSFR: FormWithCSRF,
+@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
         govukButton: GovukButton, govukSummaryList: GovukSummaryList, govukPanel: GovukPanel,
         govukFieldset: GovukFieldset, govukRadios: GovukRadios, govukCharacterCountArea: GovukCharacterCount,
         govukErrorSummary: GovukErrorSummary)
@@ -95,7 +95,7 @@
 </div>
 
     <section class="govuk-!-display-none-print">
-    @formWithCSFR(action = SatisfactionSurveyController.formCompleteFeedback, 'autoComplete -> "off", 'class -> "govuk-!-display-none-print") {
+    @formWithCSRF(action = SatisfactionSurveyController.formCompleteFeedback, 'autoComplete -> "off", 'class -> "govuk-!-display-none-print") {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(

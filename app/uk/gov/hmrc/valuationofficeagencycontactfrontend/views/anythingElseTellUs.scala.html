@@ -28,7 +28,7 @@
 @import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
 
 
-@this(mainTemplate: main_template, formWithCSFR: FormWithCSRF,
+@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
 hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
         govukFieldset: GovukFieldset,  govukBackLink: GovukBackLink)
 
@@ -71,7 +71,7 @@ hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSumm
     pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("anythingElse.title"))else messages("anythingElse.title")),
     beforeContentBlock = Option(beforeBlock)
 ) {
-    @formWithCSFR(action = AnythingElseTellUsController.onSubmit(), 'autoComplete -> "off") {
+    @formWithCSRF(action = AnythingElseTellUsController.onSubmit(), 'autoComplete -> "off") {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(

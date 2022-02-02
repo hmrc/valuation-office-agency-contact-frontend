@@ -31,7 +31,7 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.components.help_with_service_fair_rent
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.DataRequestUtil.isEnquiryCategoryOneOf
 
-@this(mainTemplate: main_template, formWithCSFR: FormWithCSRF,
+@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
         govukInput: GovukInput, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
         govukFieldset: GovukFieldset, govukBackLink: GovukBackLink)
 
@@ -80,7 +80,7 @@
     pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + messages("propertyAddress.title")) else messages("propertyAddress.title")),
     beforeContentBlock = Option(beforeBlock)
 ) {
-    @formWithCSFR(action = PropertyAddressController.onSubmit(mode)) {
+    @formWithCSRF(action = PropertyAddressController.onSubmit(mode)) {
         @if(form.hasErrors) {
 
             @* after text updates please switch to uk.gov.hmrc.govukfrontend.views.Implicits.RichFormErrors#asHtmlErrorLinks()
