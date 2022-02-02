@@ -731,6 +731,7 @@ confirmation.para1=Your reference is
 confirmation.new.p1 = We usually respond to enquiries within a few days. However, complex enquiries can take up to 28 days.
 confirmation.existing.p1 = We will add any new details you have given us to your enquiry.
 confirmation.existing.p2 = We will contact you with an update to your enquiry using the contact details you have supplied.
+confirmation.email.sent = We have sent a confirmation email to
 confirmation.whatHappensnext = What happens next
 confirmation.feedback = Feedback
 confirmation.feedback.subheading = Overall, how would you describe your experience with the form?
