@@ -9,7 +9,7 @@ object Dependencies {
   private val logbackJsonLoggerVersion = "5.1.0"
   private val httpCachingClientVersion = "9.5.0-play-28"
   private val simpleReactivemongoVersion = "8.0.0-play-28"
-  private val playConditionalFormMappingVersion = "1.10.0-play-28"
+  private val playConditionalFormMappingVersion = "1.11.0-play-28"
   private val playLanguageVersion = "5.1.0-play-28"
   private val httpVerbsVersion = "13.10.0"
   private val commonTextVersion = "1.9"
