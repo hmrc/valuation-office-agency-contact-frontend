@@ -41,7 +41,6 @@ class FrontendAppConfig @Inject() (val configuration: Configuration, servicesCon
   lazy val betaFeedbackUrl = s"$contactHost/contact/beta-feedback"
   lazy val betaFeedbackUnauthenticatedUrl = s"$contactHost/contact/beta-feedback-unauthenticated"
 
-  val authUrl = servicesConfig.baseUrl("auth")
   //$COVERAGE-ON$
   lazy val loginUrl = loadConfig("urls.login")
   lazy val loginContinueUrl = loadConfig("urls.loginContinue")
