@@ -48,29 +48,39 @@ class EmailConnector @Inject()(servicesConfig: ServicesConfig,
     // TODO: remove overriding $messages with $messagesEN when template cf_enquiry_confirmation_cy is ready
     val messagesEN: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
 
-    val contactDetails = contact.contact
-    val submissionDate = nowInUK
-    val parameters = Json.obj(
-      "recipientName_FullName" -> contactDetails.fullName,
-      "enquirySubject" -> getEnquirySubject(contact)(request, messagesEN),
-      "submissionDate" -> submissionDate.format(dateFormatter), // TODO: use CY month names by uk.gov.hmrc.play.language.LanguageUtils.Dates
-      "submissionTime" -> submissionDate.format(timeFormatter),
-      "nextStep"       -> messagesEN("confirmation.new.p1")
-    )
+    val parameters = getParametersJson(contact)(request, messagesEN)
 
     val templateId = messages.lang.language match {
       case "cy" => cf_enquiry_confirmation_cy
       case _ => cf_enquiry_confirmation
     }
-    sendEmail(contactDetails.email, templateId, parameters)
+    sendEmail(contact.contact.email, templateId, parameters)
   }
 
-  private def getEnquirySubject(contact: Contact)(implicit request: DataRequest[_], messages: Messages): String = {
+  private def getParametersJson(contact: Contact)(implicit request: DataRequest[_], messages: Messages): JsObject = {
     val isUpdateExistingEnquiry = request.userAnswers.existingEnquiryCategory.isDefined
+    val submissionDate = nowInUK
+    Json.obj(
+      "recipientName_FullName" -> contact.contact.fullName,
+      "enquirySubject" -> getEnquirySubject(contact, isUpdateExistingEnquiry),
+      "submissionDate" -> submissionDate.format(dateFormatter), // TODO: use CY month names by uk.gov.hmrc.play.language.LanguageUtils.Dates
+      "submissionTime" -> submissionDate.format(timeFormatter),
+      "nextStep"       -> getNextStepText(isUpdateExistingEnquiry)
+    )
+  }
+
+  private def getEnquirySubject(contact: Contact, isUpdateExistingEnquiry: Boolean)(implicit messages: Messages): String = {
     val category = ContactWithEnMessage.enquiryCategory(contact)
     val subCategory = ContactWithEnMessage.enquirySubCategory(contact, isUpdateExistingEnquiry)
     s"$category - $subCategory"
   }
+
+  private def getNextStepText(isUpdateExistingEnquiry: Boolean)(implicit messages: Messages): String =
+    if (isUpdateExistingEnquiry) {
+      s"${messages("confirmation.existing.p1")}\n${messages("confirmation.existing.p2")}"
+    } else {
+      messages("confirmation.new.p1")
+    }
 
   private def sendEmail(email: String, templateId: String, parametersJson: JsObject)(implicit hc: HeaderCarrier): Future[HttpResponse] = {
     val json = Json.obj(
