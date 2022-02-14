@@ -36,7 +36,6 @@ object Dependencies {
     "org.scalatestplus.play" %% "scalatestplus-play" % scalaTestPlusPlayVersion % Test,
     "org.scalatestplus" %% "mockito-4-2" % "3.2.11.0" % Test,
     "org.scalatestplus" %% "scalacheck-1-15" % "3.2.11.0" % Test,
-    "org.jsoup" % "jsoup" % "1.14.3" % Test,
     "com.typesafe.play" %% "play-test" % PlayVersion.current % Test,
     "org.mockito" % "mockito-all" % mockitoAllVersion % Test,
     "org.scalacheck" %% "scalacheck" % "1.15.4" % Test,
