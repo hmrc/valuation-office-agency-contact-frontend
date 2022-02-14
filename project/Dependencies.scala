@@ -5,7 +5,7 @@ import sbt._
 object Dependencies {
 
   private val bootstrapPlayVersion = "5.20.0"
-  private val playFrontendHmrc = "3.3.0-play-28"
+  private val playFrontendHmrc = "3.4.0-play-28"
   private val logbackJsonLoggerVersion = "5.1.0"
   private val httpCachingClientVersion = "9.5.0-play-28"
   private val simpleReactivemongoVersion = "8.0.0-play-28"
@@ -36,16 +36,10 @@ object Dependencies {
     "org.scalatestplus.play" %% "scalatestplus-play" % scalaTestPlusPlayVersion % Test,
     "org.scalatestplus" %% "mockito-4-2" % "3.2.11.0" % Test,
     "org.scalatestplus" %% "scalacheck-1-15" % "3.2.11.0" % Test,
-    "org.jsoup" % "jsoup" % "1.14.3" % Test,
     "com.typesafe.play" %% "play-test" % PlayVersion.current % Test,
     "org.mockito" % "mockito-all" % mockitoAllVersion % Test,
     "org.scalacheck" %% "scalacheck" % "1.15.4" % Test,
-    "com.typesafe.akka" %% "akka-testkit" % PlayVersion.akkaVersion % Test,
-    "com.typesafe.akka" %% "akka-slf4j" % PlayVersion.akkaVersion % Test,
-    "com.typesafe.akka" %% "akka-protobuf-v3" % PlayVersion.akkaVersion % Test,
-    "com.typesafe.akka" %% "akka-serialization-jackson" % PlayVersion.akkaVersion % Test,
-    "com.typesafe.akka" %% "akka-stream" % PlayVersion.akkaVersion % Test,
-    "com.typesafe.akka" %% "akka-actor-typed" % PlayVersion.akkaVersion % Test
+    "com.typesafe.akka" %% "akka-testkit" % PlayVersion.akkaVersion % Test
   )
 
   lazy val appDependencies: Seq[ModuleID] = compile ++ test

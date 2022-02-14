@@ -18,15 +18,14 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors
 
 import play.api.Logging
 import play.api.http.Status.{ACCEPTED, OK}
-import play.api.i18n.{Lang, Messages, MessagesApi}
+import play.api.i18n.Messages
 import play.api.libs.json.{JsObject, JsValue, Json}
 import uk.gov.hmrc.http.{HeaderCarrier, HttpClient, HttpReads, HttpResponse}
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.DataRequest
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Contact, ContactWithEnMessage}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.DateFormatter.{dateFormatter, nowInUK, timeFormatter}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.DateUtil
 
-import java.util.Locale
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -35,20 +34,16 @@ import scala.concurrent.{ExecutionContext, Future}
  */
 @Singleton
 class EmailConnector @Inject()(servicesConfig: ServicesConfig,
-                               http: HttpClient,
-                               messagesApi: MessagesApi)
-                              (implicit ec: ExecutionContext) extends Logging {
+                               http: HttpClient)
+                              (implicit ec: ExecutionContext, dateUtil: DateUtil) extends Logging {
 
   private val emailServiceBaseUrl = servicesConfig.baseUrl("email")
   private val sendEmailUrl = s"$emailServiceBaseUrl/hmrc/email"
   private val cf_enquiry_confirmation = "cf_enquiry_confirmation"
-  private val cf_enquiry_confirmation_cy = "cf_enquiry_confirmation" // TODO: replace value with cf_enquiry_confirmation_cy when template is ready
+  private val cf_enquiry_confirmation_cy = "cf_enquiry_confirmation_cy"
 
   def sendEnquiryConfirmation(contact: Contact)(implicit request: DataRequest[_], messages: Messages, hc: HeaderCarrier): Future[HttpResponse] = {
-    // TODO: remove overriding $messages with $messagesEN when template cf_enquiry_confirmation_cy is ready
-    val messagesEN: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
-
-    val parameters = getParametersJson(contact)(request, messagesEN)
+    val parameters = getParametersJson(contact, request.userAnswers.existingEnquiryCategory.isDefined)
 
     val templateId = messages.lang.language match {
       case "cy" => cf_enquiry_confirmation_cy
@@ -57,14 +52,13 @@ class EmailConnector @Inject()(servicesConfig: ServicesConfig,
     sendEmail(contact.contact.email, templateId, parameters)
   }
 
-  private def getParametersJson(contact: Contact)(implicit request: DataRequest[_], messages: Messages): JsObject = {
-    val isUpdateExistingEnquiry = request.userAnswers.existingEnquiryCategory.isDefined
-    val submissionDate = nowInUK
+  private def getParametersJson(contact: Contact, isUpdateExistingEnquiry: Boolean)(implicit messages: Messages): JsObject = {
+    val submissionDate = dateUtil.nowInUK
     Json.obj(
       "recipientName_FullName" -> contact.contact.fullName,
       "enquirySubject" -> getEnquirySubject(contact, isUpdateExistingEnquiry),
-      "submissionDate" -> submissionDate.format(dateFormatter), // TODO: use CY month names by uk.gov.hmrc.play.language.LanguageUtils.Dates
-      "submissionTime" -> submissionDate.format(timeFormatter),
+      "submissionDate" -> dateUtil.formattedZonedDate(submissionDate),
+      "submissionTime" -> submissionDate.format(dateUtil.timeFormatter),
       "nextStep"       -> getNextStepText(isUpdateExistingEnquiry)
     )
   }

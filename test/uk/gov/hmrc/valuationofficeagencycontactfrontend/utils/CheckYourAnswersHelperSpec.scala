@@ -17,20 +17,26 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend
 
 import org.scalatestplus.mockito.MockitoSugar
+import play.api.i18n.{Lang, Messages}
 import play.api.libs.json.JsString
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.JourneyMap.changeModePrefix
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, UserAnswers}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, DateUtil, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerRow
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.ContactFormatter._
 
+import java.util.Locale
+
 class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
   val mockUserAnswers = mock[UserAnswers]
+
+  implicit val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
+  implicit val dateUtil: DateUtil = injector.instanceOf[DateUtil]
 
   "Check Your Answers Helper" when {
 

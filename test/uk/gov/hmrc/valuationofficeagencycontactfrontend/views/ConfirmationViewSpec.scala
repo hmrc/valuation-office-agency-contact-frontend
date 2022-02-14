@@ -20,7 +20,6 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurvey
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.DateFormatter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow, AnswerSection}
 
 class ConfirmationViewSpec extends ViewBehaviours {
@@ -33,7 +32,6 @@ class ConfirmationViewSpec extends ViewBehaviours {
   val tellUs = TellUsMore("Hello")
   val contact = Contact(contactDetails, address, councilTax, cSub, tellUs.message)
   val alternativeContact = Contact(contactDetails, alternativeAddress, councilTax, cSub, tellUs.message)
-  val date = DateFormatter.satisfactionSurveyTodayDate
   val whatHappensNew = Seq("confirmation.new.p1")
   val answerSectionNew = AnswerSection(None, List(
     AnswerRow("enquiryCategory.checkYourAnswersLabel", "enquiryCategory.council_tax", true, ""),

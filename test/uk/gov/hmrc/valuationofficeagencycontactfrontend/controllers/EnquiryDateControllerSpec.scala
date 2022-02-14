@@ -17,6 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.data.Form
+import play.api.i18n.{Lang, Messages}
 import play.api.libs.json.JsString
 import play.api.test.Helpers._
 import uk.gov.hmrc.http.cache.client.CacheMap
@@ -26,10 +27,15 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{Dat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryDateForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.EnquiryDateId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateUtil, MessageControllerComponentsHelpers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{enquiryDate => enquiry_date}
 
+import java.util.Locale
+
 class EnquiryDateControllerSpec extends ControllerSpecBase {
+
+  implicit val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
+  implicit val dateUtil: DateUtil = injector.instanceOf[DateUtil]
 
   def enquiryDate = inject[enquiry_date]
   def auditService = inject[AuditingService]
