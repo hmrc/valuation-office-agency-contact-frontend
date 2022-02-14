@@ -1,5 +1,3 @@
-import Dependencies._
-import sbt.Keys.{scalaVersion, _}
 import sbt._
 import scoverage.ScoverageKeys
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin._
@@ -14,16 +12,12 @@ import uk.gov.hmrc.SbtAutoBuildPlugin
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin
 import uk.gov.hmrc.versioning.SbtGitVersioning
 
-lazy val plugins : Seq[Plugins] = Seq.empty
-lazy val playSettings : Seq[Setting[_]] = Seq.empty
-
-lazy val appName = "valuation-office-agency-contact-frontend"
+val appName = "valuation-office-agency-contact-frontend"
 
 lazy val root = Project(appName, file("."))
-  .enablePlugins(Seq(play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin) ++ plugins : _*)
+  .enablePlugins(Seq(play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin) : _*)
   .disablePlugins(JUnitXmlReportPlugin)
   .settings(majorVersion := 1)
-  .settings(playSettings : _*)
   .settings(RoutesKeys.routesImport ++= Seq("uk.gov.hmrc.valuationofficeagencycontactfrontend.models._"))
   .settings(
     ScoverageKeys.coverageExcludedFiles := "<empty>;Reverse.*;.*filters.*;.*handlers.*;.*components.*;.*models.*;" +
@@ -38,7 +32,7 @@ lazy val root = Project(appName, file("."))
   .settings(publishingSettings: _*)
   .settings(
     scalacOptions ++= Seq("-feature"),
-    libraryDependencies ++= appDependencies,
+    libraryDependencies ++= Dependencies.appDependencies,
     retrieveManaged := true,
     update / evictionWarningOptions := EvictionWarningOptions.default.withWarnScalaVersionEviction(false),
     Test / fork := true,

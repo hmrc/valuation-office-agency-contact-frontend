@@ -29,7 +29,7 @@ import uk.gov.hmrc.http.{HeaderCarrier, HttpClient, HttpReads, HttpResponse}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.DataRequest
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Contact, ContactDetails, PropertyAddress}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateUtil, UserAnswers}
 
 import scala.concurrent.Future
 
@@ -48,6 +48,7 @@ class EmailConnectorSpec extends SpecBase with MockitoSugar with ScalaFutures {
 
   implicit val hc: HeaderCarrier = HeaderCarrier()
   implicit val request: DataRequest[_] = DataRequest(FakeRequest(), "sessionId", new UserAnswers(new CacheMap("id", Map())))
+  implicit val dateUtil = injector.instanceOf[DateUtil]
 
   private def httpMock(status: Int, body: String) = {
     val httpMock = mock[HttpClient]
@@ -58,7 +59,7 @@ class EmailConnectorSpec extends SpecBase with MockitoSugar with ScalaFutures {
 
   "EmailConnector" should {
     "send enquiry confirmation" in {
-      val emailConnector = new EmailConnector(servicesConfig, httpMock(ACCEPTED, ""), msgApi)
+      val emailConnector = new EmailConnector(servicesConfig, httpMock(ACCEPTED, ""))
       implicit val messages: Messages = msgApi.preferred(Seq(Lang("en")))
 
       val response = emailConnector.sendEnquiryConfirmation(contact).futureValue
@@ -68,7 +69,7 @@ class EmailConnectorSpec extends SpecBase with MockitoSugar with ScalaFutures {
 
     "handle error response on send enquiry confirmation" in {
       val body = """{"error":"Parameter missed"}"""
-      val emailConnector = new EmailConnector(servicesConfig, httpMock(BAD_REQUEST, body), msgApi)
+      val emailConnector = new EmailConnector(servicesConfig, httpMock(BAD_REQUEST, body))
       implicit val messages: Messages = msgApi.preferred(Seq(Lang("en")))
 
       val response = emailConnector.sendEnquiryConfirmation(contact).futureValue

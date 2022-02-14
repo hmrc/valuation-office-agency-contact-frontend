@@ -24,7 +24,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{Dat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryDateForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.EnquiryDateId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateUtil, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.enquiryDate
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 
@@ -41,7 +41,7 @@ class EnquiryDateController @Inject()(appConfig: FrontendAppConfig,
                                       navigator: Navigator,
                                       enquiry_date: enquiryDate,
                                       cc: MessagesControllerComponents
-                                     )(implicit ec: ExecutionContext) extends FrontendController(cc) with I18nSupport {
+                                     )(implicit ec: ExecutionContext, dateUtil: DateUtil) extends FrontendController(cc) with I18nSupport {
 
   def onPageLoad(mode: Mode) = (getData andThen requireData) { implicit request =>
     val preparedForm = request.userAnswers.enquiryDate match {

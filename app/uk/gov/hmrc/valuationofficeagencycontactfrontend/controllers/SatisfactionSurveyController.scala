@@ -29,7 +29,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{satisfactionSurveyThankYou => satisfaction_Survey_Thank_You}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{SatisfactionSurvey, SatisfactionSurveyForm}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{AddressFormatters, DateFormatter, UserAnswers}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{AddressFormatters, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ConfirmationController.whatHappensNextMessages
 
 import scala.concurrent.ExecutionContext
@@ -67,7 +67,6 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
 
     SatisfactionSurveyForm().bindFromRequest().fold(
       formWithErrors => {
-        val date = DateFormatter.satisfactionSurveyTodayDate
         Ok(confirmation(appConfig, contact, answerSections, whatHappensNextMessages(request.userAnswers), formWithErrors))
       },
       success => {

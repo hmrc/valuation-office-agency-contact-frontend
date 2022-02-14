@@ -16,13 +16,19 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
+import play.api.i18n.{Lang, Messages}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.CheckYourAnswersHelper
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, DateUtil}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_answers
 
+import java.util.Locale
+
 class CheckYourAnswersViewSpec extends ViewBehaviours {
+
+  implicit val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
+  implicit val dateUtil: DateUtil = injector.instanceOf[DateUtil]
 
   val tellUs = TellUsMore("Hello")
   val cd = ContactDetails("c1", "c3", "c5")

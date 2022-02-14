@@ -16,24 +16,28 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
-import java.time.{LocalDate, ZoneId, ZonedDateTime}
+import play.api.i18n.Messages
+import uk.gov.hmrc.play.language.LanguageUtils
+
 import java.time.format.DateTimeFormatter
+import java.time.{LocalDate, ZoneId, ZonedDateTime}
 import java.util.Locale
+import javax.inject.{Inject, Singleton}
 
 /**
  * @author Yuriy Tumakha
  */
-object DateFormatter {
+@Singleton
+class DateUtil @Inject()(langUtil: LanguageUtils) {
 
     val ukTimezone: ZoneId = ZoneId.of("Europe/London")
-    val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.UK)
     val shortDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.UK)
     val timeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.UK)
 
     def nowInUK: ZonedDateTime = ZonedDateTime.now(ukTimezone)
 
-    def formattedLocalDate(date: LocalDate): String = date.format(dateFormatter)
+    def formattedLocalDate(date: LocalDate)(implicit messages: Messages): String = langUtil.Dates.formatDate(date)
 
-    def satisfactionSurveyTodayDate: String = nowInUK.format(shortDateFormatter)
+    def formattedZonedDate(date: ZonedDateTime)(implicit messages: Messages): String = formattedLocalDate(date.toLocalDate)
 
 }

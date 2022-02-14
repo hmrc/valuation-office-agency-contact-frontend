@@ -16,16 +16,16 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
+import play.api.i18n.Messages
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.JourneyMap.changeModePrefix
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage.lastTellUsMorePage
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CheckMode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.ContactFormatter._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.DateFormatter.formattedLocalDate
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerRow
 
-class CheckYourAnswersHelper(userAnswers: UserAnswers) {
+class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messages, dateUtil: DateUtil) {
 
   def tellUsMore(keyMessage: String = "tellUsMore.heading"): Option[AnswerRow] = userAnswers.tellUsMore map {
     x => AnswerRow(keyMessage, s"${x.message}", false, routes.TellUsMoreController.onPageLoad(CheckMode).url)
@@ -75,7 +75,7 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
   }
 
   def datePropertyChanged(keyMessage: String = "datePropertyChanged.poorRepair.heading"): Option[AnswerRow] = userAnswers.datePropertyChanged map {
-    date => AnswerRow(keyMessage, formattedLocalDate(date), false, routes.DatePropertyChangedController.onPageLoad().url)
+    date => AnswerRow(keyMessage, dateUtil.formattedLocalDate(date), false, routes.DatePropertyChangedController.onPageLoad().url)
   }
 
   def councilTaxBusinessEnquiry: Option[AnswerRow] = userAnswers.councilTaxBusinessEnquiry.map {

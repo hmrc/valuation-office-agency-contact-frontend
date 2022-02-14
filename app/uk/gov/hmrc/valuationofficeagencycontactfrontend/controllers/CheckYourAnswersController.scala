@@ -18,7 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import com.google.inject.Inject
 import play.api.Logger
-import play.api.i18n.{I18nSupport, MessagesApi}
+import play.api.i18n.{I18nSupport, Messages, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
@@ -26,7 +26,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.AnswerSectionId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, UserAnswers}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, DateUtil, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_answers
 
@@ -39,7 +39,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
                                            requireData: DataRequiredAction,
                                            checkYourAnswers: check_your_answers,
                                            cc: MessagesControllerComponents
-                                          ) extends FrontendController(cc) with I18nSupport {
+                                          )(implicit dateUtil: DateUtil) extends FrontendController(cc) with I18nSupport {
 
   private val log = Logger(this.getClass)
 
@@ -65,7 +65,7 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
     Redirect(routes.ConfirmationController.onPageLoadSendEmail())
   }
 
-  private[controllers] def userAnswersSectionBuilder(answers: UserAnswers): Option[AnswerSection] = {
+  private[controllers] def userAnswersSectionBuilder(answers: UserAnswers)(implicit messages: Messages): Option[AnswerSection] = {
     import answers._
     val checkYourAnswersHelper = new CheckYourAnswersHelper(answers)
 
