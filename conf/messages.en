@@ -187,7 +187,7 @@ councilTaxBandTooHigh.p3.url = https://www.gov.uk/guidance/council-tax-band-chan
 councilTaxBandTooHigh.p4 = How properties are valued for Council Tax
 councilTaxBandTooHigh.p4.url = https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed
 
-# --- Council Tax band for my new property'
+# --- Council Tax band for my new property
 councilTaxBandForNew.title = Speak to your local council about Council Tax bands for new properties - Valuation Office Agency contact form - GOV.UK
 councilTaxBandForNew.heading = Speak to your local council about Council Tax bands for new properties
 councilTaxBandForNew.p1.part1 = Contact your local council
@@ -235,7 +235,7 @@ propertyWindWater.form.heading = Is the property protected from wind and water?
 propertyWindWater.form.p1 = Read about <a class="govuk-link" target="_blank" href="https://www.gov.uk/government/publications/council-tax-domestic-properties-in-disrepair-or-derelict/council-tax-domestic-properties-which-are-in-disrepair-or-are-derelict"> when a Council Tax band would be affected by poor repair (opens in a new tab)</a>.
 propertyWindWater.form.yes = Yes
 propertyWindWater.form.no = No
-error.propertyWindWater.required = Select ''Yes'' if the property is protected from wind and water
+error.propertyWindWater.required = Select ’Yes’ if the property is protected from wind and water
 
 # -------- End of wind and water journey
 propertyWindWaterEnd.title = Tell us about the condition of your property online  - Valuation Office Agency contact form - GOV.UK
@@ -375,14 +375,14 @@ businessRatesSelfCatering140Days.title = Is your property available to let for a
 businessRatesSelfCatering140Days.heading = Is your property available to let for at least 140 days per year?
 businessRatesSelfCatering140Days.yes = Yes
 businessRatesSelfCatering140Days.no = No
-error.businessRatesSelfCatering140Days.required = Select ''Yes'' if your property is available to let for at least 140 days per year
+error.businessRatesSelfCatering140Days.required = Select ’Yes’ if your property is available to let for at least 140 days per year
 
 # --- Property let for at least 70 days
 businessRatesSelfCatering70Days.title = Is your property available to let for at least 70 days per year? - Valuation Office Agency contact form - GOV.UK
 businessRatesSelfCatering70Days.heading = Is your property available to let for at least 70 days per year?
 businessRatesSelfCatering70Days.yes = Yes
 businessRatesSelfCatering70Days.no = No
-error.businessRatesSelfCatering70Days.required = Select ''Yes'' if your property is available to let for at least 70 days per year
+error.businessRatesSelfCatering70Days.required = Select ’Yes’ if your property is available to let for at least 70 days per year
 
 # --- Property merged or split
 propertyMergeSplit.title = Speak to your local council if you have split or merged your property - Valuation Office Agency contact form - GOV.UK
@@ -450,7 +450,7 @@ businessRatesNoNeedToPay.url1 = <a href="https://www.gov.uk/run-business-from-ho
 businessRatesValuationOnline.title = Check and challenge your business rates valuation online - Valuation Office Agency contact form - GOV.UK
 businessRatesValuationOnline.heading = Check and challenge your business rates valuation online
 businessRatesValuationOnline.p1.url = https://www.gov.uk/correct-your-business-rates
-businessRatesValuationOnline.p1.part1 = Use the Valuation Office Agency''s online service
+businessRatesValuationOnline.p1.part1 = Use the Valuation Office Agency’s online service
 businessRatesValuationOnline.p1.part2 = if you think there should be a change to your business rates valuation.
 businessRatesValuationOnline.subheading1 = For properties in England
 businessRatesValuationOnline.p2 = Submit a check to make any changes to physical details, or confirm them if there are no changes to make. You can challenge the valuation after the check has been resolved.
@@ -464,9 +464,9 @@ businessRatesValuationOnline.p4 = More about business rates and how they are cal
 businessRatesPropertyDemolished.title = Tell us that your property has been demolished - Valuation Office Agency contact form - GOV.UK
 businessRatesPropertyDemolished.heading = Tell us that your property has been demolished
 businessRatesPropertyDemolished.p1.url =  https://www.gov.uk/correct-your-business-rates
-businessRatesPropertyDemolished.p1.part1 = Use the Valuation Office Agency''s online service
+businessRatesPropertyDemolished.p1.part1 = Use the Valuation Office Agency’s online service
 businessRatesPropertyDemolished.p1.part2 =  to tell us that your property has been demolished.
-businessRatesPropertyDemolished.p2 = For properties in England, you will need to sign in and submit a ''check''.
+businessRatesPropertyDemolished.p2 = For properties in England, you will need to sign in and submit a ’check’.
 businessRatesPropertyDemolished.subheading = Other help on GOV.UK
 businessRatesPropertyDemolished.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
 businessRatesPropertyDemolished.p3 = A step by step guide to check and challenge
@@ -511,7 +511,7 @@ error.businessRatesPropertyEnquiry.required = Select if your property is in Engl
 # --- Tell us that your property is no longer used for business
 businessRatesNonBusiness.title = Tell us that your property is no longer used for business - Valuation Office Agency contact form - GOV.UK
 businessRatesNonBusiness.heading = Tell us that your property is no longer used for business
-businessRatesNonBusiness.p1 = <a href="https://www.gov.uk/correct-your-business-rates" target="_self">Use the Valuation Office Agency''s online service</a> and submit a ''check'' to tell us that your property is not being used for business.
+businessRatesNonBusiness.p1 = <a href="https://www.gov.uk/correct-your-business-rates" target="_self">Use the Valuation Office Agency’s online service</a> and submit a ’check’ to tell us that your property is not being used for business.
 businessRatesNonBusiness.subheading = Other help on GOV.UK
 businessRatesNonBusiness.p2 = <a href="https://www.gov.uk/government/collections/check-and-challenge-step-by-step" target="_self">How to check and challenge your business rates valuation</a>
 
@@ -544,9 +544,9 @@ businessRatesChallenge.body = Use the Valuation Office Agency’s online service
 propertyOrAreaChanged.title = Tell us about changes to your property or area - Valuation Office Agency contact form - GOV.UK
 propertyOrAreaChanged.heading = Tell us about changes to your property or area
 propertyOrAreaChanged.p1.url = https://www.gov.uk/correct-your-business-rates
-propertyOrAreaChanged.p1.part1 = Use the Valuation Office Agency''s online service
+propertyOrAreaChanged.p1.part1 = Use the Valuation Office Agency’s online service
 propertyOrAreaChanged.p1.part2 = to tell us about changes to your property or the surrounding area.
-propertyOrAreaChanged.p2 = For properties in England, you will need to sign in and submit a ''check''.
+propertyOrAreaChanged.p2 = For properties in England, you will need to sign in and submit a ’check’.
 propertyOrAreaChanged.subheading = Other help on GOV.UK
 propertyOrAreaChanged.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
 propertyOrAreaChanged.p3 = A step by step guide to check and challenge your business rates in England
