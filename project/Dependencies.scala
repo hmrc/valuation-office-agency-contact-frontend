@@ -11,7 +11,7 @@ object Dependencies {
   private val simpleReactivemongoVersion = "8.0.0-play-28"
   private val playConditionalFormMappingVersion = "1.11.0-play-28"
   private val playLanguageVersion = "5.1.0-play-28"
-  private val httpVerbsVersion = "13.10.0"
+  private val httpVerbsVersion = "13.12.0"
   private val commonTextVersion = "1.9"
   private val scalaTestVersion = "3.2.11"
   private val scalaTestPlusPlayVersion = "5.1.0"
