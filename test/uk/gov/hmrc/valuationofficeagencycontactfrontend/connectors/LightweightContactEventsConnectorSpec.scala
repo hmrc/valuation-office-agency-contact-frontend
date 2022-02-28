@@ -40,7 +40,7 @@ import play.api.libs.json.{JsValue, Json, Writes, _}
 import play.api.test.Helpers._
 import play.api.{Configuration, Environment}
 import uk.gov.hmrc.http.{HeaderCarrier, HttpReads, HttpResponse}
-import uk.gov.hmrc.play.bootstrap.http.HttpClient
+import uk.gov.hmrc.http.HttpClient
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 
@@ -48,11 +48,12 @@ import scala.concurrent.Future
 
 class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
 
-  def getHttpMock(returnedStatus: Int) = {
+  def getHttpMock(returnedStatus: Int): HttpClient = {
     val httpMock = mock[HttpClient]
     when(httpMock.POST[JsValue, HttpResponse](anyString, any[JsValue], any[Seq[(String, String)]])(any[Writes[JsValue]], any[HttpReads[HttpResponse]],
-      any[HeaderCarrier], any())) thenReturn Future.successful(HttpResponse(returnedStatus, None))
-    when(httpMock.GET[HttpResponse](anyString, any[Seq[(String,String)]], any[Seq[(String,String)]])(any[HttpReads[HttpResponse]], any[HeaderCarrier], any())) thenReturn Future.successful(HttpResponse(returnedStatus, None))
+      any[HeaderCarrier], any())) thenReturn Future.successful(HttpResponse(returnedStatus, ""))
+    when(httpMock.GET[HttpResponse](anyString, any[Seq[(String, String)]], any[Seq[(String, String)]])(
+      any[HttpReads[HttpResponse]], any[HeaderCarrier], any())) thenReturn Future.successful(HttpResponse(returnedStatus, ""))
     httpMock
   }
 
@@ -158,7 +159,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
         val httpMock = getHttpMock(200)
 
         val connector = new LightweightContactEventsConnector(httpMock, configuration,auditService, servicesConfig)
-        connector.sendJson(minimalJson)(HeaderCarrier())
+        connector.sendJson(minimalJson, minimalJson)(HeaderCarrier())
 
         verify(httpMock).POST(urlCaptor.capture, bodyCaptor.capture, headersCaptor.capture)(jsonWritesNapper.capture,
           httpReadsNapper.capture, headerCarrierNapper.capture, any())
@@ -169,14 +170,14 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
 
       "return a case class representing the received JSON when the send method is successful" in {
         val connector = new LightweightContactEventsConnector(getHttpMock(200), configuration,auditService, servicesConfig)
-        val result = await(connector.sendJson(minimalJson)(HeaderCarrier()))
+        val result = await(connector.sendJson(minimalJson, minimalJson)(HeaderCarrier()))
         result.isSuccess mustBe true
         result.get mustBe 200
       }
 
       "return a string representing the error when send method fails" in {
         val connector = new LightweightContactEventsConnector(getHttpMock(500), configuration,auditService, servicesConfig)
-        val result = await(connector.sendJson(minimalJson)(HeaderCarrier()))
+        val result = await(connector.sendJson(minimalJson, minimalJson)(HeaderCarrier()))
         result.isFailure mustBe true
         val e = result.failed.get
         e mustBe a[RuntimeException]
@@ -185,7 +186,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar {
 
       "return failure if the backend service call fails using minimal Json" in {
         val connector = new LightweightContactEventsConnector(getHttpMock(500), configuration,auditService, servicesConfig)
-        val result = await(connector.sendJson(minimalJson)(HeaderCarrier()))
+        val result = await(connector.sendJson(minimalJson, minimalJson)(HeaderCarrier()))
         result.isFailure mustBe true
       }
 
