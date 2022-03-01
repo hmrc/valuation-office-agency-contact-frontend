@@ -16,24 +16,24 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors
 
-import javax.inject.Inject
+import play.api.http.Status.OK
 import play.api.i18n.MessagesApi
 import play.api.libs.json._
 import play.api.{Configuration, Logger}
-import uk.gov.hmrc.http.{HeaderCarrier, HttpResponse}
+import uk.gov.hmrc.http.HttpReads.Implicits._
+import uk.gov.hmrc.http.{HeaderCarrier, HttpClient, HttpResponse}
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
-import uk.gov.hmrc.http.HttpClient
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Contact, ContactWithEnMessage}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Contact, ContactWithEnMessage, EnquiryAuditEvent}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
+import javax.inject.Inject
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.util.{Failure, Success, Try}
-import uk.gov.hmrc.http.HttpReads.Implicits._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 class LightweightContactEventsConnector @Inject()(http: HttpClient,
                                                   val configuration: Configuration,
-                                                   auditService: AuditingService,
+                                                  auditService: AuditingService,
                                                   servicesConfig: ServicesConfig) {
 
   private val log = Logger(this.getClass)
@@ -44,21 +44,32 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient,
 
   def getStyleGuide = http.GET[HttpResponse](s"$serviceUrl${baseSegment}style-guide")
 
-  def send(input: Contact, messagesApi: MessagesApi, userAnswers: UserAnswers)(implicit hc: HeaderCarrier) =
-    sendJson(Json.toJson(ContactWithEnMessage(input, messagesApi, userAnswers)))
+  def send(input: Contact, messagesApi: MessagesApi, userAnswers: UserAnswers)(implicit hc: HeaderCarrier) = {
+    val msg = ContactWithEnMessage(input, messagesApi, userAnswers)
+    val auditEvent = EnquiryAuditEvent(
+      msg.contact,
+      msg.propertyAddress,
+      msg.isCouncilTaxEnquiry,
+      msg.contactReason,
+      msg.enquiryCategoryMsg,
+      msg.subEnquiryCategoryMsg,
+      msg.message,
+      userAnswers.enquiryDate,
+      userAnswers.refNumber)
+    sendJson(Json.toJson(msg), Json.toJson(auditEvent))
+  }
 
-  def sendJson(json: JsValue)(implicit hc: HeaderCarrier): Future[Try[Int]] = {
-    http.POST[JsValue, HttpResponse](s"$serviceUrl${baseSegment}create", json, Seq(jsonContentTypeHeader))
+  def sendJson(msgJson: JsValue, auditEventJson: JsValue)(implicit hc: HeaderCarrier): Future[Try[Int]] = {
+    http.POST[JsValue, HttpResponse](s"$serviceUrl${baseSegment}create", msgJson, Seq(jsonContentTypeHeader))
       .map {
         response =>
           response.status match {
-            case 200 =>
-              auditService.sendEvent("sendenquirytoVOA", json)
-              Success(200)
-            case status => {
+            case OK =>
+              auditService.sendEvent("sendenquirytoVOA", auditEventJson)
+              Success(OK)
+            case status =>
               log.warn("Received status of " + status + " from upstream service")
               Failure(new RuntimeException("Received status of " + status + " from upstream service"))
-            }
           }
       } recover {
       case e =>
@@ -68,4 +79,3 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient,
   }
 
 }
-
