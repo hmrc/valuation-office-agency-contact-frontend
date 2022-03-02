@@ -18,9 +18,9 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import javax.inject.{Inject, Singleton}
 import play.api.Configuration
-import play.api.i18n.{I18nSupport, Lang, MessagesApi}
+import play.api.i18n.{I18nSupport, Messages, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
-import uk.gov.hmrc.play.bootstrap.controller.FrontendController
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactReasonForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
@@ -43,10 +43,10 @@ class Application @Inject() (override val messagesApi: MessagesApi,
 
   def start(mode: Mode) = Action.async { implicit request =>
     val defaultPage = Ok(contactReason(ContactReasonForm(), NormalMode))
-    cc.messagesApi.preferred(request).lang match {
-      case eng if eng == Lang("en") => Future.successful(configuration.getOptional[String]("govukStartPage")
+    language match {
+      case "cy" => Future.successful(configuration.getOptional[String]("govukStartPageWelsh")
         .fold(defaultPage)(Redirect(_)))
-      case wal if wal == Lang("cy") => Future.successful(configuration.getOptional[String]("govukStartPageWelsh")
+      case _ => Future.successful(configuration.getOptional[String]("govukStartPage")
         .fold(defaultPage)(Redirect(_)))
     }
   }
@@ -65,4 +65,7 @@ class Application @Inject() (override val messagesApi: MessagesApi,
   def createRefererURL(): String = {
     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactReasonController.onPageLoad().url
   }
+
+  private def language(implicit messages: Messages): String = messages.lang.language
+
 }
