@@ -31,8 +31,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurveyForm
 
-import scala.concurrent.{ExecutionContext, Future}
-import scala.util.{Failure, Success, Try}
+import scala.concurrent.ExecutionContext
+import scala.util.{Failure, Success}
 
 @Singleton()
 class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
