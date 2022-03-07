@@ -42,8 +42,8 @@ error.tell_us_more.invalid = Your enquiry must not include < and >
 error.tellUsMore.poorRepair.required = Enter details of the condition of your property
 error.tellUsMore.areaChanged.required = Enter details of the changes to the area
 
-session_expired.title = For your security, this service has been reset - Valuation Office Agency contact form - GOV.UK
-session_expired.heading = For your security, this service has been reset
+session_expired.title = For your security, we deleted your answers - Valuation Office Agency contact form - GOV.UK
+session_expired.heading = For your security, we deleted your answers
 session_expired.guidance = The service has timed out because it was inactive for 60 minutes. Your information has not been submitted.
 
 site.back = Back

@@ -47,8 +47,9 @@
 }
 
 @mainTemplate(
-  pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("contactReason.title") else messages("contactReason.title")),
-  beforeContentBlock = Some(beforeBlock)
+ pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("contactReason.title") else messages("contactReason.title")),
+ beforeContentBlock = Some(beforeBlock),
+ enableTimeoutDialog = false
 ) {
  @formWithCSRF(action = routes.ContactReasonController.onSubmit(), 'autoComplete -> "off") {
   @if(form.hasErrors) {
