@@ -127,8 +127,8 @@ private[mappings] class LocalDateFormatter(key: String) extends Formatter[Option
 
   override def unbind(key: String, value: Option[LocalDate]): Map[String, String] =
     Map(
-      s"$key-day" -> value.map(_.getDayOfMonth).getOrElse("").toString,
-      s"$key-month" -> value.map(_.getMonthValue).getOrElse("").toString,
-      s"$key-year" -> value.map(_.getYear).getOrElse("").toString
+      s"$key-day" -> value.map(_.getDayOfMonth.toString).getOrElse(""),
+      s"$key-month" -> value.map(_.getMonthValue.toString).getOrElse(""),
+      s"$key-year" -> value.map(_.getYear.toString).getOrElse("")
     )
 }

@@ -14,21 +14,31 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.govukfrontend.views.html.components.GovukButton
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 
-@this(mainTemplate: main_template)
+@this(
+        mainTemplate: main_template,
+        govukButton: GovukButton
+)
 
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
 @mainTemplate(
-pageTitle = Option(messages("session_expired.title"))) {
+    pageTitle = Option(messages("session_expired.title")),
+    enableTimeoutDialog = false
+) {
 
     <h1 class="govuk-heading-l">@messages("session_expired.heading")</h1>
 
     <p class="govuk-body">@messages("session_expired.guidance")</p>
 
-    <p class="govuk-body">
-        <a href="@uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.Application.start().url" class="govuk-link" >@messages("site.start-again")</a>
-    </p>
+    @govukButton(Button(
+        href = Some(routes.Application.start().url),
+        content = Text(messages("site.start-again"))
+    ))
 }
