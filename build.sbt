@@ -34,7 +34,6 @@ lazy val root = Project(appName, file("."))
     scalacOptions ++= Seq("-feature"),
     libraryDependencies ++= Dependencies.appDependencies,
     retrieveManaged := true,
-    update / evictionWarningOptions := EvictionWarningOptions.default.withWarnScalaVersionEviction(false),
     Test / fork := true,
     scalaVersion := "2.12.15",
     maintainer := "voa.service.optimisation@digital.hmrc.gov.uk"
@@ -43,8 +42,7 @@ lazy val root = Project(appName, file("."))
   .settings(integrationTestSettings())
   .settings(resolvers ++= Seq(
     Resolver.bintrayRepo("hmrc", "releases"),
-    Resolver.jcenterRepo,
-    Resolver.bintrayRepo("emueller", "maven")
+    Resolver.jcenterRepo
   ))
   .settings(
     // concatenate js

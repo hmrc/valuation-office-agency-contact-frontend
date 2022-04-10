@@ -16,63 +16,59 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.repositories
 
-import javax.inject.{Inject, Singleton}
-import org.joda.time.{DateTime, DateTimeZone}
-import play.api.Configuration
-import play.api.libs.json.{JsValue, Json}
-import play.modules.reactivemongo.ReactiveMongoComponent
-import reactivemongo.api.indexes.{Index, IndexType}
-import reactivemongo.bson.{BSONDocument, BSONInteger, BSONObjectID}
-import reactivemongo.play.json._
+import play.api.libs.json.{Reads, Writes}
+import play.api.{Configuration, Logging}
 import uk.gov.hmrc.http.cache.client.CacheMap
-import uk.gov.hmrc.mongo.ReactiveRepository
-import uk.gov.hmrc.mongo.json.ReactiveMongoFormats
+import uk.gov.hmrc.mongo.cache.CacheIdType.SimpleCacheId
+import uk.gov.hmrc.mongo.cache.{CacheItem, DataKey, MongoCacheRepository}
+import uk.gov.hmrc.mongo.{MongoComponent, TimestampSupport}
 
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
-//$COVERAGE-OFF$
-case class DatedCacheMap(id: String,
-                         data: Map[String, JsValue],
-                         lastUpdated: DateTime = DateTime.now(DateTimeZone.UTC))
+import java.util.concurrent.TimeUnit.SECONDS
+import javax.inject.{Inject, Singleton}
+import scala.concurrent.duration.Duration
+import scala.concurrent.{ExecutionContext, Future}
 
-object DatedCacheMap {
-  implicit val dateFormat = ReactiveMongoFormats.dateTimeFormats
-  implicit val formats = Json.format[DatedCacheMap]
-
-  def apply(cacheMap: CacheMap): DatedCacheMap = DatedCacheMap(cacheMap.id, cacheMap.data)
-}
 
 @Singleton
-class SessionRepository @Inject() (config: Configuration, mongo: ReactiveMongoComponent)
-  extends ReactiveRepository[DatedCacheMap, BSONObjectID]("sessions",
-    mongo.mongoConnector.db, DatedCacheMap.formats) {
+class SessionRepository @Inject()(
+                                   config: Configuration,
+                                   mongo: MongoComponent,
+                                   timestampSupport: TimestampSupport
+                                 )(implicit ec: ExecutionContext)
+  extends MongoCacheRepository(
+    mongoComponent = mongo,
+    collectionName = "sessions",
+    ttl = Duration(config.get[Long]("mongodb.timeToLiveInSeconds"), SECONDS),
+    timestampSupport = timestampSupport,
+    cacheIdType = SimpleCacheId
+  ) with Logging {
 
-  override def indexes: Seq[Index] =  {
-    //Must be here. Otherwise is access before is properly initialized
-    val timeToLiveInSeconds: Int = config.get[String]("mongodb.timeToLiveInSeconds").toInt
-    Seq(
-    Index(Seq("lastUpdated" -> IndexType.Ascending), name = Some("lastUpdatedExpiryIndex"),
-      options = BSONDocument( "expireAfterSeconds" -> BSONInteger(timeToLiveInSeconds))),
-    Index(Seq("id" -> IndexType.Descending), name = Some("contact-form-id_idx")))
+  implicit class cacheItemOps(cacheItem: CacheItem) {
+    def asCacheMap: CacheMap = CacheMap(cacheItem.id, cacheItem.data.value.toMap)
   }
 
-  def upsert(cm: CacheMap): Future[Boolean] = {
-    val selector = BSONDocument("id" -> cm.id)
-    val cmDocument = Json.toJson(DatedCacheMap(cm))
-    val modifier = BSONDocument("$set" -> cmDocument)
+  def save[T](cacheId: String, key: String, data: T)(implicit writes: Writes[T]): Future[CacheMap] =
+    put(cacheId)(DataKey(key), data)
+      .map(_.asCacheMap)
+      .recoverWith {
+        case e =>
+          logger.error(e.getMessage, e)
+          Future.failed(e)
+      }
 
-    collection.update.one(selector, modifier, upsert = true).map { lastError =>
-      lastError.ok
-    }
-  }
+  def get[T](cacheId: String, key: String)(implicit reads: Reads[T]): Future[Option[T]] =
+    get[T](cacheId)(DataKey(key))
 
-  def get(id: String): Future[Option[CacheMap]] = {
+  def findEntity[T](cacheId: String): Future[Option[CacheMap]] =
+    findById(cacheId)
+      .map(_.map(_.asCacheMap))
 
-    find("id" -> id)
-      .map(_.headOption)
-      .map(_.map(x => CacheMap(id, x.data)))
+  def remove(cacheId: String, key: String): Future[Boolean] =
+    delete(cacheId)(DataKey(key))
+      .map(_ => true)
 
-  }
+  def removeEntity(cacheId: String): Future[Boolean] =
+    deleteEntity(cacheId)
+      .map(_ => true)
+
 }
-
-//$COVERAGE-ON$
