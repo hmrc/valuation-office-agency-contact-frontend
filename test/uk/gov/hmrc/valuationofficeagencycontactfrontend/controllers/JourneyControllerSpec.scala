@@ -83,7 +83,8 @@ class JourneyControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to start page EnquiryCategory when valid data is submitted, but no data retrieved form cache" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody((HousingBenefitAllowancesRouter.fieldId, HousingBenefitAllowancesRouter.options.head))
+      val postRequest = fakeRequest.withMethod("POST")
+        .withFormUrlEncodedBody((HousingBenefitAllowancesRouter.fieldId, HousingBenefitAllowancesRouter.options.head))
 
       val result = controller().onSubmit(pageKey)(postRequest)
 

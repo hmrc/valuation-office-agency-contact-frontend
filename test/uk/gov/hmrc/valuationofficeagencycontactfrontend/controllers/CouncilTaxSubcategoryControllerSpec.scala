@@ -73,7 +73,7 @@ class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with Mockit
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", CouncilTaxSubcategoryForm.options.head.value))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", CouncilTaxSubcategoryForm.options.head.value))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -82,7 +82,7 @@ class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with Mockit
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm = CouncilTaxSubcategoryForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)

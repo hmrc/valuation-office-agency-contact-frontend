@@ -58,9 +58,10 @@ class AnythingElseTellUsController @Inject()(appConfig: FrontendAppConfig,
       AnythingElseForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(anythingElseTellUs(appConfig, formWithErrors, mode))),
-        (value) =>
+        value =>
           dataCacheConnector.save[String](request.sessionId, AnythingElseId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(AnythingElseId, mode)(new UserAnswers(cacheMap))))
       )
   }
+
 }

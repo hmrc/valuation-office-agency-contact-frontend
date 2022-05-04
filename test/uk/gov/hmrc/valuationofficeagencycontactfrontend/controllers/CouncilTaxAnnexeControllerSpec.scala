@@ -88,7 +88,7 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
       when(fakeDataCacheConnector.save(any, any, any)(any))
         .thenReturn(Future.successful(CacheMap("council_tax_annexe", Map("council_tax_annexe" -> JsString("bar")))))
 
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", AnnexeForm.options.head.value))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", AnnexeForm.options.head.value))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -97,7 +97,7 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm = AnnexeForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
@@ -112,7 +112,7 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", AnnexeForm.options.head.value))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", AnnexeForm.options.head.value))
       val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER
@@ -131,7 +131,7 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
       when(fakeDataCacheConnector.save(any, any, any)(any))
         .thenReturn(Future.successful(CacheMap("annexeSelfContained", Map("annexeSelfContained" -> JsString("bar")))))
 
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", AnnexeSelfContainedForm.options.head.value))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", AnnexeSelfContainedForm.options.head.value))
 
       val result = controller().onSelfContainedSubmit()(postRequest)
 
@@ -139,7 +139,7 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
     }
 
     "return a Bad Request and errors when invalid data is submitted for annexe self contained form" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm = AnnexeSelfContainedForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSelfContainedSubmit()(postRequest)
@@ -192,7 +192,7 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
       when(fakeDataCacheConnector.save(any, any, any)(any))
         .thenReturn(Future.successful(CacheMap("annexeCookingWashing.form", Map("annexeCookingWashing.form" -> JsString("yes")))))
 
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", AnnexeCookingWashingForm.options.head.value))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", AnnexeCookingWashingForm.options.head.value))
 
       val result = controller().onHaveCookingWashingSubmit(postRequest)
 
@@ -201,7 +201,7 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
     }
 
     "return a Bad Request and errors when invalid data is submitted for annexe cooking washing form" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm = AnnexeCookingWashingForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onHaveCookingWashingSubmit()(postRequest)

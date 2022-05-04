@@ -383,7 +383,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("message", "value 1"))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("message", "value 1"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 

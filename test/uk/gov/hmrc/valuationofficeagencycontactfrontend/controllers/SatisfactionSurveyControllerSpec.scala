@@ -80,12 +80,16 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
       val councilTaxSubcategory = "council_tax_property_demolished"
       val tellUs = TellUsMore("Hello")
 
-      val validData = Map(EnquiryCategoryId.toString -> JsString(ec), CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory), AnswerSectionId.toString -> Json.toJson(answerSectionNew),
-        ContactDetailsId.toString -> Json.toJson(cd), PropertyAddressId.toString -> Json.toJson(propertyAddress), TellUsMoreId.toString -> Json.toJson(tellUs))
+      val validData = Map(EnquiryCategoryId.toString -> JsString(ec),
+        CouncilTaxSubcategoryId.toString -> JsString(councilTaxSubcategory),
+        AnswerSectionId.toString -> Json.toJson(answerSectionNew),
+        ContactDetailsId.toString -> Json.toJson(cd),
+        PropertyAddressId.toString -> Json.toJson(propertyAddress),
+        TellUsMoreId.toString -> Json.toJson(tellUs))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val request = FakeRequest().withFormUrlEncodedBody("satisfaction" -> "verySatisfied", "details" -> "value 1")
+      val request = FakeRequest("POST", "").withFormUrlEncodedBody("satisfaction" -> "verySatisfied", "details" -> "value 1")
 
       val result = controller(getRelevantData).formCompleteFeedback()(request)
 

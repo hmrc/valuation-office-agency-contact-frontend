@@ -60,7 +60,7 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("addressLine1", "value 1"), ("addressLine2", "value 2"), ("town", "value 3"),
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("addressLine1", "value 1"), ("addressLine2", "value 2"), ("town", "value 3"),
         ("county", "value 4"), ("postcode", "AA1 1AA"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
@@ -70,7 +70,7 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm = PropertyAddressForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
@@ -104,7 +104,7 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to the next page when valid data is submitted and address line 2 and county are None" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("addressLine1", "value 1"), ("town", "value 3"), ("postcode", "BB11BB"))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("addressLine1", "value 1"), ("town", "value 3"), ("postcode", "BB11BB"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 

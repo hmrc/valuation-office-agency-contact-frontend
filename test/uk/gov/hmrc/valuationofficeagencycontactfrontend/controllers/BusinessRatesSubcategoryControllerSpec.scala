@@ -80,7 +80,7 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", BusinessRatesSubcategoryForm.options.head.value))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", BusinessRatesSubcategoryForm.options.head.value))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -89,7 +89,7 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm = BusinessRatesSubcategoryForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)

@@ -70,7 +70,7 @@ class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar {
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("message", "value 1"))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("message", "value 1"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -79,7 +79,7 @@ class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar {
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("message", "<>"))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("message", "<>"))
       val boundForm = WhatElseForm().bind(Map("message" -> "<>"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
