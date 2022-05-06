@@ -21,7 +21,7 @@ import org.scalatestplus.mockito.MockitoSugar
 import org.scalatestplus.scalacheck.ScalaCheckDrivenPropertyChecks
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.HousingBenefitAllowancesRouter
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.{EnglandOrWalesPropertyRouter, HousingBenefitAllowancesRouter}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
@@ -115,7 +115,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return a function that goes to the change valuation page when an enquiry category for business rates has been selected and business_rates_change_valuation option selected" in {
         when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_change_valuation")
-        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesSubcategoryController.onChangeValuationPageLoad
+        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.JourneyController.onPageLoad(EnglandOrWalesPropertyRouter.key)
       }
 
       "return a function that goes to the self catering form page when an enquiry category for business rates has been selected and business_rates_self_catering option selected" in {
