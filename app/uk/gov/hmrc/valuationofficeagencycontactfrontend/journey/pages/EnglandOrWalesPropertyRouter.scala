@@ -30,5 +30,5 @@ object EnglandOrWalesPropertyRouter extends CategoryRouter(
   fieldId = "businessRatesJurisdiction",
   options = Seq(EnglandBRJurisdiction.key, WalesBRJurisdiction.key)
 ) {
-  override def previousPage: UserAnswers => Call = _ => routes.EnquiryCategoryController.onPageLoad(NormalMode)
+  override def previousPage: UserAnswers => Call = _ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
 }
