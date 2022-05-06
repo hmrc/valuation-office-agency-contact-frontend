@@ -87,7 +87,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("fullName", "a"), ("email", "a@test.com"),
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("fullName", "a"), ("email", "a@test.com"),
         ("confirmEmail", "a@test.com"), ("contactNumber", "0487357346776"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)

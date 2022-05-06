@@ -47,7 +47,8 @@ lazy val root = Project(appName, file("."))
   .settings(
     // concatenate js
     Concat.groups := Seq(
-      "javascripts/valuationofficeagencycontactfrontend-app.js" -> group(Seq("javascripts/show-hide-content.js", "javascripts/valuationofficeagencycontactfrontend.js"))
+      "javascripts/valuationofficeagencycontactfrontend-app.js" ->
+        group(Seq("javascripts/show-hide-content.js", "javascripts/valuationofficeagencycontactfrontend.js"))
     ),
     // prevent removal of unused code which generates warning errors due to use of third-party libs
     uglifyCompressOptions := Seq("unused=false", "dead_code=false"),

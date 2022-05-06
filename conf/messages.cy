@@ -513,12 +513,10 @@ businessRatesBill.subheading = Cymorth arall ar GOV.UK
 businessRatesBill.url = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-business-rate-relief">Gostyngiadau a disgowntiau ardrethi busnes</a>
 businessRatesBill.url1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/government/collections/financial-support-for-businesses-during-coronavirus-covid-19">Cefnogaeth i fusnesau yn ystod coronafirws (COVID-19)</a>
 
-# --- Business Rates Property Enquiry
-businessRatesPropertyEnquiry.title = A yw eich eiddo yng Nghymru neu Lloegr? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
-businessRatesPropertyEnquiry.heading = A yw eich eiddo yng Nghymru neu Lloegr?
-businessRatesPropertyEnquiry.england = Lloegr
-businessRatesPropertyEnquiry.wales = Cymru
-error.businessRatesPropertyEnquiry.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
+businessRatesJurisdiction.heading = A yw eich eiddo yng Nghymru neu Lloegr?
+businessRatesJurisdiction.england = Lloegr
+businessRatesJurisdiction.wales = Cymru
+error.businessRatesJurisdiction.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
 
 # --- Business Rates Property Enquiry
 businessRatesPropertyEnquiry.title = A yw eich eiddo yng Nghymru neu Lloegr? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK

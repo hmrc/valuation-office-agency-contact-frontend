@@ -23,7 +23,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CheckMode, Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import play.api.Logger
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.HousingBenefitAllowancesRouter
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.{EnglandOrWalesPropertyRouter, HousingBenefitAllowancesRouter}
 
 @Singleton
 class Navigator @Inject()() {
@@ -73,8 +73,8 @@ class Navigator @Inject()() {
       case (Some("more_details"), _, _, _) => routes.WhatElseController.onPageLoad()
       case (Some("update_existing"), _, _, _) => routes.AnythingElseTellUsController.onPageLoad()
       case (Some(option), _, _, _) => {
-        log.warn(s"Navigation for contact reason reached with unknown option $option by controller")
-        throw new RuntimeException(s"Navigation for contact reason reached with unknown option $option by controller")
+        log.warn(s"Navigation reached with unknown option $option by controller")
+        throw new RuntimeException(s"Navigation reached with unknown option $option by controller")
       }
     }
   }
@@ -84,10 +84,9 @@ class Navigator @Inject()() {
       case Some("new_enquiry") => routes.EnquiryCategoryController.onPageLoad(NormalMode)
       case Some("more_details") => routes.ExistingEnquiryCategoryController.onPageLoad()
       case Some("update_existing") => routes.EnquiryDateController.onPageLoad()
-      case Some(option) => {
+      case option =>
         log.warn(s"Navigation for contact reason reached with unknown option $option by controller")
         throw new RuntimeException(s"Navigation for contact reason reached with unknown option $option by controller")
-      }
     }
   }
 
@@ -162,7 +161,7 @@ class Navigator @Inject()() {
       case Some("business_rates_changes") => routes.BusinessRatesChallengeController.onAreaChangePageLoad()
       case Some("business_rates_self_catering") => routes.BusinessRatesSelfCateringController.onPageLoad()
       case Some("business_rates_from_home") => routes.DatePropertyChangedController.onPageLoad()
-      case Some("business_rates_change_valuation")  => routes.BusinessRatesSubcategoryController.onChangeValuationPageLoad()
+      case Some("business_rates_change_valuation") => routes.JourneyController.onPageLoad(EnglandOrWalesPropertyRouter.key)
       case Some("business_rates_demolished")  => routes.BusinessRatesSubcategoryController.onDemolishedPageLoad()
       case Some("business_rates_valuation") => routes.BusinessRatesSubcategoryController.onValuationPageLoad()
       case Some("business_rates_property_empty") => routes.PropertyEmptyController.onBusinessRatesPageLoad()

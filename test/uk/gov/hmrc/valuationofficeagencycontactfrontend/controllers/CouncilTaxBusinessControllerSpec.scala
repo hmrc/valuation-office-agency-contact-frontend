@@ -79,7 +79,7 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", CouncilTaxBusinessEnquiryForm.options.head.value))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", CouncilTaxBusinessEnquiryForm.options.head.value))
 
       val result = controller().onEnquirySubmit(NormalMode)(postRequest)
 
@@ -88,7 +88,7 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm = CouncilTaxBusinessEnquiryForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onEnquirySubmit(NormalMode)(postRequest)

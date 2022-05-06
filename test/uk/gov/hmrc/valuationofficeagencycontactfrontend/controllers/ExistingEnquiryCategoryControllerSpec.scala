@@ -115,7 +115,7 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "council_tax"))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "council_tax"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -124,7 +124,7 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to the next page when valid data is submitted with business_rates" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "business_rates"))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "business_rates"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -133,7 +133,7 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to the next page when valid data is submitted with housing_benefit" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "housing_benefit"))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "housing_benefit"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -142,7 +142,7 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to the next page when valid data is submitted with fair_rent" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "fair_rent"))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "fair_rent"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -151,7 +151,7 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to the next page when valid data is submitted with other" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "other"))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "other"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
