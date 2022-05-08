@@ -105,7 +105,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return a function that goes to the challange form page when an enquiry category for business rates has been selected and business_rates_changes option selected" in {
         when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_changes")
-        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesChallengeController.onAreaChangePageLoad
+        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.JourneyController.onPageLoad(EnglandOrWalesPropertyRouter.key)
       }
 
       "return a function that goes to the property empty page when an enquiry category for business rates has been selected and business_rates_property_empty option selected" in {
@@ -135,7 +135,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return a function that goes to the property demolished page when an enquiry category for business rates has been selected and business_rates_demolished option selected" in {
         when (mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_demolished")
-        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.BusinessRatesSubcategoryController.onDemolishedPageLoad
+        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode)(mockUserAnswers) mustBe routes.JourneyController.onPageLoad(EnglandOrWalesPropertyRouter.key)
       }
 
       "return a function that goes to the business rates valuation  page when an enquiry category for business rates has been selected and business_rates_valuation option selected" in {

@@ -23,7 +23,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object AnnexeSelfContainedForm extends FormErrorHelper {
 
-  def AnnexeSelfContainedFormatter: Formatter[String] = new Formatter[String] {
+  def annexeSelfContainedFormatter: Formatter[String] = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
       case None => produceError(key, "annexeSelfContainedEnquiry.form.error")
@@ -34,14 +34,14 @@ object AnnexeSelfContainedForm extends FormErrorHelper {
   }
 
   def apply(): Form[String] =
-    Form(single("value" -> of(AnnexeSelfContainedFormatter)))
+    Form(single("value" -> of(annexeSelfContainedFormatter)))
 
   def options = Seq(
     RadioOption("annexeSelfContainedEnquiry.form", "yes"),
     RadioOption("annexeSelfContainedEnquiry.form", "no")
   )
 
-  def optionIsValid(value: String) = options.exists(o => o.value == value)
+  def optionIsValid(value: String): Boolean = options.exists(o => o.value == value)
 
 
 }

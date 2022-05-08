@@ -22,7 +22,7 @@ import play.api.data.format.Formatter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object CouncilTaxBusinessEnquiryForm extends FormErrorHelper {
-  def CouncilTaxBusinessEnquiryFormatter = new Formatter[String] {
+  def councilTaxBusinessEnquiryFormatter: Formatter[String] = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
       case None => produceError(key, "councilTaxBusinessEnquiry.form.error")
@@ -33,7 +33,7 @@ object CouncilTaxBusinessEnquiryForm extends FormErrorHelper {
   }
 
   def apply(): Form[String] =
-    Form(single("value" -> of(CouncilTaxBusinessEnquiryFormatter)))
+    Form(single("value" -> of(councilTaxBusinessEnquiryFormatter)))
 
   def options = Seq(
     RadioOption("councilTaxBusinessEnquiry.form", "all_property"),
@@ -41,6 +41,6 @@ object CouncilTaxBusinessEnquiryForm extends FormErrorHelper {
     RadioOption("councilTaxBusinessEnquiry.form", "small_property")
   )
 
-  def optionIsValid(value: String) = options.exists(o => o.value == value)
+  def optionIsValid(value: String): Boolean = options.exists(o => o.value == value)
 
 }

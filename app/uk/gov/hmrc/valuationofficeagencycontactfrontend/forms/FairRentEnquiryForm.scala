@@ -23,7 +23,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSubca
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object FairRentEnquiryForm {
-  def FairRentEnquiryFormatter = new Formatter[String] {
+  def fairRentEnquiryFormatter: Formatter[String] = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
       case None => produceError(key, "error.fairRents.required")
@@ -34,7 +34,7 @@ object FairRentEnquiryForm {
   }
 
   def apply(): Form[String] =
-    Form(single("value" -> of(FairRentEnquiryFormatter)))
+    Form(single("value" -> of(fairRentEnquiryFormatter)))
 
   def options = Seq(
     RadioOption("fairRents", "submit_new_application"),
@@ -42,5 +42,5 @@ object FairRentEnquiryForm {
     RadioOption("fairRents", "other_request")
   )
 
-  def optionIsValid(value: String) = options.exists(o => o.value == value)
+  def optionIsValid(value: String): Boolean = options.exists(o => o.value == value)
 }

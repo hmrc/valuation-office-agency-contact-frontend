@@ -92,7 +92,7 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
 
 object ConfirmationController {
 
-  private[controllers] def enquiryKey(answers: UserAnswers): Either[String, String] = {
+  private[controllers] def enquiryKey(answers: UserAnswers): Either[String, String] =
     (answers.enquiryCategory, answers.existingEnquiryCategory) match {
       case (Some("council_tax"), _) => Right("councilTaxSubcategory")
       case (Some("business_rates"), _) => Right("businessRatesSubcategory")
@@ -105,7 +105,6 @@ object ConfirmationController {
       case (_, Some("other")) => Right("other")
       case _ => Left("Unknown enquiry category in enquiry key")
     }
-  }
 
   private[controllers] def whatHappensNextMessages(answers: UserAnswers): Seq[String] = {
     (answers.enquiryCategory.isDefined, answers.existingEnquiryCategory.isDefined) match {

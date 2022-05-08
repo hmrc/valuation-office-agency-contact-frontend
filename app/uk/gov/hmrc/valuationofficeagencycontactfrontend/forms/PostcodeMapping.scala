@@ -35,7 +35,8 @@ object PostcodeMapping {
         .map { rawPostcode =>
           val cleanedPostcode = allowedChars.replaceAllIn(rawPostcode, "").toUpperCase
           cleanedPostcode match {
-            case postcodeRegex() => Right(cleanedPostcode.substring(0, cleanedPostcode.length - 3) + " " + cleanedPostcode.substring(cleanedPostcode.length - 3))
+            case postcodeRegex() =>
+              Right(cleanedPostcode.substring(0, cleanedPostcode.length - 3) + " " + cleanedPostcode.substring(cleanedPostcode.length - 3))
             case _ => Left(Seq(FormError(key, formatError, Seq(rawPostcode))))
           }
         }.getOrElse(Left(Seq(FormError(key, missingError))))

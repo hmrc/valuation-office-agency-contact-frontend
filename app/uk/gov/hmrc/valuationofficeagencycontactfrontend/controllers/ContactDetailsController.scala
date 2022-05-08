@@ -82,7 +82,7 @@ class ContactDetailsController @Inject()(appConfig: FrontendAppConfig,
       )
   }
 
-  private[controllers] def enquiryBackLink(answers: UserAnswers): Either[String, String] = {
+  private[controllers] def enquiryBackLink(answers: UserAnswers): Either[String, String] =
     (answers.contactReason, answers.enquiryCategory, answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.fairRentEnquiryEnquiry) match {
       case (Some("more_details"), _, _, _, _) => Right(routes.RefNumberController.onPageLoad().url)
       case (Some("update_existing"), _, _, _, _) => Right(routes.RefNumberController.onPageLoad().url)
@@ -115,6 +115,5 @@ class ContactDetailsController @Inject()(appConfig: FrontendAppConfig,
       case (_, Some("business_rates"), _, _, _) => Right(routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
       case _ => Left(s"Unknown enquiry category in enquiry key")
     }
-  }
 
 }

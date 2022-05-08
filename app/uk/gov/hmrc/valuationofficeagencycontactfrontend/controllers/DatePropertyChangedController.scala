@@ -61,7 +61,9 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
     implicit request =>
       DatePropertyChangedForm().bindFromRequest().fold(
         (formWithErrors: Form[Option[LocalDate]]) =>
-          Future.successful(BadRequest(datePropertyChanged(appConfig, formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))),
+          Future.successful(
+            BadRequest(datePropertyChanged(appConfig, formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))
+          ),
         value =>
           for {
             _ <- dataCacheConnector.remove(request.sessionId, DatePropertyChangedId.toString)
@@ -101,10 +103,4 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
     }
   }
 
-    // TODO remove once confirmed not required
-//  private def clearCache(sessionId: String, dataCacheConnector: DataCacheConnector): Future[Unit] =
-//    for {
-//      _ <- dataCacheConnector.remove(sessionId, CouncilTaxSubcategoryId.toString)
-//      _ <- dataCacheConnector.remove(sessionId, BusinessRatesSubcategoryId.toString)
-//    } yield ()
 }

@@ -23,7 +23,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object ContactReasonForm extends FormErrorHelper {
 
-  def ContactReasonFormatter = new Formatter[String] {
+  def contactReasonFormatter: Formatter[String] = new Formatter[String] {
     override def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
       case None => produceError(key, "error.contactReason.required")
@@ -34,7 +34,7 @@ object ContactReasonForm extends FormErrorHelper {
   }
 
   def apply(): Form[String] =
-    Form(single("value" -> of(ContactReasonFormatter)))
+    Form(single("value" -> of(contactReasonFormatter)))
 
   def options = Seq(
     RadioOption("contactReason", "new_enquiry"),
@@ -42,6 +42,6 @@ object ContactReasonForm extends FormErrorHelper {
     RadioOption("contactReason", "update_existing")
   )
 
-  def optionIsValid(value: String) = options.exists(_.value == value)
+  def optionIsValid(value: String): Boolean = options.exists(_.value == value)
 
 }

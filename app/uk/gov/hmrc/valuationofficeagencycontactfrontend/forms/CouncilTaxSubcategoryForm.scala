@@ -24,7 +24,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object CouncilTaxSubcategoryForm extends FormErrorHelper {
 
-  def CouncilTaxSubcategoryFormatter = new Formatter[String] {
+  def councilTaxSubcategoryFormatter: Formatter[String] = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
       case None => produceError(key, "error.councilTaxSubcategory.required")
@@ -35,7 +35,7 @@ object CouncilTaxSubcategoryForm extends FormErrorHelper {
   }
 
   def apply(): Form[String] =
-    Form(single("value" -> of(CouncilTaxSubcategoryFormatter)))
+    Form(single("value" -> of(councilTaxSubcategoryFormatter)))
 
   def options = Seq(
     RadioOption("councilTaxSubcategory", CouncilTaxBandTooHighId.toString),
@@ -51,5 +51,5 @@ object CouncilTaxSubcategoryForm extends FormErrorHelper {
     RadioOption("councilTaxSubcategory", "council_tax_other")
   )
 
-  def optionIsValid(value: String) = options.exists(o => o.value == value)
+  def optionIsValid(value: String): Boolean = options.exists(o => o.value == value)
 }

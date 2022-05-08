@@ -63,7 +63,8 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messag
   }
 
   def businessRatesSubcategory: Option[AnswerRow] = userAnswers.businessRatesSubcategory map {
-    x => AnswerRow("businessRatesSubcategory.heading", s"businessRatesSubcategory.$x", true, routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
+    x =>
+      AnswerRow("businessRatesSubcategory.heading", s"businessRatesSubcategory.$x", true, routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
   }
 
   def propertyAddress: Option[AnswerRow] = userAnswers.propertyAddress map {
@@ -71,7 +72,8 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messag
   }
 
   def contactDetails: Option[AnswerRow] = userAnswers.contactDetails map {
-    _ => AnswerRow("contactDetails.heading", formattedContactDetails(userAnswers.contactDetails, "<br>"), false, routes.ContactDetailsController.onPageLoad(CheckMode).url)
+    _ => AnswerRow("contactDetails.heading", formattedContactDetails(userAnswers.contactDetails, "<br>"), false,
+      routes.ContactDetailsController.onPageLoad(CheckMode).url)
   }
 
   def datePropertyChanged(keyMessage: String = "datePropertyChanged.poorRepair.heading"): Option[AnswerRow] = userAnswers.datePropertyChanged map {
