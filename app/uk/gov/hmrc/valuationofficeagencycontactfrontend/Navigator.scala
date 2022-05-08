@@ -158,22 +158,20 @@ class Navigator @Inject()() {
 
   private val businessRatesPageRouting: UserAnswers => Call = answers => {
     answers.businessRatesSubcategory match {
-      case Some("business_rates_changes") => routes.BusinessRatesChallengeController.onAreaChangePageLoad()
+      case Some("business_rates_changes") => routes.JourneyController.onPageLoad(EnglandOrWalesPropertyRouter.key)
       case Some("business_rates_self_catering") => routes.BusinessRatesSelfCateringController.onPageLoad()
       case Some("business_rates_from_home") => routes.DatePropertyChangedController.onPageLoad()
       case Some("business_rates_change_valuation") => routes.JourneyController.onPageLoad(EnglandOrWalesPropertyRouter.key)
-      case Some("business_rates_demolished")  => routes.BusinessRatesSubcategoryController.onDemolishedPageLoad()
+      case Some("business_rates_demolished") => routes.JourneyController.onPageLoad(EnglandOrWalesPropertyRouter.key)
       case Some("business_rates_valuation") => routes.BusinessRatesSubcategoryController.onValuationPageLoad()
       case Some("business_rates_property_empty") => routes.PropertyEmptyController.onBusinessRatesPageLoad()
       case Some("business_rates_bill") => routes.BusinessRatesBillController.onPageLoad()
       case Some("business_rates_not_used") => routes.BusinessRatesPropertyController.onPageLoad()
       case Some("business_rates_other") => routes.TellUsMoreController.onPageLoad(NormalMode)
       case Some(_) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case None => {
+      case None =>
         log.warn(s"Navigation for Business Rates page reached without selection of enquiry by controller ")
         throw new RuntimeException("Unknown exception in Business Page Routing")
-      }
-
     }
   }
 
