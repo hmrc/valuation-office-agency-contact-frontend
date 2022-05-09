@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages
 
+import play.api.i18n.Lang
 import play.api.mvc.Call
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.BusinessRatesSubcategoryId
@@ -31,13 +32,23 @@ object EnglandOrWalesPropertyRouter extends CategoryRouter(
   fieldId = "businessRatesJurisdiction",
   options = Seq("england", "wales")
 ) {
+
+  private val langMap: Map[String, Lang] = Map(
+    "england" -> Lang("en"),
+    "wales" -> Lang("cy")
+  )
+
   override def previousPage: UserAnswers => Call = _ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
 
-  override def nextPage: UserAnswers => Call = _.getString(BusinessRatesSubcategoryId.toString).getOrElse("") match {
+  override def nextPage: UserAnswers => Call =
+    _.getString(BusinessRatesSubcategoryId.toString).getOrElse("") match {
       case "business_rates_change_valuation" => routes.BusinessRatesSubcategoryController.onChangeValuationPageLoad()
       case "business_rates_changes" => routes.BusinessRatesChallengeController.onAreaChangePageLoad()
       case "business_rates_demolished" => routes.BusinessRatesSubcategoryController.onDemolishedPageLoad()
       case _ => appStartPage
     }
+
+  override def nextLang: UserAnswers => Option[Lang] =
+    getValue(_) flatMap langMap.get
 
 }

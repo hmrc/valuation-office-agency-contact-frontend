@@ -449,11 +449,14 @@ businessRatesNoNeedToPay.url1 = <a href="https://www.gov.uk/run-business-from-ho
 # --- Check and challenge your business rates valuation online
 businessRatesValuationOnline.title = Check and challenge your business rates valuation online - Valuation Office Agency contact form - GOV.UK
 businessRatesValuationOnline.heading = Check and challenge your business rates valuation online
-businessRatesValuationOnline.p1.url = https://www.gov.uk/correct-your-business-rates
-businessRatesValuationOnline.p1.part1 = Use the Valuation Office Agency’s online service
+businessRatesValuationOnline.p1.url = https://www.gov.uk/business-rates-valuation-account
+businessRatesValuationOnline.p1.part1 = Sign into or set up your business rates valuation account
 businessRatesValuationOnline.p1.part2 = if you think there should be a change to your business rates valuation.
-businessRatesValuationOnline.subheading1 = For properties in England
-businessRatesValuationOnline.p2 = Submit a check to make any changes to physical details, or confirm them if there are no changes to make. You can challenge the valuation after the check has been resolved.
+businessRatesValuationOnline.p2 = How to tell us: step by step
+businessRatesValuationOnline.step1 = Sign in or register for an account
+businessRatesValuationOnline.step2 = Add a property to your account
+businessRatesValuationOnline.step3 = Send a ‘Check case’ to confirm the property details
+businessRatesValuationOnline.step4 = Send a ‘Challenge case’ if you still disagree with the rateable value
 businessRatesValuationOnline.subheading2 = Other help on GOV.UK
 businessRatesValuationOnline.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
 businessRatesValuationOnline.p3 = How to check and challenge your business rates valuation

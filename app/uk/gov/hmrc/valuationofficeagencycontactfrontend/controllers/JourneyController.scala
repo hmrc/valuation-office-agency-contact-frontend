@@ -17,8 +17,8 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.data.Form
-import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.MessagesControllerComponents
+import play.api.i18n.{I18nSupport, Lang, MessagesApi}
+import play.api.mvc.{Call, Flash, MessagesControllerComponents, Result}
 import play.twirl.api.HtmlFormat.Appendable
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
@@ -44,8 +44,10 @@ class JourneyController @Inject()(journeyMap: JourneyMap,
                                   customizedContentTemplate: customizedContent,
                                   notImplementedTemplate: notImplemented,
                                   cc: MessagesControllerComponents,
-                                  override val messagesApi: MessagesApi
+                                  override implicit val messagesApi: MessagesApi
                                  )(implicit ec: ExecutionContext) extends FrontendController(cc) with I18nSupport {
+
+  private val flashWithSwitchIndicator = Flash(Map("switching-language" -> "true"))
 
   def onPageLoad(key: String) = getAnswersAndPage(key) { implicit request =>
     implicit val page: Page[String] = request.page
@@ -67,15 +69,24 @@ class JourneyController @Inject()(journeyMap: JourneyMap,
               auditService.sendRadioButtonSelection(request.uri, categoryRouter.fieldId -> value)
             case _ =>
           }
+          val userAnswers = new UserAnswers(cacheMap)
+
           val call = if (request.changeMode) {
             routes.CheckYourAnswersController.onPageLoad
           } else {
-            page.nextPage(new UserAnswers(cacheMap))
+            page.nextPage(userAnswers)
           }
-          Redirect(call)
+
+          redirectWithLang(call, page.nextLang(userAnswers))
         }
     )
   }
+
+  private def redirectWithLang(call: Call, langOpt: Option[Lang]): Result =
+    langOpt match {
+      case Some(lang) => Redirect(call).withLang(lang).flashing(flashWithSwitchIndicator)
+      case _ => Redirect(call)
+    }
 
   private def getAnswersAndPage(key: String) =
     getData andThen requireData andThen journeyMap.getPage(key)

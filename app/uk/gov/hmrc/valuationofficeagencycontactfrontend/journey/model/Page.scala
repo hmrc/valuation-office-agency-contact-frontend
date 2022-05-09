@@ -17,6 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model
 
 import play.api.data.Form
+import play.api.i18n.Lang
 import play.api.mvc.Call
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
@@ -42,6 +43,8 @@ trait Page[T] {
   def previousPage: UserAnswers => Call
 
   def nextPage: UserAnswers => Call
+
+  def nextLang: UserAnswers => Option[Lang] = _ => None
 
   def heading = s"$fieldId.heading"
 
