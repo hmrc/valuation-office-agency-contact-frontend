@@ -19,6 +19,7 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey._
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.components.help_with_service
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.components.help_with_service_fair_rent
 
 @this(
@@ -28,7 +29,13 @@
         govukErrorSummary: GovukErrorSummary
 )
 
-@(form: Form[_], key: String, backUrl: String, title: String)(formFields: Html)(implicit request: Request[_], messages: Messages)
+@(
+        form: Form[_],
+        key: String,
+        backUrl: String,
+        title: String,
+        helpWithServiceSection: Option[String] = None
+)(formFields: Html)(implicit request: Request[_], messages: Messages)
 
 @pageTemplate(
     title = form.errors.headOption.fold("")(_ => s"${messages("error.title")} ") + title,
@@ -52,5 +59,10 @@
         @govukButton(Button(content = Text(messages("site.continue"))))
     }
 
-    @help_with_service_fair_rent()
+    @{helpWithServiceSection match {
+        case Some("help_with_service_fair_rent") => help_with_service_fair_rent()
+        case Some("help_with_service") => help_with_service()
+        case _ =>
+    }}
+
 }
