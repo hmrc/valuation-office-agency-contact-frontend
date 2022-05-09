@@ -23,7 +23,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object AnnexeForm extends FormErrorHelper {
 
-  def AnnexeFormatter = new Formatter[String] {
+  def annexeFormatter: Formatter[String] = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
       case None => produceError(key, "error.annexe.required")
@@ -34,12 +34,12 @@ object AnnexeForm extends FormErrorHelper {
   }
 
   def apply(): Form[String] =
-    Form(single("value" -> of(AnnexeFormatter)))
+    Form(single("value" -> of(annexeFormatter)))
 
   def options = Seq(
     RadioOption("annexe", "added"),
     RadioOption("annexe", "removed")
   )
 
-  def optionIsValid(value: String) = options.exists(o => o.value == value)
+  def optionIsValid(value: String): Boolean = options.exists(o => o.value == value)
 }

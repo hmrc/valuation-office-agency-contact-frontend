@@ -23,7 +23,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object BusinessRatesSubcategoryForm extends FormErrorHelper {
 
-  def BusinessRatesSubcategoryFormatter = new Formatter[String] {
+  def businessRatesSubcategoryFormatter: Formatter[String] = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
       case None => produceError(key, "error.businessRatesSubcategory.required")
@@ -34,7 +34,7 @@ object BusinessRatesSubcategoryForm extends FormErrorHelper {
   }
 
   def apply(): Form[String] =
-    Form(single("value" -> of(BusinessRatesSubcategoryFormatter)))
+    Form(single("value" -> of(businessRatesSubcategoryFormatter)))
 
   def options = Seq(
     RadioOption("businessRatesSubcategory", "business_rates_change_valuation"),
@@ -49,5 +49,5 @@ object BusinessRatesSubcategoryForm extends FormErrorHelper {
     RadioOption("businessRatesSubcategory", "business_rates_other")
   )
 
-  def optionIsValid(value: String) = options.exists(o => o.value == value)
+  def optionIsValid(value: String): Boolean = options.exists(o => o.value == value)
 }

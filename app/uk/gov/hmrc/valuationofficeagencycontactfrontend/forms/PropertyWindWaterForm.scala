@@ -23,7 +23,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object PropertyWindWaterForm extends FormErrorHelper {
 
-  def PropertyWindWaterFormatter: Formatter[String] = new Formatter[String] {
+  def propertyWindWaterFormatter: Formatter[String] = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
       case None => produceError(key, "error.propertyWindWater.required")
@@ -34,13 +34,13 @@ object PropertyWindWaterForm extends FormErrorHelper {
   }
 
   def apply(): Form[String] =
-    Form(single("value" -> of(PropertyWindWaterFormatter)))
+    Form(single("value" -> of(propertyWindWaterFormatter)))
 
   def options = Seq(
     RadioOption("propertyWindWater.form", "yes"),
     RadioOption("propertyWindWater.form", "no")
   )
 
-  def optionIsValid(value: String) = options.exists(o => o.value == value)
+  def optionIsValid(value: String): Boolean = options.exists(o => o.value == value)
 
 }

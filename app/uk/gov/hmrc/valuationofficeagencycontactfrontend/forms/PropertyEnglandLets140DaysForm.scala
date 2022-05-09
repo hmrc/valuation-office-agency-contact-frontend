@@ -23,7 +23,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSubca
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object PropertyEnglandLets140DaysForm {
-  def PropertyEnglandLets140DaysFormatter = new Formatter[String] {
+  def propertyEnglandLets140DaysFormatter: Formatter[String] = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
       case None => produceError(key, "error.businessRatesSelfCatering140Days.required")
@@ -34,12 +34,12 @@ object PropertyEnglandLets140DaysForm {
   }
 
   def apply(): Form[String] =
-    Form(single("value" -> of(PropertyEnglandLets140DaysFormatter)))
+    Form(single("value" -> of(propertyEnglandLets140DaysFormatter)))
 
   def options = Seq(
     RadioOption("businessRatesSelfCatering140Days", "yes"),
     RadioOption("businessRatesSelfCatering140Days", "no")
   )
 
-  def optionIsValid(value: String) = options.exists(o => o.value == value)
+  def optionIsValid(value: String): Boolean = options.exists(o => o.value == value)
 }

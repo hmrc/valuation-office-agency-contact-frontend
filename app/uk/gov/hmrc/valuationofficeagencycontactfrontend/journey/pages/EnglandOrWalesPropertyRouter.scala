@@ -18,6 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages
 
 import play.api.mvc.Call
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.BusinessRatesSubcategoryId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.CategoryRouter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
@@ -28,7 +29,15 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 object EnglandOrWalesPropertyRouter extends CategoryRouter(
   key = "England-or-Wales-property",
   fieldId = "businessRatesJurisdiction",
-  options = Seq(EnglandBRJurisdiction.key, WalesBRJurisdiction.key)
+  options = Seq("england", "wales")
 ) {
   override def previousPage: UserAnswers => Call = _ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
+
+  override def nextPage: UserAnswers => Call = _.getString(BusinessRatesSubcategoryId.toString).getOrElse("") match {
+      case "business_rates_change_valuation" => routes.BusinessRatesSubcategoryController.onChangeValuationPageLoad()
+      case "business_rates_changes" => routes.BusinessRatesChallengeController.onAreaChangePageLoad()
+      case "business_rates_demolished" => routes.BusinessRatesSubcategoryController.onDemolishedPageLoad()
+      case _ => appStartPage
+    }
+
 }

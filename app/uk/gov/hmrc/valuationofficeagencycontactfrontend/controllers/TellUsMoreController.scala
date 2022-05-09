@@ -21,7 +21,7 @@ import play.api.Logger
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
-import uk.gov.hmrc.play.bootstrap.controller.FrontendController
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
@@ -71,9 +71,13 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
   }
 
   private def requiredErrorMessage(userAnswers: UserAnswers): String =
-    if (userAnswers.propertyWindEnquiry.isDefined) "error.tellUsMore.poorRepair.required"
-    else if(userAnswers.councilTaxSubcategory.contains("council_tax_area_change")) "error.tellUsMore.areaChanged.required"
-    else "error.tell_us_more.required"
+    if (userAnswers.propertyWindEnquiry.isDefined) {
+      "error.tellUsMore.poorRepair.required"
+    } else if (userAnswers.councilTaxSubcategory.contains("council_tax_area_change")) {
+      "error.tellUsMore.areaChanged.required"
+    } else {
+      "error.tell_us_more.required"
+    }
 
   private def getEnquiryKey(answers: UserAnswers): String = {
     enquiryKey(answers).getOrElse {
@@ -82,7 +86,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
     }
   }
 
-  private[controllers] def enquiryKey(answers: UserAnswers): Either[String, String] = {
+  private[controllers] def enquiryKey(answers: UserAnswers): Either[String, String] =
     (answers.enquiryCategory, answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.fairRentEnquiryEnquiry) match {
       case (Some("business_rates"), _, Some("business_rates_from_home"), _) => Right("tellUsMore.business")
       case (Some("business_rates"), _, Some("business_rates_other"), _) => Right("tellUsMore.business.other")
@@ -112,10 +116,9 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
       case (Some("business_rates"), _, _, _) => Right("tellUsMore.ndr-reference")
       case _ => Left("Unknown enquiry category in enquiry key")
     }
-  }
 
-  private def backLink(answers: UserAnswers, mode: Mode) = {
-    (answers.councilTaxSubcategory,
+  private def backLink(answers: UserAnswers, mode: Mode): String =
+    ((answers.councilTaxSubcategory,
       answers.businessRatesSubcategory,
       answers.fairRentEnquiryEnquiry,
       answers.annexeEnquiry,
@@ -125,39 +128,38 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
     answers.propertyEnglandLets140DaysEnquiry,
     answers.propertyWalesLets140DaysEnquiry,
     answers.propertyWalesLets70DaysEnquiry) match {
-      case (Some("council_tax_business_uses"), _, _, _, _, _, _, _, _, _) => routes.DatePropertyChangedController.onPageLoad().url
-      case (Some("council_tax_other"), _, _, _, _, _, _, _, _, _) => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
-      case (Some("council_tax_annexe"), _, _, Some("added"), Some("yes"), Some("yes"), _, _, _, _) => routes.CouncilTaxAnnexeController.onSelfContainedPageLoad().url
-      case (Some("council_tax_annexe"), _, _, Some("added"), Some("yes"), Some("no"), _, _, _, _) => routes.CouncilTaxAnnexeController.onFacilitiesPageLoad().url
-      case (Some("council_tax_annexe"), _, _, Some("added"), Some("no"), _, _, _, _, _) => routes.CouncilTaxAnnexeController.onNotSelfContainedPageLoad().url
-      case (Some("council_tax_annexe"), _, _, Some("removed"), _, _, _, _, _, _) => routes.CouncilTaxAnnexeController.onRemovedPageLoad().url
-      case (Some("council_tax_bill"), _, _, _, _, _, _, _, _, _) => routes.CouncilTaxBillController.onPageLoad().url
-      case (Some("council_tax_band_too_high"), _, _, _, _, _, _, _, _, _) => routes.CouncilTaxBandTooHighController.onPageLoad().url
-      case (Some("council_tax_band_for_new"), _, _, _, _, _, _, _, _, _) => routes.CouncilTaxBandForNewController.onPageLoad().url
-      case (Some("council_tax_property_empty"), _, _, _, _, _, _, _, _, _) => routes.PropertyEmptyController.onPageLoad().url
-      case (Some("council_tax_property_poor_repair"), _, _, _, _, _, _, _, _, _) => routes.PropertyWindWaterController.onPageLoad().url
-      case (Some("council_tax_property_split_merge"), _, _, _, _, _, _, _, _, _) => routes.PropertySplitMergeController.onPageLoad().url
-      case (Some("council_tax_property_demolished"), _, _, _, _, _, _, _, _, _) => routes.PropertyDemolishedController.onPageLoad().url
-      case (Some("council_tax_area_change"), _, _, _, _, _, _, _, _, _) => routes.PropertyPermanentChangesController.onPageLoad().url
-      case (_, Some("business_rates_change_valuation"), _, _, _, _, _, _, _, _) => routes.BusinessRatesSubcategoryController.onChangeValuationPageLoad().url
-      case (_, Some("business_rates_from_home"), _, _, _, _, _, _, _, _) => routes.DatePropertyChangedController.onPageLoad().url
-      case (_, Some("business_rates_not_used"), _, _, _, _, _, _, _, _) => routes.BusinessRatesPropertyController.onNonBusinessPageLoad().url
-      case (_, Some("business_rates_bill"), _, _, _, _, _, _, _, _) => routes.BusinessRatesBillController.onPageLoad().url
-      case (_, Some("business_rates_self_catering"), _, _, _, _, Some("england"), Some("yes"), _, _) => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad().url
-      case (_, Some("business_rates_self_catering"), _, _, _, _, Some("england"), Some("no"), _, _) => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad().url
-      case (_, Some("business_rates_self_catering"), _, _, _, _, Some("wales"), _, Some("no"), _) => routes.PropertyWalesLetsNoActionController.onPageLoad().url
-      case (_, Some("business_rates_self_catering"), _, _, _, _, Some("wales"), _, Some("yes"), Some("yes")) => routes.BusinessRatesSelfCateringController.onWalLetsPageLoad().url
-      case (_, Some("business_rates_self_catering"), _, _, _, _, Some("wales"), _, Some("yes"), Some("no")) => routes.PropertyWalesLetsNoActionController.onPageLoad().url
-      case (_, Some("business_rates_changes"), _, _, _, _, _, _, _, _) => routes.BusinessRatesBillController.onPageLoad().url
-      case (_, Some("business_rates_demolished"), _, _, _, _, _, _, _, _) => routes.BusinessRatesSubcategoryController.onDemolishedPageLoad().url
-      case (_, Some("business_rates_valuation"), _, _, _, _, _, _, _, _) => routes.BusinessRatesSubcategoryController.onValuationPageLoad().url
-      case (_, Some("business_rates_property_empty"), _, _, _, _, _, _, _, _) => routes.PropertyEmptyController.onBusinessRatesPageLoad().url
-      case (_, Some("business_rates_other"), _, _, _, _, _, _, _, _) => routes.BusinessRatesSubcategoryController.onPageLoad(mode).url
-      case (_, _, Some("submit_new_application"), _, _, _, _, _, _, _) => routes.FairRentEnquiryController.onFairRentEnquiryNew().url
-      case (_, _, Some("check_fair_rent_register"), _, _, _, _, _, _, _) => routes.FairRentEnquiryController.onFairRentEnquiryCheck().url
-      case (_, _, Some("other_request"), _, _, _, _, _, _, _) => routes.FairRentEnquiryController.onPageLoad().url
-      case _ => routes.PropertyAddressController.onPageLoad(NormalMode).url
-    }
-  }
+      case (Some("council_tax_business_uses"), _, _, _, _, _, _, _, _, _) => routes.DatePropertyChangedController.onPageLoad()
+      case (Some("council_tax_other"), _, _, _, _, _, _, _, _, _) => routes.CouncilTaxSubcategoryController.onPageLoad(mode)
+      case (Some("council_tax_annexe"), _, _, Some("added"), Some("yes"), Some("yes"), _, _, _, _) => routes.CouncilTaxAnnexeController.onSelfContainedPageLoad()
+      case (Some("council_tax_annexe"), _, _, Some("added"), Some("yes"), Some("no"), _, _, _, _) => routes.CouncilTaxAnnexeController.onFacilitiesPageLoad()
+      case (Some("council_tax_annexe"), _, _, Some("added"), Some("no"), _, _, _, _, _) => routes.CouncilTaxAnnexeController.onNotSelfContainedPageLoad()
+      case (Some("council_tax_annexe"), _, _, Some("removed"), _, _, _, _, _, _) => routes.CouncilTaxAnnexeController.onRemovedPageLoad()
+      case (Some("council_tax_bill"), _, _, _, _, _, _, _, _, _) => routes.CouncilTaxBillController.onPageLoad()
+      case (Some("council_tax_band_too_high"), _, _, _, _, _, _, _, _, _) => routes.CouncilTaxBandTooHighController.onPageLoad()
+      case (Some("council_tax_band_for_new"), _, _, _, _, _, _, _, _, _) => routes.CouncilTaxBandForNewController.onPageLoad()
+      case (Some("council_tax_property_empty"), _, _, _, _, _, _, _, _, _) => routes.PropertyEmptyController.onPageLoad()
+      case (Some("council_tax_property_poor_repair"), _, _, _, _, _, _, _, _, _) => routes.PropertyWindWaterController.onPageLoad()
+      case (Some("council_tax_property_split_merge"), _, _, _, _, _, _, _, _, _) => routes.PropertySplitMergeController.onPageLoad()
+      case (Some("council_tax_property_demolished"), _, _, _, _, _, _, _, _, _) => routes.PropertyDemolishedController.onPageLoad()
+      case (Some("council_tax_area_change"), _, _, _, _, _, _, _, _, _) => routes.PropertyPermanentChangesController.onPageLoad()
+      case (_, Some("business_rates_change_valuation"), _, _, _, _, _, _, _, _) => routes.BusinessRatesSubcategoryController.onChangeValuationPageLoad()
+      case (_, Some("business_rates_from_home"), _, _, _, _, _, _, _, _) => routes.DatePropertyChangedController.onPageLoad()
+      case (_, Some("business_rates_not_used"), _, _, _, _, _, _, _, _) => routes.BusinessRatesPropertyController.onNonBusinessPageLoad()
+      case (_, Some("business_rates_bill"), _, _, _, _, _, _, _, _) => routes.BusinessRatesBillController.onPageLoad()
+      case (_, Some("business_rates_self_catering"), _, _, _, _, Some("england"), Some("yes"), _, _) => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
+      case (_, Some("business_rates_self_catering"), _, _, _, _, Some("england"), Some("no"), _, _) => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()
+      case (_, Some("business_rates_self_catering"), _, _, _, _, Some("wales"), _, Some("no"), _) => routes.PropertyWalesLetsNoActionController.onPageLoad()
+      case (_, Some("business_rates_self_catering"), _, _, _, _, Some("wales"), _, Some("yes"), Some("yes")) => routes.BusinessRatesSelfCateringController.onWalLetsPageLoad()
+      case (_, Some("business_rates_self_catering"), _, _, _, _, Some("wales"), _, Some("yes"), Some("no")) => routes.PropertyWalesLetsNoActionController.onPageLoad()
+      case (_, Some("business_rates_changes"), _, _, _, _, _, _, _, _) => routes.BusinessRatesBillController.onPageLoad()
+      case (_, Some("business_rates_demolished"), _, _, _, _, _, _, _, _) => routes.BusinessRatesSubcategoryController.onDemolishedPageLoad()
+      case (_, Some("business_rates_valuation"), _, _, _, _, _, _, _, _) => routes.BusinessRatesSubcategoryController.onValuationPageLoad()
+      case (_, Some("business_rates_property_empty"), _, _, _, _, _, _, _, _) => routes.PropertyEmptyController.onBusinessRatesPageLoad()
+      case (_, Some("business_rates_other"), _, _, _, _, _, _, _, _) => routes.BusinessRatesSubcategoryController.onPageLoad(mode)
+      case (_, _, Some("submit_new_application"), _, _, _, _, _, _, _) => routes.FairRentEnquiryController.onFairRentEnquiryNew()
+      case (_, _, Some("check_fair_rent_register"), _, _, _, _, _, _, _) => routes.FairRentEnquiryController.onFairRentEnquiryCheck()
+      case (_, _, Some("other_request"), _, _, _, _, _, _, _) => routes.FairRentEnquiryController.onPageLoad()
+      case _ => routes.PropertyAddressController.onPageLoad(NormalMode)
+    }).url
 
 }
