@@ -16,6 +16,8 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.EnglandOrWalesPropertyRouter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesPropertyDemolished => property_demolished}
@@ -28,14 +30,14 @@ class BusinessRatesPropertyDemolishedViewSpec extends ViewBehaviours {
 
   "Business Rates Property Demolished view" must {
     behave like normalPage(view, "businessRatesPropertyDemolished", "title", "heading",
-      "p1.part1", "p1.part2", "p1.url", "p2", "subheading", "p3", "p3.url", "p4", "p4.url")
+      "p1.part1", "p1.part2", "p1.url", "p2", "step1", "step2", "step3", "subheading", "p3", "p3.url", "p4", "p4.url")
 
     "has a link marked with site.back leading to the Business Rates Property Demolished Page" in {
       val doc = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
+      backlinkUrl mustBe routes.JourneyController.onPageLoad(EnglandOrWalesPropertyRouter.key).url
     }
   }
 }
