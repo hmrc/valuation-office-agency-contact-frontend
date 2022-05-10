@@ -27,7 +27,7 @@
 
 @(form: Form[String], key: String, backUrl: String, categoryRouter: CategoryRouter)(implicit request: Request[_], messages: Messages)
 
-@formTemplate(form, key, backUrl, messages(categoryRouter.heading)) {
+@formTemplate(form, key, backUrl, messages(categoryRouter.heading), categoryRouter.helpWithService) {
 
     @govukRadios(Radios(
         fieldset = Some(Fieldset(legend = Some(

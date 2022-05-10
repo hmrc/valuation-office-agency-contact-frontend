@@ -14,6 +14,8 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.EnglandOrWalesPropertyRouter
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
@@ -30,7 +32,7 @@
     @govukBackLink(
         BackLink(
             content = Text(messages("site.back")),
-            href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(mode).url,
+            href = routes.JourneyController.onPageLoad(EnglandOrWalesPropertyRouter.key).url,
             classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
         )
     }
@@ -50,6 +52,12 @@
     </p>
 
     <p class="govuk-body">@messages("businessRatesPropertyDemolished.p2")</p>
+
+    <ol class="govuk-list govuk-list--number">
+        <li>@messages("businessRatesPropertyDemolished.step1")</li>
+        <li>@messages("businessRatesPropertyDemolished.step2")</li>
+        <li>@messages("businessRatesPropertyDemolished.step3")</li>
+    </ol>
 
     <h2 class="govuk-heading-m">@messages("businessRatesPropertyDemolished.subheading")</h2>
 

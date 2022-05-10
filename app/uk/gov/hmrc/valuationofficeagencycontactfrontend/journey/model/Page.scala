@@ -58,4 +58,6 @@ trait Page[T] {
 
   def beforeSaveAnswers: (DataCacheConnector, JourneyPageRequest[_]) => Future[_] = (_, _) => Future.unit
 
+  def helpWithService: Option[String] = None
+
 }

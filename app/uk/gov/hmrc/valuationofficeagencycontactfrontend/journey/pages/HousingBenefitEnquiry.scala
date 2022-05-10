@@ -30,4 +30,6 @@ object HousingBenefitEnquiry extends CategoryRouter(
   options = Seq(HousingBenefitAppeals.key, HBTellUsMore.key, OtherHBEnquiry.key)
 ) {
   override def previousPage: UserAnswers => Call = _ => routes.JourneyController.onPageLoad(HousingBenefitAllowancesRouter.key)
+
+  override def helpWithService: Option[String] = Some("help_with_service_fair_rent")
 }

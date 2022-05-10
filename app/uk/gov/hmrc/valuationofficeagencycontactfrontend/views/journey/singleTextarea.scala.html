@@ -31,7 +31,7 @@
 
 @(form: Form[String], key: String, backUrl: String, page: Page[String])(implicit request: Request[_], messages: Messages)
 
-@formTemplate(form, key, backUrl, messages(page.heading)) {
+@formTemplate(form, key, backUrl, messages(page.heading), page.helpWithService) {
 
     <h1 class="govuk-label-wrapper">
         <label class="govuk-label govuk-label--l" for="@page.fieldId">

@@ -478,10 +478,13 @@ businessRatesValuationOnline.p4 = Mwy am ardrethi busnes a sut maent yn cael eu 
 # ---  Tell us that your property has been demolished
 businessRatesPropertyDemolished.title = Dywedwch wrthym fod eich eiddo wedi’i ddymchwel - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesPropertyDemolished.heading = Dywedwch wrthym fod eich eiddo wedi’i ddymchwel
-businessRatesPropertyDemolished.p1.url =  https://www.gov.uk/correct-your-business-rates
-businessRatesPropertyDemolished.p1.part1 = Defnyddiwch wasanaeth Asiantaeth y Swyddfa Brisio
-businessRatesPropertyDemolished.p1.part2 =  i ddweud wrthym fod eich eiddo wedi’i ddymchwel.
-businessRatesPropertyDemolished.p2 = Ar gyfer eiddo yn Lloegr, bydd angen i chi fewngofnodi a chyflwyno ‘gwiriad’.
+businessRatesPropertyDemolished.p1.url = https://www.gov.uk/business-rates-valuation-account
+businessRatesPropertyDemolished.p1.part1 = Mewngofnodwch neu sefydlwch eich cyfrif prisio ardrethi busnes
+businessRatesPropertyDemolished.p1.part2 = i ddweud wrthym fod eich eiddo wedi’i ddymchwel.
+businessRatesPropertyDemolished.p2 = Sut i ddweud wrthym: cam wrth gam
+businessRatesPropertyDemolished.step1 = Mewngofnodwch neu cofrestrwch i greu cyfrif
+businessRatesPropertyDemolished.step2 = Ychwanegu eiddo i’ch cyfrif
+businessRatesPropertyDemolished.step3 = Anfonwch ‘Achos gwirio’ i gadarnhau manylion yr eiddo
 businessRatesPropertyDemolished.subheading = Cymorth arall ar GOV.UK
 businessRatesPropertyDemolished.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
 businessRatesPropertyDemolished.p3 = Canllaw cam wrth gam i wirio a herio eich cyfraddau busnes

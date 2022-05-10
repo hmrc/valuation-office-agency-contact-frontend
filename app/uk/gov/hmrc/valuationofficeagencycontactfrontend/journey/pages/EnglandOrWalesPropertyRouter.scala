@@ -51,4 +51,6 @@ object EnglandOrWalesPropertyRouter extends CategoryRouter(
   override def nextLang: UserAnswers => Option[Lang] =
     getValue(_) flatMap langMap.get
 
+  override def helpWithService: Option[String] = Some("help_with_service")
+
 }
