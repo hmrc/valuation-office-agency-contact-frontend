@@ -561,10 +561,14 @@ businessRatesChallenge.body = Defnyddiwch <a href="https://www.gov.uk/correct-yo
 
 propertyOrAreaChanged.title = Dywedwch wrthym am newidiadau i’ch eiddo neu’ch ardal - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
 propertyOrAreaChanged.heading = Dywedwch wrthym am newidiadau i’ch eiddo neu’ch ardal
-propertyOrAreaChanged.p1.url = https://www.gov.uk/correct-your-business-rates
-propertyOrAreaChanged.p1.part1 = Defnyddiwch wasanaeth Asiantaeth y Swyddfa Brisio
-propertyOrAreaChanged.p1.part2 = i ddweud wrthym am newidiadau i’ch eiddo neu’r ardal gyfagos.
-propertyOrAreaChanged.p2 = Ar gyfer eiddo yn Lloegr, bydd angen i chi fewngofnodi a chyflwyno ‘gwiriad’.
+propertyOrAreaChanged.p1.url = https://www.gov.uk/business-rates-valuation-account
+propertyOrAreaChanged.p1.part1 = Mewngofnodwch neu sefydlwch eich cyfrif prisio ardrethi busnes
+propertyOrAreaChanged.p1.part2 = i ddweud wrthym am y newidiadau i’ch eiddo neu ardal.
+propertyOrAreaChanged.p2 = Sut i ddweud wrthym: cam wrth gam
+propertyOrAreaChanged.step1 = Mewngofnodwch neu cofrestrwch i greu cyfrif
+propertyOrAreaChanged.step2 = Ychwanegu eiddo i’ch cyfrif
+propertyOrAreaChanged.step3 = Anfonwch ‘Achos gwirio’ i gadarnhau manylion yr eiddo
+propertyOrAreaChanged.step4 = Anfonwch ‘Achos her’ os ydych yn dal i anghytuno â’r gwerth ardrethol
 propertyOrAreaChanged.subheading = Cymorth arall ar GOV.UK
 propertyOrAreaChanged.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
 propertyOrAreaChanged.p3 = Canllaw cam wrth gam i wirio a herio eich cyfraddau busnes yn Lloegr
