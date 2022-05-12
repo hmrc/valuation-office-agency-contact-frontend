@@ -515,9 +515,13 @@ error.businessRatesPropertyEnquiry.required = Select if your property is in Engl
 # --- Tell us that your property is no longer used for business
 businessRatesNonBusiness.title = Tell us that your property is no longer used for business - Valuation Office Agency contact form - GOV.UK
 businessRatesNonBusiness.heading = Tell us that your property is no longer used for business
-businessRatesNonBusiness.p1 = <a href="https://www.gov.uk/correct-your-business-rates" target="_self">Use the Valuation Office Agency’s online service</a> and submit a ’check’ to tell us that your property is not being used for business.
+businessRatesNonBusiness.p1 = <a href="https://www.gov.uk/business-rates-valuation-account" target="_self">Sign into or set up your business rates valuation account</a> to tell us that your property is no longer used for business.
+businessRatesNonBusiness.p2 = How to tell us: step by step
+businessRatesNonBusiness.step1 = Sign in or register for an account
+businessRatesNonBusiness.step2 = Add a property to your account
+businessRatesNonBusiness.step3 = Send a ‘Check case’ to confirm the property details
 businessRatesNonBusiness.subheading = Other help on GOV.UK
-businessRatesNonBusiness.p2 = <a href="https://www.gov.uk/government/collections/check-and-challenge-step-by-step" target="_self">How to check and challenge your business rates valuation</a>
+businessRatesNonBusiness.p3 = <a href="https://www.gov.uk/government/collections/check-and-challenge-step-by-step" target="_self">How to check and challenge your business rates valuation</a>
 
 # --- Business Rates Subcategories
 businessRatesSubcategory.title = What is your business rates enquiry about? - Valuation Office Agency contact form - GOV.UK

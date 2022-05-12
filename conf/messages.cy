@@ -534,9 +534,13 @@ error.businessRatesPropertyEnquiry.required = Dewiswch a yw eich eiddo yng Nghym
 # --- Tell us that your property is no longer used for business
 businessRatesNonBusiness.title = Dywedwch wrthym nad yw’ch eiddo’n cael ei ddefnyddio ar gyfer busnes mwyach - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesNonBusiness.heading = Dywedwch wrthym nad yw’ch eiddo’n cael ei ddefnyddio ar gyfer busnes mwyach
-businessRatesNonBusiness.p1 = <a href="https://www.gov.uk/correct-your-business-rates" target="_self">Defnyddiwch wasanaeth Asiantaeth y Swyddfa Brisio</a> i gyflwyno ‘gwiriad’ i ddweud wrthym nad yw eich eiddo’n cael ei ddefnyddio ar gyfer busnes.
+businessRatesNonBusiness.p1 = <a href="https://www.gov.uk/business-rates-valuation-account" target="_self">Mewngofnodwch neu sefydlwch eich cyfrif prisio ardrethi busnes</a> i ddweud wrthym nad yw eich eiddo yn cael ei ddefnyddio ar gyfer busnes mwyach.
+businessRatesNonBusiness.p2 = Sut i ddweud wrthym: cam wrth gam
+businessRatesNonBusiness.step1 = Mewngofnodwch neu cofrestrwch i greu cyfrif
+businessRatesNonBusiness.step2 = Ychwanegu eiddo i’ch cyfrif
+businessRatesNonBusiness.step3 = Anfonwch ‘Achos gwirio’ i gadarnhau manylion yr eiddo
 businessRatesNonBusiness.subheading = Cymorth arall ar GOV.UK
-businessRatesNonBusiness.p2 = <a href="https://www.gov.uk/government/collections/check-and-challenge-step-by-step" target="_self">Sut i wirio a herio eich prisiad ardrethi busnes</a>
+businessRatesNonBusiness.p3 = <a href="https://www.gov.uk/government/collections/check-and-challenge-step-by-step" target="_self">Sut i wirio a herio eich prisiad ardrethi busnes</a>
 
 # --- Business Rates Subcategories
 businessRatesSubcategory.title = Ynglŷn â beth yw eich ymholiad ardrethi busnes? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
