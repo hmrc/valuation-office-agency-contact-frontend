@@ -16,6 +16,8 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.EnglandOrWalesPropertyRouter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesNonBusiness => business_rates_non_business}
 
@@ -27,14 +29,15 @@ class BusinessRatesNonBusinessViewSpec  extends ViewBehaviours {
 
   "Business rates non business view" must {
     behave like normalPage(view, "businessRatesNonBusiness", "title", "heading",
-      "p1", "subheading", "p2")
+      "p1", "p2", "step1", "step2", "step3", "subheading", "p3")
 
     "has a link marked with site.back leading to the business rates non business Page" in {
       val doc = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesPropertyController.onPageLoad().url
+      backlinkUrl mustBe routes.JourneyController.onPageLoad(EnglandOrWalesPropertyRouter.key).url
     }
   }
+
 }
