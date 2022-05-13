@@ -56,25 +56,29 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient,
       msg.message,
       userAnswers.enquiryDate,
       userAnswers.refNumber)
-    sendJson(Json.toJson(msg), Json.toJson(auditEvent))
+    sendJson(Json.toJson(msg), Json.toJson(auditEvent).as[JsObject])
   }
 
-  def sendJson(msgJson: JsValue, auditEventJson: JsValue)(implicit hc: HeaderCarrier): Future[Try[Int]] = {
+  def sendJson(msgJson: JsValue, auditEventJson: JsObject)(implicit hc: HeaderCarrier): Future[Try[Int]] = {
     http.POST[JsValue, HttpResponse](s"$serviceUrl${baseSegment}create", msgJson, Seq(jsonContentTypeHeader))
       .map {
         response =>
           response.status match {
             case OK =>
-              auditService.sendEvent("sendenquirytoVOA", auditEventJson)
+              auditService.sendEnquiryToVOA(auditEventJson)
               Success(OK)
             case status =>
-              log.warn("Received status of " + status + " from upstream service")
-              Failure(new RuntimeException("Received status of " + status + " from upstream service"))
+              val ex = new RuntimeException("Received status of " + status + " from upstream service")
+              log.warn(ex.getMessage)
+              auditService.sendFormSubmissionFailed(auditEventJson, s"Response code: $status")
+              Failure(ex)
           }
       } recover {
-      case e =>
-        log.warn("Received exception " + e.getMessage + " from upstream service")
-        Failure(new RuntimeException("Received exception " + e.getMessage + " from upstream service"))
+      case throwable =>
+        val ex = new RuntimeException("Received exception " + throwable.getMessage + " from upstream service")
+        log.warn(ex.getMessage)
+        auditService.sendFormSubmissionFailed(auditEventJson, throwable.getMessage)
+        Failure(ex)
     }
   }
 
