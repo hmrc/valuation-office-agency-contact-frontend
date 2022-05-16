@@ -23,6 +23,8 @@ import uk.gov.hmrc.play.audit.http.connector.{AuditConnector, AuditResult}
 import uk.gov.hmrc.play.audit.model.ExtendedDataEvent
 import uk.gov.hmrc.play.audit.model.DataEvent
 import uk.gov.hmrc.play.audit.AuditExtensions._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.LogoutEvent
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -50,6 +52,12 @@ class AuditingService @Inject()(auditConnector: AuditConnector)  {
   def sendSurveyFeedback(detail: Map[String, String], tags: Map[String, String] = Map.empty)
                              (implicit ec: ExecutionContext, hc: HeaderCarrier): Future[AuditResult] =
     sendEventMap("SurveyFeedback", detail, tags)
+
+  def sendTimeout(userAnswers: Option[UserAnswers])(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit =
+    sendEventJson("Timeout", Json.toJson(LogoutEvent(userAnswers)))
+
+  def sendLogout(userAnswers: Option[UserAnswers])(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit =
+    sendEventJson("Logout", Json.toJson(LogoutEvent(userAnswers)))
 
   private def sendEventMap(event: String, detail: Map[String, String], tags: Map[String, String])
                              (implicit ec: ExecutionContext, hc: HeaderCarrier): Future[AuditResult] = {
