@@ -20,12 +20,13 @@ import play.api.Logger
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.play.bootstrap.controller.FrontendController
+import uk.gov.hmrc.http.cache.client.CacheMap
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.DatePropertyChangedForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.DatePropertyChangedId
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.datePropertyChanged
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
@@ -69,9 +70,8 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
             _ <- dataCacheConnector.remove(request.sessionId, DatePropertyChangedId.toString)
             cacheMap <- if (value.nonEmpty) {
               dataCacheConnector.save[LocalDate](request.sessionId, DatePropertyChangedId.toString, value.get)
-            }
-            else {
-              dataCacheConnector.save[String](request.sessionId, "", "")
+            } else {
+              dataCacheConnector.fetch(request.sessionId).map(_.getOrElse(new CacheMap(request.sessionId, Map.empty)))
             }
           } yield Redirect(navigator.nextPage(DatePropertyChangedId, mode)(new UserAnswers(cacheMap)))
       )
@@ -100,6 +100,7 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
       case (Some("council_tax_area_change"), None) => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
       case (None, Some("business_rates_from_home")) => routes.BusinessRatesSubcategoryController.onPageLoad(mode).url
       case (None, Some("business_rates_not_used")) => routes.BusinessRatesPropertyController.onPageLoad().url
+      case _ => routes.EnquiryCategoryController.onPageLoad(NormalMode).url
     }
   }
 

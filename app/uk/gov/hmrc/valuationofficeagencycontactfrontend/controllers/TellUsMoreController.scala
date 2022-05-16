@@ -144,7 +144,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
       case (Some("council_tax_area_change"), _, _, _, _, _, _, _, _, _) => routes.PropertyPermanentChangesController.onPageLoad()
       case (_, Some("business_rates_change_valuation"), _, _, _, _, _, _, _, _) => routes.BusinessRatesSubcategoryController.onChangeValuationPageLoad()
       case (_, Some("business_rates_from_home"), _, _, _, _, _, _, _, _) => routes.DatePropertyChangedController.onPageLoad()
-      case (_, Some("business_rates_not_used"), _, _, _, _, _, _, _, _) => routes.BusinessRatesPropertyController.onNonBusinessPageLoad()
+      case (_, Some("business_rates_not_used"), _, _, _, _, _, _, _, _) => routes.DatePropertyChangedController.onPageLoad()
       case (_, Some("business_rates_bill"), _, _, _, _, _, _, _, _) => routes.BusinessRatesBillController.onPageLoad()
       case (_, Some("business_rates_self_catering"), _, _, _, _, Some("england"), Some("yes"), _, _) => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
       case (_, Some("business_rates_self_catering"), _, _, _, _, Some("england"), Some("no"), _, _) => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()

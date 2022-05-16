@@ -25,7 +25,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactReasonForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.contactReason
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.DataRetrievalAction
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -37,6 +37,7 @@ class Application @Inject() (override val messagesApi: MessagesApi,
                              languageSwitchController: LanguageSwitchController,
                              getData: DataRetrievalAction,
                              dataCacheConnector: DataCacheConnector,
+                             auditService: AuditingService,
                              configuration: Configuration,
                             cc: MessagesControllerComponents
                            )(implicit ec: ExecutionContext) extends FrontendController(cc) with I18nSupport {
@@ -52,9 +53,10 @@ class Application @Inject() (override val messagesApi: MessagesApi,
   }
 
   def logout() = getData.async { implicit request =>
-      dataCacheConnector.clear(request.sessionId).map { _ =>
-        Redirect(routes.ContactReasonController.onPageLoad()).withNewSession
-      }
+    auditService.sendLogout(request.userAnswers)
+    dataCacheConnector.clear(request.sessionId).map { _ =>
+      Redirect(routes.ContactReasonController.onPageLoad()).withNewSession
+    }
   }
 
   def startWelsh() = Action.async { implicit request =>
