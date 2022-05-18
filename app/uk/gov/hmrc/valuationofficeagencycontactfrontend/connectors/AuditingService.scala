@@ -17,7 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors
 
 import javax.inject.Inject
-import play.api.libs.json.{JsObject, JsValue, Json}
+import play.api.libs.json.{JsObject, JsValue, Json, Writes}
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.audit.http.connector.{AuditConnector, AuditResult}
 import uk.gov.hmrc.play.audit.model.ExtendedDataEvent
@@ -37,7 +37,7 @@ class AuditingService @Inject()(auditConnector: AuditConnector)  {
     sendEventJson("sendenquirytoVOA", auditEventJson)
 
   def sendFormSubmissionFailed(auditEventJsonObj: JsObject, error: String)(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit =
-    auditConnector.sendExplicitAudit("FormSubmissionFailed", auditEventJsonObj ++ Json.obj("error" -> error))
+    sendEventJson("FormSubmissionFailed", auditEventJsonObj ++ Json.obj("error" -> error))
 
   def sendRadioButtonSelection(uri: String, nameValuePair: (String, String))(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit = {
     val detail = Map("path" -> uri, "radioButton" -> nameValuePair._1, "optionSelected" -> nameValuePair._2)
@@ -54,19 +54,22 @@ class AuditingService @Inject()(auditConnector: AuditConnector)  {
     sendEventMap("SurveyFeedback", detail, tags)
 
   def sendTimeout(userAnswers: Option[UserAnswers])(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit =
-    auditConnector.sendExplicitAudit("Timeout", LogoutEvent(userAnswers))
+    sendEventObject("Timeout", LogoutEvent(userAnswers))
 
   def sendLogout(userAnswers: Option[UserAnswers])(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit =
-    auditConnector.sendExplicitAudit("Logout", LogoutEvent(userAnswers))
+    sendEventObject("Logout", LogoutEvent(userAnswers))
 
   def sendContinueNextPage(url: String)(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit =
-    auditConnector.sendExplicitAudit("ContinueNextPage", Map("url" -> url))
+    sendEventMap("ContinueNextPage", Map("url" -> url), hc.toAuditTags())
 
   private def sendEventMap(event: String, detail: Map[String, String], tags: Map[String, String])
                              (implicit ec: ExecutionContext, hc: HeaderCarrier): Future[AuditResult] = {
     val de = DataEvent(auditSource = auditSource, auditType = event, tags = tags, detail = detail)
     auditConnector.sendEvent(de)
   }
+
+  private def sendEventObject[T](auditType: String, detail: T)(implicit ec: ExecutionContext, hc: HeaderCarrier, writes: Writes[T]): Unit =
+    sendEventJson(auditType, Json.toJson(detail).as[JsObject])
 
   private def sendEventJson(auditType: String, json: JsValue)(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit = {
     val event = eventFor(auditType, json)
