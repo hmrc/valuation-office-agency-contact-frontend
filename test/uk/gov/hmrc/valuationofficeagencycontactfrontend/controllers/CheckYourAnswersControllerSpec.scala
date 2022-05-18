@@ -23,7 +23,7 @@ import play.api.i18n.{Lang, Messages}
 import play.api.libs.json.{JsString, Json}
 import play.api.test.Helpers._
 import uk.gov.hmrc.http.cache.client.CacheMap
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage
@@ -47,9 +47,10 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
   def internalServerError = app.injector.instanceOf[internal_Server_Error]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+  def auditService = inject[AuditingService]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new CheckYourAnswersController(frontendAppConfig, messagesApi, FakeDataCacheConnector, dataRetrievalAction,
+    new CheckYourAnswersController(frontendAppConfig, auditService, messagesApi, FakeDataCacheConnector, dataRetrievalAction,
       new DataRequiredActionImpl(ec), checkYourAnswers, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   "Check Your Answers Controller" must {

@@ -66,7 +66,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
           Future.successful(BadRequest(tellUsMore(appConfig, formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))),
         (value) =>
           dataCacheConnector.save[TellUsMore](request.sessionId, TellUsMoreId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(TellUsMoreId, mode)(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(TellUsMoreId, mode).apply(new UserAnswers(cacheMap))))
       )
   }
 

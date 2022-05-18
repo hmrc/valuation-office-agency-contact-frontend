@@ -37,7 +37,7 @@ class AuditingService @Inject()(auditConnector: AuditConnector)  {
     sendEventJson("sendenquirytoVOA", auditEventJson)
 
   def sendFormSubmissionFailed(auditEventJsonObj: JsObject, error: String)(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit =
-    sendEventJson("FormSubmissionFailed", auditEventJsonObj ++ Json.obj("error" -> error))
+    auditConnector.sendExplicitAudit("FormSubmissionFailed", auditEventJsonObj ++ Json.obj("error" -> error))
 
   def sendRadioButtonSelection(uri: String, nameValuePair: (String, String))(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit = {
     val detail = Map("path" -> uri, "radioButton" -> nameValuePair._1, "optionSelected" -> nameValuePair._2)
@@ -54,10 +54,13 @@ class AuditingService @Inject()(auditConnector: AuditConnector)  {
     sendEventMap("SurveyFeedback", detail, tags)
 
   def sendTimeout(userAnswers: Option[UserAnswers])(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit =
-    sendEventJson("Timeout", Json.toJson(LogoutEvent(userAnswers)))
+    auditConnector.sendExplicitAudit("Timeout", LogoutEvent(userAnswers))
 
   def sendLogout(userAnswers: Option[UserAnswers])(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit =
-    sendEventJson("Logout", Json.toJson(LogoutEvent(userAnswers)))
+    auditConnector.sendExplicitAudit("Logout", LogoutEvent(userAnswers))
+
+  def sendContinueNextPage(url: String)(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit =
+    auditConnector.sendExplicitAudit("ContinueNextPage", Map("url" -> url))
 
   private def sendEventMap(event: String, detail: Map[String, String], tags: Map[String, String])
                              (implicit ec: ExecutionContext, hc: HeaderCarrier): Future[AuditResult] = {

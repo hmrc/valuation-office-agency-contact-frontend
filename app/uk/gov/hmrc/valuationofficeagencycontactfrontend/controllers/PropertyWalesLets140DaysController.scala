@@ -68,7 +68,7 @@ class PropertyWalesLets140DaysController @Inject()(
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering140DaysCY" -> value)
           dataCacheConnector.save[String](request.sessionId, PropertyWalesLets140DaysId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(PropertyWalesLets140DaysId, mode)(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(PropertyWalesLets140DaysId, mode).apply(new UserAnswers(cacheMap))))
         }
       )
   }

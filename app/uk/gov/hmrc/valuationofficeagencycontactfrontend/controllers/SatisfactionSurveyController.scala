@@ -72,7 +72,10 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
       success => {
         auditService.sendRadioButtonSelection(request.uri, "satisfaction" -> success.satisfaction)
         sendFeedback(success, AddressFormatters.formattedPropertyAddress(contact.propertyAddress, ", "))
-        Redirect(routes.SatisfactionSurveyController.surveyThankyou)
+
+        val call = routes.SatisfactionSurveyController.surveyThankyou
+        auditService.sendContinueNextPage(call.url)
+        Redirect(call)
       }
     )
   }
@@ -86,4 +89,5 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
   def surveyThankyou = Action { implicit request =>
     Ok(satisfactionSurveyThankYou(appConfig))
   }
+
 }

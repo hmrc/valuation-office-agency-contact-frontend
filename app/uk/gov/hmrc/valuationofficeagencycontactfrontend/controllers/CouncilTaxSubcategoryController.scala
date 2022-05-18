@@ -66,7 +66,7 @@ class CouncilTaxSubcategoryController @Inject()(
             cacheMap <- dataCacheConnector.save[String](request.sessionId, CouncilTaxSubcategoryId.toString, value)
           } yield {
             auditService.sendRadioButtonSelection(request.uri, "councilTaxSubcategory" -> value)
-            Redirect(navigator.nextPage(CouncilTaxSubcategoryId, mode)(new UserAnswers(cacheMap)))
+            Redirect(navigator.nextPage(CouncilTaxSubcategoryId, mode).apply(new UserAnswers(cacheMap)))
           }
       )
   }

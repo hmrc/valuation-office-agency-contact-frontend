@@ -21,7 +21,7 @@ import play.api.Logger
 import play.api.i18n.{I18nSupport, Messages, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.AnswerSectionId
@@ -33,6 +33,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_an
 import scala.concurrent.ExecutionContext
 
 class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
+                                           auditService: AuditingService,
                                            override val messagesApi: MessagesApi,
                                            dataCacheConnector: DataCacheConnector,
                                            getData: DataRetrievalAction,
@@ -61,8 +62,10 @@ class CheckYourAnswersController @Inject()(appConfig: FrontendAppConfig,
       }
   }
 
-  def goToConfirmationPage() = (getData andThen requireData) {
-    Redirect(routes.ConfirmationController.onPageLoadSendEmail())
+  def goToConfirmationPage() = (getData andThen requireData) { implicit request =>
+    val call = routes.ConfirmationController.onPageLoadSendEmail()
+    auditService.sendContinueNextPage(call.url)
+    Redirect(call)
   }
 
   private[controllers] def userAnswersSectionBuilder(answers: UserAnswers)(implicit messages: Messages): Option[AnswerSection] = {

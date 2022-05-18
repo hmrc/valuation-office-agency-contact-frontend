@@ -72,7 +72,7 @@ class BusinessRatesSubcategoryController @Inject()(
             cacheMap <- dataCacheConnector.save[String](request.sessionId, BusinessRatesSubcategoryId.toString, value)
           } yield {
             auditService.sendRadioButtonSelection(request.uri, "businessRatesSubcategory" -> value)
-            Redirect(navigator.nextPage(BusinessRatesSubcategoryId, mode)(new UserAnswers(cacheMap)))
+            Redirect(navigator.nextPage(BusinessRatesSubcategoryId, mode).apply(new UserAnswers(cacheMap)))
           }
       )
   }

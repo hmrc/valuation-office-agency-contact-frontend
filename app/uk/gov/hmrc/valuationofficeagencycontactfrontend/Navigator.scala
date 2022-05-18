@@ -23,10 +23,16 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CheckMode, Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import play.api.Logger
+import uk.gov.hmrc.http.HeaderCarrier
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.AuditingService
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.{EnglandOrWalesPropertyRouter, HousingBenefitAllowancesRouter}
 
+import scala.concurrent.ExecutionContext
+
 @Singleton
-class Navigator @Inject()() {
+class Navigator @Inject()(
+                           auditService: AuditingService
+                         )(implicit ec: ExecutionContext) {
 
   private val log = Logger(this.getClass)
 
@@ -361,10 +367,16 @@ class Navigator @Inject()() {
 
   private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()
 
-  def nextPage(id: Identifier, mode: Mode): UserAnswers => Call = mode match {
+  def nextPage(id: Identifier, mode: Mode)(implicit hc: HeaderCarrier): UserAnswers => Call = mode match {
     case NormalMode =>
-      routeMap.getOrElse(id, _ => routes.EnquiryCategoryController.onPageLoad(NormalMode))
+      routeMap.getOrElse(id, _ => auditNextUrl(routes.EnquiryCategoryController.onPageLoad(NormalMode)))
     case CheckMode =>
-      editRouteMap.getOrElse(id, _ => routes.CheckYourAnswersController.onPageLoad)
+      editRouteMap.getOrElse(id, _ => auditNextUrl(routes.CheckYourAnswersController.onPageLoad))
   }
+
+  private def auditNextUrl(call: Call)(implicit hc: HeaderCarrier): Call = {
+    auditService.sendContinueNextPage(call.url)
+    call
+  }
+
 }

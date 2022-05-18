@@ -77,6 +77,8 @@ class JourneyController @Inject()(journeyMap: JourneyMap,
             page.nextPage(userAnswers)
           }
 
+          auditService.sendContinueNextPage(call.url)
+
           redirectWithLang(call, page.nextLang(userAnswers))
         }
     )

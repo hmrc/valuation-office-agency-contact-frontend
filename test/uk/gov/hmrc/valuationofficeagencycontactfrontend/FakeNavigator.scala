@@ -16,11 +16,19 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend
 
+import org.scalatestplus.mockito.MockitoSugar.mock
 import play.api.mvc.Call
+import uk.gov.hmrc.http.HeaderCarrier
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.AuditingService
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.Identifier
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
-class FakeNavigator(desiredRoute: Call, mode: Mode = NormalMode) extends Navigator {
-  override def nextPage(controllerId: Identifier, mode: Mode): (UserAnswers) => Call = (ua) => desiredRoute
+import scala.concurrent.ExecutionContext.Implicits.global
+
+class FakeNavigator(desiredRoute: Call) extends Navigator(mock[AuditingService]) {
+
+  override def nextPage(controllerId: Identifier, mode: Mode)(implicit hc: HeaderCarrier): UserAnswers => Call =
+    _ => desiredRoute
+
 }
