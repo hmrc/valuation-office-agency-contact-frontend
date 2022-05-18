@@ -365,14 +365,12 @@ class Navigator @Inject()(
     FairRentEnquiryId -> FairRentEnquiryRouting
   )
 
-  private val editRouteMap: Map[Identifier, UserAnswers => Call] = Map()
-
-  def nextPage(id: Identifier, mode: Mode)(implicit hc: HeaderCarrier): UserAnswers => Call = mode match {
+  def nextPage(id: Identifier, mode: Mode)(implicit hc: HeaderCarrier): UserAnswers => Call = (mode match {
     case NormalMode =>
-      routeMap.getOrElse(id, _ => auditNextUrl(routes.EnquiryCategoryController.onPageLoad(NormalMode)))
+      routeMap.getOrElse(id, (_: UserAnswers) => routes.EnquiryCategoryController.onPageLoad(NormalMode))
     case CheckMode =>
-      editRouteMap.getOrElse(id, _ => auditNextUrl(routes.CheckYourAnswersController.onPageLoad))
-  }
+      (_: UserAnswers) => routes.CheckYourAnswersController.onPageLoad
+  }) andThen auditNextUrl
 
   private def auditNextUrl(call: Call)(implicit hc: HeaderCarrier): Call = {
     auditService.sendContinueNextPage(call.url)
