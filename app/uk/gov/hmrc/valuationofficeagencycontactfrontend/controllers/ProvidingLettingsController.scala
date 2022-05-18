@@ -50,7 +50,7 @@ class ProvidingLettingsController @Inject()(val appConfig: FrontendAppConfig,
         _ <- dataCacheConnector.remove(request.sessionId, ExistingEnquiryCategoryId.toString)
         _ <- dataCacheConnector.save[String](request.sessionId, EnquiryCategoryId.toString, "fair_rent")
         cacheMap <- dataCacheConnector.save[String](request.sessionId, FairRentEnquiryId.toString, "other_request")
-      } yield Redirect(navigator.nextPage(FairRentEnquiryId, NormalMode)(new UserAnswers(cacheMap)))
+      } yield Redirect(navigator.nextPage(FairRentEnquiryId, NormalMode).apply(new UserAnswers(cacheMap)))
   }
 
 }

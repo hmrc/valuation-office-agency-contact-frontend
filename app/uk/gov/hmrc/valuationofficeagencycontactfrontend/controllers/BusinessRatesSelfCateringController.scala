@@ -68,7 +68,7 @@ class BusinessRatesSelfCateringController @Inject()(
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering" -> value)
           dataCacheConnector.save[String](request.sessionId, BusinessRatesSelfCateringId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(BusinessRatesSelfCateringId, mode)(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(BusinessRatesSelfCateringId, mode).apply(new UserAnswers(cacheMap))))
         }
       )
   }

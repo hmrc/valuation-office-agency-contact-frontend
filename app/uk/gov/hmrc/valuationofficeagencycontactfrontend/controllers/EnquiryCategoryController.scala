@@ -66,7 +66,7 @@ class EnquiryCategoryController @Inject()(
             cacheMap <- dataCacheConnector.save[String](request.sessionId, EnquiryCategoryId.toString, value)
           } yield {
             auditService.sendRadioButtonSelection(request.uri, "enquiryCategory" -> value)
-            Redirect(navigator.nextPage(EnquiryCategoryId, mode)(new UserAnswers(cacheMap)))
+            Redirect(navigator.nextPage(EnquiryCategoryId, mode).apply(new UserAnswers(cacheMap)))
           }
       )
   }

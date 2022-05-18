@@ -60,7 +60,7 @@ class WhatElseController @Inject()(appConfig: FrontendAppConfig,
           Future.successful(BadRequest(whatElse(appConfig, formWithErrors, mode))),
         (value) =>
           dataCacheConnector.save[String](request.sessionId, WhatElseId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(WhatElseId, mode)(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(WhatElseId, mode).apply(new UserAnswers(cacheMap))))
       )
   }
 }

@@ -69,7 +69,7 @@ class CouncilTaxBusinessController @Inject()(appConfig: FrontendAppConfig,
             cacheMap <- dataCacheConnector.save[String](request.sessionId, CouncilTaxBusinessEnquiryId.toString, value)
           } yield {
             auditService.sendRadioButtonSelection(request.uri, "councilTaxBusinessEnquiry" -> value)
-            Redirect(navigator.nextPage(CouncilTaxBusinessEnquiryId, mode)(new UserAnswers(cacheMap)))
+            Redirect(navigator.nextPage(CouncilTaxBusinessEnquiryId, mode).apply(new UserAnswers(cacheMap)))
           }
       )
   }

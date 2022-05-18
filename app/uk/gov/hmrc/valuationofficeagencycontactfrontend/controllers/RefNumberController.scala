@@ -58,7 +58,7 @@ class RefNumberController @Inject()(appConfig: FrontendAppConfig,
           ),
         (value) =>
           dataCacheConnector.save[String](request.sessionId, RefNumberId.toString, value.getOrElse("")).map(cacheMap =>
-            Redirect(navigator.nextPage(RefNumberId, mode)(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(RefNumberId, mode).apply(new UserAnswers(cacheMap))))
       )
   }
 }

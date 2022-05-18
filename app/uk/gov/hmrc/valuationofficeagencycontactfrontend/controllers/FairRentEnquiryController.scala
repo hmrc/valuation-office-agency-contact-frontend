@@ -65,7 +65,7 @@ class FairRentEnquiryController @Inject()(
         value => {
           auditService.sendRadioButtonSelection(request.uri, "fairRents" -> value)
           dataCacheConnector.save[String](request.sessionId, FairRentEnquiryId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(FairRentEnquiryId, mode)(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(FairRentEnquiryId, mode).apply(new UserAnswers(cacheMap))))
         }
       )
   }

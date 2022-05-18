@@ -79,7 +79,7 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
             cacheMap <- dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeEnquiryId.toString, value)
           } yield {
             auditService.sendRadioButtonSelection(request.uri, "annexe" -> value)
-            Redirect(navigator.nextPage(CouncilTaxAnnexeEnquiryId, mode)(new UserAnswers(cacheMap)))
+            Redirect(navigator.nextPage(CouncilTaxAnnexeEnquiryId, mode).apply(new UserAnswers(cacheMap)))
           }
       )
   }
@@ -106,7 +106,7 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
         value => {
           auditService.sendRadioButtonSelection(request.uri, "annexeSelfContainedEnquiry" -> value)
           dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeSelfContainedEnquiryId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(CouncilTaxAnnexeSelfContainedEnquiryId, NormalMode)(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(CouncilTaxAnnexeSelfContainedEnquiryId, NormalMode).apply(new UserAnswers(cacheMap))))
         }
       )
   }
@@ -143,7 +143,7 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
         value => {
           auditService.sendRadioButtonSelection(request.uri, "annexeCookingWashing" -> value)
           dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeHaveCookingId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(CouncilTaxAnnexeHaveCookingId, NormalMode)(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(CouncilTaxAnnexeHaveCookingId, NormalMode).apply(new UserAnswers(cacheMap))))
         }
       )
   }

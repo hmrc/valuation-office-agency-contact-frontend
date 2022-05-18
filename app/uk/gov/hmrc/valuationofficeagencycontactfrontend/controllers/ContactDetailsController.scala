@@ -78,7 +78,7 @@ class ContactDetailsController @Inject()(appConfig: FrontendAppConfig,
           }),
         (value) =>
           dataCacheConnector.save[ContactDetails](request.sessionId, ContactDetailsId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(ContactDetailsId, mode)(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(ContactDetailsId, mode).apply(new UserAnswers(cacheMap))))
       )
   }
 

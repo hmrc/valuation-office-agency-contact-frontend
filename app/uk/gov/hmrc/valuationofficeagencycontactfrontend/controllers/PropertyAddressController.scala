@@ -67,7 +67,7 @@ class PropertyAddressController @Inject()(appConfig: FrontendAppConfig,
           Future.successful(BadRequest(propertyAddress(appConfig, formWithErrors, mode, helpTextKey(request.userAnswers)))),
         (value) =>
           dataCacheConnector.save[PropertyAddress](request.sessionId, PropertyAddressId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(PropertyAddressId, mode)(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(PropertyAddressId, mode).apply(new UserAnswers(cacheMap))))
       )
   }
 }

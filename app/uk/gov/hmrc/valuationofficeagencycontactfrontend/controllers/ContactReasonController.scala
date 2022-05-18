@@ -52,7 +52,7 @@ class ContactReasonController @Inject()( override val messagesApi: MessagesApi,
       value => {
         auditService.sendRadioButtonSelection(request.uri, "contactReason" -> value)
         dataCacheConnector.save[String](request.sessionId, ContactReasonId.toString, value).map(cacheMap =>
-          Redirect(navigator.nextPage(ContactReasonId, mode)(new UserAnswers(cacheMap))))
+          Redirect(navigator.nextPage(ContactReasonId, mode).apply(new UserAnswers(cacheMap))))
       }
     )
   }

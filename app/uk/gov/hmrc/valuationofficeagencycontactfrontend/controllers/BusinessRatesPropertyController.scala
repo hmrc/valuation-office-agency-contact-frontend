@@ -67,7 +67,7 @@ class BusinessRatesPropertyController @Inject()(
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesPropertyEnquiry" -> value)
           dataCacheConnector.save[String](request.sessionId, BusinessRatesPropertyEnquiryId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(BusinessRatesPropertyEnquiryId, mode)(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(BusinessRatesPropertyEnquiryId, mode).apply(new UserAnswers(cacheMap))))
         }
       )
   }

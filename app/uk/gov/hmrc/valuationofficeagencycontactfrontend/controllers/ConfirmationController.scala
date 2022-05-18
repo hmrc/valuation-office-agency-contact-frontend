@@ -66,7 +66,7 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
         enquiryKey(request.userAnswers) match {
           case Right(_) =>
             emailConnector.sendEnquiryConfirmation(contact)
-            Redirect(navigator.nextPage(CheckYourAnswersId, NormalMode)(request.userAnswers))
+            Redirect(navigator.nextPage(CheckYourAnswersId, NormalMode).apply(request.userAnswers))
           case Left(msg) => {
             log.warn(s"Obtaining enquiry value - Navigation for Confirmation page reached with error $msg")
             throw new RuntimeException(s"Obtaining enquiry value - Navigation for Confirmation page reached with error $msg")

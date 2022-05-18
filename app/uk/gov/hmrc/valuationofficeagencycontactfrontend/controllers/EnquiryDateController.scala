@@ -57,7 +57,7 @@ class EnquiryDateController @Inject()(appConfig: FrontendAppConfig,
       value => {
         auditService.sendRadioButtonSelection(request.uri, "enquiryDate" -> value)
         dataCacheConnector.save[String](request.sessionId, EnquiryDateId.toString, value).map(cacheMap =>
-          Redirect(navigator.nextPage(EnquiryDateId, mode)(new UserAnswers(cacheMap))))
+          Redirect(navigator.nextPage(EnquiryDateId, mode).apply(new UserAnswers(cacheMap))))
       }
     )
   }
