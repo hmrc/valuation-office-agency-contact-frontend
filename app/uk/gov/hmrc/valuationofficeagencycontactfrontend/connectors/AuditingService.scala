@@ -54,7 +54,7 @@ class AuditingService @Inject()(auditConnector: AuditConnector)  {
     sendEventMap("SurveyFeedback", detail, tags)
 
   def sendTimeout(userAnswers: Option[UserAnswers])(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit =
-    sendEventObject("Timeout", LogoutEvent(userAnswers))
+    sendEventObject("UserTimeout", LogoutEvent(userAnswers))
 
   def sendLogout(userAnswers: Option[UserAnswers])(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit =
     sendEventObject("Logout", LogoutEvent(userAnswers))
