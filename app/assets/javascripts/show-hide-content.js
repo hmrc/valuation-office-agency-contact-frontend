@@ -34,8 +34,7 @@
 
     // Escape name attribute for use in DOM selector
     function escapeElementName (str) {
-      var result = str.replace('[', '\[').replace(']', '\]')
-      return result
+      return str.replace('[', '\[').replace(']', '\]')
     }
 
     // Adds ARIA attributes to control + associated content
@@ -111,10 +110,9 @@
     function handleRadioContent ($control, $content) {
       // All radios in this group which control content
       var selector = selectors.radio + '[name=' + escapeElementName($control.attr('name')) + '][aria-controls]'
-      var $radios = $control.closest('form').find(selector)
 
       // Hide content for radios in group
-      $radios.each(function () {
+      $control.closest('form').find(selector).each(function () {
         hideToggledContent($(this))
       })
 

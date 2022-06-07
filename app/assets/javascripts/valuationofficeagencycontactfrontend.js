@@ -19,8 +19,7 @@ $(document).ready(function() {
   // Initialise show-hide-content
   // Toggles additional content based on radio/checkbox input state
   // =====================================================
-      var showHideContent = new GOVUK.ShowHideContent()
-      showHideContent.init()
+    new GOVUK.ShowHideContent().init()
 
   // =====================================================
   // Handle number inputs
@@ -88,8 +87,7 @@ $(document).ready(function() {
 
       //Chrome
       if(typeof window.matchMedia != 'undefined'){
-          var mediaQueryList = window.matchMedia('print');
-          mediaQueryList.addListener(function(mql) {
+          matchMedia('print').addListener(function(mql) {
               if (mql.matches) {
                   beforePrintCall();
               };
