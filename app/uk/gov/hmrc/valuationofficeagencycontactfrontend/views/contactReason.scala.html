@@ -14,7 +14,8 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukBackLink, GovukButton, GovukRadios, GovukErrorSummary, GovukFieldset}
+@import play.api.Configuration
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukBackLink, GovukButton, GovukRadios, GovukErrorSummary, GovukFieldset, GovukNotificationBanner}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
@@ -27,12 +28,21 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.notificationbanner.NotificationBanner
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactReasonForm
 
 
-@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF, govukBackLink: GovukBackLink,
-        govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary, govukFieldset: GovukFieldset)
+@this(mainTemplate: main_template,
+        formWithCSRF: FormWithCSRF,
+        govukBackLink: GovukBackLink,
+        govukRadios: GovukRadios,
+        govukButton: GovukButton,
+        govukErrorSummary: GovukErrorSummary,
+        govukFieldset: GovukFieldset,
+        govukNotificationBanner: GovukNotificationBanner,
+        configuration: Configuration
+)
 
 
 @(form: Form[String], mode: Mode)(implicit request: Request[_], messages: Messages)
@@ -59,6 +69,13 @@
      errorList = form.errors.map(e => ErrorLink(href = Some("#contactReason.new_enquiry"), content = HtmlContent(messages(e.messages, e.args))))
     )
    )
+  } else {
+   @if(configuration.get[Boolean]("bannerNotice.enabled")) {
+    @govukNotificationBanner(NotificationBanner(
+     content = HtmlContent("<p class='govuk-notification-banner__heading'>" + configuration.get[String]("bannerNotice." + messages.lang.code + ".body") + "</p>"),
+     title = Text(configuration.get[String]("bannerNotice." + messages.lang.code + ".title"))
+    ))
+   }
   }
 
   @govukRadios(Radios(

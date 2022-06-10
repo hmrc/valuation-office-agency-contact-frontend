@@ -63,6 +63,5 @@
     serviceUrl= Some(routes.Application.start.url),
     isWelshTranslationAvailable = true,
     additionalHeadBlock = Some(headTemplate(enableTimeoutDialog)),
-    additionalScriptsBlock = Some(hmrcScripts()),
     beforeContentBlock = Option(beforeBLock)
 )(contentBlock)
