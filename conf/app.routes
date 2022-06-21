@@ -55,7 +55,7 @@ GET         /changeBusinessRatesSubcategory        uk.gov.hmrc.valuationofficeag
 POST        /changeBusinessRatesSubcategory        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onSubmit(mode: Mode = CheckMode)
 
 GET         /challenge-business-rates              uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesChallengeController.onChallengePageLoad()
-GET         /property-or-area-changed              uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesChallengeController.onAreaChangePageLoad()
+GET         /property-or-area-changed-in-England   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesChallengeController.onAreaChangePageLoad()
 
 GET         /property-address                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyAddressController.onPageLoad(mode: Mode = NormalMode)
 POST        /property-address                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyAddressController.onSubmit(mode: Mode = NormalMode)
@@ -135,8 +135,7 @@ GET         /property-wales-lets-no-action               uk.gov.hmrc.valuationof
 
 GET         /property-england-lets                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onEngLetsPageLoad(mode: Mode = NormalMode)
 GET         /property-wales-lets                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onWalLetsPageLoad(mode: Mode = NormalMode)
-GET         /change-valuation                            uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onChangeValuationPageLoad(mode: Mode = NormalMode)
-GET         /demolished                                  uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onDemolishedPageLoad(mode: Mode = NormalMode)
+GET         /property-demolished-in-England              uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onDemolishedPageLoad(mode: Mode = NormalMode)
 GET         /property-needs-assessment-business-rates    uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onValuationPageLoad(mode: Mode = NormalMode)
 
 GET         /no-longer-used-for-business                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesPropertyController.onPageLoad(mode: Mode = NormalMode)

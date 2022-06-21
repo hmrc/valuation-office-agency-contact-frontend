@@ -37,23 +37,42 @@ class EnglandOrWalesPropertyRouterSpec extends AnyFlatSpec with should.Matchers 
     EnglandOrWalesPropertyRouter.previousPage(emptyUserAnswers) shouldBe routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
   }
 
-  it should "return correct next page" in {
-    val demolishedPropertyAnswer = userAnswers(Map(BusinessRatesSubcategoryId.toString -> JsString("business_rates_demolished")))
-    EnglandOrWalesPropertyRouter.nextPage(demolishedPropertyAnswer) shouldBe routes.BusinessRatesSubcategoryController.onDemolishedPageLoad()
+  it should "return correct next page for England jurisdiction" in {
+    val demolishedPropertyAnswer = userAnswers(Map(
+      BusinessRatesSubcategoryId.toString -> JsString("business_rates_change_valuation"),
+      EnglandOrWalesPropertyRouter.key -> JsString("england")
+    ))
+    EnglandOrWalesPropertyRouter.nextPage(demolishedPropertyAnswer) shouldBe routes.JourneyController.onPageLoad("valuation-online-in-England")
+  }
+
+  it should "return correct next page for Wales jurisdiction" in {
+    val propertyAreaChangesInWalesAnswers = userAnswers(Map(
+      BusinessRatesSubcategoryId.toString -> JsString("business_rates_changes"),
+      EnglandOrWalesPropertyRouter.key -> JsString("wales"),
+    ))
+    EnglandOrWalesPropertyRouter.nextPage(propertyAreaChangesInWalesAnswers) shouldBe routes.JourneyController.onPageLoad("property-or-area-changed-in-Wales")
+    EnglandOrWalesPropertyRouter.nextLang(propertyAreaChangesInWalesAnswers) shouldBe None
   }
 
   it should "return start page for empty UserAnswers" in {
     EnglandOrWalesPropertyRouter.nextPage(emptyUserAnswers) shouldBe routes.EnquiryCategoryController.onPageLoad(NormalMode)
   }
 
-  it should "return correct next page and language" in {
-    val propertyAreaChangesInWalesAnswers = userAnswers(Map(
-      BusinessRatesSubcategoryId.toString -> JsString("business_rates_changes"),
-      EnglandOrWalesPropertyRouter.key -> JsString("wales"),
+  it should "apply empty page suffix for empty jurisdiction" in {
+    val demolishedPropertyAnswer = userAnswers(Map(
+      BusinessRatesSubcategoryId.toString -> JsString("business_rates_demolished")
     ))
-    EnglandOrWalesPropertyRouter.nextPage(propertyAreaChangesInWalesAnswers) shouldBe routes.BusinessRatesChallengeController.onAreaChangePageLoad()
-    EnglandOrWalesPropertyRouter.nextLang(propertyAreaChangesInWalesAnswers).get.code shouldBe "cy"
+    EnglandOrWalesPropertyRouter.nextPage(demolishedPropertyAnswer) shouldBe routes.JourneyController.onPageLoad("property-demolished")
   }
+
+  it should "apply empty page suffix for wrong jurisdiction" in {
+    val demolishedPropertyAnswer = userAnswers(Map(
+      BusinessRatesSubcategoryId.toString -> JsString("business_rates_demolished"),
+      EnglandOrWalesPropertyRouter.key -> JsString("wrong_jurisdiction")
+    ))
+    EnglandOrWalesPropertyRouter.nextPage(demolishedPropertyAnswer) shouldBe routes.JourneyController.onPageLoad("property-demolished")
+  }
+
 
   private def userAnswers(data: Map[String, JsValue]) =
     new UserAnswers(new CacheMap("cacheId", data))

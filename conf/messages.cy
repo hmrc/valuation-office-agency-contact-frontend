@@ -459,7 +459,6 @@ businessRatesSelfCateringNoBusinessRateWales.p5.part2 =  cwblhewch ffurflen gynn
 businessRatesSelfCateringNoBusinessRateWales.p5.part3 = i ddweud wrth Asiantaeth y Swyddfa Brisio.
 
 # --- Check and challenge your business rates valuation online
-businessRatesValuationOnline.title = Gwirio a herio eich prisiad ardrethi busnes ar-lein - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesValuationOnline.heading = Gwirio a herio eich prisiad ardrethi busnes ar-lein
 businessRatesValuationOnline.p1.url = https://www.gov.uk/business-rates-valuation-account
 businessRatesValuationOnline.p1.part1 = Mewngofnodwch neu sefydlwch eich cyfrif prisio ardrethi busnes
@@ -469,11 +468,22 @@ businessRatesValuationOnline.step1 = Mewngofnodwch neu cofrestrwch i greu cyfrif
 businessRatesValuationOnline.step2 = Ychwanegu eiddo i’ch cyfrif
 businessRatesValuationOnline.step3 = Anfonwch ‘Achos gwirio’ i gadarnhau manylion yr eiddo
 businessRatesValuationOnline.step4 = Anfonwch ‘Achos her’ os ydych yn dal i anghytuno â’r gwerth ardrethol
-businessRatesValuationOnline.subheading2 = Cymorth arall ar GOV.UK
+businessRatesValuationOnline.subheading1 = Cymorth arall ar GOV.UK
 businessRatesValuationOnline.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
 businessRatesValuationOnline.p3 = Sut i wirio a herio eich prisiad ardrethi busnes
 businessRatesValuationOnline.p4.url = https://www.gov.uk/introduction-to-business-rates
 businessRatesValuationOnline.p4 = Mwy am ardrethi busnes a sut maent yn cael eu cyfrifo
+
+# --- Business rates valuation in Wales
+businessRatesValuationInWales.heading = Gwirio a herio eich prisiad ardrethi busnes ar-lein
+businessRatesValuationInWales.p1.url = https://www.gov.uk/correct-your-business-rates
+businessRatesValuationInWales.p1.part1 = Defnyddiwch wasanaeth ar-lein Asiantaeth y Swyddfa Brisio
+businessRatesValuationInWales.p1.part2 = os ydych chi’n credu y dylid newid eich prisiad ardrethi busnes.
+businessRatesValuationInWales.subheading1 = Cymorth arall ar GOV.UK
+businessRatesValuationInWales.p2.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
+businessRatesValuationInWales.p2 = Sut i wirio a herio eich prisiad ardrethi busnes
+businessRatesValuationInWales.p3.url = https://www.gov.uk/introduction-to-business-rates
+businessRatesValuationInWales.p3 = Mwy am ardrethi busnes a sut maent yn cael eu cyfrifo
 
 # ---  Tell us that your property has been demolished
 businessRatesPropertyDemolished.title = Dywedwch wrthym fod eich eiddo wedi’i ddymchwel - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK

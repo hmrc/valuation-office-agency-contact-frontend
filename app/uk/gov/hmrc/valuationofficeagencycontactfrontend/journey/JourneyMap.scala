@@ -40,6 +40,8 @@ class JourneyMap @Inject()(pageNotFound: page_not_found,
   private val pages: Seq[Page[String]] = Seq(
     // Business Rates
     EnglandOrWalesPropertyRouter,
+    BRChangeValuationInEngland,
+    BRChangeValuationInWales,
     // Housing Benefit, Local Housing Allowances
     HousingBenefitAllowancesRouter,
     LocalHousingAllowanceRates,
