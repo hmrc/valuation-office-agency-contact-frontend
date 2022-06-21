@@ -26,7 +26,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
  */
 object BRChangeValuationInWales extends CustomizedContent(
   key = "valuation-online-in-Wales",
-  fieldId = "businessRatesValuationOnline"
+  fieldId = "businessRatesValuationInWales"
 ) {
   override def previousPage: UserAnswers => Call = _ => routes.JourneyController.onPageLoad(EnglandOrWalesPropertyRouter.key)
 }
