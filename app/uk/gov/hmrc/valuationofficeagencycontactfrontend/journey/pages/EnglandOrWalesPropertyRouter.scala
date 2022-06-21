@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages
 
-import play.api.i18n.Lang
 import play.api.mvc.Call
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.BusinessRatesSubcategoryId
@@ -33,23 +32,28 @@ object EnglandOrWalesPropertyRouter extends CategoryRouter(
   options = Seq("england", "wales")
 ) {
 
-  private val langMap: Map[String, Lang] = Map(
-    "england" -> Lang("en"),
-    "wales" -> Lang("cy")
+  private val jurisdiction2suffixMap = Map(
+    "england" -> "-in-England",
+    "wales" -> "-in-Wales"
+  ).withDefault(_ => "")
+
+  private val subcategory2pageMap = Map(
+    "business_rates_change_valuation" -> "valuation-online",
+    "business_rates_changes" -> "property-or-area-changed",
+    "business_rates_demolished" -> "property-demolished"
   )
 
   override def previousPage: UserAnswers => Call = _ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
 
   override def nextPage: UserAnswers => Call =
-    _.getString(BusinessRatesSubcategoryId.toString).getOrElse("") match {
-      case "business_rates_change_valuation" => routes.BusinessRatesSubcategoryController.onChangeValuationPageLoad()
-      case "business_rates_changes" => routes.BusinessRatesChallengeController.onAreaChangePageLoad()
-      case "business_rates_demolished" => routes.BusinessRatesSubcategoryController.onDemolishedPageLoad()
-      case _ => appStartPage
-    }
+    userAnswers => {
+      val suffix = getValue(userAnswers).fold("")(jurisdiction2suffixMap)
 
-  override def nextLang: UserAnswers => Option[Lang] =
-    getValue(_) flatMap langMap.get
+      userAnswers.getString(BusinessRatesSubcategoryId.toString)
+        .flatMap(subcategory2pageMap.get)
+        .map(_ + suffix)
+        .fold(appStartPage)(routes.JourneyController.onPageLoad)
+    }
 
   override def helpWithService: Option[String] = Some("help_with_service")
 

@@ -29,7 +29,6 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSubcategory => business_rates_subcategory}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesChangeValuation => business_rates_change_valuation}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesPropertyDemolished => business_rates_demolished}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesValuation => business_rates_valuation}
 
@@ -44,7 +43,6 @@ class BusinessRatesSubcategoryController @Inject()(
                                         getData: DataRetrievalAction,
                                         requireData: DataRequiredAction,
                                         businessRatesSubcategory: business_rates_subcategory,
-                                        businessRatesChangeValuation: business_rates_change_valuation,
                                         businessRatesPropertyDemolished: business_rates_demolished,
                                         businessRatesValuation: business_rates_valuation,
                                         cc: MessagesControllerComponents
@@ -75,11 +73,6 @@ class BusinessRatesSubcategoryController @Inject()(
             Redirect(navigator.nextPage(BusinessRatesSubcategoryId, mode).apply(new UserAnswers(cacheMap)))
           }
       )
-  }
-
-  def onChangeValuationPageLoad(mode: Mode) = (getData andThen requireData) {
-    implicit request =>
-      Ok(businessRatesChangeValuation(appConfig,mode))
   }
 
   def onDemolishedPageLoad(mode: Mode) = (getData andThen requireData) {

@@ -27,6 +27,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.TellUsMoreForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.TellUsMoreId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.EnglandOrWalesPropertyRouter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode, TellUsMore}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{tellUsMore => tell_us_more}
@@ -142,7 +143,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
       case (Some("council_tax_property_split_merge"), _, _, _, _, _, _, _, _, _) => routes.PropertySplitMergeController.onPageLoad()
       case (Some("council_tax_property_demolished"), _, _, _, _, _, _, _, _, _) => routes.PropertyDemolishedController.onPageLoad()
       case (Some("council_tax_area_change"), _, _, _, _, _, _, _, _, _) => routes.PropertyPermanentChangesController.onPageLoad()
-      case (_, Some("business_rates_change_valuation"), _, _, _, _, _, _, _, _) => routes.BusinessRatesSubcategoryController.onChangeValuationPageLoad()
+      case (_, Some("business_rates_change_valuation"), _, _, _, _, _, _, _, _) => EnglandOrWalesPropertyRouter.nextPage(answers)
       case (_, Some("business_rates_from_home"), _, _, _, _, _, _, _, _) => routes.DatePropertyChangedController.onPageLoad()
       case (_, Some("business_rates_not_used"), _, _, _, _, _, _, _, _) => routes.DatePropertyChangedController.onPageLoad()
       case (_, Some("business_rates_bill"), _, _, _, _, _, _, _, _) => routes.BusinessRatesBillController.onPageLoad()
