@@ -15,13 +15,10 @@
  *@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.CustomizedContent
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey._
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.customized._
 
 @this(
-        pageTemplate: pageTemplate,
-        notImplementedCustomizedContent: notImplementedCustomized
+        pageTemplate: pageTemplate
 )
 
 @(key: String, backUrl: String, customizedContent: CustomizedContent)(implicit request: Request[_], messages: Messages)
@@ -31,14 +28,6 @@
     backUrl = backUrl
 ) {
 
-    @{
-        customizedContent match {
-            case LocalHousingAllowanceRates => localHousingAllowanceRates(customizedContent)
-            case HousingBenefitAppeals => housingBenefitAppeals(customizedContent)
-            case BRChangeValuationInEngland => brChangeValuationInEngland(customizedContent)
-            case BRChangeValuationInWales => brChangeValuationInWales(customizedContent)
-            case _ => notImplementedCustomizedContent(key, customizedContent)
-        }
-    }
+    @customizedContent.render
 
 }

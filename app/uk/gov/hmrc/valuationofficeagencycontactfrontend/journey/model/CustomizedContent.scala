@@ -18,8 +18,10 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model
 
 import play.api.data.Form
 import play.api.data.Forms.{single, text}
+import play.api.i18n.Messages
 import play.api.mvc.Call
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
+import play.twirl.api.HtmlFormat.Appendable
 
 /**
  * @author Yuriy Tumakha
@@ -32,4 +34,9 @@ abstract class CustomizedContent(val key: String,
   val getValue: UserAnswers => Option[String] = _ => None
 
   override def nextPage: UserAnswers => Call = ???
+
+  def template(customizedContent: CustomizedContent)(implicit messages: Messages): Appendable
+
+  def render(implicit messages: Messages): Appendable = template(this)
+
 }

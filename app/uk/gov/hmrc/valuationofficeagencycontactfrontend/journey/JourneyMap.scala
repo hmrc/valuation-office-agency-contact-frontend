@@ -42,6 +42,8 @@ class JourneyMap @Inject()(pageNotFound: page_not_found,
     EnglandOrWalesPropertyRouter,
     BRChangeValuationInEngland,
     BRChangeValuationInWales,
+    BRPropertyDemolishedInEngland,
+    BRPropertyDemolishedInWales,
     // Housing Benefit, Local Housing Allowances
     HousingBenefitAllowancesRouter,
     LocalHousingAllowanceRates,

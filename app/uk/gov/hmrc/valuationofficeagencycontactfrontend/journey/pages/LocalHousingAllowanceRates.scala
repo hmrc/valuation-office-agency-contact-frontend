@@ -16,10 +16,13 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages
 
+import play.api.i18n.Messages
 import play.api.mvc.Call
+import play.twirl.api.HtmlFormat.Appendable
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.CustomizedContent
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.customized.localHousingAllowanceRates
 
 /**
  * @author Yuriy Tumakha
@@ -29,4 +32,8 @@ object LocalHousingAllowanceRates extends CustomizedContent(
   fieldId = "localHousingAllowanceRates"
 ) {
   override def previousPage: UserAnswers => Call = _ => routes.JourneyController.onPageLoad(HousingBenefitAllowancesRouter.key)
+
+  override def template(customizedContent: CustomizedContent)(implicit messages: Messages): Appendable =
+    localHousingAllowanceRates(customizedContent)
+
 }
