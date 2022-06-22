@@ -474,7 +474,6 @@ businessRatesValuationInWales.p3.url = https://www.gov.uk/introduction-to-busine
 businessRatesValuationInWales.p3 = More about business rates and how they are calculated
 
 # ---  Tell us that your property has been demolished
-businessRatesPropertyDemolished.title = Tell us that your property has been demolished - Valuation Office Agency contact form - GOV.UK
 businessRatesPropertyDemolished.heading = Tell us that your property has been demolished
 businessRatesPropertyDemolished.p1.url = https://www.gov.uk/business-rates-valuation-account
 businessRatesPropertyDemolished.p1.part1 = Sign into or set up your business rates valuation account
@@ -483,11 +482,22 @@ businessRatesPropertyDemolished.p2 = How to tell us: step by step
 businessRatesPropertyDemolished.step1 = Sign in or register for an account
 businessRatesPropertyDemolished.step2 = Add a property to your account
 businessRatesPropertyDemolished.step3 = Send a ‘Check case’ to confirm the property details
-businessRatesPropertyDemolished.subheading = Other help on GOV.UK
+businessRatesPropertyDemolished.subheading1 = Other help on GOV.UK
 businessRatesPropertyDemolished.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
 businessRatesPropertyDemolished.p3 = A step by step guide to check and challenge
 businessRatesPropertyDemolished.p4.url = https://www.gov.uk/guidance/how-to-check-and-challenge-your-rateable-value-in-wales
 businessRatesPropertyDemolished.p4 = How to check and challenge your business rates valuation in Wales
+
+# --- Property has been demolished in Wales
+businessRatesPropertyDemolishedInWales.heading = Tell us that your property has been demolished
+businessRatesPropertyDemolishedInWales.p1.url = https://www.gov.uk/correct-your-business-rates
+businessRatesPropertyDemolishedInWales.p1.part1 = Use the Valuation Office Agency’s online service
+businessRatesPropertyDemolishedInWales.p1.part2 = to tell us that your property has been demolished.
+businessRatesPropertyDemolishedInWales.subheading1 = Other help on GOV.UK
+businessRatesPropertyDemolishedInWales.p2.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
+businessRatesPropertyDemolishedInWales.p2 = A step by step guide to check and challenge
+businessRatesPropertyDemolishedInWales.p3.url = https://www.gov.uk/guidance/how-to-check-and-challenge-your-rateable-value-in-wales
+businessRatesPropertyDemolishedInWales.p3 = How to check and challenge your business rates valuation in Wales
 
 # --- My property needs a business rates valuation
 businessRatesValuation.title = Speak to your local council first about getting a business rates valuation - Valuation Office Agency contact form - GOV.UK

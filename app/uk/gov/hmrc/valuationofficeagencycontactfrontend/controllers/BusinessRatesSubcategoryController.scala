@@ -29,7 +29,6 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSubcategory => business_rates_subcategory}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesPropertyDemolished => business_rates_demolished}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesValuation => business_rates_valuation}
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -43,7 +42,6 @@ class BusinessRatesSubcategoryController @Inject()(
                                         getData: DataRetrievalAction,
                                         requireData: DataRequiredAction,
                                         businessRatesSubcategory: business_rates_subcategory,
-                                        businessRatesPropertyDemolished: business_rates_demolished,
                                         businessRatesValuation: business_rates_valuation,
                                         cc: MessagesControllerComponents
                                                   ) extends FrontendController(cc) with I18nSupport {
@@ -73,11 +71,6 @@ class BusinessRatesSubcategoryController @Inject()(
             Redirect(navigator.nextPage(BusinessRatesSubcategoryId, mode).apply(new UserAnswers(cacheMap)))
           }
       )
-  }
-
-  def onDemolishedPageLoad(mode: Mode) = (getData andThen requireData) {
-    implicit request =>
-      Ok(businessRatesPropertyDemolished(appConfig,mode))
   }
 
   def onValuationPageLoad(mode: Mode)= (getData andThen requireData) {

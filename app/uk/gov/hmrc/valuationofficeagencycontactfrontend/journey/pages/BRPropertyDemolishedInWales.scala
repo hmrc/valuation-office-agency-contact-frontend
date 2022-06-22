@@ -22,18 +22,18 @@ import play.twirl.api.HtmlFormat.Appendable
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.CustomizedContent
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.customized.housingBenefitAppeals
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.customized.brPropertyDemolishedInWales
 
 /**
  * @author Yuriy Tumakha
  */
-object HousingBenefitAppeals extends CustomizedContent(
-  key = "housing-benefit-appeals",
-  fieldId = "housingBenefitAppeals"
+object BRPropertyDemolishedInWales extends CustomizedContent(
+  key = "property-demolished-in-Wales",
+  fieldId = "businessRatesPropertyDemolishedInWales"
 ) {
-  override def previousPage: UserAnswers => Call = _ => routes.JourneyController.onPageLoad(HousingBenefitEnquiry.key)
+  override def previousPage: UserAnswers => Call = _ => routes.JourneyController.onPageLoad(EnglandOrWalesPropertyRouter.key)
 
   override def template(customizedContent: CustomizedContent)(implicit messages: Messages): Appendable =
-    housingBenefitAppeals(customizedContent)
+    brPropertyDemolishedInWales(customizedContent)
 
 }

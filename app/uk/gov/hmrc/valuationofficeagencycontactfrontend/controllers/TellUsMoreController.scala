@@ -153,7 +153,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
       case (_, Some("business_rates_self_catering"), _, _, _, _, Some("wales"), _, Some("yes"), Some("yes")) => routes.BusinessRatesSelfCateringController.onWalLetsPageLoad()
       case (_, Some("business_rates_self_catering"), _, _, _, _, Some("wales"), _, Some("yes"), Some("no")) => routes.PropertyWalesLetsNoActionController.onPageLoad()
       case (_, Some("business_rates_changes"), _, _, _, _, _, _, _, _) => routes.BusinessRatesBillController.onPageLoad()
-      case (_, Some("business_rates_demolished"), _, _, _, _, _, _, _, _) => routes.BusinessRatesSubcategoryController.onDemolishedPageLoad()
+      case (_, Some("business_rates_demolished"), _, _, _, _, _, _, _, _) => EnglandOrWalesPropertyRouter.nextPage(answers)
       case (_, Some("business_rates_valuation"), _, _, _, _, _, _, _, _) => routes.BusinessRatesSubcategoryController.onValuationPageLoad()
       case (_, Some("business_rates_property_empty"), _, _, _, _, _, _, _, _) => routes.PropertyEmptyController.onBusinessRatesPageLoad()
       case (_, Some("business_rates_other"), _, _, _, _, _, _, _, _) => routes.BusinessRatesSubcategoryController.onPageLoad(mode)

@@ -135,7 +135,6 @@ GET         /property-wales-lets-no-action               uk.gov.hmrc.valuationof
 
 GET         /property-england-lets                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onEngLetsPageLoad(mode: Mode = NormalMode)
 GET         /property-wales-lets                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSelfCateringController.onWalLetsPageLoad(mode: Mode = NormalMode)
-GET         /property-demolished-in-England              uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onDemolishedPageLoad(mode: Mode = NormalMode)
 GET         /property-needs-assessment-business-rates    uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onValuationPageLoad(mode: Mode = NormalMode)
 
 GET         /no-longer-used-for-business                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesPropertyController.onPageLoad(mode: Mode = NormalMode)

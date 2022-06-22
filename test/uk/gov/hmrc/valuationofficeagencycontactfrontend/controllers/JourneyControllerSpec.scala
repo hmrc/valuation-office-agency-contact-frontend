@@ -21,12 +21,13 @@ import play.api.i18n.{DefaultMessagesApi, Lang, Messages, MessagesImpl}
 import play.api.libs.json.JsString
 import play.api.mvc.{Call, Request}
 import play.api.test.Helpers._
+import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.JourneyMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.{CustomizedContent, NotImplemented}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.HousingBenefitAllowancesRouter
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.{HousingBenefitAllowancesRouter, HousingBenefitAppeals, HousingBenefitEnquiry}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.{categoryRouter, customizedContent, notImplemented, singleTextarea}
@@ -141,25 +142,18 @@ class JourneyControllerSpec extends ControllerSpecBase {
       html must include("/back/url")
     }
 
-    "handle not implemented CustomizedContent" in {
-      object CustomizedContentPage extends CustomizedContent("some-customized-content", "customizedPrefix") {
-        override def previousPage: UserAnswers => Call = _ => appStartPage
-      }
+    "handle customized content HousingBenefitAppeals" in {
+      val customizedContentPage = HousingBenefitAppeals
 
       implicit val request: Request[_] = fakeRequest
       implicit val messages: Messages = MessagesImpl(Lang("en"), new DefaultMessagesApi)
 
-      CustomizedContentPage.previousPage(userAnswers).url mustBe CustomizedContentPage.appStartPage.url
+      customizedContentPage.previousPage(userAnswers).url mustBe routes.JourneyController.onPageLoad(HousingBenefitEnquiry.key).url
 
-      assertThrows[NotImplementedError] {
-        CustomizedContentPage.nextPage(userAnswers).url
-      }
-
-      val html = customizedContentTemplate(CustomizedContentPage.key, "/back/url", CustomizedContentPage).toString()
-      html must include("Not Implemented Customized Content")
-      html must include(CustomizedContentPage.key)
+      val html = customizedContentTemplate(customizedContentPage.key, "/back/url", customizedContentPage).toString()
+      html must include("housingBenefitAppeals.heading - service.name - GOV.UK")
       html must include("/back/url")
-      html must include("CustomizedContentPage")
+      html must include("https://www.gov.uk/appeal-housing-benefit-decision")
     }
 
   }
