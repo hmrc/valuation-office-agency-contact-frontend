@@ -55,7 +55,6 @@ GET         /changeBusinessRatesSubcategory        uk.gov.hmrc.valuationofficeag
 POST        /changeBusinessRatesSubcategory        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onSubmit(mode: Mode = CheckMode)
 
 GET         /challenge-business-rates              uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesChallengeController.onChallengePageLoad()
-GET         /property-or-area-changed-in-England   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesChallengeController.onAreaChangePageLoad()
 
 GET         /property-address                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyAddressController.onPageLoad(mode: Mode = NormalMode)
 POST        /property-address                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyAddressController.onSubmit(mode: Mode = NormalMode)

@@ -569,7 +569,7 @@ businessRatesChallenge.title = Challenging my business rates valuation - Valuati
 businessRatesChallenge.heading = Challenging my business rates valuation
 businessRatesChallenge.body = Use the Valuation Office Agency’s online service to <a href="https://www.gov.uk/correct-your-business-rates" target="_self">check and challenge your business rates valuation</a>.</p><p class="govuk-body">If your property is in England, you’ll need to register and claim your property before you can challenge the valuation.
 
-propertyOrAreaChanged.title = Tell us about changes to your property or area - Valuation Office Agency contact form - GOV.UK
+# --- Changes to your property or area in England
 propertyOrAreaChanged.heading = Tell us about changes to your property or area
 propertyOrAreaChanged.p1.url = https://www.gov.uk/business-rates-valuation-account
 propertyOrAreaChanged.p1.part1 = Sign into or set up your business rates valuation account
@@ -579,11 +579,22 @@ propertyOrAreaChanged.step1 = Sign in or register for an account
 propertyOrAreaChanged.step2 = Add a property to your account
 propertyOrAreaChanged.step3 = Send a ‘Check case’ to confirm the property details
 propertyOrAreaChanged.step4 = Send a ‘Challenge case’ if you still disagree with the rateable value
-propertyOrAreaChanged.subheading = Other help on GOV.UK
+propertyOrAreaChanged.subheading1 = Other help on GOV.UK
 propertyOrAreaChanged.p3.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
 propertyOrAreaChanged.p3 = A step by step guide to check and challenge your business rates in England
 propertyOrAreaChanged.p4.url = https://www.gov.uk/guidance/how-to-check-and-challenge-your-rateable-value-in-wales
 propertyOrAreaChanged.p4 = How to check and challenge your business rates valuation in Wales
+
+# --- Changes to your property or area in Wales
+propertyOrAreaChangedInWales.heading = Tell us about changes to your property or area
+propertyOrAreaChangedInWales.p1.url = https://www.gov.uk/correct-your-business-rates
+propertyOrAreaChangedInWales.p1.part1 = Use the Valuation Office Agency’s online service
+propertyOrAreaChangedInWales.p1.part2 = to tell us about changes to your property or the surrounding area.
+propertyOrAreaChangedInWales.subheading1 = Other help on GOV.UK
+propertyOrAreaChangedInWales.p2.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
+propertyOrAreaChangedInWales.p2 = A step by step guide to check and challenge your business rates in England
+propertyOrAreaChangedInWales.p3.url = https://www.gov.uk/guidance/how-to-check-and-challenge-your-rateable-value-in-wales
+propertyOrAreaChangedInWales.p3 = How to check and challenge your business rates valuation in Wales
 
 # --- Property address
 propertyAddress.title = What is the property address? - Valuation Office Agency contact form - GOV.UK

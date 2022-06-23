@@ -1,0 +1,55 @@
+@*
+ * Copyright 2022 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.CustomizedContent
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+@import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.components.general_enquires
+
+
+@(customizedContent: CustomizedContent)(implicit messages: Messages)
+
+<h1 class="govuk-heading-l">@messages(customizedContent.heading)</h1>
+
+<p class="govuk-body">
+    <a class="govuk-link" target="_self" href=@messages("propertyOrAreaChanged.p1.url")>
+        @messages("propertyOrAreaChanged.p1.part1")
+    </a>
+    @messages("propertyOrAreaChanged.p1.part2")
+</p>
+
+<p class="govuk-body">@messages("propertyOrAreaChanged.p2")</p>
+
+<ol class="govuk-list govuk-list--number">
+    <li>@messages("propertyOrAreaChanged.step1")</li>
+    <li>@messages("propertyOrAreaChanged.step2")</li>
+    <li>@messages("propertyOrAreaChanged.step3")</li>
+    <li>@messages("propertyOrAreaChanged.step4")</li>
+</ol>
+
+<h2 class="govuk-heading-m">@messages("propertyOrAreaChanged.subheading1")</h2>
+
+<p class="govuk-body">
+    <a class="govuk-link" target="_self" href=@messages("propertyOrAreaChanged.p3.url")>
+        @messages("propertyOrAreaChanged.p3")
+    </a>
+    <br/>
+    <a class="govuk-link" target="_self" href=@messages("propertyOrAreaChanged.p4.url")>
+        @messages("propertyOrAreaChanged.p4")
+    </a>
+</p>
+
+@general_enquires(routes.TellUsMoreController.onPageLoad(NormalMode).url)
