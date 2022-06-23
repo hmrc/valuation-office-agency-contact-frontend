@@ -21,12 +21,11 @@ import play.api.i18n.{DefaultMessagesApi, Lang, Messages, MessagesImpl}
 import play.api.libs.json.JsString
 import play.api.mvc.{Call, Request}
 import play.api.test.Helpers._
-import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.JourneyMap
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.{CustomizedContent, NotImplemented}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.NotImplemented
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.{HousingBenefitAllowancesRouter, HousingBenefitAppeals, HousingBenefitEnquiry}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
@@ -42,16 +41,16 @@ class JourneyControllerSpec extends ControllerSpecBase {
   def singleTextareaTemplate: singleTextarea = inject[singleTextarea]
   def customizedContentTemplate: customizedContent = inject[customizedContent]
   def notImplementedTemplate: notImplemented = inject[notImplemented]
-  def journeyMap = inject[JourneyMap]
-  def auditService = inject[AuditingService]
+  private def journeyMap = inject[JourneyMap]
+  private def auditService = inject[AuditingService]
 
-  def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
+  private def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new JourneyController(journeyMap, auditService, FakeDataCacheConnector,
       dataRetrievalAction, new DataRequiredActionImpl(ec),
       categoryRouterTemplate, singleTextareaTemplate, customizedContentTemplate, notImplementedTemplate,
       MessageControllerComponentsHelpers.stubMessageControllerComponents, messagesApi)
 
-  def viewAsString(form: Form[String] = form) =
+  private def viewAsString(form: Form[String] = form): String =
     categoryRouterTemplate(form, pageKey,
       HousingBenefitAllowancesRouter.previousPage(userAnswers).url, HousingBenefitAllowancesRouter)(fakeRequest, messages).toString
 
@@ -149,6 +148,10 @@ class JourneyControllerSpec extends ControllerSpecBase {
       implicit val messages: Messages = MessagesImpl(Lang("en"), new DefaultMessagesApi)
 
       customizedContentPage.previousPage(userAnswers).url mustBe routes.JourneyController.onPageLoad(HousingBenefitEnquiry.key).url
+
+      assertThrows[NotImplementedError] {
+        customizedContentPage.nextPage(userAnswers).url
+      }
 
       val html = customizedContentTemplate(customizedContentPage.key, "/back/url", customizedContentPage).toString()
       html must include("housingBenefitAppeals.heading - service.name - GOV.UK")
