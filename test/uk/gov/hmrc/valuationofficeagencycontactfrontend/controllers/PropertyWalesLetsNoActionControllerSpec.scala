@@ -77,7 +77,7 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       val result = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRateSelection = result.isRight
       isBusinessRateSelection mustBe true
-      assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesLets70DaysController.onPageLoad().url)
+      assert(result.toOption.get == routes.PropertyWalesLets70DaysController.onPageLoad().url)
     }
 
     "returns the Property 140 Days Controller when enquiry category is business_rates and sub category is business_rates_self_catering" +
@@ -89,7 +89,7 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       val result = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRateSelection = result.isRight
       isBusinessRateSelection mustBe true
-      assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesLets140DaysController.onPageLoad().url)
+      assert(result.toOption.get == routes.PropertyWalesLets140DaysController.onPageLoad().url)
     }
 
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
@@ -119,7 +119,7 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       val result = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
-      assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesLets70DaysController.onPageLoad().url)
+      assert(result.toOption.get == routes.PropertyWalesLets70DaysController.onPageLoad().url)
     }
 
     "The enquiry key function produces a string with a back link when the enquiry category is no to 140 days controller" in {
@@ -130,7 +130,7 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       val result = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
-      assert(result.right.get == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesLets140DaysController.onPageLoad().url)
+      assert(result.toOption.get == routes.PropertyWalesLets140DaysController.onPageLoad().url)
     }
 
     "return 500 and the error view for a GET with no enquiry type" in {

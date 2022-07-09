@@ -15,7 +15,7 @@ GET         /language/:lang                        uk.gov.hmrc.valuationofficeag
 
 GET         /timeout                               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.SessionExpiredController.onPageLoad
 
-GET         /check-your-answers                    uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CheckYourAnswersController.onPageLoad
+GET         /check-your-answers                    uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CheckYourAnswersController.onPageLoad()
 GET         /goto-confirmation                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CheckYourAnswersController.goToConfirmationPage()
 
 GET         /your-enquiry                          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.EnquiryCategoryController.onPageLoad(mode: Mode = NormalMode)

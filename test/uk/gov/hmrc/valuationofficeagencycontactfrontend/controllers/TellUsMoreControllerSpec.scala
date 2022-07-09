@@ -67,7 +67,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
+      val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business.other")
       isBusinessRatesSelection mustBe true
     }
 
@@ -79,7 +79,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_from_home")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business")
+      val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business")
       isBusinessRatesSelection mustBe true
     }
 
@@ -91,7 +91,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_change_valuation")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
+      val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business.other")
       isBusinessRatesSelection mustBe true
     }
 
@@ -103,7 +103,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_bill")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
+      val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business.other")
       isBusinessRatesSelection mustBe true
     }
 
@@ -115,7 +115,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_changes")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
+      val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business.other")
       isBusinessRatesSelection mustBe true
     }
 
@@ -127,7 +127,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_property_empty")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
+      val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business.other")
       isBusinessRatesSelection mustBe true
     }
 
@@ -139,7 +139,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_valuation")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
+      val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business.other")
       isBusinessRatesSelection mustBe true
     }
 
@@ -151,7 +151,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_demolished")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
+      val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business.other")
       isBusinessRatesSelection mustBe true
     }
 
@@ -163,7 +163,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_not_used")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
+      val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business.other")
       isBusinessRatesSelection mustBe true
     }
 
@@ -175,7 +175,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isBusinessRatesSelection = result.right.get.endsWith("tellUsMore.business.other")
+      val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business.other")
       isBusinessRatesSelection mustBe true
     }
 
@@ -187,7 +187,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("business_rates_change_valuation")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.ct-reference")
+      val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.ct-reference")
       isCouncilTaxSelection mustBe true
     }
 
@@ -199,7 +199,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("council_tax_band")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.ndr-reference")
+      val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.ndr-reference")
       isCouncilTaxSelection mustBe true
     }
 
@@ -211,7 +211,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_poor_repair")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
+      val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.general")
       isCouncilTaxSelection mustBe true
     }
 
@@ -223,7 +223,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_other")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.other")
+      val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.other")
       isCouncilTaxSelection mustBe true
     }
 
@@ -235,7 +235,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_area_change")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
+      val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.general")
       isCouncilTaxSelection mustBe true
     }
 
@@ -247,7 +247,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_annexe")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
+      val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.general")
       isCouncilTaxSelection mustBe true
     }
 
@@ -259,7 +259,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_bill")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
+      val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.general")
       isCouncilTaxSelection mustBe true
     }
 
@@ -272,7 +272,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_band_too_high")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
+      val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.general")
       isCouncilTaxSelection mustBe true
     }
 
@@ -284,7 +284,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_band_for_new")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
+      val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.general")
       isCouncilTaxSelection mustBe true
     }
 
@@ -296,7 +296,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_empty")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
+      val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.general")
       isCouncilTaxSelection mustBe true
     }
 
@@ -308,7 +308,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_split_merge")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
+      val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.general")
       isCouncilTaxSelection mustBe true
     }
 
@@ -320,7 +320,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_demolished")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.general")
+      val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.general")
       isCouncilTaxSelection mustBe true
     }
 
@@ -332,7 +332,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_business_uses")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isCouncilTaxSelection = result.right.get.endsWith("tellUsMore.business")
+      val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.business")
       isCouncilTaxSelection mustBe true
     }
 
@@ -344,7 +344,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("submit_new_application")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isFairRentSelection = result.right.get.endsWith("tellUsMore.fairRent")
+      val isFairRentSelection = result.toOption.get.endsWith("tellUsMore.fairRent")
       isFairRentSelection mustBe true
     }
 
@@ -356,7 +356,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("check_fair_rent_register")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isFairRentSelection = result.right.get.endsWith("tellUsMore.fairRent")
+      val isFairRentSelection = result.toOption.get.endsWith("tellUsMore.fairRent")
       isFairRentSelection mustBe true
     }
 
@@ -368,7 +368,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.fairRentEnquiryEnquiry) thenReturn Some("other_request")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      val isFairRentSelection = result.right.get.endsWith("tellUsMore.fairRent")
+      val isFairRentSelection = result.toOption.get.endsWith("tellUsMore.fairRent")
       isFairRentSelection mustBe true
     }
 

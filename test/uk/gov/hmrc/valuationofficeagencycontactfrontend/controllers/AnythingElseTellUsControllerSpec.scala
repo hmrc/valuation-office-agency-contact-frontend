@@ -37,7 +37,7 @@ class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSu
   def anythingElse = app.injector.instanceOf[anything_else]
   def internalServerError = app.injector.instanceOf[internal_Server_Error]
 
-  def onwardRoute = routes.CheckYourAnswersController.onPageLoad
+  def onwardRoute = routes.CheckYourAnswersController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new AnythingElseTellUsController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),

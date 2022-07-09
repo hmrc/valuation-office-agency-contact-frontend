@@ -72,7 +72,7 @@ class JourneyController @Inject()(journeyMap: JourneyMap,
           val userAnswers = new UserAnswers(cacheMap)
 
           val call = if (request.changeMode) {
-            routes.CheckYourAnswersController.onPageLoad
+            routes.CheckYourAnswersController.onPageLoad()
           } else {
             page.nextPage(userAnswers)
           }

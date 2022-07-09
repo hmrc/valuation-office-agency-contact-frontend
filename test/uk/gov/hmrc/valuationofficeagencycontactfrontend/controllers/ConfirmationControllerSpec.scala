@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
-import org.mockito.Matchers._
+import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.when
 import org.scalatestplus.mockito.MockitoSugar
 import play.api.i18n.MessagesApi
@@ -159,7 +159,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
 
       val result = enquiryKey(mockUserAnswers)
-      val isBusinessRatesSelection = result.right.get.startsWith("businessRatesSubcategory")
+      val isBusinessRatesSelection = result.toOption.get.startsWith("businessRatesSubcategory")
       isBusinessRatesSelection mustBe true
     }
 
@@ -171,7 +171,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_demolished")
 
       val result = enquiryKey(mockUserAnswers)
-      val isCouncilTaxSelection = result.right.get.startsWith("councilTaxSubcategory")
+      val isCouncilTaxSelection = result.toOption.get.startsWith("councilTaxSubcategory")
       isCouncilTaxSelection mustBe true
     }
 
