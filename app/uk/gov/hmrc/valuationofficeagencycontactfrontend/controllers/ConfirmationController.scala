@@ -85,7 +85,7 @@ class ConfirmationController @Inject()(val appConfig: FrontendAppConfig,
         throw new RuntimeException(s"On Page load - Navigation for Confirmation page reached without a contact and error $msg")
     }
 
-    Ok(confirmation(appConfig, contact, answerSections, whatHappensNextMessages(request.userAnswers), SatisfactionSurveyForm.apply))
+    Ok(confirmation(appConfig, contact, answerSections, whatHappensNextMessages(request.userAnswers), SatisfactionSurveyForm.apply()))
 
   }
 }

@@ -19,6 +19,8 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours
 import play.api.data.{Form, FormError}
 import play.twirl.api.HtmlFormat
 
+import scala.jdk.CollectionConverters._
+
 trait QuestionViewBehaviours[A] extends ViewBehaviours {
 
   val errorKey = "value"
@@ -55,7 +57,6 @@ trait QuestionViewBehaviours[A] extends ViewBehaviours {
           }
 
           s"show an error in the label for field '$field'" in {
-            import collection.JavaConverters._
             val doc = asDocument(createView(form.withError(FormError(field, "error"))))
 
             val labelElement = Option {

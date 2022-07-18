@@ -80,7 +80,7 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
     )
   }
 
-  private def sendFeedback(f: SatisfactionSurvey, refNum: String)(implicit headerCarrier: HeaderCarrier) {
+  private def sendFeedback(f: SatisfactionSurvey, refNum: String)(implicit headerCarrier: HeaderCarrier): Unit = {
     auditService.sendSurveySatisfaction(Map("satisfaction" -> f.satisfaction, "referenceNumber" -> refNum)).flatMap { _ =>
       auditService.sendSurveyFeedback(Map("feedback" -> f.details.getOrElse(""), "referenceNumber" -> refNum))
     }

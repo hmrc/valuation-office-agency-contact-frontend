@@ -16,9 +16,9 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
+import org.mockito.ArgumentMatchers.any
 import org.scalatestplus.mockito.MockitoSugar
 import org.mockito.Mockito.when
-import org.mockito.Matchers.any
 import play.api.data.Form
 import play.api.libs.json.JsString
 import uk.gov.hmrc.http.cache.client.CacheMap

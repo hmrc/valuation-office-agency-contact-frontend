@@ -100,7 +100,7 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
 
   def onSelfContainedSubmit: Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
-      AnnexeSelfContainedForm().bindFromRequest.fold(
+      AnnexeSelfContainedForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(annexeSelfContainedEnquiry(appConfig, formWithErrors))),
         value => {
@@ -137,7 +137,7 @@ class CouncilTaxAnnexeController @Inject()(val appConfig: FrontendAppConfig,
 
   def onHaveCookingWashingSubmit: Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
-      AnnexeCookingWashingForm().bindFromRequest.fold(
+      AnnexeCookingWashingForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(annexeCookingWashingEnquiry(appConfig, formWithErrors))),
         value => {

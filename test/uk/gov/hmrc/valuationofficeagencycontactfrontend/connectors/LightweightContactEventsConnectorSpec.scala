@@ -33,7 +33,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors
 
 import org.mockito.ArgumentCaptor
-import org.mockito.Matchers.{any, anyString}
+import org.mockito.ArgumentMatchers.{any, anyString}
 import org.mockito.Mockito.{verify, when}
 import org.scalatestplus.mockito.MockitoSugar
 import play.api.libs.json.{JsValue, Json, Writes, _}

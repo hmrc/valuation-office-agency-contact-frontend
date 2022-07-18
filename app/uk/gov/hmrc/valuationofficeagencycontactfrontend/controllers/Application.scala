@@ -60,7 +60,7 @@ class Application @Inject() (override val messagesApi: MessagesApi,
   }
 
   def startWelsh() = Action.async { implicit request =>
-    val newReq = request.withHeaders(request.headers.replace(REFERER -> createRefererURL))
+    val newReq = request.withHeaders(request.headers.replace(REFERER -> createRefererURL()))
     languageSwitchController.switchToLanguage("cymraeg").apply(newReq)
   }
 

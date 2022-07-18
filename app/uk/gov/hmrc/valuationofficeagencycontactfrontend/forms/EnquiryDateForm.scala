@@ -29,7 +29,7 @@ object EnquiryDateForm extends FormErrorHelper {
   def enquiryDateFormatter()(implicit messages: Messages, dateUtil: DateUtil): Formatter[String] = new Formatter[String] {
     override def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
-      case None => Left(Seq(FormError(key, "error.enquiryDate.required", Seq(beforeDate))))
+      case None => Left(Seq(FormError(key, "error.enquiryDate.required", Seq(beforeDate()))))
       case _ => produceError(key, "error.unknown")
     }
 
@@ -37,7 +37,7 @@ object EnquiryDateForm extends FormErrorHelper {
   }
 
   def apply()(implicit messages: Messages, dateUtil: DateUtil): Form[String] = {
-    Form(single("value" -> of(enquiryDateFormatter)))
+    Form(single("value" -> of(enquiryDateFormatter())))
   }
 
   def options = Seq(

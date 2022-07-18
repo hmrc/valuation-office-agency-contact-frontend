@@ -50,31 +50,31 @@ class Navigator @Inject()(
 
   private val propertyAddressRouting: UserAnswers => Call = answers => {
     (answers.contactReason, answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.fairRentEnquiryEnquiry) match {
-      case (Some("new_enquiry"), Some("council_tax_property_poor_repair"), _, _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_business_uses"), _, _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_area_change"), _, _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_other"), _, _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_annexe"), _, _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_bill"), _, _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_band_too_high"), _, _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_band_for_new"), _, _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_property_empty"), _, _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_property_split_merge"), _, _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), Some("council_tax_property_demolished"), _, _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_change_valuation"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_bill"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_changes"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_from_home"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_other"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_not_used"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_self_catering"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_property_empty"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_valuation"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, Some("business_rates_demolished"), _) => routes.CheckYourAnswersController.onPageLoad
-      case (_, _, _, _) if answers.enquiryCategory.contains("housing_benefit") => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, _, Some("submit_new_application")) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, _, Some("check_fair_rent_register")) => routes.CheckYourAnswersController.onPageLoad
-      case (Some("new_enquiry"), _, _, Some("other_request")) => routes.CheckYourAnswersController.onPageLoad
+      case (Some("new_enquiry"), Some("council_tax_property_poor_repair"), _, _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_business_uses"), _, _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_area_change"), _, _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_other"), _, _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_annexe"), _, _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_bill"), _, _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_band_too_high"), _, _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_band_for_new"), _, _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_property_empty"), _, _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_property_split_merge"), _, _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), Some("council_tax_property_demolished"), _, _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_change_valuation"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_bill"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_changes"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_from_home"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_other"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_not_used"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_self_catering"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_property_empty"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_valuation"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, Some("business_rates_demolished"), _) => routes.CheckYourAnswersController.onPageLoad()
+      case (_, _, _, _) if answers.enquiryCategory.contains("housing_benefit") => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, _, Some("submit_new_application")) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, _, Some("check_fair_rent_register")) => routes.CheckYourAnswersController.onPageLoad()
+      case (Some("new_enquiry"), _, _, Some("other_request")) => routes.CheckYourAnswersController.onPageLoad()
       case (Some("new_enquiry"), _, _, _) => routes.TellUsMoreController.onPageLoad(NormalMode)
       case (Some("more_details"), _, _, _) => routes.WhatElseController.onPageLoad()
       case (Some("update_existing"), _, _, _) => routes.AnythingElseTellUsController.onPageLoad()
@@ -143,7 +143,7 @@ class Navigator @Inject()(
     }, _ =>
       (enquiryCategory.isDefined, existingEnquiryCategory.isDefined) match {
         case (true, false) => enquiryRouting(enquiryCategory, routes.ConfirmationController.onPageLoad())
-        case (false, true) => enquiryRouting(existingEnquiryCategory, routes.ConfirmationController.onPageLoad)
+        case (false, true) => enquiryRouting(existingEnquiryCategory, routes.ConfirmationController.onPageLoad())
         case _ => log.warn("Navigation for confirmation page - Enquiry or Existing Enquiry Subcategory not defined")
           throw new RuntimeException("Navigation for confirmation page - Enquiry or Existing Enquiry Subcategory not defined")
       })
@@ -228,7 +228,7 @@ class Navigator @Inject()(
       case (_, _, Some("submit_new_application")) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (_, _, Some("check_fair_rent_register")) => routes.ContactDetailsController.onPageLoad(NormalMode)
       case (_, _, Some("other_request")) => routes.ContactDetailsController.onPageLoad(NormalMode)
-      case _ => routes.CheckYourAnswersController.onPageLoad
+      case _ => routes.CheckYourAnswersController.onPageLoad()
     }
   }
 
@@ -318,8 +318,8 @@ class Navigator @Inject()(
 
   private val businessRatesPropertyEnquiryRouting: UserAnswers => Call = answers => {
     answers.businessRatesPropertyEnquiry match {
-      case Some("england") => routes.BusinessRatesPropertyController.onNonBusinessPageLoad
-      case Some("wales") => routes.DatePropertyChangedController.onPageLoad
+      case Some("england") => routes.BusinessRatesPropertyController.onNonBusinessPageLoad()
+      case Some("wales") => routes.DatePropertyChangedController.onPageLoad()
       case _ =>
         log.warn(s"Navigation for is business rates property enquiry reached without selection of enquiry by controller")
         throw new RuntimeException("Unknown exception for is business rates self catering routing")
@@ -340,16 +340,16 @@ class Navigator @Inject()(
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     ContactReasonId -> contactReasonRouting,
     EnquiryDateId -> enquiryDateRouting,
-    ExistingEnquiryCategoryId -> (_ => routes.RefNumberController.onPageLoad),
+    ExistingEnquiryCategoryId -> (_ => routes.RefNumberController.onPageLoad()),
     RefNumberId -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
     EnquiryCategoryId -> enquiryRouting,
     CouncilTaxSubcategoryId -> councilTaxPageRouting,
     BusinessRatesSubcategoryId -> businessRatesPageRouting,
     ContactDetailsId -> contactDetailsRouting,
     PropertyAddressId -> propertyAddressRouting,
-    WhatElseId -> (_ => routes.CheckYourAnswersController.onPageLoad),
+    WhatElseId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
     TellUsMoreId -> tellUsMoreRouting,
-    AnythingElseId -> (_ => routes.CheckYourAnswersController.onPageLoad),
+    AnythingElseId -> (_ => routes.CheckYourAnswersController.onPageLoad()),
     CheckYourAnswersId -> confirmationPageRouting,
     BusinessRatesSmartLinksId -> (_ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)),
     DatePropertyChangedId -> (_ => routes.TellUsMoreController.onPageLoad(NormalMode)),
@@ -369,7 +369,7 @@ class Navigator @Inject()(
     case NormalMode =>
       routeMap.getOrElse(id, (_: UserAnswers) => routes.EnquiryCategoryController.onPageLoad(NormalMode))
     case CheckMode =>
-      (_: UserAnswers) => routes.CheckYourAnswersController.onPageLoad
+      (_: UserAnswers) => routes.CheckYourAnswersController.onPageLoad()
   }) andThen auditNextUrl
 
   private def auditNextUrl(call: Call)(implicit hc: HeaderCarrier): Call = {
