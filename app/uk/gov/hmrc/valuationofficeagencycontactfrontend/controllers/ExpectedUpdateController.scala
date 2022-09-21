@@ -18,19 +18,24 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
-import uk.gov.hmrc.play.bootstrap.controller.FrontendController
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.DataRetrievalAction
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.ExistingEnquiryCategoryId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.expectedUpdate
 
 import javax.inject.Inject
 
 class ExpectedUpdateController @Inject()(override val messagesApi: MessagesApi,
                                          getData: DataRetrievalAction,
+                                         dataCacheConnector: DataCacheConnector,
                                          expected_update: expectedUpdate,
                                          cc: MessagesControllerComponents
                                         ) extends FrontendController(cc) with I18nSupport {
 
   def onPageLoad() = getData {implicit  request =>
+    dataCacheConnector.save[String](request.sessionId, ExistingEnquiryCategoryId.toString, "other")
+
     Ok(expected_update())
   }
 

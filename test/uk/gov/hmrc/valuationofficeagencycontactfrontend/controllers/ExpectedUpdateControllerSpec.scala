@@ -17,6 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.test.Helpers._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.DataRetrievalAction
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{expectedUpdate => expected_update}
@@ -26,11 +27,12 @@ class ExpectedUpdateControllerSpec extends ControllerSpecBase {
 
 
   def expectedUpdate = inject[expected_update]
+  def dataCacheConnector = inject[DataCacheConnector]
 
   def onwardRoute = routes.EnquiryDateController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new ExpectedUpdateController(messagesApi, dataRetrievalAction, expectedUpdate, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new ExpectedUpdateController(messagesApi, dataRetrievalAction, dataCacheConnector, expectedUpdate, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   def viewAsString() = expectedUpdate()(fakeRequest, messages).toString()
 
