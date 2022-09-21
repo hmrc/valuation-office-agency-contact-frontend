@@ -90,7 +90,7 @@ class UserAnswers(val cacheMap: CacheMap) {
         case "business_rates" => businessRatesSubcategory
         case "housing_benefit" => getString(lastTellUsMorePage)
         case "fair_rent" => fairRentEnquiryEnquiry
-        case "other" => otherSubcategory
+        case "other" => otherSubcategory orElse Some("other")
         case _ => None
       }
       message <- enquiryCategory match {
