@@ -437,5 +437,14 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
         }
       }
 
+    "return Redirect for initAndStart" in {
+      val emptyData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, Map.empty)))
+
+      val result = controller(emptyData).initAndStart(fakeRequest)
+
+      status(result) mustBe SEE_OTHER
+      redirectLocation(result) mustBe Some(routes.RefNumberController.onPageLoad().url)
+    }
+
   }
 }
