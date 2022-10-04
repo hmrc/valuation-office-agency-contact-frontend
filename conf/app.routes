@@ -63,6 +63,7 @@ POST        /changePropertyAddress                 uk.gov.hmrc.valuationofficeag
 
 GET         /valuation-advice                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ValuationAdviceController.onPageLoad()
 
+GET         /tell-us-more-init                     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.initAndStart
 GET         /tell-us-more                          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onPageLoad(mode: Mode = NormalMode)
 POST        /tell-us-more                          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onSubmit(mode: Mode = NormalMode)
 GET         /changeTellUsMore                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onPageLoad(mode: Mode = CheckMode)

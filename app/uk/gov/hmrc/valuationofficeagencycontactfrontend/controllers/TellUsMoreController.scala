@@ -26,7 +26,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConn
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.TellUsMoreForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.TellUsMoreId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{ExistingEnquiryCategoryId, TellUsMoreId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.EnglandOrWalesPropertyRouter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode, TellUsMore}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
@@ -47,6 +47,12 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
   private val log = Logger(this.getClass)
 
   implicit val ec: ExecutionContext = cc.executionContext
+
+  def initAndStart = getData.async { implicit request =>
+    dataCacheConnector
+      .save[String](request.sessionId, ExistingEnquiryCategoryId.toString, "other")
+      .map(_ => Redirect(routes.RefNumberController.onPageLoad().url))
+  }
 
   def onPageLoad(mode: Mode) = (getData andThen requireData) {
     implicit request =>
