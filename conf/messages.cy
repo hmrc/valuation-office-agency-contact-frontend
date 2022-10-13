@@ -182,8 +182,8 @@ councilTaxBill.p3 = <a class="govuk-link" target="_self" href="https://www.gov.u
 # --- Council Tax Band Too High
 councilTaxBandTooHigh.title = Gallwch herio’ch band Treth Gyngor ar-lein - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
 councilTaxBandTooHigh.heading = Gallwch herio’ch band Treth Gyngor ar-lein
-councilTaxBandTooHigh.p1.part1 = Defnyddiwch y gwasanaeth Treth Gyngor
-councilTaxBandTooHigh.p1.part2 = i wirio a herio’ch band Treth Gyngor.
+councilTaxBandTooHigh.p1.part1 = Heriwch eich band Treth Gyngor
+councilTaxBandTooHigh.p1.part2 = drwy ddefnyddio ein gwasanaeth.
 councilTaxBandTooHigh.p1.url = https://www.gov.uk/council-tax-bands
 councilTaxBandTooHigh.subheading = Cymorth arall ar GOV.UK
 councilTaxBandTooHigh.p2 = Sut i herio’ch band Treth Gyngor
