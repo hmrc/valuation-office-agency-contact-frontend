@@ -71,7 +71,7 @@ hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSumm
     pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("anythingElse.title"))else messages("anythingElse.title")),
     beforeContentBlock = Option(beforeBlock)
 ) {
-    @formWithCSRF(action = AnythingElseTellUsController.onSubmit(), 'autoComplete -> "off") {
+    @formWithCSRF(action = AnythingElseTellUsController.onSubmit(), Symbol("autoComplete") -> "off") {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(
