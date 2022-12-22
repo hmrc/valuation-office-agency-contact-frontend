@@ -80,12 +80,9 @@ class AuditingService @Inject()(auditConnector: AuditConnector)  {
     ExtendedDataEvent(
       auditSource = auditSource,
       auditType = auditType,
-      tags = (Seq.empty[(String, String)] :+ "transactionName" -> "submit-contact-to-VOA"
-              :+ "clientIP" -> hc.trueClientIp.getOrElse("")
-              :+ "clientPort" -> hc.trueClientPort.getOrElse("")).toMap - ("X-Request-Chain",
-              "x-forwarded-for",
-              "True-Client-IP",
-              "True-Client-Port"),
+      tags = Map("transactionName" -> "submit-contact-to-VOA",
+              "clientIP" -> hc.trueClientIp.getOrElse(""),
+              "clientPort" -> hc.trueClientPort.getOrElse("")),
       detail = json
     )
   }
