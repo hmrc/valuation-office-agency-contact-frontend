@@ -21,7 +21,7 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.Request
 import play.twirl.api.Html
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
-import uk.gov.hmrc.play.bootstrap.http.FrontendErrorHandler
+import uk.gov.hmrc.play.bootstrap.frontend.http.FrontendErrorHandler
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.error_template
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.page_not_found
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}

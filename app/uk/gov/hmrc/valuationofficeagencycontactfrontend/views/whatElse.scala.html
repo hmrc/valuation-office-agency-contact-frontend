@@ -70,7 +70,7 @@
     pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("whatElse.title"))else messages("whatElse.title")),
     beforeContentBlock = Option(beforeBlock)
 ) {
-    @formWithCSRF(action = WhatElseController.onSubmit(), 'autoComplete -> "off") {
+    @formWithCSRF(action = WhatElseController.onSubmit(), Symbol("autoComplete") -> "off") {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(

@@ -50,7 +50,7 @@
     pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("annexe.title"))else messages("annexe.title")),
     beforeContentBlock = Some(beforeBlock)
 ) {
-    @formWithCSRF(action = CouncilTaxAnnexeController.onSubmit(), 'autoComplete -> "off") {
+    @formWithCSRF(action = CouncilTaxAnnexeController.onSubmit(), Symbol("autoComplete") -> "off") {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(

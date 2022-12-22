@@ -46,7 +46,7 @@
     pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages(s"$enquiryKey.title"))else messages(s"$enquiryKey.title")),
 ) {
 
-    @formWithCSRF(action = DatePropertyChangedController.onSubmit(), 'autoComplete -> "off") {
+    @formWithCSRF(action = DatePropertyChangedController.onSubmit(), Symbol("autoComplete") -> "off") {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(

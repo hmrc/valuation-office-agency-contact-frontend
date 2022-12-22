@@ -119,7 +119,7 @@
         pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + title) else title),
         beforeContentBlock = Option(beforeBlock)
     ) {
-        @formWithCSRF(action = TellUsMoreController.onSubmit(mode), 'autoComplete -> "off") {
+        @formWithCSRF(action = TellUsMoreController.onSubmit(mode), Symbol("autoComplete") -> "off") {
             @if(form.hasErrors) {
                 @govukErrorSummary(
                     ErrorSummary(

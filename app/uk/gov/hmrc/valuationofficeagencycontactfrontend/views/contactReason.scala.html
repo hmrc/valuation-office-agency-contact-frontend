@@ -51,7 +51,7 @@
  @govukBackLink(
   BackLink(
    content = Text(messages("site.back")),
-   href = routes.Application.start.url,
+   href = routes.Application.start().url,
    classes = "govuk-!-margin-top-0 govuk-!-margin-bottom-0")
  )
 }
@@ -61,7 +61,7 @@
  beforeContentBlock = Some(beforeBlock),
  enableTimeoutDialog = false
 ) {
- @formWithCSRF(action = routes.ContactReasonController.onSubmit(), 'autoComplete -> "off") {
+ @formWithCSRF(action = routes.ContactReasonController.onSubmit(), Symbol("autoComplete") -> "off") {
   @if(form.hasErrors) {
    @govukErrorSummary(
     ErrorSummary(

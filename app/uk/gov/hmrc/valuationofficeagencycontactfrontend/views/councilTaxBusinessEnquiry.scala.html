@@ -51,7 +51,7 @@
     pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("councilTaxBusinessEnquiry.title"))else messages("councilTaxBusinessEnquiry.title")),
     beforeContentBlock = Option(beforeBlock)
 ) {
-    @formWithCSFR(action = CouncilTaxBusinessController.onEnquirySubmit(), 'autoComplete -> "off") {
+    @formWithCSFR(action = CouncilTaxBusinessController.onEnquirySubmit(), Symbol("autoComplete") -> "off") {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(

@@ -65,15 +65,15 @@ private[mappings] class LocalDateFormatter(key: String) extends Formatter[Option
 
   def validateDateField(key: String, day: String, month: String, year: String): Either[Seq[FormError], Option[LocalDate]] = {
     for {
-      day <- validateDay(key, day).right
-      month <- validateMont(key, month).right
-      year <- validateYear(key, year).right
+      day <- validateDay(key, day)
+      month <- validateMont(key, month)
+      year <- validateYear(key, year)
       finalDate <- {
         Try (
           LocalDate.of(year, month, day)
         ).toEither.left.map(_ =>
           List(FormError(key, invalidDate),FormError(key, dayMsg),FormError(key, monthMsg),FormError(key, yearMsg))
-        ).right.flatMap { date =>
+        ).flatMap { date =>
           if(date.isBefore(earliestEffectiveDate)) {
             Left(List(FormError(key, yearRange),FormError(key, dayMsg),FormError(key, monthMsg),FormError(key, yearMsg)))
           }else {

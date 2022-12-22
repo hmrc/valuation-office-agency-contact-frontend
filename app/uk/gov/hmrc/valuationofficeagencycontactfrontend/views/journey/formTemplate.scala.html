@@ -52,7 +52,7 @@
         )
     }
 
-    @formWithCSRF(action = routes.JourneyController.onSubmit(key), 'autoComplete -> "off") {
+    @formWithCSRF(action = routes.JourneyController.onSubmit(key), Symbol("autoComplete") -> "off") {
 
         @formFields
 
