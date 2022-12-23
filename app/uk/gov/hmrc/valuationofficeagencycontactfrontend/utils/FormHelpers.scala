@@ -16,20 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
-import play.api.data.Form
-
 object FormHelpers {
-
-  def getErrorByKey[A](form: Form[A], errorKey: String) = {
-    form.error(errorKey) match {  //TODO - retrieve only one error. Some fields have more that validation rules
-      case None => ""
-      case Some(error) => error.message
-    }
-  }
-
-  def getErrorsByKey[A](form: Form[A], errorKey: String): Seq[String] = {
-    form.errors(errorKey).map(_.message)
-  }
 
   val antiXSSRegex = """^[A-Za-z0-9\s\-&,]+$"""
 }

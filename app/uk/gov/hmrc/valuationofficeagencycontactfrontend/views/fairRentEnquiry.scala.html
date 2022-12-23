@@ -51,7 +51,7 @@ govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErro
     pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("fairRents.title"))else messages("fairRents.title")),
     beforeContentBlock = Option(beforeBlock)
 ) {
-    @formWithCSRF(action = FairRentEnquiryController.onSubmit(), 'autoComplete -> "off") {
+    @formWithCSRF(action = FairRentEnquiryController.onSubmit(), Symbol("autoComplete") -> "off") {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(

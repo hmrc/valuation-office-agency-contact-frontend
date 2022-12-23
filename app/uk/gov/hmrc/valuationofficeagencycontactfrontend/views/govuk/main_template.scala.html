@@ -60,7 +60,7 @@
 @hmrcLayout(
     pageTitle = pageTitle,
     serviceName = Some(messages("site.service_name")),
-    serviceUrl= Some(routes.Application.start.url),
+    serviceUrl= Some(routes.Application.start().url),
     isWelshTranslationAvailable = true,
     additionalHeadBlock = Some(headTemplate(enableTimeoutDialog)),
     beforeContentBlock = Option(beforeBLock)

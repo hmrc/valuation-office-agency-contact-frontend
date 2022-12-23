@@ -50,7 +50,7 @@ govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErro
     pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("businessRatesSelfCatering.title"))else messages("businessRatesSelfCatering.title")),
     beforeContentBlock = Option(beforeBlock)
 ) {
-    @formWithCSRF(action = BusinessRatesSelfCateringController.onSubmit(), 'autoComplete -> "off") {
+    @formWithCSRF(action = BusinessRatesSelfCateringController.onSubmit(), Symbol("autoComplete") -> "off") {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(

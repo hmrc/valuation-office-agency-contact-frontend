@@ -17,6 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import play.api.data.Form
+import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode}
@@ -33,7 +34,7 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
 
   def createNDRViewUsingForm(form: Form[ContactDetails]) = contactDetails(frontendAppConfig, form, NormalMode, ndrBackLink)(fakeRequest, messages)
 
-  def createCTView() = contactDetails(frontendAppConfig, ContactDetailsForm(), NormalMode, ctBackLink)(fakeRequest, messages)
+  def createCTView(): HtmlFormat.Appendable = contactDetails(frontendAppConfig, ContactDetailsForm(), NormalMode, ctBackLink)(fakeRequest, messages)
 
   def createCTViewUsingForm(form: Form[ContactDetails]) = contactDetails(frontendAppConfig, form, NormalMode, ctBackLink)(fakeRequest, messages)
 
@@ -41,7 +42,7 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
 
   "ContactDetails view" must {
 
-    behave like normalPage(createCTView, messageKeyPrefix)
+    behave like normalPage(() => createCTView(), messageKeyPrefix)
 
     behave like pageWithTextFields(createCTViewUsingForm, messageKeyPrefix, routes.ContactDetailsController.onSubmit(NormalMode).url, "fullName",
       "email", "contactNumber")

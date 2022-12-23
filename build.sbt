@@ -14,6 +14,8 @@ import uk.gov.hmrc.versioning.SbtGitVersioning
 
 val appName = "valuation-office-agency-contact-frontend"
 
+ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" % VersionScheme.Always // Resolves versions conflict
+
 lazy val root = Project(appName, file("."))
   .enablePlugins(PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin)
   .disablePlugins(JUnitXmlReportPlugin)
@@ -35,16 +37,14 @@ lazy val root = Project(appName, file("."))
     libraryDependencies ++= Dependencies.appDependencies,
     retrieveManaged := true,
     Test / fork := true,
-    scalaVersion := "2.13.8",
+    scalaVersion := "2.13.10",
     DefaultBuildSettings.targetJvm := "jvm-11",
+    scalacOptions += "-Wconf:src=routes/.*:s",
+    scalacOptions += "-Wconf:cat=unused-imports&src=html/.*:s",
     maintainer := "voa.service.optimisation@digital.hmrc.gov.uk"
   )
   .configs(IntegrationTest)
   .settings(integrationTestSettings())
-  .settings(resolvers ++= Seq(
-    Resolver.bintrayRepo("hmrc", "releases"),
-    Resolver.jcenterRepo
-  ))
   .settings(
     // concatenate js
     Concat.groups := Seq(

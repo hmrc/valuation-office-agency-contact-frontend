@@ -50,7 +50,7 @@
     pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + messages("businessRatesSubcategory.title")) else messages("businessRatesSubcategory.title")),
     beforeContentBlock = Option(beforeBlock)
 ) {
-    @formWithCSRF(action = BusinessRatesSubcategoryController.onSubmit(mode), 'autoComplete -> "off") {
+    @formWithCSRF(action = BusinessRatesSubcategoryController.onSubmit(mode), Symbol("autoComplete") -> "off") {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(

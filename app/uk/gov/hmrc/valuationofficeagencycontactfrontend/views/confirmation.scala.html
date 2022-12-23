@@ -86,7 +86,7 @@
     </p>
 
     <section class="govuk-!-display-none-print">
-    @formWithCSRF(action = routes.SatisfactionSurveyController.formCompleteFeedback, 'autoComplete -> "off") {
+    @formWithCSRF(action = routes.SatisfactionSurveyController.formCompleteFeedback, Symbol("autoComplete") -> "off") {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(

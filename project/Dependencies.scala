@@ -4,7 +4,7 @@ import sbt._
 object Dependencies {
 
   private val bootstrapPlayVersion = "7.12.0"
-  private val playFrontendHmrc = "3.34.0-play-28"
+  private val playFrontendHmrc = "5.2.0-play-28"
   private val hmrcMongoVersion = "0.74.0"
   private val httpCachingClientVersion = "10.0.0-play-28"
   private val commonsTextVersion = "1.10.0"

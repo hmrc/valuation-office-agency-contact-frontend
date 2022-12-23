@@ -1,8 +1,5 @@
 # valuation-office-agency-contact-frontend
 
-[![Build Status](https://travis-ci.org/hmrc/valuation-office-agency-contact-frontend.svg)](https://travis-ci.org/hmrc/valuation-office-agency-contact-frontend) [ ![Download](https://api.bintray.com/packages/hmrc/releases/valuation-office-agency-contact-frontend/images/download.svg) ](https://bintray.com/hmrc/releases/valuation-office-agency-contact-frontend/_latestVersion)
-
-This is a placeholder README.md for a new repository
 
 ### License
 

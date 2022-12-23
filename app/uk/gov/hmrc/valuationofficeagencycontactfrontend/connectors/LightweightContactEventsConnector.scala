@@ -27,14 +27,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Contact, Contact
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 import javax.inject.Inject
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success, Try}
 
 class LightweightContactEventsConnector @Inject()(http: HttpClient,
                                                   val configuration: Configuration,
                                                   auditService: AuditingService,
-                                                  servicesConfig: ServicesConfig) {
+                                                  servicesConfig: ServicesConfig)(implicit ec: ExecutionContext) {
 
   private val log = Logger(this.getClass)
   implicit val hc: HeaderCarrier = HeaderCarrier()

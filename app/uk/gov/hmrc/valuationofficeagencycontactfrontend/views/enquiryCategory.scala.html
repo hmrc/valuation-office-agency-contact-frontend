@@ -51,7 +51,7 @@
     pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("enquiryCategory.title"))else messages("enquiryCategory.title")),
     beforeContentBlock = Some(beforeBlock)
 ) {
-    @formWithCSRF(action = EnquiryCategoryController.onSubmit(mode), 'autoComplete -> "off") {
+    @formWithCSRF(action = EnquiryCategoryController.onSubmit(mode), Symbol("autoComplete") -> "off") {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(
