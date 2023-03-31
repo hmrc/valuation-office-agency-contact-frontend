@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,11 +22,11 @@ import play.api.data.format.Formatter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSubcategoryForm.produceError
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
-object PropertyWalesLets140DaysForm {
-  def propertyWalesLets140DaysFormatter: Formatter[String] = new Formatter[String] {
+object PropertyWalesActualLetsForm {
+  def propertyWalesActualLetsFormatter: Formatter[String] = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
-      case None => produceError(key, "error.businessRatesSelfCatering140Days.required")
+      case None => produceError(key, "error.propertyWalesActualLets.required")
       case _ => produceError(key, "error.unknown")
     }
 
@@ -34,11 +34,11 @@ object PropertyWalesLets140DaysForm {
   }
 
   def apply(): Form[String] =
-    Form(single("value" -> of(propertyWalesLets140DaysFormatter)))
+    Form(single("value" -> of(propertyWalesActualLetsFormatter)))
 
   def options = Seq(
-    RadioOption("businessRatesSelfCatering140Days", "yes"),
-    RadioOption("businessRatesSelfCatering140Days", "no")
+    RadioOption("propertyWalesActualLets", "yes"),
+    RadioOption("propertyWalesActualLets", "no")
   )
 
   def optionIsValid(value: String): Boolean = options.exists(o => o.value == value)

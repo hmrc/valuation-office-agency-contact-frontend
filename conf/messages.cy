@@ -396,6 +396,20 @@ businessRatesSelfCatering70Days.yes = Ydy
 businessRatesSelfCatering70Days.no = Nag ydy
 error.businessRatesSelfCatering70Days.required = Dewiswch ’Ydy’ os yw eich eiddo mewn gwirionedd yn cael ei osod am o leiaf 70 diwrnod y flwyddyn
 
+# --- Property let for actual lets - Wales
+propertyWalesActualLets.title = A yw eich eiddo yn cael ei osod yn wirioneddol am 182 noson y flwyddyn - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyWalesActualLets.heading = A yw eich eiddo yn cael ei osod yn wirioneddol am 182 noson y flwyddyn
+propertyWalesActualLets.yes = Ydy
+propertyWalesActualLets.no = Nag ydy
+error.propertyWalesActualLets.required = Dewiswch ’Ydy’ os yw eich eiddo mewn gwirionedd yn cael ei osod am o leiaf 182 noson y flwyddyn
+
+# --- Property let for available lets - Wales
+propertyWalesAvailableLets.title = A yw eich eiddo ar gael i’w osod am o leiaf 251 noson y flwyddyn - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyWalesAvailableLets.heading = A yw eich eiddo ar gael i’w osod am o leiaf 251 noson y flwyddyn
+propertyWalesAvailableLets.yes = Ydy
+propertyWalesAvailableLets.no = Nag ydy
+error.propertyWalesAvailableLets.required = Dewiswch ‘Ydy’ os yw eich eiddo ar gael i’w osod am o leiaf 251 noson y flwyddyn
+
 # --- Property merged or split
 propertyMergeSplit.title = Siaradwch â’ch cyngor lleol os ydych chi wedi rhannu neu uno’ch eiddo - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
 propertyMergeSplit.heading = Siaradwch â’ch cyngor lleol os ydych chi wedi rhannu neu uno’ch eiddo

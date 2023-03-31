@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -746,7 +746,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return function that goes on 140 days lets page when businessRatesSelfCateringEnquiry is wales" in {
         when (mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("wales")
-        navigator.nextPage(BusinessRatesSelfCateringId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesLets140DaysController.onPageLoad()
+        navigator.nextPage(BusinessRatesSelfCateringId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesAvailableLetsController.onPageLoad()
       }
 
       "return function that goes on tell us about your property when yes to lets in England that are let for at least 140 days" in {
@@ -771,32 +771,32 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return function that goes on tell us about your property when yes to lets in Wales that are let for at least 140 days" in {
         when (mockUserAnswers.propertyWalesLets140DaysEnquiry) thenReturn Some("yes")
-        navigator.nextPage(PropertyWalesLets140DaysId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesLets70DaysController.onPageLoad()
+        navigator.nextPage(PropertyWalesAvailableLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesActualLetsController.onPageLoad()
       }
 
       "return function that goes on tell us about your property when no to lets in Wales that are let for at least 140 days" in {
         when (mockUserAnswers.propertyWalesLets140DaysEnquiry) thenReturn Some("no")
-        navigator.nextPage(PropertyWalesLets140DaysId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesLetsNoActionController.onPageLoad()
+        navigator.nextPage(PropertyWalesAvailableLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesLetsNoActionController.onPageLoad()
       }
 
       "return a exception when propertyWalesLets140DaysEnquiry returns None" in {
         when (mockUserAnswers.propertyWalesLets140DaysEnquiry) thenReturn None
-        an[RuntimeException] should be thrownBy navigator.nextPage(PropertyWalesLets140DaysId, NormalMode).apply(mockUserAnswers)
+        an[RuntimeException] should be thrownBy navigator.nextPage(PropertyWalesAvailableLetsId, NormalMode).apply(mockUserAnswers)
       }
 
       "return function that goes on tell us about your property when yes to lets in Wales that are let for at least 70 days" in {
         when (mockUserAnswers.propertyWalesLets70DaysEnquiry) thenReturn Some("yes")
-        navigator.nextPage(PropertyWalesLets70DaysId, NormalMode).apply(mockUserAnswers) mustBe routes.BusinessRatesSelfCateringController.onWalLetsPageLoad()
+        navigator.nextPage(PropertyWalesActualLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.BusinessRatesSelfCateringController.onWalLetsPageLoad()
       }
 
       "return function that goes on tell us about your property when no to lets in Wales that are let for at least 70 days" in {
         when (mockUserAnswers.propertyWalesLets70DaysEnquiry) thenReturn Some("no")
-        navigator.nextPage(PropertyWalesLets70DaysId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesLetsNoActionController.onPageLoad()
+        navigator.nextPage(PropertyWalesActualLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesLetsNoActionController.onPageLoad()
       }
 
       "return a exception when propertyWalesLets70DaysEnquiry returns None" in {
         when (mockUserAnswers.propertyWalesLets70DaysEnquiry) thenReturn None
-        an[RuntimeException] should be thrownBy navigator.nextPage(PropertyWalesLets70DaysId, NormalMode).apply(mockUserAnswers)
+        an[RuntimeException] should be thrownBy navigator.nextPage(PropertyWalesActualLetsId, NormalMode).apply(mockUserAnswers)
       }
 
       "return function that goes on the non-business page when businessRatesPropertyEnquiry is england" in {

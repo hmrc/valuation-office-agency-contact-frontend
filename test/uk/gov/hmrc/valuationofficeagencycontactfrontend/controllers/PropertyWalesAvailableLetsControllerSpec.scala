@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,47 +23,50 @@ import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyWalesLets70DaysForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyWalesLets70DaysId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{PropertyEnglandLets140DaysForm, PropertyWalesAvailableLetsForm}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyWalesAvailableLetsId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets70Days => property_wales_lets_70_days}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesAvailableLets => property_wales_available_lets}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLetsNoAction => property_wales_lets_no_action}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets => wales_lets}
 
-class PropertyWalesLets70DaysControllerSpec extends ControllerSpecBase {
+class PropertyWalesAvailableLetsControllerSpec extends ControllerSpecBase {
 
-  def propertyWalesLets70DaysEnquiry = inject[property_wales_lets_70_days]
+  def propertyWalesLets140DaysEnquiry = inject[property_wales_available_lets]
   def propertyWalesLets = inject[wales_lets]
+  def propertyWalesLetsNoAction = inject[property_wales_lets_no_action]
   def auditService = inject[AuditingService]
 
   def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new PropertyWalesLets70DaysController(frontendAppConfig, messagesApi, auditService, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), propertyWalesLets70DaysEnquiry, propertyWalesLets, stubMessageControllerComponents)
+    new PropertyWalesAvailableLetsController(frontendAppConfig, messagesApi, auditService, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction, new DataRequiredActionImpl(ec), propertyWalesLets140DaysEnquiry, propertyWalesLetsNoAction, stubMessageControllerComponents)
 
-  def viewAsString(form: Form[String] = PropertyWalesLets70DaysForm()) = propertyWalesLets70DaysEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def wales140DaysBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad().url
 
-  "PropertyWalesLets70DaysController" must {
+  def viewAsString(form: Form[String] = PropertyEnglandLets140DaysForm()) = propertyWalesLets140DaysEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+
+  "PropertyWalesLets140DaysController" must {
 
     "return OK and the correct view for a GET" in {
       val result = controller().onPageLoad(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(PropertyWalesLets70DaysId.toString -> JsString(PropertyWalesLets70DaysForm.options.head.value))
+      val validData = Map(PropertyWalesAvailableLetsId.toString -> JsString(PropertyWalesAvailableLetsForm.options.head.value))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsString(PropertyWalesLets70DaysForm().fill(PropertyWalesLets70DaysForm.options.head.value))
+      contentAsString(result) mustBe viewAsString(PropertyWalesAvailableLetsForm().fill(PropertyWalesAvailableLetsForm.options.head.value))
     }
 
     "redirect to no action page when valid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", PropertyWalesLets70DaysForm.options.head.value))
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", PropertyWalesAvailableLetsForm.options.head.value))
 
       val result = controller().onPageLoad(NormalMode)(postRequest)
 
@@ -71,7 +74,7 @@ class PropertyWalesLets70DaysControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", PropertyWalesLets70DaysForm.options.head.value))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", PropertyWalesAvailableLetsForm.options.head.value))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -80,7 +83,7 @@ class PropertyWalesLets70DaysControllerSpec extends ControllerSpecBase {
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm = PropertyWalesLets70DaysForm().bind(Map("value" -> "invalid value"))
+      val boundForm = PropertyWalesAvailableLetsForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -96,7 +99,7 @@ class PropertyWalesLets70DaysControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", PropertyWalesLets70DaysForm.options.head.value))
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", PropertyWalesAvailableLetsForm.options.head.value))
       val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER

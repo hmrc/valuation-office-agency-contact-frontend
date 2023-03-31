@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,9 @@ import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyWalesLets70DaysForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyWalesLets70DaysId
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets70Days => property_wales_lets_70_days}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyWalesActualLetsForm
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyWalesActualLetsId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesActualLets => property_wales_actual_lets}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets => wales_lets}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
@@ -33,7 +33,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navi
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class PropertyWalesLets70DaysController @Inject()(
+class PropertyWalesActualLetsController @Inject()(
                                                      appConfig: FrontendAppConfig,
                                                      override val messagesApi: MessagesApi,
                                                      auditService: AuditingService,
@@ -41,7 +41,7 @@ class PropertyWalesLets70DaysController @Inject()(
                                                      navigator: Navigator,
                                                      getData: DataRetrievalAction,
                                                      requireData: DataRequiredAction,
-                                                     propertyWalesLets70Days: property_wales_lets_70_days,
+                                                     propertyWalesActualLets: property_wales_actual_lets,
                                                      propertyWalesLets: wales_lets,
                                                      cc: MessagesControllerComponents
                                                    ) extends FrontendController(cc) with I18nSupport {
@@ -51,21 +51,21 @@ class PropertyWalesLets70DaysController @Inject()(
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.propertyWalesLets70DaysEnquiry match {
-        case None => PropertyWalesLets70DaysForm()
-        case Some(value) => PropertyWalesLets70DaysForm().fill(value)
+        case None => PropertyWalesActualLetsForm()
+        case Some(value) => PropertyWalesActualLetsForm().fill(value)
       }
-      Ok(propertyWalesLets70Days(appConfig, preparedForm, mode))
+      Ok(propertyWalesActualLets(appConfig, preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
-      PropertyWalesLets70DaysForm().bindFromRequest().fold(
+      PropertyWalesActualLetsForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(propertyWalesLets70Days(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(propertyWalesActualLets(appConfig, formWithErrors, mode))),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering70Days" -> value)
-          dataCacheConnector.save[String](request.sessionId, PropertyWalesLets70DaysId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(PropertyWalesLets70DaysId, mode).apply(new UserAnswers(cacheMap))))
+          dataCacheConnector.save[String](request.sessionId, PropertyWalesActualLetsId.toString, value).map(cacheMap =>
+            Redirect(navigator.nextPage(PropertyWalesActualLetsId, mode).apply(new UserAnswers(cacheMap))))
         }
       )
   }
