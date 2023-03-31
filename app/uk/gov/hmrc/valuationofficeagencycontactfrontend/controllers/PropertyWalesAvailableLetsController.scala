@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,18 +23,17 @@ import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyWalesLets140DaysForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyWalesLets140DaysId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyWalesAvailableLetsForm
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyWalesAvailableLetsId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets140Days => property_wales_lets_140_days}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLetsNoAction => property_wales_lets_no_action}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesAvailableLets => property_wales_available_lets, propertyWalesLetsNoAction => property_wales_lets_no_action}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class PropertyWalesLets140DaysController @Inject()(
+class PropertyWalesAvailableLetsController @Inject()(
                                                      appConfig: FrontendAppConfig,
                                                      override val messagesApi: MessagesApi,
                                                      auditService: AuditingService,
@@ -42,7 +41,7 @@ class PropertyWalesLets140DaysController @Inject()(
                                                      navigator: Navigator,
                                                      getData: DataRetrievalAction,
                                                      requireData: DataRequiredAction,
-                                                     propertyWalesLets140Days: property_wales_lets_140_days,
+                                                     propertyWalesAvailableLets: property_wales_available_lets,
                                                      propertyWalesLetsNoAction: property_wales_lets_no_action,
                                                      cc: MessagesControllerComponents
                                                    ) extends FrontendController(cc) with I18nSupport {
@@ -54,21 +53,21 @@ class PropertyWalesLets140DaysController @Inject()(
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.propertyWalesLets140DaysEnquiry match {
-        case None => PropertyWalesLets140DaysForm()
-        case Some(value) => PropertyWalesLets140DaysForm().fill(value)
+        case None => PropertyWalesAvailableLetsForm()
+        case Some(value) => PropertyWalesAvailableLetsForm().fill(value)
       }
-      Ok(propertyWalesLets140Days(appConfig, preparedForm, mode))
+      Ok(propertyWalesAvailableLets(appConfig, preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
-      PropertyWalesLets140DaysForm().bindFromRequest().fold(
+      PropertyWalesAvailableLetsForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(propertyWalesLets140Days(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(propertyWalesAvailableLets(appConfig, formWithErrors, mode))),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering140DaysCY" -> value)
-          dataCacheConnector.save[String](request.sessionId, PropertyWalesLets140DaysId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(PropertyWalesLets140DaysId, mode).apply(new UserAnswers(cacheMap))))
+          dataCacheConnector.save[String](request.sessionId, PropertyWalesAvailableLetsId.toString, value).map(cacheMap =>
+            Redirect(navigator.nextPage(PropertyWalesAvailableLetsId, mode).apply(new UserAnswers(cacheMap))))
         }
       )
   }
@@ -93,9 +92,9 @@ class PropertyWalesLets140DaysController @Inject()(
       answers.propertyWalesLets140DaysEnquiry,
       answers.propertyWalesLets70DaysEnquiry) match {
       case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("wales"), Some("yes"), Some("no")) =>
-        Right(routes.PropertyWalesLets70DaysController.onPageLoad().url)
+        Right(routes.PropertyWalesActualLetsController.onPageLoad().url)
       case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("wales"), Some("no"), _) =>
-        Right(routes.PropertyWalesLets140DaysController.onPageLoad().url)
+        Right(routes.PropertyWalesAvailableLetsController.onPageLoad().url)
       case _ => Left(s"Unknown enquiry category in enquiry key")
     }
   }

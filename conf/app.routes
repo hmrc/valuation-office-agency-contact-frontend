@@ -124,11 +124,11 @@ POST        /self-catering-holiday-let                   uk.gov.hmrc.valuationof
 GET         /property-england-lets-140-days              uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyEnglandLets140DaysController.onPageLoad(mode: Mode = NormalMode)
 POST        /property-england-lets-140-days              uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyEnglandLets140DaysController.onSubmit(mode: Mode = NormalMode)
 
-GET         /property-wales-lets-140-days                uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyWalesLets140DaysController.onPageLoad(mode: Mode = NormalMode)
-POST        /property-wales-lets-140-days                uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyWalesLets140DaysController.onSubmit(mode: Mode = NormalMode)
+GET         /property-available-let-wales                uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyWalesAvailableLetsController.onPageLoad(mode: Mode = NormalMode)
+POST        /property-available-let-wales                uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyWalesAvailableLetsController.onSubmit(mode: Mode = NormalMode)
 
-GET         /property-wales-lets-70-days                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyWalesLets70DaysController.onPageLoad(mode: Mode = NormalMode)
-POST        /property-wales-lets-70-days                 uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyWalesLets70DaysController.onSubmit(mode: Mode = NormalMode)
+GET         /property-actual-let-wales                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyWalesActualLetsController.onPageLoad(mode: Mode = NormalMode)
+POST        /property-actual-let-wales                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyWalesActualLetsController.onSubmit(mode: Mode = NormalMode)
 
 GET         /property-england-lets-no-action             uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad(mode: Mode = NormalMode)
 GET         /property-wales-lets-no-action               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyWalesLetsNoActionController.onPageLoad(mode: Mode = NormalMode)

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,8 +45,8 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
     new PropertyWalesLetsNoActionController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction, new DataRequiredActionImpl(ec), propertyWalesLetsNoAction, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
-  def wales140DaysBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesLets140DaysController.onPageLoad().url
-  def wales70DaysBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesLets70DaysController.onPageLoad().url
+  def wales140DaysBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesAvailableLetsController.onPageLoad().url
+  def wales70DaysBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad().url
 
   def viewAsString70(form: Form[ContactDetails] = ContactDetailsForm()) = propertyWalesLetsNoAction(frontendAppConfig, wales70DaysBackLink)(fakeRequest, messages).toString
   def viewAsString140(form: Form[ContactDetails] = ContactDetailsForm()) = propertyWalesLetsNoAction(frontendAppConfig, wales140DaysBackLink)(fakeRequest, messages).toString
@@ -58,8 +58,8 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"),
         BusinessRatesSubcategoryId.toString -> JsString("business_rates_self_catering"),
         BusinessRatesSelfCateringId.toString -> JsString("wales"),
-        PropertyWalesLets140DaysId.toString -> JsString("yes"),
-        PropertyWalesLets70DaysId.toString -> JsString("no"))
+        PropertyWalesAvailableLetsId.toString -> JsString("yes"),
+        PropertyWalesActualLetsId.toString -> JsString("no"))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
@@ -77,7 +77,7 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       val result = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRateSelection = result.isRight
       isBusinessRateSelection mustBe true
-      assert(result.toOption.get == routes.PropertyWalesLets70DaysController.onPageLoad().url)
+      assert(result.toOption.get == routes.PropertyWalesActualLetsController.onPageLoad().url)
     }
 
     "returns the Property 140 Days Controller when enquiry category is business_rates and sub category is business_rates_self_catering" +
@@ -89,7 +89,7 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       val result = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRateSelection = result.isRight
       isBusinessRateSelection mustBe true
-      assert(result.toOption.get == routes.PropertyWalesLets140DaysController.onPageLoad().url)
+      assert(result.toOption.get == routes.PropertyWalesAvailableLetsController.onPageLoad().url)
     }
 
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
@@ -106,7 +106,7 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       when(mockUserAnswers.propertyWalesLets140DaysEnquiry) thenReturn Some("yes")
       when(mockUserAnswers.propertyWalesLets70DaysEnquiry) thenReturn Some("no")
       val result = controller().enquiryBackLink(mockUserAnswers)
-      result mustBe Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesLets70DaysController.onPageLoad().url)
+      result mustBe Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad().url)
     }
 
 
@@ -119,7 +119,7 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       val result = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
-      assert(result.toOption.get == routes.PropertyWalesLets70DaysController.onPageLoad().url)
+      assert(result.toOption.get == routes.PropertyWalesActualLetsController.onPageLoad().url)
     }
 
     "The enquiry key function produces a string with a back link when the enquiry category is no to 140 days controller" in {
@@ -130,7 +130,7 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       val result = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
-      assert(result.toOption.get == routes.PropertyWalesLets140DaysController.onPageLoad().url)
+      assert(result.toOption.get == routes.PropertyWalesAvailableLetsController.onPageLoad().url)
     }
 
     "return 500 and the error view for a GET with no enquiry type" in {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -277,7 +277,7 @@ class Navigator @Inject()(
   private val selfCateringPageRouting: UserAnswers => Call = answers => {
     answers.businessRatesSelfCateringEnquiry match {
       case Some("england") => routes.PropertyEnglandLets140DaysController.onPageLoad()
-      case Some("wales") => routes.PropertyWalesLets140DaysController.onPageLoad()
+      case Some("wales") => routes.PropertyWalesAvailableLetsController.onPageLoad()
       case _ =>
         log.warn(s"Navigation for is business rates self catering enquiry reached without selection of enquiry by controller")
         throw new RuntimeException("Unknown exception for is business rates self catering routing")
@@ -294,9 +294,9 @@ class Navigator @Inject()(
     }
   }
 
-  private val propertyWalesLets140DaysRouting: UserAnswers => Call = answers => {
+  private val propertyWalesAvailableLetsRouting: UserAnswers => Call = answers => {
     answers.propertyWalesLets140DaysEnquiry match {
-      case Some("yes") => routes.PropertyWalesLets70DaysController.onPageLoad()
+      case Some("yes") => routes.PropertyWalesActualLetsController.onPageLoad()
       case Some("no") => routes.PropertyWalesLetsNoActionController.onPageLoad()
 
       case _ =>
@@ -305,7 +305,7 @@ class Navigator @Inject()(
     }
   }
 
-  private val propertyWalesLets70DaysRouting: UserAnswers => Call = answers => {
+  private val propertyWalesActualLetsRouting: UserAnswers => Call = answers => {
     answers.propertyWalesLets70DaysEnquiry match {
       case Some("yes") => routes.BusinessRatesSelfCateringController.onWalLetsPageLoad()
       case Some("no") => routes.PropertyWalesLetsNoActionController.onPageLoad()
@@ -360,8 +360,8 @@ class Navigator @Inject()(
     BusinessRatesSelfCateringId -> selfCateringPageRouting,
     BusinessRatesPropertyEnquiryId -> businessRatesPropertyEnquiryRouting,
     PropertyEnglandLets140DaysId -> propertyEnglandLets140DaysRouting,
-    PropertyWalesLets140DaysId -> propertyWalesLets140DaysRouting,
-    PropertyWalesLets70DaysId -> propertyWalesLets70DaysRouting,
+    PropertyWalesAvailableLetsId -> propertyWalesAvailableLetsRouting,
+    PropertyWalesActualLetsId -> propertyWalesActualLetsRouting,
     FairRentEnquiryId -> FairRentEnquiryRouting
   )
 

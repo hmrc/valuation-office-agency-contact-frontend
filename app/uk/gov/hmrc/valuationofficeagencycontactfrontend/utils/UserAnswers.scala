@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -74,9 +74,9 @@ class UserAnswers(val cacheMap: CacheMap) {
 
   def propertyEnglandLets140DaysEnquiry: Option[String] = cacheMap.getEntry[String](PropertyEnglandLets140DaysId.toString)
 
-  def propertyWalesLets140DaysEnquiry: Option[String] = cacheMap.getEntry[String](PropertyWalesLets140DaysId.toString)
+  def propertyWalesLets140DaysEnquiry: Option[String] = cacheMap.getEntry[String](PropertyWalesAvailableLetsId.toString)
 
-  def propertyWalesLets70DaysEnquiry: Option[String] = cacheMap.getEntry[String](PropertyWalesLets70DaysId.toString)
+  def propertyWalesLets70DaysEnquiry: Option[String] = cacheMap.getEntry[String](PropertyWalesActualLetsId.toString)
 
   def fairRentEnquiryEnquiry: Option[String] = cacheMap.getEntry[String](FairRentEnquiryId.toString)
 

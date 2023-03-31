@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,8 @@ class PropertyWalesLetsNoActionViewSpec  extends ViewBehaviours {
 
   def propertyWalesLetsNoAction = app.injector.instanceOf[wales_lets_no_action]
 
-  def wales140DayBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesLets140DaysController.onPageLoad().url
-  def wales70DayBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesLets70DaysController.onPageLoad().url
+  def wales140DayBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesAvailableLetsController.onPageLoad().url
+  def wales70DayBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad().url
 
   def view140Days = () => propertyWalesLetsNoAction(frontendAppConfig, wales140DayBackLink)(fakeRequest, messages)
   def view7Days = () => propertyWalesLetsNoAction(frontendAppConfig, wales70DayBackLink)(fakeRequest, messages)
@@ -38,7 +38,7 @@ class PropertyWalesLetsNoActionViewSpec  extends ViewBehaviours {
       val backlinkText = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesLets140DaysController.onPageLoad().url
+      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesAvailableLetsController.onPageLoad().url
     }
   }
 }

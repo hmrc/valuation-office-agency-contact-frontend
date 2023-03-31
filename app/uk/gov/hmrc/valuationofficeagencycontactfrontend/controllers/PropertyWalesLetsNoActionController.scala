@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,9 +65,9 @@ class PropertyWalesLetsNoActionController @Inject()(val appConfig: FrontendAppCo
       answers.propertyWalesLets140DaysEnquiry,
       answers.propertyWalesLets70DaysEnquiry) match {
       case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("wales"), Some("yes"), Some("no")) =>
-        Right(routes.PropertyWalesLets70DaysController.onPageLoad().url)
+        Right(routes.PropertyWalesActualLetsController.onPageLoad().url)
       case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("wales"), Some("no"), _) =>
-        Right(routes.PropertyWalesLets140DaysController.onPageLoad().url)
+        Right(routes.PropertyWalesAvailableLetsController.onPageLoad().url)
       case _ => Left(s"Unknown enquiry category in enquiry key")
     }
   }

@@ -384,6 +384,20 @@ businessRatesSelfCatering70Days.yes = Yes
 businessRatesSelfCatering70Days.no = No
 error.businessRatesSelfCatering70Days.required = Select ’Yes’ if your property is available to let for at least 70 days per year
 
+# --- Property let for actual lets - Wales
+propertyWalesActualLets.title = Is your property actually let for at least 182 nights per year? - Valuation Office Agency contact form - GOV.UK
+propertyWalesActualLets.heading = Is your property actually let for at least 182 nights per year?
+propertyWalesActualLets.yes = Yes
+propertyWalesActualLets.no = No
+error.propertyWalesActualLets.required = Select ’Yes’ if your property is actually let for at least 182 nights per year
+
+# --- Property let for available lets - Wales
+propertyWalesAvailableLets.title = Is your property available to let for at least 251 nights per year? - Valuation Office Agency contact form - GOV.UK
+propertyWalesAvailableLets.heading = Is your property available to let for at least 251 nights per year?
+propertyWalesAvailableLets.yes = Yes
+propertyWalesAvailableLets.no = No
+error.propertyWalesAvailableLets.required = Select ’Yes’ if your property is available for at least 251 nights per year
+
 # --- Property merged or split
 propertyMergeSplit.title = Speak to your local council if you have split or merged your property - Valuation Office Agency contact form - GOV.UK
 propertyMergeSplit.heading = Speak to your local council if you have split or merged your property
