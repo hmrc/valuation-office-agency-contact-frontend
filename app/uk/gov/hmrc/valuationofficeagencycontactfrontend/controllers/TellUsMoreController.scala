@@ -132,9 +132,9 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
       answers.annexeSelfContainedEnquiry,
       answers.annexeHaveCookingWashing,
     answers.businessRatesSelfCateringEnquiry,
-    answers.propertyEnglandLets140DaysEnquiry,
-    answers.propertyWalesLets140DaysEnquiry,
-    answers.propertyWalesLets70DaysEnquiry) match {
+    answers.propertyEnglandAvailableLetsEnquiry,
+    answers.propertyWalesAvailableLetsEnquiry,
+    answers.propertyWalesActualLetsEnquiry) match {
       case (Some("council_tax_business_uses"), _, _, _, _, _, _, _, _, _) => routes.DatePropertyChangedController.onPageLoad()
       case (Some("council_tax_other"), _, _, _, _, _, _, _, _, _) => routes.CouncilTaxSubcategoryController.onPageLoad(mode)
       case (Some("council_tax_annexe"), _, _, Some("added"), Some("yes"), Some("yes"), _, _, _, _) => routes.CouncilTaxAnnexeController.onSelfContainedPageLoad()
@@ -154,7 +154,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
       case (_, Some("business_rates_not_used"), _, _, _, _, _, _, _, _) => routes.DatePropertyChangedController.onPageLoad()
       case (_, Some("business_rates_bill"), _, _, _, _, _, _, _, _) => routes.BusinessRatesBillController.onPageLoad()
       case (_, Some("business_rates_self_catering"), _, _, _, _, Some("england"), Some("yes"), _, _) => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
-      case (_, Some("business_rates_self_catering"), _, _, _, _, Some("england"), Some("no"), _, _) => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()
+      case (_, Some("business_rates_self_catering"), _, _, _, _, Some("england"), Some("no"), _, _) => routes.PropertyEnglandAvailableLetsController.onEngLetsNoActionPageLoad()
       case (_, Some("business_rates_self_catering"), _, _, _, _, Some("wales"), _, Some("no"), _) => routes.PropertyWalesLetsNoActionController.onPageLoad()
       case (_, Some("business_rates_self_catering"), _, _, _, _, Some("wales"), _, Some("yes"), Some("yes")) => routes.BusinessRatesSelfCateringController.onWalLetsPageLoad()
       case (_, Some("business_rates_self_catering"), _, _, _, _, Some("wales"), _, Some("yes"), Some("no")) => routes.PropertyWalesLetsNoActionController.onPageLoad()

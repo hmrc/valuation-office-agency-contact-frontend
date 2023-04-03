@@ -23,18 +23,18 @@ import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyEnglandLets140DaysForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyEnglandLets140DaysId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyEnglandAvailableLetsForm
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyEnglandAvailableLetsId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLets140Days => property_england_lets_140_days}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandAvailableLets => property_england_available_lets}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLetsNoAction => property_england_lets_no_action}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets => wales_lets}
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class PropertyEnglandLets140DaysController @Inject()(
+class PropertyEnglandAvailableLetsController @Inject()(
                                                      appConfig: FrontendAppConfig,
                                                      override val messagesApi: MessagesApi,
                                                      auditService: AuditingService,
@@ -42,7 +42,7 @@ class PropertyEnglandLets140DaysController @Inject()(
                                                      navigator: Navigator,
                                                      getData: DataRetrievalAction,
                                                      requireData: DataRequiredAction,
-                                                     propertyEnglandLets140Days: property_england_lets_140_days,
+                                                     propertyEnglandAvailableLets: property_england_available_lets,
                                                      propertyEnglandLetsNoAction: property_england_lets_no_action,
                                                      propertyWalesLets: wales_lets,
                                                      cc: MessagesControllerComponents
@@ -52,22 +52,22 @@ class PropertyEnglandLets140DaysController @Inject()(
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.propertyEnglandLets140DaysEnquiry match {
-        case None => PropertyEnglandLets140DaysForm()
-        case Some(value) => PropertyEnglandLets140DaysForm().fill(value)
+      val preparedForm = request.userAnswers.propertyEnglandAvailableLetsEnquiry match {
+        case None => PropertyEnglandAvailableLetsForm()
+        case Some(value) => PropertyEnglandAvailableLetsForm().fill(value)
       }
-      Ok(propertyEnglandLets140Days(appConfig, preparedForm, mode))
+      Ok(propertyEnglandAvailableLets(appConfig, preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
-      PropertyEnglandLets140DaysForm().bindFromRequest().fold(
+      PropertyEnglandAvailableLetsForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(propertyEnglandLets140Days(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(propertyEnglandAvailableLets(appConfig, formWithErrors, mode))),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering140DaysEN" -> value)
-          dataCacheConnector.save[String](request.sessionId, PropertyEnglandLets140DaysId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(PropertyEnglandLets140DaysId, mode).apply(new UserAnswers(cacheMap))))
+          dataCacheConnector.save[String](request.sessionId, PropertyEnglandAvailableLetsId.toString, value).map(cacheMap =>
+            Redirect(navigator.nextPage(PropertyEnglandAvailableLetsId, mode).apply(new UserAnswers(cacheMap))))
         }
       )
   }

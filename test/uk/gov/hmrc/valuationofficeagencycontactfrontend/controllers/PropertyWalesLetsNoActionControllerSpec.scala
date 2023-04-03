@@ -72,8 +72,8 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
       when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("wales")
-      when(mockUserAnswers.propertyWalesLets140DaysEnquiry) thenReturn Some("yes")
-      when(mockUserAnswers.propertyWalesLets70DaysEnquiry) thenReturn Some("no")
+      when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn Some("yes")
+      when(mockUserAnswers.propertyWalesActualLetsEnquiry) thenReturn Some("no")
       val result = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRateSelection = result.isRight
       isBusinessRateSelection mustBe true
@@ -85,7 +85,7 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
       when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("wales")
-      when(mockUserAnswers.propertyWalesLets140DaysEnquiry) thenReturn Some("no")
+      when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn Some("no")
       val result = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRateSelection = result.isRight
       isBusinessRateSelection mustBe true
@@ -103,8 +103,8 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
       when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("wales")
-      when(mockUserAnswers.propertyWalesLets140DaysEnquiry) thenReturn Some("yes")
-      when(mockUserAnswers.propertyWalesLets70DaysEnquiry) thenReturn Some("no")
+      when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn Some("yes")
+      when(mockUserAnswers.propertyWalesActualLetsEnquiry) thenReturn Some("no")
       val result = controller().enquiryBackLink(mockUserAnswers)
       result mustBe Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad().url)
     }
@@ -114,8 +114,8 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
       when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("wales")
-      when(mockUserAnswers.propertyWalesLets140DaysEnquiry) thenReturn Some("yes")
-      when(mockUserAnswers.propertyWalesLets70DaysEnquiry) thenReturn Some("no")
+      when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn Some("yes")
+      when(mockUserAnswers.propertyWalesActualLetsEnquiry) thenReturn Some("no")
       val result = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
@@ -126,7 +126,7 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
       when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("wales")
-      when(mockUserAnswers.propertyWalesLets140DaysEnquiry) thenReturn Some("no")
+      when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn Some("no")
       val result = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true

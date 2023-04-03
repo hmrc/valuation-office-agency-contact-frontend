@@ -50,7 +50,7 @@ class PropertyWalesActualLetsController @Inject()(
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.propertyWalesLets70DaysEnquiry match {
+      val preparedForm = request.userAnswers.propertyWalesActualLetsEnquiry match {
         case None => PropertyWalesActualLetsForm()
         case Some(value) => PropertyWalesActualLetsForm().fill(value)
       }

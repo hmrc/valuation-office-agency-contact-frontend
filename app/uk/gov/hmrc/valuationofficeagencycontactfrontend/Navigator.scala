@@ -276,7 +276,7 @@ class Navigator @Inject()(
 
   private val selfCateringPageRouting: UserAnswers => Call = answers => {
     answers.businessRatesSelfCateringEnquiry match {
-      case Some("england") => routes.PropertyEnglandLets140DaysController.onPageLoad()
+      case Some("england") => routes.PropertyEnglandAvailableLetsController.onPageLoad()
       case Some("wales") => routes.PropertyWalesAvailableLetsController.onPageLoad()
       case _ =>
         log.warn(s"Navigation for is business rates self catering enquiry reached without selection of enquiry by controller")
@@ -284,10 +284,10 @@ class Navigator @Inject()(
     }
   }
 
-  private val propertyEnglandLets140DaysRouting: UserAnswers => Call = answers => {
-    answers.propertyEnglandLets140DaysEnquiry match {
+  private val propertyEnglandAvailableLetsRouting: UserAnswers => Call = answers => {
+    answers.propertyEnglandAvailableLetsEnquiry match {
       case Some("yes") => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
-      case Some("no") => routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()
+      case Some("no") => routes.PropertyEnglandAvailableLetsController.onEngLetsNoActionPageLoad()
       case _ =>
         log.warn(s"Navigation for is business rates property enquiry reached without selection of enquiry by controller")
         throw new RuntimeException("Unknown exception for is business rates self catering routing")
@@ -295,7 +295,7 @@ class Navigator @Inject()(
   }
 
   private val propertyWalesAvailableLetsRouting: UserAnswers => Call = answers => {
-    answers.propertyWalesLets140DaysEnquiry match {
+    answers.propertyWalesAvailableLetsEnquiry match {
       case Some("yes") => routes.PropertyWalesActualLetsController.onPageLoad()
       case Some("no") => routes.PropertyWalesLetsNoActionController.onPageLoad()
 
@@ -306,7 +306,7 @@ class Navigator @Inject()(
   }
 
   private val propertyWalesActualLetsRouting: UserAnswers => Call = answers => {
-    answers.propertyWalesLets70DaysEnquiry match {
+    answers.propertyWalesActualLetsEnquiry match {
       case Some("yes") => routes.BusinessRatesSelfCateringController.onWalLetsPageLoad()
       case Some("no") => routes.PropertyWalesLetsNoActionController.onPageLoad()
 
@@ -359,7 +359,7 @@ class Navigator @Inject()(
     CouncilTaxBusinessEnquiryId -> councilTaxBusinessEnquiryRouting,
     BusinessRatesSelfCateringId -> selfCateringPageRouting,
     BusinessRatesPropertyEnquiryId -> businessRatesPropertyEnquiryRouting,
-    PropertyEnglandLets140DaysId -> propertyEnglandLets140DaysRouting,
+    PropertyEnglandAvailableLetsId -> propertyEnglandAvailableLetsRouting,
     PropertyWalesAvailableLetsId -> propertyWalesAvailableLetsRouting,
     PropertyWalesActualLetsId -> propertyWalesActualLetsRouting,
     FairRentEnquiryId -> FairRentEnquiryRouting

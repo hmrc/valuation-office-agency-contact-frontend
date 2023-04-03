@@ -22,11 +22,11 @@ import play.api.data.format.Formatter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSubcategoryForm.produceError
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
-object PropertyEnglandLets140DaysForm {
-  def propertyEnglandLets140DaysFormatter: Formatter[String] = new Formatter[String] {
+object PropertyEnglandAvailableLetsForm {
+  def propertyEnglandAvailableLetsFormatter: Formatter[String] = new Formatter[String] {
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
-      case None => produceError(key, "error.businessRatesSelfCatering140Days.required")
+      case None => produceError(key, "error.propertyEnglandAvailableLets.required")
       case _ => produceError(key, "error.unknown")
     }
 
@@ -34,11 +34,11 @@ object PropertyEnglandLets140DaysForm {
   }
 
   def apply(): Form[String] =
-    Form(single("value" -> of(propertyEnglandLets140DaysFormatter)))
+    Form(single("value" -> of(propertyEnglandAvailableLetsFormatter)))
 
   def options = Seq(
-    RadioOption("businessRatesSelfCatering140Days", "yes"),
-    RadioOption("businessRatesSelfCatering140Days", "no")
+    RadioOption("propertyEnglandAvailableLets", "yes"),
+    RadioOption("propertyEnglandAvailableLets", "no")
   )
 
   def optionIsValid(value: String): Boolean = options.exists(o => o.value == value)

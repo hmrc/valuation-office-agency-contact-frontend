@@ -72,11 +72,11 @@ class UserAnswers(val cacheMap: CacheMap) {
 
   def businessRatesPropertyEnquiry: Option[String] = cacheMap.getEntry[String](BusinessRatesPropertyEnquiryId.toString)
 
-  def propertyEnglandLets140DaysEnquiry: Option[String] = cacheMap.getEntry[String](PropertyEnglandLets140DaysId.toString)
+  def propertyEnglandAvailableLetsEnquiry: Option[String] = cacheMap.getEntry[String](PropertyEnglandAvailableLetsId.toString)
 
-  def propertyWalesLets140DaysEnquiry: Option[String] = cacheMap.getEntry[String](PropertyWalesAvailableLetsId.toString)
+  def propertyWalesAvailableLetsEnquiry: Option[String] = cacheMap.getEntry[String](PropertyWalesAvailableLetsId.toString)
 
-  def propertyWalesLets70DaysEnquiry: Option[String] = cacheMap.getEntry[String](PropertyWalesActualLetsId.toString)
+  def propertyWalesActualLetsEnquiry: Option[String] = cacheMap.getEntry[String](PropertyWalesActualLetsId.toString)
 
   def fairRentEnquiryEnquiry: Option[String] = cacheMap.getEntry[String](FairRentEnquiryId.toString)
 
