@@ -62,8 +62,8 @@ class PropertyWalesLetsNoActionController @Inject()(val appConfig: FrontendAppCo
       answers.enquiryCategory,
       answers.businessRatesSubcategory,
       answers.businessRatesSelfCateringEnquiry,
-      answers.propertyWalesLets140DaysEnquiry,
-      answers.propertyWalesLets70DaysEnquiry) match {
+      answers.propertyWalesAvailableLetsEnquiry,
+      answers.propertyWalesActualLetsEnquiry) match {
       case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("wales"), Some("yes"), Some("no")) =>
         Right(routes.PropertyWalesActualLetsController.onPageLoad().url)
       case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("wales"), Some("no"), _) =>

@@ -382,12 +382,12 @@ businessRatesSelfCatering.england = Lloegr
 businessRatesSelfCatering.wales = Cymru
 error.businessRatesSelfCatering.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
 
-# --- Property let for at least 140 days
-businessRatesSelfCatering140Days.title = A yw eich eiddo ar gael i’w osod am o leiaf 140 diwrnod y flwyddyn? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
-businessRatesSelfCatering140Days.heading = A yw eich eiddo ar gael i’w osod am o leiaf 140 diwrnod y flwyddyn?
-businessRatesSelfCatering140Days.yes = Ydy
-businessRatesSelfCatering140Days.no = Nag ydy
-error.businessRatesSelfCatering140Days.required = Dewiswch ’Ydy’ os yw eich eiddo ar gael i’w osod am o leiaf 140 diwrnod y flwyddyn
+# --- Property let available England
+propertyEnglandAvailableLets.title = A yw eich eiddo ar gael i’w osod am o leiaf 140 noson y flwyddyn - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyEnglandAvailableLets.heading = A yw eich eiddo ar gael i’w osod am o leiaf 140 noson y flwyddyn
+propertyEnglandAvailableLets.yes = Ydy
+propertyEnglandAvailableLets.no = Nag ydy
+error.propertyEnglandAvailableLets.required = Dewiswch ‘Ydy’ os yw eich eiddo ar gael i’w osod am o leiaf 140 noson y flwyddyn
 
 # --- Property let for at least 70 days
 businessRatesSelfCatering70Days.title = A yw eich eiddo mewn gwirionedd yn cael ei osod am o leiaf 70 diwrnod y flwyddyn? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
@@ -418,11 +418,13 @@ propertyMergeSplit.p1.part1 = Cysylltwch â’ch cyngor lleol
 propertyMergeSplit.p1.part2 = gan fod angen iddynt roi’r holl fanylion sydd eu hangen arnom, gan gynnwys cyfeirnod.
 propertyMergeSplit.p2 = Dim ond ar ôl iddynt anfon y wybodaeth honno y byddwn yn gallu diweddaru eich band Treth Gyngor.
 
-# --- No business rates are required
+# --- No business rates are required in England
 businessRatesSelfCateringNoBusinessRate.title = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yn Lloegr - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
 businessRatesSelfCateringNoBusinessRate.heading = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yn Lloegr
 businessRatesSelfCateringNoBusinessRate.p1 = Efallai y bydd angen i chi dalu’r Dreth Gyngor o hyd.
-businessRatesSelfCateringNoBusinessRate.p2 = Os yw eich eiddo yn Lloegr, dim ond os yw ar gael y gellir ei brisio am gyfnodau byr sy’n gyfanswm o 140 diwrnod neu fwy y flwyddyn y bydd yn cael ei brisio.
+businessRatesSelfCateringNoBusinessRate.p2 = Os yw eich eiddo yng Lloegr, bydd yn cael ei brisio ar gyfer ardrethi busnes os yw:
+businessRatesSelfCateringNoBusinessRate.p2.bullet1 = ar gael i’w osod am gyfnodau byr sy’n dod i gyfanswm o 140 noson neu fwy bob blwyddyn
+businessRatesSelfCateringNoBusinessRate.p2.bullet2 = wedi gosod mewn gwirionedd am o leiaf 70 noson
 businessRatesSelfCateringNoBusinessRate.p3.part1 = Os ydych eisoes yn talu ardrethi busnes am yr eiddo hwn, ac yn credu na ddylech fod,
 businessRatesSelfCateringNoBusinessRate.p3.url = https://www.gov.uk/correct-your-business-rates
 businessRatesSelfCateringNoBusinessRate.p3.part2 = defnyddio’r gwasanaeth ar-lein
@@ -431,7 +433,9 @@ businessRatesSelfCateringNoBusinessRate.p3.part3 = a chwblhewch ‘Gwiriad’ i 
 # --- Self-catering properties or holiday lets in England
 propertyEnglandLets.title = Dywedwch wrthym am eich bwthyn gwyliau neu llety hunanarlwyo yn Lloegr - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
 propertyEnglandLets.heading = Dywedwch wrthym am eich bwthyn gwyliau neu llety hunanarlwyo yn Lloegr
-propertyEnglandLets.p1 = Os yw eich eiddo yn Lloegr ac ar gael i’w osod am gyfnodau byr am gyfanswm o 140 diwrnod neu fwy bob blwyddyn, bydd yn cael ei brisio ar gyfer ardrethi busnes.
+propertyEnglandLets.p1 = Os yw eich eiddo yng Lloegr, bydd yn cael ei brisio ar gyfer ardrethi busnes os yw:
+propertyEnglandLets.p1.bullet1 = ar gael i’w osod am gyfnodau byr sy’n dod i gyfanswm o 140 noson neu fwy bob blwyddyn
+propertyEnglandLets.p1.bullet2 = wedi gosod mewn gwirionedd am o leiaf 70 noson
 propertyEnglandLets.p2.url = https://www.gov.uk/government/publications/self-catering-holiday-homes-questionnaire
 propertyEnglandLets.p2.part1 = Cwblhewch y ffurflen manylion rhent
 propertyEnglandLets.p2.part2 = i ddweud wrthym am eich bwthyn gwyliau neu llety hunanarlwyo.
@@ -443,8 +447,8 @@ propertyEnglandLets.p3 = Eiddo hunanarlwyo a gosodiadau gwyliau
 propertyWalesLets.title = Dywedwch wrthym am eich bwthyn gwyliau neu llety hunanarlwyo yng Nghymru - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
 propertyWalesLets.heading = Dywedwch wrthym am eich bwthyn gwyliau neu llety hunanarlwyo yng Nghymru
 propertyWalesLets.p1 = Os yw eich eiddo yng Nghymru, bydd yn cael ei brisio ar gyfer ardrethi busnes os yw:
-propertyWalesLets.p1.bl1 = ar gael i’w osod am gyfnodau byr sy’n dod i gyfanswm o 140 diwrnod neu fwy bob blwyddyn
-propertyWalesLets.p1.bl2 = wedi gosod mewn gwirionedd am o leiaf 70 diwrnod
+propertyWalesLets.p1.bl1 = ar gael i’w osod am gyfnodau byr sy’n dod i gyfanswm o 251 noson neu fwy bob blwyddyn
+propertyWalesLets.p1.bl2 = wedi gosod mewn gwirionedd am o leiaf 140 noson
 propertyWalesLets.p2.url = https://www.gov.uk/government/publications/request-for-rental-information-self-catering-holiday-homes
 propertyWalesLets.p2.part1 = Cwblhewch y ffurflen manylion rhent
 propertyWalesLets.p2.part2 = i ddweud wrthym am eich bwthyn gwyliau neu llety hunanarlwyo.
@@ -465,8 +469,8 @@ businessRatesSelfCateringNoBusinessRateWales.title = Ni fydd yn rhaid i chi dalu
 businessRatesSelfCateringNoBusinessRateWales.heading = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yng Nghymru
 businessRatesSelfCateringNoBusinessRateWales.p1 = Efallai y bydd angen i chi dalu’r Dreth Gyngor o hyd
 businessRatesSelfCateringNoBusinessRateWales.p2 = Os yw eich eiddo yng Nghymru, bydd yn cael ei brisio ar gyfer ardrethi busnes os yw:
-businessRatesSelfCateringNoBusinessRateWales.p3 = ar gael i’w osod am gyfnodau byr sy’n dod i gyfanswm o 140 diwrnod neu fwy bob blwyddyn
-businessRatesSelfCateringNoBusinessRateWales.p4 = wedi gosod mewn gwirionedd am o leiaf 70 diwrnod
+businessRatesSelfCateringNoBusinessRateWales.p3 = ar gael i’w osod am gyfnodau byr sy’n dod i gyfanswm o 251 noson neu fwy bob blwyddyn
+businessRatesSelfCateringNoBusinessRateWales.p4 = wedi gosod mewn gwirionedd am o leiaf 140 noson
 businessRatesSelfCateringNoBusinessRateWales.p5.part1 = Os ydych eisoes yn talu ardrethi busnes am yr eiddo hwn, ac yn credu na ddylech fod,
 businessRatesSelfCateringNoBusinessRateWales.p5.part1.url = https://www.gov.uk/government/publications/business-rates-proposal-to-alter-the-2017-rating-list-for-wales
 businessRatesSelfCateringNoBusinessRateWales.p5.part2 =  cwblhewch ffurflen gynnig

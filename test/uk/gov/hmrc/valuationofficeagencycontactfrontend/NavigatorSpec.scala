@@ -741,7 +741,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return function that goes on 140 days lets page when businessRatesSelfCateringEnquiry is england" in {
         when (mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("england")
-        navigator.nextPage(BusinessRatesSelfCateringId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyEnglandLets140DaysController.onPageLoad()
+        navigator.nextPage(BusinessRatesSelfCateringId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyEnglandAvailableLetsController.onPageLoad()
       }
 
       "return function that goes on 140 days lets page when businessRatesSelfCateringEnquiry is wales" in {
@@ -750,18 +750,18 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
       }
 
       "return function that goes on tell us about your property when yes to lets in England that are let for at least 140 days" in {
-        when (mockUserAnswers.propertyEnglandLets140DaysEnquiry) thenReturn Some("yes")
-        navigator.nextPage(PropertyEnglandLets140DaysId, NormalMode).apply(mockUserAnswers) mustBe routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
+        when (mockUserAnswers.propertyEnglandAvailableLetsEnquiry) thenReturn Some("yes")
+        navigator.nextPage(PropertyEnglandAvailableLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
       }
 
       "return function that goes on tell us about your property when no to lets in England that are let for at least 140 days" in {
-        when (mockUserAnswers.propertyEnglandLets140DaysEnquiry) thenReturn Some("no")
-        navigator.nextPage(PropertyEnglandLets140DaysId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyEnglandLets140DaysController.onEngLetsNoActionPageLoad()
+        when (mockUserAnswers.propertyEnglandAvailableLetsEnquiry) thenReturn Some("no")
+        navigator.nextPage(PropertyEnglandAvailableLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyEnglandAvailableLetsController.onEngLetsNoActionPageLoad()
       }
 
       "return a exception when propertyEnglandLets140DaysEnquiry returns None" in {
-        when (mockUserAnswers.propertyEnglandLets140DaysEnquiry) thenReturn None
-        an[RuntimeException] should be thrownBy navigator.nextPage(PropertyEnglandLets140DaysId, NormalMode).apply(mockUserAnswers)
+        when (mockUserAnswers.propertyEnglandAvailableLetsEnquiry) thenReturn None
+        an[RuntimeException] should be thrownBy navigator.nextPage(PropertyEnglandAvailableLetsId, NormalMode).apply(mockUserAnswers)
       }
 
       "return a exception when businessRatesSelfCateringEnquiry returns None" in {
@@ -770,32 +770,32 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
       }
 
       "return function that goes on tell us about your property when yes to lets in Wales that are let for at least 140 days" in {
-        when (mockUserAnswers.propertyWalesLets140DaysEnquiry) thenReturn Some("yes")
+        when (mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn Some("yes")
         navigator.nextPage(PropertyWalesAvailableLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesActualLetsController.onPageLoad()
       }
 
       "return function that goes on tell us about your property when no to lets in Wales that are let for at least 140 days" in {
-        when (mockUserAnswers.propertyWalesLets140DaysEnquiry) thenReturn Some("no")
+        when (mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn Some("no")
         navigator.nextPage(PropertyWalesAvailableLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesLetsNoActionController.onPageLoad()
       }
 
       "return a exception when propertyWalesLets140DaysEnquiry returns None" in {
-        when (mockUserAnswers.propertyWalesLets140DaysEnquiry) thenReturn None
+        when (mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn None
         an[RuntimeException] should be thrownBy navigator.nextPage(PropertyWalesAvailableLetsId, NormalMode).apply(mockUserAnswers)
       }
 
       "return function that goes on tell us about your property when yes to lets in Wales that are let for at least 70 days" in {
-        when (mockUserAnswers.propertyWalesLets70DaysEnquiry) thenReturn Some("yes")
+        when (mockUserAnswers.propertyWalesActualLetsEnquiry) thenReturn Some("yes")
         navigator.nextPage(PropertyWalesActualLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.BusinessRatesSelfCateringController.onWalLetsPageLoad()
       }
 
       "return function that goes on tell us about your property when no to lets in Wales that are let for at least 70 days" in {
-        when (mockUserAnswers.propertyWalesLets70DaysEnquiry) thenReturn Some("no")
+        when (mockUserAnswers.propertyWalesActualLetsEnquiry) thenReturn Some("no")
         navigator.nextPage(PropertyWalesActualLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesLetsNoActionController.onPageLoad()
       }
 
       "return a exception when propertyWalesLets70DaysEnquiry returns None" in {
-        when (mockUserAnswers.propertyWalesLets70DaysEnquiry) thenReturn None
+        when (mockUserAnswers.propertyWalesActualLetsEnquiry) thenReturn None
         an[RuntimeException] should be thrownBy navigator.nextPage(PropertyWalesActualLetsId, NormalMode).apply(mockUserAnswers)
       }
 

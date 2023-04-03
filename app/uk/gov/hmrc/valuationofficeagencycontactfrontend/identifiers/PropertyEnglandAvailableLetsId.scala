@@ -16,6 +16,6 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers
 
-object PropertyEnglandLets140DaysId extends Identifier {
-  override def toString: String = "propertyEnglandLets140Days"
+object PropertyEnglandAvailableLetsId extends Identifier {
+  override def toString: String = "propertyEnglandAvailableLets"
 }

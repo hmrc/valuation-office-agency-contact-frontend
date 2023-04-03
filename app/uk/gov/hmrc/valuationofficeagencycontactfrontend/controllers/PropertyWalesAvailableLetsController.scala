@@ -52,7 +52,7 @@ class PropertyWalesAvailableLetsController @Inject()(
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.propertyWalesLets140DaysEnquiry match {
+      val preparedForm = request.userAnswers.propertyWalesAvailableLetsEnquiry match {
         case None => PropertyWalesAvailableLetsForm()
         case Some(value) => PropertyWalesAvailableLetsForm().fill(value)
       }
@@ -89,8 +89,8 @@ class PropertyWalesAvailableLetsController @Inject()(
       answers.enquiryCategory,
       answers.businessRatesSubcategory,
       answers.businessRatesSelfCateringEnquiry,
-      answers.propertyWalesLets140DaysEnquiry,
-      answers.propertyWalesLets70DaysEnquiry) match {
+      answers.propertyWalesAvailableLetsEnquiry,
+      answers.propertyWalesActualLetsEnquiry) match {
       case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("wales"), Some("yes"), Some("no")) =>
         Right(routes.PropertyWalesActualLetsController.onPageLoad().url)
       case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("wales"), Some("no"), _) =>

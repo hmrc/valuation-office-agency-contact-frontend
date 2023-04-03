@@ -30,7 +30,7 @@
     @govukBackLink(
         BackLink(
             content = Text(messages("site.back")),
-            href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyEnglandLets140DaysController.onPageLoad().url,
+            href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad().url,
             classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
         )
     }
@@ -45,6 +45,10 @@
     <p class="govuk-body">@messages("businessRatesSelfCateringNoBusinessRate.p1")</p>
 
     <p class="govuk-body">@messages("businessRatesSelfCateringNoBusinessRate.p2")</p>
+    <ul class="govuk-list govuk-list--bullet">
+        <li>@messages("businessRatesSelfCateringNoBusinessRate.p2.bullet1")</li>
+        <li>@messages("businessRatesSelfCateringNoBusinessRate.p2.bullet2")</li>
+    </ul>
 
     <p class="govuk-body">
         @messages("businessRatesSelfCateringNoBusinessRate.p3.part1")
