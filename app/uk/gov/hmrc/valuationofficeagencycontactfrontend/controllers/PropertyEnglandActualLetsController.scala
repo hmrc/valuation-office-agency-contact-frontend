@@ -20,21 +20,19 @@ import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyEnglandAvailableLetsForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyEnglandAvailableLetsId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyEnglandActualLetsForm
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyEnglandActualLetsId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandAvailableLets => property_england_available_lets}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLetsNoAction => property_england_lets_no_action}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets => wales_lets}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandActualLets => property_england_actual_lets}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class PropertyEnglandAvailableLetsController @Inject()(
+class PropertyEnglandActualLetsController @Inject()(
                                                      appConfig: FrontendAppConfig,
                                                      override val messagesApi: MessagesApi,
                                                      auditService: AuditingService,
@@ -42,9 +40,7 @@ class PropertyEnglandAvailableLetsController @Inject()(
                                                      navigator: Navigator,
                                                      getData: DataRetrievalAction,
                                                      requireData: DataRequiredAction,
-                                                     propertyEnglandAvailableLets: property_england_available_lets,
-                                                     propertyEnglandLetsNoAction: property_england_lets_no_action,
-                                                     propertyWalesLets: wales_lets,
+                                                     propertyEnglandActualLets: property_england_actual_lets,
                                                      cc: MessagesControllerComponents
                                                    ) extends FrontendController(cc) with I18nSupport {
 
@@ -52,29 +48,23 @@ class PropertyEnglandAvailableLetsController @Inject()(
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.propertyEnglandAvailableLetsEnquiry match {
-        case None => PropertyEnglandAvailableLetsForm()
-        case Some(value) => PropertyEnglandAvailableLetsForm().fill(value)
+      val preparedForm = request.userAnswers.propertyEnglandActualLetsEnquiry match {
+        case None => PropertyEnglandActualLetsForm()
+        case Some(value) => PropertyEnglandActualLetsForm().fill(value)
       }
-      Ok(propertyEnglandAvailableLets(appConfig, preparedForm, mode))
+      Ok(propertyEnglandActualLets(appConfig, preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
-      PropertyEnglandAvailableLetsForm().bindFromRequest().fold(
+      PropertyEnglandActualLetsForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(propertyEnglandAvailableLets(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(propertyEnglandActualLets(appConfig, formWithErrors, mode))),
         value => {
-          auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering140DaysEN" -> value)
-          dataCacheConnector.save[String](request.sessionId, PropertyEnglandAvailableLetsId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(PropertyEnglandAvailableLetsId, mode).apply(new UserAnswers(cacheMap))))
+          auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering70DaysEN" -> value)
+          dataCacheConnector.save[String](request.sessionId, PropertyEnglandActualLetsId.toString, value).map(cacheMap =>
+            Redirect(navigator.nextPage(PropertyEnglandActualLetsId, mode).apply(new UserAnswers(cacheMap))))
         }
       )
   }
-
-  def onWalLetsPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
-    implicit request =>
-      Ok(propertyWalesLets(appConfig))
-  }
-
 }

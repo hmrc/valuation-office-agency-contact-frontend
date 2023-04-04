@@ -154,7 +154,7 @@ class TellUsMoreController @Inject()(appConfig: FrontendAppConfig,
       case (_, Some("business_rates_not_used"), _, _, _, _, _, _, _, _) => routes.DatePropertyChangedController.onPageLoad()
       case (_, Some("business_rates_bill"), _, _, _, _, _, _, _, _) => routes.BusinessRatesBillController.onPageLoad()
       case (_, Some("business_rates_self_catering"), _, _, _, _, Some("england"), Some("yes"), _, _) => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
-      case (_, Some("business_rates_self_catering"), _, _, _, _, Some("england"), Some("no"), _, _) => routes.PropertyEnglandAvailableLetsController.onEngLetsNoActionPageLoad()
+      case (_, Some("business_rates_self_catering"), _, _, _, _, Some("england"), Some("no"), _, _) => routes.PropertyEnglandLetsNoActionController.onPageLoad()
       case (_, Some("business_rates_self_catering"), _, _, _, _, Some("wales"), _, Some("no"), _) => routes.PropertyWalesLetsNoActionController.onPageLoad()
       case (_, Some("business_rates_self_catering"), _, _, _, _, Some("wales"), _, Some("yes"), Some("yes")) => routes.BusinessRatesSelfCateringController.onWalLetsPageLoad()
       case (_, Some("business_rates_self_catering"), _, _, _, _, Some("wales"), _, Some("yes"), Some("no")) => routes.PropertyWalesLetsNoActionController.onPageLoad()
