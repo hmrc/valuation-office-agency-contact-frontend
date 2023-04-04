@@ -286,8 +286,18 @@ class Navigator @Inject()(
 
   private val propertyEnglandAvailableLetsRouting: UserAnswers => Call = answers => {
     answers.propertyEnglandAvailableLetsEnquiry match {
+      case Some("yes") => routes.PropertyEnglandActualLetsController.onPageLoad()
+      case Some("no") => routes.PropertyEnglandLetsNoActionController.onPageLoad()
+      case _ =>
+        log.warn(s"Navigation for is business rates property enquiry reached without selection of enquiry by controller")
+        throw new RuntimeException("Unknown exception for is business rates self catering routing")
+    }
+  }
+
+  private val propertyEnglandActualLetsRouting: UserAnswers => Call = answers => {
+    answers.propertyEnglandActualLetsEnquiry match {
       case Some("yes") => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
-      case Some("no") => routes.PropertyEnglandAvailableLetsController.onEngLetsNoActionPageLoad()
+      case Some("no") => routes.PropertyEnglandLetsNoActionController.onPageLoad()
       case _ =>
         log.warn(s"Navigation for is business rates property enquiry reached without selection of enquiry by controller")
         throw new RuntimeException("Unknown exception for is business rates self catering routing")
@@ -360,6 +370,7 @@ class Navigator @Inject()(
     BusinessRatesSelfCateringId -> selfCateringPageRouting,
     BusinessRatesPropertyEnquiryId -> businessRatesPropertyEnquiryRouting,
     PropertyEnglandAvailableLetsId -> propertyEnglandAvailableLetsRouting,
+    PropertyEnglandActualLetsId -> propertyEnglandActualLetsRouting,
     PropertyWalesAvailableLetsId -> propertyWalesAvailableLetsRouting,
     PropertyWalesActualLetsId -> propertyWalesActualLetsRouting,
     FairRentEnquiryId -> FairRentEnquiryRouting

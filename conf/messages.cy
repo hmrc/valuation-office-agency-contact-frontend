@@ -382,19 +382,19 @@ businessRatesSelfCatering.england = Lloegr
 businessRatesSelfCatering.wales = Cymru
 error.businessRatesSelfCatering.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
 
-# --- Property let available England
+# --- Property let available - England
 propertyEnglandAvailableLets.title = A yw eich eiddo ar gael i’w osod am o leiaf 140 noson y flwyddyn - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
 propertyEnglandAvailableLets.heading = A yw eich eiddo ar gael i’w osod am o leiaf 140 noson y flwyddyn
 propertyEnglandAvailableLets.yes = Ydy
 propertyEnglandAvailableLets.no = Nag ydy
 error.propertyEnglandAvailableLets.required = Dewiswch ‘Ydy’ os yw eich eiddo ar gael i’w osod am o leiaf 140 noson y flwyddyn
 
-# --- Property let for at least 70 days
-businessRatesSelfCatering70Days.title = A yw eich eiddo mewn gwirionedd yn cael ei osod am o leiaf 70 diwrnod y flwyddyn? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
-businessRatesSelfCatering70Days.heading = A yw eich eiddo mewn gwirionedd yn cael ei osod am o leiaf 70 diwrnod y flwyddyn??
-businessRatesSelfCatering70Days.yes = Ydy
-businessRatesSelfCatering70Days.no = Nag ydy
-error.businessRatesSelfCatering70Days.required = Dewiswch ’Ydy’ os yw eich eiddo mewn gwirionedd yn cael ei osod am o leiaf 70 diwrnod y flwyddyn
+# --- Property let actual - England
+propertyEnglandActualLets.title = A yw eich eiddo yn cael ei osod yn wirioneddol am 70 noson y flwyddyn? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyEnglandActualLets.heading = A yw eich eiddo yn cael ei osod yn wirioneddol am 70 noson y flwyddyn?
+propertyEnglandActualLets.yes = Ydy
+propertyEnglandActualLets.no = Nag ydy
+error.propertyEnglandActualLets.required = Dewiswch ‘Ydy’ os yw eich eiddo mewn gwirionedd yn cael ei osod am o leiaf 70 noson y flwyddyn
 
 # --- Property let for actual lets - Wales
 propertyWalesActualLets.title = A yw eich eiddo yn cael ei osod yn wirioneddol am 182 noson y flwyddyn - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK

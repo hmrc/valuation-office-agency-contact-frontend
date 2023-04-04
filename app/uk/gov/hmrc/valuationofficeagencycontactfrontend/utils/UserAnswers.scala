@@ -74,6 +74,8 @@ class UserAnswers(val cacheMap: CacheMap) {
 
   def propertyEnglandAvailableLetsEnquiry: Option[String] = cacheMap.getEntry[String](PropertyEnglandAvailableLetsId.toString)
 
+  def propertyEnglandActualLetsEnquiry: Option[String] = cacheMap.getEntry[String](PropertyEnglandActualLetsId.toString)
+
   def propertyWalesAvailableLetsEnquiry: Option[String] = cacheMap.getEntry[String](PropertyWalesAvailableLetsId.toString)
 
   def propertyWalesActualLetsEnquiry: Option[String] = cacheMap.getEntry[String](PropertyWalesActualLetsId.toString)

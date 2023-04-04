@@ -751,12 +751,12 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return function that goes on tell us about your property when yes to lets in England that are let for at least 140 days" in {
         when (mockUserAnswers.propertyEnglandAvailableLetsEnquiry) thenReturn Some("yes")
-        navigator.nextPage(PropertyEnglandAvailableLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
+        navigator.nextPage(PropertyEnglandAvailableLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyEnglandActualLetsController.onPageLoad()
       }
 
       "return function that goes on tell us about your property when no to lets in England that are let for at least 140 days" in {
         when (mockUserAnswers.propertyEnglandAvailableLetsEnquiry) thenReturn Some("no")
-        navigator.nextPage(PropertyEnglandAvailableLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyEnglandAvailableLetsController.onEngLetsNoActionPageLoad()
+        navigator.nextPage(PropertyEnglandAvailableLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyEnglandLetsNoActionController.onPageLoad()
       }
 
       "return a exception when propertyEnglandLets140DaysEnquiry returns None" in {

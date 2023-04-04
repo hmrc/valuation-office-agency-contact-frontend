@@ -16,14 +16,15 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
+import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLets => england_lets}
 
 class PropertyEnglandLetsViewSpec  extends ViewBehaviours {
 
-  def propertyEnglandLets = app.injector.instanceOf[england_lets]
+  def propertyEnglandLets: england_lets = app.injector.instanceOf[england_lets]
 
-  def view = () => propertyEnglandLets(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => propertyEnglandLets(frontendAppConfig)(fakeRequest, messages)
 
   "Property England Lets view" must {
     behave like normalPage(view, "propertyEnglandLets", "title", "heading",
@@ -34,7 +35,7 @@ class PropertyEnglandLetsViewSpec  extends ViewBehaviours {
       val backlinkText = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad().url
+      backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyEnglandActualLetsController.onPageLoad().url
     }
   }
 }

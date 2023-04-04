@@ -18,36 +18,34 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.data.Form
 import play.api.libs.json.JsString
+import play.api.mvc.Call
 import play.api.test.Helpers.{contentAsString, redirectLocation, status, _}
 import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyEnglandAvailableLetsForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyEnglandAvailableLetsId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyEnglandActualLetsForm
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyEnglandActualLetsId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandAvailableLets => property_england_available_lets}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLetsNoAction => property_england_lets_no_action}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets => wales_lets}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandActualLets => property_England_actual_lets}
 
-class PropertyEnglandAvailableLetsControllerSpec extends ControllerSpecBase {
+class PropertyEnglandActualLetsControllerSpec extends ControllerSpecBase {
 
-  def propertyEnglandLets140DaysEnquiry = inject[property_england_available_lets]
-  def propertyEnglandLetsNoAction = inject[property_england_lets_no_action]
-  def propertyWalesLets = inject[wales_lets]
-  def auditService = inject[AuditingService]
+  def propertyEnglandActualLetsEnquiry: property_England_actual_lets = inject[property_England_actual_lets]
 
-  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+  def auditService: AuditingService = inject[AuditingService]
+
+  def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new PropertyEnglandAvailableLetsController(frontendAppConfig, messagesApi, auditService, FakeDataCacheConnector,
-      new FakeNavigator(desiredRoute = onwardRoute), dataRetrievalAction, new DataRequiredActionImpl(ec),
-      propertyEnglandLets140DaysEnquiry, propertyEnglandLetsNoAction, propertyWalesLets, stubMessageControllerComponents)
+    new PropertyEnglandActualLetsController(frontendAppConfig, messagesApi, auditService, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction, new DataRequiredActionImpl(ec), propertyEnglandActualLetsEnquiry, stubMessageControllerComponents)
 
-  def viewAsString(form: Form[String] = PropertyEnglandAvailableLetsForm()) = propertyEnglandLets140DaysEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = PropertyEnglandActualLetsForm()) = propertyEnglandActualLetsEnquiry(
+    frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
-  "PropertyEnglandLets140DaysController" must {
+  "PropertyEnglandActualLetsController" must {
 
     "return OK and the correct view for a GET" in {
       val result = controller().onPageLoad(NormalMode)(fakeRequest)
@@ -56,24 +54,25 @@ class PropertyEnglandAvailableLetsControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe viewAsString()
     }
 
-    "return OK and the correct view for wales lets rates page GET" in {
-      val result = controller().onWalLetsPageLoad(NormalMode)(fakeRequest)
-
-      status(result) mustBe OK
-      contentAsString(result) mustBe propertyWalesLets(frontendAppConfig)(fakeRequest, messages).toString()
-    }
-
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(PropertyEnglandAvailableLetsId.toString -> JsString(PropertyEnglandAvailableLetsForm.options.head.value))
+      val validData = Map(PropertyEnglandActualLetsId.toString -> JsString(PropertyEnglandActualLetsForm.options.head.value))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsString(PropertyEnglandAvailableLetsForm().fill(PropertyEnglandAvailableLetsForm.options.head.value))
+      contentAsString(result) mustBe viewAsString(PropertyEnglandActualLetsForm().fill(PropertyEnglandActualLetsForm.options.head.value))
+    }
+
+    "redirect to no action page when valid data is submitted" in {
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", PropertyEnglandActualLetsForm.options.head.value))
+
+      val result = controller().onPageLoad(NormalMode)(postRequest)
+
+      status(result) mustBe OK
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", PropertyEnglandAvailableLetsForm.options.head.value))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", PropertyEnglandActualLetsForm.options.head.value))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -82,7 +81,7 @@ class PropertyEnglandAvailableLetsControllerSpec extends ControllerSpecBase {
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm = PropertyEnglandAvailableLetsForm().bind(Map("value" -> "invalid value"))
+      val boundForm = PropertyEnglandActualLetsForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -98,7 +97,7 @@ class PropertyEnglandAvailableLetsControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", PropertyEnglandAvailableLetsForm.options.head.value))
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", PropertyEnglandActualLetsForm.options.head.value))
       val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER

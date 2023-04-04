@@ -16,23 +16,24 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
+import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLetsNoAction => england_lets_no_action}
 
 class PropertyEnglandLetsNoActionViewSpec  extends ViewBehaviours {
 
-  def propertyEnglandLetsNoAction = app.injector.instanceOf[england_lets_no_action]
+  def propertyEnglandLetsNoAction: england_lets_no_action = app.injector.instanceOf[england_lets_no_action]
 
-  def england140DayBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad().url
+  def backLink:String = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad().url
 
-  def view140Days = () => propertyEnglandLetsNoAction(frontendAppConfig)(fakeRequest, messages)
+  def viewEnglandAvailable140Nights: () => HtmlFormat.Appendable = () => propertyEnglandLetsNoAction(frontendAppConfig, backLink)(fakeRequest, messages)
 
   "Property Wales Lets No Action view" must {
-    behave like normalPage(view140Days, "businessRatesSelfCateringNoBusinessRate", "title", "heading",
+    behave like normalPage(viewEnglandAvailable140Nights, "businessRatesSelfCateringNoBusinessRate", "title", "heading",
       "p1", "p2", "p2.bullet1", "p2.bullet2", "p3.part1", "p3.part2", "p3.part3")
 
     "has a link marked with site.back leading to the Property England Lets 140 Page" in {
-      val doc = asDocument(view140Days())
+      val doc = asDocument(viewEnglandAvailable140Nights())
       val backlinkText = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").attr("href")
