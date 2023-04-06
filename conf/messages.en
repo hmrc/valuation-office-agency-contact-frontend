@@ -375,14 +375,14 @@ propertyEnglandAvailableLets.title = Is your property available to let for at le
 propertyEnglandAvailableLets.heading = Is your property available to let for at least 140 nights per year?
 propertyEnglandAvailableLets.yes = Yes
 propertyEnglandAvailableLets.no = No
-error.propertyEnglandAvailableLets.required = Select 'Yes' if your property is available to let for at least 140 nights per year
+error.propertyEnglandAvailableLets.required = Select ’Yes’ if your property is available to let for at least 140 nights per year
 
 # --- Property let actual - England
 propertyEnglandActualLets.title = Is your property actually let for at least 70 nights per year? - Valuation Office Agency contact form - GOV.UK
 propertyEnglandActualLets.heading = Is your property actually let for at least 70 nights per year?
 propertyEnglandActualLets.yes = Yes
 propertyEnglandActualLets.no = No
-error.propertyEnglandActualLets.required = Select 'Yes' if your property is actually let for 70 nights per year
+error.propertyEnglandActualLets.required = Select ’Yes’ if your property is actually let for 70 nights per year
 
 # --- Property let for actual lets - Wales
 propertyWalesActualLets.title = Is your property actually let for at least 182 nights per year? - Valuation Office Agency contact form - GOV.UK
