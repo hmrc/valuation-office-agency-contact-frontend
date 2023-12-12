@@ -7,7 +7,6 @@ object Dependencies {
   private val playFrontendHmrc = "8.1.0"
   private val hmrcMongoVersion = "1.6.0"
   private val commonsTextVersion = "1.11.0"
-  private val httpCachingClientVersion = "11.0.0" // Deprecated - use hmrc-mongo instead
 
   // Test dependencies
   private val scalaTestVersion            = "3.2.17"
@@ -20,7 +19,6 @@ object Dependencies {
     "uk.gov.hmrc"            %% "bootstrap-frontend-play-30"  % bootstrapPlayVersion,
     "uk.gov.hmrc"            %% "play-frontend-hmrc-play-30"  % playFrontendHmrc,
     "uk.gov.hmrc.mongo"      %% "hmrc-mongo-play-30"          % hmrcMongoVersion,
-    "uk.gov.hmrc"            %% "http-caching-client-play-29" % httpCachingClientVersion, // Deprecated - use hmrc-mongo instead
     "org.apache.commons"     %  "commons-text"                % commonsTextVersion
   )
 

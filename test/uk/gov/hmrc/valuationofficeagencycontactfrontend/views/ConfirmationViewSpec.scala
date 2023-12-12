@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
+import org.jsoup.nodes.Document.OutputSettings
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.SatisfactionSurveyForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
@@ -23,6 +24,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow, AnswerSection}
 
 class ConfirmationViewSpec extends ViewBehaviours {
+
+  private val outputSettings = new OutputSettings().prettyPrint(false)
 
   val contactDetails = ContactDetails("c1", "c3", "c5")
   val councilTax = "council_tax"
@@ -62,13 +65,13 @@ class ConfirmationViewSpec extends ViewBehaviours {
     )
 
     "Given a property address with address line 2 and county as None it should contain a formatted address string with <br/> interstitial" in {
-      val doc = asDocument(alternativeView())
+      val doc = asDocument(alternativeView()).outputSettings(outputSettings)
       assert(doc.toString.contains("<br>c"))
       assert(doc.toString.contains("<br>f"))
     }
 
     "Given a property address it should contain a formatted address string with <br/> interstitial" in {
-      val doc = asDocument(view())
+      val doc = asDocument(view()).outputSettings(outputSettings)
       assert(doc.toString.contains("<br>b"))
       assert(doc.toString.contains("<br>c"))
       assert(doc.toString.contains("<br>d"))
@@ -76,7 +79,7 @@ class ConfirmationViewSpec extends ViewBehaviours {
     }
 
     "Given a Contact Details it should contain a formatted Contact Details string with <br/> interstitial" in {
-      val doc = asDocument(view())
+      val doc = asDocument(view()).outputSettings(outputSettings)
       assert(doc.toString.contains("c1"))
       assert(doc.toString.contains("<br>c3"))
       assert(doc.toString.contains("<br>c5"))

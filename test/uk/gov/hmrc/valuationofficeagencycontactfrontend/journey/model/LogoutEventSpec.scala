@@ -20,9 +20,8 @@ import org.scalatest._
 import flatspec._
 import matchers._
 import play.api.libs.json.{JsObject, JsString, Json}
-import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{ContactDetailsId, RefNumberId}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, ContactDetails}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 /**

@@ -26,8 +26,8 @@ import play.api.test.Helpers
 import uk.gov.hmrc.http.SessionKeys
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.OptionalDataRequest
-import uk.gov.hmrc.http.cache.client.CacheMap
 
 import scala.concurrent.Future
 

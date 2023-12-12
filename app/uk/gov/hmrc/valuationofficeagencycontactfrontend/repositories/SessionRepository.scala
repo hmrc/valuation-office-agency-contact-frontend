@@ -18,10 +18,10 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.repositories
 
 import play.api.libs.json.{Reads, Writes}
 import play.api.{Configuration, Logging}
-import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.mongo.cache.CacheIdType.SimpleCacheId
 import uk.gov.hmrc.mongo.cache.{CacheItem, DataKey, MongoCacheRepository}
 import uk.gov.hmrc.mongo.{MongoComponent, TimestampSupport}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.CacheMap
 
 import java.util.concurrent.TimeUnit.SECONDS
 import javax.inject.{Inject, Singleton}

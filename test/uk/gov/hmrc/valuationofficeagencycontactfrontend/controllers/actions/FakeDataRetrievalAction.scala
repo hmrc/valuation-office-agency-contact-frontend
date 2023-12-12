@@ -18,7 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions
 
 import play.api.mvc.{AnyContent, BodyParser, Request}
 import play.api.test.Helpers
-import uk.gov.hmrc.http.cache.client.CacheMap
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.OptionalDataRequest
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
