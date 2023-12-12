@@ -48,7 +48,7 @@ class EmailConnectorSpec extends SpecBase with MockitoSugar with ScalaFutures {
 
   implicit val hc: HeaderCarrier = HeaderCarrier()
   implicit val request: DataRequest[_] = DataRequest(FakeRequest(), "sessionId", new UserAnswers(new CacheMap("id", Map())))
-  implicit val dateUtil = injector.instanceOf[DateUtil]
+  implicit val dateUtil: DateUtil = injector.instanceOf[DateUtil]
 
   private def httpMock(status: Int, body: String) = {
     val httpMock = mock[HttpClient]

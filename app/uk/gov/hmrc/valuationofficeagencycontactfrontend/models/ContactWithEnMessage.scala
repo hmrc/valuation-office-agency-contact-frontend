@@ -19,7 +19,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
 import org.apache.commons.text.StringEscapeUtils
 import play.api.Logger
 import play.api.i18n.{Lang, Messages, MessagesApi}
-import play.api.libs.json.Json
+import play.api.libs.json.{Json, OFormat}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 import java.util.Locale
@@ -34,7 +34,7 @@ case class ContactWithEnMessage(contact: ContactDetails,
 
 object ContactWithEnMessage {
 
-  implicit val format = Json.format[ContactWithEnMessage]
+  implicit val format: OFormat[ContactWithEnMessage] = Json.format[ContactWithEnMessage]
   private val log = Logger(this.getClass)
   val councilTaxKey = "council_tax"
   val businessRatesKey = "business_rates"
