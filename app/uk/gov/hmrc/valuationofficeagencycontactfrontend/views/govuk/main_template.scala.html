@@ -35,14 +35,9 @@
 
 @(
         pageTitle: Option[String] = None,
-        beforeContentBlock: Option[Html] = None,
+        backLink: Option[BackLink] = None,
         enableTimeoutDialog: Boolean = true
 )(contentBlock: Html)(implicit request: Request[_], messages: Messages)
-
-@beforeBLock = {
-@hmrcLanguageSelectHelper()
-@beforeContentBlock
-}
 
 @hmrcStandardPage(
     HmrcStandardPageParams(
@@ -52,6 +47,7 @@
         serviceURLs = ServiceURLs(
             serviceUrl= Some(routes.Application.start().url)
         ),
+        backLink = backLink,
         banners = Banners(
             displayHmrcBanner = false,
             phaseBanner = Some(
@@ -62,8 +58,7 @@
             )
         ),
         templateOverrides = TemplateOverrides(
-            additionalHeadBlock = Some(headTemplate(enableTimeoutDialog)),
-            beforeContentBlock = Option(beforeBLock)
+            additionalHeadBlock = Some(headTemplate(enableTimeoutDialog))
         )
     )
 )(contentBlock)

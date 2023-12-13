@@ -27,17 +27,8 @@
 
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
-@beforeBlock = {
-    @govukBackLink(
-        BackLink(
-            content = Text(messages("site.back")),
-            href = routes.BusinessRatesPropertyController.onPageLoad().url,
-            classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
-        )
-    }
-
 @mainTemplate(
-    beforeContentBlock = Option(beforeBlock),
+    backLink = Some(BackLink(href = routes.BusinessRatesPropertyController.onPageLoad().url)),
     pageTitle = Option(messages("businessRatesNonBusiness.title"))) {
 
     <h1 class="govuk-heading-l">@Messages("businessRatesNonBusiness.heading")</h1>

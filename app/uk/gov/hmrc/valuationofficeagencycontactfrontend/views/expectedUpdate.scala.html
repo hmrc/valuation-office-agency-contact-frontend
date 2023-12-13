@@ -26,17 +26,9 @@
 
 @()(implicit request: Request[_], messages: Messages)
 
-@beforeContent = {
- @backLink(
-  BackLink(
-   href=routes.EnquiryDateController.onPageLoad().url,
-   content = Text(messages("site.back")),
-   classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0"))
-}
-
 @mainTemplate(
  pageTitle = Some(messages("expectedUpdate.title")),
- beforeContentBlock = Some(beforeContent)
+ backLink = Some(BackLink(href = routes.EnquiryDateController.onPageLoad().url))
 ) {
 
 

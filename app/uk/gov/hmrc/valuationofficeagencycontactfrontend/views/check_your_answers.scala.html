@@ -31,18 +31,8 @@
 
 @(appConfig: FrontendAppConfig, answerSections: Seq[Section], backLink: String)(implicit request: Request[_], messages: Messages)
 
-
-    @beforeBlock = {
-    @govukBackLink(
-        BackLink(
-            content = Text(messages("site.back")),
-            href = backLink,
-            classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
-        )
-    }
-
 @mainTemplate(
-    beforeContentBlock = Option(beforeBlock),
+    backLink = Some(BackLink(href = backLink)),
     pageTitle = Option(messages("checkYourAnswers.title"))) {
 
     <h1 class="govuk-heading-l">@messages("checkYourAnswers.heading")</h1>

@@ -39,17 +39,6 @@
 
 @(appConfig: FrontendAppConfig, form: Form[TellUsMore], mode: Mode, enquiryKey: String, backlink: String)(implicit request: Request[_], messages: Messages)
 
-
-@beforeBlock = {
-    @govukBackLink(
-        BackLink(
-            content = Text(messages("site.back")),
-            href = backlink,
-            classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
-    )
-}
-
-
 @content = {
 
     @if(enquiryKey == "tellUsMore.poorRepair" || enquiryKey == "tellUsMore.business"
@@ -117,7 +106,7 @@
 
     @mainTemplate(
         pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + title) else title),
-        beforeContentBlock = Option(beforeBlock)
+        backLink = Some(BackLink(href = backlink))
     ) {
         @formWithCSRF(action = TellUsMoreController.onSubmit(mode), Symbol("autoComplete") -> "off") {
             @if(form.hasErrors) {
