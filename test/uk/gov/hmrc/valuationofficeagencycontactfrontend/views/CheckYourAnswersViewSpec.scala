@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
+import org.jsoup.nodes.Document.OutputSettings
 import play.api.i18n.{Lang, Messages}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, DateUtil}
@@ -26,6 +27,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_an
 import java.util.Locale
 
 class CheckYourAnswersViewSpec extends ViewBehaviours {
+
+  private val outputSettings = new OutputSettings().prettyPrint(false)
 
   implicit val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
   implicit val dateUtil: DateUtil = injector.instanceOf[DateUtil]
@@ -72,9 +75,9 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
     "has a link marked with site.back leading to the Tell Us More Page" in {
       val doc = asDocument(view1())
-      val backlinkText = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").text()
+      val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").attr("href")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
@@ -119,13 +122,13 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
     }
 
     "Given a property address with address line 2 and county None it should contain a formatted address string with <br/> interstitial" in {
-      val doc = asDocument(view1())
+      val doc = asDocument(view1()).outputSettings(outputSettings)
       assert(doc.toString.contains("<br>c"))
       assert(doc.toString.contains("<br>f"))
     }
 
     "Given a Contact Details it should contain a formatted Contact Details string with <br/> interstitial" in {
-      val doc = asDocument(view1())
+      val doc = asDocument(view1()).outputSettings(outputSettings)
       assert(doc.toString.contains("c1"))
       assert(doc.toString.contains("<br>c3"))
       assert(doc.toString.contains("<br>c5"))
@@ -142,7 +145,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
     }
 
     "Given a property address it should contain a formatted address string with <br/> interstitial" in {
-      val doc = asDocument(view2())
+      val doc = asDocument(view2()).outputSettings(outputSettings)
       assert(doc.toString.contains("<br>b"))
       assert(doc.toString.contains("<br>c"))
       assert(doc.toString.contains("<br>d"))

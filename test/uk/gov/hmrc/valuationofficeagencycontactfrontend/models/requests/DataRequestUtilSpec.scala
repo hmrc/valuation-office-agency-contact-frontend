@@ -21,8 +21,8 @@ import org.scalatest.matchers.should
 import play.api.libs.json.JsString
 import play.api.mvc.Request
 import play.api.test.FakeRequest
-import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.EnquiryCategoryId
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 /**

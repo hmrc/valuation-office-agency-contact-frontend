@@ -18,7 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors
 
 import com.google.inject.{ImplementedBy, Inject}
 import play.api.libs.json.Format
-import uk.gov.hmrc.http.cache.client.CacheMap
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.repositories.SessionRepository
 
 import scala.concurrent.{ExecutionContext, Future}

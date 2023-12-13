@@ -21,13 +21,12 @@ import play.api.i18n.{DefaultMessagesApi, Lang, Messages, MessagesImpl}
 import play.api.libs.json.JsString
 import play.api.mvc.{Call, Request}
 import play.api.test.Helpers._
-import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.JourneyMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.NotImplemented
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.{HousingBenefitAllowancesRouter, HousingBenefitAppeals, HousingBenefitEnquiry}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.{categoryRouter, customizedContent, notImplemented, singleTextarea}
 

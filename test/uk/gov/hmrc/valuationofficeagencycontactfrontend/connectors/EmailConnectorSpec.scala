@@ -24,11 +24,10 @@ import play.api.http.Status.{ACCEPTED, BAD_REQUEST}
 import play.api.i18n.{DefaultMessagesApi, Lang, Messages}
 import play.api.libs.json.{JsValue, Writes}
 import play.api.test.FakeRequest
-import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.http.{HeaderCarrier, HttpClient, HttpReads, HttpResponse}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.DataRequest
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Contact, ContactDetails, PropertyAddress}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, Contact, ContactDetails, PropertyAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateUtil, UserAnswers}
 
 import scala.concurrent.Future
@@ -48,7 +47,7 @@ class EmailConnectorSpec extends SpecBase with MockitoSugar with ScalaFutures {
 
   implicit val hc: HeaderCarrier = HeaderCarrier()
   implicit val request: DataRequest[_] = DataRequest(FakeRequest(), "sessionId", new UserAnswers(new CacheMap("id", Map())))
-  implicit val dateUtil = injector.instanceOf[DateUtil]
+  implicit val dateUtil: DateUtil = injector.instanceOf[DateUtil]
 
   private def httpMock(status: Int, body: String) = {
     val httpMock = mock[HttpClient]

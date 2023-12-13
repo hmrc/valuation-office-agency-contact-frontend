@@ -32,7 +32,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertySmal
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesNoNeedToPay => business_rates_no_need_to_pay}
 
 import javax.inject.Inject
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 
 class CouncilTaxBusinessController @Inject()(appConfig: FrontendAppConfig,
                                              override val messagesApi: MessagesApi,
@@ -47,7 +47,7 @@ class CouncilTaxBusinessController @Inject()(appConfig: FrontendAppConfig,
                                              cc: MessagesControllerComponents
                                             ) extends FrontendController(cc) with I18nSupport {
 
-  implicit val ec = cc.executionContext
+  implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>

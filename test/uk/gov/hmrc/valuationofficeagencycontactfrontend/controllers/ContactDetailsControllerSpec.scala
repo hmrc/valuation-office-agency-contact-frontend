@@ -20,7 +20,6 @@ import org.mockito.Mockito.when
 import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.{JsString, Json}
-import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
@@ -28,7 +27,7 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, ContactReasonId, CouncilTaxSubcategoryId, EnquiryCategoryId, PropertyAddressId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode, PropertyAddress}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, ContactDetails, NormalMode, PropertyAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{contactDetails => contact_details}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}

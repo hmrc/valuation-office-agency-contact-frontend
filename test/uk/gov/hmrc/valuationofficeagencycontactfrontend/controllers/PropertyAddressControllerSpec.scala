@@ -18,14 +18,13 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.data.Form
 import play.api.libs.json.Json
-import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyAddressForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyAddressId
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{NormalMode, PropertyAddress}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, NormalMode, PropertyAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyAddress => property_address}
 

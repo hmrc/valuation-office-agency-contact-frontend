@@ -19,7 +19,6 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend
 import org.scalatestplus.mockito.MockitoSugar
 import play.api.i18n.{Lang, Messages}
 import play.api.libs.json.JsString
-import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.JourneyMap.changeModePrefix
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage

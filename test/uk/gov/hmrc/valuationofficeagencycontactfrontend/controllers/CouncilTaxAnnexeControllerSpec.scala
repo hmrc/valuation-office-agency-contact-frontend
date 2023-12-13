@@ -22,13 +22,12 @@ import org.scalatestplus.mockito.MockitoSugar.mock
 import play.api.data.Form
 import play.api.libs.json.JsString
 import play.api.test.Helpers._
-import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{AnnexeCookingWashingForm, AnnexeForm, AnnexeSelfContainedForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{CouncilTaxAnnexeEnquiryId, CouncilTaxAnnexeHaveCookingId, CouncilTaxAnnexeSelfContainedEnquiryId}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxAnnexe => council_tax_annexe}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeSelfContainedEnquiry => annexe_self_contained_enquiry}

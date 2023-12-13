@@ -15,7 +15,6 @@
  *@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components._
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 
 @this(
@@ -27,9 +26,5 @@
 
 @mainTemplate(
     pageTitle = Some(s"$title - ${messages("service.name")} - GOV.UK"),
-    beforeContentBlock = Some(govukBackLink(BackLink(
-        content = Text(messages("site.back")),
-        href = backUrl,
-        classes = "govuk-!-margin-top-0 govuk-!-margin-bottom-0")
-    ))
+    backLink = Some(BackLink(href = backUrl))
 )(content)

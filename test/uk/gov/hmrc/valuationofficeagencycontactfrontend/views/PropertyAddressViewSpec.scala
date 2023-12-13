@@ -50,9 +50,9 @@ class PropertyAddressViewSpec extends QuestionViewBehaviours[PropertyAddress] {
 
     "has a link marked with site.back leading to the Contact Details Page" in {
       val doc = asDocument(createView())
-      val backlinkText = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").text()
+      val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").attr("href")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url
     }
   }

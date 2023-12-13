@@ -22,14 +22,13 @@ import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.JsString
 import play.api.test.Helpers.{contentAsString, status}
-import uk.gov.hmrc.http.cache.client.CacheMap
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{CouncilTaxBusinessEnquiryForm, CouncilTaxSubcategoryForm}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CouncilTaxBusinessEnquiryId
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBusinessEnquiry => council_tax_business_enquiry}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertySmallPartUsed => small_part_used}

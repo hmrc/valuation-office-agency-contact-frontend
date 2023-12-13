@@ -19,16 +19,15 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import play.api.data.Form
 import play.api.libs.json.JsString
 import play.api.test.Helpers.{contentAsString, redirectLocation, status, _}
-import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.FairRentEnquiryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.FairRentEnquiryId
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{fairRentEnquiry => fair_rent_enquiry}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{submitFairRentApplication => submit_fair_rent_application, checkFairRentApplication => check_fair_rent_application}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{checkFairRentApplication => check_fair_rent_application, submitFairRentApplication => submit_fair_rent_application}
 
 class FairRentEnquiryControllerSpec extends ControllerSpecBase {
 

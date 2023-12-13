@@ -17,9 +17,9 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import play.api.test.Injecting
-import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{FakeDataClearAction, FakeDataRetrievalAction}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.CacheMap
 
 trait ControllerSpecBase extends SpecBase with Injecting {
 

@@ -20,13 +20,12 @@ import play.api.data.Form
 import play.api.i18n.{Lang, Messages}
 import play.api.libs.json.JsString
 import play.api.test.Helpers._
-import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryDateForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.EnquiryDateId
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateUtil, MessageControllerComponentsHelpers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{enquiryDate => enquiry_date}
 

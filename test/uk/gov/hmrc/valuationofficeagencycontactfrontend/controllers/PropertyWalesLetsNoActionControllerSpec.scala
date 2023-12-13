@@ -21,16 +21,15 @@ import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.JsString
 import play.api.test.Helpers._
-import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{ContactDetails, NormalMode}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, ContactDetails, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{ propertyWalesLetsNoAction => property_wales_lets_no_action}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLetsNoAction => property_wales_lets_no_action}
 
 class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with MockitoSugar {
 

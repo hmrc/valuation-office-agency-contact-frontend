@@ -32,17 +32,8 @@
 
 @(appConfig: FrontendAppConfig, form: Form[_], mode: Mode, enquiryKey: String, backlink: String)(implicit request: Request[_], messages: Messages)
 
-@beforeBlock = {
-    @govukBackLink(
-        BackLink(
-            content = Text(messages("site.back")),
-            href = backlink,
-            classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
-        )
-    }
-
 @mainTemplate(
-    beforeContentBlock = Option(beforeBlock),
+    backLink = Some(BackLink(href = backlink)),
     pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages(s"$enquiryKey.title"))else messages(s"$enquiryKey.title")),
 ) {
 

@@ -21,14 +21,13 @@ import org.scalatestplus.mockito.MockitoSugar
 import org.mockito.Mockito.when
 import play.api.data.Form
 import play.api.libs.json.JsString
-import uk.gov.hmrc.http.cache.client.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxSubcategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CouncilTaxSubcategoryId
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxSubcategory => council_tax_subcategory}
 

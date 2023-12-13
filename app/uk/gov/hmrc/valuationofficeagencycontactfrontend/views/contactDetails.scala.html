@@ -40,15 +40,6 @@
 
 @(appConfig: FrontendAppConfig, form: Form[ContactDetails], mode: Mode, backLink: String)(implicit request: Request[_], messages: Messages)
 
-@beforeBlock = {
-    @govukBackLink(
-        BackLink(
-            content = Text(messages("site.back")),
-            href = backLink,
-            classes="govuk-!-margin-top-0 govuk-!-margin-bottom-0")
-        )
-    }
-
 @textInput(id: String, inputType: String, classes: String, autoCompleteLabel: String, mode: String = "", pattern: String = "") = {
     @govukInput(Input(
         id=id,
@@ -80,7 +71,7 @@
 
 @mainTemplate(
     pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + messages("contactDetails.title")) else messages("contactDetails.title")),
-    beforeContentBlock = Option(beforeBlock)
+    backLink = Some(BackLink(href = backLink))
 ) {
     @formWithCSRF(action = ContactDetailsController.onSubmit(mode)) {
         @if(form.hasErrors) {

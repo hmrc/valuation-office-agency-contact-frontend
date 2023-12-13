@@ -15,53 +15,50 @@
  *@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components._
-@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcStandardFooter
-@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcHead
-@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcScripts
-@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcTimeoutDialogHelper
-@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcLayout
+@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcStandardPage
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.hmrcstandardpage.Banners
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.hmrcstandardpage.HmrcStandardPageParams
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.hmrcstandardpage.ServiceURLs
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.hmrcstandardpage.TemplateOverrides
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcLanguageSelectHelper
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.head
-@import uk.gov.hmrc.hmrcfrontend.config.AccessibilityStatementConfig
 
 @import play.api.i18n.Messages
 @import play.api.mvc.Request
 
 @this(
-        hmrcLayout: HmrcLayout,
-        hmrcHead: HmrcHead,
-        hmrcScripts: HmrcScripts,
-        hmrcTimeoutDialogHelper: HmrcTimeoutDialogHelper,
-        govukBackLink: GovukBackLink,
+        hmrcStandardPage: HmrcStandardPage,
         headTemplate: head,
-        govukPhaseBanner: GovukPhaseBanner,
-        hmrcLanguageSelectHelper: HmrcLanguageSelectHelper,
-        hmrcStandardFooter: HmrcStandardFooter,
-        accessibilityStatementConfig: AccessibilityStatementConfig
+        hmrcLanguageSelectHelper: HmrcLanguageSelectHelper
 )
 
 @(
         pageTitle: Option[String] = None,
-        beforeContentBlock: Option[Html] = None,
+        backLink: Option[BackLink] = None,
         enableTimeoutDialog: Boolean = true
 )(contentBlock: Html)(implicit request: Request[_], messages: Messages)
 
-@beforeBLock = {
-@govukPhaseBanner(PhaseBanner(tag = Option(Tag(Text("BETA"))),
-    content = HtmlContent(messages("site.new_service"))))
-    <div class="govuk-!-margin-0 govuk-!-margin-bottom-0">
-    @hmrcLanguageSelectHelper()
-    </div>
-
-@beforeContentBlock
-}
-
-@hmrcLayout(
-    pageTitle = pageTitle,
-    serviceName = Some(messages("site.service_name")),
-    serviceUrl= Some(routes.Application.start().url),
-    isWelshTranslationAvailable = true,
-    additionalHeadBlock = Some(headTemplate(enableTimeoutDialog)),
-    beforeContentBlock = Option(beforeBLock)
+@hmrcStandardPage(
+    HmrcStandardPageParams(
+        pageTitle = pageTitle,
+        isWelshTranslationAvailable = true,
+        serviceName = Some(messages("site.service_name")),
+        serviceURLs = ServiceURLs(
+            serviceUrl= Some(routes.Application.start().url)
+        ),
+        backLink = backLink,
+        banners = Banners(
+            displayHmrcBanner = false,
+            phaseBanner = Some(
+                PhaseBanner(
+                    tag = Option(Tag(Text("BETA"))),
+                    content = HtmlContent(messages("site.new_service"))
+                )
+            )
+        ),
+        templateOverrides = TemplateOverrides(
+            additionalHeadBlock = Some(headTemplate(enableTimeoutDialog))
+        )
+    )
 )(contentBlock)
