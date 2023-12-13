@@ -50,9 +50,9 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
 
     "Contact Details has a link marked with site.back leading to the council tax subcategory page when enquiry category is council_tax" in {
       val doc = asDocument(createCTViewUsingForm(form))
-      val backlinkText = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").text()
+      val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").attr("href")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
 
@@ -64,9 +64,9 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
 
     "Contact Details has a link marked with site.back leading to the business rates subcategory page when enquiry category is business_rates" in {
       val doc = asDocument(createNDRViewUsingForm(form))
-      val backlinkText = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").text()
+      val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=govuk-back-link govuk-!-margin-top-0 govuk-!-margin-bottom-0]").attr("href")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
     }
 
