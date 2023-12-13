@@ -41,8 +41,6 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient,
   val baseSegment = "/lightweight-contact-events/"
   val jsonContentTypeHeader = ("Content-Type", "application/json")
 
-  def getStyleGuide = http.GET[HttpResponse](s"$serviceUrl${baseSegment}style-guide")
-
   def send(input: Contact, messagesApi: MessagesApi, userAnswers: UserAnswers)(implicit hc: HeaderCarrier) = {
     val msg = ContactWithEnMessage(input, messagesApi, userAnswers)
     val auditEvent = EnquiryAuditEvent(
