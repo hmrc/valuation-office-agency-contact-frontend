@@ -14,10 +14,12 @@ val appName = "valuation-office-agency-contact-frontend"
 
 ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" % VersionScheme.Always // Resolves versions conflict
 
+ThisBuild / majorVersion := 1
+ThisBuild / scalaVersion := "2.13.12"
+
 lazy val root = Project(appName, file("."))
   .enablePlugins(PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin)
   .disablePlugins(JUnitXmlReportPlugin)
-  .settings(majorVersion := 1)
   .settings(RoutesKeys.routesImport ++= Seq("uk.gov.hmrc.valuationofficeagencycontactfrontend.models._"))
   .settings(
     ScoverageKeys.coverageExcludedFiles := "<empty>;Reverse.*;.*filters.*;.*handlers.*;.*components.*;.*models.*;" +
@@ -31,18 +33,13 @@ lazy val root = Project(appName, file("."))
   .settings(scalaSettings)
   .settings(defaultSettings())
   .settings(
-    scalacOptions ++= Seq("-feature"),
     libraryDependencies ++= Dependencies.appDependencies,
-    retrieveManaged := true,
     Test / fork := true,
-    scalaVersion := "2.13.12",
-    DefaultBuildSettings.targetJvm := "jvm-11",
+    scalacOptions += "-feature",
     scalacOptions += "-Wconf:src=routes/.*:s",
     scalacOptions += "-Wconf:cat=unused-imports&src=html/.*:s",
     maintainer := "voa.service.optimisation@digital.hmrc.gov.uk"
   )
-  .configs(IntegrationTest)
-  .settings(integrationTestSettings())
   .settings(
     SassKeys.generateSourceMaps := false,
     SassKeys.cssStyle := Minified

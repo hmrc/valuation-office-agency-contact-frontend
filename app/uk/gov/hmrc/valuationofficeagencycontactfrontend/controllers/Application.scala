@@ -23,7 +23,7 @@ import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactReasonForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.contactReason
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.DataRetrievalAction
@@ -42,7 +42,7 @@ class Application @Inject() (override val messagesApi: MessagesApi,
                             cc: MessagesControllerComponents
                            )(implicit ec: ExecutionContext) extends FrontendController(cc) with I18nSupport {
 
-  def start(mode: Mode) = Action.async { implicit request =>
+  def start() = Action.async { implicit request =>
     val defaultPage = Ok(contactReason(ContactReasonForm(), NormalMode))
     language match {
       case "cy" => Future.successful(configuration.getOptional[String]("govukStartPageWelsh")

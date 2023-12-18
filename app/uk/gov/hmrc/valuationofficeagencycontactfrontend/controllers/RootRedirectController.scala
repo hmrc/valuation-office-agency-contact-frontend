@@ -21,11 +21,14 @@ import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
 import javax.inject.{Inject, Singleton}
 
+/**
+ * @author Yuriy Tumakha
+ */
 @Singleton
 class RootRedirectController @Inject()(cc: MessagesControllerComponents) extends FrontendController(cc) {
 
   def rootRedirect: Action[AnyContent] = Action {
-    Redirect("/valuation-office-agency-contact-frontend")
+    Redirect(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.Application.start())
   }
 
 }

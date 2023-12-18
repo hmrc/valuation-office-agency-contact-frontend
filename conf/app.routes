@@ -2,7 +2,7 @@
 
 ->          /hmrc-frontend                         hmrcfrontend.Routes
 
-GET         /                                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.Application.start(mode: Mode = NormalMode)
+GET         /                                      uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.Application.start()
 
 GET         /logout                                uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.Application.logout()
 
