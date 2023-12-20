@@ -28,13 +28,16 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.session
 import scala.concurrent.ExecutionContext
 
 @Singleton
-class SessionExpiredController @Inject()(val appConfig: FrontendAppConfig,
-                                         auditService: AuditingService,
-                                         getData: DataRetrievalAction,
-                                         override val messagesApi: MessagesApi,
-                                         cc: MessagesControllerComponents,
-                                         sessionExpired: session_expired
-                                        )(implicit ec: ExecutionContext) extends FrontendController(cc) with I18nSupport {
+class SessionExpiredController @Inject() (
+  val appConfig: FrontendAppConfig,
+  auditService: AuditingService,
+  getData: DataRetrievalAction,
+  override val messagesApi: MessagesApi,
+  cc: MessagesControllerComponents,
+  sessionExpired: session_expired
+)(implicit ec: ExecutionContext
+) extends FrontendController(cc)
+  with I18nSupport {
 
   def onPageLoad: Action[AnyContent] = getData { implicit request =>
     auditService.sendTimeout(request.userAnswers)

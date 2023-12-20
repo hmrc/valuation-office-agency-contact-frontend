@@ -34,25 +34,27 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRate
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class CouncilTaxBusinessController @Inject()(appConfig: FrontendAppConfig,
-                                             override val messagesApi: MessagesApi,
-                                             auditService: AuditingService,
-                                             dataCacheConnector: DataCacheConnector,
-                                             navigator: Navigator,
-                                             getData: DataRetrievalAction,
-                                             requireData: DataRequiredAction,
-                                             councilTaxBusinessEnquiry: council_tax_business_enquiry,
-                                             propertySmallPartUsed: small_part_used,
-                                             businessRatesNoNeedToPay: business_rates_no_need_to_pay,
-                                             cc: MessagesControllerComponents
-                                            ) extends FrontendController(cc) with I18nSupport {
+class CouncilTaxBusinessController @Inject() (
+  appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  auditService: AuditingService,
+  dataCacheConnector: DataCacheConnector,
+  navigator: Navigator,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  councilTaxBusinessEnquiry: council_tax_business_enquiry,
+  propertySmallPartUsed: small_part_used,
+  businessRatesNoNeedToPay: business_rates_no_need_to_pay,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.councilTaxBusinessEnquiry match {
-        case None => CouncilTaxBusinessEnquiryForm()
+        case None        => CouncilTaxBusinessEnquiryForm()
         case Some(value) => CouncilTaxBusinessEnquiryForm().fill(value)
       }
 
@@ -84,10 +86,9 @@ class CouncilTaxBusinessController @Inject()(appConfig: FrontendAppConfig,
       Ok(businessRatesNoNeedToPay(appConfig))
   }
 
-  private def backLink(answers: UserAnswers, mode: Mode): String = {
+  private def backLink(answers: UserAnswers, mode: Mode): String =
     answers.businessRatesSubcategory match {
       case Some("business_rates_from_home") => routes.BusinessRatesSubcategoryController.onPageLoad(mode).url
-      case _ => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
+      case _                                => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
     }
-  }
 }

@@ -33,42 +33,45 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{AddressFormatters
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ConfirmationController.whatHappensNextMessages
 
 import scala.concurrent.ExecutionContext
+import play.api.mvc
+import play.api.mvc.AnyContent
 
 @Singleton()
-class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
-                                             override val messagesApi: MessagesApi,
-                                             getData: DataRetrievalAction,
-                                             requireData: DataRequiredAction,
-                                             auditService: AuditingService,
-                                             confirmation: Confirmation,
-                                             satisfactionSurveyThankYou: satisfaction_Survey_Thank_You,
-                                             cc: MessagesControllerComponents)(implicit ec: ExecutionContext) extends FrontendController(cc) with I18nSupport {
+class SatisfactionSurveyController @Inject() (
+  val appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  auditService: AuditingService,
+  confirmation: Confirmation,
+  satisfactionSurveyThankYou: satisfaction_Survey_Thank_You,
+  cc: MessagesControllerComponents
+)(implicit ec: ExecutionContext
+) extends FrontendController(cc)
+  with I18nSupport {
 
   private val log = Logger(this.getClass)
 
-  implicit def hc(implicit request: Request[_]):HeaderCarrier = HeaderCarrierConverter.fromRequestAndSession(request, request.session)
+  implicit def hc(implicit request: Request[_]): HeaderCarrier = HeaderCarrierConverter.fromRequestAndSession(request, request.session)
 
-  def enquiryKey(answers: UserAnswers): Either[String, String] = {
+  def enquiryKey(answers: UserAnswers): Either[String, String] =
     answers.enquiryCategory match {
-      case Some("council_tax") => Right("councilTaxSubcategory")
+      case Some("council_tax")    => Right("councilTaxSubcategory")
       case Some("business_rates") => Right("businessRatesSubcategory")
-      case _ => Left("Unknown enquiry category in enquiry key")
+      case _                      => Left("Unknown enquiry category in enquiry key")
     }
-  }
 
-  def formCompleteFeedback  = (getData andThen requireData) { implicit request =>
-
+  def formCompleteFeedback: mvc.Action[AnyContent] = (getData andThen requireData) { implicit request =>
     val (contact, answerSections) = (request.userAnswers.contact(), request.userAnswers.answerSection) match {
       case (Right(ct), Some(as)) => (ct, as)
-      case (Left(msg), _) =>
+      case (Left(msg), _)        =>
         log.warn(s"Navigation for Survey page reached without a contact and error $msg")
         throw new RuntimeException(s"Navigation for Survey page reached without a contact and error $msg")
     }
 
     SatisfactionSurveyForm().bindFromRequest().fold(
-      formWithErrors => {
-        Ok(confirmation(appConfig, contact, answerSections, whatHappensNextMessages(request.userAnswers), formWithErrors))
-      },
+      formWithErrors =>
+        Ok(confirmation(appConfig, contact, answerSections, whatHappensNextMessages(request.userAnswers), formWithErrors)),
       success => {
         auditService.sendRadioButtonSelection(request.uri, "satisfaction" -> success.satisfaction)
         sendFeedback(success, AddressFormatters.formattedPropertyAddress(contact.propertyAddress, ", "))
@@ -80,13 +83,12 @@ class SatisfactionSurveyController @Inject()(val appConfig: FrontendAppConfig,
     )
   }
 
-  private def sendFeedback(f: SatisfactionSurvey, refNum: String)(implicit headerCarrier: HeaderCarrier): Unit = {
+  private def sendFeedback(f: SatisfactionSurvey, refNum: String)(implicit headerCarrier: HeaderCarrier): Unit =
     auditService.sendSurveySatisfaction(Map("satisfaction" -> f.satisfaction, "referenceNumber" -> refNum)).flatMap { _ =>
       auditService.sendSurveyFeedback(Map("feedback" -> f.details.getOrElse(""), "referenceNumber" -> refNum))
     }
-  }
 
-  def surveyThankyou = Action { implicit request =>
+  def surveyThankyou: mvc.Action[AnyContent] = Action { implicit request =>
     Ok(satisfactionSurveyThankYou(appConfig))
   }
 

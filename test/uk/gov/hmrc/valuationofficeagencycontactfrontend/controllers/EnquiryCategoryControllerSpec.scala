@@ -27,19 +27,30 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.EnquiryCateg
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{enquiryCategory => enquiry_category}
+import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class EnquiryCategoryControllerSpec extends ControllerSpecBase {
 
-  def enquiryCategory = inject[enquiry_category]
-  def auditService = inject[AuditingService]
+  def enquiryCategory: html.enquiryCategory = inject[enquiry_category]
+  def auditService: AuditingService         = inject[AuditingService]
 
-  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+  def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new EnquiryCategoryController(frontendAppConfig, messagesApi, auditService, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), enquiryCategory, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new EnquiryCategoryController(
+      frontendAppConfig,
+      messagesApi,
+      auditService,
+      FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      enquiryCategory,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
-  def viewAsString(form: Form[String] = EnquiryCategoryForm()) = enquiryCategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = EnquiryCategoryForm()): String = enquiryCategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
   "EnquiryCategory Controller" must {
 
@@ -51,7 +62,7 @@ class EnquiryCategoryControllerSpec extends ControllerSpecBase {
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(EnquiryCategoryId.toString -> JsString(EnquiryCategoryForm.options.head.value))
+      val validData       = Map(EnquiryCategoryId.toString -> JsString(EnquiryCategoryForm.options.head.value))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
@@ -70,7 +81,7 @@ class EnquiryCategoryControllerSpec extends ControllerSpecBase {
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm = EnquiryCategoryForm().bind(Map("value" -> "invalid value"))
+      val boundForm   = EnquiryCategoryForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -86,7 +97,7 @@ class EnquiryCategoryControllerSpec extends ControllerSpecBase {
     "redirect to Session Expired for a POST if no existing data is found" in {
       val postRequest = fakeRequest.withMethod("POST")
         .withFormUrlEncodedBody(("value", EnquiryCategoryForm.options.head.value))
-      val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
+      val result      = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(onwardRoute.url)

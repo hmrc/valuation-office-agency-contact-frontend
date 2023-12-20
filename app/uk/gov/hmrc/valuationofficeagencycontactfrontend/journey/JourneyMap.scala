@@ -33,9 +33,8 @@ import scala.concurrent.{ExecutionContext, Future}
  * @author Yuriy Tumakha
  */
 @Singleton
-class JourneyMap @Inject()(pageNotFound: page_not_found,
-                           appConfig: FrontendAppConfig,
-                           override val messagesApi: MessagesApi)(implicit ec: ExecutionContext) extends I18nSupport {
+class JourneyMap @Inject() (pageNotFound: page_not_found, appConfig: FrontendAppConfig, override val messagesApi: MessagesApi)(implicit ec: ExecutionContext)
+  extends I18nSupport {
 
   private val pages: Seq[Page[String]] = Seq(
     // Business Rates
@@ -60,7 +59,7 @@ class JourneyMap @Inject()(pageNotFound: page_not_found,
 
   val journeyMap: Map[String, Page[String]] = pages.map(page => page.key -> page).toMap
 
-  def getPage(key: String) = new ActionRefiner[DataRequest, JourneyPageRequest] {
+  def getPage(key: String): ActionRefiner[DataRequest, JourneyPageRequest] = new ActionRefiner[DataRequest, JourneyPageRequest] {
     def executionContext: ExecutionContext = ec
 
     def refine[A](request: DataRequest[A]): Future[Either[Result, JourneyPageRequest[A]]] = Future.successful {

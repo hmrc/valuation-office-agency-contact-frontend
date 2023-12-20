@@ -22,26 +22,30 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyWalesAvail
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesAvailableLets => property_wales_available_lets}
+import play.api.mvc.Call
+import play.twirl.api.HtmlFormat
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.propertyWalesAvailableLets
 
 class PropertyWalesAvailableLetsViewSpec extends ViewBehaviours {
 
-  def propertyWalesLets140DaysSubcategory = app.injector.instanceOf[property_wales_available_lets]
+  def propertyWalesLets140DaysSubcategory: propertyWalesAvailableLets = app.injector.instanceOf[property_wales_available_lets]
 
-  def onwardRoute = routes.PropertyWalesActualLetsController.onPageLoad()
+  def onwardRoute: Call = routes.PropertyWalesActualLetsController.onPageLoad()
 
   val messageKeyPrefix = "propertyWalesAvailableLets"
 
-  def createView = () => propertyWalesLets140DaysSubcategory(frontendAppConfig, PropertyWalesAvailableLetsForm(), NormalMode)(fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable =
+    () => propertyWalesLets140DaysSubcategory(frontendAppConfig, PropertyWalesAvailableLetsForm(), NormalMode)(fakeRequest, messages)
 
-  def createViewUsingForm = (form: Form[String]) => propertyWalesLets140DaysSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+  def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
+    (form: Form[String]) => propertyWalesLets140DaysSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
   "PropertyEnglandAvailableLetsSubcategory view" when {
     "rendered" must {
       "contain radio buttons for the value" in {
         val doc = asDocument(createViewUsingForm(PropertyWalesAvailableLetsForm()))
-        for (option <- PropertyWalesAvailableLetsForm.options) {
+        for (option <- PropertyWalesAvailableLetsForm.options)
           assertContainsRadioButton(doc, option.id, "value", option.value, false)
-        }
       }
 
       "has a radio button with the label set to the message with key PropertyEnglandAvailableLets.yes and that it is used once" in {
@@ -53,26 +57,24 @@ class PropertyWalesAvailableLetsViewSpec extends ViewBehaviours {
       }
 
       "has a link marked with site.back leading to the Business Rates Self Containing Holiday Let Page" in {
-        val doc = asDocument(createView())
+        val doc          = asDocument(createView())
         val backlinkText = doc.select("a[class=govuk-back-link]").text()
         backlinkText mustBe messages("site.back")
-        val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+        val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
         backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSelfCateringController.onPageLoad().url
       }
 
     }
 
-    for(option <- PropertyWalesAvailableLetsForm.options) {
+    for (option <- PropertyWalesAvailableLetsForm.options)
       s"rendered with a value of '${option.value}'" must {
         s"have the '${option.value}' radio button selected" in {
           val doc = asDocument(createViewUsingForm(PropertyWalesAvailableLetsForm().bind(Map("value" -> s"${option.value}"))))
           assertContainsRadioButton(doc, option.id, "value", option.value, true)
 
-          for(unselectedOption <- PropertyWalesAvailableLetsForm.options.filterNot(o => o == option)) {
+          for (unselectedOption <- PropertyWalesAvailableLetsForm.options.filterNot(o => o == option))
             assertContainsRadioButton(doc, unselectedOption.id, "value", unselectedOption.value, false)
-          }
         }
       }
-    }
   }
 }

@@ -35,17 +35,19 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertySmal
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesNoNeedToPay => business_rates_no_need_to_pay}
 
 import scala.concurrent.Future
+import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSugar {
 
-  val fakeDataCacheConnector = mock[DataCacheConnector]
+  val fakeDataCacheConnector: DataCacheConnector = mock[DataCacheConnector]
 
-  def councilTaxBusinessEnquiry = inject[council_tax_business_enquiry]
-  def propertySmallPartUsed = inject[small_part_used]
-  def businessRatesNoNeedToPay = inject[business_rates_no_need_to_pay]
-  def auditService = inject[AuditingService]
+  def councilTaxBusinessEnquiry: html.councilTaxBusinessEnquiry = inject[council_tax_business_enquiry]
+  def propertySmallPartUsed: html.propertySmallPartUsed         = inject[small_part_used]
+  def businessRatesNoNeedToPay: html.businessRatesNoNeedToPay   = inject[business_rates_no_need_to_pay]
+  def auditService: AuditingService                             = inject[AuditingService]
 
-  def onwardRoute = routes.DatePropertyChangedController.onPageLoad()
+  def onwardRoute: Call = routes.DatePropertyChangedController.onPageLoad()
 
   when(fakeDataCacheConnector.save(any, any, any)(any))
     .thenReturn(Future.successful(CacheMap("council_tax_business_uses", Map("council_tax_business_uses" -> JsString("bar")))))
@@ -53,11 +55,26 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
   when(fakeDataCacheConnector.remove(anyString, anyString)).thenReturn(Future.successful(true))
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new CouncilTaxBusinessController(frontendAppConfig, messagesApi, auditService, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), councilTaxBusinessEnquiry, propertySmallPartUsed, businessRatesNoNeedToPay,
-      MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new CouncilTaxBusinessController(
+      frontendAppConfig,
+      messagesApi,
+      auditService,
+      fakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      councilTaxBusinessEnquiry,
+      propertySmallPartUsed,
+      businessRatesNoNeedToPay,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
-  def viewAsString(form: Form[String] = CouncilTaxBusinessEnquiryForm()) = councilTaxBusinessEnquiry(frontendAppConfig, form, NormalMode,  routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)(fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = CouncilTaxBusinessEnquiryForm()): String = councilTaxBusinessEnquiry(
+    frontendAppConfig,
+    form,
+    NormalMode,
+    routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
+  )(fakeRequest, messages).toString
 
   "CouncilTaxBusiness Controller" must {
 
@@ -69,7 +86,7 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(CouncilTaxBusinessEnquiryId.toString -> JsString(CouncilTaxBusinessEnquiryForm.options.head.value))
+      val validData       = Map(CouncilTaxBusinessEnquiryId.toString -> JsString(CouncilTaxBusinessEnquiryForm.options.head.value))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
@@ -88,7 +105,7 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm = CouncilTaxBusinessEnquiryForm().bind(Map("value" -> "invalid value"))
+      val boundForm   = CouncilTaxBusinessEnquiryForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onEnquirySubmit(NormalMode)(postRequest)
 
@@ -105,7 +122,7 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
 
     "redirect to Session Expired for a POST if no existing data is found" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", CouncilTaxSubcategoryForm.options.head.value))
-      val result = controller(dontGetAnyData).onEnquirySubmit(NormalMode)(postRequest)
+      val result      = controller(dontGetAnyData).onEnquirySubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)

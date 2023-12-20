@@ -19,12 +19,11 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class ContactDetailsSpec extends AnyFlatSpec {
 
-  val c = ContactDetails("Alex", "test@email.com", "02078273278732")
+  val c: ContactDetails = ContactDetails("Alex", "test@email.com", "02078273278732")
 
   "Full name " should "be Alex" in {
     assert(c.fullName === "Alex")
   }
-
 
   "Email address " should "be test@email.com" in {
     assert(c.email === "test@email.com")
@@ -38,12 +37,8 @@ class ContactDetailsSpec extends AnyFlatSpec {
     assert(c.fullName != "Alex1")
   }
 
-
   "Wrong Contact number " should "shouldn't be 02078273278735" in {
     assert(c.contactNumber != "02078273278735")
   }
-
-
-
 
 }

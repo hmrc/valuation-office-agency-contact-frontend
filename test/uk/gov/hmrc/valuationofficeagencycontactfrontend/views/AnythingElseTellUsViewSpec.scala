@@ -22,20 +22,23 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.AnythingElseForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.QuestionViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{anythingElseTellUs => anything_else}
+import play.twirl.api.HtmlFormat
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.anythingElseTellUs
 
 class AnythingElseTellUsViewSpec extends QuestionViewBehaviours[String] {
 
   val messageKeyPrefix = "anythingElse"
 
-  def anythingElse = app.injector.instanceOf[anything_else]
+  def anythingElse: anythingElseTellUs = app.injector.instanceOf[anything_else]
 
-  def createView = () => anythingElse(frontendAppConfig, AnythingElseForm(), NormalMode)(fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable = () => anythingElse(frontendAppConfig, AnythingElseForm(), NormalMode)(fakeRequest, messages)
 
-  def createAlternativeView = () => anythingElse(frontendAppConfig, AnythingElseForm(), NormalMode)(fakeRequest, messages)
+  def createAlternativeView: () => HtmlFormat.Appendable = () => anythingElse(frontendAppConfig, AnythingElseForm(), NormalMode)(fakeRequest, messages)
 
-  def createViewUsingForm = (form: Form[String]) => anythingElse(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+  def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
+    (form: Form[String]) => anythingElse(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
-  override val form = AnythingElseForm()
+  override val form: Form[String] = AnythingElseForm()
 
   "AnythingElseTellUs view" must {
 
@@ -45,16 +48,16 @@ class AnythingElseTellUsViewSpec extends QuestionViewBehaviours[String] {
   }
 
   "contain continue button with the value Continue" in {
-    val doc = asDocument(createViewUsingForm(AnythingElseForm()))
+    val doc            = asDocument(createViewUsingForm(AnythingElseForm()))
     val continueButton = doc.getElementById("submit").text()
     assert(continueButton == messages("site.continue"))
   }
 
   "has a link marked with site.back leading to the Anything Else Tell Us Page" in {
-    val doc = asDocument(createView())
+    val doc          = asDocument(createView())
     val backlinkText = doc.select("a[class=govuk-back-link]").text()
     backlinkText mustBe messages("site.back")
-    val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+    val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
     backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
   }
 }

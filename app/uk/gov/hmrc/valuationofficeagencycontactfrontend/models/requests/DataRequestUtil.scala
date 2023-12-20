@@ -25,7 +25,7 @@ object DataRequestUtil {
 
   def isEnquiryCategoryOneOf(categories: String*)(implicit request: Request[_]): Boolean = request match {
     case dataRequest: DataRequest[_] => categories.contains(dataRequest.userAnswers.enquiryCategory.getOrElse(""))
-    case _ => false
+    case _                           => false
   }
 
 }

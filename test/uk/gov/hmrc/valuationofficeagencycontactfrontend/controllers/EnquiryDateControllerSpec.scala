@@ -30,23 +30,33 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateUtil, Message
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{enquiryDate => enquiry_date}
 
 import java.util.Locale
+import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class EnquiryDateControllerSpec extends ControllerSpecBase {
 
   implicit val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
-  implicit val dateUtil: DateUtil = injector.instanceOf[DateUtil]
+  implicit val dateUtil: DateUtil        = injector.instanceOf[DateUtil]
 
-  def enquiryDate = inject[enquiry_date]
-  def auditService = inject[AuditingService]
+  def enquiryDate: html.enquiryDate = inject[enquiry_date]
+  def auditService: AuditingService = inject[AuditingService]
 
-  def onwardRoute = routes.EnquiryDateController.onPageLoad()
+  def onwardRoute: Call = routes.EnquiryDateController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new EnquiryDateController(frontendAppConfig, messagesApi, new DataRequiredActionImpl(ec), dataRetrievalAction,
-                              auditService, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-                              enquiryDate, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new EnquiryDateController(
+      frontendAppConfig,
+      messagesApi,
+      new DataRequiredActionImpl(ec),
+      dataRetrievalAction,
+      auditService,
+      FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = onwardRoute),
+      enquiryDate,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
-  def viewAsString(form: Form[String] = EnquiryDateForm()) =
+  def viewAsString(form: Form[String] = EnquiryDateForm()): String =
     enquiryDate(frontendAppConfig, form, EnquiryDateForm.beforeDate(), NormalMode)(fakeRequest, messages).toString()
 
   "EnquiryDateController Controller" must {
@@ -61,7 +71,7 @@ class EnquiryDateControllerSpec extends ControllerSpecBase {
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(EnquiryDateId.toString -> JsString(EnquiryDateForm.options.head.value))
+      val validData       = Map(EnquiryDateId.toString -> JsString(EnquiryDateForm.options.head.value))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
@@ -72,7 +82,7 @@ class EnquiryDateControllerSpec extends ControllerSpecBase {
     "redirect to the next page when valid data is submitted" in {
       val postRequest = fakeRequest.withMethod("POST")
         .withFormUrlEncodedBody(("value", EnquiryDateForm.options.head.value))
-      val result = controller().onSubmit(NormalMode)(postRequest)
+      val result      = controller().onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(onwardRoute.url)

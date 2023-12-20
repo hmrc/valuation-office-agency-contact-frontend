@@ -25,18 +25,23 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerC
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{windWatertightCannotBeReduced => wind_watertight_cannot_be_reduced}
 
 import javax.inject.Singleton
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.windWatertightCannotBeReduced
 
 @Singleton
 class PropertyWindWaterControllerSpec extends ControllerSpecBase {
 
-  def windWatertightCannotBeReducedEnquiry = app.injector.instanceOf[wind_watertight_cannot_be_reduced]
+  def windWatertightCannotBeReducedEnquiry: windWatertightCannotBeReduced = app.injector.instanceOf[wind_watertight_cannot_be_reduced]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new PropertyWindWaterController(frontendAppConfig, messagesApi, windWatertightCannotBeReducedEnquiry, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new PropertyWindWaterController(
+      frontendAppConfig,
+      messagesApi,
+      windWatertightCannotBeReducedEnquiry,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
-  def viewAsString(form: Form[String] = PropertyWindWaterForm()) =
+  def viewAsString(form: Form[String] = PropertyWindWaterForm()): String =
     windWatertightCannotBeReducedEnquiry(frontendAppConfig, NormalMode)(fakeRequest, messages).toString()
-
 
   "Property Wind And Water Controller" must {
     "return the correct view for a GET" in {

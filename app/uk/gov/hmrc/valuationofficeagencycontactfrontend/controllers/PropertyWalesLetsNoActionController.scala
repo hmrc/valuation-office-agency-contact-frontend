@@ -29,46 +29,50 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWale
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.ExecutionContext
+import play.api.mvc
+import play.api.mvc.AnyContent
 
 @Singleton
-class PropertyWalesLetsNoActionController @Inject()(val appConfig: FrontendAppConfig,
-                                                    override val messagesApi: MessagesApi,
-                                                    dataCacheConnector: DataCacheConnector,
-                                                    navigator: Navigator,
-                                                    getData: DataRetrievalAction,
-                                                    requireData: DataRequiredAction,
-                                                    propertyWalesLetsNoAction: property_wales_lets_no_action,
-                                                    cc: MessagesControllerComponents
-                                            ) extends FrontendController(cc) with I18nSupport {
+class PropertyWalesLetsNoActionController @Inject() (
+  val appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  dataCacheConnector: DataCacheConnector,
+  navigator: Navigator,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  propertyWalesLetsNoAction: property_wales_lets_no_action,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   private val log = Logger(this.getClass)
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode) = (getData andThen requireData) {
+  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       enquiryBackLink(request.userAnswers) match {
         case Right(link) => Ok(propertyWalesLetsNoAction(appConfig, link))
-        case Left(msg) => {
+        case Left(msg)   =>
           log.warn(s"Navigation for Wales No Action page reached with error $msg")
           throw new RuntimeException(s"Navigation for Wales No Action page reached with error $msg")
-        }
       }
 
   }
 
-  private[controllers] def enquiryBackLink(answers: UserAnswers): Either[String, String] = {
-    (answers.contactReason,
+  private[controllers] def enquiryBackLink(answers: UserAnswers): Either[String, String] =
+    (
+      answers.contactReason,
       answers.enquiryCategory,
       answers.businessRatesSubcategory,
       answers.businessRatesSelfCateringEnquiry,
       answers.propertyWalesAvailableLetsEnquiry,
-      answers.propertyWalesActualLetsEnquiry) match {
+      answers.propertyWalesActualLetsEnquiry
+    ) match {
       case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("wales"), Some("yes"), Some("no")) =>
         Right(routes.PropertyWalesActualLetsController.onPageLoad().url)
-      case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("wales"), Some("no"), _) =>
+      case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("wales"), Some("no"), _)           =>
         Right(routes.PropertyWalesAvailableLetsController.onPageLoad().url)
-      case _ => Left(s"Unknown enquiry category in enquiry key")
+      case _                                                                                                         => Left("Unknown enquiry category in enquiry key")
     }
-  }
 }

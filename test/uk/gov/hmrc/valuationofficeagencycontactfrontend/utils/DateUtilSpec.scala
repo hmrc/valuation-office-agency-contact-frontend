@@ -30,12 +30,12 @@ import java.util.Locale
 class DateUtilSpec extends SpecBase with Logging {
 
   private val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(new Locale("en"))))
-  private val messagesWelsh: Messages = messagesApi.preferred(Seq(Lang(new Locale("cy"))))
+  private val messagesWelsh: Messages   = messagesApi.preferred(Seq(Lang(new Locale("cy"))))
 
   private val dateUtil = injector.instanceOf[DateUtil]
 
   // scalastyle:off
-  private val testLocalDate: LocalDate = LocalDate.of(2022, JANUARY, 22)
+  private val testLocalDate: LocalDate     = LocalDate.of(2022, JANUARY, 22)
   private val testZonedDate: ZonedDateTime = ZonedDateTime.of(testLocalDate.plusMonths(1), LocalTime.of(13, 45), dateUtil.ukTimezone)
   // scalastyle:on
 

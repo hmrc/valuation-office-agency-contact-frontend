@@ -21,10 +21,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.ViewSpecBase
 
 trait SidelinkBehaviours extends ViewSpecBase {
 
-  def normalPage(view: () => HtmlFormat.Appendable,
-                 messageKeyPrefix: String,
-                 expectedGuidanceKeys: String*) = {
-
+  def normalPage(view: () => HtmlFormat.Appendable, messageKeyPrefix: String, expectedGuidanceKeys: String*): Unit =
     "behave like a normal page" when {
       "rendered" must {
         "display the correct guidance" in {
@@ -34,5 +31,4 @@ trait SidelinkBehaviours extends ViewSpecBase {
 
       }
     }
-  }
 }

@@ -27,18 +27,28 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.RefNumberId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{refNumber => ref_number}
+import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class RefNumberControllerSpec extends ControllerSpecBase {
 
-  def refNumber = app.injector.instanceOf[ref_number]
+  def refNumber: html.refNumber = app.injector.instanceOf[ref_number]
 
-  def onwardRoute = routes.RefNumberController.onPageLoad()
+  def onwardRoute: Call = routes.RefNumberController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new RefNumberController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), refNumber, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new RefNumberController(
+      frontendAppConfig,
+      messagesApi,
+      FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      refNumber,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
-  def viewAsString(form: Form[Option[String]] = RefNumberForm()) = refNumber(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[Option[String]] = RefNumberForm()): String = refNumber(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
   "RefNumberController Controller" must {
 
@@ -50,7 +60,7 @@ class RefNumberControllerSpec extends ControllerSpecBase {
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(RefNumberId.toString -> JsString("VOA123"))
+      val validData       = Map(RefNumberId.toString -> JsString("VOA123"))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
@@ -60,7 +70,7 @@ class RefNumberControllerSpec extends ControllerSpecBase {
 
     "redirect to the next page when valid data is submitted" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "VOA123"))
-      val result = controller().onSubmit(NormalMode)(postRequest)
+      val result      = controller().onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(onwardRoute.url)

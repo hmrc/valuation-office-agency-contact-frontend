@@ -22,27 +22,41 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.AuditingServi
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.DataRetrievalAction
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.session_expired
+import play.api.mvc.AnyContentAsEmpty
+import play.api.test.FakeRequest
 
 class SessionExpiredControllerSpec extends ControllerSpecBase {
 
-  def sessionExpired = app.injector.instanceOf[session_expired]
+  def sessionExpired: session_expired = app.injector.instanceOf[session_expired]
 
-  def auditService = app.injector.instanceOf[AuditingService]
+  def auditService: AuditingService = app.injector.instanceOf[AuditingService]
 
-  def getDataAction = app.injector.instanceOf[DataRetrievalAction]
+  def getDataAction: DataRetrievalAction = app.injector.instanceOf[DataRetrievalAction]
 
-  val testRequest = fakeRequest.withSession(SessionKeys.sessionId -> "id")
+  val testRequest: FakeRequest[AnyContentAsEmpty.type] = fakeRequest.withSession(SessionKeys.sessionId -> "id")
 
   "SessionExpired Controller" must {
     "return 200 for a GET" in {
-      val result = new SessionExpiredController(frontendAppConfig, auditService, getDataAction, messagesApi,
-        MessageControllerComponentsHelpers.stubMessageControllerComponents, sessionExpired).onPageLoad()(testRequest)
+      val result = new SessionExpiredController(
+        frontendAppConfig,
+        auditService,
+        getDataAction,
+        messagesApi,
+        MessageControllerComponentsHelpers.stubMessageControllerComponents,
+        sessionExpired
+      ).onPageLoad()(testRequest)
       status(result) mustBe OK
     }
 
     "return the correct view for a GET" in {
-      val result = new SessionExpiredController(frontendAppConfig, auditService, getDataAction, messagesApi,
-        MessageControllerComponentsHelpers.stubMessageControllerComponents, sessionExpired).onPageLoad()(testRequest)
+      val result = new SessionExpiredController(
+        frontendAppConfig,
+        auditService,
+        getDataAction,
+        messagesApi,
+        MessageControllerComponentsHelpers.stubMessageControllerComponents,
+        sessionExpired
+      ).onPageLoad()(testRequest)
       contentAsString(result) mustBe sessionExpired(frontendAppConfig)(fakeRequest, messages).toString
     }
   }

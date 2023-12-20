@@ -19,19 +19,30 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{valuationForTaxes => valuation_for_taxes}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class ValuationForTaxesControllerSpec extends ControllerSpecBase {
 
-  def valuationForTaxes = app.injector.instanceOf[valuation_for_taxes]
+  def valuationForTaxes: html.valuationForTaxes = app.injector.instanceOf[valuation_for_taxes]
 
   "Valuation For Taxes Controller" must {
     "return 200 for a GET" in {
-      val result = new ValuationForTaxesController(frontendAppConfig, messagesApi, valuationForTaxes, MessageControllerComponentsHelpers.stubMessageControllerComponents).onPageLoad()(fakeRequest)
+      val result = new ValuationForTaxesController(
+        frontendAppConfig,
+        messagesApi,
+        valuationForTaxes,
+        MessageControllerComponentsHelpers.stubMessageControllerComponents
+      ).onPageLoad()(fakeRequest)
       status(result) mustBe OK
     }
 
     "return the correct view for a GET" in {
-      val result = new ValuationForTaxesController(frontendAppConfig, messagesApi, valuationForTaxes, MessageControllerComponentsHelpers.stubMessageControllerComponents).onPageLoad()(fakeRequest)
+      val result = new ValuationForTaxesController(
+        frontendAppConfig,
+        messagesApi,
+        valuationForTaxes,
+        MessageControllerComponentsHelpers.stubMessageControllerComponents
+      ).onPageLoad()(fakeRequest)
       contentAsString(result) mustBe valuationForTaxes(frontendAppConfig)(fakeRequest, messages).toString
     }
 

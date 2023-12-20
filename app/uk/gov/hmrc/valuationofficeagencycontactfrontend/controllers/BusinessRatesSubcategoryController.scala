@@ -32,39 +32,42 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRate
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesValuation => business_rates_valuation}
 
 import scala.concurrent.{ExecutionContext, Future}
+import play.api.mvc
+import play.api.mvc.AnyContent
 
-class BusinessRatesSubcategoryController @Inject()(
-                                        appConfig: FrontendAppConfig,
-                                        override val messagesApi: MessagesApi,
-                                        auditService: AuditingService,
-                                        dataCacheConnector: DataCacheConnector,
-                                        navigator: Navigator,
-                                        getData: DataRetrievalAction,
-                                        requireData: DataRequiredAction,
-                                        businessRatesSubcategory: business_rates_subcategory,
-                                        businessRatesValuation: business_rates_valuation,
-                                        cc: MessagesControllerComponents
-                                                  ) extends FrontendController(cc) with I18nSupport {
+class BusinessRatesSubcategoryController @Inject() (
+  appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  auditService: AuditingService,
+  dataCacheConnector: DataCacheConnector,
+  navigator: Navigator,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  businessRatesSubcategory: business_rates_subcategory,
+  businessRatesValuation: business_rates_valuation,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode) = (getData andThen requireData) {
+  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.businessRatesSubcategory match {
-        case None => BusinessRatesSubcategoryForm()
+        case None        => BusinessRatesSubcategoryForm()
         case Some(value) => BusinessRatesSubcategoryForm().fill(value)
       }
       Ok(businessRatesSubcategory(appConfig, preparedForm, mode))
   }
 
-  def onSubmit(mode: Mode) = (getData andThen requireData).async {
+  def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       BusinessRatesSubcategoryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(businessRatesSubcategory(appConfig, formWithErrors, mode))),
         value =>
           for {
-            _ <- dataCacheConnector.remove(request.sessionId, CouncilTaxSubcategoryId.toString)
+            _        <- dataCacheConnector.remove(request.sessionId, CouncilTaxSubcategoryId.toString)
             cacheMap <- dataCacheConnector.save[String](request.sessionId, BusinessRatesSubcategoryId.toString, value)
           } yield {
             auditService.sendRadioButtonSelection(request.uri, "businessRatesSubcategory" -> value)
@@ -73,7 +76,7 @@ class BusinessRatesSubcategoryController @Inject()(
       )
   }
 
-  def onValuationPageLoad(mode: Mode)= (getData andThen requireData) {
+  def onValuationPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(businessRatesValuation(appConfig))
   }

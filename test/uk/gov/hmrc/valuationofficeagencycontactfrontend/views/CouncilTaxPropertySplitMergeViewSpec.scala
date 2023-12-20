@@ -19,25 +19,25 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertySplitMerge => property_split_merge}
+import play.twirl.api.HtmlFormat
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.propertySplitMerge
 
 class CouncilTaxPropertySplitMergeViewSpec extends ViewBehaviours {
 
-  def councilTaxPropertyEmpty = app.injector.instanceOf[property_split_merge]
+  def councilTaxPropertyEmpty: propertySplitMerge = app.injector.instanceOf[property_split_merge]
 
-  def view = () => councilTaxPropertyEmpty(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxPropertyEmpty(frontendAppConfig)(fakeRequest, messages)
 
   "Council Tax Property Empty view" must {
-    behave like normalPage(view, "propertyMergeSplit", "title", "heading",
-      "p1.url", "p1.part1", "p1.part2", "p2")
+    behave like normalPage(view, "propertyMergeSplit", "title", "heading", "p1.url", "p1.part1", "p1.part2", "p2")
 
     "has a link marked with site.back leading to the Council Tax Property Empty Page" in {
-      val doc = asDocument(view())
+      val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
   }
-
 
 }

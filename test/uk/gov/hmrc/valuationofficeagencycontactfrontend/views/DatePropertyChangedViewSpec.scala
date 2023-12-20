@@ -24,20 +24,26 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBeh
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{datePropertyChanged => date_property_changed}
 
 import java.time.LocalDate
+import play.twirl.api.HtmlFormat
 
 class DatePropertyChangedViewSpec extends ViewBehaviours {
 
-  def datePropertyChanged = app.injector.instanceOf[date_property_changed]
+  def datePropertyChanged: html.datePropertyChanged = app.injector.instanceOf[date_property_changed]
 
   val messageKeyPrefix = "datePropertyChanged"
 
-  val backUrl = routes.PropertyWindWaterController.onPageLoad().url
+  val backUrl: String = routes.PropertyWindWaterController.onPageLoad().url
 
-  def dateForm= DatePropertyChangedForm()
+  def dateForm: Form[Option[LocalDate]] = DatePropertyChangedForm()
 
-  def createView = () => datePropertyChanged(frontendAppConfig, dateForm, NormalMode, messageKeyPrefix, "/valuation-office-agency-contact-frontend/about-business-rates")(fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable = () =>
+    datePropertyChanged(frontendAppConfig, dateForm, NormalMode, messageKeyPrefix, "/valuation-office-agency-contact-frontend/about-business-rates")(
+      fakeRequest,
+      messages
+    )
 
-  def createViewUsingForm = (form: Form[Option[LocalDate]]) => datePropertyChanged(frontendAppConfig, form, NormalMode, "test", "test")(fakeRequest, messages)
+  def createViewUsingForm: Form[Option[LocalDate]] => HtmlFormat.Appendable =
+    (form: Form[Option[LocalDate]]) => datePropertyChanged(frontendAppConfig, form, NormalMode, "test", "test")(fakeRequest, messages)
 
   "DatePropertyChanged view" must {
     behave like normalPage(createView, messageKeyPrefix)
@@ -46,16 +52,16 @@ class DatePropertyChangedViewSpec extends ViewBehaviours {
   "DatePropertyChanged view" when {
     "rendered" must {
       "contain continue button with the value Continue" in {
-        val doc = asDocument(createViewUsingForm(dateForm))
+        val doc            = asDocument(createViewUsingForm(dateForm))
         val continueButton = doc.getElementsByClass("govuk-button").first().text()
         assert(continueButton == messages("site.continue"))
       }
 
       "have a link marked with site.back leading to the Business Rates Subcategory Page" in {
-        val doc = asDocument(createView())
+        val doc          = asDocument(createView())
         val backlinkText = doc.select("a[class=govuk-back-link]").text()
         backlinkText mustBe messages("site.back")
-        val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+        val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
         backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
       }
     }

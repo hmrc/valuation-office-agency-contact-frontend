@@ -14,7 +14,7 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukBackLink, GovukButton, GovukErrorSummary, GovukFieldset, GovukInput}
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukErrorSummary, GovukFieldset, GovukInput}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
@@ -35,7 +35,7 @@
 
 @this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
         govukInput: GovukInput, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
-        govukFieldset: GovukFieldset, govukBackLink: GovukBackLink)
+        govukFieldset: GovukFieldset)
 
 
 @(appConfig: FrontendAppConfig, form: Form[ContactDetails], mode: Mode, backLink: String)(implicit request: Request[_], messages: Messages)

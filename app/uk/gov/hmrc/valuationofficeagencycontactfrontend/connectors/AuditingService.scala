@@ -28,8 +28,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 import scala.concurrent.{ExecutionContext, Future}
 
-
-class AuditingService @Inject()(auditConnector: AuditConnector)  {
+class AuditingService @Inject() (auditConnector: AuditConnector) {
 
   val auditSource = "digital-contact-centre"
 
@@ -41,16 +40,16 @@ class AuditingService @Inject()(auditConnector: AuditConnector)  {
 
   def sendRadioButtonSelection(uri: String, nameValuePair: (String, String))(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit = {
     val detail = Map("path" -> uri, "radioButton" -> nameValuePair._1, "optionSelected" -> nameValuePair._2)
-    val de = DataEvent(auditSource = auditSource, auditType = "RadioButtonSelection", tags = hc.toAuditTags(), detail = detail)
+    val de     = DataEvent(auditSource = auditSource, auditType = "RadioButtonSelection", tags = hc.toAuditTags(), detail = detail)
     auditConnector.sendEvent(de)
   }
 
-  def sendSurveySatisfaction(detail: Map[String, String], tags: Map[String, String] = Map.empty)
-                             (implicit ec: ExecutionContext, hc: HeaderCarrier): Future[AuditResult] =
+  def sendSurveySatisfaction(detail: Map[String, String], tags: Map[String, String] = Map.empty)(implicit ec: ExecutionContext, hc: HeaderCarrier)
+    : Future[AuditResult] =
     sendEventMap("SurveySatisfaction", detail, tags)
 
-  def sendSurveyFeedback(detail: Map[String, String], tags: Map[String, String] = Map.empty)
-                             (implicit ec: ExecutionContext, hc: HeaderCarrier): Future[AuditResult] =
+  def sendSurveyFeedback(detail: Map[String, String], tags: Map[String, String] = Map.empty)(implicit ec: ExecutionContext, hc: HeaderCarrier)
+    : Future[AuditResult] =
     sendEventMap("SurveyFeedback", detail, tags)
 
   def sendTimeout(userAnswers: Option[UserAnswers])(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit =
@@ -62,8 +61,8 @@ class AuditingService @Inject()(auditConnector: AuditConnector)  {
   def sendContinueNextPage(url: String)(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit =
     sendEventMap("ContinueNextPage", Map("url" -> url), hc.toAuditTags())
 
-  private def sendEventMap(event: String, detail: Map[String, String], tags: Map[String, String])
-                             (implicit ec: ExecutionContext, hc: HeaderCarrier): Future[AuditResult] = {
+  private def sendEventMap(event: String, detail: Map[String, String], tags: Map[String, String])(implicit ec: ExecutionContext, hc: HeaderCarrier)
+    : Future[AuditResult] = {
     val de = DataEvent(auditSource = auditSource, auditType = event, tags = tags, detail = detail)
     auditConnector.sendEvent(de)
   }
@@ -76,15 +75,12 @@ class AuditingService @Inject()(auditConnector: AuditConnector)  {
     auditConnector.sendExtendedEvent(event)
   }
 
-  private def eventFor(auditType: String, json: JsValue)(implicit hc: HeaderCarrier) = {
+  private def eventFor(auditType: String, json: JsValue)(implicit hc: HeaderCarrier) =
     ExtendedDataEvent(
       auditSource = auditSource,
       auditType = auditType,
-      tags = Map("transactionName" -> "submit-contact-to-VOA",
-              "clientIP" -> hc.trueClientIp.getOrElse(""),
-              "clientPort" -> hc.trueClientPort.getOrElse("")),
+      tags = Map("transactionName" -> "submit-contact-to-VOA", "clientIP" -> hc.trueClientIp.getOrElse(""), "clientPort" -> hc.trueClientPort.getOrElse("")),
       detail = json
     )
-  }
 
 }

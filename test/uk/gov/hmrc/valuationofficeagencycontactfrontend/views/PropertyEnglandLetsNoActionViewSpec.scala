@@ -20,23 +20,34 @@ import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLetsNoAction => england_lets_no_action}
 
-class PropertyEnglandLetsNoActionViewSpec  extends ViewBehaviours {
+class PropertyEnglandLetsNoActionViewSpec extends ViewBehaviours {
 
   def propertyEnglandLetsNoAction: england_lets_no_action = app.injector.instanceOf[england_lets_no_action]
 
-  def backLink:String = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad().url
+  def backLink: String = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad().url
 
   def viewEnglandAvailable140Nights: () => HtmlFormat.Appendable = () => propertyEnglandLetsNoAction(frontendAppConfig, backLink)(fakeRequest, messages)
 
   "Property Wales Lets No Action view" must {
-    behave like normalPage(viewEnglandAvailable140Nights, "businessRatesSelfCateringNoBusinessRate", "title", "heading",
-      "p1", "p2", "p2.bullet1", "p2.bullet2", "p3.part1", "p3.part2", "p3.part3")
+    behave like normalPage(
+      viewEnglandAvailable140Nights,
+      "businessRatesSelfCateringNoBusinessRate",
+      "title",
+      "heading",
+      "p1",
+      "p2",
+      "p2.bullet1",
+      "p2.bullet2",
+      "p3.part1",
+      "p3.part2",
+      "p3.part3"
+    )
 
     "has a link marked with site.back leading to the Property England Lets 140 Page" in {
-      val doc = asDocument(viewEnglandAvailable140Nights())
+      val doc          = asDocument(viewEnglandAvailable140Nights())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad().url
     }
   }

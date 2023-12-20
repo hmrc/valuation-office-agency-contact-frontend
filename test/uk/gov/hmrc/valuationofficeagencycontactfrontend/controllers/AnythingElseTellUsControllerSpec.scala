@@ -29,20 +29,30 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, Normal
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{anythingElseTellUs => anything_else}
+import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{anythingElseTellUs, error}
 
 class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSugar {
 
-  val mockUserAnswers = mock[UserAnswers]
-  def anythingElse = app.injector.instanceOf[anything_else]
-  def internalServerError = app.injector.instanceOf[internal_Server_Error]
+  val mockUserAnswers: UserAnswers                   = mock[UserAnswers]
+  def anythingElse: anythingElseTellUs               = app.injector.instanceOf[anything_else]
+  def internalServerError: error.internalServerError = app.injector.instanceOf[internal_Server_Error]
 
-  def onwardRoute = routes.CheckYourAnswersController.onPageLoad()
+  def onwardRoute: Call = routes.CheckYourAnswersController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new AnythingElseTellUsController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), anythingElse, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new AnythingElseTellUsController(
+      frontendAppConfig,
+      messagesApi,
+      FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      anythingElse,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
-  def viewAsString(form: Form[String] = AnythingElseForm(), msg: String = "") =
+  def viewAsString(form: Form[String] = AnythingElseForm(), msg: String = ""): String =
     anythingElse(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
   "AnythingElseTellUsMore Controller" must {
@@ -61,8 +71,7 @@ class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSu
     "populate the view correctly on a GET when the anything else has previously been filled" in {
       val anythingElseString = "Anything else"
 
-      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"),
-        AnythingElseId.toString -> JsString(anythingElseString))
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), AnythingElseId.toString -> JsString(anythingElseString))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
@@ -83,7 +92,7 @@ class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSu
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm = AnythingElseForm().bind(Map("value" -> "invalid value"))
+      val boundForm   = AnythingElseForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 

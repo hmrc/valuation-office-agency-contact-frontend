@@ -21,24 +21,26 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.FairRentEnquiryFor
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{fairRentEnquiry => fair_rent_enquiry}
+import play.twirl.api.HtmlFormat
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.fairRentEnquiry
 
 class FairRentEnquiryViewSpec extends ViewBehaviours {
 
-  def fairRentEnquirySubcategory = app.injector.instanceOf[fair_rent_enquiry]
+  def fairRentEnquirySubcategory: fairRentEnquiry = app.injector.instanceOf[fair_rent_enquiry]
 
   val messageKeyPrefix = "fairRents"
 
-  def createView = () => fairRentEnquirySubcategory(frontendAppConfig, FairRentEnquiryForm(), NormalMode)(fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable = () => fairRentEnquirySubcategory(frontendAppConfig, FairRentEnquiryForm(), NormalMode)(fakeRequest, messages)
 
-  def createViewUsingForm = (form: Form[String]) => fairRentEnquirySubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+  def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
+    (form: Form[String]) => fairRentEnquirySubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
   "fairRentEnquirySubcategory view" when {
     "rendered" must {
       "contain radio buttons for the value" in {
         val doc = asDocument(createViewUsingForm(FairRentEnquiryForm()))
-        for (option <- FairRentEnquiryForm.options) {
+        for (option <- FairRentEnquiryForm.options)
           assertContainsRadioButton(doc, option.id, "value", option.value, false)
-        }
       }
 
       "has a radio button with the label set to the message with key housingBenefits.new and that it is used once" in {
@@ -54,25 +56,23 @@ class FairRentEnquiryViewSpec extends ViewBehaviours {
       }
 
       "has a link marked with site.back leading to the Enquiry Page" in {
-        val doc = asDocument(createView())
+        val doc          = asDocument(createView())
         val backlinkText = doc.select("a[class=govuk-back-link]").text()
         backlinkText mustBe messages("site.back")
-        val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+        val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
         backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
       }
     }
 
-    for(option <- FairRentEnquiryForm.options) {
+    for (option <- FairRentEnquiryForm.options)
       s"rendered with a value of '${option.value}'" must {
         s"have the '${option.value}' radio button selected" in {
           val doc = asDocument(createViewUsingForm(FairRentEnquiryForm().bind(Map("value" -> s"${option.value}"))))
           assertContainsRadioButton(doc, option.id, "value", option.value, true)
 
-          for(unselectedOption <- FairRentEnquiryForm.options.filterNot(o => o == option)) {
+          for (unselectedOption <- FairRentEnquiryForm.options.filterNot(o => o == option))
             assertContainsRadioButton(doc, unselectedOption.id, "value", unselectedOption.value, false)
-          }
         }
       }
-    }
   }
 }

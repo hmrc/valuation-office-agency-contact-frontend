@@ -16,8 +16,5 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels
 
-case class RepeaterAnswerSection (headingKey: String,
-                                  relevanceRow: AnswerRow,
-                                  rows: Seq[RepeaterAnswerRow],
-                                  addLinkKey: String,
-                                  addLinkUrl: String) extends Section
+case class RepeaterAnswerSection(headingKey: String, relevanceRow: AnswerRow, rows: Seq[RepeaterAnswerRow], addLinkKey: String, addLinkUrl: String)
+  extends Section

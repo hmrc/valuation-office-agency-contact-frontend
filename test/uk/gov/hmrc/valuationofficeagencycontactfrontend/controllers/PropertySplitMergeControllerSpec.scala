@@ -24,19 +24,25 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerC
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertySplitMerge => property_split_merge}
 
 import javax.inject.Singleton
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.propertySplitMerge
 
 @Singleton
 class PropertySplitMergeControllerSpec extends ControllerSpecBase {
 
-  def propertySplitMergeEnquiry = app.injector.instanceOf[property_split_merge]
+  def propertySplitMergeEnquiry: propertySplitMerge = app.injector.instanceOf[property_split_merge]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new PropertySplitMergeController(frontendAppConfig, messagesApi, dataRetrievalAction, new DataRequiredActionImpl(ec), propertySplitMergeEnquiry,
-      MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new PropertySplitMergeController(
+      frontendAppConfig,
+      messagesApi,
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      propertySplitMergeEnquiry,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
-  def viewAsString(form: Form[String] = PropertyWindWaterForm()) =
+  def viewAsString(form: Form[String] = PropertyWindWaterForm()): String =
     propertySplitMergeEnquiry(frontendAppConfig)(fakeRequest, messages).toString()
-
 
   "Property Permanent Changes Controller" must {
     "return the correct view for a GET" in {

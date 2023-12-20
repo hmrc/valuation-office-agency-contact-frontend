@@ -38,11 +38,23 @@ class PropertyEnglandActualLetsControllerSpec extends ControllerSpecBase {
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new PropertyEnglandActualLetsController(frontendAppConfig, messagesApi, auditService, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), propertyEnglandActualLetsEnquiry, stubMessageControllerComponents)
+    new PropertyEnglandActualLetsController(
+      frontendAppConfig,
+      messagesApi,
+      auditService,
+      FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      propertyEnglandActualLetsEnquiry,
+      stubMessageControllerComponents
+    )
 
-  def viewAsString(form: Form[String] = PropertyEnglandActualLetsForm()) = propertyEnglandActualLetsEnquiry(
-    frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = PropertyEnglandActualLetsForm()): String = propertyEnglandActualLetsEnquiry(
+    frontendAppConfig,
+    form,
+    NormalMode
+  )(fakeRequest, messages).toString
 
   "PropertyEnglandActualLetsController" must {
 
@@ -54,7 +66,7 @@ class PropertyEnglandActualLetsControllerSpec extends ControllerSpecBase {
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(PropertyEnglandActualLetsId.toString -> JsString(PropertyEnglandActualLetsForm.options.head.value))
+      val validData       = Map(PropertyEnglandActualLetsId.toString -> JsString(PropertyEnglandActualLetsForm.options.head.value))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
@@ -80,7 +92,7 @@ class PropertyEnglandActualLetsControllerSpec extends ControllerSpecBase {
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm = PropertyEnglandActualLetsForm().bind(Map("value" -> "invalid value"))
+      val boundForm   = PropertyEnglandActualLetsForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -97,7 +109,7 @@ class PropertyEnglandActualLetsControllerSpec extends ControllerSpecBase {
 
     "redirect to Session Expired for a POST if no existing data is found" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", PropertyEnglandActualLetsForm.options.head.value))
-      val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
+      val result      = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)

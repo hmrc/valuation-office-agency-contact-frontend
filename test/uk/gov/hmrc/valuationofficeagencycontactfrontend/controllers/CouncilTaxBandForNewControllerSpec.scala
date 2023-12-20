@@ -20,14 +20,14 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.DataRetrievalAction
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBandForNew => council_tax_for_new}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class CouncilTaxBandForNewControllerSpec extends ControllerSpecBase {
 
-  def councilTaxBandForNew = app.injector.instanceOf[council_tax_for_new]
+  def councilTaxBandForNew: html.councilTaxBandForNew = app.injector.instanceOf[council_tax_for_new]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new CouncilTaxBandForNewController(frontendAppConfig, messagesApi,councilTaxBandForNew,
-      MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new CouncilTaxBandForNewController(frontendAppConfig, messagesApi, councilTaxBandForNew, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   "Council Tax Band For A New Property Controller" must {
     "return the correct view for a GET" in {

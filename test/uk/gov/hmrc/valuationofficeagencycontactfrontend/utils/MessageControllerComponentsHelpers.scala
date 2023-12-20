@@ -23,7 +23,6 @@ import play.api.test.Helpers
 
 import scala.concurrent.ExecutionContext
 
-
 object MessageControllerComponentsHelpers {
 
   def stubMessageControllerComponents: MessagesControllerComponents = {
@@ -31,7 +30,8 @@ object MessageControllerComponentsHelpers {
     val stub = Helpers.stubControllerComponents()
 
     new MessagesControllerComponents {
-      override def messagesActionBuilder: MessagesActionBuilder = new DefaultMessagesActionBuilderImpl(stub.parsers.default, stub.messagesApi)(stub.executionContext)
+      override def messagesActionBuilder: MessagesActionBuilder =
+        new DefaultMessagesActionBuilderImpl(stub.parsers.default, stub.messagesApi)(stub.executionContext)
 
       override def actionBuilder: ActionBuilder[Request, AnyContent] = stub.actionBuilder
 

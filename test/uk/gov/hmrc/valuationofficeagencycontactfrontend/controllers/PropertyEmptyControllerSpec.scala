@@ -21,15 +21,24 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{Dat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxPropertyEmpty => council_tax_property_empty}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesPropertyEmpty => business_rates_property_empty}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.councilTaxPropertyEmpty
 
 class PropertyEmptyControllerSpec extends ControllerSpecBase {
 
-  def councilPropertyEmpty = app.injector.instanceOf[council_tax_property_empty]
-  def businessRatesPropertyEmpty = app.injector.instanceOf[business_rates_property_empty]
+  def councilPropertyEmpty: councilTaxPropertyEmpty               = app.injector.instanceOf[council_tax_property_empty]
+  def businessRatesPropertyEmpty: html.businessRatesPropertyEmpty = app.injector.instanceOf[business_rates_property_empty]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new PropertyEmptyController(frontendAppConfig, messagesApi, dataRetrievalAction, new DataRequiredActionImpl(ec),
-      councilPropertyEmpty, businessRatesPropertyEmpty, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new PropertyEmptyController(
+      frontendAppConfig,
+      messagesApi,
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      councilPropertyEmpty,
+      businessRatesPropertyEmpty,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
   "Property Empty Controller" must {
     "return the correct council tax view for a GET" in {

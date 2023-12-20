@@ -19,5 +19,5 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 import play.api.data.FormError
 
 trait FormErrorHelper {
-  def produceError(key: String, error: String) = Left(Seq(FormError(key, error)))
+  def produceError(key: String, error: String): Left[Seq[FormError], Nothing] = Left(Seq(FormError(key, error)))
 }

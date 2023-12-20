@@ -34,26 +34,27 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWale
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class PropertyEnglandAvailableLetsController @Inject()(
-                                                     appConfig: FrontendAppConfig,
-                                                     override val messagesApi: MessagesApi,
-                                                     auditService: AuditingService,
-                                                     dataCacheConnector: DataCacheConnector,
-                                                     navigator: Navigator,
-                                                     getData: DataRetrievalAction,
-                                                     requireData: DataRequiredAction,
-                                                     propertyEnglandAvailableLets: property_england_available_lets,
-                                                     propertyEnglandLetsNoAction: property_england_lets_no_action,
-                                                     propertyWalesLets: wales_lets,
-                                                     cc: MessagesControllerComponents
-                                                   ) extends FrontendController(cc) with I18nSupport {
+class PropertyEnglandAvailableLetsController @Inject() (
+  appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  auditService: AuditingService,
+  dataCacheConnector: DataCacheConnector,
+  navigator: Navigator,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  propertyEnglandAvailableLets: property_england_available_lets,
+  propertyEnglandLetsNoAction: property_england_lets_no_action,
+  propertyWalesLets: wales_lets,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.propertyEnglandAvailableLetsEnquiry match {
-        case None => PropertyEnglandAvailableLetsForm()
+        case None        => PropertyEnglandAvailableLetsForm()
         case Some(value) => PropertyEnglandAvailableLetsForm().fill(value)
       }
       Ok(propertyEnglandAvailableLets(appConfig, preparedForm, mode))
@@ -67,7 +68,8 @@ class PropertyEnglandAvailableLetsController @Inject()(
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering140DaysEN" -> value)
           dataCacheConnector.save[String](request.sessionId, PropertyEnglandAvailableLetsId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(PropertyEnglandAvailableLetsId, mode).apply(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(PropertyEnglandAvailableLetsId, mode).apply(new UserAnswers(cacheMap)))
+          )
         }
       )
   }

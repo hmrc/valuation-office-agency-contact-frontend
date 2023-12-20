@@ -16,13 +16,11 @@
 
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
-@import uk.gov.hmrc.govukfrontend.views.html.components.GovukBackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 
-@this(mainTemplate: main_template, govukBackLink: GovukBackLink)
+@this(mainTemplate: main_template)
 
 
 @(appConfig: FrontendAppConfig, mode:Mode)(implicit request: Request[_], messages: Messages)

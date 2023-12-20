@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
-
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
@@ -34,25 +33,26 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navi
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class BusinessRatesPropertyController @Inject()(
-                                                 appConfig: FrontendAppConfig,
-                                                 override val messagesApi: MessagesApi,
-                                                 auditService: AuditingService,
-                                                 dataCacheConnector: DataCacheConnector,
-                                                 navigator: Navigator,
-                                                 getData: DataRetrievalAction,
-                                                 requireData: DataRequiredAction,
-                                                 businessRatesPropertyEnquiry: business_rates_property_enquiry,
-                                                 businessRatesNonBusiness: business_rates_non_business,
-                                                 cc: MessagesControllerComponents
-                                               ) extends FrontendController(cc) with I18nSupport {
+class BusinessRatesPropertyController @Inject() (
+  appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  auditService: AuditingService,
+  dataCacheConnector: DataCacheConnector,
+  navigator: Navigator,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  businessRatesPropertyEnquiry: business_rates_property_enquiry,
+  businessRatesNonBusiness: business_rates_non_business,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.businessRatesPropertyEnquiry match {
-        case None => BusinessRatesPropertyForm()
+        case None        => BusinessRatesPropertyForm()
         case Some(value) => BusinessRatesPropertyForm().fill(value)
       }
 
@@ -67,7 +67,8 @@ class BusinessRatesPropertyController @Inject()(
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesPropertyEnquiry" -> value)
           dataCacheConnector.save[String](request.sessionId, BusinessRatesPropertyEnquiryId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(BusinessRatesPropertyEnquiryId, mode).apply(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(BusinessRatesPropertyEnquiryId, mode).apply(new UserAnswers(cacheMap)))
+          )
         }
       )
   }

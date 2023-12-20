@@ -25,18 +25,23 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerC
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyPermanentChanges => property_permanent_changes}
 
 import javax.inject.Singleton
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.propertyPermanentChanges
 
 @Singleton
 class PropertyPermanentChangesControllerSpec extends ControllerSpecBase {
 
-  def propertyPermanentChangesEnquiry = app.injector.instanceOf[property_permanent_changes]
+  def propertyPermanentChangesEnquiry: propertyPermanentChanges = app.injector.instanceOf[property_permanent_changes]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new PropertyPermanentChangesController(frontendAppConfig, messagesApi, propertyPermanentChangesEnquiry, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new PropertyPermanentChangesController(
+      frontendAppConfig,
+      messagesApi,
+      propertyPermanentChangesEnquiry,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
-  def viewAsString(form: Form[String] = PropertyWindWaterForm()) =
+  def viewAsString(form: Form[String] = PropertyWindWaterForm()): String =
     propertyPermanentChangesEnquiry(frontendAppConfig, NormalMode)(fakeRequest, messages).toString()
-
 
   "Property Permanent Changes Controller" must {
     "return the correct view for a GET" in {

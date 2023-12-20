@@ -26,8 +26,7 @@ import play.twirl.api.HtmlFormat.Appendable
 /**
  * @author Yuriy Tumakha
  */
-abstract class CustomizedContent(val key: String,
-                                 val fieldId: String) extends Page[String] {
+abstract class CustomizedContent(val key: String, val fieldId: String) extends Page[String] {
 
   val form: Form[String] = Form(single("value" -> text))
 

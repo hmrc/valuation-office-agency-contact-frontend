@@ -17,6 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.behaviours.FormBehaviours
+import play.api.data.Form
 
 class EnquiryCategoryFormSpec extends FormBehaviours {
 
@@ -24,11 +25,11 @@ class EnquiryCategoryFormSpec extends FormBehaviours {
     "value" -> EnquiryCategoryForm.options.head.value
   )
 
-  val form = EnquiryCategoryForm()
+  val form: Form[String] = EnquiryCategoryForm()
 
   "EnquiryCategory form" must {
     behave like questionForm[String](EnquiryCategoryForm.options.head.value)
 
-    behave like formWithOptionField("value", EnquiryCategoryForm.options.map{x => x.value}:_*)
+    behave like formWithOptionField("value", EnquiryCategoryForm.options.map(x => x.value): _*)
   }
 }

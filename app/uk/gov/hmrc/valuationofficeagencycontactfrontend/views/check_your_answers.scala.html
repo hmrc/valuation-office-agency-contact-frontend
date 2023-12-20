@@ -14,7 +14,7 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukBackLink, GovukButton, GovukSummaryList}
+@import uk.gov.hmrc.govukfrontend.views.html.components.{GovukButton, GovukSummaryList}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
@@ -26,8 +26,7 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.components.help_with_service_fair_rent
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.DataRequestUtil.isEnquiryCategoryOneOf
 
-@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
-        govukButton: GovukButton, govukBackLink: GovukBackLink, govukSummaryList: GovukSummaryList )
+@this(mainTemplate: main_template, govukButton: GovukButton, govukSummaryList: GovukSummaryList )
 
 @(appConfig: FrontendAppConfig, answerSections: Seq[Section], backLink: String)(implicit request: Request[_], messages: Messages)
 

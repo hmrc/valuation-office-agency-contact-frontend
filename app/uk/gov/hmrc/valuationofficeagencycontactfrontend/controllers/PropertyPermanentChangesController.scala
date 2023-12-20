@@ -26,15 +26,17 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyPerm
 import javax.inject.Inject
 import scala.concurrent.ExecutionContext
 
-class PropertyPermanentChangesController @Inject()(appConfig: FrontendAppConfig,
-                                                   override val messagesApi: MessagesApi,
-                                                   propertyPermanentChanges: property_permanent_changes,
-                                                   cc: MessagesControllerComponents
-                                                   ) extends FrontendController(cc) with I18nSupport {
+class PropertyPermanentChangesController @Inject() (
+  appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  propertyPermanentChanges: property_permanent_changes,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def onPageLoad(): Action[AnyContent] = Action  { implicit request =>
-      Ok(propertyPermanentChanges(appConfig, NormalMode))
+  def onPageLoad(): Action[AnyContent] = Action { implicit request =>
+    Ok(propertyPermanentChanges(appConfig, NormalMode))
   }
 }

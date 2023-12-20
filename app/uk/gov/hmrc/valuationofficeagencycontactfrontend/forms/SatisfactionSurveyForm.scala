@@ -35,13 +35,13 @@ object SatisfactionSurveyForm {
       "satisfaction" -> of[String](satisfactionFormat)
         .verifying("error.required.feedback", !_.isEmpty)
         .verifying("error.required.feedback", optionIsValid(_)),
-      "details" -> optional(text
+      "details"      -> optional(text
         .verifying("error.message.max_length.feedback", _.length <= 1200)
         .verifying("error.message.xss-invalid.feedback", _.matches(antiXSSMessageRegex)))
     )(SatisfactionSurvey.apply)(SatisfactionSurvey.unapply)
   )
 
-  def options = Seq(
+  def options: Seq[RadioOption] = Seq(
     RadioOption("satisfaction", "verySatisfied"),
     RadioOption("satisfaction", "satisfied"),
     RadioOption("satisfaction", "neither"),
@@ -49,9 +49,8 @@ object SatisfactionSurveyForm {
     RadioOption("satisfaction", "veryDissatisfied")
   )
 
-  def optionIsValid(value: String) = {
+  def optionIsValid(value: String): Boolean =
     options.exists(o => o.value == value)
-  }
 }
 
-case class SatisfactionSurvey (satisfaction: String, details: Option[String])
+case class SatisfactionSurvey(satisfaction: String, details: Option[String])

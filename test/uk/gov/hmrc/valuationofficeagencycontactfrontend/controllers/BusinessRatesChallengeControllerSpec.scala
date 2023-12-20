@@ -29,7 +29,7 @@ class BusinessRatesChallengeControllerSpec extends ControllerSpecBase {
       val result = new BusinessRatesChallengeController(messagesApi, frontendAppConfig, brChallengeView, stubMessageControllerComponents)
         .onChallengePageLoad(fakeRequest)
       status(result) mustBe OK
-      contentAsString(result) must include ("Challenging my business rates valuation")
+      contentAsString(result) must include("Challenging my business rates valuation")
     }
   }
 

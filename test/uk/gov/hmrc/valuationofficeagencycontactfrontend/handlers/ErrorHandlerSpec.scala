@@ -23,13 +23,16 @@ import play.api.test.Helpers._
 
 class ErrorHandlerSpec extends SpecBase {
 
-  def errorHandler = app.injector.instanceOf[HttpErrorHandler]
+  def errorHandler: HttpErrorHandler = app.injector.instanceOf[HttpErrorHandler]
 
   "Error handler" should {
     "render error page" in {
 
-      val result =  errorHandler.onClientError(
-        FakeRequest(),404, "Not found")
+      val result = errorHandler.onClientError(
+        FakeRequest(),
+        404,
+        "Not found"
+      )
 
       val content = contentAsString(result)
 
@@ -39,8 +42,5 @@ class ErrorHandlerSpec extends SpecBase {
 
     }
   }
-
-
-
 
 }

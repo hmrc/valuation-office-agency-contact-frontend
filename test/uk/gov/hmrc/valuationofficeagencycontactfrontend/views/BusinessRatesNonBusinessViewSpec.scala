@@ -19,22 +19,22 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesNonBusiness => business_rates_non_business}
+import play.twirl.api.HtmlFormat
 
-class BusinessRatesNonBusinessViewSpec  extends ViewBehaviours {
+class BusinessRatesNonBusinessViewSpec extends ViewBehaviours {
 
-  def businessRatesNonBusiness = app.injector.instanceOf[business_rates_non_business]
+  def businessRatesNonBusiness: html.businessRatesNonBusiness = app.injector.instanceOf[business_rates_non_business]
 
-  def view = () => businessRatesNonBusiness(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => businessRatesNonBusiness(frontendAppConfig)(fakeRequest, messages)
 
   "Business rates non business view" must {
-    behave like normalPage(view, "businessRatesNonBusiness", "title", "heading",
-      "p1", "p2", "step1", "step2", "step3", "subheading", "p3")
+    behave like normalPage(view, "businessRatesNonBusiness", "title", "heading", "p1", "p2", "step1", "step2", "step3", "subheading", "p3")
 
     "has a link marked with site.back leading to the business rates non business Page" in {
-      val doc = asDocument(view())
+      val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
       backlinkUrl mustBe routes.BusinessRatesPropertyController.onPageLoad().url
     }
   }

@@ -24,20 +24,20 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.FormHelpers.antiXS
 object ContactDetailsForm {
 
   private val phoneRegex = """^(\+[-\s\./0-9]*|\d[-\s\./0-9]*)(\(\d{1,3}\)[-\s\./0-9]*|\(\d{1}\-\d{1,3}\)[-\s\./0-9]*|\d{1,20}[-\s\./0-9]*)"""
-  private val emailRegex = """^[a-zA-Z0-9\.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$""" //scalastyle:ignore
+
+  private val emailRegex =
+    """^[a-zA-Z0-9\.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$""" // scalastyle:ignore
 
   def apply(): Form[ContactDetails] = Form(
     mapping(
-      "fullName" -> text.verifying("contactDetails.fullName.required", !_.isEmpty)
-                .verifying("contactDetails.fullName.invalid", _.matches(antiXSSRegex)),
-      "email" -> text.verifying("contactDetails.email.required", !_.isEmpty)
-                .verifying("contactDetails.email.invalid", _.matches(emailRegex)),
+      "fullName"      -> text.verifying("contactDetails.fullName.required", !_.isEmpty)
+        .verifying("contactDetails.fullName.invalid", _.matches(antiXSSRegex)),
+      "email"         -> text.verifying("contactDetails.email.required", !_.isEmpty)
+        .verifying("contactDetails.email.invalid", _.matches(emailRegex)),
       "contactNumber" -> text.verifying("contactDetails.contactNumber.required", !_.isEmpty)
-                .verifying("contactDetails.contactNumber.length", _.length >= 11)
-                .verifying("contactDetails.contactNumber.length", _.length <= 20)
-                .verifying("contactDetails.contactNumber.invalid", _ matches(phoneRegex))
+        .verifying("contactDetails.contactNumber.length", _.length >= 11)
+        .verifying("contactDetails.contactNumber.length", _.length <= 20)
+        .verifying("contactDetails.contactNumber.invalid", _ matches phoneRegex)
     )(ContactDetails.apply)(ContactDetails.unapply)
   )
 }
-
-

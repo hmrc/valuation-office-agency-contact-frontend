@@ -26,32 +26,33 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.FairRentEnquiryFor
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.FairRentEnquiryId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{fairRentEnquiry => fair_rent_enquiry, submitFairRentApplication => submit_fair_rent_application, checkFairRentApplication => check_fair_rent_application}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{checkFairRentApplication => check_fair_rent_application, fairRentEnquiry => fair_rent_enquiry, submitFairRentApplication => submit_fair_rent_application}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class FairRentEnquiryController @Inject()(
-                                                     appConfig: FrontendAppConfig,
-                                                     override val messagesApi: MessagesApi,
-                                                     auditService: AuditingService,
-                                                     dataCacheConnector: DataCacheConnector,
-                                                     navigator: Navigator,
-                                                     getData: DataRetrievalAction,
-                                                     requireData: DataRequiredAction,
-                                                     fairRentEnquiry: fair_rent_enquiry,
-                                                     submitFairRentApplication: submit_fair_rent_application,
-                                                     checkFairRentApplication: check_fair_rent_application,
-                                                     cc: MessagesControllerComponents
-                                                   ) extends FrontendController(cc) with I18nSupport {
+class FairRentEnquiryController @Inject() (
+  appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  auditService: AuditingService,
+  dataCacheConnector: DataCacheConnector,
+  navigator: Navigator,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  fairRentEnquiry: fair_rent_enquiry,
+  submitFairRentApplication: submit_fair_rent_application,
+  checkFairRentApplication: check_fair_rent_application,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.fairRentEnquiryEnquiry match {
-        case None => FairRentEnquiryForm()
+        case None        => FairRentEnquiryForm()
         case Some(value) => FairRentEnquiryForm().fill(value)
       }
       Ok(fairRentEnquiry(appConfig, preparedForm, mode))
@@ -65,7 +66,8 @@ class FairRentEnquiryController @Inject()(
         value => {
           auditService.sendRadioButtonSelection(request.uri, "fairRents" -> value)
           dataCacheConnector.save[String](request.sessionId, FairRentEnquiryId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(FairRentEnquiryId, mode).apply(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(FairRentEnquiryId, mode).apply(new UserAnswers(cacheMap)))
+          )
         }
       )
   }
@@ -79,6 +81,5 @@ class FairRentEnquiryController @Inject()(
     implicit request =>
       Ok(checkFairRentApplication())
   }
-
 
 }

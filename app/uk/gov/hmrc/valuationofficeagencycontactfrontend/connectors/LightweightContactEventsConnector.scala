@@ -30,19 +30,22 @@ import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success, Try}
 
-class LightweightContactEventsConnector @Inject()(http: HttpClient,
-                                                  val configuration: Configuration,
-                                                  auditService: AuditingService,
-                                                  servicesConfig: ServicesConfig)(implicit ec: ExecutionContext) {
+class LightweightContactEventsConnector @Inject() (
+  http: HttpClient,
+  val configuration: Configuration,
+  auditService: AuditingService,
+  servicesConfig: ServicesConfig
+)(implicit ec: ExecutionContext
+) {
 
-  private val log = Logger(this.getClass)
-  implicit val hc: HeaderCarrier = HeaderCarrier()
-  val serviceUrl = servicesConfig.baseUrl("lightweight-contact-events")
-  val baseSegment = "/lightweight-contact-events/"
-  val jsonContentTypeHeader = ("Content-Type", "application/json")
+  private val log                             = Logger(this.getClass)
+  implicit val hc: HeaderCarrier              = HeaderCarrier()
+  val serviceUrl: String                      = servicesConfig.baseUrl("lightweight-contact-events")
+  val baseSegment                             = "/lightweight-contact-events/"
+  val jsonContentTypeHeader: (String, String) = ("Content-Type", "application/json")
 
-  def send(input: Contact, messagesApi: MessagesApi, userAnswers: UserAnswers)(implicit hc: HeaderCarrier) = {
-    val msg = ContactWithEnMessage(input, messagesApi, userAnswers)
+  def send(input: Contact, messagesApi: MessagesApi, userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[Try[Int]] = {
+    val msg        = ContactWithEnMessage(input, messagesApi, userAnswers)
     val auditEvent = EnquiryAuditEvent(
       msg.contact,
       msg.propertyAddress,
@@ -52,16 +55,17 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient,
       msg.subEnquiryCategoryMsg,
       msg.message,
       userAnswers.enquiryDate,
-      userAnswers.refNumber)
+      userAnswers.refNumber
+    )
     sendJson(Json.toJson(msg), Json.toJson(auditEvent).as[JsObject])
   }
 
-  def sendJson(msgJson: JsValue, auditEventJson: JsObject)(implicit hc: HeaderCarrier): Future[Try[Int]] = {
+  def sendJson(msgJson: JsValue, auditEventJson: JsObject)(implicit hc: HeaderCarrier): Future[Try[Int]] =
     http.POST[JsValue, HttpResponse](s"$serviceUrl${baseSegment}create", msgJson, Seq(jsonContentTypeHeader))
       .map {
         response =>
           response.status match {
-            case OK =>
+            case OK     =>
               auditService.sendEnquiryToVOA(auditEventJson)
               Success(OK)
             case status =>
@@ -77,6 +81,5 @@ class LightweightContactEventsConnector @Inject()(http: HttpClient,
         auditService.sendFormSubmissionFailed(auditEventJson, throwable.getMessage)
         Failure(ex)
     }
-  }
 
 }

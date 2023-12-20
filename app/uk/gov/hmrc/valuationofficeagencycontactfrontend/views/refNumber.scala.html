@@ -16,7 +16,7 @@
 
 @import uk.gov.hmrc.govukfrontend.views.Aliases.Hint
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
-@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukBackLink, GovukButton, GovukErrorSummary, GovukInput}
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukErrorSummary, GovukInput}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
@@ -29,8 +29,7 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 
 @this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
-        govukInput: GovukInput, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
-        govukBackLink: GovukBackLink)
+        govukInput: GovukInput, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
 
 
 @(appConfig: FrontendAppConfig, form: Form[Option[String]], mode: Mode)(implicit request: Request[_], messages: Messages)

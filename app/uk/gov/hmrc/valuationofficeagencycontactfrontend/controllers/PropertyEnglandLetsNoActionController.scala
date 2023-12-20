@@ -28,44 +28,48 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.ExecutionContext
+import play.api.mvc
+import play.api.mvc.AnyContent
 
 @Singleton
-class PropertyEnglandLetsNoActionController @Inject()(val appConfig: FrontendAppConfig,
-                                                      override val messagesApi: MessagesApi,
-                                                      getData: DataRetrievalAction,
-                                                      requireData: DataRequiredAction,
-                                                      propertyEnglandLetsNoAction: property_england_lets_no_action,
-                                                      cc: MessagesControllerComponents
-                                            ) extends FrontendController(cc) with I18nSupport {
+class PropertyEnglandLetsNoActionController @Inject() (
+  val appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  propertyEnglandLetsNoAction: property_england_lets_no_action,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   private val log = Logger(this.getClass)
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode) = (getData andThen requireData) {
+  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       enquiryBackLink(request.userAnswers) match {
         case Right(link) => Ok(propertyEnglandLetsNoAction(appConfig, link))
-        case Left(msg) => {
+        case Left(msg)   =>
           log.warn(s"Navigation for England No Action page reached with error $msg")
           throw new RuntimeException(s"Navigation for England No Action page reached with error $msg")
-        }
       }
 
   }
 
-  private[controllers] def enquiryBackLink(answers: UserAnswers): Either[String, String] = {
-    (answers.contactReason,
+  private[controllers] def enquiryBackLink(answers: UserAnswers): Either[String, String] =
+    (
+      answers.contactReason,
       answers.enquiryCategory,
       answers.businessRatesSubcategory,
       answers.businessRatesSelfCateringEnquiry,
       answers.propertyEnglandAvailableLetsEnquiry,
-      answers.propertyEnglandActualLetsEnquiry) match {
+      answers.propertyEnglandActualLetsEnquiry
+    ) match {
       case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("england"), Some("yes"), Some("no")) =>
         Right(routes.PropertyEnglandActualLetsController.onPageLoad().url)
-      case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("england"), Some("no"), _) =>
+      case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("england"), Some("no"), _)           =>
         Right(routes.PropertyEnglandAvailableLetsController.onPageLoad().url)
-      case _ => Left(s"Unknown enquiry category in enquiry key")
+      case _                                                                                                           => Left("Unknown enquiry category in enquiry key")
     }
-  }
 }

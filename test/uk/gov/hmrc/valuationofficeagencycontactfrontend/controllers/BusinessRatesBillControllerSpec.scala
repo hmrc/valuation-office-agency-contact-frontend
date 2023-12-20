@@ -19,13 +19,14 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesBill => business_rates_bill}
 import play.api.test.Helpers._
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class BusinessRatesBillControllerSpec extends ControllerSpecBase {
 
-  def businessRatesBill = app.injector.instanceOf[business_rates_bill]
+  def businessRatesBill: html.businessRatesBill = app.injector.instanceOf[business_rates_bill]
 
-  def controller = new BusinessRatesBillController(messagesApi, frontendAppConfig, businessRatesBill,
-      MessageControllerComponentsHelpers.stubMessageControllerComponents)
+  def controller =
+    new BusinessRatesBillController(messagesApi, frontendAppConfig, businessRatesBill, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   "BusinessRatesBillController" must {
     "return the correct view for a GET" in {

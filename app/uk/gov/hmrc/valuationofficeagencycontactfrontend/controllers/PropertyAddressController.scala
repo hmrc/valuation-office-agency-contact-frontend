@@ -31,43 +31,47 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyAddress => property_address}
 
 import scala.concurrent.{ExecutionContext, Future}
+import play.api.mvc
+import play.api.mvc.AnyContent
 
-class PropertyAddressController @Inject()(appConfig: FrontendAppConfig,
-                                          override val messagesApi: MessagesApi,
-                                          dataCacheConnector: DataCacheConnector,
-                                          navigator: Navigator,
-                                          getData: DataRetrievalAction,
-                                          requireData: DataRequiredAction,
-                                          propertyAddress: property_address,
-                                          cc: MessagesControllerComponents
-                                         ) extends FrontendController(cc) with I18nSupport {
+class PropertyAddressController @Inject() (
+  appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  dataCacheConnector: DataCacheConnector,
+  navigator: Navigator,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  propertyAddress: property_address,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def helpTextKey(userAnswers: UserAnswers): Option[String] = {
+  def helpTextKey(userAnswers: UserAnswers): Option[String] =
     userAnswers.contactReason match {
       case Some("more_details") => Some("propertyAddress.existing_address")
-      case _ => None
+      case _                    => None
     }
-  }
 
-  def onPageLoad(mode: Mode) = (getData andThen requireData) {
+  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.propertyAddress match {
-        case None => PropertyAddressForm()
+        case None        => PropertyAddressForm()
         case Some(value) => PropertyAddressForm().fill(value)
       }
       Ok(propertyAddress(appConfig, preparedForm, mode, helpTextKey(request.userAnswers)))
   }
 
-  def onSubmit(mode: Mode) = (getData andThen requireData).async {
+  def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       PropertyAddressForm().bindFromRequest().fold(
         (formWithErrors: Form[PropertyAddress]) =>
           Future.successful(BadRequest(propertyAddress(appConfig, formWithErrors, mode, helpTextKey(request.userAnswers)))),
-        (value) =>
+        value =>
           dataCacheConnector.save[PropertyAddress](request.sessionId, PropertyAddressId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(PropertyAddressId, mode).apply(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(PropertyAddressId, mode).apply(new UserAnswers(cacheMap)))
+          )
       )
   }
 }

@@ -17,6 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.behaviours.FormBehaviours
+import play.api.data.Form
 
 class AnnexeFormSpec extends FormBehaviours {
 
@@ -24,11 +25,11 @@ class AnnexeFormSpec extends FormBehaviours {
     "value" -> AnnexeForm.options.head.value
   )
 
-  val form = AnnexeForm()
+  val form: Form[String] = AnnexeForm()
 
   "Annexe form" must {
     behave like questionForm[String](AnnexeForm.options.head.value)
 
-    behave like formWithOptionField("value", AnnexeForm.options.map{x => x.value}:_*)
+    behave like formWithOptionField("value", AnnexeForm.options.map(x => x.value): _*)
   }
 }

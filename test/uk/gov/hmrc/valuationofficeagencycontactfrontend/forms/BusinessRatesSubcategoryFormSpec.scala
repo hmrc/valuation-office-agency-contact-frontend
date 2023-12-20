@@ -17,6 +17,7 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.behaviours.FormBehaviours
+import play.api.data.Form
 
 class BusinessRatesSubcategoryFormSpec extends FormBehaviours {
 
@@ -24,11 +25,11 @@ class BusinessRatesSubcategoryFormSpec extends FormBehaviours {
     "value" -> BusinessRatesSubcategoryForm.options.head.value
   )
 
-  val form = BusinessRatesSubcategoryForm()
+  val form: Form[String] = BusinessRatesSubcategoryForm()
 
   "BusinessRatesSubcategory form" must {
     behave like questionForm[String](BusinessRatesSubcategoryForm.options.head.value)
 
-    behave like formWithOptionField("value", BusinessRatesSubcategoryForm.options.map{x => x.value}:_*)
+    behave like formWithOptionField("value", BusinessRatesSubcategoryForm.options.map(x => x.value): _*)
   }
 }

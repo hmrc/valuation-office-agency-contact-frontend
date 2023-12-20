@@ -21,16 +21,18 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.AnnexeForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxAnnexe => council_tax_annexe}
+import play.twirl.api.HtmlFormat
 
 class CouncilTaxAnnexViewSpec extends ViewBehaviours {
 
-  def councilTaxAnnexe = app.injector.instanceOf[council_tax_annexe]
+  def councilTaxAnnexe: html.councilTaxAnnexe = app.injector.instanceOf[council_tax_annexe]
 
   val messageKeyPrefix = "annexe"
 
-  def createView = () => councilTaxAnnexe(frontendAppConfig, AnnexeForm(), NormalMode)(fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable = () => councilTaxAnnexe(frontendAppConfig, AnnexeForm(), NormalMode)(fakeRequest, messages)
 
-  def createViewUsingForm = (form: Form[String]) => councilTaxAnnexe(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+  def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
+    (form: Form[String]) => councilTaxAnnexe(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
   "CouncilTaxAnnex view" must {
     behave like normalPage(createView, messageKeyPrefix)
@@ -40,15 +42,14 @@ class CouncilTaxAnnexViewSpec extends ViewBehaviours {
     "rendered" must {
 
       "contain continue button with the value Continue" in {
-        val doc = asDocument(createViewUsingForm(AnnexeForm()))
+        val doc            = asDocument(createViewUsingForm(AnnexeForm()))
         val continueButton = doc.getElementsByClass("govuk-button").first().text()
         assert(continueButton == messages("site.continue"))
       }
       "contain radio buttons for the value" in {
         val doc = asDocument(createViewUsingForm(AnnexeForm()))
-        for (option <- AnnexeForm.options) {
+        for (option <- AnnexeForm.options)
           assertContainsRadioButton(doc, option.id, "value", option.value, false)
-        }
       }
 
       "has a radio button with the label set to the message with key annexe.added and that it is used once" in {
@@ -60,25 +61,23 @@ class CouncilTaxAnnexViewSpec extends ViewBehaviours {
       }
 
       "have a link marked with site.back leading to the Business Rates Subcategory Page" in {
-        val doc = asDocument(createView())
+        val doc          = asDocument(createView())
         val backlinkText = doc.select("a[class=govuk-back-link]").text()
         backlinkText mustBe messages("site.back")
-        val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+        val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
         backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
       }
     }
 
-    for(option <- AnnexeForm.options) {
+    for (option <- AnnexeForm.options)
       s"rendered with a value of '${option.value}'" must {
         s"have the '${option.value}' radio button selected" in {
           val doc = asDocument(createViewUsingForm(AnnexeForm().bind(Map("value" -> s"${option.value}"))))
           assertContainsRadioButton(doc, option.id, "value", option.value, true)
 
-          for(unselectedOption <- AnnexeForm.options.filterNot(o => o == option)) {
+          for (unselectedOption <- AnnexeForm.options.filterNot(o => o == option))
             assertContainsRadioButton(doc, unselectedOption.id, "value", unselectedOption.value, false)
-          }
         }
       }
-    }
   }
 }

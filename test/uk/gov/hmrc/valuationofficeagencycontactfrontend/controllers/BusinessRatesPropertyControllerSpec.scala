@@ -28,20 +28,33 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, Normal
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesPropertyEnquiry => business_rates_property_enquiry}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesNonBusiness => business_rates_non_business}
+import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class BusinessRatesPropertyControllerSpec extends ControllerSpecBase {
 
-  def businessRatesPropertyEnquiry = inject[business_rates_property_enquiry]
-  def businessRatesNonBusiness = inject[business_rates_non_business]
-  def auditService = inject[AuditingService]
+  def businessRatesPropertyEnquiry: html.businessRatesPropertyEnquiry = inject[business_rates_property_enquiry]
+  def businessRatesNonBusiness: html.businessRatesNonBusiness         = inject[business_rates_non_business]
+  def auditService: AuditingService                                   = inject[AuditingService]
 
-  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+  def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new BusinessRatesPropertyController(frontendAppConfig, messagesApi, auditService, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesPropertyEnquiry, businessRatesNonBusiness, stubMessageControllerComponents)
+    new BusinessRatesPropertyController(
+      frontendAppConfig,
+      messagesApi,
+      auditService,
+      FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      businessRatesPropertyEnquiry,
+      businessRatesNonBusiness,
+      stubMessageControllerComponents
+    )
 
-  def viewAsString(form: Form[String] = BusinessRatesPropertyForm()) = businessRatesPropertyEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = BusinessRatesPropertyForm()): String =
+    businessRatesPropertyEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
   "BusinessRatesSelfCateringController" must {
 
@@ -53,7 +66,7 @@ class BusinessRatesPropertyControllerSpec extends ControllerSpecBase {
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(BusinessRatesPropertyEnquiryId.toString -> JsString(BusinessRatesPropertyForm.options.head.value))
+      val validData       = Map(BusinessRatesPropertyEnquiryId.toString -> JsString(BusinessRatesPropertyForm.options.head.value))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
@@ -71,7 +84,7 @@ class BusinessRatesPropertyControllerSpec extends ControllerSpecBase {
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm = BusinessRatesPropertyForm().bind(Map("value" -> "invalid value"))
+      val boundForm   = BusinessRatesPropertyForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 

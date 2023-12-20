@@ -21,24 +21,26 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSubca
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSubcategory => business_rates_subcategory}
+import play.twirl.api.HtmlFormat
 
 class BusinessRatesSubcategoryViewSpec extends ViewBehaviours {
 
-  def businessRatesSubcategory = app.injector.instanceOf[business_rates_subcategory]
+  def businessRatesSubcategory: html.businessRatesSubcategory = app.injector.instanceOf[business_rates_subcategory]
 
   val messageKeyPrefix = "businessRatesSubcategory"
 
-  def createView = () => businessRatesSubcategory(frontendAppConfig, BusinessRatesSubcategoryForm(), NormalMode)(fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable =
+    () => businessRatesSubcategory(frontendAppConfig, BusinessRatesSubcategoryForm(), NormalMode)(fakeRequest, messages)
 
-  def createViewUsingForm = (form: Form[String]) => businessRatesSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+  def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
+    (form: Form[String]) => businessRatesSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
   "BusinessRatesSubcategory view" when {
     "rendered" must {
       "contain radio buttons for the value" in {
         val doc = asDocument(createViewUsingForm(BusinessRatesSubcategoryForm()))
-        for (option <- BusinessRatesSubcategoryForm.options) {
+        for (option <- BusinessRatesSubcategoryForm.options)
           assertContainsRadioButton(doc, option.id, "value", option.value, false)
-        }
       }
 
       "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_changes and that it is used once" in {
@@ -58,31 +60,29 @@ class BusinessRatesSubcategoryViewSpec extends ViewBehaviours {
       }
 
       "contain continue button with the value Continue" in {
-        val doc = asDocument(createViewUsingForm(BusinessRatesSubcategoryForm()))
+        val doc            = asDocument(createViewUsingForm(BusinessRatesSubcategoryForm()))
         val continueButton = doc.getElementById("submit").text()
         assert(continueButton == messages("site.continue"))
       }
 
       "has a link marked with site.back leading to the Business Rates Smart Links Page" in {
-        val doc = asDocument(createView())
+        val doc          = asDocument(createView())
         val backlinkText = doc.select("a[class=govuk-back-link]").text()
         backlinkText mustBe messages("site.back")
-        val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+        val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
         backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
       }
     }
 
-    for(option <- BusinessRatesSubcategoryForm.options) {
+    for (option <- BusinessRatesSubcategoryForm.options)
       s"rendered with a value of '${option.value}'" must {
         s"have the '${option.value}' radio button selected" in {
           val doc = asDocument(createViewUsingForm(BusinessRatesSubcategoryForm().bind(Map("value" -> s"${option.value}"))))
           assertContainsRadioButton(doc, option.id, "value", option.value, true)
 
-          for(unselectedOption <- BusinessRatesSubcategoryForm.options.filterNot(o => o == option)) {
+          for (unselectedOption <- BusinessRatesSubcategoryForm.options.filterNot(o => o == option))
             assertContainsRadioButton(doc, unselectedOption.id, "value", unselectedOption.value, false)
-          }
         }
       }
-    }
   }
 }

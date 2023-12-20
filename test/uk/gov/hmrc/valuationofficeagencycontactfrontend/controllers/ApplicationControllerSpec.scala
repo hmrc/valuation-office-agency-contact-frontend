@@ -22,17 +22,19 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{contactReason => contact_reason}
+import play.api.mvc.AnyContentAsEmpty
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class ApplicationControllerSpec extends ControllerSpecBase {
 
-  def appController = inject[Application]
+  def appController: Application = inject[Application]
 
-  def contactReason = inject[contact_reason]
+  def contactReason: html.contactReason = inject[contact_reason]
 
-  def viewAsString(form: Form[String] = EnquiryCategoryForm()) = contactReason(form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = EnquiryCategoryForm()): String = contactReason(form, NormalMode)(fakeRequest, messages).toString
 
-  override val fakeRequest = FakeRequest("GET", "/").withHeaders(("X-Session-ID", "id"))
-  
+  override val fakeRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest("GET", "/").withHeaders(("X-Session-ID", "id"))
+
   "Application Controller" must {
 
     "return OK and the correct view for a GET" in {

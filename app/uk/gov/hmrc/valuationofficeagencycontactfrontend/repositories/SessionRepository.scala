@@ -28,20 +28,20 @@ import javax.inject.{Inject, Singleton}
 import scala.concurrent.duration.Duration
 import scala.concurrent.{ExecutionContext, Future}
 
-
 @Singleton
-class SessionRepository @Inject()(
-                                   config: Configuration,
-                                   mongo: MongoComponent,
-                                   timestampSupport: TimestampSupport
-                                 )(implicit ec: ExecutionContext)
-  extends MongoCacheRepository(
+class SessionRepository @Inject() (
+  config: Configuration,
+  mongo: MongoComponent,
+  timestampSupport: TimestampSupport
+)(implicit ec: ExecutionContext
+) extends MongoCacheRepository(
     mongoComponent = mongo,
     collectionName = "sessions",
     ttl = Duration(config.get[Long]("mongodb.timeToLiveInSeconds"), SECONDS),
     timestampSupport = timestampSupport,
     cacheIdType = SimpleCacheId
-  ) with Logging {
+  )
+  with Logging {
 
   implicit class cacheItemOps(cacheItem: CacheItem) {
     def asCacheMap: CacheMap = CacheMap(cacheItem.id, cacheItem.data.value.toMap)

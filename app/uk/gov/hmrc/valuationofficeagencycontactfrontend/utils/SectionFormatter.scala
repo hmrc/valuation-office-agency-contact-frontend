@@ -23,39 +23,41 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow, A
 
 object SectionFormatter {
 
-  def formatSections(answerSections: Seq[Section])(implicit messages: Messages): Seq[SummaryListRow] = {
+  def formatSections(answerSections: Seq[Section])(implicit messages: Messages): Seq[SummaryListRow] =
     answerSections.flatMap {
-      case a: AnswerSection => formatAnswerSection(a)
+      case a: AnswerSection         => formatAnswerSection(a)
       case _: RepeaterAnswerSection => throw new NotImplementedError("Not used anywhere in code.")
+      case _                        => Seq.empty
     }
-  }
 
-  private def formatAnswerSection(section: AnswerSection)(implicit messages: Messages): Seq[SummaryListRow] = {
+  private def formatAnswerSection(section: AnswerSection)(implicit messages: Messages): Seq[SummaryListRow] =
     section.rows.zipWithIndex.map {
-      case (row:AnswerRow, i: Int) if row.answerIsMessageKey  => {
+      case (row: AnswerRow, i: Int) if row.answerIsMessageKey =>
         SummaryListRow(
           key = Key(Text(messages(row.label))),
           value = Value(Text(messages(row.answer))),
-          actions = Option(Actions(items = Seq(ActionItem(href=row.changeUrl,
-            classes = s"change-link-${i}",
-            visuallyHiddenText = Some(messages(row.label)),
-            content = Text(messages("site.edit")))).filter(_ => i != 0))
-          )
+          actions = Option(Actions(items =
+            Seq(ActionItem(
+              href = row.changeUrl,
+              classes = s"change-link-$i",
+              visuallyHiddenText = Some(messages(row.label)),
+              content = Text(messages("site.edit"))
+            )).filter(_ => i != 0)
+          ))
         )
-      }
-      case (row:AnswerRow, i: Int) => {
+      case (row: AnswerRow, i: Int)                           =>
         SummaryListRow(
           key = Key(Text(messages(row.label))),
           value = Value(HtmlContent(row.answer)),
-          actions = Option(Actions(items = Seq(ActionItem(href=row.changeUrl,
-            classes = s"change-link-${i}",
-            visuallyHiddenText = Some(messages(row.label)),
-            content = Text(messages("site.edit")))).filter(_ => i != 0))
-          )
+          actions = Option(Actions(items =
+            Seq(ActionItem(
+              href = row.changeUrl,
+              classes = s"change-link-$i",
+              visuallyHiddenText = Some(messages(row.label)),
+              content = Text(messages("site.edit"))
+            )).filter(_ => i != 0)
+          ))
         )
-      }
     }
-
-  }
 
 }

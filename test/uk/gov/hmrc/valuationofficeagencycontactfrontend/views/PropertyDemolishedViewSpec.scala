@@ -19,24 +19,38 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyDemolished => property_demolished}
+import play.twirl.api.HtmlFormat
 
 class PropertyDemolishedViewSpec extends ViewBehaviours {
 
-  def propertyDemolished = app.injector.instanceOf[property_demolished]
+  def propertyDemolished: html.propertyDemolished = app.injector.instanceOf[property_demolished]
 
-  def view = () => propertyDemolished(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => propertyDemolished(frontendAppConfig)(fakeRequest, messages)
 
   "Property Demolished view" must {
-    behave like normalPage(view, "propertyDemolished", "title", "heading",
-      "p2.part1", "p2.part2", "p2.url", "subheading", "p3.part1", "p3.url", "p4.part1", "p4.url", "p5.part1", "p5.url")
+    behave like normalPage(
+      view,
+      "propertyDemolished",
+      "title",
+      "heading",
+      "p2.part1",
+      "p2.part2",
+      "p2.url",
+      "subheading",
+      "p3.part1",
+      "p3.url",
+      "p4.part1",
+      "p4.url",
+      "p5.part1",
+      "p5.url"
+    )
 
     "has a link marked with site.back leading to the Property Demolished Page" in {
-      val doc = asDocument(view())
+      val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
   }
 }
-

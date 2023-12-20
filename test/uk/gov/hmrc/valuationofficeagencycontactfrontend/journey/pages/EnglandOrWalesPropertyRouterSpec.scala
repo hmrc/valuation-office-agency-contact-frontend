@@ -39,7 +39,7 @@ class EnglandOrWalesPropertyRouterSpec extends AnyFlatSpec with should.Matchers 
   it should "return correct next page for England jurisdiction" in {
     val demolishedPropertyAnswer = userAnswers(Map(
       BusinessRatesSubcategoryId.toString -> JsString("business_rates_change_valuation"),
-      EnglandOrWalesPropertyRouter.key -> JsString("england")
+      EnglandOrWalesPropertyRouter.key    -> JsString("england")
     ))
     EnglandOrWalesPropertyRouter.nextPage(demolishedPropertyAnswer) shouldBe routes.JourneyController.onPageLoad("valuation-online-in-England")
   }
@@ -47,7 +47,7 @@ class EnglandOrWalesPropertyRouterSpec extends AnyFlatSpec with should.Matchers 
   it should "return correct next page for Wales jurisdiction" in {
     val propertyAreaChangesInWalesAnswers = userAnswers(Map(
       BusinessRatesSubcategoryId.toString -> JsString("business_rates_changes"),
-      EnglandOrWalesPropertyRouter.key -> JsString("wales"),
+      EnglandOrWalesPropertyRouter.key    -> JsString("wales")
     ))
     EnglandOrWalesPropertyRouter.nextPage(propertyAreaChangesInWalesAnswers) shouldBe routes.JourneyController.onPageLoad("property-or-area-changed-in-Wales")
     EnglandOrWalesPropertyRouter.nextLang(propertyAreaChangesInWalesAnswers) shouldBe None
@@ -67,11 +67,10 @@ class EnglandOrWalesPropertyRouterSpec extends AnyFlatSpec with should.Matchers 
   it should "apply empty page suffix for wrong jurisdiction" in {
     val demolishedPropertyAnswer = userAnswers(Map(
       BusinessRatesSubcategoryId.toString -> JsString("business_rates_demolished"),
-      EnglandOrWalesPropertyRouter.key -> JsString("wrong_jurisdiction")
+      EnglandOrWalesPropertyRouter.key    -> JsString("wrong_jurisdiction")
     ))
     EnglandOrWalesPropertyRouter.nextPage(demolishedPropertyAnswer) shouldBe routes.JourneyController.onPageLoad("property-demolished")
   }
-
 
   private def userAnswers(data: Map[String, JsValue]) =
     new UserAnswers(new CacheMap("cacheId", data))

@@ -28,20 +28,34 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, Normal
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesActualLets => property_wales_actual_lets}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets => wales_lets}
+import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.propertyWalesActualLets
 
 class PropertyWalesActualLetsControllerSpec extends ControllerSpecBase {
 
-  def propertyWalesLets70DaysEnquiry = inject[property_wales_actual_lets]
-  def propertyWalesLets = inject[wales_lets]
-  def auditService = inject[AuditingService]
+  def propertyWalesLets70DaysEnquiry: propertyWalesActualLets = inject[property_wales_actual_lets]
+  def propertyWalesLets: html.propertyWalesLets               = inject[wales_lets]
+  def auditService: AuditingService                           = inject[AuditingService]
 
-  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+  def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new PropertyWalesActualLetsController(frontendAppConfig, messagesApi, auditService, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), propertyWalesLets70DaysEnquiry, propertyWalesLets, stubMessageControllerComponents)
+    new PropertyWalesActualLetsController(
+      frontendAppConfig,
+      messagesApi,
+      auditService,
+      FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      propertyWalesLets70DaysEnquiry,
+      propertyWalesLets,
+      stubMessageControllerComponents
+    )
 
-  def viewAsString(form: Form[String] = PropertyWalesActualLetsForm()) = propertyWalesLets70DaysEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = PropertyWalesActualLetsForm()): String =
+    propertyWalesLets70DaysEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
   "PropertyWalesLets70DaysController" must {
 
@@ -53,7 +67,7 @@ class PropertyWalesActualLetsControllerSpec extends ControllerSpecBase {
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(PropertyWalesActualLetsId.toString -> JsString(PropertyWalesActualLetsForm.options.head.value))
+      val validData       = Map(PropertyWalesActualLetsId.toString -> JsString(PropertyWalesActualLetsForm.options.head.value))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
@@ -79,7 +93,7 @@ class PropertyWalesActualLetsControllerSpec extends ControllerSpecBase {
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm = PropertyWalesActualLetsForm().bind(Map("value" -> "invalid value"))
+      val boundForm   = PropertyWalesActualLetsForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -96,7 +110,7 @@ class PropertyWalesActualLetsControllerSpec extends ControllerSpecBase {
 
     "redirect to Session Expired for a POST if no existing data is found" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", PropertyWalesActualLetsForm.options.head.value))
-      val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
+      val result      = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)

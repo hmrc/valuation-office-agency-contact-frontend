@@ -18,22 +18,22 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{submitFairRentApplication => submit_fair_rent_application}
+import play.twirl.api.HtmlFormat
 
 class SubmitFairRentApplicationViewSpec extends ViewBehaviours {
 
-  def submitFairRentApplication = app.injector.instanceOf[submit_fair_rent_application]
+  def submitFairRentApplication: html.submitFairRentApplication = app.injector.instanceOf[submit_fair_rent_application]
 
-  def view = () =>submitFairRentApplication()(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => submitFairRentApplication()(fakeRequest, messages)
 
   "Check Fair Rent Application view" must {
-    behave like normalPage(view, "fairRentApplication", "title", "heading",
-      "p1", "p2", "subheading", "p3")
+    behave like normalPage(view, "fairRentApplication", "title", "heading", "p1", "p2", "subheading", "p3")
 
     "has a link marked with site.back leading to the Fair Rent Enquiry self contained Page" in {
-      val doc = asDocument(view())
+      val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.FairRentEnquiryController.onPageLoad().url
     }
   }

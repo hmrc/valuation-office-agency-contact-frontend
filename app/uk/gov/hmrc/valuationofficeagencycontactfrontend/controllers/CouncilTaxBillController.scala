@@ -24,13 +24,16 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBill => council_tax_bill}
 
-class CouncilTaxBillController @Inject() (appConfig: FrontendAppConfig,
-                                          override val messagesApi: MessagesApi,
-                                          getData: DataRetrievalAction,
-                                          requireData: DataRequiredAction,
-                                          councilTaxBill: council_tax_bill,
-                                          cc: MessagesControllerComponents
-                                         ) extends FrontendController(cc) with I18nSupport {
+class CouncilTaxBillController @Inject() (
+  appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  councilTaxBill: council_tax_bill,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
+
   def onPageLoad(): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(councilTaxBill(appConfig))

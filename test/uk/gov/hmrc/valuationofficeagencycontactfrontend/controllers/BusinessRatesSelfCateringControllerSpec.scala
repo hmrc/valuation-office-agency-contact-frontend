@@ -30,21 +30,35 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerC
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesSelfCateringEnquiry => business_rates_self_catering_enquiry}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLets => england_lets}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets => wales_lets}
+import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
 
-  def businessRatesSelfCateringEnquiry = inject[business_rates_self_catering_enquiry]
-  def propertyEnglandLets = inject[england_lets]
-  def propertyWalesLets = inject[wales_lets]
-  def auditService = inject[AuditingService]
+  def businessRatesSelfCateringEnquiry: html.businessRatesSelfCateringEnquiry = inject[business_rates_self_catering_enquiry]
+  def propertyEnglandLets: html.propertyEnglandLets                           = inject[england_lets]
+  def propertyWalesLets: html.propertyWalesLets                               = inject[wales_lets]
+  def auditService: AuditingService                                           = inject[AuditingService]
 
-  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+  def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-  new BusinessRatesSelfCateringController(frontendAppConfig, messagesApi, auditService, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-  dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSelfCateringEnquiry, propertyEnglandLets ,propertyWalesLets, stubMessageControllerComponents)
+    new BusinessRatesSelfCateringController(
+      frontendAppConfig,
+      messagesApi,
+      auditService,
+      FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      businessRatesSelfCateringEnquiry,
+      propertyEnglandLets,
+      propertyWalesLets,
+      stubMessageControllerComponents
+    )
 
-  def viewAsString(form: Form[String] = BusinessRatesSelfCateringForm()) = businessRatesSelfCateringEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = BusinessRatesSelfCateringForm()): String =
+    businessRatesSelfCateringEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
   "BusinessRatesSelfCateringController" must {
 
@@ -56,7 +70,7 @@ class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(BusinessRatesSelfCateringId.toString -> JsString(BusinessRatesSelfCateringForm.options.head.value))
+      val validData       = Map(BusinessRatesSelfCateringId.toString -> JsString(BusinessRatesSelfCateringForm.options.head.value))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
@@ -74,7 +88,7 @@ class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm = BusinessRatesSelfCateringForm().bind(Map("value" -> "invalid value"))
+      val boundForm   = BusinessRatesSelfCateringForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -105,7 +119,7 @@ class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
 
     "redirect to Session Expired for a POST if no existing data is found" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", BusinessRatesSelfCateringForm.options.head.value))
-      val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
+      val result      = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)

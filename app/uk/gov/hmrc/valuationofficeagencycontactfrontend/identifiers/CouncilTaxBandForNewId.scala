@@ -19,4 +19,3 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers
 case object CouncilTaxBandForNewId extends Identifier {
   override def toString: String = "council_tax_band_for_new"
 }
-

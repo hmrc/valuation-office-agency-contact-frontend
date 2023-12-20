@@ -23,25 +23,20 @@ import scala.jdk.CollectionConverters._
 
 trait QuestionViewBehaviours[A] extends ViewBehaviours {
 
-  val errorKey = "value"
-  val errorMessage = "error.number"
-  val error = FormError(errorKey, errorMessage)
+  val errorKey         = "value"
+  val errorMessage     = "error.number"
+  val error: FormError = FormError(errorKey, errorMessage)
 
   val form: Form[A]
 
-  def pageWithTextFields(createView: (Form[A]) => HtmlFormat.Appendable,
-                         messageKeyPrefix: String,
-                         expectedFormAction: String,
-                         fields: String*) = {
-
+  def pageWithTextFields(createView: (Form[A]) => HtmlFormat.Appendable, messageKeyPrefix: String, expectedFormAction: String, fields: String*): Unit =
     "behave like a question page" when {
       "rendered" must {
-        for(field <- fields) {
+        for (field <- fields)
           s"contain an input for $field" in {
             val doc = asDocument(createView(form))
             assertRenderedById(doc, field)
           }
-        }
 
         "not render an error summary" in {
           val doc = asDocument(createView(form))
@@ -49,7 +44,7 @@ trait QuestionViewBehaviours[A] extends ViewBehaviours {
         }
       }
 
-      for(field <- fields) {
+      for (field <- fields)
         s"rendered with an error with field '$field'" must {
           "show an error summary" in {
             val doc = asDocument(createView(form.withError(FormError(field, "error"))))
@@ -68,7 +63,5 @@ trait QuestionViewBehaviours[A] extends ViewBehaviours {
             labelElement.attr("for") mustBe field
           }
         }
-      }
     }
-  }
 }

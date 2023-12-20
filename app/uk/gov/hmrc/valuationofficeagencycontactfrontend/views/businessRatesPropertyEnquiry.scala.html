@@ -14,7 +14,7 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukBackLink, GovukButton, GovukRadios, GovukErrorSummary, GovukFieldset}
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukRadios, GovukErrorSummary}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
@@ -31,8 +31,8 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesPropertyForm
 
-@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF, govukBackLink: GovukBackLink,
-        govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary, govukFieldset: GovukFieldset)
+@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
+        govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
 
 @(appConfig: FrontendAppConfig, form: Form[String], mode: Mode)(implicit request: Request[_], messages: Messages)
 

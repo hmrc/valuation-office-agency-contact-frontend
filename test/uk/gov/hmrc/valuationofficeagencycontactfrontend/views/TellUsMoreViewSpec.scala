@@ -22,24 +22,27 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.TellUsMoreForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{NormalMode, TellUsMore}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.QuestionViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{tellUsMore => tell_us_more}
-
+import play.twirl.api.HtmlFormat
 
 class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
 
   val messageKeyPrefix = "tellUsMore"
 
-  val backLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
-  val poorRepairBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.DatePropertyChangedController.onPageLoad().url
+  val backLink: String           = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
+  val poorRepairBackLink: String = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.DatePropertyChangedController.onPageLoad().url
 
-  def tellUsMore = app.injector.instanceOf[tell_us_more]
+  def tellUsMore: html.tellUsMore = app.injector.instanceOf[tell_us_more]
 
-  def createView = () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.ct-reference", backLink)(fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable =
+    () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.ct-reference", backLink)(fakeRequest, messages)
 
-  def createAlternativeView = () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.ndr-reference", backLink)(fakeRequest, messages)
+  def createAlternativeView: () => HtmlFormat.Appendable =
+    () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.ndr-reference", backLink)(fakeRequest, messages)
 
-  def createViewUsingForm = (form: Form[TellUsMore]) => tellUsMore(frontendAppConfig, form, NormalMode, "", backLink)(fakeRequest, messages)
+  def createViewUsingForm: Form[TellUsMore] => HtmlFormat.Appendable =
+    (form: Form[TellUsMore]) => tellUsMore(frontendAppConfig, form, NormalMode, "", backLink)(fakeRequest, messages)
 
-  override val form = TellUsMoreForm()
+  override val form: Form[TellUsMore] = TellUsMoreForm()
 
   "TellUsMore view" must {
 
@@ -58,7 +61,7 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
   }
 
   "contain continue button with the value Continue" in {
-    val doc = asDocument(createViewUsingForm(TellUsMoreForm()))
+    val doc            = asDocument(createViewUsingForm(TellUsMoreForm()))
     val continueButton = doc.getElementById("submit").text()
     assert(continueButton == messages("site.continue"))
   }
@@ -69,10 +72,10 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
   }
 
   "has a link marked with site.back leading to the Contact Details Page" in {
-    val doc = asDocument(createView())
+    val doc          = asDocument(createView())
     val backlinkText = doc.select("a[class=govuk-back-link]").text()
     backlinkText mustBe messages("site.back")
-    val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+    val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
     backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
   }
 }

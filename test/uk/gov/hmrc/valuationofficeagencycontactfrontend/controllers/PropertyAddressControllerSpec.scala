@@ -27,18 +27,29 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyAddr
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, NormalMode, PropertyAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyAddress => property_address}
+import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class PropertyAddressControllerSpec extends ControllerSpecBase {
 
-  def propertyAddress = app.injector.instanceOf[property_address]
+  def propertyAddress: html.propertyAddress = app.injector.instanceOf[property_address]
 
-  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+  def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new PropertyAddressController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), propertyAddress, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new PropertyAddressController(
+      frontendAppConfig,
+      messagesApi,
+      FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      propertyAddress,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
-  def viewAsString(form: Form[PropertyAddress] = PropertyAddressForm()) = propertyAddress(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[PropertyAddress] = PropertyAddressForm()): String =
+    propertyAddress(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
   "Property Address Controller" must {
 
@@ -50,7 +61,7 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(PropertyAddressId.toString -> Json.toJson(PropertyAddress("value 1", Some("value 2"), "value 3", Some("value 4"), "AA1 1AA")))
+      val validData       = Map(PropertyAddressId.toString -> Json.toJson(PropertyAddress("value 1", Some("value 2"), "value 3", Some("value 4"), "AA1 1AA")))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
@@ -59,8 +70,13 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("addressLine1", "value 1"), ("addressLine2", "value 2"), ("town", "value 3"),
-        ("county", "value 4"), ("postcode", "AA1 1AA"))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(
+        ("addressLine1", "value 1"),
+        ("addressLine2", "value 2"),
+        ("town", "value 3"),
+        ("county", "value 4"),
+        ("postcode", "AA1 1AA")
+      )
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -70,7 +86,7 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm = PropertyAddressForm().bind(Map("value" -> "invalid value"))
+      val boundForm   = PropertyAddressForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -86,15 +102,21 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("addressLine1", "value 1"), ("addressLine2", "value 2"), ("town", "value 3"), ("county", "value 4"), ("postcode", "value 5"))
-      val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
+      val postRequest = fakeRequest.withFormUrlEncodedBody(
+        ("addressLine1", "value 1"),
+        ("addressLine2", "value 2"),
+        ("town", "value 3"),
+        ("county", "value 4"),
+        ("postcode", "value 5")
+      )
+      val result      = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
     "populate the view correctly on a GET when the question has previously been answered and address line 2 and county are None" in {
-      val validData = Map(PropertyAddressId.toString -> Json.toJson(PropertyAddress("value 1", None, "value 3", None, "value 5")))
+      val validData       = Map(PropertyAddressId.toString -> Json.toJson(PropertyAddress("value 1", None, "value 3", None, "value 5")))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)

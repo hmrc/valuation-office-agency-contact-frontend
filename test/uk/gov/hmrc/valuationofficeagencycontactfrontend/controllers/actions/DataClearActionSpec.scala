@@ -42,7 +42,7 @@ class DataClearActionSpec extends SpecBase with MockitoSugar with ScalaFutures w
     "there is no session Id in the request" must {
       "throw an exception" in {
         val dataCacheConnector = mock[DataCacheConnector]
-        val action = new Harness(dataCacheConnector)
+        val action             = new Harness(dataCacheConnector)
 
         recoverToSucceededIf[IllegalStateException] {
           action.callTransform(fakeRequest)
@@ -54,7 +54,7 @@ class DataClearActionSpec extends SpecBase with MockitoSugar with ScalaFutures w
       "set userAnswers to 'None' in the request" in {
         val dataCacheConnector = mock[DataCacheConnector]
         when(dataCacheConnector.fetch(any())) thenReturn Future(None)
-        val action = new Harness(dataCacheConnector)
+        val action             = new Harness(dataCacheConnector)
 
         val futureResult = action.callTransform(fakeRequest.withSession(SessionKeys.sessionId -> "id"))
 
@@ -68,7 +68,7 @@ class DataClearActionSpec extends SpecBase with MockitoSugar with ScalaFutures w
       "set userAnswers to 'None' in the request" in {
         val dataCacheConnector = mock[DataCacheConnector]
         when(dataCacheConnector.fetch(any())) thenReturn Future(Some(new CacheMap("id", Map())))
-        val action = new Harness(dataCacheConnector)
+        val action             = new Harness(dataCacheConnector)
 
         val futureResult = action.callTransform(fakeRequest.withSession(SessionKeys.sessionId -> "id"))
 

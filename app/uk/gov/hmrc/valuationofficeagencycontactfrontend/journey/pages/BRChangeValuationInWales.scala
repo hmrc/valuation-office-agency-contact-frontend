@@ -27,10 +27,11 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.custo
 /**
  * @author Yuriy Tumakha
  */
-object BRChangeValuationInWales extends CustomizedContent(
-  key = "valuation-online-in-Wales",
-  fieldId = "businessRatesValuationInWales"
-) {
+object BRChangeValuationInWales
+  extends CustomizedContent(
+    key = "valuation-online-in-Wales",
+    fieldId = "businessRatesValuationInWales"
+  ) {
   override def previousPage: UserAnswers => Call = _ => routes.JourneyController.onPageLoad(EnglandOrWalesPropertyRouter.key)
 
   override def template(customizedContent: CustomizedContent)(implicit messages: Messages): Appendable =

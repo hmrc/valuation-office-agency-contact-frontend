@@ -24,11 +24,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{valuationAdvice => valuation_advice}
 
 @Singleton
-class ValuationAdviceController @Inject()(val appConfig: FrontendAppConfig,
-                                          override val messagesApi: MessagesApi,
-                                          valuationAdvice: valuation_advice,
-                                          cc: MessagesControllerComponents
-                                         ) extends FrontendController(cc) with I18nSupport {
+class ValuationAdviceController @Inject() (
+  val appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  valuationAdvice: valuation_advice,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
     Ok(valuationAdvice(appConfig))
