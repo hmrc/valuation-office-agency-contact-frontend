@@ -25,11 +25,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBa
 import javax.inject.{Inject, Singleton}
 
 @Singleton
-class CouncilTaxBandTooHighController @Inject()(val appConfig: FrontendAppConfig,
-                                                override val messagesApi: MessagesApi,
-                                                councilTaxBandTooHigh: council_tax_too_high,
-                                                cc: MessagesControllerComponents
-                                           ) extends FrontendController(cc) with I18nSupport {
+class CouncilTaxBandTooHighController @Inject() (
+  val appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  councilTaxBandTooHigh: council_tax_too_high,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
     Ok(councilTaxBandTooHigh(appConfig))

@@ -22,37 +22,47 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyAddressFor
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{NormalMode, PropertyAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.QuestionViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyAddress => property_address}
+import play.twirl.api.HtmlFormat
 
 class PropertyAddressViewSpec extends QuestionViewBehaviours[PropertyAddress] {
 
   val messageKeyPrefix = "propertyAddress"
 
-  def propertyAddress = app.injector.instanceOf[property_address]
+  def propertyAddress: html.propertyAddress = app.injector.instanceOf[property_address]
 
-  def createView = () => propertyAddress(frontendAppConfig, PropertyAddressForm(), NormalMode)(fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable = () => propertyAddress(frontendAppConfig, PropertyAddressForm(), NormalMode)(fakeRequest, messages)
 
-  def createViewUsingForm = (form: Form[PropertyAddress]) => propertyAddress(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+  def createViewUsingForm: Form[PropertyAddress] => HtmlFormat.Appendable =
+    (form: Form[PropertyAddress]) => propertyAddress(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
-  override val form = PropertyAddressForm()
+  override val form: Form[PropertyAddress] = PropertyAddressForm()
 
   "Property Address view" must {
 
     behave like normalPage(createView, messageKeyPrefix)
 
-    behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.ContactDetailsController.onSubmit(NormalMode).url, "addressLine1", "addressLine2",
-      "town", "county", "postcode")
+    behave like pageWithTextFields(
+      createViewUsingForm,
+      messageKeyPrefix,
+      routes.ContactDetailsController.onSubmit(NormalMode).url,
+      "addressLine1",
+      "addressLine2",
+      "town",
+      "county",
+      "postcode"
+    )
 
     "contain continue button with the value Continue" in {
-      val doc = asDocument(createViewUsingForm(PropertyAddressForm()))
+      val doc            = asDocument(createViewUsingForm(PropertyAddressForm()))
       val continueButton = doc.getElementById("submit").text()
       assert(continueButton == messages("site.continue"))
     }
 
     "has a link marked with site.back leading to the Contact Details Page" in {
-      val doc = asDocument(createView())
+      val doc          = asDocument(createView())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url
     }
   }

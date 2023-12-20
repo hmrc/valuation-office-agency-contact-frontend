@@ -20,22 +20,22 @@ import org.scalatest.OptionValues
 import play.api.data.{Form, FormError}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpecLike
+import org.scalatest.Assertion
 
 trait FormSpec extends AnyWordSpecLike with Matchers with OptionValues {
-  def checkForError(form: Form[_], data: Map[String, String], expectedErrors: Seq[FormError]) = {
+
+  def checkForError(form: Form[_], data: Map[String, String], expectedErrors: Seq[FormError]): Assertion =
     form.bind(data).fold(
       formWithErrors => {
         for (error <- formWithErrors.errors) expectedErrors should contain(FormError(error.key, error.message))
         formWithErrors.errors.size shouldBe expectedErrors.size
       },
-      form => {
+      _ =>
         fail("Expected a validation error when binding the form, but it was bound successfully.")
-      }
     )
-  }
 
-  def error(key: String, value: String) = Seq(FormError(key, value))
+  def error(key: String, value: String): Seq[FormError] = Seq(FormError(key, value))
 
-  lazy val emptyForm = Map[String, String]()
+  lazy val emptyForm: Map[String, String] = Map[String, String]()
 
 }

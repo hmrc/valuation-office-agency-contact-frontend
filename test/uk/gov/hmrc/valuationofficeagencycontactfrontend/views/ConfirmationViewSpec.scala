@@ -22,35 +22,45 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBeh
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow, AnswerSection}
+import play.twirl.api.HtmlFormat
 
 class ConfirmationViewSpec extends ViewBehaviours {
 
   private val outputSettings = new OutputSettings().prettyPrint(false)
 
-  val contactDetails = ContactDetails("c1", "c3", "c5")
-  val councilTax = "council_tax"
-  val address = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
-  val alternativeAddress = PropertyAddress("a", None, "c", None, "f")
-  val cSub = "council_tax_home_business"
-  val tellUs = TellUsMore("Hello")
-  val contact = Contact(contactDetails, address, councilTax, cSub, tellUs.message)
-  val alternativeContact = Contact(contactDetails, alternativeAddress, councilTax, cSub, tellUs.message)
-  val whatHappensNew = Seq("confirmation.new.p1")
-  val answerSectionNew = AnswerSection(None, List(
-    AnswerRow("enquiryCategory.checkYourAnswersLabel", "enquiryCategory.council_tax", true, ""),
-    AnswerRow("contactDetails.heading", "c1<br>c3<br>c5", false, ""),
-    AnswerRow("propertyAddress.heading", "a<br>b<br>c<br>d<br>f", false, ""),
-    AnswerRow("tellUsMore.checkYourAnswersLabel", "some message", false, "")))
+  val contactDetails: ContactDetails      = ContactDetails("c1", "c3", "c5")
+  val councilTax                          = "council_tax"
+  val address: PropertyAddress            = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+  val alternativeAddress: PropertyAddress = PropertyAddress("a", None, "c", None, "f")
+  val cSub                                = "council_tax_home_business"
+  val tellUs: TellUsMore                  = TellUsMore("Hello")
+  val contact: Contact                    = Contact(contactDetails, address, councilTax, cSub, tellUs.message)
+  val alternativeContact: Contact         = Contact(contactDetails, alternativeAddress, councilTax, cSub, tellUs.message)
+  val whatHappensNew: Seq[String]         = Seq("confirmation.new.p1")
 
-  def confirmation = app.injector.instanceOf[Confirmation]
+  val answerSectionNew: AnswerSection = AnswerSection(
+    None,
+    List(
+      AnswerRow("enquiryCategory.checkYourAnswersLabel", "enquiryCategory.council_tax", true, ""),
+      AnswerRow("contactDetails.heading", "c1<br>c3<br>c5", false, ""),
+      AnswerRow("propertyAddress.heading", "a<br>b<br>c<br>d<br>f", false, ""),
+      AnswerRow("tellUsMore.checkYourAnswersLabel", "some message", false, "")
+    )
+  )
 
-  def view = () => confirmation(frontendAppConfig, contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(fakeRequest, messages)
+  def confirmation: html.confirmation = app.injector.instanceOf[Confirmation]
 
-  def alternativeView = () => confirmation(frontendAppConfig, alternativeContact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable =
+    () => confirmation(frontendAppConfig, contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(fakeRequest, messages)
+
+  def alternativeView: () => HtmlFormat.Appendable =
+    () => confirmation(frontendAppConfig, alternativeContact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(fakeRequest, messages)
 
   "Confirmation view" must {
 
-    behave like normalPage(view, "confirmation",
+    behave like normalPage(
+      view,
+      "confirmation",
       "para1",
       "enquirySummary",
       "whatHappensnext",

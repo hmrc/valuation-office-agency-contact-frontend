@@ -30,37 +30,62 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{datePropertyChanged => date_property_changed}
 
 import java.time.LocalDate
+import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
-class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoSugar{
+class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoSugar {
 
-  val mockUserAnswers = mock[UserAnswers]
+  val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
-  def datePropertyChanged = inject[date_property_changed]
+  def datePropertyChanged: html.datePropertyChanged = inject[date_property_changed]
 
-  def routePoorRepair = routes.PropertyWindWaterController.onPageLoad()
-  def routeBusiness = routes.CouncilTaxBusinessController.onPageLoad()
-  def routeAreaChange = routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
+  def routePoorRepair: Call = routes.PropertyWindWaterController.onPageLoad()
+  def routeBusiness: Call   = routes.CouncilTaxBusinessController.onPageLoad()
+  def routeAreaChange: Call = routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
 
   def controllerPoorRepair(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new DatePropertyChangedController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = routePoorRepair),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), datePropertyChanged, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new DatePropertyChangedController(
+      frontendAppConfig,
+      messagesApi,
+      FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = routePoorRepair),
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      datePropertyChanged,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
   def controllerBusiness(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new DatePropertyChangedController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = routeBusiness),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), datePropertyChanged, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new DatePropertyChangedController(
+      frontendAppConfig,
+      messagesApi,
+      FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = routeBusiness),
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      datePropertyChanged,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
   def controllerAreaChange(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new DatePropertyChangedController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = routeAreaChange),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), datePropertyChanged, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new DatePropertyChangedController(
+      frontendAppConfig,
+      messagesApi,
+      FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = routeAreaChange),
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      datePropertyChanged,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
-  def viewBusinessAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()) =
+  def viewBusinessAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()): String =
     datePropertyChanged(frontendAppConfig, form, NormalMode, "datePropertyChanged.business", routeAreaChange.url)(fakeRequest, messages).toString
 
-  def viewAreaChangeAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()) =
+  def viewAreaChangeAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()): String =
     datePropertyChanged(frontendAppConfig, form, NormalMode, "datePropertyChanged.areaChange", routeAreaChange.url)(fakeRequest, messages).toString
 
   "DatePropertyChangedController Controller" must {
-
 
     "return OK and the date view for business sub category" in {
       val validData = Map(CouncilTaxSubcategoryId.toString -> JsString("council_tax_business_uses"))
@@ -85,7 +110,7 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoS
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", LocalDate.of(2021,1,1).toString))
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", LocalDate.of(2021, 1, 1).toString))
 
       val result = controllerPoorRepair().onSubmit(NormalMode)(postRequest)
 

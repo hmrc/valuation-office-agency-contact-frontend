@@ -33,25 +33,36 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.{cate
 class JourneyControllerSpec extends ControllerSpecBase {
 
   val pageKey = HousingBenefitAllowancesRouter.key
-  val form = HousingBenefitAllowancesRouter.form
+  val form    = HousingBenefitAllowancesRouter.form
 
-  def userAnswers = new UserAnswers(emptyCacheMap)
-  def categoryRouterTemplate: categoryRouter = inject[categoryRouter]
-  def singleTextareaTemplate: singleTextarea = inject[singleTextarea]
+  def userAnswers                                  = new UserAnswers(emptyCacheMap)
+  def categoryRouterTemplate: categoryRouter       = inject[categoryRouter]
+  def singleTextareaTemplate: singleTextarea       = inject[singleTextarea]
   def customizedContentTemplate: customizedContent = inject[customizedContent]
-  def notImplementedTemplate: notImplemented = inject[notImplemented]
-  private def journeyMap = inject[JourneyMap]
-  private def auditService = inject[AuditingService]
+  def notImplementedTemplate: notImplemented       = inject[notImplemented]
+  private def journeyMap                           = inject[JourneyMap]
+  private def auditService                         = inject[AuditingService]
 
   private def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new JourneyController(journeyMap, auditService, FakeDataCacheConnector,
-      dataRetrievalAction, new DataRequiredActionImpl(ec),
-      categoryRouterTemplate, singleTextareaTemplate, customizedContentTemplate, notImplementedTemplate,
-      MessageControllerComponentsHelpers.stubMessageControllerComponents, messagesApi)
+    new JourneyController(
+      journeyMap,
+      auditService,
+      FakeDataCacheConnector,
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      categoryRouterTemplate,
+      singleTextareaTemplate,
+      customizedContentTemplate,
+      notImplementedTemplate,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents,
+      messagesApi
+    )
 
   private def viewAsString(form: Form[String] = form): String =
-    categoryRouterTemplate(form, pageKey,
-      HousingBenefitAllowancesRouter.previousPage(userAnswers).url, HousingBenefitAllowancesRouter)(fakeRequest, messages).toString
+    categoryRouterTemplate(form, pageKey, HousingBenefitAllowancesRouter.previousPage(userAnswers).url, HousingBenefitAllowancesRouter)(
+      fakeRequest,
+      messages
+    ).toString
 
   "JourneyController" must {
 
@@ -73,7 +84,7 @@ class JourneyControllerSpec extends ControllerSpecBase {
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(HousingBenefitAllowancesRouter.key -> JsString(HousingBenefitAllowancesRouter.options.head))
+      val validData       = Map(HousingBenefitAllowancesRouter.key -> JsString(HousingBenefitAllowancesRouter.options.head))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(pageKey)(fakeRequest)
@@ -93,7 +104,7 @@ class JourneyControllerSpec extends ControllerSpecBase {
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody((HousingBenefitAllowancesRouter.fieldId, "invalid value"))
-      val boundForm = form.bind(Map(HousingBenefitAllowancesRouter.fieldId -> "invalid value"))
+      val boundForm   = form.bind(Map(HousingBenefitAllowancesRouter.fieldId -> "invalid value"))
 
       val result = controller().onSubmit(pageKey)(postRequest)
 
@@ -115,7 +126,7 @@ class JourneyControllerSpec extends ControllerSpecBase {
 
     "redirect to Session Expired for a POST if no existing data is found" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody((HousingBenefitAllowancesRouter.fieldId, HousingBenefitAllowancesRouter.options.head))
-      val result = controller(dontGetAnyData).onSubmit(pageKey)(postRequest)
+      val result      = controller(dontGetAnyData).onSubmit(pageKey)(postRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
@@ -127,7 +138,7 @@ class JourneyControllerSpec extends ControllerSpecBase {
       }
 
       implicit val request: Request[_] = fakeRequest
-      implicit val messages: Messages = MessagesImpl(Lang("en"), new DefaultMessagesApi)
+      implicit val messages: Messages  = MessagesImpl(Lang("en"), new DefaultMessagesApi)
 
       NotImplementedPage.previousPage(userAnswers).url mustBe NotImplementedPage.appStartPage.url
 
@@ -144,7 +155,7 @@ class JourneyControllerSpec extends ControllerSpecBase {
       val customizedContentPage = HousingBenefitAppeals
 
       implicit val request: Request[_] = fakeRequest
-      implicit val messages: Messages = MessagesImpl(Lang("en"), new DefaultMessagesApi)
+      implicit val messages: Messages  = MessagesImpl(Lang("en"), new DefaultMessagesApi)
 
       customizedContentPage.previousPage(userAnswers).url mustBe routes.JourneyController.onPageLoad(HousingBenefitEnquiry.key).url
 

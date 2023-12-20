@@ -21,15 +21,17 @@ import play.api.libs.json.{Json, Writes}
 /**
  * @author Yuriy Tumakha
  */
-case class EnquiryAuditEvent(contact: ContactDetails,
-                             propertyAddress: PropertyAddress,
-                             isCouncilTaxEnquiry: Boolean,
-                             contactReason: Option[String],
-                             enquiryCategoryMsg: String,
-                             subEnquiryCategoryMsg: String,
-                             message: String,
-                             enquiryBeforeLast28days: Option[String],
-                             refNumber: Option[String])
+case class EnquiryAuditEvent(
+  contact: ContactDetails,
+  propertyAddress: PropertyAddress,
+  isCouncilTaxEnquiry: Boolean,
+  contactReason: Option[String],
+  enquiryCategoryMsg: String,
+  subEnquiryCategoryMsg: String,
+  message: String,
+  enquiryBeforeLast28days: Option[String],
+  refNumber: Option[String]
+)
 
 object EnquiryAuditEvent {
 

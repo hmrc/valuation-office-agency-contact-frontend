@@ -18,19 +18,11 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
 
 import play.api.libs.json.{Json, OFormat}
 
-case class Contact(contact: ContactDetails,
-                   propertyAddress: PropertyAddress,
-                   enquiryCategory: String,
-                   subEnquiryCategory: String,
-                   message: String)
+case class Contact(contact: ContactDetails, propertyAddress: PropertyAddress, enquiryCategory: String, subEnquiryCategory: String, message: String)
 
 object Contact {
   implicit val format: OFormat[Contact] = Json.format[Contact]
 
-  def apply(message: String,
-            enquiryCategory: String,
-            subEnquiryCategory: String,
-            contact: ContactDetails,
-            propertyAddress: PropertyAddress): Contact =
+  def apply(message: String, enquiryCategory: String, subEnquiryCategory: String, contact: ContactDetails, propertyAddress: PropertyAddress): Contact =
     Contact(contact, propertyAddress, enquiryCategory, subEnquiryCategory, message)
 }

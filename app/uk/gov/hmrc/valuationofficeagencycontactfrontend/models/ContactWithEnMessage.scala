@@ -24,29 +24,38 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 import java.util.Locale
 
-case class ContactWithEnMessage(contact: ContactDetails,
-                                propertyAddress: PropertyAddress,
-                                isCouncilTaxEnquiry: Boolean,
-                                contactReason: Option[String],
-                                enquiryCategoryMsg: String,
-                                subEnquiryCategoryMsg: String,
-                                message: String)
+case class ContactWithEnMessage(
+  contact: ContactDetails,
+  propertyAddress: PropertyAddress,
+  isCouncilTaxEnquiry: Boolean,
+  contactReason: Option[String],
+  enquiryCategoryMsg: String,
+  subEnquiryCategoryMsg: String,
+  message: String
+)
 
 object ContactWithEnMessage {
 
   implicit val format: OFormat[ContactWithEnMessage] = Json.format[ContactWithEnMessage]
-  private val log = Logger(this.getClass)
-  val councilTaxKey = "council_tax"
-  val businessRatesKey = "business_rates"
+  private val log                                    = Logger(this.getClass)
+  val councilTaxKey                                  = "council_tax"
+  val businessRatesKey                               = "business_rates"
 
   def apply(contact: Contact, messagesApi: MessagesApi, userAnswers: UserAnswers): ContactWithEnMessage = {
     implicit val messagesEN: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
 
-    val enquiryCategoryMsg = enquiryCategory(contact)
+    val enquiryCategoryMsg    = enquiryCategory(contact)
     val subEnquiryCategoryMsg = enquirySubCategory(contact, userAnswers.existingEnquiryCategory.isDefined)
 
-    ContactWithEnMessage(contact.contact, contact.propertyAddress, contact.enquiryCategory == councilTaxKey,
-      userAnswers.contactReason, enquiryCategoryMsg, subEnquiryCategoryMsg, StringEscapeUtils.escapeJava(contact.message))
+    ContactWithEnMessage(
+      contact.contact,
+      contact.propertyAddress,
+      contact.enquiryCategory == councilTaxKey,
+      userAnswers.contactReason,
+      enquiryCategoryMsg,
+      subEnquiryCategoryMsg,
+      StringEscapeUtils.escapeJava(contact.message)
+    )
   }
 
   def enquiryCategory(contact: Contact)(implicit messages: Messages): String = {
@@ -54,7 +63,8 @@ object ContactWithEnMessage {
     messages.translate("enquiryCategory." + contact.enquiryCategory, Seq.empty)
       .orElse(messages.translate("existingEnquiryCategory." + contact.enquiryCategory, Seq.empty)) match {
       case Some(msg) => msg
-      case _ => log.warn(s"Unable to find key ${contact.enquiryCategory} in $lang messages")
+      case _         =>
+        log.warn(s"Unable to find key ${contact.enquiryCategory} in $lang messages")
         throw new RuntimeException(s"Unable to find key ${contact.enquiryCategory} in $lang messages")
     }
   }
@@ -63,11 +73,11 @@ object ContactWithEnMessage {
     if (isUpdateExistingEnquiry) {
       messages("existing.enquiry")
     } else {
-      val lang = messages.lang.language
+      val lang           = messages.lang.language
       val categoryPrefix = categoryKeyPrefix(contact)
       messages.translate(categoryPrefix + "." + contact.subEnquiryCategory, Seq.empty) match {
         case Some(msg) => msg
-        case None =>
+        case None      =>
           log.warn(s"Unable to find key $categoryPrefix.${contact.subEnquiryCategory} in $lang messages")
           throw new RuntimeException(s"Unable to find key $categoryPrefix.${contact.subEnquiryCategory} in $lang messages")
       }
@@ -75,12 +85,12 @@ object ContactWithEnMessage {
 
   private def categoryKeyPrefix(contact: Contact): String =
     contact.enquiryCategory match {
-      case `councilTaxKey` => "councilTaxSubcategory"
+      case `councilTaxKey`    => "councilTaxSubcategory"
       case `businessRatesKey` => "businessRatesSubcategory"
-      case "housing_benefit" => "housingBenefitSubcategory"
-      case "fair_rent" => "fairRents"
-      case "other" => "other"
-      case _ =>
+      case "housing_benefit"  => "housingBenefitSubcategory"
+      case "fair_rent"        => "fairRents"
+      case "other"            => "other"
+      case _                  =>
         log.warn("Unknown enquiry category key " + contact.enquiryCategory)
         throw new RuntimeException("Unknown enquiry category key " + contact.enquiryCategory)
     }

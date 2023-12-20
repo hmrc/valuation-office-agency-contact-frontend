@@ -20,14 +20,19 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.DataRetrievalAction
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBandTooHigh => council_tax_too_high}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class CouncilTaxBandTooHighControllerSpec extends ControllerSpecBase {
 
-  def councilTaxBandTooHigh = app.injector.instanceOf[council_tax_too_high]
+  def councilTaxBandTooHigh: html.councilTaxBandTooHigh = app.injector.instanceOf[council_tax_too_high]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new CouncilTaxBandTooHighController(frontendAppConfig, messagesApi,councilTaxBandTooHigh,
-      MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new CouncilTaxBandTooHighController(
+      frontendAppConfig,
+      messagesApi,
+      councilTaxBandTooHigh,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
   "Council Tax Band Too High Controller" must {
     "return the correct view for a GET" in {

@@ -30,10 +30,11 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 class LogoutEventSpec extends AnyFlatSpec with should.Matchers {
 
   "LogoutEvent" should "accept userAnswers in constructor and should be serialized to correct json" in {
-    val contact = ContactDetails("Full name", "user@email.com", "07711223344")
-    val userAnswers = new UserAnswers(new CacheMap("sessionId",
+    val contact     = ContactDetails("Full name", "user@email.com", "07711223344")
+    val userAnswers = new UserAnswers(new CacheMap(
+      "sessionId",
       Map(
-        RefNumberId.toString -> JsString("refNumber1"),
+        RefNumberId.toString      -> JsString("refNumber1"),
         ContactDetailsId.toString -> Json.toJson(contact)
       )
     ))

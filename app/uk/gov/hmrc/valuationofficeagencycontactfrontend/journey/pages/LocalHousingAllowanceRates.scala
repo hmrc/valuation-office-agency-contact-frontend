@@ -27,10 +27,11 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.custo
 /**
  * @author Yuriy Tumakha
  */
-object LocalHousingAllowanceRates extends CustomizedContent(
-  key = "local-housing-allowance-rates",
-  fieldId = "localHousingAllowanceRates"
-) {
+object LocalHousingAllowanceRates
+  extends CustomizedContent(
+    key = "local-housing-allowance-rates",
+    fieldId = "localHousingAllowanceRates"
+  ) {
   override def previousPage: UserAnswers => Call = _ => routes.JourneyController.onPageLoad(HousingBenefitAllowancesRouter.key)
 
   override def template(customizedContent: CustomizedContent)(implicit messages: Messages): Appendable =

@@ -24,10 +24,11 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 object ExistingEnquiryCategoryForm extends FormErrorHelper {
 
   def existingEnquiryCategoryFormatter: Formatter[String] = new Formatter[String] {
+
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
-      case None => produceError(key, "error.existingEnquiryCategory.required")
-      case _ => produceError(key, "error.unknown")
+      case None                        => produceError(key, "error.existingEnquiryCategory.required")
+      case _                           => produceError(key, "error.unknown")
     }
 
     def unbind(key: String, value: String) = Map(key -> value)
@@ -36,7 +37,7 @@ object ExistingEnquiryCategoryForm extends FormErrorHelper {
   def apply(): Form[String] =
     Form(single("value" -> of(existingEnquiryCategoryFormatter)))
 
-  def options = Seq(
+  def options: Seq[RadioOption] = Seq(
     RadioOption("existingEnquiryCategory", "council_tax"),
     RadioOption("existingEnquiryCategory", "business_rates"),
     RadioOption("existingEnquiryCategory", "housing_benefit"),

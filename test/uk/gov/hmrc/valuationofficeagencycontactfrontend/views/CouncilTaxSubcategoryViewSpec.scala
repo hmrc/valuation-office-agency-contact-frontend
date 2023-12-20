@@ -21,24 +21,25 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxSubcateg
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxSubcategory => council_tax_subcategory}
+import play.twirl.api.HtmlFormat
 
 class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
 
-  def councilTaxSubcategory = app.injector.instanceOf[council_tax_subcategory]
+  def councilTaxSubcategory: html.councilTaxSubcategory = app.injector.instanceOf[council_tax_subcategory]
 
   val messageKeyPrefix = "councilTaxSubcategory"
 
-  def createView = () => councilTaxSubcategory(frontendAppConfig, CouncilTaxSubcategoryForm(), NormalMode)(fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable = () => councilTaxSubcategory(frontendAppConfig, CouncilTaxSubcategoryForm(), NormalMode)(fakeRequest, messages)
 
-  def createViewUsingForm = (form: Form[String]) => councilTaxSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+  def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
+    (form: Form[String]) => councilTaxSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
   "CouncilTaxSubcategory view" when {
     "rendered" must {
       "contain radio buttons for the value" in {
         val doc = asDocument(createViewUsingForm(CouncilTaxSubcategoryForm()))
-        for (option <- CouncilTaxSubcategoryForm.options) {
+        for (option <- CouncilTaxSubcategoryForm.options)
           assertContainsRadioButton(doc, option.id, "value", option.value, false)
-        }
       }
 
       "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_band_too_high and that it is used once" in {
@@ -53,7 +54,6 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
         labelDefinedAndUsedOnce("council_tax_property_demolished", messageKeyPrefix, createView)
       }
 
-
       "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_annexe and that it is used once" in {
         labelDefinedAndUsedOnce("council_tax_annexe", messageKeyPrefix, createView)
       }
@@ -63,31 +63,29 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
       }
 
       "contain continue button with the value Continue" in {
-        val doc = asDocument(createViewUsingForm(CouncilTaxSubcategoryForm()))
+        val doc            = asDocument(createViewUsingForm(CouncilTaxSubcategoryForm()))
         val continueButton = doc.getElementById("submit").text()
         assert(continueButton == messages("site.continue"))
       }
 
       "has a link marked with site.back leading to the Enquiry page" in {
-        val doc = asDocument(createView())
+        val doc          = asDocument(createView())
         val backlinkText = doc.select("a[class=govuk-back-link]").text()
         backlinkText mustBe messages("site.back")
-        val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+        val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
         backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
       }
     }
 
-    for(option <- CouncilTaxSubcategoryForm.options) {
+    for (option <- CouncilTaxSubcategoryForm.options)
       s"rendered with a value of '${option.value}'" must {
         s"have the '${option.value}' radio button selected" in {
           val doc = asDocument(createViewUsingForm(CouncilTaxSubcategoryForm().bind(Map("value" -> s"${option.value}"))))
           assertContainsRadioButton(doc, option.id, "value", option.value, true)
 
-          for(unselectedOption <- CouncilTaxSubcategoryForm.options.filterNot(o => o == option)) {
+          for (unselectedOption <- CouncilTaxSubcategoryForm.options.filterNot(o => o == option))
             assertContainsRadioButton(doc, unselectedOption.id, "value", unselectedOption.value, false)
-          }
         }
       }
-    }
   }
 }

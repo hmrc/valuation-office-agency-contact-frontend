@@ -24,10 +24,11 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 /**
  * @author Yuriy Tumakha
  */
-object HBTellUsMore extends TellUsMorePage(
-  key = "hb-tell-us-more",
-  fieldId = "housingBenefitTellUsMore"
-) {
+object HBTellUsMore
+  extends TellUsMorePage(
+    key = "hb-tell-us-more",
+    fieldId = "housingBenefitTellUsMore"
+  ) {
   override def previousPage: UserAnswers => Call = _ => routes.JourneyController.onPageLoad(HousingBenefitEnquiry.key)
 
   override def helpWithService: Option[String] = Some("help_with_service_fair_rent")

@@ -26,21 +26,22 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 /**
  * @author Yuriy Tumakha
  */
-object EnglandOrWalesPropertyRouter extends CategoryRouter(
-  key = "England-or-Wales-property",
-  fieldId = "businessRatesJurisdiction",
-  options = Seq("england", "wales")
-) {
+object EnglandOrWalesPropertyRouter
+  extends CategoryRouter(
+    key = "England-or-Wales-property",
+    fieldId = "businessRatesJurisdiction",
+    options = Seq("england", "wales")
+  ) {
 
   private val jurisdiction2suffixMap = Map(
     "england" -> "-in-England",
-    "wales" -> "-in-Wales"
+    "wales"   -> "-in-Wales"
   ).withDefault(_ => "")
 
   private val subcategory2pageMap = Map(
     "business_rates_change_valuation" -> "valuation-online",
-    "business_rates_changes" -> "property-or-area-changed",
-    "business_rates_demolished" -> "property-demolished"
+    "business_rates_changes"          -> "property-or-area-changed",
+    "business_rates_demolished"       -> "property-demolished"
   )
 
   override def previousPage: UserAnswers => Call = _ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)

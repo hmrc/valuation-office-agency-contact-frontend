@@ -19,28 +19,28 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{valuationAdvice => valuation_advice}
+import play.twirl.api.HtmlFormat
 
 class ValuationAdviceViewSpec extends ViewBehaviours {
 
-  def valuationAdvice = app.injector.instanceOf[valuation_advice]
+  def valuationAdvice: html.valuationAdvice = app.injector.instanceOf[valuation_advice]
 
-  def view = () => valuationAdvice(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => valuationAdvice(frontendAppConfig)(fakeRequest, messages)
 
   "Valuation Advice view" must {
 
-    behave like normalPage(view, "valuationAdvice", "title", "heading", "email-title",
-    "email")
+    behave like normalPage(view, "valuationAdvice", "title", "heading", "email-title", "email")
 
     "has a link marked with site.back leading to the Enquiry Category Page" in {
-      val doc = asDocument(view())
+      val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
     }
 
     "contain start again link " in {
-      val doc = asDocument(view())
+      val doc              = asDocument(view())
       val startAgainButton = doc.getElementsByClass("govuk-link").text()
       assert(startAgainButton == messages("site.start-again") || startAgainButton.contains("Newid yr iaith ir Gymraeg Cymraeg"))
     }

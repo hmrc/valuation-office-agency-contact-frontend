@@ -20,32 +20,30 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.DataRetrievalAction
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{expectedUpdate => expected_update}
-
+import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class ExpectedUpdateControllerSpec extends ControllerSpecBase {
 
+  def expectedUpdate: html.expectedUpdate = inject[expected_update]
 
-  def expectedUpdate = inject[expected_update]
-
-  def onwardRoute = routes.EnquiryDateController.onPageLoad()
+  def onwardRoute: Call = routes.EnquiryDateController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ExpectedUpdateController(messagesApi, dataRetrievalAction, expectedUpdate, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
-  def viewAsString() = expectedUpdate()(fakeRequest, messages).toString()
+  def viewAsString(): String = expectedUpdate()(fakeRequest, messages).toString()
 
+  "ExpectedUpdateController Controller" must {
 
-    "ExpectedUpdateController Controller" must {
+    "return OK and the correct view for a GET" in {
+      val result = controller().onPageLoad()(fakeRequest)
 
-      "return OK and the correct view for a GET" in {
-        val result = controller().onPageLoad()(fakeRequest)
+      status(result) mustBe OK
 
-        status(result) mustBe OK
+      contentAsString(result) mustBe viewAsString()
 
-        contentAsString(result) mustBe viewAsString()
-
-      }
     }
-
+  }
 
 }

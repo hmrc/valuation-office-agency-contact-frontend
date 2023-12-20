@@ -43,11 +43,12 @@ object CacheMap {
 }
 
 class KeyStoreEntryValidationException(
-                                        val key: String,
-                                        val invalidJson: JsValue,
-                                        val readingAs: Class[_],
-                                        val errors: scala.collection.Seq[(JsPath, scala.collection.Seq[JsonValidationError])]
-                                      ) extends Exception {
+  val key: String,
+  val invalidJson: JsValue,
+  val readingAs: Class[_],
+  val errors: scala.collection.Seq[(JsPath, scala.collection.Seq[JsonValidationError])]
+) extends Exception {
+
   override def getMessage: String =
     s"KeyStore entry for key '$key' was '${Json.stringify(invalidJson)}'. Attempt to convert to ${readingAs.getName} gave errors: $errors"
 }

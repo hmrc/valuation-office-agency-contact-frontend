@@ -35,51 +35,50 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navi
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class ExistingEnquiryCategoryController @Inject()(
-                                                   appConfig: FrontendAppConfig,
-                                                   override val messagesApi: MessagesApi,
-                                                   auditService: AuditingService,
-                                                   dataCacheConnector: DataCacheConnector,
-                                                   navigator: Navigator,
-                                                   getData: DataRetrievalAction,
-                                                   requireData: DataRequiredAction,
-                                                   existingEnquiryCategory: existingEnquiryCategory,
-                                                   cc: MessagesControllerComponents
-                                                 ) extends FrontendController(cc) with I18nSupport {
+class ExistingEnquiryCategoryController @Inject() (
+  appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  auditService: AuditingService,
+  dataCacheConnector: DataCacheConnector,
+  navigator: Navigator,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  existingEnquiryCategory: existingEnquiryCategory,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   private val log = Logger(this.getClass)
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode) = (getData andThen requireData) { implicit request =>
+  def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) { implicit request =>
     val preparedForm = request.userAnswers.existingEnquiryCategory match {
-      case None => ExistingEnquiryCategoryForm()
+      case None        => ExistingEnquiryCategoryForm()
       case Some(value) => ExistingEnquiryCategoryForm().fill(value)
     }
     enquiryBackLink(request.userAnswers) match {
       case Right(link) => Ok(existingEnquiryCategory(appConfig, preparedForm, mode, link))
-      case Left(msg) => {
+      case Left(msg)   =>
         log.warn(s"Navigation for Existing Enquiry Category page reached with error $msg")
         throw new RuntimeException(s"Navigation for Existing Enquiry Category page reached with error $msg")
-      }
     }
   }
 
-  def onSubmit(mode: Mode) = getData.async {
+  def onSubmit(mode: Mode): Action[AnyContent] = getData.async {
     implicit request =>
       ExistingEnquiryCategoryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(existingEnquiryCategory(appConfig, formWithErrors, mode, ""))),
-        value => {
+        value =>
           for {
-            _ <- saveSubCategoryInCache(value, request.sessionId)
-            _ <- dataCacheConnector.remove(request.sessionId, EnquiryCategoryId.toString)
+            _        <- saveSubCategoryInCache(value, request.sessionId)
+            _        <- dataCacheConnector.remove(request.sessionId, EnquiryCategoryId.toString)
             cacheMap <- dataCacheConnector.save[String](request.sessionId, ExistingEnquiryCategoryId.toString, value)
           } yield {
             auditService.sendRadioButtonSelection(request.uri, "existingEnquiryCategory" -> value)
             Redirect(navigator.nextPage(ExistingEnquiryCategoryId, mode).apply(new UserAnswers(cacheMap)))
           }
-        }
       )
   }
 
@@ -87,23 +86,21 @@ class ExistingEnquiryCategoryController @Inject()(
     Redirect(routes.EnquiryCategoryController.onPageLoad(NormalMode))
   }
 
-  private def saveSubCategoryInCache(subcategory: String, sessionId: String) = {
+  private def saveSubCategoryInCache(subcategory: String, sessionId: String) =
     subcategory match {
-      case "council_tax"       => dataCacheConnector.save[String](sessionId, CouncilTaxSubcategoryId.toString, subcategory)
-      case "business_rates"    => dataCacheConnector.save[String](sessionId, BusinessRatesSubcategoryId.toString, subcategory)
-      case "housing_benefit"   => dataCacheConnector.save[String](sessionId, lastTellUsMorePage, OtherHAHBEnquiry.key)
-      case "fair_rent"         => dataCacheConnector.save[String](sessionId, FairRentEnquiryId.toString, "other_request")
-      case "other"             => dataCacheConnector.save[String](sessionId, OtherSubcategoryId.toString, subcategory)
-      case _                   => Future.unit
+      case "council_tax"     => dataCacheConnector.save[String](sessionId, CouncilTaxSubcategoryId.toString, subcategory)
+      case "business_rates"  => dataCacheConnector.save[String](sessionId, BusinessRatesSubcategoryId.toString, subcategory)
+      case "housing_benefit" => dataCacheConnector.save[String](sessionId, lastTellUsMorePage, OtherHAHBEnquiry.key)
+      case "fair_rent"       => dataCacheConnector.save[String](sessionId, FairRentEnquiryId.toString, "other_request")
+      case "other"           => dataCacheConnector.save[String](sessionId, OtherSubcategoryId.toString, subcategory)
+      case _                 => Future.unit
     }
-  }
 
-  private[controllers] def enquiryBackLink(answers: UserAnswers): Either[String, String] = {
+  private[controllers] def enquiryBackLink(answers: UserAnswers): Either[String, String] =
     answers.contactReason match {
-      case Some("new_enquiry") => Right(routes.ContactReasonController.onPageLoad().url)
-      case Some("more_details") => Right(routes.ContactReasonController.onPageLoad().url)
+      case Some("new_enquiry")     => Right(routes.ContactReasonController.onPageLoad().url)
+      case Some("more_details")    => Right(routes.ContactReasonController.onPageLoad().url)
       case Some("update_existing") => Right(routes.EnquiryDateController.onPageLoad().url)
-      case _ => Left(s"Unknown enquiry category in enquiry key")
+      case _                       => Left("Unknown enquiry category in enquiry key")
     }
-  }
 }

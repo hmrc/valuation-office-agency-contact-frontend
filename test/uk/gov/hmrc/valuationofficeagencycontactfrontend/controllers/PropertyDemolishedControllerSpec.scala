@@ -20,14 +20,14 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.DataRetrievalAction
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyDemolished => property_demolished}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class PropertyDemolishedControllerSpec extends ControllerSpecBase {
 
-  def propertyDemolished = app.injector.instanceOf[property_demolished]
+  def propertyDemolished: html.propertyDemolished = app.injector.instanceOf[property_demolished]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new PropertyDemolishedController(frontendAppConfig, messagesApi,propertyDemolished,
-      MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new PropertyDemolishedController(frontendAppConfig, messagesApi, propertyDemolished, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   "Property Demolished Controller" must {
     "return the correct view for a GET" in {

@@ -27,13 +27,14 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.page_no
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
 
 @Singleton
-class ErrorHandler @Inject()(
-                              appConfig: FrontendAppConfig,
-                              val messagesApi: MessagesApi,
-                              errorTemplate: error_template,
-                              pageNotFound: page_not_found,
-                              internalServerError: internal_Server_Error
-                            ) extends FrontendErrorHandler with I18nSupport {
+class ErrorHandler @Inject() (
+  appConfig: FrontendAppConfig,
+  val messagesApi: MessagesApi,
+  errorTemplate: error_template,
+  pageNotFound: page_not_found,
+  internalServerError: internal_Server_Error
+) extends FrontendErrorHandler
+  with I18nSupport {
 
   override def standardErrorTemplate(pageTitle: String, heading: String, message: String)(implicit rh: Request[_]): Html =
     errorTemplate(pageTitle, heading, message)
@@ -45,4 +46,3 @@ class ErrorHandler @Inject()(
   override def internalServerErrorTemplate(implicit request: Request[_]): Html = internalServerError(appConfig)
 
 }
-

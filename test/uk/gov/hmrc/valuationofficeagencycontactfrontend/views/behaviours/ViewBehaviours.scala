@@ -21,25 +21,23 @@ import java.util.Locale
 import play.api.i18n.Lang
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.ViewSpecBase
+import org.scalatest.Assertion
 
 trait ViewBehaviours extends ViewSpecBase {
 
-  def labelDefinedAndUsedOnce(option: String, prefix: String, view: () => HtmlFormat.Appendable) = {
-    val doc = asDocument(view())
+  def labelDefinedAndUsedOnce(option: String, prefix: String, view: () => HtmlFormat.Appendable): Assertion = {
+    val doc   = asDocument(view())
     assert(messages.isDefinedAt(s"$prefix.$option"))
     val label = doc.select(s"label[for=$prefix.$option]")
     assert(label.size() == 1)
   }
 
-  def normalPage(view: () => HtmlFormat.Appendable,
-                 messageKeyPrefix: String,
-                 expectedGuidanceKeys: String*) = {
-
+  def normalPage(view: () => HtmlFormat.Appendable, messageKeyPrefix: String, expectedGuidanceKeys: String*): Unit =
     "behave like a normal page" when {
       "rendered" must {
         "have the correct banner title" in {
-          val doc = asDocument(view())
-          val nav = Option {
+          val doc  = asDocument(view())
+          val nav  = Option {
             doc.getElementById("proposition-menu")
           }.getOrElse(
             doc.getElementsByAttributeValue("class", "hmrc-header__service-name hmrc-header__service-name--linked").first().parent()
@@ -65,9 +63,11 @@ trait ViewBehaviours extends ViewSpecBase {
 
         "display language toggles" in {
           val doc = asDocument(view())
-          doc.getElementById("cymraeg-switch") != null || !doc.getElementsByAttributeValue("href", "/valuation-office-agency-contact-frontend/language/cymraeg").isEmpty
+          doc.getElementById("cymraeg-switch") != null || !doc.getElementsByAttributeValue(
+            "href",
+            "/valuation-office-agency-contact-frontend/language/cymraeg"
+          ).isEmpty
         }
       }
     }
-  }
 }

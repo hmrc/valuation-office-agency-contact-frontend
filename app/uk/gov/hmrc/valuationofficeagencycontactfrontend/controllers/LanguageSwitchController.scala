@@ -24,14 +24,14 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.play.language.{LanguageController, LanguageUtils}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 
-class LanguageSwitchController @Inject()(
-                                           configuration: Configuration,
-                                           appConfig: FrontendAppConfig,
-                                           languageUtils: LanguageUtils,
-                                           cc: MessagesControllerComponents)(
-                                           implicit override val messagesApi: MessagesApi
-                                         ) extends LanguageController(languageUtils, cc) with I18nSupport {
-
+class LanguageSwitchController @Inject() (
+  configuration: Configuration,
+  appConfig: FrontendAppConfig,
+  languageUtils: LanguageUtils,
+  cc: MessagesControllerComponents
+)(implicit override val messagesApi: MessagesApi
+) extends LanguageController(languageUtils, cc)
+  with I18nSupport {
 
   override protected def fallbackURL: String = routes.EnquiryCategoryController.onPageLoad(NormalMode).url
 

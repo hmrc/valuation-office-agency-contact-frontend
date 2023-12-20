@@ -28,16 +28,16 @@ import javax.inject.{Inject, Singleton}
  * @author Yuriy Tumakha
  */
 @Singleton
-class DateUtil @Inject()(langUtil: LanguageUtils) {
+class DateUtil @Inject() (langUtil: LanguageUtils) {
 
-    val ukTimezone: ZoneId = ZoneId.of("Europe/London")
-    val shortDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.UK)
-    val timeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.UK)
+  val ukTimezone: ZoneId                    = ZoneId.of("Europe/London")
+  val shortDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.UK)
+  val timeFormatter: DateTimeFormatter      = DateTimeFormatter.ofPattern("HH:mm", Locale.UK)
 
-    def nowInUK: ZonedDateTime = ZonedDateTime.now(ukTimezone)
+  def nowInUK: ZonedDateTime = ZonedDateTime.now(ukTimezone)
 
-    def formattedLocalDate(date: LocalDate)(implicit messages: Messages): String = langUtil.Dates.formatDate(date)
+  def formattedLocalDate(date: LocalDate)(implicit messages: Messages): String = langUtil.Dates.formatDate(date)
 
-    def formattedZonedDate(date: ZonedDateTime)(implicit messages: Messages): String = formattedLocalDate(date.toLocalDate)
+  def formattedZonedDate(date: ZonedDateTime)(implicit messages: Messages): String = formattedLocalDate(date.toLocalDate)
 
 }

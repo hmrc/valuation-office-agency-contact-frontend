@@ -21,25 +21,38 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{providingLettings => providing_lettings}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class ProvidingLettingsControllerSpec extends ControllerSpecBase {
 
-  def providingLettings = app.injector.instanceOf[providing_lettings]
-  def dataCacheConnector = app.injector.instanceOf[DataCacheConnector]
-  def navigator = app.injector.instanceOf[Navigator]
+  def providingLettings: html.providingLettings = app.injector.instanceOf[providing_lettings]
+  def dataCacheConnector: DataCacheConnector    = app.injector.instanceOf[DataCacheConnector]
+  def navigator: Navigator                      = app.injector.instanceOf[Navigator]
 
   "Housing benefits Controller" must {
     "return 200 for a GET" in {
-      val result = new ProvidingLettingsController(frontendAppConfig, messagesApi, providingLettings,
-        dataCacheConnector, dontGetAnyData, navigator,
-        MessageControllerComponentsHelpers.stubMessageControllerComponents).onPageLoad()(fakeRequest)
+      val result = new ProvidingLettingsController(
+        frontendAppConfig,
+        messagesApi,
+        providingLettings,
+        dataCacheConnector,
+        dontGetAnyData,
+        navigator,
+        MessageControllerComponentsHelpers.stubMessageControllerComponents
+      ).onPageLoad()(fakeRequest)
       status(result) mustBe OK
     }
 
     "return the correct view for a GET" in {
-      val result = new ProvidingLettingsController(frontendAppConfig, messagesApi, providingLettings,
-        dataCacheConnector, dontGetAnyData, navigator,
-        MessageControllerComponentsHelpers.stubMessageControllerComponents).onPageLoad()(fakeRequest)
+      val result = new ProvidingLettingsController(
+        frontendAppConfig,
+        messagesApi,
+        providingLettings,
+        dataCacheConnector,
+        dontGetAnyData,
+        navigator,
+        MessageControllerComponentsHelpers.stubMessageControllerComponents
+      ).onPageLoad()(fakeRequest)
       contentAsString(result) mustBe providingLettings(frontendAppConfig)(fakeRequest, messages).toString
     }
 

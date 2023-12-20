@@ -22,18 +22,22 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ExistingEnquiryCat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{existingEnquiryCategory => existing_enquiry}
+import play.twirl.api.HtmlFormat
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.existingEnquiryCategory
 
 class ExistingEnquiryCategoryViewSpec extends ViewBehaviours {
 
-  def existingEnqCategory = app.injector.instanceOf[existing_enquiry]
+  def existingEnqCategory: existingEnquiryCategory = app.injector.instanceOf[existing_enquiry]
 
   val messageKeyPrefix = "existingEnquiryCategory"
 
-  val backUrl = routes.ContactReasonController.onPageLoad().url
+  val backUrl: String = routes.ContactReasonController.onPageLoad().url
 
-  def createView = () => existingEnqCategory(frontendAppConfig, ExistingEnquiryCategoryForm(), NormalMode, backUrl)(fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable =
+    () => existingEnqCategory(frontendAppConfig, ExistingEnquiryCategoryForm(), NormalMode, backUrl)(fakeRequest, messages)
 
-  def createViewUsingForm = (form: Form[String]) => existingEnqCategory(frontendAppConfig, form, NormalMode, backUrl)(fakeRequest, messages)
+  def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
+    (form: Form[String]) => existingEnqCategory(frontendAppConfig, form, NormalMode, backUrl)(fakeRequest, messages)
 
   "ExistingEnquiryCategory view" must {
     behave like normalPage(createView, messageKeyPrefix)
@@ -42,16 +46,15 @@ class ExistingEnquiryCategoryViewSpec extends ViewBehaviours {
   "ExistingEnquiryCategory view" when {
     "rendered" must {
       "contain continue button with the value Continue" in {
-        val doc = asDocument(createViewUsingForm(ExistingEnquiryCategoryForm()))
+        val doc            = asDocument(createViewUsingForm(ExistingEnquiryCategoryForm()))
         val continueButton = doc.getElementsByClass("govuk-button").first().text()
         assert(continueButton == messages("site.continue"))
       }
 
       "contain radio buttons for the value" in {
         val doc = asDocument(createViewUsingForm(ExistingEnquiryCategoryForm()))
-        for (option <- ExistingEnquiryCategoryForm.options) {
+        for (option <- ExistingEnquiryCategoryForm.options)
           assertContainsRadioButton(doc, option.id, "value", option.value, false)
-        }
       }
 
       "has a radio button with the label set to the message with key existingEnquiryCategory.council_tax and that it is used once" in {
@@ -75,18 +78,16 @@ class ExistingEnquiryCategoryViewSpec extends ViewBehaviours {
       }
     }
 
-    for(option <- ExistingEnquiryCategoryForm.options) {
+    for (option <- ExistingEnquiryCategoryForm.options)
       s"rendered with a value of '${option.value}'" must {
         s"have the '${option.value}' radio button selected" in {
           val doc = asDocument(createViewUsingForm(ExistingEnquiryCategoryForm().bind(Map("value" -> s"${option.value}"))))
           assertContainsRadioButton(doc, option.id, "value", option.value, true)
 
-          for(unselectedOption <- ExistingEnquiryCategoryForm.options.filterNot(o => o == option)) {
+          for (unselectedOption <- ExistingEnquiryCategoryForm.options.filterNot(o => o == option))
             assertContainsRadioButton(doc, unselectedOption.id, "value", unselectedOption.value, false)
-          }
         }
       }
-    }
 
   }
 }

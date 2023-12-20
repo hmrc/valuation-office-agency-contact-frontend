@@ -31,14 +31,17 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{providingLet
 import scala.concurrent.ExecutionContext
 
 @Singleton
-class ProvidingLettingsController @Inject()(val appConfig: FrontendAppConfig,
-                                            override val messagesApi: MessagesApi,
-                                            providingLettings: providing_lettings,
-                                            dataCacheConnector: DataCacheConnector,
-                                            getData: DataRetrievalAction,
-                                            navigator: Navigator,
-                                            cc: MessagesControllerComponents
-                                           )(implicit ec: ExecutionContext) extends FrontendController(cc) with I18nSupport {
+class ProvidingLettingsController @Inject() (
+  val appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  providingLettings: providing_lettings,
+  dataCacheConnector: DataCacheConnector,
+  getData: DataRetrievalAction,
+  navigator: Navigator,
+  cc: MessagesControllerComponents
+)(implicit ec: ExecutionContext
+) extends FrontendController(cc)
+  with I18nSupport {
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
     Ok(providingLettings(appConfig))
@@ -47,8 +50,8 @@ class ProvidingLettingsController @Inject()(val appConfig: FrontendAppConfig,
   def toEnquiryForm: Action[AnyContent] = getData.async {
     implicit request =>
       for {
-        _ <- dataCacheConnector.remove(request.sessionId, ExistingEnquiryCategoryId.toString)
-        _ <- dataCacheConnector.save[String](request.sessionId, EnquiryCategoryId.toString, "fair_rent")
+        _        <- dataCacheConnector.remove(request.sessionId, ExistingEnquiryCategoryId.toString)
+        _        <- dataCacheConnector.save[String](request.sessionId, EnquiryCategoryId.toString, "fair_rent")
         cacheMap <- dataCacheConnector.save[String](request.sessionId, FairRentEnquiryId.toString, "other_request")
       } yield Redirect(navigator.nextPage(FairRentEnquiryId, NormalMode).apply(new UserAnswers(cacheMap)))
   }

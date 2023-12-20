@@ -31,38 +31,41 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.enquiryCategory
 
 import scala.concurrent.{ExecutionContext, Future}
+import play.api.mvc
+import play.api.mvc.AnyContent
 
-class EnquiryCategoryController @Inject()(
-                                        appConfig: FrontendAppConfig,
-                                        override val messagesApi: MessagesApi,
-                                        auditService: AuditingService,
-                                        dataCacheConnector: DataCacheConnector,
-                                        navigator: Navigator,
-                                        getData: DataRetrievalAction,
-                                        requireData: DataRequiredAction,
-                                        enquiryCategory: enquiryCategory,
-                                        cc: MessagesControllerComponents
-                                         ) extends FrontendController(cc) with I18nSupport {
+class EnquiryCategoryController @Inject() (
+  appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  auditService: AuditingService,
+  dataCacheConnector: DataCacheConnector,
+  navigator: Navigator,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  enquiryCategory: enquiryCategory,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode) = (getData andThen requireData) {
+  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.enquiryCategory match {
-        case None => EnquiryCategoryForm()
+        case None        => EnquiryCategoryForm()
         case Some(value) => EnquiryCategoryForm().fill(value)
       }
       Ok(enquiryCategory(appConfig, preparedForm, mode))
   }
 
-  def onSubmit(mode: Mode) = getData.async {
+  def onSubmit(mode: Mode): mvc.Action[AnyContent] = getData.async {
     implicit request =>
       EnquiryCategoryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(enquiryCategory(appConfig, formWithErrors, mode))),
         value =>
           for {
-            _ <- dataCacheConnector.remove(request.sessionId, ExistingEnquiryCategoryId.toString)
+            _        <- dataCacheConnector.remove(request.sessionId, ExistingEnquiryCategoryId.toString)
             cacheMap <- dataCacheConnector.save[String](request.sessionId, EnquiryCategoryId.toString, value)
           } yield {
             auditService.sendRadioButtonSelection(request.uri, "enquiryCategory" -> value)

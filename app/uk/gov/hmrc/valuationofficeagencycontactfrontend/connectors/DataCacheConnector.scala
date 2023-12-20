@@ -23,10 +23,10 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.repositories.SessionRepo
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class DataCacheConnectorImpl @Inject()(
-                                        sessionRepository: SessionRepository
-                                      )(implicit ec: ExecutionContext)
-  extends DataCacheConnector {
+class DataCacheConnectorImpl @Inject() (
+  sessionRepository: SessionRepository
+)(implicit ec: ExecutionContext
+) extends DataCacheConnector {
 
   def save[A](cacheId: String, key: String, value: A)(implicit fmt: Format[A]): Future[CacheMap] =
     sessionRepository.save(cacheId, key, value)
@@ -51,7 +51,7 @@ class DataCacheConnectorImpl @Inject()(
     getEntry[Seq[A]](cacheId, collectionKey)
       .flatMap(
         remove(_, item) match {
-          case Seq() =>
+          case Seq()  =>
             remove(cacheId, collectionKey)
             fetch(cacheId).map(_.getOrElse(throw new Exception(s"Couldn't find document with key $cacheId")))
           case newSeq =>

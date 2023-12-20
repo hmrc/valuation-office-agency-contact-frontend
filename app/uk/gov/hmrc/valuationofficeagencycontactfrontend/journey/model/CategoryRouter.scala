@@ -25,9 +25,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{StringValue, User
 /**
  * @author Yuriy Tumakha
  */
-abstract class CategoryRouter(val key: String,
-                              val fieldId: String,
-                              val options: Seq[String]) extends Page[String] {
+abstract class CategoryRouter(val key: String, val fieldId: String, val options: Seq[String]) extends Page[String] {
 
   val form: Form[String] = Form(single(fieldId -> of(StringValue)
     .verifying(errorRequired, options.contains(_))))

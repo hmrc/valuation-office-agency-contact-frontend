@@ -26,14 +26,17 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRate
 
 import javax.inject.Inject
 
-class PropertyEmptyController @Inject()(appConfig: FrontendAppConfig,
-                                        override val messagesApi: MessagesApi,
-                                        getData: DataRetrievalAction,
-                                        requireData: DataRequiredAction,
-                                        councilTaxPropertyEmpty: council_tax_property_empty,
-                                        businessRatesPropertyEmpty: business_rates_property_empty,
-                                        cc: MessagesControllerComponents
-                                                   ) extends FrontendController(cc) with I18nSupport {
+class PropertyEmptyController @Inject() (
+  appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  councilTaxPropertyEmpty: council_tax_property_empty,
+  businessRatesPropertyEmpty: business_rates_property_empty,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
+
   def onPageLoad(): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(councilTaxPropertyEmpty(appConfig))

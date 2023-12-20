@@ -18,6 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.behaviours.FormBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.TellUsMore
+import play.api.data.Form
 
 class TellUsMoreFormSpec extends FormBehaviours {
 
@@ -25,38 +26,38 @@ class TellUsMoreFormSpec extends FormBehaviours {
     "message" -> "value 1"
   )
 
-  val form = TellUsMoreForm()
+  val form: Form[TellUsMore] = TellUsMoreForm()
 
   "TellUsMore form" must {
     behave like questionForm(TellUsMore("value 1"))
 
-    s"fail to bind when message length is more than 5000" in {
-      val data = validData + ("message" -> "a" * 5001)
+    "fail to bind when message length is more than 5000" in {
+      val data          = validData + ("message" -> "a" * 5001)
       val expectedError = error("message", "error.message.max_length")
       checkForError(form, data, expectedError)
     }
 
-    s"fail to bind when message is invalid" in {
-      val data = validData + ("message" -> "<script>alert(\"xss\")</script>")
+    "fail to bind when message is invalid" in {
+      val data          = validData + ("message" -> "<script>alert(\"xss\")</script>")
       val expectedError = error("message", "error.tell_us_more.invalid")
       checkForError(form, data, expectedError)
     }
 
     "fail to bind when message is blank" in {
-      val data = validData + ("message" -> "")
+      val data          = validData + ("message" -> "")
       val expectedError = Seq(error("message", "error.tell_us_more.required")).flatten
       checkForError(form, data, expectedError)
     }
 
     "fail to bind when message is omitted" in {
-      val data = validData - "message"
+      val data          = validData - "message"
       val expectedError = error("message", "error.required")
       checkForError(form, data, expectedError)
     }
 
     "fail to bind when message is blank and is for poor repair" in {
-      val form = TellUsMoreForm("error.tellUsMore.poorRepair.required")
-      val data = validData + ("message" -> "")
+      val form          = TellUsMoreForm("error.tellUsMore.poorRepair.required")
+      val data          = validData + ("message" -> "")
       val expectedError = Seq(error("message", "error.tellUsMore.poorRepair.required")).flatten
       checkForError(form, data, expectedError)
     }
@@ -64,4 +65,3 @@ class TellUsMoreFormSpec extends FormBehaviours {
   }
 
 }
-

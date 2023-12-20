@@ -37,28 +37,32 @@ import scala.concurrent.Future
  */
 class EmailConnectorSpec extends SpecBase with MockitoSugar with ScalaFutures {
 
-  private val contactDetails = ContactDetails("first", "email", "contactNumber")
+  private val contactDetails  = ContactDetails("first", "email", "contactNumber")
   private val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "e")
-  private val contact = Contact(contactDetails, propertyAddress, "council_tax", "council_tax_band", "msg")
+  private val contact         = Contact(contactDetails, propertyAddress, "council_tax", "council_tax_band", "msg")
 
   private val messagesMap: Map[String, Map[String, String]] =
     Map("en" -> Map("enquiryCategory.council_tax" -> "CT", "councilTaxSubcategory.council_tax_band" -> "TB"))
-  private val msgApi = new DefaultMessagesApi(messages = messagesMap)
+  private val msgApi                                        = new DefaultMessagesApi(messages = messagesMap)
 
-  implicit val hc: HeaderCarrier = HeaderCarrier()
+  implicit val hc: HeaderCarrier       = HeaderCarrier()
   implicit val request: DataRequest[_] = DataRequest(FakeRequest(), "sessionId", new UserAnswers(new CacheMap("id", Map())))
-  implicit val dateUtil: DateUtil = injector.instanceOf[DateUtil]
+  implicit val dateUtil: DateUtil      = injector.instanceOf[DateUtil]
 
   private def httpMock(status: Int, body: String) = {
     val httpMock = mock[HttpClient]
-    when(httpMock.POST[JsValue, HttpResponse](anyString, any[JsValue], any[Seq[(String, String)]])(any[Writes[JsValue]],
-      any[HttpReads[HttpResponse]], any[HeaderCarrier], any())) thenReturn Future.successful(HttpResponse(status, body))
+    when(httpMock.POST[JsValue, HttpResponse](anyString, any[JsValue], any[Seq[(String, String)]])(
+      any[Writes[JsValue]],
+      any[HttpReads[HttpResponse]],
+      any[HeaderCarrier],
+      any()
+    )) thenReturn Future.successful(HttpResponse(status, body))
     httpMock
   }
 
   "EmailConnector" should {
     "send enquiry confirmation" in {
-      val emailConnector = new EmailConnector(servicesConfig, httpMock(ACCEPTED, ""))
+      val emailConnector              = new EmailConnector(servicesConfig, httpMock(ACCEPTED, ""))
       implicit val messages: Messages = msgApi.preferred(Seq(Lang("en")))
 
       val response = emailConnector.sendEnquiryConfirmation(contact).futureValue
@@ -67,8 +71,8 @@ class EmailConnectorSpec extends SpecBase with MockitoSugar with ScalaFutures {
     }
 
     "handle error response on send enquiry confirmation" in {
-      val body = """{"error":"Parameter missed"}"""
-      val emailConnector = new EmailConnector(servicesConfig, httpMock(BAD_REQUEST, body))
+      val body                        = """{"error":"Parameter missed"}"""
+      val emailConnector              = new EmailConnector(servicesConfig, httpMock(BAD_REQUEST, body))
       implicit val messages: Messages = msgApi.preferred(Seq(Lang("en")))
 
       val response = emailConnector.sendEnquiryConfirmation(contact).futureValue

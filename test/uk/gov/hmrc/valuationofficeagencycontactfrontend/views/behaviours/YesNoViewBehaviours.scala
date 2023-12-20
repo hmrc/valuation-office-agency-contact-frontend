@@ -22,16 +22,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BooleanForm
 
 trait YesNoViewBehaviours extends QuestionViewBehaviours[Boolean] {
 
-  val form = BooleanForm()
+  val form: Form[Boolean] = BooleanForm()
 
-  def yesNoPage(createView: (Form[Boolean]) => HtmlFormat.Appendable,
-                messageKeyPrefix: String,
-                expectedFormAction: String) = {
-
+  def yesNoPage(createView: (Form[Boolean]) => HtmlFormat.Appendable, messageKeyPrefix: String, expectedFormAction: String): Unit =
     "behave like a page with a Yes/No question" when {
       "rendered" must {
         "contain a legend for the question" in {
-          val doc = asDocument(createView(BooleanForm()))
+          val doc     = asDocument(createView(BooleanForm()))
           val legends = doc.getElementsByTag("legend")
           legends.size mustBe 1
           legends.first.text mustBe messages(s"$messageKeyPrefix.heading")
@@ -70,16 +67,14 @@ trait YesNoViewBehaviours extends QuestionViewBehaviours[Boolean] {
         }
 
         "show an error in the value field's label" in {
-          val doc = asDocument(createView(BooleanForm().withError(error)))
+          val doc       = asDocument(createView(BooleanForm().withError(error)))
           val errorSpan = doc.getElementsByClass("error-notification").first
           errorSpan.text mustBe messages(errorMessage)
         }
       }
     }
-  }
 
-
-  def answeredYesNoPage(createView: (Form[Boolean]) => HtmlFormat.Appendable, answer: Boolean) = {
+  def answeredYesNoPage(createView: (Form[Boolean]) => HtmlFormat.Appendable, answer: Boolean): Unit = {
 
     "have only the correct value checked" in {
       val doc = asDocument(createView(BooleanForm().fill(answer)))

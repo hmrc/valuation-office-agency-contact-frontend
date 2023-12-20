@@ -33,25 +33,26 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navi
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class PropertyWalesActualLetsController @Inject()(
-                                                     appConfig: FrontendAppConfig,
-                                                     override val messagesApi: MessagesApi,
-                                                     auditService: AuditingService,
-                                                     dataCacheConnector: DataCacheConnector,
-                                                     navigator: Navigator,
-                                                     getData: DataRetrievalAction,
-                                                     requireData: DataRequiredAction,
-                                                     propertyWalesActualLets: property_wales_actual_lets,
-                                                     propertyWalesLets: wales_lets,
-                                                     cc: MessagesControllerComponents
-                                                   ) extends FrontendController(cc) with I18nSupport {
+class PropertyWalesActualLetsController @Inject() (
+  appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  auditService: AuditingService,
+  dataCacheConnector: DataCacheConnector,
+  navigator: Navigator,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  propertyWalesActualLets: property_wales_actual_lets,
+  propertyWalesLets: wales_lets,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.propertyWalesActualLetsEnquiry match {
-        case None => PropertyWalesActualLetsForm()
+        case None        => PropertyWalesActualLetsForm()
         case Some(value) => PropertyWalesActualLetsForm().fill(value)
       }
       Ok(propertyWalesActualLets(appConfig, preparedForm, mode))
@@ -65,7 +66,8 @@ class PropertyWalesActualLetsController @Inject()(
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering70Days" -> value)
           dataCacheConnector.save[String](request.sessionId, PropertyWalesActualLetsId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(PropertyWalesActualLetsId, mode).apply(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(PropertyWalesActualLetsId, mode).apply(new UserAnswers(cacheMap)))
+          )
         }
       )
   }

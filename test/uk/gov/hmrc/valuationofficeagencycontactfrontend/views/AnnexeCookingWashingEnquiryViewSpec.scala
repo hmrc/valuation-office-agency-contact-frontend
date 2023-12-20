@@ -19,22 +19,22 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.AnnexeSelfContainedForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{annexeCookingWashingEnquiry => annexe_cooking_washing_enquiry}
+import play.twirl.api.HtmlFormat
 
 class AnnexeCookingWashingEnquiryViewSpec extends ViewBehaviours {
 
-  def annexeCookingWashingEnquiry = app.injector.instanceOf[annexe_cooking_washing_enquiry]
+  def annexeCookingWashingEnquiry: html.annexeCookingWashingEnquiry = app.injector.instanceOf[annexe_cooking_washing_enquiry]
 
-  def view = () => annexeCookingWashingEnquiry(frontendAppConfig, AnnexeSelfContainedForm())(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => annexeCookingWashingEnquiry(frontendAppConfig, AnnexeSelfContainedForm())(fakeRequest, messages)
 
   "AnnexeCookingWashingEnquiry view" must {
-    behave like normalPage(view, "annexeCookingWashing", "title", "heading",
-      "form.yes", "form.no")
+    behave like normalPage(view, "annexeCookingWashing", "title", "heading", "form.yes", "form.no")
 
     "has a link marked with site.back leading to the Council Tax annexe cooking-washing enquiry Page" in {
-      val doc = asDocument(view())
+      val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxAnnexeController.onSelfContainedEnquiryPageLoad().url
     }
   }

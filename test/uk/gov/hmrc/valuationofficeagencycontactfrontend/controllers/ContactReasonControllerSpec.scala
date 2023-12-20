@@ -25,22 +25,30 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerC
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{contactReason => contact_reason}
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactReasonForm
-
+import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class ContactReasonControllerSpec extends ControllerSpecBase {
 
-  def contactReason = inject[contact_reason]
+  def contactReason: html.contactReason = inject[contact_reason]
 
-  def onwardRoute = routes.ContactReasonController.onPageLoad()
+  def onwardRoute: Call = routes.ContactReasonController.onPageLoad()
 
-  def auditService = inject[AuditingService]
+  def auditService: AuditingService = inject[AuditingService]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new ContactReasonController(messagesApi, getClearCacheMap, dataRetrievalAction, auditService, FakeDataCacheConnector,
-      new FakeNavigator(desiredRoute = onwardRoute), contactReason, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new ContactReasonController(
+      messagesApi,
+      getClearCacheMap,
+      dataRetrievalAction,
+      auditService,
+      FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = onwardRoute),
+      contactReason,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
-  def viewAsString(form: Form[String] = ContactReasonForm()) = contactReason(form, NormalMode)(fakeRequest, messages).toString()
-
+  def viewAsString(form: Form[String] = ContactReasonForm()): String = contactReason(form, NormalMode)(fakeRequest, messages).toString()
 
   "ContactReason Controller" must {
 
@@ -55,7 +63,7 @@ class ContactReasonControllerSpec extends ControllerSpecBase {
 
     "redirect to the next page when valid data is submitted" in {
       val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", ContactReasonForm.options.head.value))
-      val result = controller().onSubmit(NormalMode)(postRequest)
+      val result      = controller().onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(onwardRoute.url)

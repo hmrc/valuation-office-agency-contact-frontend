@@ -28,21 +28,35 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, Normal
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{fairRentEnquiry => fair_rent_enquiry}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{checkFairRentApplication => check_fair_rent_application, submitFairRentApplication => submit_fair_rent_application}
+import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{checkFairRentApplication, fairRentEnquiry, submitFairRentApplication}
 
 class FairRentEnquiryControllerSpec extends ControllerSpecBase {
 
-  def fairRentEnquiryEnquiry = inject[fair_rent_enquiry]
-  def onFairRentEnquiryNew = inject[submit_fair_rent_application]
-  def onFairRentEnquiryCheck = inject[check_fair_rent_application]
-  def auditService = inject[AuditingService]
+  def fairRentEnquiryEnquiry: fairRentEnquiry          = inject[fair_rent_enquiry]
+  def onFairRentEnquiryNew: submitFairRentApplication  = inject[submit_fair_rent_application]
+  def onFairRentEnquiryCheck: checkFairRentApplication = inject[check_fair_rent_application]
+  def auditService: AuditingService                    = inject[AuditingService]
 
-  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+  def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new FairRentEnquiryController(frontendAppConfig, messagesApi, auditService, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), fairRentEnquiryEnquiry, onFairRentEnquiryNew, onFairRentEnquiryCheck, stubMessageControllerComponents)
+    new FairRentEnquiryController(
+      frontendAppConfig,
+      messagesApi,
+      auditService,
+      FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      fairRentEnquiryEnquiry,
+      onFairRentEnquiryNew,
+      onFairRentEnquiryCheck,
+      stubMessageControllerComponents
+    )
 
-  def viewAsString(form: Form[String] = FairRentEnquiryForm()) = fairRentEnquiryEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = FairRentEnquiryForm()): String =
+    fairRentEnquiryEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
   "PropertyEnglandLets140DaysController" must {
 
@@ -61,7 +75,7 @@ class FairRentEnquiryControllerSpec extends ControllerSpecBase {
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(FairRentEnquiryId.toString -> JsString(FairRentEnquiryForm.options.head.value))
+      val validData       = Map(FairRentEnquiryId.toString -> JsString(FairRentEnquiryForm.options.head.value))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
@@ -95,7 +109,7 @@ class FairRentEnquiryControllerSpec extends ControllerSpecBase {
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm = FairRentEnquiryForm().bind(Map("value" -> "invalid value"))
+      val boundForm   = FairRentEnquiryForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -112,7 +126,7 @@ class FairRentEnquiryControllerSpec extends ControllerSpecBase {
 
     "redirect to Session Expired for a POST if no existing data is found" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", FairRentEnquiryForm.options.head.value))
-      val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
+      val result      = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)

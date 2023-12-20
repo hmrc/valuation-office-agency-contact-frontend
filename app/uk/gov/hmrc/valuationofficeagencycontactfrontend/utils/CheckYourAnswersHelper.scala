@@ -39,7 +39,7 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messag
     x => AnswerRow("existingEnquiryCategory.heading", s"existingEnquiryCategory.$x", true, routes.ExistingEnquiryCategoryController.onPageLoad().url)
   }
 
-  def refNumber: Option[AnswerRow] =  {
+  def refNumber: Option[AnswerRow] = {
     val ref = userAnswers.refNumber.map(_.trim).filter(_ != "")
     Option(
       AnswerRow("refNumber.value", ref.getOrElse("site.not_provided"), ref.isEmpty, routes.RefNumberController.onPageLoad().url)
@@ -72,8 +72,13 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messag
   }
 
   def contactDetails: Option[AnswerRow] = userAnswers.contactDetails map {
-    _ => AnswerRow("contactDetails.heading", formattedContactDetails(userAnswers.contactDetails, "<br>"), false,
-      routes.ContactDetailsController.onPageLoad(CheckMode).url)
+    _ =>
+      AnswerRow(
+        "contactDetails.heading",
+        formattedContactDetails(userAnswers.contactDetails, "<br>"),
+        false,
+        routes.ContactDetailsController.onPageLoad(CheckMode).url
+      )
   }
 
   def datePropertyChanged(keyMessage: String = "datePropertyChanged.poorRepair.heading"): Option[AnswerRow] = userAnswers.datePropertyChanged map {
@@ -89,8 +94,13 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messag
   }
 
   def housingBenefitTellUsMore: Option[AnswerRow] = userAnswers.getString(lastTellUsMorePage) map {
-    pageKey => AnswerRow(s"housingBenefitSubcategory.$pageKey", userAnswers.getString(pageKey).getOrElse(""), answerIsMessageKey = false,
-      routes.JourneyController.onPageLoad(changeModePrefix + pageKey).url)
+    pageKey =>
+      AnswerRow(
+        s"housingBenefitSubcategory.$pageKey",
+        userAnswers.getString(pageKey).getOrElse(""),
+        answerIsMessageKey = false,
+        routes.JourneyController.onPageLoad(changeModePrefix + pageKey).url
+      )
   }
 
 }

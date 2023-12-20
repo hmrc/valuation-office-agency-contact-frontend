@@ -25,13 +25,16 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertySpli
 
 import javax.inject.Inject
 
-class PropertySplitMergeController @Inject()(appConfig: FrontendAppConfig,
-                                             override val messagesApi: MessagesApi,
-                                             getData: DataRetrievalAction,
-                                             requireData: DataRequiredAction,
-                                             propertySplitMerge: property_split_merge,
-                                             cc: MessagesControllerComponents
-                                            ) extends FrontendController(cc) with I18nSupport {
+class PropertySplitMergeController @Inject() (
+  appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  propertySplitMerge: property_split_merge,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
+
   def onPageLoad(): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(propertySplitMerge(appConfig))

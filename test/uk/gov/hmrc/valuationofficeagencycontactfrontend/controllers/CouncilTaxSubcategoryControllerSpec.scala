@@ -32,25 +32,36 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerC
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxSubcategory => council_tax_subcategory}
 
 import scala.concurrent.Future
+import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with MockitoSugar {
 
-  def councilTaxSubcategory = inject[council_tax_subcategory]
-  def auditService = inject[AuditingService]
+  def councilTaxSubcategory: html.councilTaxSubcategory = inject[council_tax_subcategory]
+  def auditService: AuditingService                     = inject[AuditingService]
 
-  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+  def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
-  def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) = {
+  def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap): CouncilTaxSubcategoryController = {
     val fakeDataCacheConnector = mock[DataCacheConnector]
     when(fakeDataCacheConnector.save(any, any, any)(any))
       .thenReturn(Future.successful(CacheMap("councilTaxSubcategory", Map("councilTaxSubcategory" -> JsString("bar")))))
     when(fakeDataCacheConnector.remove(any[String], any[String]))
       .thenReturn(Future.successful(true))
-    new CouncilTaxSubcategoryController(frontendAppConfig, messagesApi, auditService, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), councilTaxSubcategory, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new CouncilTaxSubcategoryController(
+      frontendAppConfig,
+      messagesApi,
+      auditService,
+      fakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      councilTaxSubcategory,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
   }
 
-  def viewAsString(form: Form[String] = CouncilTaxSubcategoryForm()) =
+  def viewAsString(form: Form[String] = CouncilTaxSubcategoryForm()): String =
     councilTaxSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
   "CouncilTaxSubcategory Controller" must {
@@ -63,7 +74,7 @@ class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with Mockit
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(CouncilTaxSubcategoryId.toString -> JsString(CouncilTaxSubcategoryForm.options.head.value))
+      val validData       = Map(CouncilTaxSubcategoryId.toString -> JsString(CouncilTaxSubcategoryForm.options.head.value))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
@@ -82,7 +93,7 @@ class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with Mockit
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm = CouncilTaxSubcategoryForm().bind(Map("value" -> "invalid value"))
+      val boundForm   = CouncilTaxSubcategoryForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -99,7 +110,7 @@ class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with Mockit
 
     "redirect to Session Expired for a POST if no existing data is found" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", CouncilTaxSubcategoryForm.options.head.value))
-      val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
+      val result      = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)

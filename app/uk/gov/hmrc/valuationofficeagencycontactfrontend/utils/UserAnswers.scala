@@ -81,25 +81,24 @@ class UserAnswers(val cacheMap: CacheMap) {
 
   def fairRentEnquiryEnquiry: Option[String] = cacheMap.getEntry[String](FairRentEnquiryId.toString)
 
-  def contact(): Either[String, Contact] = {
+  def contact(): Either[String, Contact] =
     (for {
-      cd <- contactDetails
-      pa <- propertyAddress
-      eq <- enquiryCategory orElse existingEnquiryCategory
+      cd          <- contactDetails
+      pa          <- propertyAddress
+      eq          <- enquiryCategory orElse existingEnquiryCategory
       subcategory <- eq match {
-        case "council_tax" => councilTaxSubcategory
-        case "business_rates" => businessRatesSubcategory
-        case "housing_benefit" => getString(lastTellUsMorePage)
-        case "fair_rent" => fairRentEnquiryEnquiry
-        case "other" => otherSubcategory orElse Some("other")
-        case _ => None
-      }
-      message <- enquiryCategory match {
-        case Some("housing_benefit") => getString(subcategory)
-        case _ => tellUsMore.map(_.message).orElse(whatElse).orElse(anythingElse)
-      }
+                       case "council_tax"     => councilTaxSubcategory
+                       case "business_rates"  => businessRatesSubcategory
+                       case "housing_benefit" => getString(lastTellUsMorePage)
+                       case "fair_rent"       => fairRentEnquiryEnquiry
+                       case "other"           => otherSubcategory orElse Some("other")
+                       case _                 => None
+                     }
+      message     <- enquiryCategory match {
+                       case Some("housing_benefit") => getString(subcategory)
+                       case _                       => tellUsMore.map(_.message).orElse(whatElse).orElse(anythingElse)
+                     }
     } yield Contact(cd, pa, eq, subcategory, message))
       .toRight("Unable to parse")
-  }
 
 }

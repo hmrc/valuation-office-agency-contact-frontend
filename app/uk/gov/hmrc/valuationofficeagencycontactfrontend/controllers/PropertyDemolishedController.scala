@@ -25,11 +25,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyDemo
 import javax.inject.{Inject, Singleton}
 
 @Singleton
-class PropertyDemolishedController @Inject()(val appConfig: FrontendAppConfig,
-                                               override val messagesApi: MessagesApi,
-                                             propertyDemolished: property_demolished,
-                                               cc: MessagesControllerComponents
-                                              ) extends FrontendController(cc) with I18nSupport {
+class PropertyDemolishedController @Inject() (
+  val appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  propertyDemolished: property_demolished,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
     Ok(propertyDemolished(appConfig))

@@ -34,26 +34,27 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWale
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class BusinessRatesSelfCateringController @Inject()(
-                                                appConfig: FrontendAppConfig,
-                                                override val messagesApi: MessagesApi,
-                                                auditService: AuditingService,
-                                                dataCacheConnector: DataCacheConnector,
-                                                navigator: Navigator,
-                                                getData: DataRetrievalAction,
-                                                requireData: DataRequiredAction,
-                                                businessRatesSelfCateringEnquiry: business_rates_self_catering_enquiry,
-                                                propertyEnglandLets: england_lets,
-                                                propertyWalesLets: wales_lets,
-                                                cc: MessagesControllerComponents
-                                              ) extends FrontendController(cc) with I18nSupport {
+class BusinessRatesSelfCateringController @Inject() (
+  appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  auditService: AuditingService,
+  dataCacheConnector: DataCacheConnector,
+  navigator: Navigator,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  businessRatesSelfCateringEnquiry: business_rates_self_catering_enquiry,
+  propertyEnglandLets: england_lets,
+  propertyWalesLets: wales_lets,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.businessRatesSelfCateringEnquiry match {
-        case None => BusinessRatesSelfCateringForm()
+        case None        => BusinessRatesSelfCateringForm()
         case Some(value) => BusinessRatesSelfCateringForm().fill(value)
       }
 
@@ -68,7 +69,8 @@ class BusinessRatesSelfCateringController @Inject()(
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering" -> value)
           dataCacheConnector.save[String](request.sessionId, BusinessRatesSelfCateringId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(BusinessRatesSelfCateringId, mode).apply(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(BusinessRatesSelfCateringId, mode).apply(new UserAnswers(cacheMap)))
+          )
         }
       )
   }

@@ -44,21 +44,23 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
 
   implicit def ec: ExecutionContext = app.injector.instanceOf[ExecutionContext]
 
-  class FakeUserAnswers(cd: ContactDetails,
-                        eq: String,
-                        cts: String,
-                        brs: String,
-                        has: String,
-                        address: PropertyAddress,
-                        tum: TellUsMore = TellUsMore(""),
-                        ae: Option[String] = None,
-                        ee: Option[String] = None,
-                        cr: Option[String] = None,
-                        cacheMap: CacheMap = new CacheMap("", Map())) extends UserAnswers(cacheMap) {
+  class FakeUserAnswers(
+    cd: ContactDetails,
+    eq: String,
+    cts: String,
+    brs: String,
+    has: String,
+    address: PropertyAddress,
+    tum: TellUsMore = TellUsMore(""),
+    ae: Option[String] = None,
+    ee: Option[String] = None,
+    cr: Option[String] = None,
+    cacheMap: CacheMap = new CacheMap("", Map())
+  ) extends UserAnswers(cacheMap) {
 
     override def tellUsMore: Option[TellUsMore] = Some(tum)
 
-    override def enquiryCategory: Option[String] = if(eq.isEmpty) None else Some(eq)
+    override def enquiryCategory: Option[String] = if (eq.isEmpty) None else Some(eq)
 
     override def existingEnquiryCategory: Option[String] = ee
 

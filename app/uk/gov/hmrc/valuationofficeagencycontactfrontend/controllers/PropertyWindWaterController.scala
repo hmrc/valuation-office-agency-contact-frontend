@@ -27,11 +27,13 @@ import javax.inject.{Inject, Singleton}
 import scala.concurrent.ExecutionContext
 
 @Singleton
-class PropertyWindWaterController @Inject()(val appConfig: FrontendAppConfig,
-                                            override val messagesApi: MessagesApi,
-                                            windWatertightCannotBeReduced: wind_watertight_cannot_be_reduced,
-                                            cc: MessagesControllerComponents
-                                            ) extends FrontendController(cc) with I18nSupport {
+class PropertyWindWaterController @Inject() (
+  val appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  windWatertightCannotBeReduced: wind_watertight_cannot_be_reduced,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   implicit val ec: ExecutionContext = cc.executionContext
 

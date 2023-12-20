@@ -22,11 +22,13 @@ import play.api.data.format.Formatter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object CouncilTaxBusinessEnquiryForm extends FormErrorHelper {
+
   def councilTaxBusinessEnquiryFormatter: Formatter[String] = new Formatter[String] {
+
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
-      case None => produceError(key, "councilTaxBusinessEnquiry.form.error")
-      case _ => produceError(key, "error.unknown")
+      case None                        => produceError(key, "councilTaxBusinessEnquiry.form.error")
+      case _                           => produceError(key, "error.unknown")
     }
 
     def unbind(key: String, value: String) = Map(key -> value)
@@ -35,7 +37,7 @@ object CouncilTaxBusinessEnquiryForm extends FormErrorHelper {
   def apply(): Form[String] =
     Form(single("value" -> of(councilTaxBusinessEnquiryFormatter)))
 
-  def options = Seq(
+  def options: Seq[RadioOption] = Seq(
     RadioOption("councilTaxBusinessEnquiry.form", "all_property"),
     RadioOption("councilTaxBusinessEnquiry.form", "large_property").copy(hintKey = Some("councilTaxBusinessEnquiry.hint.large_property")),
     RadioOption("councilTaxBusinessEnquiry.form", "small_property")

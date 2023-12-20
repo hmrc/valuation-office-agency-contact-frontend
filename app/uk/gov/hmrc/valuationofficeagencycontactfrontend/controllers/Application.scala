@@ -29,44 +29,48 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingServ
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.DataRetrievalAction
 
 import scala.concurrent.{ExecutionContext, Future}
+import play.api.mvc
+import play.api.mvc.AnyContent
 
 @Singleton
-class Application @Inject() (override val messagesApi: MessagesApi,
-                            val appConfig: FrontendAppConfig,
-                             contactReason: contactReason,
-                             languageSwitchController: LanguageSwitchController,
-                             getData: DataRetrievalAction,
-                             dataCacheConnector: DataCacheConnector,
-                             auditService: AuditingService,
-                             configuration: Configuration,
-                            cc: MessagesControllerComponents
-                           )(implicit ec: ExecutionContext) extends FrontendController(cc) with I18nSupport {
+class Application @Inject() (
+  override val messagesApi: MessagesApi,
+  val appConfig: FrontendAppConfig,
+  contactReason: contactReason,
+  languageSwitchController: LanguageSwitchController,
+  getData: DataRetrievalAction,
+  dataCacheConnector: DataCacheConnector,
+  auditService: AuditingService,
+  configuration: Configuration,
+  cc: MessagesControllerComponents
+)(implicit ec: ExecutionContext
+) extends FrontendController(cc)
+  with I18nSupport {
 
-  def start() = Action.async { implicit request =>
+  def start(): mvc.Action[AnyContent] = Action.async { implicit request =>
     val defaultPage = Ok(contactReason(ContactReasonForm(), NormalMode))
     language match {
       case "cy" => Future.successful(configuration.getOptional[String]("govukStartPageWelsh")
-        .fold(defaultPage)(Redirect(_)))
-      case _ => Future.successful(configuration.getOptional[String]("govukStartPage")
-        .fold(defaultPage)(Redirect(_)))
+          .fold(defaultPage)(Redirect(_)))
+      case _    => Future.successful(configuration.getOptional[String]("govukStartPage")
+          .fold(defaultPage)(Redirect(_)))
     }
   }
 
-  def logout() = getData.async { implicit request =>
+  def logout(): mvc.Action[AnyContent] = getData.async { implicit request =>
     auditService.sendLogout(request.userAnswers)
     dataCacheConnector.clear(request.sessionId).map { _ =>
       Redirect(routes.ContactReasonController.onPageLoad()).withNewSession
     }
   }
 
-  def startWelsh() = Action.async { implicit request =>
+  def startWelsh(): mvc.Action[AnyContent] = Action.async { implicit request =>
     val newReq = request.withHeaders(request.headers.replace(REFERER -> createRefererURL()))
     languageSwitchController.switchToLanguage("cymraeg").apply(newReq)
   }
 
-  def createRefererURL(): String = {
+  def createRefererURL(): String =
     uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactReasonController.onPageLoad().url
-  }
 
   private def language(implicit messages: Messages): String = messages.lang.language
 

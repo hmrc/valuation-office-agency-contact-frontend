@@ -34,15 +34,17 @@ import java.time.LocalDate
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
-                                              override val messagesApi: MessagesApi,
-                                              dataCacheConnector: DataCacheConnector,
-                                              navigator: Navigator,
-                                              getData: DataRetrievalAction,
-                                              requireData: DataRequiredAction,
-                                              datePropertyChanged: datePropertyChanged,
-                                              cc: MessagesControllerComponents
-                                             ) extends FrontendController(cc) with I18nSupport {
+class DatePropertyChangedController @Inject() (
+  val appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  dataCacheConnector: DataCacheConnector,
+  navigator: Navigator,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  datePropertyChanged: datePropertyChanged,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   private val log = Logger(this.getClass)
 
@@ -50,14 +52,14 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) { implicit request =>
     val preparedForm = request.userAnswers.datePropertyChanged match {
-      case None => DatePropertyChangedForm()
+      case None        => DatePropertyChangedForm()
       case Some(value) => DatePropertyChangedForm().fill(Some(value))
     }
 
     Ok(datePropertyChanged(appConfig, preparedForm, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))
   }
 
-  def onSubmit(mode: Mode) = (getData andThen requireData).async {
+  def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       DatePropertyChangedForm().bindFromRequest().fold(
         (formWithErrors: Form[Option[LocalDate]]) =>
@@ -66,41 +68,38 @@ class DatePropertyChangedController @Inject()(val appConfig: FrontendAppConfig,
           ),
         value =>
           for {
-            _ <- dataCacheConnector.remove(request.sessionId, DatePropertyChangedId.toString)
+            _        <- dataCacheConnector.remove(request.sessionId, DatePropertyChangedId.toString)
             cacheMap <- if (value.nonEmpty) {
-              dataCacheConnector.save[LocalDate](request.sessionId, DatePropertyChangedId.toString, value.get)
-            } else {
-              dataCacheConnector.fetch(request.sessionId).map(_.getOrElse(new CacheMap(request.sessionId, Map.empty)))
-            }
+                          dataCacheConnector.save[LocalDate](request.sessionId, DatePropertyChangedId.toString, value.get)
+                        } else {
+                          dataCacheConnector.fetch(request.sessionId).map(_.getOrElse(new CacheMap(request.sessionId, Map.empty)))
+                        }
           } yield Redirect(navigator.nextPage(DatePropertyChangedId, mode).apply(new UserAnswers(cacheMap)))
       )
   }
 
-  private def getEnquiryKey(answers: UserAnswers): String = {
+  private def getEnquiryKey(answers: UserAnswers): String =
     enquiryKey(answers).getOrElse {
-      log.warn(s"Navigation for Date Property Changed page reached with error - Unknown enquiry category in enquiry key")
-      throw new RuntimeException(s"Navigation for  Date Property Changed page reached with error Unknown enquiry category in enquiry key")
+      log.warn("Navigation for Date Property Changed page reached with error - Unknown enquiry category in enquiry key")
+      throw new RuntimeException("Navigation for  Date Property Changed page reached with error Unknown enquiry category in enquiry key")
     }
-  }
 
-  private[controllers] def enquiryKey(answers: UserAnswers): Either[String, String] = {
+  private[controllers] def enquiryKey(answers: UserAnswers): Either[String, String] =
     (answers.councilTaxSubcategory, answers.businessRatesSubcategory) match {
       case (Some("council_tax_business_uses"), None) => Right("datePropertyChanged.business")
-      case (Some("council_tax_area_change"), None) => Right("datePropertyChanged.areaChange")
-      case (None, Some("business_rates_from_home")) => Right("datePropertyChanged.business")
-      case (None, Some("business_rates_not_used")) => Right("datePropertyChanged.notUsed")
-      case _ => Left("Unknown enquiry category in enquiry key")
+      case (Some("council_tax_area_change"), None)   => Right("datePropertyChanged.areaChange")
+      case (None, Some("business_rates_from_home"))  => Right("datePropertyChanged.business")
+      case (None, Some("business_rates_not_used"))   => Right("datePropertyChanged.notUsed")
+      case _                                         => Left("Unknown enquiry category in enquiry key")
     }
-  }
 
-  private def backLink(answers: UserAnswers, mode: Mode) = {
+  private def backLink(answers: UserAnswers, mode: Mode) =
     (answers.councilTaxSubcategory, answers.businessRatesSubcategory) match {
       case (Some("council_tax_business_uses"), None) => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
-      case (Some("council_tax_area_change"), None) => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
-      case (None, Some("business_rates_from_home")) => routes.BusinessRatesSubcategoryController.onPageLoad(mode).url
-      case (None, Some("business_rates_not_used")) => routes.BusinessRatesPropertyController.onPageLoad().url
-      case _ => routes.EnquiryCategoryController.onPageLoad(NormalMode).url
+      case (Some("council_tax_area_change"), None)   => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
+      case (None, Some("business_rates_from_home"))  => routes.BusinessRatesSubcategoryController.onPageLoad(mode).url
+      case (None, Some("business_rates_not_used"))   => routes.BusinessRatesPropertyController.onPageLoad().url
+      case _                                         => routes.EnquiryCategoryController.onPageLoad(NormalMode).url
     }
-  }
 
 }

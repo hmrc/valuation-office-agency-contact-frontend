@@ -19,23 +19,22 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBill => council_tax_bill}
-
+import play.twirl.api.HtmlFormat
 
 class CouncilTaxBillViewSpec extends ViewBehaviours {
 
-  def councilTaxBill = app.injector.instanceOf[council_tax_bill]
+  def councilTaxBill: html.councilTaxBill = app.injector.instanceOf[council_tax_bill]
 
-  def view = () => councilTaxBill(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxBill(frontendAppConfig)(fakeRequest, messages)
 
   "Council Tax Bill view" must {
-    behave like normalPage(view, "councilTaxBill", "title", "heading",
-      "p1", "p2", "p3")
+    behave like normalPage(view, "councilTaxBill", "title", "heading", "p1", "p2", "p3")
 
     "has a link marked with site.back leading to the Council Tax Property Empty Page" in {
-      val doc = asDocument(view())
+      val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
-      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
   }

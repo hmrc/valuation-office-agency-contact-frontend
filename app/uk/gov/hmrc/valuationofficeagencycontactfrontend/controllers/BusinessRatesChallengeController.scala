@@ -24,12 +24,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.businessRatesChallenge
 
 @Singleton
-class BusinessRatesChallengeController @Inject() (override val messagesApi: MessagesApi,
-                                                  val appConfig: FrontendAppConfig,
-                                                  businessRatesChallengeView: businessRatesChallenge,
-                                                  cc: MessagesControllerComponents
-                                                 ) extends FrontendController(cc) with I18nSupport {
-
+class BusinessRatesChallengeController @Inject() (
+  override val messagesApi: MessagesApi,
+  val appConfig: FrontendAppConfig,
+  businessRatesChallengeView: businessRatesChallenge,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   def onChallengePageLoad: Action[AnyContent] = Action { implicit request =>
     Ok(businessRatesChallengeView(appConfig))

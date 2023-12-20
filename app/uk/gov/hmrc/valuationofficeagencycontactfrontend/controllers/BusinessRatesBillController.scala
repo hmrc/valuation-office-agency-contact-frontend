@@ -24,11 +24,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRate
 
 import javax.inject.Inject
 
-class BusinessRatesBillController @Inject() (override val messagesApi: MessagesApi,
-                                              val appConfig: FrontendAppConfig,
-                                              businessRatesBill: business_rates_bill,
-                                              cc: MessagesControllerComponents
-                                             ) extends FrontendController(cc) with I18nSupport {
+class BusinessRatesBillController @Inject() (
+  override val messagesApi: MessagesApi,
+  val appConfig: FrontendAppConfig,
+  businessRatesBill: business_rates_bill,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   def onPageLoad(): Action[AnyContent] = Action { implicit request =>
     Ok(businessRatesBill(appConfig))

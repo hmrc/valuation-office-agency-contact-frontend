@@ -19,12 +19,10 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class TellUsMoreSpec extends AnyFlatSpec {
 
-  val m = TellUsMore("Hello")
+  val m: TellUsMore = TellUsMore("Hello")
 
   "Message " should "be Hello" in {
     assert(m.message === "Hello")
   }
-
-
 
 }

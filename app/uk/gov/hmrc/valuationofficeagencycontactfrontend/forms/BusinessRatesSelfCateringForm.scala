@@ -23,11 +23,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSubca
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object BusinessRatesSelfCateringForm {
+
   def businessRatesSelfCateringFormatter: Formatter[String] = new Formatter[String] {
+
     def bind(key: String, data: Map[String, String]) = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
-      case None => produceError(key, "error.businessRatesSelfCatering.required")
-      case _ => produceError(key, "error.unknown")
+      case None                        => produceError(key, "error.businessRatesSelfCatering.required")
+      case _                           => produceError(key, "error.unknown")
     }
 
     def unbind(key: String, value: String) = Map(key -> value)
@@ -36,7 +38,7 @@ object BusinessRatesSelfCateringForm {
   def apply(): Form[String] =
     Form(single("value" -> of(businessRatesSelfCateringFormatter)))
 
-  def options = Seq(
+  def options: Seq[RadioOption] = Seq(
     RadioOption("businessRatesSelfCatering", "england"),
     RadioOption("businessRatesSelfCatering", "wales")
   )

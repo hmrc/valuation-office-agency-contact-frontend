@@ -46,13 +46,13 @@ trait Page[T] {
 
   def nextLang: UserAnswers => Option[Lang] = _ => None
 
-  def heading = s"$fieldId.heading"
+  def heading: String = s"$fieldId.heading"
 
-  def errorRequired = s"error.$fieldId.required"
+  def errorRequired: String = s"error.$fieldId.required"
 
-  def errorPattern = s"error.$fieldId.pattern"
+  def errorPattern: String = s"error.$fieldId.pattern"
 
-  def errorMaxLength = s"error.$fieldId.maxLength"
+  def errorMaxLength: String = s"error.$fieldId.maxLength"
 
   def appStartPage: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 

@@ -23,14 +23,18 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.Data
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.expectedUpdate
 
 import javax.inject.Inject
+import play.api.mvc
+import play.api.mvc.AnyContent
 
-class ExpectedUpdateController @Inject()(override val messagesApi: MessagesApi,
-                                         getData: DataRetrievalAction,
-                                         expected_update: expectedUpdate,
-                                         cc: MessagesControllerComponents
-                                        ) extends FrontendController(cc) with I18nSupport {
+class ExpectedUpdateController @Inject() (
+  override val messagesApi: MessagesApi,
+  getData: DataRetrievalAction,
+  expected_update: expectedUpdate,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
-  def onPageLoad() = getData {implicit  request =>
+  def onPageLoad(): mvc.Action[AnyContent] = getData { implicit request =>
     Ok(expected_update())
   }
 

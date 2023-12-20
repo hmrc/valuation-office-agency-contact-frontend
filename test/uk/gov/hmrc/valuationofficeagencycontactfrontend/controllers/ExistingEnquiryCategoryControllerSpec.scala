@@ -27,24 +27,34 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{ContactReas
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{existingEnquiryCategory => existing_enquiry_category}
+import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
 
-  def existingEnquiryCategory = inject[existing_enquiry_category]
-  def auditService = inject[AuditingService]
+  def existingEnquiryCategory: html.existingEnquiryCategory = inject[existing_enquiry_category]
+  def auditService: AuditingService                         = inject[AuditingService]
 
-  def contactReasonRoute = routes.ContactReasonController.onPageLoad()
-  def enquiryDateRoute = routes.EnquiryDateController.onPageLoad()
+  def contactReasonRoute: Call = routes.ContactReasonController.onPageLoad()
+  def enquiryDateRoute: Call   = routes.EnquiryDateController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new ExistingEnquiryCategoryController(frontendAppConfig, messagesApi, auditService, FakeDataCacheConnector,
-      new FakeNavigator(desiredRoute = contactReasonRoute), dataRetrievalAction, new DataRequiredActionImpl(ec),
-      existingEnquiryCategory, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new ExistingEnquiryCategoryController(
+      frontendAppConfig,
+      messagesApi,
+      auditService,
+      FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = contactReasonRoute),
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      existingEnquiryCategory,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
-  def viewAsString(form: Form[String] = ExistingEnquiryCategoryForm()) =
+  def viewAsString(form: Form[String] = ExistingEnquiryCategoryForm()): String =
     existingEnquiryCategory(frontendAppConfig, form, NormalMode, contactReasonRoute.url)(fakeRequest, messages).toString
 
-  def viewAsStringEnquiryDate(form: Form[String] = ExistingEnquiryCategoryForm()) =
+  def viewAsStringEnquiryDate(form: Form[String] = ExistingEnquiryCategoryForm()): String =
     existingEnquiryCategory(frontendAppConfig, form, NormalMode, enquiryDateRoute.url)(fakeRequest, messages).toString
 
   "ExistingEnquiryCategory Controller" must {
@@ -104,8 +114,10 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(ContactReasonId.toString -> JsString(ContactReasonForm.options.head.value),
-                          ExistingEnquiryCategoryId.toString -> JsString(ExistingEnquiryCategoryForm.options.head.value))
+      val validData       = Map(
+        ContactReasonId.toString           -> JsString(ContactReasonForm.options.head.value),
+        ExistingEnquiryCategoryId.toString -> JsString(ExistingEnquiryCategoryForm.options.head.value)
+      )
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)

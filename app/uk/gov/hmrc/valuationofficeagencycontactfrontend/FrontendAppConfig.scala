@@ -21,33 +21,36 @@ import play.api.Configuration
 import play.api.i18n.Lang
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
+import play.api.mvc.Call
 
 @Singleton
 class FrontendAppConfig @Inject() (val configuration: Configuration, servicesConfig: ServicesConfig) {
 
   private def loadConfig(key: String) = configuration.getOptional[String](key).getOrElse(throw new Exception(s"Missing configuration key: $key"))
 
-  private lazy val contactHost = configuration.get[String]("contact-frontend.host")
+  private lazy val contactHost             = configuration.get[String]("contact-frontend.host")
   private val contactFormServiceIdentifier = "valuationofficeagencycontactfrontend"
 
-  lazy val optimizelyId = configuration.getOptional[String](s"optimizely.projectId").getOrElse("")
+  lazy val optimizelyId: String = configuration.getOptional[String]("optimizely.projectId").getOrElse("")
 
-  lazy val analyticsToken = loadConfig(s"google-analytics.token")
-  lazy val analyticsHost = loadConfig(s"google-analytics.host")
-  lazy val GTM = loadConfig(s"google-analytics.GTM")
-  lazy val reportAProblemPartialUrl = s"$contactHost/contact/problem_reports_ajax?service=$contactFormServiceIdentifier"
-  lazy val reportAProblemNonJSUrl = s"$contactHost/contact/problem_reports_nonjs?service=$contactFormServiceIdentifier"
-  //$COVERAGE-OFF$
-  lazy val betaFeedbackUrl = s"$contactHost/contact/beta-feedback"
-  lazy val betaFeedbackUnauthenticatedUrl = s"$contactHost/contact/beta-feedback-unauthenticated"
+  lazy val analyticsToken: String                 = loadConfig("google-analytics.token")
+  lazy val analyticsHost: String                  = loadConfig("google-analytics.host")
+  lazy val GTM: String                            = loadConfig("google-analytics.GTM")
+  lazy val reportAProblemPartialUrl: String       = s"$contactHost/contact/problem_reports_ajax?service=$contactFormServiceIdentifier"
+  lazy val reportAProblemNonJSUrl: String         = s"$contactHost/contact/problem_reports_nonjs?service=$contactFormServiceIdentifier"
+  // $COVERAGE-OFF$
+  lazy val betaFeedbackUrl: String                = s"$contactHost/contact/beta-feedback"
+  lazy val betaFeedbackUnauthenticatedUrl: String = s"$contactHost/contact/beta-feedback-unauthenticated"
 
-  //$COVERAGE-ON$
-  lazy val loginUrl = loadConfig("urls.login")
-  lazy val loginContinueUrl = loadConfig("urls.loginContinue")
+  // $COVERAGE-ON$
+  lazy val loginUrl: String         = loadConfig("urls.login")
+  lazy val loginContinueUrl: String = loadConfig("urls.loginContinue")
 
-  lazy val languageTranslationEnabled = configuration.getOptional[Boolean]("microservice.services.features.welsh-translation").getOrElse(true)
-  def languageMap: Map[String, Lang] = Map(
+  lazy val languageTranslationEnabled: Boolean = configuration.getOptional[Boolean]("microservice.services.features.welsh-translation").getOrElse(true)
+
+  def languageMap: Map[String, Lang]        = Map(
     "english" -> Lang("en"),
-    "cymraeg" -> Lang("cy"))
-  def routeToSwitchLanguage = (lang: String) => routes.LanguageSwitchController.switchToLanguage(lang)
+    "cymraeg" -> Lang("cy")
+  )
+  def routeToSwitchLanguage: String => Call = (lang: String) => routes.LanguageSwitchController.switchToLanguage(lang)
 }

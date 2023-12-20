@@ -19,63 +19,63 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class PropertyAddressSpec extends AnyFlatSpec {
 
-   val address = PropertyAddress("1", Some("High Street"), "London", Some("London"), "ZZ11ZZ")
+  val address: PropertyAddress = PropertyAddress("1", Some("High Street"), "London", Some("London"), "ZZ11ZZ")
 
-  "Property address line 1" should "be 1" in{
+  "Property address line 1" should "be 1" in {
     assert(address.addressLine1 == "1")
   }
 
-  "Property address line 2" should "be High Street" in{
+  "Property address line 2" should "be High Street" in {
     assert(address.addressLine2 == Some("High Street"))
   }
 
-  "Property Town" should "be London" in{
+  "Property Town" should "be London" in {
     assert(address.town == "London")
   }
 
-  "Property County" should "be London" in{
+  "Property County" should "be London" in {
     assert(address.county == Some("London"))
   }
 
-  "Property Postcode" should "be ZZ11ZZ" in{
+  "Property Postcode" should "be ZZ11ZZ" in {
     assert(address.postcode == "ZZ11ZZ")
   }
 
-  "Property address line 1" should "should't be 2" in{
+  "Property address line 1" should "should't be 2" in {
     assert(address.addressLine1 != "2")
   }
 
-  "Property address line 2" should "shouldn't be Avenue" in{
+  "Property address line 2" should "shouldn't be Avenue" in {
     assert(address.addressLine2 != Some("Avenue"))
   }
 
-  "Property Town" should "shouldn't be" in{
+  "Property Town" should "shouldn't be" in {
     assert(address.town != "Leeds")
   }
 
-  "Property County" should "shouldn't be Cardiff" in{
+  "Property County" should "shouldn't be Cardiff" in {
     assert(address.county != Some("Cardiff"))
   }
 
-  "Property Postcode" should "shouldn't be AA11AA" in{
+  "Property Postcode" should "shouldn't be AA11AA" in {
     assert(address.postcode != "AA11AA")
   }
 
-  val alternativeAddress = PropertyAddress("1", None, "London", None, "ZZ11ZZ")
+  val alternativeAddress: PropertyAddress = PropertyAddress("1", None, "London", None, "ZZ11ZZ")
 
-  "Alternative Property address line 2" should "be None" in{
+  "Alternative Property address line 2" should "be None" in {
     assert(alternativeAddress.addressLine2 == None)
   }
 
-  "Alternative Property address line 2" should "shouldn't be Avenue" in{
+  "Alternative Property address line 2" should "shouldn't be Avenue" in {
     assert(alternativeAddress.addressLine2 != Some("Avenue"))
   }
 
-  "Alternative Property County" should "be None" in{
+  "Alternative Property County" should "be None" in {
     assert(alternativeAddress.county == None)
   }
 
-  "Alternative Property County" should "shouldn't be Cardiff" in{
+  "Alternative Property County" should "shouldn't be Cardiff" in {
     assert(alternativeAddress.county != Some("Cardiff"))
   }
 }

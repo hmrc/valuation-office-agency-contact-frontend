@@ -33,15 +33,17 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRate
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesValuation => business_rates_valuation}
 
 import scala.concurrent.Future
+import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 
 class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with MockitoSugar {
-  val fakeDataCacheConnector = mock[DataCacheConnector]
+  val fakeDataCacheConnector: DataCacheConnector = mock[DataCacheConnector]
 
-  def businessRatesSubcategory = inject[business_rates_subcategory]
-  def businessRatesValuation = inject[business_rates_valuation]
-  def auditService = inject[AuditingService]
+  def businessRatesSubcategory: html.businessRatesSubcategory = inject[business_rates_subcategory]
+  def businessRatesValuation: html.businessRatesValuation     = inject[business_rates_valuation]
+  def auditService: AuditingService                           = inject[AuditingService]
 
-  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+  def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   when(fakeDataCacheConnector.remove(any[String], any[String]))
     .thenReturn(Future.successful(true))
@@ -50,11 +52,20 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
     .thenReturn(Future.successful(CacheMap("businessRatesSubcategory", Map("businessRatesSubcategory" -> JsString("bar")))))
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new BusinessRatesSubcategoryController(frontendAppConfig, messagesApi, auditService, fakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), businessRatesSubcategory,
-      businessRatesValuation, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new BusinessRatesSubcategoryController(
+      frontendAppConfig,
+      messagesApi,
+      auditService,
+      fakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      businessRatesSubcategory,
+      businessRatesValuation,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
-  def viewAsString(form: Form[String] = BusinessRatesSubcategoryForm()) =
+  def viewAsString(form: Form[String] = BusinessRatesSubcategoryForm()): String =
     businessRatesSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
 
   "BusinessRatesSubcategory Controller" must {
@@ -67,7 +78,7 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
-      val validData = Map(BusinessRatesSubcategoryId.toString -> JsString(BusinessRatesSubcategoryForm.options.head.value))
+      val validData       = Map(BusinessRatesSubcategoryId.toString -> JsString(BusinessRatesSubcategoryForm.options.head.value))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
@@ -86,7 +97,7 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm = BusinessRatesSubcategoryForm().bind(Map("value" -> "invalid value"))
+      val boundForm   = BusinessRatesSubcategoryForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -110,7 +121,7 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
 
     "redirect to Session Expired for a POST if no existing data is found" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", BusinessRatesSubcategoryForm.options.head.value))
-      val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
+      val result      = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)

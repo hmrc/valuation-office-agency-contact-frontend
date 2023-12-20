@@ -30,37 +30,52 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, Contac
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLetsNoAction => property_wales_lets_no_action}
+import play.api.mvc.Call
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error
 
 class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with MockitoSugar {
 
-  def propertyWalesLetsNoAction = app.injector.instanceOf[property_wales_lets_no_action]
-  def internalServerError = app.injector.instanceOf[internal_Server_Error]
+  def propertyWalesLetsNoAction: html.propertyWalesLetsNoAction = app.injector.instanceOf[property_wales_lets_no_action]
+  def internalServerError: error.internalServerError            = app.injector.instanceOf[internal_Server_Error]
 
-  def onwardRoute = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+  def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
-  val mockUserAnswers = mock[UserAnswers]
+  val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new PropertyWalesLetsNoActionController(frontendAppConfig, messagesApi, FakeDataCacheConnector, new FakeNavigator(desiredRoute = onwardRoute),
-      dataRetrievalAction, new DataRequiredActionImpl(ec), propertyWalesLetsNoAction, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new PropertyWalesLetsNoActionController(
+      frontendAppConfig,
+      messagesApi,
+      FakeDataCacheConnector,
+      new FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      propertyWalesLetsNoAction,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
-  def wales140DaysBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesAvailableLetsController.onPageLoad().url
-  def wales70DaysBackLink = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad().url
+  def wales140DaysBackLink: String = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesAvailableLetsController.onPageLoad().url
+  def wales70DaysBackLink: String  = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad().url
 
-  def viewAsString70(form: Form[ContactDetails] = ContactDetailsForm()) = propertyWalesLetsNoAction(frontendAppConfig, wales70DaysBackLink)(fakeRequest, messages).toString
-  def viewAsString140(form: Form[ContactDetails] = ContactDetailsForm()) = propertyWalesLetsNoAction(frontendAppConfig, wales140DaysBackLink)(fakeRequest, messages).toString
+  def viewAsString70(form: Form[ContactDetails] = ContactDetailsForm()): String =
+    propertyWalesLetsNoAction(frontendAppConfig, wales70DaysBackLink)(fakeRequest, messages).toString
 
+  def viewAsString140(form: Form[ContactDetails] = ContactDetailsForm()): String =
+    propertyWalesLetsNoAction(frontendAppConfig, wales140DaysBackLink)(fakeRequest, messages).toString
 
   "Wales Lets No Action Controller" must {
 
     "return OK and the correct view for a GET when business_rates, business_rates_self_catering, wales, yes, no in user 70 day journey" in {
-      val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"),
-        BusinessRatesSubcategoryId.toString -> JsString("business_rates_self_catering"),
-        BusinessRatesSelfCateringId.toString -> JsString("wales"),
+      val validData       = Map(
+        EnquiryCategoryId.toString            -> JsString("business_rates"),
+        BusinessRatesSubcategoryId.toString   -> JsString("business_rates_self_catering"),
+        BusinessRatesSelfCateringId.toString  -> JsString("wales"),
         PropertyWalesAvailableLetsId.toString -> JsString("yes"),
-        PropertyWalesActualLetsId.toString -> JsString("no"))
+        PropertyWalesActualLetsId.toString    -> JsString("no")
+      )
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result          = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe viewAsString70()
@@ -68,28 +83,28 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
 
     "returns the Property 70 Days Controller when enquiry category is business_rates and sub category is business_rates_self_catering" +
       "and businessRatesSelfCateringEnquiry is wales and propertyWalesLets140DaysEnquiry is yes and propertyWalesLets70DaysEnquiry us no" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
-      when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("wales")
-      when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn Some("yes")
-      when(mockUserAnswers.propertyWalesActualLetsEnquiry) thenReturn Some("no")
-      val result = controller().enquiryBackLink(mockUserAnswers)
-      val isBusinessRateSelection = result.isRight
-      isBusinessRateSelection mustBe true
-      assert(result.toOption.get == routes.PropertyWalesActualLetsController.onPageLoad().url)
-    }
+        when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+        when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
+        when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("wales")
+        when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn Some("yes")
+        when(mockUserAnswers.propertyWalesActualLetsEnquiry) thenReturn Some("no")
+        val result                  = controller().enquiryBackLink(mockUserAnswers)
+        val isBusinessRateSelection = result.isRight
+        isBusinessRateSelection mustBe true
+        assert(result.toOption.get == routes.PropertyWalesActualLetsController.onPageLoad().url)
+      }
 
     "returns the Property 140 Days Controller when enquiry category is business_rates and sub category is business_rates_self_catering" +
       "and businessRatesSelfCateringEnquiry is wales and propertyWalesLets140DaysEnquiry is yes" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
-      when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("wales")
-      when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn Some("no")
-      val result = controller().enquiryBackLink(mockUserAnswers)
-      val isBusinessRateSelection = result.isRight
-      isBusinessRateSelection mustBe true
-      assert(result.toOption.get == routes.PropertyWalesAvailableLetsController.onPageLoad().url)
-    }
+        when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+        when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
+        when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("wales")
+        when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn Some("no")
+        val result                  = controller().enquiryBackLink(mockUserAnswers)
+        val isBusinessRateSelection = result.isRight
+        isBusinessRateSelection mustBe true
+        assert(result.toOption.get == routes.PropertyWalesAvailableLetsController.onPageLoad().url)
+      }
 
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn None
@@ -108,14 +123,13 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       result mustBe Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad().url)
     }
 
-
     "The enquiry key function produces a string with a back link when the enquiry category is no to 70 days Controller" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
       when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("wales")
       when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn Some("yes")
       when(mockUserAnswers.propertyWalesActualLetsEnquiry) thenReturn Some("no")
-      val result = controller().enquiryBackLink(mockUserAnswers)
+      val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
       assert(result.toOption.get == routes.PropertyWalesActualLetsController.onPageLoad().url)
@@ -126,7 +140,7 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
       when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("wales")
       when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn Some("no")
-      val result = controller().enquiryBackLink(mockUserAnswers)
+      val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
       assert(result.toOption.get == routes.PropertyWalesAvailableLetsController.onPageLoad().url)

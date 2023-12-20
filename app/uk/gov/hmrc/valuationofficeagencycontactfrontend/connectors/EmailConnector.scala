@@ -33,13 +33,11 @@ import scala.concurrent.{ExecutionContext, Future}
  * @author Yuriy Tumakha
  */
 @Singleton
-class EmailConnector @Inject()(servicesConfig: ServicesConfig,
-                               http: HttpClient)
-                              (implicit ec: ExecutionContext, dateUtil: DateUtil) extends Logging {
+class EmailConnector @Inject() (servicesConfig: ServicesConfig, http: HttpClient)(implicit ec: ExecutionContext, dateUtil: DateUtil) extends Logging {
 
-  private val emailServiceBaseUrl = servicesConfig.baseUrl("email")
-  private val sendEmailUrl = s"$emailServiceBaseUrl/hmrc/email"
-  private val cf_enquiry_confirmation = "cf_enquiry_confirmation"
+  private val emailServiceBaseUrl        = servicesConfig.baseUrl("email")
+  private val sendEmailUrl               = s"$emailServiceBaseUrl/hmrc/email"
+  private val cf_enquiry_confirmation    = "cf_enquiry_confirmation"
   private val cf_enquiry_confirmation_cy = "cf_enquiry_confirmation_cy"
 
   def sendEnquiryConfirmation(contact: Contact)(implicit request: DataRequest[_], messages: Messages, hc: HeaderCarrier): Future[HttpResponse] = {
@@ -47,7 +45,7 @@ class EmailConnector @Inject()(servicesConfig: ServicesConfig,
 
     val templateId = messages.lang.language match {
       case "cy" => cf_enquiry_confirmation_cy
-      case _ => cf_enquiry_confirmation
+      case _    => cf_enquiry_confirmation
     }
     sendEmail(contact.contact.email, templateId, parameters)
   }
@@ -56,15 +54,15 @@ class EmailConnector @Inject()(servicesConfig: ServicesConfig,
     val submissionDate = dateUtil.nowInUK
     Json.obj(
       "recipientName_FullName" -> contact.contact.fullName,
-      "enquirySubject" -> getEnquirySubject(contact, isUpdateExistingEnquiry),
-      "submissionDate" -> dateUtil.formattedZonedDate(submissionDate),
-      "submissionTime" -> submissionDate.format(dateUtil.timeFormatter),
-      "nextStep"       -> getNextStepText(isUpdateExistingEnquiry)
+      "enquirySubject"         -> getEnquirySubject(contact, isUpdateExistingEnquiry),
+      "submissionDate"         -> dateUtil.formattedZonedDate(submissionDate),
+      "submissionTime"         -> submissionDate.format(dateUtil.timeFormatter),
+      "nextStep"               -> getNextStepText(isUpdateExistingEnquiry)
     )
   }
 
   private def getEnquirySubject(contact: Contact, isUpdateExistingEnquiry: Boolean)(implicit messages: Messages): String = {
-    val category = ContactWithEnMessage.enquiryCategory(contact)
+    val category    = ContactWithEnMessage.enquiryCategory(contact)
     val subCategory = ContactWithEnMessage.enquirySubCategory(contact, isUpdateExistingEnquiry)
     s"$category - $subCategory"
   }
@@ -77,8 +75,8 @@ class EmailConnector @Inject()(servicesConfig: ServicesConfig,
     }
 
   private def sendEmail(email: String, templateId: String, parametersJson: JsObject)(implicit hc: HeaderCarrier): Future[HttpResponse] = {
-    val json = Json.obj(
-      "to" -> Seq(email),
+    val json    = Json.obj(
+      "to"         -> Seq(email),
       "templateId" -> templateId,
       "parameters" -> parametersJson
     )
@@ -90,7 +88,7 @@ class EmailConnector @Inject()(servicesConfig: ServicesConfig,
     http.POST[JsValue, HttpResponse](sendEmailUrl, json, headers).map { res =>
       res.status match {
         case OK | ACCEPTED => logger.info(s"Send email to user successful: ${res.status}")
-        case _ => logger.error(s"Send email to user FAILED: ${res.status} ${res.body}")
+        case _             => logger.error(s"Send email to user FAILED: ${res.status} ${res.body}")
       }
       res
     }

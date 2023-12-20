@@ -18,22 +18,21 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.error_template
+import play.twirl.api.HtmlFormat
 
 class ErrorTemplateViewspec extends ViewBehaviours {
 
-  def errorTemplate = app.injector.instanceOf[error_template]
+  def errorTemplate: error_template = app.injector.instanceOf[error_template]
 
-    def view = () => errorTemplate(
+  def view: () => HtmlFormat.Appendable = () =>
+    errorTemplate(
       messages("global.error.badRequest400.title"),
       messages("global.error.badRequest400.heading"),
-      messages("global.error.badRequest400.message"))(fakeRequest, messages)
+      messages("global.error.badRequest400.message")
+    )(fakeRequest, messages)
 
-    "error template view" must {
-      behave like normalPage(view, "global.error.badRequest400",
-        "title",
-        "heading",
-        "message"
-      )
+  "error template view" must {
+    behave like normalPage(view, "global.error.badRequest400", "title", "heading", "message")
 
   }
 }

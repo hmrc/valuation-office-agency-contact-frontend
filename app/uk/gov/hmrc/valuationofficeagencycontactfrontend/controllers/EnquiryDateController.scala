@@ -30,34 +30,40 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navi
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
+import play.api.mvc
+import play.api.mvc.AnyContent
 
+class EnquiryDateController @Inject() (
+  appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  requireData: DataRequiredAction,
+  getData: DataRetrievalAction,
+  auditService: AuditingService,
+  dataCacheConnector: DataCacheConnector,
+  navigator: Navigator,
+  enquiry_date: enquiryDate,
+  cc: MessagesControllerComponents
+)(implicit ec: ExecutionContext,
+  dateUtil: DateUtil
+) extends FrontendController(cc)
+  with I18nSupport {
 
-class EnquiryDateController @Inject()(appConfig: FrontendAppConfig,
-                                      override val messagesApi: MessagesApi,
-                                      requireData: DataRequiredAction,
-                                      getData: DataRetrievalAction,
-                                      auditService: AuditingService,
-                                      dataCacheConnector: DataCacheConnector,
-                                      navigator: Navigator,
-                                      enquiry_date: enquiryDate,
-                                      cc: MessagesControllerComponents
-                                     )(implicit ec: ExecutionContext, dateUtil: DateUtil) extends FrontendController(cc) with I18nSupport {
-
-  def onPageLoad(mode: Mode) = (getData andThen requireData) { implicit request =>
+  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) { implicit request =>
     val preparedForm = request.userAnswers.enquiryDate match {
-      case None => EnquiryDateForm()
+      case None        => EnquiryDateForm()
       case Some(value) => EnquiryDateForm().fill(value)
     }
     Ok(enquiry_date(appConfig, preparedForm, EnquiryDateForm.beforeDate(), NormalMode))
   }
 
-  def onSubmit(mode: Mode) = getData.async { implicit request =>
+  def onSubmit(mode: Mode): mvc.Action[AnyContent] = getData.async { implicit request =>
     EnquiryDateForm().bindFromRequest().fold(
       formWithErrors => Future.successful(BadRequest(enquiry_date(appConfig, formWithErrors, EnquiryDateForm.beforeDate(), NormalMode))),
       value => {
         auditService.sendRadioButtonSelection(request.uri, "enquiryDate" -> value)
         dataCacheConnector.save[String](request.sessionId, EnquiryDateId.toString, value).map(cacheMap =>
-          Redirect(navigator.nextPage(EnquiryDateId, mode).apply(new UserAnswers(cacheMap))))
+          Redirect(navigator.nextPage(EnquiryDateId, mode).apply(new UserAnswers(cacheMap)))
+        )
       }
     )
   }

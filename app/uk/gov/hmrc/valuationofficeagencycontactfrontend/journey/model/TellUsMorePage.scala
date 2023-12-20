@@ -33,14 +33,12 @@ import scala.util.matching.Regex
 /**
  * @author Yuriy Tumakha
  */
-abstract class TellUsMorePage(val key: String,
-                              val fieldId: String) extends Page[String] {
+abstract class TellUsMorePage(val key: String, val fieldId: String) extends Page[String] {
 
   val form: Form[String] = Form(single(fieldId -> text
     .verifying(Constraints.nonEmpty(errorMessage = errorRequired))
     .verifying(Constraints.pattern(textareaRegex, error = errorPattern))
-    .verifying(Constraints.maxLength(maxChars, errorMaxLength))
-  ))
+    .verifying(Constraints.maxLength(maxChars, errorMaxLength))))
 
   def getValue: UserAnswers => Option[String] = _.getString(key)
 
@@ -51,7 +49,7 @@ abstract class TellUsMorePage(val key: String,
 }
 
 object TellUsMorePage {
-  val lastTellUsMorePage = "lastTellUsMorePage"
-  val maxChars = 5000
+  val lastTellUsMorePage   = "lastTellUsMorePage"
+  val maxChars             = 5000
   val textareaRegex: Regex = """^[^<>]*$""".r
 }

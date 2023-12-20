@@ -31,36 +31,41 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{anythingElse
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
+import play.api.mvc
+import play.api.mvc.AnyContent
 
-class AnythingElseTellUsController @Inject()(appConfig: FrontendAppConfig,
-                                             override val messagesApi: MessagesApi,
-                                             dataCacheConnector: DataCacheConnector,
-                                             navigator: Navigator,
-                                             getData: DataRetrievalAction,
-                                             requireData: DataRequiredAction,
-                                             anythingElseTellUs: anything_tell_us,
-                                             cc: MessagesControllerComponents
-                                            ) extends FrontendController(cc) with I18nSupport {
+class AnythingElseTellUsController @Inject() (
+  appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  dataCacheConnector: DataCacheConnector,
+  navigator: Navigator,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  anythingElseTellUs: anything_tell_us,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode) = (getData andThen requireData) {
+  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.anythingElse match {
-        case None => AnythingElseForm()
+        case None        => AnythingElseForm()
         case Some(value) => AnythingElseForm().fill(value)
       }
       Ok(anythingElseTellUs(appConfig, preparedForm, mode))
   }
 
-  def onSubmit(mode: Mode) = (getData andThen requireData).async {
+  def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       AnythingElseForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(anythingElseTellUs(appConfig, formWithErrors, mode))),
         value =>
           dataCacheConnector.save[String](request.sessionId, AnythingElseId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(AnythingElseId, mode).apply(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(AnythingElseId, mode).apply(new UserAnswers(cacheMap)))
+          )
       )
   }
 

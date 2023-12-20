@@ -20,18 +20,15 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.ContactDetails
 
 object ContactFormatter {
 
- def formattedConfirmedContactDetails(contact: ContactDetails, interstitial: String): String = {
+  def formattedConfirmedContactDetails(contact: ContactDetails, interstitial: String): String =
     insertInterstitials(Seq(contact.fullName.trim, contact.email, contact.contactNumber), interstitial)
- }
 
- def formattedContactDetails(contact: Option[ContactDetails], interstitial: String): String = {
-  contact.fold("") { con =>
-   insertInterstitials(Seq(con.fullName.trim, con.email, con.contactNumber), interstitial)
-  }
- }
+  def formattedContactDetails(contact: Option[ContactDetails], interstitial: String): String =
+    contact.fold("") { con =>
+      insertInterstitials(Seq(con.fullName.trim, con.email, con.contactNumber), interstitial)
+    }
 
-  private[utils] def insertInterstitials(contact: Seq[String], interstitial: String): String = {
-    if (contact.isEmpty) "" else contact.head.trim + contact.tail.fold("") { (acc, elem) => acc + interstitial + elem.trim }
-  }
+  private[utils] def insertInterstitials(contact: Seq[String], interstitial: String): String =
+    if (contact.isEmpty) "" else contact.head.trim + contact.tail.fold("")((acc, elem) => acc + interstitial + elem.trim)
 
 }

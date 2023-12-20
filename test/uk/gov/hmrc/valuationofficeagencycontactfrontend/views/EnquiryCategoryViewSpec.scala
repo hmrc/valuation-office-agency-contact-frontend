@@ -21,16 +21,18 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryFor
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{enquiryCategory => enquiry_category}
+import play.twirl.api.HtmlFormat
 
 class EnquiryCategoryViewSpec extends ViewBehaviours {
 
-  def enquiryCategory = app.injector.instanceOf[enquiry_category]
+  def enquiryCategory: html.enquiryCategory = app.injector.instanceOf[enquiry_category]
 
   val messageKeyPrefix = "enquiryCategory"
 
-  def createView = () => enquiryCategory(frontendAppConfig, EnquiryCategoryForm(), NormalMode)(fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable = () => enquiryCategory(frontendAppConfig, EnquiryCategoryForm(), NormalMode)(fakeRequest, messages)
 
-  def createViewUsingForm = (form: Form[String]) => enquiryCategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+  def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
+    (form: Form[String]) => enquiryCategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
 
   "EnquiryCategory view" must {
     behave like normalPage(createView, messageKeyPrefix)
@@ -40,15 +42,14 @@ class EnquiryCategoryViewSpec extends ViewBehaviours {
     "rendered" must {
 
       "contain continue button with the value Continue" in {
-        val doc = asDocument(createViewUsingForm(EnquiryCategoryForm()))
+        val doc            = asDocument(createViewUsingForm(EnquiryCategoryForm()))
         val continueButton = doc.getElementsByClass("govuk-button").first().text()
         assert(continueButton == messages("site.continue"))
       }
       "contain radio buttons for the value" in {
         val doc = asDocument(createViewUsingForm(EnquiryCategoryForm()))
-        for (option <- EnquiryCategoryForm.options) {
+        for (option <- EnquiryCategoryForm.options)
           assertContainsRadioButton(doc, option.id, "value", option.value, false)
-        }
       }
 
       "has a radio button with the label set to the message with key enquiryCategory.council_tax and that it is used once" in {
@@ -76,17 +77,15 @@ class EnquiryCategoryViewSpec extends ViewBehaviours {
       }
     }
 
-    for(option <- EnquiryCategoryForm.options) {
+    for (option <- EnquiryCategoryForm.options)
       s"rendered with a value of '${option.value}'" must {
         s"have the '${option.value}' radio button selected" in {
           val doc = asDocument(createViewUsingForm(EnquiryCategoryForm().bind(Map("value" -> s"${option.value}"))))
           assertContainsRadioButton(doc, option.id, "value", option.value, true)
 
-          for(unselectedOption <- EnquiryCategoryForm.options.filterNot(o => o == option)) {
+          for (unselectedOption <- EnquiryCategoryForm.options.filterNot(o => o == option))
             assertContainsRadioButton(doc, unselectedOption.id, "value", unselectedOption.value, false)
-          }
         }
       }
-    }
   }
 }

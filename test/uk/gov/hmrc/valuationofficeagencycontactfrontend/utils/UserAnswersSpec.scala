@@ -25,20 +25,20 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 
 class UserAnswersSpec extends SpecBase with MockitoSugar {
 
-  val mockUserAnswers = mock[UserAnswers]
+  val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
   "Create Contact Model method" must {
 
     "Return a ContactModel object containing a Property Address if all the information is present and the enquiry selected is council_tax" in {
-      val contactDetails = ContactDetails("a", "c", "e")
-      val ec = "council_tax"
-      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val contactDetails        = ContactDetails("a", "c", "e")
+      val ec                    = "council_tax"
+      val propertyAddress       = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
       val councilTaxSubcategory = "council_tax_home_business"
-      val tellUs = TellUsMore("Hello")
+      val tellUs                = TellUsMore("Hello")
 
       val expectedResult = Contact(contactDetails, propertyAddress, ec, councilTaxSubcategory, tellUs.message)
 
-      val userAnswers = new FakeUserAnswers(contactDetails, ec, councilTaxSubcategory, "",  "", propertyAddress, tellUs)
+      val userAnswers = new FakeUserAnswers(contactDetails, ec, councilTaxSubcategory, "", "", propertyAddress, tellUs)
 
       val result = userAnswers.contact()
 
@@ -46,15 +46,15 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
     }
 
     "Return a ContactModel object containing a Property Address if address line 2 and county are None and the enquiry selected is council_tax" in {
-      val contactDetails = ContactDetails("a", "c", "e")
-      val ec = "council_tax"
-      val propertyAddress = PropertyAddress("a", None, "c", None, "f")
+      val contactDetails        = ContactDetails("a", "c", "e")
+      val ec                    = "council_tax"
+      val propertyAddress       = PropertyAddress("a", None, "c", None, "f")
       val councilTaxSubcategory = "council_tax_home_business"
-      val tellUs = TellUsMore("Hello")
+      val tellUs                = TellUsMore("Hello")
 
       val expectedResult = Contact(contactDetails, propertyAddress, ec, councilTaxSubcategory, tellUs.message)
 
-      val userAnswers = new FakeUserAnswers(contactDetails, ec, councilTaxSubcategory, "",  "", propertyAddress, tellUs)
+      val userAnswers = new FakeUserAnswers(contactDetails, ec, councilTaxSubcategory, "", "", propertyAddress, tellUs)
 
       val result = userAnswers.contact()
 
@@ -62,15 +62,15 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
     }
 
     "Return a ContactModel object containing a Property Address if all the information is present and the enquiry selected is business_rates" in {
-      val contactDetails = ContactDetails("a", "c", "e")
-      val ec = "business_rates"
-      val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
+      val contactDetails      = ContactDetails("a", "c", "e")
+      val ec                  = "business_rates"
+      val propertyAddress     = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
       val businessSubcategory = "business_rates_rateable_value"
-      val tellUs = TellUsMore("Hello")
+      val tellUs              = TellUsMore("Hello")
 
       val expectedResult = Contact(contactDetails, propertyAddress, ec, businessSubcategory, tellUs.message)
 
-      val userAnswers = new FakeUserAnswers(contactDetails, ec, "", businessSubcategory,  "", propertyAddress, tellUs)
+      val userAnswers = new FakeUserAnswers(contactDetails, ec, "", businessSubcategory, "", propertyAddress, tellUs)
 
       val result = userAnswers.contact()
 
@@ -78,15 +78,15 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
     }
 
     "Return a ContactModel object containing a Property Address if address line 2 and county are None and the enquiry selected is business_rates" in {
-      val contactDetails = ContactDetails("a", "c", "e")
-      val ec = "business_rates"
-      val propertyAddress = PropertyAddress("a", None, "c", None, "f")
+      val contactDetails      = ContactDetails("a", "c", "e")
+      val ec                  = "business_rates"
+      val propertyAddress     = PropertyAddress("a", None, "c", None, "f")
       val businessSubcategory = "business_rates_rateable_value"
-      val tellUs = TellUsMore("Hello")
+      val tellUs              = TellUsMore("Hello")
 
       val expectedResult = Contact(contactDetails, propertyAddress, ec, businessSubcategory, tellUs.message)
 
-      val userAnswers = new FakeUserAnswers(contactDetails, ec, "", businessSubcategory,  "", propertyAddress, tellUs)
+      val userAnswers = new FakeUserAnswers(contactDetails, ec, "", businessSubcategory, "", propertyAddress, tellUs)
 
       val result = userAnswers.contact()
 
@@ -94,21 +94,24 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
     }
 
     "Return a ContactModel object containing a Property Address if address line 2 and county are None and the enquiry selected is housing_benefit" in {
-      val contactDetails = ContactDetails("a", "c", "e")
-      val ec = "housing_benefit"
-      val contactReason = "new_enquiry"
-      val propertyAddress = PropertyAddress("a", None, "c", None, "f")
+      val contactDetails            = ContactDetails("a", "c", "e")
+      val ec                        = "housing_benefit"
+      val contactReason             = "new_enquiry"
+      val propertyAddress           = PropertyAddress("a", None, "c", None, "f")
       val housingBenefitSubcategory = "other-ha-hb-enquiry"
 
-      val validData = Map(ContactReasonId.toString -> JsString(contactReason), EnquiryCategoryId.toString -> JsString(ec),
+      val validData = Map(
+        ContactReasonId.toString          -> JsString(contactReason),
+        EnquiryCategoryId.toString        -> JsString(ec),
         TellUsMorePage.lastTellUsMorePage -> JsString(housingBenefitSubcategory),
-        ContactDetailsId.toString -> Json.toJson(contactDetails), PropertyAddressId.toString -> Json.toJson(propertyAddress),
-        housingBenefitSubcategory -> JsString("Enquiry details"))
+        ContactDetailsId.toString         -> Json.toJson(contactDetails),
+        PropertyAddressId.toString        -> Json.toJson(propertyAddress),
+        housingBenefitSubcategory         -> JsString("Enquiry details")
+      )
 
       val expectedResult = Contact(contactDetails, propertyAddress, ec, housingBenefitSubcategory, "Enquiry details")
 
-      val userAnswers = new FakeUserAnswers(contactDetails, ec, "", housingBenefitSubcategory,  "", propertyAddress,
-        cacheMap = CacheMap("", validData))
+      val userAnswers = new FakeUserAnswers(contactDetails, ec, "", housingBenefitSubcategory, "", propertyAddress, cacheMap = CacheMap("", validData))
 
       val result = userAnswers.contact()
 
@@ -125,4 +128,3 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
 
   }
 }
-

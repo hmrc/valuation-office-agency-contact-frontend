@@ -25,16 +25,15 @@ trait WithRequiredBooleanMapping {
 
     override val format = Some(("format.boolean", Nil))
 
-    def bind(key: String, data: Map[String, String]) = {
+    def bind(key: String, data: Map[String, String]): Either[Seq[FormError], Boolean] =
       Right(data.getOrElse(key, "")).flatMap {
-        case "true" => Right(true)
+        case "true"  => Right(true)
         case "false" => Right(false)
-        case _ => Left(Seq(FormError(key, "error.boolean", Nil)))
+        case _       => Left(Seq(FormError(key, "error.boolean", Nil)))
       }
-    }
-    //$COVERAGE-OFF$
-    def unbind(key: String, value: Boolean) = Map(key -> value.toString)
-    //$COVERAGE-ON$
+
+    def unbind(key: String, value: Boolean): Map[String, String] = Map(key -> value.toString)
+
   }
 
   val requiredBoolean: Mapping[Boolean] = Forms.of[Boolean](requiredBooleanFormatter)

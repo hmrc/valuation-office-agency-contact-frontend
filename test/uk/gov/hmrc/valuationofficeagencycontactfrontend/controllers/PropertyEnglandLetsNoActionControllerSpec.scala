@@ -33,15 +33,21 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEngl
 class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   def propertyEnglandLetsNoAction: property_england_lets_no_action = app.injector.instanceOf[property_england_lets_no_action]
-  def internalServerError: internal_Server_Error = app.injector.instanceOf[internal_Server_Error]
+  def internalServerError: internal_Server_Error                   = app.injector.instanceOf[internal_Server_Error]
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new PropertyEnglandLetsNoActionController(frontendAppConfig, messagesApi, dataRetrievalAction,
-      new DataRequiredActionImpl(ec), propertyEnglandLetsNoAction, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new PropertyEnglandLetsNoActionController(
+      frontendAppConfig,
+      messagesApi,
+      dataRetrievalAction,
+      new DataRequiredActionImpl(ec),
+      propertyEnglandLetsNoAction,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
 
   def englandActualBackLink: String = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyEnglandActualLetsController.onPageLoad().url
 
@@ -51,13 +57,15 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with 
   "England Lets No Action Controller" must {
 
     "return OK and the correct view for a GET when business_rates, business_rates_self_catering, England, yes, no in user actual nights journey" in {
-      val validData = Map(EnquiryCategoryId.toString -> JsString("business_rates"),
-        BusinessRatesSubcategoryId.toString -> JsString("business_rates_self_catering"),
-        BusinessRatesSelfCateringId.toString -> JsString("england"),
+      val validData       = Map(
+        EnquiryCategoryId.toString              -> JsString("business_rates"),
+        BusinessRatesSubcategoryId.toString     -> JsString("business_rates_self_catering"),
+        BusinessRatesSelfCateringId.toString    -> JsString("england"),
         PropertyEnglandAvailableLetsId.toString -> JsString("yes"),
-        PropertyEnglandActualLetsId.toString -> JsString("no"))
+        PropertyEnglandActualLetsId.toString    -> JsString("no")
+      )
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result          = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe viewAsStringNoAction()
@@ -65,28 +73,28 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with 
 
     "returns the Property actual nights Controller when enquiry category is business_rates and sub category is business_rates_self_catering" +
       "and businessRatesSelfCateringEnquiry is england and propertyEnglandAvailableLetsEnquiry is yes and propertyEnglandActualLetsEnquiry us no" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
-      when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("england")
-      when(mockUserAnswers.propertyEnglandAvailableLetsEnquiry) thenReturn Some("yes")
-      when(mockUserAnswers.propertyEnglandActualLetsEnquiry) thenReturn Some("no")
-      val result = controller().enquiryBackLink(mockUserAnswers)
-      val isBusinessRateSelection = result.isRight
-      isBusinessRateSelection mustBe true
-      assert(result.toOption.get == routes.PropertyEnglandActualLetsController.onPageLoad().url)
-    }
+        when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+        when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
+        when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("england")
+        when(mockUserAnswers.propertyEnglandAvailableLetsEnquiry) thenReturn Some("yes")
+        when(mockUserAnswers.propertyEnglandActualLetsEnquiry) thenReturn Some("no")
+        val result                  = controller().enquiryBackLink(mockUserAnswers)
+        val isBusinessRateSelection = result.isRight
+        isBusinessRateSelection mustBe true
+        assert(result.toOption.get == routes.PropertyEnglandActualLetsController.onPageLoad().url)
+      }
 
     "returns the Property available 140 nights Controller when enquiry category is business_rates and sub category is business_rates_self_catering" +
       "and businessRatesSelfCateringEnquiry is wales and propertyEnglandAvailableLetsEnquiry is yes" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
-      when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("england")
-      when(mockUserAnswers.propertyEnglandAvailableLetsEnquiry) thenReturn Some("no")
-      val result = controller().enquiryBackLink(mockUserAnswers)
-      val isBusinessRateSelection = result.isRight
-      isBusinessRateSelection mustBe true
-      assert(result.toOption.get == routes.PropertyEnglandAvailableLetsController.onPageLoad().url)
-    }
+        when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
+        when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
+        when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("england")
+        when(mockUserAnswers.propertyEnglandAvailableLetsEnquiry) thenReturn Some("no")
+        val result                  = controller().enquiryBackLink(mockUserAnswers)
+        val isBusinessRateSelection = result.isRight
+        isBusinessRateSelection mustBe true
+        assert(result.toOption.get == routes.PropertyEnglandAvailableLetsController.onPageLoad().url)
+      }
 
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
       when(mockUserAnswers.enquiryCategory) thenReturn None
@@ -105,14 +113,13 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with 
       result mustBe Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyEnglandActualLetsController.onPageLoad().url)
     }
 
-
     "The enquiry key function produces a string with a back link when the enquiry category is no to Actual 70 nights Controller" in {
       when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
       when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("england")
       when(mockUserAnswers.propertyEnglandAvailableLetsEnquiry) thenReturn Some("yes")
       when(mockUserAnswers.propertyEnglandActualLetsEnquiry) thenReturn Some("no")
-      val result = controller().enquiryBackLink(mockUserAnswers)
+      val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
       assert(result.toOption.get == routes.PropertyEnglandActualLetsController.onPageLoad().url)
@@ -123,7 +130,7 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with 
       when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
       when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("england")
       when(mockUserAnswers.propertyEnglandAvailableLetsEnquiry) thenReturn Some("no")
-      val result = controller().enquiryBackLink(mockUserAnswers)
+      val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
       assert(result.toOption.get == routes.PropertyEnglandAvailableLetsController.onPageLoad().url)

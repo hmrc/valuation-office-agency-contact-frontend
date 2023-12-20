@@ -31,36 +31,41 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navi
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
+import play.api.mvc
+import play.api.mvc.AnyContent
 
-class WhatElseController @Inject()(appConfig: FrontendAppConfig,
-                                   override val messagesApi: MessagesApi,
-                                   dataCacheConnector: DataCacheConnector,
-                                   navigator: Navigator,
-                                   getData: DataRetrievalAction,
-                                   requireData: DataRequiredAction,
-                                   whatElse: what_else,
-                                   cc: MessagesControllerComponents
-                                    ) extends FrontendController(cc) with I18nSupport {
+class WhatElseController @Inject() (
+  appConfig: FrontendAppConfig,
+  override val messagesApi: MessagesApi,
+  dataCacheConnector: DataCacheConnector,
+  navigator: Navigator,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  whatElse: what_else,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode) = (getData andThen requireData) {
+  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.whatElse match {
-        case None => WhatElseForm()
+        case None        => WhatElseForm()
         case Some(value) => WhatElseForm().fill(value)
       }
       Ok(whatElse(appConfig, preparedForm, mode))
   }
 
-  def onSubmit(mode: Mode) = (getData andThen requireData).async {
+  def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       WhatElseForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
           Future.successful(BadRequest(whatElse(appConfig, formWithErrors, mode))),
-        (value) =>
+        value =>
           dataCacheConnector.save[String](request.sessionId, WhatElseId.toString, value).map(cacheMap =>
-            Redirect(navigator.nextPage(WhatElseId, mode).apply(new UserAnswers(cacheMap))))
+            Redirect(navigator.nextPage(WhatElseId, mode).apply(new UserAnswers(cacheMap)))
+          )
       )
   }
 }

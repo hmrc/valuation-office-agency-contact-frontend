@@ -31,28 +31,31 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.contactReason
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
+class ContactReasonController @Inject() (
+  override val messagesApi: MessagesApi,
+  clearData: DataClearAction,
+  getData: DataRetrievalAction,
+  auditService: AuditingService,
+  dataCacheConnector: DataCacheConnector,
+  navigator: Navigator,
+  contact_reason: contactReason,
+  cc: MessagesControllerComponents
+)(implicit ec: ExecutionContext
+) extends FrontendController(cc)
+  with I18nSupport {
 
-class ContactReasonController @Inject()( override val messagesApi: MessagesApi,
-                                         clearData: DataClearAction,
-                                         getData: DataRetrievalAction,
-                                         auditService: AuditingService,
-                                         dataCacheConnector: DataCacheConnector,
-                                         navigator: Navigator,
-                                         contact_reason: contactReason,
-                                         cc: MessagesControllerComponents
-                                       )(implicit ec: ExecutionContext) extends FrontendController(cc) with I18nSupport {
-
-  def onPageLoad(mode: Mode) = clearData { implicit request =>
+  def onPageLoad(mode: Mode): Action[AnyContent] = clearData { implicit request =>
     Ok(contact_reason(ContactReasonForm(), NormalMode))
   }
 
-  def onSubmit(mode: Mode) = getData.async { implicit request =>
+  def onSubmit(mode: Mode): Action[AnyContent] = getData.async { implicit request =>
     ContactReasonForm().bindFromRequest().fold(
-      formWithErrors =>Future.successful(BadRequest(contact_reason(formWithErrors, NormalMode))),
+      formWithErrors => Future.successful(BadRequest(contact_reason(formWithErrors, NormalMode))),
       value => {
         auditService.sendRadioButtonSelection(request.uri, "contactReason" -> value)
         dataCacheConnector.save[String](request.sessionId, ContactReasonId.toString, value).map(cacheMap =>
-          Redirect(navigator.nextPage(ContactReasonId, mode).apply(new UserAnswers(cacheMap))))
+          Redirect(navigator.nextPage(ContactReasonId, mode).apply(new UserAnswers(cacheMap)))
+        )
       }
     )
   }

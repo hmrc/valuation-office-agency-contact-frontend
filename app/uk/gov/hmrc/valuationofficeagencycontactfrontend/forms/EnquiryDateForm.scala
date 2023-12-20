@@ -27,26 +27,26 @@ object EnquiryDateForm extends FormErrorHelper {
   private val minusDays = 28
 
   def enquiryDateFormatter()(implicit messages: Messages, dateUtil: DateUtil): Formatter[String] = new Formatter[String] {
+
     override def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
-      case None => Left(Seq(FormError(key, "error.enquiryDate.required", Seq(beforeDate()))))
-      case _ => produceError(key, "error.unknown")
+      case None                        => Left(Seq(FormError(key, "error.enquiryDate.required", Seq(beforeDate()))))
+      case _                           => produceError(key, "error.unknown")
     }
 
     override def unbind(key: String, value: String): Map[String, String] = Map(key -> value)
   }
 
-  def apply()(implicit messages: Messages, dateUtil: DateUtil): Form[String] = {
+  def apply()(implicit messages: Messages, dateUtil: DateUtil): Form[String] =
     Form(single("value" -> of(enquiryDateFormatter())))
-  }
 
-  def options = Seq(
+  def options: Seq[RadioOption] = Seq(
     RadioOption("enquiryDate", "yes"),
     RadioOption("enquiryDate", "no"),
     RadioOption("enquiryDate", "notKnow")
   )
 
-  def optionIsValid(value: String) = options.exists(o => o.value == value)
+  def optionIsValid(value: String): Boolean = options.exists(o => o.value == value)
 
   def beforeDate()(implicit messages: Messages, dateUtil: DateUtil): String =
     dateUtil.formattedZonedDate(dateUtil.nowInUK.minusDays(minusDays))

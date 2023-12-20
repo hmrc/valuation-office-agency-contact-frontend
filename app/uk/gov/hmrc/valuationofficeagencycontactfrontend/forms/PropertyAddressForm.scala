@@ -23,7 +23,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.FormHelpers.antiXS
 
 object PropertyAddressForm {
 
-  private val postcodeRegex = """^\s*\-*\.*\(*\)*[a-zA-Z]{1,2}[0-9]{1,2}[a-zA-Z]?(\s*\-*\.*\(*\)*[0-9][a-zA-Z]{1,2})?$""" //scalastyle:ignore
+  private val postcodeRegex = """^\s*\-*\.*\(*\)*[a-zA-Z]{1,2}[0-9]{1,2}[a-zA-Z]?(\s*\-*\.*\(*\)*[0-9][a-zA-Z]{1,2})?$""" // scalastyle:ignore
 
   def apply(): Form[PropertyAddress] = Form(
     mapping(
@@ -33,13 +33,13 @@ object PropertyAddressForm {
       "addressLine2" -> optional(text
         .verifying("propertyAddress.addressLine2.length", _.length <= 80)
         .verifying("propertyAddress.addressLine2.invalid", _.matches(antiXSSRegex))),
-      "town" -> text.verifying("propertyAddress.town.required", !_.isEmpty)
+      "town"         -> text.verifying("propertyAddress.town.required", !_.isEmpty)
         .verifying("propertyAddress.town.length", _.length <= 80)
         .verifying("propertyAddress.town.invalid", _.matches(antiXSSRegex)),
-      "county" -> optional(text
+      "county"       -> optional(text
         .verifying("propertyAddress.county.length", _.length <= 80)
         .verifying("propertyAddress.county.invalid", _.matches(antiXSSRegex))),
-      "postcode" -> text.verifying("propertyAddress.postcode.required", !_.isEmpty)
+      "postcode"     -> text.verifying("propertyAddress.postcode.required", !_.isEmpty)
         .verifying("propertyAddress.postcode.length", _.length <= 8)
         .verifying("propertyAddress.postcode.invalid", _.toUpperCase.matches(postcodeRegex))
     )(PropertyAddress.apply)(PropertyAddress.unapply)
