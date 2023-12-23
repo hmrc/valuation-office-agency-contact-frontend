@@ -8,8 +8,7 @@ object CodeCoverageSettings extends AutoPlugin {
   private val excludedPackages: Seq[String] = Seq(
     ".*\\.Reverse.*",
     ".*Routes",
-    ".*RoutesPrefix",
-    "views\\..*"
+    ".*RoutesPrefix"
   )
 
   override lazy val projectSettings: Seq[Setting[?]] = Seq(
