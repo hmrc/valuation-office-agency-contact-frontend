@@ -17,7 +17,6 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 
 import com.google.inject.Inject
-import play.api.Configuration
 import play.api.i18n.{I18nSupport, Lang, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
@@ -25,7 +24,6 @@ import uk.gov.hmrc.play.language.{LanguageController, LanguageUtils}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 
 class LanguageSwitchController @Inject() (
-  configuration: Configuration,
   appConfig: FrontendAppConfig,
   languageUtils: LanguageUtils,
   cc: MessagesControllerComponents

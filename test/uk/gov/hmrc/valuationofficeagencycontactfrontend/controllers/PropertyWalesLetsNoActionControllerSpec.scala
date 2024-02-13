@@ -21,8 +21,6 @@ import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.JsString
 import play.api.test.Helpers._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FakeNavigator
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
@@ -47,8 +45,6 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
     new PropertyWalesLetsNoActionController(
       frontendAppConfig,
       messagesApi,
-      FakeDataCacheConnector,
-      new FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction,
       new DataRequiredActionImpl(ec),
       propertyWalesLetsNoAction,

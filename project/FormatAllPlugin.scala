@@ -34,7 +34,8 @@ object FormatAllPlugin extends AutoPlugin {
           scalafmtAll,
           Compile / scalafmtSbt,
           scalafixAll.toTask(""),
-          (Compile / scalastyle).toTask("")
+          (Compile / scalastyle).toTask(""),
+          (Test / scalastyle).toTask("")
         )
         .value
     )

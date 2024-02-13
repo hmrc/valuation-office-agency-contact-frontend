@@ -2,4 +2,4 @@
 ->         /valuation-office-agency-contact-frontend        app.Routes
 ->         /                                                health.Routes
 
-GET        /                                                uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.RootRedirectController.rootRedirect
+GET        /                                                uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.localroot.RootRedirectController.rootRedirect

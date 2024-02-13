@@ -19,12 +19,11 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend
 import com.google.inject.{Inject, Singleton}
 import play.api.Configuration
 import play.api.i18n.Lang
-import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes
 import play.api.mvc.Call
 
 @Singleton
-class FrontendAppConfig @Inject() (val configuration: Configuration, servicesConfig: ServicesConfig) {
+class FrontendAppConfig @Inject() (val configuration: Configuration) {
 
   private def loadConfig(key: String) = configuration.getOptional[String](key).getOrElse(throw new Exception(s"Missing configuration key: $key"))
 
