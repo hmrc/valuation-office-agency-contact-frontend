@@ -51,8 +51,8 @@
         <h1 class="govuk-fieldset__heading">@messages("propertyAddress.heading")</h1>
     </legend>
 
-    @helpTextKey.map{key: String =>
-      @messages.translate(key, Seq()).map{text:String =>
+    @helpTextKey.map{ key =>
+      @messages.translate(key, Seq()).map{ text =>
           <p class="govuk-body">
               @text
           </p>

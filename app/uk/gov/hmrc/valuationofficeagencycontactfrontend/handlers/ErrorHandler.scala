@@ -18,13 +18,16 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.handlers
 
 import javax.inject.{Inject, Singleton}
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.Request
+import play.api.mvc.{Request, RequestHeader}
 import play.twirl.api.Html
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.play.bootstrap.frontend.http.FrontendErrorHandler
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.error_template
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.page_not_found
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.internal_server_error
+
+import scala.concurrent.{ExecutionContext, Future}
+import scala.language.implicitConversions
 
 @Singleton
 class ErrorHandler @Inject() (
@@ -32,17 +35,32 @@ class ErrorHandler @Inject() (
   val messagesApi: MessagesApi,
   errorTemplate: error_template,
   pageNotFound: page_not_found,
-  internalServerError: internal_Server_Error
+  internalServerError: internal_server_error
+)(implicit val ec: ExecutionContext
 ) extends FrontendErrorHandler
   with I18nSupport {
 
-  override def standardErrorTemplate(pageTitle: String, heading: String, message: String)(implicit rh: Request[_]): Html =
-    errorTemplate(pageTitle, heading, message)
+  override def standardErrorTemplate(pageTitle: String, heading: String, message: String)(implicit rh: RequestHeader): Future[Html] =
+    render { implicit request =>
+      errorTemplate(pageTitle, heading, message)
+    }
 
-  override def badRequestTemplate(implicit request: Request[_]): Html = pageNotFound(appConfig)
+  override def badRequestTemplate(implicit rh: RequestHeader): Future[Html] =
+    render { implicit request =>
+      pageNotFound(appConfig)
+    }
 
-  override def notFoundTemplate(implicit request: Request[_]): Html = pageNotFound(appConfig)
+  override def notFoundTemplate(implicit rh: RequestHeader): Future[Html] =
+    render { implicit request =>
+      pageNotFound(appConfig)
+    }
 
-  override def internalServerErrorTemplate(implicit request: Request[_]): Html = internalServerError(appConfig)
+  override def internalServerErrorTemplate(implicit rh: RequestHeader): Future[Html] =
+    render { implicit request =>
+      internalServerError(appConfig)
+    }
+
+  private def render(template: Request[_] => Html)(implicit rh: RequestHeader): Future[Html] =
+    Future.successful(template(Request(rh, "")))
 
 }

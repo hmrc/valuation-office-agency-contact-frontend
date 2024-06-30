@@ -27,7 +27,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.WhatElseForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.WhatElseId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.internal_server_error
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{whatElse => what_else}
 import play.api.mvc.Call
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
@@ -37,8 +37,8 @@ class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
-  def whatElse: html.whatElse                        = app.injector.instanceOf[what_else]
-  def internalServerError: error.internalServerError = app.injector.instanceOf[internal_Server_Error]
+  def whatElse: html.whatElse                          = app.injector.instanceOf[what_else]
+  def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 

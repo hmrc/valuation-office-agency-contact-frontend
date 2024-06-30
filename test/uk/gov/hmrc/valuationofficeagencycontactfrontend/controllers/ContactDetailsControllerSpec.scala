@@ -30,15 +30,15 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMore
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, ContactDetails, NormalMode, PropertyAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{contactDetails => contact_details}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.internal_server_error
 import play.api.mvc.Call
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error
 
 class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar {
 
-  def contactDetails: html.contactDetails            = app.injector.instanceOf[contact_details]
-  def internalServerError: error.internalServerError = app.injector.instanceOf[internal_Server_Error]
+  def contactDetails: html.contactDetails              = app.injector.instanceOf[contact_details]
+  def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 

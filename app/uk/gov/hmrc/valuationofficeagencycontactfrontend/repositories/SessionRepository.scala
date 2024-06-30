@@ -56,7 +56,7 @@ class SessionRepository @Inject() (
           Future.failed(e)
       }
 
-  def get[T](cacheId: String, key: String)(implicit reads: Reads[T]): Future[Option[T]] =
+  def getEntity[T](cacheId: String, key: String)(implicit reads: Reads[T]): Future[Option[T]] =
     get[T](cacheId)(DataKey(key))
 
   def findEntity[T](cacheId: String): Future[Option[CacheMap]] =

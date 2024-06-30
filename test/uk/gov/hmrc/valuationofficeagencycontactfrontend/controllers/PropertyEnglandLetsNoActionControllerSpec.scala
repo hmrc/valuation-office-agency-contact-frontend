@@ -27,13 +27,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, ContactDetails, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.internal_server_error
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLetsNoAction => property_england_lets_no_action}
 
 class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   def propertyEnglandLetsNoAction: property_england_lets_no_action = app.injector.instanceOf[property_england_lets_no_action]
-  def internalServerError: internal_Server_Error                   = app.injector.instanceOf[internal_Server_Error]
+  def internalServerError: internal_server_error                   = app.injector.instanceOf[internal_server_error]
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
