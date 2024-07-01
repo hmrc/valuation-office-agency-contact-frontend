@@ -29,7 +29,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{AnswerSecti
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, ContactDetails, NormalMode, PropertyAddress, TellUsMore}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow, AnswerSection}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.internal_server_error
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{satisfactionSurveyThankYou => satisfaction_Survey_Thank_You}
 import play.api.mvc.Call
@@ -60,7 +60,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
 
   def satisfactionSurveyThankYou: html.satisfactionSurveyThankYou = app.injector.instanceOf[satisfaction_Survey_Thank_You]
 
-  def internalServerError: error.internalServerError = app.injector.instanceOf[internal_Server_Error]
+  def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new SatisfactionSurveyController(

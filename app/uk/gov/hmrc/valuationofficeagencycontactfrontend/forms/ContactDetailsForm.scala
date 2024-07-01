@@ -30,14 +30,14 @@ object ContactDetailsForm {
 
   def apply(): Form[ContactDetails] = Form(
     mapping(
-      "fullName"      -> text.verifying("contactDetails.fullName.required", !_.isEmpty)
+      "fullName"      -> text.verifying("contactDetails.fullName.required", _.nonEmpty)
         .verifying("contactDetails.fullName.invalid", _.matches(antiXSSRegex)),
-      "email"         -> text.verifying("contactDetails.email.required", !_.isEmpty)
+      "email"         -> text.verifying("contactDetails.email.required", _.nonEmpty)
         .verifying("contactDetails.email.invalid", _.matches(emailRegex)),
-      "contactNumber" -> text.verifying("contactDetails.contactNumber.required", !_.isEmpty)
+      "contactNumber" -> text.verifying("contactDetails.contactNumber.required", _.nonEmpty)
         .verifying("contactDetails.contactNumber.length", _.length >= 11)
         .verifying("contactDetails.contactNumber.length", _.length <= 20)
         .verifying("contactDetails.contactNumber.invalid", _ matches phoneRegex)
-    )(ContactDetails.apply)(ContactDetails.unapply)
+    )(ContactDetails.apply)(cd => Some(Tuple.fromProductTyped(cd)))
   )
 }

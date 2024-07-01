@@ -27,21 +27,22 @@ object PropertyAddressForm {
 
   def apply(): Form[PropertyAddress] = Form(
     mapping(
-      "addressLine1" -> text.verifying("propertyAddress.addressLine1.required", !_.isEmpty)
+      "addressLine1" -> text.verifying("propertyAddress.addressLine1.required", _.nonEmpty)
         .verifying("propertyAddress.addressLine1.length", _.length <= 80)
         .verifying("propertyAddress.addressLine1.invalid", _.matches(antiXSSRegex)),
       "addressLine2" -> optional(text
         .verifying("propertyAddress.addressLine2.length", _.length <= 80)
         .verifying("propertyAddress.addressLine2.invalid", _.matches(antiXSSRegex))),
-      "town"         -> text.verifying("propertyAddress.town.required", !_.isEmpty)
+      "town"         -> text.verifying("propertyAddress.town.required", _.nonEmpty)
         .verifying("propertyAddress.town.length", _.length <= 80)
         .verifying("propertyAddress.town.invalid", _.matches(antiXSSRegex)),
       "county"       -> optional(text
         .verifying("propertyAddress.county.length", _.length <= 80)
         .verifying("propertyAddress.county.invalid", _.matches(antiXSSRegex))),
-      "postcode"     -> text.verifying("propertyAddress.postcode.required", !_.isEmpty)
+      "postcode"     -> text.verifying("propertyAddress.postcode.required", _.nonEmpty)
         .verifying("propertyAddress.postcode.length", _.length <= 8)
         .verifying("propertyAddress.postcode.invalid", _.toUpperCase.matches(postcodeRegex))
-    )(PropertyAddress.apply)(PropertyAddress.unapply)
+    )(PropertyAddress.apply)(pa => Some(Tuple.fromProductTyped(pa)))
   )
+
 }

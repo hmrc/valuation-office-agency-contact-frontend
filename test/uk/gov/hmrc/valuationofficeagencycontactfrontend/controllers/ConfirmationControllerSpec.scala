@@ -32,7 +32,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.{AnswerRow, AnswerSection}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.internal_server_error
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
 
 import scala.concurrent.Future
@@ -73,8 +73,8 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
-  def confirmation: html.confirmation                = app.injector.instanceOf[Confirmation]
-  def internalServerError: error.internalServerError = app.injector.instanceOf[internal_Server_Error]
+  def confirmation: html.confirmation                  = app.injector.instanceOf[Confirmation]
+  def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ConfirmationController(
@@ -330,7 +330,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
         TellUsMoreId.toString            -> Json.toJson(tellUs)
       )
 
-      when(mockConnector.send(any[Contact], any[MessagesApi], any[UserAnswers])(any[HeaderCarrier])) thenReturn Future.successful(Success(200))
+      when(mockConnector.send(any[Contact], any[MessagesApi], any[UserAnswers])(any[HeaderCarrier])) thenReturn Future.successful(Success(OK))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 

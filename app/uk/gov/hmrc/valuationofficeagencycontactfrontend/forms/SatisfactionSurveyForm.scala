@@ -33,12 +33,12 @@ object SatisfactionSurveyForm {
   def apply(): Form[SatisfactionSurvey] = Form(
     mapping(
       "satisfaction" -> of[String](satisfactionFormat)
-        .verifying("error.required.feedback", !_.isEmpty)
-        .verifying("error.required.feedback", optionIsValid(_)),
+        .verifying("error.required.feedback", _.nonEmpty)
+        .verifying("error.required.feedback", optionIsValid),
       "details"      -> optional(text
         .verifying("error.message.max_length.feedback", _.length <= 1200)
         .verifying("error.message.xss-invalid.feedback", _.matches(antiXSSMessageRegex)))
-    )(SatisfactionSurvey.apply)(SatisfactionSurvey.unapply)
+    )(SatisfactionSurvey.apply)(ss => Some(Tuple.fromProductTyped(ss)))
   )
 
   def options: Seq[RadioOption] = Seq(
@@ -50,7 +50,7 @@ object SatisfactionSurveyForm {
   )
 
   def optionIsValid(value: String): Boolean =
-    options.exists(o => o.value == value)
+    options.exists(_.value == value)
 }
 
 case class SatisfactionSurvey(satisfaction: String, details: Option[String])

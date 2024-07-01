@@ -17,13 +17,13 @@
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.views
 
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.internal_server_error
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error
 
 class InternalServerErrorViewSpec extends ViewBehaviours {
 
-  def internalServerError: error.internalServerError = app.injector.instanceOf[internal_Server_Error]
+  def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
 
   def view: () => HtmlFormat.Appendable = () => internalServerError(frontendAppConfig)(fakeRequest, messages)
 

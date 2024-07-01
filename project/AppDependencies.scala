@@ -3,15 +3,15 @@ import sbt.*
 
 object AppDependencies {
 
-  private val bootstrapPlayVersion = "8.4.0"
-  private val playFrontendHmrc     = "8.5.0"
-  private val hmrcMongoVersion     = "1.7.0"
-  private val commonsTextVersion   = "1.11.0"
+  private val bootstrapPlayVersion = "9.0.0"
+  private val playFrontendHmrc     = "10.3.0"
+  private val hmrcMongoVersion     = "2.1.0"
+  private val commonsTextVersion   = "1.12.0"
 
   // Test dependencies
-  private val scalaTestVersion            = "3.2.18"
-  private val scalaTestPlusCheckVersion   = "3.2.18.0"
-  private val scalaTestPlusMockitoVersion = "3.2.17.0"
+  private val scalaTestVersion            = "3.2.19"
+  private val scalaTestPlusCheckVersion   = "3.2.19.0"
+  private val scalaTestPlusMockitoVersion = "3.2.19.0"
   private val scalaTestPlusPlayVersion    = "7.0.1"
   private val flexMarkVersion             = "0.64.8"
 
@@ -27,8 +27,8 @@ object AppDependencies {
     "org.apache.pekko"       %% "pekko-testkit"      % PlayVersion.pekkoVersion    % Test,
     "org.scalatest"          %% "scalatest"          % scalaTestVersion            % Test,
     "org.scalatestplus.play" %% "scalatestplus-play" % scalaTestPlusPlayVersion    % Test,
-    "org.scalatestplus"      %% "mockito-4-11"       % scalaTestPlusMockitoVersion % Test,
-    "org.scalatestplus"      %% "scalacheck-1-17"    % scalaTestPlusCheckVersion   % Test,
+    "org.scalatestplus"      %% "mockito-5-12"       % scalaTestPlusMockitoVersion % Test,
+    "org.scalatestplus"      %% "scalacheck-1-18"    % scalaTestPlusCheckVersion   % Test,
     "com.vladsch.flexmark"    % "flexmark-all"       % flexMarkVersion             % Test // for scalatest 3.2.x
   )
 

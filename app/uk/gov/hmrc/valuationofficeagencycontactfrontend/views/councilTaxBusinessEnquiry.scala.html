@@ -57,13 +57,13 @@
                 )))),
             idPrefix = Option("councilTaxBusinessEnquiry.form"),
             name = "value",
-            formGroupClasses = "govuk-radios--inline",
+            classes = "govuk-radios--inline",
             items = CouncilTaxBusinessEnquiryForm.options.map(i => RadioItem(
                 content = Text(messages(i.messageKey)),
                 id = Option(i.id),
                 value = Option(i.value),
                 hint = i.hintKey.map(hint => Hint(content = Text(messages(hint)))),
-                checked = form("value").value.map(_ == i.value).getOrElse(false)
+                checked = form("value").value.contains(i.value)
             )
             ),
             errorMessage = form.errors.asTextErrorMessageForField("value")

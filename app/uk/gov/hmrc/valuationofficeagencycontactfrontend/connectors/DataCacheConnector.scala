@@ -41,7 +41,7 @@ class DataCacheConnectorImpl @Inject() (
     sessionRepository.findEntity(cacheId)
 
   def getEntry[A](cacheId: String, key: String)(implicit fmt: Format[A]): Future[Option[A]] =
-    sessionRepository.get(cacheId, key)
+    sessionRepository.getEntity(cacheId, key)
 
   def addToCollection[A](cacheId: String, collectionKey: String, value: A)(implicit fmt: Format[A]): Future[CacheMap] =
     getEntry[Seq[A]](cacheId, collectionKey)

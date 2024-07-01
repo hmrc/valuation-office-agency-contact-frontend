@@ -30,7 +30,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersHelper, DateUtil, MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerSection
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.check_your_answers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.internal_server_error
 
 import java.time.LocalDate
 import java.util.Locale
@@ -44,8 +44,8 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
   implicit val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
   implicit val dateUtil: DateUtil        = injector.instanceOf[DateUtil]
 
-  def checkYourAnswers: check_your_answers           = app.injector.instanceOf[check_your_answers]
-  def internalServerError: error.internalServerError = app.injector.instanceOf[internal_Server_Error]
+  def checkYourAnswers: check_your_answers             = app.injector.instanceOf[check_your_answers]
+  def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
 
   def onwardRoute: Call             = routes.EnquiryCategoryController.onPageLoad(NormalMode)
   def auditService: AuditingService = inject[AuditingService]

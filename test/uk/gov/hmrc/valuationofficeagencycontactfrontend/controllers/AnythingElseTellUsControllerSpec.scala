@@ -27,16 +27,16 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.AnythingElseForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{AnythingElseId, EnquiryCategoryId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.{internalServerError => internal_Server_Error}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.internal_server_error
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{anythingElseTellUs => anything_else}
 import play.api.mvc.Call
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{anythingElseTellUs, error}
 
 class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSugar {
 
-  val mockUserAnswers: UserAnswers                   = mock[UserAnswers]
-  def anythingElse: anythingElseTellUs               = app.injector.instanceOf[anything_else]
-  def internalServerError: error.internalServerError = app.injector.instanceOf[internal_Server_Error]
+  val mockUserAnswers: UserAnswers                     = mock[UserAnswers]
+  def anythingElse: anythingElseTellUs                 = app.injector.instanceOf[anything_else]
+  def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
 
   def onwardRoute: Call = routes.CheckYourAnswersController.onPageLoad()
 

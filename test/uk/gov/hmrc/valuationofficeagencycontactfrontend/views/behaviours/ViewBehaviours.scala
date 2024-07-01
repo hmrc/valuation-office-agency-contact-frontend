@@ -36,14 +36,14 @@ trait ViewBehaviours extends ViewSpecBase {
     "behave like a normal page" when {
       "rendered" must {
         "have the correct banner title" in {
-          val doc  = asDocument(view())
-          val nav  = Option {
+          val doc    = asDocument(view())
+          val header = Option {
             doc.getElementById("proposition-menu")
           }.getOrElse(
-            doc.getElementsByAttributeValue("class", "hmrc-header__service-name hmrc-header__service-name--linked").first().parent()
+            doc.getElementsByAttributeValue("class", "govuk-header__content").first()
           )
-          val span = nav.children.first
-          span.text mustBe messagesApi("site.service_name")(Lang(Locale.UK))
+          val link   = header.children.first
+          link.text mustBe messagesApi("site.service_name")(Lang(Locale.UK))
         }
 
         "display the correct browser title" in {
