@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,7 +60,7 @@ class ErrorHandler @Inject() (
       internalServerError(appConfig)
     }
 
-  private def render(template: Request[_] => Html)(implicit rh: RequestHeader): Future[Html] =
+  private def render(template: Request[?] => Html)(implicit rh: RequestHeader): Future[Html] =
     Future.successful(template(Request(rh, "")))
 
 }

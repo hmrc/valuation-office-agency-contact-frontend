@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -137,7 +137,7 @@ class JourneyControllerSpec extends ControllerSpecBase {
         override def previousPage: UserAnswers => Call = _ => appStartPage
       }
 
-      implicit val request: Request[_] = fakeRequest
+      implicit val request: Request[?] = fakeRequest
       implicit val messages: Messages  = MessagesImpl(Lang("en"), new DefaultMessagesApi)
 
       NotImplementedPage.previousPage(userAnswers).url mustBe NotImplementedPage.appStartPage.url
@@ -154,7 +154,7 @@ class JourneyControllerSpec extends ControllerSpecBase {
     "handle customized content HousingBenefitAppeals" in {
       val customizedContentPage = HousingBenefitAppeals
 
-      implicit val request: Request[_] = fakeRequest
+      implicit val request: Request[?] = fakeRequest
       implicit val messages: Messages  = MessagesImpl(Lang("en"), new DefaultMessagesApi)
 
       customizedContentPage.previousPage(userAnswers).url mustBe routes.JourneyController.onPageLoad(HousingBenefitEnquiry.key).url

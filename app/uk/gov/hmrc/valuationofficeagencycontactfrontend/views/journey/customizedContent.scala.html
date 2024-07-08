@@ -1,5 +1,5 @@
 @*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
         pageTemplate: pageTemplate
 )
 
-@(key: String, backUrl: String, customizedContent: CustomizedContent)(implicit request: Request[_], messages: Messages)
+@(key: String, backUrl: String, customizedContent: CustomizedContent)(implicit request: Request[?], messages: Messages)
 
 @pageTemplate(
     title = messages(customizedContent.heading),

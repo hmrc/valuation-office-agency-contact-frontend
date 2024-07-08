@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,11 +79,11 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
 
     "returns the Property 70 Days Controller when enquiry category is business_rates and sub category is business_rates_self_catering" +
       "and businessRatesSelfCateringEnquiry is wales and propertyWalesLets140DaysEnquiry is yes and propertyWalesLets70DaysEnquiry us no" in {
-        when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-        when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
-        when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("wales")
-        when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn Some("yes")
-        when(mockUserAnswers.propertyWalesActualLetsEnquiry) thenReturn Some("no")
+        when(mockUserAnswers.enquiryCategory) `thenReturn` Some("business_rates")
+        when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_self_catering")
+        when(mockUserAnswers.businessRatesSelfCateringEnquiry) `thenReturn` Some("wales")
+        when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) `thenReturn` Some("yes")
+        when(mockUserAnswers.propertyWalesActualLetsEnquiry) `thenReturn` Some("no")
         val result                  = controller().enquiryBackLink(mockUserAnswers)
         val isBusinessRateSelection = result.isRight
         isBusinessRateSelection mustBe true
@@ -92,10 +92,10 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
 
     "returns the Property 140 Days Controller when enquiry category is business_rates and sub category is business_rates_self_catering" +
       "and businessRatesSelfCateringEnquiry is wales and propertyWalesLets140DaysEnquiry is yes" in {
-        when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-        when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
-        when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("wales")
-        when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn Some("no")
+        when(mockUserAnswers.enquiryCategory) `thenReturn` Some("business_rates")
+        when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_self_catering")
+        when(mockUserAnswers.businessRatesSelfCateringEnquiry) `thenReturn` Some("wales")
+        when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) `thenReturn` Some("no")
         val result                  = controller().enquiryBackLink(mockUserAnswers)
         val isBusinessRateSelection = result.isRight
         isBusinessRateSelection mustBe true
@@ -103,28 +103,28 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       }
 
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn None
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` None
+      when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_other")
       val result = controller().enquiryBackLink(mockUserAnswers)
       result mustBe Left("Unknown enquiry category in enquiry key")
     }
 
     "The enquiry key function produces a Right(correct path) when the enquiry category has been selected" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
-      when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("wales")
-      when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn Some("yes")
-      when(mockUserAnswers.propertyWalesActualLetsEnquiry) thenReturn Some("no")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("business_rates")
+      when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_self_catering")
+      when(mockUserAnswers.businessRatesSelfCateringEnquiry) `thenReturn` Some("wales")
+      when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) `thenReturn` Some("yes")
+      when(mockUserAnswers.propertyWalesActualLetsEnquiry) `thenReturn` Some("no")
       val result = controller().enquiryBackLink(mockUserAnswers)
       result mustBe Right(uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad().url)
     }
 
     "The enquiry key function produces a string with a back link when the enquiry category is no to 70 days Controller" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
-      when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("wales")
-      when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn Some("yes")
-      when(mockUserAnswers.propertyWalesActualLetsEnquiry) thenReturn Some("no")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("business_rates")
+      when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_self_catering")
+      when(mockUserAnswers.businessRatesSelfCateringEnquiry) `thenReturn` Some("wales")
+      when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) `thenReturn` Some("yes")
+      when(mockUserAnswers.propertyWalesActualLetsEnquiry) `thenReturn` Some("no")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
@@ -132,10 +132,10 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
     }
 
     "The enquiry key function produces a string with a back link when the enquiry category is no to 140 days controller" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
-      when(mockUserAnswers.businessRatesSelfCateringEnquiry) thenReturn Some("wales")
-      when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) thenReturn Some("no")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("business_rates")
+      when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_self_catering")
+      when(mockUserAnswers.businessRatesSelfCateringEnquiry) `thenReturn` Some("wales")
+      when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) `thenReturn` Some("no")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true

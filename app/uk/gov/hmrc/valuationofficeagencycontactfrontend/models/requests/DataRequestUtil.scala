@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,8 @@ import play.api.mvc.Request
  */
 object DataRequestUtil {
 
-  def isEnquiryCategoryOneOf(categories: String*)(implicit request: Request[_]): Boolean = request match {
-    case dataRequest: DataRequest[_] => categories.contains(dataRequest.userAnswers.enquiryCategory.getOrElse(""))
+  def isEnquiryCategoryOneOf(categories: String*)(implicit request: Request[?]): Boolean = request match {
+    case dataRequest: DataRequest[?] => categories.contains(dataRequest.userAnswers.enquiryCategory.getOrElse(""))
     case _                           => false
   }
 

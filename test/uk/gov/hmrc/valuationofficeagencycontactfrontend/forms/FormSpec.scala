@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import org.scalatest.Assertion
 
 trait FormSpec extends AnyWordSpecLike with Matchers with OptionValues {
 
-  def checkForError(form: Form[_], data: Map[String, String], expectedErrors: Seq[FormError]): Assertion =
+  def checkForError(form: Form[?], data: Map[String, String], expectedErrors: Seq[FormError]): Assertion =
     form.bind(data).fold(
       formWithErrors => {
         for (error <- formWithErrors.errors) expectedErrors should contain(FormError(error.key, error.message))

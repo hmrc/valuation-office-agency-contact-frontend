@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,22 +34,22 @@ class DataRequestUtilSpec extends AnyFlatSpec with should.Matchers {
 
   "isEnquiryCategoryOneOf" should "return true for category 'housing_benefit'" in {
     val userAnswers: UserAnswers             = new UserAnswers(CacheMap("", Map(EnquiryCategoryId.toString -> JsString("housing_benefit"))))
-    implicit val dataRequest: DataRequest[_] = DataRequest(FakeRequest(), "sessionId", userAnswers)
+    implicit val dataRequest: DataRequest[?] = DataRequest(FakeRequest(), "sessionId", userAnswers)
 
-    DataRequestUtil.isEnquiryCategoryOneOf(categories: _*) shouldBe true
+    DataRequestUtil.isEnquiryCategoryOneOf(categories*) shouldBe true
   }
 
   "isEnquiryCategoryOneOf" should "return false for category 'business_rates'" in {
     val userAnswers: UserAnswers             = new UserAnswers(CacheMap("", Map(EnquiryCategoryId.toString -> JsString("business_rates"))))
-    implicit val dataRequest: DataRequest[_] = DataRequest(FakeRequest(), "sessionId", userAnswers)
+    implicit val dataRequest: DataRequest[?] = DataRequest(FakeRequest(), "sessionId", userAnswers)
 
-    DataRequestUtil.isEnquiryCategoryOneOf(categories: _*) shouldBe false
+    DataRequestUtil.isEnquiryCategoryOneOf(categories*) shouldBe false
   }
 
   "isEnquiryCategoryOneOf" should "return false for basic request" in {
-    implicit val dataRequest: Request[_] = FakeRequest()
+    implicit val dataRequest: Request[?] = FakeRequest()
 
-    DataRequestUtil.isEnquiryCategoryOneOf(categories: _*) shouldBe false
+    DataRequestUtil.isEnquiryCategoryOneOf(categories*) shouldBe false
   }
 
 }
