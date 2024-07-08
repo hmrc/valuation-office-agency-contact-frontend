@@ -1,5 +1,5 @@
 @*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@
         input_date: inputDate, formWithCSRF: FormWithCSRF, govukErrorSummary: GovukErrorSummary)
 
 
-@(appConfig: FrontendAppConfig, form: Form[_], mode: Mode, enquiryKey: String, backlink: String)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, form: Form[?], mode: Mode, enquiryKey: String, backlink: String)(implicit request: Request[?], messages: Messages)
 
 @mainTemplate(
     backLink = Some(BackLink(href = backlink)),

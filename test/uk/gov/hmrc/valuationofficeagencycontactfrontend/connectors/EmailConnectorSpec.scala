@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ class EmailConnectorSpec extends SpecBase with MockitoSugar with ScalaFutures {
   private val msgApi                                        = new DefaultMessagesApi(messages = messagesMap)
 
   implicit val hc: HeaderCarrier       = HeaderCarrier()
-  implicit val request: DataRequest[_] = DataRequest(FakeRequest(), "sessionId", new UserAnswers(new CacheMap("id", Map())))
+  implicit val request: DataRequest[?] = DataRequest(FakeRequest(), "sessionId", new UserAnswers(new CacheMap("id", Map())))
   implicit val dateUtil: DateUtil      = injector.instanceOf[DateUtil]
 
   private def httpMock(status: Int, body: String) = {
@@ -56,7 +56,7 @@ class EmailConnectorSpec extends SpecBase with MockitoSugar with ScalaFutures {
       any[HttpReads[HttpResponse]],
       any[HeaderCarrier],
       any()
-    )) thenReturn Future.successful(HttpResponse(status, body))
+    )) `thenReturn` Future.successful(HttpResponse(status, body))
     httpMock
   }
 

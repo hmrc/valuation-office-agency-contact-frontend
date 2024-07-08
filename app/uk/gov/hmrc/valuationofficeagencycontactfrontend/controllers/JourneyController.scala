@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -98,7 +98,7 @@ class JourneyController @Inject() (
   private def getAnswersAndPage(key: String) =
     getData andThen requireData andThen journeyMap.getPage(key)
 
-  private def journeyView(form: Form[String], key: String)(implicit request: JourneyPageRequest[_], page: Page[String]): Appendable = {
+  private def journeyView(form: Form[String], key: String)(implicit request: JourneyPageRequest[?], page: Page[String]): Appendable = {
 
     val backLinkUrl = page.previousPage(request.userAnswers).url
 

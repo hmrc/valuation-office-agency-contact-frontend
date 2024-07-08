@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ class EmailConnector @Inject() (servicesConfig: ServicesConfig, http: HttpClient
   private val cf_enquiry_confirmation    = "cf_enquiry_confirmation"
   private val cf_enquiry_confirmation_cy = "cf_enquiry_confirmation_cy"
 
-  def sendEnquiryConfirmation(contact: Contact)(implicit request: DataRequest[_], messages: Messages, hc: HeaderCarrier): Future[HttpResponse] = {
+  def sendEnquiryConfirmation(contact: Contact)(implicit request: DataRequest[?], messages: Messages, hc: HeaderCarrier): Future[HttpResponse] = {
     val parameters = getParametersJson(contact, request.userAnswers.existingEnquiryCategory.isDefined)
 
     val templateId = messages.lang.language match {

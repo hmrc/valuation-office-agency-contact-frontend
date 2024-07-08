@@ -1,5 +1,5 @@
 @*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@
         govukRadios: GovukRadios
 )
 
-@(form: Form[String], key: String, backUrl: String, categoryRouter: CategoryRouter)(implicit request: Request[_], messages: Messages)
+@(form: Form[String], key: String, backUrl: String, categoryRouter: CategoryRouter)(implicit request: Request[?], messages: Messages)
 
 @formTemplate(form, key, backUrl, messages(categoryRouter.heading), categoryRouter.helpWithService) {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ object ContactDetailsForm {
       "contactNumber" -> text.verifying("contactDetails.contactNumber.required", _.nonEmpty)
         .verifying("contactDetails.contactNumber.length", _.length >= 11)
         .verifying("contactDetails.contactNumber.length", _.length <= 20)
-        .verifying("contactDetails.contactNumber.invalid", _ matches phoneRegex)
+        .verifying("contactDetails.contactNumber.invalid", _.matches(phoneRegex))
     )(ContactDetails.apply)(cd => Some(Tuple.fromProductTyped(cd)))
   )
 }

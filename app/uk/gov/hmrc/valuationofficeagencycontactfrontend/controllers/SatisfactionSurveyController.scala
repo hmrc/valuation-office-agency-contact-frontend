@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ class SatisfactionSurveyController @Inject() (
 
   private val log = Logger(this.getClass)
 
-  implicit def hc(implicit request: Request[_]): HeaderCarrier = HeaderCarrierConverter.fromRequestAndSession(request, request.session)
+  implicit def hc(implicit request: Request[?]): HeaderCarrier = HeaderCarrierConverter.fromRequestAndSession(request, request.session)
 
   def enquiryKey(answers: UserAnswers): Either[String, String] =
     answers.enquiryCategory match {

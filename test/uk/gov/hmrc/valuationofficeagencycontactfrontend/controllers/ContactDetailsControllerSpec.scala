@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -157,8 +157,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("business_rates")
+      when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_other")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
@@ -166,8 +166,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_bill" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_bill")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("business_rates")
+      when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_bill")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
@@ -175,8 +175,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_changes" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_changes")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("business_rates")
+      when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_changes")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
@@ -184,8 +184,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_from_home" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_from_home")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("business_rates")
+      when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_from_home")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
@@ -193,8 +193,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_change_valuation" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_change_valuation")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("business_rates")
+      when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_change_valuation")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
@@ -202,8 +202,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_not_used" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_not_used")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("business_rates")
+      when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_not_used")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
@@ -211,8 +211,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_self_catering" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_self_catering")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("business_rates")
+      when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_self_catering")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
@@ -220,8 +220,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_demolished" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_demolished")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("business_rates")
+      when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_demolished")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
@@ -229,8 +229,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_property_empty" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_property_empty")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("business_rates")
+      when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_property_empty")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
@@ -238,8 +238,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_valuation" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_valuation")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("business_rates")
+      when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_valuation")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
@@ -247,8 +247,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "The enquiry key function produces a string with a Council Tax subcategory back link when the enquiry category is council_tax" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_demolished")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_property_demolished")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection mustBe true
@@ -256,8 +256,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_property_poor_repair" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_poor_repair")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_property_poor_repair")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection mustBe true
@@ -265,8 +265,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_band_too_high" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_band_too_high")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_band_too_high")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection mustBe true
@@ -274,8 +274,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_property_empty" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_empty")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_property_empty")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection mustBe true
@@ -283,8 +283,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_property_split_merge" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_split_merge")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_property_split_merge")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection mustBe true
@@ -292,8 +292,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_business_uses" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_business_uses")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_business_uses")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection mustBe true
@@ -301,8 +301,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_annexe" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_annexe")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_annexe")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection mustBe true
@@ -310,8 +310,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_bill" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_bill")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_bill")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection mustBe true
@@ -319,8 +319,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_band_for_new" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_band_for_new")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_band_for_new")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection mustBe true
@@ -328,8 +328,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_area_change" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_area_change")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_area_change")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection mustBe true
@@ -337,8 +337,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_other" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_other")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("council_tax")
+      when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_other")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection mustBe true
@@ -346,8 +346,8 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     }
 
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn None
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` None
+      when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_other")
       val result = controller().enquiryBackLink(mockUserAnswers)
       result mustBe Left("Unknown enquiry category in enquiry key")
     }

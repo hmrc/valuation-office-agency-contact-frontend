@@ -9,7 +9,7 @@ val appName = "valuation-office-agency-contact-frontend"
 
 ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" % VersionScheme.Always // Resolves versions conflict
 
-ThisBuild / scalaVersion := "3.3.3"
+ThisBuild / scalaVersion := "3.4.2"
 ThisBuild / majorVersion := 1
 
 lazy val microservice = Project(appName, file("."))
@@ -20,7 +20,6 @@ lazy val microservice = Project(appName, file("."))
     PlayKeys.playDefaultPort := 7311,
     libraryDependencies ++= AppDependencies.appDependencies,
     Test / fork := true,
-    scalacOptions += "-feature",
     scalacOptions += "-Wconf:src=routes/.*:s",
     scalacOptions += "-Wconf:cat=unused-imports&src=html/.*:s",
     maintainer := "voa.service.optimisation@digital.hmrc.gov.uk"

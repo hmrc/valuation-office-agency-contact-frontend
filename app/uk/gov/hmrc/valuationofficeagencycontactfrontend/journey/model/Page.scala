@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ trait Page[T] {
 
   def appStartPage: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
-  def beforeSaveAnswers: (DataCacheConnector, JourneyPageRequest[_]) => Future[_] = (_, _) => Future.unit
+  def beforeSaveAnswers: (DataCacheConnector, JourneyPageRequest[?]) => Future[?] = (_, _) => Future.unit
 
   def helpWithService: Option[String] = None
 

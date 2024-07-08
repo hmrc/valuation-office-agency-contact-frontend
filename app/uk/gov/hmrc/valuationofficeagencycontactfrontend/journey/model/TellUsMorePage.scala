@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ abstract class TellUsMorePage(val key: String, val fieldId: String) extends Page
 
   def getValue: UserAnswers => Option[String] = _.getString(key)
 
-  override def beforeSaveAnswers: (DataCacheConnector, JourneyPageRequest[_]) => Future[_] =
+  override def beforeSaveAnswers: (DataCacheConnector, JourneyPageRequest[?]) => Future[?] =
     (dataCacheConnector, request) => dataCacheConnector.save[String](request.sessionId, lastTellUsMorePage, key)
 
   override def nextPage: UserAnswers => Call = _ => routes.ContactDetailsController.onPageLoad(NormalMode)

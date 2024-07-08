@@ -1,5 +1,5 @@
 @*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,12 +30,12 @@
 )
 
 @(
-        form: Form[_],
+        form: Form[?],
         key: String,
         backUrl: String,
         title: String,
         helpWithServiceSection: Option[String] = None
-)(formFields: Html)(implicit request: Request[_], messages: Messages)
+)(formFields: Html)(implicit request: Request[?], messages: Messages)
 
 @pageTemplate(
     title = form.errors.headOption.fold("")(_ => s"${messages("error.title")} ") + title,

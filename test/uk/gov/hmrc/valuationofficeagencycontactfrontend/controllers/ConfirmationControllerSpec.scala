@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -207,10 +207,10 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
     "The enquiry key function produces a string with a businessRatesSubcategory string key when the enquiry category is business_rates" +
       " and the business_rates_other has been selected" in {
-        when(mockUserAnswers.enquiryCategory) thenReturn Some("business_rates")
-        when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
-        when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
-        when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
+        when(mockUserAnswers.enquiryCategory) `thenReturn` Some("business_rates")
+        when(mockUserAnswers.contactDetails) `thenReturn` Some(ContactDetails("a", "c", "e"))
+        when(mockUserAnswers.propertyAddress) `thenReturn` Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+        when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_other")
 
         val result                   = enquiryKey(mockUserAnswers)
         val isBusinessRatesSelection = result.toOption.get.startsWith("businessRatesSubcategory")
@@ -219,10 +219,10 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
     "The enquiry key function produces a string with a councilTaxSubcategory key when the enquiry category is council_tax" +
       " and the council_tax_band has been selected" in {
-        when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-        when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
-        when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
-        when(mockUserAnswers.councilTaxSubcategory) thenReturn Some("council_tax_property_demolished")
+        when(mockUserAnswers.enquiryCategory) `thenReturn` Some("council_tax")
+        when(mockUserAnswers.contactDetails) `thenReturn` Some(ContactDetails("a", "c", "e"))
+        when(mockUserAnswers.propertyAddress) `thenReturn` Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+        when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_property_demolished")
 
         val result                = enquiryKey(mockUserAnswers)
         val isCouncilTaxSelection = result.toOption.get.startsWith("councilTaxSubcategory")
@@ -230,16 +230,16 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       }
 
     "enquiryKey returns a string with a housingBenefitSubcategory key prefix when the enquiry category is housing_benefit" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("housing_benefit")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("housing_benefit")
 
       enquiryKey(mockUserAnswers) mustBe Right("housingBenefitSubcategory")
     }
 
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn None
-      when(mockUserAnswers.contactDetails) thenReturn Some(ContactDetails("a", "c", "e"))
-      when(mockUserAnswers.propertyAddress) thenReturn Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
-      when(mockUserAnswers.businessRatesSubcategory) thenReturn Some("business_rates_other")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` None
+      when(mockUserAnswers.contactDetails) `thenReturn` Some(ContactDetails("a", "c", "e"))
+      when(mockUserAnswers.propertyAddress) `thenReturn` Some(PropertyAddress("a", Some("a"), "a", Some("a"), "a"))
+      when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_other")
 
       val result = enquiryKey(mockUserAnswers)
       result mustBe Left("Unknown enquiry category in enquiry key")
@@ -330,7 +330,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
         TellUsMoreId.toString            -> Json.toJson(tellUs)
       )
 
-      when(mockConnector.send(any[Contact], any[MessagesApi], any[UserAnswers])(any[HeaderCarrier])) thenReturn Future.successful(Success(OK))
+      when(mockConnector.send(any[Contact], any[MessagesApi], any[UserAnswers])(any[HeaderCarrier])) `thenReturn` Future.successful(Success(OK))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
@@ -340,8 +340,8 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
     }
 
     "will return correct messages if a new enquiry" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when(mockUserAnswers.existingEnquiryCategory) thenReturn None
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("council_tax")
+      when(mockUserAnswers.existingEnquiryCategory) `thenReturn` None
 
       val result = whatHappensNextMessages(mockUserAnswers)
 
@@ -349,8 +349,8 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
     }
 
     "will return correct messages if an existing enquiry" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn None
-      when(mockUserAnswers.existingEnquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` None
+      when(mockUserAnswers.existingEnquiryCategory) `thenReturn` Some("council_tax")
 
       val result = whatHappensNextMessages(mockUserAnswers)
 
@@ -358,8 +358,8 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
     }
 
     "will return empty string if new and existing enquiry are both defined in the cache" in {
-      when(mockUserAnswers.enquiryCategory) thenReturn Some("council_tax")
-      when(mockUserAnswers.existingEnquiryCategory) thenReturn Some("council_tax")
+      when(mockUserAnswers.enquiryCategory) `thenReturn` Some("council_tax")
+      when(mockUserAnswers.existingEnquiryCategory) `thenReturn` Some("council_tax")
 
       val result = whatHappensNextMessages(mockUserAnswers)
 

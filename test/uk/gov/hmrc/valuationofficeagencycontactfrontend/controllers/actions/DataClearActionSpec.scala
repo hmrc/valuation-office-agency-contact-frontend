@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ class DataClearActionSpec extends SpecBase with MockitoSugar with ScalaFutures w
     "there is no data in the cache" must {
       "set userAnswers to 'None' in the request" in {
         val dataCacheConnector = mock[DataCacheConnector]
-        when(dataCacheConnector.fetch(any())) thenReturn Future(None)
+        when(dataCacheConnector.fetch(any())) `thenReturn` Future(None)
         val action             = new Harness(dataCacheConnector)
 
         val futureResult = action.callTransform(fakeRequest.withSession(SessionKeys.sessionId -> "id"))
@@ -67,7 +67,7 @@ class DataClearActionSpec extends SpecBase with MockitoSugar with ScalaFutures w
     "there is data in the cache" must {
       "set userAnswers to 'None' in the request" in {
         val dataCacheConnector = mock[DataCacheConnector]
-        when(dataCacheConnector.fetch(any())) thenReturn Future(Some(new CacheMap("id", Map())))
+        when(dataCacheConnector.fetch(any())) `thenReturn` Future(Some(new CacheMap("id", Map())))
         val action             = new Harness(dataCacheConnector)
 
         val futureResult = action.callTransform(fakeRequest.withSession(SessionKeys.sessionId -> "id"))

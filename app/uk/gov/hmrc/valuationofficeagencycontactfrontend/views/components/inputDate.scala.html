@@ -1,5 +1,5 @@
 @*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@
 @this(govukDateInput: GovukDateInput)
 
 @(
-        form: Form[_],
+        form: Form[?],
         legend: String,
         legendClass: Option[String] = None,
         hint: Option[String] = None,
@@ -37,7 +37,7 @@
 @govukDateInput(DateInput(
     id,
     namePrefix = Some(form(id).name),
-    errorMessage = form(id).error.map(err => ErrorMessage(content = Text(messages(err.message, err.args: _*)))),
+    errorMessage = form(id).error.map(err => ErrorMessage(content = Text(messages(err.message, err.args*)))),
     hint = if(hint.isDefined) Some(Hint(content = Text(hint.get))) else None,
     fieldset = Some(Fieldset(
         legend = Some(Legend(

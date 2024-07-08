@@ -1,5 +1,5 @@
 @*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@
 @this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
 govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
 
-@(appConfig: FrontendAppConfig, form: Form[String], mode: Mode)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, form: Form[String], mode: Mode)(implicit request: Request[?], messages: Messages)
 
 @mainTemplate(
     pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("propertyEnglandActualLets.title"))else messages("propertyEnglandActualLets.title")),
@@ -46,7 +46,7 @@ govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErro
                 ErrorSummary(
                     attributes = Map("id" -> "error-summary-heading"),
                     title = Text(messages("error.summary.title")),
-                    errorList = form.errors.map(e => ErrorLink(href = Some("#propertyEnglandActualLets.yes"), content = HtmlContent(messages(e.messages, e.args :_*))))
+                    errorList = form.errors.map(e => ErrorLink(href = Some("#propertyEnglandActualLets.yes"), content = HtmlContent(messages(e.messages, e.args*))))
                 )
             )
         }
