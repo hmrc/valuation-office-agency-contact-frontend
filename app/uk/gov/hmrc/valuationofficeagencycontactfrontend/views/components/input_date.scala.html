@@ -29,7 +29,7 @@ secondaryLabel: Option[String] = None,
 hint: Option[String] = None
 )(implicit messages: Messages)
 
-<div class="form-field @if(!(errorKey.isEmpty && dayErrorKey.isEmpty || monthErrorKey.isEmpty || yearErrorKey.isEmpty)){form-field--error}">
+<div class="form-field @if(!(errorKey.isEmpty && dayErrorKey.isEmpty && monthErrorKey.isEmpty && yearErrorKey.isEmpty)){form-field--error}">
     <fieldset>
         <legend>
         <span class="form-label bold @if(!legendClass.isEmpty){@legendClass}">
