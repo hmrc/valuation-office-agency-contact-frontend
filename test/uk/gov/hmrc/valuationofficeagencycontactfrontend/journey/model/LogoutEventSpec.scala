@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,8 +25,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, Contac
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 /**
- * @author Yuriy Tumakha
- */
+  * @author Yuriy Tumakha
+  */
 class LogoutEventSpec extends AnyFlatSpec with should.Matchers {
 
   "LogoutEvent" should "accept userAnswers in constructor and should be serialized to correct json" in {

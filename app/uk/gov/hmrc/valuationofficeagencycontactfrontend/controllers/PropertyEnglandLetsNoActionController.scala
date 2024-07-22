@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,6 +70,7 @@ class PropertyEnglandLetsNoActionController @Inject() (
         Right(routes.PropertyEnglandActualLetsController.onPageLoad().url)
       case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("england"), Some("no"), _)           =>
         Right(routes.PropertyEnglandAvailableLetsController.onPageLoad().url)
-      case _                                                                                                           => Left("Unknown enquiry category in enquiry key")
+      case _                                                                                                           =>
+        Left("Unknown enquiry category in enquiry key")
     }
 }

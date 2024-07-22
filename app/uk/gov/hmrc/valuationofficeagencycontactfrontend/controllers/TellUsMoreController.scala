@@ -83,13 +83,12 @@ class TellUsMoreController @Inject() (
   }
 
   private def requiredErrorMessage(userAnswers: UserAnswers): String =
-    if (userAnswers.propertyWindEnquiry.isDefined) {
+    if userAnswers.propertyWindEnquiry.isDefined then
       "error.tellUsMore.poorRepair.required"
-    } else if (userAnswers.councilTaxSubcategory.contains("council_tax_area_change")) {
+    else if userAnswers.councilTaxSubcategory.contains("council_tax_area_change") then
       "error.tellUsMore.areaChanged.required"
-    } else {
+    else
       "error.tell_us_more.required"
-    }
 
   private def getEnquiryKey(answers: UserAnswers): String =
     enquiryKey(answers).getOrElse {

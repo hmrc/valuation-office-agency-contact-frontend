@@ -31,8 +31,8 @@ import scala.concurrent.Future
 import scala.util.matching.Regex
 
 /**
- * @author Yuriy Tumakha
- */
+  * @author Yuriy Tumakha
+  */
 abstract class TellUsMorePage(val key: String, val fieldId: String) extends Page[String] {
 
   val form: Form[String] = Form(single(fieldId -> text

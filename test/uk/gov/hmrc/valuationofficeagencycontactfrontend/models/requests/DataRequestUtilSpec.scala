@@ -26,8 +26,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.CacheMap
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 
 /**
- * @author Yuriy Tumakha
- */
+  * @author Yuriy Tumakha
+  */
 class DataRequestUtilSpec extends AnyFlatSpec with should.Matchers {
 
   val categories: Seq[String] = Seq("housing_benefit", "fair_rent")

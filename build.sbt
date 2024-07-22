@@ -7,8 +7,6 @@ import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin
 
 val appName = "valuation-office-agency-contact-frontend"
 
-ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" % VersionScheme.Always // Resolves versions conflict
-
 ThisBuild / scalaVersion := "3.4.2"
 ThisBuild / majorVersion := 1
 

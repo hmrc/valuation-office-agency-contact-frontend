@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,8 @@ import play.api.test.Helpers._
 import play.api.test.{FakeRequest, Injecting}
 
 /**
- * @author Yuriy Tumakha
- */
+  * @author Yuriy Tumakha
+  */
 class RootRedirectControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite with Injecting {
 
   private val fakeRequest = FakeRequest("GET", "/")

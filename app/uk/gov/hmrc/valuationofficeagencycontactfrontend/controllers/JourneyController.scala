@@ -34,8 +34,8 @@ import play.api.mvc
 import play.api.mvc.AnyContent
 
 /**
- * @author Yuriy Tumakha
- */
+  * @author Yuriy Tumakha
+  */
 class JourneyController @Inject() (
   journeyMap: JourneyMap,
   auditService: AuditingService,
@@ -76,11 +76,10 @@ class JourneyController @Inject() (
           }
           val userAnswers = new UserAnswers(cacheMap)
 
-          val call = if (request.changeMode) {
+          val call = if request.changeMode then
             routes.CheckYourAnswersController.onPageLoad()
-          } else {
+          else
             page.nextPage(userAnswers)
-          }
 
           auditService.sendContinueNextPage(call.url)
 

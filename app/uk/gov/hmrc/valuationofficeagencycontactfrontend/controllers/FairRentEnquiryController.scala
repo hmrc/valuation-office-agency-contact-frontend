@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.FairRentEnquiryFor
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.FairRentEnquiryId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{checkFairRentApplication => check_fair_rent_application, fairRentEnquiry => fair_rent_enquiry, submitFairRentApplication => submit_fair_rent_application}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.views
+  .html.{checkFairRentApplication => check_fair_rent_application, fairRentEnquiry => fair_rent_enquiry, submitFairRentApplication => submit_fair_rent_application}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
 
 import javax.inject.Inject

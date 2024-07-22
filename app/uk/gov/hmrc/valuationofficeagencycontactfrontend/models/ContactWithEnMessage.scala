@@ -70,9 +70,9 @@ object ContactWithEnMessage {
   }
 
   def enquirySubCategory(contact: Contact, isUpdateExistingEnquiry: Boolean)(implicit messages: Messages): String =
-    if (isUpdateExistingEnquiry) {
+    if isUpdateExistingEnquiry then
       messages("existing.enquiry")
-    } else {
+    else
       val lang           = messages.lang.language
       val categoryPrefix = categoryKeyPrefix(contact)
       messages.translate(categoryPrefix + "." + contact.subEnquiryCategory, Seq.empty) match {
@@ -81,7 +81,6 @@ object ContactWithEnMessage {
           log.warn(s"Unable to find key $categoryPrefix.${contact.subEnquiryCategory} in $lang messages")
           throw new RuntimeException(s"Unable to find key $categoryPrefix.${contact.subEnquiryCategory} in $lang messages")
       }
-    }
 
   private def categoryKeyPrefix(contact: Contact): String =
     contact.enquiryCategory match {

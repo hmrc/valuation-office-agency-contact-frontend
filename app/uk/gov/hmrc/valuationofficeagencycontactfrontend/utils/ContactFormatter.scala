@@ -29,6 +29,6 @@ object ContactFormatter {
     }
 
   private[utils] def insertInterstitials(contact: Seq[String], interstitial: String): String =
-    if (contact.isEmpty) "" else contact.head.trim + contact.tail.fold("")((acc, elem) => acc + interstitial + elem.trim)
+    if contact.isEmpty then "" else contact.head.trim + contact.tail.fold("")((acc, elem) => acc + interstitial + elem.trim)
 
 }

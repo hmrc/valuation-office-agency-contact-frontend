@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,11 +37,7 @@ trait ViewBehaviours extends ViewSpecBase {
       "rendered" must {
         "have the correct banner title" in {
           val doc    = asDocument(view())
-          val header = Option {
-            doc.getElementById("proposition-menu")
-          }.getOrElse(
-            doc.getElementsByAttributeValue("class", "govuk-header__content").first()
-          )
+          val header = doc.getElementsByAttributeValue("class", "govuk-header__content").first()
           val link   = header.children.first
           link.text mustBe messagesApi("site.service_name")(Lang(Locale.UK))
         }

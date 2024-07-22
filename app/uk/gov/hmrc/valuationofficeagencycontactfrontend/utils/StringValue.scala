@@ -20,12 +20,12 @@ import play.api.data.FormError
 import play.api.data.format.Formatter
 
 /**
- * String form binder.
- *
- * Returns empty string instead of error.required
- *
- * @author Yuriy Tumakha
- */
+  * String form binder.
+  *
+  * Returns empty string instead of error.required
+  *
+  * @author Yuriy Tumakha
+  */
 object StringValue extends Formatter[String] {
   def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = Right(data.getOrElse(key, ""))
 

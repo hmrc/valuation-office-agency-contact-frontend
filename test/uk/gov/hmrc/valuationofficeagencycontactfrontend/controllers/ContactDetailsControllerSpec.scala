@@ -25,7 +25,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.FakeDataCache
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
 import play.api.test.Helpers._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, ContactReasonId, CouncilTaxSubcategoryId, EnquiryCategoryId, PropertyAddressId}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend
+  .identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, ContactReasonId, CouncilTaxSubcategoryId, EnquiryCategoryId, PropertyAddressId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, ContactDetails, NormalMode, PropertyAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{MessageControllerComponentsHelpers, UserAnswers}

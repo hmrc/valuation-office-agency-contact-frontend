@@ -33,8 +33,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateUtil, UserAns
 import scala.concurrent.Future
 
 /**
- * @author Yuriy Tumakha
- */
+  * @author Yuriy Tumakha
+  */
 class EmailConnectorSpec extends SpecBase with MockitoSugar with ScalaFutures {
 
   private val contactDetails  = ContactDetails("first", "email", "contactNumber")
