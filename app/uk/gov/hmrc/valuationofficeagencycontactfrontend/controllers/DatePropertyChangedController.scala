@@ -67,14 +67,11 @@ class DatePropertyChangedController @Inject() (
             BadRequest(datePropertyChanged(appConfig, formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))
           ),
         value =>
-          for {
+          for
             _        <- dataCacheConnector.remove(request.sessionId, DatePropertyChangedId.toString)
-            cacheMap <- if (value.nonEmpty) {
-                          dataCacheConnector.save[LocalDate](request.sessionId, DatePropertyChangedId.toString, value.get)
-                        } else {
-                          dataCacheConnector.fetch(request.sessionId).map(_.getOrElse(new CacheMap(request.sessionId, Map.empty)))
-                        }
-          } yield Redirect(navigator.nextPage(DatePropertyChangedId, mode).apply(new UserAnswers(cacheMap)))
+            cacheMap <- if value.nonEmpty then dataCacheConnector.save[LocalDate](request.sessionId, DatePropertyChangedId.toString, value.get)
+                        else dataCacheConnector.fetch(request.sessionId).map(_.getOrElse(new CacheMap(request.sessionId, Map.empty)))
+          yield Redirect(navigator.nextPage(DatePropertyChangedId, mode).apply(new UserAnswers(cacheMap)))
       )
   }
 

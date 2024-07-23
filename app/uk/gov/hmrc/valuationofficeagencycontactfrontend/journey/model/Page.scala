@@ -28,8 +28,8 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import scala.concurrent.Future
 
 /**
- * @author Yuriy Tumakha
- */
+  * @author Yuriy Tumakha
+  */
 trait Page[T] {
 
   def key: String

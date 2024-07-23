@@ -24,7 +24,7 @@ object AddressFormatters {
     insertInterstitials(Seq(Some(address.addressLine1), address.addressLine2, Some(address.town), address.county, Some(address.postcode)), interstitial)
 
   private[utils] def insertInterstitials(address: Seq[Option[String]], interstitial: String): String =
-    if (address.isEmpty) "" else trim(address.head, "") + address.tail.foldLeft("")((acc, elem) => acc + trim(elem, interstitial))
+    if address.isEmpty then "" else trim(address.head, "") + address.tail.foldLeft("")((acc, elem) => acc + trim(elem, interstitial))
 
   def trim(ostr: Option[String], interstitial: String): String =
     ostr match {

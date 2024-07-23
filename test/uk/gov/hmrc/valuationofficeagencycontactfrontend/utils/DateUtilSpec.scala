@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,8 +25,8 @@ import java.time.{LocalDate, LocalTime, ZonedDateTime}
 import java.util.Locale
 
 /**
- * @author Yuriy Tumakha
- */
+  * @author Yuriy Tumakha
+  */
 class DateUtilSpec extends SpecBase with Logging {
 
   private val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(new Locale("en"))))

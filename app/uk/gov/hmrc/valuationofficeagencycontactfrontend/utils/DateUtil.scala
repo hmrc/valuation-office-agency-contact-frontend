@@ -25,8 +25,8 @@ import java.util.Locale
 import javax.inject.{Inject, Singleton}
 
 /**
- * @author Yuriy Tumakha
- */
+  * @author Yuriy Tumakha
+  */
 @Singleton
 class DateUtil @Inject() (langUtil: LanguageUtils) {
 

@@ -73,49 +73,42 @@ private[mappings] class LocalDateFormatter(key: String) extends Formatter[Option
         ).toEither.left.map(_ =>
           List(FormError(key, invalidDate), FormError(key, dayMsg), FormError(key, monthMsg), FormError(key, yearMsg))
         ).flatMap { date =>
-          if (date.isBefore(earliestEffectiveDate)) {
+          if date.isBefore(earliestEffectiveDate) then
             Left(List(FormError(key, yearRange), FormError(key, dayMsg), FormError(key, monthMsg), FormError(key, yearMsg)))
-          } else {
+          else
             Right(Some(date))
-          }
         }
     } yield finalDate
 
   def validateDay(key: String, day: String): Either[Seq[FormError], Int] =
-    if (testRegex.matcher(day).matches()) {
+    if testRegex.matcher(day).matches() then
       val intDay = day.toInt
-      if (intDay > 31 || intDay < 1) {
+      if intDay > 31 || intDay < 1 then
         Left(List(FormError(key, dayRange), FormError(key, dayMsg)))
-      } else {
+      else
         Right(intDay)
-      }
-    } else {
+    else
       Left(List(FormError(key, dayNumber), FormError(key, dayMsg)))
-    }
 
   def validateMont(key: String, month: String): Either[Seq[FormError], Int] =
-    if (testRegex.matcher(month).matches()) {
+    if testRegex.matcher(month).matches() then
       val intMonth = month.toInt
-      if (intMonth > 12 | intMonth < 1) {
+      if intMonth > 12 | intMonth < 1 then
         Left(List(FormError(key, monthRange), FormError(key, monthMsg)))
-      } else {
+      else
         Right(intMonth)
-      }
-    } else {
+    else
       Left(List(FormError(key, monthNumber), FormError(key, monthMsg)))
-    }
 
   def validateYear(key: String, year: String): Either[Seq[FormError], Int] =
-    if (testRegex.matcher(year).matches()) {
+    if testRegex.matcher(year).matches() then
       val intYear = year.toInt
-      if (intYear < 1900) {
+      if intYear < 1900 then
         Left(List(FormError(key, yearRange), FormError(key, yearMsg)))
-      } else {
+      else
         Right(intYear)
-      }
-    } else {
+    else
       Left(List(FormError(key, yearNumber), FormError(key, yearMsg)))
-    }
 
   override def unbind(key: String, value: Option[LocalDate]): Map[String, String] =
     Map(

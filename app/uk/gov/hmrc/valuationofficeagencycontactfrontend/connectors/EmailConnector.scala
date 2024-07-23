@@ -30,8 +30,8 @@ import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 
 /**
- * @author Yuriy Tumakha
- */
+  * @author Yuriy Tumakha
+  */
 @Singleton
 class EmailConnector @Inject() (servicesConfig: ServicesConfig, http: HttpClient)(implicit ec: ExecutionContext, dateUtil: DateUtil) extends Logging {
 
@@ -68,11 +68,10 @@ class EmailConnector @Inject() (servicesConfig: ServicesConfig, http: HttpClient
   }
 
   private def getNextStepText(isUpdateExistingEnquiry: Boolean)(implicit messages: Messages): String =
-    if (isUpdateExistingEnquiry) {
+    if isUpdateExistingEnquiry then
       s"${messages("confirmation.existing.p1")}\n${messages("confirmation.existing.p2")}"
-    } else {
+    else
       messages("confirmation.new.p1")
-    }
 
   private def sendEmail(email: String, templateId: String, parametersJson: JsObject)(implicit hc: HeaderCarrier): Future[HttpResponse] = {
     val json    = Json.obj(

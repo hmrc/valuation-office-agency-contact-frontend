@@ -19,8 +19,8 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests
 import play.api.mvc.Request
 
 /**
- * @author Yuriy Tumakha
- */
+  * @author Yuriy Tumakha
+  */
 object DataRequestUtil {
 
   def isEnquiryCategoryOneOf(categories: String*)(implicit request: Request[?]): Boolean = request match {

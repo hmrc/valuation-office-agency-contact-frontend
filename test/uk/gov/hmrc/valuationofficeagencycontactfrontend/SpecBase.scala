@@ -60,7 +60,7 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
 
     override def tellUsMore: Option[TellUsMore] = Some(tum)
 
-    override def enquiryCategory: Option[String] = if (eq.isEmpty) None else Some(eq)
+    override def enquiryCategory: Option[String] = Option(eq).filterNot(_.isEmpty)
 
     override def existingEnquiryCategory: Option[String] = ee
 

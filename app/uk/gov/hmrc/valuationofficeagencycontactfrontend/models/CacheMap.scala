@@ -19,10 +19,10 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
 import play.api.libs.json._
 
 /**
- * Replacement for uk.gov.hmrc.http.cache.client.CacheMap
- *
- * @author Yuriy Tumakha
- */
+  * Replacement for uk.gov.hmrc.http.cache.client.CacheMap
+  *
+  * @author Yuriy Tumakha
+  */
 case class CacheMap(id: String, data: Map[String, JsValue]) {
 
   def getEntry[T](key: String)(implicit fjs: Reads[T]): Option[T] =
