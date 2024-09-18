@@ -21,7 +21,8 @@
 @()(implicit request: Request[?], messages: Messages)
 
 @mainTemplate(
-    pageTitle = Option(messages("service.unavailable.heading"))
+    pageTitle = Option(messages("service.unavailable.heading")),
+    enableTimeoutDialog = false
 ) {
 
     <h1 class="govuk-heading-l">@messages("service.unavailable.heading")</h1>

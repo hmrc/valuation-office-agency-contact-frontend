@@ -903,7 +903,7 @@ footer.links.languale.url = /valuation-office-agency-contact-frontend/language/e
 footer.links.languale.text = English
 
 service.unavailable.heading = Mae’n ddrwg gennym, ond nid yw’r gwasanaeth ar gael ar hyn o bryd
-service.unavailable.p1 = Byddwch yn gallu defnyddio’r gwasanaeth o 4:30pm ymlaen.
+service.unavailable.p1 = Byddwch yn gallu defnyddio’r gwasanaeth o 16:30 ymlaen.
 service.unavailable.p2 = os ydych am siarad â rhywun am eich Band Treth Cyngor.
 service.unavailable.p3 = os ydych am siarad â rhywun am eich Bil Treth Cyngor.
 service.unavailable.link1.text = Cysylltwch ag Asiantaeth y Swyddfa Brisio
