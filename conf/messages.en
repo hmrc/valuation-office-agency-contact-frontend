@@ -898,3 +898,12 @@ error500.tryagain.para = Try again later.
 
 footer.links.languale.url = /valuation-office-agency-contact-frontend/language/cymraeg
 footer.links.languale.text = Cymraeg
+
+service.unavailable.heading = Sorry, the service is unavailable
+service.unavailable.p1 = You will be able to use the service from 4:30 pm.
+service.unavailable.p2 = if you need to speak to someone about your Council Tax band.
+service.unavailable.p3 = if you need to speak to someone about your Council Tax bill.
+service.unavailable.link1.text = Contact the Valuation Office Agency
+service.unavailable.link1.href = https://www.gov.uk/contact-voa
+service.unavailable.link2.text = Contact your local council
+service.unavailable.link2.href = https://www.gov.uk/find-local-council

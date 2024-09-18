@@ -9,6 +9,8 @@ GET         /logout                                uk.gov.hmrc.valuationofficeag
 GET         /eich-ymholiad                         uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.Application.startWelsh()
 GET         /dechrau-nawr                          uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.Application.startWelsh()
 
+GET         /service-unavailable                   uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ServiceUnavailableController.show()
+
 GET         /assets/*file                          controllers.Assets.versioned(path="/public", file: Asset)
 
 GET         /language/:lang                        uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.LanguageSwitchController.switchToLanguage(lang: String)
