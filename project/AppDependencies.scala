@@ -3,9 +3,9 @@ import sbt.*
 
 object AppDependencies {
 
-  private val bootstrapPlayVersion = "9.0.0"
-  private val playFrontendHmrc     = "10.5.0"
-  private val hmrcMongoVersion     = "2.1.0"
+  private val bootstrapPlayVersion = "9.5.0"
+  private val playFrontendHmrc     = "10.11.0"
+  private val hmrcMongoVersion     = "2.2.0"
   private val commonsTextVersion   = "1.12.0"
 
   // Test dependencies
