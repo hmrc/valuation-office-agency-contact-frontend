@@ -899,7 +899,7 @@ error500.tryagain.para = Try again later.
 footer.links.languale.url = /valuation-office-agency-contact-frontend/language/cymraeg
 footer.links.languale.text = Cymraeg
 
-service.unavailable.heading = Sorry, the service is unavailable
+service.unavailable.heading = Sorry, the service is currently unavailable
 service.unavailable.p1 = You will be able to use the service from 4:30 pm.
 service.unavailable.p2 = if you need to speak to someone about your Council Tax band.
 service.unavailable.p3 = if you need to speak to someone about your Council Tax bill.
