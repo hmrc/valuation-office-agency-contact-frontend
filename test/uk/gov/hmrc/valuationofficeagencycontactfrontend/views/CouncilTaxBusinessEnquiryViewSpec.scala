@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ class CouncilTaxBusinessEnquiryViewSpec extends ViewBehaviours {
   def councilTaxBusinessEnquiry: html.councilTaxBusinessEnquiry = app.injector.instanceOf[council_tax_business_enquiry]
 
   def view: () => HtmlFormat.Appendable =
-    () => councilTaxBusinessEnquiry(frontendAppConfig, CouncilTaxBusinessEnquiryForm(), NormalMode, backlink)(fakeRequest, messages)
+    () => councilTaxBusinessEnquiry(frontendAppConfig, CouncilTaxBusinessEnquiryForm(), NormalMode, backlink)(using fakeRequest, messages)
 
   "Council Tax Bill view" must {
     behave like normalPage(view, "councilTaxBusinessEnquiry", "title", "heading", "form.all_property", "form.large_property", "form.small_property")

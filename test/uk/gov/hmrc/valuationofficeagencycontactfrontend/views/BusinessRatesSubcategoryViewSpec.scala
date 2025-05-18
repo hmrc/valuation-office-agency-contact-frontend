@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,10 +30,10 @@ class BusinessRatesSubcategoryViewSpec extends ViewBehaviours {
   val messageKeyPrefix = "businessRatesSubcategory"
 
   def createView: () => HtmlFormat.Appendable =
-    () => businessRatesSubcategory(frontendAppConfig, BusinessRatesSubcategoryForm(), NormalMode)(fakeRequest, messages)
+    () => businessRatesSubcategory(frontendAppConfig, BusinessRatesSubcategoryForm(), NormalMode)(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => businessRatesSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+    (form: Form[String]) => businessRatesSubcategory(frontendAppConfig, form, NormalMode)(using fakeRequest, messages)
 
   "BusinessRatesSubcategory view" when {
     "rendered" must {
@@ -43,21 +43,17 @@ class BusinessRatesSubcategoryViewSpec extends ViewBehaviours {
           assertContainsRadioButton(doc, option.id, "value", option.value, false)
       }
 
-      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_changes and that it is used once" in {
+      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_changes and that it is used once" in
         labelDefinedAndUsedOnce("business_rates_changes", messageKeyPrefix, createView)
-      }
 
-      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_from_home and that it is used once" in {
+      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_from_home and that it is used once" in
         labelDefinedAndUsedOnce("business_rates_from_home", messageKeyPrefix, createView)
-      }
 
-      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_not_used and that it is used once" in {
+      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_not_used and that it is used once" in
         labelDefinedAndUsedOnce("business_rates_not_used", messageKeyPrefix, createView)
-      }
 
-      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_other and that it is used once" in {
+      "has a radio button with the label set to the message with key businessRatesSubcategory.business_rates_other and that it is used once" in
         labelDefinedAndUsedOnce("business_rates_other", messageKeyPrefix, createView)
-      }
 
       "contain continue button with the value Continue" in {
         val doc            = asDocument(createViewUsingForm(BusinessRatesSubcategoryForm()))

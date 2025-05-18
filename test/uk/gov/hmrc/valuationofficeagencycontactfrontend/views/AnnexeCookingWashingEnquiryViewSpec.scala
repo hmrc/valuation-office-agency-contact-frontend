@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ class AnnexeCookingWashingEnquiryViewSpec extends ViewBehaviours {
 
   def annexeCookingWashingEnquiry: html.annexeCookingWashingEnquiry = app.injector.instanceOf[annexe_cooking_washing_enquiry]
 
-  def view: () => HtmlFormat.Appendable = () => annexeCookingWashingEnquiry(frontendAppConfig, AnnexeSelfContainedForm())(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => annexeCookingWashingEnquiry(frontendAppConfig, AnnexeSelfContainedForm())(using fakeRequest, messages)
 
   "AnnexeCookingWashingEnquiry view" must {
     behave like normalPage(view, "annexeCookingWashing", "title", "heading", "form.yes", "form.no")

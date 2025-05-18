@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,10 +52,10 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = ExistingEnquiryCategoryForm()): String =
-    existingEnquiryCategory(frontendAppConfig, form, NormalMode, contactReasonRoute.url)(fakeRequest, messages).toString
+    existingEnquiryCategory(frontendAppConfig, form, NormalMode, contactReasonRoute.url)(using fakeRequest, messages).toString
 
   def viewAsStringEnquiryDate(form: Form[String] = ExistingEnquiryCategoryForm()): String =
-    existingEnquiryCategory(frontendAppConfig, form, NormalMode, enquiryDateRoute.url)(fakeRequest, messages).toString
+    existingEnquiryCategory(frontendAppConfig, form, NormalMode, enquiryDateRoute.url)(using fakeRequest, messages).toString
 
   "ExistingEnquiryCategory Controller" must {
 

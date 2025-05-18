@@ -7,7 +7,7 @@ import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin
 
 val appName = "valuation-office-agency-contact-frontend"
 
-ThisBuild / scalaVersion := "3.4.2"
+ThisBuild / scalaVersion := "3.7.0"
 ThisBuild / majorVersion := 1
 
 lazy val microservice = Project(appName, file("."))
@@ -18,9 +18,11 @@ lazy val microservice = Project(appName, file("."))
     PlayKeys.playDefaultPort := 7311,
     libraryDependencies ++= AppDependencies.appDependencies,
     Test / fork := true,
+    maintainer := "voa.service.optimisation@digital.hmrc.gov.uk",
     scalacOptions += "-Wconf:src=routes/.*:s",
-    scalacOptions += "-Wconf:cat=unused-imports&src=html/.*:s",
-    maintainer := "voa.service.optimisation@digital.hmrc.gov.uk"
+    scalacOptions += "-Wconf:msg=Flag .* set repeatedly:s",
+    scalacOptions += "-Wconf:msg=Implicit parameters should be provided with a \\`using\\` clause&src=views/.*:s",
+    javaOptions += "-XX:+EnableDynamicAgentLoading"
   )
   .settings(
     SassKeys.generateSourceMaps := false,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSu
     )
 
   def viewAsString(form: Form[String] = AnythingElseForm(), msg: String = ""): String =
-    anythingElse(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+    anythingElse(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
 
   "AnythingElseTellUsMore Controller" must {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
 
   def onwardRoute: Call = routes.DatePropertyChangedController.onPageLoad()
 
-  when(fakeDataCacheConnector.save(any, any, any)(any))
+  when(fakeDataCacheConnector.save(any, any, any)(using any))
     .thenReturn(Future.successful(CacheMap("council_tax_business_uses", Map("council_tax_business_uses" -> JsString("bar")))))
 
   when(fakeDataCacheConnector.remove(anyString, anyString)).thenReturn(Future.successful(true))
@@ -74,7 +74,7 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
     form,
     NormalMode,
     routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
-  )(fakeRequest, messages).toString
+  )(using fakeRequest, messages).toString
 
   "CouncilTaxBusiness Controller" must {
 
@@ -132,7 +132,7 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
       val result = controller().onSmallPartUsedPageLoad(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe propertySmallPartUsed(frontendAppConfig)(fakeRequest, messages).toString
+      contentAsString(result) mustBe propertySmallPartUsed(frontendAppConfig)(using fakeRequest, messages).toString
 
     }
 
@@ -140,7 +140,7 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
       val result = controller().onSmallPartUsedBusinessRatesPageLoad()(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe businessRatesNoNeedToPay(frontendAppConfig)(fakeRequest, messages).toString
+      contentAsString(result) mustBe businessRatesNoNeedToPay(frontendAppConfig)(using fakeRequest, messages).toString
 
     }
   }

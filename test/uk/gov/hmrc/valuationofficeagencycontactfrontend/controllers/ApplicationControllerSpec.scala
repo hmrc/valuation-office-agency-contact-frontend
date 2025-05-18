@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ class ApplicationControllerSpec extends ControllerSpecBase {
 
   def contactReason: html.contactReason = inject[contact_reason]
 
-  def viewAsString(form: Form[String] = EnquiryCategoryForm()): String = contactReason(form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = EnquiryCategoryForm()): String = contactReason(form, NormalMode)(using fakeRequest, messages).toString
 
   override val fakeRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest("GET", "/").withHeaders(("X-Session-ID", "id"))
 

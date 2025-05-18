@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ class BusinessRatesBillControllerSpec extends ControllerSpecBase {
   "BusinessRatesBillController" must {
     "return the correct view for a GET" in {
       val result = controller.onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe businessRatesBill(frontendAppConfig)(fakeRequest, messages).toString
+      contentAsString(result) mustBe businessRatesBill(frontendAppConfig)(using fakeRequest, messages).toString
     }
   }
 }

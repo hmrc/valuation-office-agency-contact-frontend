@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,12 +33,12 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
   def ndrBackLink: String = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
 
   def createNDRViewUsingForm(form: Form[ContactDetails]): HtmlFormat.Appendable =
-    contactDetails(frontendAppConfig, form, NormalMode, ndrBackLink)(fakeRequest, messages)
+    contactDetails(frontendAppConfig, form, NormalMode, ndrBackLink)(using fakeRequest, messages)
 
-  def createCTView(): HtmlFormat.Appendable = contactDetails(frontendAppConfig, ContactDetailsForm(), NormalMode, ctBackLink)(fakeRequest, messages)
+  def createCTView(): HtmlFormat.Appendable = contactDetails(frontendAppConfig, ContactDetailsForm(), NormalMode, ctBackLink)(using fakeRequest, messages)
 
   def createCTViewUsingForm(form: Form[ContactDetails]): HtmlFormat.Appendable =
-    contactDetails(frontendAppConfig, form, NormalMode, ctBackLink)(fakeRequest, messages)
+    contactDetails(frontendAppConfig, form, NormalMode, ctBackLink)(using fakeRequest, messages)
 
   override val form: Form[ContactDetails] = ContactDetailsForm()
 

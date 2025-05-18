@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,10 +35,10 @@ class PropertyWalesAvailableLetsViewSpec extends ViewBehaviours {
   val messageKeyPrefix = "propertyWalesAvailableLets"
 
   def createView: () => HtmlFormat.Appendable =
-    () => propertyWalesLets140DaysSubcategory(frontendAppConfig, PropertyWalesAvailableLetsForm(), NormalMode)(fakeRequest, messages)
+    () => propertyWalesLets140DaysSubcategory(frontendAppConfig, PropertyWalesAvailableLetsForm(), NormalMode)(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => propertyWalesLets140DaysSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+    (form: Form[String]) => propertyWalesLets140DaysSubcategory(frontendAppConfig, form, NormalMode)(using fakeRequest, messages)
 
   "PropertyEnglandAvailableLetsSubcategory view" when {
     "rendered" must {
@@ -48,13 +48,11 @@ class PropertyWalesAvailableLetsViewSpec extends ViewBehaviours {
           assertContainsRadioButton(doc, option.id, "value", option.value, false)
       }
 
-      "has a radio button with the label set to the message with key PropertyEnglandAvailableLets.yes and that it is used once" in {
+      "has a radio button with the label set to the message with key PropertyEnglandAvailableLets.yes and that it is used once" in
         labelDefinedAndUsedOnce("yes", messageKeyPrefix, createView)
-      }
 
-      "has a radio button with the label set to the message with key PropertyEnglandAvailableLets.no and that it is used once" in {
+      "has a radio button with the label set to the message with key PropertyEnglandAvailableLets.no and that it is used once" in
         labelDefinedAndUsedOnce("no", messageKeyPrefix, createView)
-      }
 
       "has a link marked with site.back leading to the Business Rates Self Containing Holiday Let Page" in {
         val doc          = asDocument(createView())

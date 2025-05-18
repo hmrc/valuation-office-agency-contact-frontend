@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ class AnnexeRemovedViewSpec extends ViewBehaviours {
 
   def councilTaxAnnexeRemoved: annexeRemoved = app.injector.instanceOf[annexe_removed]
 
-  def view: () => HtmlFormat.Appendable = () => councilTaxAnnexeRemoved(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxAnnexeRemoved(frontendAppConfig)(using fakeRequest, messages)
 
   "Council Tax Bill view" must {
     behave like normalPage(view, "annexeRemoved", "title", "heading", "p1", "url1", "url2", "url3", "subheading")

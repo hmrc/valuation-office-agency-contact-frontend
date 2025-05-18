@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,8 +21,7 @@ class TellUsMoreSpec extends AnyFlatSpec {
 
   val m: TellUsMore = TellUsMore("Hello")
 
-  "Message " should "be Hello" in {
+  "Message " should "be Hello" in
     assert(m.message === "Hello")
-  }
 
 }

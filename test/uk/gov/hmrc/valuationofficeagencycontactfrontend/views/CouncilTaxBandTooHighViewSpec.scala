@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ class CouncilTaxBandTooHighViewSpec extends ViewBehaviours {
 
   def councilTaxBandTooHigh: html.councilTaxBandTooHigh = app.injector.instanceOf[council_tax_band_too_high]
 
-  def view: () => HtmlFormat.Appendable = () => councilTaxBandTooHigh(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxBandTooHigh(frontendAppConfig)(using fakeRequest, messages)
 
   "Council Tax Band Too High view" must {
     behave like normalPage(

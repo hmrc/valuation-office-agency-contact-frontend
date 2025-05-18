@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ object BusinessRatesSubcategoryForm extends FormErrorHelper {
   }
 
   def apply(): Form[String] =
-    Form(single("value" -> of(businessRatesSubcategoryFormatter)))
+    Form(single("value" -> of(using businessRatesSubcategoryFormatter)))
 
   def options: Seq[RadioOption] = Seq(
     RadioOption("businessRatesSubcategory", "business_rates_change_valuation"),

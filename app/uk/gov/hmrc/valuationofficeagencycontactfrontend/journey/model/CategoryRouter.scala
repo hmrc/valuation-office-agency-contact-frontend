@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{StringValue, User
   */
 abstract class CategoryRouter(val key: String, val fieldId: String, val options: Seq[String]) extends Page[String] {
 
-  val form: Form[String] = Form(single(fieldId -> of(StringValue)
+  val form: Form[String] = Form(single(fieldId -> of(using StringValue)
     .verifying(errorRequired, options.contains(_))))
 
   def getValue: UserAnswers => Option[String] = _.getString(key)

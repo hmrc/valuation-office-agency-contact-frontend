@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ class BusinessRatesBillViewSpec extends ViewBehaviours {
 
   def businessRatesBill: html.businessRatesBill = app.injector.instanceOf[business_rates_bill]
 
-  def view: () => HtmlFormat.Appendable = () => businessRatesBill(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => businessRatesBill(frontendAppConfig)(using fakeRequest, messages)
 
   "Business Rates Bill view" must {
     behave like normalPage(view, "businessRatesBill", "title", "heading", "p1", "subheading", "url", "url1")

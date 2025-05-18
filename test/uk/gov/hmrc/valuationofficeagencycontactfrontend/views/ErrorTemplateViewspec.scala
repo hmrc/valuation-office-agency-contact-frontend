@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ class ErrorTemplateViewspec extends ViewBehaviours {
       messages("global.error.badRequest400.title"),
       messages("global.error.badRequest400.heading"),
       messages("global.error.badRequest400.message")
-    )(fakeRequest, messages)
+    )(using fakeRequest, messages)
 
   "error template view" must {
     behave like normalPage(view, "global.error.badRequest400", "title", "heading", "message")

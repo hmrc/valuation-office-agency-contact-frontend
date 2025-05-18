@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ class PropertySmallPartUsedViewSpec extends ViewBehaviours {
 
   def propertySmallPartUsed: html.propertySmallPartUsed = app.injector.instanceOf[property_small_part]
 
-  def view: () => HtmlFormat.Appendable = () => propertySmallPartUsed(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => propertySmallPartUsed(frontendAppConfig)(using fakeRequest, messages)
 
   "Small part of property used for business view" must {
     behave like normalPage(view, "propertySmallPartUsed", "title", "heading", "p1", "subheading", "p2.url", "p2", "p3.url", "p3")

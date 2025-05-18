@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ class ProvidingLettingsControllerSpec extends ControllerSpecBase {
         navigator,
         MessageControllerComponentsHelpers.stubMessageControllerComponents
       ).onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe providingLettings(frontendAppConfig)(fakeRequest, messages).toString
+      contentAsString(result) mustBe providingLettings(frontendAppConfig)(using fakeRequest, messages).toString
     }
 
   }

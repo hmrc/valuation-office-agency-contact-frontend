@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,8 @@ class PropertyWalesLetsNoActionViewSpec extends ViewBehaviours {
   def wales140DayBackLink: String = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesAvailableLetsController.onPageLoad().url
   def wales70DayBackLink: String  = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad().url
 
-  def view140Days: () => HtmlFormat.Appendable = () => propertyWalesLetsNoAction(frontendAppConfig, wales140DayBackLink)(fakeRequest, messages)
-  def view7Days: () => HtmlFormat.Appendable   = () => propertyWalesLetsNoAction(frontendAppConfig, wales70DayBackLink)(fakeRequest, messages)
+  def view140Days: () => HtmlFormat.Appendable = () => propertyWalesLetsNoAction(frontendAppConfig, wales140DayBackLink)(using fakeRequest, messages)
+  def view7Days: () => HtmlFormat.Appendable   = () => propertyWalesLetsNoAction(frontendAppConfig, wales70DayBackLink)(using fakeRequest, messages)
 
   "Property Wales Lets No Action view" must {
     behave like normalPage(

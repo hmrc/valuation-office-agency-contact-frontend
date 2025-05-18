@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -77,13 +77,13 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[String] = AnnexeForm()): String = councilTaxAnnexe(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = AnnexeForm()): String = councilTaxAnnexe(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
 
   def viewCookingWashingAsString(form: Form[String] = AnnexeCookingWashingForm()): String =
-    annexeCookingWashingEnquiry(frontendAppConfig, form)(fakeRequest, messages).toString
+    annexeCookingWashingEnquiry(frontendAppConfig, form)(using fakeRequest, messages).toString
 
   def viewcouncilTaxAnnexeSelfContainedEnquiry(form: Form[String] = AnnexeSelfContainedForm()): String =
-    councilTaxAnnexeSelfContainedEnquiry(frontendAppConfig, form)(fakeRequest, messages).toString
+    councilTaxAnnexeSelfContainedEnquiry(frontendAppConfig, form)(using fakeRequest, messages).toString
   "Council Tax Annex Controller" must {
     "return OK and the correct view for a GET" in {
       val result = controller().onPageLoad(NormalMode)(fakeRequest)
@@ -105,7 +105,7 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
       when(fakeDataCacheConnector.remove(any[String], any[String]))
         .thenReturn(Future.successful(true))
 
-      when(fakeDataCacheConnector.save(any, any, any)(any))
+      when(fakeDataCacheConnector.save(any, any, any)(using any))
         .thenReturn(Future.successful(CacheMap("council_tax_annexe", Map("council_tax_annexe" -> JsString("bar")))))
 
       val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", AnnexeForm.options.head.value))
@@ -143,12 +143,12 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
       val result = controller().onRemovedPageLoad()(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe annexeRemoved(frontendAppConfig)(fakeRequest, messages).toString()
+      contentAsString(result) mustBe annexeRemoved(frontendAppConfig)(using fakeRequest, messages).toString()
     }
 
     "redirect to the next page when valid data is submitted for annexe self contained" in {
 
-      when(fakeDataCacheConnector.save(any, any, any)(any))
+      when(fakeDataCacheConnector.save(any, any, any)(using any))
         .thenReturn(Future.successful(CacheMap("annexeSelfContained", Map("annexeSelfContained" -> JsString("bar")))))
 
       val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", AnnexeSelfContainedForm.options.head.value))
@@ -165,28 +165,28 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
       val result = controller().onSelfContainedSubmit()(postRequest)
 
       status(result) mustBe BAD_REQUEST
-      contentAsString(result) mustBe councilTaxAnnexeSelfContainedEnquiry(frontendAppConfig, boundForm)(fakeRequest, messages).toString()
+      contentAsString(result) mustBe councilTaxAnnexeSelfContainedEnquiry(frontendAppConfig, boundForm)(using fakeRequest, messages).toString()
     }
 
     "return OK and the correct view for a no cooking and washing facilities GET" in {
       val result = controller().onFacilitiesPageLoad()(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe councilTaxAnnexeNoFacilities(frontendAppConfig)(fakeRequest, messages).toString()
+      contentAsString(result) mustBe councilTaxAnnexeNoFacilities(frontendAppConfig)(using fakeRequest, messages).toString()
     }
 
     "return OK and the correct view for a not self contained page GET" in {
       val result = controller().onNotSelfContainedPageLoad()(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe annexeNotSelfContained(frontendAppConfig)(fakeRequest, messages).toString()
+      contentAsString(result) mustBe annexeNotSelfContained(frontendAppConfig)(using fakeRequest, messages).toString()
     }
 
     "return OK and the correct view for annexe self contained GET" in {
       val result = controller().onSelfContainedPageLoad()(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe councilTaxAnnexeSelfContained(frontendAppConfig)(fakeRequest, messages).toString()
+      contentAsString(result) mustBe councilTaxAnnexeSelfContained(frontendAppConfig)(using fakeRequest, messages).toString()
     }
 
     "return OK and the correct view when onHaveCookingWashingPageLoad is called" in {
@@ -209,7 +209,7 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
       when(fakeDataCacheConnector.remove(any[String], any[String]))
         .thenReturn(Future.successful(true))
 
-      when(fakeDataCacheConnector.save(any, any, any)(any))
+      when(fakeDataCacheConnector.save(any, any, any)(using any))
         .thenReturn(Future.successful(CacheMap("annexeCookingWashing.form", Map("annexeCookingWashing.form" -> JsString("yes")))))
 
       val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", AnnexeCookingWashingForm.options.head.value))

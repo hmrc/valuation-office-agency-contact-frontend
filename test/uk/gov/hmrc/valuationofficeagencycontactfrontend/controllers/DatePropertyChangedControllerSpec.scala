@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,10 +80,10 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoS
     )
 
   def viewBusinessAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()): String =
-    datePropertyChanged(frontendAppConfig, form, NormalMode, "datePropertyChanged.business", routeAreaChange.url)(fakeRequest, messages).toString
+    datePropertyChanged(frontendAppConfig, form, NormalMode, "datePropertyChanged.business", routeAreaChange.url)(using fakeRequest, messages).toString
 
   def viewAreaChangeAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()): String =
-    datePropertyChanged(frontendAppConfig, form, NormalMode, "datePropertyChanged.areaChange", routeAreaChange.url)(fakeRequest, messages).toString
+    datePropertyChanged(frontendAppConfig, form, NormalMode, "datePropertyChanged.areaChange", routeAreaChange.url)(using fakeRequest, messages).toString
 
   "DatePropertyChangedController Controller" must {
 

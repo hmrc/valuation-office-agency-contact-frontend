@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ class AnnexeNoFacilitiesViewSpec extends ViewBehaviours {
 
   def councilTaxAnnexeNoFacilities: annexeNoFacilities = app.injector.instanceOf[annexe_no_facilities]
 
-  def view: () => HtmlFormat.Appendable = () => councilTaxAnnexeNoFacilities(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxAnnexeNoFacilities(frontendAppConfig)(using fakeRequest, messages)
 
   "Council Tax Bill view" must {
     behave like normalPage(view, "annexeNoFacilities", "title", "heading", "p1", "p2", "subheading")

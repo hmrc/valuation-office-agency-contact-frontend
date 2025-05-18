@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ class CouncilTaxPropertyEmptyViewSpec extends ViewBehaviours {
 
   def councilTaxPropertyEmpty: html.councilTaxPropertyEmpty = app.injector.instanceOf[council_tax_property_empty]
 
-  def view: () => HtmlFormat.Appendable = () => councilTaxPropertyEmpty(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxPropertyEmpty(frontendAppConfig)(using fakeRequest, messages)
 
   "Council Tax Property Empty view" must {
     behave like normalPage(view, "councilTaxPropertyEmpty", "title", "heading", "p1", "p2")

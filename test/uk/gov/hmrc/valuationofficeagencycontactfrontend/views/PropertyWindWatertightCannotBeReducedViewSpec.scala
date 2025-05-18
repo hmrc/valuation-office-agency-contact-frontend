@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ class PropertyWindWatertightCannotBeReducedViewSpec extends ViewBehaviours {
 
   def PropertyWindWatertightCannotBeReduced: windWatertightCannotBeReduced = app.injector.instanceOf[wind_watertight_cannot_be_reduced]
 
-  def view: () => HtmlFormat.Appendable = () => PropertyWindWatertightCannotBeReduced(frontendAppConfig, NormalMode)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => PropertyWindWatertightCannotBeReduced(frontendAppConfig, NormalMode)(using fakeRequest, messages)
 
   "The Property wind and water cannot be reduced or removed view" must {
     behave like normalPage(view, "propertyWindWaterEnd", "title", "heading", "p1.part1", "p1.part2", "subheading", "p2")

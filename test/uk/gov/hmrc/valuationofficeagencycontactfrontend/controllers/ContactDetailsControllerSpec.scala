@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,13 +62,13 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
   def refNumberBackLink: String = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.RefNumberController.onPageLoad().url
 
   def viewAsStringCT(form: Form[ContactDetails] = ContactDetailsForm()): String =
-    contactDetails(frontendAppConfig, form, NormalMode, ctBackLink)(fakeRequest, messages).toString
+    contactDetails(frontendAppConfig, form, NormalMode, ctBackLink)(using fakeRequest, messages).toString
 
   def viewAsStringNDR(form: Form[ContactDetails] = ContactDetailsForm()): String =
-    contactDetails(frontendAppConfig, form, NormalMode, ndrBackLink)(fakeRequest, messages).toString
+    contactDetails(frontendAppConfig, form, NormalMode, ndrBackLink)(using fakeRequest, messages).toString
 
   def viewAsStringRefNumber(form: Form[ContactDetails] = ContactDetailsForm()): String =
-    contactDetails(frontendAppConfig, form, NormalMode, refNumberBackLink)(fakeRequest, messages).toString
+    contactDetails(frontendAppConfig, form, NormalMode, refNumberBackLink)(using fakeRequest, messages).toString
 
   "ContactDetails Controller" must {
 
@@ -136,7 +136,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
       intercept[Exception] {
         val result = controller(getRelevantData).onSubmit(NormalMode)(postRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
       }
     }
 
@@ -397,13 +397,12 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
       contentAsString(result) mustBe viewAsStringCT(ContactDetailsForm().fill(ContactDetails("a", "a@test.com", "0847428742424")))
     }
 
-    "return 500 and the error view for a GET with no enquiry type" in {
+    "return 500 and the error view for a GET with no enquiry type" in
       intercept[Exception] {
         val result = controller().onPageLoad(NormalMode)(fakeRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
       }
-    }
 
   }
 }

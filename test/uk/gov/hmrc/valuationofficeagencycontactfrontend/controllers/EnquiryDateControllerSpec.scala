@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ class EnquiryDateControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = EnquiryDateForm()): String =
-    enquiryDate(frontendAppConfig, form, EnquiryDateForm.beforeDate(), NormalMode)(fakeRequest, messages).toString()
+    enquiryDate(frontendAppConfig, form, EnquiryDateForm.beforeDate(), NormalMode)(using fakeRequest, messages).toString()
 
   "EnquiryDateController Controller" must {
 

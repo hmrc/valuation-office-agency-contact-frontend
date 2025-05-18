@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
   when(fakeDataCacheConnector.remove(any[String], any[String]))
     .thenReturn(Future.successful(true))
 
-  when(fakeDataCacheConnector.save(any, any, any)(any))
+  when(fakeDataCacheConnector.save(any, any, any)(using any))
     .thenReturn(Future.successful(CacheMap("businessRatesSubcategory", Map("businessRatesSubcategory" -> JsString("bar")))))
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
@@ -66,7 +66,7 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
     )
 
   def viewAsString(form: Form[String] = BusinessRatesSubcategoryForm()): String =
-    businessRatesSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+    businessRatesSubcategory(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
 
   "BusinessRatesSubcategory Controller" must {
 
@@ -109,7 +109,7 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
       val result = controller().onValuationPageLoad(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe businessRatesValuation(frontendAppConfig)(fakeRequest, messages).toString()
+      contentAsString(result) mustBe businessRatesValuation(frontendAppConfig)(using fakeRequest, messages).toString()
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {

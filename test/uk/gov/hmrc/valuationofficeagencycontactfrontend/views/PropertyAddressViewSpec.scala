@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,10 +30,10 @@ class PropertyAddressViewSpec extends QuestionViewBehaviours[PropertyAddress] {
 
   def propertyAddress: html.propertyAddress = app.injector.instanceOf[property_address]
 
-  def createView: () => HtmlFormat.Appendable = () => propertyAddress(frontendAppConfig, PropertyAddressForm(), NormalMode)(fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable = () => propertyAddress(frontendAppConfig, PropertyAddressForm(), NormalMode)(using fakeRequest, messages)
 
   def createViewUsingForm: Form[PropertyAddress] => HtmlFormat.Appendable =
-    (form: Form[PropertyAddress]) => propertyAddress(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+    (form: Form[PropertyAddress]) => propertyAddress(frontendAppConfig, form, NormalMode)(using fakeRequest, messages)
 
   override val form: Form[PropertyAddress] = PropertyAddressForm()
 

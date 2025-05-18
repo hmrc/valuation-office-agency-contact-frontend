@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ class FairRentEnquiryControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = FairRentEnquiryForm()): String =
-    fairRentEnquiryEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+    fairRentEnquiryEnquiry(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
 
   "PropertyEnglandLets140DaysController" must {
 
@@ -71,7 +71,7 @@ class FairRentEnquiryControllerSpec extends ControllerSpecBase {
       val result = controller().onFairRentEnquiryNew(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe onFairRentEnquiryNew()(fakeRequest, messages).toString()
+      contentAsString(result) mustBe onFairRentEnquiryNew()(using fakeRequest, messages).toString()
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {

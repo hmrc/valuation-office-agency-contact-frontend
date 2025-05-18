@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,10 +29,11 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
 
   val messageKeyPrefix = "councilTaxSubcategory"
 
-  def createView: () => HtmlFormat.Appendable = () => councilTaxSubcategory(frontendAppConfig, CouncilTaxSubcategoryForm(), NormalMode)(fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable =
+    () => councilTaxSubcategory(frontendAppConfig, CouncilTaxSubcategoryForm(), NormalMode)(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => councilTaxSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+    (form: Form[String]) => councilTaxSubcategory(frontendAppConfig, form, NormalMode)(using fakeRequest, messages)
 
   "CouncilTaxSubcategory view" when {
     "rendered" must {
@@ -42,25 +43,20 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
           assertContainsRadioButton(doc, option.id, "value", option.value, false)
       }
 
-      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_band_too_high and that it is used once" in {
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_band_too_high and that it is used once" in
         labelDefinedAndUsedOnce("council_tax_band_too_high", messageKeyPrefix, createView)
-      }
 
-      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_band_for_new and that it is used once" in {
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_band_for_new and that it is used once" in
         labelDefinedAndUsedOnce("council_tax_band_for_new", messageKeyPrefix, createView)
-      }
 
-      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_property_demolished and that it is used once" in {
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_property_demolished and that it is used once" in
         labelDefinedAndUsedOnce("council_tax_property_demolished", messageKeyPrefix, createView)
-      }
 
-      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_annexe and that it is used once" in {
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_annexe and that it is used once" in
         labelDefinedAndUsedOnce("council_tax_annexe", messageKeyPrefix, createView)
-      }
 
-      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_other and that it is used once" in {
+      "has a radio button with the label set to the message with key councilTaxSubcategory.council_tax_other and that it is used once" in
         labelDefinedAndUsedOnce("council_tax_other", messageKeyPrefix, createView)
-      }
 
       "contain continue button with the value Continue" in {
         val doc            = asDocument(createViewUsingForm(CouncilTaxSubcategoryForm()))

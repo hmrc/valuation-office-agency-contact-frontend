@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -132,7 +132,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       status(result) mustBe OK
 
       contentAsString(result) mustBe confirmation(frontendAppConfig, contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(
-        fakeRequest,
+        using fakeRequest,
         messages
       ).toString
     }
@@ -163,7 +163,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       status(result) mustBe OK
 
       contentAsString(result) mustBe confirmation(frontendAppConfig, contact, answerSectionExisting, whatHappensExisting, SatisfactionSurveyForm.apply())(
-        fakeRequest,
+        using fakeRequest,
         messages
       ).toString
     }
@@ -193,7 +193,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       status(result) mustBe OK
 
       contentAsString(result) mustBe confirmation(frontendAppConfig, contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(
-        fakeRequest,
+        using fakeRequest,
         messages
       ).toString
     }
@@ -269,7 +269,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
         status(result) mustBe INTERNAL_SERVER_ERROR
 
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
       }
     }
 
@@ -295,25 +295,23 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
         status(result) mustBe INTERNAL_SERVER_ERROR
 
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
       }
     }
 
-    "return 500 and the error view for a GET with no enquiry type" in {
+    "return 500 and the error view for a GET with no enquiry type" in
       intercept[Exception] {
         val result = controller().onPageLoad()(fakeRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
       }
-    }
 
-    "return 500 and error view for a GET when the backend service call fails" in {
+    "return 500 and error view for a GET when the backend service call fails" in
       intercept[Exception] {
         val result = controllerF().onPageLoad()(fakeRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
       }
-    }
 
     "return 303 and send email when form complete" in {
       val contactDetails        = ContactDetails("a", "c", "e")
@@ -330,7 +328,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
         TellUsMoreId.toString            -> Json.toJson(tellUs)
       )
 
-      when(mockConnector.send(any[Contact], any[MessagesApi], any[UserAnswers])(any[HeaderCarrier])) `thenReturn` Future.successful(Success(OK))
+      when(mockConnector.send(any[Contact], any[MessagesApi], any[UserAnswers])(using any[HeaderCarrier])) `thenReturn` Future.successful(Success(OK))
 
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,8 @@ import play.twirl.api.HtmlFormat
 class BusinessRatesPropertyEnquiryViewSpec extends ViewBehaviours {
   def businessRatesPropertyEnquiry: html.businessRatesPropertyEnquiry = app.injector.instanceOf[business_rates_property_enquiry]
 
-  def view: () => HtmlFormat.Appendable = () => businessRatesPropertyEnquiry(frontendAppConfig, BusinessRatesPropertyForm(), NormalMode)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable =
+    () => businessRatesPropertyEnquiry(frontendAppConfig, BusinessRatesPropertyForm(), NormalMode)(using fakeRequest, messages)
 
   "Business Rates Property Enquiry view" must {
     behave like normalPage(view, "businessRatesPropertyEnquiry", "title", "heading", "england", "wales")

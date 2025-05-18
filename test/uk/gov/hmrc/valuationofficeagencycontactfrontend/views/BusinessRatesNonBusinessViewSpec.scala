@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ class BusinessRatesNonBusinessViewSpec extends ViewBehaviours {
 
   def businessRatesNonBusiness: html.businessRatesNonBusiness = app.injector.instanceOf[business_rates_non_business]
 
-  def view: () => HtmlFormat.Appendable = () => businessRatesNonBusiness(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => businessRatesNonBusiness(frontendAppConfig)(using fakeRequest, messages)
 
   "Business rates non business view" must {
     behave like normalPage(view, "businessRatesNonBusiness", "title", "heading", "p1", "p2", "step1", "step2", "step3", "subheading", "p3")

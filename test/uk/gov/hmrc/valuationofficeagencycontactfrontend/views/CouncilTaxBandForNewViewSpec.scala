@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ class CouncilTaxBandForNewViewSpec extends ViewBehaviours {
 
   def councilTaxBandForNew: html.councilTaxBandForNew = app.injector.instanceOf[council_tax_band_for_new]
 
-  def view: () => HtmlFormat.Appendable = () => councilTaxBandForNew(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxBandForNew(frontendAppConfig)(using fakeRequest, messages)
 
   "Council Tax Band For A New Property view" must {
     behave like normalPage(view, "councilTaxBandForNew", "title", "heading", "subheading", "p1.part1", "p1.url", "p1.part2", "p2", "p3", "p4", "p4.url", "p4")
