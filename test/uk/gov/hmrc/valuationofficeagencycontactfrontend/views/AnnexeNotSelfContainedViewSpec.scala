@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ class AnnexeNotSelfContainedViewSpec extends ViewBehaviours {
 
   def councilTaxAnnexeNotSelfContained: annexeNotSelfContained = app.injector.instanceOf[annexe_not_self_contained]
 
-  def view: () => HtmlFormat.Appendable = () => councilTaxAnnexeNotSelfContained(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxAnnexeNotSelfContained(frontendAppConfig)(using fakeRequest, messages)
 
   "Council Tax Bill view" must {
     behave like normalPage(view, "annexeNotSelfContained", "title", "heading", "p1", "p2", "subheading")

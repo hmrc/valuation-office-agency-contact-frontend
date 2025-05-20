@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ object PropertyEnglandAvailableLetsForm {
   }
 
   def apply(): Form[String] =
-    Form(single("value" -> of(propertyEnglandAvailableLetsFormatter)))
+    Form(single("value" -> of(using propertyEnglandAvailableLetsFormatter)))
 
   def options: Seq[RadioOption] = Seq(
     RadioOption("propertyEnglandAvailableLets", "yes"),

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,7 +76,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
     )
 
   def viewAsString(form: Form[SatisfactionSurvey] = SatisfactionSurveyForm()): String =
-    satisfactionSurveyThankYou(frontendAppConfig)(fakeRequest, messages).toString
+    satisfactionSurveyThankYou(frontendAppConfig)(using fakeRequest, messages).toString
 
   "SatisfactionSurvey Controller" must {
 
@@ -136,7 +136,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
       intercept[Exception] {
         val result = controller(getRelevantData).formCompleteFeedback()(request)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
       }
     }
 

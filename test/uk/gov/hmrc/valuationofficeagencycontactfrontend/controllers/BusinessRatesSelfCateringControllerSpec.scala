@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,7 +58,7 @@ class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = BusinessRatesSelfCateringForm()): String =
-    businessRatesSelfCateringEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+    businessRatesSelfCateringEnquiry(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
 
   "BusinessRatesSelfCateringController" must {
 
@@ -100,14 +100,14 @@ class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
       val result = controller().onEngLetsPageLoad(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe propertyEnglandLets(frontendAppConfig)(fakeRequest, messages).toString()
+      contentAsString(result) mustBe propertyEnglandLets(frontendAppConfig)(using fakeRequest, messages).toString()
     }
 
     "return OK and the correct view for wales lets page GET" in {
       val result = controller().onWalLetsPageLoad(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe propertyWalesLets(frontendAppConfig)(fakeRequest, messages).toString()
+      contentAsString(result) mustBe propertyWalesLets(frontendAppConfig)(using fakeRequest, messages).toString()
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {

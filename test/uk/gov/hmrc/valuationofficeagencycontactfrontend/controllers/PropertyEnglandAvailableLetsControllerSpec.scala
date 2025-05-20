@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,7 +58,7 @@ class PropertyEnglandAvailableLetsControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = PropertyEnglandAvailableLetsForm()): String =
-    propertyEnglandLets140DaysEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+    propertyEnglandLets140DaysEnquiry(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
 
   "PropertyEnglandLets140DaysController" must {
 
@@ -73,7 +73,7 @@ class PropertyEnglandAvailableLetsControllerSpec extends ControllerSpecBase {
       val result = controller().onWalLetsPageLoad(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe propertyWalesLets(frontendAppConfig)(fakeRequest, messages).toString()
+      contentAsString(result) mustBe propertyWalesLets(frontendAppConfig)(using fakeRequest, messages).toString()
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {

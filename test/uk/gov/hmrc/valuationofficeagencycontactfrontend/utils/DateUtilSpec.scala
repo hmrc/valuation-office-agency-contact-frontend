@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,15 +60,15 @@ class DateUtilSpec extends SpecBase with Logging {
 
   "formattedLocalDate" must {
     "format date in format 'd MMMM yyyy'" in {
-      dateUtil.formattedLocalDate(testLocalDate)(messagesEnglish) mustBe "22 January 2022"
-      dateUtil.formattedLocalDate(testLocalDate)(messagesWelsh) mustBe "22 Ionawr 2022"
+      dateUtil.formattedLocalDate(testLocalDate)(using messagesEnglish) mustBe "22 January 2022"
+      dateUtil.formattedLocalDate(testLocalDate)(using messagesWelsh) mustBe "22 Ionawr 2022"
     }
   }
 
   "formattedZonedDate" must {
     "format date in format 'd MMMM yyyy'" in {
-      dateUtil.formattedZonedDate(testZonedDate)(messagesEnglish) mustBe "22 February 2022"
-      dateUtil.formattedZonedDate(testZonedDate)(messagesWelsh) mustBe "22 Chwefror 2022"
+      dateUtil.formattedZonedDate(testZonedDate)(using messagesEnglish) mustBe "22 February 2022"
+      dateUtil.formattedZonedDate(testZonedDate)(using messagesWelsh) mustBe "22 Chwefror 2022"
     }
   }
 

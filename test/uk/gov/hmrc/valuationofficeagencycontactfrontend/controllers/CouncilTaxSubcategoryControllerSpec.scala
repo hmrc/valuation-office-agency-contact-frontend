@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with Mockit
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap): CouncilTaxSubcategoryController = {
     val fakeDataCacheConnector = mock[DataCacheConnector]
-    when(fakeDataCacheConnector.save(any, any, any)(any))
+    when(fakeDataCacheConnector.save(any, any, any)(using any))
       .thenReturn(Future.successful(CacheMap("councilTaxSubcategory", Map("councilTaxSubcategory" -> JsString("bar")))))
     when(fakeDataCacheConnector.remove(any[String], any[String]))
       .thenReturn(Future.successful(true))
@@ -62,7 +62,7 @@ class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with Mockit
   }
 
   def viewAsString(form: Form[String] = CouncilTaxSubcategoryForm()): String =
-    councilTaxSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+    councilTaxSubcategory(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
 
   "CouncilTaxSubcategory Controller" must {
 

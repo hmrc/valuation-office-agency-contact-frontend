@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,11 +30,11 @@ class PropertyEnglandActualLetsViewSpec extends ViewBehaviours {
   val messageKeyPrefix = "propertyEnglandActualLets"
 
   def createView: () => HtmlFormat.Appendable =
-    () => propertyEnglandLetsSubcategory(frontendAppConfig, PropertyEnglandActualLetsForm(), NormalMode)(fakeRequest, messages)
+    () => propertyEnglandLetsSubcategory(frontendAppConfig, PropertyEnglandActualLetsForm(), NormalMode)(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable = (
     form: Form[String]
-  ) => propertyEnglandLetsSubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+  ) => propertyEnglandLetsSubcategory(frontendAppConfig, form, NormalMode)(using fakeRequest, messages)
 
   "PropertyEnglandActualLetsSubcategory view" when {
     "rendered" must {
@@ -44,13 +44,11 @@ class PropertyEnglandActualLetsViewSpec extends ViewBehaviours {
           assertContainsRadioButton(doc, option.id, "value", option.value, isChecked = false)
       }
 
-      "has a radio button with the label set to the message with key propertyEnglandActualLets.yes and that it is used once" in {
+      "has a radio button with the label set to the message with key propertyEnglandActualLets.yes and that it is used once" in
         labelDefinedAndUsedOnce("yes", messageKeyPrefix, createView)
-      }
 
-      "has a radio button with the label set to the message with key propertyEnglandActualLets.no and that it is used once" in {
+      "has a radio button with the label set to the message with key propertyEnglandActualLets.no and that it is used once" in
         labelDefinedAndUsedOnce("no", messageKeyPrefix, createView)
-      }
 
       "has a link marked with site.back leading to the Business Rates Self Containing Holiday Let Page" in {
         val doc          = asDocument(createView())

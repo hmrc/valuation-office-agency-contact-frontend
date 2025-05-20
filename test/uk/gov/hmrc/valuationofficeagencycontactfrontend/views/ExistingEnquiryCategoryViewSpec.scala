@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,10 +34,10 @@ class ExistingEnquiryCategoryViewSpec extends ViewBehaviours {
   val backUrl: String = routes.ContactReasonController.onPageLoad().url
 
   def createView: () => HtmlFormat.Appendable =
-    () => existingEnqCategory(frontendAppConfig, ExistingEnquiryCategoryForm(), NormalMode, backUrl)(fakeRequest, messages)
+    () => existingEnqCategory(frontendAppConfig, ExistingEnquiryCategoryForm(), NormalMode, backUrl)(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => existingEnqCategory(frontendAppConfig, form, NormalMode, backUrl)(fakeRequest, messages)
+    (form: Form[String]) => existingEnqCategory(frontendAppConfig, form, NormalMode, backUrl)(using fakeRequest, messages)
 
   "ExistingEnquiryCategory view" must {
     behave like normalPage(createView, messageKeyPrefix)
@@ -57,25 +57,20 @@ class ExistingEnquiryCategoryViewSpec extends ViewBehaviours {
           assertContainsRadioButton(doc, option.id, "value", option.value, false)
       }
 
-      "has a radio button with the label set to the message with key existingEnquiryCategory.council_tax and that it is used once" in {
+      "has a radio button with the label set to the message with key existingEnquiryCategory.council_tax and that it is used once" in
         labelDefinedAndUsedOnce("council_tax", messageKeyPrefix, createView)
-      }
 
-      "has a radio button with the label set to the message with key existingEnquiryCategory.business_rates and that it is used once" in {
+      "has a radio button with the label set to the message with key existingEnquiryCategory.business_rates and that it is used once" in
         labelDefinedAndUsedOnce("business_rates", messageKeyPrefix, createView)
-      }
 
-      "has a radio button with the label set to the message with key existingEnquiryCategory.housing_benefit and that it is used once" in {
+      "has a radio button with the label set to the message with key existingEnquiryCategory.housing_benefit and that it is used once" in
         labelDefinedAndUsedOnce("housing_benefit", messageKeyPrefix, createView)
-      }
 
-      "has a radio button with the label set to the message with key existingEnquiryCategory.fair_rent and that it is used once" in {
+      "has a radio button with the label set to the message with key existingEnquiryCategory.fair_rent and that it is used once" in
         labelDefinedAndUsedOnce("fair_rent", messageKeyPrefix, createView)
-      }
 
-      "has a radio button with the label set to the message with key existingEnquiryCategory.other and that it is used once" in {
+      "has a radio button with the label set to the message with key existingEnquiryCategory.other and that it is used once" in
         labelDefinedAndUsedOnce("other", messageKeyPrefix, createView)
-      }
     }
 
     for (option <- ExistingEnquiryCategoryForm.options)

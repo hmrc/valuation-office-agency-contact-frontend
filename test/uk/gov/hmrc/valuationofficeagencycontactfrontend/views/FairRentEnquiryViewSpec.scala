@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,10 +30,11 @@ class FairRentEnquiryViewSpec extends ViewBehaviours {
 
   val messageKeyPrefix = "fairRents"
 
-  def createView: () => HtmlFormat.Appendable = () => fairRentEnquirySubcategory(frontendAppConfig, FairRentEnquiryForm(), NormalMode)(fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable =
+    () => fairRentEnquirySubcategory(frontendAppConfig, FairRentEnquiryForm(), NormalMode)(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => fairRentEnquirySubcategory(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+    (form: Form[String]) => fairRentEnquirySubcategory(frontendAppConfig, form, NormalMode)(using fakeRequest, messages)
 
   "fairRentEnquirySubcategory view" when {
     "rendered" must {
@@ -43,17 +44,14 @@ class FairRentEnquiryViewSpec extends ViewBehaviours {
           assertContainsRadioButton(doc, option.id, "value", option.value, false)
       }
 
-      "has a radio button with the label set to the message with key housingBenefits.new and that it is used once" in {
+      "has a radio button with the label set to the message with key housingBenefits.new and that it is used once" in
         labelDefinedAndUsedOnce("submit_new_application", messageKeyPrefix, createView)
-      }
 
-      "has a radio button with the label set to the message with key housingBenefits.check and that it is used once" in {
+      "has a radio button with the label set to the message with key housingBenefits.check and that it is used once" in
         labelDefinedAndUsedOnce("check_fair_rent_register", messageKeyPrefix, createView)
-      }
 
-      "has a radio button with the label set to the message with key housingBenefits.other and that it is used once" in {
+      "has a radio button with the label set to the message with key housingBenefits.other and that it is used once" in
         labelDefinedAndUsedOnce("other_request", messageKeyPrefix, createView)
-      }
 
       "has a link marked with site.back leading to the Enquiry Page" in {
         val doc          = asDocument(createView())

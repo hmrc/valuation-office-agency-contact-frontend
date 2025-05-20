@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,12 +31,12 @@ class AnythingElseTellUsViewSpec extends QuestionViewBehaviours[String] {
 
   def anythingElse: anythingElseTellUs = app.injector.instanceOf[anything_else]
 
-  def createView: () => HtmlFormat.Appendable = () => anythingElse(frontendAppConfig, AnythingElseForm(), NormalMode)(fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable = () => anythingElse(frontendAppConfig, AnythingElseForm(), NormalMode)(using fakeRequest, messages)
 
-  def createAlternativeView: () => HtmlFormat.Appendable = () => anythingElse(frontendAppConfig, AnythingElseForm(), NormalMode)(fakeRequest, messages)
+  def createAlternativeView: () => HtmlFormat.Appendable = () => anythingElse(frontendAppConfig, AnythingElseForm(), NormalMode)(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => anythingElse(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+    (form: Form[String]) => anythingElse(frontendAppConfig, form, NormalMode)(using fakeRequest, messages)
 
   override val form: Form[String] = AnythingElseForm()
 

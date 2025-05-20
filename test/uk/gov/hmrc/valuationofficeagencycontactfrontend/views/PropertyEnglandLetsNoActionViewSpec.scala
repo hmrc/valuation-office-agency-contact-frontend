@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ class PropertyEnglandLetsNoActionViewSpec extends ViewBehaviours {
 
   def backLink: String = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad().url
 
-  def viewEnglandAvailable140Nights: () => HtmlFormat.Appendable = () => propertyEnglandLetsNoAction(frontendAppConfig, backLink)(fakeRequest, messages)
+  def viewEnglandAvailable140Nights: () => HtmlFormat.Appendable = () => propertyEnglandLetsNoAction(frontendAppConfig, backLink)(using fakeRequest, messages)
 
   "Property Wales Lets No Action view" must {
     behave like normalPage(

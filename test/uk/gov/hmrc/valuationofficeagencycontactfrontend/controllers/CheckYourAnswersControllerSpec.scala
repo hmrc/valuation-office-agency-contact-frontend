@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -955,18 +955,16 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       intercept[Exception] {
         val result = controller(getRelevantData).onPageLoad()(fakeRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
       }
     }
 
-    "return 500 and the error view for a reaching summary page with no enquiry" in {
-
+    "return 500 and the error view for a reaching summary page with no enquiry" in
       intercept[Exception] {
         val result = controller().onPageLoad()(fakeRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
       }
-    }
 
   }
 

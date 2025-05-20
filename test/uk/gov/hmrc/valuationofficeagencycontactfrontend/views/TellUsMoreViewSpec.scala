@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,13 +34,13 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
   def tellUsMore: html.tellUsMore = app.injector.instanceOf[tell_us_more]
 
   def createView: () => HtmlFormat.Appendable =
-    () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.ct-reference", backLink)(fakeRequest, messages)
+    () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.ct-reference", backLink)(using fakeRequest, messages)
 
   def createAlternativeView: () => HtmlFormat.Appendable =
-    () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.ndr-reference", backLink)(fakeRequest, messages)
+    () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.ndr-reference", backLink)(using fakeRequest, messages)
 
   def createViewUsingForm: Form[TellUsMore] => HtmlFormat.Appendable =
-    (form: Form[TellUsMore]) => tellUsMore(frontendAppConfig, form, NormalMode, "", backLink)(fakeRequest, messages)
+    (form: Form[TellUsMore]) => tellUsMore(frontendAppConfig, form, NormalMode, "", backLink)(using fakeRequest, messages)
 
   override val form: Form[TellUsMore] = TellUsMoreForm()
 
@@ -52,7 +52,7 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
   }
 
   "TellUsMore view for property poor repair" must {
-    def view = () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.poorRepair", poorRepairBackLink)(fakeRequest, messages)
+    def view = () => tellUsMore(frontendAppConfig, TellUsMoreForm(), NormalMode, "tellUsMore.poorRepair", poorRepairBackLink)(using fakeRequest, messages)
 
     behave like normalPage(view, "tellUsMore.poorRepair", "hint", "inset")
 

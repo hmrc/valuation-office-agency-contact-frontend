@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,5 +22,5 @@ import play.api.data.Forms.of
 import java.time.LocalDate
 
 trait Mappings {
-  protected def localDate(key: String): FieldMapping[Option[LocalDate]] = of(new LocalDateFormatter(key))
+  protected def localDate(key: String): FieldMapping[Option[LocalDate]] = of(using new LocalDateFormatter(key))
 }

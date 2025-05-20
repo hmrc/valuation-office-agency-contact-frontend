@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,12 +38,12 @@ class DatePropertyChangedViewSpec extends ViewBehaviours {
 
   def createView: () => HtmlFormat.Appendable = () =>
     datePropertyChanged(frontendAppConfig, dateForm, NormalMode, messageKeyPrefix, "/valuation-office-agency-contact-frontend/about-business-rates")(
-      fakeRequest,
+      using fakeRequest,
       messages
     )
 
   def createViewUsingForm: Form[Option[LocalDate]] => HtmlFormat.Appendable =
-    (form: Form[Option[LocalDate]]) => datePropertyChanged(frontendAppConfig, form, NormalMode, "test", "test")(fakeRequest, messages)
+    (form: Form[Option[LocalDate]]) => datePropertyChanged(frontendAppConfig, form, NormalMode, "test", "test")(using fakeRequest, messages)
 
   "DatePropertyChanged view" must {
     behave like normalPage(createView, messageKeyPrefix)

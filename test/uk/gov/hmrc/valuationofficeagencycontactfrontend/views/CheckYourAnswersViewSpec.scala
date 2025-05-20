@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,7 +66,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
         ).flatten
       )),
       backlinkUrl
-    )(fakeRequest, messages)
+    )(using fakeRequest, messages)
 
   def view2: () => HtmlFormat.Appendable = () =>
     checkYourAnswers(
@@ -82,7 +82,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
         ).flatten
       )),
       backlinkUrl
-    )(fakeRequest, messages)
+    )(using fakeRequest, messages)
 
   def view3: () => HtmlFormat.Appendable = () =>
     checkYourAnswers(
@@ -99,7 +99,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
         ).flatten
       )),
       backlinkUrlAE
-    )(fakeRequest, messages)
+    )(using fakeRequest, messages)
 
   "Check Your Answers view" must {
 

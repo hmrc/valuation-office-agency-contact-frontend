@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,5 +37,5 @@ object BooleanForm extends FormErrorHelper {
 
   }
 
-  def apply(errorKey: String = "error.boolean"): Form[Boolean] = Form(single("value" -> of(booleanFormat(errorKey))))
+  def apply(errorKey: String = "error.boolean"): Form[Boolean] = Form(single("value" -> of(using booleanFormat(errorKey))))
 }

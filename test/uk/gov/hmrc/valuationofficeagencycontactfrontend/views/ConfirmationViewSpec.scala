@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,10 +51,10 @@ class ConfirmationViewSpec extends ViewBehaviours {
   def confirmation: html.confirmation = app.injector.instanceOf[Confirmation]
 
   def view: () => HtmlFormat.Appendable =
-    () => confirmation(frontendAppConfig, contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(fakeRequest, messages)
+    () => confirmation(frontendAppConfig, contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(using fakeRequest, messages)
 
   def alternativeView: () => HtmlFormat.Appendable =
-    () => confirmation(frontendAppConfig, alternativeContact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(fakeRequest, messages)
+    () => confirmation(frontendAppConfig, alternativeContact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(using fakeRequest, messages)
 
   "Confirmation view" must {
 

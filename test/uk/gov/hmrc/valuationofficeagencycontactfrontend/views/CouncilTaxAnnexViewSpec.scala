@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,10 +29,10 @@ class CouncilTaxAnnexViewSpec extends ViewBehaviours {
 
   val messageKeyPrefix = "annexe"
 
-  def createView: () => HtmlFormat.Appendable = () => councilTaxAnnexe(frontendAppConfig, AnnexeForm(), NormalMode)(fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable = () => councilTaxAnnexe(frontendAppConfig, AnnexeForm(), NormalMode)(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => councilTaxAnnexe(frontendAppConfig, form, NormalMode)(fakeRequest, messages)
+    (form: Form[String]) => councilTaxAnnexe(frontendAppConfig, form, NormalMode)(using fakeRequest, messages)
 
   "CouncilTaxAnnex view" must {
     behave like normalPage(createView, messageKeyPrefix)
@@ -52,13 +52,11 @@ class CouncilTaxAnnexViewSpec extends ViewBehaviours {
           assertContainsRadioButton(doc, option.id, "value", option.value, false)
       }
 
-      "has a radio button with the label set to the message with key annexe.added and that it is used once" in {
+      "has a radio button with the label set to the message with key annexe.added and that it is used once" in
         labelDefinedAndUsedOnce("added", messageKeyPrefix, createView)
-      }
 
-      "has a radio button with the label set to the message with key annexe.removed and that it is used once" in {
+      "has a radio button with the label set to the message with key annexe.removed and that it is used once" in
         labelDefinedAndUsedOnce("removed", messageKeyPrefix, createView)
-      }
 
       "have a link marked with site.back leading to the Business Rates Subcategory Page" in {
         val doc          = asDocument(createView())

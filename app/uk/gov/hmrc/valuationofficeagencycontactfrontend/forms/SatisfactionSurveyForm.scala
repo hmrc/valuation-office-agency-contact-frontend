@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ object SatisfactionSurveyForm {
 
   def apply(): Form[SatisfactionSurvey] = Form(
     mapping(
-      "satisfaction" -> of[String](satisfactionFormat)
+      "satisfaction" -> of[String](using satisfactionFormat)
         .verifying("error.required.feedback", _.nonEmpty)
         .verifying("error.required.feedback", optionIsValid),
       "details"      -> optional(text

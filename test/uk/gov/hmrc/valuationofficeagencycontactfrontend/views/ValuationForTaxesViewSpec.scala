@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ class ValuationForTaxesViewSpec extends ViewBehaviours {
 
   def valuationForTaxes: html.valuationForTaxes = app.injector.instanceOf[valuation_for_taxes]
 
-  def view: () => HtmlFormat.Appendable = () => valuationForTaxes(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => valuationForTaxes(frontendAppConfig)(using fakeRequest, messages)
 
   "Valuation For Taxes view" must {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ trait ViewBehaviours extends ViewSpecBase {
           val doc    = asDocument(view())
           val header = doc.getElementsByAttributeValue("class", "govuk-header__content").first()
           val link   = header.children.first
-          link.text mustBe messagesApi("site.service_name")(Lang(Locale.UK))
+          link.text mustBe messagesApi("site.service_name")(using Lang(Locale.UK))
         }
 
         "display the correct browser title" in {

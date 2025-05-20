@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ class EmailConnectorSpec extends SpecBase with MockitoSugar with ScalaFutures {
   private def httpMock(status: Int, body: String) = {
     val httpMock = mock[HttpClient]
     when(httpMock.POST[JsValue, HttpResponse](anyString, any[JsValue], any[Seq[(String, String)]])(
-      any[Writes[JsValue]],
+      using any[Writes[JsValue]],
       any[HttpReads[HttpResponse]],
       any[HeaderCarrier],
       any()

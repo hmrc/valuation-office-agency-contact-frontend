@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ class RefNumberControllerSpec extends ControllerSpecBase {
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[Option[String]] = RefNumberForm()): String = refNumber(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+  def viewAsString(form: Form[Option[String]] = RefNumberForm()): String = refNumber(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
 
   "RefNumberController Controller" must {
 

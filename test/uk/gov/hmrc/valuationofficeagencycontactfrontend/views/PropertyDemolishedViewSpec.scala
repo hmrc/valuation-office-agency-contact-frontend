@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ class PropertyDemolishedViewSpec extends ViewBehaviours {
 
   def propertyDemolished: html.propertyDemolished = app.injector.instanceOf[property_demolished]
 
-  def view: () => HtmlFormat.Appendable = () => propertyDemolished(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => propertyDemolished(frontendAppConfig)(using fakeRequest, messages)
 
   "Property Demolished view" must {
     behave like normalPage(

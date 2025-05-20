@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ class CouncilTaxBillViewSpec extends ViewBehaviours {
 
   def councilTaxBill: html.councilTaxBill = app.injector.instanceOf[council_tax_bill]
 
-  def view: () => HtmlFormat.Appendable = () => councilTaxBill(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxBill(frontendAppConfig)(using fakeRequest, messages)
 
   "Council Tax Bill view" must {
     behave like normalPage(view, "councilTaxBill", "title", "heading", "p1", "p2", "p3")

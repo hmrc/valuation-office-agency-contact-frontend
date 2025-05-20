@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ class PropertyWalesLetsViewSpec extends ViewBehaviours {
 
   def propertyWalesLets: html.propertyWalesLets = app.injector.instanceOf[wales_lets]
 
-  def view: () => HtmlFormat.Appendable = () => propertyWalesLets(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => propertyWalesLets(frontendAppConfig)(using fakeRequest, messages)
 
   "Property England Lets view" must {
     behave like normalPage(

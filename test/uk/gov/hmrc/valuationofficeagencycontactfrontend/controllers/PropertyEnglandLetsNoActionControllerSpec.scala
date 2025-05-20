@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with 
   def englandActualBackLink: String = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyEnglandActualLetsController.onPageLoad().url
 
   def viewAsStringNoAction(form: Form[ContactDetails] = ContactDetailsForm()): String =
-    propertyEnglandLetsNoAction(frontendAppConfig, englandActualBackLink)(fakeRequest, messages).toString
+    propertyEnglandLetsNoAction(frontendAppConfig, englandActualBackLink)(using fakeRequest, messages).toString
 
   "England Lets No Action Controller" must {
 
@@ -136,13 +136,12 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with 
       assert(result.toOption.get == routes.PropertyEnglandAvailableLetsController.onPageLoad().url)
     }
 
-    "return 500 and the error view for a GET with no enquiry type" in {
+    "return 500 and the error view for a GET with no enquiry type" in
       intercept[Exception] {
         val result = controller().onPageLoad(NormalMode)(fakeRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
       }
-    }
 
     "redirect to Session Expired for a GET if no existing data is found" in {
       val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)

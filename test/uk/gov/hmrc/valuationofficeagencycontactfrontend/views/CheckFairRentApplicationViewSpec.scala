@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ class CheckFairRentApplicationViewSpec extends ViewBehaviours {
 
   def checkFairRentApplication: html.checkFairRentApplication = app.injector.instanceOf[check_fair_rent_application]
 
-  def view: () => HtmlFormat.Appendable = () => checkFairRentApplication()(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => checkFairRentApplication()(using fakeRequest, messages)
 
   "Check Fair Rent Application view" must {
     behave like normalPage(view, "checkFairRentApplication", "title", "heading", "p1", "p2", "subheading", "p3")

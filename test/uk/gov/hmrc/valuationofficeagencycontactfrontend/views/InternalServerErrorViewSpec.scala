@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ class InternalServerErrorViewSpec extends ViewBehaviours {
 
   def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
 
-  def view: () => HtmlFormat.Appendable = () => internalServerError(frontendAppConfig)(fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => internalServerError(frontendAppConfig)(using fakeRequest, messages)
 
   "Internal Server Error view" must {
 

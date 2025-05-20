@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ object MessageControllerComponentsHelpers {
 
     new MessagesControllerComponents {
       override def messagesActionBuilder: MessagesActionBuilder =
-        new DefaultMessagesActionBuilderImpl(stub.parsers.default, stub.messagesApi)(stub.executionContext)
+        new DefaultMessagesActionBuilderImpl(stub.parsers.default, stub.messagesApi)(using stub.executionContext)
 
       override def actionBuilder: ActionBuilder[Request, AnyContent] = stub.actionBuilder
 

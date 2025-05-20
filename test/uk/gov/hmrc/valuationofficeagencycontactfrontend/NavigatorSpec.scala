@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -169,13 +169,12 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
       }
 
       // Property base testing, can be disabled.
-      "return a function that goes to the contact form page when an enquiry category for business rates has been selected and random string selected on next page" in {
+      "return a function that goes to the contact form page when an enquiry category for business rates has been selected and random string selected on next page" in
         forAll("category") { (category: String) =>
           val userAnswerMock = mock[UserAnswers]
           when(userAnswerMock.businessRatesSubcategory) `thenReturn` Some(category)
           navigator.nextPage(BusinessRatesSubcategoryId, NormalMode).apply(userAnswerMock) mustBe routes.ContactDetailsController.onPageLoad(NormalMode)
         }
-      }
 
       "return a function that goes to the property address page when the contact form has been submitted without errors and the enquiry is business rates" in {
         when(mockUserAnswers.contactDetails) `thenReturn` Some(ContactDetails("First", "test@email.com", "0208382737288"))

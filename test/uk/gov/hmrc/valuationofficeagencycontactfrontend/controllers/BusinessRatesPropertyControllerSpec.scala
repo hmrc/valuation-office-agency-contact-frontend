@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ class BusinessRatesPropertyControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = BusinessRatesPropertyForm()): String =
-    businessRatesPropertyEnquiry(frontendAppConfig, form, NormalMode)(fakeRequest, messages).toString
+    businessRatesPropertyEnquiry(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
 
   "BusinessRatesSelfCateringController" must {
 
@@ -96,7 +96,7 @@ class BusinessRatesPropertyControllerSpec extends ControllerSpecBase {
       val result = controller().onNonBusinessPageLoad(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe businessRatesNonBusiness(frontendAppConfig)(fakeRequest, messages).toString()
+      contentAsString(result) mustBe businessRatesNonBusiness(frontendAppConfig)(using fakeRequest, messages).toString()
     }
   }
 }

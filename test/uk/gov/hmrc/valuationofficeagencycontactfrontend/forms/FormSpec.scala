@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ trait FormSpec extends AnyWordSpecLike with Matchers with OptionValues {
     form.bind(data).fold(
       formWithErrors => {
         for (error <- formWithErrors.errors) expectedErrors should contain(FormError(error.key, error.message))
-        formWithErrors.errors.size shouldBe expectedErrors.size
+        formWithErrors.errors.size                        shouldBe expectedErrors.size
       },
       _ =>
         fail("Expected a validation error when binding the form, but it was bound successfully.")
