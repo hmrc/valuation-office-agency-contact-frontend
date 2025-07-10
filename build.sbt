@@ -7,7 +7,7 @@ import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin
 
 val appName = "valuation-office-agency-contact-frontend"
 
-ThisBuild / scalaVersion := "3.7.0"
+ThisBuild / scalaVersion := "3.7.1"
 ThisBuild / majorVersion := 1
 
 lazy val microservice = Project(appName, file("."))

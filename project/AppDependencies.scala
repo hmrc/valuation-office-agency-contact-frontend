@@ -3,8 +3,8 @@ import sbt.*
 
 object AppDependencies {
 
-  private val bootstrapPlayVersion = "9.12.0"
-  private val playFrontendHmrc     = "12.1.0"
+  private val bootstrapPlayVersion = "9.16.0"
+  private val playFrontendHmrc     = "12.7.0"
   private val hmrcMongoVersion     = "2.6.0"
   private val commonsTextVersion   = "1.13.1"
 
@@ -12,7 +12,7 @@ object AppDependencies {
   private val scalaTestVersion            = "3.2.19"
   private val scalaTestPlusCheckVersion   = "3.2.19.0"
   private val scalaTestPlusMockitoVersion = "3.2.19.0"
-  private val scalaTestPlusPlayVersion    = "7.0.1"
+  private val scalaTestPlusPlayVersion    = "7.0.2"
   private val flexMarkVersion             = "0.64.8"
 
   private val compile = Seq(
