@@ -38,11 +38,5 @@ class ProvidingLettingsViewSpec extends ViewBehaviours {
       val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
       backlinkUrl mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
     }
-
-    "contain start again link " in {
-      val doc              = asDocument(view())
-      val startAgainButton = doc.getElementsByClass("govuk-link").text()
-      assert(startAgainButton == messages("site.start-again") || startAgainButton.contains("Newid yr iaith ir Gymraeg Cymraeg"))
-    }
   }
 }

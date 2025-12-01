@@ -37,7 +37,7 @@ trait ViewBehaviours extends ViewSpecBase {
       "rendered" must {
         "have the correct banner title" in {
           val doc    = asDocument(view())
-          val header = doc.getElementsByAttributeValue("class", "govuk-header__content").first()
+          val header = doc.getElementsByAttributeValue("class", "govuk-service-navigation__service-name").first()
           val link   = header.children.first
           link.text mustBe messagesApi("site.service_name")(using Lang(Locale.UK))
         }

@@ -70,7 +70,7 @@ class DatePropertyChangedController @Inject() (
           for
             _        <- dataCacheConnector.remove(request.sessionId, DatePropertyChangedId.toString)
             cacheMap <- if value.nonEmpty then dataCacheConnector.save[LocalDate](request.sessionId, DatePropertyChangedId.toString, value.get)
-                        else dataCacheConnector.fetch(request.sessionId).map(_.getOrElse(new CacheMap(request.sessionId, Map.empty)))
+            else dataCacheConnector.fetch(request.sessionId).map(_.getOrElse(new CacheMap(request.sessionId, Map.empty)))
           yield Redirect(navigator.nextPage(DatePropertyChangedId, mode).apply(new UserAnswers(cacheMap)))
       )
   }
