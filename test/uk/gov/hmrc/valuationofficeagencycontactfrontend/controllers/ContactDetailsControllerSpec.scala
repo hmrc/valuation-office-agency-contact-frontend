@@ -58,7 +58,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
     )
 
   def ctBackLink: String        = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
-  def ndrBackLink: String       = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
+  def ndrBackLink: String       = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
   def refNumberBackLink: String = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.RefNumberController.onPageLoad().url
 
   def viewAsStringCT(form: Form[ContactDetails] = ContactDetailsForm()): String =
@@ -163,7 +163,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
-      assert(result.toOption.get == routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
+      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_bill" in {

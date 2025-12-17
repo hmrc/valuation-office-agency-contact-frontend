@@ -288,6 +288,7 @@ class CheckYourAnswersController @Inject() (
       case (Some("new_enquiry"), _, Some("business_rates_demolished"), _)        => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _, Some("business_rates_not_used"), _)          => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _, Some("business_rates_self_catering"), _)     => routes.PropertyAddressController.onPageLoad(NormalMode).url
+      case (Some("new_enquiry"), _, Some("business_rates_other"), _)             => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _, _, Some("submit_new_application"))           => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _, _, Some("check_fair_rent_register"))         => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _, _, Some("other_request"))                    => routes.PropertyAddressController.onPageLoad(NormalMode).url
