@@ -116,7 +116,7 @@ class ContactDetailsController @Inject() (
       case (_, Some("fair_rent"), _, _, Some("check_fair_rent_register"))             => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("fair_rent"), _, _, Some("other_request"))                        => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("council_tax"), _, _, _)                                          => Right(routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
-      case (_, Some("business_rates"), _, _, _)                                       => Right(routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
+      case (_, Some("business_rates"), _, _, _)                                       => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case _                                                                          => Left("Unknown enquiry category in enquiry key")
     }
 
