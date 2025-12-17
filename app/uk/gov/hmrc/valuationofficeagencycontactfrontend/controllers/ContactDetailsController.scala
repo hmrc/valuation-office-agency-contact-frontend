@@ -110,6 +110,7 @@ class ContactDetailsController @Inject() (
       case (_, Some("business_rates"), _, Some("business_rates_demolished"), _)       => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("business_rates"), _, Some("business_rates_property_empty"), _)   => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("business_rates"), _, Some("business_rates_valuation"), _)        => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      case (_, Some("business_rates"), _, Some("business_rates_other"), _)            => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("housing_benefit"), _, _, _)                                      => Right(answers.getString(lastTellUsMorePage).fold(appStartPage)(routes.JourneyController.onPageLoad).url)
       case (_, Some("fair_rent"), _, _, Some("submit_new_application"))               => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("fair_rent"), _, _, Some("check_fair_rent_register"))             => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
