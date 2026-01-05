@@ -32,3 +32,5 @@ lazy val microservice = Project(appName, file("."))
     // Include only final files for assets fingerprinting
     digest / includeFilter := GlobFilter("*.min.css")
   )
+
+addCommandAlias("precommit", "scalafmtSbt;scalafmtAll;coverage;test;coverageReport")
