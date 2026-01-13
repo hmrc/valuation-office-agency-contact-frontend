@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,21 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors
 
-import org.mockito.ArgumentMatchers.{any, anyString}
+import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.when
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatestplus.mockito.MockitoSugar
 import play.api.http.Status.{ACCEPTED, BAD_REQUEST}
 import play.api.i18n.{DefaultMessagesApi, Lang, Messages}
-import play.api.libs.json.{JsValue, Writes}
 import play.api.test.FakeRequest
-import uk.gov.hmrc.http.{HeaderCarrier, HttpClient, HttpReads, HttpResponse}
+import uk.gov.hmrc.http.HeaderCarrier
+import uk.gov.hmrc.http.client.HttpClientV2
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.DataRequest
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, Contact, ContactDetails, PropertyAddress}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateUtil, UserAnswers}
 
-import scala.concurrent.Future
+import java.net.URL
 
 /**
   * @author Yuriy Tumakha
@@ -49,16 +49,12 @@ class EmailConnectorSpec extends SpecBase with MockitoSugar with ScalaFutures {
   implicit val request: DataRequest[?] = DataRequest(FakeRequest(), "sessionId", new UserAnswers(new CacheMap("id", Map())))
   implicit val dateUtil: DateUtil      = injector.instanceOf[DateUtil]
 
-  private def httpMock(status: Int, body: String) = {
-    val httpMock = mock[HttpClient]
-    when(httpMock.POST[JsValue, HttpResponse](anyString, any[JsValue], any[Seq[(String, String)]])(
-      using any[Writes[JsValue]],
-      any[HttpReads[HttpResponse]],
-      any[HeaderCarrier],
-      any()
-    )) `thenReturn` Future.successful(HttpResponse(status, body))
-    httpMock
-  }
+  private def httpMock(status: Int, body: String): HttpClientV2 =
+    val httpClientV2Mock = mock[HttpClientV2]
+    when(
+      httpClientV2Mock.post(any[URL])(using any[HeaderCarrier])
+    ).thenReturn(RequestBuilderStub(Right(status), body))
+    httpClientV2Mock
 
   "EmailConnector" should {
     "send enquiry confirmation" in {

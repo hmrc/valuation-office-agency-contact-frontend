@@ -1,10 +1,6 @@
 checkYourAnswers.title = Check your answers - Valuation Office Agency contact form - GOV.UK
 checkYourAnswers.heading = Check your answers
 
-date.day = Day
-date.month = Month
-date.year = Year
-
 hintText.optional = (optional)
 
 error.title = Error:
@@ -881,11 +877,6 @@ datePropertyChanged.error.month.range = Date must have a month that is a number 
 
 datePropertyChanged.error.year.number = Date must have a year that is a number
 datePropertyChanged.error.year.range = Date must be on or after 1 january 1900
-
-datePropertyChanged.date.day = Day
-datePropertyChanged.date.month = Month
-datePropertyChanged.date.year = Year
-
 
 error400.title = Page not found - Valuation Office Agency contact form - GOV.UK
 error400.heading = Page not found
