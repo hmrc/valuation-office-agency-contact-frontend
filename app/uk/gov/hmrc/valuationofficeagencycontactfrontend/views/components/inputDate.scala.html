@@ -1,5 +1,5 @@
 @*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,19 +49,19 @@
     items = Seq(
         InputItem(
             name = form("day").name,
-            label = Some(messages("datePropertyChanged.date.day")),
+            label = Some(messages("date.input.day")),
             value = form(s"$id-day").value,
             classes = s"govuk-input--width-2 ${form(id).errors.find(_.message == s"$id.day").map(_ => " govuk-input--error").getOrElse("")}"
         ),
         InputItem(
             name = form("month").name,
-            label = Some(messages("datePropertyChanged.date.month")),
+            label = Some(messages("date.input.month")),
             value = form(s"$id-month").value,
             classes = s"govuk-input--width-2 ${form(id).errors.find(_.message == s"$id.month").map(_ => " govuk-input--error").getOrElse("")}"
         ),
         InputItem(
             name = form("year").name,
-            label = Some(messages("datePropertyChanged.date.year")),
+            label = Some(messages("date.input.year")),
             value = form(s"$id-year").value,
             classes = s"govuk-input--width-4 ${form(id).errors.find(_.message == s"$id.year").map(_ => " govuk-input--error").getOrElse("")}"
         )

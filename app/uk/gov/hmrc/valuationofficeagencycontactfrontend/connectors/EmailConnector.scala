@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,11 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors
 import play.api.Logging
 import play.api.http.Status.{ACCEPTED, OK}
 import play.api.i18n.Messages
-import play.api.libs.json.{JsObject, JsValue, Json}
-import uk.gov.hmrc.http.{HeaderCarrier, HttpClient, HttpReads, HttpResponse}
+import play.api.libs.json.{JsObject, Json}
+import play.api.libs.ws.writeableOf_JsValue
+import uk.gov.hmrc.http.HttpReads.Implicits.*
+import uk.gov.hmrc.http.client.HttpClientV2
+import uk.gov.hmrc.http.{HeaderCarrier, HttpReads, HttpResponse, StringContextOps}
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.DataRequest
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Contact, ContactWithEnMessage}
@@ -33,14 +36,20 @@ import scala.concurrent.{ExecutionContext, Future}
   * @author Yuriy Tumakha
   */
 @Singleton
-class EmailConnector @Inject() (servicesConfig: ServicesConfig, http: HttpClient)(implicit ec: ExecutionContext, dateUtil: DateUtil) extends Logging {
+class EmailConnector @Inject() (
+  servicesConfig: ServicesConfig,
+  httpClientV2: HttpClientV2
+)(implicit ec: ExecutionContext,
+  dateUtil: DateUtil
+) extends Logging:
 
-  private val emailServiceBaseUrl        = servicesConfig.baseUrl("email")
-  private val sendEmailUrl               = s"$emailServiceBaseUrl/hmrc/email"
-  private val cf_enquiry_confirmation    = "cf_enquiry_confirmation"
-  private val cf_enquiry_confirmation_cy = "cf_enquiry_confirmation_cy"
+  private val emailServiceBaseUrl                     = servicesConfig.baseUrl("email")
+  private val sendEmailUrl                            = s"$emailServiceBaseUrl/hmrc/email"
+  private val cf_enquiry_confirmation                 = "cf_enquiry_confirmation"
+  private val cf_enquiry_confirmation_cy              = "cf_enquiry_confirmation_cy"
+  private val jsonContentTypeHeader: (String, String) = "Content-Type" -> "application/json"
 
-  def sendEnquiryConfirmation(contact: Contact)(implicit request: DataRequest[?], messages: Messages, hc: HeaderCarrier): Future[HttpResponse] = {
+  def sendEnquiryConfirmation(contact: Contact)(implicit request: DataRequest[?], messages: Messages, hc: HeaderCarrier): Future[HttpResponse] =
     val parameters = getParametersJson(contact, request.userAnswers.existingEnquiryCategory.isDefined)
 
     val templateId = messages.lang.language match {
@@ -48,9 +57,8 @@ class EmailConnector @Inject() (servicesConfig: ServicesConfig, http: HttpClient
       case _    => cf_enquiry_confirmation
     }
     sendEmail(contact.contact.email, templateId, parameters)
-  }
 
-  private def getParametersJson(contact: Contact, isUpdateExistingEnquiry: Boolean)(implicit messages: Messages): JsObject = {
+  private def getParametersJson(contact: Contact, isUpdateExistingEnquiry: Boolean)(implicit messages: Messages): JsObject =
     val submissionDate = dateUtil.nowInUK
     Json.obj(
       "recipientName_FullName" -> contact.contact.fullName,
@@ -59,13 +67,11 @@ class EmailConnector @Inject() (servicesConfig: ServicesConfig, http: HttpClient
       "submissionTime"         -> submissionDate.format(dateUtil.timeFormatter),
       "nextStep"               -> getNextStepText(isUpdateExistingEnquiry)
     )
-  }
 
-  private def getEnquirySubject(contact: Contact, isUpdateExistingEnquiry: Boolean)(implicit messages: Messages): String = {
+  private def getEnquirySubject(contact: Contact, isUpdateExistingEnquiry: Boolean)(implicit messages: Messages): String =
     val category    = ContactWithEnMessage.enquiryCategory(contact)
     val subCategory = ContactWithEnMessage.enquirySubCategory(contact, isUpdateExistingEnquiry)
     s"$category - $subCategory"
-  }
 
   private def getNextStepText(isUpdateExistingEnquiry: Boolean)(implicit messages: Messages): String =
     if isUpdateExistingEnquiry then
@@ -73,24 +79,21 @@ class EmailConnector @Inject() (servicesConfig: ServicesConfig, http: HttpClient
     else
       messages("confirmation.new.p1")
 
-  private def sendEmail(email: String, templateId: String, parametersJson: JsObject)(implicit hc: HeaderCarrier): Future[HttpResponse] = {
-    val json    = Json.obj(
+  private def sendEmail(email: String, templateId: String, parametersJson: JsObject)(implicit hc: HeaderCarrier): Future[HttpResponse] =
+    val json = Json.obj(
       "to"         -> Seq(email),
       "templateId" -> templateId,
       "parameters" -> parametersJson
     )
-    val headers = Seq("Content-Type" -> "application/json")
 
-    // The default HttpReads will wrap the response in an exception and make the body inaccessible
-    implicit val responseReads: HttpReads[HttpResponse] = (_, _, response: HttpResponse) => response
-
-    http.POST[JsValue, HttpResponse](sendEmailUrl, json, headers).map { res =>
-      res.status match {
-        case OK | ACCEPTED => logger.info(s"Send email to user successful: ${res.status}")
-        case _             => logger.error(s"Send email to user FAILED: ${res.status} ${res.body}")
+    httpClientV2.post(url"$sendEmailUrl")
+      .withBody(json)
+      .setHeader(jsonContentTypeHeader)
+      .execute[HttpResponse]
+      .map { res =>
+        res.status match {
+          case OK | ACCEPTED => logger.info(s"Send email to user successful: ${res.status}")
+          case _             => logger.error(s"Send email to user FAILED: ${res.status} ${res.body}")
+        }
+        res
       }
-      res
-    }
-  }
-
-}

@@ -3,10 +3,10 @@ import sbt.*
 
 object AppDependencies {
 
-  private val bootstrapPlayVersion = "10.4.0"
-  private val playFrontendHmrc     = "12.22.0"
+  private val bootstrapPlayVersion = "10.5.0"
+  private val playFrontendHmrc     = "12.27.0"
   private val hmrcMongoVersion     = "2.11.0"
-  private val commonsTextVersion   = "1.14.0"
+  private val commonsTextVersion   = "1.15.0"
 
   // Test dependencies
   private val scalaTestVersion            = "3.2.19"

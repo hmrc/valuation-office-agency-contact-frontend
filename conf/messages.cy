@@ -1,10 +1,6 @@
 checkYourAnswers.title = Gwiriwch eich atebion - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
 checkYourAnswers.heading = Gwiriwch eich atebion
  
-date.day = Diwrnod
-date.month = Mis
-date.year = Blwyddyn
- 
 hintText.optional = (opsiynol)
 
 error.title = Gwall:
@@ -885,10 +881,6 @@ datePropertyChanged.error.month.range = Rhaid i’r dyddiad gael mis sy’n rhif
 
 datePropertyChanged.error.year.number = Rhaid i’r dyddiad gael blwyddyn sy’n rhif
 datePropertyChanged.error.year.range = Rhaid i’r dyddiad fod ar neu ar ôl 1 Ionawr 1900
-
-datePropertyChanged.date.day = Dydd
-datePropertyChanged.date.month = Mis
-datePropertyChanged.date.year = Blwyddyn
 
 error400.title = Page not found - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
 error400.heading = Page not found
