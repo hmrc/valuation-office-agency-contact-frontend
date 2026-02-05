@@ -1,11 +1,12 @@
 import org.irundaia.sbt.sass.Minified
 import play.sbt.routes.RoutesKeys
 import sbt.*
+import uk.gov.hmrc.DefaultBuildSettings.targetJvm
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin
 
 val appName = "valuation-office-agency-contact-frontend"
 
-ThisBuild / scalaVersion := "3.7.4"
+ThisBuild / scalaVersion := "3.8.1"
 ThisBuild / majorVersion := 1
 
 lazy val microservice = Project(appName, file("."))
@@ -17,6 +18,7 @@ lazy val microservice = Project(appName, file("."))
     libraryDependencies ++= AppDependencies.appDependencies,
     Test / fork := true,
     maintainer := "voa.service.optimisation@digital.hmrc.gov.uk",
+    targetJvm := "jvm-21",
     scalacOptions += "-Wconf:src=routes/.*:s",
     scalacOptions += "-Wconf:msg=Flag .* set repeatedly:s",
     scalacOptions += "-Wconf:msg=Implicit parameters should be provided with a \\`using\\` clause&src=views/.*:s",
