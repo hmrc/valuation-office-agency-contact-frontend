@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,10 +35,11 @@ import scala.util.matching.Regex
   */
 abstract class TellUsMorePage(val key: String, val fieldId: String) extends Page[String] {
 
-  val form: Form[String] = Form(single(fieldId -> text
-    .verifying(Constraints.nonEmpty(errorMessage = errorRequired))
-    .verifying(Constraints.pattern(textareaRegex, error = errorPattern))
-    .verifying(Constraints.maxLength(maxChars, errorMaxLength))))
+  val form: Form[String] = Form(single(fieldId ->
+    text
+      .verifying(Constraints.nonEmpty(errorMessage = errorRequired))
+      .verifying(Constraints.pattern(textareaRegex, error = errorPattern))
+      .verifying(Constraints.maxLength(maxChars, errorMaxLength))))
 
   def getValue: UserAnswers => Option[String] = _.getString(key)
 
