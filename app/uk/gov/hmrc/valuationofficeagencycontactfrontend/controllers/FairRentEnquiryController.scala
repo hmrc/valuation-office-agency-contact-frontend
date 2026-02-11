@@ -28,13 +28,12 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views
   .html.{checkFairRentApplication => check_fair_rent_application, fairRentEnquiry => fair_rent_enquiry, submitFairRentApplication => submit_fair_rent_application}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
 class FairRentEnquiryController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   auditService: AuditingService,
   dataCacheConnector: DataCacheConnector,
@@ -56,14 +55,14 @@ class FairRentEnquiryController @Inject() (
         case None        => FairRentEnquiryForm()
         case Some(value) => FairRentEnquiryForm().fill(value)
       }
-      Ok(fairRentEnquiry(appConfig, preparedForm, mode))
+      Ok(fairRentEnquiry(preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       FairRentEnquiryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(fairRentEnquiry(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(fairRentEnquiry(formWithErrors, mode))),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "fairRents" -> value)
           dataCacheConnector.save[String](request.sessionId, FairRentEnquiryId.toString, value).map(cacheMap =>

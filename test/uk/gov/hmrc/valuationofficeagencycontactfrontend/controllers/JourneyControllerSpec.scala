@@ -32,16 +32,17 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.journey.{cate
 
 class JourneyControllerSpec extends ControllerSpecBase {
 
-  val pageKey = HousingBenefitAllowancesRouter.key
-  val form    = HousingBenefitAllowancesRouter.form
+  private val pageKey = HousingBenefitAllowancesRouter.key
+  private val form    = HousingBenefitAllowancesRouter.form
 
   def userAnswers                                  = new UserAnswers(emptyCacheMap)
   def categoryRouterTemplate: categoryRouter       = inject[categoryRouter]
   def singleTextareaTemplate: singleTextarea       = inject[singleTextarea]
   def customizedContentTemplate: customizedContent = inject[customizedContent]
   def notImplementedTemplate: notImplemented       = inject[notImplemented]
-  private def journeyMap                           = inject[JourneyMap]
-  private def auditService                         = inject[AuditingService]
+
+  private def journeyMap   = inject[JourneyMap]
+  private def auditService = inject[AuditingService]
 
   private def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new JourneyController(

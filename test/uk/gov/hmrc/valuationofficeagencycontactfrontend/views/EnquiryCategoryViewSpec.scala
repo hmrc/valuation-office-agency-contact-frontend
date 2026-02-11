@@ -29,10 +29,10 @@ class EnquiryCategoryViewSpec extends ViewBehaviours {
 
   val messageKeyPrefix = "enquiryCategory"
 
-  def createView: () => HtmlFormat.Appendable = () => enquiryCategory(frontendAppConfig, EnquiryCategoryForm(), NormalMode)(using fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable = () => enquiryCategory(EnquiryCategoryForm(), NormalMode)(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => enquiryCategory(frontendAppConfig, form, NormalMode)(using fakeRequest, messages)
+    (form: Form[String]) => enquiryCategory(form, NormalMode)(using fakeRequest, messages)
 
   "EnquiryCategory view" must {
     behave like normalPage(createView, messageKeyPrefix)

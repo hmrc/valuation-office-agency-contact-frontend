@@ -18,6 +18,7 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions
 
 import com.google.inject.{ImplementedBy, Inject}
 import play.api.mvc.{ActionBuilder, ActionTransformer, AnyContent, BodyParser, ControllerComponents, Request}
+import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.requests.OptionalDataRequest
@@ -29,7 +30,7 @@ class DataRetrievalActionImpl @Inject() (val dataCacheConnector: DataCacheConnec
   extends DataRetrievalAction {
 
   override protected def transform[A](request: Request[A]): Future[OptionalDataRequest[A]] = {
-    implicit val hc = HeaderCarrierConverter.fromRequestAndSession(request, request.session)
+    implicit val hc: HeaderCarrier = HeaderCarrierConverter.fromRequestAndSession(request, request.session)
 
     hc.sessionId match {
       case None            => Future.failed(new IllegalStateException())

@@ -26,7 +26,7 @@ class AnnexeSelfContainedEnquiryViewSpec extends ViewBehaviours {
 
   def councilTaxAnnexSelfContained: annexeSelfContainedEnquiry = app.injector.instanceOf[annex_self_contained_enquiry]
 
-  def view: () => HtmlFormat.Appendable = () => councilTaxAnnexSelfContained(frontendAppConfig, AnnexeSelfContainedForm())(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxAnnexSelfContained(AnnexeSelfContainedForm())(using fakeRequest, messages)
 
   "Council Tax Bill view" must {
     behave like normalPage(view, "annexeSelfContainedEnquiry", "title", "heading", "hint", "form.yes", "form.no")

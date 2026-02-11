@@ -20,7 +20,7 @@ import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSelfCateringForm
@@ -35,7 +35,6 @@ import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
 class BusinessRatesSelfCateringController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   auditService: AuditingService,
   dataCacheConnector: DataCacheConnector,
@@ -58,14 +57,14 @@ class BusinessRatesSelfCateringController @Inject() (
         case Some(value) => BusinessRatesSelfCateringForm().fill(value)
       }
 
-      Ok(businessRatesSelfCateringEnquiry(appConfig, preparedForm, mode))
+      Ok(businessRatesSelfCateringEnquiry(preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       BusinessRatesSelfCateringForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(businessRatesSelfCateringEnquiry(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(businessRatesSelfCateringEnquiry(formWithErrors, mode))),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering" -> value)
           dataCacheConnector.save[String](request.sessionId, BusinessRatesSelfCateringId.toString, value).map(cacheMap =>
@@ -77,12 +76,12 @@ class BusinessRatesSelfCateringController @Inject() (
 
   def onEngLetsPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      Ok(propertyEnglandLets(appConfig))
+      Ok(propertyEnglandLets())
   }
 
   def onWalLetsPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      Ok(propertyWalesLets(appConfig))
+      Ok(propertyWalesLets())
   }
 
 }

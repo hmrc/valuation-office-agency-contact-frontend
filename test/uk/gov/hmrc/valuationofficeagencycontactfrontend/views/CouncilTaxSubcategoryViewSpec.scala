@@ -30,10 +30,10 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
   val messageKeyPrefix = "councilTaxSubcategory"
 
   def createView: () => HtmlFormat.Appendable =
-    () => councilTaxSubcategory(frontendAppConfig, CouncilTaxSubcategoryForm(), NormalMode)(using fakeRequest, messages)
+    () => councilTaxSubcategory(CouncilTaxSubcategoryForm(), NormalMode)(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => councilTaxSubcategory(frontendAppConfig, form, NormalMode)(using fakeRequest, messages)
+    (form: Form[String]) => councilTaxSubcategory(form, NormalMode)(using fakeRequest, messages)
 
   "CouncilTaxSubcategory view" when {
     "rendered" must {

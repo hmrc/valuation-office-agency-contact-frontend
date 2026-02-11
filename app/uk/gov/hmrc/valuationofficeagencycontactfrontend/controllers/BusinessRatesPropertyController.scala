@@ -28,13 +28,12 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesPropertyEnquiry => business_rates_property_enquiry}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesNonBusiness => business_rates_non_business}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
 class BusinessRatesPropertyController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   auditService: AuditingService,
   dataCacheConnector: DataCacheConnector,
@@ -56,14 +55,14 @@ class BusinessRatesPropertyController @Inject() (
         case Some(value) => BusinessRatesPropertyForm().fill(value)
       }
 
-      Ok(businessRatesPropertyEnquiry(appConfig, preparedForm, mode))
+      Ok(businessRatesPropertyEnquiry(preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       BusinessRatesPropertyForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(businessRatesPropertyEnquiry(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(businessRatesPropertyEnquiry(formWithErrors, mode))),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesPropertyEnquiry" -> value)
           dataCacheConnector.save[String](request.sessionId, BusinessRatesPropertyEnquiryId.toString, value).map(cacheMap =>
@@ -75,6 +74,6 @@ class BusinessRatesPropertyController @Inject() (
 
   def onNonBusinessPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      Ok(businessRatesNonBusiness(appConfig))
+      Ok(businessRatesNonBusiness())
   }
 }

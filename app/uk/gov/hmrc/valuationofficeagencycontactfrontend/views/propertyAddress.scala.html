@@ -20,7 +20,6 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
@@ -35,13 +34,13 @@
         govukInput: GovukInput, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
         govukFieldset: GovukFieldset)
 
-@(appConfig: FrontendAppConfig, form: Form[PropertyAddress], mode: Mode, helpTextKey: Option[String] = None)(implicit request: Request[?], messages: Messages)
+@(form: Form[PropertyAddress], mode: Mode, helpTextKey: Option[String] = None)(implicit request: Request[?], messages: Messages)
 
 @textInput(id: String, optional: Boolean, classes: String, autoCompleteLabel: String) = {
     @govukInput(Input(
         id=id, name=id, inputType = "text", value = form(id).value, classes=classes, autocomplete=Some(autoCompleteLabel),
-        label = if(optional) Label(content = Text(s"${messages(s"propertyAddress.${id}")} ${messages("hintText.optional")}"))
-                    else Label(content = Text(messages(s"propertyAddress.${id}"))),
+        label = if(optional) Label(content = Text(s"${messages(s"propertyAddress.$id")} ${messages("hintText.optional")}"))
+                    else Label(content = Text(messages(s"propertyAddress.$id"))),
         errorMessage = form.errors.asTextErrorMessageForField(id)
     ))
 }
@@ -59,16 +58,16 @@
       }
     }
 
-    @textInput("addressLine1", false, "govuk-input--width-30", "address-line1")
-    @textInput("addressLine2", true, classes = "govuk-input--width-30", "address-line2")
-    @textInput("town", false, "govuk-!-width-two-thirds", "address-level2")
-    @textInput("county", true, "govuk-!-width-two-thirds", "address-level1")
-    @textInput("postcode", false, "govuk-input--width-10", "postal-code")
+    @textInput("addressLine1", optional = false, "govuk-input--width-30", "address-line1")
+    @textInput("addressLine2", optional = true, classes = "govuk-input--width-30", "address-line2")
+    @textInput("town", optional = false, "govuk-!-width-two-thirds", "address-level2")
+    @textInput("county", optional = true, "govuk-!-width-two-thirds", "address-level1")
+    @textInput("postcode", optional = false, "govuk-input--width-10", "postal-code")
 }
 
 
 @mainTemplate(
-    pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + messages("propertyAddress.title")) else messages("propertyAddress.title")),
+    pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("propertyAddress.title") else messages("propertyAddress.title")),
     backLink = Some(BackLink(href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(mode).url))
 ) {
     @formWithCSRF(action = PropertyAddressController.onSubmit(mode)) {

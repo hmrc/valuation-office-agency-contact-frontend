@@ -21,7 +21,6 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxSubcategoryForm
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
@@ -33,11 +32,11 @@
         govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
 
 
-@(appConfig: FrontendAppConfig, form: Form[String], mode: Mode)(implicit request: Request[?], messages: Messages)
+@(form: Form[String], mode: Mode)(implicit request: Request[?], messages: Messages)
 
 
 @mainTemplate(
-    pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + messages("councilTaxSubcategory.title")) else messages("councilTaxSubcategory.title")),
+    pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("councilTaxSubcategory.title") else messages("councilTaxSubcategory.title")),
     backLink = Some(BackLink(href = EnquiryCategoryController.onPageLoad(mode).url))
 ) {
     @formWithCSRF(action = CouncilTaxSubcategoryController.onSubmit(mode), Symbol("autoComplete") -> "off") {
@@ -60,7 +59,7 @@
                 content = Text(messages(i.messageKey)),
                 id = Option(i.id),
                 value = Option(i.value),
-                checked = form("value").value.map(_ == i.value).getOrElse(false)
+                checked = form("value").value.contains(i.value)
             )
             ),
             errorMessage = form.errors.asTextErrorMessageForField("value")

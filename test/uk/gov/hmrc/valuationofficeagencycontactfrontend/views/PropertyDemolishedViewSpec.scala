@@ -25,7 +25,7 @@ class PropertyDemolishedViewSpec extends ViewBehaviours {
 
   def propertyDemolished: html.propertyDemolished = app.injector.instanceOf[property_demolished]
 
-  def view: () => HtmlFormat.Appendable = () => propertyDemolished(frontendAppConfig)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => propertyDemolished()(using fakeRequest, messages)
 
   "Property Demolished view" must {
     behave like normalPage(

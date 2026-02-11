@@ -54,7 +54,6 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
   def view1: () => HtmlFormat.Appendable = () =>
     checkYourAnswers(
-      frontendAppConfig,
       Seq(AnswerSection(
         None,
         Seq(
@@ -70,7 +69,6 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
   def view2: () => HtmlFormat.Appendable = () =>
     checkYourAnswers(
-      frontendAppConfig,
       Seq(AnswerSection(
         None,
         Seq(
@@ -86,7 +84,6 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
   def view3: () => HtmlFormat.Appendable = () =>
     checkYourAnswers(
-      frontendAppConfig,
       Seq(AnswerSection(
         None,
         Seq(
@@ -195,25 +192,25 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
       val subcategoryLink = doc.getElementsByClass("change-link-1").first().attr("href")
       subcategoryLink mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(
         NormalMode
-      ).url.toString
+      ).url
     }
 
     "has a link marked with site.edit for changing the contact details" in {
       val doc                = asDocument(view1())
       val contactDetailsLink = doc.getElementsByClass("change-link-2").first().attr("href")
-      contactDetailsLink mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(CheckMode).url.toString
+      contactDetailsLink mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.ContactDetailsController.onPageLoad(CheckMode).url
     }
 
     "has a link marked with site.edit for changing the property details" in {
       val doc                = asDocument(view2())
       val contactDetailsLink = doc.getElementsByClass("change-link-3").first().attr("href")
-      contactDetailsLink mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(CheckMode).url.toString
+      contactDetailsLink mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyAddressController.onPageLoad(CheckMode).url
     }
 
     "has a link marked with site.edit for changing the enquiry message" in {
       val doc                = asDocument(view2())
       val contactDetailsLink = doc.getElementsByClass("change-link-4").first().attr("href")
-      contactDetailsLink mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(CheckMode).url.toString
+      contactDetailsLink mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.TellUsMoreController.onPageLoad(CheckMode).url
     }
 
     "has a link marked with site.edit for changing the business rates subcategory option" in {
@@ -221,7 +218,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
       val subcategoryLink = doc.getElementsByClass("change-link-1").first().attr("href")
       subcategoryLink mustBe uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(
         NormalMode
-      ).url.toString
+      ).url
     }
 
     "it shouldn't have a href element with id change-link-0 so the user cannot change the enquiry type" in {

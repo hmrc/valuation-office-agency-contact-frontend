@@ -96,7 +96,7 @@ class LightweightContactEventsConnectorSpec extends SpecBase with MockitoSugar:
         headerCarrierNapper.getValue.nsStamp mustBe headerCarrierStub.nsStamp
       }
 
-      "return a 200 status when the send method is successfull using contactModel" in {
+      "return a 200 status when the send method is successful using contactModel" in {
         val connector = new LightweightContactEventsConnector(getHttpMock(OK), auditService, servicesConfig)
         val result    = await(connector.send(contactModel, messagesApi, userAnswers)(using HeaderCarrier()))
         result.isSuccess mustBe true

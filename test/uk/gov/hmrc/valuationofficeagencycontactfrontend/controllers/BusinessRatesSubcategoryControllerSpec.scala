@@ -53,7 +53,6 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new BusinessRatesSubcategoryController(
-      frontendAppConfig,
       messagesApi,
       auditService,
       fakeDataCacheConnector,
@@ -66,7 +65,7 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
     )
 
   def viewAsString(form: Form[String] = BusinessRatesSubcategoryForm()): String =
-    businessRatesSubcategory(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
+    businessRatesSubcategory(form, NormalMode)(using fakeRequest, messages).toString
 
   "BusinessRatesSubcategory Controller" must {
 
@@ -109,7 +108,7 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
       val result = controller().onValuationPageLoad(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe businessRatesValuation(frontendAppConfig)(using fakeRequest, messages).toString()
+      contentAsString(result) mustBe businessRatesValuation()(using fakeRequest, messages).toString()
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {

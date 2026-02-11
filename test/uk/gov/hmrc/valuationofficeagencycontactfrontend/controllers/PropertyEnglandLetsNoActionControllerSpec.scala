@@ -41,7 +41,6 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with 
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new PropertyEnglandLetsNoActionController(
-      frontendAppConfig,
       messagesApi,
       dataRetrievalAction,
       new DataRequiredActionImpl(ec),
@@ -52,7 +51,7 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with 
   def englandActualBackLink: String = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyEnglandActualLetsController.onPageLoad().url
 
   def viewAsStringNoAction(form: Form[ContactDetails] = ContactDetailsForm()): String =
-    propertyEnglandLetsNoAction(frontendAppConfig, englandActualBackLink)(using fakeRequest, messages).toString
+    propertyEnglandLetsNoAction(englandActualBackLink)(using fakeRequest, messages).toString
 
   "England Lets No Action Controller" must {
 
@@ -140,7 +139,7 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with 
       intercept[Exception] {
         val result = controller().onPageLoad(NormalMode)(fakeRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
       }
 
     "redirect to Session Expired for a GET if no existing data is found" in {

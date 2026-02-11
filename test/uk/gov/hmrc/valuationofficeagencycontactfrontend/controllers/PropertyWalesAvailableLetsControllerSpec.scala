@@ -44,7 +44,6 @@ class PropertyWalesAvailableLetsControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new PropertyWalesAvailableLetsController(
-      frontendAppConfig,
       messagesApi,
       auditService,
       FakeDataCacheConnector,
@@ -59,7 +58,7 @@ class PropertyWalesAvailableLetsControllerSpec extends ControllerSpecBase {
   def wales140DaysBackLink: String = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad().url
 
   def viewAsString(form: Form[String] = PropertyEnglandAvailableLetsForm()): String =
-    propertyWalesLets140DaysEnquiry(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
+    propertyWalesLets140DaysEnquiry(form, NormalMode)(using fakeRequest, messages).toString
 
   "PropertyWalesLets140DaysController" must {
 

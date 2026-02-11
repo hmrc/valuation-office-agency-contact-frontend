@@ -25,7 +25,7 @@ class ValuationForTaxesViewSpec extends ViewBehaviours {
 
   def valuationForTaxes: html.valuationForTaxes = app.injector.instanceOf[valuation_for_taxes]
 
-  def view: () => HtmlFormat.Appendable = () => valuationForTaxes(frontendAppConfig)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => valuationForTaxes()(using fakeRequest, messages)
 
   "Valuation For Taxes view" must {
 
@@ -42,7 +42,7 @@ class ValuationForTaxesViewSpec extends ViewBehaviours {
     "The Start again link links to the Enquiry Category Controller onPageLoad method" in {
       val doc  = asDocument(view())
       val href = doc.getElementsByClass("govuk-link").attr("href")
-      assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.Application.start().url.toString || href.contains(
+      assert(href == uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.Application.start().url || href.contains(
         "/hmrc-frontend/language/cy"
       ))
     }

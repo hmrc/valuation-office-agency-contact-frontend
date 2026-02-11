@@ -26,7 +26,7 @@ object EnquiryDateForm extends FormErrorHelper {
 
   private val minusDays = 28
 
-  def enquiryDateFormatter()(implicit messages: Messages, dateUtil: DateUtil): Formatter[String] = new Formatter[String] {
+  private def enquiryDateFormatter()(implicit messages: Messages, dateUtil: DateUtil): Formatter[String] = new Formatter[String] {
 
     override def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)

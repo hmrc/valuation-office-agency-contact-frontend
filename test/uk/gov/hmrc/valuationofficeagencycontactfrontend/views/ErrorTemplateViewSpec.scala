@@ -20,7 +20,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.behaviours.ViewBeh
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.error_template
 import play.twirl.api.HtmlFormat
 
-class ErrorTemplateViewspec extends ViewBehaviours {
+class ErrorTemplateViewSpec extends ViewBehaviours {
 
   def errorTemplate: error_template = app.injector.instanceOf[error_template]
 

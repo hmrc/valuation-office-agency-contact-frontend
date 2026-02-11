@@ -25,7 +25,7 @@ class CouncilTaxPropertyEmptyViewSpec extends ViewBehaviours {
 
   def councilTaxPropertyEmpty: html.councilTaxPropertyEmpty = app.injector.instanceOf[council_tax_property_empty]
 
-  def view: () => HtmlFormat.Appendable = () => councilTaxPropertyEmpty(frontendAppConfig)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxPropertyEmpty()(using fakeRequest, messages)
 
   "Council Tax Property Empty view" must {
     behave like normalPage(view, "councilTaxPropertyEmpty", "title", "heading", "p1", "p2")

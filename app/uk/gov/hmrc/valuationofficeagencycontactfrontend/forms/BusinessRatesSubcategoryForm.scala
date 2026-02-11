@@ -16,22 +16,22 @@
 
 package uk.gov.hmrc.valuationofficeagencycontactfrontend.forms
 
-import play.api.data.Form
-import play.api.data.Forms._
+import play.api.data.{Form, FormError}
+import play.api.data.Forms.*
 import play.api.data.format.Formatter
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object BusinessRatesSubcategoryForm extends FormErrorHelper {
 
-  def businessRatesSubcategoryFormatter: Formatter[String] = new Formatter[String] {
+  private def businessRatesSubcategoryFormatter: Formatter[String] = new Formatter[String] {
 
-    def bind(key: String, data: Map[String, String]) = data.get(key) match {
+    def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)
       case None                        => produceError(key, "error.businessRatesSubcategory.required")
       case _                           => produceError(key, "error.unknown")
     }
 
-    def unbind(key: String, value: String) = Map(key -> value)
+    def unbind(key: String, value: String): Map[String, String] = Map(key -> value)
   }
 
   def apply(): Form[String] =

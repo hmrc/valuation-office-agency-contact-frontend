@@ -29,10 +29,10 @@ class CouncilTaxAnnexViewSpec extends ViewBehaviours {
 
   val messageKeyPrefix = "annexe"
 
-  def createView: () => HtmlFormat.Appendable = () => councilTaxAnnexe(frontendAppConfig, AnnexeForm(), NormalMode)(using fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable = () => councilTaxAnnexe(AnnexeForm(), NormalMode)(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => councilTaxAnnexe(frontendAppConfig, form, NormalMode)(using fakeRequest, messages)
+    (form: Form[String]) => councilTaxAnnexe(form, NormalMode)(using fakeRequest, messages)
 
   "CouncilTaxAnnex view" must {
     behave like normalPage(createView, messageKeyPrefix)

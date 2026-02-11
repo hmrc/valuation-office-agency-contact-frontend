@@ -23,7 +23,7 @@ import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxSubcategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, CouncilTaxSubcategoryId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
@@ -35,7 +35,6 @@ import play.api.mvc
 import play.api.mvc.AnyContent
 
 class CouncilTaxSubcategoryController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   auditService: AuditingService,
   dataCacheConnector: DataCacheConnector,
@@ -55,14 +54,14 @@ class CouncilTaxSubcategoryController @Inject() (
         case None        => CouncilTaxSubcategoryForm()
         case Some(value) => CouncilTaxSubcategoryForm().fill(value)
       }
-      Ok(councilTaxSubcategory(appConfig, preparedForm, mode))
+      Ok(councilTaxSubcategory(preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       CouncilTaxSubcategoryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(councilTaxSubcategory(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(councilTaxSubcategory(formWithErrors, mode))),
         value =>
           for {
             _        <- dataCacheConnector.remove(request.sessionId, BusinessRatesSubcategoryId.toString)

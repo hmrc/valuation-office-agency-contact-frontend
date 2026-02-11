@@ -24,7 +24,6 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{Dat
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyEnglandLetsNoAction => property_england_lets_no_action}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.ExecutionContext
@@ -33,7 +32,6 @@ import play.api.mvc.AnyContent
 
 @Singleton
 class PropertyEnglandLetsNoActionController @Inject() (
-  val appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
@@ -49,7 +47,7 @@ class PropertyEnglandLetsNoActionController @Inject() (
   def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       enquiryBackLink(request.userAnswers) match {
-        case Right(link) => Ok(propertyEnglandLetsNoAction(appConfig, link))
+        case Right(link) => Ok(propertyEnglandLetsNoAction(link))
         case Left(msg)   =>
           log.warn(s"Navigation for England No Action page reached with error $msg")
           throw new RuntimeException(s"Navigation for England No Action page reached with error $msg")

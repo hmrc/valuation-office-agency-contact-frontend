@@ -29,7 +29,7 @@ class CouncilTaxBusinessEnquiryViewSpec extends ViewBehaviours {
   def councilTaxBusinessEnquiry: html.councilTaxBusinessEnquiry = app.injector.instanceOf[council_tax_business_enquiry]
 
   def view: () => HtmlFormat.Appendable =
-    () => councilTaxBusinessEnquiry(frontendAppConfig, CouncilTaxBusinessEnquiryForm(), NormalMode, backlink)(using fakeRequest, messages)
+    () => councilTaxBusinessEnquiry(CouncilTaxBusinessEnquiryForm(), NormalMode, backlink)(using fakeRequest, messages)
 
   "Council Tax Bill view" must {
     behave like normalPage(view, "councilTaxBusinessEnquiry", "title", "heading", "form.all_property", "form.large_property", "form.small_property")

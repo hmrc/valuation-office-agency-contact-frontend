@@ -24,24 +24,25 @@ import scala.util.Try
 import java.util.regex.Pattern
 
 private[mappings] class LocalDateFormatter(key: String) extends Formatter[Option[LocalDate]] {
-  val testRegex: Pattern               = """\d+""".r.pattern
-  val earliestEffectiveDate: LocalDate = LocalDate.of(1900, 1, 1)
-  val yearMsg: String                  = s"$key.year"
-  val monthMsg: String                 = s"$key.month"
-  val dayMsg: String                   = s"$key.day"
-  val invalidDate: String              = s"$key.error.invalidDate"
-  val dayMonthRequired: String         = s"$key.error.mandatory.dayMonth"
-  val dayYearRequired: String          = s"$key.error.mandatory.dayYear"
-  val monthYearRequired: String        = s"$key.error.mandatory.monthYear"
-  val dayRequired: String              = s"$key.error.mandatory.day"
-  val monthRequired: String            = s"$key.error.mandatory.month"
-  val yearRequired: String             = s"$key.error.mandatory.year"
-  val yearRange: String                = s"$key.error.year.range"
-  val dayRange: String                 = s"$key.error.day.range"
-  val dayNumber: String                = s"$key.error.day.number"
-  val monthRange: String               = s"$key.error.month.range"
-  val monthNumber: String              = s"$key.error.month.number"
-  val yearNumber: String               = s"$key.error.year.number"
+  private val testRegex: Pattern               = """\d+""".r.pattern
+  private val earliestEffectiveDate: LocalDate = LocalDate.of(1900, 1, 1)
+  private val yearMsg: String                  = s"$key.year"
+  private val monthMsg: String                 = s"$key.month"
+  private val dayMsg: String                   = s"$key.day"
+
+  val invalidDate: String       = s"$key.error.invalidDate"
+  val dayMonthRequired: String  = s"$key.error.mandatory.dayMonth"
+  val dayYearRequired: String   = s"$key.error.mandatory.dayYear"
+  val monthYearRequired: String = s"$key.error.mandatory.monthYear"
+  val dayRequired: String       = s"$key.error.mandatory.day"
+  val monthRequired: String     = s"$key.error.mandatory.month"
+  val yearRequired: String      = s"$key.error.mandatory.year"
+  val yearRange: String         = s"$key.error.year.range"
+  val dayRange: String          = s"$key.error.day.range"
+  val dayNumber: String         = s"$key.error.day.number"
+  val monthRange: String        = s"$key.error.month.range"
+  val monthNumber: String       = s"$key.error.month.number"
+  val yearNumber: String        = s"$key.error.year.number"
 
   override def bind(key: String, data: Map[String, String]): Either[Seq[FormError], Option[LocalDate]] = {
     val yearValue  = data.get(s"$key-year").map(_.trim).filter(_ != "")
@@ -62,7 +63,7 @@ private[mappings] class LocalDateFormatter(key: String) extends Formatter[Option
     validation
   }
 
-  def validateDateField(key: String, day: String, month: String, year: String): Either[Seq[FormError], Option[LocalDate]] =
+  private def validateDateField(key: String, day: String, month: String, year: String): Either[Seq[FormError], Option[LocalDate]] =
     for {
       day       <- validateDay(key, day)
       month     <- validateMont(key, month)
@@ -80,7 +81,7 @@ private[mappings] class LocalDateFormatter(key: String) extends Formatter[Option
         }
     } yield finalDate
 
-  def validateDay(key: String, day: String): Either[Seq[FormError], Int] =
+  private def validateDay(key: String, day: String): Either[Seq[FormError], Int] =
     if testRegex.matcher(day).matches() then
       val intDay = day.toInt
       if intDay > 31 || intDay < 1 then
@@ -90,7 +91,7 @@ private[mappings] class LocalDateFormatter(key: String) extends Formatter[Option
     else
       Left(List(FormError(key, dayNumber), FormError(key, dayMsg)))
 
-  def validateMont(key: String, month: String): Either[Seq[FormError], Int] =
+  private def validateMont(key: String, month: String): Either[Seq[FormError], Int] =
     if testRegex.matcher(month).matches() then
       val intMonth = month.toInt
       if intMonth > 12 | intMonth < 1 then
@@ -100,7 +101,7 @@ private[mappings] class LocalDateFormatter(key: String) extends Formatter[Option
     else
       Left(List(FormError(key, monthNumber), FormError(key, monthMsg)))
 
-  def validateYear(key: String, year: String): Either[Seq[FormError], Int] =
+  private def validateYear(key: String, year: String): Either[Seq[FormError], Int] =
     if testRegex.matcher(year).matches() then
       val intYear = year.toInt
       if intYear < 1900 then

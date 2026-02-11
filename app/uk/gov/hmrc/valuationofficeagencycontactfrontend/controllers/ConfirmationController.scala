@@ -21,7 +21,7 @@ import play.api.Logger
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{EmailConnector, LightweightContactEventsConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ConfirmationController._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
@@ -38,7 +38,6 @@ import play.api.mvc.AnyContent
 
 @Singleton()
 class ConfirmationController @Inject() (
-  val appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   val connector: LightweightContactEventsConnector,
   emailConnector: EmailConnector,
@@ -86,7 +85,7 @@ class ConfirmationController @Inject() (
         throw new RuntimeException(s"On Page load - Navigation for Confirmation page reached without a contact and error $msg")
     }
 
-    Ok(confirmation(appConfig, contact, answerSections, whatHappensNextMessages(request.userAnswers), SatisfactionSurveyForm.apply()))
+    Ok(confirmation(contact, answerSections, whatHappensNextMessages(request.userAnswers), SatisfactionSurveyForm.apply()))
 
   }
 }

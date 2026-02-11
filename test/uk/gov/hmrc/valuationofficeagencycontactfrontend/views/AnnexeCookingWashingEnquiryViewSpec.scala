@@ -25,7 +25,7 @@ class AnnexeCookingWashingEnquiryViewSpec extends ViewBehaviours {
 
   def annexeCookingWashingEnquiry: html.annexeCookingWashingEnquiry = app.injector.instanceOf[annexe_cooking_washing_enquiry]
 
-  def view: () => HtmlFormat.Appendable = () => annexeCookingWashingEnquiry(frontendAppConfig, AnnexeSelfContainedForm())(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => annexeCookingWashingEnquiry(AnnexeSelfContainedForm())(using fakeRequest, messages)
 
   "AnnexeCookingWashingEnquiry view" must {
     behave like normalPage(view, "annexeCookingWashing", "title", "heading", "form.yes", "form.no")

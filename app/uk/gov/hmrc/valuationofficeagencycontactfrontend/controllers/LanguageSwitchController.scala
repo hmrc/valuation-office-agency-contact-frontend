@@ -19,20 +19,20 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import com.google.inject.Inject
 import play.api.i18n.{I18nSupport, Lang, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.play.language.{LanguageController, LanguageUtils}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 
 class LanguageSwitchController @Inject() (
-  appConfig: FrontendAppConfig,
   languageUtils: LanguageUtils,
   cc: MessagesControllerComponents
 )(implicit override val messagesApi: MessagesApi
 ) extends LanguageController(languageUtils, cc)
-  with I18nSupport {
+  with I18nSupport:
 
   override protected def fallbackURL: String = routes.EnquiryCategoryController.onPageLoad(NormalMode).url
 
-  override protected def languageMap: Map[String, Lang] = appConfig.languageMap
-
-}
+  override protected val languageMap: Map[String, Lang] =
+    Map(
+      "english" -> Lang("en"),
+      "cymraeg" -> Lang("cy")
+    )

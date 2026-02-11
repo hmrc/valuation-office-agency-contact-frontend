@@ -32,8 +32,6 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
 
   def injector: Injector = app.injector
 
-  def frontendAppConfig: FrontendAppConfig = injector.instanceOf[FrontendAppConfig]
-
   def messagesApi: MessagesApi = injector.instanceOf[MessagesApi]
 
   def fakeRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest("", "")

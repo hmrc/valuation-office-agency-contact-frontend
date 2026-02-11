@@ -26,12 +26,12 @@ class BusinessRatesBillControllerSpec extends ControllerSpecBase {
   def businessRatesBill: html.businessRatesBill = app.injector.instanceOf[business_rates_bill]
 
   def controller =
-    new BusinessRatesBillController(messagesApi, frontendAppConfig, businessRatesBill, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new BusinessRatesBillController(messagesApi, businessRatesBill, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   "BusinessRatesBillController" must {
     "return the correct view for a GET" in {
       val result = controller.onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe businessRatesBill(frontendAppConfig)(using fakeRequest, messages).toString
+      contentAsString(result) mustBe businessRatesBill()(using fakeRequest, messages).toString
     }
   }
 }

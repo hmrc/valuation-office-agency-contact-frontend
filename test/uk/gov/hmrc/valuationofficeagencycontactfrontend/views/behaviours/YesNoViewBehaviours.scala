@@ -24,7 +24,7 @@ trait YesNoViewBehaviours extends QuestionViewBehaviours[Boolean] {
 
   val form: Form[Boolean] = BooleanForm()
 
-  def yesNoPage(createView: (Form[Boolean]) => HtmlFormat.Appendable, messageKeyPrefix: String, expectedFormAction: String): Unit =
+  def yesNoPage(createView: Form[Boolean] => HtmlFormat.Appendable, messageKeyPrefix: String, expectedFormAction: String): Unit =
     "behave like a page with a Yes/No question" when {
       "rendered" must {
         "contain a legend for the question" in {
@@ -74,7 +74,7 @@ trait YesNoViewBehaviours extends QuestionViewBehaviours[Boolean] {
       }
     }
 
-  def answeredYesNoPage(createView: (Form[Boolean]) => HtmlFormat.Appendable, answer: Boolean): Unit = {
+  def answeredYesNoPage(createView: Form[Boolean] => HtmlFormat.Appendable, answer: Boolean): Unit = {
 
     "have only the correct value checked" in {
       val doc = asDocument(createView(BooleanForm().fill(answer)))

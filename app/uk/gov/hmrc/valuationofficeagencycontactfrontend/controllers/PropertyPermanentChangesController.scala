@@ -19,7 +19,6 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyPermanentChanges => property_permanent_changes}
 
@@ -27,7 +26,6 @@ import javax.inject.Inject
 import scala.concurrent.ExecutionContext
 
 class PropertyPermanentChangesController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   propertyPermanentChanges: property_permanent_changes,
   cc: MessagesControllerComponents
@@ -37,6 +35,6 @@ class PropertyPermanentChangesController @Inject() (
   implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoad(): Action[AnyContent] = Action { implicit request =>
-    Ok(propertyPermanentChanges(appConfig, NormalMode))
+    Ok(propertyPermanentChanges(NormalMode))
   }
 }

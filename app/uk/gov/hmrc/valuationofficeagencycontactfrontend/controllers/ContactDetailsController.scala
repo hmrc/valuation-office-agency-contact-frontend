@@ -24,7 +24,7 @@ import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactDetailsForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.ContactDetailsId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.TellUsMorePage.lastTellUsMorePage
@@ -38,7 +38,6 @@ import play.api.mvc
 import play.api.mvc.AnyContent
 
 class ContactDetailsController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   dataCacheConnector: DataCacheConnector,
   navigator: Navigator,
@@ -60,7 +59,7 @@ class ContactDetailsController @Inject() (
         case Some(value) => ContactDetailsForm().fill(value)
       }
       enquiryBackLink(request.userAnswers) match {
-        case Right(link) => Ok(contactDetails(appConfig, preparedForm, mode, link))
+        case Right(link) => Ok(contactDetails(preparedForm, mode, link))
         case Left(msg)   =>
           log.warn(s"Navigation for Contact Details page reached with error $msg")
           throw new RuntimeException(s"Navigation for Contact Details page reached with error $msg")
@@ -73,7 +72,7 @@ class ContactDetailsController @Inject() (
       ContactDetailsForm().bindFromRequest().fold(
         (formWithErrors: Form[ContactDetails]) =>
           Future.successful(enquiryBackLink(request.userAnswers) match {
-            case Right(link) => BadRequest(contactDetails(appConfig, formWithErrors, mode, link))
+            case Right(link) => BadRequest(contactDetails(formWithErrors, mode, link))
             case Left(msg)   =>
               log.warn(s"Navigation for Contact Details page reached with error $msg")
               throw new RuntimeException(s"Navigation for Contact Details page reached with error $msg")

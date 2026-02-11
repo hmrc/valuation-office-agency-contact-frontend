@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.valuationofficeagencycontactfrontend
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.utils
 
 import org.scalatestplus.mockito.MockitoSugar
 import play.api.i18n.{Lang, Messages}
@@ -27,7 +27,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{CheckYourAnswersH
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.AnswerRow
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters._
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.ContactFormatter._
-
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.SpecBase
 import java.util.Locale
 
 class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {

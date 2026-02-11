@@ -20,7 +20,7 @@ import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyEnglandAvailableLetsForm
@@ -35,7 +35,6 @@ import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
 class PropertyEnglandAvailableLetsController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   auditService: AuditingService,
   dataCacheConnector: DataCacheConnector,
@@ -57,14 +56,14 @@ class PropertyEnglandAvailableLetsController @Inject() (
         case None        => PropertyEnglandAvailableLetsForm()
         case Some(value) => PropertyEnglandAvailableLetsForm().fill(value)
       }
-      Ok(propertyEnglandAvailableLets(appConfig, preparedForm, mode))
+      Ok(propertyEnglandAvailableLets(preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       PropertyEnglandAvailableLetsForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(propertyEnglandAvailableLets(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(propertyEnglandAvailableLets(formWithErrors, mode))),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering140DaysEN" -> value)
           dataCacheConnector.save[String](request.sessionId, PropertyEnglandAvailableLetsId.toString, value).map(cacheMap =>
@@ -76,7 +75,7 @@ class PropertyEnglandAvailableLetsController @Inject() (
 
   def onWalLetsPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      Ok(propertyWalesLets(appConfig))
+      Ok(propertyWalesLets())
   }
 
 }

@@ -20,12 +20,10 @@ import javax.inject.Inject
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBill => council_tax_bill}
 
 class CouncilTaxBillController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
@@ -36,6 +34,6 @@ class CouncilTaxBillController @Inject() (
 
   def onPageLoad(): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      Ok(councilTaxBill(appConfig))
+      Ok(councilTaxBill())
   }
 }

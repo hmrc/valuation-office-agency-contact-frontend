@@ -49,7 +49,6 @@ class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with Mockit
     when(fakeDataCacheConnector.remove(any[String], any[String]))
       .thenReturn(Future.successful(true))
     new CouncilTaxSubcategoryController(
-      frontendAppConfig,
       messagesApi,
       auditService,
       fakeDataCacheConnector,
@@ -62,7 +61,7 @@ class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with Mockit
   }
 
   def viewAsString(form: Form[String] = CouncilTaxSubcategoryForm()): String =
-    councilTaxSubcategory(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
+    councilTaxSubcategory(form, NormalMode)(using fakeRequest, messages).toString
 
   "CouncilTaxSubcategory Controller" must {
 

@@ -45,7 +45,6 @@ class EnquiryDateControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new EnquiryDateController(
-      frontendAppConfig,
       messagesApi,
       new DataRequiredActionImpl(ec),
       dataRetrievalAction,
@@ -57,7 +56,7 @@ class EnquiryDateControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = EnquiryDateForm()): String =
-    enquiryDate(frontendAppConfig, form, EnquiryDateForm.beforeDate(), NormalMode)(using fakeRequest, messages).toString()
+    enquiryDate(form, EnquiryDateForm.beforeDate(), NormalMode)(using fakeRequest, messages).toString()
 
   "EnquiryDateController Controller" must {
 

@@ -47,7 +47,6 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new TellUsMoreController(
-      frontendAppConfig,
       messagesApi,
       FakeDataCacheConnector,
       new FakeNavigator(desiredRoute = onwardRoute),
@@ -58,7 +57,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
     )
 
   def viewAsString(form: Form[TellUsMore] = TellUsMoreForm(), msg: String = ""): String =
-    tellUsMore(frontendAppConfig, form, NormalMode, msg, backLink)(using fakeRequest, messages).toString
+    tellUsMore(form, NormalMode, msg, backLink)(using fakeRequest, messages).toString
 
   "TellUsMore Controller" must {
 
@@ -435,7 +434,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       intercept[Exception] {
         val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
       }
     }
 
@@ -443,7 +442,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       intercept[Exception] {
         val result = controller().onPageLoad(NormalMode)(fakeRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
       }
 
     "return Redirect for initAndStart" in {

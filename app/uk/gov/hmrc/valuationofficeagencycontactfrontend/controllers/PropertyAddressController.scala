@@ -23,7 +23,7 @@ import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyAddressForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyAddressId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, PropertyAddress}
@@ -35,7 +35,6 @@ import play.api.mvc
 import play.api.mvc.AnyContent
 
 class PropertyAddressController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   dataCacheConnector: DataCacheConnector,
   navigator: Navigator,
@@ -60,14 +59,14 @@ class PropertyAddressController @Inject() (
         case None        => PropertyAddressForm()
         case Some(value) => PropertyAddressForm().fill(value)
       }
-      Ok(propertyAddress(appConfig, preparedForm, mode, helpTextKey(request.userAnswers)))
+      Ok(propertyAddress(preparedForm, mode, helpTextKey(request.userAnswers)))
   }
 
   def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       PropertyAddressForm().bindFromRequest().fold(
         (formWithErrors: Form[PropertyAddress]) =>
-          Future.successful(BadRequest(propertyAddress(appConfig, formWithErrors, mode, helpTextKey(request.userAnswers)))),
+          Future.successful(BadRequest(propertyAddress(formWithErrors, mode, helpTextKey(request.userAnswers)))),
         value =>
           dataCacheConnector.save[PropertyAddress](request.sessionId, PropertyAddressId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(PropertyAddressId, mode).apply(new UserAnswers(cacheMap)))

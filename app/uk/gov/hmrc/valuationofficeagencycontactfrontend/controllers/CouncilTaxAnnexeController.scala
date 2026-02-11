@@ -21,7 +21,7 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CouncilTaxAnnexeSelfContainedEnquiryId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{AnnexeCookingWashingForm, AnnexeForm, AnnexeSelfContainedForm}
@@ -41,7 +41,6 @@ import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
 class CouncilTaxAnnexeController @Inject() (
-  val appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   auditService: AuditingService,
   dataCacheConnector: DataCacheConnector,
@@ -67,14 +66,14 @@ class CouncilTaxAnnexeController @Inject() (
         case None        => AnnexeForm()
         case Some(value) => AnnexeForm().fill(value)
       }
-      Ok(councilTaxAnnexe(appConfig, preparedForm, mode))
+      Ok(councilTaxAnnexe(preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = getData.async {
     implicit request =>
       AnnexeForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(councilTaxAnnexe(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(councilTaxAnnexe(formWithErrors, mode))),
         value =>
           for {
             _        <- dataCacheConnector.remove(request.sessionId, CouncilTaxAnnexeEnquiryId.toString)
@@ -88,7 +87,7 @@ class CouncilTaxAnnexeController @Inject() (
 
   def onRemovedPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      Ok(annexeRemoved(appConfig))
+      Ok(annexeRemoved())
   }
 
   def onSelfContainedEnquiryPageLoad: Action[AnyContent] = (getData andThen requireData) {
@@ -97,14 +96,14 @@ class CouncilTaxAnnexeController @Inject() (
         case None        => AnnexeSelfContainedForm()
         case Some(value) => AnnexeSelfContainedForm().fill(value)
       }
-      Ok(annexeSelfContainedEnquiry(appConfig, preparedForm))
+      Ok(annexeSelfContainedEnquiry(preparedForm))
   }
 
   def onSelfContainedSubmit: Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       AnnexeSelfContainedForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(annexeSelfContainedEnquiry(appConfig, formWithErrors))),
+          Future.successful(BadRequest(annexeSelfContainedEnquiry(formWithErrors))),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "annexeSelfContainedEnquiry" -> value)
           dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeSelfContainedEnquiryId.toString, value).map(cacheMap =>
@@ -116,17 +115,17 @@ class CouncilTaxAnnexeController @Inject() (
 
   def onNotSelfContainedPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      Ok(annexeNotSelfContained(appConfig))
+      Ok(annexeNotSelfContained())
   }
 
   def onFacilitiesPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      Ok(annexeNoFacilities(appConfig))
+      Ok(annexeNoFacilities())
   }
 
   def onSelfContainedPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      Ok(annexeSelfContained(appConfig))
+      Ok(annexeSelfContained())
   }
 
   def onHaveCookingWashingPageLoad: Action[AnyContent] = (getData andThen requireData) {
@@ -135,14 +134,14 @@ class CouncilTaxAnnexeController @Inject() (
         case None        => AnnexeCookingWashingForm()
         case Some(value) => AnnexeCookingWashingForm().fill(value)
       }
-      Ok(annexeCookingWashingEnquiry(appConfig, preparedForm))
+      Ok(annexeCookingWashingEnquiry(preparedForm))
   }
 
   def onHaveCookingWashingSubmit: Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       AnnexeCookingWashingForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(annexeCookingWashingEnquiry(appConfig, formWithErrors))),
+          Future.successful(BadRequest(annexeCookingWashingEnquiry(formWithErrors))),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "annexeCookingWashing" -> value)
           dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeHaveCookingId.toString, value).map(cacheMap =>

@@ -20,7 +20,6 @@ import javax.inject.{Inject, Singleton}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Request, RequestHeader}
 import play.twirl.api.Html
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.play.bootstrap.frontend.http.FrontendErrorHandler
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.error_template
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.error.page_not_found
@@ -31,7 +30,6 @@ import scala.language.implicitConversions
 
 @Singleton
 class ErrorHandler @Inject() (
-  appConfig: FrontendAppConfig,
   val messagesApi: MessagesApi,
   errorTemplate: error_template,
   pageNotFound: page_not_found,
@@ -47,17 +45,17 @@ class ErrorHandler @Inject() (
 
   override def badRequestTemplate(implicit rh: RequestHeader): Future[Html] =
     render { implicit request =>
-      pageNotFound(appConfig)
+      pageNotFound()
     }
 
   override def notFoundTemplate(implicit rh: RequestHeader): Future[Html] =
     render { implicit request =>
-      pageNotFound(appConfig)
+      pageNotFound()
     }
 
   override def internalServerErrorTemplate(implicit rh: RequestHeader): Future[Html] =
     render { implicit request =>
-      internalServerError(appConfig)
+      internalServerError()
     }
 
   private def render(template: Request[?] => Html)(implicit rh: RequestHeader): Future[Html] =

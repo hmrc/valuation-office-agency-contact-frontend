@@ -20,7 +20,7 @@ import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.AnythingElseForm
@@ -35,7 +35,6 @@ import play.api.mvc
 import play.api.mvc.AnyContent
 
 class AnythingElseTellUsController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   dataCacheConnector: DataCacheConnector,
   navigator: Navigator,
@@ -54,14 +53,14 @@ class AnythingElseTellUsController @Inject() (
         case None        => AnythingElseForm()
         case Some(value) => AnythingElseForm().fill(value)
       }
-      Ok(anythingElseTellUs(appConfig, preparedForm, mode))
+      Ok(anythingElseTellUs(preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       AnythingElseForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(anythingElseTellUs(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(anythingElseTellUs(formWithErrors, mode))),
         value =>
           dataCacheConnector.save[String](request.sessionId, AnythingElseId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(AnythingElseId, mode).apply(new UserAnswers(cacheMap)))

@@ -27,17 +27,16 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.PropertyWalesActualLetsForm
 
 @this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
 govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
 
-@(appConfig: FrontendAppConfig, form: Form[String], mode: Mode)(implicit request: Request[?], messages: Messages)
+@(form: Form[String], mode: Mode)(implicit request: Request[?], messages: Messages)
 
 @mainTemplate(
-    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("propertyWalesActualLets.title"))else messages("propertyWalesActualLets.title")),
+    pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("propertyWalesActualLets.title") else messages("propertyWalesActualLets.title")),
     backLink = Some(BackLink(href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesAvailableLetsController.onPageLoad().url))
 ) {
     @formWithCSRF(action = PropertyWalesActualLetsController.onSubmit(), Symbol("autoComplete") -> "off") {
@@ -61,7 +60,7 @@ govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErro
                 content = Text(messages(i.messageKey)),
                 id = Option(i.id),
                 value = Option(i.value),
-                checked = form("value").value.map(_ == i.value).getOrElse(false)
+                checked = form("value").value.contains(i.value)
             )
             ),
             errorMessage = form.errors.asTextErrorMessageForField("value")

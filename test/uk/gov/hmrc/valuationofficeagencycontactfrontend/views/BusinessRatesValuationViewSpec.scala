@@ -25,7 +25,7 @@ class BusinessRatesValuationViewSpec extends ViewBehaviours {
 
   def businessRatesValuation: html.businessRatesValuation = app.injector.instanceOf[business_rates_valuation]
 
-  def view: () => HtmlFormat.Appendable = () => businessRatesValuation(frontendAppConfig)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => businessRatesValuation()(using fakeRequest, messages)
 
   "Business rates valuation  view" must {
     behave like normalPage(

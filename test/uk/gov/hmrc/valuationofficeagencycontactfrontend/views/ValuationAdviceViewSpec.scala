@@ -25,7 +25,7 @@ class ValuationAdviceViewSpec extends ViewBehaviours {
 
   def valuationAdvice: html.valuationAdvice = app.injector.instanceOf[valuation_advice]
 
-  def view: () => HtmlFormat.Appendable = () => valuationAdvice(frontendAppConfig)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => valuationAdvice()(using fakeRequest, messages)
 
   "Valuation Advice view" must {
 

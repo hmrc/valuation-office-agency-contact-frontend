@@ -39,7 +39,6 @@ class PropertyEnglandActualLetsControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new PropertyEnglandActualLetsController(
-      frontendAppConfig,
       messagesApi,
       auditService,
       FakeDataCacheConnector,
@@ -51,7 +50,6 @@ class PropertyEnglandActualLetsControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = PropertyEnglandActualLetsForm()): String = propertyEnglandActualLetsEnquiry(
-    frontendAppConfig,
     form,
     NormalMode
   )(using fakeRequest, messages).toString

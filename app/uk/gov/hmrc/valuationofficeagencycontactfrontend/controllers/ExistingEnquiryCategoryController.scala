@@ -31,13 +31,12 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages.OtherHAHBE
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.existingEnquiryCategory
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
 class ExistingEnquiryCategoryController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   auditService: AuditingService,
   dataCacheConnector: DataCacheConnector,
@@ -59,7 +58,7 @@ class ExistingEnquiryCategoryController @Inject() (
       case Some(value) => ExistingEnquiryCategoryForm().fill(value)
     }
     enquiryBackLink(request.userAnswers) match {
-      case Right(link) => Ok(existingEnquiryCategory(appConfig, preparedForm, mode, link))
+      case Right(link) => Ok(existingEnquiryCategory(preparedForm, mode, link))
       case Left(msg)   =>
         log.warn(s"Navigation for Existing Enquiry Category page reached with error $msg")
         throw new RuntimeException(s"Navigation for Existing Enquiry Category page reached with error $msg")
@@ -70,7 +69,7 @@ class ExistingEnquiryCategoryController @Inject() (
     implicit request =>
       ExistingEnquiryCategoryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(existingEnquiryCategory(appConfig, formWithErrors, mode, ""))),
+          Future.successful(BadRequest(existingEnquiryCategory(formWithErrors, mode, ""))),
         value =>
           for {
             _        <- saveSubCategoryInCache(value, request.sessionId)

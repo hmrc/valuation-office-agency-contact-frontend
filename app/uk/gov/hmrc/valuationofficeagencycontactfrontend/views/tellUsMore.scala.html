@@ -21,7 +21,6 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
@@ -36,7 +35,7 @@
 @this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
         hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
 
-@(appConfig: FrontendAppConfig, form: Form[TellUsMore], mode: Mode, enquiryKey: String, backlink: String)(implicit request: Request[?], messages: Messages)
+@(form: Form[TellUsMore], mode: Mode, enquiryKey: String, backlink: String)(implicit request: Request[?], messages: Messages)
 
 @content = {
 
@@ -104,7 +103,7 @@
 || enquiryKey == "tellUsMore.notUsed" || enquiryKey == "tellUsMore.business.other" || enquiryKey == "tellUsMore.fairRent") messages(s"$enquiryKey.title") else messages("tellUsMore.title")) { title =>
 
     @mainTemplate(
-        pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + title) else title),
+        pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + title else title),
         backLink = Some(BackLink(href = backlink))
     ) {
         @formWithCSRF(action = TellUsMoreController.onSubmit(mode), Symbol("autoComplete") -> "off") {

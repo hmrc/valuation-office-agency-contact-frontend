@@ -26,7 +26,7 @@ class BusinessRatesChallengeControllerSpec extends ControllerSpecBase {
 
   "BusinessRatesChallengeController" must {
     "return 200 for GET on ChallengePageLoad" in {
-      val result = new BusinessRatesChallengeController(messagesApi, frontendAppConfig, brChallengeView, stubMessageControllerComponents)
+      val result = new BusinessRatesChallengeController(messagesApi, brChallengeView, stubMessageControllerComponents)
         .onChallengePageLoad(fakeRequest)
       status(result) mustBe OK
       contentAsString(result) must include("Challenging my business rates valuation")

@@ -47,7 +47,6 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ContactDetailsController(
-      frontendAppConfig,
       messagesApi,
       FakeDataCacheConnector,
       new FakeNavigator(desiredRoute = onwardRoute),
@@ -62,13 +61,13 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
   def refNumberBackLink: String = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.RefNumberController.onPageLoad().url
 
   def viewAsStringCT(form: Form[ContactDetails] = ContactDetailsForm()): String =
-    contactDetails(frontendAppConfig, form, NormalMode, ctBackLink)(using fakeRequest, messages).toString
+    contactDetails(form, NormalMode, ctBackLink)(using fakeRequest, messages).toString
 
   def viewAsStringNDR(form: Form[ContactDetails] = ContactDetailsForm()): String =
-    contactDetails(frontendAppConfig, form, NormalMode, ndrBackLink)(using fakeRequest, messages).toString
+    contactDetails(form, NormalMode, ndrBackLink)(using fakeRequest, messages).toString
 
   def viewAsStringRefNumber(form: Form[ContactDetails] = ContactDetailsForm()): String =
-    contactDetails(frontendAppConfig, form, NormalMode, refNumberBackLink)(using fakeRequest, messages).toString
+    contactDetails(form, NormalMode, refNumberBackLink)(using fakeRequest, messages).toString
 
   "ContactDetails Controller" must {
 
@@ -128,7 +127,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
       contentAsString(result) mustBe viewAsStringNDR(boundForm)
     }
 
-    "return an error when invalid data is submitted and enquiry category is wrong or unwnown" in {
+    "return an error when invalid data is submitted and enquiry category is wrong or unknown" in {
       val postRequest     = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
       val validData       = Map(EnquiryCategoryId.toString -> JsString("other"))
       val getRelevantData = new FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
@@ -136,7 +135,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
       intercept[Exception] {
         val result = controller(getRelevantData).onSubmit(NormalMode)(postRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
       }
     }
 
@@ -401,7 +400,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
       intercept[Exception] {
         val result = controller().onPageLoad(NormalMode)(fakeRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
       }
 
   }

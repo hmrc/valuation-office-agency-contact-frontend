@@ -20,12 +20,10 @@ import javax.inject.{Inject, Singleton}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{valuationAdvice => valuation_advice}
 
 @Singleton
 class ValuationAdviceController @Inject() (
-  val appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   valuationAdvice: valuation_advice,
   cc: MessagesControllerComponents
@@ -33,6 +31,6 @@ class ValuationAdviceController @Inject() (
   with I18nSupport {
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
-    Ok(valuationAdvice(appConfig))
+    Ok(valuationAdvice())
   }
 }

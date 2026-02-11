@@ -27,7 +27,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.RefNumberId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{refNumber => ref_number}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
@@ -35,7 +35,6 @@ import play.api.mvc
 import play.api.mvc.AnyContent
 
 class RefNumberController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   dataCacheConnector: DataCacheConnector,
   navigator: Navigator,
@@ -51,14 +50,14 @@ class RefNumberController @Inject() (
   def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = RefNumberForm().fill(request.userAnswers.refNumber)
-      Ok(refNumber(appConfig, preparedForm, mode))
+      Ok(refNumber(preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       RefNumberForm().bindFromRequest().fold(
         (formWithErrors: Form[Option[String]]) =>
-          Future.successful(BadRequest(refNumber(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(refNumber(formWithErrors, mode))),
         value =>
           dataCacheConnector.save[String](request.sessionId, RefNumberId.toString, value.getOrElse("")).map(cacheMap =>
             Redirect(navigator.nextPage(RefNumberId, mode).apply(new UserAnswers(cacheMap)))

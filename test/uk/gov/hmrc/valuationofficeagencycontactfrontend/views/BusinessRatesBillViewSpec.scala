@@ -25,7 +25,7 @@ class BusinessRatesBillViewSpec extends ViewBehaviours {
 
   def businessRatesBill: html.businessRatesBill = app.injector.instanceOf[business_rates_bill]
 
-  def view: () => HtmlFormat.Appendable = () => businessRatesBill(frontendAppConfig)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => businessRatesBill()(using fakeRequest, messages)
 
   "Business Rates Bill view" must {
     behave like normalPage(view, "businessRatesBill", "title", "heading", "p1", "subheading", "url", "url1")

@@ -28,7 +28,6 @@ class ValuationAdviceControllerSpec extends ControllerSpecBase {
   "Valuation Advice Controller" must {
     "return 200 for a GET" in {
       val result = new ValuationAdviceController(
-        frontendAppConfig,
         messagesApi,
         valuationAdvice,
         MessageControllerComponentsHelpers.stubMessageControllerComponents
@@ -38,12 +37,11 @@ class ValuationAdviceControllerSpec extends ControllerSpecBase {
 
     "return the correct view for a GET" in {
       val result = new ValuationAdviceController(
-        frontendAppConfig,
         messagesApi,
         valuationAdvice,
         MessageControllerComponentsHelpers.stubMessageControllerComponents
       ).onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe valuationAdvice(frontendAppConfig)(using fakeRequest, messages).toString
+      contentAsString(result) mustBe valuationAdvice()(using fakeRequest, messages).toString
     }
 
   }

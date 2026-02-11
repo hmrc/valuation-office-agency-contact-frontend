@@ -20,7 +20,7 @@ import javax.inject.{Inject, Singleton}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.DataCacheConnector
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.DataRetrievalAction
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{EnquiryCategoryId, ExistingEnquiryCategoryId, FairRentEnquiryId}
@@ -32,7 +32,6 @@ import scala.concurrent.ExecutionContext
 
 @Singleton
 class ProvidingLettingsController @Inject() (
-  val appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   providingLettings: providing_lettings,
   dataCacheConnector: DataCacheConnector,
@@ -44,7 +43,7 @@ class ProvidingLettingsController @Inject() (
   with I18nSupport {
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
-    Ok(providingLettings(appConfig))
+    Ok(providingLettings())
   }
 
   def toEnquiryForm: Action[AnyContent] = getData.async {

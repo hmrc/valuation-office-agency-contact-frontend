@@ -38,7 +38,6 @@ class SessionExpiredControllerSpec extends ControllerSpecBase {
   "SessionExpired Controller" must {
     "return 200 for a GET" in {
       val result = new SessionExpiredController(
-        frontendAppConfig,
         auditService,
         getDataAction,
         messagesApi,
@@ -50,14 +49,13 @@ class SessionExpiredControllerSpec extends ControllerSpecBase {
 
     "return the correct view for a GET" in {
       val result = new SessionExpiredController(
-        frontendAppConfig,
         auditService,
         getDataAction,
         messagesApi,
         MessageControllerComponentsHelpers.stubMessageControllerComponents,
         sessionExpired
       ).onPageLoad()(testRequest)
-      contentAsString(result) mustBe sessionExpired(frontendAppConfig)(using fakeRequest, messages).toString
+      contentAsString(result) mustBe sessionExpired()(using fakeRequest, messages).toString
     }
   }
 

@@ -19,7 +19,6 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.journey
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.Results.NotFound
 import play.api.mvc.{ActionRefiner, Request, Result}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.JourneyMap.changeModePrefix
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.model.Page
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.journey.pages._
@@ -33,8 +32,7 @@ import scala.concurrent.{ExecutionContext, Future}
   * @author Yuriy Tumakha
   */
 @Singleton
-class JourneyMap @Inject() (pageNotFound: page_not_found, appConfig: FrontendAppConfig, override val messagesApi: MessagesApi)(implicit ec: ExecutionContext)
-  extends I18nSupport {
+class JourneyMap @Inject() (pageNotFound: page_not_found, override val messagesApi: MessagesApi)(implicit ec: ExecutionContext) extends I18nSupport {
 
   private val pages: Seq[Page[String]] = Seq(
     // Business Rates
@@ -68,7 +66,7 @@ class JourneyMap @Inject() (pageNotFound: page_not_found, appConfig: FrontendApp
       getPageInChangeMode(key)
         .orElse(journeyMap.get(key).map((_, false)))
         .map(t => JourneyPageRequest(t._1, request.request, request.sessionId, request.userAnswers, t._2))
-        .toRight(NotFound(pageNotFound(appConfig)))
+        .toRight(NotFound(pageNotFound()))
     }
   }
 

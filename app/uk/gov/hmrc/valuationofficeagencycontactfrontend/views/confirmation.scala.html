@@ -25,7 +25,6 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.panel.Panel
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.{SatisfactionSurvey, SatisfactionSurveyForm}
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Contact
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.AddressFormatters.formattedPropertyAddress
@@ -38,7 +37,7 @@
         govukFieldset: GovukFieldset, govukRadios: GovukRadios, govukCharacterCountArea: GovukCharacterCount,
         govukErrorSummary: GovukErrorSummary)
 
-@(appConfig: FrontendAppConfig, contact: Contact, answerSections: AnswerSection, whatHappensNextMessages: Seq[String], form: Form[SatisfactionSurvey])(implicit request: Request[?], messages: Messages)
+@(contact: Contact, answerSections: AnswerSection, whatHappensNextMessages: Seq[String], form: Form[SatisfactionSurvey])(implicit request: Request[?], messages: Messages)
 
 @panelContent = {
 @messages("confirmation.para1") <br />
