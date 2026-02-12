@@ -31,10 +31,10 @@ class PropertyEnglandAvailableLetsViewSpec extends ViewBehaviours {
   val messageKeyPrefix = "propertyEnglandAvailableLets"
 
   def createView: () => HtmlFormat.Appendable =
-    () => propertyEnglandLets140DaysSubcategory(frontendAppConfig, PropertyEnglandAvailableLetsForm(), NormalMode)(using fakeRequest, messages)
+    () => propertyEnglandLets140DaysSubcategory(PropertyEnglandAvailableLetsForm(), NormalMode)(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => propertyEnglandLets140DaysSubcategory(frontendAppConfig, form, NormalMode)(using fakeRequest, messages)
+    (form: Form[String]) => propertyEnglandLets140DaysSubcategory(form, NormalMode)(using fakeRequest, messages)
 
   "PropertyEnglandLets140DaysSubcategory view" when {
     "rendered" must {

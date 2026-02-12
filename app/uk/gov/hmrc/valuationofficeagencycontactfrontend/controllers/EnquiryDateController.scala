@@ -26,7 +26,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.EnquiryDateI
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.{DateUtil, UserAnswers}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.enquiryDate
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
@@ -34,7 +34,6 @@ import play.api.mvc
 import play.api.mvc.AnyContent
 
 class EnquiryDateController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   requireData: DataRequiredAction,
   getData: DataRetrievalAction,
@@ -53,12 +52,12 @@ class EnquiryDateController @Inject() (
       case None        => EnquiryDateForm()
       case Some(value) => EnquiryDateForm().fill(value)
     }
-    Ok(enquiry_date(appConfig, preparedForm, EnquiryDateForm.beforeDate(), NormalMode))
+    Ok(enquiry_date(preparedForm, EnquiryDateForm.beforeDate(), NormalMode))
   }
 
   def onSubmit(mode: Mode): mvc.Action[AnyContent] = getData.async { implicit request =>
     EnquiryDateForm().bindFromRequest().fold(
-      formWithErrors => Future.successful(BadRequest(enquiry_date(appConfig, formWithErrors, EnquiryDateForm.beforeDate(), NormalMode))),
+      formWithErrors => Future.successful(BadRequest(enquiry_date(formWithErrors, EnquiryDateForm.beforeDate(), NormalMode))),
       value => {
         auditService.sendRadioButtonSelection(request.uri, "enquiryDate" -> value)
         dataCacheConnector.save[String](request.sessionId, EnquiryDateId.toString, value).map(cacheMap =>

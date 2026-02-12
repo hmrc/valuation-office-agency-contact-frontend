@@ -19,14 +19,12 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyDemolished => property_demolished}
 
 import javax.inject.{Inject, Singleton}
 
 @Singleton
 class PropertyDemolishedController @Inject() (
-  val appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   propertyDemolished: property_demolished,
   cc: MessagesControllerComponents
@@ -34,6 +32,6 @@ class PropertyDemolishedController @Inject() (
   with I18nSupport {
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
-    Ok(propertyDemolished(appConfig))
+    Ok(propertyDemolished())
   }
 }

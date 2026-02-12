@@ -23,7 +23,7 @@ import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.EnquiryCategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{EnquiryCategoryId, ExistingEnquiryCategoryId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
@@ -35,7 +35,6 @@ import play.api.mvc
 import play.api.mvc.AnyContent
 
 class EnquiryCategoryController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   auditService: AuditingService,
   dataCacheConnector: DataCacheConnector,
@@ -55,14 +54,14 @@ class EnquiryCategoryController @Inject() (
         case None        => EnquiryCategoryForm()
         case Some(value) => EnquiryCategoryForm().fill(value)
       }
-      Ok(enquiryCategory(appConfig, preparedForm, mode))
+      Ok(enquiryCategory(preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): mvc.Action[AnyContent] = getData.async {
     implicit request =>
       EnquiryCategoryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(enquiryCategory(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(enquiryCategory(formWithErrors, mode))),
         value =>
           for {
             _        <- dataCacheConnector.remove(request.sessionId, ExistingEnquiryCategoryId.toString)

@@ -26,7 +26,7 @@ class CouncilTaxPropertySplitMergeViewSpec extends ViewBehaviours {
 
   def councilTaxPropertyEmpty: propertySplitMerge = app.injector.instanceOf[property_split_merge]
 
-  def view: () => HtmlFormat.Appendable = () => councilTaxPropertyEmpty(frontendAppConfig)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxPropertyEmpty()(using fakeRequest, messages)
 
   "Council Tax Property Empty view" must {
     behave like normalPage(view, "propertyMergeSplit", "title", "heading", "p1.url", "p1.part1", "p1.part2", "p2")

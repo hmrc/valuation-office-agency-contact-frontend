@@ -27,7 +27,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.WhatElseId
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{whatElse => what_else}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
@@ -35,7 +35,6 @@ import play.api.mvc
 import play.api.mvc.AnyContent
 
 class WhatElseController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   dataCacheConnector: DataCacheConnector,
   navigator: Navigator,
@@ -54,14 +53,14 @@ class WhatElseController @Inject() (
         case None        => WhatElseForm()
         case Some(value) => WhatElseForm().fill(value)
       }
-      Ok(whatElse(appConfig, preparedForm, mode))
+      Ok(whatElse(preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       WhatElseForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(whatElse(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(whatElse(formWithErrors, mode))),
         value =>
           dataCacheConnector.save[String](request.sessionId, WhatElseId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(WhatElseId, mode).apply(new UserAnswers(cacheMap)))

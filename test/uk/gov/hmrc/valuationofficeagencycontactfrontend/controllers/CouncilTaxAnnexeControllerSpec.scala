@@ -60,7 +60,6 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new CouncilTaxAnnexeController(
-      frontendAppConfig,
       messagesApi,
       auditService,
       fakeDataCacheConnector,
@@ -77,13 +76,13 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[String] = AnnexeForm()): String = councilTaxAnnexe(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = AnnexeForm()): String = councilTaxAnnexe(form, NormalMode)(using fakeRequest, messages).toString
 
   def viewCookingWashingAsString(form: Form[String] = AnnexeCookingWashingForm()): String =
-    annexeCookingWashingEnquiry(frontendAppConfig, form)(using fakeRequest, messages).toString
+    annexeCookingWashingEnquiry(form)(using fakeRequest, messages).toString
 
   def viewcouncilTaxAnnexeSelfContainedEnquiry(form: Form[String] = AnnexeSelfContainedForm()): String =
-    councilTaxAnnexeSelfContainedEnquiry(frontendAppConfig, form)(using fakeRequest, messages).toString
+    councilTaxAnnexeSelfContainedEnquiry(form)(using fakeRequest, messages).toString
   "Council Tax Annex Controller" must {
     "return OK and the correct view for a GET" in {
       val result = controller().onPageLoad(NormalMode)(fakeRequest)
@@ -143,7 +142,7 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
       val result = controller().onRemovedPageLoad()(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe annexeRemoved(frontendAppConfig)(using fakeRequest, messages).toString()
+      contentAsString(result) mustBe annexeRemoved()(using fakeRequest, messages).toString()
     }
 
     "redirect to the next page when valid data is submitted for annexe self contained" in {
@@ -165,28 +164,28 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
       val result = controller().onSelfContainedSubmit()(postRequest)
 
       status(result) mustBe BAD_REQUEST
-      contentAsString(result) mustBe councilTaxAnnexeSelfContainedEnquiry(frontendAppConfig, boundForm)(using fakeRequest, messages).toString()
+      contentAsString(result) mustBe councilTaxAnnexeSelfContainedEnquiry(boundForm)(using fakeRequest, messages).toString()
     }
 
     "return OK and the correct view for a no cooking and washing facilities GET" in {
       val result = controller().onFacilitiesPageLoad()(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe councilTaxAnnexeNoFacilities(frontendAppConfig)(using fakeRequest, messages).toString()
+      contentAsString(result) mustBe councilTaxAnnexeNoFacilities()(using fakeRequest, messages).toString()
     }
 
     "return OK and the correct view for a not self contained page GET" in {
       val result = controller().onNotSelfContainedPageLoad()(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe annexeNotSelfContained(frontendAppConfig)(using fakeRequest, messages).toString()
+      contentAsString(result) mustBe annexeNotSelfContained()(using fakeRequest, messages).toString()
     }
 
     "return OK and the correct view for annexe self contained GET" in {
       val result = controller().onSelfContainedPageLoad()(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe councilTaxAnnexeSelfContained(frontendAppConfig)(using fakeRequest, messages).toString()
+      contentAsString(result) mustBe councilTaxAnnexeSelfContained()(using fakeRequest, messages).toString()
     }
 
     "return OK and the correct view when onHaveCookingWashingPageLoad is called" in {

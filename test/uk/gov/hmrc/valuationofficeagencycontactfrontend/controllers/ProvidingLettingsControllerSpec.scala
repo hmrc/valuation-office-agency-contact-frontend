@@ -32,7 +32,6 @@ class ProvidingLettingsControllerSpec extends ControllerSpecBase {
   "Housing benefits Controller" must {
     "return 200 for a GET" in {
       val result = new ProvidingLettingsController(
-        frontendAppConfig,
         messagesApi,
         providingLettings,
         dataCacheConnector,
@@ -45,7 +44,6 @@ class ProvidingLettingsControllerSpec extends ControllerSpecBase {
 
     "return the correct view for a GET" in {
       val result = new ProvidingLettingsController(
-        frontendAppConfig,
         messagesApi,
         providingLettings,
         dataCacheConnector,
@@ -53,7 +51,7 @@ class ProvidingLettingsControllerSpec extends ControllerSpecBase {
         navigator,
         MessageControllerComponentsHelpers.stubMessageControllerComponents
       ).onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe providingLettings(frontendAppConfig)(using fakeRequest, messages).toString
+      contentAsString(result) mustBe providingLettings()(using fakeRequest, messages).toString
     }
 
   }

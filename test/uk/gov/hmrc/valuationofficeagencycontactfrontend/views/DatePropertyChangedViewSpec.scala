@@ -37,13 +37,13 @@ class DatePropertyChangedViewSpec extends ViewBehaviours {
   def dateForm: Form[Option[LocalDate]] = DatePropertyChangedForm()
 
   def createView: () => HtmlFormat.Appendable = () =>
-    datePropertyChanged(frontendAppConfig, dateForm, NormalMode, messageKeyPrefix, "/valuation-office-agency-contact-frontend/about-business-rates")(
+    datePropertyChanged(dateForm, NormalMode, messageKeyPrefix, "/valuation-office-agency-contact-frontend/about-business-rates")(
       using fakeRequest,
       messages
     )
 
   def createViewUsingForm: Form[Option[LocalDate]] => HtmlFormat.Appendable =
-    (form: Form[Option[LocalDate]]) => datePropertyChanged(frontendAppConfig, form, NormalMode, "test", "test")(using fakeRequest, messages)
+    (form: Form[Option[LocalDate]]) => datePropertyChanged(form, NormalMode, "test", "test")(using fakeRequest, messages)
 
   "DatePropertyChanged view" must {
     behave like normalPage(createView, messageKeyPrefix)

@@ -25,7 +25,7 @@ class AnnexeRemovedViewSpec extends ViewBehaviours {
 
   def councilTaxAnnexeRemoved: annexeRemoved = app.injector.instanceOf[annexe_removed]
 
-  def view: () => HtmlFormat.Appendable = () => councilTaxAnnexeRemoved(frontendAppConfig)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxAnnexeRemoved()(using fakeRequest, messages)
 
   "Council Tax Bill view" must {
     behave like normalPage(view, "annexeRemoved", "title", "heading", "p1", "url1", "url2", "url3", "subheading")

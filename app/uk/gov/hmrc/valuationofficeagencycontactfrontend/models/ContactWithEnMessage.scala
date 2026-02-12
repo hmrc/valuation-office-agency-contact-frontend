@@ -38,8 +38,8 @@ object ContactWithEnMessage {
 
   implicit val format: OFormat[ContactWithEnMessage] = Json.format[ContactWithEnMessage]
   private val log                                    = Logger(this.getClass)
-  val councilTaxKey                                  = "council_tax"
-  val businessRatesKey                               = "business_rates"
+  private val councilTaxKey                          = "council_tax"
+  private val businessRatesKey                       = "business_rates"
 
   def apply(contact: Contact, messagesApi: MessagesApi, userAnswers: UserAnswers): ContactWithEnMessage = {
     implicit val messagesEN: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))

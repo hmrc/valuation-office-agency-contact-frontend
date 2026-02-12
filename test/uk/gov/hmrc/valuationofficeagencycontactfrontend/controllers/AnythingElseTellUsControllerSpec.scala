@@ -42,7 +42,6 @@ class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSu
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new AnythingElseTellUsController(
-      frontendAppConfig,
       messagesApi,
       FakeDataCacheConnector,
       new FakeNavigator(desiredRoute = onwardRoute),
@@ -53,7 +52,7 @@ class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSu
     )
 
   def viewAsString(form: Form[String] = AnythingElseForm(), msg: String = ""): String =
-    anythingElse(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
+    anythingElse(form, NormalMode)(using fakeRequest, messages).toString
 
   "AnythingElseTellUsMore Controller" must {
 

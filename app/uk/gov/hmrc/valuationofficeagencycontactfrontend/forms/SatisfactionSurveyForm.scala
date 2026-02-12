@@ -25,9 +25,11 @@ object SatisfactionSurveyForm {
 
   private val antiXSSMessageRegex = """^['`A-Za-z0-9\s\-&,\.£\(\)%;:\?\!]+$"""
 
-  def satisfactionFormat: Formatter[String] = new Formatter[String] {
-    def bind(key: String, data: Map[String, String]) = data.get(key).toRight(Seq(FormError(key, "error.required.feedback", Nil)))
-    def unbind(key: String, value: String)           = Map(key -> value)
+  private def satisfactionFormat: Formatter[String] = new Formatter[String] {
+    def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] =
+      data.get(key).toRight(Seq(FormError(key, "error.required.feedback", Nil)))
+
+    def unbind(key: String, value: String): Map[String, String] = Map(key -> value)
   }
 
   def apply(): Form[SatisfactionSurvey] = Form(

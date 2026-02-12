@@ -19,20 +19,18 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{businessRatesBill => business_rates_bill}
 
 import javax.inject.Inject
 
 class BusinessRatesBillController @Inject() (
   override val messagesApi: MessagesApi,
-  val appConfig: FrontendAppConfig,
   businessRatesBill: business_rates_bill,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
   with I18nSupport {
 
   def onPageLoad(): Action[AnyContent] = Action { implicit request =>
-    Ok(businessRatesBill(appConfig))
+    Ok(businessRatesBill())
   }
 }

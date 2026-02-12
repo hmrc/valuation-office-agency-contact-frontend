@@ -27,7 +27,6 @@ class CouncilTaxBillControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new CouncilTaxBillController(
-      frontendAppConfig,
       messagesApi,
       dataRetrievalAction,
       new DataRequiredActionImpl(ec),
@@ -38,7 +37,7 @@ class CouncilTaxBillControllerSpec extends ControllerSpecBase {
   "Council Tax Bill Controller" must {
     "return the correct view for a GET" in {
       val result = controller().onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe councilTaxBill(frontendAppConfig)(using fakeRequest, messages).toString
+      contentAsString(result) mustBe councilTaxBill()(using fakeRequest, messages).toString
     }
   }
 }

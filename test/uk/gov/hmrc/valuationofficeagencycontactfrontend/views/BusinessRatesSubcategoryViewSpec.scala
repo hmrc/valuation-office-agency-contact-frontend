@@ -30,10 +30,10 @@ class BusinessRatesSubcategoryViewSpec extends ViewBehaviours {
   val messageKeyPrefix = "businessRatesSubcategory"
 
   def createView: () => HtmlFormat.Appendable =
-    () => businessRatesSubcategory(frontendAppConfig, BusinessRatesSubcategoryForm(), NormalMode)(using fakeRequest, messages)
+    () => businessRatesSubcategory(BusinessRatesSubcategoryForm(), NormalMode)(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => businessRatesSubcategory(frontendAppConfig, form, NormalMode)(using fakeRequest, messages)
+    (form: Form[String]) => businessRatesSubcategory(form, NormalMode)(using fakeRequest, messages)
 
   "BusinessRatesSubcategory view" when {
     "rendered" must {

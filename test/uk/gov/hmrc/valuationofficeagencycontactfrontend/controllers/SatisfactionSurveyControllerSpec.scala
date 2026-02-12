@@ -65,7 +65,6 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new SatisfactionSurveyController(
-      frontendAppConfig,
       messagesApi,
       dataRetrievalAction,
       new DataRequiredActionImpl(ec),
@@ -76,7 +75,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
     )
 
   def viewAsString(form: Form[SatisfactionSurvey] = SatisfactionSurveyForm()): String =
-    satisfactionSurveyThankYou(frontendAppConfig)(using fakeRequest, messages).toString
+    satisfactionSurveyThankYou()(using fakeRequest, messages).toString
 
   "SatisfactionSurvey Controller" must {
 
@@ -136,7 +135,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
       intercept[Exception] {
         val result = controller(getRelevantData).formCompleteFeedback()(request)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
       }
     }
 

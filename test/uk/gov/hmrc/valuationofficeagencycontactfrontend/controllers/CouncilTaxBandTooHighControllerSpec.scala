@@ -28,7 +28,6 @@ class CouncilTaxBandTooHighControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new CouncilTaxBandTooHighController(
-      frontendAppConfig,
       messagesApi,
       councilTaxBandTooHigh,
       MessageControllerComponentsHelpers.stubMessageControllerComponents
@@ -37,7 +36,7 @@ class CouncilTaxBandTooHighControllerSpec extends ControllerSpecBase {
   "Council Tax Band Too High Controller" must {
     "return the correct view for a GET" in {
       val result = controller().onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe councilTaxBandTooHigh(frontendAppConfig)(using fakeRequest, messages).toString
+      contentAsString(result) mustBe councilTaxBandTooHigh()(using fakeRequest, messages).toString
     }
   }
 }

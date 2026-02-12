@@ -23,7 +23,7 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.RadioOption
 
 object ContactReasonForm extends FormErrorHelper {
 
-  def contactReasonFormatter: Formatter[String] = new Formatter[String] {
+  private def contactReasonFormatter: Formatter[String] = new Formatter[String] {
 
     override def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match {
       case Some(s) if optionIsValid(s) => Right(s)

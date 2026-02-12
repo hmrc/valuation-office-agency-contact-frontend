@@ -21,7 +21,7 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxBusinessEnquiryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.CouncilTaxBusinessEnquiryId
@@ -35,7 +35,6 @@ import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
 class CouncilTaxBusinessController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   auditService: AuditingService,
   dataCacheConnector: DataCacheConnector,
@@ -58,14 +57,14 @@ class CouncilTaxBusinessController @Inject() (
         case Some(value) => CouncilTaxBusinessEnquiryForm().fill(value)
       }
 
-      Ok(councilTaxBusinessEnquiry(appConfig, preparedForm, mode, backLink(request.userAnswers, mode)))
+      Ok(councilTaxBusinessEnquiry(preparedForm, mode, backLink(request.userAnswers, mode)))
   }
 
   def onEnquirySubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData) async {
     implicit request =>
       CouncilTaxBusinessEnquiryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(councilTaxBusinessEnquiry(appConfig, formWithErrors, mode, backLink(request.userAnswers, mode)))),
+          Future.successful(BadRequest(councilTaxBusinessEnquiry(formWithErrors, mode, backLink(request.userAnswers, mode)))),
         value =>
           for {
             cacheMap <- dataCacheConnector.save[String](request.sessionId, CouncilTaxBusinessEnquiryId.toString, value)
@@ -78,12 +77,12 @@ class CouncilTaxBusinessController @Inject() (
 
   def onSmallPartUsedPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      Ok(propertySmallPartUsed(appConfig))
+      Ok(propertySmallPartUsed())
   }
 
   def onSmallPartUsedBusinessRatesPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      Ok(businessRatesNoNeedToPay(appConfig))
+      Ok(businessRatesNoNeedToPay())
   }
 
   private def backLink(answers: UserAnswers, mode: Mode): String =

@@ -26,7 +26,7 @@ class PropertyPermanentChangesViewSpec extends ViewBehaviours {
 
   def PropertyPermanentChanges: propertyPermanentChanges = app.injector.instanceOf[property_permanent_changes]
 
-  def view: () => HtmlFormat.Appendable = () => PropertyPermanentChanges(frontendAppConfig, NormalMode)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => PropertyPermanentChanges(NormalMode)(using fakeRequest, messages)
 
   "The Property Permanent Changes view" must {
     behave like normalPage(view, "propertyPermanentChanges", "title", "heading", "p1.part1", "p1.part2", "subheading", "p2")

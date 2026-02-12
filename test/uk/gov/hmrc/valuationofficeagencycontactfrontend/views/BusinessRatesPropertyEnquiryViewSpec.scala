@@ -26,7 +26,7 @@ class BusinessRatesPropertyEnquiryViewSpec extends ViewBehaviours {
   def businessRatesPropertyEnquiry: html.businessRatesPropertyEnquiry = app.injector.instanceOf[business_rates_property_enquiry]
 
   def view: () => HtmlFormat.Appendable =
-    () => businessRatesPropertyEnquiry(frontendAppConfig, BusinessRatesPropertyForm(), NormalMode)(using fakeRequest, messages)
+    () => businessRatesPropertyEnquiry(BusinessRatesPropertyForm(), NormalMode)(using fakeRequest, messages)
 
   "Business Rates Property Enquiry view" must {
     behave like normalPage(view, "businessRatesPropertyEnquiry", "title", "heading", "england", "wales")

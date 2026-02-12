@@ -20,7 +20,6 @@ import play.api.Logger
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
@@ -33,7 +32,6 @@ import play.api.mvc.AnyContent
 
 @Singleton
 class PropertyWalesLetsNoActionController @Inject() (
-  val appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
@@ -49,7 +47,7 @@ class PropertyWalesLetsNoActionController @Inject() (
   def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       enquiryBackLink(request.userAnswers) match {
-        case Right(link) => Ok(propertyWalesLetsNoAction(appConfig, link))
+        case Right(link) => Ok(propertyWalesLetsNoAction(link))
         case Left(msg)   =>
           log.warn(s"Navigation for Wales No Action page reached with error $msg")
           throw new RuntimeException(s"Navigation for Wales No Action page reached with error $msg")

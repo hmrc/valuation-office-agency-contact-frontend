@@ -42,7 +42,6 @@ class FairRentEnquiryControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new FairRentEnquiryController(
-      frontendAppConfig,
       messagesApi,
       auditService,
       FakeDataCacheConnector,
@@ -56,7 +55,7 @@ class FairRentEnquiryControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = FairRentEnquiryForm()): String =
-    fairRentEnquiryEnquiry(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
+    fairRentEnquiryEnquiry(form, NormalMode)(using fakeRequest, messages).toString
 
   "PropertyEnglandLets140DaysController" must {
 

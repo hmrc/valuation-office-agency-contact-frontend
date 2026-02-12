@@ -25,7 +25,7 @@ class CouncilTaxBillViewSpec extends ViewBehaviours {
 
   def councilTaxBill: html.councilTaxBill = app.injector.instanceOf[council_tax_bill]
 
-  def view: () => HtmlFormat.Appendable = () => councilTaxBill(frontendAppConfig)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxBill()(using fakeRequest, messages)
 
   "Council Tax Bill view" must {
     behave like normalPage(view, "councilTaxBill", "title", "heading", "p1", "p2", "p3")

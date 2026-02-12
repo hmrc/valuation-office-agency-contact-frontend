@@ -21,7 +21,6 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
@@ -38,7 +37,7 @@
         govukFieldset: GovukFieldset)
 
 
-@(appConfig: FrontendAppConfig, form: Form[ContactDetails], mode: Mode, backLink: String)(implicit request: Request[?], messages: Messages)
+@(form: Form[ContactDetails], mode: Mode, backLink: String)(implicit request: Request[?], messages: Messages)
 
 @textInput(id: String, inputType: String, classes: String, autoCompleteLabel: String, mode: String = "", pattern: String = "") = {
     @govukInput(Input(
@@ -49,10 +48,10 @@
         value = form(id).value,
         classes=classes,
         autocomplete=Some(autoCompleteLabel),
-        label = Label(content = Text(messages(s"contactDetails.${id}"))), inputmode=Some(mode),
+        label = Label(content = Text(messages(s"contactDetails.$id"))), inputmode=Some(mode),
         attributes=Map("spellcheck" -> "false"),
         errorMessage = form.errors.asTextErrorMessageForField(id),
-        hint = messages.translate(s"contactDetails.${id}.hint", Seq()).map(hintText => Hint(id=Option(s"${id}-hint"), content=Text(hintText)))
+        hint = messages.translate(s"contactDetails.$id.hint", Seq()).map(hintText => Hint(id=Option(s"$id-hint"), content=Text(hintText)))
     ))
 }
 
@@ -70,7 +69,7 @@
 
 
 @mainTemplate(
-    pageTitle = Some(if(form.hasErrors) (messages("error.title") + " " + messages("contactDetails.title")) else messages("contactDetails.title")),
+    pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("contactDetails.title") else messages("contactDetails.title")),
     backLink = Some(BackLink(href = backLink))
 ) {
     @formWithCSRF(action = ContactDetailsController.onSubmit(mode)) {

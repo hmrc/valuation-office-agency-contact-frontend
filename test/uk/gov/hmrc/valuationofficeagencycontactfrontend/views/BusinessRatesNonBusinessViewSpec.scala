@@ -25,7 +25,7 @@ class BusinessRatesNonBusinessViewSpec extends ViewBehaviours {
 
   def businessRatesNonBusiness: html.businessRatesNonBusiness = app.injector.instanceOf[business_rates_non_business]
 
-  def view: () => HtmlFormat.Appendable = () => businessRatesNonBusiness(frontendAppConfig)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => businessRatesNonBusiness()(using fakeRequest, messages)
 
   "Business rates non business view" must {
     behave like normalPage(view, "businessRatesNonBusiness", "title", "heading", "p1", "p2", "step1", "step2", "step3", "subheading", "p3")

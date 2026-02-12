@@ -24,7 +24,7 @@ class SessionExpiredViewSpec extends ViewBehaviours {
 
   def sessionExpired: session_expired = app.injector.instanceOf[session_expired]
 
-  def view: () => HtmlFormat.Appendable = () => sessionExpired(frontendAppConfig)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => sessionExpired()(using fakeRequest, messages)
 
   "Session Expired view" must {
 

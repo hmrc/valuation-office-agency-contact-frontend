@@ -39,7 +39,6 @@ class EnquiryCategoryControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new EnquiryCategoryController(
-      frontendAppConfig,
       messagesApi,
       auditService,
       FakeDataCacheConnector,
@@ -51,7 +50,7 @@ class EnquiryCategoryControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = EnquiryCategoryForm()): String =
-    enquiryCategory(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
+    enquiryCategory(form, NormalMode)(using fakeRequest, messages).toString
 
   "EnquiryCategory Controller" must {
 
@@ -90,7 +89,7 @@ class EnquiryCategoryControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe viewAsString(boundForm)
     }
 
-    "return eror page if no existing data is found" in {
+    "return error page if no existing data is found" in {
       val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
       status(result) mustBe SEE_OTHER
     }

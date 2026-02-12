@@ -14,54 +14,47 @@
  * limitations under the License.
  */
 
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.PropertyAddress
+package uk.gov.hmrc.valuationofficeagencycontactfrontend.models
+
+import org.scalatest.OptionValues
 import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.PropertyAddress
 
-class PropertyAddressSpec extends AnyFlatSpec {
+class PropertyAddressSpec extends AnyFlatSpec with Matchers with OptionValues:
 
-  val address: PropertyAddress = PropertyAddress("1", Some("High Street"), "London", Some("London"), "ZZ11ZZ")
+  private val address = PropertyAddress("1", Some("High Street"), "London", Some("London"), "ZZ11ZZ")
 
-  "Property address line 1" should "be 1" in
-    assert(address.addressLine1 == "1")
+  private val alternativeAddress = PropertyAddress("22", None, "London", None, "ZZ11ZZ")
 
-  "Property address line 2" should "be High Street" in
-    assert(address.addressLine2 == Some("High Street"))
+  "Property address line 1" should "be 1" in {
+    address.addressLine1 shouldBe "1"
+  }
 
-  "Property Town" should "be London" in
-    assert(address.town == "London")
+  "Property address line 2" should "be High Street" in {
+    address.addressLine2.value shouldBe "High Street"
+  }
 
-  "Property County" should "be London" in
-    assert(address.county == Some("London"))
+  "Property Town" should "be London" in {
+    address.town shouldBe "London"
+  }
 
-  "Property Postcode" should "be ZZ11ZZ" in
-    assert(address.postcode == "ZZ11ZZ")
+  "Property County" should "be London" in {
+    address.county.value shouldBe "London"
+  }
 
-  "Property address line 1" should "should't be 2" in
-    assert(address.addressLine1 != "2")
+  "Property Postcode" should "be ZZ11ZZ" in {
+    address.postcode shouldBe "ZZ11ZZ"
+  }
 
-  "Property address line 2" should "shouldn't be Avenue" in
-    assert(address.addressLine2 != Some("Avenue"))
+  "Alternative Property address line 1" should "be 22" in {
+    alternativeAddress.addressLine1 shouldBe "22"
+  }
 
-  "Property Town" should "shouldn't be" in
-    assert(address.town != "Leeds")
+  "Alternative Property address line 2" should "be None" in {
+    alternativeAddress.addressLine2 shouldBe None
+  }
 
-  "Property County" should "shouldn't be Cardiff" in
-    assert(address.county != Some("Cardiff"))
-
-  "Property Postcode" should "shouldn't be AA11AA" in
-    assert(address.postcode != "AA11AA")
-
-  val alternativeAddress: PropertyAddress = PropertyAddress("1", None, "London", None, "ZZ11ZZ")
-
-  "Alternative Property address line 2" should "be None" in
-    assert(alternativeAddress.addressLine2 == None)
-
-  "Alternative Property address line 2" should "shouldn't be Avenue" in
-    assert(alternativeAddress.addressLine2 != Some("Avenue"))
-
-  "Alternative Property County" should "be None" in
-    assert(alternativeAddress.county == None)
-
-  "Alternative Property County" should "shouldn't be Cardiff" in
-    assert(alternativeAddress.county != Some("Cardiff"))
-}
+  "Alternative Property County" should "be None" in {
+    alternativeAddress.county shouldBe None
+  }

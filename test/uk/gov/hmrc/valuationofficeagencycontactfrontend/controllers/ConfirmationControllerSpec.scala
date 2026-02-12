@@ -78,7 +78,6 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ConfirmationController(
-      frontendAppConfig,
       messagesApi,
       mockConnector,
       emailConnector,
@@ -93,7 +92,6 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   def controllerF(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ConfirmationController(
-      frontendAppConfig,
       messagesApi,
       mockConnectorF,
       emailConnector,
@@ -131,7 +129,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
       status(result) mustBe OK
 
-      contentAsString(result) mustBe confirmation(frontendAppConfig, contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(
+      contentAsString(result) mustBe confirmation(contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(
         using fakeRequest,
         messages
       ).toString
@@ -162,7 +160,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
       status(result) mustBe OK
 
-      contentAsString(result) mustBe confirmation(frontendAppConfig, contact, answerSectionExisting, whatHappensExisting, SatisfactionSurveyForm.apply())(
+      contentAsString(result) mustBe confirmation(contact, answerSectionExisting, whatHappensExisting, SatisfactionSurveyForm.apply())(
         using fakeRequest,
         messages
       ).toString
@@ -192,7 +190,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
       status(result) mustBe OK
 
-      contentAsString(result) mustBe confirmation(frontendAppConfig, contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(
+      contentAsString(result) mustBe confirmation(contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(
         using fakeRequest,
         messages
       ).toString
@@ -269,7 +267,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
         status(result) mustBe INTERNAL_SERVER_ERROR
 
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
       }
     }
 
@@ -295,7 +293,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
 
         status(result) mustBe INTERNAL_SERVER_ERROR
 
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
       }
     }
 
@@ -303,14 +301,14 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       intercept[Exception] {
         val result = controller().onPageLoad()(fakeRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
       }
 
     "return 500 and error view for a GET when the backend service call fails" in
       intercept[Exception] {
         val result = controllerF().onPageLoad()(fakeRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
       }
 
     "return 303 and send email when form complete" in {

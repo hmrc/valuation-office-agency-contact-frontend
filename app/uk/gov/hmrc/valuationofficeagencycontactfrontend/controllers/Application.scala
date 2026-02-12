@@ -21,7 +21,6 @@ import play.api.Configuration
 import play.api.i18n.{I18nSupport, Messages, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.ContactReasonForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.contactReason
@@ -35,7 +34,6 @@ import play.api.mvc.AnyContent
 @Singleton
 class Application @Inject() (
   override val messagesApi: MessagesApi,
-  val appConfig: FrontendAppConfig,
   contactReason: contactReason,
   languageSwitchController: LanguageSwitchController,
   getData: DataRetrievalAction,

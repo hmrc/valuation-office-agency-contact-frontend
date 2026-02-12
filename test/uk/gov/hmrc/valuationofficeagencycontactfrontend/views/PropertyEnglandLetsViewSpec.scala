@@ -24,7 +24,7 @@ class PropertyEnglandLetsViewSpec extends ViewBehaviours {
 
   def propertyEnglandLets: england_lets = app.injector.instanceOf[england_lets]
 
-  def view: () => HtmlFormat.Appendable = () => propertyEnglandLets(frontendAppConfig)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => propertyEnglandLets()(using fakeRequest, messages)
 
   "Property England Lets view" must {
     behave like normalPage(

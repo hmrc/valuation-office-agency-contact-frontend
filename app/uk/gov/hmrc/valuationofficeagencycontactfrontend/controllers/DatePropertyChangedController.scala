@@ -28,14 +28,13 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.DateProperty
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.{CacheMap, Mode, NormalMode}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.datePropertyChanged
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 
 import java.time.LocalDate
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
 class DatePropertyChangedController @Inject() (
-  val appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   dataCacheConnector: DataCacheConnector,
   navigator: Navigator,
@@ -56,7 +55,7 @@ class DatePropertyChangedController @Inject() (
       case Some(value) => DatePropertyChangedForm().fill(Some(value))
     }
 
-    Ok(datePropertyChanged(appConfig, preparedForm, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))
+    Ok(datePropertyChanged(preparedForm, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
@@ -64,7 +63,7 @@ class DatePropertyChangedController @Inject() (
       DatePropertyChangedForm().bindFromRequest().fold(
         (formWithErrors: Form[Option[LocalDate]]) =>
           Future.successful(
-            BadRequest(datePropertyChanged(appConfig, formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))
+            BadRequest(datePropertyChanged(formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))
           ),
         value =>
           for

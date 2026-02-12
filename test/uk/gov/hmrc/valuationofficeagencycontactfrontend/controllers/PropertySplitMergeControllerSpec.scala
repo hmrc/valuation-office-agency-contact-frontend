@@ -33,7 +33,6 @@ class PropertySplitMergeControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new PropertySplitMergeController(
-      frontendAppConfig,
       messagesApi,
       dataRetrievalAction,
       new DataRequiredActionImpl(ec),
@@ -42,12 +41,12 @@ class PropertySplitMergeControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = PropertyWindWaterForm()): String =
-    propertySplitMergeEnquiry(frontendAppConfig)(using fakeRequest, messages).toString()
+    propertySplitMergeEnquiry()(using fakeRequest, messages).toString()
 
   "Property Permanent Changes Controller" must {
     "return the correct view for a GET" in {
       val result = controller().onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe propertySplitMergeEnquiry(frontendAppConfig)(using fakeRequest, messages).toString
+      contentAsString(result) mustBe propertySplitMergeEnquiry()(using fakeRequest, messages).toString
     }
 
     "return OK and the correct view for a GET" in {

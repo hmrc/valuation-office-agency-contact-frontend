@@ -27,12 +27,12 @@ class CouncilTaxBandForNewControllerSpec extends ControllerSpecBase {
   def councilTaxBandForNew: html.councilTaxBandForNew = app.injector.instanceOf[council_tax_for_new]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
-    new CouncilTaxBandForNewController(frontendAppConfig, messagesApi, councilTaxBandForNew, MessageControllerComponentsHelpers.stubMessageControllerComponents)
+    new CouncilTaxBandForNewController(messagesApi, councilTaxBandForNew, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
   "Council Tax Band For A New Property Controller" must {
     "return the correct view for a GET" in {
       val result = controller().onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe councilTaxBandForNew(frontendAppConfig)(using fakeRequest, messages).toString
+      contentAsString(result) mustBe councilTaxBandForNew()(using fakeRequest, messages).toString
     }
   }
 }

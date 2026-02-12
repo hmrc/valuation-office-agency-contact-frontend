@@ -18,7 +18,6 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.viewmodels.Section
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryList
@@ -28,7 +27,7 @@
 
 @this(mainTemplate: main_template, govukButton: GovukButton, govukSummaryList: GovukSummaryList )
 
-@(appConfig: FrontendAppConfig, answerSections: Seq[Section], backLink: String)(implicit request: Request[?], messages: Messages)
+@(answerSections: Seq[Section], backLink: String)(implicit request: Request[?], messages: Messages)
 
 @mainTemplate(
     backLink = Some(BackLink(href = backLink)),

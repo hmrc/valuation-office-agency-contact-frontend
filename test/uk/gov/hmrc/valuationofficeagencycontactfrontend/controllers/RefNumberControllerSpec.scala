@@ -38,7 +38,6 @@ class RefNumberControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new RefNumberController(
-      frontendAppConfig,
       messagesApi,
       FakeDataCacheConnector,
       new FakeNavigator(desiredRoute = onwardRoute),
@@ -48,7 +47,7 @@ class RefNumberControllerSpec extends ControllerSpecBase {
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[Option[String]] = RefNumberForm()): String = refNumber(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
+  def viewAsString(form: Form[Option[String]] = RefNumberForm()): String = refNumber(form, NormalMode)(using fakeRequest, messages).toString
 
   "RefNumberController Controller" must {
 

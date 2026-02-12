@@ -27,17 +27,16 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.AnnexeSelfContainedForm
 
 @this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
         govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
 
-@(appConfig: FrontendAppConfig, form: Form[String])(implicit request: Request[?], messages: Messages)
+@(form: Form[String])(implicit request: Request[?], messages: Messages)
 
 @mainTemplate(
-    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("annexeSelfContainedEnquiry.title"))else messages("annexeSelfContainedEnquiry.title")),
+    pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("annexeSelfContainedEnquiry.title") else messages("annexeSelfContainedEnquiry.title")),
     backLink = Some(BackLink(href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxAnnexeController.onPageLoad().url))
 ) {
     @formWithCSRF(action = CouncilTaxAnnexeController.onSelfContainedSubmit(), Symbol("autoComplete") -> "off") {

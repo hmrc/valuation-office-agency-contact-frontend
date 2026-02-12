@@ -25,7 +25,7 @@ class AnnexeNotSelfContainedViewSpec extends ViewBehaviours {
 
   def councilTaxAnnexeNotSelfContained: annexeNotSelfContained = app.injector.instanceOf[annexe_not_self_contained]
 
-  def view: () => HtmlFormat.Appendable = () => councilTaxAnnexeNotSelfContained(frontendAppConfig)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxAnnexeNotSelfContained()(using fakeRequest, messages)
 
   "Council Tax Bill view" must {
     behave like normalPage(view, "annexeNotSelfContained", "title", "heading", "p1", "p2", "subheading")

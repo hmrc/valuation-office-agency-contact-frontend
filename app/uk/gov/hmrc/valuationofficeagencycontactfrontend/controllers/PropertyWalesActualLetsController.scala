@@ -28,13 +28,12 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWale
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesLets => wales_lets}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
 class PropertyWalesActualLetsController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   auditService: AuditingService,
   dataCacheConnector: DataCacheConnector,
@@ -55,14 +54,14 @@ class PropertyWalesActualLetsController @Inject() (
         case None        => PropertyWalesActualLetsForm()
         case Some(value) => PropertyWalesActualLetsForm().fill(value)
       }
-      Ok(propertyWalesActualLets(appConfig, preparedForm, mode))
+      Ok(propertyWalesActualLets(preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       PropertyWalesActualLetsForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(propertyWalesActualLets(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(propertyWalesActualLets(formWithErrors, mode))),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering70Days" -> value)
           dataCacheConnector.save[String](request.sessionId, PropertyWalesActualLetsId.toString, value).map(cacheMap =>

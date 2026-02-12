@@ -45,7 +45,6 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoS
 
   def controllerPoorRepair(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new DatePropertyChangedController(
-      frontendAppConfig,
       messagesApi,
       FakeDataCacheConnector,
       new FakeNavigator(desiredRoute = routePoorRepair),
@@ -57,7 +56,6 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoS
 
   def controllerBusiness(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new DatePropertyChangedController(
-      frontendAppConfig,
       messagesApi,
       FakeDataCacheConnector,
       new FakeNavigator(desiredRoute = routeBusiness),
@@ -69,7 +67,6 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoS
 
   def controllerAreaChange(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new DatePropertyChangedController(
-      frontendAppConfig,
       messagesApi,
       FakeDataCacheConnector,
       new FakeNavigator(desiredRoute = routeAreaChange),
@@ -80,10 +77,10 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoS
     )
 
   def viewBusinessAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()): String =
-    datePropertyChanged(frontendAppConfig, form, NormalMode, "datePropertyChanged.business", routeAreaChange.url)(using fakeRequest, messages).toString
+    datePropertyChanged(form, NormalMode, "datePropertyChanged.business", routeAreaChange.url)(using fakeRequest, messages).toString
 
   def viewAreaChangeAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()): String =
-    datePropertyChanged(frontendAppConfig, form, NormalMode, "datePropertyChanged.areaChange", routeAreaChange.url)(using fakeRequest, messages).toString
+    datePropertyChanged(form, NormalMode, "datePropertyChanged.areaChange", routeAreaChange.url)(using fakeRequest, messages).toString
 
   "DatePropertyChangedController Controller" must {
 

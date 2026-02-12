@@ -19,14 +19,12 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{councilTaxBandTooHigh => council_tax_too_high}
 
 import javax.inject.{Inject, Singleton}
 
 @Singleton
 class CouncilTaxBandTooHighController @Inject() (
-  val appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   councilTaxBandTooHigh: council_tax_too_high,
   cc: MessagesControllerComponents
@@ -34,6 +32,6 @@ class CouncilTaxBandTooHighController @Inject() (
   with I18nSupport {
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
-    Ok(councilTaxBandTooHigh(appConfig))
+    Ok(councilTaxBandTooHigh())
   }
 }

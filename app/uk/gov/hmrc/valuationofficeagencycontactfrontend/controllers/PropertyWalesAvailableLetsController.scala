@@ -28,13 +28,12 @@ import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.PropertyWale
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.utils.UserAnswers
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertyWalesAvailableLets => property_wales_available_lets, propertyWalesLetsNoAction => property_wales_lets_no_action}
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
 class PropertyWalesAvailableLetsController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   auditService: AuditingService,
   dataCacheConnector: DataCacheConnector,
@@ -57,14 +56,14 @@ class PropertyWalesAvailableLetsController @Inject() (
         case None        => PropertyWalesAvailableLetsForm()
         case Some(value) => PropertyWalesAvailableLetsForm().fill(value)
       }
-      Ok(propertyWalesAvailableLets(appConfig, preparedForm, mode))
+      Ok(propertyWalesAvailableLets(preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       PropertyWalesAvailableLetsForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(propertyWalesAvailableLets(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(propertyWalesAvailableLets(formWithErrors, mode))),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering140DaysCY" -> value)
           dataCacheConnector.save[String](request.sessionId, PropertyWalesAvailableLetsId.toString, value).map(cacheMap =>
@@ -77,7 +76,7 @@ class PropertyWalesAvailableLetsController @Inject() (
   def onWalLetsNoActionPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       enquiryBackLink(request.userAnswers) match {
-        case Right(link) => Ok(propertyWalesLetsNoAction(appConfig, link))
+        case Right(link) => Ok(propertyWalesLetsNoAction(link))
         case Left(msg)   =>
           log.warn(s"Navigation for Wales No Action page reached with error $msg")
           throw new RuntimeException(s"Navigation for Wales No Action page reached with error $msg")

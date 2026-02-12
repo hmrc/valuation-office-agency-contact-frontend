@@ -19,14 +19,12 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{propertySplitMerge => property_split_merge}
 
 import javax.inject.Inject
 
 class PropertySplitMergeController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
@@ -37,6 +35,6 @@ class PropertySplitMergeController @Inject() (
 
   def onPageLoad(): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      Ok(propertySplitMerge(appConfig))
+      Ok(propertySplitMerge())
   }
 }

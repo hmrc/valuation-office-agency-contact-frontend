@@ -25,7 +25,7 @@ class AnnexeNoFacilitiesViewSpec extends ViewBehaviours {
 
   def councilTaxAnnexeNoFacilities: annexeNoFacilities = app.injector.instanceOf[annexe_no_facilities]
 
-  def view: () => HtmlFormat.Appendable = () => councilTaxAnnexeNoFacilities(frontendAppConfig)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxAnnexeNoFacilities()(using fakeRequest, messages)
 
   "Council Tax Bill view" must {
     behave like normalPage(view, "annexeNoFacilities", "title", "heading", "p1", "p2", "subheading")

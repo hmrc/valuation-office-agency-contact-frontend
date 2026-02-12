@@ -44,7 +44,6 @@ class PropertyEnglandAvailableLetsControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new PropertyEnglandAvailableLetsController(
-      frontendAppConfig,
       messagesApi,
       auditService,
       FakeDataCacheConnector,
@@ -58,7 +57,7 @@ class PropertyEnglandAvailableLetsControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = PropertyEnglandAvailableLetsForm()): String =
-    propertyEnglandLets140DaysEnquiry(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
+    propertyEnglandLets140DaysEnquiry(form, NormalMode)(using fakeRequest, messages).toString
 
   "PropertyEnglandLets140DaysController" must {
 
@@ -73,7 +72,7 @@ class PropertyEnglandAvailableLetsControllerSpec extends ControllerSpecBase {
       val result = controller().onWalLetsPageLoad(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe propertyWalesLets(frontendAppConfig)(using fakeRequest, messages).toString()
+      contentAsString(result) mustBe propertyWalesLets()(using fakeRequest, messages).toString()
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {

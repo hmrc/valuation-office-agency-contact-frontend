@@ -52,7 +52,6 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new CheckYourAnswersController(
-      frontendAppConfig,
       auditService,
       messagesApi,
       FakeDataCacheConnector,
@@ -955,7 +954,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       intercept[Exception] {
         val result = controller(getRelevantData).onPageLoad()(fakeRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
       }
     }
 
@@ -963,7 +962,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       intercept[Exception] {
         val result = controller().onPageLoad()(fakeRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
       }
 
   }

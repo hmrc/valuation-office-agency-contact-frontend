@@ -34,19 +34,18 @@ class PropertyPermanentChangesControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new PropertyPermanentChangesController(
-      frontendAppConfig,
       messagesApi,
       propertyPermanentChangesEnquiry,
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
   def viewAsString(form: Form[String] = PropertyWindWaterForm()): String =
-    propertyPermanentChangesEnquiry(frontendAppConfig, NormalMode)(using fakeRequest, messages).toString()
+    propertyPermanentChangesEnquiry(NormalMode)(using fakeRequest, messages).toString()
 
   "Property Permanent Changes Controller" must {
     "return the correct view for a GET" in {
       val result = controller().onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe propertyPermanentChangesEnquiry(frontendAppConfig, NormalMode)(using fakeRequest, messages).toString
+      contentAsString(result) mustBe propertyPermanentChangesEnquiry(NormalMode)(using fakeRequest, messages).toString
     }
 
     "return OK and the correct view for a GET" in {

@@ -19,7 +19,6 @@ package uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.NormalMode
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{windWatertightCannotBeReduced => wind_watertight_cannot_be_reduced}
 
@@ -28,7 +27,6 @@ import scala.concurrent.ExecutionContext
 
 @Singleton
 class PropertyWindWaterController @Inject() (
-  val appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   windWatertightCannotBeReduced: wind_watertight_cannot_be_reduced,
   cc: MessagesControllerComponents
@@ -38,6 +36,6 @@ class PropertyWindWaterController @Inject() (
   implicit val ec: ExecutionContext = cc.executionContext
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
-    Ok(windWatertightCannotBeReduced(appConfig, NormalMode))
+    Ok(windWatertightCannotBeReduced(NormalMode))
   }
 }

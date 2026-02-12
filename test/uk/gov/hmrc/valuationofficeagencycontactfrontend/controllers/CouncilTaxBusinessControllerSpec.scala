@@ -56,7 +56,6 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new CouncilTaxBusinessController(
-      frontendAppConfig,
       messagesApi,
       auditService,
       fakeDataCacheConnector,
@@ -70,7 +69,6 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
     )
 
   def viewAsString(form: Form[String] = CouncilTaxBusinessEnquiryForm()): String = councilTaxBusinessEnquiry(
-    frontendAppConfig,
     form,
     NormalMode,
     routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
@@ -132,7 +130,7 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
       val result = controller().onSmallPartUsedPageLoad(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe propertySmallPartUsed(frontendAppConfig)(using fakeRequest, messages).toString
+      contentAsString(result) mustBe propertySmallPartUsed()(using fakeRequest, messages).toString
 
     }
 
@@ -140,7 +138,7 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
       val result = controller().onSmallPartUsedBusinessRatesPageLoad()(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe businessRatesNoNeedToPay(frontendAppConfig)(using fakeRequest, messages).toString
+      contentAsString(result) mustBe businessRatesNoNeedToPay()(using fakeRequest, messages).toString
 
     }
   }

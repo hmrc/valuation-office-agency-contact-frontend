@@ -27,7 +27,6 @@
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.CouncilTaxBusinessEnquiryForm
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
@@ -35,10 +34,10 @@
 @this(mainTemplate: main_template, formWithCSFR: FormWithCSRF,
         govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
 
-@(appConfig: FrontendAppConfig, form: Form[String], mode: Mode, backLink: String)(implicit request: Request[?], messages: Messages)
+@(form: Form[String], mode: Mode, backLink: String)(implicit request: Request[?], messages: Messages)
 
 @mainTemplate(
-    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("councilTaxBusinessEnquiry.title"))else messages("councilTaxBusinessEnquiry.title")),
+    pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("councilTaxBusinessEnquiry.title") else messages("councilTaxBusinessEnquiry.title")),
     backLink = Some(BackLink(href = backLink))
 ) {
     @formWithCSFR(action = CouncilTaxBusinessController.onEnquirySubmit(), Symbol("autoComplete") -> "off") {

@@ -23,7 +23,7 @@ import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions._
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.{FrontendAppConfig, Navigator}
+import uk.gov.hmrc.valuationofficeagencycontactfrontend.Navigator
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.BusinessRatesSubcategoryForm
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.identifiers.{BusinessRatesSubcategoryId, CouncilTaxSubcategoryId}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
@@ -36,7 +36,6 @@ import play.api.mvc
 import play.api.mvc.AnyContent
 
 class BusinessRatesSubcategoryController @Inject() (
-  appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   auditService: AuditingService,
   dataCacheConnector: DataCacheConnector,
@@ -57,14 +56,14 @@ class BusinessRatesSubcategoryController @Inject() (
         case None        => BusinessRatesSubcategoryForm()
         case Some(value) => BusinessRatesSubcategoryForm().fill(value)
       }
-      Ok(businessRatesSubcategory(appConfig, preparedForm, mode))
+      Ok(businessRatesSubcategory(preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       BusinessRatesSubcategoryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(businessRatesSubcategory(appConfig, formWithErrors, mode))),
+          Future.successful(BadRequest(businessRatesSubcategory(formWithErrors, mode))),
         value =>
           for {
             _        <- dataCacheConnector.remove(request.sessionId, CouncilTaxSubcategoryId.toString)
@@ -78,6 +77,6 @@ class BusinessRatesSubcategoryController @Inject() (
 
   def onValuationPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      Ok(businessRatesValuation(appConfig))
+      Ok(businessRatesValuation())
   }
 }

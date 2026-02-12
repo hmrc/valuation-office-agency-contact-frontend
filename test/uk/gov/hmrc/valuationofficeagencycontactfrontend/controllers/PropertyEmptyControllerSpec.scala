@@ -31,7 +31,6 @@ class PropertyEmptyControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new PropertyEmptyController(
-      frontendAppConfig,
       messagesApi,
       dataRetrievalAction,
       new DataRequiredActionImpl(ec),
@@ -43,12 +42,12 @@ class PropertyEmptyControllerSpec extends ControllerSpecBase {
   "Property Empty Controller" must {
     "return the correct council tax view for a GET" in {
       val result = controller().onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe councilPropertyEmpty(frontendAppConfig)(using fakeRequest, messages).toString
+      contentAsString(result) mustBe councilPropertyEmpty()(using fakeRequest, messages).toString
     }
 
     "return the correct business rates view for a GET" in {
       val result = controller().onBusinessRatesPageLoad()(fakeRequest)
-      contentAsString(result) mustBe businessRatesPropertyEmpty(frontendAppConfig)(using fakeRequest, messages).toString
+      contentAsString(result) mustBe businessRatesPropertyEmpty()(using fakeRequest, messages).toString
     }
   }
 }

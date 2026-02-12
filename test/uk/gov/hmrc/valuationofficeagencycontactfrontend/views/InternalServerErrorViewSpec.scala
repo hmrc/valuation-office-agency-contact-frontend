@@ -25,7 +25,7 @@ class InternalServerErrorViewSpec extends ViewBehaviours {
 
   def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
 
-  def view: () => HtmlFormat.Appendable = () => internalServerError(frontendAppConfig)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => internalServerError()(using fakeRequest, messages)
 
   "Internal Server Error view" must {
 

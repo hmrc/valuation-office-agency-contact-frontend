@@ -25,7 +25,7 @@ class ProvidingLettingsViewSpec extends ViewBehaviours {
 
   def providingLettings: html.providingLettings = app.injector.instanceOf[providing_lettings]
 
-  def view: () => HtmlFormat.Appendable = () => providingLettings(frontendAppConfig)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => providingLettings()(using fakeRequest, messages)
 
   "Housing benefits view" must {
 

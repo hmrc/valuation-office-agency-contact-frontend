@@ -34,19 +34,18 @@ class PropertyWindWaterControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new PropertyWindWaterController(
-      frontendAppConfig,
       messagesApi,
       windWatertightCannotBeReducedEnquiry,
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
   def viewAsString(form: Form[String] = PropertyWindWaterForm()): String =
-    windWatertightCannotBeReducedEnquiry(frontendAppConfig, NormalMode)(using fakeRequest, messages).toString()
+    windWatertightCannotBeReducedEnquiry(NormalMode)(using fakeRequest, messages).toString()
 
   "Property Wind And Water Controller" must {
     "return the correct view for a GET" in {
       val result = controller().onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe windWatertightCannotBeReducedEnquiry(frontendAppConfig, NormalMode)(using fakeRequest, messages).toString
+      contentAsString(result) mustBe windWatertightCannotBeReducedEnquiry(NormalMode)(using fakeRequest, messages).toString
     }
 
     "return OK and the correct view for a GET" in {

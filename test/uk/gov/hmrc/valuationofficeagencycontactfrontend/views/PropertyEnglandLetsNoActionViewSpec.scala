@@ -26,7 +26,7 @@ class PropertyEnglandLetsNoActionViewSpec extends ViewBehaviours {
 
   def backLink: String = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad().url
 
-  def viewEnglandAvailable140Nights: () => HtmlFormat.Appendable = () => propertyEnglandLetsNoAction(frontendAppConfig, backLink)(using fakeRequest, messages)
+  def viewEnglandAvailable140Nights: () => HtmlFormat.Appendable = () => propertyEnglandLetsNoAction(backLink)(using fakeRequest, messages)
 
   "Property Wales Lets No Action view" must {
     behave like normalPage(

@@ -40,7 +40,6 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new ExistingEnquiryCategoryController(
-      frontendAppConfig,
       messagesApi,
       auditService,
       FakeDataCacheConnector,
@@ -52,10 +51,10 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = ExistingEnquiryCategoryForm()): String =
-    existingEnquiryCategory(frontendAppConfig, form, NormalMode, contactReasonRoute.url)(using fakeRequest, messages).toString
+    existingEnquiryCategory(form, NormalMode, contactReasonRoute.url)(using fakeRequest, messages).toString
 
   def viewAsStringEnquiryDate(form: Form[String] = ExistingEnquiryCategoryForm()): String =
-    existingEnquiryCategory(frontendAppConfig, form, NormalMode, enquiryDateRoute.url)(using fakeRequest, messages).toString
+    existingEnquiryCategory(form, NormalMode, enquiryDateRoute.url)(using fakeRequest, messages).toString
 
   "ExistingEnquiryCategory Controller" must {
 

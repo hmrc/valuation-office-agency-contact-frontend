@@ -30,7 +30,7 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class AuditingService @Inject() (auditConnector: AuditConnector) {
 
-  val auditSource = "digital-contact-centre"
+  private val auditSource = "digital-contact-centre"
 
   def sendEnquiryToVOA(auditEventJson: JsValue)(implicit ec: ExecutionContext, hc: HeaderCarrier): Unit =
     sendEventJson("sendenquirytoVOA", auditEventJson)

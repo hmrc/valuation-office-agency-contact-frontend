@@ -41,7 +41,6 @@ class BusinessRatesPropertyControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new BusinessRatesPropertyController(
-      frontendAppConfig,
       messagesApi,
       auditService,
       FakeDataCacheConnector,
@@ -54,7 +53,7 @@ class BusinessRatesPropertyControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = BusinessRatesPropertyForm()): String =
-    businessRatesPropertyEnquiry(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
+    businessRatesPropertyEnquiry(form, NormalMode)(using fakeRequest, messages).toString
 
   "BusinessRatesSelfCateringController" must {
 
@@ -96,7 +95,7 @@ class BusinessRatesPropertyControllerSpec extends ControllerSpecBase {
       val result = controller().onNonBusinessPageLoad(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe businessRatesNonBusiness(frontendAppConfig)(using fakeRequest, messages).toString()
+      contentAsString(result) mustBe businessRatesNonBusiness()(using fakeRequest, messages).toString()
     }
   }
 }

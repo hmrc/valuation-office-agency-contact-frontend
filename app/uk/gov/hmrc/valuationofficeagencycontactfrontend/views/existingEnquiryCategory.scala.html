@@ -23,7 +23,6 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.models.Mode
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
@@ -34,10 +33,10 @@
 @this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
         govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
 
-@(appConfig: FrontendAppConfig, form: Form[String], mode: Mode, backLink: String)(implicit request: Request[?], messages: Messages)
+@(form: Form[String], mode: Mode, backLink: String)(implicit request: Request[?], messages: Messages)
 
 @mainTemplate(
-    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("existingEnquiryCategory.title"))else messages("existingEnquiryCategory.title")),
+    pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("existingEnquiryCategory.title") else messages("existingEnquiryCategory.title")),
     backLink = Some(BackLink(href = ContactReasonController.onPageLoad().url))
 ) {
     @formWithCSRF(action = ExistingEnquiryCategoryController.onSubmit(), Symbol("autoComplete") -> "off") {
@@ -60,7 +59,7 @@
                 content = Text(messages(i.messageKey)),
                 id = Option(i.id),
                 value = Option(i.value),
-                checked = form("value").value.map(_ == i.value).getOrElse(false)
+                checked = form("value").value.contains(i.value)
             )
             ),
             errorMessage = form.errors.asTextErrorMessageForField("value")

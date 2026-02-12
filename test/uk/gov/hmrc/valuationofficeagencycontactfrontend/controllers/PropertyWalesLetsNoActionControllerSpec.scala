@@ -43,7 +43,6 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new PropertyWalesLetsNoActionController(
-      frontendAppConfig,
       messagesApi,
       dataRetrievalAction,
       new DataRequiredActionImpl(ec),
@@ -55,10 +54,10 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
   def wales70DaysBackLink: String  = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad().url
 
   def viewAsString70(form: Form[ContactDetails] = ContactDetailsForm()): String =
-    propertyWalesLetsNoAction(frontendAppConfig, wales70DaysBackLink)(using fakeRequest, messages).toString
+    propertyWalesLetsNoAction(wales70DaysBackLink)(using fakeRequest, messages).toString
 
   def viewAsString140(form: Form[ContactDetails] = ContactDetailsForm()): String =
-    propertyWalesLetsNoAction(frontendAppConfig, wales140DaysBackLink)(using fakeRequest, messages).toString
+    propertyWalesLetsNoAction(wales140DaysBackLink)(using fakeRequest, messages).toString
 
   "Wales Lets No Action Controller" must {
 
@@ -146,7 +145,7 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
       intercept[Exception] {
         val result = controller().onPageLoad(NormalMode)(fakeRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError(frontendAppConfig)(using fakeRequest, messages).toString
+        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
       }
 
     "redirect to Session Expired for a GET if no existing data is found" in {

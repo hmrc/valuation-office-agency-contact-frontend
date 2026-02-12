@@ -14,12 +14,11 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.govuk.main_template
 
 @this(mainTemplate: main_template)
 
-@(appConfig: FrontendAppConfig)(implicit request: Request[?], messages: Messages)
+@()(implicit request: Request[?], messages: Messages)
 
 @mainTemplate(
     pageTitle = Option(messages("error400.title"))) {

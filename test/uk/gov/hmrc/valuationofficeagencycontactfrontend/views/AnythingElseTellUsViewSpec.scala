@@ -31,12 +31,12 @@ class AnythingElseTellUsViewSpec extends QuestionViewBehaviours[String] {
 
   def anythingElse: anythingElseTellUs = app.injector.instanceOf[anything_else]
 
-  def createView: () => HtmlFormat.Appendable = () => anythingElse(frontendAppConfig, AnythingElseForm(), NormalMode)(using fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable = () => anythingElse(AnythingElseForm(), NormalMode)(using fakeRequest, messages)
 
-  def createAlternativeView: () => HtmlFormat.Appendable = () => anythingElse(frontendAppConfig, AnythingElseForm(), NormalMode)(using fakeRequest, messages)
+  def createAlternativeView: () => HtmlFormat.Appendable = () => anythingElse(AnythingElseForm(), NormalMode)(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => anythingElse(frontendAppConfig, form, NormalMode)(using fakeRequest, messages)
+    (form: Form[String]) => anythingElse(form, NormalMode)(using fakeRequest, messages)
 
   override val form: Form[String] = AnythingElseForm()
 

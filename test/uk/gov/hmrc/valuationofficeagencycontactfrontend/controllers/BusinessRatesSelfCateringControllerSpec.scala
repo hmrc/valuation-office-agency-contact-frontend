@@ -44,7 +44,6 @@ class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new BusinessRatesSelfCateringController(
-      frontendAppConfig,
       messagesApi,
       auditService,
       FakeDataCacheConnector,
@@ -58,7 +57,7 @@ class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = BusinessRatesSelfCateringForm()): String =
-    businessRatesSelfCateringEnquiry(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
+    businessRatesSelfCateringEnquiry(form, NormalMode)(using fakeRequest, messages).toString
 
   "BusinessRatesSelfCateringController" must {
 
@@ -100,14 +99,14 @@ class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
       val result = controller().onEngLetsPageLoad(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe propertyEnglandLets(frontendAppConfig)(using fakeRequest, messages).toString()
+      contentAsString(result) mustBe propertyEnglandLets()(using fakeRequest, messages).toString()
     }
 
     "return OK and the correct view for wales lets page GET" in {
       val result = controller().onWalLetsPageLoad(NormalMode)(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe propertyWalesLets(frontendAppConfig)(using fakeRequest, messages).toString()
+      contentAsString(result) mustBe propertyWalesLets()(using fakeRequest, messages).toString()
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {

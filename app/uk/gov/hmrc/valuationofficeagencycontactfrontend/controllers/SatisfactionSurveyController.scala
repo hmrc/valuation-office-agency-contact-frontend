@@ -24,7 +24,6 @@ import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.http.HeaderCarrierConverter
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.connectors.AuditingService
-import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{confirmation => Confirmation}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.views.html.{satisfactionSurveyThankYou => satisfaction_Survey_Thank_You}
 import uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
@@ -38,7 +37,6 @@ import play.api.mvc.AnyContent
 
 @Singleton()
 class SatisfactionSurveyController @Inject() (
-  val appConfig: FrontendAppConfig,
   override val messagesApi: MessagesApi,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
@@ -71,7 +69,7 @@ class SatisfactionSurveyController @Inject() (
 
     SatisfactionSurveyForm().bindFromRequest().fold(
       formWithErrors =>
-        Ok(confirmation(appConfig, contact, answerSections, whatHappensNextMessages(request.userAnswers), formWithErrors)),
+        Ok(confirmation(contact, answerSections, whatHappensNextMessages(request.userAnswers), formWithErrors)),
       success => {
         auditService.sendRadioButtonSelection(request.uri, "satisfaction" -> success.satisfaction)
         sendFeedback(success, AddressFormatters.formattedPropertyAddress(contact.propertyAddress, ", "))
@@ -89,7 +87,7 @@ class SatisfactionSurveyController @Inject() (
     }
 
   def surveyThankyou: mvc.Action[AnyContent] = Action { implicit request =>
-    Ok(satisfactionSurveyThankYou(appConfig))
+    Ok(satisfactionSurveyThankYou())
   }
 
 }

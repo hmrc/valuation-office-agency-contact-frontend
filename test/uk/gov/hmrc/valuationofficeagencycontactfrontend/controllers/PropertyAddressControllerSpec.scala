@@ -38,7 +38,6 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new PropertyAddressController(
-      frontendAppConfig,
       messagesApi,
       FakeDataCacheConnector,
       new FakeNavigator(desiredRoute = onwardRoute),
@@ -49,7 +48,7 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[PropertyAddress] = PropertyAddressForm()): String =
-    propertyAddress(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
+    propertyAddress(form, NormalMode)(using fakeRequest, messages).toString
 
   "Property Address Controller" must {
 

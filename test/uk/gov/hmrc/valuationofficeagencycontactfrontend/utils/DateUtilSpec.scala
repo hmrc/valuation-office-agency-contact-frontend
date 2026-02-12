@@ -29,8 +29,8 @@ import java.util.Locale
   */
 class DateUtilSpec extends SpecBase with Logging {
 
-  private val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(new Locale("en"))))
-  private val messagesWelsh: Messages   = messagesApi.preferred(Seq(Lang(new Locale("cy"))))
+  private val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.of("en"))))
+  private val messagesWelsh: Messages   = messagesApi.preferred(Seq(Lang(Locale.of("cy"))))
 
   private val dateUtil = injector.instanceOf[DateUtil]
 

@@ -22,7 +22,7 @@ import play.api.data.format.Formatter
 
 object BooleanForm extends FormErrorHelper {
 
-  def booleanFormat(errorKey: String): Formatter[Boolean] = new Formatter[Boolean] {
+  private def booleanFormat(errorKey: String): Formatter[Boolean] = new Formatter[Boolean] {
 
     override val format = Some(("format.boolean", Nil))
 

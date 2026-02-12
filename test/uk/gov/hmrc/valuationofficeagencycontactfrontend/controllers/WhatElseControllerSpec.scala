@@ -44,7 +44,6 @@ class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar {
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     new WhatElseController(
-      frontendAppConfig,
       messagesApi,
       FakeDataCacheConnector,
       new FakeNavigator(desiredRoute = onwardRoute),
@@ -54,7 +53,7 @@ class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar {
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[String] = WhatElseForm()): String = whatElse(frontendAppConfig, form, NormalMode)(using fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = WhatElseForm()): String = whatElse(form, NormalMode)(using fakeRequest, messages).toString
 
   "TellUsMore Controller" must {
 

@@ -28,7 +28,6 @@ class ValuationForTaxesControllerSpec extends ControllerSpecBase {
   "Valuation For Taxes Controller" must {
     "return 200 for a GET" in {
       val result = new ValuationForTaxesController(
-        frontendAppConfig,
         messagesApi,
         valuationForTaxes,
         MessageControllerComponentsHelpers.stubMessageControllerComponents
@@ -38,12 +37,11 @@ class ValuationForTaxesControllerSpec extends ControllerSpecBase {
 
     "return the correct view for a GET" in {
       val result = new ValuationForTaxesController(
-        frontendAppConfig,
         messagesApi,
         valuationForTaxes,
         MessageControllerComponentsHelpers.stubMessageControllerComponents
       ).onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe valuationForTaxes(frontendAppConfig)(using fakeRequest, messages).toString
+      contentAsString(result) mustBe valuationForTaxes()(using fakeRequest, messages).toString
     }
 
   }

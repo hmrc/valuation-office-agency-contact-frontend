@@ -25,7 +25,7 @@ class CouncilTaxBandTooHighViewSpec extends ViewBehaviours {
 
   def councilTaxBandTooHigh: html.councilTaxBandTooHigh = app.injector.instanceOf[council_tax_band_too_high]
 
-  def view: () => HtmlFormat.Appendable = () => councilTaxBandTooHigh(frontendAppConfig)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxBandTooHigh()(using fakeRequest, messages)
 
   "Council Tax Band Too High view" must {
     behave like normalPage(

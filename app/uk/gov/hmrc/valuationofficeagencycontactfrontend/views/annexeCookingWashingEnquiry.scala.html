@@ -28,16 +28,15 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
 @import uk.gov.hmrc.valuationofficeagencycontactfrontend.forms.AnnexeCookingWashingForm
-@import uk.gov.hmrc.valuationofficeagencycontactfrontend.FrontendAppConfig
 
 @this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
         govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
 
-@(appConfig: FrontendAppConfig, form: Form[String])(implicit request: Request[?], messages: Messages)
+@(form: Form[String])(implicit request: Request[?], messages: Messages)
 
 
 @mainTemplate(
-    pageTitle = Some(if(form.hasErrors)(messages("error.title") + " " + messages("annexeCookingWashing.title"))else messages("annexeCookingWashing.title")),
+    pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("annexeCookingWashing.title") else messages("annexeCookingWashing.title")),
     backLink = Some(BackLink(href = uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.routes.CouncilTaxAnnexeController.onSelfContainedEnquiryPageLoad().url))
 ) {
     @formWithCSRF(action = CouncilTaxAnnexeController.onHaveCookingWashingSubmit(), Symbol("autoComplete") -> "off") {
