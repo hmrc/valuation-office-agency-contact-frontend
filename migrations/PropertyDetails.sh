@@ -5,11 +5,11 @@ echo "Applying migration PropertyDetails"
 echo "Adding routes to conf/app.routes"
 
 echo "" >> ../conf/app.routes
-echo "GET        /propertyDetails                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyDetailsController.onPageLoad(mode: Mode = NormalMode)" >> ../conf/app.routes
-echo "POST       /propertyDetails                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyDetailsController.onSubmit(mode: Mode = NormalMode)" >> ../conf/app.routes
+echo "GET        /propertyDetails                       uk.gov.hmrc.vo.contact.frontend.controllers.PropertyDetailsController.onPageLoad(mode: Mode = NormalMode)" >> ../conf/app.routes
+echo "POST       /propertyDetails                       uk.gov.hmrc.vo.contact.frontend.controllers.PropertyDetailsController.onSubmit(mode: Mode = NormalMode)" >> ../conf/app.routes
 
-echo "GET        /changePropertyDetails                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyDetailsController.onPageLoad(mode: Mode = CheckMode)" >> ../conf/app.routes
-echo "POST       /changePropertyDetails                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.PropertyDetailsController.onSubmit(mode: Mode = CheckMode)" >> ../conf/app.routes
+echo "GET        /changePropertyDetails                       uk.gov.hmrc.vo.contact.frontend.controllers.PropertyDetailsController.onPageLoad(mode: Mode = CheckMode)" >> ../conf/app.routes
+echo "POST       /changePropertyDetails                       uk.gov.hmrc.vo.contact.frontend.controllers.PropertyDetailsController.onSubmit(mode: Mode = CheckMode)" >> ../conf/app.routes
 
 echo "Adding messages to conf.messages"
 echo "" >> ../conf/messages.en

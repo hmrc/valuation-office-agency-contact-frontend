@@ -1,0 +1,127 @@
+@*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukErrorSummary}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
+@import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
+@import uk.gov.hmrc.vo.contact.frontend.models.Mode
+@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service_fair_rent
+@import uk.gov.hmrc.vo.contact.frontend.models.TellUsMore
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
+@import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.charactercount.CharacterCount
+@import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
+
+@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
+        hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
+
+@(form: Form[TellUsMore], mode: Mode, enquiryKey: String, backlink: String)(implicit request: Request[?], messages: Messages)
+
+@content = {
+
+    @if(enquiryKey == "tellUsMore.poorRepair" || enquiryKey == "tellUsMore.business"
+            || enquiryKey == "tellUsMore.areaChange" || enquiryKey == "tellUsMore.other"
+            || enquiryKey == "tellUsMore.general" || enquiryKey == "tellUsMore.notUsed"
+            || enquiryKey == "tellUsMore.business.other" || enquiryKey == "tellUsMore.fairRent") {
+            <h1 class="govuk-label-wrapper">
+                <label class="govuk-label govuk-label--l" for="message">
+                    @messages(s"$enquiryKey.heading")
+                </label>
+            </h1>
+
+    @hmrcCharacterCount(
+        CharacterCount(
+            id = "message",
+            name = "message",
+            value = form("message").value,
+            hint = {
+                if(enquiryKey != "tellUsMore.notUsed") {
+                    Option(Hint(content = Text(messages(s"$enquiryKey.hint"))))
+                    } else None
+                },
+            rows = 4,
+            maxLength = Some(5000),
+            errorMessage = form.errors.asHtmlErrorMessageForField("message")
+        )
+    )
+
+        @if(enquiryKey != "tellUsMore.other" && enquiryKey != "tellUsMore.general" && enquiryKey != "tellUsMore.business.other" && enquiryKey != "tellUsMore.fairRent") {
+            <div class="govuk-inset-text">@messages(s"$enquiryKey.inset")</div>
+        }
+
+    } else {
+            <h1 class="govuk-label-wrapper">
+                <label class="govuk-label govuk-label--l" for="message">@messages("tellUsMore.heading")</label>
+            </h1>
+
+        <p class="govuk-body">@messages("tellUsMore.para")</p>
+
+        <ul class="govuk-list govuk-list--bullet">
+            <li>@messages("tellUsMore.para2")</li>
+            <li>@messages("tellUsMore.para3")</li>
+            <li>@messages("tellUsMore.para4") @messages(enquiryKey)</li>
+        </ul>
+
+    @hmrcCharacterCount(
+        CharacterCount(
+            id = "message",
+            name = "message",
+            value = form("message").value,
+            rows = 4,
+            maxLength = Some(5000),
+            hint = Option(Hint(content = Text(messages("tellUsMore.hint")))),
+            errorMessage = form.errors.asHtmlErrorMessageForField("message"),
+            label = Label(content = Text(messages("tellUsMore.message"))
+        )
+    )
+)
+
+    }
+}
+
+@defining(if(enquiryKey == "tellUsMore.poorRepair" || enquiryKey == "tellUsMore.business" || enquiryKey == "tellUsMore.areaChange" || enquiryKey == "tellUsMore.other"
+|| enquiryKey == "tellUsMore.notUsed" || enquiryKey == "tellUsMore.business.other" || enquiryKey == "tellUsMore.fairRent") messages(s"$enquiryKey.title") else messages("tellUsMore.title")) { title =>
+
+    @mainTemplate(
+        pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + title else title),
+        backLink = Some(BackLink(href = backlink))
+    ) {
+        @formWithCSRF(action = TellUsMoreController.onSubmit(mode), Symbol("autoComplete") -> "off") {
+            @if(form.hasErrors) {
+                @govukErrorSummary(
+                    ErrorSummary(
+                        attributes = Map("id" -> "error-summary-heading"),
+                        title = Text(messages("error.summary.title")),
+                        errorList = form.errors.take(1).map(e => ErrorLink(href = Some("#" + e.key), content = HtmlContent(messages(e.messages, e.args))))
+                    )
+                )
+            }
+            @content
+            @govukButton(Button(attributes = Map("id" -> "submit"), content = Text(messages("site.continue"))))
+
+            @if(enquiryKey == "tellUsMore.fairRent") {
+                @help_with_service_fair_rent()
+            }
+        }
+    }
+}

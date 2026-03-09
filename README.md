@@ -1,8 +1,8 @@
 # valuation-office-agency-contact-frontend
 
-VOA Contact Forms.
+VO Contact Forms.
 
-### Running VOA Contact Forms on your local machine
+### Running VO Contact Forms on your local machine
 
 https://confluence.tools.tax.service.gov.uk/display/VOAO/Running+Contact+Forms+on+your+local+machine
 

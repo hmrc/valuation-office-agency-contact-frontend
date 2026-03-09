@@ -1,0 +1,102 @@
+/*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package uk.gov.hmrc.vo.contact.frontend.controllers
+
+import org.scalatestplus.mockito.MockitoSugar
+import play.api.data.Form
+import play.api.libs.json.JsString
+import play.api.test.Helpers.*
+import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
+import uk.gov.hmrc.vo.contact.frontend.connectors.FakeDataCacheConnector
+import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
+import uk.gov.hmrc.vo.contact.frontend.forms.AnythingElseForm
+import uk.gov.hmrc.vo.contact.frontend.identifiers.{AnythingElseId, EnquiryCategoryId}
+import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
+import uk.gov.hmrc.vo.contact.frontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
+import uk.gov.hmrc.vo.contact.frontend.views.html.error.internal_server_error
+import uk.gov.hmrc.vo.contact.frontend.views.html.{anythingElseTellUs => anything_else}
+import play.api.mvc.Call
+import uk.gov.hmrc.vo.contact.frontend.views.html.{anythingElseTellUs, error}
+
+class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSugar {
+
+  val mockUserAnswers: UserAnswers                     = mock[UserAnswers]
+  def anythingElse: anythingElseTellUs                 = app.injector.instanceOf[anything_else]
+  def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
+
+  def onwardRoute: Call = routes.CheckYourAnswersController.onPageLoad()
+
+  def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
+    AnythingElseTellUsController(
+      messagesApi,
+      FakeDataCacheConnector,
+      FakeNavigator(desiredRoute = onwardRoute),
+      dataRetrievalAction,
+      DataRequiredActionImpl(ec),
+      anythingElse,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
+
+  def viewAsString(form: Form[String] = AnythingElseForm(), msg: String = ""): String =
+    anythingElse(form, NormalMode)(using fakeRequest, messages).toString
+
+  "AnythingElseTellUsMore Controller" must {
+
+    "return OK and the correct view for a GET" in {
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"))
+
+      val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsString(AnythingElseForm())
+    }
+
+    "populate the view correctly on a GET when the anything else has previously been filled" in {
+      val anythingElseString = "Anything else"
+
+      val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"), AnythingElseId.toString -> JsString(anythingElseString))
+
+      val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
+
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+
+      status(result) mustBe OK
+      contentAsString(result) mustBe viewAsString(AnythingElseForm().fill(anythingElseString))
+    }
+
+    "redirect to the next page when valid data is submitted" in {
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("message", "value 1"))
+
+      val result = controller().onSubmit(NormalMode)(postRequest)
+
+      status(result) mustBe SEE_OTHER
+      redirectLocation(result) mustBe Some(onwardRoute.url)
+    }
+
+    "return a Bad Request and errors when invalid data is submitted" in {
+      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
+      val boundForm   = AnythingElseForm().bind(Map("value" -> "invalid value"))
+
+      val result = controller().onSubmit(NormalMode)(postRequest)
+
+      status(result) mustBe BAD_REQUEST
+      contentAsString(result) mustBe viewAsString(boundForm)
+    }
+  }
+}

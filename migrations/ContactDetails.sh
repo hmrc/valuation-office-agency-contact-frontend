@@ -11,11 +11,11 @@ echo "Applying migration ContactDetails"
 echo "Adding routes to conf/app.routes"
 
 echo "" >> ../conf/app.Routes
-echo "GET        /contactDetails                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onPageLoad(mode: Mode = NormalMode)" >> ../conf/app.Routes
-echo "POST       /contactDetails                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onSubmit(mode: Mode = NormalMode)" >> ../conf/app.Routes
+echo "GET        /contactDetails                       uk.gov.hmrc.vo.contact.frontend.controllers.ContactDetailsController.onPageLoad(mode: Mode = NormalMode)" >> ../conf/app.Routes
+echo "POST       /contactDetails                       uk.gov.hmrc.vo.contact.frontend.controllers.ContactDetailsController.onSubmit(mode: Mode = NormalMode)" >> ../conf/app.Routes
 
-echo "GET        /changeContactDetails                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onPageLoad(mode: Mode = CheckMode)" >> ../conf/app.Routes
-echo "POST       /changeContactDetails                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.ContactDetailsController.onSubmit(mode: Mode = CheckMode)" >> ../conf/app.Routes
+echo "GET        /changeContactDetails                       uk.gov.hmrc.vo.contact.frontend.controllers.ContactDetailsController.onPageLoad(mode: Mode = CheckMode)" >> ../conf/app.Routes
+echo "POST       /changeContactDetails                       uk.gov.hmrc.vo.contact.frontend.controllers.ContactDetailsController.onSubmit(mode: Mode = CheckMode)" >> ../conf/app.Routes
 
 echo "Adding messages to conf.messages"
 echo "" >> ../conf/messages.en

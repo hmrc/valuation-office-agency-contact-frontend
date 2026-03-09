@@ -5,11 +5,11 @@ echo "Applying migration BusinessRatesAddress"
 echo "Adding routes to conf/app.routes"
 
 echo "" >> ../conf/app.routes
-echo "GET        /businessRatesAddress                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesAddressController.onPageLoad(mode: Mode = NormalMode)" >> ../conf/app.routes
-echo "POST       /businessRatesAddress                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesAddressController.onSubmit(mode: Mode = NormalMode)" >> ../conf/app.routes
+echo "GET        /businessRatesAddress                       uk.gov.hmrc.vo.contact.frontend.controllers.BusinessRatesAddressController.onPageLoad(mode: Mode = NormalMode)" >> ../conf/app.routes
+echo "POST       /businessRatesAddress                       uk.gov.hmrc.vo.contact.frontend.controllers.BusinessRatesAddressController.onSubmit(mode: Mode = NormalMode)" >> ../conf/app.routes
 
-echo "GET        /changeBusinessRatesAddress                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesAddressController.onPageLoad(mode: Mode = CheckMode)" >> ../conf/app.routes
-echo "POST       /changeBusinessRatesAddress                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesAddressController.onSubmit(mode: Mode = CheckMode)" >> ../conf/app.routes
+echo "GET        /changeBusinessRatesAddress                       uk.gov.hmrc.vo.contact.frontend.controllers.BusinessRatesAddressController.onPageLoad(mode: Mode = CheckMode)" >> ../conf/app.routes
+echo "POST       /changeBusinessRatesAddress                       uk.gov.hmrc.vo.contact.frontend.controllers.BusinessRatesAddressController.onSubmit(mode: Mode = CheckMode)" >> ../conf/app.routes
 
 echo "Adding messages to conf.messages"
 echo "" >> ../conf/messages.en

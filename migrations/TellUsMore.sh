@@ -5,11 +5,11 @@ echo "Applying migration TellUsMore"
 echo "Adding routes to conf/app.routes"
 
 echo "" >> ../conf/app.routes
-echo "GET        /tellUsMore                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onPageLoad(mode: Mode = NormalMode)" >> ../conf/app.routes
-echo "POST       /tellUsMore                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onSubmit(mode: Mode = NormalMode)" >> ../conf/app.routes
+echo "GET        /tellUsMore                       uk.gov.hmrc.vo.contact.frontend.controllers.TellUsMoreController.onPageLoad(mode: Mode = NormalMode)" >> ../conf/app.routes
+echo "POST       /tellUsMore                       uk.gov.hmrc.vo.contact.frontend.controllers.TellUsMoreController.onSubmit(mode: Mode = NormalMode)" >> ../conf/app.routes
 
-echo "GET        /changeTellUsMore                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onPageLoad(mode: Mode = CheckMode)" >> ../conf/app.routes
-echo "POST       /changeTellUsMore                       uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.TellUsMoreController.onSubmit(mode: Mode = CheckMode)" >> ../conf/app.routes
+echo "GET        /changeTellUsMore                       uk.gov.hmrc.vo.contact.frontend.controllers.TellUsMoreController.onPageLoad(mode: Mode = CheckMode)" >> ../conf/app.routes
+echo "POST       /changeTellUsMore                       uk.gov.hmrc.vo.contact.frontend.controllers.TellUsMoreController.onSubmit(mode: Mode = CheckMode)" >> ../conf/app.routes
 
 echo "Adding messages to conf.messages"
 echo "" >> ../conf/messages.en

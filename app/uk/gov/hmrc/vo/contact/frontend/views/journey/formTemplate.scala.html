@@ -1,0 +1,67 @@
+@*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.govukfrontend.views.html.components._
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
+@import uk.gov.hmrc.vo.contact.frontend.controllers.routes
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service_fair_rent
+
+@this(
+        pageTemplate: pageTemplate,
+        formWithCSRF: FormWithCSRF,
+        govukButton: GovukButton,
+        govukErrorSummary: GovukErrorSummary
+)
+
+@(
+        form: Form[?],
+        key: String,
+        backUrl: String,
+        title: String,
+        helpWithServiceSection: Option[String] = None
+)(formFields: Html)(implicit request: Request[?], messages: Messages)
+
+@pageTemplate(
+    title = form.errors.headOption.fold("")(_ => s"${messages("error.title")} ") + title,
+    backUrl = backUrl
+) {
+
+    @if(form.hasErrors) {
+        @govukErrorSummary(
+            ErrorSummary(
+                title = Text(messages("error.summary.title")),
+                errorList = form.errors.map(e =>
+                    ErrorLink(href = Some(s"#${e.key}"), content = HtmlContent(messages(e.messages, e.args))))
+            )
+        )
+    }
+
+    @formWithCSRF(action = routes.JourneyController.onSubmit(key), Symbol("autoComplete") -> "off") {
+
+        @formFields
+
+        @govukButton(Button(content = Text(messages("site.continue"))))
+    }
+
+    @{helpWithServiceSection match {
+        case Some("help_with_service_fair_rent") => help_with_service_fair_rent()
+        case Some("help_with_service") => help_with_service()
+        case _ =>
+    }}
+
+}

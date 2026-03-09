@@ -1,0 +1,63 @@
+@*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukErrorSummary}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
+@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.inputDate
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
+@import uk.gov.hmrc.vo.contact.frontend.models.Mode
+@import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
+
+@this(mainTemplate: main_template, govukButton: GovukButton,
+        input_date: inputDate, formWithCSRF: FormWithCSRF, govukErrorSummary: GovukErrorSummary)
+
+
+@(form: Form[?], mode: Mode, enquiryKey: String, backlink: String)(implicit request: Request[?], messages: Messages)
+
+@mainTemplate(
+    backLink = Some(BackLink(href = backlink)),
+    pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages(s"$enquiryKey.title") else messages(s"$enquiryKey.title")),
+) {
+
+    @formWithCSRF(action = DatePropertyChangedController.onSubmit(), Symbol("autoComplete") -> "off") {
+        @if(form.hasErrors) {
+            @govukErrorSummary(
+                ErrorSummary(
+                    title = Text(messages("error.summary.title")),
+                    errorList = form.mapping.mappings.flatMap(x => form.error(x.key).map(e =>
+                        ErrorLink(href = Option("#datePropertyChanged-day"), content = HtmlContent(messages(e.messages, e.args)))
+                    )), attributes = Map("id" -> "error-summary-heading")
+                )
+            )
+        }
+
+        @input_date(
+            id = "datePropertyChanged",
+            form = form,
+            legend = messages(s"$enquiryKey.heading"),
+            hint = Some(messages("datePropertyChanged.hint")),
+            headingIsLegend = true
+        )
+
+        @govukButton(Button(content = Text(messages("site.continue"))))
+
+        @components.help_with_service()
+    }
+}

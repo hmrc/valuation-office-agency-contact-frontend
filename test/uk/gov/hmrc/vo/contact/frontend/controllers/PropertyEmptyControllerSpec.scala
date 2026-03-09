@@ -1,0 +1,53 @@
+/*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package uk.gov.hmrc.vo.contact.frontend.controllers
+
+import play.api.test.Helpers._
+import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction}
+import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
+import uk.gov.hmrc.vo.contact.frontend.views.html.{councilTaxPropertyEmpty => council_tax_property_empty}
+import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesPropertyEmpty => business_rates_property_empty}
+import uk.gov.hmrc.vo.contact.frontend.views.html
+import uk.gov.hmrc.vo.contact.frontend.views.html.councilTaxPropertyEmpty
+
+class PropertyEmptyControllerSpec extends ControllerSpecBase {
+
+  def councilPropertyEmpty: councilTaxPropertyEmpty               = app.injector.instanceOf[council_tax_property_empty]
+  def businessRatesPropertyEmpty: html.businessRatesPropertyEmpty = app.injector.instanceOf[business_rates_property_empty]
+
+  def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
+    PropertyEmptyController(
+      messagesApi,
+      dataRetrievalAction,
+      DataRequiredActionImpl(ec),
+      councilPropertyEmpty,
+      businessRatesPropertyEmpty,
+      MessageControllerComponentsHelpers.stubMessageControllerComponents
+    )
+
+  "Property Empty Controller" must {
+    "return the correct council tax view for a GET" in {
+      val result = controller().onPageLoad()(fakeRequest)
+      contentAsString(result) mustBe councilPropertyEmpty()(using fakeRequest, messages).toString
+    }
+
+    "return the correct business rates view for a GET" in {
+      val result = controller().onBusinessRatesPageLoad()(fakeRequest)
+      contentAsString(result) mustBe businessRatesPropertyEmpty()(using fakeRequest, messages).toString
+    }
+  }
+}

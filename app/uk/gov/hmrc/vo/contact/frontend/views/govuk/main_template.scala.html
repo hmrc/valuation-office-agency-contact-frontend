@@ -1,0 +1,60 @@
+@*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import play.api.i18n.Messages
+@import play.api.mvc.Request
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.phasebanner.PhaseBanner
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.tag.Tag
+@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcStandardPage
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.hmrcstandardpage.{Banners, HmrcStandardPageParams, ServiceURLs, TemplateOverrides}
+@import uk.gov.hmrc.vo.contact.frontend.controllers.routes
+
+@this(
+        hmrcStandardPage: HmrcStandardPage,
+        headTemplate: head
+)
+
+@(
+        pageTitle: Option[String] = None,
+        backLink: Option[BackLink] = None,
+        enableTimeoutDialog: Boolean = true
+)(contentBlock: Html)(implicit request: Request[?], messages: Messages)
+
+@hmrcStandardPage(
+    HmrcStandardPageParams(
+        pageTitle = pageTitle,
+        isWelshTranslationAvailable = true,
+        serviceName = Some(messages("site.service_name")),
+        serviceURLs = ServiceURLs(
+            serviceUrl= Some(routes.Application.start().url)
+        ),
+        backLink = backLink,
+        banners = Banners(
+            displayHmrcBanner = false,
+            phaseBanner = Some(
+                PhaseBanner(
+                    tag = Option(Tag(Text("Beta"))),
+                    content = Text(messages("site.new_service"))
+                )
+            )
+        ),
+        templateOverrides = TemplateOverrides(
+            additionalHeadBlock = Some(headTemplate(enableTimeoutDialog))
+        )
+    )
+)(contentBlock)

@@ -1,4 +1,4 @@
-checkYourAnswers.title = Gwiriwch eich atebion - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+checkYourAnswers.title = Gwiriwch eich atebion - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 checkYourAnswers.heading = Gwiriwch eich atebion
  
 hintText.optional = (opsiynol)
@@ -38,7 +38,7 @@ error.tell_us_more.invalid = Ni ddylai eich ymholiad gynnwys < a >
 error.tellUsMore.poorRepair.required = Rhowch fanylion am gyflwr eich eiddo
 error.tellUsMore.areaChanged.required = Rhowch fanylion y newidiadau i’r ardal
 
-session_expired.title = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+session_expired.title = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 session_expired.heading = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod
 session_expired.guidance = Mae’r gwasanaeth wedi bennu oherwydd ei fod yn anweithgar am 60 munud. Nad yw eich gwybodaeth wedi’i gyflwyno.
  
@@ -54,8 +54,8 @@ site.save_and_continue = Cadw a mynd yn eich blaen
 site.start-again = Dechrau’r eto
 site.submit = Cyflwyno
 site.submit.enquiry = Cyflwyno’ch ymholiad
-site.service_name = Ffurflen gyswllt Asiantaeth y Swyddfa Brisio
-service.name = Ffurflen gyswllt Asiantaeth y Swyddfa Brisio
+site.service_name = Ffurflen gyswllt Swyddfa Brisio
+service.name = Ffurflen gyswllt Swyddfa Brisio
 service.homePageUrl = /valuation-office-agency-contact-frontend/
 site.textarea.char_limit = (Y terfyn yw {0} o gymeriadau)
 site.print.button= Argraffwch y dudalen hon
@@ -67,7 +67,7 @@ page.not-implemented = Heb ei Weithredu
 unauthorised.title = Ni allwch gyrchu’r gwasanaeth gyda’r cyfrif hwn
 unauthorised.heading = Ni allwch gyrchu’r gwasanaeth gyda’r cyfrif hwn
 
-contactReason.title = Pam ydych chi eisiau cysylltu â ni? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+contactReason.title = Pam ydych chi eisiau cysylltu â ni? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 contactReason.heading = Pam ydych chi eisiau cysylltu â ni?
 
 contactReason.new_enquiry = Rwyf am wneud ymholiad newydd
@@ -75,7 +75,7 @@ contactReason.more_details = Rwyf am ddarparu mwy o fanylion ar gyfer ymholiad s
 contactReason.update_existing = Rwyf am gael diweddariad ar ymholiad
 error.contactReason.required = Dewiswch pam rydych chi eisiau cysylltu â ni
 
-enquiryDate.title = A wnaethoch chi eich ymholiad cyn {0}? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+enquiryDate.title = A wnaethoch chi eich ymholiad cyn {0}? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 enquiryDate.heading = A wnaethoch chi eich ymholiad cyn {0}?
 enquiryDate.yes = Do
 enquiryDate.no = Naddo
@@ -83,13 +83,13 @@ enquiryDate.notKnow = Ddim yn siŵr
 error.enquiryDate.required = Dewiswch ‘Do’ os gwnaethoch eich ymholiad cyn {0}
 
 
-expectedUpdate.title = Pryd y gallwch chi ddisgwyl diweddariad - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+expectedUpdate.title = Pryd y gallwch chi ddisgwyl diweddariad - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 expectedUpdate.heading = Pryd y gallwch chi ddisgwyl diweddariad
 expectedUpdate.para1 = Fel arfer byddwn yn ymateb i ymholiadau o fewn ychydig ddyddiau. Fodd bynnag, gall ymholiadau cymhleth gymryd hyd at 28 diwrnod.
 expectedUpdate.para2 = Peidiwch â chyflwyno’ch ymholiad eto.
 
 existing.enquiry=Ymchwiliad Bodoli
-existingEnquiryCategory.title = Am beth wnaethoch chi gysylltu â ni? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+existingEnquiryCategory.title = Am beth wnaethoch chi gysylltu â ni? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 existingEnquiryCategory.heading = Am beth wnaethoch chi gysylltu â ni?
 existingEnquiryCategory.council_tax = Treth y Cyngor
 existingEnquiryCategory.business_rates = Trethi Busnes
@@ -99,12 +99,12 @@ existingEnquiryCategory.other = Arall
 
 error.existingEnquiryCategory.required = Dewiswch yr hyn y gwnaethoch chi gysylltu â ni amdano
 
-refNumber.title = Beth yw eich cyfeirnod? (dewisol) - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+refNumber.title = Beth yw eich cyfeirnod? (dewisol) - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 refNumber.value = Beth yw eich cyfeirnod?
 refNumber.value.optional = Beth yw eich cyfeirnod? (dewisol)
 refNumber.hint = Er enghraifft, VOR12345678, CHK76543210.
 
-enquiryCategory.title = Beth yw testun eich ymholiad? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+enquiryCategory.title = Beth yw testun eich ymholiad? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 enquiryCategory.heading = Beth yw testun eich ymholiad?
 enquiryCategory.council_tax = Treth Gyngor
 enquiryCategory.business_rates = Ardrethi busnes
@@ -151,7 +151,7 @@ enquiryCategory.valuation_for_public_body.summary = Gallai prisiad ar gyfer cyrf
 enquiryCategory.valuation_for_public_body.about1 = prisiad annibynnol a chyngor proffesiynol ar eiddo ar gyfer cyrff cyhoeddus
 enquiryCategory.valuation_for_public_body.finaltext = Sylwer: mae’r gwasanaeth hwn yn gweithredu’n yr Alban hefyd.
  
-contactDetails.title = Beth yw’ch manylion cyswllt? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+contactDetails.title = Beth yw’ch manylion cyswllt? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 contactDetails.heading = Beth yw’ch manylion cyswllt?
 contactDetails.hint = Byddwn ond yn defnyddio’r manylion hyn i gysylltu â chi ynglŷn â’ch ymholiad.
 contactDetails.fullName = Enw llawn
@@ -168,7 +168,7 @@ contactDetails.contactNumber.invalid = Nodwch rif ffôn, fel 01632 960 001
 contactDetails.checkYourAnswersLabel = Manylion cyswllt
 
 # --- Council Tax Bill
-councilTaxBill.title = Siaradwch â’ch cyngor lleol am eich bil Treth Gyngor - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+councilTaxBill.title = Siaradwch â’ch cyngor lleol am eich bil Treth Gyngor - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 councilTaxBill.heading = Siaradwch â’ch cyngor lleol am eich bil Treth Gyngor
 councilTaxBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council">Cysylltwch â’ch cyngor lleol </a> os oes gennych unrhyw gwestiynau am eich bil Treth Gyngor, gan eu bod yn delio â biliau a thaliadau.
 councilTaxBill.subheading = Cymorth arall ar GOV.UK
@@ -176,7 +176,7 @@ councilTaxBill.p2 = <a class="govuk-link" target="_self" href="https://www.gov.u
 councilTaxBill.p3 = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-council-tax-reduction">Gwnewch gais am Leihad Treth Gyngor</a>
 
 # --- Council Tax Band Too High
-councilTaxBandTooHigh.title = Gallwch herio’ch band Treth Gyngor ar-lein - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+councilTaxBandTooHigh.title = Gallwch herio’ch band Treth Gyngor ar-lein - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 councilTaxBandTooHigh.heading = Gallwch herio’ch band Treth Gyngor ar-lein
 councilTaxBandTooHigh.p1.part1 = Heriwch eich band Treth Gyngor
 councilTaxBandTooHigh.p1.part2 = drwy ddefnyddio ein gwasanaeth.
@@ -190,7 +190,7 @@ councilTaxBandTooHigh.p4 = Sut mae eiddo’n cael eu prisio ar gyfer Treth Gyngo
 councilTaxBandTooHigh.p4.url = https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed
 
 # --- Council Tax band for my new property
-councilTaxBandForNew.title = Siaradwch â’ch cyngor lleol am fandiau Treth Gyngor ar gyfer eiddo newydd - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+councilTaxBandForNew.title = Siaradwch â’ch cyngor lleol am fandiau Treth Gyngor ar gyfer eiddo newydd - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 councilTaxBandForNew.heading = Siaradwch â’ch cyngor lleol am fandiau Treth Gyngor ar gyfer eiddo newydd
 councilTaxBandForNew.p1.part1 = Cysylltwch â’ch cyngor lleol
 councilTaxBandForNew.p1.url = https://www.gov.uk/find-local-council
@@ -203,7 +203,7 @@ councilTaxBandForNew.p4 = Pryd i gysylltu â’ch cyngor ynghylch Treth Gyngor
 councilTaxBandForNew.p4.url = https://www.gov.uk/guidance/your-property-and-council-tax
 
 # --- My property has been partly or fully demolished
-propertyDemolished.title = Dywedwch wrthym os yw eich eiddo wedi’i ddymchwel - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyDemolished.title = Dywedwch wrthym os yw eich eiddo wedi’i ddymchwel - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 propertyDemolished.heading = Dywedwch wrthym os yw eich eiddo wedi’i ddymchwel
 propertyDemolished.p1.url = https://www.gov.uk/find-local-council
 propertyDemolished.p1.part1 = Cysylltwch gyda’ch cyngor lleol
@@ -221,14 +221,14 @@ propertyDemolished.p5.part1 = Sut mae eiddo’n cael eu prisio ar gyfer Treth Gy
 
 
 # --- Council Tax My Property Empty
-councilTaxPropertyEmpty.title = Nid yw band Treth y Cyngor yn cael ei effeithio os nad oes unrhyw un yn byw yn yr eiddo - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+councilTaxPropertyEmpty.title = Nid yw band Treth y Cyngor yn cael ei effeithio os nad oes unrhyw un yn byw yn yr eiddo - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 councilTaxPropertyEmpty.heading = Nid yw band Treth y Cyngor yn cael ei effeithio os nad oes unrhyw un yn byw yn yr eiddo
 councilTaxPropertyEmpty.p1 = <a class="govuk-link" href="https://www.gov.uk/find-local-council" target="_self"> Cysylltwch â’ch cyngor lleol </a> i weld a allwch gael rhyddhad ar eich bil.
 councilTaxPropertyEmpty.subHeading = Cymorth arall ar GOV.UK
 councilTaxPropertyEmpty.p2 = <a class="govuk-link" href="https://www.gov.uk/council-tax/second-homes-and-empty-properties" target="_self"> Treth Gyngor ar gyfer eiddo gwag </a>
 
 # --- The Council Tax band cannot be reduced or removed
-propertyWindWater.title = Ni ellir lleihau na dileu’r band Treth Gyngor - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyWindWater.title = Ni ellir lleihau na dileu’r band Treth Gyngor - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 propertyWindWater.heading = Ni ellir lleihau na dileu’r band Treth Gyngor
 propertyWindWater.p1 = Os yw’r eiddo’n atal gwynt a dŵr, yna ni ystyrir ei fod mewn cyflwr gwael. Ni ellir dileu’r band Treth Gyngor pe gallai rhywun ddal i fyw yn yr eiddo.
 propertyWindWater.subheading = Cymorth arall ar GOV.UK
@@ -236,7 +236,7 @@ propertyWindWater.p2.url = https://www.gov.uk/government/publications/council-ta
 propertyWindWater.p2 = Pryd fyddai atgyweiriad gwael yn effeithio ar fand Treth Gyngor.
 
 # -------- Council Tax protected from wind and water form
-propertyWindWater.form.title = Ydy’r eiddo wedi’i warchod rhag gwynt a dŵr? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyWindWater.form.title = Ydy’r eiddo wedi’i warchod rhag gwynt a dŵr? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 propertyWindWater.form.heading = Ydy’r eiddo wedi’i warchod rhag gwynt a dŵr?
 propertyWindWater.form.p1 = Darllenwch am <a class="govuk-link" target="_blank" href="https://www.gov.uk/government/publications/council-tax-domestic-properties-in-disrepair-or-derelict/council-tax-domestic-properties-which-are-in-disrepair-or-are-derelict"> bryd y byddai atgyweiriad gwael yn effeithio ar fand Treth Gyngor (yn agor mewn tab newydd)</a>.
 propertyWindWater.form.yes = Ydy
@@ -245,7 +245,7 @@ error.propertyWindWater.required = Dewiswch ‘Ydy’ os yw eich eiddo wedi’i 
 
 # -------- End of wind and water journey
 
-propertyWindWaterEnd.title = Dywedwch wrthym am gyflwr eich eiddo ar-lein - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyWindWaterEnd.title = Dywedwch wrthym am gyflwr eich eiddo ar-lein - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 propertyWindWaterEnd.heading = Dywedwch wrthym am gyflwr eich eiddo ar-lein
 propertyWindWaterEnd.p1.url = https://www.gov.uk/council-tax-bands
 propertyWindWaterEnd.p1.part1 = Defnyddiwch y gwasanaeth Treth Gyngor
@@ -255,7 +255,7 @@ propertyWindWaterEnd.p2.url = https://www.gov.uk/government/publications/council
 propertyWindWaterEnd.p2 = Pryd fyddai atgyweiriad gwael yn effeithio ar fand Treth Gyngor.
 
 # -------- End of Permanent Changes journey
-propertyPermanentChanges.title = Dywedwch wrthym am newidiadau parhaol i’r ardal leol ar-lein - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyPermanentChanges.title = Dywedwch wrthym am newidiadau parhaol i’r ardal leol ar-lein - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 propertyPermanentChanges.heading = Dywedwch wrthym am newidiadau parhaol i’r ardal leol ar-lein
 propertyPermanentChanges.p1.url = https://www.gov.uk/council-tax-bands
 propertyPermanentChanges.p1.part1 = Defnyddiwch y gwasanaeth Treth Gyngor
@@ -267,14 +267,14 @@ propertyPermanentChanges.p2 = Heriwch eich band Treth Gyngor
 # ---- Annexe Journey Messages start ----
 
 # -------- I have added or removed an annexe
-annexe.title = A yw’r rhandy wedi’i ychwanegu neu ei dileu? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+annexe.title = A yw’r rhandy wedi’i ychwanegu neu ei dileu? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 annexe.heading = A yw’r rhandy wedi’i ychwanegu neu ei dileu?
 annexe.added = Wedi’i ychwanegu
 annexe.removed = Wedi’i dileu
 error.annexe.required = Dewiswch a yw’r rhandy wedi’i ychwanegu neu ei dileu
 
 # -------- Is the annexe self-contained?
-annexeSelfContainedEnquiry.title = A yw’r rhandy yn hunangynhwysol? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+annexeSelfContainedEnquiry.title = A yw’r rhandy yn hunangynhwysol? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 annexeSelfContainedEnquiry.heading = A yw’r rhandy yn hunangynhwysol?
 annexeSelfContainedEnquiry.hint = Mae hyn yn golygu ei fod yn cael ei ddefnyddio fel ardal fyw ar wahân.
 annexeSelfContainedEnquiry.form.yes = Ydy
@@ -282,35 +282,35 @@ annexeSelfContainedEnquiry.form.no = Nac ydy
 annexeSelfContainedEnquiry.form.error = Dewiswch ‘Ydy’ os yw’r rhandy yn hunangynhwysol
 
 # -------- Annexe is not self-contained
-annexeNotSelfContained.title = Ni fydd eich rhandy yn effeithio ar eich band Treth Gyngor - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+annexeNotSelfContained.title = Ni fydd eich rhandy yn effeithio ar eich band Treth Gyngor - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 annexeNotSelfContained.heading = Ni fydd eich rhandy yn effeithio ar eich band Treth Gyngor
 annexeNotSelfContained.p1 = Ni fydd eich band Treth Gyngor yn cael ei effeithio oherwydd nad yw’r rhandy yn hunangynhwysol gyda chyfleusterau coginio ac ymolchi ei hun.
 annexeNotSelfContained.subheading = Cymorth arall ar GOV.UK
 annexeNotSelfContained.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> Sut mae rhandai yn effeithio ar fandiau Treth Gyngor </a>
 
 # -------- Annexe no cooking and washing facilities
-annexeNoFacilities.title = Ni fydd eich rhandy hunangynhwysol yn effeithio ar eich band Treth Gyngor - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+annexeNoFacilities.title = Ni fydd eich rhandy hunangynhwysol yn effeithio ar eich band Treth Gyngor - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 annexeNoFacilities.heading = Ni fydd eich rhandy hunangynhwysol yn effeithio ar eich band Treth Gyngor
 annexeNoFacilities.p1 = Ni fydd eich band treth gyngor yn cael ei effeithio oherwydd nad oes gan y rhandy gyfleusterau coginio ac ymolchi ei hun.
 annexeNoFacilities.subheading = Cymorth arall ar GOV.UK
 annexeNoFacilities.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> Sut mae rhandai yn effeithio ar fandiau </a>
 
 # -------- Annexe self contained
-annexeSelfContained.title = Siaradwch gyda’ch cyngor lleol am eich rhandy - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+annexeSelfContained.title = Siaradwch gyda’ch cyngor lleol am eich rhandy - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 annexeSelfContained.heading = Siaradwch gyda’ch cyngor lleol am eich rhandy
 annexeSelfContained.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council"> Cysylltwch gyda’ch cyngor lleol</a> i ddarparu manylion llawn yr atodiad, gan gynnwys yr holl ystafelloedd a sut maen nhw wedi’u cysylltu â’r prif eiddo.
 annexeSelfContained.subheading = Cymorth arall ar GOV.UK
 annexeSelfContained.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> Sut mae rhandai yn effeithio ar fandiau Treth Gyngor </a>
 
 # -------- Does the annexe have both cooking and washing facilities?
-annexeCookingWashing.title = A oes gan yr atodiad gyfleusterau coginio ac ymolchi? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+annexeCookingWashing.title = A oes gan yr atodiad gyfleusterau coginio ac ymolchi? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 annexeCookingWashing.heading = A oes gan yr atodiad gyfleusterau coginio ac ymolchi?
 annexeCookingWashing.form.yes = Oes
 annexeCookingWashing.form.no = Nac oes
 annexeCookingWashing.form.error = Dewiswch ‘Oes’ os oes gan yr rhandy gyfleusterau coginio ac ymolchi
 
 # -------- Tell us you have removed an annexe
-annexeRemoved.title = Dywedwch wrthym eich bod wedi dileu rhandy - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+annexeRemoved.title = Dywedwch wrthym eich bod wedi dileu rhandy - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 annexeRemoved.heading = Dywedwch wrthym eich bod wedi dileu rhandy
 annexeRemoved.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/council-tax-bands">Defnyddiwch y gwasanaeth Treth Gyngor</a> a heriwch eich band Treth Gyngor i ddweud wrthym eich bod wedi dileu rhandy.
 annexeRemoved.subheading = Cymorth arall ar GOV.UK
@@ -322,7 +322,7 @@ annexeRemoved.url3 = <a class="govuk-link" target="_self" href="https://www.gov.
 # ---- Property Used For business Journey Messages start ----
 
 # -------- Business Enquiry
-councilTaxBusinessEnquiry.title = Faint o’ch eiddo sy’n cael ei ddefnyddio ar gyfer busnes? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+councilTaxBusinessEnquiry.title = Faint o’ch eiddo sy’n cael ei ddefnyddio ar gyfer busnes? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 councilTaxBusinessEnquiry.heading = Faint o’ch eiddo sy’n cael ei ddefnyddio ar gyfer busnes?
 councilTaxBusinessEnquiry.form.all_property = Defnyddir yr holl eiddo ar gyfer busnes
 councilTaxBusinessEnquiry.form.large_property = Defnyddir rhan fawr o’r eiddo ar gyfer busnes
@@ -333,7 +333,7 @@ councilTaxBusinessEnquiry.form.error = Dewiswch faint o’ch eiddo sy’n cael e
 # ---- Property Used For business end ----
 
 # -------- Your Council Tax will not be affected
-propertySmallPartUsed.title = Ni fydd eich Treth Gyngor yn cael ei heffeithio - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+propertySmallPartUsed.title = Ni fydd eich Treth Gyngor yn cael ei heffeithio - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 propertySmallPartUsed.heading = Ni fydd eich Treth Gyngor yn cael ei heffeithio
 propertySmallPartUsed.p1 = Os ydych chi’n defnyddio ystafell fel swyddfa neu ar gyfer gwerthu nwyddau trwy’r post, ni fydd hyn yn effeithio ar eich band Treth Gyngor. Ni fydd yn rhaid i chi dalu ardrethi busnes.
 propertySmallPartUsed.subheading = Cymorth arall ar GOV.UK
@@ -343,19 +343,19 @@ propertySmallPartUsed.p3.url = https://www.gov.uk/run-business-from-home
 propertySmallPartUsed.p3 = Rhedeg busnes o gartref
 
 # -------- When did you start using your property for business
-datePropertyChanged.business.title = Pryd wnaethoch chi ddechrau defnyddio’ch eiddo ar gyfer busnes? (dewisol) - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+datePropertyChanged.business.title = Pryd wnaethoch chi ddechrau defnyddio’ch eiddo ar gyfer busnes? (dewisol) - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 datePropertyChanged.business.heading = Pryd wnaethoch chi ddechrau defnyddio’ch eiddo ar gyfer busnes? (dewisol)
 
 # -------- Permanent changes in the local area that affect the value of my property
-datePropertyChanged.areaChange.title = Pryd ddigwyddodd y newid i’r ardal? (dewisol) - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+datePropertyChanged.areaChange.title = Pryd ddigwyddodd y newid i’r ardal? (dewisol) - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 datePropertyChanged.areaChange.heading = Pryd ddigwyddodd y newid i’r ardal? (dewisol)
 
 # -------- When did you stop using your property for business
-datePropertyChanged.notUsed.title = Pryd wnaethoch chi stopio defnyddio’ch eiddo ar gyfer busnes? (dewisol) - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+datePropertyChanged.notUsed.title = Pryd wnaethoch chi stopio defnyddio’ch eiddo ar gyfer busnes? (dewisol) - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 datePropertyChanged.notUsed.heading = Pryd wnaethoch chi stopio defnyddio’ch eiddo ar gyfer busnes? (dewisol)
 
 # --- Council Tax Subcategories
-councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 councilTaxSubcategory.heading = Beth yw testun eich ymholiad ynghylch Treth Gyngor?
 councilTaxSubcategory.subheading = Am beth ydych am roi gwybod i ni?
 councilTaxSubcategory.council_tax_band_too_high = Mae fy mand Treth Gyngor yn rhy uchel
@@ -372,42 +372,42 @@ councilTaxSubcategory.council_tax_other = Arall
 councilTaxSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
 
 # --- Business Rates Self Catering
-businessRatesSelfCatering.title = A yw eich eiddo neu osodiad gwyliau yng Nghymru neu Lloegr? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesSelfCatering.title = A yw eich eiddo neu osodiad gwyliau yng Nghymru neu Lloegr? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 businessRatesSelfCatering.heading = A yw eich eiddo neu osodiad gwyliau yng Nghymru neu Lloegr?
 businessRatesSelfCatering.england = Lloegr
 businessRatesSelfCatering.wales = Cymru
 error.businessRatesSelfCatering.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
 
 # --- Property let available - England
-propertyEnglandAvailableLets.title = A yw eich eiddo ar gael i’w osod am o leiaf 140 noson y flwyddyn - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyEnglandAvailableLets.title = A yw eich eiddo ar gael i’w osod am o leiaf 140 noson y flwyddyn - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 propertyEnglandAvailableLets.heading = A yw eich eiddo ar gael i’w osod am o leiaf 140 noson y flwyddyn
 propertyEnglandAvailableLets.yes = Ydy
 propertyEnglandAvailableLets.no = Nag ydy
 error.propertyEnglandAvailableLets.required = Dewiswch ‘Ydy’ os yw eich eiddo ar gael i’w osod am o leiaf 140 noson y flwyddyn
 
 # --- Property let actual - England
-propertyEnglandActualLets.title = A yw eich eiddo yn cael ei osod yn wirioneddol am 70 noson y flwyddyn? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyEnglandActualLets.title = A yw eich eiddo yn cael ei osod yn wirioneddol am 70 noson y flwyddyn? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 propertyEnglandActualLets.heading = A yw eich eiddo yn cael ei osod yn wirioneddol am 70 noson y flwyddyn?
 propertyEnglandActualLets.yes = Ydy
 propertyEnglandActualLets.no = Nag ydy
 error.propertyEnglandActualLets.required = Dewiswch ‘Ydy’ os yw eich eiddo mewn gwirionedd yn cael ei osod am o leiaf 70 noson y flwyddyn
 
 # --- Property let for actual lets - Wales
-propertyWalesActualLets.title = A yw eich eiddo yn cael ei osod yn wirioneddol am 182 noson y flwyddyn - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyWalesActualLets.title = A yw eich eiddo yn cael ei osod yn wirioneddol am 182 noson y flwyddyn - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 propertyWalesActualLets.heading = A yw eich eiddo yn cael ei osod yn wirioneddol am 182 noson y flwyddyn
 propertyWalesActualLets.yes = Ydy
 propertyWalesActualLets.no = Nag ydy
 error.propertyWalesActualLets.required = Dewiswch ’Ydy’ os yw eich eiddo mewn gwirionedd yn cael ei osod am o leiaf 182 noson y flwyddyn
 
 # --- Property let for available lets - Wales
-propertyWalesAvailableLets.title = A yw eich eiddo ar gael i’w osod am o leiaf 251 noson y flwyddyn - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyWalesAvailableLets.title = A yw eich eiddo ar gael i’w osod am o leiaf 251 noson y flwyddyn - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 propertyWalesAvailableLets.heading = A yw eich eiddo ar gael i’w osod am o leiaf 251 noson y flwyddyn
 propertyWalesAvailableLets.yes = Ydy
 propertyWalesAvailableLets.no = Nag ydy
 error.propertyWalesAvailableLets.required = Dewiswch ‘Ydy’ os yw eich eiddo ar gael i’w osod am o leiaf 251 noson y flwyddyn
 
 # --- Property merged or split
-propertyMergeSplit.title = Siaradwch â’ch cyngor lleol os ydych chi wedi rhannu neu uno’ch eiddo - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyMergeSplit.title = Siaradwch â’ch cyngor lleol os ydych chi wedi rhannu neu uno’ch eiddo - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 propertyMergeSplit.heading = Siaradwch â’ch cyngor lleol os ydych chi wedi rhannu neu uno’ch eiddo
 propertyMergeSplit.p1.url = https://www.gov.uk/find-local-council
 propertyMergeSplit.p1.part1 = Cysylltwch â’ch cyngor lleol
@@ -415,7 +415,7 @@ propertyMergeSplit.p1.part2 = gan fod angen iddynt roi’r holl fanylion sydd eu
 propertyMergeSplit.p2 = Dim ond ar ôl iddynt anfon y wybodaeth honno y byddwn yn gallu diweddaru eich band Treth Gyngor.
 
 # --- No business rates are required in England
-businessRatesSelfCateringNoBusinessRate.title = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yn Lloegr - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesSelfCateringNoBusinessRate.title = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yn Lloegr - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 businessRatesSelfCateringNoBusinessRate.heading = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yn Lloegr
 businessRatesSelfCateringNoBusinessRate.p1 = Efallai y bydd angen i chi dalu’r Dreth Gyngor o hyd.
 businessRatesSelfCateringNoBusinessRate.p2 = Os yw eich eiddo yng Lloegr, bydd yn cael ei brisio ar gyfer ardrethi busnes os yw:
@@ -424,10 +424,10 @@ businessRatesSelfCateringNoBusinessRate.p2.bullet2 = wedi gosod mewn gwirionedd 
 businessRatesSelfCateringNoBusinessRate.p3.part1 = Os ydych eisoes yn talu ardrethi busnes am yr eiddo hwn, ac yn credu na ddylech fod,
 businessRatesSelfCateringNoBusinessRate.p3.url = https://www.gov.uk/correct-your-business-rates
 businessRatesSelfCateringNoBusinessRate.p3.part2 = defnyddio’r gwasanaeth ar-lein
-businessRatesSelfCateringNoBusinessRate.p3.part3 = a chwblhewch ‘Gwiriad’ i ddweud wrth Asiantaeth y Swyddfa Brisio.
+businessRatesSelfCateringNoBusinessRate.p3.part3 = a chwblhewch ‘Gwiriad’ i ddweud wrth Swyddfa Brisio.
 
 # --- Self-catering properties or holiday lets in England
-propertyEnglandLets.title = Dywedwch wrthym am eich bwthyn gwyliau neu llety hunanarlwyo yn Lloegr - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyEnglandLets.title = Dywedwch wrthym am eich bwthyn gwyliau neu llety hunanarlwyo yn Lloegr - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 propertyEnglandLets.heading = Dywedwch wrthym am eich bwthyn gwyliau neu llety hunanarlwyo yn Lloegr
 propertyEnglandLets.p1 = Os yw eich eiddo yng Lloegr, bydd yn cael ei brisio ar gyfer ardrethi busnes os yw:
 propertyEnglandLets.p1.bullet1 = ar gael i’w osod am gyfnodau byr sy’n dod i gyfanswm o 140 noson neu fwy bob blwyddyn
@@ -440,7 +440,7 @@ propertyEnglandLets.p3.url = https://www.gov.uk/introduction-to-business-rates/s
 propertyEnglandLets.p3 = Eiddo hunanarlwyo a gosodiadau gwyliau
 
 # --- Self-catering properties or holiday lets in Wales
-propertyWalesLets.title = Dywedwch wrthym am eich bwthyn gwyliau neu llety hunanarlwyo yng Nghymru - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyWalesLets.title = Dywedwch wrthym am eich bwthyn gwyliau neu llety hunanarlwyo yng Nghymru - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 propertyWalesLets.heading = Dywedwch wrthym am eich bwthyn gwyliau neu llety hunanarlwyo yng Nghymru
 propertyWalesLets.p1 = Os yw eich eiddo yng Nghymru, bydd yn cael ei brisio ar gyfer ardrethi busnes os yw:
 propertyWalesLets.p1.bl1 = ar gael i’w osod am gyfnodau byr sy’n dod i gyfanswm o 251 noson neu fwy bob blwyddyn
@@ -453,7 +453,7 @@ propertyWalesLets.p3.url = https://www.gov.uk/introduction-to-business-rates/sel
 propertyWalesLets.p3 = Eiddo hunanarlwyo a gosodiadau gwyliau
 
 # --- Not need to pay business rates in England
-businessRatesNoNeedToPay.title = Ni fydd angen i chi dalu ardrethi busnes - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesNoNeedToPay.title = Ni fydd angen i chi dalu ardrethi busnes - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 businessRatesNoNeedToPay.heading = Ni fydd angen i chi dalu ardrethi busnes
 businessRatesNoNeedToPay.p1 = Os ydych chi’n defnyddio ystafell fel swyddfa yn unig neu’n gwerthu nwyddau trwy’r post, ni fydd angen i chi dalu ardrethi busnes. Ni fydd eich band Treth Gyngor yn cael ei effeithio.
 businessRatesNoNeedToPay.subheading = Cymorth arall ar GOV.UK
@@ -461,7 +461,7 @@ businessRatesNoNeedToPay.url = <a href="https://www.gov.uk/introduction-to-busin
 businessRatesNoNeedToPay.url1 = <a href="https://www.gov.uk/run-business-from-home" target="_self">Rhedeg busnes o gartref</a>
 
 # --- No business rates are required in Wales
-businessRatesSelfCateringNoBusinessRateWales.title = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yng Nghymru - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesSelfCateringNoBusinessRateWales.title = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yng Nghymru - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 businessRatesSelfCateringNoBusinessRateWales.heading = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yng Nghymru
 businessRatesSelfCateringNoBusinessRateWales.p1 = Efallai y bydd angen i chi dalu’r Dreth Gyngor o hyd
 businessRatesSelfCateringNoBusinessRateWales.p2 = Os yw eich eiddo yng Nghymru, bydd yn cael ei brisio ar gyfer ardrethi busnes os yw:
@@ -470,7 +470,7 @@ businessRatesSelfCateringNoBusinessRateWales.p4 = wedi gosod mewn gwirionedd am 
 businessRatesSelfCateringNoBusinessRateWales.p5.part1 = Os ydych eisoes yn talu ardrethi busnes am yr eiddo hwn, ac yn credu na ddylech fod,
 businessRatesSelfCateringNoBusinessRateWales.p5.part1.url = https://www.gov.uk/government/publications/business-rates-proposal-to-alter-the-2017-rating-list-for-wales
 businessRatesSelfCateringNoBusinessRateWales.p5.part2 =  cwblhewch ffurflen gynnig
-businessRatesSelfCateringNoBusinessRateWales.p5.part3 = i ddweud wrth Asiantaeth y Swyddfa Brisio.
+businessRatesSelfCateringNoBusinessRateWales.p5.part3 = i ddweud wrth Swyddfa Brisio.
 
 # --- Check and challenge your business rates valuation online
 businessRatesValuationOnline.heading = Gwirio a herio eich prisiad ardrethi busnes ar-lein
@@ -495,7 +495,7 @@ businessRatesValuationOnline.p4 = Mwy am ardrethi busnes a sut maent yn cael eu 
 # --- Business rates valuation in Wales
 businessRatesValuationInWales.heading = Gwirio a herio eich prisiad ardrethi busnes ar-lein
 businessRatesValuationInWales.p1.url = https://www.gov.uk/correct-your-business-rates
-businessRatesValuationInWales.p1.part1 = Defnyddiwch wasanaeth ar-lein Asiantaeth y Swyddfa Brisio
+businessRatesValuationInWales.p1.part1 = Defnyddiwch wasanaeth ar-lein Swyddfa Brisio
 businessRatesValuationInWales.p1.part2 = os ydych chi’n credu y dylid newid eich prisiad ardrethi busnes.
 businessRatesValuationInWales.subheading1 = Cymorth arall ar GOV.UK
 businessRatesValuationInWales.p2.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
@@ -521,7 +521,7 @@ businessRatesPropertyDemolished.p4 = Sut i wirio a herio eich prisiad ardrethi b
 # --- Property has been demolished in Wales
 businessRatesPropertyDemolishedInWales.heading = Dywedwch wrthym fod eich eiddo wedi’i ddymchwel
 businessRatesPropertyDemolishedInWales.p1.url = https://www.gov.uk/correct-your-business-rates
-businessRatesPropertyDemolishedInWales.p1.part1 = Defnyddiwch wasanaeth Asiantaeth y Swyddfa Brisio
+businessRatesPropertyDemolishedInWales.p1.part1 = Defnyddiwch wasanaeth Swyddfa Brisio
 businessRatesPropertyDemolishedInWales.p1.part2 = i ddweud wrthym fod eich eiddo wedi’i ddymchwel.
 businessRatesPropertyDemolishedInWales.subheading1 = Cymorth arall ar GOV.UK
 businessRatesPropertyDemolishedInWales.p2.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
@@ -530,7 +530,7 @@ businessRatesPropertyDemolishedInWales.p3.url = https://www.gov.uk/guidance/how-
 businessRatesPropertyDemolishedInWales.p3 = Sut i wirio a herio eich prisiad ardrethi busnes yng Nghymru
 
 # --- My property needs a business rates valuation
-businessRatesValuation.title = Siaradwch â’ch cyngor lleol yn gyntaf am gael prisiad ardrethi busnes - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesValuation.title = Siaradwch â’ch cyngor lleol yn gyntaf am gael prisiad ardrethi busnes - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 businessRatesValuation.heading = Siaradwch â’ch cyngor lleol yn gyntaf am gael prisiad ardrethi busnes
 businessRatesValuation.p1.url = https://www.gov.uk/contact-your-local-council-about-business-rates
 businessRatesValuation.p1.part1 = Cysylltwch â’ch cyngor lleol
@@ -543,14 +543,14 @@ businessRatesValuation.p4.url = https://www.gov.uk/calculate-your-business-rates
 businessRatesValuation.p4 = Amcangyfrifwch eich ardrethi busnes
 
 # -------- Business Rates Property Empty
-businessRatesPropertyEmpty.title = Nid yw ardrethi busnes yn cael eu heffeithio os yw eiddo’n wag - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesPropertyEmpty.title = Nid yw ardrethi busnes yn cael eu heffeithio os yw eiddo’n wag - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 businessRatesPropertyEmpty.heading = Nid yw ardrethi busnes yn cael eu heffeithio os yw eiddo’n wag
 businessRatesPropertyEmpty.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/contact-your-local-council-about-business-rates">Cysylltwch â’ch cyngor lleol</a> i ddarganfod a allwch gael unrhyw ostyngiadau neu ddisgowntiau ar eich bil.
 businessRatesPropertyEmpty.subheading = Cymorth arall ar GOV.UK
 businessRatesPropertyEmpty.url = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-business-rate-relief">Gostyngiadau a disgowntiau ardrethi busnes</a>
 
 # -------- Business rates bill
-businessRatesBill.title = Siaradwch â’ch cyngor lleol am eich bil ardrethi busnes - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesBill.title = Siaradwch â’ch cyngor lleol am eich bil ardrethi busnes - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 businessRatesBill.heading = Siaradwch â’ch cyngor lleol am eich bil ardrethi busnes
 businessRatesBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/contact-your-local-council-about-business-rates">Cysylltwch â’ch cyngor lleol</a> os oes gennych unrhyw gwestiynau am eich bil ardrethi busnes, gan mai nhw sy’n delio â biliau a thaliadau.
 businessRatesBill.subheading = Cymorth arall ar GOV.UK
@@ -563,14 +563,14 @@ businessRatesJurisdiction.wales = Cymru
 error.businessRatesJurisdiction.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
 
 # --- Business Rates Property Enquiry
-businessRatesPropertyEnquiry.title = A yw eich eiddo yng Nghymru neu Lloegr? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesPropertyEnquiry.title = A yw eich eiddo yng Nghymru neu Lloegr? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 businessRatesPropertyEnquiry.heading = A yw eich eiddo yng Nghymru neu Lloegr?
 businessRatesPropertyEnquiry.england = Lloegr
 businessRatesPropertyEnquiry.wales = Cymru
 error.businessRatesPropertyEnquiry.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
 
 # --- Tell us that your property is no longer used for business
-businessRatesNonBusiness.title = Dywedwch wrthym nad yw’ch eiddo’n cael ei ddefnyddio ar gyfer busnes mwyach - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesNonBusiness.title = Dywedwch wrthym nad yw’ch eiddo’n cael ei ddefnyddio ar gyfer busnes mwyach - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 businessRatesNonBusiness.heading = Dywedwch wrthym nad yw’ch eiddo’n cael ei ddefnyddio ar gyfer busnes mwyach
 businessRatesNonBusiness.p1 = <a href="https://www.gov.uk/business-rates-valuation-account" target="_self">Mewngofnodwch neu sefydlwch eich cyfrif prisio ardrethi busnes</a> i ddweud wrthym nad yw eich eiddo yn cael ei ddefnyddio ar gyfer busnes mwyach.
 businessRatesNonBusiness.p2 = Sut i ddweud wrthym: cam wrth gam
@@ -581,7 +581,7 @@ businessRatesNonBusiness.subheading = Cymorth arall ar GOV.UK
 businessRatesNonBusiness.p3 = <a href="https://www.gov.uk/government/collections/check-and-challenge-step-by-step" target="_self">Sut i wirio a herio eich prisiad ardrethi busnes</a>
 
 # --- Business Rates Subcategories
-businessRatesSubcategory.title = Ynglŷn â beth yw eich ymholiad ardrethi busnes? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesSubcategory.title = Ynglŷn â beth yw eich ymholiad ardrethi busnes? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 businessRatesSubcategory.heading = Ynglŷn â beth yw eich ymholiad ardrethi busnes?
 businessRatesSubcategory.subheading = Am beth ydych am roi gwybod i ni?
 businessRatesSubcategory.business_rates_changes = Mae fy eiddo neu fy ardal wedi newid
@@ -597,9 +597,9 @@ businessRatesSubcategory.business_rates_demolished = Mae fy eiddo wedi cael ei d
 businessRatesSubcategory.business_rates_valuation = Mae angen prisiad ardrethi busnes ar fy eiddo
 businessRatesSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
 
-businessRatesChallenge.title = Herio fy mhrisiad trethi busnes - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+businessRatesChallenge.title = Herio fy mhrisiad trethi busnes - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 businessRatesChallenge.heading = Herio fy mhrisiad trethi busnes
-businessRatesChallenge.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self">wasanaeth ar-lein</a> Asiantaeth y Swyddfa Brisio i wirio a herio eich prisiad ardrethi busnes.
+businessRatesChallenge.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self">wasanaeth ar-lein</a> Swyddfa Brisio i wirio a herio eich prisiad ardrethi busnes.
 
 # --- Changes to your property or area in England
 propertyOrAreaChanged.heading = Dywedwch wrthym am newidiadau i’ch eiddo neu’ch ardal
@@ -620,7 +620,7 @@ propertyOrAreaChanged.p4 = Sut i wirio a herio eich prisiad ardrethi busnes yng 
 # --- Changes to your property or area in Wales
 propertyOrAreaChangedInWales.heading = Dywedwch wrthym am newidiadau i’ch eiddo neu’ch ardal
 propertyOrAreaChangedInWales.p1.url = https://www.gov.uk/correct-your-business-rates
-propertyOrAreaChangedInWales.p1.part1 = Defnyddiwch wasanaeth Asiantaeth y Swyddfa Brisio
+propertyOrAreaChangedInWales.p1.part1 = Defnyddiwch wasanaeth Swyddfa Brisio
 propertyOrAreaChangedInWales.p1.part2 = i ddweud wrthym am newidiadau i’ch eiddo neu’r ardal gyfagos.
 propertyOrAreaChangedInWales.subheading1 = Cymorth arall ar GOV.UK
 propertyOrAreaChangedInWales.p2.url = https://www.gov.uk/government/collections/check-and-challenge-step-by-step
@@ -629,7 +629,7 @@ propertyOrAreaChangedInWales.p3.url = https://www.gov.uk/guidance/how-to-check-a
 propertyOrAreaChangedInWales.p3 = Sut i wirio a herio eich prisiad ardrethi busnes yng Nghymru
 
 # --- Property address
-propertyAddress.title = Beth yw cyfeiriad yr eiddo? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+propertyAddress.title = Beth yw cyfeiriad yr eiddo? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 propertyAddress.heading = Beth yw cyfeiriad yr eiddo?
 propertyAddress.existing_address = Rhaid i hwn fod yr un cyfeiriad â’ch ymholiad gwreiddiol.
 propertyAddress.addressLine1 = Cyfeiriad – llinell 1
@@ -652,14 +652,14 @@ propertyAddress.postcode.invalid = Nodwch god post go iawn
 propertyAddress.postcode.length = Rhaid i’r cod post fod yn 8 nod neu lai
 propertyAddress.checkYourAnswersLabel = Manylion yr eiddo
 
-whatElse.title = Beth arall hoffech chi ddweud wrthym am eich ymholiad? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+whatElse.title = Beth arall hoffech chi ddweud wrthym am eich ymholiad? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 whatElse.message = Beth arall hoffech chi ddweud wrthym am eich ymholiad?
 error.what_else.required = Nodwch fwy o fanylion am eich ymholiad
 error.what_else.invalid = Ni ddylai eich ymholiad gynnwys < a >
 error.what_else.max_length = Rhaid i’ch ymholiad fod yn 5000 nod neu lai
 
 # --- Tell Us more
-tellUsMore.title = Rhowch ragor o wybodaeth i ni am eich ymholiad - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+tellUsMore.title = Rhowch ragor o wybodaeth i ni am eich ymholiad - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 tellUsMore.heading = Rhowch ragor o wybodaeth i ni am eich ymholiad
 tellUsMore.message = Eich neges
 tellUsMore.hint = Uchafswm o 5000 nod
@@ -673,45 +673,45 @@ tellUsMore.ndr-reference = (fe welwch hwn ar eich bil ardrethi busnes)
 tellUsMore.checkYourAnswersLabel = Ymholiad
 tellUsMore.anythingElse = Is there anything else you would like to tell us about?
 
-anythingElse.title = Oes yna unrhyw beth arall yr hoffech chi ddweud wrthym? (dewisol) - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+anythingElse.title = Oes yna unrhyw beth arall yr hoffech chi ddweud wrthym? (dewisol) - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 anythingElse.heading = Oes yna unrhyw beth arall yr hoffech chi ddweud wrthym? (dewisol)
 anythingElse.checkYourAnswersLabel = Oes yna unrhyw beth arall yr hoffech chi ddweud wrthym?
 
 # --- Tell Us More Property Wind water journey
-tellUsMore.poorRepair.title = Dywedwch fwy wrthym am gyflwr eich eiddo - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+tellUsMore.poorRepair.title = Dywedwch fwy wrthym am gyflwr eich eiddo - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 tellUsMore.poorRepair.heading = Dywedwch fwy wrthym am gyflwr eich eiddo
 tellUsMore.poorRepair.hint = Er enghraifft, os oes gan yr eiddo do neu ffenestri.
 tellUsMore.poorRepair.inset = Bydd angen i chi ddarparu tystiolaeth pan fyddwn yn ymateb i chi, megis lluniau neu gynlluniau o’r eiddo.
 
 # --- Tell Us More CT Business uses journey
-tellUsMore.business.title = Dywedwch fwy wrthym am eich eiddo- Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+tellUsMore.business.title = Dywedwch fwy wrthym am eich eiddo- Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 tellUsMore.business.heading = Dywedwch fwy wrthym am eich eiddo
 tellUsMore.business.hint = Rhowch fanylion fel nifer yr ystafelloedd a ddefnyddir ar gyfer busnes a’r hyn y maent yn cael ei ddefnyddio ar eu cyfer.
 tellUsMore.business.inset = Bydd angen i chi ddarparu tystiolaeth pan fyddwn yn ymateb i chi, megis lluniau neu gynlluniau o’r eiddo.
 
 # --- Tell Us More CT area changes journey
-tellUsMore.areaChange.title = Dywedwch fwy wrthym am y newidiadau parhaol i’r ardal- Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+tellUsMore.areaChange.title = Dywedwch fwy wrthym am y newidiadau parhaol i’r ardal- Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 tellUsMore.areaChange.heading = Dywedwch fwy wrthym am y newidiadau parhaol i’r ardal
 tellUsMore.areaChange.hint = Megis archfarchnad newydd neu brif ffordd.
 tellUsMore.areaChange.inset = Bydd angen i chi ddarparu tystiolaeth pan fyddwn yn ymateb i chi, megis lluniau neu gynlluniau o’r eiddo.
 
 # --- Tell Us More CT other journey
-tellUsMore.other.title = Beth yw eich ymholiad Treth Gyngor arall? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+tellUsMore.other.title = Beth yw eich ymholiad Treth Gyngor arall? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 tellUsMore.other.heading = Beth yw eich ymholiad Treth Gyngor arall?
 tellUsMore.other.hint = Darparwch fanylion megis cyfeirnodau achos a dyddiadau.
 
 # --- Tell Us More BR Property not used journey
-tellUsMore.notUsed.title = Am beth ddefnyddir yr eiddo? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+tellUsMore.notUsed.title = Am beth ddefnyddir yr eiddo? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 tellUsMore.notUsed.heading = Am beth ddefnyddir yr eiddo?
 tellUsMore.notUsed.inset = Bydd angen i chi ddarparu tystiolaeth pan fyddwn yn ymateb i chi, megis lluniau neu gynlluniau o’r eiddo.
 
 # --- Tell Us More BR other journey
-tellUsMore.business.other.title = Beth yw eich ymholiad ardrethi busnes arall? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+tellUsMore.business.other.title = Beth yw eich ymholiad ardrethi busnes arall? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 tellUsMore.business.other.heading = Beth yw eich ymholiad ardrethi busnes arall?
 tellUsMore.business.other.hint = Darparwch fanylion megis cyfeirnodau achos a dyddiadau.
 
 # --- Tell Us More Fair Rents other journey
-tellUsMore.fairRent.title = Beth yw eich ymholiad arall ynglŷn â rhenti teg? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+tellUsMore.fairRent.title = Beth yw eich ymholiad arall ynglŷn â rhenti teg? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 tellUsMore.fairRent.heading = Beth yw eich ymholiad arall ynglŷn â rhenti teg?
 tellUsMore.fairRent.hint =
 # --- tellUsMore.fairRent.hint is intentionally left blank as this route does not need a hint!
@@ -726,10 +726,10 @@ generalEnquiries.telephoneWal.p3 = Ffôn: 03000 505505
 generalEnquiries.days.p3 = Dydd Llun i ddydd Gwener, 9yb tan 4:30yh
 
 # --- Housing Benefit, Local Housing Allowances journey
-housingBenefits.title = Manylion cyswllt ar gyfer Budd-dal Tai, Lwfansau Tai Lleol, neu renti teg - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+housingBenefits.title = Manylion cyswllt ar gyfer Budd-dal Tai, Lwfansau Tai Lleol, neu renti teg - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 housingBenefits.heading = Manylion cyswllt ar gyfer Budd-dal Tai, Lwfansau Tai Lleol, neu renti teg
 housingBenefits.email-title = E-bost:
-housingBenefits.email = NSOhelpdesk@voa.gov.uk
+housingBenefits.email = NSOhelpdeskvo@hmrc.gov.uk
 housingBenefits.phone-title = Ffôn:
 housingBenefits.phone-number = 03000 502502
 housingBenefits.opening-hours = Mae ein gwasanaeth ffôn ar gael rhwng 9.00am a 4.30pm, o Ddydd Llun i Ddydd Gwener.
@@ -762,7 +762,7 @@ error.otherHBTellUsMore.pattern = Ni ddylai eich ymholiad gynnwys < a >
 error.otherHBTellUsMore.maxLength = Rhaid i’ch ymholiad fod yn 5000 nod neu lai
 
 localHousingAllowanceRates.heading = Chwilio am gyfraddau Lwfans Tai Lleol ar-lein
-localHousingAllowanceRates.link1.text = Defnyddiwch wasanaeth ar-lein Asiantaeth y Swyddfa Brisio
+localHousingAllowanceRates.link1.text = Defnyddiwch wasanaeth ar-lein Swyddfa Brisio
 localHousingAllowanceRates.p1 = i chwilio am gyfraddau Lwfans Tai Lleol yn eich ardal chi.
 localHousingAllowanceRates.subheading = Cymorth arall ar GOV.UK
 localHousingAllowanceRates.link2.text = Sut mae cyfraddau Lwfans Tai Lleol yn cael eu gosod
@@ -779,7 +779,7 @@ housingBenefitSubcategory.other-ha-hb-enquiry = Beth yw eich ymholiad Budd-dal T
 
 
 # --- Fair Rents journey
-fairRents.title = Ynglŷn â beth yw eich ymholiad rhent teg? - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+fairRents.title = Ynglŷn â beth yw eich ymholiad rhent teg? - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 fairRents.heading = Ynglŷn â beth yw eich ymholiad rhent teg?
 fairRents.submit_new_application = Rwyf am gyflwyno cais newydd
 fairRents.check_fair_rent_register = Rwyf am wirio’r gofrestr rhent deg
@@ -789,7 +789,7 @@ error.fairRents.required = Dewiswch beth yw pwrpas eich ymholiad rhent teg
 
 
 # --- Confirmation for new and existing enquiries
-confirmation.title = Ymchwiliad wedi’i gyflwyno - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+confirmation.title = Ymchwiliad wedi’i gyflwyno - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 confirmation.heading = Ymchwiliad wedi’i gyflwyno
 confirmation.enquirySummary = Crynodeb o’ch ymholiad
 confirmation.para1= Eich cyfeirnod yw
@@ -816,34 +816,34 @@ error.message.xss-invalid.feedback = Rhaid i’r adborth gynnwys llythrennau a i
 
 # SURVEY THANKYOU
 ###############################
-feedback.thankyou.title = Diolch am eich adborth - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+feedback.thankyou.title = Diolch am eich adborth - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 feedback.thankyou.heading = Diolch am eich adborth
 feedback.anotherForm=Cyflwyno ffurflen arall
 
-valuationAdvice.title = Manylion cyswllt ar gyfer Gwasanaethau Prisiwr Dosbarth - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+valuationAdvice.title = Manylion cyswllt ar gyfer Gwasanaethau Prisiwr Dosbarth - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 valuationAdvice.heading = Manylion cyswllt ar gyfer Gwasanaethau Prisiwr Dosbarth (GPD)
 valuationAdvice.email-title = E-bost:
-valuationAdvice.email = clientdevelopment@voa.gov.uk
+valuationAdvice.email = clientdevelopmentvo@hmrc.gov.uk
 valuationAdvice.phone-title =  Ffôn
 valuationAdvice.phone-number = 03000 501501
  
-valuationForTaxes.title = Manylion cyswllt ar gyfer Hawl i Brynu, prisiadau trethi, neu apeliadau yn erbyn yr Ardoll Seilwaith Cymunedol - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+valuationForTaxes.title = Manylion cyswllt ar gyfer Hawl i Brynu, prisiadau trethi, neu apeliadau yn erbyn yr Ardoll Seilwaith Cymunedol - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 valuationForTaxes.heading = Manylion cyswllt ar gyfer Hawl i Brynu, prisiadau trethi, neu apeliadau yn erbyn yr Ardoll Seilwaith Cymunedol
 valuationForTaxes.email-title = E-bost:
-valuationForTaxes.email = askSVT@voa.gov.uk
+valuationForTaxes.email = askSVTvo@hmrc.gov.uk
 valuationForTaxes.generalEnquiries-title = Ymholiadau cyffredinol
 valuationForTaxes.phone1 = Rhif f ffôn (England) 03000 501501
 valuationForTaxes.phone2 = Rhif f ffôn (Cymru) 03000 505505
 valuationForTaxes.openingHours-title = Oriau agor
 valuationForTaxes.openingHours =  08:30 – 17:00. Ar gau ar wyliau’r banc.
  
-providingLettings.title = Darparwch wybodaeth i’r Swyddogion Rhent ar-lein - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+providingLettings.title = Darparwch wybodaeth i’r Swyddogion Rhent ar-lein - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 providingLettings.heading = Darparwch wybodaeth i’r Swyddogion Rhent ar-lein
 providingLettings.p1 = Dadlwythwch a chwblhewch y ffurflen ar GOV.UK.
 providingLettings.p1.url = https://www.gov.uk/government/publications/local-housing-allowance-and-statistics-on-private-rent-levels
 providingLettings.p2 = Yna gallwch ei anfon at y Swyddogion Rhent gan ddefnyddio’r manylion a ddarperir gyda’r ffurflen.
 
-fairRentApplication.title = Cyflwyno cais rhent teg gan ddefnyddio’r ffurflen gais - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+fairRentApplication.title = Cyflwyno cais rhent teg gan ddefnyddio’r ffurflen gais - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 fairRentApplication.heading = Cyflwyno cais rhent teg gan ddefnyddio’r ffurflen gais
 fairRentApplication.p1 = Dadlwythwch y ffurflenni cais rhent teg a darllenwch ganllaw
 fairRentApplication.p1.url = https://www.gov.uk/government/publications/fair-rent-forms
@@ -853,16 +853,16 @@ fairRentApplication.p3 = Ynglŷn â rhenti teg
 fairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
 fairRent.telephone = Ffôn: 03000 502502
 
-checkFairRentApplication.title = Gwiriwch y gofrestr rhenti teg ar-lein - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+checkFairRentApplication.title = Gwiriwch y gofrestr rhenti teg ar-lein - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 checkFairRentApplication.heading = Gwiriwch y gofrestr rhenti teg ar-lein
-checkFairRentApplication.p1 = Defnyddiwch wasanaeth Asiantaeth y Swyddfa Brisio
+checkFairRentApplication.p1 = Defnyddiwch wasanaeth Swyddfa Brisio
 checkFairRentApplication.p1.url = https://www.gov.uk/check-register-rents
 checkFairRentApplication.p2 = i wirio’r gofrestr rhenti teg.
 checkFairRentApplication.subheading = Cymorth arall ar GOV.UK
 checkFairRentApplication.p3 = Ynglŷn â rhenti teg
 checkFairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
 
-datePropertyChanged.poorRepair.title = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol) - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+datePropertyChanged.poorRepair.title = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol) - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 datePropertyChanged.poorRepair.heading = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol)
 datePropertyChanged.hint = Er enghraifft, 27 2 2021
 datePropertyChanged.error.invalidDate = Rhowch ddyddiad go iawn
@@ -882,12 +882,12 @@ datePropertyChanged.error.month.range = Rhaid i’r dyddiad gael mis sy’n rhif
 datePropertyChanged.error.year.number = Rhaid i’r dyddiad gael blwyddyn sy’n rhif
 datePropertyChanged.error.year.range = Rhaid i’r dyddiad fod ar neu ar ôl 1 Ionawr 1900
 
-error400.title = Page not found - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+error400.title = Page not found - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 error400.heading = Page not found
 error400.para1 = If you typed the web address, check it is correct.
 error400.para2 = If you pasted the web address, check you copied the entire address.
 
-error500.title = Sorry, there is a problem with the service - Ffurflen gyswllt Asiantaeth y Swyddfa Brisio - GOV.UK
+error500.title = Sorry, there is a problem with the service - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 error500.heading = Sorry, there is a problem with this service
 error500.tryagain.para = Try again later.
 
@@ -898,7 +898,7 @@ service.unavailable.heading = Mae’n ddrwg gennym, ond nid yw’r gwasanaeth ar
 service.unavailable.p1 = Byddwch yn gallu defnyddio’r gwasanaeth o 4:30pm ymlaen.
 service.unavailable.p2 = os ydych am siarad â rhywun am eich Band Treth Cyngor.
 service.unavailable.p3 = os ydych am siarad â rhywun am eich Bil Treth Cyngor.
-service.unavailable.link1.text = Cysylltwch ag Asiantaeth y Swyddfa Brisio
+service.unavailable.link1.text = Cysylltwch ag Swyddfa Brisio
 service.unavailable.link1.href = https://www.gov.uk/cysylltu-voa
 service.unavailable.link2.text = Cysylltwch â’ch cyngor lleol (Saesneg)
 service.unavailable.link2.href = https://www.gov.uk/find-local-council

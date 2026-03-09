@@ -5,11 +5,11 @@ echo "Applying migration BusinessRatesSubcategory"
 echo "Adding routes to conf/app.routes"
 
 echo "" >> ../conf/app.routes
-echo "GET        /businessRatesSubcategory               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onPageLoad(mode: Mode = NormalMode)" >> ../conf/app.routes
-echo "POST       /businessRatesSubcategory               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onSubmit(mode: Mode = NormalMode)" >> ../conf/app.routes
+echo "GET        /businessRatesSubcategory               uk.gov.hmrc.vo.contact.frontend.controllers.BusinessRatesSubcategoryController.onPageLoad(mode: Mode = NormalMode)" >> ../conf/app.routes
+echo "POST       /businessRatesSubcategory               uk.gov.hmrc.vo.contact.frontend.controllers.BusinessRatesSubcategoryController.onSubmit(mode: Mode = NormalMode)" >> ../conf/app.routes
 
-echo "GET        /changeBusinessRatesSubcategory               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onPageLoad(mode: Mode = CheckMode)" >> ../conf/app.routes
-echo "POST       /changeBusinessRatesSubcategory               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.BusinessRatesSubcategoryController.onSubmit(mode: Mode = CheckMode)" >> ../conf/app.routes
+echo "GET        /changeBusinessRatesSubcategory               uk.gov.hmrc.vo.contact.frontend.controllers.BusinessRatesSubcategoryController.onPageLoad(mode: Mode = CheckMode)" >> ../conf/app.routes
+echo "POST       /changeBusinessRatesSubcategory               uk.gov.hmrc.vo.contact.frontend.controllers.BusinessRatesSubcategoryController.onSubmit(mode: Mode = CheckMode)" >> ../conf/app.routes
 
 echo "Adding messages to conf.messages"
 echo "" >> ../conf/messages.en
