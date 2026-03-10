@@ -5,11 +5,11 @@ echo "Applying migration CouncilTaxSubcategory"
 echo "Adding routes to conf/app.routes"
 
 echo "" >> ../conf/app.routes
-echo "GET        /councilTaxSubcategory               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onPageLoad(mode: Mode = NormalMode)" >> ../conf/app.routes
-echo "POST       /councilTaxSubcategory               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onSubmit(mode: Mode = NormalMode)" >> ../conf/app.routes
+echo "GET        /councilTaxSubcategory               uk.gov.hmrc.vo.contact.frontend.controllers.CouncilTaxSubcategoryController.onPageLoad(mode: Mode = NormalMode)" >> ../conf/app.routes
+echo "POST       /councilTaxSubcategory               uk.gov.hmrc.vo.contact.frontend.controllers.CouncilTaxSubcategoryController.onSubmit(mode: Mode = NormalMode)" >> ../conf/app.routes
 
-echo "GET        /changeCouncilTaxSubcategory               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onPageLoad(mode: Mode = CheckMode)" >> ../conf/app.routes
-echo "POST       /changeCouncilTaxSubcategory               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.CouncilTaxSubcategoryController.onSubmit(mode: Mode = CheckMode)" >> ../conf/app.routes
+echo "GET        /changeCouncilTaxSubcategory               uk.gov.hmrc.vo.contact.frontend.controllers.CouncilTaxSubcategoryController.onPageLoad(mode: Mode = CheckMode)" >> ../conf/app.routes
+echo "POST       /changeCouncilTaxSubcategory               uk.gov.hmrc.vo.contact.frontend.controllers.CouncilTaxSubcategoryController.onSubmit(mode: Mode = CheckMode)" >> ../conf/app.routes
 
 echo "Adding messages to conf.messages"
 echo "" >> ../conf/messages.en

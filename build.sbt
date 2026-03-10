@@ -6,13 +6,13 @@ import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin
 
 val appName = "valuation-office-agency-contact-frontend"
 
-ThisBuild / scalaVersion := "3.8.1"
+ThisBuild / scalaVersion := "3.8.2"
 ThisBuild / majorVersion := 1
 
 lazy val microservice = Project(appName, file("."))
   .enablePlugins(PlayScala, SbtDistributablesPlugin)
   .disablePlugins(JUnitXmlReportPlugin)
-  .settings(RoutesKeys.routesImport ++= Seq("uk.gov.hmrc.valuationofficeagencycontactfrontend.models._"))
+  .settings(RoutesKeys.routesImport ++= Seq("uk.gov.hmrc.vo.contact.frontend.models._"))
   .settings(
     PlayKeys.playDefaultPort := 7311,
     libraryDependencies ++= AppDependencies.appDependencies,

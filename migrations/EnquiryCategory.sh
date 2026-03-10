@@ -11,11 +11,11 @@ echo "Applying migration EnquiryCategory"
 echo "Adding routes to conf/app.routes"
 
 echo "" >> ../conf/app.Routes
-echo "GET        /enquiryCategory               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.EnquiryCategoryController.onPageLoad(mode: Mode = NormalMode)" >> ../conf/app.Routes
-echo "POST       /enquiryCategory               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.EnquiryCategoryController.onSubmit(mode: Mode = NormalMode)" >> ../conf/app.Routes
+echo "GET        /enquiryCategory               uk.gov.hmrc.vo.contact.frontend.controllers.EnquiryCategoryController.onPageLoad(mode: Mode = NormalMode)" >> ../conf/app.Routes
+echo "POST       /enquiryCategory               uk.gov.hmrc.vo.contact.frontend.controllers.EnquiryCategoryController.onSubmit(mode: Mode = NormalMode)" >> ../conf/app.Routes
 
-echo "GET        /changeEnquiryCategory               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.EnquiryCategoryController.onPageLoad(mode: Mode = CheckMode)" >> ../conf/app.Routes
-echo "POST       /changeEnquiryCategory               uk.gov.hmrc.valuationofficeagencycontactfrontend.controllers.EnquiryCategoryController.onSubmit(mode: Mode = CheckMode)" >> ../conf/app.Routes
+echo "GET        /changeEnquiryCategory               uk.gov.hmrc.vo.contact.frontend.controllers.EnquiryCategoryController.onPageLoad(mode: Mode = CheckMode)" >> ../conf/app.Routes
+echo "POST       /changeEnquiryCategory               uk.gov.hmrc.vo.contact.frontend.controllers.EnquiryCategoryController.onSubmit(mode: Mode = CheckMode)" >> ../conf/app.Routes
 
 echo "Adding messages to conf.messages"
 echo "" >> ../conf/messages.en

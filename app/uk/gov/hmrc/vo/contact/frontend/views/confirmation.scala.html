@@ -1,0 +1,138 @@
+@*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukCharacterCount, GovukErrorSummary, GovukFieldset, GovukPanel, GovukRadios}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.charactercount.CharacterCount
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.panel.Panel
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
+@import uk.gov.hmrc.vo.contact.frontend.forms.{SatisfactionSurvey, SatisfactionSurveyForm}
+@import uk.gov.hmrc.vo.contact.frontend.models.Contact
+@import uk.gov.hmrc.vo.contact.frontend.utils.AddressFormatters.formattedPropertyAddress
+@import uk.gov.hmrc.vo.contact.frontend.viewmodels.AnswerSection
+@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.vo.contact.frontend.controllers.routes
+
+@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
+        govukButton: GovukButton, govukPanel: GovukPanel,
+        govukFieldset: GovukFieldset, govukRadios: GovukRadios, govukCharacterCountArea: GovukCharacterCount,
+        govukErrorSummary: GovukErrorSummary)
+
+@(contact: Contact, answerSections: AnswerSection, whatHappensNextMessages: Seq[String], form: Form[SatisfactionSurvey])(implicit request: Request[?], messages: Messages)
+
+@panelContent = {
+@messages("confirmation.para1") <br />
+@Html(formattedPropertyAddress(contact.propertyAddress, ", "))
+}
+
+@mainTemplate(
+    pageTitle = Option(messages("confirmation.title"))) {
+    @if(form.hasErrors){<script type="text/javascript"> window.location='#error-summary-heading'</script>}
+    <section tabindex="0">
+    @govukPanel(Panel(title = Text(messages("confirmation.heading")), headingLevel = 1,
+        content = HtmlContent(panelContent)
+    ))
+    </section>
+
+    <p class="govuk-body">
+        @messages("confirmation.email.sent") <strong>@contact.contact.email</strong>
+    </p>
+
+    <h2 class="govuk-heading-m">@messages("confirmation.whatHappensnext")</h2>
+
+    @for(message <- whatHappensNextMessages) {
+        <p class="govuk-body">@Html(Messages(message))</p>
+    }
+
+    <section>
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        <h2 class="govuk-heading-m">@Html(Messages("confirmation.enquirySummary"))</h2>
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half"> @messages(answerSections.rows.head.label) </dt>
+                <dd class="govuk-summary-list__value"> @messages(answerSections.rows.head.answer) </dd>
+            </div>
+            @for(sectionRow <- answerSections.rows.tail) {
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">@messages(sectionRow.label)</dt>
+                    <dd class="govuk-summary-list__value">@Html(messages(sectionRow.answer))</dd>
+                </div>
+            }
+        </dl>
+    </section>
+
+    <p class="govuk-body">
+        <a href="javascript:window.print();" class="govuk-link print-link">@messages("site.print.button")</a>
+    </p>
+
+    <section class="govuk-!-display-none-print">
+    @formWithCSRF(action = routes.SatisfactionSurveyController.formCompleteFeedback, Symbol("autoComplete") -> "off") {
+        @if(form.hasErrors) {
+            @govukErrorSummary(
+                ErrorSummary(
+                    title = Text(messages("error.summary.title")),
+                    errorList = form.mapping.mappings.flatMap(x => form.error(x.key).map(e =>
+                        ErrorLink(href = Option("#satisfaction.verySatisfied"), content = HtmlContent(messages(e.messages, e.args)))
+                    )),
+                    attributes = Map("id" -> "error-summary-heading")
+                )
+            )
+        }
+
+        @govukFieldset(Fieldset(html = surveyContent))
+
+        @govukButton(Button(attributes = Map("id" -> "submit"), content = Text(messages("confirmation.feedback.submit"))))
+    }
+    </section>
+}
+
+@surveyContent = {
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible block-js-enabled">
+
+    <h3 class="govuk-heading-l">@messages("confirmation.feedback") @messages("hintText.optional") </h3>
+
+    <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">@messages("confirmation.feedback.subheading")</legend>
+            @govukRadios(Radios(
+                name = "satisfaction",
+                errorMessage = form.errors.asHtmlErrorMessageForField("satisfaction"),
+                items = SatisfactionSurveyForm.options.map(i => RadioItem(
+                    content = Text(messages(i.messageKey)),
+                    id = Option(i.id),
+                    value = Option(i.value),
+                    checked = form("satisfaction").value.contains(i.value)
+                ))
+            ))
+        </fieldset>
+    </div>
+
+    <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--s">
+            @messages("confirmation.feedback.improve") @messages("hintText.optional")
+        </label>
+        @govukCharacterCountArea(CharacterCount(
+            id = "details", name = "details", rows = 5, value = form("details").value, maxLength = Some(1200), hint = Option(Hint(content = Text(messages("confirmation.feedback.warning")))),
+            errorMessage = form.errors.asHtmlErrorMessageForField("details")
+        ))
+    </div>
+}

@@ -1,0 +1,81 @@
+/*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package uk.gov.hmrc.vo.contact.frontend.controllers
+
+import javax.inject.Inject
+import play.api.data.Form
+import play.api.i18n.{I18nSupport, MessagesApi}
+import play.api.mvc.MessagesControllerComponents
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
+
+import scala.concurrent.{ExecutionContext, Future}
+import play.api.mvc
+import play.api.mvc.AnyContent
+import uk.gov.hmrc.vo.contact.frontend.Navigator
+import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
+import uk.gov.hmrc.vo.contact.frontend.forms.BusinessRatesSubcategoryForm
+import uk.gov.hmrc.vo.contact.frontend.identifiers.{BusinessRatesSubcategoryId, CouncilTaxSubcategoryId}
+import uk.gov.hmrc.vo.contact.frontend.models.Mode
+import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
+import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesSubcategory as business_rates_subcategory, businessRatesValuation as business_rates_valuation}
+
+class BusinessRatesSubcategoryController @Inject() (
+  override val messagesApi: MessagesApi,
+  auditService: AuditingService,
+  dataCacheConnector: DataCacheConnector,
+  navigator: Navigator,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  businessRatesSubcategory: business_rates_subcategory,
+  businessRatesValuation: business_rates_valuation,
+  cc: MessagesControllerComponents
+) extends FrontendController(cc)
+  with I18nSupport {
+
+  implicit val ec: ExecutionContext = cc.executionContext
+
+  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
+    implicit request =>
+      val preparedForm = request.userAnswers.businessRatesSubcategory match {
+        case None        => BusinessRatesSubcategoryForm()
+        case Some(value) => BusinessRatesSubcategoryForm().fill(value)
+      }
+      Ok(businessRatesSubcategory(preparedForm, mode))
+  }
+
+  def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData).async {
+    implicit request =>
+      BusinessRatesSubcategoryForm().bindFromRequest().fold(
+        (formWithErrors: Form[String]) =>
+          Future.successful(BadRequest(businessRatesSubcategory(formWithErrors, mode))),
+        value =>
+          for {
+            _        <- dataCacheConnector.remove(request.sessionId, CouncilTaxSubcategoryId.toString)
+            cacheMap <- dataCacheConnector.save[String](request.sessionId, BusinessRatesSubcategoryId.toString, value)
+          } yield {
+            auditService.sendRadioButtonSelection(request.uri, "businessRatesSubcategory" -> value)
+            Redirect(navigator.nextPage(BusinessRatesSubcategoryId, mode).apply(UserAnswers(cacheMap)))
+          }
+      )
+  }
+
+  def onValuationPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
+    implicit request =>
+      Ok(businessRatesValuation())
+  }
+}

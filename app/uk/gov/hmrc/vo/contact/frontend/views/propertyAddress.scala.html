@@ -1,0 +1,99 @@
+@*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukErrorSummary, GovukFieldset, GovukInput}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
+@import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
+@import uk.gov.hmrc.vo.contact.frontend.models.Mode
+@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.input.Input
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
+@import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.vo.contact.frontend.models.PropertyAddress
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service_fair_rent
+@import uk.gov.hmrc.vo.contact.frontend.models.requests.DataRequestUtil.isEnquiryCategoryOneOf
+
+@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
+        govukInput: GovukInput, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
+        govukFieldset: GovukFieldset)
+
+@(form: Form[PropertyAddress], mode: Mode, helpTextKey: Option[String] = None)(implicit request: Request[?], messages: Messages)
+
+@textInput(id: String, optional: Boolean, classes: String, autoCompleteLabel: String) = {
+    @govukInput(Input(
+        id=id, name=id, inputType = "text", value = form(id).value, classes=classes, autocomplete=Some(autoCompleteLabel),
+        label = if(optional) Label(content = Text(s"${messages(s"propertyAddress.$id")} ${messages("hintText.optional")}"))
+                    else Label(content = Text(messages(s"propertyAddress.$id"))),
+        errorMessage = form.errors.asTextErrorMessageForField(id)
+    ))
+}
+
+@content = {
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">@messages("propertyAddress.heading")</h1>
+    </legend>
+
+    @helpTextKey.map{ key =>
+      @messages.translate(key, Seq()).map{ text =>
+          <p class="govuk-body">
+              @text
+          </p>
+      }
+    }
+
+    @textInput("addressLine1", optional = false, "govuk-input--width-30", "address-line1")
+    @textInput("addressLine2", optional = true, classes = "govuk-input--width-30", "address-line2")
+    @textInput("town", optional = false, "govuk-!-width-two-thirds", "address-level2")
+    @textInput("county", optional = true, "govuk-!-width-two-thirds", "address-level1")
+    @textInput("postcode", optional = false, "govuk-input--width-10", "postal-code")
+}
+
+
+@mainTemplate(
+    pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("propertyAddress.title") else messages("propertyAddress.title")),
+    backLink = Some(BackLink(href = uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactDetailsController.onPageLoad(mode).url))
+) {
+    @formWithCSRF(action = PropertyAddressController.onSubmit(mode)) {
+        @if(form.hasErrors) {
+
+            @* after text updates please switch to uk.gov.hmrc.govukfrontend.views.Implicits.RichFormErrors#asHtmlErrorLinks()
+            at the moment we must render field name:
+            "First name - This field is required"
+            Should be after text updates :
+            "Please enter first name"
+            *@
+
+            @govukErrorSummary(
+                ErrorSummary(
+                    title = Text(messages("error.summary.title")),
+                    errorList = form.mapping.mappings.flatMap(x => form.error(x.key).map(e =>
+                        ErrorLink(href = Option(s"#${x.key}"), content = HtmlContent(messages(e.messages, e.args)))
+                    )), attributes = Map("id" -> "error-summary-heading")
+                )
+            )
+        }
+        @govukFieldset(Fieldset(html = content))
+        @govukButton(Button(content = Text(messages("site.continue")), attributes = Map("id"-> "submit")))
+
+        @if(isEnquiryCategoryOneOf("housing_benefit","fair_rent")) {
+            @help_with_service_fair_rent()
+        }
+    }
+}
