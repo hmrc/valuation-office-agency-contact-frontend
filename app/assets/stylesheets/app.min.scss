@@ -15,18 +15,6 @@
   zoom: 1;
 }
 
-.hmrc-language-select__list {
-  margin-bottom: 0;
-}
-
-.govuk-back-link {
-  margin-top: 0;
-}
-
-.govuk-main-wrapper {
-  padding-top: 15px;
-}
-
 @media print {
   .govuk-phase-banner, .hmrc-language-select, a.print-link, .no-print, footer {
     display: none !important;

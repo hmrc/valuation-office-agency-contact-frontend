@@ -1,5 +1,10 @@
 checkYourAnswers.title = Gwiriwch eich atebion - Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 checkYourAnswers.heading = Gwiriwch eich atebion
+
+# Phase banner
+phase.banner.before = Gwasanaeth newydd yw hwn.
+phase.banner.link =
+phase.banner.after =
  
 hintText.optional = (opsiynol)
 
@@ -60,7 +65,6 @@ service.homePageUrl = /valuation-office-agency-contact-frontend/
 site.textarea.char_limit = (Y terfyn yw {0} o gymeriadau)
 site.print.button= Argraffwch y dudalen hon
 site.govuk= Yn ôl i GOV.UK
-site.new_service = This is a new service
 site.not_provided = Not provided
 page.not-implemented = Heb ei Weithredu
 

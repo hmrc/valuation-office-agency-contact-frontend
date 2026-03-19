@@ -1,6 +1,11 @@
 checkYourAnswers.title = Check your answers - Valuation Office contact form - GOV.UK
 checkYourAnswers.heading = Check your answers
 
+# Phase banner
+phase.banner.before = This is a new service.
+phase.banner.link =
+phase.banner.after =
+
 hintText.optional = (optional)
 
 error.title = Error:
@@ -60,7 +65,6 @@ service.homePageUrl = /valuation-office-agency-contact-frontend/
 site.textarea.char_limit = (Limit is {0} characters)
 site.print.button=Print this page
 site.govuk=Back to GOV.UK
-site.new_service = This is a new service
 site.not_provided = Not provided
 page.not-implemented = Not Implemented
 
