@@ -20,12 +20,14 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.phasebanner.PhaseBanner
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.tag.Tag
+@import uk.gov.hmrc.hmrcfrontend.views.config.StandardBetaBanner
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcStandardPage
 @import uk.gov.hmrc.hmrcfrontend.views.viewmodels.hmrcstandardpage.{Banners, HmrcStandardPageParams, ServiceURLs, TemplateOverrides}
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 
 @this(
         hmrcStandardPage: HmrcStandardPage,
+        standardBetaBanner: StandardBetaBanner,
         headTemplate: head
 )
 
@@ -46,12 +48,7 @@
         backLink = backLink,
         banners = Banners(
             displayHmrcBanner = false,
-            phaseBanner = Some(
-                PhaseBanner(
-                    tag = Option(Tag(Text("Beta"))),
-                    content = Text(messages("site.new_service"))
-                )
-            )
+            phaseBanner = Some(standardBetaBanner("#"))
         ),
         templateOverrides = TemplateOverrides(
             additionalHeadBlock = Some(headTemplate(enableTimeoutDialog))
