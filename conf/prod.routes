@@ -1,5 +1,6 @@
 # Add all the application routes to the app.routes file
 ->         /valuation-office-agency-contact-frontend        app.Routes
-->         /                                                health.Routes
 
-GET        /                                                uk.gov.hmrc.vo.contact.frontend.controllers.localroot.RootRedirectController.rootRedirect
+GET        /ping/ping                                       uk.gov.hmrc.play.health.HealthController.ping
+
+GET        /                                                uk.gov.hmrc.vo.service.controller.local.RootRedirectController.rootRedirect
