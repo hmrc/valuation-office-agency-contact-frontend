@@ -15,19 +15,18 @@
  *@
 
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 
-@this(mainTemplate: main_template)
+@this(layout: PrimaryLayout)
 
 
-@()(implicit request: Request[?], messages: Messages)
+@()(implicit request: RequestHeader, messages: Messages)
 
-@mainTemplate(
-    backLink = Some(BackLink(href = routes.BusinessRatesPropertyController.onPageLoad().url)),
-    pageTitle = Option(messages("businessRatesNonBusiness.title"))) {
-
+@layout(
+    pageTitle = messages("businessRatesNonBusiness.title"),
+    backLink = Some(routes.BusinessRatesPropertyController.onPageLoad().url)
+) {
     <h1 class="govuk-heading-l">@Messages("businessRatesNonBusiness.heading")</h1>
 
     <p class="govuk-body">@Html(Messages("businessRatesNonBusiness.p1"))</p>

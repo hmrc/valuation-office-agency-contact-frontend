@@ -16,22 +16,21 @@
 
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukErrorSummary}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.contact.frontend.models.{Mode, NormalMode}
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.hmrcfrontend.views.viewmodels.charactercount.CharacterCount
 @import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
 
 
-@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
+@this(layout: PrimaryLayout, formWithCSRF: FormWithCSRF,
 hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
 
 
-@(form: Form[String], mode: Mode)(implicit request: Request[?], messages: Messages)
+@(form: Form[String], mode: Mode)(implicit request: RequestHeader, messages: Messages)
 
 
 @content = {
@@ -55,9 +54,9 @@ hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSumm
 
 }
 
-@mainTemplate(
-    pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("anythingElse.title") else messages("anythingElse.title")),
-    backLink = Some(BackLink(href = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url))
+@layout(
+    pageTitle = if(form.hasErrors) messages("error.prefix") + " " + messages("anythingElse.title") else messages("anythingElse.title"),
+    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url)
 ) {
     @formWithCSRF(action = AnythingElseTellUsController.onSubmit(), Symbol("autoComplete") -> "off") {
         @if(form.hasErrors) {

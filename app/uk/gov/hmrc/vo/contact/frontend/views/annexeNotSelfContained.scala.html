@@ -15,17 +15,16 @@
  *@
 
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(mainTemplate: main_template)
+@this(layout: PrimaryLayout)
 
-@()(implicit request: Request[?], messages: Messages)
+@()(implicit request: RequestHeader, messages: Messages)
 
-@mainTemplate(
-    backLink = Some(BackLink(href = uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxAnnexeController.onSelfContainedEnquiryPageLoad().url)),
-    pageTitle = Option(messages("annexeNotSelfContained.title"))) {
-
+@layout(
+    pageTitle = messages("annexeNotSelfContained.title"),
+    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxAnnexeController.onSelfContainedEnquiryPageLoad().url)
+) {
     <h1 class="govuk-heading-l">@Messages("annexeNotSelfContained.heading")</h1>
 
     <p class="govuk-body">@Html(Messages("annexeNotSelfContained.p1"))</p>
@@ -35,6 +34,5 @@
     <p class="govuk-body">@Html(Messages("annexeNotSelfContained.p2"))</p>
 
     @components.general_enquires(uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
-
 
 }

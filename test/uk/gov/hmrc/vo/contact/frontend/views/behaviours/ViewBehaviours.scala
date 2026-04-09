@@ -36,15 +36,14 @@ trait ViewBehaviours extends ViewSpecBase {
     "behave like a normal page" when {
       "rendered" must {
         "have the correct banner title" in {
-          val doc    = asDocument(view())
-          val header = doc.getElementsByAttributeValue("class", "govuk-service-navigation__service-name").first()
-          val link   = header.children.first
-          link.text mustBe messagesApi("site.service_name")(using Lang(Locale.UK))
+          val doc  = asDocument(view())
+          val link = doc.select(".govuk-service-navigation__service-name a").first()
+          link.text mustBe messagesApi("service.name")(using Lang(Locale.UK))
         }
 
         "display the correct browser title" in {
           val doc = asDocument(view())
-          assertEqualsMessage(doc, "title", s"$messageKeyPrefix.title")
+          assertEqualsValue(doc, "title", messages(s"$messageKeyPrefix.title") + " - Valuation Office contact form - GOV.UK")
         }
 
         "display the correct page title" in {

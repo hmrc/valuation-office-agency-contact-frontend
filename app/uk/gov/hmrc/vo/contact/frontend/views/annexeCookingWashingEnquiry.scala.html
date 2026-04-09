@@ -18,26 +18,24 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
 @import uk.gov.hmrc.govukfrontend.views.Implicits.*
 @import uk.gov.hmrc.vo.contact.frontend.forms.AnnexeCookingWashingForm
 
-@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
+@this(layout: PrimaryLayout, formWithCSRF: FormWithCSRF,
         govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
 
-@(form: Form[String])(implicit request: Request[?], messages: Messages)
+@(form: Form[String])(implicit request: RequestHeader, messages: Messages)
 
-
-@mainTemplate(
-    pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("annexeCookingWashing.title") else messages("annexeCookingWashing.title")),
-    backLink = Some(BackLink(href = uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxAnnexeController.onSelfContainedEnquiryPageLoad().url))
+@layout(
+    pageTitle = if(form.hasErrors) messages("error.prefix") + " " + messages("annexeCookingWashing.title") else messages("annexeCookingWashing.title"),
+    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxAnnexeController.onSelfContainedEnquiryPageLoad().url)
 ) {
     @formWithCSRF(action = CouncilTaxAnnexeController.onHaveCookingWashingSubmit(), Symbol("autoComplete") -> "off") {
         @if(form.hasErrors) {

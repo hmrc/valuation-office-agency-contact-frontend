@@ -14,19 +14,17 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 
-@this(mainTemplate: main_template)
+@this(layout: PrimaryLayout)
 
-@()(implicit request: Request[?], messages: Messages)
+@()(implicit request: RequestHeader, messages: Messages)
 
-@mainTemplate(
-    backLink = Some(BackLink(href = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad().url)),
-    pageTitle = Option(messages("propertyWalesLets.title"))
+@layout(
+    pageTitle = messages("propertyWalesLets.title"),
+    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad().url)
 ) {
-
     <h1 class="govuk-heading-l">@messages("propertyWalesLets.heading")</h1>
 
     <p class="govuk-body">
@@ -51,6 +49,5 @@
     </p>
 
     @components.general_enquires(uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
-
 
 }

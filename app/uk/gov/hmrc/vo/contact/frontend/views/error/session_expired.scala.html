@@ -18,20 +18,18 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
 @this(
-        mainTemplate: main_template,
+        layout: PrimaryLayout,
         govukButton: GovukButton
 )
 
-@()(implicit request: Request[?], messages: Messages)
+@()(implicit request: RequestHeader, messages: Messages)
 
-@mainTemplate(
-    pageTitle = Option(messages("session_expired.title")),
-    enableTimeoutDialog = false
+@layout(
+    pageTitle = messages("session_expired.title")
 ) {
-
     <h1 class="govuk-heading-l">@messages("session_expired.heading")</h1>
 
     <p class="govuk-body">@messages("session_expired.guidance")</p>

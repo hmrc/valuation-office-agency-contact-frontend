@@ -14,17 +14,16 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(mainTemplate: main_template)
+@this(layout: PrimaryLayout)
 
-@()(implicit request: Request[?], messages: Messages)
+@()(implicit request: RequestHeader, messages: Messages)
 
-@mainTemplate(
-    pageTitle = Option(messages("feedback.thankyou.title"))) {
-
+@layout(
+    pageTitle = messages("feedback.thankyou.title")
+) {
     <h1 class="govuk-heading-l">@Messages("feedback.thankyou.heading")</h1>
 
     <p class="govuk-body"><a href="./new-or-existing-enquiry">@Messages("feedback.anotherForm")</a></p>
-
 }

@@ -8,7 +8,7 @@ phase.banner.after =
  
 hintText.optional = (opsiynol)
 
-error.title = Gwall:
+error.prefix = Gwall:
 error.boolean = Rhowch ateb
 error.invalid_date = Rhowch ddyddiad cywir
 error.date.day_blank = Nodwch ddiwrnod
@@ -59,8 +59,8 @@ site.save_and_continue = Cadw a mynd yn eich blaen
 site.start-again = Dechrau’r eto
 site.submit = Cyflwyno
 site.submit.enquiry = Cyflwyno’ch ymholiad
-site.service_name = Ffurflen gyswllt Swyddfa Brisio
 service.name = Ffurflen gyswllt Swyddfa Brisio
+gov.name = GOV.UK
 service.homePageUrl = /valuation-office-agency-contact-frontend/
 site.textarea.char_limit = (Y terfyn yw {0} o gymeriadau)
 site.print.button= Argraffwch y dudalen hon

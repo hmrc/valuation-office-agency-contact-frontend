@@ -20,9 +20,10 @@
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service_fair_rent
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
 @this(
-        pageTemplate: pageTemplate,
+        layout: PrimaryLayout,
         formWithCSRF: FormWithCSRF,
         govukButton: GovukButton,
         govukErrorSummary: GovukErrorSummary
@@ -34,11 +35,11 @@
         backUrl: String,
         title: String,
         helpWithServiceSection: Option[String] = None
-)(formFields: Html)(implicit request: Request[?], messages: Messages)
+)(formFields: Html)(implicit request: RequestHeader, messages: Messages)
 
-@pageTemplate(
-    title = form.errors.headOption.fold("")(_ => s"${messages("error.title")} ") + title,
-    backUrl = backUrl
+@layout(
+    pageTitle = form.errors.headOption.fold("")(_ => s"${messages("error.prefix")} ") + title,
+    backLink = Some(backUrl)
 ) {
 
     @if(form.hasErrors) {

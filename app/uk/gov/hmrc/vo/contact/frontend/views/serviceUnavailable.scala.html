@@ -14,17 +14,15 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(mainTemplate: main_template)
+@this(layout: PrimaryLayout)
 
-@()(implicit request: Request[?], messages: Messages)
+@()(implicit request: RequestHeader, messages: Messages)
 
-@mainTemplate(
-    pageTitle = Option(messages("service.unavailable.heading")),
-    enableTimeoutDialog = false
+@layout(
+    pageTitle = messages("service.unavailable.heading")
 ) {
-
     <h1 class="govuk-heading-l">@messages("service.unavailable.heading")</h1>
     <p class="govuk-body">@messages("service.unavailable.p1")</p>
     <p class="govuk-body">
@@ -33,5 +31,4 @@
     <p class="govuk-body">
         <a class="govuk-link" href=@messages("service.unavailable.link2.href")>@messages("service.unavailable.link2.text")</a> @messages("service.unavailable.p3")
     </p>
-
 }

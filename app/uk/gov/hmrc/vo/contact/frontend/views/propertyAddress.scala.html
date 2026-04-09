@@ -15,14 +15,13 @@
  *@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukErrorSummary, GovukFieldset, GovukInput}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.input.Input
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
@@ -30,11 +29,11 @@
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service_fair_rent
 @import uk.gov.hmrc.vo.contact.frontend.models.requests.DataRequestUtil.isEnquiryCategoryOneOf
 
-@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
+@this(layout: PrimaryLayout, formWithCSRF: FormWithCSRF,
         govukInput: GovukInput, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
         govukFieldset: GovukFieldset)
 
-@(form: Form[PropertyAddress], mode: Mode, helpTextKey: Option[String] = None)(implicit request: Request[?], messages: Messages)
+@(form: Form[PropertyAddress], mode: Mode, helpTextKey: Option[String] = None)(implicit request: RequestHeader, messages: Messages)
 
 @textInput(id: String, optional: Boolean, classes: String, autoCompleteLabel: String) = {
     @govukInput(Input(
@@ -66,9 +65,9 @@
 }
 
 
-@mainTemplate(
-    pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("propertyAddress.title") else messages("propertyAddress.title")),
-    backLink = Some(BackLink(href = uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactDetailsController.onPageLoad(mode).url))
+@layout(
+    pageTitle = if(form.hasErrors) messages("error.prefix") + " " + messages("propertyAddress.title") else messages("propertyAddress.title"),
+    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactDetailsController.onPageLoad(mode).url)
 ) {
     @formWithCSRF(action = PropertyAddressController.onSubmit(mode)) {
         @if(form.hasErrors) {

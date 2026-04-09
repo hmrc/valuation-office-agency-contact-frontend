@@ -15,8 +15,7 @@
  *@
 
 @import play.api.Configuration
-@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukRadios, GovukErrorSummary, GovukNotificationBanner}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukRadios, GovukErrorSummary}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
@@ -26,29 +25,26 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.notificationbanner.NotificationBanner
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
 @import uk.gov.hmrc.vo.contact.frontend.forms.ContactReasonForm
 
 
-@this(mainTemplate: main_template,
+@this(layout: PrimaryLayout,
         formWithCSRF: FormWithCSRF,
         govukRadios: GovukRadios,
         govukButton: GovukButton,
         govukErrorSummary: GovukErrorSummary,
-        govukNotificationBanner: GovukNotificationBanner,
         configuration: Configuration
 )
 
 
-@(form: Form[String], mode: Mode)(implicit request: Request[?], messages: Messages)
+@(form: Form[String], mode: Mode)(implicit request: RequestHeader, messages: Messages)
 
-@mainTemplate(
- pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("contactReason.title") else messages("contactReason.title")),
- backLink = Some(BackLink(href = routes.Application.start().url)),
- enableTimeoutDialog = false
+@layout(
+ pageTitle = if(form.hasErrors) messages("error.prefix") + " " + messages("contactReason.title") else messages("contactReason.title"),
+ backLink = Some(routes.Application.start().url)
 ) {
  @formWithCSRF(action = routes.ContactReasonController.onSubmit(), Symbol("autoComplete") -> "off") {
   @if(form.hasErrors) {
@@ -58,13 +54,6 @@
      errorList = form.errors.map(e => ErrorLink(href = Some("#contactReason.new_enquiry"), content = HtmlContent(messages(e.messages, e.args))))
     )
    )
-  } else {
-   @if(configuration.get[Boolean]("bannerNotice.enabled")) {
-    @govukNotificationBanner(NotificationBanner(
-     content = HtmlContent("<p class='govuk-notification-banner__heading'>" + configuration.get[String]("bannerNotice." + messages.lang.code + ".body") + "</p>"),
-     title = Text(configuration.get[String]("bannerNotice." + messages.lang.code + ".title"))
-    ))
-   }
   }
 
   @govukRadios(Radios(

@@ -17,17 +17,18 @@
 @import uk.gov.hmrc.govukfrontend.views.html.components._
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.vo.contact.frontend.journey.model.Page
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
 @this(
-        pageTemplate: pageTemplate,
+        layout: PrimaryLayout,
         govukSummaryList: GovukSummaryList
 )
 
-@(key: String, backUrl: String, page: Page[String])(implicit request: Request[?], messages: Messages)
+@(key: String, backUrl: String, page: Page[String])(implicit request: RequestHeader, messages: Messages)
 
-@pageTemplate(
-    title = messages(page.heading),
-    backUrl = backUrl
+@layout(
+    pageTitle = messages(page.heading),
+    backLink = Some(backUrl)
 ) {
     <h1 class="govuk-heading-l">@messages(page.heading)</h1>
 

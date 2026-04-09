@@ -14,16 +14,22 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcTimeoutDialogHelper
-@import play.api.i18n.Messages
-@import play.api.mvc.Request
+@import uk.gov.hmrc.govukfrontend.views.Aliases.ErrorSummary
+@import uk.gov.hmrc.vo.service.view.html.*
 
-@this(hmrcTimeoutDialogHelper: HmrcTimeoutDialogHelper)
+@this(
+        standardPage: StandardPage
+)
 
-@(enableTimeoutDialog: Boolean = true)(implicit request: Request[?], messages: Messages)
+@(
+        pageTitle: String,
+        backLink: Option[String] = None,
+        errorSummary: Option[ErrorSummary] = None
+)(contentBlock: Html)(implicit request: RequestHeader, messages: Messages)
 
-<link href="@controllers.routes.Assets.versioned("stylesheets/app.min.css")" media="all" rel="stylesheet" type="text/css" />
-
-@if(enableTimeoutDialog) {
- @hmrcTimeoutDialogHelper(signOutUrl = uk.gov.hmrc.vo.contact.frontend.controllers.routes.Application.logout().url)
-}
+@standardPage(
+    pageTitle,
+    backLinkUrl = backLink,
+    errorSummary = errorSummary,
+    showH1 = false
+)(contentBlock)

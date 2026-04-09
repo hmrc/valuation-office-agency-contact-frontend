@@ -14,22 +14,19 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 
-@this(mainTemplate: main_template)
+@this(layout: PrimaryLayout)
 
 
-@()(implicit request: Request[?], messages: Messages)
+@()(implicit request: RequestHeader, messages: Messages)
 
-@mainTemplate(
- pageTitle = Some(messages("fairRentApplication.title")),
- backLink = Some(BackLink(href = routes.FairRentEnquiryController.onPageLoad().url))
+@layout(
+ pageTitle = messages("fairRentApplication.title"),
+ backLink = Some(routes.FairRentEnquiryController.onPageLoad().url)
 ) {
-
-
  <h1 class="govuk-heading-l">@messages("fairRentApplication.heading")</h1>
 
  <p class="govuk-body">
@@ -46,4 +43,5 @@
  </ul>
 
  @components.general_enquires_fair_rent(uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+
 }
