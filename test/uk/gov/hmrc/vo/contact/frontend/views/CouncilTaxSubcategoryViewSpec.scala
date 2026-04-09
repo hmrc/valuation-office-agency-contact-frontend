@@ -60,8 +60,8 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
 
       "contain continue button with the value Continue" in {
         val doc            = asDocument(createViewUsingForm(CouncilTaxSubcategoryForm()))
-        val continueButton = doc.getElementById("submit").text()
-        assert(continueButton == messages("site.continue"))
+        val continueButton = doc.getElementById("continue-button").text()
+        assert(continueButton == messages("button.continue.label"))
       }
 
       "has a link marked with site.back leading to the Enquiry page" in {

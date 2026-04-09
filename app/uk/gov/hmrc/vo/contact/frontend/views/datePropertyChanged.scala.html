@@ -15,7 +15,6 @@
  *@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukErrorSummary}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.inputDate
@@ -23,6 +22,7 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
+@import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
 @this(layout: PrimaryLayout, govukButton: GovukButton,
         input_date: inputDate, formWithCSRF: FormWithCSRF, govukErrorSummary: GovukErrorSummary)
@@ -54,7 +54,7 @@
             headingIsLegend = true
         )
 
-        @govukButton(Button(content = Text(messages("site.continue"))))
+        @govukButton(SubmitButton("continue"))
 
         @components.help_with_service()
     }

@@ -48,7 +48,7 @@ class ContactReasonViewSpec extends ViewBehaviours {
       "contain continue button with the value Continue" in {
         val doc            = asDocument(createViewUsingForm(ContactReasonForm()))
         val continueButton = doc.getElementsByClass("govuk-button").first().text()
-        assert(continueButton == messages("site.continue"))
+        assert(continueButton == messages("button.continue.label"))
       }
 
       "contain radio buttons for the value" in {

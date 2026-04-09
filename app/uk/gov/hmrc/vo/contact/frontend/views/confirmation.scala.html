@@ -16,7 +16,6 @@
 
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukCharacterCount, GovukErrorSummary, GovukFieldset, GovukPanel, GovukRadios}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.charactercount.CharacterCount
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
@@ -31,6 +30,7 @@
 @import uk.gov.hmrc.vo.contact.frontend.viewmodels.AnswerSection
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes
+@import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
 @this(layout: PrimaryLayout, formWithCSRF: FormWithCSRF,
         govukButton: GovukButton, govukPanel: GovukPanel,
@@ -101,7 +101,7 @@
 
         @govukFieldset(Fieldset(html = surveyContent))
 
-        @govukButton(Button(attributes = Map("id" -> "submit"), content = Text(messages("confirmation.feedback.submit"))))
+        @govukButton(SubmitButton("feedback"))
     }
     </section>
 }

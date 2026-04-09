@@ -15,14 +15,14 @@
  *@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components.{GovukButton, GovukSummaryList}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.viewmodels.Section
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryList
+@import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 @import uk.gov.hmrc.vo.contact.frontend.utils.SectionFormatter.formatSections
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service_fair_rent
 @import uk.gov.hmrc.vo.contact.frontend.models.requests.DataRequestUtil.isEnquiryCategoryOneOf
+@import uk.gov.hmrc.vo.service.model.button.LinkButton
 
 @this(layout: PrimaryLayout, govukButton: GovukButton, govukSummaryList: GovukSummaryList)
 
@@ -36,10 +36,7 @@
 
     @govukSummaryList(SummaryList(rows = formatSections(answerSections)))
 
-    @govukButton(Button(name = Option("continue"), content = Text(messages("site.submit")),
-        href = Option(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CheckYourAnswersController.goToConfirmationPage().url),
-        attributes = Map("id" -> "submit")
-    ))
+    @govukButton(LinkButton("confirm", routes.CheckYourAnswersController.goToConfirmationPage().url))
 
     @if(isEnquiryCategoryOneOf("housing_benefit","fair_rent")) {
         @help_with_service_fair_rent()

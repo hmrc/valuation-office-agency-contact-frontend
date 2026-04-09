@@ -15,7 +15,6 @@
  *@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukErrorSummary, GovukFieldset, GovukInput}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
@@ -28,6 +27,7 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service_fair_rent
 @import uk.gov.hmrc.vo.contact.frontend.models.requests.DataRequestUtil.isEnquiryCategoryOneOf
+@import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
 
@@ -91,7 +91,8 @@
             )
         }
         @govukFieldset(Fieldset(html = content))
-        @govukButton(Button(content = Text(messages("site.continue")), attributes = Map("id"-> "submit")))
+
+        @govukButton(SubmitButton("continue"))
 
         @if(isEnquiryCategoryOneOf("housing_benefit","fair_rent")) {
             @help_with_service_fair_rent()

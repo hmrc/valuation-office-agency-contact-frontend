@@ -15,7 +15,6 @@
  *@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukRadios, GovukErrorSummary}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
@@ -28,6 +27,7 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
 @import uk.gov.hmrc.vo.contact.frontend.forms.AnnexeForm
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
 @this(layout: PrimaryLayout, formWithCSRF: FormWithCSRF,
         govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
@@ -64,7 +64,7 @@
             errorMessage = form.errors.asTextErrorMessageForField("value")
         ))
 
-        @govukButton(Button(content = Text(messages("site.continue"))))
+        @govukButton(SubmitButton("continue"))
 
         @components.help_with_service()
     }

@@ -21,6 +21,7 @@
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service_fair_rent
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
+@import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
 @this(
         layout: PrimaryLayout,
@@ -56,7 +57,7 @@
 
         @formFields
 
-        @govukButton(Button(content = Text(messages("site.continue"))))
+        @govukButton(SubmitButton("continue"))
     }
 
     @{helpWithServiceSection match {

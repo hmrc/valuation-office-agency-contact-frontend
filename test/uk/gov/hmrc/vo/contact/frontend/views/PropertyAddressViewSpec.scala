@@ -54,8 +54,8 @@ class PropertyAddressViewSpec extends QuestionViewBehaviours[PropertyAddress] {
 
     "contain continue button with the value Continue" in {
       val doc            = asDocument(createViewUsingForm(PropertyAddressForm()))
-      val continueButton = doc.getElementById("submit").text()
-      assert(continueButton == messages("site.continue"))
+      val continueButton = doc.getElementById("continue-button").text()
+      assert(continueButton == messages("button.continue.label"))
     }
 
     "has a link marked with site.back leading to the Contact Details Page" in {

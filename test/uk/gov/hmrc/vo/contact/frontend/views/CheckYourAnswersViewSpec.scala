@@ -104,7 +104,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
     "contain a submit button with the value Submit" in {
       val doc          = asDocument(view1())
-      val submitButton = doc.getElementById("submit").text()
+      val submitButton = doc.getElementById("confirm-button").text()
       assert(submitButton == messages("site.submit"))
     }
 

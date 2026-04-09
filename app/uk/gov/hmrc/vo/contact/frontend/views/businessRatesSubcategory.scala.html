@@ -15,7 +15,6 @@
  *@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukErrorSummary, GovukRadios}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
@@ -26,6 +25,7 @@
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
 @this(layout: PrimaryLayout, formWithCSRF: FormWithCSRF,
         govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
@@ -63,7 +63,7 @@
             errorMessage = form.errors.asTextErrorMessageForField("value")
         ))
 
-        @govukButton(Button(content = Text(messages("site.continue")), attributes = Map("id"-> "submit")))
+        @govukButton(SubmitButton("continue"))
 
         @components.help_with_service()
     }
