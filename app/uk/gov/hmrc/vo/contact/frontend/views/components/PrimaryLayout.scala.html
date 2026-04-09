@@ -14,7 +14,8 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.Aliases.ErrorSummary
+@import uk.gov.hmrc.govukfrontend.views.Aliases.{ErrorSummary, Text}
+@import uk.gov.hmrc.govukfrontend.views.html.components.implicits.*
 @import uk.gov.hmrc.vo.service.view.html.*
 
 @this(
@@ -24,12 +25,24 @@
 @(
         pageTitle: String,
         backLink: Option[String] = None,
+        theForm: Option[Form[?]] = None,
         errorSummary: Option[ErrorSummary] = None
 )(contentBlock: Html)(implicit request: RequestHeader, messages: Messages)
+
+@pageErrorSummary = @{
+    errorSummary.orElse {
+        theForm.filter(_.hasErrors).map { form =>
+            ErrorSummary(
+                errorList = form.errors.asTextErrorLinks,
+                title = Text(messages("error.summary.title"))
+            )
+        }
+    }
+}
 
 @standardPage(
     pageTitle,
     backLinkUrl = backLink,
-    errorSummary = errorSummary,
+    errorSummary = pageErrorSummary,
     showH1 = false
 )(contentBlock)
