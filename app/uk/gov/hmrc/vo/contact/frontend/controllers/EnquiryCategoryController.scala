@@ -16,23 +16,21 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import javax.inject.Inject
-import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.MessagesControllerComponents
-import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-
-import scala.concurrent.{ExecutionContext, Future}
 import play.api.mvc
-import play.api.mvc.AnyContent
+import play.api.mvc.{AnyContent, MessagesControllerComponents}
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.Navigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.vo.contact.frontend.forms.EnquiryCategoryForm
+import uk.gov.hmrc.vo.contact.frontend.forms.EnquiryCategoryForm.form
 import uk.gov.hmrc.vo.contact.frontend.identifiers.{EnquiryCategoryId, ExistingEnquiryCategoryId}
 import uk.gov.hmrc.vo.contact.frontend.models.Mode
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.enquiryCategory
+
+import javax.inject.Inject
+import scala.concurrent.{ExecutionContext, Future}
 
 class EnquiryCategoryController @Inject() (
   override val messagesApi: MessagesApi,
@@ -41,35 +39,28 @@ class EnquiryCategoryController @Inject() (
   navigator: Navigator,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
-  enquiryCategory: enquiryCategory,
+  enquiryCategoryView: enquiryCategory,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
-    implicit request =>
-      val preparedForm = request.userAnswers.enquiryCategory match {
-        case None        => EnquiryCategoryForm()
-        case Some(value) => EnquiryCategoryForm().fill(value)
-      }
-      Ok(enquiryCategory(preparedForm, mode))
+  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) { implicit request =>
+    val preparedForm = request.userAnswers.enquiryCategory.fold(form)(form.fillAndValidate)
+    Ok(enquiryCategoryView(preparedForm, mode))
   }
 
-  def onSubmit(mode: Mode): mvc.Action[AnyContent] = getData.async {
-    implicit request =>
-      EnquiryCategoryForm().bindFromRequest().fold(
-        (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(enquiryCategory(formWithErrors, mode))),
-        value =>
-          for {
-            _        <- dataCacheConnector.remove(request.sessionId, ExistingEnquiryCategoryId.toString)
-            cacheMap <- dataCacheConnector.save[String](request.sessionId, EnquiryCategoryId.toString, value)
-          } yield {
-            auditService.sendRadioButtonSelection(request.uri, "enquiryCategory" -> value)
-            Redirect(navigator.nextPage(EnquiryCategoryId, mode).apply(UserAnswers(cacheMap)))
-          }
-      )
+  def onSubmit(mode: Mode): mvc.Action[AnyContent] = getData.async { implicit request =>
+    form.bindFromRequest().fold(
+      formWithErrors => Future.successful(BadRequest(enquiryCategoryView(formWithErrors, mode))),
+      value =>
+        for {
+          _        <- dataCacheConnector.remove(request.sessionId, ExistingEnquiryCategoryId.toString)
+          cacheMap <- dataCacheConnector.save[String](request.sessionId, EnquiryCategoryId.toString, value)
+        } yield {
+          auditService.sendRadioButtonSelection(request.uri, "enquiryCategory" -> value)
+          Redirect(navigator.nextPage(EnquiryCategoryId, mode).apply(UserAnswers(cacheMap)))
+        }
+    )
   }
-}

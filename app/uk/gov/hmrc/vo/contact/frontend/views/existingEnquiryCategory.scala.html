@@ -34,19 +34,21 @@
 
 @(form: Form[String], mode: Mode, backLink: String)(implicit request: RequestHeader, messages: Messages)
 
+@errorSummary = @{
+    Option.when(form.hasErrors)(
+        ErrorSummary(
+            title = Text(messages("error.summary.title")),
+            errorList = form.errors.map(e => ErrorLink(href = Some("#existingEnquiryCategory.council_tax"), content = HtmlContent(messages(e.messages, e.args))))
+        )
+    )
+}
+
 @layout(
     pageTitle = if(form.hasErrors) messages("error.prefix") + " " + messages("existingEnquiryCategory.title") else messages("existingEnquiryCategory.title"),
-    backLink = Some(ContactReasonController.onPageLoad().url)
+    backLink = Some(ContactReasonController.onPageLoad.url),
+    errorSummary = errorSummary
 ) {
     @formWithCSRF(action = ExistingEnquiryCategoryController.onSubmit(), Symbol("autoComplete") -> "off") {
-        @if(form.hasErrors) {
-            @govukErrorSummary(
-                ErrorSummary(
-                    title = Text(messages("error.summary.title")),
-                    errorList = form.errors.map(e => ErrorLink(href = Some("#existingEnquiryCategory.council_tax"), content = HtmlContent(messages(e.messages, e.args))))
-                )
-            )
-        }
 
         @govukRadios(Radios(
             fieldset = Option(Fieldset(legend = Option(

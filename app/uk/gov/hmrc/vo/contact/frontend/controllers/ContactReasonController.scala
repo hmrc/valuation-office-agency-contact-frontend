@@ -22,7 +22,7 @@ import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.Navigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataClearAction, DataRetrievalAction}
-import uk.gov.hmrc.vo.contact.frontend.forms.ContactReasonForm
+import uk.gov.hmrc.vo.contact.frontend.forms.ContactReasonForm.form
 import uk.gov.hmrc.vo.contact.frontend.identifiers.ContactReasonId
 import uk.gov.hmrc.vo.contact.frontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
@@ -42,26 +42,23 @@ class ContactReasonController @Inject() (
   cc: MessagesControllerComponents
 )(using ec: ExecutionContext
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
-  def onPageLoad(mode: Mode): Action[AnyContent] = clearData { implicit request =>
-    Ok(contact_reason(ContactReasonForm(), NormalMode))
+  def onPageLoad: Action[AnyContent] = clearData { implicit request =>
+    Ok(contact_reason(form))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = getData.async { implicit request =>
-    ContactReasonForm().bindFromRequest().fold(
-      formWithErrors => Future.successful(BadRequest(contact_reason(formWithErrors, NormalMode))),
-      value => {
+    form.bindFromRequest().fold(
+      formWithErrors => Future.successful(BadRequest(contact_reason(formWithErrors))),
+      value =>
         auditService.sendRadioButtonSelection(request.uri, "contactReason" -> value)
         dataCacheConnector.save[String](request.sessionId, ContactReasonId.toString, value).map(cacheMap =>
-          Redirect(navigator.nextPage(ContactReasonId, mode).apply(UserAnswers(cacheMap)))
+          Redirect(navigator.nextPage(ContactReasonId, NormalMode).apply(UserAnswers(cacheMap)))
         )
-      }
     )
   }
 
   def redirect: Action[AnyContent] = Action {
-    Redirect(routes.ContactReasonController.onPageLoad())
+    Redirect(routes.ContactReasonController.onPageLoad)
   }
-
-}

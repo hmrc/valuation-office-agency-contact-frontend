@@ -26,53 +26,31 @@
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
-@import uk.gov.hmrc.govukfrontend.views.Implicits._
-@import uk.gov.hmrc.vo.contact.frontend.forms.ContactReasonForm
+@import uk.gov.hmrc.govukfrontend.views.Implicits.*
+@import uk.gov.hmrc.vo.contact.frontend.forms.ContactReasonForm.values
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
+@import uk.gov.hmrc.vo.service.model.input.RadioField
 
-@this(layout: PrimaryLayout,
+@this(
+        layout: PrimaryLayout,
         formWithCSRF: FormWithCSRF,
         govukRadios: GovukRadios,
-        govukButton: GovukButton,
-        govukErrorSummary: GovukErrorSummary,
-        configuration: Configuration
+        govukButton: GovukButton
 )
 
-
-@(form: Form[String], mode: Mode)(implicit request: RequestHeader, messages: Messages)
+@(form: Form[String])(implicit request: RequestHeader, messages: Messages)
 
 @layout(
- pageTitle = if(form.hasErrors) messages("error.prefix") + " " + messages("contactReason.title") else messages("contactReason.title"),
- backLink = Some(routes.Application.start().url)
+    pageTitle = messages("contact.reason.label"),
+    backLink = Some(routes.Application.start().url),
+    theForm = Some(form)
 ) {
- @formWithCSRF(action = routes.ContactReasonController.onSubmit(), Symbol("autoComplete") -> "off") {
-  @if(form.hasErrors) {
-   @govukErrorSummary(
-    ErrorSummary(
-     title = Text(messages("error.summary.title")),
-     errorList = form.errors.map(e => ErrorLink(href = Some("#contactReason.new_enquiry"), content = HtmlContent(messages(e.messages, e.args))))
-    )
-   )
-  }
+    @formWithCSRF(action = routes.ContactReasonController.onSubmit(), Symbol("autoComplete") -> "off") {
 
-  @govukRadios(Radios(
-   fieldset = Option(Fieldset(legend = Option(
-    Legend(content = Text(messages("contactReason.heading")), isPageHeading = true, classes = "govuk-fieldset__legend--l"
-    )))),
-   idPrefix = Option("contactReason"),
-   name = "value",
-   items = ContactReasonForm.options.map(i => RadioItem(
-    content = Text(messages(i.messageKey)),
-    id = Option(i.id),
-    value = Option(i.value),
-    checked = form("value").value.contains(i.value)
-   )
-   ),
-   errorMessage = form.errors.asTextErrorMessageForField("value")
-  ))
+        @govukRadios(RadioField.radios(form, "contact", "reason", values))
 
-  @govukButton(SubmitButton("continue"))
+        @govukButton(SubmitButton("continue"))
 
-  @components.help_with_service()
- }
+        @components.help_with_service()
+    }
 }

@@ -16,36 +16,27 @@
 
 package uk.gov.hmrc.vo.contact.frontend.forms
 
-import play.api.data.{Form, FormError}
+import play.api.data.Form
 import play.api.data.Forms.*
-import play.api.data.format.Formatter
-import uk.gov.hmrc.vo.contact.frontend.utils.RadioOption
+import play.api.data.validation.Constraints.nonEmpty
 
-object EnquiryCategoryForm extends FormErrorHelper {
+object EnquiryCategoryForm:
 
-  private def enquiryCategoryFormatter: Formatter[String] = new Formatter[String] {
-
-    def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match {
-      case Some(s) if optionIsValid(s) => Right(s)
-      case None                        => produceError(key, "error.enquiryCategory.required")
-      case _                           => produceError(key, "error.unknown")
-    }
-
-    def unbind(key: String, value: String): Map[String, String] = Map(key -> value)
-  }
-
-  def apply(): Form[String] =
-    Form(single("value" -> of(using enquiryCategoryFormatter)))
-
-  def options: Seq[RadioOption] = Seq(
-    RadioOption("enquiryCategory", "council_tax"),
-    RadioOption("enquiryCategory", "business_rates"),
-    RadioOption("enquiryCategory", "housing_benefit"),
-    RadioOption("enquiryCategory", "fair_rent"),
-    RadioOption("enquiryCategory", "providing_lettings"),
-    RadioOption("enquiryCategory", "valuations_for_tax"),
-    RadioOption("enquiryCategory", "valuation_for_public_body")
+  val values: Seq[String] = Seq(
+    "council_tax",
+    "business_rates",
+    "housing_benefit",
+    "fair_rent",
+    "providing_lettings",
+    "valuations_for_tax",
+    "valuation_for_public_body"
   )
 
-  def optionIsValid(value: String): Boolean = options.exists(o => o.value == value)
-}
+  val form: Form[String] =
+    Form(
+      single(
+        "category" -> default(text, "")
+          .verifying(nonEmpty(errorMessage = "error.enquiry.category.required"))
+          .verifying("error.value.invalid", v => v.isEmpty || values.contains(v))
+      )
+    )

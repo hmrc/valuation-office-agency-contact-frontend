@@ -35,7 +35,7 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
   def existingEnquiryCategory: html.existingEnquiryCategory = inject[existing_enquiry_category]
   def auditService: AuditingService                         = inject[AuditingService]
 
-  def contactReasonRoute: Call = routes.ContactReasonController.onPageLoad()
+  def contactReasonRoute: Call = routes.ContactReasonController.onPageLoad
   def enquiryDateRoute: Call   = routes.EnquiryDateController.onPageLoad()
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =

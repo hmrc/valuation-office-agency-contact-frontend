@@ -57,7 +57,7 @@ class ApplicationControllerSpec extends ControllerSpecBase {
 
     "return the contact reason controller url" in {
       appController.createRefererURL() mustBe
-        uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactReasonController.onPageLoad().url
+        uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactReasonController.onPageLoad.url
     }
   }
 }

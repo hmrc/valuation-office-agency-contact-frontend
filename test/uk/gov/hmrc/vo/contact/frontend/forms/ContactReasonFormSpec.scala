@@ -30,7 +30,7 @@ class ContactReasonFormSpec extends FormBehaviours {
 
     "fail to bind when value is blank" in {
       val data          = emptyData
-      val expectedError = Seq(error("value", "error.contactReason.required")).flatten
+      val expectedError = Seq(error("value", "error.contact.reason.required")).flatten
       checkForError(form, data, expectedError)
     }
 

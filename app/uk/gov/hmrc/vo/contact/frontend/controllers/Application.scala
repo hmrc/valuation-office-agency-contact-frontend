@@ -34,7 +34,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.contactReason
 @Singleton
 class Application @Inject() (
   override val messagesApi: MessagesApi,
-  contactReason: contactReason,
+  contactReasonView: contactReason,
   languageSwitchController: LanguageSwitchController,
   getData: DataRetrievalAction,
   dataCacheConnector: DataCacheConnector,
@@ -46,7 +46,7 @@ class Application @Inject() (
   with I18nSupport {
 
   def start(): mvc.Action[AnyContent] = Action.async { implicit request =>
-    val defaultPage = Ok(contactReason(ContactReasonForm(), NormalMode))
+    val defaultPage = Ok(contactReasonView(ContactReasonForm.form))
     language match {
       case "cy" => Future.successful(configuration.getOptional[String]("govukStartPageWelsh")
           .fold(defaultPage)(Redirect(_)))
@@ -58,7 +58,7 @@ class Application @Inject() (
   def logout(): mvc.Action[AnyContent] = getData.async { implicit request =>
     auditService.sendLogout(request.userAnswers)
     dataCacheConnector.clear(request.sessionId).map { _ =>
-      Redirect(routes.ContactReasonController.onPageLoad()).withNewSession
+      Redirect(routes.ContactReasonController.onPageLoad).withNewSession
     }
   }
 
@@ -68,7 +68,7 @@ class Application @Inject() (
   }
 
   def createRefererURL(): String =
-    uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactReasonController.onPageLoad().url
+    uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactReasonController.onPageLoad.url
 
   private def language(using messages: Messages): String = messages.lang.language
 

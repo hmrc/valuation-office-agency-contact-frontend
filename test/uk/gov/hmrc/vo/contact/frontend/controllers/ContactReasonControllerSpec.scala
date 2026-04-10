@@ -32,7 +32,7 @@ class ContactReasonControllerSpec extends ControllerSpecBase {
 
   def contactReason: html.contactReason = inject[contact_reason]
 
-  def onwardRoute: Call = routes.ContactReasonController.onPageLoad()
+  def onwardRoute: Call = routes.ContactReasonController.onPageLoad
 
   def auditService: AuditingService = inject[AuditingService]
 

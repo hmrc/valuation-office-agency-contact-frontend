@@ -4,7 +4,7 @@ object AppDependencies {
 
   private val bootstrapVersion   = "10.7.0"
   private val playFrontendHmrc   = "13.3.0"
-  private val voServiceVersion   = "0.6.0-SNAPSHOT"
+  private val voServiceVersion   = "0.7.0"
   private val hmrcMongoVersion   = "2.12.0"
   private val commonsTextVersion = "1.15.0"
 

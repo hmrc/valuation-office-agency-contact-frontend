@@ -37,7 +37,7 @@
 
 @layout(
  pageTitle = if(form.hasErrors) messages("error.prefix") + " " + messages("enquiryDate.title", formattedDate) else messages("enquiryDate.title", formattedDate),
- backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactReasonController.onPageLoad().url)
+ backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactReasonController.onPageLoad.url)
 ) {
  @formWithCSRF(action = EnquiryDateController.onSubmit(), Symbol("autoComplete") -> "off") {
   @if(form.hasErrors) {

@@ -21,7 +21,8 @@ error.integer = Give an answer in whole numbers
 error.non_numeric = Give a value using only numbers
 error.number = Please enter a valid number
 error.required = This field is required
-error.enquiryCategory.required = Select what your enquiry is about
+error.value.invalid = Must be a valid value
+error.enquiry.category.required = Select what your enquiry is about
 error.councilTaxSubcategory.required = Select what your Council Tax enquiry is about
 error.businessRatesSubcategory.required = Select what your business rates enquiry is about
 error.summary.title = There is a problem
@@ -72,13 +73,11 @@ page.not-implemented = Not Implemented
 unauthorised.title = You can’t access this service with this account
 unauthorised.heading = You can’t access this service with this account
 
-contactReason.title = Why do you want to contact us?
-contactReason.heading = Why do you want to contact us?
-
-contactReason.new_enquiry = I want to make a new enquiry
-contactReason.more_details = I want to provide more details for an existing enquiry
-contactReason.update_existing = I want to get an update on an existing enquiry
-error.contactReason.required = Select why you want to contact us
+contact.reason.label = Why do you want to contact us?
+contact.reason.new_enquiry.label = I want to make a new enquiry
+contact.reason.more_details.label = I want to provide more details for an existing enquiry
+contact.reason.update_existing.label = I want to get an update on an existing enquiry
+error.contact.reason.required = Select why you want to contact us
 
 enquiryDate.title = Did you make your enquiry before {0}?
 enquiryDate.heading = Did you make your enquiry before {0}?
@@ -109,15 +108,15 @@ refNumber.value = What is your reference number?
 refNumber.value.optional = What is your reference number?(optional)
 refNumber.hint = For example, VOR12345678, CHK76543210
 
-enquiryCategory.title = What is your enquiry about?
-enquiryCategory.heading = What is your enquiry about?
-enquiryCategory.council_tax = Council Tax
-enquiryCategory.business_rates = Business rates
-enquiryCategory.fair_rent = Fair rents
-enquiryCategory.housing_benefit = Housing Benefit and Local Housing Allowances
-enquiryCategory.providing_lettings = Providing lettings information to, or contacting, the Rent Officers
-enquiryCategory.valuations_for_tax = Right to Buy, Valuations for taxes, or appeals against Community Infrastructure Levy
-enquiryCategory.valuation_for_public_body = Valuation and property advice, for public sector bodies, by District Valuer Services (DVS)
+enquiry.category.label = What is your enquiry about?
+enquiry.category.council_tax.label = Council Tax
+enquiry.category.business_rates.label = Business rates
+enquiry.category.housing_benefit.label = Housing Benefit and Local Housing Allowances
+enquiry.category.fair_rent.label = Fair rents
+enquiry.category.providing_lettings.label = Providing lettings information to, or contacting, the Rent Officers
+enquiry.category.valuations_for_tax.label = Right to Buy, Valuations for taxes, or appeals against Community Infrastructure Levy
+enquiry.category.valuation_for_public_body.label = Valuation and property advice, for public sector bodies, by District Valuer Services (DVS)
+
 enquiryCategory.other_business = Other business
 enquiryCategory.checkYourAnswersLabel = Enquiry type
 

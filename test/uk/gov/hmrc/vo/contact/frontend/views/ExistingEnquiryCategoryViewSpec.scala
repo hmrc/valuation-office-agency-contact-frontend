@@ -31,7 +31,7 @@ class ExistingEnquiryCategoryViewSpec extends ViewBehaviours {
 
   val messageKeyPrefix = "existingEnquiryCategory"
 
-  val backUrl: String = routes.ContactReasonController.onPageLoad().url
+  val backUrl: String = routes.ContactReasonController.onPageLoad.url
 
   def createView: () => HtmlFormat.Appendable =
     () => existingEnqCategory(ExistingEnquiryCategoryForm(), NormalMode, backUrl)(using fakeRequest, messages)

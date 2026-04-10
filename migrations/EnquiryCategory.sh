@@ -19,8 +19,7 @@ echo "POST       /changeEnquiryCategory               uk.gov.hmrc.vo.contact.fro
 
 echo "Adding messages to conf.messages"
 echo "" >> ../conf/messages.en
-echo "enquiryCategory.title = enquiryCategory" >> ../conf/messages.en
-echo "enquiryCategory.heading = enquiryCategory" >> ../conf/messages.en
+echo "enquiry.category.label = enquiryCategory" >> ../conf/messages.en
 echo "enquiryCategory.option1 = enquiryCategory" Option 1 >> ../conf/messages.en
 echo "enquiryCategory.option2 = enquiryCategory" Option 2 >> ../conf/messages.en
 echo "enquiryCategory.checkYourAnswersLabel = enquiryCategory" >> ../conf/messages.en

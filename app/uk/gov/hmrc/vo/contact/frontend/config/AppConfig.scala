@@ -39,11 +39,11 @@ class AppConfig @Inject() (val configuration: Configuration) extends VOServiceCo
 
   override def notificationBannerEnabledOn: Set[Call] = Set(
     serviceLocalRoot,
-    routes.ContactReasonController.onPageLoad()
+    routes.ContactReasonController.onPageLoad
   )
 
   override def timeoutDialogEnabledExcept: Set[Call] = Set(
-    routes.ContactReasonController.onPageLoad(),
+    routes.ContactReasonController.onPageLoad,
     routes.ServiceUnavailableController.show(),
     routes.SessionExpiredController.onPageLoad
   )

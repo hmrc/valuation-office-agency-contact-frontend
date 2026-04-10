@@ -97,8 +97,8 @@ class ExistingEnquiryCategoryController @Inject() (
 
   private[controllers] def enquiryBackLink(answers: UserAnswers): Either[String, String] =
     answers.contactReason match {
-      case Some("new_enquiry")     => Right(routes.ContactReasonController.onPageLoad().url)
-      case Some("more_details")    => Right(routes.ContactReasonController.onPageLoad().url)
+      case Some("new_enquiry")     => Right(routes.ContactReasonController.onPageLoad.url)
+      case Some("more_details")    => Right(routes.ContactReasonController.onPageLoad.url)
       case Some("update_existing") => Right(routes.EnquiryDateController.onPageLoad().url)
       case _                       => Left("Unknown enquiry category in enquiry key")
     }

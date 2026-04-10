@@ -30,7 +30,7 @@ class ContactReasonViewSpec extends ViewBehaviours {
 
   val messageKeyPrefix = "contactReason"
 
-  val backUrl: String = routes.ContactReasonController.onPageLoad().url
+  val backUrl: String = routes.ContactReasonController.onPageLoad.url
 
   def createView: () => HtmlFormat.Appendable = {
     () => contactReason(ContactReasonForm(), NormalMode)(using fakeRequest, messages)

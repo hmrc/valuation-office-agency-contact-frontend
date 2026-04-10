@@ -98,7 +98,7 @@ trait FormBehaviours extends FormSpec {
       val expectedError = error(field, "error.required")
       Try {
         // TODO - We need to find better way hot to test this. It works when error key is same for all inputs.
-        checkForError(form, data, error(field, "error.enquiryCategory.required"))
+        checkForError(form, data, error(field, "error.enquiry.category.required"))
       }.orElse {
         Try {
           checkForError(form, data, error(field, "error.councilTaxSubcategory.required"))

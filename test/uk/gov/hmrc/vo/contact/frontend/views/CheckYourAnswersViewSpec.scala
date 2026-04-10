@@ -118,7 +118,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
     "contain Enquiry Type heading" in {
       val doc = asDocument(view1())
-      assert(doc.toString.contains(messages("enquiryCategory.heading")))
+      assert(doc.toString.contains(messages("enquiry.category.label")))
     }
 
     "contain Enquiry Details heading" in {
