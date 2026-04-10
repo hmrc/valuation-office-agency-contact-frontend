@@ -32,7 +32,7 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages,
   }
 
   def contactReason: Option[AnswerRow] = userAnswers.contactReason map {
-    x => AnswerRow("contact.reason.label", s"contactReason.$x", true, routes.ContactReasonController.onPageLoad.url)
+    x => AnswerRow("contact.reason.label", s"contact.reason.$x.label", true, routes.ContactReasonController.onPageLoad.url)
   }
 
   def existingEnquiryCategory: Option[AnswerRow] = userAnswers.existingEnquiryCategory map {
