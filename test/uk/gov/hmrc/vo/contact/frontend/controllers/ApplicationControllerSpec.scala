@@ -31,7 +31,7 @@ class ApplicationControllerSpec extends ControllerSpecBase {
 
   def contactReason: html.contactReason = inject[contact_reason]
 
-  def viewAsString(form: Form[String] = EnquiryCategoryForm()): String = contactReason(form, NormalMode)(using fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = EnquiryCategoryForm.form): String = contactReason(form)(using fakeRequest, messages).toString
 
   override val fakeRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest("GET", "/").withHeaders(("X-Session-ID", "id"))
 

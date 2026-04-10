@@ -21,22 +21,22 @@ import uk.gov.hmrc.vo.contact.frontend.forms.behaviours.FormBehaviours
 
 class ContactReasonFormSpec extends FormBehaviours {
 
-  val validData: Map[String, String] = Map("value" -> "new_enquiry")
+  val validData: Map[String, String] = Map("reason" -> "new_enquiry")
   val emptyData: Map[String, String] = Map.empty
 
-  val form: Form[String] = ContactReasonForm()
+  val form: Form[String] = ContactReasonForm.form
 
   "ContactReason form" must {
 
     "fail to bind when value is blank" in {
       val data          = emptyData
-      val expectedError = Seq(error("value", "error.contact.reason.required")).flatten
+      val expectedError = Seq(error("reason", "error.contact.reason.required")).flatten
       checkForError(form, data, expectedError)
     }
 
     "fail to bind when value has invalid value" in {
-      val data          = Map("value" -> "invalid_value")
-      val expectedError = Seq(error("value", "error.unknown")).flatten
+      val data          = Map("reason" -> "invalid_value")
+      val expectedError = Seq(error("reason", "error.value.invalid")).flatten
       checkForError(form, data, expectedError)
     }
   }

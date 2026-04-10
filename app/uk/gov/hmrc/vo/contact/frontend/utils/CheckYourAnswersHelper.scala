@@ -55,7 +55,7 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages,
   }
 
   def enquiryCategory: Option[AnswerRow] = userAnswers.enquiryCategory map {
-    x => AnswerRow("enquiry.category.label", s"enquiryCategory.$x", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url)
+    x => AnswerRow("enquiry.category.label", s"enquiry.category.$x.label", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url)
   }
 
   def councilTaxSubcategory: Option[AnswerRow] = userAnswers.councilTaxSubcategory map {

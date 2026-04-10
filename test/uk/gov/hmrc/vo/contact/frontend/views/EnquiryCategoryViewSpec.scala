@@ -27,58 +27,111 @@ class EnquiryCategoryViewSpec extends ViewBehaviours {
 
   def enquiryCategory: html.enquiryCategory = app.injector.instanceOf[enquiry_category]
 
-  val messageKeyPrefix = "enquiryCategory"
+  val messageKeyPrefix = "enquiry.category"
 
-  def createView: () => HtmlFormat.Appendable = () => enquiryCategory(EnquiryCategoryForm(), NormalMode)(using fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable =
+    () => enquiryCategory(EnquiryCategoryForm.form, NormalMode)(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => enquiryCategory(form, NormalMode)(using fakeRequest, messages)
+    form => enquiryCategory(form, NormalMode)(using fakeRequest, messages)
 
   "EnquiryCategory view" must {
-    behave like normalPage(createView, messageKeyPrefix)
+    "display the correct browser title" in {
+      val doc = asDocument(createView())
+      assertEqualsValue(doc, "title", messages(s"$messageKeyPrefix.label") + " - Valuation Office contact form - GOV.UK")
+    }
+
+    "display the correct page h1 header" in {
+      val doc = asDocument(createView())
+      assertPageTitleEqualsMessage(doc, s"$messageKeyPrefix.label")
+    }
   }
 
   "EnquiryCategory view" when {
     "rendered" must {
 
       "contain continue button with the value Continue" in {
-        val doc            = asDocument(createViewUsingForm(EnquiryCategoryForm()))
+        val doc            = asDocument(createViewUsingForm(EnquiryCategoryForm.form))
         val continueButton = doc.getElementsByClass("govuk-button").first().text()
         assert(continueButton == messages("button.continue.label"))
       }
       "contain radio buttons for the value" in {
-        val doc = asDocument(createViewUsingForm(EnquiryCategoryForm()))
-        for (option <- EnquiryCategoryForm.options)
-          assertContainsRadioButton(doc, option.id, "value", option.value, false)
+        val doc = asDocument(createViewUsingForm(EnquiryCategoryForm.form))
+        for ((value, idx) <- EnquiryCategoryForm.values.zipWithIndex) {
+          val id = "category" + (if idx == 0 then "" else s"-${idx + 1}")
+          assertContainsRadioButton(doc, id, "category", value, false)
+        }
       }
 
-      "has a radio button with the label set to the message with key enquiryCategory.council_tax and that it is used once" in
-        labelDefinedAndUsedOnce("council_tax", messageKeyPrefix, createView)
+      "has a radio button with id 'category' and the label for it" in {
+        val id  = "category"
+        val doc = asDocument(createView())
+        assert(doc.getElementById(id).attr("name") == "category")
+        assert(doc.select(s"label[for=$id]").size == 1)
+        assertContainsText(doc, messages("enquiry.category.council_tax.label"))
+      }
 
-      "has a radio button with the label set to the message with key enquiryCategory.business_rates and that it is used once" in
-        labelDefinedAndUsedOnce("business_rates", messageKeyPrefix, createView)
+      "has a radio button with id 'category-2' and the label for it" in {
+        val id  = "category-2"
+        val doc = asDocument(createView())
+        assert(doc.getElementById(id).attr("name") == "category")
+        assert(doc.select(s"label[for=$id]").size == 1)
+        assertContainsText(doc, messages("enquiry.category.business_rates.label"))
+      }
 
-      "has a radio button with the label set to the message with key enquiryCategory.housing_benefit and that it is used once" in
-        labelDefinedAndUsedOnce("housing_benefit", messageKeyPrefix, createView)
+      "has a radio button with id 'category-3' and the label for it" in {
+        val id  = "category-3"
+        val doc = asDocument(createView())
+        assert(doc.getElementById(id).attr("name") == "category")
+        assert(doc.select(s"label[for=$id]").size == 1)
+        assertContainsText(doc, messages("enquiry.category.housing_benefit.label"))
+      }
 
-      "has a radio button with the label set to the message with key enquiryCategory.providing_lettings and that it is used once" in
-        labelDefinedAndUsedOnce("providing_lettings", messageKeyPrefix, createView)
+      "has a radio button with id 'category-4' and the label for it" in {
+        val id  = "category-4"
+        val doc = asDocument(createView())
+        assert(doc.getElementById(id).attr("name") == "category")
+        assert(doc.select(s"label[for=$id]").size == 1)
+        assertContainsText(doc, messages("enquiry.category.fair_rent.label"))
+      }
 
-      "has a radio button with the label set to the message with key enquiryCategory.valuations_for_tax and that it is used once" in
-        labelDefinedAndUsedOnce("valuations_for_tax", messageKeyPrefix, createView)
+      "has a radio button with id 'category-5' and the label for it" in {
+        val id  = "category-5"
+        val doc = asDocument(createView())
+        assert(doc.getElementById(id).attr("name") == "category")
+        assert(doc.select(s"label[for=$id]").size == 1)
+        assertContainsText(doc, messages("enquiry.category.providing_lettings.label"))
 
-      "has a radio button with the label set to the message with key enquiryCategory.valuation_for_public_body and that it is used once" in
-        labelDefinedAndUsedOnce("valuation_for_public_body", messageKeyPrefix, createView)
+      }
+
+      "has a radio button with id 'category-6' and the label for it" in {
+        val id  = "category-6"
+        val doc = asDocument(createView())
+        assert(doc.getElementById(id).attr("name") == "category")
+        assert(doc.select(s"label[for=$id]").size == 1)
+        assertContainsText(doc, messages("enquiry.category.valuations_for_tax.label"))
+      }
+
+      "has a radio button with id 'category-7' and the label for it" in {
+        val id  = "category-7"
+        val doc = asDocument(createView())
+        assert(doc.getElementById(id).attr("name") == "category")
+        assert(doc.select(s"label[for=$id]").size == 1)
+        assertContainsText(doc, messages("enquiry.category.valuation_for_public_body.label"))
+      }
     }
 
-    for (option <- EnquiryCategoryForm.options)
-      s"rendered with a value of '${option.value}'" must {
-        s"have the '${option.value}' radio button selected" in {
-          val doc = asDocument(createViewUsingForm(EnquiryCategoryForm().bind(Map("value" -> s"${option.value}"))))
-          assertContainsRadioButton(doc, option.id, "value", option.value, true)
+    for ((value, idx) <- EnquiryCategoryForm.values.zipWithIndex)
+      val id = "category" + (if idx == 0 then "" else s"-${idx + 1}")
 
-          for (unselectedOption <- EnquiryCategoryForm.options.filterNot(o => o == option))
-            assertContainsRadioButton(doc, unselectedOption.id, "value", unselectedOption.value, false)
+      s"rendered with a value of '$value'" must {
+        s"have the '$value' radio button selected" in {
+          val doc = asDocument(createViewUsingForm(EnquiryCategoryForm.form.bind(Map("category" -> value))))
+          assertContainsRadioButton(doc, id, "category", value, true)
+
+          for ((unselectedValue, index) <- EnquiryCategoryForm.values.zipWithIndex.filterNot(_._1 == value))
+            val unselectedId = "category" + (if index == 0 then "" else s"-${index + 1}")
+            assertContainsRadioButton(doc, unselectedId, "category", unselectedValue, false)
         }
       }
   }

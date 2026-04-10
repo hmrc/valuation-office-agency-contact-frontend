@@ -48,12 +48,12 @@ class ContactReasonControllerSpec extends ControllerSpecBase {
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[String] = ContactReasonForm()): String = contactReason(form, NormalMode)(using fakeRequest, messages).toString()
+  def viewAsString(form: Form[String] = ContactReasonForm.form): String = contactReason(form)(using fakeRequest, messages).toString()
 
   "ContactReason Controller" must {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onPageLoad(fakeRequest)
 
       status(result) mustBe OK
 
@@ -62,7 +62,7 @@ class ContactReasonControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", ContactReasonForm.options.head.value))
+      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("reason", ContactReasonForm.values.head))
       val result      = controller().onSubmit(NormalMode)(postRequest)
 
       status(result) mustBe SEE_OTHER

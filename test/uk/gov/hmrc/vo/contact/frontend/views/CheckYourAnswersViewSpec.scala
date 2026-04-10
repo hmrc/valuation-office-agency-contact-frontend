@@ -143,7 +143,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
     "contain Council Tax string if the council_tax enquiry category has been selected" in {
       val doc = asDocument(view1())
-      assert(doc.toString.contains(messages("enquiryCategory.council_tax")))
+      assert(doc.toString.contains(messages("enquiry.category.council_tax.label")))
     }
 
     "contain councilTaxSubcategory.council_tax_band subcategory string" in {
@@ -171,7 +171,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
     "contain Business Rates string if the business_rates enquiry category has been selected" in {
       val doc = asDocument(view2())
-      assert(doc.toString.contains(messages("enquiryCategory.business_rates")))
+      assert(doc.toString.contains(messages("enquiry.category.business_rates.label")))
     }
 
     "contain businessRatesSubcategory.business_rates_rateable_value subcategory string" in {

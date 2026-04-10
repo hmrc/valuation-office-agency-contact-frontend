@@ -114,7 +114,7 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
 
     "populate the view correctly on a GET when the question has previously been answered" in {
       val validData       = Map(
-        ContactReasonId.toString           -> JsString(ContactReasonForm.options.head.value),
+        ContactReasonId.toString           -> JsString(ContactReasonForm.values.head),
         ExistingEnquiryCategoryId.toString -> JsString(ExistingEnquiryCategoryForm.options.head.value)
       )
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
