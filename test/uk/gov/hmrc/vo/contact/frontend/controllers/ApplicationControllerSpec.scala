@@ -20,7 +20,6 @@ import play.api.data.Form
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.vo.contact.frontend.forms.EnquiryCategoryForm
-import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.views.html.{contactReason => contact_reason}
 import play.api.mvc.AnyContentAsEmpty
 import uk.gov.hmrc.vo.contact.frontend.views.html
