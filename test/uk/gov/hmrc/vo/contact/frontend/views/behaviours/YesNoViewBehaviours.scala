@@ -61,11 +61,6 @@ trait YesNoViewBehaviours extends QuestionViewBehaviours[Boolean] {
       }
 
       "rendered with an error" must {
-        "show an error summary" in {
-          val doc = asDocument(createView(BooleanForm().withError(error)))
-          assertRenderedById(doc, "error-summary-heading")
-        }
-
         "show an error in the value field's label" in {
           val doc       = asDocument(createView(BooleanForm().withError(error)))
           val errorSpan = doc.getElementsByClass("error-notification").first

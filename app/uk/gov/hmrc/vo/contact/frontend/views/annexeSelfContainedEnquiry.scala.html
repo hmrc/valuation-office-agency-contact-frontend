@@ -14,12 +14,9 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukRadios, GovukErrorSummary}
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukRadios}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
@@ -29,24 +26,22 @@
 @import uk.gov.hmrc.vo.contact.frontend.forms.AnnexeSelfContainedForm
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
-@this(layout: PrimaryLayout, formWithCSRF: FormWithCSRF,
-        govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
+@this(
+        layout: PrimaryLayout,
+        formWithCSRF: FormWithCSRF,
+        govukRadios: GovukRadios,
+        govukButton: GovukButton
+)
 
 @(form: Form[String])(implicit request: RequestHeader, messages: Messages)
 
 @layout(
-    pageTitle = if(form.hasErrors) messages("error.prefix") + " " + messages("annexeSelfContainedEnquiry.title") else messages("annexeSelfContainedEnquiry.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxAnnexeController.onPageLoad().url)
+    pageTitle = messages("annexeSelfContainedEnquiry.title"),
+    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxAnnexeController.onPageLoad().url),
+    theForm = Some(form),
+    overrideErrorSummaryLink = Some("#annexeSelfContainedEnquiry.form.yes")
 ) {
     @formWithCSRF(action = CouncilTaxAnnexeController.onSelfContainedSubmit(), Symbol("autoComplete") -> "off") {
-        @if(form.hasErrors) {
-            @govukErrorSummary(
-                ErrorSummary(
-                    title = Text(messages("error.summary.title")),
-                    errorList = form.errors.map(e => ErrorLink(href = Some("#annexeSelfContainedEnquiry.form.yes"), content = HtmlContent(messages(e.messages, e.args*))))
-                )
-            )
-        }
 
         @govukRadios(Radios(
             fieldset = Option(Fieldset(legend = Option(

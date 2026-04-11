@@ -14,37 +14,29 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukErrorSummary}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton}
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.inputDate
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
-@this(layout: PrimaryLayout, govukButton: GovukButton,
-        input_date: inputDate, formWithCSRF: FormWithCSRF, govukErrorSummary: GovukErrorSummary)
-
+@this(
+        layout: PrimaryLayout,
+        govukButton: GovukButton,
+        input_date: inputDate,
+        formWithCSRF: FormWithCSRF
+)
 
 @(form: Form[?], mode: Mode, enquiryKey: String, backlink: String)(implicit request: RequestHeader, messages: Messages)
 
 @layout(
-    pageTitle = if(form.hasErrors) messages("error.prefix") + " " + messages(s"$enquiryKey.title") else messages(s"$enquiryKey.title"),
-    backLink = Some(backlink)
+    pageTitle = messages(s"$enquiryKey.title"),
+    backLink = Some(backlink),
+    theForm = Some(form),
+    overrideErrorSummaryLink = Some("#datePropertyChanged-day")
 ) {
     @formWithCSRF(action = DatePropertyChangedController.onSubmit(), Symbol("autoComplete") -> "off") {
-        @if(form.hasErrors) {
-            @govukErrorSummary(
-                ErrorSummary(
-                    title = Text(messages("error.summary.title")),
-                    errorList = form.mapping.mappings.flatMap(x => form.error(x.key).map(e =>
-                        ErrorLink(href = Option("#datePropertyChanged-day"), content = HtmlContent(messages(e.messages, e.args)))
-                    )), attributes = Map("id" -> "error-summary-heading")
-                )
-            )
-        }
 
         @input_date(
             id = "datePropertyChanged",

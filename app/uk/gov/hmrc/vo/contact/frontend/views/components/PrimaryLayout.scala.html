@@ -14,7 +14,7 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.Aliases.{ErrorSummary, Text}
+@import uk.gov.hmrc.govukfrontend.views.Aliases.{ErrorLink, ErrorSummary, Text}
 @import uk.gov.hmrc.govukfrontend.views.html.components.implicits.*
 @import uk.gov.hmrc.vo.service.view.html.*
 
@@ -26,23 +26,25 @@
         pageTitle: String,
         backLink: Option[String] = None,
         theForm: Option[Form[?]] = None,
-        errorSummary: Option[ErrorSummary] = None
+        overrideErrorSummaryLink: Option[String] = None
 )(contentBlock: Html)(implicit request: RequestHeader, messages: Messages)
 
-@pageErrorSummary = @{
-    errorSummary.orElse {
-        theForm.filter(_.hasErrors).map { form =>
-            ErrorSummary(
-                errorList = form.errors.asTextErrorLinks,
-                title = Text(messages("error.summary.title"))
-            )
-        }
+@errorSummary = @{
+    theForm.filter(_.hasErrors).map { form =>
+        ErrorSummary(
+            errorList = overrideErrorSummaryLink.fold(form.errors.asTextErrorLinks)(
+                link => form.errors.map(
+                    e => ErrorLink(href = Some(link), content = Text(messages(e.message, e.args*)))
+                )
+            ),
+            title = Text(messages("error.summary.title"))
+        )
     }
 }
 
 @standardPage(
     pageTitle,
     backLinkUrl = backLink,
-    errorSummary = pageErrorSummary,
+    errorSummary = errorSummary,
     showH1 = false
 )(contentBlock)

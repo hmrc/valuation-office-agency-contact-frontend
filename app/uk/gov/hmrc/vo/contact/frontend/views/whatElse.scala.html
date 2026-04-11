@@ -14,22 +14,22 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukErrorSummary}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton}
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
-@import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.govukfrontend.views.Implicits.*
 @import uk.gov.hmrc.hmrcfrontend.views.viewmodels.charactercount.CharacterCount
 @import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
-@this(layout: PrimaryLayout, formWithCSRF: FormWithCSRF,
-        hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
-
+@this(
+        layout: PrimaryLayout,
+        formWithCSRF: FormWithCSRF,
+        hmrcCharacterCount: HmrcCharacterCount,
+        govukButton: GovukButton
+)
 
 @(form: Form[String], mode: Mode)(implicit request: RequestHeader, messages: Messages)
 
@@ -54,19 +54,12 @@
 }
 
 @layout(
-    pageTitle = if(form.hasErrors) messages("error.prefix") + " " + messages("whatElse.title") else messages("whatElse.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url)
+    pageTitle = messages("whatElse.title"),
+    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url),
+    theForm = Some(form)
 ) {
     @formWithCSRF(action = WhatElseController.onSubmit(), Symbol("autoComplete") -> "off") {
-        @if(form.hasErrors) {
-            @govukErrorSummary(
-                ErrorSummary(
-                    attributes = Map("id" -> "error-summary-heading"),
-                    title = Text(messages("error.summary.title")),
-                    errorList = form.errors.take(1).map(e => ErrorLink(href = Some("#" + e.key), content = Text(messages(e.messages, e.args))))
-                )
-            )
-        }
+
         @content
 
         @govukButton(SubmitButton("continue"))
