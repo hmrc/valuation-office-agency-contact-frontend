@@ -16,33 +16,19 @@
 
 package uk.gov.hmrc.vo.contact.frontend.forms
 
-import play.api.data.{Form, FormError}
-import play.api.data.Forms.{of, single}
-import play.api.data.format.Formatter
-import uk.gov.hmrc.vo.contact.frontend.utils.RadioOption
+import play.api.data.Form
+import play.api.data.Forms.{default, single, text}
+import play.api.data.validation.Constraints.nonEmpty
 
-object ContactReasonForm extends FormErrorHelper {
+object ContactReasonForm:
 
-  private def contactReasonFormatter: Formatter[String] = new Formatter[String] {
+  val values: Seq[String] = Seq("new_enquiry", "more_details", "update_existing")
 
-    override def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match {
-      case Some(s) if optionIsValid(s) => Right(s)
-      case None                        => produceError(key, "error.contactReason.required")
-      case _                           => produceError(key, "error.unknown")
-    }
-
-    override def unbind(key: String, value: String): Map[String, String] = Map(key -> value)
-  }
-
-  def apply(): Form[String] =
-    Form(single("value" -> of(using contactReasonFormatter)))
-
-  def options: Seq[RadioOption] = Seq(
-    RadioOption("contactReason", "new_enquiry"),
-    RadioOption("contactReason", "more_details"),
-    RadioOption("contactReason", "update_existing")
-  )
-
-  def optionIsValid(value: String): Boolean = options.exists(_.value == value)
-
-}
+  val form: Form[String] =
+    Form(
+      single(
+        "reason" -> default(text, "")
+          .verifying(nonEmpty(errorMessage = "error.contact.reason.required"))
+          .verifying("error.value.invalid", v => v.isEmpty || values.contains(v))
+      )
+    )

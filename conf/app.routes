@@ -27,7 +27,7 @@ POST        /changeEnquiryCategory                              uk.gov.hmrc.vo.c
 
 GET         /start-now                                          uk.gov.hmrc.vo.contact.frontend.controllers.ContactReasonController.redirect
 GET         /enquiryCategory                                    uk.gov.hmrc.vo.contact.frontend.controllers.ContactReasonController.redirect
-GET         /new-or-existing-enquiry                            uk.gov.hmrc.vo.contact.frontend.controllers.ContactReasonController.onPageLoad(mode: Mode = NormalMode)
+GET         /new-or-existing-enquiry                            uk.gov.hmrc.vo.contact.frontend.controllers.ContactReasonController.onPageLoad
 POST        /new-or-existing-enquiry                            uk.gov.hmrc.vo.contact.frontend.controllers.ContactReasonController.onSubmit(mode: Mode = NormalMode)
 
 GET         /date-of-enquiry                                    uk.gov.hmrc.vo.contact.frontend.controllers.EnquiryDateController.onPageLoad(mode: Mode = NormalMode)

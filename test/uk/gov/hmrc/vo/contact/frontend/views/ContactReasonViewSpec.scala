@@ -20,7 +20,6 @@ import play.api.data.Form
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 import uk.gov.hmrc.vo.contact.frontend.forms.ContactReasonForm
-import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{contactReason, contactReason as contact_reason}
 
@@ -28,48 +27,66 @@ class ContactReasonViewSpec extends ViewBehaviours {
 
   def contactReason: contactReason = app.injector.instanceOf[contact_reason]
 
-  val messageKeyPrefix = "contactReason"
+  val messageKeyPrefix = "contact.reason"
 
-  val backUrl: String = routes.ContactReasonController.onPageLoad().url
+  val backUrl: String = routes.ContactReasonController.onPageLoad.url
 
-  def createView: () => HtmlFormat.Appendable = {
-    () => contactReason(ContactReasonForm(), NormalMode)(using fakeRequest, messages)
-  }
+  def createView: () => HtmlFormat.Appendable =
+    () => contactReason(ContactReasonForm.form)(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => contactReason(ContactReasonForm(), NormalMode)(using fakeRequest, messages)
+    form => contactReason(form)(using fakeRequest, messages)
 
   "ContactReason view" must {
-    behave like normalPage(createView, messageKeyPrefix)
+    "display the correct browser title" in {
+      val doc = asDocument(createView())
+      assertEqualsValue(doc, "title", messages(s"$messageKeyPrefix.label") + " - Valuation Office contact form - GOV.UK")
+    }
+
+    "display the correct page h1 header" in {
+      val doc = asDocument(createView())
+      assertPageTitleEqualsMessage(doc, s"$messageKeyPrefix.label")
+    }
   }
 
   "ContactReason view" when {
     "rendered" must {
       "contain continue button with the value Continue" in {
-        val doc            = asDocument(createViewUsingForm(ContactReasonForm()))
+        val doc            = asDocument(createViewUsingForm(ContactReasonForm.form))
         val continueButton = doc.getElementsByClass("govuk-button").first().text()
-        assert(continueButton == messages("site.continue"))
+        assert(continueButton == messages("button.continue.label"))
       }
 
       "contain radio buttons for the value" in {
-        val doc = asDocument(createViewUsingForm(ContactReasonForm()))
-        for (option <- ContactReasonForm.options)
-          assertContainsRadioButton(doc, option.id, "value", option.value, false)
+        val doc = asDocument(createViewUsingForm(ContactReasonForm.form))
+        for ((value, idx) <- ContactReasonForm.values.zipWithIndex) {
+          val id = "reason" + (if idx == 0 then "" else s"-${idx + 1}")
+          assertContainsRadioButton(doc, id, "reason", value, false)
+        }
       }
 
-      "has a radio button with the label set to the message with key contactReason.new_enquiry and that it is used once" in {
-        labelDefinedAndUsedOnce("new_enquiry", messageKeyPrefix, createView)
-        assertContainsText(asDocument(createView()), messages("contactReason.new_enquiry"))
+      "has a radio button with id 'reason' and the label for it" in {
+        val id  = "reason"
+        val doc = asDocument(createView())
+        assert(doc.getElementById(id).attr("name") == "reason")
+        assert(doc.select(s"label[for=$id]").size == 1)
+        assertContainsText(doc, messages("contact.reason.new_enquiry.label"))
       }
 
-      "has a radio button with the label set to the message with key contactReason.more_details and that it is used once" in {
-        labelDefinedAndUsedOnce("more_details", messageKeyPrefix, createView)
-        assertContainsText(asDocument(createView()), messages("contactReason.more_details"))
+      "has a radio button with id 'reason-2' and the label for it" in {
+        val id  = "reason-2"
+        val doc = asDocument(createView())
+        assert(doc.getElementById(id).attr("name") == "reason")
+        assert(doc.select(s"label[for=$id]").size == 1)
+        assertContainsText(doc, messages("contact.reason.more_details.label"))
       }
 
-      "has a radio button with the label set to the message with key contactReason.update_existing and that it is used once" in {
-        labelDefinedAndUsedOnce("update_existing", messageKeyPrefix, createView)
-        assertContainsText(asDocument(createView()), messages("contactReason.update_existing"))
+      "has a radio button with id 'reason-3' and the label for it" in {
+        val id  = "reason-3"
+        val doc = asDocument(createView())
+        assert(doc.getElementById(id).attr("name") == "reason")
+        assert(doc.select(s"label[for=$id]").size == 1)
+        assertContainsText(doc, messages("contact.reason.update_existing.label"))
       }
     }
   }

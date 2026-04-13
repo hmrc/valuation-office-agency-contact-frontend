@@ -15,16 +15,17 @@
  *@
 
 @import uk.gov.hmrc.vo.contact.frontend.journey.model.CustomizedContent
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
 @this(
-        pageTemplate: pageTemplate
+        layout: PrimaryLayout
 )
 
-@(key: String, backUrl: String, customizedContent: CustomizedContent)(implicit request: Request[?], messages: Messages)
+@(key: String, backUrl: String, customizedContent: CustomizedContent)(implicit request: RequestHeader, messages: Messages)
 
-@pageTemplate(
-    title = messages(customizedContent.heading),
-    backUrl = backUrl
+@layout(
+    pageTitle = messages(customizedContent.heading),
+    backLink = Some(backUrl)
 ) {
 
     @customizedContent.render

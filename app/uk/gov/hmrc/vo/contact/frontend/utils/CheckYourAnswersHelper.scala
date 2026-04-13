@@ -32,7 +32,7 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages,
   }
 
   def contactReason: Option[AnswerRow] = userAnswers.contactReason map {
-    x => AnswerRow("contactReason.heading", s"contactReason.$x", true, routes.ContactReasonController.onPageLoad().url)
+    x => AnswerRow("contact.reason.label", s"contact.reason.$x.label", true, routes.ContactReasonController.onPageLoad.url)
   }
 
   def existingEnquiryCategory: Option[AnswerRow] = userAnswers.existingEnquiryCategory map {
@@ -55,7 +55,7 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages,
   }
 
   def enquiryCategory: Option[AnswerRow] = userAnswers.enquiryCategory map {
-    x => AnswerRow("enquiryCategory.heading", s"enquiryCategory.$x", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url)
+    x => AnswerRow("enquiry.category.label", s"enquiry.category.$x.label", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url)
   }
 
   def councilTaxSubcategory: Option[AnswerRow] = userAnswers.councilTaxSubcategory map {

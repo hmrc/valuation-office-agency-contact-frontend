@@ -54,7 +54,7 @@ class DatePropertyChangedViewSpec extends ViewBehaviours {
       "contain continue button with the value Continue" in {
         val doc            = asDocument(createViewUsingForm(dateForm))
         val continueButton = doc.getElementsByClass("govuk-button").first().text()
-        assert(continueButton == messages("site.continue"))
+        assert(continueButton == messages("button.continue.label"))
       }
 
       "have a link marked with site.back leading to the Business Rates Subcategory Page" in {

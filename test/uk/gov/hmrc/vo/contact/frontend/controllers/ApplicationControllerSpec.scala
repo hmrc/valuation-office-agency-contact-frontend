@@ -20,7 +20,6 @@ import play.api.data.Form
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.vo.contact.frontend.forms.EnquiryCategoryForm
-import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.views.html.{contactReason => contact_reason}
 import play.api.mvc.AnyContentAsEmpty
 import uk.gov.hmrc.vo.contact.frontend.views.html
@@ -31,7 +30,7 @@ class ApplicationControllerSpec extends ControllerSpecBase {
 
   def contactReason: html.contactReason = inject[contact_reason]
 
-  def viewAsString(form: Form[String] = EnquiryCategoryForm()): String = contactReason(form, NormalMode)(using fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = EnquiryCategoryForm.form): String = contactReason(form)(using fakeRequest, messages).toString
 
   override val fakeRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest("GET", "/").withHeaders(("X-Session-ID", "id"))
 
@@ -57,7 +56,7 @@ class ApplicationControllerSpec extends ControllerSpecBase {
 
     "return the contact reason controller url" in {
       appController.createRefererURL() mustBe
-        uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactReasonController.onPageLoad().url
+        uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactReasonController.onPageLoad.url
     }
   }
 }

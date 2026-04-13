@@ -14,28 +14,28 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukErrorSummary}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service_fair_rent
 @import uk.gov.hmrc.vo.contact.frontend.models.TellUsMore
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
-@import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.govukfrontend.views.Implicits.*
 @import uk.gov.hmrc.hmrcfrontend.views.viewmodels.charactercount.CharacterCount
 @import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
+@import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
-@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
-        hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
+@this(
+        layout: PrimaryLayout,
+        formWithCSRF: FormWithCSRF,
+        hmrcCharacterCount: HmrcCharacterCount,
+        govukButton: GovukButton
+)
 
-@(form: Form[TellUsMore], mode: Mode, enquiryKey: String, backlink: String)(implicit request: Request[?], messages: Messages)
+@(form: Form[TellUsMore], mode: Mode, enquiryKey: String, backlink: String)(implicit request: RequestHeader, messages: Messages)
 
 @content = {
 
@@ -102,22 +102,16 @@
 @defining(if(enquiryKey == "tellUsMore.poorRepair" || enquiryKey == "tellUsMore.business" || enquiryKey == "tellUsMore.areaChange" || enquiryKey == "tellUsMore.other"
 || enquiryKey == "tellUsMore.notUsed" || enquiryKey == "tellUsMore.business.other" || enquiryKey == "tellUsMore.fairRent") messages(s"$enquiryKey.title") else messages("tellUsMore.title")) { title =>
 
-    @mainTemplate(
-        pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + title else title),
-        backLink = Some(BackLink(href = backlink))
+    @layout(
+        pageTitle = title,
+        backLink = Some(backlink),
+        theForm = Some(form)
     ) {
         @formWithCSRF(action = TellUsMoreController.onSubmit(mode), Symbol("autoComplete") -> "off") {
-            @if(form.hasErrors) {
-                @govukErrorSummary(
-                    ErrorSummary(
-                        attributes = Map("id" -> "error-summary-heading"),
-                        title = Text(messages("error.summary.title")),
-                        errorList = form.errors.take(1).map(e => ErrorLink(href = Some("#" + e.key), content = HtmlContent(messages(e.messages, e.args))))
-                    )
-                )
-            }
+
             @content
-            @govukButton(Button(attributes = Map("id" -> "submit"), content = Text(messages("site.continue"))))
+
+            @govukButton(SubmitButton("continue"))
 
             @if(enquiryKey == "tellUsMore.fairRent") {
                 @help_with_service_fair_rent()

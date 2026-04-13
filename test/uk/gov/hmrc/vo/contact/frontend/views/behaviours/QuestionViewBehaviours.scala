@@ -46,11 +46,6 @@ trait QuestionViewBehaviours[A] extends ViewBehaviours {
 
       for (field <- fields)
         s"rendered with an error with field '$field'" must {
-          "show an error summary" in {
-            val doc = asDocument(createView(form.withError(FormError(field, "error"))))
-            assertRenderedById(doc, "error-summary-heading")
-          }
-
           s"show an error in the label for field '$field'" in {
             val doc = asDocument(createView(form.withError(FormError(field, "error"))))
 

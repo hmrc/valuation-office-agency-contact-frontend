@@ -16,7 +16,6 @@
 
 @import uk.gov.hmrc.govukfrontend.views.Implicits._
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukCharacterCount, GovukErrorSummary, GovukFieldset, GovukPanel, GovukRadios}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.charactercount.CharacterCount
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
@@ -29,23 +28,25 @@
 @import uk.gov.hmrc.vo.contact.frontend.models.Contact
 @import uk.gov.hmrc.vo.contact.frontend.utils.AddressFormatters.formattedPropertyAddress
 @import uk.gov.hmrc.vo.contact.frontend.viewmodels.AnswerSection
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes
+@import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
-@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
+@this(layout: PrimaryLayout, formWithCSRF: FormWithCSRF,
         govukButton: GovukButton, govukPanel: GovukPanel,
         govukFieldset: GovukFieldset, govukRadios: GovukRadios, govukCharacterCountArea: GovukCharacterCount,
         govukErrorSummary: GovukErrorSummary)
 
-@(contact: Contact, answerSections: AnswerSection, whatHappensNextMessages: Seq[String], form: Form[SatisfactionSurvey])(implicit request: Request[?], messages: Messages)
+@(contact: Contact, answerSections: AnswerSection, whatHappensNextMessages: Seq[String], form: Form[SatisfactionSurvey])(implicit request: RequestHeader, messages: Messages)
 
 @panelContent = {
 @messages("confirmation.para1") <br />
 @Html(formattedPropertyAddress(contact.propertyAddress, ", "))
 }
 
-@mainTemplate(
-    pageTitle = Option(messages("confirmation.title"))) {
+@layout(
+    pageTitle = messages("confirmation.title")
+) {
     @if(form.hasErrors){<script type="text/javascript"> window.location='#error-summary-heading'</script>}
     <section tabindex="0">
     @govukPanel(Panel(title = Text(messages("confirmation.heading")), headingLevel = 1,
@@ -100,7 +101,7 @@
 
         @govukFieldset(Fieldset(html = surveyContent))
 
-        @govukButton(Button(attributes = Map("id" -> "submit"), content = Text(messages("confirmation.feedback.submit"))))
+        @govukButton(SubmitButton("feedback"))
     }
     </section>
 }

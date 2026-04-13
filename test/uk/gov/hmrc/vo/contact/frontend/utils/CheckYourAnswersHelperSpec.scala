@@ -86,7 +86,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.enquiryCategory
-        result mustBe Some(AnswerRow("enquiryCategory.heading", s"enquiryCategory.$ec", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("enquiry.category.label", s"enquiry.category.$ec.label", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url))
       }
 
       "enquiryCategory function should return an Answer Row containing enquiryCategory.checkYourAnswersLabel label and a enquiry category option when address line 2 and county are None" in {
@@ -100,7 +100,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.enquiryCategory
-        result mustBe Some(AnswerRow("enquiryCategory.heading", s"enquiryCategory.$ec", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url))
+        result mustBe Some(AnswerRow("enquiry.category.label", s"enquiry.category.$ec.label", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url))
       }
 
       "enquiryCategory function should return a None if no enquiry category option is found in the User Answers" in {

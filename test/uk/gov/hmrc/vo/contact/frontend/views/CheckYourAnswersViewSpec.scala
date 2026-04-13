@@ -104,7 +104,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
     "contain a submit button with the value Submit" in {
       val doc          = asDocument(view1())
-      val submitButton = doc.getElementById("submit").text()
+      val submitButton = doc.getElementById("confirm-button").text()
       assert(submitButton == messages("site.submit"))
     }
 
@@ -118,7 +118,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
     "contain Enquiry Type heading" in {
       val doc = asDocument(view1())
-      assert(doc.toString.contains(messages("enquiryCategory.heading")))
+      assert(doc.toString.contains(messages("enquiry.category.label")))
     }
 
     "contain Enquiry Details heading" in {
@@ -143,7 +143,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
     "contain Council Tax string if the council_tax enquiry category has been selected" in {
       val doc = asDocument(view1())
-      assert(doc.toString.contains(messages("enquiryCategory.council_tax")))
+      assert(doc.toString.contains(messages("enquiry.category.council_tax.label")))
     }
 
     "contain councilTaxSubcategory.council_tax_band subcategory string" in {
@@ -171,7 +171,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
     "contain Business Rates string if the business_rates enquiry category has been selected" in {
       val doc = asDocument(view2())
-      assert(doc.toString.contains(messages("enquiryCategory.business_rates")))
+      assert(doc.toString.contains(messages("enquiry.category.business_rates.label")))
     }
 
     "contain businessRatesSubcategory.business_rates_rateable_value subcategory string" in {

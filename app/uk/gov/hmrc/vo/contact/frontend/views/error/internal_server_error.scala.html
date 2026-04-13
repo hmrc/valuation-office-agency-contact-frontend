@@ -14,17 +14,16 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(mainTemplate: main_template)
+@this(layout: PrimaryLayout)
 
-@()(implicit request: Request[?], messages: Messages)
+@()(implicit request: RequestHeader, messages: Messages)
 
-@mainTemplate(
-    pageTitle = Option(messages("error500.title"))) {
-
+@layout(
+    pageTitle = messages("error500.title")
+) {
     <h1 class="govuk-heading-l">@messages("error500.heading")</h1>
 
     <p class="govuk-body">@messages("error500.tryagain.para")</p>
-
 }

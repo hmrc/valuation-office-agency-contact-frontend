@@ -65,8 +65,8 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
 
     "contain continue button with the value Continue when the enquiry category is council_tax" in {
       val doc            = asDocument(createCTViewUsingForm(ContactDetailsForm()))
-      val continueButton = doc.getElementById("submit").text()
-      assert(continueButton == messages("site.continue"))
+      val continueButton = doc.getElementById("continue-button").text()
+      assert(continueButton == messages("button.continue.label"))
     }
 
     "Contact Details has a link marked with site.back leading to the business rates subcategory page when enquiry category is business_rates" in {
@@ -79,8 +79,8 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
 
     "contain continue button with the value Continue when the enquiry category is business_rates" in {
       val doc            = asDocument(createNDRViewUsingForm(ContactDetailsForm()))
-      val continueButton = doc.getElementById("submit").text()
-      assert(continueButton == messages("site.continue"))
+      val continueButton = doc.getElementById("continue-button").text()
+      assert(continueButton == messages("button.continue.label"))
     }
   }
 }

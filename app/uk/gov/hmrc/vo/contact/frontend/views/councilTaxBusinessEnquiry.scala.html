@@ -14,41 +14,35 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukRadios, GovukErrorSummary}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukRadios}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
-@import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.govukfrontend.views.Implicits.*
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
 @import uk.gov.hmrc.vo.contact.frontend.forms.CouncilTaxBusinessEnquiryForm
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
+@import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
-@this(mainTemplate: main_template, formWithCSFR: FormWithCSRF,
-        govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
+@this(
+        layout: PrimaryLayout,
+        formWithCSFR: FormWithCSRF,
+        govukRadios: GovukRadios,
+        govukButton: GovukButton
+)
 
-@(form: Form[String], mode: Mode, backLink: String)(implicit request: Request[?], messages: Messages)
+@(form: Form[String], mode: Mode, backLink: String)(implicit request: RequestHeader, messages: Messages)
 
-@mainTemplate(
-    pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("councilTaxBusinessEnquiry.title") else messages("councilTaxBusinessEnquiry.title")),
-    backLink = Some(BackLink(href = backLink))
+@layout(
+    pageTitle = messages("councilTaxBusinessEnquiry.title"),
+    backLink = Some(backLink),
+    theForm = Some(form),
+    overrideErrorSummaryLink = Some("#councilTaxBusinessEnquiry.form-error")
 ) {
     @formWithCSFR(action = CouncilTaxBusinessController.onEnquirySubmit(), Symbol("autoComplete") -> "off") {
-        @if(form.hasErrors) {
-            @govukErrorSummary(
-                ErrorSummary(
-                    title = Text(messages("error.summary.title")),
-                    errorList = form.errors.map(e => ErrorLink(href = Some("#councilTaxBusinessEnquiry.form-error"), content = HtmlContent(messages(e.messages, e.args*))))
-                )
-            )
-        }
 
         @govukRadios(Radios(
             fieldset = Option(Fieldset(legend = Option(
@@ -68,6 +62,6 @@
             errorMessage = form.errors.asTextErrorMessageForField("value")
         ))
 
-        @govukButton(Button(content = Text(messages("site.continue"))))
+        @govukButton(SubmitButton("continue"))
     }
 }

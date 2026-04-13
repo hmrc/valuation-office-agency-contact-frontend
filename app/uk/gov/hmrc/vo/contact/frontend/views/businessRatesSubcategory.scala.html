@@ -14,39 +14,34 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukErrorSummary, GovukRadios}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukRadios}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.contact.frontend.forms.BusinessRatesSubcategoryForm
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
-@import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.govukfrontend.views.Implicits.*
+@import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
-@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
-        govukRadios: GovukRadios, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
+@this(
+        layout: PrimaryLayout,
+        formWithCSRF: FormWithCSRF,
+        govukRadios: GovukRadios,
+        govukButton: GovukButton
+)
 
+@(form: Form[String], mode: Mode)(implicit request: RequestHeader, messages: Messages)
 
-@(form: Form[String], mode: Mode)(implicit request: Request[?], messages: Messages)
-
-@mainTemplate(
-    pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("businessRatesSubcategory.title") else messages("businessRatesSubcategory.title")),
-    backLink = Some(BackLink(href = EnquiryCategoryController.onPageLoad(mode).url))
+@layout(
+    pageTitle = messages("businessRatesSubcategory.title"),
+    backLink = Some(EnquiryCategoryController.onPageLoad(mode).url),
+    theForm = Some(form),
+    overrideErrorSummaryLink = Some("#businessRatesSubcategory.business_rates_change_valuation")
 ) {
     @formWithCSRF(action = BusinessRatesSubcategoryController.onSubmit(mode), Symbol("autoComplete") -> "off") {
-        @if(form.hasErrors) {
-            @govukErrorSummary(
-                ErrorSummary(
-                    title = Text(messages("error.summary.title")),
-                    errorList = form.errors.map(e => ErrorLink(href = Some("#businessRatesSubcategory.business_rates_change_valuation"), content = HtmlContent(messages(e.messages, e.args))))
-                )
-            )
-        }
 
         @govukRadios(Radios(
             fieldset = Option(Fieldset(legend = Option(
@@ -64,7 +59,7 @@
             errorMessage = form.errors.asTextErrorMessageForField("value")
         ))
 
-        @govukButton(Button(content = Text(messages("site.continue")), attributes = Map("id"-> "submit")))
+        @govukButton(SubmitButton("continue"))
 
         @components.help_with_service()
     }

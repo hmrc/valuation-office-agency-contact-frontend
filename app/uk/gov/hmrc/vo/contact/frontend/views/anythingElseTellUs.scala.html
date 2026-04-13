@@ -14,24 +14,23 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.Implicits._
-@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukErrorSummary}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
+@import uk.gov.hmrc.govukfrontend.views.Implicits.*
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton}
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.contact.frontend.models.{Mode, NormalMode}
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.hmrcfrontend.views.viewmodels.charactercount.CharacterCount
 @import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
+@import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
+@this(
+        layout: PrimaryLayout,
+        formWithCSRF: FormWithCSRF,
+        hmrcCharacterCount: HmrcCharacterCount,
+        govukButton: GovukButton
+)
 
-@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
-hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary)
-
-
-@(form: Form[String], mode: Mode)(implicit request: Request[?], messages: Messages)
+@(form: Form[String], mode: Mode)(implicit request: RequestHeader, messages: Messages)
 
 
 @content = {
@@ -55,22 +54,16 @@ hmrcCharacterCount: HmrcCharacterCount, govukButton: GovukButton, govukErrorSumm
 
 }
 
-@mainTemplate(
-    pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("anythingElse.title") else messages("anythingElse.title")),
-    backLink = Some(BackLink(href = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url))
+@layout(
+    pageTitle = messages("anythingElse.title"),
+    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url),
+    theForm = Some(form)
 ) {
     @formWithCSRF(action = AnythingElseTellUsController.onSubmit(), Symbol("autoComplete") -> "off") {
-        @if(form.hasErrors) {
-            @govukErrorSummary(
-                ErrorSummary(
-                    attributes = Map("id" -> "error-summary-heading"),
-                    title = Text(messages("error.summary.title")),
-                    errorList = form.errors.take(1).map(e => ErrorLink(href = Some("#" + e.key), content = HtmlContent(messages(e.messages, e.args))))
-                )
-            )
-        }
+
         @content
-        @govukButton(Button(attributes = Map("id" -> "submit"), content = Text(messages("site.continue"))))
+
+        @govukButton(SubmitButton("continue"))
 
         @components.help_with_service()
     }

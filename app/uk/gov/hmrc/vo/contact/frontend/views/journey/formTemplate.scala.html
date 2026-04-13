@@ -14,18 +14,17 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.html.components._
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
+@import uk.gov.hmrc.govukfrontend.views.html.components.*
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service_fair_rent
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
+@import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
 @this(
-        pageTemplate: pageTemplate,
+        layout: PrimaryLayout,
         formWithCSRF: FormWithCSRF,
-        govukButton: GovukButton,
-        govukErrorSummary: GovukErrorSummary
+        govukButton: GovukButton
 )
 
 @(
@@ -34,28 +33,18 @@
         backUrl: String,
         title: String,
         helpWithServiceSection: Option[String] = None
-)(formFields: Html)(implicit request: Request[?], messages: Messages)
+)(formFields: Html)(implicit request: RequestHeader, messages: Messages)
 
-@pageTemplate(
-    title = form.errors.headOption.fold("")(_ => s"${messages("error.title")} ") + title,
-    backUrl = backUrl
+@layout(
+    pageTitle = title,
+    backLink = Some(backUrl),
+    theForm = Some(form)
 ) {
-
-    @if(form.hasErrors) {
-        @govukErrorSummary(
-            ErrorSummary(
-                title = Text(messages("error.summary.title")),
-                errorList = form.errors.map(e =>
-                    ErrorLink(href = Some(s"#${e.key}"), content = HtmlContent(messages(e.messages, e.args))))
-            )
-        )
-    }
-
     @formWithCSRF(action = routes.JourneyController.onSubmit(key), Symbol("autoComplete") -> "off") {
 
         @formFields
 
-        @govukButton(Button(content = Text(messages("site.continue"))))
+        @govukButton(SubmitButton("continue"))
     }
 
     @{helpWithServiceSection match {

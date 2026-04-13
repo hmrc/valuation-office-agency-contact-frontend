@@ -15,18 +15,16 @@
  *@
 
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(mainTemplate: main_template)
+@this(layout: PrimaryLayout)
 
-@()(implicit request: Request[?], messages: Messages)
+@()(implicit request: RequestHeader, messages: Messages)
 
-@mainTemplate(
-    backLink = Some(BackLink(href = uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)),
-    pageTitle = Option(messages("councilTaxBandTooHigh.title"))
+@layout(
+    pageTitle = messages("councilTaxBandTooHigh.title"),
+    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
 ) {
-
     <h1 class="govuk-heading-l">@messages("councilTaxBandTooHigh.heading")</h1>
 
     <p class="govuk-body">

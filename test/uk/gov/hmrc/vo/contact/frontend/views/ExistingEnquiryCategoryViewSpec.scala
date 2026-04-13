@@ -31,7 +31,7 @@ class ExistingEnquiryCategoryViewSpec extends ViewBehaviours {
 
   val messageKeyPrefix = "existingEnquiryCategory"
 
-  val backUrl: String = routes.ContactReasonController.onPageLoad().url
+  val backUrl: String = routes.ContactReasonController.onPageLoad.url
 
   def createView: () => HtmlFormat.Appendable =
     () => existingEnqCategory(ExistingEnquiryCategoryForm(), NormalMode, backUrl)(using fakeRequest, messages)
@@ -48,7 +48,7 @@ class ExistingEnquiryCategoryViewSpec extends ViewBehaviours {
       "contain continue button with the value Continue" in {
         val doc            = asDocument(createViewUsingForm(ExistingEnquiryCategoryForm()))
         val continueButton = doc.getElementsByClass("govuk-button").first().text()
-        assert(continueButton == messages("site.continue"))
+        assert(continueButton == messages("button.continue.label"))
       }
 
       "contain radio buttons for the value" in {

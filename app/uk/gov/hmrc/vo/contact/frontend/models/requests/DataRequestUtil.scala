@@ -16,16 +16,14 @@
 
 package uk.gov.hmrc.vo.contact.frontend.models.requests
 
-import play.api.mvc.Request
+import play.api.mvc.RequestHeader
 
 /**
   * @author Yuriy Tumakha
   */
-object DataRequestUtil {
+object DataRequestUtil:
 
-  def isEnquiryCategoryOneOf(categories: String*)(using request: Request[?]): Boolean = request match {
-    case dataRequest: DataRequest[?] => categories.contains(dataRequest.userAnswers.enquiryCategory.getOrElse(""))
-    case _                           => false
-  }
-
-}
+  def isEnquiryCategoryOneOf(categories: String*)(using request: RequestHeader): Boolean =
+    request match
+      case dataRequest: DataRequest[?] => categories.contains(dataRequest.userAnswers.enquiryCategory.getOrElse(""))
+      case _                           => false

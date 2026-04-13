@@ -1,4 +1,4 @@
-@*
+/*
  * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,10 +12,19 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *@
+ */
 
-@(
-href: String
-)(implicit messages: Messages)
+package uk.gov.hmrc.vo.contact.frontend.config
 
-<a href=@href class="link-back">@messages("site.back")</a>
+import play.api.inject.{Binding, Module}
+import play.api.{Configuration, Environment}
+import uk.gov.hmrc.vo.service.config.VOServiceConfig
+
+/**
+  * @author Yuriy Tumakha
+  */
+class VOContactModule extends Module:
+
+  override def bindings(env: Environment, conf: Configuration): Seq[Binding[?]] = Seq(
+    bind[VOServiceConfig].to[AppConfig]
+  )

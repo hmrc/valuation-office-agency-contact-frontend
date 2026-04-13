@@ -14,30 +14,31 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukErrorSummary, GovukFieldset, GovukInput}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.button.Button
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukFieldset, GovukInput}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.models.ContactDetails
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.input.Input
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service_fair_rent
 @import uk.gov.hmrc.vo.contact.frontend.models.requests.DataRequestUtil.isEnquiryCategoryOneOf
+@import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
-@import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.govukfrontend.views.Implicits.*
 
-@this(mainTemplate: main_template, formWithCSRF: FormWithCSRF,
-        govukInput: GovukInput, govukButton: GovukButton, govukErrorSummary: GovukErrorSummary,
-        govukFieldset: GovukFieldset)
+@this(
+        layout: PrimaryLayout,
+        formWithCSRF: FormWithCSRF,
+        govukInput: GovukInput,
+        govukButton: GovukButton,
+        govukFieldset: GovukFieldset
+)
 
-
-@(form: Form[ContactDetails], mode: Mode, backLink: String)(implicit request: Request[?], messages: Messages)
+@(form: Form[ContactDetails], mode: Mode, backLink: String)(implicit request: RequestHeader, messages: Messages)
 
 @textInput(id: String, inputType: String, classes: String, autoCompleteLabel: String, mode: String = "", pattern: String = "") = {
     @govukInput(Input(
@@ -68,31 +69,16 @@
 }
 
 
-@mainTemplate(
-    pageTitle = Some(if(form.hasErrors) messages("error.title") + " " + messages("contactDetails.title") else messages("contactDetails.title")),
-    backLink = Some(BackLink(href = backLink))
+@layout(
+    pageTitle = messages("contactDetails.title"),
+    backLink = Some(backLink),
+    theForm = Some(form)
 ) {
     @formWithCSRF(action = ContactDetailsController.onSubmit(mode)) {
-        @if(form.hasErrors) {
 
-            @* after text updates please switch to uk.gov.hmrc.govukfrontend.views.Implicits.RichFormErrors#asHtmlErrorLinks()
-                at the moment we must render field name:
-                "First name - This field is required"
-                Should be after text updates :
-                "Please enter first name"
-            *@
-
-            @govukErrorSummary(
-                ErrorSummary(
-                    title = Text(messages("error.summary.title")),
-                    errorList = form.mapping.mappings.flatMap(x => form.error(x.key).map(e =>
-                            ErrorLink(href = Option(s"#${x.key}"), content = HtmlContent(messages(e.messages, e.args)))
-                    )), attributes = Map("id" -> "error-summary-heading")
-                )
-            )
-        }
         @govukFieldset(Fieldset(html = content))
-        @govukButton(Button(content = Text(messages("site.continue")), attributes = Map("id"-> "submit")))
+
+        @govukButton(SubmitButton("continue"))
 
         @if(isEnquiryCategoryOneOf("housing_benefit","fair_rent")) {
             @help_with_service_fair_rent()

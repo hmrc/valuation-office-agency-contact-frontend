@@ -24,7 +24,7 @@
         govukRadios: GovukRadios
 )
 
-@(form: Form[String], key: String, backUrl: String, categoryRouter: CategoryRouter)(implicit request: Request[?], messages: Messages)
+@(form: Form[String], key: String, backUrl: String, categoryRouter: CategoryRouter)(implicit request: RequestHeader, messages: Messages)
 
 @formTemplate(form, key, backUrl, messages(categoryRouter.heading), categoryRouter.helpWithService) {
 

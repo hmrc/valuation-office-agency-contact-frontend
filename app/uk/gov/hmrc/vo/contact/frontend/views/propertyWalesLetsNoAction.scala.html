@@ -14,19 +14,17 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 
-@this(mainTemplate: main_template)
+@this(layout: PrimaryLayout)
 
-@(backLink: String)(implicit request: Request[?], messages: Messages)
+@(backLink: String)(implicit request: RequestHeader, messages: Messages)
 
-@mainTemplate(
-    backLink = Some(BackLink(href = backLink)),
-    pageTitle = Option(messages("businessRatesSelfCateringNoBusinessRateWales.title"))
+@layout(
+    pageTitle = messages("businessRatesSelfCateringNoBusinessRateWales.title"),
+    backLink = Some(backLink)
 ) {
-
     <h1 class="govuk-heading-l">@messages("businessRatesSelfCateringNoBusinessRateWales.heading")</h1>
 
     <p class="govuk-body">@messages("businessRatesSelfCateringNoBusinessRateWales.p1")</p>

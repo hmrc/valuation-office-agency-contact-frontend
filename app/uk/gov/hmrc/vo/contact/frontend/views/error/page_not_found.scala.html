@@ -14,19 +14,17 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.vo.contact.frontend.views.html.govuk.main_template
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(mainTemplate: main_template)
+@this(layout: PrimaryLayout)
 
-@()(implicit request: Request[?], messages: Messages)
+@()(implicit request: RequestHeader, messages: Messages)
 
-@mainTemplate(
-    pageTitle = Option(messages("error400.title"))) {
-
+@layout(
+    pageTitle = messages("error400.title")
+) {
     <h1 class="govuk-heading-l">@Messages("error400.heading")</h1>
 
     <p class="govuk-body">@Messages("error400.para1")</p>
-
     <p class="govuk-body">@Messages("error400.para2")</p>
-
 }
