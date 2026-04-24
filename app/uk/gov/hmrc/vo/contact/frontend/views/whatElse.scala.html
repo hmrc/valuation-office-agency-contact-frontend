@@ -18,10 +18,9 @@
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
-@import uk.gov.hmrc.govukfrontend.views.Implicits.*
-@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.charactercount.CharacterCount
 @import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
+@import uk.gov.hmrc.vo.service.model.input.TextAreaField
 
 @this(
         layout: PrimaryLayout,
@@ -32,34 +31,14 @@
 
 @(form: Form[String], mode: Mode)(implicit request: RequestHeader, messages: Messages)
 
-@content = {
-
-<h1 class="govuk-label-wrapper">
-    <label class="govuk-label govuk-label--l" for="message">
-        @messages("whatElse.message")
-    </label>
-</h1>
-
-@hmrcCharacterCount(
-    CharacterCount(
-    id = "message",
-    name = "message",
-    value = form("message").value,
-    rows = 5,
-    maxLength = 5000,
-    errorMessage = form.errors.asHtmlErrorMessageForField("message")
-        )
-    )
-}
-
 @layout(
-    pageTitle = messages("whatElse.title"),
+    pageTitle = messages("whatElse.message.label"),
     backLink = PropertyAddressController.onPageLoad(NormalMode).url,
     theForm = form
 ) {
-    @formWithCSRF(action = WhatElseController.onSubmit(), Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = WhatElseController.onSubmit()) {
 
-        @content
+        @hmrcCharacterCount(TextAreaField.characterCount(form, "whatElse", "message", maxLength = 5000, isPageHeading = true))
 
         @govukButton(SubmitButton("continue"))
 

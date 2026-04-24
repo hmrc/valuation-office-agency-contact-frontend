@@ -42,7 +42,10 @@ class AnythingElseTellUsViewSpec extends QuestionViewBehaviours[String] {
 
   "AnythingElseTellUs view" must {
 
-    behave like normalPage(createView, messageKeyPrefix, "title", "heading")
+    "display the correct browser title" in {
+      val doc = asDocument(createView())
+      assertEqualsValue(doc, "title", messages(s"$messageKeyPrefix.message.label") + " - Valuation Office contact form - GOV.UK")
+    }
 
     behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.AnythingElseTellUsController.onSubmit().url)
   }

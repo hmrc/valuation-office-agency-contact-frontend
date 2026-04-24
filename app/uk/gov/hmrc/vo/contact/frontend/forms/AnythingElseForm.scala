@@ -19,12 +19,12 @@ package uk.gov.hmrc.vo.contact.frontend.forms
 import play.api.data.Form
 import play.api.data.Forms.{single, text}
 
-object AnythingElseForm {
+object AnythingElseForm:
 
-  def apply(): Form[String] = Form(
-    single(
-      "message" -> text.verifying("error.message.max_length", _.length <= 5000)
-        .verifying("error.tell_us_more.invalid", x => !(x.contains('<') || x.contains('>')))
+  def apply(): Form[String] =
+    Form(
+      single(
+        "message" -> text.verifying("error.message.max_length", _.length <= 5000)
+          .verifying("error.tell_us_more.invalid", x => !(x.contains('<') || x.contains('>')))
+      )
     )
-  )
-}

@@ -14,13 +14,12 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.Implicits.*
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton}
 @import uk.gov.hmrc.vo.contact.frontend.models.{Mode, NormalMode}
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
-@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.charactercount.CharacterCount
 @import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
+@import uk.gov.hmrc.vo.service.model.input.TextAreaField
 
 @this(
         layout: PrimaryLayout,
@@ -31,36 +30,14 @@
 
 @(form: Form[String], mode: Mode)(implicit request: RequestHeader, messages: Messages)
 
-
-@content = {
-
-    <h1 class="govuk-heading-l govuk-label-wrapper">
-        <label class="govuk-label govuk-label--l" for="message">
-            @messages("anythingElse.heading")
-        </label>
-    </h1>
-
-    @hmrcCharacterCount(
-        CharacterCount(
-            id = "message",
-            name = "message",
-            value=form("message").value,
-            rows = 5,
-            maxLength = 5000,
-            errorMessage = form.errors.asHtmlErrorMessageForField("message")
-                )
-            )
-
-}
-
 @layout(
-    pageTitle = messages("anythingElse.title"),
+    pageTitle = messages("anythingElse.message.label"),
     backLink = PropertyAddressController.onPageLoad(NormalMode).url,
     theForm = form
 ) {
-    @formWithCSRF(action = AnythingElseTellUsController.onSubmit(), Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = AnythingElseTellUsController.onSubmit()) {
 
-        @content
+        @hmrcCharacterCount(TextAreaField.characterCount(form, "anythingElse", "message", maxLength = 5000, isPageHeading = true))
 
         @govukButton(SubmitButton("continue"))
 

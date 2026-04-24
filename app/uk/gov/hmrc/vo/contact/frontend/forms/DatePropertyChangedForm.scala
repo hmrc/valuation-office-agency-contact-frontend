@@ -22,9 +22,13 @@ import uk.gov.hmrc.vo.contact.frontend.forms.mappings.Mappings
 
 import java.time.LocalDate
 
-object DatePropertyChangedForm extends Mappings {
+object DatePropertyChangedForm extends Mappings:
 
   private val key = "datePropertyChanged"
 
-  def apply(): Form[Option[LocalDate]] = Form(single(key -> localDate(key)))
-}
+  def apply(): Form[Option[LocalDate]] =
+    Form(
+      single(
+        key -> localDate(key)
+      )
+    )

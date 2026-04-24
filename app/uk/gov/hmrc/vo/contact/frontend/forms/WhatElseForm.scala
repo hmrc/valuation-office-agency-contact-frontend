@@ -17,15 +17,15 @@
 package uk.gov.hmrc.vo.contact.frontend.forms
 
 import play.api.data.Form
-import play.api.data.Forms._
+import play.api.data.Forms.*
 
-object WhatElseForm {
+object WhatElseForm:
 
-  def apply(): Form[String] = Form(
-    single(
-      "message" -> text.verifying("error.what_else.required", _.nonEmpty)
-        .verifying("error.what_else.max_length", _.length <= 5000)
-        .verifying("error.what_else.invalid", x => !(x.contains('<') || x.contains('>')))
+  def apply(): Form[String] =
+    Form(
+      single(
+        "message" -> text.verifying("error.what_else.required", _.nonEmpty)
+          .verifying("error.what_else.max_length", _.length <= 5000)
+          .verifying("error.what_else.invalid", x => !(x.contains('<') || x.contains('>')))
+      )
     )
-  )
-}

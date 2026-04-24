@@ -656,17 +656,15 @@ propertyAddress.postcode.invalid = Nodwch god post go iawn
 propertyAddress.postcode.length = Rhaid i’r cod post fod yn 8 nod neu lai
 propertyAddress.checkYourAnswersLabel = Manylion yr eiddo
 
-whatElse.title = Beth arall hoffech chi ddweud wrthym am eich ymholiad?
-whatElse.message = Beth arall hoffech chi ddweud wrthym am eich ymholiad?
+whatElse.message.label = Beth arall hoffech chi ddweud wrthym am eich ymholiad?
 error.what_else.required = Nodwch fwy o fanylion am eich ymholiad
 error.what_else.invalid = Ni ddylai eich ymholiad gynnwys < a >
 error.what_else.max_length = Rhaid i’ch ymholiad fod yn 5000 nod neu lai
 
 # --- Tell Us more
-tellUsMore.title = Rhowch ragor o wybodaeth i ni am eich ymholiad
 tellUsMore.heading = Rhowch ragor o wybodaeth i ni am eich ymholiad
-tellUsMore.message = Eich neges
-tellUsMore.hint = Uchafswm o 5000 nod
+tellUsMore.message.label = Eich neges
+tellUsMore.message.hint = Uchafswm o 5000 nod
 tellUsMore.para =  I’n helpu i ddelio â’ch cais, byddwch cystal â rhoi:
 tellUsMore.para1 = Yr hyn y mae’ch ymholiad ynghylch
 tellUsMore.para2 =  Eich perthynas â’r eiddo (er enghraifft, perchennog neu denant)
@@ -677,48 +675,38 @@ tellUsMore.ndr-reference = (fe welwch hwn ar eich bil ardrethi busnes)
 tellUsMore.checkYourAnswersLabel = Ymholiad
 tellUsMore.anythingElse = Is there anything else you would like to tell us about?
 
-anythingElse.title = Oes yna unrhyw beth arall yr hoffech chi ddweud wrthym? (dewisol)
-anythingElse.heading = Oes yna unrhyw beth arall yr hoffech chi ddweud wrthym? (dewisol)
+anythingElse.message.label = Oes yna unrhyw beth arall yr hoffech chi ddweud wrthym? (dewisol)
 anythingElse.checkYourAnswersLabel = Oes yna unrhyw beth arall yr hoffech chi ddweud wrthym?
 
 # --- Tell Us More Property Wind water journey
-tellUsMore.poorRepair.title = Dywedwch fwy wrthym am gyflwr eich eiddo
 tellUsMore.poorRepair.heading = Dywedwch fwy wrthym am gyflwr eich eiddo
-tellUsMore.poorRepair.hint = Er enghraifft, os oes gan yr eiddo do neu ffenestri.
+tellUsMore.poorRepair.message.hint = Er enghraifft, os oes gan yr eiddo do neu ffenestri.
 tellUsMore.poorRepair.inset = Bydd angen i chi ddarparu tystiolaeth pan fyddwn yn ymateb i chi, megis lluniau neu gynlluniau o’r eiddo.
 
 # --- Tell Us More CT Business uses journey
-tellUsMore.business.title = Dywedwch fwy wrthym am eich eiddo- Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 tellUsMore.business.heading = Dywedwch fwy wrthym am eich eiddo
-tellUsMore.business.hint = Rhowch fanylion fel nifer yr ystafelloedd a ddefnyddir ar gyfer busnes a’r hyn y maent yn cael ei ddefnyddio ar eu cyfer.
+tellUsMore.business.message.hint = Rhowch fanylion fel nifer yr ystafelloedd a ddefnyddir ar gyfer busnes a’r hyn y maent yn cael ei ddefnyddio ar eu cyfer.
 tellUsMore.business.inset = Bydd angen i chi ddarparu tystiolaeth pan fyddwn yn ymateb i chi, megis lluniau neu gynlluniau o’r eiddo.
 
 # --- Tell Us More CT area changes journey
-tellUsMore.areaChange.title = Dywedwch fwy wrthym am y newidiadau parhaol i’r ardal- Ffurflen gyswllt Swyddfa Brisio - GOV.UK
 tellUsMore.areaChange.heading = Dywedwch fwy wrthym am y newidiadau parhaol i’r ardal
-tellUsMore.areaChange.hint = Megis archfarchnad newydd neu brif ffordd.
+tellUsMore.areaChange.message.hint = Megis archfarchnad newydd neu brif ffordd.
 tellUsMore.areaChange.inset = Bydd angen i chi ddarparu tystiolaeth pan fyddwn yn ymateb i chi, megis lluniau neu gynlluniau o’r eiddo.
 
 # --- Tell Us More CT other journey
-tellUsMore.other.title = Beth yw eich ymholiad Treth Gyngor arall?
 tellUsMore.other.heading = Beth yw eich ymholiad Treth Gyngor arall?
-tellUsMore.other.hint = Darparwch fanylion megis cyfeirnodau achos a dyddiadau.
+tellUsMore.other.message.hint = Darparwch fanylion megis cyfeirnodau achos a dyddiadau.
 
 # --- Tell Us More BR Property not used journey
-tellUsMore.notUsed.title = Am beth ddefnyddir yr eiddo?
 tellUsMore.notUsed.heading = Am beth ddefnyddir yr eiddo?
 tellUsMore.notUsed.inset = Bydd angen i chi ddarparu tystiolaeth pan fyddwn yn ymateb i chi, megis lluniau neu gynlluniau o’r eiddo.
 
 # --- Tell Us More BR other journey
-tellUsMore.business.other.title = Beth yw eich ymholiad ardrethi busnes arall?
 tellUsMore.business.other.heading = Beth yw eich ymholiad ardrethi busnes arall?
-tellUsMore.business.other.hint = Darparwch fanylion megis cyfeirnodau achos a dyddiadau.
+tellUsMore.business.other.message.hint = Darparwch fanylion megis cyfeirnodau achos a dyddiadau.
 
 # --- Tell Us More Fair Rents other journey
-tellUsMore.fairRent.title = Beth yw eich ymholiad arall ynglŷn â rhenti teg?
 tellUsMore.fairRent.heading = Beth yw eich ymholiad arall ynglŷn â rhenti teg?
-tellUsMore.fairRent.hint =
-# --- tellUsMore.fairRent.hint is intentionally left blank as this route does not need a hint!
 
 # --- General Enquiries journey
 generalEnquiries.h2Heading = Os oes dal angen i chi gysylltu â ni

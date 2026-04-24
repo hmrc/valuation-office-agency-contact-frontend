@@ -47,7 +47,7 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages,
   }
 
   def whatElse: Option[AnswerRow] = userAnswers.whatElse map {
-    x => AnswerRow("whatElse.message", x, false, routes.WhatElseController.onPageLoad().url)
+    x => AnswerRow("whatElse.message.label", x, false, routes.WhatElseController.onPageLoad().url)
   }
 
   def anythingElse: Option[AnswerRow] = userAnswers.anythingElse map {

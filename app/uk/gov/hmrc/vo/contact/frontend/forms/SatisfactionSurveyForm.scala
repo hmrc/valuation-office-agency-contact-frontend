@@ -16,32 +16,33 @@
 
 package uk.gov.hmrc.vo.contact.frontend.forms
 
-import play.api.data.{Form, FormError}
-import play.api.data.Forms._
+import play.api.data.Forms.*
 import play.api.data.format.Formatter
+import play.api.data.{Form, FormError}
 import uk.gov.hmrc.vo.contact.frontend.utils.RadioOption
 
-object SatisfactionSurveyForm {
+object SatisfactionSurveyForm:
 
   private val antiXSSMessageRegex = """^['`A-Za-z0-9\s\-&,\.£\(\)%;:\?\!]+$"""
 
-  private def satisfactionFormat: Formatter[String] = new Formatter[String] {
-    def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] =
-      data.get(key).toRight(Seq(FormError(key, "error.required.feedback", Nil)))
+  private def satisfactionFormat: Formatter[String] =
+    new Formatter[String]:
+      def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] =
+        data.get(key).toRight(Seq(FormError(key, "error.required.feedback", Nil)))
 
-    def unbind(key: String, value: String): Map[String, String] = Map(key -> value)
-  }
+      def unbind(key: String, value: String): Map[String, String] = Map(key -> value)
 
-  def apply(): Form[SatisfactionSurvey] = Form(
-    mapping(
-      "satisfaction" -> of[String](using satisfactionFormat)
-        .verifying("error.required.feedback", _.nonEmpty)
-        .verifying("error.required.feedback", optionIsValid),
-      "details"      -> optional(text
-        .verifying("error.message.max_length.feedback", _.length <= 1200)
-        .verifying("error.message.xss-invalid.feedback", _.matches(antiXSSMessageRegex)))
-    )(SatisfactionSurvey.apply)(ss => Some(Tuple.fromProductTyped(ss)))
-  )
+  def apply(): Form[SatisfactionSurvey] =
+    Form(
+      mapping(
+        "satisfaction" -> of[String](using satisfactionFormat)
+          .verifying("error.required.feedback", _.nonEmpty)
+          .verifying("error.required.feedback", optionIsValid),
+        "details"      -> optional(text
+          .verifying("error.message.max_length.feedback", _.length <= 1200)
+          .verifying("error.message.xss-invalid.feedback", _.matches(antiXSSMessageRegex)))
+      )(SatisfactionSurvey.apply)(ss => Some(Tuple.fromProductTyped(ss)))
+    )
 
   def options: Seq[RadioOption] = Seq(
     RadioOption("satisfaction", "verySatisfied"),
@@ -53,6 +54,5 @@ object SatisfactionSurveyForm {
 
   def optionIsValid(value: String): Boolean =
     options.exists(_.value == value)
-}
 
 case class SatisfactionSurvey(satisfaction: String, details: Option[String])

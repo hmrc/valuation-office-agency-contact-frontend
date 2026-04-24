@@ -17,32 +17,31 @@
 package uk.gov.hmrc.vo.contact.frontend.forms
 
 import play.api.data.Form
-import play.api.data.Forms._
-import uk.gov.hmrc.vo.contact.frontend.utils.FormHelpers.antiXSSRegex
+import play.api.data.Forms.*
 import uk.gov.hmrc.vo.contact.frontend.models.PropertyAddress
+import uk.gov.hmrc.vo.contact.frontend.utils.FormHelpers.antiXSSRegex
 
-object PropertyAddressForm {
+object PropertyAddressForm:
 
-  private val postcodeRegex = """^\s*\-*\.*\(*\)*[a-zA-Z]{1,2}[0-9]{1,2}[a-zA-Z]?(\s*\-*\.*\(*\)*[0-9][a-zA-Z]{1,2})?$""" // scalastyle:ignore
+  private val postcodeRegex = """^\s*\-*\.*\(*\)*[a-zA-Z]{1,2}[0-9]{1,2}[a-zA-Z]?(\s*\-*\.*\(*\)*[0-9][a-zA-Z]{1,2})?$"""
 
-  def apply(): Form[PropertyAddress] = Form(
-    mapping(
-      "addressLine1" -> text.verifying("propertyAddress.addressLine1.required", _.nonEmpty)
-        .verifying("propertyAddress.addressLine1.length", _.length <= 80)
-        .verifying("propertyAddress.addressLine1.invalid", _.matches(antiXSSRegex)),
-      "addressLine2" -> optional(text
-        .verifying("propertyAddress.addressLine2.length", _.length <= 80)
-        .verifying("propertyAddress.addressLine2.invalid", _.matches(antiXSSRegex))),
-      "town"         -> text.verifying("propertyAddress.town.required", _.nonEmpty)
-        .verifying("propertyAddress.town.length", _.length <= 80)
-        .verifying("propertyAddress.town.invalid", _.matches(antiXSSRegex)),
-      "county"       -> optional(text
-        .verifying("propertyAddress.county.length", _.length <= 80)
-        .verifying("propertyAddress.county.invalid", _.matches(antiXSSRegex))),
-      "postcode"     -> text.verifying("propertyAddress.postcode.required", _.nonEmpty)
-        .verifying("propertyAddress.postcode.length", _.length <= 8)
-        .verifying("propertyAddress.postcode.invalid", _.toUpperCase.matches(postcodeRegex))
-    )(PropertyAddress.apply)(pa => Some(Tuple.fromProductTyped(pa)))
-  )
-
-}
+  def apply(): Form[PropertyAddress] =
+    Form(
+      mapping(
+        "addressLine1" -> text.verifying("propertyAddress.addressLine1.required", _.nonEmpty)
+          .verifying("propertyAddress.addressLine1.length", _.length <= 80)
+          .verifying("propertyAddress.addressLine1.invalid", _.matches(antiXSSRegex)),
+        "addressLine2" -> optional(text
+          .verifying("propertyAddress.addressLine2.length", _.length <= 80)
+          .verifying("propertyAddress.addressLine2.invalid", _.matches(antiXSSRegex))),
+        "town"         -> text.verifying("propertyAddress.town.required", _.nonEmpty)
+          .verifying("propertyAddress.town.length", _.length <= 80)
+          .verifying("propertyAddress.town.invalid", _.matches(antiXSSRegex)),
+        "county"       -> optional(text
+          .verifying("propertyAddress.county.length", _.length <= 80)
+          .verifying("propertyAddress.county.invalid", _.matches(antiXSSRegex))),
+        "postcode"     -> text.verifying("propertyAddress.postcode.required", _.nonEmpty)
+          .verifying("propertyAddress.postcode.length", _.length <= 8)
+          .verifying("propertyAddress.postcode.invalid", _.toUpperCase.matches(postcodeRegex))
+      )(PropertyAddress.apply)(pa => Some(Tuple.fromProductTyped(pa)))
+    )

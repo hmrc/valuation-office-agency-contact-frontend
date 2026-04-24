@@ -642,17 +642,15 @@ propertyAddress.postcode.invalid = Enter a real postcode
 propertyAddress.postcode.length = Postcode must be 8 characters or fewer
 propertyAddress.checkYourAnswersLabel = Property details
 
-whatElse.title = What else would you like to tell us about your enquiry?
-whatElse.message = What else would you like to tell us about your enquiry?
+whatElse.message.label = What else would you like to tell us about your enquiry?
 error.what_else.required = Enter more details about your enquiry
 error.what_else.invalid = Your enquiry must not include < and >
 error.what_else.max_length = Your enquiry must be 5000 characters or fewer
 
 # --- Tell Us more
-tellUsMore.title = Tell us more about your enquiry
 tellUsMore.heading = Tell us more about your enquiry
-tellUsMore.message = Your message
-tellUsMore.hint = Maximum 5,000 characters
+tellUsMore.message.label = Your message
+tellUsMore.message.hint = Maximum 5,000 characters
 tellUsMore.para = To help us deal with your enquiry, please provide:
 tellUsMore.para1 = What your enquiry is about
 tellUsMore.para2 = Your relationship to the property (for example, owner or tenant)
@@ -664,48 +662,38 @@ tellUsMore.checkYourAnswersLabel = Enquiry
 tellUsMore.anythingElse = Is there anything else you would like to tell us about?
 
 # --- Tell Us More Property Wind water journey
-tellUsMore.poorRepair.title = Tell us more about the condition of the property
 tellUsMore.poorRepair.heading = Tell us more about the condition of the property
-tellUsMore.poorRepair.hint = For example, if the property has a roof or windows.
+tellUsMore.poorRepair.message.hint = For example, if the property has a roof or windows.
 tellUsMore.poorRepair.inset = You will need to supply evidence when we reply to you, such as photos or plans of the property.
 
 # --- Tell Us More CT Business uses journey
-tellUsMore.business.title = Tell us more about your property
 tellUsMore.business.heading = Tell us more about your property
-tellUsMore.business.hint = Provide details such as the number of rooms used for business and what they are used for.
+tellUsMore.business.message.hint = Provide details such as the number of rooms used for business and what they are used for.
 tellUsMore.business.inset = You will need to supply evidence when we reply to you, such as photos or plans of the property.
 
 # --- Tell Us More CT area changes journey
-tellUsMore.areaChange.title = Tell us more about the permanent changes to the area
 tellUsMore.areaChange.heading = Tell us more about the permanent changes to the area
-tellUsMore.areaChange.hint = Such as a new supermarket or a major road.
+tellUsMore.areaChange.message.hint = Such as a new supermarket or a major road.
 tellUsMore.areaChange.inset = You will need to supply evidence when we reply to you, such as photos or plans of the property.
 
 # --- Tell Us More CT other journey
-tellUsMore.other.title = What is your other Council Tax enquiry?
 tellUsMore.other.heading = What is your other Council Tax enquiry?
-tellUsMore.other.hint = Include details such as case reference numbers and dates.
+tellUsMore.other.message.hint = Include details such as case reference numbers and dates.
 
 # --- Tell Us More CT other journey
-tellUsMore.general.title = What is your Council Tax enquiry?
 tellUsMore.general.heading = What is your Council Tax enquiry?
-tellUsMore.general.hint = Include details such as case reference numbers and dates.
+tellUsMore.general.message.hint = Include details such as case reference numbers and dates.
 
 # --- Tell Us More BR Property not used journey
-tellUsMore.notUsed.title = What is the property used for?
 tellUsMore.notUsed.heading = What is the property used for?
 tellUsMore.notUsed.inset = You will need to supply evidence when we reply to you, such as photos or plans of the property.
 
 # --- Tell Us More BR other journey
-tellUsMore.business.other.title = What is your other business rates enquiry?
 tellUsMore.business.other.heading = What is your other business rates enquiry?
-tellUsMore.business.other.hint = Include details such as case reference numbers and dates.
+tellUsMore.business.other.message.hint = Include details such as case reference numbers and dates.
 
 # --- Tell Us More Fair Rents other journey
-tellUsMore.fairRent.title = What is your other fair rents enquiry?
 tellUsMore.fairRent.heading = What is your other fair rents enquiry?
-tellUsMore.fairRent.hint =
-# --- tellUsMore.fairRent.hint is intentionally left blank as this route does not need a hint!
 
 # --- General Enquiries journey
 generalEnquiries.h2Heading = If you still need to contact us
@@ -778,8 +766,7 @@ fairRents.other_request = Other
 fairRents.fairRentTelephone = Telephone: 03000 502502
 error.fairRents.required = Select what your fair rent enquiry is about
 
-anythingElse.title = Is there anything else you would like to tell us about? (optional)
-anythingElse.heading = Is there anything else you would like to tell us about? (optional)
+anythingElse.message.label = Is there anything else you would like to tell us about? (optional)
 anythingElse.checkYourAnswersLabel = Is there anything else you would like to tell us about?
 
 # --- Call Charges
