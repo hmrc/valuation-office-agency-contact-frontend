@@ -29,7 +29,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.contactReason
 
 import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 class ContactReasonController @Inject() (
   override val messagesApi: MessagesApi,
@@ -50,7 +50,7 @@ class ContactReasonController @Inject() (
 
   def onSubmit(mode: Mode): Action[AnyContent] = getData.async { implicit request =>
     form.bindFromRequest().fold(
-      formWithErrors => Future.successful(BadRequest(contact_reason(formWithErrors))),
+      formWithErrors => BadRequest(contact_reason(formWithErrors)),
       value =>
         auditService.sendRadioButtonSelection(request.uri, "contactReason" -> value)
         dataCacheConnector.save[String](request.sessionId, ContactReasonId.toString, value).map(cacheMap =>

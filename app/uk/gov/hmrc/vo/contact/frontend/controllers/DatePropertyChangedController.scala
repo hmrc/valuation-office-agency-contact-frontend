@@ -32,7 +32,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.datePropertyChanged
 
 import java.time.LocalDate
 import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 class DatePropertyChangedController @Inject() (
   override val messagesApi: MessagesApi,
@@ -62,9 +62,7 @@ class DatePropertyChangedController @Inject() (
     implicit request =>
       DatePropertyChangedForm().bindFromRequest().fold(
         (formWithErrors: Form[Option[LocalDate]]) =>
-          Future.successful(
-            BadRequest(datePropertyChanged(formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))
-          ),
+          BadRequest(datePropertyChanged(formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode))),
         value =>
           for
             _        <- dataCacheConnector.remove(request.sessionId, DatePropertyChangedId.toString)

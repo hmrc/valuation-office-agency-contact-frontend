@@ -30,7 +30,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertyEnglandActualLets as property_england_actual_lets
 
 import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 class PropertyEnglandActualLetsController @Inject() (
   override val messagesApi: MessagesApi,
@@ -59,7 +59,7 @@ class PropertyEnglandActualLetsController @Inject() (
     implicit request =>
       PropertyEnglandActualLetsForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(propertyEnglandActualLets(formWithErrors, mode))),
+          BadRequest(propertyEnglandActualLets(formWithErrors, mode)),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering70DaysEN" -> value)
           dataCacheConnector.save[String](request.sessionId, PropertyEnglandActualLetsId.toString, value).map(cacheMap =>

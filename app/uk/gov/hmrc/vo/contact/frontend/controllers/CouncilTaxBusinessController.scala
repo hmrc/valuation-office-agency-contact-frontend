@@ -30,7 +30,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesNoNeedToPay as business_rates_no_need_to_pay, councilTaxBusinessEnquiry as council_tax_business_enquiry, propertySmallPartUsed as small_part_used}
 
 import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 class CouncilTaxBusinessController @Inject() (
   override val messagesApi: MessagesApi,
@@ -62,7 +62,7 @@ class CouncilTaxBusinessController @Inject() (
     implicit request =>
       CouncilTaxBusinessEnquiryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(councilTaxBusinessEnquiry(formWithErrors, mode, backLink(request.userAnswers, mode)))),
+          BadRequest(councilTaxBusinessEnquiry(formWithErrors, mode, backLink(request.userAnswers, mode))),
         value =>
           for {
             cacheMap <- dataCacheConnector.save[String](request.sessionId, CouncilTaxBusinessEnquiryId.toString, value)

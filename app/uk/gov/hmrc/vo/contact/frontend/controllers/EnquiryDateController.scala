@@ -21,7 +21,7 @@ import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
 import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 import play.api.mvc
 import play.api.mvc.AnyContent
 import uk.gov.hmrc.vo.contact.frontend.Navigator
@@ -57,7 +57,7 @@ class EnquiryDateController @Inject() (
 
   def onSubmit(mode: Mode): mvc.Action[AnyContent] = getData.async { implicit request =>
     EnquiryDateForm().bindFromRequest().fold(
-      formWithErrors => Future.successful(BadRequest(enquiry_date(formWithErrors, EnquiryDateForm.beforeDate(), NormalMode))),
+      formWithErrors => BadRequest(enquiry_date(formWithErrors, EnquiryDateForm.beforeDate(), NormalMode)),
       value => {
         auditService.sendRadioButtonSelection(request.uri, "enquiryDate" -> value)
         dataCacheConnector.save[String](request.sessionId, EnquiryDateId.toString, value).map(cacheMap =>

@@ -30,7 +30,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.enquiryCategory
 
 import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 class EnquiryCategoryController @Inject() (
   override val messagesApi: MessagesApi,
@@ -53,7 +53,7 @@ class EnquiryCategoryController @Inject() (
 
   def onSubmit(mode: Mode): mvc.Action[AnyContent] = getData.async { implicit request =>
     form.bindFromRequest().fold(
-      formWithErrors => Future.successful(BadRequest(enquiryCategoryView(formWithErrors, mode))),
+      formWithErrors => BadRequest(enquiryCategoryView(formWithErrors, mode)),
       value =>
         for {
           _        <- dataCacheConnector.remove(request.sessionId, ExistingEnquiryCategoryId.toString)

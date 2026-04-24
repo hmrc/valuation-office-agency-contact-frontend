@@ -25,7 +25,7 @@ import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.journey.model.TellUsMorePage.lastTellUsMorePage
 import uk.gov.hmrc.vo.contact.frontend.journey.pages.HBTellUsMore.appStartPage
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 import play.api.mvc
 import play.api.mvc.AnyContent
 import uk.gov.hmrc.vo.contact.frontend.Navigator
@@ -71,12 +71,12 @@ class ContactDetailsController @Inject() (
     implicit request =>
       ContactDetailsForm().bindFromRequest().fold(
         (formWithErrors: Form[ContactDetails]) =>
-          Future.successful(enquiryBackLink(request.userAnswers) match {
+          enquiryBackLink(request.userAnswers) match {
             case Right(link) => BadRequest(contactDetails(formWithErrors, mode, link))
             case Left(msg)   =>
               log.warn(s"Navigation for Contact Details page reached with error $msg")
               throw RuntimeException(s"Navigation for Contact Details page reached with error $msg")
-          }),
+          },
         value =>
           dataCacheConnector.save[ContactDetails](request.sessionId, ContactDetailsId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(ContactDetailsId, mode).apply(UserAnswers(cacheMap)))

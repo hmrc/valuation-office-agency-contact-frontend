@@ -22,7 +22,7 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 import play.api.mvc
 import play.api.mvc.AnyContent
 import uk.gov.hmrc.vo.contact.frontend.Navigator
@@ -61,7 +61,7 @@ class CouncilTaxSubcategoryController @Inject() (
     implicit request =>
       CouncilTaxSubcategoryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(councilTaxSubcategory(formWithErrors, mode))),
+          BadRequest(councilTaxSubcategory(formWithErrors, mode)),
         value =>
           for {
             _        <- dataCacheConnector.remove(request.sessionId, BusinessRatesSubcategoryId.toString)

@@ -30,7 +30,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesSelfCateringEnquiry as business_rates_self_catering_enquiry, propertyEnglandLets as england_lets, propertyWalesLets as wales_lets}
 
 import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 class BusinessRatesSelfCateringController @Inject() (
   override val messagesApi: MessagesApi,
@@ -62,7 +62,7 @@ class BusinessRatesSelfCateringController @Inject() (
     implicit request =>
       BusinessRatesSelfCateringForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(businessRatesSelfCateringEnquiry(formWithErrors, mode))),
+          BadRequest(businessRatesSelfCateringEnquiry(formWithErrors, mode)),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering" -> value)
           dataCacheConnector.save[String](request.sessionId, BusinessRatesSelfCateringId.toString, value).map(cacheMap =>

@@ -21,27 +21,25 @@ import play.api.mvc.{ActionBuilder, ActionTransformer, AnyContent, BodyParser, C
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.http.HeaderCarrierConverter
 import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
+import uk.gov.hmrc.vo.contact.frontend.controllers.*
 import uk.gov.hmrc.vo.contact.frontend.models.requests.OptionalDataRequest
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class DataClearActionImpl @Inject() (val dataCacheConnector: DataCacheConnector, cc: ControllerComponents) extends DataClearAction {
+class DataClearActionImpl @Inject() (val dataCacheConnector: DataCacheConnector, cc: ControllerComponents) extends DataClearAction:
 
-  override protected def transform[A](request: Request[A]): Future[OptionalDataRequest[A]] = {
-    implicit val hc: HeaderCarrier = HeaderCarrierConverter.fromRequestAndSession(request, request.session)
+  override protected def transform[A](request: Request[A]): Future[OptionalDataRequest[A]] =
+    given hc: HeaderCarrier = HeaderCarrierConverter.fromRequestAndSession(request, request.session)
 
-    hc.sessionId match {
+    hc.sessionId match
       case None            => Future.failed(IllegalStateException())
       case Some(sessionId) =>
         dataCacheConnector.clear(sessionId.toString)
-        Future.successful(OptionalDataRequest(request, sessionId.toString, None))
-    }
-  }
+        OptionalDataRequest(request, sessionId.toString, None)
 
   override def parser: BodyParser[AnyContent] = cc.parsers.default
 
   override protected def executionContext: ExecutionContext = cc.executionContext
-}
 
 @ImplementedBy(classOf[DataClearActionImpl])
 trait DataClearAction extends ActionTransformer[Request, OptionalDataRequest] with ActionBuilder[OptionalDataRequest, AnyContent]

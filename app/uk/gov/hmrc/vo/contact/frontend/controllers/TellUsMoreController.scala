@@ -23,7 +23,7 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 import play.api.mvc
 import play.api.mvc.AnyContent
 import uk.gov.hmrc.vo.contact.frontend.Navigator
@@ -73,7 +73,7 @@ class TellUsMoreController @Inject() (
     implicit request =>
       TellUsMoreForm(requiredErrorMessage(request.userAnswers)).bindFromRequest().fold(
         (formWithErrors: Form[TellUsMore]) =>
-          Future.successful(BadRequest(tellUsMore(formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))),
+          BadRequest(tellUsMore(formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode))),
         value =>
           dataCacheConnector.save[TellUsMore](request.sessionId, TellUsMoreId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(TellUsMoreId, mode).apply(UserAnswers(cacheMap)))

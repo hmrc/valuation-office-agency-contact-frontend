@@ -31,7 +31,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyWalesAvailableLets as property_wales_available_lets, propertyWalesLetsNoAction as property_wales_lets_no_action}
 
 import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 class PropertyWalesAvailableLetsController @Inject() (
   override val messagesApi: MessagesApi,
@@ -63,7 +63,7 @@ class PropertyWalesAvailableLetsController @Inject() (
     implicit request =>
       PropertyWalesAvailableLetsForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(propertyWalesAvailableLets(formWithErrors, mode))),
+          BadRequest(propertyWalesAvailableLets(formWithErrors, mode)),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering140DaysCY" -> value)
           dataCacheConnector.save[String](request.sessionId, PropertyWalesAvailableLetsId.toString, value).map(cacheMap =>

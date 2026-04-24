@@ -22,7 +22,7 @@ import play.api.i18n.{I18nSupport, Messages, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 import play.api.mvc
 import play.api.mvc.AnyContent
 import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
@@ -47,10 +47,10 @@ class Application @Inject() (
   def start(): mvc.Action[AnyContent] = Action.async { implicit request =>
     val defaultPage = Ok(contactReasonView(ContactReasonForm.form))
     language match {
-      case "cy" => Future.successful(configuration.getOptional[String]("govukStartPageWelsh")
-          .fold(defaultPage)(Redirect(_)))
-      case _    => Future.successful(configuration.getOptional[String]("govukStartPage")
-          .fold(defaultPage)(Redirect(_)))
+      case "cy" => configuration.getOptional[String]("govukStartPageWelsh")
+          .fold(defaultPage)(Redirect(_))
+      case _    => configuration.getOptional[String]("govukStartPage")
+          .fold(defaultPage)(Redirect(_))
     }
   }
 

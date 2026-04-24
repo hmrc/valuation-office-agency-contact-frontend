@@ -23,7 +23,7 @@ import play.twirl.api.HtmlFormat.Appendable
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
 import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 import play.api.mvc
 import play.api.mvc.AnyContent
 import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
@@ -63,7 +63,7 @@ class JourneyController @Inject() (
   def onSubmit(key: String): mvc.Action[AnyContent] = getAnswersAndPage(key).async { implicit request =>
     implicit val page: Page[String] = request.page
     page.form.bindFromRequest().fold(
-      formWithErrors => Future.successful(BadRequest(journeyView(formWithErrors, key))),
+      formWithErrors => BadRequest(journeyView(formWithErrors, key)),
       value =>
         for {
           _        <- page.beforeSaveAnswers(dataCacheConnector, request)

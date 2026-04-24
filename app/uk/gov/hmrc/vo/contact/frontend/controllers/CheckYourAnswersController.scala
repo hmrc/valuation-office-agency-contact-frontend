@@ -74,189 +74,174 @@ class CheckYourAnswersController @Inject() (
     val checkYourAnswersHelper = CheckYourAnswersHelper(answers)
 
     (contactReason, enquiryCategory, councilTaxSubcategory, businessRatesSubcategory, fairRentEnquiryEnquiry) match {
-      case (Some("more_details"), _, _, _, _)                                                    => Some(
-          AnswerSection(
-            None,
-            Seq(
-              checkYourAnswersHelper.existingEnquiryCategory,
-              checkYourAnswersHelper.refNumber,
-              checkYourAnswersHelper.contactDetails,
-              checkYourAnswersHelper.propertyAddress,
-              checkYourAnswersHelper.whatElse
-            ).flatten
-          )
+      case (Some("more_details"), _, _, _, _)                                                    =>
+        AnswerSection(
+          None,
+          Seq(
+            checkYourAnswersHelper.existingEnquiryCategory,
+            checkYourAnswersHelper.refNumber,
+            checkYourAnswersHelper.contactDetails,
+            checkYourAnswersHelper.propertyAddress,
+            checkYourAnswersHelper.whatElse
+          ).flatten
         )
-      case (Some("update_existing"), _, _, _, _)                                                 => Some(
-          AnswerSection(
-            None,
-            Seq(
-              checkYourAnswersHelper.existingEnquiryCategory,
-              checkYourAnswersHelper.refNumber,
-              checkYourAnswersHelper.contactDetails,
-              checkYourAnswersHelper.propertyAddress,
-              checkYourAnswersHelper.anythingElse
-            ).flatten
-          )
+      case (Some("update_existing"), _, _, _, _)                                                 =>
+        AnswerSection(
+          None,
+          Seq(
+            checkYourAnswersHelper.existingEnquiryCategory,
+            checkYourAnswersHelper.refNumber,
+            checkYourAnswersHelper.contactDetails,
+            checkYourAnswersHelper.propertyAddress,
+            checkYourAnswersHelper.anythingElse
+          ).flatten
         )
-      case (Some("new_enquiry"), Some("business_rates"), _, Some("business_rates_from_home"), _) => Some(
-          AnswerSection(
-            None,
-            Seq(
-              checkYourAnswersHelper.enquiryCategory,
-              checkYourAnswersHelper.businessRatesSubcategory,
-              checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.business.heading"),
-              checkYourAnswersHelper.tellUsMore("tellUsMore.business.heading"),
-              checkYourAnswersHelper.contactDetails,
-              checkYourAnswersHelper.propertyAddress
-            ).flatten
-          )
+      case (Some("new_enquiry"), Some("business_rates"), _, Some("business_rates_from_home"), _) =>
+        AnswerSection(
+          None,
+          Seq(
+            checkYourAnswersHelper.enquiryCategory,
+            checkYourAnswersHelper.businessRatesSubcategory,
+            checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.business.heading"),
+            checkYourAnswersHelper.tellUsMore("tellUsMore.business.heading"),
+            checkYourAnswersHelper.contactDetails,
+            checkYourAnswersHelper.propertyAddress
+          ).flatten
         )
-      case (Some("new_enquiry"), Some("business_rates"), _, Some("business_rates_not_used"), _)  => Some(
-          AnswerSection(
-            None,
-            Seq(
-              checkYourAnswersHelper.enquiryCategory,
-              checkYourAnswersHelper.businessRatesSubcategory,
-              checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.notUsed.heading"),
-              checkYourAnswersHelper.tellUsMore("tellUsMore.notUsed.heading"),
-              checkYourAnswersHelper.contactDetails,
-              checkYourAnswersHelper.propertyAddress
-            ).flatten
-          )
+      case (Some("new_enquiry"), Some("business_rates"), _, Some("business_rates_not_used"), _)  =>
+        AnswerSection(
+          None,
+          Seq(
+            checkYourAnswersHelper.enquiryCategory,
+            checkYourAnswersHelper.businessRatesSubcategory,
+            checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.notUsed.heading"),
+            checkYourAnswersHelper.tellUsMore("tellUsMore.notUsed.heading"),
+            checkYourAnswersHelper.contactDetails,
+            checkYourAnswersHelper.propertyAddress
+          ).flatten
         )
-      case (Some("new_enquiry"), Some("business_rates"), _, Some("business_rates_other"), _)     => Some(
-          AnswerSection(
-            None,
-            Seq(
-              checkYourAnswersHelper.enquiryCategory,
-              checkYourAnswersHelper.businessRatesSubcategory,
-              checkYourAnswersHelper.tellUsMore("tellUsMore.business.other.heading"),
-              checkYourAnswersHelper.contactDetails,
-              checkYourAnswersHelper.propertyAddress
-            ).flatten
-          )
+      case (Some("new_enquiry"), Some("business_rates"), _, Some("business_rates_other"), _)     =>
+        AnswerSection(
+          None,
+          Seq(
+            checkYourAnswersHelper.enquiryCategory,
+            checkYourAnswersHelper.businessRatesSubcategory,
+            checkYourAnswersHelper.tellUsMore("tellUsMore.business.other.heading"),
+            checkYourAnswersHelper.contactDetails,
+            checkYourAnswersHelper.propertyAddress
+          ).flatten
         )
-      case (_, Some("business_rates"), _, _, _)                                                  => Some(
-          AnswerSection(
-            None,
-            Seq(
-              checkYourAnswersHelper.enquiryCategory,
-              checkYourAnswersHelper.businessRatesSubcategory,
-              checkYourAnswersHelper.contactDetails,
-              checkYourAnswersHelper.propertyAddress,
-              checkYourAnswersHelper.tellUsMore()
-            ).flatten
-          )
+      case (_, Some("business_rates"), _, _, _)                                                  =>
+        AnswerSection(
+          None,
+          Seq(
+            checkYourAnswersHelper.enquiryCategory,
+            checkYourAnswersHelper.businessRatesSubcategory,
+            checkYourAnswersHelper.contactDetails,
+            checkYourAnswersHelper.propertyAddress,
+            checkYourAnswersHelper.tellUsMore()
+          ).flatten
         )
-      case (_, Some("council_tax"), Some("council_tax_property_poor_repair"), _, _)              => Some(
-          AnswerSection(
-            None,
-            Seq(
-              checkYourAnswersHelper.enquiryCategory,
-              checkYourAnswersHelper.councilTaxSubcategory,
-              checkYourAnswersHelper.datePropertyChanged(),
-              checkYourAnswersHelper.tellUsMore("tellUsMore.poorRepair.heading"),
-              checkYourAnswersHelper.contactDetails,
-              checkYourAnswersHelper.propertyAddress
-            ).flatten
-          )
+      case (_, Some("council_tax"), Some("council_tax_property_poor_repair"), _, _)              =>
+        AnswerSection(
+          None,
+          Seq(
+            checkYourAnswersHelper.enquiryCategory,
+            checkYourAnswersHelper.councilTaxSubcategory,
+            checkYourAnswersHelper.datePropertyChanged(),
+            checkYourAnswersHelper.tellUsMore("tellUsMore.poorRepair.heading"),
+            checkYourAnswersHelper.contactDetails,
+            checkYourAnswersHelper.propertyAddress
+          ).flatten
         )
-      case (_, Some("council_tax"), Some("council_tax_business_uses"), _, _)                     => Some(
-          AnswerSection(
-            None,
-            Seq(
-              checkYourAnswersHelper.enquiryCategory,
-              checkYourAnswersHelper.councilTaxSubcategory,
-              checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.business.heading"),
-              checkYourAnswersHelper.tellUsMore("tellUsMore.business.heading"),
-              checkYourAnswersHelper.contactDetails,
-              checkYourAnswersHelper.propertyAddress
-            ).flatten
-          )
+      case (_, Some("council_tax"), Some("council_tax_business_uses"), _, _)                     =>
+        AnswerSection(
+          None,
+          Seq(
+            checkYourAnswersHelper.enquiryCategory,
+            checkYourAnswersHelper.councilTaxSubcategory,
+            checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.business.heading"),
+            checkYourAnswersHelper.tellUsMore("tellUsMore.business.heading"),
+            checkYourAnswersHelper.contactDetails,
+            checkYourAnswersHelper.propertyAddress
+          ).flatten
         )
-      case (_, Some("council_tax"), Some("council_tax_area_change"), _, _)                       => Some(
-          AnswerSection(
-            None,
-            Seq(
-              checkYourAnswersHelper.enquiryCategory,
-              checkYourAnswersHelper.councilTaxSubcategory,
-              checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.areaChange.heading"),
-              checkYourAnswersHelper.tellUsMore("tellUsMore.areaChange.heading"),
-              checkYourAnswersHelper.contactDetails,
-              checkYourAnswersHelper.propertyAddress
-            ).flatten
-          )
+      case (_, Some("council_tax"), Some("council_tax_area_change"), _, _)                       =>
+        AnswerSection(
+          None,
+          Seq(
+            checkYourAnswersHelper.enquiryCategory,
+            checkYourAnswersHelper.councilTaxSubcategory,
+            checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.areaChange.heading"),
+            checkYourAnswersHelper.tellUsMore("tellUsMore.areaChange.heading"),
+            checkYourAnswersHelper.contactDetails,
+            checkYourAnswersHelper.propertyAddress
+          ).flatten
         )
-      case (_, Some("council_tax"), Some("council_tax_other"), _, _)                             => Some(
-          AnswerSection(
-            None,
-            Seq(
-              checkYourAnswersHelper.enquiryCategory,
-              checkYourAnswersHelper.councilTaxSubcategory,
-              checkYourAnswersHelper.tellUsMore("tellUsMore.other.heading"),
-              checkYourAnswersHelper.contactDetails,
-              checkYourAnswersHelper.propertyAddress
-            ).flatten
-          )
+      case (_, Some("council_tax"), Some("council_tax_other"), _, _)                             =>
+        AnswerSection(
+          None,
+          Seq(
+            checkYourAnswersHelper.enquiryCategory,
+            checkYourAnswersHelper.councilTaxSubcategory,
+            checkYourAnswersHelper.tellUsMore("tellUsMore.other.heading"),
+            checkYourAnswersHelper.contactDetails,
+            checkYourAnswersHelper.propertyAddress
+          ).flatten
         )
-      case (_, Some("council_tax"), _, _, _)                                                     => Some(
-          AnswerSection(
-            None,
-            Seq(
-              checkYourAnswersHelper.enquiryCategory,
-              checkYourAnswersHelper.councilTaxSubcategory,
-              checkYourAnswersHelper.contactDetails,
-              checkYourAnswersHelper.propertyAddress,
-              checkYourAnswersHelper.tellUsMore()
-            ).flatten
-          )
+      case (_, Some("council_tax"), _, _, _)                                                     =>
+        AnswerSection(
+          None,
+          Seq(
+            checkYourAnswersHelper.enquiryCategory,
+            checkYourAnswersHelper.councilTaxSubcategory,
+            checkYourAnswersHelper.contactDetails,
+            checkYourAnswersHelper.propertyAddress,
+            checkYourAnswersHelper.tellUsMore()
+          ).flatten
         )
-      case (_, Some("housing_benefit"), _, _, _)                                                 => Some(
-          AnswerSection(
-            None,
-            Seq(
-              checkYourAnswersHelper.enquiryCategory,
-              checkYourAnswersHelper.housingBenefitTellUsMore,
-              checkYourAnswersHelper.contactDetails,
-              checkYourAnswersHelper.propertyAddress
-            ).flatten
-          )
+      case (_, Some("housing_benefit"), _, _, _)                                                 =>
+        AnswerSection(
+          None,
+          Seq(
+            checkYourAnswersHelper.enquiryCategory,
+            checkYourAnswersHelper.housingBenefitTellUsMore,
+            checkYourAnswersHelper.contactDetails,
+            checkYourAnswersHelper.propertyAddress
+          ).flatten
         )
-      case (_, Some("fair_rent"), _, _, Some("submit_new_application"))                          => Some(
-          AnswerSection(
-            None,
-            Seq(
-              checkYourAnswersHelper.enquiryCategory,
-              checkYourAnswersHelper.datePropertyChanged(),
-              checkYourAnswersHelper.tellUsMore("tellUsMore.fairRent.heading"),
-              checkYourAnswersHelper.contactDetails,
-              checkYourAnswersHelper.propertyAddress
-            ).flatten
-          )
+      case (_, Some("fair_rent"), _, _, Some("submit_new_application"))                          =>
+        AnswerSection(
+          None,
+          Seq(
+            checkYourAnswersHelper.enquiryCategory,
+            checkYourAnswersHelper.datePropertyChanged(),
+            checkYourAnswersHelper.tellUsMore("tellUsMore.fairRent.heading"),
+            checkYourAnswersHelper.contactDetails,
+            checkYourAnswersHelper.propertyAddress
+          ).flatten
         )
-      case (_, Some("fair_rent"), _, _, Some("check_fair_rent_register"))                        => Some(
-          AnswerSection(
-            None,
-            Seq(
-              checkYourAnswersHelper.enquiryCategory,
-              checkYourAnswersHelper.datePropertyChanged(),
-              checkYourAnswersHelper.tellUsMore("tellUsMore.fairRent.heading"),
-              checkYourAnswersHelper.contactDetails,
-              checkYourAnswersHelper.propertyAddress
-            ).flatten
-          )
+      case (_, Some("fair_rent"), _, _, Some("check_fair_rent_register"))                        =>
+        AnswerSection(
+          None,
+          Seq(
+            checkYourAnswersHelper.enquiryCategory,
+            checkYourAnswersHelper.datePropertyChanged(),
+            checkYourAnswersHelper.tellUsMore("tellUsMore.fairRent.heading"),
+            checkYourAnswersHelper.contactDetails,
+            checkYourAnswersHelper.propertyAddress
+          ).flatten
         )
-      case (_, Some("fair_rent"), _, _, Some("other_request"))                                   => Some(
-          AnswerSection(
-            None,
-            Seq(
-              checkYourAnswersHelper.enquiryCategory,
-              checkYourAnswersHelper.datePropertyChanged(),
-              checkYourAnswersHelper.tellUsMore("tellUsMore.fairRent.heading"),
-              checkYourAnswersHelper.contactDetails,
-              checkYourAnswersHelper.propertyAddress
-            ).flatten
-          )
+      case (_, Some("fair_rent"), _, _, Some("other_request"))                                   =>
+        AnswerSection(
+          None,
+          Seq(
+            checkYourAnswersHelper.enquiryCategory,
+            checkYourAnswersHelper.datePropertyChanged(),
+            checkYourAnswersHelper.tellUsMore("tellUsMore.fairRent.heading"),
+            checkYourAnswersHelper.contactDetails,
+            checkYourAnswersHelper.propertyAddress
+          ).flatten
         )
       case _                                                                                     => None
     }

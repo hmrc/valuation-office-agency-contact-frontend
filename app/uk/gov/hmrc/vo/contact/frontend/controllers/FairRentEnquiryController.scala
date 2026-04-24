@@ -30,7 +30,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{checkFairRentApplication as check_fair_rent_application, fairRentEnquiry as fair_rent_enquiry, submitFairRentApplication as submit_fair_rent_application}
 
 import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 class FairRentEnquiryController @Inject() (
   override val messagesApi: MessagesApi,
@@ -61,7 +61,7 @@ class FairRentEnquiryController @Inject() (
     implicit request =>
       FairRentEnquiryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(fairRentEnquiry(formWithErrors, mode))),
+          BadRequest(fairRentEnquiry(formWithErrors, mode)),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "fairRents" -> value)
           dataCacheConnector.save[String](request.sessionId, FairRentEnquiryId.toString, value).map(cacheMap =>

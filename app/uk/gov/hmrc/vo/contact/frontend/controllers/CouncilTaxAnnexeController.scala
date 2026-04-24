@@ -30,7 +30,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{annexeCookingWashingEnquiry, annexeNoFacilities, annexeNotSelfContained, annexeRemoved, annexeSelfContained, annexeSelfContainedEnquiry, councilTaxAnnexe}
 
 import javax.inject.{Inject, Singleton}
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 @Singleton
 class CouncilTaxAnnexeController @Inject() (
@@ -63,7 +63,7 @@ class CouncilTaxAnnexeController @Inject() (
 
   def onSubmit(mode: Mode): Action[AnyContent] = getData.async { implicit request =>
     AnnexeForm().bindFromRequest().fold(
-      (formWithErrors: Form[String]) => Future.successful(BadRequest(councilTaxAnnexeView(formWithErrors, mode))),
+      (formWithErrors: Form[String]) => BadRequest(councilTaxAnnexeView(formWithErrors, mode)),
       value =>
         for
           _        <- dataCacheConnector.remove(request.sessionId, CouncilTaxAnnexeEnquiryId.toString)
@@ -88,7 +88,7 @@ class CouncilTaxAnnexeController @Inject() (
   def onSelfContainedSubmit: Action[AnyContent] = (getData `andThen` requireData).async { implicit request =>
     AnnexeSelfContainedForm().bindFromRequest().fold(
       (formWithErrors: Form[String]) =>
-        Future.successful(BadRequest(annexeSelfContainedEnquiryView(formWithErrors))),
+        BadRequest(annexeSelfContainedEnquiryView(formWithErrors)),
       value =>
         auditService.sendRadioButtonSelection(request.uri, "annexeSelfContainedEnquiry" -> value)
         dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeSelfContainedEnquiryId.toString, value).map(cacheMap =>
@@ -118,7 +118,7 @@ class CouncilTaxAnnexeController @Inject() (
 
   def onHaveCookingWashingSubmit: Action[AnyContent] = (getData `andThen` requireData).async { implicit request =>
     AnnexeCookingWashingForm().bindFromRequest().fold(
-      (formWithErrors: Form[String]) => Future.successful(BadRequest(annexeCookingWashingEnquiryView(formWithErrors))),
+      (formWithErrors: Form[String]) => BadRequest(annexeCookingWashingEnquiryView(formWithErrors)),
       value =>
         auditService.sendRadioButtonSelection(request.uri, "annexeCookingWashing" -> value)
         dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeHaveCookingId.toString, value).map(cacheMap =>

@@ -22,7 +22,7 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 import play.api.mvc
 import play.api.mvc.AnyContent
 import uk.gov.hmrc.vo.contact.frontend.Navigator
@@ -49,7 +49,7 @@ class PropertyAddressController @Inject() (
 
   def helpTextKey(userAnswers: UserAnswers): Option[String] =
     userAnswers.contactReason match {
-      case Some("more_details") => Some("propertyAddress.existing_address")
+      case Some("more_details") => "propertyAddress.existing_address"
       case _                    => None
     }
 
@@ -66,7 +66,7 @@ class PropertyAddressController @Inject() (
     implicit request =>
       PropertyAddressForm().bindFromRequest().fold(
         (formWithErrors: Form[PropertyAddress]) =>
-          Future.successful(BadRequest(propertyAddress(formWithErrors, mode, helpTextKey(request.userAnswers)))),
+          BadRequest(propertyAddress(formWithErrors, mode, helpTextKey(request.userAnswers))),
         value =>
           dataCacheConnector.save[PropertyAddress](request.sessionId, PropertyAddressId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(PropertyAddressId, mode).apply(UserAnswers(cacheMap)))

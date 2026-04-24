@@ -68,7 +68,7 @@ class ExistingEnquiryCategoryController @Inject() (
     implicit request =>
       ExistingEnquiryCategoryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(existingEnquiryCategory(formWithErrors, mode, ""))),
+          BadRequest(existingEnquiryCategory(formWithErrors, mode, "")),
         value =>
           for {
             _        <- saveSubCategoryInCache(value, request.sessionId)

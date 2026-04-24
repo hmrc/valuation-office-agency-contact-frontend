@@ -30,7 +30,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesNonBusiness as business_rates_non_business, businessRatesPropertyEnquiry as business_rates_property_enquiry}
 
 import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 class BusinessRatesPropertyController @Inject() (
   override val messagesApi: MessagesApi,
@@ -61,7 +61,7 @@ class BusinessRatesPropertyController @Inject() (
     implicit request =>
       BusinessRatesPropertyForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(businessRatesPropertyEnquiry(formWithErrors, mode))),
+          BadRequest(businessRatesPropertyEnquiry(formWithErrors, mode)),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesPropertyEnquiry" -> value)
           dataCacheConnector.save[String](request.sessionId, BusinessRatesPropertyEnquiryId.toString, value).map(cacheMap =>

@@ -22,7 +22,7 @@ import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
 import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 import play.api.mvc
 import play.api.mvc.AnyContent
 import uk.gov.hmrc.vo.contact.frontend.Navigator
@@ -60,7 +60,7 @@ class AnythingElseTellUsController @Inject() (
     implicit request =>
       AnythingElseForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(anythingElseTellUsView(formWithErrors, mode))),
+          BadRequest(anythingElseTellUsView(formWithErrors, mode)),
         value =>
           dataCacheConnector.save[String](request.sessionId, AnythingElseId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(AnythingElseId, mode).apply(UserAnswers(cacheMap)))

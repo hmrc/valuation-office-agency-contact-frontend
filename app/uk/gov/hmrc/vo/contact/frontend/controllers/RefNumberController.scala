@@ -22,7 +22,7 @@ import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
 import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 import play.api.mvc
 import play.api.mvc.AnyContent
 import uk.gov.hmrc.vo.contact.frontend.Navigator
@@ -57,7 +57,7 @@ class RefNumberController @Inject() (
     implicit request =>
       RefNumberForm().bindFromRequest().fold(
         (formWithErrors: Form[Option[String]]) =>
-          Future.successful(BadRequest(refNumber(formWithErrors, mode))),
+          BadRequest(refNumber(formWithErrors, mode)),
         value =>
           dataCacheConnector.save[String](request.sessionId, RefNumberId.toString, value.getOrElse("")).map(cacheMap =>
             Redirect(navigator.nextPage(RefNumberId, mode).apply(UserAnswers(cacheMap)))
