@@ -18,7 +18,6 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.models.ContactDetails
@@ -42,17 +41,17 @@
 
 @textInput(id: String, inputType: String, classes: String, autoCompleteLabel: String, mode: String = "", pattern: String = "") = {
     @govukInput(Input(
-        id=id,
-        name=id,
+        id = id,
+        name = id,
         inputType = inputType,
-        pattern = Some(pattern),
+        pattern = pattern,
         value = form(id).value,
-        classes=classes,
-        autocomplete=Some(autoCompleteLabel),
-        label = Label(content = Text(messages(s"contactDetails.$id"))), inputmode=Some(mode),
-        attributes=Map("spellcheck" -> "false"),
+        classes = classes,
+        autocomplete = autoCompleteLabel,
+        label = Label(content = Text(messages(s"contactDetails.$id"))), inputmode = mode,
+        attributes = Map("spellcheck" -> "false"),
         errorMessage = form.errors.asTextErrorMessageForField(id),
-        hint = messages.translate(s"contactDetails.$id.hint", Seq()).map(hintText => Hint(id=Option(s"$id-hint"), content=Text(hintText)))
+        hint = messages.translate(s"contactDetails.$id.hint", Seq()).map(hintText => Hint(id = s"$id-hint", content = Text(hintText)))
     ))
 }
 
@@ -71,8 +70,8 @@
 
 @layout(
     pageTitle = messages("contactDetails.title"),
-    backLink = Some(backLink),
-    theForm = Some(form)
+    backLink = backLink,
+    theForm = form
 ) {
     @formWithCSRF(action = ContactDetailsController.onSubmit(mode)) {
 

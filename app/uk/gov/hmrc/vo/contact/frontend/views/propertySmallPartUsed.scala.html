@@ -22,7 +22,7 @@
 
 @layout(
     pageTitle = messages("propertySmallPartUsed.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxBusinessController.onPageLoad().url)
+    backLink = CouncilTaxBusinessController.onPageLoad().url
 ) {
     <h1 class="govuk-heading-l">@messages("propertySmallPartUsed.heading")</h1>
 

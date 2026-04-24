@@ -23,7 +23,7 @@
 
 @layout(
     pageTitle = messages("councilTaxBandTooHigh.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
+    backLink = CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
 ) {
     <h1 class="govuk-heading-l">@messages("councilTaxBandTooHigh.heading")</h1>
 
@@ -42,6 +42,6 @@
         <li><a class="govuk-link" target="_self" href=@messages("councilTaxBandTooHigh.p4.url")>@messages("councilTaxBandTooHigh.p4")</a></li>
     </ul>
 
-    @components.general_enquires(uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    @components.general_enquires(TellUsMoreController.onPageLoad(NormalMode).url)
 
 }

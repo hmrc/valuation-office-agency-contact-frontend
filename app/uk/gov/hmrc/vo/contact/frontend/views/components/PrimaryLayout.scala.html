@@ -34,7 +34,7 @@
         ErrorSummary(
             errorList = overrideErrorSummaryLink.fold(form.errors.asTextErrorLinks)(
                 link => form.errors.map(
-                    e => ErrorLink(href = Some(link), content = Text(messages(e.message, e.args*)))
+                    e => ErrorLink(href = link, content = Text(messages(e.message, e.args*)))
                 )
             ),
             title = Text(messages("error.summary.title"))

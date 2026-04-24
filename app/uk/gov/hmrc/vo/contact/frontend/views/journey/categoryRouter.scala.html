@@ -29,15 +29,15 @@
 @formTemplate(form, key, backUrl, messages(categoryRouter.heading), categoryRouter.helpWithService) {
 
     @govukRadios(Radios(
-        fieldset = Some(Fieldset(legend = Some(
+        fieldset = Fieldset(legend =
             Legend(Text(messages(categoryRouter.heading)), "govuk-fieldset__legend--l", isPageHeading = true)
-        ))),
-        idPrefix = Option(categoryRouter.fieldId),
+        ),
+        idPrefix = categoryRouter.fieldId,
         name = categoryRouter.fieldId,
         items = categoryRouter.options.zipWithIndex.map { case (option, idx) =>
             RadioItem(
-                id = Some(categoryRouter.fieldId + (if (idx == 0) "" else "-" + (idx + 1))),
-                value = Some(option),
+                id = categoryRouter.fieldId + (if (idx == 0) "" else "-" + (idx + 1)),
+                value = option,
                 content = Text(messages(s"${categoryRouter.fieldId}.$option")),
                 checked = form(categoryRouter.fieldId).value.contains(option)
             )

@@ -18,7 +18,6 @@
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.inputDate
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
 @this(
@@ -32,9 +31,9 @@
 
 @layout(
     pageTitle = messages(s"$enquiryKey.title"),
-    backLink = Some(backlink),
-    theForm = Some(form),
-    overrideErrorSummaryLink = Some("#datePropertyChanged-day")
+    backLink = backlink,
+    theForm = form,
+    overrideErrorSummaryLink = "#datePropertyChanged-day"
 ) {
     @formWithCSRF(action = DatePropertyChangedController.onSubmit(), Symbol("autoComplete") -> "off") {
 
@@ -42,7 +41,7 @@
             id = "datePropertyChanged",
             form = form,
             legend = messages(s"$enquiryKey.heading"),
-            hint = Some(messages("datePropertyChanged.hint")),
+            hint = messages("datePropertyChanged.hint"),
             headingIsLegend = true
         )
 

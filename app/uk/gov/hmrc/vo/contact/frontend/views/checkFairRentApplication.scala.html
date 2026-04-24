@@ -15,7 +15,6 @@
  *@
 
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 
 @this(layout: PrimaryLayout)
@@ -25,7 +24,7 @@
 
 @layout(
  pageTitle = messages("checkFairRentApplication.title"),
- backLink = Some(routes.FairRentEnquiryController.onPageLoad().url)
+ backLink = FairRentEnquiryController.onPageLoad().url
 ) {
  <h1 class="govuk-heading-l">@messages("checkFairRentApplication.heading")</h1>
 
@@ -42,5 +41,5 @@
   <li><a class="govuk-link" target="_self" href=@messages("checkFairRentApplication.p3.url")>@messages("checkFairRentApplication.p3")</a></li>
  </ul>
 
- @components.general_enquires_fair_rent(uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+ @components.general_enquires_fair_rent(TellUsMoreController.onPageLoad(NormalMode).url)
 }

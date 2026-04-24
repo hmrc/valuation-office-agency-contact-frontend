@@ -18,7 +18,6 @@
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.viewmodels.Section
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryList
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 @import uk.gov.hmrc.vo.contact.frontend.utils.SectionFormatter.formatSections
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service_fair_rent
 @import uk.gov.hmrc.vo.contact.frontend.models.requests.DataRequestUtil.isEnquiryCategoryOneOf
@@ -30,13 +29,13 @@
 
 @layout(
     pageTitle = messages("checkYourAnswers.title"),
-    backLink = Some(backLink)
+    backLink = backLink
 ) {
     <h1 class="govuk-heading-l">@messages("checkYourAnswers.heading")</h1>
 
     @govukSummaryList(SummaryList(rows = formatSections(answerSections)))
 
-    @govukButton(LinkButton("confirm", routes.CheckYourAnswersController.goToConfirmationPage().url))
+    @govukButton(LinkButton("confirm", CheckYourAnswersController.goToConfirmationPage().url))
 
     @if(isEnquiryCategoryOneOf("housing_benefit","fair_rent")) {
         @help_with_service_fair_rent()

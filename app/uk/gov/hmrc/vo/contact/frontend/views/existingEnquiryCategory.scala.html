@@ -18,7 +18,6 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.forms.ExistingEnquiryCategoryForm
@@ -37,22 +36,22 @@
 
 @layout(
     pageTitle = messages("existingEnquiryCategory.title"),
-    backLink = Some(ContactReasonController.onPageLoad.url),
-    theForm = Some(form),
-    overrideErrorSummaryLink = Some("#existingEnquiryCategory.council_tax")
+    backLink = ContactReasonController.onPageLoad.url,
+    theForm = form,
+    overrideErrorSummaryLink = "#existingEnquiryCategory.council_tax"
 ) {
     @formWithCSRF(action = ExistingEnquiryCategoryController.onSubmit(), Symbol("autoComplete") -> "off") {
 
         @govukRadios(Radios(
-            fieldset = Option(Fieldset(legend = Option(
+            fieldset = Fieldset(legend =
                 Legend(content = Text(messages("existingEnquiryCategory.heading")), isPageHeading = true, classes = "govuk-fieldset__legend--l"
-                )))),
-            idPrefix = Option("existingEnquiryCategory"),
+                )),
+            idPrefix = "existingEnquiryCategory",
             name = "value",
             items = ExistingEnquiryCategoryForm.options.map(i => RadioItem(
                 content = Text(messages(i.messageKey)),
-                id = Option(i.id),
-                value = Option(i.value),
+                id = i.id,
+                value = i.value,
                 checked = form("value").value.contains(i.value)
             )
             ),

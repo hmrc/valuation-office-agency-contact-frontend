@@ -14,7 +14,6 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 
@@ -25,7 +24,7 @@
 
 @layout(
     pageTitle = messages("businessRatesNonBusiness.title"),
-    backLink = Some(routes.BusinessRatesPropertyController.onPageLoad().url)
+    backLink = BusinessRatesPropertyController.onPageLoad().url
 ) {
     <h1 class="govuk-heading-l">@Messages("businessRatesNonBusiness.heading")</h1>
 
@@ -43,6 +42,6 @@
 
     <p class="govuk-body">@Html(Messages("businessRatesNonBusiness.p3"))</p>
 
-    @components.general_enquires(uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    @components.general_enquires(TellUsMoreController.onPageLoad(NormalMode).url)
 
 }

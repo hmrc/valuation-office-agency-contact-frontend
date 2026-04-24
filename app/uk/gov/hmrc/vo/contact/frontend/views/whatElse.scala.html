@@ -15,7 +15,6 @@
  *@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton}
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
@@ -47,7 +46,7 @@
     name = "message",
     value = form("message").value,
     rows = 5,
-    maxLength = Some(5000),
+    maxLength = 5000,
     errorMessage = form.errors.asHtmlErrorMessageForField("message")
         )
     )
@@ -55,8 +54,8 @@
 
 @layout(
     pageTitle = messages("whatElse.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url),
-    theForm = Some(form)
+    backLink = PropertyAddressController.onPageLoad(NormalMode).url,
+    theForm = form
 ) {
     @formWithCSRF(action = WhatElseController.onSubmit(), Symbol("autoComplete") -> "off") {
 

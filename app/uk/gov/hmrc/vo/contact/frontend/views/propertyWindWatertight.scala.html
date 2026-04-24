@@ -22,7 +22,7 @@
 
 @layout(
     pageTitle = messages("propertyWindWater.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWindWaterController.onPageLoad().url)
+    backLink = PropertyWindWaterController.onPageLoad().url
 ) {
     <h1 class="govuk-heading-l">@messages("propertyWindWater.heading")</h1>
 

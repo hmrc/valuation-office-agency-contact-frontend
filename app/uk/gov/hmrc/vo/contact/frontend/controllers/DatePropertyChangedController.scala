@@ -52,7 +52,7 @@ class DatePropertyChangedController @Inject() (
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) { implicit request =>
     val preparedForm = request.userAnswers.datePropertyChanged match {
       case None        => DatePropertyChangedForm()
-      case Some(value) => DatePropertyChangedForm().fill(Some(value))
+      case Some(value) => DatePropertyChangedForm().fill(value)
     }
 
     Ok(datePropertyChanged(preparedForm, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))

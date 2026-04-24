@@ -44,10 +44,10 @@
             name = page.fieldId,
             value = form(page.fieldId).value,
             rows = 5,
-            maxLength = Some(TellUsMorePage.maxChars),
+            maxLength = TellUsMorePage.maxChars,
             errorMessage = form.errors.asTextErrorMessageForField(page.fieldId),
             language = if(messages.lang.language == "cy") Cy else En,
-            spellcheck = Some(true)
+            spellcheck = true
         )
     )
 

@@ -18,7 +18,6 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
 @import uk.gov.hmrc.govukfrontend.views.Implicits.*
@@ -37,22 +36,22 @@
 
 @layout(
     pageTitle = messages("propertyWalesActualLets.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesAvailableLetsController.onPageLoad().url),
-    theForm = Some(form),
-    overrideErrorSummaryLink = Some("#propertyWalesActualLets.yes")
+    backLink = PropertyWalesAvailableLetsController.onPageLoad().url,
+    theForm = form,
+    overrideErrorSummaryLink = "#propertyWalesActualLets.yes"
 ) {
     @formWithCSRF(action = PropertyWalesActualLetsController.onSubmit(), Symbol("autoComplete") -> "off") {
 
         @govukRadios(Radios(
-            fieldset = Option(Fieldset(legend = Option(
+            fieldset = Fieldset(legend =
                 Legend(content = Text(messages("propertyWalesActualLets.heading")), isPageHeading = true, classes = "govuk-fieldset__legend--l"
-                )))),
-            idPrefix = Option("propertyWalesActualLets"),
+                )),
+            idPrefix = "propertyWalesActualLets",
             name = "value",
             items = PropertyWalesActualLetsForm.options.map(i => RadioItem(
                 content = Text(messages(i.messageKey)),
-                id = Option(i.id),
-                value = Option(i.value),
+                id = i.id,
+                value = i.value,
                 checked = form("value").value.contains(i.value)
             )
             ),

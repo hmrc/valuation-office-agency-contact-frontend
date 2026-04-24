@@ -23,7 +23,7 @@
 
 @layout(
     pageTitle = messages("businessRatesSelfCateringNoBusinessRateWales.title"),
-    backLink = Some(backLink)
+    backLink = backLink
 ) {
     <h1 class="govuk-heading-l">@messages("businessRatesSelfCateringNoBusinessRateWales.heading")</h1>
 
@@ -51,5 +51,5 @@
         </a>
     </p>
 
-    @components.general_enquires(uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    @components.general_enquires(TellUsMoreController.onPageLoad(NormalMode).url)
 }

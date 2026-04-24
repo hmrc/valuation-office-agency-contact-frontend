@@ -23,7 +23,7 @@
 
 @layout(
     pageTitle = messages("propertyEnglandLets.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandActualLetsController.onPageLoad().url)
+    backLink = PropertyEnglandActualLetsController.onPageLoad().url
 ) {
     <h1 class="govuk-heading-l">@messages("propertyEnglandLets.heading")</h1>
 
@@ -48,6 +48,6 @@
         </a>
     </p>
 
-    @components.general_enquires(uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    @components.general_enquires(TellUsMoreController.onPageLoad(NormalMode).url)
 
 }

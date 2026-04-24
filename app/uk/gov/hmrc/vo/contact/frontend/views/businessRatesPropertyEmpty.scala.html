@@ -23,7 +23,7 @@
 
 @layout(
     pageTitle = messages("businessRatesPropertyEmpty.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
+    backLink = BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
 ) {
     <h1 class="govuk-heading-l">@Messages("businessRatesPropertyEmpty.heading")</h1>
 
@@ -33,6 +33,6 @@
 
     <p class="govuk-body">@Html(Messages("businessRatesPropertyEmpty.url"))</p>
 
-    @components.general_enquires(uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    @components.general_enquires(TellUsMoreController.onPageLoad(NormalMode).url)
 
 }

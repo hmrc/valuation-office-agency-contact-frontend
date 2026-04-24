@@ -29,7 +29,6 @@
 @import uk.gov.hmrc.vo.contact.frontend.utils.AddressFormatters.formattedPropertyAddress
 @import uk.gov.hmrc.vo.contact.frontend.viewmodels.AnswerSection
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
 @this(layout: PrimaryLayout, formWithCSRF: FormWithCSRF,
@@ -86,13 +85,13 @@
     </p>
 
     <section class="govuk-!-display-none-print">
-    @formWithCSRF(action = routes.SatisfactionSurveyController.formCompleteFeedback, Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = SatisfactionSurveyController.formCompleteFeedback, Symbol("autoComplete") -> "off") {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(
                     title = Text(messages("error.summary.title")),
                     errorList = form.mapping.mappings.flatMap(x => form.error(x.key).map(e =>
-                        ErrorLink(href = Option("#satisfaction.verySatisfied"), content = HtmlContent(messages(e.messages, e.args)))
+                        ErrorLink(href = "#satisfaction.verySatisfied", content = HtmlContent(messages(e.messages, e.args)))
                     )),
                     attributes = Map("id" -> "error-summary-heading")
                 )
@@ -119,8 +118,8 @@
                 errorMessage = form.errors.asHtmlErrorMessageForField("satisfaction"),
                 items = SatisfactionSurveyForm.options.map(i => RadioItem(
                     content = Text(messages(i.messageKey)),
-                    id = Option(i.id),
-                    value = Option(i.value),
+                    id = i.id,
+                    value = i.value,
                     checked = form("satisfaction").value.contains(i.value)
                 ))
             ))
@@ -132,7 +131,7 @@
             @messages("confirmation.feedback.improve") @messages("hintText.optional")
         </label>
         @govukCharacterCountArea(CharacterCount(
-            id = "details", name = "details", rows = 5, value = form("details").value, maxLength = Some(1200), hint = Option(Hint(content = Text(messages("confirmation.feedback.warning")))),
+            id = "details", name = "details", rows = 5, value = form("details").value, maxLength = 1200, hint = Hint(content = Text(messages("confirmation.feedback.warning"))),
             errorMessage = form.errors.asHtmlErrorMessageForField("details")
         ))
     </div>

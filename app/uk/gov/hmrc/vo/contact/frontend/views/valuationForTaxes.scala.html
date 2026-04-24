@@ -23,7 +23,7 @@
 
 @layout(
     pageTitle = messages("valuationForTaxes.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url)
+    backLink = EnquiryCategoryController.onPageLoad(NormalMode).url
 ) {
     <h1 class="govuk-heading-l">@messages("valuationForTaxes.heading")</h1>
 

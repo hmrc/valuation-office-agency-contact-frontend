@@ -15,7 +15,6 @@
  *@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components.*
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service_fair_rent
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
@@ -37,10 +36,10 @@
 
 @layout(
     pageTitle = title,
-    backLink = Some(backUrl),
-    theForm = Some(form)
+    backLink = backUrl,
+    theForm = form
 ) {
-    @formWithCSRF(action = routes.JourneyController.onSubmit(key), Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = JourneyController.onSubmit(key), Symbol("autoComplete") -> "off") {
 
         @formFields
 

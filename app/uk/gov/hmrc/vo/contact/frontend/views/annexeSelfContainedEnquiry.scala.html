@@ -18,7 +18,6 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
 @import uk.gov.hmrc.govukfrontend.views.Implicits.*
@@ -37,24 +36,24 @@
 
 @layout(
     pageTitle = messages("annexeSelfContainedEnquiry.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxAnnexeController.onPageLoad().url),
-    theForm = Some(form),
-    overrideErrorSummaryLink = Some("#annexeSelfContainedEnquiry.form.yes")
+    backLink = CouncilTaxAnnexeController.onPageLoad().url,
+    theForm = form,
+    overrideErrorSummaryLink = "#annexeSelfContainedEnquiry.form.yes"
 ) {
     @formWithCSRF(action = CouncilTaxAnnexeController.onSelfContainedSubmit(), Symbol("autoComplete") -> "off") {
 
         @govukRadios(Radios(
-            fieldset = Option(Fieldset(legend = Option(
+            fieldset = Fieldset(legend =
                 Legend(content = Text(messages("annexeSelfContainedEnquiry.heading")), isPageHeading = true, classes = "govuk-fieldset__legend--l"
-                )))),
-            idPrefix = Option("annexeSelfContainedEnquiry.form"),
+                )),
+            idPrefix = "annexeSelfContainedEnquiry.form",
             name = "value",
-            hint = Some(Hint(content = Text(messages("annexeSelfContainedEnquiry.hint")))),
+            hint = Hint(content = Text(messages("annexeSelfContainedEnquiry.hint"))),
             classes = "govuk-radios--inline",
             items = AnnexeSelfContainedForm.options.map(i => RadioItem(
                 content = Text(messages(i.messageKey)),
-                id = Option(i.id),
-                value = Option(i.value),
+                id = i.id,
+                value = i.value,
                 checked = form("value").value.contains(i.value)
             )
             ),

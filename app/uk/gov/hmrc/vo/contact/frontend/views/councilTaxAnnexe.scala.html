@@ -18,7 +18,6 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
@@ -37,22 +36,22 @@
 
 @layout(
     pageTitle = messages("annexe.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(mode).url),
-    theForm = Some(form),
-    overrideErrorSummaryLink = Some("#annexe.added")
+    backLink = CouncilTaxSubcategoryController.onPageLoad(mode).url,
+    theForm = form,
+    overrideErrorSummaryLink = "#annexe.added"
 ) {
     @formWithCSRF(action = CouncilTaxAnnexeController.onSubmit(), Symbol("autoComplete") -> "off") {
 
         @govukRadios(Radios(
-            fieldset = Option(Fieldset(legend = Option(
+            fieldset = Fieldset(legend =
                 Legend(content = Text(messages("annexe.heading")), isPageHeading = true, classes = "govuk-fieldset__legend--l"
-                )))),
-            idPrefix = Option("annexe"),
+                )),
+            idPrefix = "annexe",
             name = "value",
             items = AnnexeForm.options.map(i => RadioItem(
                 content = Text(messages(i.messageKey)),
-                id = Option(i.id),
-                value = Option(i.value),
+                id = i.id,
+                value = i.value,
                 checked = form("value").value.contains(i.value)
             )
             ),

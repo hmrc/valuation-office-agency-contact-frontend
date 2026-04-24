@@ -17,7 +17,6 @@
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service_fair_rent
@@ -56,11 +55,11 @@
             value = form("message").value,
             hint = {
                 if(enquiryKey != "tellUsMore.notUsed") {
-                    Option(Hint(content = Text(messages(s"$enquiryKey.hint"))))
+                    Hint(content = Text(messages(s"$enquiryKey.hint")))
                     } else None
                 },
             rows = 4,
-            maxLength = Some(5000),
+            maxLength = 5000,
             errorMessage = form.errors.asHtmlErrorMessageForField("message")
         )
     )
@@ -88,8 +87,8 @@
             name = "message",
             value = form("message").value,
             rows = 4,
-            maxLength = Some(5000),
-            hint = Option(Hint(content = Text(messages("tellUsMore.hint")))),
+            maxLength = 5000,
+            hint = Hint(content = Text(messages("tellUsMore.hint"))),
             errorMessage = form.errors.asHtmlErrorMessageForField("message"),
             label = Label(content = Text(messages("tellUsMore.message"))
         )
@@ -104,8 +103,8 @@
 
     @layout(
         pageTitle = title,
-        backLink = Some(backlink),
-        theForm = Some(form)
+        backLink = backlink,
+        theForm = form
     ) {
         @formWithCSRF(action = TellUsMoreController.onSubmit(mode), Symbol("autoComplete") -> "off") {
 

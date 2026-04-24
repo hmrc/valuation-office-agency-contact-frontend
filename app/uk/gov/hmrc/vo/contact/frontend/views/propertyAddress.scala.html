@@ -17,7 +17,6 @@
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukFieldset, GovukInput}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.input.Input
@@ -40,7 +39,7 @@
 
 @textInput(id: String, optional: Boolean, classes: String, autoCompleteLabel: String) = {
     @govukInput(Input(
-        id=id, name=id, inputType = "text", value = form(id).value, classes=classes, autocomplete=Some(autoCompleteLabel),
+        id = id, name = id, inputType = "text", value = form(id).value, classes = classes, autocomplete = autoCompleteLabel,
         label = if(optional) Label(content = Text(s"${messages(s"propertyAddress.$id")} ${messages("hintText.optional")}"))
                     else Label(content = Text(messages(s"propertyAddress.$id"))),
         errorMessage = form.errors.asTextErrorMessageForField(id)
@@ -70,8 +69,8 @@
 
 @layout(
     pageTitle = messages("propertyAddress.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactDetailsController.onPageLoad(mode).url),
-    theForm = Some(form)
+    backLink = ContactDetailsController.onPageLoad(mode).url,
+    theForm = form
 ) {
     @formWithCSRF(action = PropertyAddressController.onSubmit(mode)) {
 

@@ -24,7 +24,7 @@
 
 @layout(
     pageTitle = messages("businessRatesChallenge.title"),
-    backLink = Some(routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url)
+    backLink = BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
 ) {
     <h1 class="govuk-heading-l">@messages("businessRatesChallenge.heading")</h1>
 

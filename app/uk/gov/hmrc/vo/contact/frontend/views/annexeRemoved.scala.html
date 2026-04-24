@@ -23,7 +23,7 @@
 
 @layout(
     pageTitle = messages("annexeRemoved.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxAnnexeController.onPageLoad().url)
+    backLink = CouncilTaxAnnexeController.onPageLoad().url
 ) {
     <h1 class="govuk-heading-l">@Messages("annexeRemoved.heading")</h1>
 
@@ -37,5 +37,5 @@
         <li>@Html(Messages("annexeRemoved.url3"))</li>
     </ul>
 
-    @components.general_enquires(uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    @components.general_enquires(TellUsMoreController.onPageLoad(NormalMode).url)
 }

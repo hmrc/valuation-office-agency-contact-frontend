@@ -23,7 +23,7 @@
 
 @layout(
     pageTitle = messages("propertyMergeSplit.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
+    backLink = CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
 ) {
     <h1 class="govuk-heading-l">@Messages("propertyMergeSplit.heading")</h1>
 
@@ -40,6 +40,6 @@
 
     <p class="govuk-body">@Html(Messages("councilTaxPropertyEmpty.p2"))</p>
 
-    @components.general_enquires(uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    @components.general_enquires(TellUsMoreController.onPageLoad(NormalMode).url)
 
 }

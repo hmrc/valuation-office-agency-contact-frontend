@@ -20,7 +20,6 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.input.Input
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
@@ -36,10 +35,10 @@
 
 @layout(
     pageTitle = messages("refNumber.title"),
-    backLink = Some(routes.ExistingEnquiryCategoryController.onPageLoad().url),
-    theForm = Some(form)
+    backLink = ExistingEnquiryCategoryController.onPageLoad().url,
+    theForm = form
 ) {
-    @formWithCSRF(action = routes.RefNumberController.onSubmit()) {
+    @formWithCSRF(action = RefNumberController.onSubmit()) {
 
         @govukInput(Input(
             id="value", name="value", inputType = "text", value = form("value").value,
@@ -50,7 +49,7 @@
                 classes = "govuk-label--l" ),
 
             attributes=Map("spellcheck" -> "false"),
-            hint = Option(Hint(content = Text(messages("refNumber.hint")))),
+            hint = Hint(content = Text(messages("refNumber.hint"))),
             errorMessage = form.errors.asTextErrorMessageForField("value")
         ))
 
