@@ -32,7 +32,6 @@ class BusinessRatesValuationViewSpec extends ViewBehaviours {
       view,
       "businessRatesValuation",
       "title",
-      "heading",
       "p1.url",
       "p1.part1",
       "p1.part2",

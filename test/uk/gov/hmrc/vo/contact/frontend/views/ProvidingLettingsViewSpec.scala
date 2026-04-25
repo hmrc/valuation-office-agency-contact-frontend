@@ -29,7 +29,7 @@ class ProvidingLettingsViewSpec extends ViewBehaviours {
 
   "Housing benefits view" must {
 
-    behave like normalPage(view, "providingLettings", "title", "heading", "p1", "p2")
+    behave like normalPage(view, "providingLettings", "title", "p1", "p2")
 
     "has a link marked with site.back leading to the Enquiry Category Page" in {
       val doc          = asDocument(view())

@@ -29,7 +29,7 @@ class PropertyPermanentChangesViewSpec extends ViewBehaviours {
   def view: () => HtmlFormat.Appendable = () => PropertyPermanentChanges(NormalMode)(using fakeRequest, messages)
 
   "The Property Permanent Changes view" must {
-    behave like normalPage(view, "propertyPermanentChanges", "title", "heading", "p1.part1", "p1.part2", "subheading", "p2")
+    behave like normalPage(view, "propertyPermanentChanges", "title", "p1.part1", "p1.part2", "subheading", "p2")
 
     "has a link marked with site.back leading to the Council Tax band cannot be reduced or removed" in {
       val doc          = asDocument(view())

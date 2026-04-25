@@ -26,8 +26,6 @@
     pageTitle = messages("businessRatesNonBusiness.title"),
     backLink = BusinessRatesPropertyController.onPageLoad().url
 ) {
-    <h1 class="govuk-heading-l">@Messages("businessRatesNonBusiness.heading")</h1>
-
     <p class="govuk-body">@Html(Messages("businessRatesNonBusiness.p1"))</p>
 
     <p class="govuk-body">@Html(Messages("businessRatesNonBusiness.p2"))</p>
@@ -43,5 +41,4 @@
     <p class="govuk-body">@Html(Messages("businessRatesNonBusiness.p3"))</p>
 
     @components.general_enquires(TellUsMoreController.onPageLoad(NormalMode).url)
-
 }

@@ -14,12 +14,11 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.govukfrontend.views.Implicits.*
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukCharacterCount, GovukErrorSummary, GovukFieldset, GovukPanel, GovukRadios}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.charactercount.CharacterCount
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.panel.Panel
@@ -31,10 +30,16 @@
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
-@this(layout: PrimaryLayout, formWithCSRF: FormWithCSRF,
-        govukButton: GovukButton, govukPanel: GovukPanel,
-        govukFieldset: GovukFieldset, govukRadios: GovukRadios, govukCharacterCountArea: GovukCharacterCount,
-        govukErrorSummary: GovukErrorSummary)
+@this(
+        layout: PrimaryLayout,
+        formWithCSRF: FormWithCSRF,
+        govukButton: GovukButton,
+        govukPanel: GovukPanel,
+        govukFieldset: GovukFieldset,
+        govukRadios: GovukRadios,
+        govukCharacterCountArea: GovukCharacterCount,
+        govukErrorSummary: GovukErrorSummary
+)
 
 @(contact: Contact, answerSections: AnswerSection, whatHappensNextMessages: Seq[String], form: Form[SatisfactionSurvey])(implicit request: RequestHeader, messages: Messages)
 
@@ -44,9 +49,12 @@
 }
 
 @layout(
-    pageTitle = messages("confirmation.title")
+    pageTitle = messages("confirmation.title"),
+    showH1 = false
 ) {
-    @if(form.hasErrors){<script type="text/javascript"> window.location='#error-summary-heading'</script>}
+    @if(form.hasErrors) {
+        <script type="text/javascript"> window.location = '#error-summary-heading'</script>
+    }
     <section tabindex="0">
     @govukPanel(Panel(title = Text(messages("confirmation.heading")), headingLevel = 1,
         content = HtmlContent(panelContent)
@@ -85,7 +93,7 @@
     </p>
 
     <section class="govuk-!-display-none-print">
-    @formWithCSRF(action = SatisfactionSurveyController.formCompleteFeedback, Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = SatisfactionSurveyController.formCompleteFeedback) {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(

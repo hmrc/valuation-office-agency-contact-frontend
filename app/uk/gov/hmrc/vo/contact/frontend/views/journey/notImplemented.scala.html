@@ -14,7 +14,7 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.html.components._
+@import uk.gov.hmrc.govukfrontend.views.html.components.*
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.vo.contact.frontend.journey.model.Page
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
@@ -30,9 +30,8 @@
     pageTitle = messages(page.heading),
     backLink = backUrl
 ) {
-    <h1 class="govuk-heading-l">@messages(page.heading)</h1>
-
-        @govukSummaryList(SummaryList(
+    @govukSummaryList(
+        SummaryList(
             rows = Seq(
                 SummaryListRow(
                     Key(content = Text("Journey Page Key")),
@@ -43,6 +42,6 @@
                     Value(content = Text(page.getClass.getSimpleName.replace("$", "")))
                 )
             )
-        ))
-
+        )
+    )
 }

@@ -32,15 +32,16 @@
 @layout(
     pageTitle = messages(s"$enquiryKey.title"),
     backLink = backlink,
+    showH1 = false,
     theForm = form,
     overrideErrorSummaryLink = "#datePropertyChanged-day"
 ) {
-    @formWithCSRF(action = DatePropertyChangedController.onSubmit(), Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = DatePropertyChangedController.onSubmit()) {
 
         @input_date(
             id = "datePropertyChanged",
             form = form,
-            legend = messages(s"$enquiryKey.heading"),
+            legend = messages(s"$enquiryKey.title"),
             hint = messages("datePropertyChanged.hint"),
             headingIsLegend = true
         )

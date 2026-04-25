@@ -33,6 +33,7 @@
 @layout(
     pageTitle = messages("anythingElse.message.label"),
     backLink = PropertyAddressController.onPageLoad(NormalMode).url,
+    showH1 = false,
     theForm = form
 ) {
     @formWithCSRF(action = AnythingElseTellUsController.onSubmit()) {

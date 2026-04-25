@@ -74,14 +74,14 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages,
   def contactDetails: Option[AnswerRow] = userAnswers.contactDetails map {
     _ =>
       AnswerRow(
-        "contactDetails.heading",
+        "contactDetails.title",
         formattedContactDetails(userAnswers.contactDetails, "<br>"),
         false,
         routes.ContactDetailsController.onPageLoad(CheckMode).url
       )
   }
 
-  def datePropertyChanged(keyMessage: String = "datePropertyChanged.poorRepair.heading"): Option[AnswerRow] = userAnswers.datePropertyChanged map {
+  def datePropertyChanged(keyMessage: String = "datePropertyChanged.poorRepair.title"): Option[AnswerRow] = userAnswers.datePropertyChanged map {
     date => AnswerRow(keyMessage, dateUtil.formattedLocalDate(date), false, routes.DatePropertyChangedController.onPageLoad().url)
   }
 

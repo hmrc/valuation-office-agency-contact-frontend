@@ -52,10 +52,6 @@
 ) {
     @formWithCSRF(action = TellUsMoreController.onSubmit(mode)) {
 
-        <h1 class="govuk-label-wrapper">
-            <label class="govuk-label govuk-label--l" for="message">@messages(s"$prefix.heading")</label>
-        </h1>
-
         @if(hideLabel) {
             @if(messages.isDefinedAt(s"$enquiryKey.inset")) {
                 <div class="govuk-inset-text">@messages(s"$enquiryKey.inset")</div>

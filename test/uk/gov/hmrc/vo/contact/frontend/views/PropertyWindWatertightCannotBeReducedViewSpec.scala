@@ -29,7 +29,7 @@ class PropertyWindWatertightCannotBeReducedViewSpec extends ViewBehaviours {
   def view: () => HtmlFormat.Appendable = () => PropertyWindWatertightCannotBeReduced(NormalMode)(using fakeRequest, messages)
 
   "The Property wind and water cannot be reduced or removed view" must {
-    behave like normalPage(view, "propertyWindWaterEnd", "title", "heading", "p1.part1", "p1.part2", "subheading", "p2")
+    behave like normalPage(view, "propertyWindWaterEnd", "title", "p1.part1", "p1.part2", "subheading", "p2")
 
     "has a link marked with site.back leading to the Council Tax band cannot be reduced or removed" in {
       val doc          = asDocument(view())

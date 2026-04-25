@@ -14,8 +14,8 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.Implicits._
-@import uk.gov.hmrc.govukfrontend.views.html.components._
+@import uk.gov.hmrc.govukfrontend.views.Implicits.*
+@import uk.gov.hmrc.govukfrontend.views.html.components.*
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.vo.contact.frontend.journey.model.CategoryRouter
 
@@ -36,7 +36,7 @@
         name = categoryRouter.fieldId,
         items = categoryRouter.options.zipWithIndex.map { case (option, idx) =>
             RadioItem(
-                id = categoryRouter.fieldId + (if (idx == 0) "" else "-" + (idx + 1)),
+                id = categoryRouter.fieldId + (if(idx == 0) "" else "-" + (idx + 1)),
                 value = option,
                 content = Text(messages(s"${categoryRouter.fieldId}.$option")),
                 checked = form(categoryRouter.fieldId).value.contains(option)

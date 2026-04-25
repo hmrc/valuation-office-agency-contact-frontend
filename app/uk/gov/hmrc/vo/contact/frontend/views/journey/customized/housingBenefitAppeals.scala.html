@@ -22,17 +22,15 @@
 
 @(customizedContent: CustomizedContent)(implicit messages: Messages)
 
-<h1 class="govuk-heading-l">@messages(customizedContent.heading)</h1>
-
 <p class="govuk-body">
- <a class="govuk-link" href="https://www.gov.uk/appeal-housing-benefit-decision">@messages("housingBenefitAppeals.link1.text")</a>
- @messages("housingBenefitAppeals.p1")
+    <a class="govuk-link" href="https://www.gov.uk/appeal-housing-benefit-decision">@messages("housingBenefitAppeals.link1.text")</a>
+    @messages("housingBenefitAppeals.p1")
 </p>
 
 <h2 class="govuk-heading-m">@messages("housingBenefitAppeals.subheading")</h2>
 
 <p class="govuk-body">
- <a class="govuk-link" href="https://www.gov.uk/housing-benefit">@messages("housingBenefitAppeals.link2.text")</a>
+    <a class="govuk-link" href="https://www.gov.uk/housing-benefit">@messages("housingBenefitAppeals.link2.text")</a>
 </p>
 
 @general_enquires_fair_rent(routes.JourneyController.onPageLoad(OtherHBEnquiry.key).url)

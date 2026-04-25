@@ -38,10 +38,11 @@
 @layout(
     pageTitle = messages("councilTaxBusinessEnquiry.title"),
     backLink = backLink,
+    showH1 = false,
     theForm = form,
     overrideErrorSummaryLink = "#councilTaxBusinessEnquiry.form-error"
 ) {
-    @formWithCSFR(action = CouncilTaxBusinessController.onEnquirySubmit(), Symbol("autoComplete") -> "off") {
+    @formWithCSFR(action = CouncilTaxBusinessController.onEnquirySubmit()) {
 
         @govukRadios(Radios(
             fieldset = Fieldset(legend =

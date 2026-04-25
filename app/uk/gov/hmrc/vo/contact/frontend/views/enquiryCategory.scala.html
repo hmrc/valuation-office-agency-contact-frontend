@@ -33,9 +33,10 @@
 @layout(
     pageTitle = messages("enquiry.category.label"),
     backLink = ContactReasonController.onPageLoad.url,
+    showH1 = false,
     theForm = form
 ) {
-    @formWithCSRF(action = EnquiryCategoryController.onSubmit(mode), Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = EnquiryCategoryController.onSubmit(mode)) {
 
         @govukRadios(RadioField.radios(form, "enquiry", "category", values))
 

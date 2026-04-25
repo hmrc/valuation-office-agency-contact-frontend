@@ -37,10 +37,11 @@
 @layout(
     pageTitle = messages("existingEnquiryCategory.title"),
     backLink = ContactReasonController.onPageLoad.url,
+    showH1 = false,
     theForm = form,
     overrideErrorSummaryLink = "#existingEnquiryCategory.council_tax"
 ) {
-    @formWithCSRF(action = ExistingEnquiryCategoryController.onSubmit(), Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = ExistingEnquiryCategoryController.onSubmit()) {
 
         @govukRadios(Radios(
             fieldset = Fieldset(legend =

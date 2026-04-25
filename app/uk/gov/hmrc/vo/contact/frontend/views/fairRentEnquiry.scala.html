@@ -38,10 +38,11 @@
 @layout(
     pageTitle = messages("fairRents.title"),
     backLink = EnquiryCategoryController.onPageLoad(NormalMode).url,
+    showH1 = false,
     theForm = form,
     overrideErrorSummaryLink = "#fairRents.new"
 ) {
-    @formWithCSRF(action = FairRentEnquiryController.onSubmit(), Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = FairRentEnquiryController.onSubmit()) {
 
         @govukRadios(Radios(
             fieldset = Fieldset(legend =

@@ -20,7 +20,6 @@ echo "POST       /changeContactDetails                       uk.gov.hmrc.vo.cont
 echo "Adding messages to conf.messages"
 echo "" >> ../conf/messages.en
 echo "contactDetails.title = contactDetails" >> ../conf/messages.en
-echo "contactDetails.heading = contactDetails" >> ../conf/messages.en
 echo "contactDetails.field1 = Field 1" >> ../conf/messages.en
 echo "contactDetails.field2 = Field 2" >> ../conf/messages.en
 echo "contactDetails.checkYourAnswersLabel = contactDetails" >> ../conf/messages.en

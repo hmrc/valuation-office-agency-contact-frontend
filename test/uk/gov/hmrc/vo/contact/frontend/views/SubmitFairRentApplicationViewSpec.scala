@@ -27,7 +27,7 @@ class SubmitFairRentApplicationViewSpec extends ViewBehaviours {
   def view: () => HtmlFormat.Appendable = () => submitFairRentApplication()(using fakeRequest, messages)
 
   "Check Fair Rent Application view" must {
-    behave like normalPage(view, "fairRentApplication", "title", "heading", "p1", "p2", "subheading", "p3")
+    behave like normalPage(view, "fairRentApplication", "title", "p1", "p2", "subheading", "p3")
 
     "has a link marked with site.back leading to the Fair Rent Enquiry self contained Page" in {
       val doc          = asDocument(view())

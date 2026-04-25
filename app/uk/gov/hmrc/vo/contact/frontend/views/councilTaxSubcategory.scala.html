@@ -38,10 +38,11 @@
 @layout(
     pageTitle = messages("councilTaxSubcategory.title"),
     backLink = EnquiryCategoryController.onPageLoad(mode).url,
+    showH1 = false,
     theForm = form,
     overrideErrorSummaryLink = "#councilTaxSubcategory.council_tax_band_too_high"
 ) {
-    @formWithCSRF(action = CouncilTaxSubcategoryController.onSubmit(mode), Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = CouncilTaxSubcategoryController.onSubmit(mode)) {
 
         @govukRadios(Radios(
             fieldset = Fieldset(legend =
@@ -58,7 +59,6 @@
             ),
             errorMessage = form.errors.asTextErrorMessageForField("value")
         ))
-
 
         @govukButton(SubmitButton("continue"))
 

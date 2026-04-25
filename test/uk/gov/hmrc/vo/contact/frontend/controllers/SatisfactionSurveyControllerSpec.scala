@@ -49,7 +49,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
     None,
     List(
       AnswerRow("enquiryCategory.checkYourAnswersLabel", "enquiryCategory.council_tax", true, ""),
-      AnswerRow("contactDetails.heading", "Test<br>test123@test.com<br>077777777777", false, ""),
+      AnswerRow("contactDetails.title", "Test<br>test123@test.com<br>077777777777", false, ""),
       AnswerRow("propertyAddress.heading", "123 test<br>london<br>bn12 2kj", false, ""),
       AnswerRow("tellUsMore.checkYourAnswersLabel", "some message", false, "")
     )

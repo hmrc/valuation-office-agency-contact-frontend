@@ -32,7 +32,6 @@ class CouncilTaxBandTooHighViewSpec extends ViewBehaviours {
       view,
       "councilTaxBandTooHigh",
       "title",
-      "heading",
       "p1.part1",
       "p1.part2",
       "p1.url",

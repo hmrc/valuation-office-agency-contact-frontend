@@ -28,7 +28,7 @@ class CouncilTaxPropertyEmptyViewSpec extends ViewBehaviours {
   def view: () => HtmlFormat.Appendable = () => councilTaxPropertyEmpty()(using fakeRequest, messages)
 
   "Council Tax Property Empty view" must {
-    behave like normalPage(view, "councilTaxPropertyEmpty", "title", "heading", "p1", "p2")
+    behave like normalPage(view, "councilTaxPropertyEmpty", "title", "p1", "p2")
 
     "has a link marked with site.back leading to the Council Tax Property Empty Page" in {
       val doc          = asDocument(view())

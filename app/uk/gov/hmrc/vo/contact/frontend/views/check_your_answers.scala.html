@@ -31,8 +31,6 @@
     pageTitle = messages("checkYourAnswers.title"),
     backLink = backLink
 ) {
-    <h1 class="govuk-heading-l">@messages("checkYourAnswers.heading")</h1>
-
     @govukSummaryList(SummaryList(rows = formatSections(answerSections)))
 
     @govukButton(LinkButton("confirm", CheckYourAnswersController.goToConfirmationPage().url))
@@ -40,5 +38,4 @@
     @if(isEnquiryCategoryOneOf("housing_benefit","fair_rent")) {
         @help_with_service_fair_rent()
     }
-
 }

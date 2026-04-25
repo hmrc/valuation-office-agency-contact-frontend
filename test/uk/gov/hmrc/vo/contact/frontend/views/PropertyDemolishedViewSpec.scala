@@ -32,7 +32,6 @@ class PropertyDemolishedViewSpec extends ViewBehaviours {
       view,
       "propertyDemolished",
       "title",
-      "heading",
       "p2.part1",
       "p2.part2",
       "p2.url",

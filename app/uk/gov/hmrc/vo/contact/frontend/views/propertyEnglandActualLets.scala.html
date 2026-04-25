@@ -37,10 +37,11 @@
 @layout(
     pageTitle = messages("propertyEnglandActualLets.title"),
     backLink = PropertyEnglandAvailableLetsController.onPageLoad().url,
+    showH1 = false,
     theForm = form,
     overrideErrorSummaryLink = "#propertyEnglandActualLets.yes"
 ) {
-    @formWithCSRF(action = PropertyEnglandActualLetsController.onSubmit(), Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = PropertyEnglandActualLetsController.onSubmit()) {
 
         @govukRadios(Radios(
             fieldset = Fieldset(legend =

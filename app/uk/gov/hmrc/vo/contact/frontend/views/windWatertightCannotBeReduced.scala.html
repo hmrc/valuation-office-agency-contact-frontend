@@ -14,21 +14,18 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.vo.contact.frontend.models.{Mode, NormalMode}
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
-@import uk.gov.hmrc.vo.contact.frontend.models.Mode
-@import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 
 @this(layout: PrimaryLayout)
 
 
-@(mode:Mode)(implicit request: RequestHeader, messages: Messages)
+@(mode: Mode)(implicit request: RequestHeader, messages: Messages)
 
 @layout(
     pageTitle = messages("propertyWindWaterEnd.title"),
     backLink = CouncilTaxSubcategoryController.onPageLoad(mode).url
 ) {
-    <h1 class="govuk-heading-l">@messages("propertyWindWaterEnd.heading")</h1>
-
     <p class="govuk-body">
         <a class="govuk-link" target="_self" href=@messages("propertyWindWaterEnd.p1.url")>
         @messages("propertyWindWaterEnd.p1.part1")
@@ -40,7 +37,7 @@
 
     <p class="govuk-body">
         <a class="govuk-link" target="_self" href=@messages("propertyWindWaterEnd.p2.url")>
-            @messages("propertyWindWaterEnd.p2")
+        @messages("propertyWindWaterEnd.p2")
         </a>
     </p>
 

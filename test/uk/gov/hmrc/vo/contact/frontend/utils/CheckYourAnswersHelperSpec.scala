@@ -271,7 +271,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
         val result = checkYourAnswers.contactDetails
         result mustBe Some(AnswerRow(
-          "contactDetails.heading",
+          "contactDetails.title",
           formattedContactDetails(userAnswers.contactDetails, "<br>"),
           false,
           routes.ContactDetailsController.onPageLoad(CheckMode).url
@@ -291,7 +291,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
           val result = checkYourAnswers.contactDetails
           result mustBe Some(AnswerRow(
-            "contactDetails.heading",
+            "contactDetails.title",
             formattedContactDetails(userAnswers.contactDetails, "<br>"),
             false,
             routes.ContactDetailsController.onPageLoad(CheckMode).url

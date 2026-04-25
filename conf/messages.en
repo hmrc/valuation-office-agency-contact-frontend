@@ -1,5 +1,4 @@
 checkYourAnswers.title = Check your answers
-checkYourAnswers.heading = Check your answers
 
 # Phase banner
 phase.banner.before = This is a new service.
@@ -45,7 +44,6 @@ error.tellUsMore.poorRepair.required = Enter details of the condition of your pr
 error.tellUsMore.areaChanged.required = Enter details of the changes to the area
 
 session_expired.title = For your security, we deleted your answers
-session_expired.heading = For your security, we deleted your answers
 session_expired.guidance = The service has timed out because it was inactive for 60 minutes. Your information has not been submitted.
 
 site.back = Back
@@ -87,7 +85,6 @@ enquiryDate.notKnow = I don’t know
 error.enquiryDate.required = Select ‘Yes’ if you made your enquiry before {0}
 
 expectedUpdate.title = When you can expect an update
-expectedUpdate.heading = When you can expect an update
 expectedUpdate.para1 = We respond to most enquires within a few days. However, complicated enquiries can take up to 28 days.
 expectedUpdate.para2 = Please do not resubmit your enquiry.
 
@@ -150,7 +147,6 @@ enquiryCategory.valuation_for_public_body.about1 = independent valuation and pro
 enquiryCategory.valuation_for_public_body.finaltext = Note: this service also operates in Scotland.
 
 contactDetails.title = What are your contact details?
-contactDetails.heading = What are your contact details?
 contactDetails.hint = We will only use these details to contact you about your enquiry.
 contactDetails.fullName = Full name
 contactDetails.fullName.required = Enter your full name
@@ -167,7 +163,6 @@ contactDetails.checkYourAnswersLabel = Contact details
 
 # --- Council Tax Bill
 councilTaxBill.title = Speak to your local council about your Council Tax bill
-councilTaxBill.heading = Speak to your local council about your Council Tax bill
 councilTaxBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council">Contact your local council </a> if you have any questions about your Council Tax bill, as they handle billing and payments.
 councilTaxBill.subheading = Other help on GOV.UK
 councilTaxBill.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-council-tax-discount">Apply for discount on your Council Tax bill</a>
@@ -175,7 +170,6 @@ councilTaxBill.p3 = <a class="govuk-link" target="_self" href="https://www.gov.u
 
 # --- Council Tax Band Too High
 councilTaxBandTooHigh.title = You can challenge your Council Tax band online
-councilTaxBandTooHigh.heading = You can challenge your Council Tax band online
 councilTaxBandTooHigh.p1.part1 = Challenge your Council Tax band
 councilTaxBandTooHigh.p1.part2 = by using our service.
 councilTaxBandTooHigh.p1.url = https://www.gov.uk/council-tax-bands
@@ -189,7 +183,6 @@ councilTaxBandTooHigh.p4.url = https://www.gov.uk/guidance/understand-how-counci
 
 # --- Council Tax band for my new property
 councilTaxBandForNew.title = Speak to your local council about Council Tax bands for new properties
-councilTaxBandForNew.heading = Speak to your local council about Council Tax bands for new properties
 councilTaxBandForNew.p1.part1 = Contact your local council
 councilTaxBandForNew.p1.url = https://www.gov.uk/find-local-council
 councilTaxBandForNew.p1.part2 =  as they need to provide us with all the details we need, including a reference number.
@@ -202,7 +195,6 @@ councilTaxBandForNew.p4.url = https://www.gov.uk/guidance/your-property-and-coun
 
 # --- My property has been partly or fully demolished
 propertyDemolished.title = Tell us if your property has been demolished
-propertyDemolished.heading = Tell us if your property has been demolished.
 propertyDemolished.p2.url = https://www.gov.uk/council-tax-bands
 propertyDemolished.p2.part1 = Use the Council Tax service
 propertyDemolished.p2.part2 = and challenge your Council Tax band to tell us that your property has been demolished.
@@ -216,14 +208,12 @@ propertyDemolished.p5.part1 = How properties are valued for Council Tax
 
 # --- Council Tax My Property Empty
 councilTaxPropertyEmpty.title = The Council Tax band is not affected if no one is living in the property
-councilTaxPropertyEmpty.heading = The Council Tax band is not affected if no one is living in the property
 councilTaxPropertyEmpty.p1 = <a class="govuk-link" href="https://www.gov.uk/find-local-council" target="_self"> Contact your local council </a> to see if you may get relief on your bill.
 councilTaxPropertyEmpty.subHeading = Other help on GOV.UK
 councilTaxPropertyEmpty.p2 = <a class="govuk-link" href="https://www.gov.uk/council-tax/second-homes-and-empty-properties" target="_self"> Council Tax for empty properties </a>
 
 # --- The Council Tax band cannot be reduced or removed
 propertyWindWater.title = The Council Tax band cannot be reduced or removed
-propertyWindWater.heading = The Council Tax band cannot be reduced or removed
 propertyWindWater.p1 = If the property is wind and watertight then it is not considered to be in poor repair. The Council Tax band cannot be removed if someone could still live at the property.
 propertyWindWater.subheading = Other help on GOV.UK
 propertyWindWater.p2.url = https://www.gov.uk/government/publications/council-tax-domestic-properties-in-disrepair-or-derelict/council-tax-domestic-properties-which-are-in-disrepair-or-are-derelict
@@ -239,7 +229,6 @@ error.propertyWindWater.required = Select ’Yes’ if the property is protected
 
 # -------- End of wind and water journey
 propertyWindWaterEnd.title = Tell us about the condition of your property online
-propertyWindWaterEnd.heading = Tell us about the condition of your property online
 propertyWindWaterEnd.p1.url = https://www.gov.uk/council-tax-bands
 propertyWindWaterEnd.p1.part1 = Use the Council Tax service
 propertyWindWaterEnd.p1.part2 = to check and challenge your Council Tax band.
@@ -249,7 +238,6 @@ propertyWindWaterEnd.p2 = When a Council Tax band would be affected by poor repa
 
 # -------- End of Permanent Changes journey
 propertyPermanentChanges.title = Tell us about permanent changes to the local area online
-propertyPermanentChanges.heading = Tell us about permanent changes to the local area online
 propertyPermanentChanges.p1.url = https://www.gov.uk/council-tax-bands
 propertyPermanentChanges.p1.part1 = Use the Council Tax service
 propertyPermanentChanges.p1.part2 = to check and challenge your Council Tax band.
@@ -276,21 +264,18 @@ annexeSelfContainedEnquiry.form.error = Select ‘Yes’ if the annexe is self-c
 
 # -------- Annexe is not self-contained
 annexeNotSelfContained.title = Your annexe will not affect your Council Tax band
-annexeNotSelfContained.heading = Your annexe will not affect your Council Tax band
 annexeNotSelfContained.p1 = Your Council Tax band will not be affected because the annexe is not self-contained with its own cooking and washing facilities.
 annexeNotSelfContained.subheading = Other help on GOV.UK
 annexeNotSelfContained.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> How annexes affect Council Tax bands </a>
 
 # -------- Annexe no cooking and washing facilities
 annexeNoFacilities.title = Your self-contained annexe will not affect your Council Tax band
-annexeNoFacilities.heading = Your self-contained annexe will not affect your Council Tax band
 annexeNoFacilities.p1 = Your Council Tax band will not be affected because the annexe does not have its own cooking and washing facilities.
 annexeNoFacilities.subheading = Other help on GOV.UK
 annexeNoFacilities.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> How annexes affect Council Tax bands </a>
 
 # -------- Annexe self contained
 annexeSelfContained.title = Speak to your local council about your annexe
-annexeSelfContained.heading = Speak to your local council about your annexe
 annexeSelfContained.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council"> Contact your local council</a> to provide full details of the annexe, including all the rooms and how they are connected to the main property.
 annexeSelfContained.subheading = Other help on GOV.UK
 annexeSelfContained.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> How annexes affect Council Tax bands </a>
@@ -304,7 +289,6 @@ annexeCookingWashing.form.error = Select ‘Yes’ if the annexe has both cookin
 
 # -------- Tell us you have removed an annexe
 annexeRemoved.title = Tell us you have removed an annexe
-annexeRemoved.heading = Tell us you have removed an annexe
 annexeRemoved.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/council-tax-bands">Use the Council Tax service</a> and challenge your Council Tax band to tell us that you have removed an annexe.
 annexeRemoved.subheading = Other help on GOV.UK
 annexeRemoved.url1 = <a class="govuk-link" target="_self" href="http://gov.uk/challenge-council-tax-band">How to challenge your Council Tax band</a>
@@ -326,7 +310,6 @@ councilTaxBusinessEnquiry.form.error = Select how much of your property is used 
 
 # -------- Your Council Tax will not be affected
 propertySmallPartUsed.title = Your Council Tax will not be affected
-propertySmallPartUsed.heading = Your Council Tax will not be affected
 propertySmallPartUsed.p1 = If you use a room as an office or sell goods by post this will not affect your Council Tax band. You will not have to pay business rates.
 propertySmallPartUsed.subheading =Other help on GOV.UK
 propertySmallPartUsed.p2.url = https://www.gov.uk/introduction-to-business-rates/working-at-home
@@ -336,15 +319,12 @@ propertySmallPartUsed.p3 = Running a business from home
 
 # -------- When did you start using your property for business
 datePropertyChanged.business.title = When did you start using your property for business? (optional)
-datePropertyChanged.business.heading = When did you start using your property for business? (optional)
 
 # -------- Permanent changes in the local area that affect the value of my property
 datePropertyChanged.areaChange.title = When did the change in the area happen? (optional)
-datePropertyChanged.areaChange.heading = When did the change in the area happen? (optional)
 
 # -------- When did you stop using your property for business
 datePropertyChanged.notUsed.title = When did you stop using your property for business? (optional)
-datePropertyChanged.notUsed.heading = When did you stop using your property for business? (optional)
 
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = What is your Council Tax enquiry about?
@@ -400,7 +380,6 @@ error.propertyWalesAvailableLets.required = Select ’Yes’ if your property is
 
 # --- Property merged or split
 propertyMergeSplit.title = Speak to your local council if you have split or merged your property
-propertyMergeSplit.heading = Speak to your local council if you have split or merged your property
 propertyMergeSplit.p1.url = https://www.gov.uk/find-local-council
 propertyMergeSplit.p1.part1 = Contact your local council
 propertyMergeSplit.p1.part2 = as they need to provide us with all the details we need, including a reference number.
@@ -408,7 +387,6 @@ propertyMergeSplit.p2 = We will only be able to update your Council Tax band onc
 
 # --- No business rates are required in England
 businessRatesSelfCateringNoBusinessRate.title = You will not have to pay business rates for your property in England
-businessRatesSelfCateringNoBusinessRate.heading = You will not have to pay business rates for your property in England
 businessRatesSelfCateringNoBusinessRate.p1 = You may still need to pay Council Tax.
 businessRatesSelfCateringNoBusinessRate.p2 = If your property is in England, it will only be valued for business rates if it is both:
 businessRatesSelfCateringNoBusinessRate.p2.bullet1 = available to let for short periods that total 140 nights or more per year
@@ -420,7 +398,6 @@ businessRatesSelfCateringNoBusinessRate.p3.part3 =and complete a ‘check’ to 
 
 # --- No business rates are required in Wales
 businessRatesSelfCateringNoBusinessRateWales.title = You will not have to pay business rates for your property in Wales
-businessRatesSelfCateringNoBusinessRateWales.heading = You will not have to pay business rates for your property in Wales
 businessRatesSelfCateringNoBusinessRateWales.p1 = You may still need to pay Council Tax
 businessRatesSelfCateringNoBusinessRateWales.p2 = If your property is in Wales, it will only be valued for business rates if it is both:
 businessRatesSelfCateringNoBusinessRateWales.p3 = available to let for short periods that total 251 nights or more per year
@@ -432,7 +409,6 @@ businessRatesSelfCateringNoBusinessRateWales.p5.part3 = to tell the Valuation Of
 
 # --- Self-catering properties or holiday lets in England
 propertyEnglandLets.title = Tell us about your self-catering or holiday let property in England
-propertyEnglandLets.heading = Tell us about your self-catering or holiday let property in England
 propertyEnglandLets.p1 = If your property is in England, it will be valued for business rates if it is both:
 propertyEnglandLets.p1.bullet1 = available to let for short periods that total 140 nights or more per year
 propertyEnglandLets.p1.bullet2 = actually let for at least 70 nights
@@ -445,7 +421,6 @@ propertyEnglandLets.p3 = Self-catering and holiday lets
 
 # --- Self-catering properties or holiday lets in Wales
 propertyWalesLets.title = Tell us about your self-catering or holiday let property in Wales
-propertyWalesLets.heading = Tell us about your self-catering or holiday let property in Wales
 propertyWalesLets.p1 = If your property is in Wales, it will be valued for business rates if it is both:
 propertyWalesLets.p1.bl1 = available to let for short periods that total 251 nights or more per year
 propertyWalesLets.p1.bl2 = actually let for at least 182 nights
@@ -458,7 +433,6 @@ propertyWalesLets.p3 = Self-catering and holiday lets
 
 # --- Not need to pay business rates
 businessRatesNoNeedToPay.title = You will not need to pay business rates
-businessRatesNoNeedToPay.heading = You will not need to pay business rates
 businessRatesNoNeedToPay.p1 = If you only use a room as an office or sell goods by post, you will not need to pay business rates. Your Council Tax band will not be affected.
 businessRatesNoNeedToPay.subheading = Other help on GOV.UK
 businessRatesNoNeedToPay.url = <a href="https://www.gov.uk/introduction-to-business-rates/working-at-home" target="_self">Working at home </a>
@@ -523,7 +497,6 @@ businessRatesPropertyDemolishedInWales.p3 = How to check and challenge your busi
 
 # --- My property needs a business rates valuation
 businessRatesValuation.title = Speak to your local council first about getting a business rates valuation
-businessRatesValuation.heading = Speak to your local council first about getting a business rates valuation
 businessRatesValuation.p1.url = https://www.gov.uk/contact-your-local-council-about-business-rates
 businessRatesValuation.p1.part1 = Contact your local council
 businessRatesValuation.p1.part2 = as they need to provide us with all the details we need, including a reference number.
@@ -536,7 +509,6 @@ businessRatesValuation.p4 = Estimate your business rates
 
 # -------- Business rates bill
 businessRatesBill.title = Speak to your local council about your business rates bill
-businessRatesBill.heading = Speak to your local council about your business rates bill
 businessRatesBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/contact-your-local-council-about-business-rates">Contact your local council</a> if you have any questions about your business rates bill, as they handle billing and payments.
 businessRatesBill.subheading = Other help on GOV.UK
 businessRatesBill.url = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-business-rate-relief">Business rates relief and discounts</a>
@@ -556,7 +528,6 @@ error.businessRatesPropertyEnquiry.required = Select if your property is in Engl
 
 # --- Tell us that your property is no longer used for business
 businessRatesNonBusiness.title = Tell us that your property is no longer used for business
-businessRatesNonBusiness.heading = Tell us that your property is no longer used for business
 businessRatesNonBusiness.p1 = <a href="https://www.gov.uk/business-rates-valuation-account" target="_self">Sign into or set up your business rates valuation account</a> to tell us that your property is no longer used for business.
 businessRatesNonBusiness.p2 = How to tell us: step by step
 businessRatesNonBusiness.step1 = Sign in or register for an account
@@ -582,13 +553,11 @@ businessRatesSubcategory.checkYourAnswersLabel = Enquiry details
 
 # -------- Business Rates Property Empty
 businessRatesPropertyEmpty.title = Business rates are not affected if a property is empty
-businessRatesPropertyEmpty.heading = Business rates are not affected if a property is empty
 businessRatesPropertyEmpty.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/contact-your-local-council-about-business-rates">Contact your local council</a> to find out if you can get any reliefs or discounts on your bill.
 businessRatesPropertyEmpty.subheading = Other help on GOV.UK
 businessRatesPropertyEmpty.url = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-business-rate-relief">Business rates relief and discounts</a>
 
 businessRatesChallenge.title = Challenging my business rates valuation
-businessRatesChallenge.heading = Challenging my business rates valuation
 businessRatesChallenge.body = Use the Valuation Office’s online service to <a href="https://www.gov.uk/correct-your-business-rates" target="_self">check and challenge your business rates valuation</a>.</p><p class="govuk-body">If your property is in England, you’ll need to register and claim your property before you can challenge the valuation.
 
 # --- Changes to your property or area in England
@@ -804,18 +773,15 @@ error.message.xss-invalid.feedback = Feedback must only contain letters a to z, 
 # SURVEY THANKYOU
 ###############################
 feedback.thankyou.title = Thank you for your feedback
-feedback.thankyou.heading = Thank you for your feedback
 feedback.anotherForm=Submit another form
 
-valuationAdvice.title = Contact details for District Valuer Services
-valuationAdvice.heading = Contact details for District Valuer Services (DVS)
+valuationAdvice.title = Contact details for District Valuer Services (DVS)
 valuationAdvice.email-title = Email:
 valuationAdvice.email = clientdevelopmentvo@hmrc.gov.uk
 valuationAdvice.phone-title = Telephone
 valuationAdvice.phone-number = 03000 501501
 
 valuationForTaxes.title = Contact details for Right to Buy, valuation for taxes, or appeals against Community Infrastructure Levy
-valuationForTaxes.heading = Contact details for Right to Buy, valuation for taxes, or appeals against Community Infrastructure Levy
 valuationForTaxes.email-title = Email:
 valuationForTaxes.email = askSVTvo@hmrc.gov.uk
 valuationForTaxes.generalEnquiries-title = General enquiries
@@ -825,13 +791,11 @@ valuationForTaxes.openingHours-title = Opening hours
 valuationForTaxes.openingHours = 8:30am to 5:00pm. Closed on bank holidays.
 
 providingLettings.title = Provide information to the Rent Officers online
-providingLettings.heading = Provide information to the Rent Officers online
 providingLettings.p1 = Download and complete the form on GOV.UK.
 providingLettings.p1.url = https://www.gov.uk/government/publications/local-housing-allowance-and-statistics-on-private-rent-levels
 providingLettings.p2 = You can then send it to the Rent Officers using the details provided with the form.
 
 fairRentApplication.title = Submit a fair rent application using the application form
-fairRentApplication.heading = Submit a fair rent application using the application form
 fairRentApplication.p1 = Download the fair rent application forms and read guidance
 fairRentApplication.p1.url = https://www.gov.uk/government/publications/fair-rent-forms
 fairRentApplication.p2 = on the GOV.UK website.
@@ -841,7 +805,6 @@ fairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
 fairRent.telephone = Telephone: 03000 502502
 
 checkFairRentApplication.title = Check the register of fair rents online
-checkFairRentApplication.heading = Check the register of fair rents online
 checkFairRentApplication.p1 = Use the Valuation Office’s service
 checkFairRentApplication.p1.url = https://www.gov.uk/check-register-rents
 checkFairRentApplication.p2 = to check the register of fair rents.
@@ -850,7 +813,6 @@ checkFairRentApplication.p3 = About fair rents
 checkFairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
 
 datePropertyChanged.poorRepair.title = When did your property start to be in poor repair? (optional)
-datePropertyChanged.poorRepair.heading = When did your property start to be in poor repair? (optional)
 datePropertyChanged.hint = For example, 27 2 2021
 datePropertyChanged.error.invalidDate = Enter a real date
 datePropertyChanged.error.mandatory.dayMonth = Date must include a day and month
@@ -870,12 +832,10 @@ datePropertyChanged.error.year.number = Date must have a year that is a number
 datePropertyChanged.error.year.range = Date must be on or after 1 january 1900
 
 error400.title = Page not found
-error400.heading = Page not found
 error400.para1 = If you typed the web address, check it is correct.
 error400.para2 = If you pasted the web address, check you copied the entire address.
 
 error500.title = Sorry, there is a problem with the service
-error500.heading = Sorry, there is a problem with this service
 error500.tryagain.para = Try again later.
 
 footer.links.languale.url = /valuation-office-agency-contact-frontend/language/cymraeg

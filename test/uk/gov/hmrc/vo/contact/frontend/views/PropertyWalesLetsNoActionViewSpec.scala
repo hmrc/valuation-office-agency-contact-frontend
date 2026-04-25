@@ -35,7 +35,6 @@ class PropertyWalesLetsNoActionViewSpec extends ViewBehaviours {
       view140Days,
       "businessRatesSelfCateringNoBusinessRateWales",
       "title",
-      "heading",
       "p1",
       "p2",
       "p3",

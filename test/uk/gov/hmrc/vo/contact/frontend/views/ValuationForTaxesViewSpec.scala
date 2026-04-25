@@ -29,7 +29,7 @@ class ValuationForTaxesViewSpec extends ViewBehaviours {
 
   "Valuation For Taxes view" must {
 
-    behave like normalPage(view, "valuationForTaxes", "title", "heading", "email-title", "email")
+    behave like normalPage(view, "valuationForTaxes", "title", "email-title", "email")
 
     "has a link marked with site.back leading to the Enquiry Category Page" in {
       val doc          = asDocument(view())

@@ -28,7 +28,7 @@ class BusinessRatesBillViewSpec extends ViewBehaviours {
   def view: () => HtmlFormat.Appendable = () => businessRatesBill()(using fakeRequest, messages)
 
   "Business Rates Bill view" must {
-    behave like normalPage(view, "businessRatesBill", "title", "heading", "p1", "subheading", "url", "url1")
+    behave like normalPage(view, "businessRatesBill", "title", "p1", "subheading", "url", "url1")
 
     "has a link marked with site.back leading to the Council Tax annexe self contained Page" in {
       val doc          = asDocument(view())

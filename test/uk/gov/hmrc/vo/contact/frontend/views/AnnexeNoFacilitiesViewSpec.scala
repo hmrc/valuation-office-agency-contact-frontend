@@ -28,7 +28,7 @@ class AnnexeNoFacilitiesViewSpec extends ViewBehaviours {
   def view: () => HtmlFormat.Appendable = () => councilTaxAnnexeNoFacilities()(using fakeRequest, messages)
 
   "Council Tax Bill view" must {
-    behave like normalPage(view, "annexeNoFacilities", "title", "heading", "p1", "p2", "subheading")
+    behave like normalPage(view, "annexeNoFacilities", "title", "p1", "p2", "subheading")
 
     "has a link marked with site.back leading to the Council Tax annexe self contained Page" in {
       val doc          = asDocument(view())

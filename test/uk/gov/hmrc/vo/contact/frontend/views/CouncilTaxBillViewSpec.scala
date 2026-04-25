@@ -28,7 +28,7 @@ class CouncilTaxBillViewSpec extends ViewBehaviours {
   def view: () => HtmlFormat.Appendable = () => councilTaxBill()(using fakeRequest, messages)
 
   "Council Tax Bill view" must {
-    behave like normalPage(view, "councilTaxBill", "title", "heading", "p1", "p2", "p3")
+    behave like normalPage(view, "councilTaxBill", "title", "p1", "p2", "p3")
 
     "has a link marked with site.back leading to the Council Tax Property Empty Page" in {
       val doc          = asDocument(view())

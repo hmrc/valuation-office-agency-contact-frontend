@@ -28,7 +28,7 @@ class CouncilTaxBandForNewViewSpec extends ViewBehaviours {
   def view: () => HtmlFormat.Appendable = () => councilTaxBandForNew()(using fakeRequest, messages)
 
   "Council Tax Band For A New Property view" must {
-    behave like normalPage(view, "councilTaxBandForNew", "title", "heading", "subheading", "p1.part1", "p1.url", "p1.part2", "p2", "p3", "p4", "p4.url", "p4")
+    behave like normalPage(view, "councilTaxBandForNew", "title", "subheading", "p1.part1", "p1.url", "p1.part2", "p2", "p3", "p4", "p4.url", "p4")
 
     "has a link marked with site.back leading to the Council Tax Band For A New Property" in {
       val doc          = asDocument(view())

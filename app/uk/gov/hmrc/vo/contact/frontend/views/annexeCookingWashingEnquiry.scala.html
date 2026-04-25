@@ -36,10 +36,11 @@
 @layout(
     pageTitle = messages("annexeCookingWashing.title"),
     backLink = CouncilTaxAnnexeController.onSelfContainedEnquiryPageLoad().url,
+    showH1 = false,
     theForm = form,
     overrideErrorSummaryLink = "#annexeCookingWashing.form.yes"
 ) {
-    @formWithCSRF(action = CouncilTaxAnnexeController.onHaveCookingWashingSubmit(), Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = CouncilTaxAnnexeController.onHaveCookingWashingSubmit()) {
 
         @govukRadios(Radios(
             fieldset = Fieldset(legend =

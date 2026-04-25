@@ -14,8 +14,8 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
 @this(layout: PrimaryLayout)
 
@@ -25,8 +25,6 @@
     pageTitle = messages("businessRatesSelfCateringNoBusinessRateWales.title"),
     backLink = backLink
 ) {
-    <h1 class="govuk-heading-l">@messages("businessRatesSelfCateringNoBusinessRateWales.heading")</h1>
-
     <p class="govuk-body">@messages("businessRatesSelfCateringNoBusinessRateWales.p1")</p>
 
     <p class="govuk-body">@messages("businessRatesSelfCateringNoBusinessRateWales.p2")</p>
@@ -47,7 +45,7 @@
 
     <p class="govuk-body">
         <a class="govuk-link" target="_self" href=@messages("propertyEnglandLets.p3.url")>
-            @messages("propertyEnglandLets.p3")
+        @messages("propertyEnglandLets.p3")
         </a>
     </p>
 

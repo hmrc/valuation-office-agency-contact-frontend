@@ -14,8 +14,8 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
 @this(layout: PrimaryLayout)
 
@@ -23,24 +23,21 @@
 @()(implicit request: RequestHeader, messages: Messages)
 
 @layout(
- pageTitle = messages("fairRentApplication.title"),
- backLink = FairRentEnquiryController.onPageLoad().url
+    pageTitle = messages("fairRentApplication.title"),
+    backLink = FairRentEnquiryController.onPageLoad().url
 ) {
- <h1 class="govuk-heading-l">@messages("fairRentApplication.heading")</h1>
+    <p class="govuk-body">
+        <a class="govuk-link" target="_self" href=@messages("fairRentApplication.p1.url")>
+        @messages("fairRentApplication.p1")
+        </a>
+        @messages("fairRentApplication.p2")
+    </p>
 
- <p class="govuk-body">
-  <a class="govuk-link" target="_self" href=@messages("fairRentApplication.p1.url")>
-  @messages("fairRentApplication.p1")
-  </a>
-  @messages("fairRentApplication.p2")
- </p>
+    <h2 class="govuk-heading-m">@messages("fairRentApplication.subheading")</h2>
 
- <h2 class="govuk-heading-m">@messages("fairRentApplication.subheading")</h2>
+    <ul class="govuk-list">
+        <li><a class="govuk-link" target="_self" href=@messages("fairRentApplication.p3.url")>@messages("fairRentApplication.p3")</a></li>
+    </ul>
 
- <ul class="govuk-list">
-  <li><a class="govuk-link" target="_self" href=@messages("fairRentApplication.p3.url")>@messages("fairRentApplication.p3")</a></li>
- </ul>
-
- @components.general_enquires_fair_rent(TellUsMoreController.onPageLoad(NormalMode).url)
-
+    @components.general_enquires_fair_rent(TellUsMoreController.onPageLoad(NormalMode).url)
 }

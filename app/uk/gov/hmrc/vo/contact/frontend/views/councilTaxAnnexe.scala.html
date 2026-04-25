@@ -37,10 +37,11 @@
 @layout(
     pageTitle = messages("annexe.title"),
     backLink = CouncilTaxSubcategoryController.onPageLoad(mode).url,
+    showH1 = false,
     theForm = form,
     overrideErrorSummaryLink = "#annexe.added"
 ) {
-    @formWithCSRF(action = CouncilTaxAnnexeController.onSubmit(), Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = CouncilTaxAnnexeController.onSubmit()) {
 
         @govukRadios(Radios(
             fieldset = Fieldset(legend =

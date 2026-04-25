@@ -27,7 +27,7 @@ class PropertySmallPartUsedViewSpec extends ViewBehaviours {
   def view: () => HtmlFormat.Appendable = () => propertySmallPartUsed()(using fakeRequest, messages)
 
   "Small part of property used for business view" must {
-    behave like normalPage(view, "propertySmallPartUsed", "title", "heading", "p1", "subheading", "p2.url", "p2", "p3.url", "p3")
+    behave like normalPage(view, "propertySmallPartUsed", "title", "p1", "subheading", "p2.url", "p2", "p3.url", "p3")
 
     "has a link marked with site.back leading to the Council Tax band cannot be reduced or removed" in {
       val doc          = asDocument(view())

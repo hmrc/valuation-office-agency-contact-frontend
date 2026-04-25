@@ -37,10 +37,11 @@
 @layout(
     pageTitle = messages("businessRatesSelfCatering.title"),
     backLink = BusinessRatesSubcategoryController.onPageLoad(mode).url,
+    showH1 = false,
     theForm = form,
     overrideErrorSummaryLink = "#businessRatesSelfCatering.england"
 ) {
-    @formWithCSRF(action = BusinessRatesSelfCateringController.onSubmit(), Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = BusinessRatesSelfCateringController.onSubmit()) {
 
         @govukRadios(Radios(
             fieldset = Fieldset(legend =

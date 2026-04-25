@@ -19,19 +19,18 @@
 @import uk.gov.hmrc.vo.contact.frontend.journey.pages.OtherHAHBEnquiry
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.general_enquires_fair_rent
 
+
 @(customizedContent: CustomizedContent)(implicit messages: Messages)
 
-<h1 class="govuk-heading-l">@messages(customizedContent.heading)</h1>
-
 <p class="govuk-body">
- <a class="govuk-link" href="https://lha-direct.voa.gov.uk/search.aspx">@messages("localHousingAllowanceRates.link1.text")</a>
- @messages("localHousingAllowanceRates.p1")
+    <a class="govuk-link" href="https://lha-direct.voa.gov.uk/search.aspx">@messages("localHousingAllowanceRates.link1.text")</a>
+    @messages("localHousingAllowanceRates.p1")
 </p>
 
 <h2 class="govuk-heading-m">@messages("localHousingAllowanceRates.subheading")</h2>
 
 <p class="govuk-body">
- <a class="govuk-link" href="https://www.gov.uk/guidance/local-housing-allowance">@messages("localHousingAllowanceRates.link2.text")</a>
+    <a class="govuk-link" href="https://www.gov.uk/guidance/local-housing-allowance">@messages("localHousingAllowanceRates.link2.text")</a>
 </p>
 
 @general_enquires_fair_rent(routes.JourneyController.onPageLoad(OtherHAHBEnquiry.key).url)

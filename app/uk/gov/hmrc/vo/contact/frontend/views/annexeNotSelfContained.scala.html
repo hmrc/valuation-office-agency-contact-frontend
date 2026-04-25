@@ -25,8 +25,6 @@
     pageTitle = messages("annexeNotSelfContained.title"),
     backLink = CouncilTaxAnnexeController.onSelfContainedEnquiryPageLoad().url
 ) {
-    <h1 class="govuk-heading-l">@Messages("annexeNotSelfContained.heading")</h1>
-
     <p class="govuk-body">@Html(Messages("annexeNotSelfContained.p1"))</p>
 
     <h2 class="govuk-heading-m">@messages("annexeNotSelfContained.subheading")</h2>
@@ -34,5 +32,4 @@
     <p class="govuk-body">@Html(Messages("annexeNotSelfContained.p2"))</p>
 
     @components.general_enquires(TellUsMoreController.onPageLoad(NormalMode).url)
-
 }

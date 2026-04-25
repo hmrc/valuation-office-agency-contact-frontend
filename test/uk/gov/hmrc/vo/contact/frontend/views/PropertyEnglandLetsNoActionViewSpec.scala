@@ -33,7 +33,6 @@ class PropertyEnglandLetsNoActionViewSpec extends ViewBehaviours {
       viewEnglandAvailable140Nights,
       "businessRatesSelfCateringNoBusinessRate",
       "title",
-      "heading",
       "p1",
       "p2",
       "p2.bullet1",

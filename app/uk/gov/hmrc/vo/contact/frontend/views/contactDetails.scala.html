@@ -57,7 +57,7 @@
 
 @content = {
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-        <h1 class="govuk-fieldset__heading">@messages("contactDetails.heading")</h1>
+        <h1 class="govuk-fieldset__heading">@messages("contactDetails.title")</h1>
     </legend>
     <br>
     <p class="govuk-body">@messages("contactDetails.hint")</p>
@@ -71,6 +71,7 @@
 @layout(
     pageTitle = messages("contactDetails.title"),
     backLink = backLink,
+    showH1 = false,
     theForm = form
 ) {
     @formWithCSRF(action = ContactDetailsController.onSubmit(mode)) {

@@ -31,7 +31,6 @@ class PropertyEnglandLetsViewSpec extends ViewBehaviours {
       view,
       "propertyEnglandLets",
       "title",
-      "heading",
       "p1",
       "p1.bullet1",
       "p1.bullet2",

@@ -54,7 +54,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
     List(
       AnswerRow("existingEnquiryCategory.heading", "existingEnquiryCategory.council_tax", true, ""),
       AnswerRow("refNumber.value", "VO1238983", true, ""),
-      AnswerRow("contactDetails.heading", "Test<br>test123@test.com<br>077777777777", false, ""),
+      AnswerRow("contactDetails.title", "Test<br>test123@test.com<br>077777777777", false, ""),
       AnswerRow("propertyAddress.heading", "123 test<br>someCity<br>bn12 2kj", false, ""),
       AnswerRow("anythingElse.checkYourAnswersLabel", "some message", false, "")
     )
@@ -65,7 +65,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
     List(
       AnswerRow("enquiryCategory.checkYourAnswersLabel", "enquiryCategory.council_tax", true, ""),
       AnswerRow("councilTaxSubcategory.checkYourAnswersLabel", "councilTaxSubcategory.council_tax_changes", true, ""),
-      AnswerRow("contactDetails.heading", "Test<br>test123@test.com<br>077777777777", false, ""),
+      AnswerRow("contactDetails.title", "Test<br>test123@test.com<br>077777777777", false, ""),
       AnswerRow("propertyAddress.heading", "123 test<br>london<br>bn12 2kj", false, ""),
       AnswerRow("tellUsMore.checkYourAnswersLabel", "some message", false, "")
     )

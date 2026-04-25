@@ -23,10 +23,8 @@
 
 @layout(
     pageTitle = messages("businessRatesBill.title"),
-    backLink = BusinessRatesSubcategoryController.onPageLoad(NormalMode).url,
+    backLink = BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
 ) {
-    <h1 class="govuk-heading-l">@Messages("businessRatesBill.heading")</h1>
-
     <p class="govuk-body">@Html(Messages("businessRatesBill.p1"))</p>
 
     <h2 class="govuk-heading-m">@messages("businessRatesBill.subheading")</h2>

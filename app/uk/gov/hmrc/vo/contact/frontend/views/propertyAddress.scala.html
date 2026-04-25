@@ -70,6 +70,7 @@
 @layout(
     pageTitle = messages("propertyAddress.title"),
     backLink = ContactDetailsController.onPageLoad(mode).url,
+    showH1 = false,
     theForm = form
 ) {
     @formWithCSRF(action = PropertyAddressController.onSubmit(mode)) {

@@ -1,5 +1,4 @@
 checkYourAnswers.title = Gwiriwch eich atebion
-checkYourAnswers.heading = Gwiriwch eich atebion
 
 # Phase banner
 phase.banner.before = Gwasanaeth newydd yw hwn.
@@ -45,7 +44,6 @@ error.tellUsMore.poorRepair.required = Rhowch fanylion am gyflwr eich eiddo
 error.tellUsMore.areaChanged.required = Rhowch fanylion y newidiadau i’r ardal
 
 session_expired.title = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod
-session_expired.heading = Er eich diogelwch, mae’r gwasanaeth hwn wedi’i ailosod
 session_expired.guidance = Mae’r gwasanaeth wedi bennu oherwydd ei fod yn anweithgar am 60 munud. Nad yw eich gwybodaeth wedi’i gyflwyno.
  
 site.back = Yn ôl
@@ -88,7 +86,6 @@ error.enquiryDate.required = Dewiswch ‘Do’ os gwnaethoch eich ymholiad cyn {
 
 
 expectedUpdate.title = Pryd y gallwch chi ddisgwyl diweddariad
-expectedUpdate.heading = Pryd y gallwch chi ddisgwyl diweddariad
 expectedUpdate.para1 = Fel arfer byddwn yn ymateb i ymholiadau o fewn ychydig ddyddiau. Fodd bynnag, gall ymholiadau cymhleth gymryd hyd at 28 diwrnod.
 expectedUpdate.para2 = Peidiwch â chyflwyno’ch ymholiad eto.
 
@@ -156,7 +153,6 @@ enquiryCategory.valuation_for_public_body.about1 = prisiad annibynnol a chyngor 
 enquiryCategory.valuation_for_public_body.finaltext = Sylwer: mae’r gwasanaeth hwn yn gweithredu’n yr Alban hefyd.
  
 contactDetails.title = Beth yw’ch manylion cyswllt?
-contactDetails.heading = Beth yw’ch manylion cyswllt?
 contactDetails.hint = Byddwn ond yn defnyddio’r manylion hyn i gysylltu â chi ynglŷn â’ch ymholiad.
 contactDetails.fullName = Enw llawn
 contactDetails.fullName.required = Rhowch eich enw llawn
@@ -173,7 +169,6 @@ contactDetails.checkYourAnswersLabel = Manylion cyswllt
 
 # --- Council Tax Bill
 councilTaxBill.title = Siaradwch â’ch cyngor lleol am eich bil Treth Gyngor
-councilTaxBill.heading = Siaradwch â’ch cyngor lleol am eich bil Treth Gyngor
 councilTaxBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council">Cysylltwch â’ch cyngor lleol </a> os oes gennych unrhyw gwestiynau am eich bil Treth Gyngor, gan eu bod yn delio â biliau a thaliadau.
 councilTaxBill.subheading = Cymorth arall ar GOV.UK
 councilTaxBill.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-council-tax-discount">Gwnewch gais am ostyngiad ar eich bil Treth Gyngor</a>
@@ -181,7 +176,6 @@ councilTaxBill.p3 = <a class="govuk-link" target="_self" href="https://www.gov.u
 
 # --- Council Tax Band Too High
 councilTaxBandTooHigh.title = Gallwch herio’ch band Treth Gyngor ar-lein
-councilTaxBandTooHigh.heading = Gallwch herio’ch band Treth Gyngor ar-lein
 councilTaxBandTooHigh.p1.part1 = Heriwch eich band Treth Gyngor
 councilTaxBandTooHigh.p1.part2 = drwy ddefnyddio ein gwasanaeth.
 councilTaxBandTooHigh.p1.url = https://www.gov.uk/council-tax-bands
@@ -195,7 +189,6 @@ councilTaxBandTooHigh.p4.url = https://www.gov.uk/guidance/understand-how-counci
 
 # --- Council Tax band for my new property
 councilTaxBandForNew.title = Siaradwch â’ch cyngor lleol am fandiau Treth Gyngor ar gyfer eiddo newydd
-councilTaxBandForNew.heading = Siaradwch â’ch cyngor lleol am fandiau Treth Gyngor ar gyfer eiddo newydd
 councilTaxBandForNew.p1.part1 = Cysylltwch â’ch cyngor lleol
 councilTaxBandForNew.p1.url = https://www.gov.uk/find-local-council
 councilTaxBandForNew.p1.part2 = gan fod angen iddynt roi’r holl fanylion sydd eu hangen arnom, gan gynnwys cyfeirnod.
@@ -208,7 +201,6 @@ councilTaxBandForNew.p4.url = https://www.gov.uk/guidance/your-property-and-coun
 
 # --- My property has been partly or fully demolished
 propertyDemolished.title = Dywedwch wrthym os yw eich eiddo wedi’i ddymchwel
-propertyDemolished.heading = Dywedwch wrthym os yw eich eiddo wedi’i ddymchwel
 propertyDemolished.p1.url = https://www.gov.uk/find-local-council
 propertyDemolished.p1.part1 = Cysylltwch gyda’ch cyngor lleol
 propertyDemolished.p1.part2 = i ddweud wrthyn nhw fod yr eiddo wedi’i ddymchwel
@@ -226,14 +218,12 @@ propertyDemolished.p5.part1 = Sut mae eiddo’n cael eu prisio ar gyfer Treth Gy
 
 # --- Council Tax My Property Empty
 councilTaxPropertyEmpty.title = Nid yw band Treth y Cyngor yn cael ei effeithio os nad oes unrhyw un yn byw yn yr eiddo
-councilTaxPropertyEmpty.heading = Nid yw band Treth y Cyngor yn cael ei effeithio os nad oes unrhyw un yn byw yn yr eiddo
 councilTaxPropertyEmpty.p1 = <a class="govuk-link" href="https://www.gov.uk/find-local-council" target="_self"> Cysylltwch â’ch cyngor lleol </a> i weld a allwch gael rhyddhad ar eich bil.
 councilTaxPropertyEmpty.subHeading = Cymorth arall ar GOV.UK
 councilTaxPropertyEmpty.p2 = <a class="govuk-link" href="https://www.gov.uk/council-tax/second-homes-and-empty-properties" target="_self"> Treth Gyngor ar gyfer eiddo gwag </a>
 
 # --- The Council Tax band cannot be reduced or removed
 propertyWindWater.title = Ni ellir lleihau na dileu’r band Treth Gyngor
-propertyWindWater.heading = Ni ellir lleihau na dileu’r band Treth Gyngor
 propertyWindWater.p1 = Os yw’r eiddo’n atal gwynt a dŵr, yna ni ystyrir ei fod mewn cyflwr gwael. Ni ellir dileu’r band Treth Gyngor pe gallai rhywun ddal i fyw yn yr eiddo.
 propertyWindWater.subheading = Cymorth arall ar GOV.UK
 propertyWindWater.p2.url = https://www.gov.uk/government/publications/council-tax-domestic-properties-in-disrepair-or-derelict/council-tax-domestic-properties-which-are-in-disrepair-or-are-derelict
@@ -250,7 +240,6 @@ error.propertyWindWater.required = Dewiswch ‘Ydy’ os yw eich eiddo wedi’i 
 # -------- End of wind and water journey
 
 propertyWindWaterEnd.title = Dywedwch wrthym am gyflwr eich eiddo ar-lein
-propertyWindWaterEnd.heading = Dywedwch wrthym am gyflwr eich eiddo ar-lein
 propertyWindWaterEnd.p1.url = https://www.gov.uk/council-tax-bands
 propertyWindWaterEnd.p1.part1 = Defnyddiwch y gwasanaeth Treth Gyngor
 propertyWindWaterEnd.p1.part2 = i wirio a herio’ch band Treth Gyngor.
@@ -260,7 +249,6 @@ propertyWindWaterEnd.p2 = Pryd fyddai atgyweiriad gwael yn effeithio ar fand Tre
 
 # -------- End of Permanent Changes journey
 propertyPermanentChanges.title = Dywedwch wrthym am newidiadau parhaol i’r ardal leol ar-lein
-propertyPermanentChanges.heading = Dywedwch wrthym am newidiadau parhaol i’r ardal leol ar-lein
 propertyPermanentChanges.p1.url = https://www.gov.uk/council-tax-bands
 propertyPermanentChanges.p1.part1 = Defnyddiwch y gwasanaeth Treth Gyngor
 propertyPermanentChanges.p1.part2 = i wirio a herio’ch band Treth Gyngor.
@@ -287,21 +275,18 @@ annexeSelfContainedEnquiry.form.error = Dewiswch ‘Ydy’ os yw’r rhandy yn h
 
 # -------- Annexe is not self-contained
 annexeNotSelfContained.title = Ni fydd eich rhandy yn effeithio ar eich band Treth Gyngor
-annexeNotSelfContained.heading = Ni fydd eich rhandy yn effeithio ar eich band Treth Gyngor
 annexeNotSelfContained.p1 = Ni fydd eich band Treth Gyngor yn cael ei effeithio oherwydd nad yw’r rhandy yn hunangynhwysol gyda chyfleusterau coginio ac ymolchi ei hun.
 annexeNotSelfContained.subheading = Cymorth arall ar GOV.UK
 annexeNotSelfContained.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> Sut mae rhandai yn effeithio ar fandiau Treth Gyngor </a>
 
 # -------- Annexe no cooking and washing facilities
 annexeNoFacilities.title = Ni fydd eich rhandy hunangynhwysol yn effeithio ar eich band Treth Gyngor
-annexeNoFacilities.heading = Ni fydd eich rhandy hunangynhwysol yn effeithio ar eich band Treth Gyngor
 annexeNoFacilities.p1 = Ni fydd eich band treth gyngor yn cael ei effeithio oherwydd nad oes gan y rhandy gyfleusterau coginio ac ymolchi ei hun.
 annexeNoFacilities.subheading = Cymorth arall ar GOV.UK
 annexeNoFacilities.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> Sut mae rhandai yn effeithio ar fandiau </a>
 
 # -------- Annexe self contained
 annexeSelfContained.title = Siaradwch gyda’ch cyngor lleol am eich rhandy
-annexeSelfContained.heading = Siaradwch gyda’ch cyngor lleol am eich rhandy
 annexeSelfContained.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/find-local-council"> Cysylltwch gyda’ch cyngor lleol</a> i ddarparu manylion llawn yr atodiad, gan gynnwys yr holl ystafelloedd a sut maen nhw wedi’u cysylltu â’r prif eiddo.
 annexeSelfContained.subheading = Cymorth arall ar GOV.UK
 annexeSelfContained.p2 = <a class="govuk-link" target="_self" href="https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed#council-tax-bands-and-annexes"> Sut mae rhandai yn effeithio ar fandiau Treth Gyngor </a>
@@ -315,7 +300,6 @@ annexeCookingWashing.form.error = Dewiswch ‘Oes’ os oes gan yr rhandy gyfleu
 
 # -------- Tell us you have removed an annexe
 annexeRemoved.title = Dywedwch wrthym eich bod wedi dileu rhandy
-annexeRemoved.heading = Dywedwch wrthym eich bod wedi dileu rhandy
 annexeRemoved.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/council-tax-bands">Defnyddiwch y gwasanaeth Treth Gyngor</a> a heriwch eich band Treth Gyngor i ddweud wrthym eich bod wedi dileu rhandy.
 annexeRemoved.subheading = Cymorth arall ar GOV.UK
 annexeRemoved.url1 = <a class="govuk-link" target="_self" href="http://gov.uk/challenge-council-tax-band">Sut i herio’ch Band Treth Gyngor</a>
@@ -338,7 +322,6 @@ councilTaxBusinessEnquiry.form.error = Dewiswch faint o’ch eiddo sy’n cael e
 
 # -------- Your Council Tax will not be affected
 propertySmallPartUsed.title = Ni fydd eich Treth Gyngor yn cael ei heffeithio
-propertySmallPartUsed.heading = Ni fydd eich Treth Gyngor yn cael ei heffeithio
 propertySmallPartUsed.p1 = Os ydych chi’n defnyddio ystafell fel swyddfa neu ar gyfer gwerthu nwyddau trwy’r post, ni fydd hyn yn effeithio ar eich band Treth Gyngor. Ni fydd yn rhaid i chi dalu ardrethi busnes.
 propertySmallPartUsed.subheading = Cymorth arall ar GOV.UK
 propertySmallPartUsed.p2.url = https://www.gov.uk/introduction-to-business-rates/working-at-home
@@ -348,15 +331,12 @@ propertySmallPartUsed.p3 = Rhedeg busnes o gartref
 
 # -------- When did you start using your property for business
 datePropertyChanged.business.title = Pryd wnaethoch chi ddechrau defnyddio’ch eiddo ar gyfer busnes? (dewisol)
-datePropertyChanged.business.heading = Pryd wnaethoch chi ddechrau defnyddio’ch eiddo ar gyfer busnes? (dewisol)
 
 # -------- Permanent changes in the local area that affect the value of my property
 datePropertyChanged.areaChange.title = Pryd ddigwyddodd y newid i’r ardal? (dewisol)
-datePropertyChanged.areaChange.heading = Pryd ddigwyddodd y newid i’r ardal? (dewisol)
 
 # -------- When did you stop using your property for business
 datePropertyChanged.notUsed.title = Pryd wnaethoch chi stopio defnyddio’ch eiddo ar gyfer busnes? (dewisol)
-datePropertyChanged.notUsed.heading = Pryd wnaethoch chi stopio defnyddio’ch eiddo ar gyfer busnes? (dewisol)
 
 # --- Council Tax Subcategories
 councilTaxSubcategory.title = Beth yw testun eich ymholiad ynghylch Treth Gyngor?
@@ -412,7 +392,6 @@ error.propertyWalesAvailableLets.required = Dewiswch ‘Ydy’ os yw eich eiddo 
 
 # --- Property merged or split
 propertyMergeSplit.title = Siaradwch â’ch cyngor lleol os ydych chi wedi rhannu neu uno’ch eiddo
-propertyMergeSplit.heading = Siaradwch â’ch cyngor lleol os ydych chi wedi rhannu neu uno’ch eiddo
 propertyMergeSplit.p1.url = https://www.gov.uk/find-local-council
 propertyMergeSplit.p1.part1 = Cysylltwch â’ch cyngor lleol
 propertyMergeSplit.p1.part2 = gan fod angen iddynt roi’r holl fanylion sydd eu hangen arnom, gan gynnwys cyfeirnod.
@@ -420,7 +399,6 @@ propertyMergeSplit.p2 = Dim ond ar ôl iddynt anfon y wybodaeth honno y byddwn y
 
 # --- No business rates are required in England
 businessRatesSelfCateringNoBusinessRate.title = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yn Lloegr
-businessRatesSelfCateringNoBusinessRate.heading = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yn Lloegr
 businessRatesSelfCateringNoBusinessRate.p1 = Efallai y bydd angen i chi dalu’r Dreth Gyngor o hyd.
 businessRatesSelfCateringNoBusinessRate.p2 = Os yw eich eiddo yng Lloegr, bydd yn cael ei brisio ar gyfer ardrethi busnes os yw:
 businessRatesSelfCateringNoBusinessRate.p2.bullet1 = ar gael i’w osod am gyfnodau byr sy’n dod i gyfanswm o 140 noson neu fwy bob blwyddyn
@@ -432,7 +410,6 @@ businessRatesSelfCateringNoBusinessRate.p3.part3 = a chwblhewch ‘Gwiriad’ i 
 
 # --- Self-catering properties or holiday lets in England
 propertyEnglandLets.title = Dywedwch wrthym am eich bwthyn gwyliau neu llety hunanarlwyo yn Lloegr
-propertyEnglandLets.heading = Dywedwch wrthym am eich bwthyn gwyliau neu llety hunanarlwyo yn Lloegr
 propertyEnglandLets.p1 = Os yw eich eiddo yng Lloegr, bydd yn cael ei brisio ar gyfer ardrethi busnes os yw:
 propertyEnglandLets.p1.bullet1 = ar gael i’w osod am gyfnodau byr sy’n dod i gyfanswm o 140 noson neu fwy bob blwyddyn
 propertyEnglandLets.p1.bullet2 = wedi gosod mewn gwirionedd am o leiaf 70 noson
@@ -445,7 +422,6 @@ propertyEnglandLets.p3 = Eiddo hunanarlwyo a gosodiadau gwyliau
 
 # --- Self-catering properties or holiday lets in Wales
 propertyWalesLets.title = Dywedwch wrthym am eich bwthyn gwyliau neu llety hunanarlwyo yng Nghymru
-propertyWalesLets.heading = Dywedwch wrthym am eich bwthyn gwyliau neu llety hunanarlwyo yng Nghymru
 propertyWalesLets.p1 = Os yw eich eiddo yng Nghymru, bydd yn cael ei brisio ar gyfer ardrethi busnes os yw:
 propertyWalesLets.p1.bl1 = ar gael i’w osod am gyfnodau byr sy’n dod i gyfanswm o 251 noson neu fwy bob blwyddyn
 propertyWalesLets.p1.bl2 = wedi gosod mewn gwirionedd am o leiaf 140 noson
@@ -458,7 +434,6 @@ propertyWalesLets.p3 = Eiddo hunanarlwyo a gosodiadau gwyliau
 
 # --- Not need to pay business rates in England
 businessRatesNoNeedToPay.title = Ni fydd angen i chi dalu ardrethi busnes
-businessRatesNoNeedToPay.heading = Ni fydd angen i chi dalu ardrethi busnes
 businessRatesNoNeedToPay.p1 = Os ydych chi’n defnyddio ystafell fel swyddfa yn unig neu’n gwerthu nwyddau trwy’r post, ni fydd angen i chi dalu ardrethi busnes. Ni fydd eich band Treth Gyngor yn cael ei effeithio.
 businessRatesNoNeedToPay.subheading = Cymorth arall ar GOV.UK
 businessRatesNoNeedToPay.url = <a href="https://www.gov.uk/introduction-to-business-rates/working-at-home" target="_self">Gweithio gartref</a>
@@ -466,7 +441,6 @@ businessRatesNoNeedToPay.url1 = <a href="https://www.gov.uk/run-business-from-ho
 
 # --- No business rates are required in Wales
 businessRatesSelfCateringNoBusinessRateWales.title = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yng Nghymru
-businessRatesSelfCateringNoBusinessRateWales.heading = Ni fydd yn rhaid i chi dalu ardrethi busnes am eich eiddo yng Nghymru
 businessRatesSelfCateringNoBusinessRateWales.p1 = Efallai y bydd angen i chi dalu’r Dreth Gyngor o hyd
 businessRatesSelfCateringNoBusinessRateWales.p2 = Os yw eich eiddo yng Nghymru, bydd yn cael ei brisio ar gyfer ardrethi busnes os yw:
 businessRatesSelfCateringNoBusinessRateWales.p3 = ar gael i’w osod am gyfnodau byr sy’n dod i gyfanswm o 251 noson neu fwy bob blwyddyn
@@ -535,7 +509,6 @@ businessRatesPropertyDemolishedInWales.p3 = Sut i wirio a herio eich prisiad ard
 
 # --- My property needs a business rates valuation
 businessRatesValuation.title = Siaradwch â’ch cyngor lleol yn gyntaf am gael prisiad ardrethi busnes
-businessRatesValuation.heading = Siaradwch â’ch cyngor lleol yn gyntaf am gael prisiad ardrethi busnes
 businessRatesValuation.p1.url = https://www.gov.uk/contact-your-local-council-about-business-rates
 businessRatesValuation.p1.part1 = Cysylltwch â’ch cyngor lleol
 businessRatesValuation.p1.part2 = gan fod angen iddynt roi’r holl fanylion sydd eu hangen arnom, gan gynnwys cyfeirnod.
@@ -548,14 +521,12 @@ businessRatesValuation.p4 = Amcangyfrifwch eich ardrethi busnes
 
 # -------- Business Rates Property Empty
 businessRatesPropertyEmpty.title = Nid yw ardrethi busnes yn cael eu heffeithio os yw eiddo’n wag
-businessRatesPropertyEmpty.heading = Nid yw ardrethi busnes yn cael eu heffeithio os yw eiddo’n wag
 businessRatesPropertyEmpty.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/contact-your-local-council-about-business-rates">Cysylltwch â’ch cyngor lleol</a> i ddarganfod a allwch gael unrhyw ostyngiadau neu ddisgowntiau ar eich bil.
 businessRatesPropertyEmpty.subheading = Cymorth arall ar GOV.UK
 businessRatesPropertyEmpty.url = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-business-rate-relief">Gostyngiadau a disgowntiau ardrethi busnes</a>
 
 # -------- Business rates bill
 businessRatesBill.title = Siaradwch â’ch cyngor lleol am eich bil ardrethi busnes
-businessRatesBill.heading = Siaradwch â’ch cyngor lleol am eich bil ardrethi busnes
 businessRatesBill.p1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/contact-your-local-council-about-business-rates">Cysylltwch â’ch cyngor lleol</a> os oes gennych unrhyw gwestiynau am eich bil ardrethi busnes, gan mai nhw sy’n delio â biliau a thaliadau.
 businessRatesBill.subheading = Cymorth arall ar GOV.UK
 businessRatesBill.url = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-business-rate-relief">Gostyngiadau a disgowntiau ardrethi busnes</a>
@@ -575,7 +546,6 @@ error.businessRatesPropertyEnquiry.required = Dewiswch a yw eich eiddo yng Nghym
 
 # --- Tell us that your property is no longer used for business
 businessRatesNonBusiness.title = Dywedwch wrthym nad yw’ch eiddo’n cael ei ddefnyddio ar gyfer busnes mwyach
-businessRatesNonBusiness.heading = Dywedwch wrthym nad yw’ch eiddo’n cael ei ddefnyddio ar gyfer busnes mwyach
 businessRatesNonBusiness.p1 = <a href="https://www.gov.uk/business-rates-valuation-account" target="_self">Mewngofnodwch neu sefydlwch eich cyfrif prisio ardrethi busnes</a> i ddweud wrthym nad yw eich eiddo yn cael ei ddefnyddio ar gyfer busnes mwyach.
 businessRatesNonBusiness.p2 = Sut i ddweud wrthym: cam wrth gam
 businessRatesNonBusiness.step1 = Mewngofnodwch neu cofrestrwch i greu cyfrif
@@ -602,7 +572,6 @@ businessRatesSubcategory.business_rates_valuation = Mae angen prisiad ardrethi b
 businessRatesSubcategory.checkYourAnswersLabel = Manylion yr ymholiad
 
 businessRatesChallenge.title = Herio fy mhrisiad trethi busnes
-businessRatesChallenge.heading = Herio fy mhrisiad trethi busnes
 businessRatesChallenge.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self">wasanaeth ar-lein</a> Swyddfa Brisio i wirio a herio eich prisiad ardrethi busnes.
 
 # --- Changes to your property or area in England
@@ -809,18 +778,15 @@ error.message.xss-invalid.feedback = Rhaid i’r adborth gynnwys llythrennau a i
 # SURVEY THANKYOU
 ###############################
 feedback.thankyou.title = Diolch am eich adborth
-feedback.thankyou.heading = Diolch am eich adborth
 feedback.anotherForm=Cyflwyno ffurflen arall
 
-valuationAdvice.title = Manylion cyswllt ar gyfer Gwasanaethau Prisiwr Dosbarth
-valuationAdvice.heading = Manylion cyswllt ar gyfer Gwasanaethau Prisiwr Dosbarth (GPD)
+valuationAdvice.title = Manylion cyswllt ar gyfer Gwasanaethau Prisiwr Dosbarth (GPD)
 valuationAdvice.email-title = E-bost:
 valuationAdvice.email = clientdevelopmentvo@hmrc.gov.uk
 valuationAdvice.phone-title =  Ffôn
 valuationAdvice.phone-number = 03000 501501
  
 valuationForTaxes.title = Manylion cyswllt ar gyfer Hawl i Brynu, prisiadau trethi, neu apeliadau yn erbyn yr Ardoll Seilwaith Cymunedol
-valuationForTaxes.heading = Manylion cyswllt ar gyfer Hawl i Brynu, prisiadau trethi, neu apeliadau yn erbyn yr Ardoll Seilwaith Cymunedol
 valuationForTaxes.email-title = E-bost:
 valuationForTaxes.email = askSVTvo@hmrc.gov.uk
 valuationForTaxes.generalEnquiries-title = Ymholiadau cyffredinol
@@ -830,13 +796,11 @@ valuationForTaxes.openingHours-title = Oriau agor
 valuationForTaxes.openingHours =  08:30 – 17:00. Ar gau ar wyliau’r banc.
  
 providingLettings.title = Darparwch wybodaeth i’r Swyddogion Rhent ar-lein
-providingLettings.heading = Darparwch wybodaeth i’r Swyddogion Rhent ar-lein
 providingLettings.p1 = Dadlwythwch a chwblhewch y ffurflen ar GOV.UK.
 providingLettings.p1.url = https://www.gov.uk/government/publications/local-housing-allowance-and-statistics-on-private-rent-levels
 providingLettings.p2 = Yna gallwch ei anfon at y Swyddogion Rhent gan ddefnyddio’r manylion a ddarperir gyda’r ffurflen.
 
 fairRentApplication.title = Cyflwyno cais rhent teg gan ddefnyddio’r ffurflen gais
-fairRentApplication.heading = Cyflwyno cais rhent teg gan ddefnyddio’r ffurflen gais
 fairRentApplication.p1 = Dadlwythwch y ffurflenni cais rhent teg a darllenwch ganllaw
 fairRentApplication.p1.url = https://www.gov.uk/government/publications/fair-rent-forms
 fairRentApplication.p2 = ar wefan GOV.UK.
@@ -846,7 +810,6 @@ fairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
 fairRent.telephone = Ffôn: 03000 502502
 
 checkFairRentApplication.title = Gwiriwch y gofrestr rhenti teg ar-lein
-checkFairRentApplication.heading = Gwiriwch y gofrestr rhenti teg ar-lein
 checkFairRentApplication.p1 = Defnyddiwch wasanaeth Swyddfa Brisio
 checkFairRentApplication.p1.url = https://www.gov.uk/check-register-rents
 checkFairRentApplication.p2 = i wirio’r gofrestr rhenti teg.
@@ -855,7 +818,6 @@ checkFairRentApplication.p3 = Ynglŷn â rhenti teg
 checkFairRentApplication.p3.url = https://www.gov.uk/guidance/fair-rents
 
 datePropertyChanged.poorRepair.title = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol)
-datePropertyChanged.poorRepair.heading = Pryd ddechreuodd eich eiddo fod mewn cyflwr gwael? (dewisol)
 datePropertyChanged.hint = Er enghraifft, 27 2 2021
 datePropertyChanged.error.invalidDate = Rhowch ddyddiad go iawn
 datePropertyChanged.error.mandatory.dayMonth = Rhaid i’r dyddiad gynnwys dydd a mis
@@ -875,12 +837,10 @@ datePropertyChanged.error.year.number = Rhaid i’r dyddiad gael blwyddyn sy’n
 datePropertyChanged.error.year.range = Rhaid i’r dyddiad fod ar neu ar ôl 1 Ionawr 1900
 
 error400.title = Page not found
-error400.heading = Page not found
 error400.para1 = If you typed the web address, check it is correct.
 error400.para2 = If you pasted the web address, check you copied the entire address.
 
 error500.title = Sorry, there is a problem with the service
-error500.heading = Sorry, there is a problem with this service
 error500.tryagain.para = Try again later.
 
 footer.links.languale.url = /valuation-office-agency-contact-frontend/language/english

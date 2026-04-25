@@ -31,7 +31,6 @@ class PropertyWalesLetsViewSpec extends ViewBehaviours {
       view,
       "propertyWalesLets",
       "title",
-      "heading",
       "p1",
       "p1.bl1",
       "p1.bl2",

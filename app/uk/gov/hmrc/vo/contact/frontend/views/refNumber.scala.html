@@ -36,6 +36,7 @@
 @layout(
     pageTitle = messages("refNumber.title"),
     backLink = ExistingEnquiryCategoryController.onPageLoad().url,
+    showH1 = false,
     theForm = form
 ) {
     @formWithCSRF(action = RefNumberController.onSubmit()) {
@@ -45,7 +46,7 @@
 
             label = Label(
                 content = Text(messages("refNumber.value.optional")),
-                isPageHeading=true,
+                isPageHeading = true,
                 classes = "govuk-label--l" ),
 
             attributes=Map("spellcheck" -> "false"),
