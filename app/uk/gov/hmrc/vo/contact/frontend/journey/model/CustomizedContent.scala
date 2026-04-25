@@ -26,7 +26,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 /**
   * @author Yuriy Tumakha
   */
-abstract class CustomizedContent(val key: String, val fieldId: String) extends Page[String] {
+abstract class CustomizedContent(val key: String, val fieldId: String) extends Page[String]:
 
   val form: Form[String] = Form(single("value" -> text))
 
@@ -37,5 +37,3 @@ abstract class CustomizedContent(val key: String, val fieldId: String) extends P
   def template(customizedContent: CustomizedContent)(using messages: Messages): Appendable
 
   def render(using messages: Messages): Appendable = template(this)
-
-}

@@ -165,7 +165,7 @@ class JourneyControllerSpec extends ControllerSpecBase {
       }
 
       val html = customizedContentTemplate("/back/url", customizedContentPage).toString()
-      html must include("housingBenefitAppeals.heading - service.name - gov.name")
+      html must include("housingBenefitAppeals.label - service.name - gov.name")
       html must include("/back/url")
       html must include("https://www.gov.uk/appeal-housing-benefit-decision")
     }

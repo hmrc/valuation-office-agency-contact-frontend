@@ -25,11 +25,9 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
   */
 case class LogoutEvent(refNumber: Option[String], contact: Option[ContactDetails])
 
-object LogoutEvent {
+object LogoutEvent:
 
   implicit val logoutEventWrites: OWrites[LogoutEvent] = Json.writes[LogoutEvent]
 
   def apply(userAnswers: Option[UserAnswers]): LogoutEvent =
     LogoutEvent(userAnswers.flatMap(_.refNumber), userAnswers.flatMap(_.contactDetails))
-
-}

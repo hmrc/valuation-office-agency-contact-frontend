@@ -17,7 +17,7 @@
 package uk.gov.hmrc.vo.contact.frontend.journey.model
 
 import play.api.data.Form
-import play.api.data.Forms._
+import play.api.data.Forms.*
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 import uk.gov.hmrc.vo.contact.frontend.utils.{StringValue, UserAnswers}
@@ -25,12 +25,15 @@ import uk.gov.hmrc.vo.contact.frontend.utils.{StringValue, UserAnswers}
 /**
   * @author Yuriy Tumakha
   */
-abstract class CategoryRouter(val key: String, val fieldId: String, val options: Seq[String]) extends Page[String] {
+abstract class CategoryRouter(val key: String, val fieldId: String, val options: Seq[String]) extends Page[String]:
 
-  val form: Form[String] = Form(single(fieldId -> of(using StringValue)
-    .verifying(errorRequired, options.contains(_))))
+  val form: Form[String] =
+    Form(
+      single(
+        fieldId -> of(using StringValue).verifying(errorRequired, options.contains)
+      )
+    )
 
   def getValue: UserAnswers => Option[String] = _.getString(key)
 
   override def nextPage: UserAnswers => Call = getValue(_).fold(appStartPage)(routes.JourneyController.onPageLoad)
-}

@@ -28,8 +28,8 @@ object OtherHBEnquiry
   extends TellUsMorePage(
     key = "other-hb-enquiry",
     fieldId = "otherHBTellUsMore"
-  ) {
+  ):
+
   override def previousPage: UserAnswers => Call = _ => routes.JourneyController.onPageLoad(HousingBenefitEnquiry.key)
 
   override def helpWithService: Option[String] = Some("help_with_service_fair_rent")
-}

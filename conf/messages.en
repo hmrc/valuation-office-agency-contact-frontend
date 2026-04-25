@@ -439,7 +439,7 @@ businessRatesNoNeedToPay.url = <a href="https://www.gov.uk/introduction-to-busin
 businessRatesNoNeedToPay.url1 = <a href="https://www.gov.uk/run-business-from-home" target="_self">Running a business from home </a>
 
 # --- Check and challenge your business rates valuation online
-businessRatesValuationOnline.heading = Check and challenge your business rates valuation online
+businessRatesValuationOnline.label = Check and challenge your business rates valuation online
 businessRatesValuationOnline.p1.url = https://www.gov.uk/business-rates-valuation-account
 businessRatesValuationOnline.p1.part1 = Sign into or set up your business rates valuation account
 businessRatesValuationOnline.p1.part2 = if you think there should be a change to your business rates valuation.
@@ -459,7 +459,7 @@ businessRatesValuationOnline.p4.url = https://www.gov.uk/introduction-to-busines
 businessRatesValuationOnline.p4 = More about business rates and how they are calculated
 
 # --- Business rates valuation in Wales
-businessRatesValuationInWales.heading = Check and challenge your business rates valuation online
+businessRatesValuationInWales.label = Check and challenge your business rates valuation online
 businessRatesValuationInWales.p1.url = https://www.gov.uk/correct-your-business-rates
 businessRatesValuationInWales.p1.part1 = Use the Valuation Office’s online service
 businessRatesValuationInWales.p1.part2 = if you think there should be a change to your business rates valuation.
@@ -470,7 +470,7 @@ businessRatesValuationInWales.p3.url = https://www.gov.uk/introduction-to-busine
 businessRatesValuationInWales.p3 = More about business rates and how they are calculated
 
 # ---  Tell us that your property has been demolished
-businessRatesPropertyDemolished.heading = Tell us that your property has been demolished
+businessRatesPropertyDemolished.label = Tell us that your property has been demolished
 businessRatesPropertyDemolished.p1.url = https://www.gov.uk/business-rates-valuation-account
 businessRatesPropertyDemolished.p1.part1 = Sign into or set up your business rates valuation account
 businessRatesPropertyDemolished.p1.part2 = to tell us that your property has been demolished.
@@ -485,7 +485,7 @@ businessRatesPropertyDemolished.p4.url = https://www.gov.uk/guidance/how-to-chec
 businessRatesPropertyDemolished.p4 = How to check and challenge your business rates valuation in Wales
 
 # --- Property has been demolished in Wales
-businessRatesPropertyDemolishedInWales.heading = Tell us that your property has been demolished
+businessRatesPropertyDemolishedInWales.label = Tell us that your property has been demolished
 businessRatesPropertyDemolishedInWales.p1.url = https://www.gov.uk/correct-your-business-rates
 businessRatesPropertyDemolishedInWales.p1.part1 = Use the Valuation Office’s online service
 businessRatesPropertyDemolishedInWales.p1.part2 = to tell us that your property has been demolished.
@@ -514,9 +514,9 @@ businessRatesBill.subheading = Other help on GOV.UK
 businessRatesBill.url = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-business-rate-relief">Business rates relief and discounts</a>
 businessRatesBill.url1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/government/collections/financial-support-for-businesses-during-coronavirus-covid-19">Support for businesses during coronavirus (COVID-19)</a>
 
-businessRatesJurisdiction.heading = Is your property in England or Wales?
-businessRatesJurisdiction.england = England
-businessRatesJurisdiction.wales = Wales
+businessRatesJurisdiction.label = Is your property in England or Wales?
+businessRatesJurisdiction.england.label = England
+businessRatesJurisdiction.wales.label = Wales
 error.businessRatesJurisdiction.required = Select if your property is in England or Wales
 
 # --- Business Rates Property Enquiry
@@ -682,40 +682,40 @@ housingBenefits.phone-title = Telephone:
 housingBenefits.phone-number = 03000 502502
 housingBenefits.opening-hours = Our telephone service is available between 9.00am and 4.30pm, Monday to Friday.
 
-housingBenefitAllowances.heading = What is your Housing Benefit or Local Housing Allowance enquiry about?
-housingBenefitAllowances.local-housing-allowance-rates = I want to find out about Local Housing Allowance rates
-housingBenefitAllowances.hb-enquiry = I am asking about a Housing Benefit decision
-housingBenefitAllowances.other-ha-hb-enquiry = Other
+housingBenefitAllowances.label = What is your Housing Benefit or Local Housing Allowance enquiry about?
+housingBenefitAllowances.local-housing-allowance-rates.label = I want to find out about Local Housing Allowance rates
+housingBenefitAllowances.hb-enquiry.label = I am asking about a Housing Benefit decision
+housingBenefitAllowances.other-ha-hb-enquiry.label = Other
 error.housingBenefitAllowances.required = Select what your Housing Benefit or Local Housing Allowances enquiry is about
 
-housingBenefitEnquiry.heading = What is your Housing Benefit enquiry about?
-housingBenefitEnquiry.housing-benefit-appeals = I want to appeal a Housing Benefit award decision
-housingBenefitEnquiry.hb-tell-us-more = I want to find out the valuation details behind my Housing Benefit decision
-housingBenefitEnquiry.other-hb-enquiry = Other
+housingBenefitEnquiry.label = What is your Housing Benefit enquiry about?
+housingBenefitEnquiry.housing-benefit-appeals.label = I want to appeal a Housing Benefit award decision
+housingBenefitEnquiry.hb-tell-us-more.label = I want to find out the valuation details behind my Housing Benefit decision
+housingBenefitEnquiry.other-hb-enquiry.label = Other
 error.housingBenefitEnquiry.required = Select what your Housing Benefit enquiry is about
 
-housingBenefitTellUsMore.heading = Tell us more about your enquiry
+housingBenefitTellUsMore.label = Tell us more about your enquiry
 error.housingBenefitTellUsMore.required = Enter more details about your enquiry
 error.housingBenefitTellUsMore.pattern = Your enquiry must not include < and >
 error.housingBenefitTellUsMore.maxLength = Your enquiry must be 5000 characters or fewer
 
-otherHAHBTellUsMore.heading = What is your other Housing Benefit or Local Housing Allowances enquiry?
+otherHAHBTellUsMore.label = What is your other Housing Benefit or Local Housing Allowances enquiry?
 error.otherHAHBTellUsMore.required = Enter more details about your enquiry
 error.otherHAHBTellUsMore.pattern = Your enquiry must not include < and >
 error.otherHAHBTellUsMore.maxLength = Your enquiry must be 5000 characters or fewer
 
-otherHBTellUsMore.heading = What is your other Housing Benefit enquiry?
+otherHBTellUsMore.label = What is your other Housing Benefit enquiry?
 error.otherHBTellUsMore.required = Enter more details about your enquiry
 error.otherHBTellUsMore.pattern = Your enquiry must not include < and >
 error.otherHBTellUsMore.maxLength = Your enquiry must be 5000 characters or fewer
 
-localHousingAllowanceRates.heading = Search for Local Housing Allowance rates online
+localHousingAllowanceRates.label = Search for Local Housing Allowance rates online
 localHousingAllowanceRates.link1.text = Use the Valuation Office’s online service
 localHousingAllowanceRates.p1 = to search for Local Housing Allowance Rates in your area.
 localHousingAllowanceRates.subheading = Other help on GOV.UK
 localHousingAllowanceRates.link2.text = How Local Housing Allowance rates are set
 
-housingBenefitAppeals.heading = Speak to your local council about appealing a Housing Benefit decision
+housingBenefitAppeals.label = Speak to your local council about appealing a Housing Benefit decision
 housingBenefitAppeals.link1.text = Contact your local council
 housingBenefitAppeals.p1 = to appeal a Housing Benefit decision.
 housingBenefitAppeals.subheading = Other help on GOV.UK

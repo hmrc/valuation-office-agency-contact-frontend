@@ -24,7 +24,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 /**
   * @author Yuriy Tumakha
   */
-abstract class NotImplemented(val key: String) extends Page[String] {
+abstract class NotImplemented(val key: String) extends Page[String]:
 
   override def heading: String = "page.not-implemented"
 
@@ -35,4 +35,3 @@ abstract class NotImplemented(val key: String) extends Page[String] {
   val getValue: UserAnswers => Option[String] = _ => None
 
   override def nextPage: UserAnswers => Call = ???
-}

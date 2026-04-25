@@ -16,8 +16,8 @@
 
 @import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
 @import uk.gov.hmrc.vo.contact.frontend.journey.model.Page
+@import uk.gov.hmrc.vo.contact.frontend.journey.model.TellUsMorePage.maxChars
 @import uk.gov.hmrc.vo.service.model.input.TextAreaField
-
 
 @this(
         formTemplate: formTemplate,
@@ -28,8 +28,6 @@
 
 @formTemplate(form, key, backUrl, messages(page.heading), page.helpWithService) {
 
-    @hmrcCharacterCount(
-        TextAreaField.characterCount(form, "", page.fieldId, maxLength = 5000, labelText = page.heading, isPageHeading = true)
-    )
+    @hmrcCharacterCount(TextAreaField.characterCount(form, "", page.fieldId, maxLength = maxChars, isPageHeading = true))
 
 }

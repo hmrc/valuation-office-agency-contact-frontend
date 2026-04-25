@@ -17,13 +17,13 @@
 package uk.gov.hmrc.vo.contact.frontend.journey.model
 
 import play.api.data.Form
-import play.api.data.Forms._
+import play.api.data.Forms.*
 import play.api.data.validation.Constraints
 import play.api.mvc.Call
-import uk.gov.hmrc.vo.contact.frontend.controllers.routes
-import TellUsMorePage.{lastTellUsMorePage, maxChars, textareaRegex}
 import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
+import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 import uk.gov.hmrc.vo.contact.frontend.journey.JourneyPageRequest
+import uk.gov.hmrc.vo.contact.frontend.journey.model.TellUsMorePage.{lastTellUsMorePage, maxChars, textareaRegex}
 import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 
@@ -33,13 +33,16 @@ import scala.util.matching.Regex
 /**
   * @author Yuriy Tumakha
   */
-abstract class TellUsMorePage(val key: String, val fieldId: String) extends Page[String] {
+abstract class TellUsMorePage(val key: String, val fieldId: String) extends Page[String]:
 
-  val form: Form[String] = Form(single(fieldId ->
-    text
-      .verifying(Constraints.nonEmpty(errorMessage = errorRequired))
-      .verifying(Constraints.pattern(textareaRegex, error = errorPattern))
-      .verifying(Constraints.maxLength(maxChars, errorMaxLength))))
+  val form: Form[String] =
+    Form(
+      single(
+        fieldId -> text.verifying(Constraints.nonEmpty(errorMessage = errorRequired))
+          .verifying(Constraints.pattern(textareaRegex, error = errorPattern))
+          .verifying(Constraints.maxLength(maxChars, errorMaxLength))
+      )
+    )
 
   def getValue: UserAnswers => Option[String] = _.getString(key)
 
@@ -47,10 +50,9 @@ abstract class TellUsMorePage(val key: String, val fieldId: String) extends Page
     (dataCacheConnector, request) => dataCacheConnector.save[String](request.sessionId, lastTellUsMorePage, key)
 
   override def nextPage: UserAnswers => Call = _ => routes.ContactDetailsController.onPageLoad(NormalMode)
-}
 
-object TellUsMorePage {
+object TellUsMorePage:
+
   val lastTellUsMorePage   = "lastTellUsMorePage"
   val maxChars             = 5000
   val textareaRegex: Regex = """^[^<>]*$""".r
-}

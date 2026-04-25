@@ -451,7 +451,7 @@ businessRatesSelfCateringNoBusinessRateWales.p5.part2 =  cwblhewch ffurflen gynn
 businessRatesSelfCateringNoBusinessRateWales.p5.part3 = i ddweud wrth Swyddfa Brisio.
 
 # --- Check and challenge your business rates valuation online
-businessRatesValuationOnline.heading = Gwirio a herio eich prisiad ardrethi busnes ar-lein
+businessRatesValuationOnline.label = Gwirio a herio eich prisiad ardrethi busnes ar-lein
 businessRatesValuationOnline.p1.url = https://www.gov.uk/business-rates-valuation-account
 businessRatesValuationOnline.p1.part1 = Mewngofnodwch neu sefydlwch eich cyfrif prisio ardrethi busnes
 businessRatesValuationOnline.p1.part2 = os credwch y dylai fod newid i’ch prisiad ardrethi busnes.
@@ -471,7 +471,7 @@ businessRatesValuationOnline.p4.url = https://www.gov.uk/introduction-to-busines
 businessRatesValuationOnline.p4 = Mwy am ardrethi busnes a sut maent yn cael eu cyfrifo
 
 # --- Business rates valuation in Wales
-businessRatesValuationInWales.heading = Gwirio a herio eich prisiad ardrethi busnes ar-lein
+businessRatesValuationInWales.label = Gwirio a herio eich prisiad ardrethi busnes ar-lein
 businessRatesValuationInWales.p1.url = https://www.gov.uk/correct-your-business-rates
 businessRatesValuationInWales.p1.part1 = Defnyddiwch wasanaeth ar-lein Swyddfa Brisio
 businessRatesValuationInWales.p1.part2 = os ydych chi’n credu y dylid newid eich prisiad ardrethi busnes.
@@ -482,7 +482,7 @@ businessRatesValuationInWales.p3.url = https://www.gov.uk/introduction-to-busine
 businessRatesValuationInWales.p3 = Mwy am ardrethi busnes a sut maent yn cael eu cyfrifo
 
 # ---  Tell us that your property has been demolished
-businessRatesPropertyDemolished.heading = Dywedwch wrthym fod eich eiddo wedi’i ddymchwel
+businessRatesPropertyDemolished.label = Dywedwch wrthym fod eich eiddo wedi’i ddymchwel
 businessRatesPropertyDemolished.p1.url = https://www.gov.uk/business-rates-valuation-account
 businessRatesPropertyDemolished.p1.part1 = Mewngofnodwch neu sefydlwch eich cyfrif prisio ardrethi busnes
 businessRatesPropertyDemolished.p1.part2 = i ddweud wrthym fod eich eiddo wedi’i ddymchwel.
@@ -497,7 +497,7 @@ businessRatesPropertyDemolished.p4.url = https://www.gov.uk/guidance/how-to-chec
 businessRatesPropertyDemolished.p4 = Sut i wirio a herio eich prisiad ardrethi busnes yng Nghymru
 
 # --- Property has been demolished in Wales
-businessRatesPropertyDemolishedInWales.heading = Dywedwch wrthym fod eich eiddo wedi’i ddymchwel
+businessRatesPropertyDemolishedInWales.label = Dywedwch wrthym fod eich eiddo wedi’i ddymchwel
 businessRatesPropertyDemolishedInWales.p1.url = https://www.gov.uk/correct-your-business-rates
 businessRatesPropertyDemolishedInWales.p1.part1 = Defnyddiwch wasanaeth Swyddfa Brisio
 businessRatesPropertyDemolishedInWales.p1.part2 = i ddweud wrthym fod eich eiddo wedi’i ddymchwel.
@@ -532,9 +532,9 @@ businessRatesBill.subheading = Cymorth arall ar GOV.UK
 businessRatesBill.url = <a class="govuk-link" target="_self" href="https://www.gov.uk/apply-for-business-rate-relief">Gostyngiadau a disgowntiau ardrethi busnes</a>
 businessRatesBill.url1 = <a class="govuk-link" target="_self" href="https://www.gov.uk/government/collections/financial-support-for-businesses-during-coronavirus-covid-19">Cefnogaeth i fusnesau yn ystod coronafirws (COVID-19)</a>
 
-businessRatesJurisdiction.heading = A yw eich eiddo yng Nghymru neu Lloegr?
-businessRatesJurisdiction.england = Lloegr
-businessRatesJurisdiction.wales = Cymru
+businessRatesJurisdiction.label = A yw eich eiddo yng Nghymru neu Lloegr?
+businessRatesJurisdiction.england.label = Lloegr
+businessRatesJurisdiction.wales.label = Cymru
 error.businessRatesJurisdiction.required = Dewiswch a yw eich eiddo yng Nghymru neu Lloegr
 
 # --- Business Rates Property Enquiry
@@ -695,40 +695,40 @@ housingBenefits.phone-title = Ffôn:
 housingBenefits.phone-number = 03000 502502
 housingBenefits.opening-hours = Mae ein gwasanaeth ffôn ar gael rhwng 9.00am a 4.30pm, o Ddydd Llun i Ddydd Gwener.
 
-housingBenefitAllowances.heading = Ynglŷn â beth yw eich ymholiad Budd-dal Tai neu Lwfansau Tai Lleol?
-housingBenefitAllowances.local-housing-allowance-rates = Rwyf am gael gwybod am gyfraddau Lwfans Tai Lleol
-housingBenefitAllowances.hb-enquiry = Rwy’n gofyn am benderfyniad Budd-dal Tai
-housingBenefitAllowances.other-ha-hb-enquiry = Arall
+housingBenefitAllowances.label = Ynglŷn â beth yw eich ymholiad Budd-dal Tai neu Lwfansau Tai Lleol?
+housingBenefitAllowances.local-housing-allowance-rates.label = Rwyf am gael gwybod am gyfraddau Lwfans Tai Lleol
+housingBenefitAllowances.hb-enquiry.label = Rwy’n gofyn am benderfyniad Budd-dal Tai
+housingBenefitAllowances.other-ha-hb-enquiry.label = Arall
 error.housingBenefitAllowances.required = Dewiswch beth yw pwrpas eich ymholiad Budd-dal Tai neu Lwfans Tai Lleol
 
-housingBenefitEnquiry.heading = Ynglŷn â beth yw eich ymholiad Budd-dal Tai?
-housingBenefitEnquiry.housing-benefit-appeals = Rwyf am apelio yn erbyn penderfyniad dyfarnu Budd-dal Tai
-housingBenefitEnquiry.hb-tell-us-more = Rwyf am ddarganfod y manylion prisio y tu ôl i’m penderfyniad Budd-dal Tai
-housingBenefitEnquiry.other-hb-enquiry = Arall
+housingBenefitEnquiry.label = Ynglŷn â beth yw eich ymholiad Budd-dal Tai?
+housingBenefitEnquiry.housing-benefit-appeals.label = Rwyf am apelio yn erbyn penderfyniad dyfarnu Budd-dal Tai
+housingBenefitEnquiry.hb-tell-us-more.label = Rwyf am ddarganfod y manylion prisio y tu ôl i’m penderfyniad Budd-dal Tai
+housingBenefitEnquiry.other-hb-enquiry.label = Arall
 error.housingBenefitEnquiry.required = Dewiswch beth yw pwrpas eich ymholiad Budd-dal Tai
 
-housingBenefitTellUsMore.heading = Rhowch ragor o wybodaeth i ni am eich ymholiad
+housingBenefitTellUsMore.label = Rhowch ragor o wybodaeth i ni am eich ymholiad
 error.housingBenefitTellUsMore.required = Nodwch fwy o fanylion am eich ymholiad
 error.housingBenefitTellUsMore.pattern = Ni ddylai eich ymholiad gynnwys < a >
 error.housingBenefitTellUsMore.maxLength = Rhaid i’ch ymholiad fod yn 5000 nod neu lai
 
-otherHAHBTellUsMore.heading = Beth yw eich ymholiad Budd-dal Tai neu Lwfans Tai Lleol arall?
+otherHAHBTellUsMore.label = Beth yw eich ymholiad Budd-dal Tai neu Lwfans Tai Lleol arall?
 error.otherHAHBTellUsMore.required = Nodwch fwy o fanylion am eich ymholiad
 error.otherHAHBTellUsMore.pattern = Ni ddylai eich ymholiad gynnwys < a >
 error.otherHAHBTellUsMore.maxLength = Rhaid i’ch ymholiad fod yn 5000 nod neu lai
 
-otherHBTellUsMore.heading = Beth yw eich ymholiad Budd-dal Tai arall?
+otherHBTellUsMore.label = Beth yw eich ymholiad Budd-dal Tai arall?
 error.otherHBTellUsMore.required = Nodwch fwy o fanylion am eich ymholiad
 error.otherHBTellUsMore.pattern = Ni ddylai eich ymholiad gynnwys < a >
 error.otherHBTellUsMore.maxLength = Rhaid i’ch ymholiad fod yn 5000 nod neu lai
 
-localHousingAllowanceRates.heading = Chwilio am gyfraddau Lwfans Tai Lleol ar-lein
+localHousingAllowanceRates.label = Chwilio am gyfraddau Lwfans Tai Lleol ar-lein
 localHousingAllowanceRates.link1.text = Defnyddiwch wasanaeth ar-lein Swyddfa Brisio
 localHousingAllowanceRates.p1 = i chwilio am gyfraddau Lwfans Tai Lleol yn eich ardal chi.
 localHousingAllowanceRates.subheading = Cymorth arall ar GOV.UK
 localHousingAllowanceRates.link2.text = Sut mae cyfraddau Lwfans Tai Lleol yn cael eu gosod
 
-housingBenefitAppeals.heading = Siaradwch gyda’ch cyngor lleol am apelio yn erbyn penderfyniad Budd-dal Tai
+housingBenefitAppeals.label = Siaradwch gyda’ch cyngor lleol am apelio yn erbyn penderfyniad Budd-dal Tai
 housingBenefitAppeals.link1.text = Cysylltwch â’ch cyngor lleol
 housingBenefitAppeals.p1 = i apelio yn erbyn penderfyniad Budd-dal Tai.
 housingBenefitAppeals.subheading = Cymorth arall ar GOV.UK
