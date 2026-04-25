@@ -35,7 +35,7 @@
     showH1 = false,
     theForm = form
 ) {
-    @formWithCSRF(action = ContactReasonController.onSubmit()) {
+    @formWithCSRF(action = ContactReasonController.onSubmit) {
 
         @govukRadios(RadioField.radios(form, "contact", "reason", values))
 

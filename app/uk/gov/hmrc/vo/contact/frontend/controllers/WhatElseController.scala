@@ -47,20 +47,20 @@ class WhatElseController @Inject() (
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
+  def onPageLoad: mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.whatElse match {
         case None        => WhatElseForm()
         case Some(value) => WhatElseForm().fill(value)
       }
-      Ok(whatElse(preparedForm, mode))
+      Ok(whatElse(preparedForm))
   }
 
   def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       WhatElseForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          BadRequest(whatElse(formWithErrors, mode)),
+          BadRequest(whatElse(formWithErrors)),
         value =>
           dataCacheConnector.save[String](request.sessionId, WhatElseId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(WhatElseId, mode).apply(UserAnswers(cacheMap)))

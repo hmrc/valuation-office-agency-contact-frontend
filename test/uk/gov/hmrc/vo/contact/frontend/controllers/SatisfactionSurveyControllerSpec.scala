@@ -18,13 +18,11 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import org.scalatestplus.mockito.MockitoSugar
 import play.api.{Configuration, Environment}
-import play.api.data.Form
 import play.api.libs.json.{JsString, Json}
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.vo.contact.frontend.connectors.AuditingService
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
-import uk.gov.hmrc.vo.contact.frontend.forms.{SatisfactionSurvey, SatisfactionSurveyForm}
 import uk.gov.hmrc.vo.contact.frontend
   .identifiers.{AnswerSectionId, BusinessRatesSubcategoryId, ContactDetailsId, CouncilTaxSubcategoryId, EnquiryCategoryId, PropertyAddressId, TellUsMoreId}
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, ContactDetails, NormalMode, PropertyAddress, TellUsMore}
@@ -74,7 +72,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[SatisfactionSurvey] = SatisfactionSurveyForm()): String =
+  def viewAsString: String =
     satisfactionSurveyThankYou()(using fakeRequest, messages).toString
 
   "SatisfactionSurvey Controller" must {
@@ -83,7 +81,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
       val result = controller().surveyThankyou()(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+      contentAsString(result) mustBe viewAsString
     }
 
     "feedback submission must be successful for formCompleteFeedback" in {

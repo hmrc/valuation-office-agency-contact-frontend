@@ -96,14 +96,14 @@ class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
     }
 
     "return OK and the correct view for england lets page GET" in {
-      val result = controller().onEngLetsPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onEngLetsPageLoad(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe propertyEnglandLets()(using fakeRequest, messages).toString()
     }
 
     "return OK and the correct view for wales lets page GET" in {
-      val result = controller().onWalLetsPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onWalLetsPageLoad(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe propertyWalesLets()(using fakeRequest, messages).toString()

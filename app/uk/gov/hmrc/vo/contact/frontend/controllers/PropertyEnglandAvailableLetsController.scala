@@ -27,7 +27,7 @@ import uk.gov.hmrc.vo.contact.frontend.forms.PropertyEnglandAvailableLetsForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.PropertyEnglandAvailableLetsId
 import uk.gov.hmrc.vo.contact.frontend.models.Mode
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
-import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyEnglandAvailableLets as property_england_available_lets, propertyEnglandLetsNoAction as property_england_lets_no_action, propertyWalesLets as wales_lets}
+import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyEnglandAvailableLets as property_england_available_lets, propertyWalesLets as wales_lets}
 
 import javax.inject.Inject
 import scala.concurrent.ExecutionContext
@@ -40,7 +40,6 @@ class PropertyEnglandAvailableLetsController @Inject() (
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
   propertyEnglandAvailableLets: property_england_available_lets,
-  propertyEnglandLetsNoAction: property_england_lets_no_action,
   propertyWalesLets: wales_lets,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
@@ -48,20 +47,20 @@ class PropertyEnglandAvailableLetsController @Inject() (
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+  def onPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.propertyEnglandAvailableLetsEnquiry match {
         case None        => PropertyEnglandAvailableLetsForm()
         case Some(value) => PropertyEnglandAvailableLetsForm().fill(value)
       }
-      Ok(propertyEnglandAvailableLets(preparedForm, mode))
+      Ok(propertyEnglandAvailableLets(preparedForm))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       PropertyEnglandAvailableLetsForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          BadRequest(propertyEnglandAvailableLets(formWithErrors, mode)),
+          BadRequest(propertyEnglandAvailableLets(formWithErrors)),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering140DaysEN" -> value)
           dataCacheConnector.save[String](request.sessionId, PropertyEnglandAvailableLetsId.toString, value).map(cacheMap =>
@@ -71,7 +70,7 @@ class PropertyEnglandAvailableLetsController @Inject() (
       )
   }
 
-  def onWalLetsPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+  def onWalLetsPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(propertyWalesLets())
   }

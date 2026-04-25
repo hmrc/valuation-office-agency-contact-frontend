@@ -38,7 +38,7 @@ class ErrorHandler @Inject() (
 
   override def standardErrorTemplate(pageTitle: String, heading: String, message: String)(using rh: RequestHeader): Future[Html] =
     render { implicit request =>
-      errorTemplate(pageTitle, heading, message)
+      errorTemplate(heading, message)
     }
 
   override def badRequestTemplate(using rh: RequestHeader): Future[Html] =

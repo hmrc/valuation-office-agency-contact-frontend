@@ -28,15 +28,15 @@ POST        /changeEnquiryCategory                              uk.gov.hmrc.vo.c
 GET         /start-now                                          uk.gov.hmrc.vo.contact.frontend.controllers.ContactReasonController.redirect
 GET         /enquiryCategory                                    uk.gov.hmrc.vo.contact.frontend.controllers.ContactReasonController.redirect
 GET         /new-or-existing-enquiry                            uk.gov.hmrc.vo.contact.frontend.controllers.ContactReasonController.onPageLoad
-POST        /new-or-existing-enquiry                            uk.gov.hmrc.vo.contact.frontend.controllers.ContactReasonController.onSubmit(mode: Mode = NormalMode)
+POST        /new-or-existing-enquiry                            uk.gov.hmrc.vo.contact.frontend.controllers.ContactReasonController.onSubmit
 
-GET         /date-of-enquiry                                    uk.gov.hmrc.vo.contact.frontend.controllers.EnquiryDateController.onPageLoad(mode: Mode = NormalMode)
+GET         /date-of-enquiry                                    uk.gov.hmrc.vo.contact.frontend.controllers.EnquiryDateController.onPageLoad
 POST        /date-of-enquiry                                    uk.gov.hmrc.vo.contact.frontend.controllers.EnquiryDateController.onSubmit(mode: Mode = NormalMode)
 
-GET         /what-is-your-existing-enquiry-about                uk.gov.hmrc.vo.contact.frontend.controllers.ExistingEnquiryCategoryController.onPageLoad(mode: Mode = NormalMode)
+GET         /what-is-your-existing-enquiry-about                uk.gov.hmrc.vo.contact.frontend.controllers.ExistingEnquiryCategoryController.onPageLoad
 POST        /what-is-your-existing-enquiry-about                uk.gov.hmrc.vo.contact.frontend.controllers.ExistingEnquiryCategoryController.onSubmit(mode: Mode = NormalMode)
 
-GET         /reference-number                                   uk.gov.hmrc.vo.contact.frontend.controllers.RefNumberController.onPageLoad(mode: Mode = NormalMode)
+GET         /reference-number                                   uk.gov.hmrc.vo.contact.frontend.controllers.RefNumberController.onPageLoad
 POST        /reference-number                                   uk.gov.hmrc.vo.contact.frontend.controllers.RefNumberController.onSubmit(mode: Mode = NormalMode)
 
 GET         /when-you-can-expect-an-update                      uk.gov.hmrc.vo.contact.frontend.controllers.ExpectedUpdateController.onPageLoad()
@@ -71,7 +71,7 @@ POST        /tell-us-more                                       uk.gov.hmrc.vo.c
 GET         /changeTellUsMore                                   uk.gov.hmrc.vo.contact.frontend.controllers.TellUsMoreController.onPageLoad(mode: Mode = CheckMode)
 POST        /changeTellUsMore                                   uk.gov.hmrc.vo.contact.frontend.controllers.TellUsMoreController.onSubmit(mode: Mode = CheckMode)
 
-GET         /what-else-tell-us                                  uk.gov.hmrc.vo.contact.frontend.controllers.WhatElseController.onPageLoad(mode: Mode = NormalMode)
+GET         /what-else-tell-us                                  uk.gov.hmrc.vo.contact.frontend.controllers.WhatElseController.onPageLoad
 POST        /what-else-tell-us                                  uk.gov.hmrc.vo.contact.frontend.controllers.WhatElseController.onSubmit(mode: Mode = NormalMode)
 
 GET         /confirmationSend                                   uk.gov.hmrc.vo.contact.frontend.controllers.ConfirmationController.onPageLoadSendEmail()
@@ -92,7 +92,7 @@ GET         /condition-of-your-property                         uk.gov.hmrc.vo.c
 GET         /date-property-changed                              uk.gov.hmrc.vo.contact.frontend.controllers.DatePropertyChangedController.onPageLoad(mode: Mode = NormalMode)
 POST        /date-property-changed                              uk.gov.hmrc.vo.contact.frontend.controllers.DatePropertyChangedController.onSubmit(mode: Mode = NormalMode)
 
-GET         /anything-else-tell-us                              uk.gov.hmrc.vo.contact.frontend.controllers.AnythingElseTellUsController.onPageLoad(mode: Mode = NormalMode)
+GET         /anything-else-tell-us                              uk.gov.hmrc.vo.contact.frontend.controllers.AnythingElseTellUsController.onPageLoad
 POST        /anything-else-tell-us                              uk.gov.hmrc.vo.contact.frontend.controllers.AnythingElseTellUsController.onSubmit(mode: Mode = NormalMode)
 
 GET         /annexe                                             uk.gov.hmrc.vo.contact.frontend.controllers.CouncilTaxAnnexeController.onPageLoad(mode: Mode = NormalMode)
@@ -110,7 +110,7 @@ GET         /split-merged                                       uk.gov.hmrc.vo.c
 
 GET         /property-used-for-business                         uk.gov.hmrc.vo.contact.frontend.controllers.CouncilTaxBusinessController.onPageLoad(mode: Mode = NormalMode)
 POST        /property-used-for-business                         uk.gov.hmrc.vo.contact.frontend.controllers.CouncilTaxBusinessController.onEnquirySubmit(mode: Mode = NormalMode)
-GET         /small-part-of-property-used-for-business           uk.gov.hmrc.vo.contact.frontend.controllers.CouncilTaxBusinessController.onSmallPartUsedPageLoad(mode: Mode = NormalMode)
+GET         /small-part-of-property-used-for-business           uk.gov.hmrc.vo.contact.frontend.controllers.CouncilTaxBusinessController.onSmallPartUsedPageLoad
 GET         /small-part-of-property-used-for-business-rates     uk.gov.hmrc.vo.contact.frontend.controllers.CouncilTaxBusinessController.onSmallPartUsedBusinessRatesPageLoad()
 GET         /date-property-business-changed                     uk.gov.hmrc.vo.contact.frontend.controllers.DatePropertyChangedController.onPageLoad(mode: Mode = NormalMode)
 POST        /date-property-business-changed                     uk.gov.hmrc.vo.contact.frontend.controllers.DatePropertyChangedController.onSubmit(mode: Mode = NormalMode)
@@ -123,24 +123,24 @@ GET         /business-rates-property-empty                      uk.gov.hmrc.vo.c
 GET         /self-catering-holiday-let                          uk.gov.hmrc.vo.contact.frontend.controllers.BusinessRatesSelfCateringController.onPageLoad(mode: Mode = NormalMode)
 POST        /self-catering-holiday-let                          uk.gov.hmrc.vo.contact.frontend.controllers.BusinessRatesSelfCateringController.onSubmit(mode: Mode = NormalMode)
 
-GET         /property-available-let-england                     uk.gov.hmrc.vo.contact.frontend.controllers.PropertyEnglandAvailableLetsController.onPageLoad(mode: Mode = NormalMode)
+GET         /property-available-let-england                     uk.gov.hmrc.vo.contact.frontend.controllers.PropertyEnglandAvailableLetsController.onPageLoad
 POST        /property-available-let-england                     uk.gov.hmrc.vo.contact.frontend.controllers.PropertyEnglandAvailableLetsController.onSubmit(mode: Mode = NormalMode)
 
-GET         /property-actual-let-england                        uk.gov.hmrc.vo.contact.frontend.controllers.PropertyEnglandActualLetsController.onPageLoad(mode: Mode = NormalMode)
+GET         /property-actual-let-england                        uk.gov.hmrc.vo.contact.frontend.controllers.PropertyEnglandActualLetsController.onPageLoad
 POST        /property-actual-let-england                        uk.gov.hmrc.vo.contact.frontend.controllers.PropertyEnglandActualLetsController.onSubmit(mode: Mode = NormalMode)
 
-GET         /property-available-let-wales                       uk.gov.hmrc.vo.contact.frontend.controllers.PropertyWalesAvailableLetsController.onPageLoad(mode: Mode = NormalMode)
+GET         /property-available-let-wales                       uk.gov.hmrc.vo.contact.frontend.controllers.PropertyWalesAvailableLetsController.onPageLoad
 POST        /property-available-let-wales                       uk.gov.hmrc.vo.contact.frontend.controllers.PropertyWalesAvailableLetsController.onSubmit(mode: Mode = NormalMode)
 
-GET         /property-actual-let-wales                          uk.gov.hmrc.vo.contact.frontend.controllers.PropertyWalesActualLetsController.onPageLoad(mode: Mode = NormalMode)
+GET         /property-actual-let-wales                          uk.gov.hmrc.vo.contact.frontend.controllers.PropertyWalesActualLetsController.onPageLoad
 POST        /property-actual-let-wales                          uk.gov.hmrc.vo.contact.frontend.controllers.PropertyWalesActualLetsController.onSubmit(mode: Mode = NormalMode)
 
-GET         /property-england-lets-no-action                    uk.gov.hmrc.vo.contact.frontend.controllers.PropertyEnglandLetsNoActionController.onPageLoad(mode: Mode = NormalMode)
-GET         /property-wales-lets-no-action                      uk.gov.hmrc.vo.contact.frontend.controllers.PropertyWalesLetsNoActionController.onPageLoad(mode: Mode = NormalMode)
+GET         /property-england-lets-no-action                    uk.gov.hmrc.vo.contact.frontend.controllers.PropertyEnglandLetsNoActionController.onPageLoad
+GET         /property-wales-lets-no-action                      uk.gov.hmrc.vo.contact.frontend.controllers.PropertyWalesLetsNoActionController.onPageLoad
 
-GET         /property-england-lets                              uk.gov.hmrc.vo.contact.frontend.controllers.BusinessRatesSelfCateringController.onEngLetsPageLoad(mode: Mode = NormalMode)
-GET         /property-wales-lets                                uk.gov.hmrc.vo.contact.frontend.controllers.BusinessRatesSelfCateringController.onWalLetsPageLoad(mode: Mode = NormalMode)
-GET         /property-needs-assessment-business-rates           uk.gov.hmrc.vo.contact.frontend.controllers.BusinessRatesSubcategoryController.onValuationPageLoad(mode: Mode = NormalMode)
+GET         /property-england-lets                              uk.gov.hmrc.vo.contact.frontend.controllers.BusinessRatesSelfCateringController.onEngLetsPageLoad
+GET         /property-wales-lets                                uk.gov.hmrc.vo.contact.frontend.controllers.BusinessRatesSelfCateringController.onWalLetsPageLoad
+GET         /property-needs-assessment-business-rates           uk.gov.hmrc.vo.contact.frontend.controllers.BusinessRatesSubcategoryController.onValuationPageLoad
 
 GET         /no-longer-used-for-business                        uk.gov.hmrc.vo.contact.frontend.controllers.BusinessRatesPropertyController.onPageLoad(mode: Mode = NormalMode)
 POST        /no-longer-used-for-business                        uk.gov.hmrc.vo.contact.frontend.controllers.BusinessRatesPropertyController.onSubmit(mode: Mode = NormalMode)
@@ -148,12 +148,12 @@ GET         /non-business                                       uk.gov.hmrc.vo.c
 
 GET         /permanent-changes                                  uk.gov.hmrc.vo.contact.frontend.controllers.PropertyPermanentChangesController.onPageLoad()
 
-GET         /fair-rent-enquiry                                  uk.gov.hmrc.vo.contact.frontend.controllers.FairRentEnquiryController.onPageLoad(mode: Mode = NormalMode)
+GET         /fair-rent-enquiry                                  uk.gov.hmrc.vo.contact.frontend.controllers.FairRentEnquiryController.onPageLoad
 POST        /fair-rent-enquiry                                  uk.gov.hmrc.vo.contact.frontend.controllers.FairRentEnquiryController.onSubmit(mode: Mode = NormalMode)
 
-GET         /submit-fair-rent-application                       uk.gov.hmrc.vo.contact.frontend.controllers.FairRentEnquiryController.onFairRentEnquiryNew(mode: Mode = NormalMode)
+GET         /submit-fair-rent-application                       uk.gov.hmrc.vo.contact.frontend.controllers.FairRentEnquiryController.onFairRentEnquiryNew
 
-GET         /check-fair-rents-register                          uk.gov.hmrc.vo.contact.frontend.controllers.FairRentEnquiryController.onFairRentEnquiryCheck(mode: Mode = NormalMode)
+GET         /check-fair-rents-register                          uk.gov.hmrc.vo.contact.frontend.controllers.FairRentEnquiryController.onFairRentEnquiryCheck
 
 # SURVEY
 GET         /survey-thanks                                      uk.gov.hmrc.vo.contact.frontend.controllers.SatisfactionSurveyController.surveyThankyou

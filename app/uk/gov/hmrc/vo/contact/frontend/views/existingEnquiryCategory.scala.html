@@ -18,7 +18,6 @@
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
-@import uk.gov.hmrc.vo.contact.frontend.models.Mode
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.forms.ExistingEnquiryCategoryForm
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
@@ -32,7 +31,7 @@
         govukButton: GovukButton
 )
 
-@(form: Form[String], mode: Mode, backLink: String)(implicit request: RequestHeader, messages: Messages)
+@(form: Form[String])(implicit request: RequestHeader, messages: Messages)
 
 @layout(
     pageTitle = messages("existingEnquiryCategory.title"),

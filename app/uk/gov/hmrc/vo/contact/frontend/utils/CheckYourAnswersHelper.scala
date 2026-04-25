@@ -36,22 +36,22 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages,
   }
 
   def existingEnquiryCategory: Option[AnswerRow] = userAnswers.existingEnquiryCategory map {
-    x => AnswerRow("existingEnquiryCategory.heading", s"existingEnquiryCategory.$x", true, routes.ExistingEnquiryCategoryController.onPageLoad().url)
+    x => AnswerRow("existingEnquiryCategory.heading", s"existingEnquiryCategory.$x", true, routes.ExistingEnquiryCategoryController.onPageLoad.url)
   }
 
   def refNumber: Option[AnswerRow] = {
     val ref = userAnswers.refNumber.map(_.trim).filter(_ != "")
     Option(
-      AnswerRow("refNumber.value", ref.getOrElse("site.not_provided"), ref.isEmpty, routes.RefNumberController.onPageLoad().url)
+      AnswerRow("refNumber.value", ref.getOrElse("site.not_provided"), ref.isEmpty, routes.RefNumberController.onPageLoad.url)
     )
   }
 
   def whatElse: Option[AnswerRow] = userAnswers.whatElse map {
-    x => AnswerRow("whatElse.message.label", x, false, routes.WhatElseController.onPageLoad().url)
+    x => AnswerRow("whatElse.message.label", x, false, routes.WhatElseController.onPageLoad.url)
   }
 
   def anythingElse: Option[AnswerRow] = userAnswers.anythingElse map {
-    answer => AnswerRow("anythingElse.checkYourAnswersLabel", answer, false, routes.AnythingElseTellUsController.onPageLoad().url)
+    answer => AnswerRow("anythingElse.checkYourAnswersLabel", answer, false, routes.AnythingElseTellUsController.onPageLoad.url)
   }
 
   def enquiryCategory: Option[AnswerRow] = userAnswers.enquiryCategory map {
@@ -90,7 +90,7 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages,
   }
 
   def fairRentEnquiryEnquiry: Option[AnswerRow] = userAnswers.fairRentEnquiryEnquiry.map {
-    x => AnswerRow("housingBenefits.heading", s"housingBenefits.form.$x", false, routes.FairRentEnquiryController.onPageLoad().url)
+    x => AnswerRow("housingBenefits.heading", s"housingBenefits.form.$x", false, routes.FairRentEnquiryController.onPageLoad.url)
   }
 
   def housingBenefitTellUsMore: Option[AnswerRow] = userAnswers.getString(lastTellUsMorePage) map {

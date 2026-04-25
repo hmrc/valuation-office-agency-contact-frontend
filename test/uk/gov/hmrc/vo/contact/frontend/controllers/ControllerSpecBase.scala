@@ -31,5 +31,5 @@ trait ControllerSpecBase extends SpecBase with Injecting {
 
   def dontGetAnyData = FakeDataRetrievalAction(None)
 
-  def getClearCacheMap = FakeDataClearAction(Some(emptyCacheMap))
+  def getClearCacheMap = FakeDataClearAction()
 }

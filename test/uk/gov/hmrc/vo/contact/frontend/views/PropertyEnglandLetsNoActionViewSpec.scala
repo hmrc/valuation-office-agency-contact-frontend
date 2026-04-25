@@ -24,7 +24,7 @@ class PropertyEnglandLetsNoActionViewSpec extends ViewBehaviours {
 
   def propertyEnglandLetsNoAction: england_lets_no_action = app.injector.instanceOf[england_lets_no_action]
 
-  def backLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad().url
+  def backLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad.url
 
   def viewEnglandAvailable140Nights: () => HtmlFormat.Appendable = () => propertyEnglandLetsNoAction(backLink)(using fakeRequest, messages)
 
@@ -47,7 +47,7 @@ class PropertyEnglandLetsNoActionViewSpec extends ViewBehaviours {
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad().url
+      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad.url
     }
   }
 }

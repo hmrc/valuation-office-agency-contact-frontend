@@ -31,10 +31,9 @@ object BRPropertyOrAreaChangedInWales
   extends CustomizedContent(
     key = "property-or-area-changed-in-Wales",
     fieldId = "propertyOrAreaChangedInWales"
-  ) {
+  ):
+
   override def previousPage: UserAnswers => Call = _ => routes.JourneyController.onPageLoad(EnglandOrWalesPropertyRouter.key)
 
   override def template(customizedContent: CustomizedContent)(using messages: Messages): Appendable =
-    brPropertyOrAreaChangedInWales(customizedContent)
-
-}
+    brPropertyOrAreaChangedInWales()

@@ -58,7 +58,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
 
   def ctBackLink: String        = uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
   def ndrBackLink: String       = uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
-  def refNumberBackLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.RefNumberController.onPageLoad().url
+  def refNumberBackLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.RefNumberController.onPageLoad.url
 
   def viewAsStringCT(form: Form[ContactDetails] = ContactDetailsForm()): String =
     contactDetails(form, NormalMode, ctBackLink)(using fakeRequest, messages).toString

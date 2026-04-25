@@ -72,12 +72,12 @@ class BusinessRatesSelfCateringController @Inject() (
       )
   }
 
-  def onEngLetsPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+  def onEngLetsPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(propertyEnglandLets())
   }
 
-  def onWalLetsPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+  def onWalLetsPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(propertyWalesLets())
   }

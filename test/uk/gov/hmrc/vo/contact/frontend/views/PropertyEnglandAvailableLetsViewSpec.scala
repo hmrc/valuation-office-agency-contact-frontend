@@ -18,7 +18,6 @@ package uk.gov.hmrc.vo.contact.frontend.views
 
 import play.api.data.Form
 import uk.gov.hmrc.vo.contact.frontend.forms.PropertyEnglandAvailableLetsForm
-import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyEnglandAvailableLets => property_england_available_lets}
 import play.twirl.api.HtmlFormat
@@ -31,10 +30,10 @@ class PropertyEnglandAvailableLetsViewSpec extends ViewBehaviours {
   val messageKeyPrefix = "propertyEnglandAvailableLets"
 
   def createView: () => HtmlFormat.Appendable =
-    () => propertyEnglandLets140DaysSubcategory(PropertyEnglandAvailableLetsForm(), NormalMode)(using fakeRequest, messages)
+    () => propertyEnglandLets140DaysSubcategory(PropertyEnglandAvailableLetsForm())(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => propertyEnglandLets140DaysSubcategory(form, NormalMode)(using fakeRequest, messages)
+    (form: Form[String]) => propertyEnglandLets140DaysSubcategory(form)(using fakeRequest, messages)
 
   "PropertyEnglandLets140DaysSubcategory view" when {
     "rendered" must {

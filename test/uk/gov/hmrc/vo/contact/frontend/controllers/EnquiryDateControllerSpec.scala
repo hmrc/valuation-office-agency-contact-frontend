@@ -41,7 +41,7 @@ class EnquiryDateControllerSpec extends ControllerSpecBase {
   def enquiryDate: html.enquiryDate = inject[enquiry_date]
   def auditService: AuditingService = inject[AuditingService]
 
-  def onwardRoute: Call = routes.EnquiryDateController.onPageLoad()
+  def onwardRoute: Call = routes.EnquiryDateController.onPageLoad
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     EnquiryDateController(
@@ -56,12 +56,12 @@ class EnquiryDateControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = EnquiryDateForm()): String =
-    enquiryDate(form, EnquiryDateForm.beforeDate(), NormalMode)(using fakeRequest, messages).toString()
+    enquiryDate(form, EnquiryDateForm.beforeDate())(using fakeRequest, messages).toString()
 
   "EnquiryDateController Controller" must {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onPageLoad(fakeRequest)
 
       status(result) mustBe OK
 
@@ -73,7 +73,7 @@ class EnquiryDateControllerSpec extends ControllerSpecBase {
       val validData       = Map(EnquiryDateId.toString -> JsString(EnquiryDateForm.options.head.value))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       contentAsString(result) mustBe viewAsString(EnquiryDateForm().fill(EnquiryDateForm.options.head.value))
     }

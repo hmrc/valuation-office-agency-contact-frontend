@@ -74,7 +74,7 @@ class BusinessRatesSubcategoryController @Inject() (
       )
   }
 
-  def onValuationPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
+  def onValuationPageLoad: mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(businessRatesValuation())
   }

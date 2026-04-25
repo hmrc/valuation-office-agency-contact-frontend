@@ -55,14 +55,14 @@ class DatePropertyChangedController @Inject() (
       case Some(value) => DatePropertyChangedForm().fill(value)
     }
 
-    Ok(datePropertyChanged(preparedForm, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))
+    Ok(datePropertyChanged(preparedForm, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       DatePropertyChangedForm().bindFromRequest().fold(
         (formWithErrors: Form[Option[LocalDate]]) =>
-          BadRequest(datePropertyChanged(formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode))),
+          BadRequest(datePropertyChanged(formWithErrors, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode))),
         value =>
           for
             _        <- dataCacheConnector.remove(request.sessionId, DatePropertyChangedId.toString)

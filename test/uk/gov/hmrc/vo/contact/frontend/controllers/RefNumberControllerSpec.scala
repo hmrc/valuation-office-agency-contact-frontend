@@ -34,7 +34,7 @@ class RefNumberControllerSpec extends ControllerSpecBase {
 
   def refNumber: html.refNumber = app.injector.instanceOf[ref_number]
 
-  def onwardRoute: Call = routes.RefNumberController.onPageLoad()
+  def onwardRoute: Call = routes.RefNumberController.onPageLoad
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     RefNumberController(
@@ -47,12 +47,12 @@ class RefNumberControllerSpec extends ControllerSpecBase {
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[Option[String]] = RefNumberForm()): String = refNumber(form, NormalMode)(using fakeRequest, messages).toString
+  def viewAsString(form: Form[Option[String]] = RefNumberForm()): String = refNumber(form)(using fakeRequest, messages).toString
 
   "RefNumberController Controller" must {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onPageLoad(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe viewAsString()
@@ -62,7 +62,7 @@ class RefNumberControllerSpec extends ControllerSpecBase {
       val validData       = Map(RefNumberId.toString -> JsString("VO123"))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       contentAsString(result) mustBe viewAsString(RefNumberForm().fill(Option("VO123")))
     }

@@ -27,7 +27,7 @@ class ExpectedUpdateControllerSpec extends ControllerSpecBase {
 
   def expectedUpdate: html.expectedUpdate = inject[expected_update]
 
-  def onwardRoute: Call = routes.EnquiryDateController.onPageLoad()
+  def onwardRoute: Call = routes.EnquiryDateController.onPageLoad
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     ExpectedUpdateController(messagesApi, dataRetrievalAction, expectedUpdate, MessageControllerComponentsHelpers.stubMessageControllerComponents)

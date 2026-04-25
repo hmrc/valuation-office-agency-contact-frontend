@@ -54,7 +54,7 @@ class TellUsMoreController @Inject() (
   def initAndStart: mvc.Action[AnyContent] = getData.async { implicit request =>
     dataCacheConnector
       .save[String](request.sessionId, ExistingEnquiryCategoryId.toString, "other")
-      .map(_ => Redirect(routes.RefNumberController.onPageLoad().url))
+      .map(_ => Redirect(routes.RefNumberController.onPageLoad.url))
   }
 
   def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
@@ -158,21 +158,21 @@ class TellUsMoreController @Inject() (
       case (_, Some("business_rates_not_used"), _, _, _, _, _, _, _, _)                                      => routes.DatePropertyChangedController.onPageLoad()
       case (_, Some("business_rates_bill"), _, _, _, _, _, _, _, _)                                          => routes.BusinessRatesBillController.onPageLoad()
       case (_, Some("business_rates_self_catering"), _, _, _, _, Some("england"), Some("yes"), _, _)         =>
-        routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
-      case (_, Some("business_rates_self_catering"), _, _, _, _, Some("england"), Some("no"), _, _)          => routes.PropertyEnglandLetsNoActionController.onPageLoad()
-      case (_, Some("business_rates_self_catering"), _, _, _, _, Some("wales"), _, Some("no"), _)            => routes.PropertyWalesLetsNoActionController.onPageLoad()
+        routes.BusinessRatesSelfCateringController.onEngLetsPageLoad
+      case (_, Some("business_rates_self_catering"), _, _, _, _, Some("england"), Some("no"), _, _)          => routes.PropertyEnglandLetsNoActionController.onPageLoad
+      case (_, Some("business_rates_self_catering"), _, _, _, _, Some("wales"), _, Some("no"), _)            => routes.PropertyWalesLetsNoActionController.onPageLoad
       case (_, Some("business_rates_self_catering"), _, _, _, _, Some("wales"), _, Some("yes"), Some("yes")) =>
-        routes.BusinessRatesSelfCateringController.onWalLetsPageLoad()
+        routes.BusinessRatesSelfCateringController.onWalLetsPageLoad
       case (_, Some("business_rates_self_catering"), _, _, _, _, Some("wales"), _, Some("yes"), Some("no"))  =>
-        routes.PropertyWalesLetsNoActionController.onPageLoad()
+        routes.PropertyWalesLetsNoActionController.onPageLoad
       case (_, Some("business_rates_changes"), _, _, _, _, _, _, _, _)                                       => EnglandOrWalesPropertyRouter.nextPage(answers)
       case (_, Some("business_rates_demolished"), _, _, _, _, _, _, _, _)                                    => EnglandOrWalesPropertyRouter.nextPage(answers)
-      case (_, Some("business_rates_valuation"), _, _, _, _, _, _, _, _)                                     => routes.BusinessRatesSubcategoryController.onValuationPageLoad()
+      case (_, Some("business_rates_valuation"), _, _, _, _, _, _, _, _)                                     => routes.BusinessRatesSubcategoryController.onValuationPageLoad
       case (_, Some("business_rates_property_empty"), _, _, _, _, _, _, _, _)                                => routes.PropertyEmptyController.onBusinessRatesPageLoad()
       case (_, Some("business_rates_other"), _, _, _, _, _, _, _, _)                                         => routes.BusinessRatesSubcategoryController.onPageLoad(mode)
-      case (_, _, Some("submit_new_application"), _, _, _, _, _, _, _)                                       => routes.FairRentEnquiryController.onFairRentEnquiryNew()
-      case (_, _, Some("check_fair_rent_register"), _, _, _, _, _, _, _)                                     => routes.FairRentEnquiryController.onFairRentEnquiryCheck()
-      case (_, _, Some("other_request"), _, _, _, _, _, _, _)                                                => routes.FairRentEnquiryController.onPageLoad()
+      case (_, _, Some("submit_new_application"), _, _, _, _, _, _, _)                                       => routes.FairRentEnquiryController.onFairRentEnquiryNew
+      case (_, _, Some("check_fair_rent_register"), _, _, _, _, _, _, _)                                     => routes.FairRentEnquiryController.onFairRentEnquiryCheck
+      case (_, _, Some("other_request"), _, _, _, _, _, _, _)                                                => routes.FairRentEnquiryController.onPageLoad
       case _                                                                                                 => routes.PropertyAddressController.onPageLoad(NormalMode)
     }).url
 

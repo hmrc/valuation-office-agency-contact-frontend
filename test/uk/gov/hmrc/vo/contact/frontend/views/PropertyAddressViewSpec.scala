@@ -17,7 +17,6 @@
 package uk.gov.hmrc.vo.contact.frontend.views
 
 import play.api.data.Form
-import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 import uk.gov.hmrc.vo.contact.frontend.forms.PropertyAddressForm
 import uk.gov.hmrc.vo.contact.frontend.models.{NormalMode, PropertyAddress}
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.QuestionViewBehaviours
@@ -43,8 +42,6 @@ class PropertyAddressViewSpec extends QuestionViewBehaviours[PropertyAddress] {
 
     behave like pageWithTextFields(
       createViewUsingForm,
-      messageKeyPrefix,
-      routes.ContactDetailsController.onSubmit(NormalMode).url,
       "addressLine1",
       "addressLine2",
       "town",

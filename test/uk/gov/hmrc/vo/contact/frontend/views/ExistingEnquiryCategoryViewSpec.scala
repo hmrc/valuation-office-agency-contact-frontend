@@ -19,7 +19,6 @@ package uk.gov.hmrc.vo.contact.frontend.views
 import play.api.data.Form
 import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 import uk.gov.hmrc.vo.contact.frontend.forms.ExistingEnquiryCategoryForm
-import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{existingEnquiryCategory => existing_enquiry}
 import play.twirl.api.HtmlFormat
@@ -34,10 +33,10 @@ class ExistingEnquiryCategoryViewSpec extends ViewBehaviours {
   val backUrl: String = routes.ContactReasonController.onPageLoad.url
 
   def createView: () => HtmlFormat.Appendable =
-    () => existingEnqCategory(ExistingEnquiryCategoryForm(), NormalMode, backUrl)(using fakeRequest, messages)
+    () => existingEnqCategory(ExistingEnquiryCategoryForm())(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => existingEnqCategory(form, NormalMode, backUrl)(using fakeRequest, messages)
+    (form: Form[String]) => existingEnqCategory(form)(using fakeRequest, messages)
 
   "ExistingEnquiryCategory view" must {
     behave like normalPage(createView, messageKeyPrefix)

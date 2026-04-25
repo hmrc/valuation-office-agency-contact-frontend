@@ -55,19 +55,19 @@ class FairRentEnquiryControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = FairRentEnquiryForm()): String =
-    fairRentEnquiryEnquiry(form, NormalMode)(using fakeRequest, messages).toString
+    fairRentEnquiryEnquiry(form)(using fakeRequest, messages).toString
 
   "PropertyEnglandLets140DaysController" must {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onPageLoad(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe viewAsString()
     }
 
     "return OK and the correct view for england lets no business rates page GET" in {
-      val result = controller().onFairRentEnquiryNew(NormalMode)(fakeRequest)
+      val result = controller().onFairRentEnquiryNew(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe onFairRentEnquiryNew()(using fakeRequest, messages).toString()
@@ -77,7 +77,7 @@ class FairRentEnquiryControllerSpec extends ControllerSpecBase {
       val validData       = Map(FairRentEnquiryId.toString -> JsString(FairRentEnquiryForm.options.head.value))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       contentAsString(result) mustBe viewAsString(FairRentEnquiryForm().fill(FairRentEnquiryForm.options.head.value))
     }
@@ -85,7 +85,7 @@ class FairRentEnquiryControllerSpec extends ControllerSpecBase {
     "redirect to no action page when valid data is submitted" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", FairRentEnquiryForm.options.head.value))
 
-      val result = controller().onFairRentEnquiryNew(NormalMode)(postRequest)
+      val result = controller().onFairRentEnquiryNew(postRequest)
 
       status(result) mustBe OK
     }
@@ -93,7 +93,7 @@ class FairRentEnquiryControllerSpec extends ControllerSpecBase {
     "redirect to no action page when valid data for check is submitted" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", FairRentEnquiryForm.options.head.value))
 
-      val result = controller().onFairRentEnquiryCheck(NormalMode)(postRequest)
+      val result = controller().onFairRentEnquiryCheck(postRequest)
 
       status(result) mustBe OK
     }
@@ -117,7 +117,7 @@ class FairRentEnquiryControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(dontGetAnyData).onPageLoad(fakeRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)

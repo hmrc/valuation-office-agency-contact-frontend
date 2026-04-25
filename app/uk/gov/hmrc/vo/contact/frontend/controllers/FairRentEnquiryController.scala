@@ -48,20 +48,20 @@ class FairRentEnquiryController @Inject() (
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+  def onPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.fairRentEnquiryEnquiry match {
         case None        => FairRentEnquiryForm()
         case Some(value) => FairRentEnquiryForm().fill(value)
       }
-      Ok(fairRentEnquiry(preparedForm, mode))
+      Ok(fairRentEnquiry(preparedForm))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       FairRentEnquiryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          BadRequest(fairRentEnquiry(formWithErrors, mode)),
+          BadRequest(fairRentEnquiry(formWithErrors)),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "fairRents" -> value)
           dataCacheConnector.save[String](request.sessionId, FairRentEnquiryId.toString, value).map(cacheMap =>
@@ -71,12 +71,12 @@ class FairRentEnquiryController @Inject() (
       )
   }
 
-  def onFairRentEnquiryNew(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+  def onFairRentEnquiryNew: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(submitFairRentApplication())
   }
 
-  def onFairRentEnquiryCheck(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+  def onFairRentEnquiryCheck: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(checkFairRentApplication())
   }

@@ -47,20 +47,20 @@ class AnythingElseTellUsController @Inject() (
 
   given ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData `andThen` requireData) {
+  def onPageLoad: mvc.Action[AnyContent] = (getData `andThen` requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.anythingElse match {
         case None        => AnythingElseForm()
         case Some(value) => AnythingElseForm().fill(value)
       }
-      Ok(anythingElseTellUsView(preparedForm, mode))
+      Ok(anythingElseTellUsView(preparedForm))
   }
 
   def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData `andThen` requireData).async {
     implicit request =>
       AnythingElseForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          BadRequest(anythingElseTellUsView(formWithErrors, mode)),
+          BadRequest(anythingElseTellUsView(formWithErrors)),
         value =>
           dataCacheConnector.save[String](request.sessionId, AnythingElseId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(AnythingElseId, mode).apply(UserAnswers(cacheMap)))

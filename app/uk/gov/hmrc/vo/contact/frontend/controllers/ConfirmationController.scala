@@ -80,7 +80,7 @@ class ConfirmationController @Inject() (
   def onPageLoad: mvc.Action[AnyContent] = (getData andThen requireData) { implicit request =>
     val (contact, answerSections) = (request.userAnswers.contact(), request.userAnswers.answerSection) match {
       case (Right(ct), Some(as)) => (ct, as)
-      case (Left(msg), _)        =>
+      case (msg, _)              =>
         log.warn(s"On Page load - Navigation for Confirmation page reached without a contact and error $msg")
         throw RuntimeException(s"On Page load - Navigation for Confirmation page reached without a contact and error $msg")
     }

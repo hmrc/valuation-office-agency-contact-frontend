@@ -21,7 +21,6 @@
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
 @import uk.gov.hmrc.govukfrontend.views.Implicits.*
-@import uk.gov.hmrc.vo.contact.frontend.models.Mode
 @import uk.gov.hmrc.vo.contact.frontend.forms.CouncilTaxBusinessEnquiryForm
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
@@ -33,7 +32,7 @@
         govukButton: GovukButton
 )
 
-@(form: Form[String], mode: Mode, backLink: String)(implicit request: RequestHeader, messages: Messages)
+@(form: Form[String], backLink: String)(implicit request: RequestHeader, messages: Messages)
 
 @layout(
     pageTitle = messages("councilTaxBusinessEnquiry.title"),

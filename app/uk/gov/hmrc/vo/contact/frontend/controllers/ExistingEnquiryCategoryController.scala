@@ -51,14 +51,14 @@ class ExistingEnquiryCategoryController @Inject() (
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) { implicit request =>
+  def onPageLoad: Action[AnyContent] = (getData andThen requireData) { implicit request =>
     val preparedForm = request.userAnswers.existingEnquiryCategory match {
       case None        => ExistingEnquiryCategoryForm()
       case Some(value) => ExistingEnquiryCategoryForm().fill(value)
     }
     enquiryBackLink(request.userAnswers) match {
-      case Right(link) => Ok(existingEnquiryCategory(preparedForm, mode, link))
-      case Left(msg)   =>
+      case Right(_)  => Ok(existingEnquiryCategory(preparedForm))
+      case Left(msg) =>
         log.warn(s"Navigation for Existing Enquiry Category page reached with error $msg")
         throw RuntimeException(s"Navigation for Existing Enquiry Category page reached with error $msg")
     }
@@ -68,7 +68,7 @@ class ExistingEnquiryCategoryController @Inject() (
     implicit request =>
       ExistingEnquiryCategoryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          BadRequest(existingEnquiryCategory(formWithErrors, mode, "")),
+          BadRequest(existingEnquiryCategory(formWithErrors)),
         value =>
           for {
             _        <- saveSubCategoryInCache(value, request.sessionId)
@@ -99,7 +99,7 @@ class ExistingEnquiryCategoryController @Inject() (
     answers.contactReason match {
       case Some("new_enquiry")     => Right(routes.ContactReasonController.onPageLoad.url)
       case Some("more_details")    => Right(routes.ContactReasonController.onPageLoad.url)
-      case Some("update_existing") => Right(routes.EnquiryDateController.onPageLoad().url)
+      case Some("update_existing") => Right(routes.EnquiryDateController.onPageLoad.url)
       case _                       => Left("Unknown enquiry category in enquiry key")
     }
 }

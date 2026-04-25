@@ -51,25 +51,24 @@ class PropertyEnglandAvailableLetsControllerSpec extends ControllerSpecBase {
       dataRetrievalAction,
       DataRequiredActionImpl(ec),
       propertyEnglandLets140DaysEnquiry,
-      propertyEnglandLetsNoAction,
       propertyWalesLets,
       stubMessageControllerComponents
     )
 
   def viewAsString(form: Form[String] = PropertyEnglandAvailableLetsForm()): String =
-    propertyEnglandLets140DaysEnquiry(form, NormalMode)(using fakeRequest, messages).toString
+    propertyEnglandLets140DaysEnquiry(form)(using fakeRequest, messages).toString
 
   "PropertyEnglandLets140DaysController" must {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onPageLoad(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe viewAsString()
     }
 
     "return OK and the correct view for wales lets rates page GET" in {
-      val result = controller().onWalLetsPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onWalLetsPageLoad(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe propertyWalesLets()(using fakeRequest, messages).toString()
@@ -79,7 +78,7 @@ class PropertyEnglandAvailableLetsControllerSpec extends ControllerSpecBase {
       val validData       = Map(PropertyEnglandAvailableLetsId.toString -> JsString(PropertyEnglandAvailableLetsForm.options.head.value))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       contentAsString(result) mustBe viewAsString(PropertyEnglandAvailableLetsForm().fill(PropertyEnglandAvailableLetsForm.options.head.value))
     }
@@ -103,7 +102,7 @@ class PropertyEnglandAvailableLetsControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(dontGetAnyData).onPageLoad(fakeRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)

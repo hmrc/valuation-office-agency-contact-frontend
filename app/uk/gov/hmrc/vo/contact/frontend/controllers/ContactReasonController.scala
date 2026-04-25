@@ -24,7 +24,7 @@ import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheCon
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataClearAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.ContactReasonForm.form
 import uk.gov.hmrc.vo.contact.frontend.identifiers.ContactReasonId
-import uk.gov.hmrc.vo.contact.frontend.models.{Mode, NormalMode}
+import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.contactReason
 
@@ -48,7 +48,7 @@ class ContactReasonController @Inject() (
     Ok(contact_reason(form))
   }
 
-  def onSubmit(mode: Mode): Action[AnyContent] = getData.async { implicit request =>
+  def onSubmit: Action[AnyContent] = getData.async { implicit request =>
     form.bindFromRequest().fold(
       formWithErrors => BadRequest(contact_reason(formWithErrors)),
       value =>

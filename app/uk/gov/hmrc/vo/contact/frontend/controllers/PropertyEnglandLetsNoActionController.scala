@@ -26,7 +26,6 @@ import scala.concurrent.ExecutionContext
 import play.api.mvc
 import play.api.mvc.AnyContent
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.vo.contact.frontend.models.Mode
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertyEnglandLetsNoAction as property_england_lets_no_action
 
@@ -44,7 +43,7 @@ class PropertyEnglandLetsNoActionController @Inject() (
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
+  def onPageLoad: mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       enquiryBackLink(request.userAnswers) match {
         case Right(link) => Ok(propertyEnglandLetsNoAction(link))
@@ -65,9 +64,9 @@ class PropertyEnglandLetsNoActionController @Inject() (
       answers.propertyEnglandActualLetsEnquiry
     ) match {
       case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("england"), Some("yes"), Some("no")) =>
-        Right(routes.PropertyEnglandActualLetsController.onPageLoad().url)
+        Right(routes.PropertyEnglandActualLetsController.onPageLoad.url)
       case (_, Some("business_rates"), Some("business_rates_self_catering"), Some("england"), Some("no"), _)           =>
-        Right(routes.PropertyEnglandAvailableLetsController.onPageLoad().url)
+        Right(routes.PropertyEnglandAvailableLetsController.onPageLoad.url)
       case _                                                                                                           =>
         Left("Unknown enquiry category in enquiry key")
     }

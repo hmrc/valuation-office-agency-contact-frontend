@@ -31,10 +31,10 @@ class FairRentEnquiryViewSpec extends ViewBehaviours {
   val messageKeyPrefix = "fairRents"
 
   def createView: () => HtmlFormat.Appendable =
-    () => fairRentEnquirySubcategory(FairRentEnquiryForm(), NormalMode)(using fakeRequest, messages)
+    () => fairRentEnquirySubcategory(FairRentEnquiryForm())(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => fairRentEnquirySubcategory(form, NormalMode)(using fakeRequest, messages)
+    (form: Form[String]) => fairRentEnquirySubcategory(form)(using fakeRequest, messages)
 
   "fairRentEnquirySubcategory view" when {
     "rendered" must {

@@ -451,7 +451,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       val result = controller(emptyData).initAndStart(fakeRequest)
 
       status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.RefNumberController.onPageLoad().url)
+      redirectLocation(result) mustBe Some(routes.RefNumberController.onPageLoad.url)
     }
 
   }

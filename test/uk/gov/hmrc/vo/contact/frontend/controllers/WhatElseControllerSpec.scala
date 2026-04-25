@@ -53,7 +53,7 @@ class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar {
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[String] = WhatElseForm()): String = whatElse(form, NormalMode)(using fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = WhatElseForm()): String = whatElse(form)(using fakeRequest, messages).toString
 
   "TellUsMore Controller" must {
 
@@ -62,7 +62,7 @@ class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar {
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe viewAsString(WhatElseForm())
@@ -74,7 +74,7 @@ class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar {
       )
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       contentAsString(result) mustBe viewAsString(WhatElseForm().fill("value 1"))
     }
@@ -99,7 +99,7 @@ class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar {
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(dontGetAnyData).onPageLoad(fakeRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)

@@ -17,7 +17,6 @@
 package uk.gov.hmrc.vo.contact.frontend.views
 
 import play.api.data.Form
-import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 import uk.gov.hmrc.vo.contact.frontend.forms.AnythingElseForm
 import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.QuestionViewBehaviours
@@ -31,12 +30,12 @@ class AnythingElseTellUsViewSpec extends QuestionViewBehaviours[String] {
 
   def anythingElse: anythingElseTellUs = app.injector.instanceOf[anything_else]
 
-  def createView: () => HtmlFormat.Appendable = () => anythingElse(AnythingElseForm(), NormalMode)(using fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable = () => anythingElse(AnythingElseForm())(using fakeRequest, messages)
 
-  def createAlternativeView: () => HtmlFormat.Appendable = () => anythingElse(AnythingElseForm(), NormalMode)(using fakeRequest, messages)
+  def createAlternativeView: () => HtmlFormat.Appendable = () => anythingElse(AnythingElseForm())(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => anythingElse(form, NormalMode)(using fakeRequest, messages)
+    (form: Form[String]) => anythingElse(form)(using fakeRequest, messages)
 
   override val form: Form[String] = AnythingElseForm()
 
@@ -47,7 +46,7 @@ class AnythingElseTellUsViewSpec extends QuestionViewBehaviours[String] {
       assertEqualsValue(doc, "title", messages(s"$messageKeyPrefix.message.label") + " - Valuation Office contact form - GOV.UK")
     }
 
-    behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.AnythingElseTellUsController.onSubmit().url)
+    behave like pageWithTextFields(createViewUsingForm)
   }
 
   "contain continue button with the value Continue" in {

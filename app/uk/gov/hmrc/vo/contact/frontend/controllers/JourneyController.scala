@@ -104,7 +104,7 @@ class JourneyController @Inject() (
     page match {
       case categoryRouter: CategoryRouter   => categoryRouterTemplate(form, key, backLinkUrl, categoryRouter)
       case tellUsMorePage: TellUsMorePage   => singleTextareaTemplate(form, key, backLinkUrl, tellUsMorePage)
-      case customContent: CustomizedContent => customizedContentTemplate(key, backLinkUrl, customContent)
+      case customContent: CustomizedContent => customizedContentTemplate(backLinkUrl, customContent)
       case _                                => notImplementedTemplate(key, backLinkUrl, page)
     }
   }

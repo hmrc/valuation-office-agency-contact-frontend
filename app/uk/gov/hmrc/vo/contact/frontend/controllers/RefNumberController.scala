@@ -47,17 +47,17 @@ class RefNumberController @Inject() (
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
+  def onPageLoad: mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = RefNumberForm().fill(request.userAnswers.refNumber)
-      Ok(refNumber(preparedForm, mode))
+      Ok(refNumber(preparedForm))
   }
 
   def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       RefNumberForm().bindFromRequest().fold(
         (formWithErrors: Form[Option[String]]) =>
-          BadRequest(refNumber(formWithErrors, mode)),
+          BadRequest(refNumber(formWithErrors)),
         value =>
           dataCacheConnector.save[String](request.sessionId, RefNumberId.toString, value.getOrElse("")).map(cacheMap =>
             Redirect(navigator.nextPage(RefNumberId, mode).apply(UserAnswers(cacheMap)))

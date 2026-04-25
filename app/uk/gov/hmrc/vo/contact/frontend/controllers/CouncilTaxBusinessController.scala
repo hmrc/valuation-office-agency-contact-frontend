@@ -55,14 +55,14 @@ class CouncilTaxBusinessController @Inject() (
         case Some(value) => CouncilTaxBusinessEnquiryForm().fill(value)
       }
 
-      Ok(councilTaxBusinessEnquiry(preparedForm, mode, backLink(request.userAnswers, mode)))
+      Ok(councilTaxBusinessEnquiry(preparedForm, backLink(request.userAnswers, mode)))
   }
 
   def onEnquirySubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData) async {
     implicit request =>
       CouncilTaxBusinessEnquiryForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          BadRequest(councilTaxBusinessEnquiry(formWithErrors, mode, backLink(request.userAnswers, mode))),
+          BadRequest(councilTaxBusinessEnquiry(formWithErrors, backLink(request.userAnswers, mode))),
         value =>
           for {
             cacheMap <- dataCacheConnector.save[String](request.sessionId, CouncilTaxBusinessEnquiryId.toString, value)
@@ -73,7 +73,7 @@ class CouncilTaxBusinessController @Inject() (
       )
   }
 
-  def onSmallPartUsedPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+  def onSmallPartUsedPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(propertySmallPartUsed())
   }

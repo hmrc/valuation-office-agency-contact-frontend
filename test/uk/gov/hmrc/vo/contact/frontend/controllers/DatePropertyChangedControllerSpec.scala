@@ -77,10 +77,10 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoS
     )
 
   def viewBusinessAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()): String =
-    datePropertyChanged(form, NormalMode, "datePropertyChanged.business", routeAreaChange.url)(using fakeRequest, messages).toString
+    datePropertyChanged(form, "datePropertyChanged.business", routeAreaChange.url)(using fakeRequest, messages).toString
 
   def viewAreaChangeAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()): String =
-    datePropertyChanged(form, NormalMode, "datePropertyChanged.areaChange", routeAreaChange.url)(using fakeRequest, messages).toString
+    datePropertyChanged(form, "datePropertyChanged.areaChange", routeAreaChange.url)(using fakeRequest, messages).toString
 
   "DatePropertyChangedController Controller" must {
 

@@ -46,20 +46,20 @@ class PropertyEnglandActualLetsController @Inject() (
 
   implicit val ec: ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+  def onPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val preparedForm = request.userAnswers.propertyEnglandActualLetsEnquiry match {
         case None        => PropertyEnglandActualLetsForm()
         case Some(value) => PropertyEnglandActualLetsForm().fill(value)
       }
-      Ok(propertyEnglandActualLets(preparedForm, mode))
+      Ok(propertyEnglandActualLets(preparedForm))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       PropertyEnglandActualLetsForm().bindFromRequest().fold(
         (formWithErrors: Form[String]) =>
-          BadRequest(propertyEnglandActualLets(formWithErrors, mode)),
+          BadRequest(propertyEnglandActualLets(formWithErrors)),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering70DaysEN" -> value)
           dataCacheConnector.save[String](request.sessionId, PropertyEnglandActualLetsId.toString, value).map(cacheMap =>

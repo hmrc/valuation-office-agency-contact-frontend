@@ -17,7 +17,6 @@
 package uk.gov.hmrc.vo.contact.frontend.views
 
 import play.api.data.Form
-import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 import uk.gov.hmrc.vo.contact.frontend.forms.TellUsMoreForm
 import uk.gov.hmrc.vo.contact.frontend.models.{NormalMode, TellUsMore}
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.QuestionViewBehaviours
@@ -51,7 +50,7 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
       assertEqualsValue(doc, "title", messages(s"$messageKeyPrefix.heading") + " - Valuation Office contact form - GOV.UK")
     }
 
-    behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.TellUsMoreController.onSubmit(NormalMode).url, "message")
+    behave like pageWithTextFields(createViewUsingForm, "message")
   }
 
   "TellUsMore view for property poor repair" must {
@@ -62,7 +61,7 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
       assertEqualsValue(doc, "title", messages("tellUsMore.poorRepair.heading") + " - Valuation Office contact form - GOV.UK")
     }
 
-    behave like pageWithTextFields(createViewUsingForm, "tellUsMore.poorRepair", routes.TellUsMoreController.onSubmit(NormalMode).url, "message")
+    behave like pageWithTextFields(createViewUsingForm, "message")
 
   }
 

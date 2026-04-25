@@ -50,14 +50,13 @@ class PropertyEnglandActualLetsControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = PropertyEnglandActualLetsForm()): String = propertyEnglandActualLetsEnquiry(
-    form,
-    NormalMode
+    form
   )(using fakeRequest, messages).toString
 
   "PropertyEnglandActualLetsController" must {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onPageLoad(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe viewAsString()
@@ -67,7 +66,7 @@ class PropertyEnglandActualLetsControllerSpec extends ControllerSpecBase {
       val validData       = Map(PropertyEnglandActualLetsId.toString -> JsString(PropertyEnglandActualLetsForm.options.head.value))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       contentAsString(result) mustBe viewAsString(PropertyEnglandActualLetsForm().fill(PropertyEnglandActualLetsForm.options.head.value))
     }
@@ -75,7 +74,7 @@ class PropertyEnglandActualLetsControllerSpec extends ControllerSpecBase {
     "redirect to no action page when valid data is submitted" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", PropertyEnglandActualLetsForm.options.head.value))
 
-      val result = controller().onPageLoad(NormalMode)(postRequest)
+      val result = controller().onPageLoad(postRequest)
 
       status(result) mustBe OK
     }
@@ -99,7 +98,7 @@ class PropertyEnglandActualLetsControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(dontGetAnyData).onPageLoad(fakeRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)

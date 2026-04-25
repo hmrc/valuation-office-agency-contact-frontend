@@ -39,9 +39,9 @@ class Navigator @Inject() (
 
   private val enquiryDateRouting: UserAnswers => Call = answers =>
     answers.enquiryDate match {
-      case Some("yes")     => routes.ExistingEnquiryCategoryController.onPageLoad()
+      case Some("yes")     => routes.ExistingEnquiryCategoryController.onPageLoad
       case Some("no")      => routes.ExpectedUpdateController.onPageLoad()
-      case Some("notKnow") => routes.ExistingEnquiryCategoryController.onPageLoad()
+      case Some("notKnow") => routes.ExistingEnquiryCategoryController.onPageLoad
       case option          =>
         log.warn(s"Navigation enquiry date reached with unknown option $option by controller")
         throw RuntimeException(s"Navigation for enquiry date reached with unknown option $option by controller")
@@ -75,9 +75,9 @@ class Navigator @Inject() (
       case (Some("new_enquiry"), _, _, Some("check_fair_rent_register"))         => routes.CheckYourAnswersController.onPageLoad()
       case (Some("new_enquiry"), _, _, Some("other_request"))                    => routes.CheckYourAnswersController.onPageLoad()
       case (Some("new_enquiry"), _, _, _)                                        => routes.TellUsMoreController.onPageLoad(NormalMode)
-      case (Some("more_details"), _, _, _)                                       => routes.WhatElseController.onPageLoad()
-      case (Some("update_existing"), _, _, _)                                    => routes.AnythingElseTellUsController.onPageLoad()
-      case (Some(option), _, _, _)                                               =>
+      case (Some("more_details"), _, _, _)                                       => routes.WhatElseController.onPageLoad
+      case (Some("update_existing"), _, _, _)                                    => routes.AnythingElseTellUsController.onPageLoad
+      case (option, _, _, _)                                                     =>
         log.warn(s"Navigation reached with unknown option $option by controller")
         throw RuntimeException(s"Navigation reached with unknown option $option by controller")
     }
@@ -85,8 +85,8 @@ class Navigator @Inject() (
   private val contactReasonRouting: UserAnswers => Call = answers =>
     answers.contactReason match {
       case Some("new_enquiry")     => routes.EnquiryCategoryController.onPageLoad(NormalMode)
-      case Some("more_details")    => routes.ExistingEnquiryCategoryController.onPageLoad()
-      case Some("update_existing") => routes.EnquiryDateController.onPageLoad()
+      case Some("more_details")    => routes.ExistingEnquiryCategoryController.onPageLoad
+      case Some("update_existing") => routes.EnquiryDateController.onPageLoad
       case option                  =>
         log.warn(s"Navigation for contact reason reached with unknown option $option by controller")
         throw RuntimeException(s"Navigation for contact reason reached with unknown option $option by controller")
@@ -97,7 +97,7 @@ class Navigator @Inject() (
       case Some("council_tax")               => routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
       case Some("business_rates")            => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
       case Some("housing_benefit")           => routes.JourneyController.onPageLoad(HousingBenefitAllowancesRouter.key)
-      case Some("fair_rent")                 => routes.FairRentEnquiryController.onPageLoad()
+      case Some("fair_rent")                 => routes.FairRentEnquiryController.onPageLoad
       case Some("valuations_for_tax")        => routes.ValuationForTaxesController.onPageLoad()
       case Some("providing_lettings")        => routes.ProvidingLettingsController.onPageLoad()
       case Some("valuation_for_public_body") => routes.ValuationAdviceController.onPageLoad()
@@ -163,7 +163,7 @@ class Navigator @Inject() (
       case Some("business_rates_from_home")        => routes.DatePropertyChangedController.onPageLoad()
       case Some("business_rates_change_valuation") => routes.JourneyController.onPageLoad(EnglandOrWalesPropertyRouter.key)
       case Some("business_rates_demolished")       => routes.JourneyController.onPageLoad(EnglandOrWalesPropertyRouter.key)
-      case Some("business_rates_valuation")        => routes.BusinessRatesSubcategoryController.onValuationPageLoad()
+      case Some("business_rates_valuation")        => routes.BusinessRatesSubcategoryController.onValuationPageLoad
       case Some("business_rates_property_empty")   => routes.PropertyEmptyController.onBusinessRatesPageLoad()
       case Some("business_rates_bill")             => routes.BusinessRatesBillController.onPageLoad()
       case Some("business_rates_not_used")         => routes.BusinessRatesPropertyController.onPageLoad()
@@ -254,7 +254,7 @@ class Navigator @Inject() (
       case (Some("all_property"), _)                                  => routes.DatePropertyChangedController.onPageLoad()
       case (Some("large_property"), _)                                => routes.DatePropertyChangedController.onPageLoad()
       case (Some("small_property"), Some("business_rates_from_home")) => routes.CouncilTaxBusinessController.onSmallPartUsedBusinessRatesPageLoad()
-      case (Some("small_property"), _)                                => routes.CouncilTaxBusinessController.onSmallPartUsedPageLoad()
+      case (Some("small_property"), _)                                => routes.CouncilTaxBusinessController.onSmallPartUsedPageLoad
       case _                                                          =>
         log.warn("Navigation for is council tax business enquiry reached without selection of enquiry by controller")
         throw RuntimeException("Unknown exception for is council tax business enquiry routing")
@@ -262,8 +262,8 @@ class Navigator @Inject() (
 
   private val selfCateringPageRouting: UserAnswers => Call = answers =>
     answers.businessRatesSelfCateringEnquiry match {
-      case Some("england") => routes.PropertyEnglandAvailableLetsController.onPageLoad()
-      case Some("wales")   => routes.PropertyWalesAvailableLetsController.onPageLoad()
+      case Some("england") => routes.PropertyEnglandAvailableLetsController.onPageLoad
+      case Some("wales")   => routes.PropertyWalesAvailableLetsController.onPageLoad
       case _               =>
         log.warn("Navigation for is business rates self catering enquiry reached without selection of enquiry by controller")
         throw RuntimeException("Unknown exception for is business rates self catering routing")
@@ -271,8 +271,8 @@ class Navigator @Inject() (
 
   private val propertyEnglandAvailableLetsRouting: UserAnswers => Call = answers =>
     answers.propertyEnglandAvailableLetsEnquiry match {
-      case Some("yes") => routes.PropertyEnglandActualLetsController.onPageLoad()
-      case Some("no")  => routes.PropertyEnglandLetsNoActionController.onPageLoad()
+      case Some("yes") => routes.PropertyEnglandActualLetsController.onPageLoad
+      case Some("no")  => routes.PropertyEnglandLetsNoActionController.onPageLoad
       case _           =>
         log.warn("Navigation for is business rates property enquiry reached without selection of enquiry by controller")
         throw RuntimeException("Unknown exception for is business rates self catering routing")
@@ -280,8 +280,8 @@ class Navigator @Inject() (
 
   private val propertyEnglandActualLetsRouting: UserAnswers => Call = answers =>
     answers.propertyEnglandActualLetsEnquiry match {
-      case Some("yes") => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad()
-      case Some("no")  => routes.PropertyEnglandLetsNoActionController.onPageLoad()
+      case Some("yes") => routes.BusinessRatesSelfCateringController.onEngLetsPageLoad
+      case Some("no")  => routes.PropertyEnglandLetsNoActionController.onPageLoad
       case _           =>
         log.warn("Navigation for is business rates property enquiry reached without selection of enquiry by controller")
         throw RuntimeException("Unknown exception for is business rates self catering routing")
@@ -289,8 +289,8 @@ class Navigator @Inject() (
 
   private val propertyWalesAvailableLetsRouting: UserAnswers => Call = answers =>
     answers.propertyWalesAvailableLetsEnquiry match {
-      case Some("yes") => routes.PropertyWalesActualLetsController.onPageLoad()
-      case Some("no")  => routes.PropertyWalesLetsNoActionController.onPageLoad()
+      case Some("yes") => routes.PropertyWalesActualLetsController.onPageLoad
+      case Some("no")  => routes.PropertyWalesLetsNoActionController.onPageLoad
 
       case _ =>
         log.warn("Navigation for is 140 day lets property enquiry reached without selection of enquiry by controller")
@@ -299,8 +299,8 @@ class Navigator @Inject() (
 
   private val propertyWalesActualLetsRouting: UserAnswers => Call = answers =>
     answers.propertyWalesActualLetsEnquiry match {
-      case Some("yes") => routes.BusinessRatesSelfCateringController.onWalLetsPageLoad()
-      case Some("no")  => routes.PropertyWalesLetsNoActionController.onPageLoad()
+      case Some("yes") => routes.BusinessRatesSelfCateringController.onWalLetsPageLoad
+      case Some("no")  => routes.PropertyWalesLetsNoActionController.onPageLoad
 
       case _ =>
         log.warn("Navigation for is 70 day lets property enquiry reached without selection of enquiry by controller")
@@ -318,8 +318,8 @@ class Navigator @Inject() (
 
   private val FairRentEnquiryRouting: UserAnswers => Call = answers =>
     answers.fairRentEnquiryEnquiry match {
-      case Some("submit_new_application")   => routes.FairRentEnquiryController.onFairRentEnquiryNew()
-      case Some("check_fair_rent_register") => routes.FairRentEnquiryController.onFairRentEnquiryCheck()
+      case Some("submit_new_application")   => routes.FairRentEnquiryController.onFairRentEnquiryNew
+      case Some("check_fair_rent_register") => routes.FairRentEnquiryController.onFairRentEnquiryCheck
       case Some("other_request")            => routes.TellUsMoreController.onPageLoad(NormalMode)
       case _                                =>
         log.warn("Navigation for fair rent enquiry reached without selection of enquiry by controller")
@@ -329,7 +329,7 @@ class Navigator @Inject() (
   private val routeMap: Map[Identifier, UserAnswers => Call] = Map(
     ContactReasonId                        -> contactReasonRouting,
     EnquiryDateId                          -> enquiryDateRouting,
-    ExistingEnquiryCategoryId              -> (_ => routes.RefNumberController.onPageLoad()),
+    ExistingEnquiryCategoryId              -> (_ => routes.RefNumberController.onPageLoad),
     RefNumberId                            -> (_ => routes.ContactDetailsController.onPageLoad(NormalMode)),
     EnquiryCategoryId                      -> enquiryRouting,
     CouncilTaxSubcategoryId                -> councilTaxPageRouting,

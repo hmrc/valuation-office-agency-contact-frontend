@@ -36,7 +36,7 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
   def auditService: AuditingService                         = inject[AuditingService]
 
   def contactReasonRoute: Call = routes.ContactReasonController.onPageLoad
-  def enquiryDateRoute: Call   = routes.EnquiryDateController.onPageLoad()
+  def enquiryDateRoute: Call   = routes.EnquiryDateController.onPageLoad
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     ExistingEnquiryCategoryController(
@@ -51,10 +51,10 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = ExistingEnquiryCategoryForm()): String =
-    existingEnquiryCategory(form, NormalMode, contactReasonRoute.url)(using fakeRequest, messages).toString
+    existingEnquiryCategory(form)(using fakeRequest, messages).toString
 
   def viewAsStringEnquiryDate(form: Form[String] = ExistingEnquiryCategoryForm()): String =
-    existingEnquiryCategory(form, NormalMode, enquiryDateRoute.url)(using fakeRequest, messages).toString
+    existingEnquiryCategory(form)(using fakeRequest, messages).toString
 
   "ExistingEnquiryCategory Controller" must {
 
@@ -65,7 +65,7 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe viewAsString()
@@ -78,7 +78,7 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe viewAsString()
@@ -91,7 +91,7 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe viewAsStringEnquiryDate()
@@ -105,7 +105,7 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       intercept[RuntimeException] {
-        val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+        val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
         status(result) mustBe OK
         contentAsString(result) mustBe viewAsStringEnquiryDate()
@@ -119,7 +119,7 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
       )
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       contentAsString(result) mustBe viewAsString(ExistingEnquiryCategoryForm().fill(ExistingEnquiryCategoryForm.options.head.value))
     }

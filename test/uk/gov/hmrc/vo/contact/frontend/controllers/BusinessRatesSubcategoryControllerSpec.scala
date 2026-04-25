@@ -105,7 +105,7 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
     }
 
     "return OK and the correct view for valuation" in {
-      val result = controller().onValuationPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onValuationPageLoad(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe businessRatesValuation()(using fakeRequest, messages).toString()

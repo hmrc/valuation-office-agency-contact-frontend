@@ -86,8 +86,8 @@ class ContactDetailsController @Inject() (
 
   private[controllers] def enquiryBackLink(answers: UserAnswers): Either[String, String] =
     (answers.contactReason, answers.enquiryCategory, answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.fairRentEnquiryEnquiry) match {
-      case (Some("more_details"), _, _, _, _)                                         => Right(routes.RefNumberController.onPageLoad().url)
-      case (Some("update_existing"), _, _, _, _)                                      => Right(routes.RefNumberController.onPageLoad().url)
+      case (Some("more_details"), _, _, _, _)                                         => Right(routes.RefNumberController.onPageLoad.url)
+      case (Some("update_existing"), _, _, _, _)                                      => Right(routes.RefNumberController.onPageLoad.url)
       case (_, Some("council_tax"), Some("council_tax_property_poor_repair"), _, _)   => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("council_tax"), Some("council_tax_business_uses"), _, _)          => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("council_tax"), Some("council_tax_area_change"), _, _)            => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
@@ -97,7 +97,6 @@ class ContactDetailsController @Inject() (
       case (_, Some("council_tax"), Some("council_tax_band_for_new"), _, _)           => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("council_tax"), Some("council_tax_band_too_high"), _, _)          => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("council_tax"), Some("council_tax_property_empty"), _, _)         => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
-      case (_, Some("council_tax"), Some("council_tax_property_poor_repair"), _, _)   => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("council_tax"), Some("council_tax_property_split_merge"), _, _)   => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("council_tax"), Some("council_tax_property_demolished"), _, _)    => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case (_, Some("business_rates"), _, Some("business_rates_bill"), _)             => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)

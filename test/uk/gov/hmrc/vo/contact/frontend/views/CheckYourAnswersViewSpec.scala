@@ -49,7 +49,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
   val checkYourAnswersHelper3    = CheckYourAnswersHelper(userAnswers3)
 
   val backlinkUrl: String                  = uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
-  val backlinkUrlAE: String                = uk.gov.hmrc.vo.contact.frontend.controllers.routes.AnythingElseTellUsController.onPageLoad().url
+  val backlinkUrlAE: String                = uk.gov.hmrc.vo.contact.frontend.controllers.routes.AnythingElseTellUsController.onPageLoad.url
   def checkYourAnswers: check_your_answers = app.injector.instanceOf[check_your_answers]
 
   def view1: () => HtmlFormat.Appendable = () =>

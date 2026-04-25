@@ -249,7 +249,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.anythingElse
-        result mustBe Some(AnswerRow("anythingElse.checkYourAnswersLabel", anythingElse.get, false, routes.AnythingElseTellUsController.onPageLoad().url))
+        result mustBe Some(AnswerRow("anythingElse.checkYourAnswersLabel", anythingElse.get, false, routes.AnythingElseTellUsController.onPageLoad.url))
       }
 
       "propertyAddress function should return a None if no property address is found in the User Answers" in {

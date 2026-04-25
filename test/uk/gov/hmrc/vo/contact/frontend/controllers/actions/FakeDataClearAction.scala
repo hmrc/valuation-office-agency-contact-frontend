@@ -18,12 +18,11 @@ package uk.gov.hmrc.vo.contact.frontend.controllers.actions
 
 import play.api.mvc.{AnyContent, BodyParser, Request}
 import play.api.test.Helpers
-import uk.gov.hmrc.vo.contact.frontend.models.CacheMap
 import uk.gov.hmrc.vo.contact.frontend.models.requests.OptionalDataRequest
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class FakeDataClearAction(cacheMapToReturn: Option[CacheMap]) extends DataClearAction {
+class FakeDataClearAction extends DataClearAction {
   override protected def transform[A](request: Request[A]): Future[OptionalDataRequest[A]] = Future.successful(OptionalDataRequest(request, "id", None))
 
   override def parser: BodyParser[AnyContent] = Helpers.stubControllerComponents().parsers.default

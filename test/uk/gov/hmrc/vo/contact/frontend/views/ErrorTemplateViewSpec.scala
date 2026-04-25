@@ -27,12 +27,11 @@ class ErrorTemplateViewSpec extends ViewBehaviours {
   def view: () => HtmlFormat.Appendable = () =>
     errorTemplate(
       messages("global.error.badRequest400.title"),
-      messages("global.error.badRequest400.heading"),
       messages("global.error.badRequest400.message")
     )(using fakeRequest, messages)
 
   "error template view" must {
-    behave like normalPage(view, "global.error.badRequest400", "title", "heading", "message")
+    behave like normalPage(view, "global.error.badRequest400", "title", "message")
 
   }
 }

@@ -18,7 +18,6 @@ package uk.gov.hmrc.vo.contact.frontend.views
 
 import play.api.data.Form
 import uk.gov.hmrc.vo.contact.frontend.forms.PropertyWalesActualLetsForm
-import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyWalesActualLets => property_wales_actual_lets}
 import play.twirl.api.HtmlFormat
@@ -31,10 +30,10 @@ class PropertyWalesActualLetsViewSpec extends ViewBehaviours {
   val messageKeyPrefix = "propertyWalesActualLets"
 
   def createView: () => HtmlFormat.Appendable =
-    () => propertyWalesLets70DaysSubcategory(PropertyWalesActualLetsForm(), NormalMode)(using fakeRequest, messages)
+    () => propertyWalesLets70DaysSubcategory(PropertyWalesActualLetsForm())(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => propertyWalesLets70DaysSubcategory(form, NormalMode)(using fakeRequest, messages)
+    (form: Form[String]) => propertyWalesLets70DaysSubcategory(form)(using fakeRequest, messages)
 
   "PropertyEnglandActualLetsSubcategory view" when {
     "rendered" must {
@@ -55,7 +54,7 @@ class PropertyWalesActualLetsViewSpec extends ViewBehaviours {
         val backlinkText = doc.select("a[class=govuk-back-link]").text()
         backlinkText mustBe messages("site.back")
         val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-        backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesAvailableLetsController.onPageLoad().url
+        backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesAvailableLetsController.onPageLoad.url
       }
     }
 

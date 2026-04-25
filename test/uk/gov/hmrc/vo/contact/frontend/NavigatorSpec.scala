@@ -55,17 +55,17 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return function that goes ExpectedUpdateController.onPageLoad when the enquiryDate return notKnow" in {
         when(mockUserAnswers.enquiryDate) `thenReturn` Some("notKnow")
-        navigator.nextPage(EnquiryDateId, NormalMode).apply(mockUserAnswers) mustBe routes.ExistingEnquiryCategoryController.onPageLoad()
+        navigator.nextPage(EnquiryDateId, NormalMode).apply(mockUserAnswers) mustBe routes.ExistingEnquiryCategoryController.onPageLoad
       }
 
       "return function that goes ExpectedUpdateController.onPageLoad when the enquiryDate return yes" in {
         when(mockUserAnswers.enquiryDate) `thenReturn` Some("yes")
-        navigator.nextPage(EnquiryDateId, NormalMode).apply(mockUserAnswers) mustBe routes.ExistingEnquiryCategoryController.onPageLoad()
+        navigator.nextPage(EnquiryDateId, NormalMode).apply(mockUserAnswers) mustBe routes.ExistingEnquiryCategoryController.onPageLoad
       }
 
       "return function that goes on 'date page' when he want update about existing enquiry" in {
         when(mockUserAnswers.contactReason) `thenReturn` Some("update_existing")
-        navigator.nextPage(ContactReasonId, NormalMode).apply(mockUserAnswers) mustBe routes.EnquiryDateController.onPageLoad()
+        navigator.nextPage(ContactReasonId, NormalMode).apply(mockUserAnswers) mustBe routes.EnquiryDateController.onPageLoad
       }
 
       "return an exception when the contact reason returns other" in {
@@ -80,11 +80,11 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return function that goes on Existing Enquiry Category page when he want update more details" in {
         when(mockUserAnswers.contactReason) `thenReturn` Some("more_details")
-        navigator.nextPage(ContactReasonId, NormalMode).apply(mockUserAnswers) mustBe routes.ExistingEnquiryCategoryController.onPageLoad()
+        navigator.nextPage(ContactReasonId, NormalMode).apply(mockUserAnswers) mustBe routes.ExistingEnquiryCategoryController.onPageLoad
       }
 
       "return function that goes 'What is your reference number?' after he select area of contact" in {
-        navigator.nextPage(ExistingEnquiryCategoryId, NormalMode).apply(mockUserAnswers) mustBe routes.RefNumberController.onPageLoad()
+        navigator.nextPage(ExistingEnquiryCategoryId, NormalMode).apply(mockUserAnswers) mustBe routes.RefNumberController.onPageLoad
       }
 
       "return a function that goes to the contact form page when an enquiry category for council tax has been selected" in {
@@ -150,7 +150,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return a function that goes to the business rates valuation  page when an enquiry category for business rates has been selected and business_rates_valuation option selected" in {
         when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_valuation")
-        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode).apply(mockUserAnswers) mustBe routes.BusinessRatesSubcategoryController.onValuationPageLoad()
+        navigator.nextPage(BusinessRatesSubcategoryId, NormalMode).apply(mockUserAnswers) mustBe routes.BusinessRatesSubcategoryController.onValuationPageLoad
       }
 
       "return a function that goes to the business rates bill page when an enquiry category for business rates has been selected and business_rates_bill option selected" in {
@@ -190,13 +190,13 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
       "return a function that goes to the 'Tell us more' page when the property address details form has been submitted without errors and I'm udating existing enquiry" in {
         when(mockUserAnswers.propertyAddress) `thenReturn` Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
         when(mockUserAnswers.contactReason) `thenReturn` Some("more_details")
-        navigator.nextPage(PropertyAddressId, NormalMode).apply(mockUserAnswers) mustBe routes.WhatElseController.onPageLoad()
+        navigator.nextPage(PropertyAddressId, NormalMode).apply(mockUserAnswers) mustBe routes.WhatElseController.onPageLoad
       }
 
       "return a function that goes to the 'Anything Else' page when the property address details form has been submitted without errors" in {
         when(mockUserAnswers.propertyAddress) `thenReturn` Some(PropertyAddress("1", Some("Street"), "Town", Some("Some county"), "AA11AA"))
         when(mockUserAnswers.contactReason) `thenReturn` Some("update_existing")
-        navigator.nextPage(PropertyAddressId, NormalMode).apply(mockUserAnswers) mustBe routes.AnythingElseTellUsController.onPageLoad()
+        navigator.nextPage(PropertyAddressId, NormalMode).apply(mockUserAnswers) mustBe routes.AnythingElseTellUsController.onPageLoad
       }
 
       "return an exception when the property address details form has been submitted with a wrong reason" in {
@@ -728,7 +728,7 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
       "return function that goes on a small part of the property used for business page when councilTaxBusinessEnquiry is small_property" in {
         when(mockUserAnswers.councilTaxBusinessEnquiry) `thenReturn` Some("small_property")
         when(mockUserAnswers.businessRatesSubcategory) `thenReturn` None
-        navigator.nextPage(CouncilTaxBusinessEnquiryId, NormalMode).apply(mockUserAnswers) mustBe routes.CouncilTaxBusinessController.onSmallPartUsedPageLoad()
+        navigator.nextPage(CouncilTaxBusinessEnquiryId, NormalMode).apply(mockUserAnswers) mustBe routes.CouncilTaxBusinessController.onSmallPartUsedPageLoad
       }
 
       "return function that goes on a small part of the property used for business page when councilTaxBusinessEnquiry is large_property" in {
@@ -748,22 +748,22 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return function that goes on 140 days lets page when businessRatesSelfCateringEnquiry is england" in {
         when(mockUserAnswers.businessRatesSelfCateringEnquiry) `thenReturn` Some("england")
-        navigator.nextPage(BusinessRatesSelfCateringId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyEnglandAvailableLetsController.onPageLoad()
+        navigator.nextPage(BusinessRatesSelfCateringId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyEnglandAvailableLetsController.onPageLoad
       }
 
       "return function that goes on 140 days lets page when businessRatesSelfCateringEnquiry is wales" in {
         when(mockUserAnswers.businessRatesSelfCateringEnquiry) `thenReturn` Some("wales")
-        navigator.nextPage(BusinessRatesSelfCateringId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesAvailableLetsController.onPageLoad()
+        navigator.nextPage(BusinessRatesSelfCateringId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesAvailableLetsController.onPageLoad
       }
 
       "return function that goes on tell us about your property when yes to lets in England that are let for at least 140 days" in {
         when(mockUserAnswers.propertyEnglandAvailableLetsEnquiry) `thenReturn` Some("yes")
-        navigator.nextPage(PropertyEnglandAvailableLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyEnglandActualLetsController.onPageLoad()
+        navigator.nextPage(PropertyEnglandAvailableLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyEnglandActualLetsController.onPageLoad
       }
 
       "return function that goes on tell us about your property when no to lets in England that are let for at least 140 days" in {
         when(mockUserAnswers.propertyEnglandAvailableLetsEnquiry) `thenReturn` Some("no")
-        navigator.nextPage(PropertyEnglandAvailableLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyEnglandLetsNoActionController.onPageLoad()
+        navigator.nextPage(PropertyEnglandAvailableLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyEnglandLetsNoActionController.onPageLoad
       }
 
       "return a exception when propertyEnglandLets140DaysEnquiry returns None" in {
@@ -778,12 +778,12 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return function that goes on tell us about your property when yes to lets in Wales that are let for at least 140 days" in {
         when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) `thenReturn` Some("yes")
-        navigator.nextPage(PropertyWalesAvailableLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesActualLetsController.onPageLoad()
+        navigator.nextPage(PropertyWalesAvailableLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesActualLetsController.onPageLoad
       }
 
       "return function that goes on tell us about your property when no to lets in Wales that are let for at least 140 days" in {
         when(mockUserAnswers.propertyWalesAvailableLetsEnquiry) `thenReturn` Some("no")
-        navigator.nextPage(PropertyWalesAvailableLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesLetsNoActionController.onPageLoad()
+        navigator.nextPage(PropertyWalesAvailableLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesLetsNoActionController.onPageLoad
       }
 
       "return a exception when propertyWalesLets140DaysEnquiry returns None" in {
@@ -793,12 +793,12 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
       "return function that goes on tell us about your property when yes to lets in Wales that are let for at least 70 days" in {
         when(mockUserAnswers.propertyWalesActualLetsEnquiry) `thenReturn` Some("yes")
-        navigator.nextPage(PropertyWalesActualLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.BusinessRatesSelfCateringController.onWalLetsPageLoad()
+        navigator.nextPage(PropertyWalesActualLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.BusinessRatesSelfCateringController.onWalLetsPageLoad
       }
 
       "return function that goes on tell us about your property when no to lets in Wales that are let for at least 70 days" in {
         when(mockUserAnswers.propertyWalesActualLetsEnquiry) `thenReturn` Some("no")
-        navigator.nextPage(PropertyWalesActualLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesLetsNoActionController.onPageLoad()
+        navigator.nextPage(PropertyWalesActualLetsId, NormalMode).apply(mockUserAnswers) mustBe routes.PropertyWalesLetsNoActionController.onPageLoad
       }
 
       "return a exception when propertyWalesLets70DaysEnquiry returns None" in {

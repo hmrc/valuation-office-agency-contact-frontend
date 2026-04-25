@@ -29,7 +29,7 @@ import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheCon
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.EnquiryDateForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.EnquiryDateId
-import uk.gov.hmrc.vo.contact.frontend.models.{Mode, NormalMode}
+import uk.gov.hmrc.vo.contact.frontend.models.Mode
 import uk.gov.hmrc.vo.contact.frontend.utils.{DateUtil, UserAnswers}
 import uk.gov.hmrc.vo.contact.frontend.views.html.enquiryDate
 
@@ -47,17 +47,17 @@ class EnquiryDateController @Inject() (
 ) extends FrontendController(cc)
   with I18nSupport {
 
-  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) { implicit request =>
+  def onPageLoad: mvc.Action[AnyContent] = (getData andThen requireData) { implicit request =>
     val preparedForm = request.userAnswers.enquiryDate match {
       case None        => EnquiryDateForm()
       case Some(value) => EnquiryDateForm().fill(value)
     }
-    Ok(enquiry_date(preparedForm, EnquiryDateForm.beforeDate(), NormalMode))
+    Ok(enquiry_date(preparedForm, EnquiryDateForm.beforeDate()))
   }
 
   def onSubmit(mode: Mode): mvc.Action[AnyContent] = getData.async { implicit request =>
     EnquiryDateForm().bindFromRequest().fold(
-      formWithErrors => BadRequest(enquiry_date(formWithErrors, EnquiryDateForm.beforeDate(), NormalMode)),
+      formWithErrors => BadRequest(enquiry_date(formWithErrors, EnquiryDateForm.beforeDate())),
       value => {
         auditService.sendRadioButtonSelection(request.uri, "enquiryDate" -> value)
         dataCacheConnector.save[String](request.sessionId, EnquiryDateId.toString, value).map(cacheMap =>

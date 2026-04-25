@@ -259,7 +259,6 @@ class CheckYourAnswersController @Inject() (
       case (Some("new_enquiry"), Some("council_tax_bill"), _, _)                 => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), Some("council_tax_band_for_new"), _, _)         => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), Some("council_tax_property_empty"), _, _)       => routes.PropertyAddressController.onPageLoad(NormalMode).url
-      case (Some("new_enquiry"), Some("council_tax_property_poor_repair"), _, _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), Some("council_tax_property_split_merge"), _, _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), Some("council_tax_property_demolished"), _, _)  => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _, Some("business_rates_from_home"), _)         => routes.PropertyAddressController.onPageLoad(NormalMode).url
@@ -276,8 +275,8 @@ class CheckYourAnswersController @Inject() (
       case (Some("new_enquiry"), _, _, Some("check_fair_rent_register"))         => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _, _, Some("other_request"))                    => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), _, _, _)                                        => routes.TellUsMoreController.onPageLoad(NormalMode).url
-      case (Some("more_details"), _, _, _)                                       => routes.WhatElseController.onPageLoad().url
-      case (Some("update_existing"), _, _, _)                                    => routes.AnythingElseTellUsController.onPageLoad().url
+      case (Some("more_details"), _, _, _)                                       => routes.WhatElseController.onPageLoad.url
+      case (Some("update_existing"), _, _, _)                                    => routes.AnythingElseTellUsController.onPageLoad.url
       case _                                                                     =>
         log.warn("Navigation for Check your answers page reached without selection of contact reason by controller")
         throw RuntimeException("Navigation for check your answers page reached without selection of contact reason by controller")

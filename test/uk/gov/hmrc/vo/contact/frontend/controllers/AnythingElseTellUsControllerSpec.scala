@@ -51,8 +51,8 @@ class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSu
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[String] = AnythingElseForm(), msg: String = ""): String =
-    anythingElse(form, NormalMode)(using fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = AnythingElseForm()): String =
+    anythingElse(form)(using fakeRequest, messages).toString
 
   "AnythingElseTellUsMore Controller" must {
 
@@ -61,7 +61,7 @@ class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSu
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe viewAsString(AnythingElseForm())
@@ -74,7 +74,7 @@ class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSu
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe viewAsString(AnythingElseForm().fill(anythingElseString))

@@ -18,7 +18,6 @@ package uk.gov.hmrc.vo.contact.frontend.views
 
 import play.api.data.Form
 import play.twirl.api.HtmlFormat
-import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 import uk.gov.hmrc.vo.contact.frontend.forms.ContactDetailsForm
 import uk.gov.hmrc.vo.contact.frontend.models.{ContactDetails, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.QuestionViewBehaviours
@@ -48,8 +47,6 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
 
     behave like pageWithTextFields(
       createCTViewUsingForm,
-      messageKeyPrefix,
-      routes.ContactDetailsController.onSubmit(NormalMode).url,
       "fullName",
       "email",
       "contactNumber"

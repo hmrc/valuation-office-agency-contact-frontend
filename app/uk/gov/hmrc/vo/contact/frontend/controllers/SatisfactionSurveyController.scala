@@ -63,7 +63,7 @@ class SatisfactionSurveyController @Inject() (
   def formCompleteFeedback: mvc.Action[AnyContent] = (getData andThen requireData) { implicit request =>
     val (contact, answerSections) = (request.userAnswers.contact(), request.userAnswers.answerSection) match {
       case (Right(ct), Some(as)) => (ct, as)
-      case (Left(msg), _)        =>
+      case (msg, _)              =>
         log.warn(s"Navigation for Survey page reached without a contact and error $msg")
         throw RuntimeException(s"Navigation for Survey page reached without a contact and error $msg")
     }

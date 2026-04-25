@@ -31,10 +31,9 @@ object BRChangeValuationInEngland
   extends CustomizedContent(
     key = "valuation-online-in-England",
     fieldId = "businessRatesValuationOnline"
-  ) {
+  ):
+
   override def previousPage: UserAnswers => Call = _ => routes.JourneyController.onPageLoad(EnglandOrWalesPropertyRouter.key)
 
   override def template(customizedContent: CustomizedContent)(using messages: Messages): Appendable =
-    brChangeValuationInEngland(customizedContent)
-
-}
+    brChangeValuationInEngland()
