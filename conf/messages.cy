@@ -154,13 +154,13 @@ enquiryCategory.valuation_for_public_body.finaltext = Sylwer: mae’r gwasanaeth
  
 contactDetails.title = Beth yw’ch manylion cyswllt?
 contactDetails.hint = Byddwn ond yn defnyddio’r manylion hyn i gysylltu â chi ynglŷn â’ch ymholiad.
-contactDetails.fullName = Enw llawn
+contactDetails.fullName.label = Enw llawn
 contactDetails.fullName.required = Rhowch eich enw llawn
 contactDetails.fullName.invalid = Rhaid i’r enw cyntaf gynnwys llythrennau a i z, cysylltnodau, bylchau a chollnodau yn unig
-contactDetails.email = Cyfeiriad ebost
+contactDetails.email.label = Cyfeiriad ebost
 contactDetails.email.required = Nodwch eich cyfeiriad ebost
 contactDetails.email.invalid = Nodwch gyfeiriad ebost yn y fformat cywir, fel enw@enghraifft.com
-contactDetails.contactNumber =  Rhif ffôn
+contactDetails.contactNumber.label =  Rhif ffôn
 contactDetails.contactNumber.hint = Ar gyfer rhifau rhyngwladol, dylech gynnwys cod y wlad.
 contactDetails.contactNumber.required = Nodwch eich rhif ffôn
 contactDetails.contactNumber.length = Rhaid i’r rhif ffôn fod rhwng 11 ac 20 nod

@@ -14,73 +14,38 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukFieldset, GovukInput}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
-@import uk.gov.hmrc.vo.contact.frontend.models.Mode
-@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
-@import uk.gov.hmrc.vo.contact.frontend.models.ContactDetails
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.input.Input
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
-@import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service_fair_rent
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukInput}
 @import uk.gov.hmrc.vo.contact.frontend.models.requests.DataRequestUtil.isEnquiryCategoryOneOf
+@import uk.gov.hmrc.vo.contact.frontend.models.{ContactDetails, Mode}
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.{PrimaryLayout, help_with_service_fair_rent}
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
-
-@import uk.gov.hmrc.govukfrontend.views.Implicits.*
+@import uk.gov.hmrc.vo.service.model.input.TextField
 
 @this(
         layout: PrimaryLayout,
         formWithCSRF: FormWithCSRF,
         govukInput: GovukInput,
-        govukButton: GovukButton,
-        govukFieldset: GovukFieldset
+        govukButton: GovukButton
 )
 
 @(form: Form[ContactDetails], mode: Mode, backLink: String)(implicit request: RequestHeader, messages: Messages)
 
-@textInput(id: String, inputType: String, classes: String, autoCompleteLabel: String, mode: String = "", pattern: String = "") = {
-    @govukInput(Input(
-        id = id,
-        name = id,
-        inputType = inputType,
-        pattern = pattern,
-        value = form(id).value,
-        classes = classes,
-        autocomplete = autoCompleteLabel,
-        label = Label(content = Text(messages(s"contactDetails.$id"))), inputmode = mode,
-        attributes = Map("spellcheck" -> "false"),
-        errorMessage = form.errors.asTextErrorMessageForField(id),
-        hint = messages.translate(s"contactDetails.$id.hint", Seq()).map(hintText => Hint(id = s"$id-hint", content = Text(hintText)))
-    ))
-}
-
-@content = {
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-        <h1 class="govuk-fieldset__heading">@messages("contactDetails.title")</h1>
-    </legend>
-    <br>
-    <p class="govuk-body">@messages("contactDetails.hint")</p>
-
-    @textInput("fullName", "text", "govuk-input--width-30", "name")
-    @textInput("email", "email", "govuk-input--width-20", "email")
-    @textInput("contactNumber", "tel", "govuk-input--width-20", "tel")
-}
-
-
 @layout(
     pageTitle = messages("contactDetails.title"),
     backLink = backLink,
-    showH1 = false,
     theForm = form
 ) {
+    <p class="govuk-body">@messages("contactDetails.hint")</p>
+
     @formWithCSRF(action = ContactDetailsController.onSubmit(mode)) {
 
-        @govukFieldset(Fieldset(html = content))
+        @govukInput(TextField.input(form, "contactDetails", "fullName", inputWidth = 20, autocomplete = "name"))
+        @govukInput(TextField.input(form, "contactDetails", "email", inputWidth = 20, autocomplete = "email", inputType = "email"))
+        @govukInput(TextField.input(form, "contactDetails", "contactNumber", inputWidth = 20, autocomplete = "tel", inputType = "tel"))
 
         @govukButton(SubmitButton("continue"))
 
-        @if(isEnquiryCategoryOneOf("housing_benefit","fair_rent")) {
+        @if(isEnquiryCategoryOneOf("housing_benefit", "fair_rent")) {
             @help_with_service_fair_rent()
         }
     }
