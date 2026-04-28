@@ -561,7 +561,7 @@ businessRatesChallenge.title = Challenging my business rates valuation
 businessRatesChallenge.body = Use the Valuation Office’s online service to <a href="https://www.gov.uk/correct-your-business-rates" target="_self">check and challenge your business rates valuation</a>.</p><p class="govuk-body">If your property is in England, you’ll need to register and claim your property before you can challenge the valuation.
 
 # --- Changes to your property or area in England
-propertyOrAreaChanged.heading = Tell us about changes to your property or area
+propertyOrAreaChanged.label = Tell us about changes to your property or area
 propertyOrAreaChanged.p1.url = https://www.gov.uk/business-rates-valuation-account
 propertyOrAreaChanged.p1.part1 = Sign into or set up your business rates valuation account
 propertyOrAreaChanged.p1.part2 = to tell us about the changes to your property or area.
@@ -577,7 +577,7 @@ propertyOrAreaChanged.p4.url = https://www.gov.uk/guidance/how-to-check-and-chal
 propertyOrAreaChanged.p4 = How to check and challenge your business rates valuation in Wales
 
 # --- Changes to your property or area in Wales
-propertyOrAreaChangedInWales.heading = Tell us about changes to your property or area
+propertyOrAreaChangedInWales.label = Tell us about changes to your property or area
 propertyOrAreaChangedInWales.p1.url = https://www.gov.uk/correct-your-business-rates
 propertyOrAreaChangedInWales.p1.part1 = Use the Valuation Office’s online service
 propertyOrAreaChangedInWales.p1.part2 = to tell us about changes to your property or the surrounding area.

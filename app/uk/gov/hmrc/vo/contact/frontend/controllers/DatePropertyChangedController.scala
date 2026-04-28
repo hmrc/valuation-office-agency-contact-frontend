@@ -16,15 +16,14 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.Logger
-import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
+import play.api.Logging
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.Navigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.vo.contact.frontend.forms.DatePropertyChangedForm
+import uk.gov.hmrc.vo.contact.frontend.forms.DatePropertyChangedForm.datePropertyChangedForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.DatePropertyChangedId
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, Mode, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
@@ -40,29 +39,23 @@ class DatePropertyChangedController @Inject() (
   navigator: Navigator,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
-  datePropertyChanged: datePropertyChanged,
+  datePropertyChangedView: datePropertyChanged,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport
+  with Logging:
 
-  private val log = Logger(this.getClass)
-
-  implicit val ec: ExecutionContext = cc.executionContext
+  given ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) { implicit request =>
-    val preparedForm = request.userAnswers.datePropertyChanged match {
-      case None        => DatePropertyChangedForm()
-      case Some(value) => DatePropertyChangedForm().fill(value)
-    }
-
-    Ok(datePropertyChanged(preparedForm, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))
+    val preparedForm = request.userAnswers.datePropertyChanged.fold(datePropertyChangedForm)(datePropertyChangedForm.fill(_))
+    Ok(datePropertyChangedView(preparedForm, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
-      DatePropertyChangedForm().bindFromRequest().fold(
-        (formWithErrors: Form[Option[LocalDate]]) =>
-          BadRequest(datePropertyChanged(formWithErrors, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode))),
+      datePropertyChangedForm.bindFromRequest().fold(
+        formWithErrors => BadRequest(datePropertyChangedView(formWithErrors, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode))),
         value =>
           for
             _        <- dataCacheConnector.remove(request.sessionId, DatePropertyChangedId.toString)
@@ -74,26 +67,22 @@ class DatePropertyChangedController @Inject() (
 
   private def getEnquiryKey(answers: UserAnswers): String =
     enquiryKey(answers).getOrElse {
-      log.warn("Navigation for Date Property Changed page reached with error - Unknown enquiry category in enquiry key")
+      logger.warn("Navigation for Date Property Changed page reached with error - Unknown enquiry category in enquiry key")
       throw RuntimeException("Navigation for  Date Property Changed page reached with error Unknown enquiry category in enquiry key")
     }
 
   private[controllers] def enquiryKey(answers: UserAnswers): Either[String, String] =
-    (answers.councilTaxSubcategory, answers.businessRatesSubcategory) match {
+    (answers.councilTaxSubcategory, answers.businessRatesSubcategory) match
       case (Some("council_tax_business_uses"), None) => Right("datePropertyChanged.business")
       case (Some("council_tax_area_change"), None)   => Right("datePropertyChanged.areaChange")
       case (None, Some("business_rates_from_home"))  => Right("datePropertyChanged.business")
       case (None, Some("business_rates_not_used"))   => Right("datePropertyChanged.notUsed")
       case _                                         => Left("Unknown enquiry category in enquiry key")
-    }
 
   private def backLink(answers: UserAnswers, mode: Mode) =
-    (answers.councilTaxSubcategory, answers.businessRatesSubcategory) match {
+    (answers.councilTaxSubcategory, answers.businessRatesSubcategory) match
       case (Some("council_tax_business_uses"), None) => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
       case (Some("council_tax_area_change"), None)   => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
       case (None, Some("business_rates_from_home"))  => routes.BusinessRatesSubcategoryController.onPageLoad(mode).url
       case (None, Some("business_rates_not_used"))   => routes.BusinessRatesPropertyController.onPageLoad().url
       case _                                         => routes.EnquiryCategoryController.onPageLoad(NormalMode).url
-    }
-
-}

@@ -575,7 +575,7 @@ businessRatesChallenge.title = Herio fy mhrisiad trethi busnes
 businessRatesChallenge.body = Defnyddiwch <a href="https://www.gov.uk/correct-your-business-rates" target="_self">wasanaeth ar-lein</a> Swyddfa Brisio i wirio a herio eich prisiad ardrethi busnes.
 
 # --- Changes to your property or area in England
-propertyOrAreaChanged.heading = Dywedwch wrthym am newidiadau i’ch eiddo neu’ch ardal
+propertyOrAreaChanged.label = Dywedwch wrthym am newidiadau i’ch eiddo neu’ch ardal
 propertyOrAreaChanged.p1.url = https://www.gov.uk/business-rates-valuation-account
 propertyOrAreaChanged.p1.part1 = Mewngofnodwch neu sefydlwch eich cyfrif prisio ardrethi busnes
 propertyOrAreaChanged.p1.part2 = i ddweud wrthym am y newidiadau i’ch eiddo neu ardal.
@@ -591,7 +591,7 @@ propertyOrAreaChanged.p4.url = https://www.gov.uk/guidance/how-to-check-and-chal
 propertyOrAreaChanged.p4 = Sut i wirio a herio eich prisiad ardrethi busnes yng Nghymru
 
 # --- Changes to your property or area in Wales
-propertyOrAreaChangedInWales.heading = Dywedwch wrthym am newidiadau i’ch eiddo neu’ch ardal
+propertyOrAreaChangedInWales.label = Dywedwch wrthym am newidiadau i’ch eiddo neu’ch ardal
 propertyOrAreaChangedInWales.p1.url = https://www.gov.uk/correct-your-business-rates
 propertyOrAreaChangedInWales.p1.part1 = Defnyddiwch wasanaeth Swyddfa Brisio
 propertyOrAreaChangedInWales.p1.part2 = i ddweud wrthym am newidiadau i’ch eiddo neu’r ardal gyfagos.

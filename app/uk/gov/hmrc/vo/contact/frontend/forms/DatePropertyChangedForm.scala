@@ -26,7 +26,7 @@ object DatePropertyChangedForm extends Mappings:
 
   private val key = "datePropertyChanged"
 
-  def apply(): Form[Option[LocalDate]] =
+  val datePropertyChangedForm: Form[Option[LocalDate]] =
     Form(
       single(
         key -> localDate(key)
