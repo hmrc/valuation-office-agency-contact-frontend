@@ -16,11 +16,11 @@
 
 package uk.gov.hmrc.vo.contact.frontend.forms
 
+import play.api.data.Form
 import uk.gov.hmrc.vo.contact.frontend.forms.behaviours.FormBehaviours
 import uk.gov.hmrc.vo.contact.frontend.models.PropertyAddress
-import play.api.data.Form
 
-class PropertyAddressFormSpec extends FormBehaviours {
+class PropertyAddressFormSpec extends FormBehaviours:
 
   val validData: Map[String, String] = Map(
     "addressLine1" -> "value, 1",
@@ -30,7 +30,7 @@ class PropertyAddressFormSpec extends FormBehaviours {
     "postcode"     -> "AA1 1AA"
   )
 
-  val form: Form[PropertyAddress] = PropertyAddressForm()
+  val form: Form[PropertyAddress] = PropertyAddressForm.propertyAddressForm
 
   "Property Address form" must {
     behave like questionForm(PropertyAddress("value, 1", Some("value, 2"), "value, 3", Some("value, 4"), "AA1 1AA"))
@@ -135,5 +135,3 @@ class PropertyAddressFormSpec extends FormBehaviours {
     }
 
   }
-
-}

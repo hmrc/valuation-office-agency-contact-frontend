@@ -603,7 +603,11 @@ propertyOrAreaChangedInWales.p3 = Sut i wirio a herio eich prisiad ardrethi busn
 
 # --- Property address
 propertyAddress.title = Beth yw cyfeiriad yr eiddo?
-propertyAddress.heading = Beth yw cyfeiriad yr eiddo?
+propertyAddress.addressLine1.label = Cyfeiriad – llinell 1
+propertyAddress.addressLine2.label = Cyfeiriad – llinell 2 (opsiynol)
+propertyAddress.town.label = Tref neu ddinas
+propertyAddress.county.label = Sir (opsiynol)
+propertyAddress.postcode.label = Cod post
 propertyAddress.existing_address = Rhaid i hwn fod yr un cyfeiriad â’ch ymholiad gwreiddiol.
 propertyAddress.addressLine1 = Cyfeiriad – llinell 1
 propertyAddress.addressLine1.required = Nodwch linell gyntaf y cyfeiriad

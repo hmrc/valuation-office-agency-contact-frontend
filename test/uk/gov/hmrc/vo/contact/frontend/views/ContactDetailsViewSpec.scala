@@ -18,28 +18,28 @@ package uk.gov.hmrc.vo.contact.frontend.views
 
 import play.api.data.Form
 import play.twirl.api.HtmlFormat
-import uk.gov.hmrc.vo.contact.frontend.forms.ContactDetailsForm
+import uk.gov.hmrc.vo.contact.frontend.forms.ContactDetailsForm.contactDetailsForm
 import uk.gov.hmrc.vo.contact.frontend.models.{ContactDetails, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.QuestionViewBehaviours
-import uk.gov.hmrc.vo.contact.frontend.views.html.{contactDetails => contact_details}
+import uk.gov.hmrc.vo.contact.frontend.views.html.contactDetails
 
-class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
+class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails]:
 
-  def contactDetails: html.contactDetails = app.injector.instanceOf[contact_details]
+  private def contactDetails: contactDetails = app.injector.instanceOf[contactDetails]
 
-  val messageKeyPrefix    = "contactDetails"
-  def ctBackLink: String  = uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
-  def ndrBackLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
+  private val messageKeyPrefix    = "contactDetails"
+  private def ctBackLink: String  = uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
+  private def ndrBackLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
 
-  def createNDRViewUsingForm(form: Form[ContactDetails]): HtmlFormat.Appendable =
+  private def createNDRViewUsingForm(form: Form[ContactDetails]): HtmlFormat.Appendable =
     contactDetails(form, NormalMode, ndrBackLink)(using fakeRequest, messages)
 
-  def createCTView(): HtmlFormat.Appendable = contactDetails(ContactDetailsForm(), NormalMode, ctBackLink)(using fakeRequest, messages)
+  private def createCTView(): HtmlFormat.Appendable = contactDetails(contactDetailsForm, NormalMode, ctBackLink)(using fakeRequest, messages)
 
-  def createCTViewUsingForm(form: Form[ContactDetails]): HtmlFormat.Appendable =
+  private def createCTViewUsingForm(form: Form[ContactDetails]): HtmlFormat.Appendable =
     contactDetails(form, NormalMode, ctBackLink)(using fakeRequest, messages)
 
-  override val form: Form[ContactDetails] = ContactDetailsForm()
+  override val form: Form[ContactDetails] = contactDetailsForm
 
   "ContactDetails view" must {
 
@@ -61,7 +61,7 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
     }
 
     "contain continue button with the value Continue when the enquiry category is council_tax" in {
-      val doc            = asDocument(createCTViewUsingForm(ContactDetailsForm()))
+      val doc            = asDocument(createCTViewUsingForm(contactDetailsForm))
       val continueButton = doc.getElementById("continue-button").text()
       assert(continueButton == messages("button.continue.label"))
     }
@@ -75,9 +75,8 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails] {
     }
 
     "contain continue button with the value Continue when the enquiry category is business_rates" in {
-      val doc            = asDocument(createNDRViewUsingForm(ContactDetailsForm()))
+      val doc            = asDocument(createNDRViewUsingForm(contactDetailsForm))
       val continueButton = doc.getElementById("continue-button").text()
       assert(continueButton == messages("button.continue.label"))
     }
   }
-}

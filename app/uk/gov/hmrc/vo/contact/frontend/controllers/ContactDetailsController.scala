@@ -16,26 +16,23 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import javax.inject.Inject
-import play.api.Logger
-import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.MessagesControllerComponents
+import play.api.mvc.{AnyContent, MessagesControllerComponents}
+import play.api.{Logging, mvc}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.vo.contact.frontend.journey.model.TellUsMorePage.lastTellUsMorePage
-import uk.gov.hmrc.vo.contact.frontend.journey.pages.HBTellUsMore.appStartPage
-
-import scala.concurrent.ExecutionContext
-import play.api.mvc
-import play.api.mvc.AnyContent
 import uk.gov.hmrc.vo.contact.frontend.Navigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.vo.contact.frontend.forms.ContactDetailsForm
+import uk.gov.hmrc.vo.contact.frontend.forms.ContactDetailsForm.contactDetailsForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.ContactDetailsId
+import uk.gov.hmrc.vo.contact.frontend.journey.model.TellUsMorePage.lastTellUsMorePage
+import uk.gov.hmrc.vo.contact.frontend.journey.pages.HBTellUsMore.appStartPage
 import uk.gov.hmrc.vo.contact.frontend.models.{ContactDetails, Mode, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
-import uk.gov.hmrc.vo.contact.frontend.views.html.contactDetails as contact_details
+import uk.gov.hmrc.vo.contact.frontend.views.html.contactDetails
+
+import javax.inject.Inject
+import scala.concurrent.ExecutionContext
 
 class ContactDetailsController @Inject() (
   override val messagesApi: MessagesApi,
@@ -43,40 +40,34 @@ class ContactDetailsController @Inject() (
   navigator: Navigator,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
-  contactDetails: contact_details,
+  contactDetailsView: contactDetails,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport
+  with Logging:
 
-  private val log = Logger(this.getClass)
-
-  implicit val ec: ExecutionContext = cc.executionContext
+  given ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.contactDetails match {
-        case None        => ContactDetailsForm()
-        case Some(value) => ContactDetailsForm().fill(value)
-      }
-      enquiryBackLink(request.userAnswers) match {
-        case Right(link) => Ok(contactDetails(preparedForm, mode, link))
-        case Left(msg)   =>
-          log.warn(s"Navigation for Contact Details page reached with error $msg")
-          throw RuntimeException(s"Navigation for Contact Details page reached with error $msg")
-      }
+      val preparedForm = request.userAnswers.contactDetails.fold(contactDetailsForm)(contactDetailsForm.fill)
 
+      enquiryBackLink(request.userAnswers) match
+        case Right(link) => Ok(contactDetailsView(preparedForm, mode, link))
+        case Left(msg)   =>
+          logger.warn(s"Navigation for Contact Details page reached with error $msg")
+          throw RuntimeException(s"Navigation for Contact Details page reached with error $msg")
   }
 
   def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
-      ContactDetailsForm().bindFromRequest().fold(
-        (formWithErrors: Form[ContactDetails]) =>
-          enquiryBackLink(request.userAnswers) match {
-            case Right(link) => BadRequest(contactDetails(formWithErrors, mode, link))
+      contactDetailsForm.bindFromRequest().fold(
+        formWithErrors =>
+          enquiryBackLink(request.userAnswers) match
+            case Right(link) => BadRequest(contactDetailsView(formWithErrors, mode, link))
             case Left(msg)   =>
-              log.warn(s"Navigation for Contact Details page reached with error $msg")
-              throw RuntimeException(s"Navigation for Contact Details page reached with error $msg")
-          },
+              logger.warn(s"Navigation for Contact Details page reached with error $msg")
+              throw RuntimeException(s"Navigation for Contact Details page reached with error $msg"),
         value =>
           dataCacheConnector.save[ContactDetails](request.sessionId, ContactDetailsId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(ContactDetailsId, mode).apply(UserAnswers(cacheMap)))
@@ -85,7 +76,7 @@ class ContactDetailsController @Inject() (
   }
 
   private[controllers] def enquiryBackLink(answers: UserAnswers): Either[String, String] =
-    (answers.contactReason, answers.enquiryCategory, answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.fairRentEnquiryEnquiry) match {
+    (answers.contactReason, answers.enquiryCategory, answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.fairRentEnquiryEnquiry) match
       case (Some("more_details"), _, _, _, _)                                         => Right(routes.RefNumberController.onPageLoad.url)
       case (Some("update_existing"), _, _, _, _)                                      => Right(routes.RefNumberController.onPageLoad.url)
       case (_, Some("council_tax"), Some("council_tax_property_poor_repair"), _, _)   => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
@@ -116,6 +107,3 @@ class ContactDetailsController @Inject() (
       case (_, Some("council_tax"), _, _, _)                                          => Right(routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
       case (_, Some("business_rates"), _, _, _)                                       => Right(routes.TellUsMoreController.onPageLoad(NormalMode).url)
       case _                                                                          => Left("Unknown enquiry category in enquiry key")
-    }
-
-}

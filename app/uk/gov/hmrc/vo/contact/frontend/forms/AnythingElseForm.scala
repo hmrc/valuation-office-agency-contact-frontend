@@ -21,7 +21,7 @@ import play.api.data.Forms.{single, text}
 
 object AnythingElseForm:
 
-  def apply(): Form[String] =
+  val form: Form[String] =
     Form(
       single(
         "message" -> text.verifying("error.message.max_length", _.length <= 5000)

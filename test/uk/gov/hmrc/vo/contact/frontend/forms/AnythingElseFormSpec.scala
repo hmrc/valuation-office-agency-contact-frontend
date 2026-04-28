@@ -19,13 +19,13 @@ package uk.gov.hmrc.vo.contact.frontend.forms
 import uk.gov.hmrc.vo.contact.frontend.forms.behaviours.FormBehaviours
 import play.api.data.Form
 
-class AnythingElseFormSpec extends FormBehaviours {
+class AnythingElseFormSpec extends FormBehaviours:
 
   val validData: Map[String, String] = Map(
     "message" -> "value 1"
   )
 
-  val form: Form[String] = AnythingElseForm()
+  val form: Form[String] = AnythingElseForm.form
 
   "AnythingElse form" must {
     behave like questionForm("value 1")
@@ -48,4 +48,3 @@ class AnythingElseFormSpec extends FormBehaviours {
       checkForError(form, data, expectedError)
     }
   }
-}

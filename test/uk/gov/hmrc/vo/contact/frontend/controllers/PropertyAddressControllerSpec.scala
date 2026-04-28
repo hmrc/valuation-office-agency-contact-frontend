@@ -22,17 +22,17 @@ import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.*
 import play.api.test.Helpers.*
-import uk.gov.hmrc.vo.contact.frontend.forms.PropertyAddressForm
+import uk.gov.hmrc.vo.contact.frontend.forms.PropertyAddressForm.propertyAddressForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.PropertyAddressId
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode, PropertyAddress}
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
-import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyAddress => property_address}
+import uk.gov.hmrc.vo.contact.frontend.views.html.propertyAddress
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class PropertyAddressControllerSpec extends ControllerSpecBase {
+class PropertyAddressControllerSpec extends ControllerSpecBase:
 
-  def propertyAddress: html.propertyAddress = app.injector.instanceOf[property_address]
+  def propertyAddress: html.propertyAddress = app.injector.instanceOf[propertyAddress]
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
@@ -47,7 +47,7 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[PropertyAddress] = PropertyAddressForm()): String =
+  def viewAsString(form: Form[PropertyAddress] = propertyAddressForm): String =
     propertyAddress(form, NormalMode)(using fakeRequest, messages).toString
 
   "Property Address Controller" must {
@@ -65,7 +65,7 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsString(PropertyAddressForm().fill(PropertyAddress("value 1", Some("value 2"), "value 3", Some("value 4"), "AA1 1AA")))
+      contentAsString(result) mustBe viewAsString(propertyAddressForm.fill(PropertyAddress("value 1", Some("value 2"), "value 3", Some("value 4"), "AA1 1AA")))
     }
 
     "redirect to the next page when valid data is submitted" in {
@@ -85,7 +85,7 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm   = PropertyAddressForm().bind(Map("value" -> "invalid value"))
+      val boundForm   = propertyAddressForm.bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -120,7 +120,7 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsString(PropertyAddressForm().fill(PropertyAddress("value 1", None, "value 3", None, "value 5")))
+      contentAsString(result) mustBe viewAsString(propertyAddressForm.fill(PropertyAddress("value 1", None, "value 3", None, "value 5")))
     }
 
     "redirect to the next page when valid data is submitted and address line 2 and county are None" in {
@@ -132,4 +132,3 @@ class PropertyAddressControllerSpec extends ControllerSpecBase {
       redirectLocation(result) mustBe Some(onwardRoute.url)
     }
   }
-}

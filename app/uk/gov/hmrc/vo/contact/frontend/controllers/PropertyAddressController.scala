@@ -16,23 +16,21 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import javax.inject.Inject
-import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.MessagesControllerComponents
-import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-
-import scala.concurrent.ExecutionContext
 import play.api.mvc
-import play.api.mvc.AnyContent
+import play.api.mvc.{AnyContent, MessagesControllerComponents}
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.Navigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.vo.contact.frontend.forms.PropertyAddressForm
+import uk.gov.hmrc.vo.contact.frontend.forms.PropertyAddressForm.propertyAddressForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.PropertyAddressId
 import uk.gov.hmrc.vo.contact.frontend.models.{Mode, PropertyAddress}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
-import uk.gov.hmrc.vo.contact.frontend.views.html.propertyAddress as property_address
+import uk.gov.hmrc.vo.contact.frontend.views.html.propertyAddress
+
+import javax.inject.Inject
+import scala.concurrent.ExecutionContext
 
 class PropertyAddressController @Inject() (
   override val messagesApi: MessagesApi,
@@ -40,37 +38,31 @@ class PropertyAddressController @Inject() (
   navigator: Navigator,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
-  propertyAddress: property_address,
+  propertyAddressView: propertyAddress,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
-  implicit val ec: ExecutionContext = cc.executionContext
+  given ExecutionContext = cc.executionContext
 
   def helpTextKey(userAnswers: UserAnswers): Option[String] =
-    userAnswers.contactReason match {
+    userAnswers.contactReason match
       case Some("more_details") => "propertyAddress.existing_address"
       case _                    => None
-    }
 
   def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.propertyAddress match {
-        case None        => PropertyAddressForm()
-        case Some(value) => PropertyAddressForm().fill(value)
-      }
-      Ok(propertyAddress(preparedForm, mode, helpTextKey(request.userAnswers)))
+      val preparedForm = request.userAnswers.propertyAddress.fold(propertyAddressForm)(propertyAddressForm.fill)
+      Ok(propertyAddressView(preparedForm, mode, helpTextKey(request.userAnswers)))
   }
 
   def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
-      PropertyAddressForm().bindFromRequest().fold(
-        (formWithErrors: Form[PropertyAddress]) =>
-          BadRequest(propertyAddress(formWithErrors, mode, helpTextKey(request.userAnswers))),
+      propertyAddressForm.bindFromRequest().fold(
+        formWithErrors => BadRequest(propertyAddressView(formWithErrors, mode, helpTextKey(request.userAnswers))),
         value =>
           dataCacheConnector.save[PropertyAddress](request.sessionId, PropertyAddressId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(PropertyAddressId, mode).apply(UserAnswers(cacheMap)))
           )
       )
   }
-}

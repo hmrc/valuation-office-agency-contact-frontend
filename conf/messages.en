@@ -589,7 +589,11 @@ propertyOrAreaChangedInWales.p3 = How to check and challenge your business rates
 
 # --- Property address
 propertyAddress.title = What is the property address?
-propertyAddress.heading = What is the property address?
+propertyAddress.addressLine1.label = Address line 1
+propertyAddress.addressLine2.label = Address line 2 (optional)
+propertyAddress.town.label = Town or city
+propertyAddress.county.label = County (optional)
+propertyAddress.postcode.label = Postcode
 propertyAddress.existing_address = This must be the same address as your original enquiry.
 propertyAddress.addressLine1 = Address line 1
 propertyAddress.addressLine1.required = Enter the first line of the address

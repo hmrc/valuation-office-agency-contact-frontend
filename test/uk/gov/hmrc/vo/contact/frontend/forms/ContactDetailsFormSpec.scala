@@ -20,7 +20,7 @@ import uk.gov.hmrc.vo.contact.frontend.forms.behaviours.FormBehaviours
 import uk.gov.hmrc.vo.contact.frontend.models.ContactDetails
 import play.api.data.Form
 
-class ContactDetailsFormSpec extends FormBehaviours {
+class ContactDetailsFormSpec extends FormBehaviours:
 
   val validData: Map[String, String] = Map(
     "fullName"      -> "Alex",
@@ -28,7 +28,7 @@ class ContactDetailsFormSpec extends FormBehaviours {
     "contactNumber" -> "12345678901"
   )
 
-  val form: Form[ContactDetails] = ContactDetailsForm()
+  val form: Form[ContactDetails] = ContactDetailsForm.contactDetailsForm
 
   "ContactDetails form" must {
     behave like questionForm(ContactDetails("Alex", "a@a", "12345678901"))
@@ -103,4 +103,3 @@ class ContactDetailsFormSpec extends FormBehaviours {
       checkForError(form, data, expectedError)
     }
   }
-}

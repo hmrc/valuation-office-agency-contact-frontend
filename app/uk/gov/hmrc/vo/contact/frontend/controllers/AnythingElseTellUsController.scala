@@ -16,23 +16,21 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.MessagesControllerComponents
-import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-
-import javax.inject.Inject
-import scala.concurrent.ExecutionContext
 import play.api.mvc
-import play.api.mvc.AnyContent
+import play.api.mvc.{AnyContent, MessagesControllerComponents}
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.Navigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.vo.contact.frontend.forms.AnythingElseForm
+import uk.gov.hmrc.vo.contact.frontend.forms.AnythingElseForm.form
 import uk.gov.hmrc.vo.contact.frontend.identifiers.AnythingElseId
 import uk.gov.hmrc.vo.contact.frontend.models.Mode
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.anythingElseTellUs
+
+import javax.inject.Inject
+import scala.concurrent.ExecutionContext
 
 class AnythingElseTellUsController @Inject() (
   override val messagesApi: MessagesApi,
@@ -49,18 +47,14 @@ class AnythingElseTellUsController @Inject() (
 
   def onPageLoad: mvc.Action[AnyContent] = (getData `andThen` requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.anythingElse match {
-        case None        => AnythingElseForm()
-        case Some(value) => AnythingElseForm().fill(value)
-      }
+      val preparedForm = request.userAnswers.anythingElse.fold(form)(form.fill)
       Ok(anythingElseTellUsView(preparedForm))
   }
 
   def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData `andThen` requireData).async {
     implicit request =>
-      AnythingElseForm().bindFromRequest().fold(
-        (formWithErrors: Form[String]) =>
-          BadRequest(anythingElseTellUsView(formWithErrors)),
+      form.bindFromRequest().fold(
+        formWithErrors => BadRequest(anythingElseTellUsView(formWithErrors)),
         value =>
           dataCacheConnector.save[String](request.sessionId, AnythingElseId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(AnythingElseId, mode).apply(UserAnswers(cacheMap)))

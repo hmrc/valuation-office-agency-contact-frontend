@@ -21,7 +21,7 @@ import play.api.data.Forms.*
 
 object WhatElseForm:
 
-  def apply(): Form[String] =
+  val form: Form[String] =
     Form(
       single(
         "message" -> text.verifying("error.what_else.required", _.nonEmpty)

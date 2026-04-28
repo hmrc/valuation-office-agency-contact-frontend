@@ -25,7 +25,7 @@ object PropertyAddressForm:
 
   private val postcodeRegex = """^\s*\-*\.*\(*\)*[a-zA-Z]{1,2}[0-9]{1,2}[a-zA-Z]?(\s*\-*\.*\(*\)*[0-9][a-zA-Z]{1,2})?$"""
 
-  def apply(): Form[PropertyAddress] =
+  val propertyAddressForm: Form[PropertyAddress] =
     Form(
       mapping(
         "addressLine1" -> text.verifying("propertyAddress.addressLine1.required", _.nonEmpty)
