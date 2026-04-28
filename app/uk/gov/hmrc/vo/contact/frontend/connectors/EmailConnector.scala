@@ -52,10 +52,9 @@ class EmailConnector @Inject() (
   def sendEnquiryConfirmation(contact: Contact)(using request: DataRequest[?], messages: Messages, hc: HeaderCarrier): Future[HttpResponse] =
     val parameters = getParametersJson(contact, request.userAnswers.existingEnquiryCategory.isDefined)
 
-    val templateId = messages.lang.language match {
+    val templateId = messages.lang.language match
       case "cy" => cf_enquiry_confirmation_cy
       case _    => cf_enquiry_confirmation
-    }
     sendEmail(contact.contact.email, templateId, parameters)
 
   private def getParametersJson(contact: Contact, isUpdateExistingEnquiry: Boolean)(using messages: Messages): JsObject =
@@ -91,9 +90,8 @@ class EmailConnector @Inject() (
       .setHeader(jsonContentTypeHeader)
       .execute[HttpResponse]
       .map { res =>
-        res.status match {
+        res.status match
           case OK | ACCEPTED => logger.info(s"Send email to user successful: ${res.status}")
           case _             => logger.error(s"Send email to user FAILED: ${res.status} ${res.body}")
-        }
         res
       }

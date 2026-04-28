@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
@@ -27,7 +26,7 @@ import uk.gov.hmrc.vo.contact.frontend.forms.PropertyWalesActualLetsForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.PropertyWalesActualLetsId
 import uk.gov.hmrc.vo.contact.frontend.models.Mode
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
-import uk.gov.hmrc.vo.contact.frontend.views.html.propertyWalesActualLets as property_wales_actual_lets
+import uk.gov.hmrc.vo.contact.frontend.views.html.propertyWalesActualLets
 
 import javax.inject.Inject
 import scala.concurrent.ExecutionContext
@@ -39,33 +38,29 @@ class PropertyWalesActualLetsController @Inject() (
   navigator: Navigator,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
-  propertyWalesActualLets: property_wales_actual_lets,
+  propertyWalesActualLets: propertyWalesActualLets,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
-  implicit val ec: ExecutionContext = cc.executionContext
+  given ExecutionContext = cc.executionContext
 
   def onPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.propertyWalesActualLetsEnquiry match {
+      val preparedForm = request.userAnswers.propertyWalesActualLetsEnquiry match
         case None        => PropertyWalesActualLetsForm()
         case Some(value) => PropertyWalesActualLetsForm().fill(value)
-      }
       Ok(propertyWalesActualLets(preparedForm))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       PropertyWalesActualLetsForm().bindFromRequest().fold(
-        (formWithErrors: Form[String]) =>
-          BadRequest(propertyWalesActualLets(formWithErrors)),
-        value => {
+        formWithErrors => BadRequest(propertyWalesActualLets(formWithErrors)),
+        value =>
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering70Days" -> value)
           dataCacheConnector.save[String](request.sessionId, PropertyWalesActualLetsId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(PropertyWalesActualLetsId, mode).apply(UserAnswers(cacheMap)))
           )
-        }
       )
   }
-}

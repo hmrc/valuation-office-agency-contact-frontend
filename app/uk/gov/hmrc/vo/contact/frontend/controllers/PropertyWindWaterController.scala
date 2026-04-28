@@ -20,7 +20,7 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
-import uk.gov.hmrc.vo.contact.frontend.views.html.windWatertightCannotBeReduced as wind_watertight_cannot_be_reduced
+import uk.gov.hmrc.vo.contact.frontend.views.html.windWatertightCannotBeReduced
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.ExecutionContext
@@ -28,14 +28,13 @@ import scala.concurrent.ExecutionContext
 @Singleton
 class PropertyWindWaterController @Inject() (
   override val messagesApi: MessagesApi,
-  windWatertightCannotBeReduced: wind_watertight_cannot_be_reduced,
+  windWatertightCannotBeReduced: windWatertightCannotBeReduced,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
-  implicit val ec: ExecutionContext = cc.executionContext
+  given ExecutionContext = cc.executionContext
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
     Ok(windWatertightCannotBeReduced(NormalMode))
   }
-}

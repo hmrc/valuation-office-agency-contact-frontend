@@ -17,8 +17,7 @@
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc
-import play.api.mvc.{AnyContent, MessagesControllerComponents}
+import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.Navigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
@@ -44,23 +43,22 @@ class EnquiryCategoryController @Inject() (
 ) extends FrontendController(cc)
   with I18nSupport:
 
-  implicit val ec: ExecutionContext = cc.executionContext
+  given ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) { implicit request =>
+  def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) { implicit request =>
     val preparedForm = request.userAnswers.enquiryCategory.fold(form)(form.fillAndValidate)
     Ok(enquiryCategoryView(preparedForm, mode))
   }
 
-  def onSubmit(mode: Mode): mvc.Action[AnyContent] = getData.async { implicit request =>
+  def onSubmit(mode: Mode): Action[AnyContent] = getData.async { implicit request =>
     form.bindFromRequest().fold(
       formWithErrors => BadRequest(enquiryCategoryView(formWithErrors, mode)),
       value =>
-        for {
+        for
           _        <- dataCacheConnector.remove(request.sessionId, ExistingEnquiryCategoryId.toString)
           cacheMap <- dataCacheConnector.save[String](request.sessionId, EnquiryCategoryId.toString, value)
-        } yield {
+        yield
           auditService.sendRadioButtonSelection(request.uri, "enquiryCategory" -> value)
           Redirect(navigator.nextPage(EnquiryCategoryId, mode).apply(UserAnswers(cacheMap)))
-        }
     )
   }

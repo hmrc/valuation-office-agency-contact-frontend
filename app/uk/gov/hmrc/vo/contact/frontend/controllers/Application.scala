@@ -16,19 +16,17 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import javax.inject.{Inject, Singleton}
-import play.api.Configuration
 import play.api.i18n.{I18nSupport, Messages, MessagesApi}
-import play.api.mvc.MessagesControllerComponents
+import play.api.{Configuration, mvc}
+import play.api.mvc.{AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-
-import scala.concurrent.ExecutionContext
-import play.api.mvc
-import play.api.mvc.AnyContent
 import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.DataRetrievalAction
 import uk.gov.hmrc.vo.contact.frontend.forms.ContactReasonForm
 import uk.gov.hmrc.vo.contact.frontend.views.html.contactReason
+
+import javax.inject.{Inject, Singleton}
+import scala.concurrent.ExecutionContext
 
 @Singleton
 class Application @Inject() (
@@ -42,16 +40,15 @@ class Application @Inject() (
   cc: MessagesControllerComponents
 )(using ec: ExecutionContext
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
   def start(): mvc.Action[AnyContent] = Action.async { implicit request =>
     val defaultPage = Ok(contactReasonView(ContactReasonForm.form))
-    language match {
+    language match
       case "cy" => configuration.getOptional[String]("govukStartPageWelsh")
           .fold(defaultPage)(Redirect(_))
       case _    => configuration.getOptional[String]("govukStartPage")
           .fold(defaultPage)(Redirect(_))
-    }
   }
 
   def logout(): mvc.Action[AnyContent] = getData.async { implicit request =>
@@ -70,5 +67,3 @@ class Application @Inject() (
     uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactReasonController.onPageLoad.url
 
   private def language(using messages: Messages): String = messages.lang.language
-
-}

@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
@@ -27,7 +26,7 @@ import uk.gov.hmrc.vo.contact.frontend.forms.PropertyEnglandAvailableLetsForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.PropertyEnglandAvailableLetsId
 import uk.gov.hmrc.vo.contact.frontend.models.Mode
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
-import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyEnglandAvailableLets as property_england_available_lets, propertyWalesLets as wales_lets}
+import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyEnglandAvailableLets, propertyWalesLets}
 
 import javax.inject.Inject
 import scala.concurrent.ExecutionContext
@@ -39,34 +38,31 @@ class PropertyEnglandAvailableLetsController @Inject() (
   navigator: Navigator,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
-  propertyEnglandAvailableLets: property_england_available_lets,
-  propertyWalesLets: wales_lets,
+  propertyEnglandAvailableLets: propertyEnglandAvailableLets,
+  propertyWalesLets: propertyWalesLets,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
-  implicit val ec: ExecutionContext = cc.executionContext
+  given ExecutionContext = cc.executionContext
 
   def onPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.propertyEnglandAvailableLetsEnquiry match {
+      val preparedForm = request.userAnswers.propertyEnglandAvailableLetsEnquiry match
         case None        => PropertyEnglandAvailableLetsForm()
         case Some(value) => PropertyEnglandAvailableLetsForm().fill(value)
-      }
       Ok(propertyEnglandAvailableLets(preparedForm))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       PropertyEnglandAvailableLetsForm().bindFromRequest().fold(
-        (formWithErrors: Form[String]) =>
-          BadRequest(propertyEnglandAvailableLets(formWithErrors)),
-        value => {
+        formWithErrors => BadRequest(propertyEnglandAvailableLets(formWithErrors)),
+        value =>
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering140DaysEN" -> value)
           dataCacheConnector.save[String](request.sessionId, PropertyEnglandAvailableLetsId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(PropertyEnglandAvailableLetsId, mode).apply(UserAnswers(cacheMap)))
           )
-        }
       )
   }
 
@@ -74,5 +70,3 @@ class PropertyEnglandAvailableLetsController @Inject() (
     implicit request =>
       Ok(propertyWalesLets())
   }
-
-}

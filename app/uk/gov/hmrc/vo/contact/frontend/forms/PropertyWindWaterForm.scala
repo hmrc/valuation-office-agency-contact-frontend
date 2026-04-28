@@ -16,23 +16,21 @@
 
 package uk.gov.hmrc.vo.contact.frontend.forms
 
-import play.api.data.{Form, FormError}
 import play.api.data.Forms.{of, single}
 import play.api.data.format.Formatter
+import play.api.data.{Form, FormError}
 import uk.gov.hmrc.vo.contact.frontend.utils.RadioOption
 
-object PropertyWindWaterForm extends FormErrorHelper {
+object PropertyWindWaterForm extends FormErrorHelper:
 
-  private def propertyWindWaterFormatter: Formatter[String] = new Formatter[String] {
+  private def propertyWindWaterFormatter: Formatter[String] =
+    new Formatter[String]:
+      def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match
+        case Some(s) if optionIsValid(s) => Right(s)
+        case None                        => produceError(key, "error.propertyWindWater.required")
+        case _                           => produceError(key, "error.unknown")
 
-    def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match {
-      case Some(s) if optionIsValid(s) => Right(s)
-      case None                        => produceError(key, "error.propertyWindWater.required")
-      case _                           => produceError(key, "error.unknown")
-    }
-
-    def unbind(key: String, value: String): Map[String, String] = Map(key -> value)
-  }
+      def unbind(key: String, value: String): Map[String, String] = Map(key -> value)
 
   def apply(): Form[String] =
     Form(single("value" -> of(using propertyWindWaterFormatter)))
@@ -43,5 +41,3 @@ object PropertyWindWaterForm extends FormErrorHelper {
   )
 
   def optionIsValid(value: String): Boolean = options.exists(o => o.value == value)
-
-}

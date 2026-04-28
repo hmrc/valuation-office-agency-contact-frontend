@@ -16,13 +16,13 @@
 
 package uk.gov.hmrc.vo.contact.frontend.handlers
 
-import javax.inject.{Inject, Singleton}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Request, RequestHeader}
 import play.twirl.api.Html
 import uk.gov.hmrc.play.bootstrap.frontend.http.FrontendErrorHandler
 import uk.gov.hmrc.vo.contact.frontend.views.html.error.{error_template, internal_server_error, page_not_found}
 
+import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 import scala.language.implicitConversions
 
@@ -34,7 +34,7 @@ class ErrorHandler @Inject() (
   internalServerError: internal_server_error
 )(using val ec: ExecutionContext
 ) extends FrontendErrorHandler
-  with I18nSupport {
+  with I18nSupport:
 
   override def standardErrorTemplate(pageTitle: String, heading: String, message: String)(using rh: RequestHeader): Future[Html] =
     render { implicit request =>
@@ -58,5 +58,3 @@ class ErrorHandler @Inject() (
 
   private def render(template: Request[?] => Html)(using rh: RequestHeader): Future[Html] =
     Future.successful(template(Request(rh, "")))
-
-}

@@ -20,21 +20,20 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
-import uk.gov.hmrc.vo.contact.frontend.views.html.propertyPermanentChanges as property_permanent_changes
+import uk.gov.hmrc.vo.contact.frontend.views.html.propertyPermanentChanges
 
 import javax.inject.Inject
 import scala.concurrent.ExecutionContext
 
 class PropertyPermanentChangesController @Inject() (
   override val messagesApi: MessagesApi,
-  propertyPermanentChanges: property_permanent_changes,
+  propertyPermanentChanges: propertyPermanentChanges,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
-  implicit val ec: ExecutionContext = cc.executionContext
+  given ExecutionContext = cc.executionContext
 
   def onPageLoad(): Action[AnyContent] = Action { implicit request =>
     Ok(propertyPermanentChanges(NormalMode))
   }
-}

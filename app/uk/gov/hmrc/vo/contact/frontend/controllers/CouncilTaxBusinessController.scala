@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
@@ -27,7 +26,7 @@ import uk.gov.hmrc.vo.contact.frontend.forms.CouncilTaxBusinessEnquiryForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.CouncilTaxBusinessEnquiryId
 import uk.gov.hmrc.vo.contact.frontend.models.Mode
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
-import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesNoNeedToPay as business_rates_no_need_to_pay, councilTaxBusinessEnquiry as council_tax_business_enquiry, propertySmallPartUsed as small_part_used}
+import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesNoNeedToPay, councilTaxBusinessEnquiry, propertySmallPartUsed}
 
 import javax.inject.Inject
 import scala.concurrent.ExecutionContext
@@ -39,21 +38,20 @@ class CouncilTaxBusinessController @Inject() (
   navigator: Navigator,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
-  councilTaxBusinessEnquiry: council_tax_business_enquiry,
-  propertySmallPartUsed: small_part_used,
-  businessRatesNoNeedToPay: business_rates_no_need_to_pay,
+  councilTaxBusinessEnquiry: councilTaxBusinessEnquiry,
+  propertySmallPartUsed: propertySmallPartUsed,
+  businessRatesNoNeedToPay: businessRatesNoNeedToPay,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
-  implicit val ec: ExecutionContext = cc.executionContext
+  given ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.councilTaxBusinessEnquiry match {
+      val preparedForm = request.userAnswers.councilTaxBusinessEnquiry match
         case None        => CouncilTaxBusinessEnquiryForm()
         case Some(value) => CouncilTaxBusinessEnquiryForm().fill(value)
-      }
 
       Ok(councilTaxBusinessEnquiry(preparedForm, backLink(request.userAnswers, mode)))
   }
@@ -61,15 +59,13 @@ class CouncilTaxBusinessController @Inject() (
   def onEnquirySubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData) async {
     implicit request =>
       CouncilTaxBusinessEnquiryForm().bindFromRequest().fold(
-        (formWithErrors: Form[String]) =>
-          BadRequest(councilTaxBusinessEnquiry(formWithErrors, backLink(request.userAnswers, mode))),
+        formWithErrors => BadRequest(councilTaxBusinessEnquiry(formWithErrors, backLink(request.userAnswers, mode))),
         value =>
-          for {
+          for
             cacheMap <- dataCacheConnector.save[String](request.sessionId, CouncilTaxBusinessEnquiryId.toString, value)
-          } yield {
+          yield
             auditService.sendRadioButtonSelection(request.uri, "councilTaxBusinessEnquiry" -> value)
             Redirect(navigator.nextPage(CouncilTaxBusinessEnquiryId, mode).apply(UserAnswers(cacheMap)))
-          }
       )
   }
 
@@ -84,8 +80,6 @@ class CouncilTaxBusinessController @Inject() (
   }
 
   private def backLink(answers: UserAnswers, mode: Mode): String =
-    answers.businessRatesSubcategory match {
+    answers.businessRatesSubcategory match
       case Some("business_rates_from_home") => routes.BusinessRatesSubcategoryController.onPageLoad(mode).url
       case _                                => routes.CouncilTaxSubcategoryController.onPageLoad(mode).url
-    }
-}

@@ -66,7 +66,7 @@ class LightweightContactEventsConnector @Inject() (
       .execute[HttpResponse]
       .map {
         response =>
-          response.status match {
+          response.status match
             case OK     =>
               auditService.sendEnquiryToVO(auditEventJson)
               Success(OK)
@@ -75,7 +75,6 @@ class LightweightContactEventsConnector @Inject() (
               logger.warn(ex.getMessage)
               auditService.sendFormSubmissionFailed(auditEventJson, s"Response code: $status")
               Failure(ex)
-          }
       }
       .recover {
         case throwable =>

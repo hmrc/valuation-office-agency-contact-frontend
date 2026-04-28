@@ -16,21 +16,21 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import javax.inject.{Inject, Singleton}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.vo.contact.frontend.views.html.valuationForTaxes as valuation_for_taxes
+import uk.gov.hmrc.vo.contact.frontend.views.html.valuationForTaxes
+
+import javax.inject.{Inject, Singleton}
 
 @Singleton
 class ValuationForTaxesController @Inject() (
   override val messagesApi: MessagesApi,
-  valuationForTaxes: valuation_for_taxes,
+  valuationForTaxes: valuationForTaxes,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
     Ok(valuationForTaxes())
   }
-}

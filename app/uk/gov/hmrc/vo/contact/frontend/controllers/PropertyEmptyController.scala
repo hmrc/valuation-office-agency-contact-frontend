@@ -20,7 +20,7 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesPropertyEmpty as business_rates_property_empty, councilTaxPropertyEmpty as council_tax_property_empty}
+import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesPropertyEmpty, councilTaxPropertyEmpty}
 
 import javax.inject.Inject
 
@@ -28,11 +28,11 @@ class PropertyEmptyController @Inject() (
   override val messagesApi: MessagesApi,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
-  councilTaxPropertyEmpty: council_tax_property_empty,
-  businessRatesPropertyEmpty: business_rates_property_empty,
+  councilTaxPropertyEmpty: councilTaxPropertyEmpty,
+  businessRatesPropertyEmpty: businessRatesPropertyEmpty,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
   def onPageLoad(): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
@@ -43,5 +43,3 @@ class PropertyEmptyController @Inject() (
     implicit request =>
       Ok(businessRatesPropertyEmpty())
   }
-
-}

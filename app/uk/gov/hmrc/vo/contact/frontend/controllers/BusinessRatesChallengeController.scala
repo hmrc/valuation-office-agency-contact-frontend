@@ -16,11 +16,12 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import javax.inject.{Inject, Singleton}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.views.html.businessRatesChallenge
+
+import javax.inject.{Inject, Singleton}
 
 @Singleton
 class BusinessRatesChallengeController @Inject() (
@@ -28,10 +29,8 @@ class BusinessRatesChallengeController @Inject() (
   businessRatesChallengeView: businessRatesChallenge,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
   def onChallengePageLoad: Action[AnyContent] = Action { implicit request =>
     Ok(businessRatesChallengeView())
   }
-
-}

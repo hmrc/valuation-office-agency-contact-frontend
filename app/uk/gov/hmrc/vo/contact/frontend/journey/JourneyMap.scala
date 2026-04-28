@@ -62,7 +62,7 @@ class JourneyMap @Inject() (pageNotFound: page_not_found, override val messagesA
       def executionContext: ExecutionContext = ec
 
       def refine[A](request: DataRequest[A]): Future[Either[Result, JourneyPageRequest[A]]] = Future.successful {
-        implicit val req: Request[A] = request.request
+        given Request[A] = request.request
 
         getPageInChangeMode(key)
           .orElse(journeyMap.get(key).map((_, false)))

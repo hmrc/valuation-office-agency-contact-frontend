@@ -17,14 +17,10 @@
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import com.google.inject.Inject
-import play.api.Logger
+import play.api.Logging
 import play.api.i18n.{I18nSupport, Messages, MessagesApi}
-import play.api.mvc.MessagesControllerComponents
+import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-
-import scala.concurrent.ExecutionContext
-import play.api.mvc
-import play.api.mvc.AnyContent
 import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.identifiers.AnswerSectionId
@@ -32,6 +28,8 @@ import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.utils.{CheckYourAnswersHelper, DateUtil, UserAnswers}
 import uk.gov.hmrc.vo.contact.frontend.viewmodels.AnswerSection
 import uk.gov.hmrc.vo.contact.frontend.views.html.check_your_answers
+
+import scala.concurrent.ExecutionContext
 
 class CheckYourAnswersController @Inject() (
   auditService: AuditingService,
@@ -43,37 +41,36 @@ class CheckYourAnswersController @Inject() (
   cc: MessagesControllerComponents
 )(using dateUtil: DateUtil
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport
+  with Logging:
 
-  private val log = Logger(this.getClass)
+  given ExecutionContext = cc.executionContext
 
-  implicit val ec: ExecutionContext = cc.executionContext
-
-  def onPageLoad(): mvc.Action[AnyContent] = (getData andThen requireData) {
+  def onPageLoad(): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val link = enquiryBackLink(request.userAnswers)
 
-      userAnswersSectionBuilder(request.userAnswers) match {
+      userAnswersSectionBuilder(request.userAnswers) match
         case Some(answerSection) =>
           dataCacheConnector.save[AnswerSection](request.sessionId, AnswerSectionId.toString, answerSection).isCompleted
           Ok(checkYourAnswers(Seq(answerSection), link))
         case None                =>
-          log.warn("Navigation for Check your answers page reached without selection of enquiry by controller")
+          logger.warn("Navigation for Check your answers page reached without selection of enquiry by controller")
           throw RuntimeException("Navigation for check your answers page reached without selection of enquiry by controller")
-      }
   }
 
-  def goToConfirmationPage(): mvc.Action[AnyContent] = (getData andThen requireData) { implicit request =>
+  def goToConfirmationPage(): Action[AnyContent] = (getData andThen requireData) { implicit request =>
     val call = routes.ConfirmationController.onPageLoadSendEmail()
     auditService.sendContinueNextPage(call.url)
     Redirect(call)
   }
 
-  private[controllers] def userAnswersSectionBuilder(answers: UserAnswers)(using messages: Messages): Option[AnswerSection] = {
-    import answers._
+  private[controllers] def userAnswersSectionBuilder(answers: UserAnswers)(using messages: Messages): Option[AnswerSection] =
+    import answers.*
+
     val checkYourAnswersHelper = CheckYourAnswersHelper(answers)
 
-    (contactReason, enquiryCategory, councilTaxSubcategory, businessRatesSubcategory, fairRentEnquiryEnquiry) match {
+    (contactReason, enquiryCategory, councilTaxSubcategory, businessRatesSubcategory, fairRentEnquiryEnquiry) match
       case (Some("more_details"), _, _, _, _)                                                    =>
         AnswerSection(
           None,
@@ -244,11 +241,9 @@ class CheckYourAnswersController @Inject() (
           ).flatten
         )
       case _                                                                                     => None
-    }
-  }
 
   private[controllers] def enquiryBackLink(answers: UserAnswers): String =
-    (answers.contactReason, answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.fairRentEnquiryEnquiry) match {
+    (answers.contactReason, answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.fairRentEnquiryEnquiry) match
       case (_, _, _, _) if answers.enquiryCategory.contains("housing_benefit")   => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), Some("council_tax_property_poor_repair"), _, _) => routes.PropertyAddressController.onPageLoad(NormalMode).url
       case (Some("new_enquiry"), Some("council_tax_business_uses"), _, _)        => routes.PropertyAddressController.onPageLoad(NormalMode).url
@@ -278,8 +273,5 @@ class CheckYourAnswersController @Inject() (
       case (Some("more_details"), _, _, _)                                       => routes.WhatElseController.onPageLoad.url
       case (Some("update_existing"), _, _, _)                                    => routes.AnythingElseTellUsController.onPageLoad.url
       case _                                                                     =>
-        log.warn("Navigation for Check your answers page reached without selection of contact reason by controller")
+        logger.warn("Navigation for Check your answers page reached without selection of contact reason by controller")
         throw RuntimeException("Navigation for check your answers page reached without selection of contact reason by controller")
-    }
-
-}

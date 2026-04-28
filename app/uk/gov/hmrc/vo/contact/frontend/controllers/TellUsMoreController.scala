@@ -16,16 +16,10 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import javax.inject.Inject
-import play.api.Logger
-import play.api.data.Form
+import play.api.Logging
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.MessagesControllerComponents
+import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-
-import scala.concurrent.ExecutionContext
-import play.api.mvc
-import play.api.mvc.AnyContent
 import uk.gov.hmrc.vo.contact.frontend.Navigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
@@ -34,7 +28,10 @@ import uk.gov.hmrc.vo.contact.frontend.identifiers.{ExistingEnquiryCategoryId, T
 import uk.gov.hmrc.vo.contact.frontend.journey.pages.EnglandOrWalesPropertyRouter
 import uk.gov.hmrc.vo.contact.frontend.models.{Mode, NormalMode, TellUsMore}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
-import uk.gov.hmrc.vo.contact.frontend.views.html.tellUsMore as tell_us_more
+import uk.gov.hmrc.vo.contact.frontend.views.html.tellUsMore
+
+import javax.inject.Inject
+import scala.concurrent.ExecutionContext
 
 class TellUsMoreController @Inject() (
   override val messagesApi: MessagesApi,
@@ -42,38 +39,35 @@ class TellUsMoreController @Inject() (
   navigator: Navigator,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
-  tellUsMore: tell_us_more,
+  tellUsMore: tellUsMore,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport
+  with Logging:
 
-  private val log = Logger(this.getClass)
+  given ExecutionContext = cc.executionContext
 
-  implicit val ec: ExecutionContext = cc.executionContext
-
-  def initAndStart: mvc.Action[AnyContent] = getData.async { implicit request =>
+  def initAndStart: Action[AnyContent] = getData.async { implicit request =>
     dataCacheConnector
       .save[String](request.sessionId, ExistingEnquiryCategoryId.toString, "other")
       .map(_ => Redirect(routes.RefNumberController.onPageLoad.url))
   }
 
-  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
+  def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       val key = requiredErrorMessage(request.userAnswers)
 
-      val preparedForm = request.userAnswers.tellUsMore match {
+      val preparedForm = request.userAnswers.tellUsMore match
         case None        => TellUsMoreForm(key)
         case Some(value) => TellUsMoreForm(key).fill(value)
-      }
 
       Ok(tellUsMore(preparedForm, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode)))
   }
 
-  def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData).async {
+  def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       TellUsMoreForm(requiredErrorMessage(request.userAnswers)).bindFromRequest().fold(
-        (formWithErrors: Form[TellUsMore]) =>
-          BadRequest(tellUsMore(formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode))),
+        formWithErrors => BadRequest(tellUsMore(formWithErrors, mode, getEnquiryKey(request.userAnswers), backLink(request.userAnswers, mode))),
         value =>
           dataCacheConnector.save[TellUsMore](request.sessionId, TellUsMoreId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(TellUsMoreId, mode).apply(UserAnswers(cacheMap)))
@@ -91,12 +85,12 @@ class TellUsMoreController @Inject() (
 
   private def getEnquiryKey(answers: UserAnswers): String =
     enquiryKey(answers).getOrElse {
-      log.warn("Navigation for Tell us more page reached with error - Unknown enquiry category in enquiry key")
+      logger.warn("Navigation for Tell us more page reached with error - Unknown enquiry category in enquiry key")
       throw RuntimeException("Navigation for Tell us more page reached with error Unknown enquiry category in enquiry key")
     }
 
   private[controllers] def enquiryKey(answers: UserAnswers): Either[String, String] =
-    (answers.enquiryCategory, answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.fairRentEnquiryEnquiry) match {
+    (answers.enquiryCategory, answers.councilTaxSubcategory, answers.businessRatesSubcategory, answers.fairRentEnquiryEnquiry) match
       case (Some("business_rates"), _, Some("business_rates_from_home"), _)        => Right("tellUsMore.business")
       case (Some("business_rates"), _, Some("business_rates_other"), _)            => Right("tellUsMore.business.other")
       case (Some("business_rates"), _, Some("business_rates_change_valuation"), _) => Right("tellUsMore.business.other")
@@ -124,7 +118,6 @@ class TellUsMoreController @Inject() (
       case (Some("council_tax"), _, _, _)                                          => Right("tellUsMore.ct-reference")
       case (Some("business_rates"), _, _, _)                                       => Right("tellUsMore.ndr-reference")
       case _                                                                       => Left("Unknown enquiry category in enquiry key")
-    }
 
   private def backLink(answers: UserAnswers, mode: Mode): String =
     ((
@@ -138,7 +131,7 @@ class TellUsMoreController @Inject() (
       answers.propertyEnglandAvailableLetsEnquiry,
       answers.propertyWalesAvailableLetsEnquiry,
       answers.propertyWalesActualLetsEnquiry
-    ) match {
+    ) match
       case (Some("council_tax_business_uses"), _, _, _, _, _, _, _, _, _)                                    => routes.DatePropertyChangedController.onPageLoad()
       case (Some("council_tax_other"), _, _, _, _, _, _, _, _, _)                                            => routes.CouncilTaxSubcategoryController.onPageLoad(mode)
       case (Some("council_tax_annexe"), _, _, Some("added"), Some("yes"), Some("yes"), _, _, _, _)           => routes.CouncilTaxAnnexeController.onSelfContainedPageLoad()
@@ -174,6 +167,4 @@ class TellUsMoreController @Inject() (
       case (_, _, Some("check_fair_rent_register"), _, _, _, _, _, _, _)                                     => routes.FairRentEnquiryController.onFairRentEnquiryCheck
       case (_, _, Some("other_request"), _, _, _, _, _, _, _)                                                => routes.FairRentEnquiryController.onPageLoad
       case _                                                                                                 => routes.PropertyAddressController.onPageLoad(NormalMode)
-    }).url
-
-}
+    ).url
