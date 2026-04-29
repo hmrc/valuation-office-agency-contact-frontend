@@ -16,6 +16,5 @@
 
 package uk.gov.hmrc.vo.contact.frontend.identifiers
 
-case object TellUsMoreId extends Identifier {
+case object TellUsMoreId extends Identifier:
   override def toString: String = "tellUsMore"
-}

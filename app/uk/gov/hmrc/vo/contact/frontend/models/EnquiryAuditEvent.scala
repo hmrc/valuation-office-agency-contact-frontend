@@ -33,8 +33,5 @@ case class EnquiryAuditEvent(
   refNumber: Option[String]
 )
 
-object EnquiryAuditEvent {
-
+object EnquiryAuditEvent:
   implicit val enquiryAuditEventWrites: Writes[EnquiryAuditEvent] = Json.writes[EnquiryAuditEvent]
-
-}

@@ -16,6 +16,5 @@
 
 package uk.gov.hmrc.vo.contact.frontend.identifiers
 
-case object CouncilTaxBusinessEnquiryId extends Identifier {
+case object CouncilTaxBusinessEnquiryId extends Identifier:
   override def toString: String = "council_tax_business_uses"
-}

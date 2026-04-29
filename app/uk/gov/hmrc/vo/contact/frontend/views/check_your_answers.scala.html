@@ -15,15 +15,18 @@
  *@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components.{GovukButton, GovukSummaryList}
-@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
-@import uk.gov.hmrc.vo.contact.frontend.viewmodels.Section
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryList
-@import uk.gov.hmrc.vo.contact.frontend.utils.SectionFormatter.formatSections
-@import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service_fair_rent
 @import uk.gov.hmrc.vo.contact.frontend.models.requests.DataRequestUtil.isEnquiryCategoryOneOf
+@import uk.gov.hmrc.vo.contact.frontend.utils.SectionFormatter.formatSections
+@import uk.gov.hmrc.vo.contact.frontend.viewmodels.Section
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.{PrimaryLayout, help_with_service_fair_rent}
 @import uk.gov.hmrc.vo.service.model.button.LinkButton
 
-@this(layout: PrimaryLayout, govukButton: GovukButton, govukSummaryList: GovukSummaryList)
+@this(
+        layout: PrimaryLayout,
+        govukButton: GovukButton,
+        govukSummaryList: GovukSummaryList
+)
 
 @(answerSections: Seq[Section], backLink: String)(implicit request: RequestHeader, messages: Messages)
 
@@ -35,7 +38,7 @@
 
     @govukButton(LinkButton("confirm", CheckYourAnswersController.goToConfirmationPage().url))
 
-    @if(isEnquiryCategoryOneOf("housing_benefit","fair_rent")) {
+    @if(isEnquiryCategoryOneOf("housing_benefit", "fair_rent")) {
         @help_with_service_fair_rent()
     }
 }

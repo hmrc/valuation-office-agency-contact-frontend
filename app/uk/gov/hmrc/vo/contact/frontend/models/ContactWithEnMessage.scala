@@ -34,14 +34,14 @@ case class ContactWithEnMessage(
   message: String
 )
 
-object ContactWithEnMessage {
+object ContactWithEnMessage:
 
   implicit val format: OFormat[ContactWithEnMessage] = Json.format[ContactWithEnMessage]
   private val log                                    = Logger(this.getClass)
   private val councilTaxKey                          = "council_tax"
   private val businessRatesKey                       = "business_rates"
 
-  def apply(contact: Contact, messagesApi: MessagesApi, userAnswers: UserAnswers): ContactWithEnMessage = {
+  def apply(contact: Contact, messagesApi: MessagesApi, userAnswers: UserAnswers): ContactWithEnMessage =
     implicit val messagesEN: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
 
     val enquiryCategoryMsg    = enquiryCategory(contact)
@@ -56,18 +56,15 @@ object ContactWithEnMessage {
       subEnquiryCategoryMsg,
       StringEscapeUtils.escapeJava(contact.message)
     )
-  }
 
-  def enquiryCategory(contact: Contact)(using messages: Messages): String = {
+  def enquiryCategory(contact: Contact)(using messages: Messages): String =
     val lang = messages.lang.language
     messages.translate("enquiryCategory." + contact.enquiryCategory, Seq.empty)
-      .orElse(messages.translate("existingEnquiryCategory." + contact.enquiryCategory, Seq.empty)) match {
+      .orElse(messages.translate("existingEnquiryCategory." + contact.enquiryCategory, Seq.empty)) match
       case Some(msg) => msg
       case _         =>
         log.warn(s"Unable to find key ${contact.enquiryCategory} in $lang messages")
         throw RuntimeException(s"Unable to find key ${contact.enquiryCategory} in $lang messages")
-    }
-  }
 
   def enquirySubCategory(contact: Contact, isUpdateExistingEnquiry: Boolean)(using messages: Messages): String =
     if isUpdateExistingEnquiry then
@@ -75,15 +72,14 @@ object ContactWithEnMessage {
     else
       val lang           = messages.lang.language
       val categoryPrefix = categoryKeyPrefix(contact)
-      messages.translate(categoryPrefix + "." + contact.subEnquiryCategory, Seq.empty) match {
+      messages.translate(categoryPrefix + "." + contact.subEnquiryCategory, Seq.empty) match
         case Some(msg) => msg
         case None      =>
           log.warn(s"Unable to find key $categoryPrefix.${contact.subEnquiryCategory} in $lang messages")
           throw RuntimeException(s"Unable to find key $categoryPrefix.${contact.subEnquiryCategory} in $lang messages")
-      }
 
   private def categoryKeyPrefix(contact: Contact): String =
-    contact.enquiryCategory match {
+    contact.enquiryCategory match
       case `councilTaxKey`    => "councilTaxSubcategory"
       case `businessRatesKey` => "businessRatesSubcategory"
       case "housing_benefit"  => "housingBenefitSubcategory"
@@ -92,6 +88,3 @@ object ContactWithEnMessage {
       case _                  =>
         log.warn("Unknown enquiry category key " + contact.enquiryCategory)
         throw RuntimeException("Unknown enquiry category key " + contact.enquiryCategory)
-    }
-
-}

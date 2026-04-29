@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.vo.contact.frontend.viewmodels
 
-trait InputViewModelBase {
+trait InputViewModelBase:
+
   val id: String
   def errorKey: Seq[String]
   def value: Option[String]
-}

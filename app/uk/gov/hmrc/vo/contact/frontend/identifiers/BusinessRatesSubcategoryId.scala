@@ -16,6 +16,5 @@
 
 package uk.gov.hmrc.vo.contact.frontend.identifiers
 
-case object BusinessRatesSubcategoryId extends Identifier {
+case object BusinessRatesSubcategoryId extends Identifier:
   override def toString: String = "businessRatesSubcategory"
-}

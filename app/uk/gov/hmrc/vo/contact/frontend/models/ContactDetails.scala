@@ -16,10 +16,9 @@
 
 package uk.gov.hmrc.vo.contact.frontend.models
 
-import play.api.libs.json._
+import play.api.libs.json.*
 
 case class ContactDetails(fullName: String, email: String, contactNumber: String)
 
-object ContactDetails {
+object ContactDetails:
   implicit val format: OFormat[ContactDetails] = Json.format[ContactDetails]
-}

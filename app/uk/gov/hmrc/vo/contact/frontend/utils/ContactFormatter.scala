@@ -18,7 +18,7 @@ package uk.gov.hmrc.vo.contact.frontend.utils
 
 import uk.gov.hmrc.vo.contact.frontend.models.ContactDetails
 
-object ContactFormatter {
+object ContactFormatter:
 
   def formattedConfirmedContactDetails(contact: ContactDetails, interstitial: String): String =
     insertInterstitials(Seq(contact.fullName.trim, contact.email, contact.contactNumber), interstitial)
@@ -30,5 +30,3 @@ object ContactFormatter {
 
   private[utils] def insertInterstitials(contact: Seq[String], interstitial: String): String =
     if contact.isEmpty then "" else contact.head.trim + contact.tail.fold("")((acc, elem) => acc + interstitial + elem.trim)
-
-}

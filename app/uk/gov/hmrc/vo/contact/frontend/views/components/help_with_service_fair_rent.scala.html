@@ -17,21 +17,21 @@
 @()(implicit messages: Messages)
 
 <details class="govuk-details" data-module="govuk-details">
- <summary class="govuk-details__summary">
-  <span class="govuk-details__summary-text">
-      @messages("helpwithservice.title")
-  </span>
- </summary>
- <div class="govuk-details__text">
-  <p class="govuk-body govuk-body-s">
-  @messages("generalEnquiries.p2")
-  </p>
+    <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+            @messages("helpwithservice.title")
+        </span>
+    </summary>
+    <div class="govuk-details__text">
+        <p class="govuk-body govuk-body-s">
+        @messages("generalEnquiries.p2")
+        </p>
 
-  <ul class="govuk-list govuk-!-font-size-16">
-   <li>@messages("fairRents.fairRentTelephone")</li>
-   <li>@messages("generalEnquiries.days.p3")</li>
-  </ul>
+        <ul class="govuk-list govuk-!-font-size-16">
+            <li>@messages("fairRents.fairRentTelephone")</li>
+            <li>@messages("generalEnquiries.days.p3")</li>
+        </ul>
 
-  <p class="govuk-body govuk-body-s">@Html(messages("callcharges.page"))</p>
- </div>
+        <p class="govuk-body govuk-body-s">@Html(messages("callcharges.page"))</p>
+    </div>
 </details>

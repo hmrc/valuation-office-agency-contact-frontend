@@ -16,6 +16,5 @@
 
 package uk.gov.hmrc.vo.contact.frontend.identifiers
 
-case object RefNumberId extends Identifier {
+case object RefNumberId extends Identifier:
   override def toString: String = "refNumber"
-}

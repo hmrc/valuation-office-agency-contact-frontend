@@ -16,7 +16,9 @@
 
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(layout: PrimaryLayout)
+@this(
+        layout: PrimaryLayout
+)
 
 @()(implicit request: RequestHeader, messages: Messages)
 
@@ -30,7 +32,7 @@
 
     <p class="govuk-body">
         <a class="govuk-link" target="_self" href=@messages("propertyWindWater.p2.url")>
-            @messages("propertyWindWater.p2")
+        @messages("propertyWindWater.p2")
         </a>
     </p>
 }

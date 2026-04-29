@@ -17,7 +17,9 @@
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(layout: PrimaryLayout)
+@this(
+        layout: PrimaryLayout
+)
 
 @()(implicit request: RequestHeader, messages: Messages)
 
@@ -27,7 +29,7 @@
 ) {
     <p class="govuk-body">
         <a class="govuk-link" target="_self" href=@messages("businessRatesValuation.p1.url")>
-            @messages("businessRatesValuation.p1.part1")
+        @messages("businessRatesValuation.p1.part1")
         </a>
         @messages("businessRatesValuation.p1.part2")
     </p>
@@ -38,11 +40,11 @@
 
     <p class="govuk-body">
         <a class="govuk-link" target="_self" href=@messages("businessRatesValuation.p3.url")>
-            @messages("businessRatesValuation.p3")
+        @messages("businessRatesValuation.p3")
         </a>
         <br/>
         <a class="govuk-link" target="_self" href=@messages("businessRatesValuation.p4.url")>
-            @messages("businessRatesValuation.p4")
+        @messages("businessRatesValuation.p4")
         </a>
     </p>
 

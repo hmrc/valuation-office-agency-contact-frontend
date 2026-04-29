@@ -14,11 +14,12 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(layout: PrimaryLayout)
-
+@this(
+        layout: PrimaryLayout
+)
 
 @(backLink: String)(implicit request: RequestHeader, messages: Messages)
 
@@ -46,7 +47,7 @@
 
     <p class="govuk-body">
         <a class="govuk-link" target="_self" href=@messages("propertyEnglandLets.p3.url")>
-            @messages("propertyEnglandLets.p3")
+        @messages("propertyEnglandLets.p3")
         </a>
     </p>
 

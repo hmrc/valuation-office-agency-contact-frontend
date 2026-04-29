@@ -41,14 +41,14 @@
     @formWithCSRF(action = RefNumberController.onSubmit()) {
 
         @govukInput(Input(
-            id="value", name="value", inputType = "text", value = form("value").value,
+            id = "value", name = "value", inputType = "text", value = form("value").value,
 
             label = Label(
                 content = Text(messages("refNumber.value.optional")),
                 isPageHeading = true,
-                classes = "govuk-label--l" ),
+                classes = "govuk-label--l"),
 
-            attributes=Map("spellcheck" -> "false"),
+            attributes = Map("spellcheck" -> "false"),
             hint = Hint(content = Text(messages("refNumber.hint"))),
             errorMessage = form.errors.asTextErrorMessageForField("value")
         ))

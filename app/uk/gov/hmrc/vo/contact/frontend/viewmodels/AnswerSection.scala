@@ -20,6 +20,5 @@ import play.api.libs.json.{Json, OFormat}
 
 case class AnswerSection(headingKey: Option[String], rows: Seq[AnswerRow]) extends Section
 
-object AnswerSection {
+object AnswerSection:
   implicit val format: OFormat[AnswerSection] = Json.format[AnswerSection]
-}

@@ -14,14 +14,14 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.vo.contact.frontend.models.{Mode, NormalMode}
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
-@import uk.gov.hmrc.vo.contact.frontend.models.Mode
-@import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 
-@this(layout: PrimaryLayout)
+@this(
+        layout: PrimaryLayout
+)
 
-
-@(mode:Mode)(implicit request: RequestHeader, messages: Messages)
+@(mode: Mode)(implicit request: RequestHeader, messages: Messages)
 
 @layout(
     pageTitle = messages("propertyPermanentChanges.title"),
@@ -38,7 +38,7 @@
 
     <p class="govuk-body">
         <a class="govuk-link" target="_self" href=@messages("propertyPermanentChanges.p2.url")>
-            @messages("propertyPermanentChanges.p2")
+        @messages("propertyPermanentChanges.p2")
         </a>
     </p>
 

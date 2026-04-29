@@ -25,7 +25,7 @@ import ContactFormatter._
 import uk.gov.hmrc.vo.contact.frontend.models.{CheckMode, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.viewmodels.AnswerRow
 
-class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages, dateUtil: DateUtil) {
+class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages, dateUtil: DateUtil):
 
   def tellUsMore(keyMessage: String = "tellUsMore.heading"): Option[AnswerRow] = userAnswers.tellUsMore map {
     x => AnswerRow(keyMessage, s"${x.message}", false, routes.TellUsMoreController.onPageLoad(CheckMode).url)
@@ -39,12 +39,11 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages,
     x => AnswerRow("existingEnquiryCategory.heading", s"existingEnquiryCategory.$x", true, routes.ExistingEnquiryCategoryController.onPageLoad.url)
   }
 
-  def refNumber: Option[AnswerRow] = {
+  def refNumber: Option[AnswerRow] =
     val ref = userAnswers.refNumber.map(_.trim).filter(_ != "")
     Option(
       AnswerRow("refNumber.value", ref.getOrElse("site.not_provided"), ref.isEmpty, routes.RefNumberController.onPageLoad.url)
     )
-  }
 
   def whatElse: Option[AnswerRow] = userAnswers.whatElse map {
     x => AnswerRow("whatElse.message.label", x, false, routes.WhatElseController.onPageLoad.url)
@@ -102,5 +101,3 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages,
         routes.JourneyController.onPageLoad(changeModePrefix + pageKey).url
       )
   }
-
-}

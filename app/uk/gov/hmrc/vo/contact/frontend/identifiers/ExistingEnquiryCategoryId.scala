@@ -16,6 +16,5 @@
 
 package uk.gov.hmrc.vo.contact.frontend.identifiers
 
-case object ExistingEnquiryCategoryId extends Identifier {
+case object ExistingEnquiryCategoryId extends Identifier:
   override def toString: String = "existingEnquiryCategory"
-}

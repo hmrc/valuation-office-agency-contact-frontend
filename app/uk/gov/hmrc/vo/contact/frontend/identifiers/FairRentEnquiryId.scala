@@ -16,6 +16,5 @@
 
 package uk.gov.hmrc.vo.contact.frontend.identifiers
 
-object FairRentEnquiryId extends Identifier {
+object FairRentEnquiryId extends Identifier:
   override def toString: String = "fairRentEnquiry"
-}

@@ -16,6 +16,5 @@
 
 package uk.gov.hmrc.vo.contact.frontend.identifiers
 
-case object DatePropertyChangedId extends Identifier {
+case object DatePropertyChangedId extends Identifier:
   override def toString: String = "date_property_changed"
-}

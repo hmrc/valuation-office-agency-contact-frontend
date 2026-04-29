@@ -21,7 +21,7 @@ import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
 import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist._
 import uk.gov.hmrc.vo.contact.frontend.viewmodels.{AnswerRow, AnswerSection, RepeaterAnswerSection, Section}
 
-object SectionFormatter {
+object SectionFormatter:
 
   def formatSections(answerSections: Seq[Section])(using messages: Messages): Seq[SummaryListRow] =
     answerSections.flatMap {
@@ -59,5 +59,3 @@ object SectionFormatter {
           ))
         )
     }
-
-}
