@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertyDemolished as property_demolished
 
-class PropertyDemolishedControllerSpec extends ControllerSpecBase {
+class PropertyDemolishedControllerSpec extends ControllerSpecBase:
 
   def propertyDemolished: html.propertyDemolished = app.injector.instanceOf[property_demolished]
 
@@ -34,4 +34,3 @@ class PropertyDemolishedControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe propertyDemolished()(using fakeRequest, messages).toString
     }
   }
-}

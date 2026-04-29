@@ -16,13 +16,14 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{councilTaxBill => council_tax_bill}
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class CouncilTaxBillControllerSpec extends ControllerSpecBase {
+class CouncilTaxBillControllerSpec extends ControllerSpecBase:
+
   def councilTaxBill: html.councilTaxBill = app.injector.instanceOf[council_tax_bill]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
@@ -40,4 +41,3 @@ class CouncilTaxBillControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe councilTaxBill()(using fakeRequest, messages).toString
     }
   }
-}

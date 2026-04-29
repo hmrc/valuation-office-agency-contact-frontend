@@ -25,7 +25,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.windWatertightCannotBeReduced 
 import javax.inject.Singleton
 
 @Singleton
-class PropertyWindWaterControllerSpec extends ControllerSpecBase {
+class PropertyWindWaterControllerSpec extends ControllerSpecBase:
 
   def windWatertightCannotBeReducedEnquiry: windWatertightCannotBeReduced = app.injector.instanceOf[wind_watertight_cannot_be_reduced]
 
@@ -53,4 +53,3 @@ class PropertyWindWaterControllerSpec extends ControllerSpecBase {
     }
 
   }
-}

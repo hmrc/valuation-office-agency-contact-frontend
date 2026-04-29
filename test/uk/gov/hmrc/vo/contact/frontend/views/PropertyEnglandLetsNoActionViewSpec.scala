@@ -20,7 +20,7 @@ import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyEnglandLetsNoAction => england_lets_no_action}
 
-class PropertyEnglandLetsNoActionViewSpec extends ViewBehaviours {
+class PropertyEnglandLetsNoActionViewSpec extends ViewBehaviours:
 
   def propertyEnglandLetsNoAction: england_lets_no_action = app.injector.instanceOf[england_lets_no_action]
 
@@ -50,4 +50,3 @@ class PropertyEnglandLetsNoActionViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad.url
     }
   }
-}

@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{councilTaxPropertyEmpty => council_tax_property_empty}
@@ -24,7 +24,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesPropertyEmpty =>
 import uk.gov.hmrc.vo.contact.frontend.views.html
 import uk.gov.hmrc.vo.contact.frontend.views.html.councilTaxPropertyEmpty
 
-class PropertyEmptyControllerSpec extends ControllerSpecBase {
+class PropertyEmptyControllerSpec extends ControllerSpecBase:
 
   def councilPropertyEmpty: councilTaxPropertyEmpty               = app.injector.instanceOf[council_tax_property_empty]
   def businessRatesPropertyEmpty: html.businessRatesPropertyEmpty = app.injector.instanceOf[business_rates_property_empty]
@@ -50,4 +50,3 @@ class PropertyEmptyControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe businessRatesPropertyEmpty()(using fakeRequest, messages).toString
     }
   }
-}

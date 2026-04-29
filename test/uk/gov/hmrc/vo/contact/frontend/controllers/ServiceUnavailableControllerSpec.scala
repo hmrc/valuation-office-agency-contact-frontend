@@ -18,7 +18,7 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import play.api.test.Helpers.*
 
-class ServiceUnavailableControllerSpec extends ControllerSpecBase {
+class ServiceUnavailableControllerSpec extends ControllerSpecBase:
 
   private def serviceUnavailableController = inject[ServiceUnavailableController]
 
@@ -31,5 +31,3 @@ class ServiceUnavailableControllerSpec extends ControllerSpecBase {
     }
 
   }
-
-}

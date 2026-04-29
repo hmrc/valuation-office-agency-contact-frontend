@@ -17,43 +17,42 @@
 package uk.gov.hmrc.vo.contact.frontend.forms
 
 import play.api.data.Form
-import play.api.data.Forms._
+import play.api.data.Forms.*
 
-class WithRequiredBooleanMappingSpec extends FormSpec {
+class WithRequiredBooleanMappingSpec extends FormSpec:
+
+  object TestForm extends WithRequiredBooleanMapping:
+
+    val testForm: Form[Boolean] = Form(
+      single(
+        "value" -> requiredBoolean
+      )
+    )
+
+  import TestForm.*
 
   "With Required Boolean Mapping" must {
 
-    object TestForm extends WithRequiredBooleanMapping {
-      def apply(): Form[Boolean] = Form(
-        single(
-          "value" -> requiredBoolean
-        )
-      )
-    }
-
     "bind true" in {
-      val form = TestForm().bind(Map("value" -> "true"))
-      form.get shouldBe true
+      testForm.bind(Map("value" -> "true")).get shouldBe true
     }
 
     "bind false" in {
-      val form = TestForm().bind(Map("value" -> "false"))
-      form.get shouldBe false
+      testForm.bind(Map("value" -> "false")).get shouldBe false
     }
 
     "fail to bind non-booleans" in {
       val expectedError = error("value", "error.boolean")
-      checkForError(TestForm(), Map("value" -> "not a boolean"), expectedError)
+      checkForError(testForm, Map("value" -> "not a boolean"), expectedError)
     }
 
     "fail to bind a blank value" in {
       val expectedError = error("value", "error.boolean")
-      checkForError(TestForm(), Map("value" -> ""), expectedError)
+      checkForError(testForm, Map("value" -> ""), expectedError)
     }
 
     "fail to bind when value is omitted" in {
       val expectedError = error("value", "error.boolean")
-      checkForError(TestForm(), emptyForm, expectedError)
+      checkForError(testForm, emptyForm, expectedError)
     }
   }
-}

@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{councilTaxPropertyEmpty => council_tax_property_empty}
 import play.twirl.api.HtmlFormat
 
-class CouncilTaxPropertyEmptyViewSpec extends ViewBehaviours {
+class CouncilTaxPropertyEmptyViewSpec extends ViewBehaviours:
 
   def councilTaxPropertyEmpty: html.councilTaxPropertyEmpty = app.injector.instanceOf[council_tax_property_empty]
 
@@ -38,5 +38,3 @@ class CouncilTaxPropertyEmptyViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
   }
-
-}

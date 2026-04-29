@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.vo.contact.frontend.forms
 
-class BooleanFormSpec extends FormSpec {
+class BooleanFormSpec extends FormSpec:
 
   val errorKey = "error.key"
 
@@ -47,4 +47,3 @@ class BooleanFormSpec extends FormSpec {
       checkForError(BooleanForm(errorKey), emptyForm, expectedError)
     }
   }
-}

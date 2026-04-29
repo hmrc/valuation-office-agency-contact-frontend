@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html
 import uk.gov.hmrc.vo.contact.frontend.views.html.councilTaxBandTooHigh as council_tax_too_high
 
-class CouncilTaxBandTooHighControllerSpec extends ControllerSpecBase {
+class CouncilTaxBandTooHighControllerSpec extends ControllerSpecBase:
 
   def councilTaxBandTooHigh: html.councilTaxBandTooHigh = app.injector.instanceOf[council_tax_too_high]
 
@@ -38,4 +38,3 @@ class CouncilTaxBandTooHighControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe councilTaxBandTooHigh()(using fakeRequest, messages).toString
     }
   }
-}

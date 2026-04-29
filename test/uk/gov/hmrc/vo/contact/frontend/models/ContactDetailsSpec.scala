@@ -32,26 +32,34 @@ package uk.gov.hmrc.vo.contact.frontend.models
  * limitations under the License.
  */
 
+import org.scalatest.wordspec.AnyWordSpec
 import uk.gov.hmrc.vo.contact.frontend.models.ContactDetails
-import org.scalatest.flatspec.AnyFlatSpec
 
-class ContactDetailsSpec extends AnyFlatSpec {
+class ContactDetailsSpec extends AnyWordSpec:
 
-  val c: ContactDetails = ContactDetails("Alex", "test@email.com", "02078273278732")
+  val contact: ContactDetails = ContactDetails("Alex", "test@email.com", "02078273278732")
 
-  "Full name " should "be Alex" in
-    assert(c.fullName === "Alex")
+  "Full name " should {
+    "be Alex" in
+      assert(contact.fullName === "Alex")
+  }
 
-  "Email address " should "be test@email.com" in
-    assert(c.email === "test@email.com")
+  "Email address " should {
+    "be test@email.com" in
+      assert(contact.email === "test@email.com")
+  }
 
-  "Contact number " should "be 02078273278732" in
-    assert(c.contactNumber === "02078273278732")
+  "Contact number " should {
+    "be 02078273278732" in
+      assert(contact.contactNumber === "02078273278732")
+  }
 
-  "Wrong First name " should "shouldn't be Alex1" in
-    assert(c.fullName != "Alex1")
+  "Wrong First name " should {
+    "shouldn't be Alex1" in
+      assert(contact.fullName != "Alex1")
+  }
 
-  "Wrong Contact number " should "shouldn't be 02078273278735" in
-    assert(c.contactNumber != "02078273278735")
-
-}
+  "Wrong Contact number " should {
+    "shouldn't be 02078273278735" in
+      assert(contact.contactNumber != "02078273278735")
+  }

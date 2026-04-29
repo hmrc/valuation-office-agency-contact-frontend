@@ -19,7 +19,7 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 import play.api.data.Form
 import play.api.libs.json.JsString
 import play.api.test.Helpers.{contentAsString, redirectLocation, status}
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
@@ -33,7 +33,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyWalesLets => wales_le
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
+class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase:
 
   def businessRatesSelfCateringEnquiry: html.businessRatesSelfCateringEnquiry = inject[business_rates_self_catering_enquiry]
   def propertyEnglandLets: html.propertyEnglandLets                           = inject[england_lets]
@@ -124,5 +124,3 @@ class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase {
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
   }
-
-}

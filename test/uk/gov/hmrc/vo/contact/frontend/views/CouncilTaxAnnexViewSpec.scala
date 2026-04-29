@@ -23,7 +23,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{councilTaxAnnexe => council_tax_annexe}
 import play.twirl.api.HtmlFormat
 
-class CouncilTaxAnnexViewSpec extends ViewBehaviours {
+class CouncilTaxAnnexViewSpec extends ViewBehaviours:
 
   def councilTaxAnnexe: html.councilTaxAnnexe = app.injector.instanceOf[council_tax_annexe]
 
@@ -78,4 +78,3 @@ class CouncilTaxAnnexViewSpec extends ViewBehaviours {
         }
       }
   }
-}

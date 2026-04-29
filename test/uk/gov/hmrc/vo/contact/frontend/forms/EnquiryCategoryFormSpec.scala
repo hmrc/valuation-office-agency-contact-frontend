@@ -19,7 +19,7 @@ package uk.gov.hmrc.vo.contact.frontend.forms
 import uk.gov.hmrc.vo.contact.frontend.forms.behaviours.FormBehaviours
 import play.api.data.Form
 
-class EnquiryCategoryFormSpec extends FormBehaviours {
+class EnquiryCategoryFormSpec extends FormBehaviours:
 
   val validData: Map[String, String] = Map(
     "category" -> EnquiryCategoryForm.values.head
@@ -47,4 +47,3 @@ class EnquiryCategoryFormSpec extends FormBehaviours {
       checkForError(form, data, error("category", "error.value.invalid"))
     }
   }
-}

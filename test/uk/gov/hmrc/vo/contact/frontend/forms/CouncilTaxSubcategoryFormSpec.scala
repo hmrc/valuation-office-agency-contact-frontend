@@ -19,7 +19,7 @@ package uk.gov.hmrc.vo.contact.frontend.forms
 import uk.gov.hmrc.vo.contact.frontend.forms.behaviours.FormBehaviours
 import play.api.data.Form
 
-class CouncilTaxSubcategoryFormSpec extends FormBehaviours {
+class CouncilTaxSubcategoryFormSpec extends FormBehaviours:
 
   val validData: Map[String, String] = Map(
     "value" -> CouncilTaxSubcategoryForm.options.head.value
@@ -32,4 +32,3 @@ class CouncilTaxSubcategoryFormSpec extends FormBehaviours {
 
     behave like formWithOptionField("value", CouncilTaxSubcategoryForm.options.map(_.value)*)
   }
-}

@@ -25,7 +25,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.propertySplitMerge as property
 import javax.inject.Singleton
 
 @Singleton
-class PropertySplitMergeControllerSpec extends ControllerSpecBase {
+class PropertySplitMergeControllerSpec extends ControllerSpecBase:
 
   def propertySplitMergeEnquiry: propertySplitMerge = app.injector.instanceOf[property_split_merge]
 
@@ -54,4 +54,3 @@ class PropertySplitMergeControllerSpec extends ControllerSpecBase {
     }
 
   }
-}

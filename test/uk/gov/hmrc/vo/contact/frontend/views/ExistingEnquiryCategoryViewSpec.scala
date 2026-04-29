@@ -24,7 +24,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{existingEnquiryCategory => ex
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.html.existingEnquiryCategory
 
-class ExistingEnquiryCategoryViewSpec extends ViewBehaviours {
+class ExistingEnquiryCategoryViewSpec extends ViewBehaviours:
 
   def existingEnqCategory: existingEnquiryCategory = app.injector.instanceOf[existing_enquiry]
 
@@ -84,4 +84,3 @@ class ExistingEnquiryCategoryViewSpec extends ViewBehaviours {
       }
 
   }
-}

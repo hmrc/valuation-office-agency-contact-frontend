@@ -27,7 +27,7 @@ import uk.gov.hmrc.vo.contact.frontend.forms.ContactReasonForm
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class ContactReasonControllerSpec extends ControllerSpecBase {
+class ContactReasonControllerSpec extends ControllerSpecBase:
 
   def contactReason: html.contactReason = inject[contact_reason]
 
@@ -57,7 +57,6 @@ class ContactReasonControllerSpec extends ControllerSpecBase {
       status(result) mustBe OK
 
       contentAsString(result) mustBe viewAsString()
-
     }
 
     "redirect to the next page when valid data is submitted" in {
@@ -66,7 +65,6 @@ class ContactReasonControllerSpec extends ControllerSpecBase {
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(onwardRoute.url)
-
     }
 
     "redirect from old URL to new URL" in {
@@ -76,5 +74,3 @@ class ContactReasonControllerSpec extends ControllerSpecBase {
       redirectLocation(result) mustBe Some(onwardRoute.url)
     }
   }
-
-}

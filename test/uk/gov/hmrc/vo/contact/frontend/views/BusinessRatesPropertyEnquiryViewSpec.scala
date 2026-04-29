@@ -22,7 +22,8 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesPropertyEnquiry => business_rates_property_enquiry}
 import play.twirl.api.HtmlFormat
 
-class BusinessRatesPropertyEnquiryViewSpec extends ViewBehaviours {
+class BusinessRatesPropertyEnquiryViewSpec extends ViewBehaviours:
+
   def businessRatesPropertyEnquiry: html.businessRatesPropertyEnquiry = app.injector.instanceOf[business_rates_property_enquiry]
 
   def view: () => HtmlFormat.Appendable =
@@ -39,4 +40,3 @@ class BusinessRatesPropertyEnquiryViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
     }
   }
-}

@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.error.internal_server_error
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.html.error
 
-class InternalServerErrorViewSpec extends ViewBehaviours {
+class InternalServerErrorViewSpec extends ViewBehaviours:
 
   def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
 
@@ -31,4 +31,3 @@ class InternalServerErrorViewSpec extends ViewBehaviours {
 
     behave like normalPage(view, "error500", "tryagain.para")
   }
-}

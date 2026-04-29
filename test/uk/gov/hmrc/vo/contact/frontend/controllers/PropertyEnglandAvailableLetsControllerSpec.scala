@@ -18,7 +18,7 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import play.api.data.Form
 import play.api.libs.json.JsString
-import play.api.test.Helpers.{contentAsString, redirectLocation, status, _}
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
@@ -33,7 +33,7 @@ import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertyEnglandAvailableLets
 
-class PropertyEnglandAvailableLetsControllerSpec extends ControllerSpecBase {
+class PropertyEnglandAvailableLetsControllerSpec extends ControllerSpecBase:
 
   def propertyEnglandLets140DaysEnquiry: propertyEnglandAvailableLets = inject[property_england_available_lets]
   def propertyEnglandLetsNoAction: html.propertyEnglandLetsNoAction   = inject[property_england_lets_no_action]
@@ -117,5 +117,3 @@ class PropertyEnglandAvailableLetsControllerSpec extends ControllerSpecBase {
     }
 
   }
-
-}

@@ -28,7 +28,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.{MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html.error.internal_server_error
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertyEnglandLetsNoAction as property_england_lets_no_action
 
-class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with MockitoSugar {
+class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with MockitoSugar:
 
   def propertyEnglandLetsNoAction: property_england_lets_no_action = app.injector.instanceOf[property_england_lets_no_action]
   def internalServerError: internal_server_error                   = app.injector.instanceOf[internal_server_error]
@@ -148,4 +148,3 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with 
     }
 
   }
-}

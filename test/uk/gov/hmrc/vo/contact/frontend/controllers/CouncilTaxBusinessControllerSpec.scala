@@ -38,7 +38,7 @@ import scala.concurrent.Future
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSugar {
+class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSugar:
 
   val fakeDataCacheConnector: DataCacheConnector = mock[DataCacheConnector]
 
@@ -141,4 +141,3 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
 
     }
   }
-}

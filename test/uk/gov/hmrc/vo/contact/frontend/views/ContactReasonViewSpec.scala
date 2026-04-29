@@ -23,7 +23,7 @@ import uk.gov.hmrc.vo.contact.frontend.forms.ContactReasonForm
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{contactReason, contactReason as contact_reason}
 
-class ContactReasonViewSpec extends ViewBehaviours {
+class ContactReasonViewSpec extends ViewBehaviours:
 
   def contactReason: contactReason = app.injector.instanceOf[contact_reason]
 
@@ -90,4 +90,3 @@ class ContactReasonViewSpec extends ViewBehaviours {
       }
     }
   }
-}

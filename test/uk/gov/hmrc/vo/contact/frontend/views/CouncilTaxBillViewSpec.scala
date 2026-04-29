@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{councilTaxBill => council_tax_bill}
 import play.twirl.api.HtmlFormat
 
-class CouncilTaxBillViewSpec extends ViewBehaviours {
+class CouncilTaxBillViewSpec extends ViewBehaviours:
 
   def councilTaxBill: html.councilTaxBill = app.injector.instanceOf[council_tax_bill]
 
@@ -38,5 +38,3 @@ class CouncilTaxBillViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
   }
-
-}

@@ -22,7 +22,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{windWatertightCannotBeReduced
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.html.windWatertightCannotBeReduced
 
-class PropertyWindWatertightCannotBeReducedViewSpec extends ViewBehaviours {
+class PropertyWindWatertightCannotBeReducedViewSpec extends ViewBehaviours:
 
   def PropertyWindWatertightCannotBeReduced: windWatertightCannotBeReduced = app.injector.instanceOf[wind_watertight_cannot_be_reduced]
 
@@ -39,4 +39,3 @@ class PropertyWindWatertightCannotBeReducedViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
   }
-}

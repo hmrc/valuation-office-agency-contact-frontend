@@ -18,7 +18,7 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import play.api.data.Form
 import play.api.libs.json.JsString
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.*
@@ -30,7 +30,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{existingEnquiryCategory => ex
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
+class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase:
 
   def existingEnquiryCategory: html.existingEnquiryCategory = inject[existing_enquiry_category]
   def auditService: AuditingService                         = inject[AuditingService]
@@ -169,4 +169,3 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase {
       redirectLocation(result) mustBe Some(contactReasonRoute.url)
     }
   }
-}

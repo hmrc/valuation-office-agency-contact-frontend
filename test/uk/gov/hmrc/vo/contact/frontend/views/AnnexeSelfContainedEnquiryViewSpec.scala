@@ -22,7 +22,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{annexeSelfContainedEnquiry =>
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.html.annexeSelfContainedEnquiry
 
-class AnnexeSelfContainedEnquiryViewSpec extends ViewBehaviours {
+class AnnexeSelfContainedEnquiryViewSpec extends ViewBehaviours:
 
   def councilTaxAnnexSelfContained: annexeSelfContainedEnquiry = app.injector.instanceOf[annex_self_contained_enquiry]
 
@@ -39,5 +39,3 @@ class AnnexeSelfContainedEnquiryViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxAnnexeController.onPageLoad().url
     }
   }
-
-}

@@ -20,7 +20,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.error.error_template
 import play.twirl.api.HtmlFormat
 
-class ErrorTemplateViewSpec extends ViewBehaviours {
+class ErrorTemplateViewSpec extends ViewBehaviours:
 
   def errorTemplate: error_template = app.injector.instanceOf[error_template]
 
@@ -34,4 +34,3 @@ class ErrorTemplateViewSpec extends ViewBehaviours {
     behave like normalPage(view, "global.error.badRequest400", "title", "message")
 
   }
-}

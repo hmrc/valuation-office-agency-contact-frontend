@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html
 import uk.gov.hmrc.vo.contact.frontend.views.html.councilTaxBandForNew as council_tax_for_new
 
-class CouncilTaxBandForNewControllerSpec extends ControllerSpecBase {
+class CouncilTaxBandForNewControllerSpec extends ControllerSpecBase:
 
   def councilTaxBandForNew: html.councilTaxBandForNew = app.injector.instanceOf[council_tax_for_new]
 
@@ -34,4 +34,3 @@ class CouncilTaxBandForNewControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe councilTaxBandForNew()(using fakeRequest, messages).toString
     }
   }
-}

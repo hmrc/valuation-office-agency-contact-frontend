@@ -22,7 +22,7 @@ import uk.gov.hmrc.vo.contact.frontend.forms.PropertyEnglandActualLetsForm
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyEnglandActualLets => property_england_actual_lets}
 
-class PropertyEnglandActualLetsViewSpec extends ViewBehaviours {
+class PropertyEnglandActualLetsViewSpec extends ViewBehaviours:
 
   def propertyEnglandLetsSubcategory: property_england_actual_lets = app.injector.instanceOf[property_england_actual_lets]
 
@@ -69,4 +69,3 @@ class PropertyEnglandActualLetsViewSpec extends ViewBehaviours {
         }
       }
   }
-}

@@ -33,13 +33,13 @@ package uk.gov.hmrc.vo.contact.frontend.models
  */
 
 import uk.gov.hmrc.vo.contact.frontend.models.TellUsMore
-import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.wordspec.AnyWordSpec
 
-class TellUsMoreSpec extends AnyFlatSpec {
+class TellUsMoreSpec extends AnyWordSpec:
 
-  val m: TellUsMore = TellUsMore("Hello")
+  val tellUsMore: TellUsMore = TellUsMore("Hello")
 
-  "Message " should "be Hello" in
-    assert(m.message === "Hello")
-
-}
+  "Message " should {
+    "be Hello" in
+      assert(tellUsMore.message === "Hello")
+  }

@@ -23,7 +23,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyWalesActualLets => pr
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertyWalesActualLets
 
-class PropertyWalesActualLetsViewSpec extends ViewBehaviours {
+class PropertyWalesActualLetsViewSpec extends ViewBehaviours:
 
   def propertyWalesLets70DaysSubcategory: propertyWalesActualLets = app.injector.instanceOf[property_wales_actual_lets]
 
@@ -69,4 +69,3 @@ class PropertyWalesActualLetsViewSpec extends ViewBehaviours {
         }
       }
   }
-}

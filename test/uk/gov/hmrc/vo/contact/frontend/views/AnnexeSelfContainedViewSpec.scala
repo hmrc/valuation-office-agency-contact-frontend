@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{annexeSelfContained => annexe
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.html.annexeSelfContained
 
-class AnnexeSelfContainedViewSpec extends ViewBehaviours {
+class AnnexeSelfContainedViewSpec extends ViewBehaviours:
 
   def councilTaxAnnexeSelfContained: annexeSelfContained = app.injector.instanceOf[annexe_self_contained]
 
@@ -38,4 +38,3 @@ class AnnexeSelfContainedViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxAnnexeController.onHaveCookingWashingPageLoad().url
     }
   }
-}

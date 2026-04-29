@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.vo.contact.frontend.models.requests
 
-import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should
+import org.scalatest.wordspec.AnyWordSpec
 import play.api.libs.json.JsString
 import play.api.mvc.Request
 import play.api.test.FakeRequest
@@ -28,28 +28,32 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 /**
   * @author Yuriy Tumakha
   */
-class DataRequestUtilSpec extends AnyFlatSpec with should.Matchers {
+class DataRequestUtilSpec extends AnyWordSpec with should.Matchers:
 
   val categories: Seq[String] = Seq("housing_benefit", "fair_rent")
 
-  "isEnquiryCategoryOneOf" should "return true for category 'housing_benefit'" in {
-    val userAnswers: UserAnswers             = UserAnswers(CacheMap("", Map(EnquiryCategoryId.toString -> JsString("housing_benefit"))))
-    implicit val dataRequest: DataRequest[?] = DataRequest(FakeRequest(), "sessionId", userAnswers)
+  "isEnquiryCategoryOneOf" should {
+    "return true for category 'housing_benefit'" in {
+      val userAnswers: UserAnswers             = UserAnswers(CacheMap("", Map(EnquiryCategoryId.toString -> JsString("housing_benefit"))))
+      implicit val dataRequest: DataRequest[?] = DataRequest(FakeRequest(), "sessionId", userAnswers)
 
-    DataRequestUtil.isEnquiryCategoryOneOf(categories*) shouldBe true
+      DataRequestUtil.isEnquiryCategoryOneOf(categories*) shouldBe true
+    }
   }
 
-  "isEnquiryCategoryOneOf" should "return false for category 'business_rates'" in {
-    val userAnswers: UserAnswers             = UserAnswers(CacheMap("", Map(EnquiryCategoryId.toString -> JsString("business_rates"))))
-    implicit val dataRequest: DataRequest[?] = DataRequest(FakeRequest(), "sessionId", userAnswers)
+  "isEnquiryCategoryOneOf" should {
+    "return false for category 'business_rates'" in {
+      val userAnswers: UserAnswers             = UserAnswers(CacheMap("", Map(EnquiryCategoryId.toString -> JsString("business_rates"))))
+      implicit val dataRequest: DataRequest[?] = DataRequest(FakeRequest(), "sessionId", userAnswers)
 
-    DataRequestUtil.isEnquiryCategoryOneOf(categories*) shouldBe false
+      DataRequestUtil.isEnquiryCategoryOneOf(categories*) shouldBe false
+    }
   }
 
-  "isEnquiryCategoryOneOf" should "return false for basic request" in {
-    implicit val dataRequest: Request[?] = FakeRequest()
+  "isEnquiryCategoryOneOf" should {
+    "return false for basic request" in {
+      implicit val dataRequest: Request[?] = FakeRequest()
 
-    DataRequestUtil.isEnquiryCategoryOneOf(categories*) shouldBe false
+      DataRequestUtil.isEnquiryCategoryOneOf(categories*) shouldBe false
+    }
   }
-
-}

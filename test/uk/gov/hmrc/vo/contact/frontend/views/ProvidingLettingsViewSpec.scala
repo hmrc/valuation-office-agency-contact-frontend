@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{providingLettings => providing_lettings}
 import play.twirl.api.HtmlFormat
 
-class ProvidingLettingsViewSpec extends ViewBehaviours {
+class ProvidingLettingsViewSpec extends ViewBehaviours:
 
   def providingLettings: html.providingLettings = app.injector.instanceOf[providing_lettings]
 
@@ -39,4 +39,3 @@ class ProvidingLettingsViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
     }
   }
-}

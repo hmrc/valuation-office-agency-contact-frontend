@@ -23,7 +23,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{councilTaxSubcategory => council_tax_subcategory}
 import play.twirl.api.HtmlFormat
 
-class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
+class CouncilTaxSubcategoryViewSpec extends ViewBehaviours:
 
   def councilTaxSubcategory: html.councilTaxSubcategory = app.injector.instanceOf[council_tax_subcategory]
 
@@ -84,4 +84,3 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours {
         }
       }
   }
-}

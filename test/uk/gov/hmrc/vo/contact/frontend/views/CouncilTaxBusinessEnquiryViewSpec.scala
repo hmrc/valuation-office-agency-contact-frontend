@@ -22,7 +22,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{councilTaxBusinessEnquiry => council_tax_business_enquiry}
 import play.twirl.api.HtmlFormat
 
-class CouncilTaxBusinessEnquiryViewSpec extends ViewBehaviours {
+class CouncilTaxBusinessEnquiryViewSpec extends ViewBehaviours:
 
   val backlink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
 
@@ -42,5 +42,3 @@ class CouncilTaxBusinessEnquiryViewSpec extends ViewBehaviours {
       backlinkUrl mustBe backlink
     }
   }
-
-}

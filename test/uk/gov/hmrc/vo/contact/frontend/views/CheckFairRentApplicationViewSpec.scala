@@ -20,7 +20,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{checkFairRentApplication => check_fair_rent_application}
 import play.twirl.api.HtmlFormat
 
-class CheckFairRentApplicationViewSpec extends ViewBehaviours {
+class CheckFairRentApplicationViewSpec extends ViewBehaviours:
 
   def checkFairRentApplication: html.checkFairRentApplication = app.injector.instanceOf[check_fair_rent_application]
 
@@ -37,4 +37,3 @@ class CheckFairRentApplicationViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.FairRentEnquiryController.onPageLoad.url
     }
   }
-}

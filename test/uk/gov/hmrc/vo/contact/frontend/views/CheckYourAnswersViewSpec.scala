@@ -27,7 +27,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.check_your_answers
 import java.util.Locale
 import play.twirl.api.HtmlFormat
 
-class CheckYourAnswersViewSpec extends ViewBehaviours {
+class CheckYourAnswersViewSpec extends ViewBehaviours:
 
   private val outputSettings = OutputSettings().prettyPrint(false)
 
@@ -226,4 +226,3 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
       assertNotRenderedById(doc, "change-link-0")
     }
   }
-}

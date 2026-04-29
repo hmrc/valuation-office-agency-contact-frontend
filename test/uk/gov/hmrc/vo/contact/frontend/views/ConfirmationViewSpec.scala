@@ -24,7 +24,7 @@ import uk.gov.hmrc.vo.contact.frontend.models.*
 import uk.gov.hmrc.vo.contact.frontend.viewmodels.{AnswerRow, AnswerSection}
 import play.twirl.api.HtmlFormat
 
-class ConfirmationViewSpec extends ViewBehaviours {
+class ConfirmationViewSpec extends ViewBehaviours:
 
   private val outputSettings = OutputSettings().prettyPrint(false)
 
@@ -96,4 +96,3 @@ class ConfirmationViewSpec extends ViewBehaviours {
     }
 
   }
-}

@@ -25,7 +25,7 @@ import play.api.mvc.Call
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertyWalesAvailableLets
 
-class PropertyWalesAvailableLetsViewSpec extends ViewBehaviours {
+class PropertyWalesAvailableLetsViewSpec extends ViewBehaviours:
 
   def propertyWalesLets140DaysSubcategory: propertyWalesAvailableLets = app.injector.instanceOf[property_wales_available_lets]
 
@@ -74,4 +74,3 @@ class PropertyWalesAvailableLetsViewSpec extends ViewBehaviours {
         }
       }
   }
-}

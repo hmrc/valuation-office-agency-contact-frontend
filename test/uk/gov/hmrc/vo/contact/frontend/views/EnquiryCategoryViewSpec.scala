@@ -23,7 +23,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{enquiryCategory => enquiry_category}
 import play.twirl.api.HtmlFormat
 
-class EnquiryCategoryViewSpec extends ViewBehaviours {
+class EnquiryCategoryViewSpec extends ViewBehaviours:
 
   def enquiryCategory: html.enquiryCategory = app.injector.instanceOf[enquiry_category]
 
@@ -135,4 +135,3 @@ class EnquiryCategoryViewSpec extends ViewBehaviours {
         }
       }
   }
-}

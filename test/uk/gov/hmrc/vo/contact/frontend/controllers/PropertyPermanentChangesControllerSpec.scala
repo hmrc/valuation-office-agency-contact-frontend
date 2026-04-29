@@ -25,7 +25,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.propertyPermanentChanges as pr
 import javax.inject.Singleton
 
 @Singleton
-class PropertyPermanentChangesControllerSpec extends ControllerSpecBase {
+class PropertyPermanentChangesControllerSpec extends ControllerSpecBase:
 
   def propertyPermanentChangesEnquiry: propertyPermanentChanges = app.injector.instanceOf[property_permanent_changes]
 
@@ -53,4 +53,3 @@ class PropertyPermanentChangesControllerSpec extends ControllerSpecBase {
     }
 
   }
-}

@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{annexeCookingWashingEnquiry => annexe_cooking_washing_enquiry}
 import play.twirl.api.HtmlFormat
 
-class AnnexeCookingWashingEnquiryViewSpec extends ViewBehaviours {
+class AnnexeCookingWashingEnquiryViewSpec extends ViewBehaviours:
 
   def annexeCookingWashingEnquiry: html.annexeCookingWashingEnquiry = app.injector.instanceOf[annexe_cooking_washing_enquiry]
 
@@ -38,5 +38,3 @@ class AnnexeCookingWashingEnquiryViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxAnnexeController.onSelfContainedEnquiryPageLoad().url
     }
   }
-
-}

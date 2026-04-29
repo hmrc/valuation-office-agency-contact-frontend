@@ -19,7 +19,7 @@ package uk.gov.hmrc.vo.contact.frontend.models
 import play.api.i18n.DefaultMessagesApi
 import uk.gov.hmrc.vo.contact.frontend.SpecBase
 
-class ContactWithEnMessagesSpec extends SpecBase {
+class ContactWithEnMessagesSpec extends SpecBase:
 
   private val contactDetails  = ContactDetails("first", "email", "contactNumber")
   private val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "e")
@@ -83,5 +83,3 @@ class ContactWithEnMessagesSpec extends SpecBase {
       ContactWithEnMessage(contact, msgApi, userAnswers)
     }
   }
-
-}

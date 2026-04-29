@@ -18,10 +18,10 @@ package uk.gov.hmrc.vo.contact.frontend.handlers
 
 import play.api.http.HttpErrorHandler
 import play.api.test.FakeRequest
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.SpecBase
-import play.api.test.Helpers._
 
-class ErrorHandlerSpec extends SpecBase {
+class ErrorHandlerSpec extends SpecBase:
 
   def errorHandler: HttpErrorHandler = app.injector.instanceOf[HttpErrorHandler]
 
@@ -42,5 +42,3 @@ class ErrorHandlerSpec extends SpecBase {
 
     }
   }
-
-}

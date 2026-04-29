@@ -23,14 +23,13 @@ import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.ViewSpecBase
 import org.scalatest.Assertion
 
-trait ViewBehaviours extends ViewSpecBase {
+trait ViewBehaviours extends ViewSpecBase:
 
-  def labelDefinedAndUsedOnce(option: String, prefix: String, view: () => HtmlFormat.Appendable): Assertion = {
+  def labelDefinedAndUsedOnce(option: String, prefix: String, view: () => HtmlFormat.Appendable): Assertion =
     val doc   = asDocument(view())
     assert(messages.isDefinedAt(s"$prefix.$option"))
     val label = doc.select(s"label[for=$prefix.$option]")
     assert(label.size() == 1)
-  }
 
   def normalPage(view: () => HtmlFormat.Appendable, messageKeyPrefix: String, expectedGuidanceKeys: String*): Unit =
     "behave like a normal page" when {
@@ -65,4 +64,3 @@ trait ViewBehaviours extends ViewSpecBase {
         }
       }
     }
-}

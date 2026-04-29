@@ -23,7 +23,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesSubcategory => business_rates_subcategory}
 import play.twirl.api.HtmlFormat
 
-class BusinessRatesSubcategoryViewSpec extends ViewBehaviours {
+class BusinessRatesSubcategoryViewSpec extends ViewBehaviours:
 
   def businessRatesSubcategory: html.businessRatesSubcategory = app.injector.instanceOf[business_rates_subcategory]
 
@@ -81,4 +81,3 @@ class BusinessRatesSubcategoryViewSpec extends ViewBehaviours {
         }
       }
   }
-}

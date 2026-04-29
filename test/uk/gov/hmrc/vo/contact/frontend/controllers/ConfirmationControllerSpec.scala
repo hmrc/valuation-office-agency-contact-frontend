@@ -41,7 +41,7 @@ import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 import uk.gov.hmrc.vo.contact.frontend.views.html.error
 
-class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
+class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar:
 
   val mockUserAnswers: UserAnswers                     = mock[UserAnswers]
   val mockConnector: LightweightContactEventsConnector = mock[LightweightContactEventsConnector]
@@ -362,4 +362,3 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar {
       result mustBe Seq.empty[String]
     }
   }
-}

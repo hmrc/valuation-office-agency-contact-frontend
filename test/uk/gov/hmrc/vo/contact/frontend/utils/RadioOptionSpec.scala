@@ -18,7 +18,7 @@ package uk.gov.hmrc.vo.contact.frontend.utils
 
 import uk.gov.hmrc.vo.contact.frontend.SpecBase
 
-class RadioOptionSpec extends SpecBase {
+class RadioOptionSpec extends SpecBase:
 
   "Radio Option" must {
     "build correctly from a key prefix and option" in {
@@ -28,4 +28,3 @@ class RadioOptionSpec extends SpecBase {
       radioOption.messageKey mustBe "prefix.option"
     }
   }
-}

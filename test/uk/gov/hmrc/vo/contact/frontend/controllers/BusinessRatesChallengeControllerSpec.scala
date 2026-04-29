@@ -16,11 +16,11 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers.stubMessageControllerComponents
 import uk.gov.hmrc.vo.contact.frontend.views.html.businessRatesChallenge
 
-class BusinessRatesChallengeControllerSpec extends ControllerSpecBase {
+class BusinessRatesChallengeControllerSpec extends ControllerSpecBase:
 
   private def brChallengeView = app.injector.instanceOf[businessRatesChallenge]
 
@@ -32,5 +32,3 @@ class BusinessRatesChallengeControllerSpec extends ControllerSpecBase {
       contentAsString(result) must include("Challenging my business rates valuation")
     }
   }
-
-}

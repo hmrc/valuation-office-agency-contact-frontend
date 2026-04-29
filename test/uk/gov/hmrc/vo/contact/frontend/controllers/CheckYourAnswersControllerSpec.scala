@@ -37,7 +37,7 @@ import java.util.Locale
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html.error
 
-class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSugar with BeforeAndAfterEach {
+class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSugar with BeforeAndAfterEach:
 
   val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
@@ -967,8 +967,6 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
   }
 
-  override protected def beforeEach(): Unit = {
+  override protected def beforeEach(): Unit =
     reset(mockUserAnswers)
     when(mockUserAnswers.contactReason) `thenReturn` None // Backward compatibility
-  }
-}

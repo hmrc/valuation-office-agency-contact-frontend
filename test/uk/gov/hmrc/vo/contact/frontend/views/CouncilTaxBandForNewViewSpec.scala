@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{councilTaxBandForNew => council_tax_band_for_new}
 import play.twirl.api.HtmlFormat
 
-class CouncilTaxBandForNewViewSpec extends ViewBehaviours {
+class CouncilTaxBandForNewViewSpec extends ViewBehaviours:
 
   def councilTaxBandForNew: html.councilTaxBandForNew = app.injector.instanceOf[council_tax_band_for_new]
 
@@ -38,4 +38,3 @@ class CouncilTaxBandForNewViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
   }
-}

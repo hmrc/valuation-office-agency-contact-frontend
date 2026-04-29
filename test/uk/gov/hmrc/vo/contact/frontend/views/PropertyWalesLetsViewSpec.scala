@@ -20,7 +20,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyWalesLets => wales_lets}
 import play.twirl.api.HtmlFormat
 
-class PropertyWalesLetsViewSpec extends ViewBehaviours {
+class PropertyWalesLetsViewSpec extends ViewBehaviours:
 
   def propertyWalesLets: html.propertyWalesLets = app.injector.instanceOf[wales_lets]
 
@@ -50,4 +50,3 @@ class PropertyWalesLetsViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad.url
     }
   }
-}

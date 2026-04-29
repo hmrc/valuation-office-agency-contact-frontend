@@ -30,7 +30,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.ContactFormatter.*
 import uk.gov.hmrc.vo.contact.frontend.SpecBase
 import java.util.Locale
 
-class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
+class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
 
   val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
@@ -334,4 +334,3 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
     }
   }
-}

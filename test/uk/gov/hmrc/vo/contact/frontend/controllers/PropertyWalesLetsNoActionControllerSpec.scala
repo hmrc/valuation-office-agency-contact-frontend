@@ -29,7 +29,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html
 import uk.gov.hmrc.vo.contact.frontend.views.html.error.internal_server_error
 import uk.gov.hmrc.vo.contact.frontend.views.html.{error, propertyWalesLetsNoAction as property_wales_lets_no_action}
 
-class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with MockitoSugar {
+class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with MockitoSugar:
 
   def propertyWalesLetsNoAction: html.propertyWalesLetsNoAction = app.injector.instanceOf[property_wales_lets_no_action]
   def internalServerError: error.internal_server_error          = app.injector.instanceOf[internal_server_error]
@@ -150,4 +150,3 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase with Mo
     }
 
   }
-}

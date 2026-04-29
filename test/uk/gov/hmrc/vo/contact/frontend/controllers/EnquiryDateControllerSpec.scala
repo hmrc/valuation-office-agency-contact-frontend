@@ -19,7 +19,7 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 import play.api.data.Form
 import play.api.i18n.{Lang, Messages}
 import play.api.libs.json.JsString
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
@@ -33,7 +33,7 @@ import java.util.Locale
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class EnquiryDateControllerSpec extends ControllerSpecBase {
+class EnquiryDateControllerSpec extends ControllerSpecBase:
 
   implicit val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
   implicit val dateUtil: DateUtil        = injector.instanceOf[DateUtil]
@@ -66,7 +66,6 @@ class EnquiryDateControllerSpec extends ControllerSpecBase {
       status(result) mustBe OK
 
       contentAsString(result) mustBe viewAsString()
-
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
@@ -85,8 +84,5 @@ class EnquiryDateControllerSpec extends ControllerSpecBase {
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(onwardRoute.url)
-
     }
   }
-
-}

@@ -26,9 +26,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
-class FakeNavigator(desiredRoute: Call) extends Navigator(mock[AuditingService]) {
+class FakeNavigator(desiredRoute: Call) extends Navigator(mock[AuditingService]):
 
   override def nextPage(controllerId: Identifier, mode: Mode)(implicit hc: HeaderCarrier): UserAnswers => Call =
     _ => desiredRoute
-
-}

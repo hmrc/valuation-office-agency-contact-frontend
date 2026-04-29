@@ -20,7 +20,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{propertySmallPartUsed => property_small_part}
 import play.twirl.api.HtmlFormat
 
-class PropertySmallPartUsedViewSpec extends ViewBehaviours {
+class PropertySmallPartUsedViewSpec extends ViewBehaviours:
 
   def propertySmallPartUsed: html.propertySmallPartUsed = app.injector.instanceOf[property_small_part]
 
@@ -37,4 +37,3 @@ class PropertySmallPartUsedViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxBusinessController.onPageLoad().url
     }
   }
-}

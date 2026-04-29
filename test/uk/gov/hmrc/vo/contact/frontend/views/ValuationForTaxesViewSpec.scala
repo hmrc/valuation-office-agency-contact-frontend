@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{valuationForTaxes => valuation_for_taxes}
 import play.twirl.api.HtmlFormat
 
-class ValuationForTaxesViewSpec extends ViewBehaviours {
+class ValuationForTaxesViewSpec extends ViewBehaviours:
 
   def valuationForTaxes: html.valuationForTaxes = app.injector.instanceOf[valuation_for_taxes]
 
@@ -47,5 +47,3 @@ class ValuationForTaxesViewSpec extends ViewBehaviours {
       ))
     }
   }
-
-}

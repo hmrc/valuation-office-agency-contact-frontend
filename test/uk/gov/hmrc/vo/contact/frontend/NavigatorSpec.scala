@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.vo.contact.frontend
 
-import org.mockito.Mockito._
+import org.mockito.Mockito.*
 import org.scalatestplus.mockito.MockitoSugar
 import org.scalatestplus.scalacheck.ScalaCheckDrivenPropertyChecks
 import uk.gov.hmrc.http.HeaderCarrier
@@ -27,7 +27,7 @@ import uk.gov.hmrc.vo.contact.frontend.journey.pages.{EnglandOrWalesPropertyRout
 import uk.gov.hmrc.vo.contact.frontend.models.*
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 
-class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenPropertyChecks {
+class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenPropertyChecks:
 
   val navigator = Navigator(mock[AuditingService])
 
@@ -875,4 +875,3 @@ class NavigatorSpec extends SpecBase with MockitoSugar with ScalaCheckDrivenProp
 
     }
   }
-}

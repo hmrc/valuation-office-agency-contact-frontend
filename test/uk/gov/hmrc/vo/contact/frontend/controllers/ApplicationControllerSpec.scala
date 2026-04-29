@@ -18,13 +18,13 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import play.api.data.Form
 import play.api.test.FakeRequest
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.forms.EnquiryCategoryForm
 import uk.gov.hmrc.vo.contact.frontend.views.html.{contactReason => contact_reason}
 import play.api.mvc.AnyContentAsEmpty
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class ApplicationControllerSpec extends ControllerSpecBase {
+class ApplicationControllerSpec extends ControllerSpecBase:
 
   def appController: Application = inject[Application]
 
@@ -59,4 +59,3 @@ class ApplicationControllerSpec extends ControllerSpecBase {
         uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactReasonController.onPageLoad.url
     }
   }
-}

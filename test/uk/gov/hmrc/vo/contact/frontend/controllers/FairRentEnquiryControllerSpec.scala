@@ -31,7 +31,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{checkFairRentApplication => c
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html.{checkFairRentApplication, fairRentEnquiry, submitFairRentApplication}
 
-class FairRentEnquiryControllerSpec extends ControllerSpecBase {
+class FairRentEnquiryControllerSpec extends ControllerSpecBase:
 
   def fairRentEnquiryEnquiry: fairRentEnquiry          = inject[fair_rent_enquiry]
   def onFairRentEnquiryNew: submitFairRentApplication  = inject[submit_fair_rent_application]
@@ -132,5 +132,3 @@ class FairRentEnquiryControllerSpec extends ControllerSpecBase {
     }
 
   }
-
-}

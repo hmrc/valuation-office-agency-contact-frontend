@@ -22,7 +22,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyPermanentChanges => p
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertyPermanentChanges
 
-class PropertyPermanentChangesViewSpec extends ViewBehaviours {
+class PropertyPermanentChangesViewSpec extends ViewBehaviours:
 
   def PropertyPermanentChanges: propertyPermanentChanges = app.injector.instanceOf[property_permanent_changes]
 
@@ -39,4 +39,3 @@ class PropertyPermanentChangesViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
   }
-}

@@ -24,7 +24,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{fairRentEnquiry => fair_rent_
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.html.fairRentEnquiry
 
-class FairRentEnquiryViewSpec extends ViewBehaviours {
+class FairRentEnquiryViewSpec extends ViewBehaviours:
 
   def fairRentEnquirySubcategory: fairRentEnquiry = app.injector.instanceOf[fair_rent_enquiry]
 
@@ -73,4 +73,3 @@ class FairRentEnquiryViewSpec extends ViewBehaviours {
         }
       }
   }
-}

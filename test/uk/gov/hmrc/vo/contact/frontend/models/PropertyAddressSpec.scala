@@ -17,44 +17,60 @@
 package uk.gov.hmrc.vo.contact.frontend.models
 
 import org.scalatest.OptionValues
-import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
 import uk.gov.hmrc.vo.contact.frontend.models.PropertyAddress
 
-class PropertyAddressSpec extends AnyFlatSpec with Matchers with OptionValues:
+class PropertyAddressSpec extends AnyWordSpec with Matchers with OptionValues:
 
   private val address = PropertyAddress("1", Some("High Street"), "London", Some("London"), "ZZ11ZZ")
 
   private val alternativeAddress = PropertyAddress("22", None, "London", None, "ZZ11ZZ")
 
-  "Property address line 1" should "be 1" in {
-    address.addressLine1 shouldBe "1"
+  "Property address line 1" should {
+    "be 1" in {
+      address.addressLine1 shouldBe "1"
+    }
   }
 
-  "Property address line 2" should "be High Street" in {
-    address.addressLine2.value shouldBe "High Street"
+  "Property address line 2" should {
+    "be High Street" in {
+      address.addressLine2.value shouldBe "High Street"
+    }
   }
 
-  "Property Town" should "be London" in {
-    address.town shouldBe "London"
+  "Property Town" should {
+    "be London" in {
+      address.town shouldBe "London"
+    }
   }
 
-  "Property County" should "be London" in {
-    address.county.value shouldBe "London"
+  "Property County" should {
+    "be London" in {
+      address.county.value shouldBe "London"
+    }
   }
 
-  "Property Postcode" should "be ZZ11ZZ" in {
-    address.postcode shouldBe "ZZ11ZZ"
+  "Property Postcode" should {
+    "be ZZ11ZZ" in {
+      address.postcode shouldBe "ZZ11ZZ"
+    }
   }
 
-  "Alternative Property address line 1" should "be 22" in {
-    alternativeAddress.addressLine1 shouldBe "22"
+  "Alternative Property address line 1" should {
+    "be 22" in {
+      alternativeAddress.addressLine1 shouldBe "22"
+    }
   }
 
-  "Alternative Property address line 2" should "be None" in {
-    alternativeAddress.addressLine2 shouldBe None
+  "Alternative Property address line 2" should {
+    "be None" in {
+      alternativeAddress.addressLine2 shouldBe None
+    }
   }
 
-  "Alternative Property County" should "be None" in {
-    alternativeAddress.county shouldBe None
+  "Alternative Property County" should {
+    "be None" in {
+      alternativeAddress.county shouldBe None
+    }
   }

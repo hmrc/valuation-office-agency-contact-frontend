@@ -23,7 +23,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.QuestionViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{tellUsMore => tell_us_more}
 import play.twirl.api.HtmlFormat
 
-class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
+class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore]:
 
   val messageKeyPrefix = "tellUsMore"
 
@@ -62,7 +62,6 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
     }
 
     behave like pageWithTextFields(createViewUsingForm, "message")
-
   }
 
   "contain continue button with the value Continue" in {
@@ -83,4 +82,3 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
     val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
     backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
   }
-}

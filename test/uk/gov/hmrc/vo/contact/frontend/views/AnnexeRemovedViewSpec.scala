@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{annexeRemoved => annexe_remov
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.html.annexeRemoved
 
-class AnnexeRemovedViewSpec extends ViewBehaviours {
+class AnnexeRemovedViewSpec extends ViewBehaviours:
 
   def councilTaxAnnexeRemoved: annexeRemoved = app.injector.instanceOf[annexe_removed]
 
@@ -38,4 +38,3 @@ class AnnexeRemovedViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxAnnexeController.onPageLoad().url
     }
   }
-}
