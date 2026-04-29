@@ -133,7 +133,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours:
 
     "contain Property Details label" in {
       val doc = asDocument(view1())
-      assert(doc.toString.contains(messages("propertyAddress.heading")))
+      assert(doc.toString.contains(messages("propertyAddress.title")))
     }
 
     "contain Enquiry heading" in {

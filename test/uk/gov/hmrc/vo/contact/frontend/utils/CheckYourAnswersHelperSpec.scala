@@ -212,7 +212,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
 
         val result = checkYourAnswers.propertyAddress
         result mustBe Some(AnswerRow(
-          "propertyAddress.heading",
+          "propertyAddress.title",
           formattedPropertyAddress(address, "<br>"),
           false,
           routes.PropertyAddressController.onPageLoad(CheckMode).url
@@ -231,7 +231,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
 
           val result = checkYourAnswers.propertyAddress
           result mustBe Some(AnswerRow(
-            "propertyAddress.heading",
+            "propertyAddress.title",
             formattedPropertyAddress(address, "<br>"),
             false,
             routes.PropertyAddressController.onPageLoad(CheckMode).url
