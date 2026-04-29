@@ -31,7 +31,7 @@ object EnglandOrWalesPropertyRouter
     key = "England-or-Wales-property",
     fieldId = "businessRatesJurisdiction",
     options = Seq("england", "wales")
-  ) {
+  ):
 
   private val jurisdiction2suffixMap = Map(
     "england" -> "-in-England",
@@ -47,15 +47,12 @@ object EnglandOrWalesPropertyRouter
   override def previousPage: UserAnswers => Call = _ => routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode)
 
   override def nextPage: UserAnswers => Call =
-    userAnswers => {
+    userAnswers =>
       val suffix = getValue(userAnswers).fold("")(jurisdiction2suffixMap)
 
       userAnswers.getString(BusinessRatesSubcategoryId.toString)
         .flatMap(subcategory2pageMap.get)
         .map(_ + suffix)
         .fold(appStartPage)(routes.JourneyController.onPageLoad)
-    }
 
   override def helpWithService: Option[String] = Some("help_with_service")
-
-}

@@ -19,12 +19,12 @@
 
 @(answerSection: AnswerSection)(implicit messages: Messages)
 
-@if(answerSection.headingKey.isDefined){
+@if(answerSection.headingKey.isDefined) {
     <h2>@messages(answerSection.headingKey.get)</h2>
 }
 
 <ul class="tabular-data tabular-data--list">
-    @for((row, index) <- answerSection.rows.zipWithIndex){
-        @components.answer_row(row, index)
-    }
+@for((row, index) <- answerSection.rows.zipWithIndex) {
+    @components.answer_row(row, index)
+}
 </ul>

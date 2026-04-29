@@ -17,19 +17,18 @@
 package uk.gov.hmrc.vo.contact.frontend.views
 
 import play.api.data.Form
-import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 import uk.gov.hmrc.vo.contact.frontend.forms.TellUsMoreForm
 import uk.gov.hmrc.vo.contact.frontend.models.{NormalMode, TellUsMore}
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.QuestionViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{tellUsMore => tell_us_more}
 import play.twirl.api.HtmlFormat
 
-class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
+class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore]:
 
   val messageKeyPrefix = "tellUsMore"
 
-  val backLink: String           = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
-  val poorRepairBackLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.DatePropertyChangedController.onPageLoad().url
+  def backLink: String           = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
+  def poorRepairBackLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.DatePropertyChangedController.onPageLoad().url
 
   def tellUsMore: html.tellUsMore = app.injector.instanceOf[tell_us_more]
 
@@ -46,18 +45,23 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
 
   "TellUsMore view" must {
 
-    behave like normalPage(createView, messageKeyPrefix, "para", "para2", "para3", "para4", "ct-reference")
+    "display the correct browser title" in {
+      val doc = asDocument(createView())
+      assertEqualsValue(doc, "title", messages(s"$messageKeyPrefix.heading") + " - Valuation Office contact form - GOV.UK")
+    }
 
-    behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.TellUsMoreController.onSubmit(NormalMode).url, "message")
+    behave like pageWithTextFields(createViewUsingForm, "message")
   }
 
   "TellUsMore view for property poor repair" must {
     def view = () => tellUsMore(TellUsMoreForm(), NormalMode, "tellUsMore.poorRepair", poorRepairBackLink)(using fakeRequest, messages)
 
-    behave like normalPage(view, "tellUsMore.poorRepair", "hint", "inset")
+    "display the correct browser title" in {
+      val doc = asDocument(view())
+      assertEqualsValue(doc, "title", messages("tellUsMore.poorRepair.heading") + " - Valuation Office contact form - GOV.UK")
+    }
 
-    behave like pageWithTextFields(createViewUsingForm, "tellUsMore.poorRepair", routes.TellUsMoreController.onSubmit(NormalMode).url, "message")
-
+    behave like pageWithTextFields(createViewUsingForm, "message")
   }
 
   "contain continue button with the value Continue" in {
@@ -78,4 +82,3 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore] {
     val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
     backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
   }
-}

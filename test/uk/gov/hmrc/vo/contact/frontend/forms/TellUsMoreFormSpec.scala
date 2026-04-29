@@ -20,7 +20,7 @@ import uk.gov.hmrc.vo.contact.frontend.forms.behaviours.FormBehaviours
 import uk.gov.hmrc.vo.contact.frontend.models.TellUsMore
 import play.api.data.Form
 
-class TellUsMoreFormSpec extends FormBehaviours {
+class TellUsMoreFormSpec extends FormBehaviours:
 
   val validData: Map[String, String] = Map(
     "message" -> "value 1"
@@ -63,5 +63,3 @@ class TellUsMoreFormSpec extends FormBehaviours {
     }
 
   }
-
-}

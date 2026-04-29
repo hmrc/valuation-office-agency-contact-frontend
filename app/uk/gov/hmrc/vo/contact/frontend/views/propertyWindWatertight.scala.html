@@ -16,23 +16,23 @@
 
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(layout: PrimaryLayout)
+@this(
+        layout: PrimaryLayout
+)
 
 @()(implicit request: RequestHeader, messages: Messages)
 
 @layout(
     pageTitle = messages("propertyWindWater.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWindWaterController.onPageLoad().url)
+    backLink = PropertyWindWaterController.onPageLoad().url
 ) {
-    <h1 class="govuk-heading-l">@messages("propertyWindWater.heading")</h1>
-
     <p class="govuk-body">@messages("propertyWindWater.p1")</p>
 
     <h2 class="govuk-heading-m">@messages("propertyWindWater.subheading")</h2>
 
     <p class="govuk-body">
         <a class="govuk-link" target="_self" href=@messages("propertyWindWater.p2.url")>
-            @messages("propertyWindWater.p2")
+        @messages("propertyWindWater.p2")
         </a>
     </p>
 }

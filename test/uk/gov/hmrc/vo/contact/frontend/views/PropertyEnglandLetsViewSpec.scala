@@ -20,7 +20,7 @@ import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyEnglandLets => england_lets}
 
-class PropertyEnglandLetsViewSpec extends ViewBehaviours {
+class PropertyEnglandLetsViewSpec extends ViewBehaviours:
 
   def propertyEnglandLets: england_lets = app.injector.instanceOf[england_lets]
 
@@ -31,7 +31,6 @@ class PropertyEnglandLetsViewSpec extends ViewBehaviours {
       view,
       "propertyEnglandLets",
       "title",
-      "heading",
       "p1",
       "p1.bullet1",
       "p1.bullet2",
@@ -48,7 +47,6 @@ class PropertyEnglandLetsViewSpec extends ViewBehaviours {
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandActualLetsController.onPageLoad().url
+      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandActualLetsController.onPageLoad.url
     }
   }
-}

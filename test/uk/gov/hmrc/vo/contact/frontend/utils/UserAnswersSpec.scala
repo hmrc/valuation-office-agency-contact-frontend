@@ -23,7 +23,7 @@ import uk.gov.hmrc.vo.contact.frontend.identifiers.{ContactDetailsId, ContactRea
 import uk.gov.hmrc.vo.contact.frontend.journey.model.TellUsMorePage
 import uk.gov.hmrc.vo.contact.frontend.models.*
 
-class UserAnswersSpec extends SpecBase with MockitoSugar {
+class UserAnswersSpec extends SpecBase with MockitoSugar:
 
   val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
@@ -127,4 +127,3 @@ class UserAnswersSpec extends SpecBase with MockitoSugar {
     }
 
   }
-}

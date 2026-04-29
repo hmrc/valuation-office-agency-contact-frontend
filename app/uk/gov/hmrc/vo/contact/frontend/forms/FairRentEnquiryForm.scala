@@ -16,24 +16,22 @@
 
 package uk.gov.hmrc.vo.contact.frontend.forms
 
-import play.api.data.{Form, FormError}
 import play.api.data.Forms.{of, single}
 import play.api.data.format.Formatter
-import BusinessRatesSubcategoryForm.produceError
+import play.api.data.{Form, FormError}
+import uk.gov.hmrc.vo.contact.frontend.forms.BusinessRatesSubcategoryForm.produceError
 import uk.gov.hmrc.vo.contact.frontend.utils.RadioOption
 
-object FairRentEnquiryForm {
+object FairRentEnquiryForm:
 
-  private def fairRentEnquiryFormatter: Formatter[String] = new Formatter[String] {
+  private def fairRentEnquiryFormatter: Formatter[String] =
+    new Formatter[String]:
+      def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match
+        case Some(s) if optionIsValid(s) => Right(s)
+        case None                        => produceError(key, "error.fairRents.required")
+        case _                           => produceError(key, "error.unknown")
 
-    def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match {
-      case Some(s) if optionIsValid(s) => Right(s)
-      case None                        => produceError(key, "error.fairRents.required")
-      case _                           => produceError(key, "error.unknown")
-    }
-
-    def unbind(key: String, value: String): Map[String, String] = Map(key -> value)
-  }
+      def unbind(key: String, value: String): Map[String, String] = Map(key -> value)
 
   def apply(): Form[String] =
     Form(single("value" -> of(using fairRentEnquiryFormatter)))
@@ -45,4 +43,3 @@ object FairRentEnquiryForm {
   )
 
   def optionIsValid(value: String): Boolean = options.exists(o => o.value == value)
-}

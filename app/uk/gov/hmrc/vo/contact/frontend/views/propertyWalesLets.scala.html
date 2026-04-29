@@ -14,21 +14,21 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(layout: PrimaryLayout)
+@this(
+        layout: PrimaryLayout
+)
 
 @()(implicit request: RequestHeader, messages: Messages)
 
 @layout(
     pageTitle = messages("propertyWalesLets.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad().url)
+    backLink = PropertyWalesActualLetsController.onPageLoad.url
 ) {
-    <h1 class="govuk-heading-l">@messages("propertyWalesLets.heading")</h1>
-
     <p class="govuk-body">
-            <a class="govuk-link" target="_self" href=@messages("propertyWalesLets.p2.url")>
+        <a class="govuk-link" target="_self" href=@messages("propertyWalesLets.p2.url")>
         @messages("propertyWalesLets.p2.part1")
         </a>
         @messages("propertyWalesLets.p2.part2")
@@ -44,10 +44,9 @@
 
     <p class="govuk-body">
         <a class="govuk-link" target="_self" href=@messages("propertyWalesLets.p3.url")>
-            @messages("propertyWalesLets.p3")
+        @messages("propertyWalesLets.p3")
         </a>
     </p>
 
-    @components.general_enquires(uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
-
+    @components.general_enquires(TellUsMoreController.onPageLoad(NormalMode).url)
 }

@@ -19,22 +19,21 @@ package uk.gov.hmrc.vo.contact.frontend.views
 import play.api.data.Form
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.forms.PropertyEnglandActualLetsForm
-import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyEnglandActualLets => property_england_actual_lets}
 
-class PropertyEnglandActualLetsViewSpec extends ViewBehaviours {
+class PropertyEnglandActualLetsViewSpec extends ViewBehaviours:
 
   def propertyEnglandLetsSubcategory: property_england_actual_lets = app.injector.instanceOf[property_england_actual_lets]
 
   val messageKeyPrefix = "propertyEnglandActualLets"
 
   def createView: () => HtmlFormat.Appendable =
-    () => propertyEnglandLetsSubcategory(PropertyEnglandActualLetsForm(), NormalMode)(using fakeRequest, messages)
+    () => propertyEnglandLetsSubcategory(PropertyEnglandActualLetsForm())(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable = (
     form: Form[String]
-  ) => propertyEnglandLetsSubcategory(form, NormalMode)(using fakeRequest, messages)
+  ) => propertyEnglandLetsSubcategory(form)(using fakeRequest, messages)
 
   "PropertyEnglandActualLetsSubcategory view" when {
     "rendered" must {
@@ -55,7 +54,7 @@ class PropertyEnglandActualLetsViewSpec extends ViewBehaviours {
         val backlinkText = doc.select("a[class=govuk-back-link]").text()
         backlinkText mustBe messages("site.back")
         val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-        backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad().url
+        backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad.url
       }
     }
 
@@ -70,4 +69,3 @@ class PropertyEnglandActualLetsViewSpec extends ViewBehaviours {
         }
       }
   }
-}

@@ -20,12 +20,12 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyWalesLetsNoAction => wales_lets_no_action}
 import play.twirl.api.HtmlFormat
 
-class PropertyWalesLetsNoActionViewSpec extends ViewBehaviours {
+class PropertyWalesLetsNoActionViewSpec extends ViewBehaviours:
 
   def propertyWalesLetsNoAction: html.propertyWalesLetsNoAction = app.injector.instanceOf[wales_lets_no_action]
 
-  def wales140DayBackLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesAvailableLetsController.onPageLoad().url
-  def wales70DayBackLink: String  = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad().url
+  def wales140DayBackLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesAvailableLetsController.onPageLoad.url
+  def wales70DayBackLink: String  = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad.url
 
   def view140Days: () => HtmlFormat.Appendable = () => propertyWalesLetsNoAction(wales140DayBackLink)(using fakeRequest, messages)
   def view7Days: () => HtmlFormat.Appendable   = () => propertyWalesLetsNoAction(wales70DayBackLink)(using fakeRequest, messages)
@@ -35,7 +35,6 @@ class PropertyWalesLetsNoActionViewSpec extends ViewBehaviours {
       view140Days,
       "businessRatesSelfCateringNoBusinessRateWales",
       "title",
-      "heading",
       "p1",
       "p2",
       "p3",
@@ -51,7 +50,6 @@ class PropertyWalesLetsNoActionViewSpec extends ViewBehaviours {
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesAvailableLetsController.onPageLoad().url
+      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesAvailableLetsController.onPageLoad.url
     }
   }
-}

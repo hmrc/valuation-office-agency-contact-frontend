@@ -16,44 +16,40 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.data.Form
-import play.api.test.Helpers._
-import uk.gov.hmrc.vo.contact.frontend.controllers.actions.DataRetrievalAction
-import uk.gov.hmrc.vo.contact.frontend.forms.PropertyWindWaterForm
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
-import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyPermanentChanges => property_permanent_changes}
+import uk.gov.hmrc.vo.contact.frontend.views.html.propertyPermanentChanges
+import uk.gov.hmrc.vo.contact.frontend.views.html.propertyPermanentChanges as property_permanent_changes
 
 import javax.inject.Singleton
-import uk.gov.hmrc.vo.contact.frontend.views.html.propertyPermanentChanges
 
 @Singleton
-class PropertyPermanentChangesControllerSpec extends ControllerSpecBase {
+class PropertyPermanentChangesControllerSpec extends ControllerSpecBase:
 
   def propertyPermanentChangesEnquiry: propertyPermanentChanges = app.injector.instanceOf[property_permanent_changes]
 
-  def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
+  def controller =
     PropertyPermanentChangesController(
       messagesApi,
       propertyPermanentChangesEnquiry,
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[String] = PropertyWindWaterForm()): String =
+  def viewAsString: String =
     propertyPermanentChangesEnquiry(NormalMode)(using fakeRequest, messages).toString()
 
   "Property Permanent Changes Controller" must {
     "return the correct view for a GET" in {
-      val result = controller().onPageLoad()(fakeRequest)
+      val result = controller.onPageLoad()(fakeRequest)
       contentAsString(result) mustBe propertyPermanentChangesEnquiry(NormalMode)(using fakeRequest, messages).toString
     }
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad()(fakeRequest)
+      val result = controller.onPageLoad()(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+      contentAsString(result) mustBe viewAsString
     }
 
   }
-}

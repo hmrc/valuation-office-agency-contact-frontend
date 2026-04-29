@@ -16,6 +16,5 @@
 
 package uk.gov.hmrc.vo.contact.frontend.identifiers
 
-object BusinessRatesSmartLinksId extends Identifier {
+object BusinessRatesSmartLinksId extends Identifier:
   override def toString: String = "businessRatesSmartLinks"
-}

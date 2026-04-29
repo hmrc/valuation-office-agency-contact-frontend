@@ -20,30 +20,27 @@ import org.mockito.Mockito.when
 import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.{JsString, Json}
+import play.api.mvc.Call
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.*
-import play.api.test.Helpers._
-import uk.gov.hmrc.vo.contact.frontend.forms.ContactDetailsForm
-import uk.gov.hmrc.vo.contact.frontend
-  .identifiers.{BusinessRatesSubcategoryId, ContactDetailsId, ContactReasonId, CouncilTaxSubcategoryId, EnquiryCategoryId, PropertyAddressId}
+import uk.gov.hmrc.vo.contact.frontend.forms.ContactDetailsForm.contactDetailsForm
+import uk.gov.hmrc.vo.contact.frontend.identifiers.*
 import uk.gov.hmrc.vo.contact.frontend.journey.model.TellUsMorePage
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, ContactDetails, NormalMode, PropertyAddress}
 import uk.gov.hmrc.vo.contact.frontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{contactDetails => contact_details}
 import uk.gov.hmrc.vo.contact.frontend.views.html.error.internal_server_error
-import play.api.mvc.Call
-import uk.gov.hmrc.vo.contact.frontend.views.html
-import uk.gov.hmrc.vo.contact.frontend.views.html.error
+import uk.gov.hmrc.vo.contact.frontend.views.html.{contactDetails, error}
 
-class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar {
+class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
 
-  def contactDetails: html.contactDetails              = app.injector.instanceOf[contact_details]
-  def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
+  private def contactDetails: contactDetails                   = app.injector.instanceOf[contactDetails]
+  private def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
 
-  def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+  private def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
-  val mockUserAnswers: UserAnswers = mock[UserAnswers]
+  private val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     ContactDetailsController(
@@ -58,15 +55,15 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
 
   def ctBackLink: String        = uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
   def ndrBackLink: String       = uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
-  def refNumberBackLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.RefNumberController.onPageLoad().url
+  def refNumberBackLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.RefNumberController.onPageLoad.url
 
-  def viewAsStringCT(form: Form[ContactDetails] = ContactDetailsForm()): String =
+  def viewAsStringCT(form: Form[ContactDetails] = contactDetailsForm): String =
     contactDetails(form, NormalMode, ctBackLink)(using fakeRequest, messages).toString
 
-  def viewAsStringNDR(form: Form[ContactDetails] = ContactDetailsForm()): String =
+  def viewAsStringNDR(form: Form[ContactDetails] = contactDetailsForm): String =
     contactDetails(form, NormalMode, ndrBackLink)(using fakeRequest, messages).toString
 
-  def viewAsStringRefNumber(form: Form[ContactDetails] = ContactDetailsForm()): String =
+  def viewAsStringRefNumber(form: Form[ContactDetails] = contactDetailsForm): String =
     contactDetails(form, NormalMode, refNumberBackLink)(using fakeRequest, messages).toString
 
   "ContactDetails Controller" must {
@@ -99,7 +96,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsStringNDR(ContactDetailsForm().fill(ContactDetails("a", "a@test.com", "0847428742424")))
+      contentAsString(result) mustBe viewAsStringNDR(contactDetailsForm.fill(ContactDetails("a", "a@test.com", "0847428742424")))
     }
 
     "redirect to the next page when valid data is submitted" in {
@@ -118,7 +115,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest     = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm       = ContactDetailsForm().bind(Map("value" -> "invalid value"))
+      val boundForm       = contactDetailsForm.bind(Map("value" -> "invalid value"))
       val validData       = Map(EnquiryCategoryId.toString -> JsString("business_rates"), BusinessRatesSubcategoryId.toString -> JsString("business_rates_other"))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
@@ -393,7 +390,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
 
       val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
 
-      contentAsString(result) mustBe viewAsStringCT(ContactDetailsForm().fill(ContactDetails("a", "a@test.com", "0847428742424")))
+      contentAsString(result) mustBe viewAsStringCT(contactDetailsForm.fill(ContactDetails("a", "a@test.com", "0847428742424")))
     }
 
     "return 500 and the error view for a GET with no enquiry type" in
@@ -404,4 +401,3 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar 
       }
 
   }
-}

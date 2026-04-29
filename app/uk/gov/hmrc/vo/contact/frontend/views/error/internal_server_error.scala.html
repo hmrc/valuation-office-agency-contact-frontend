@@ -16,14 +16,14 @@
 
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(layout: PrimaryLayout)
+@this(
+        layout: PrimaryLayout
+)
 
 @()(implicit request: RequestHeader, messages: Messages)
 
 @layout(
     pageTitle = messages("error500.title")
 ) {
-    <h1 class="govuk-heading-l">@messages("error500.heading")</h1>
-
     <p class="govuk-body">@messages("error500.tryagain.para")</p>
 }

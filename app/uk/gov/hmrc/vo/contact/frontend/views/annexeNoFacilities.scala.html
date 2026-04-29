@@ -17,23 +17,21 @@
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(layout: PrimaryLayout)
+@this(
+        layout: PrimaryLayout
+)
 
 @()(implicit request: RequestHeader, messages: Messages)
 
 @layout(
     pageTitle = messages("annexeNoFacilities.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxAnnexeController.onHaveCookingWashingPageLoad().url)
+    backLink = CouncilTaxAnnexeController.onHaveCookingWashingPageLoad().url
 ) {
-    <h1 class="govuk-heading-l">@Messages("annexeNoFacilities.heading")</h1>
-
     <p class="govuk-body">@Html(Messages("annexeNoFacilities.p1"))</p>
 
     <h2 class="govuk-heading-m">@messages("annexeNoFacilities.subheading")</h2>
 
     <p class="govuk-body">@Html(Messages("annexeNoFacilities.p2"))</p>
 
-    @components.general_enquires(uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
-
-
+    @components.general_enquires(TellUsMoreController.onPageLoad(NormalMode).url)
 }

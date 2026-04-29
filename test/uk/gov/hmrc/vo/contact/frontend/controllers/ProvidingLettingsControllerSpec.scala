@@ -16,14 +16,14 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.Navigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{providingLettings => providing_lettings}
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class ProvidingLettingsControllerSpec extends ControllerSpecBase {
+class ProvidingLettingsControllerSpec extends ControllerSpecBase:
 
   def providingLettings: html.providingLettings = app.injector.instanceOf[providing_lettings]
   def dataCacheConnector: DataCacheConnector    = app.injector.instanceOf[DataCacheConnector]
@@ -55,4 +55,3 @@ class ProvidingLettingsControllerSpec extends ControllerSpecBase {
     }
 
   }
-}

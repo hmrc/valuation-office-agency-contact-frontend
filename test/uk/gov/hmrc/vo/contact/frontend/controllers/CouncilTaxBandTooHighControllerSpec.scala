@@ -16,17 +16,16 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.test.Helpers._
-import uk.gov.hmrc.vo.contact.frontend.controllers.actions.DataRetrievalAction
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
-import uk.gov.hmrc.vo.contact.frontend.views.html.{councilTaxBandTooHigh => council_tax_too_high}
 import uk.gov.hmrc.vo.contact.frontend.views.html
+import uk.gov.hmrc.vo.contact.frontend.views.html.councilTaxBandTooHigh as council_tax_too_high
 
-class CouncilTaxBandTooHighControllerSpec extends ControllerSpecBase {
+class CouncilTaxBandTooHighControllerSpec extends ControllerSpecBase:
 
   def councilTaxBandTooHigh: html.councilTaxBandTooHigh = app.injector.instanceOf[council_tax_too_high]
 
-  def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
+  def controller =
     CouncilTaxBandTooHighController(
       messagesApi,
       councilTaxBandTooHigh,
@@ -35,8 +34,7 @@ class CouncilTaxBandTooHighControllerSpec extends ControllerSpecBase {
 
   "Council Tax Band Too High Controller" must {
     "return the correct view for a GET" in {
-      val result = controller().onPageLoad()(fakeRequest)
+      val result = controller.onPageLoad()(fakeRequest)
       contentAsString(result) mustBe councilTaxBandTooHigh()(using fakeRequest, messages).toString
     }
   }
-}

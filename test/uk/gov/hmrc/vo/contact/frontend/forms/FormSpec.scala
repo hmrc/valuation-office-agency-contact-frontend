@@ -16,26 +16,22 @@
 
 package uk.gov.hmrc.vo.contact.frontend.forms
 
-import org.scalatest.OptionValues
-import play.api.data.{Form, FormError}
+import org.scalatest.{Assertion, OptionValues}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpecLike
-import org.scalatest.Assertion
+import play.api.data.{Form, FormError}
 
-trait FormSpec extends AnyWordSpecLike with Matchers with OptionValues {
+trait FormSpec extends AnyWordSpecLike with Matchers with OptionValues:
 
   def checkForError(form: Form[?], data: Map[String, String], expectedErrors: Seq[FormError]): Assertion =
     form.bind(data).fold(
-      formWithErrors => {
+      formWithErrors =>
         for (error <- formWithErrors.errors) expectedErrors should contain(FormError(error.key, error.message))
         formWithErrors.errors.size                        shouldBe expectedErrors.size
-      },
-      _ =>
-        fail("Expected a validation error when binding the form, but it was bound successfully.")
+      ,
+      _ => fail("Expected a validation error when binding the form, but it was bound successfully.")
     )
 
   def error(key: String, value: String): Seq[FormError] = Seq(FormError(key, value))
 
-  lazy val emptyForm: Map[String, String] = Map[String, String]()
-
-}
+  val emptyForm: Map[String, String] = Map[String, String]()

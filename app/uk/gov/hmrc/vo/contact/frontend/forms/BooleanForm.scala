@@ -16,26 +16,22 @@
 
 package uk.gov.hmrc.vo.contact.frontend.forms
 
-import play.api.data.{Form, FormError}
-import play.api.data.Forms._
+import play.api.data.Forms.*
 import play.api.data.format.Formatter
+import play.api.data.{Form, FormError}
 
-object BooleanForm extends FormErrorHelper {
+object BooleanForm extends FormErrorHelper:
 
-  private def booleanFormat(errorKey: String): Formatter[Boolean] = new Formatter[Boolean] {
+  private def booleanFormat(errorKey: String): Formatter[Boolean] =
+    new Formatter[Boolean]:
+      override val format = Some(("format.boolean", Nil))
 
-    override val format = Some(("format.boolean", Nil))
+      def bind(key: String, data: Map[String, String]): Either[Seq[FormError], Boolean] =
+        data.get(key) match
+          case Some("true")  => Right(true)
+          case Some("false") => Right(false)
+          case _             => produceError(key, errorKey)
 
-    def bind(key: String, data: Map[String, String]): Either[Seq[FormError], Boolean] =
-      data.get(key) match {
-        case Some("true")  => Right(true)
-        case Some("false") => Right(false)
-        case _             => produceError(key, errorKey)
-      }
-
-    def unbind(key: String, value: Boolean): Map[String, String] = Map(key -> value.toString)
-
-  }
+      def unbind(key: String, value: Boolean): Map[String, String] = Map(key -> value.toString)
 
   def apply(errorKey: String = "error.boolean"): Form[Boolean] = Form(single("value" -> of(using booleanFormat(errorKey))))
-}

@@ -19,8 +19,8 @@ package uk.gov.hmrc.vo.contact.frontend.journey.model
 import play.api.data.Form
 import play.api.i18n.Lang
 import play.api.mvc.Call
-import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
+import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 import uk.gov.hmrc.vo.contact.frontend.journey.JourneyPageRequest
 import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
@@ -30,7 +30,7 @@ import scala.concurrent.Future
 /**
   * @author Yuriy Tumakha
   */
-trait Page[T] {
+trait Page[T]:
 
   def key: String
 
@@ -46,7 +46,7 @@ trait Page[T] {
 
   def nextLang: UserAnswers => Option[Lang] = _ => None
 
-  def heading: String = s"$fieldId.heading"
+  def heading: String = s"$fieldId.label"
 
   def errorRequired: String = s"error.$fieldId.required"
 
@@ -59,5 +59,3 @@ trait Page[T] {
   def beforeSaveAnswers: (DataCacheConnector, JourneyPageRequest[?]) => Future[?] = (_, _) => Future.unit
 
   def helpWithService: Option[String] = None
-
-}

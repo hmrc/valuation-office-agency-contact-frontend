@@ -16,9 +16,8 @@
 
 package uk.gov.hmrc.vo.contact.frontend.journey.model
 
-import org.scalatest._
-import flatspec._
-import matchers._
+import org.scalatest.matchers.should
+import org.scalatest.wordspec.AnyWordSpec
 import play.api.libs.json.{JsObject, JsString, Json}
 import uk.gov.hmrc.vo.contact.frontend.identifiers.{ContactDetailsId, RefNumberId}
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, ContactDetails}
@@ -27,26 +26,26 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 /**
   * @author Yuriy Tumakha
   */
-class LogoutEventSpec extends AnyFlatSpec with should.Matchers {
+class LogoutEventSpec extends AnyWordSpec with should.Matchers:
 
-  "LogoutEvent" should "accept userAnswers in constructor and should be serialized to correct json" in {
-    val contact     = ContactDetails("Full name", "user@email.com", "07711223344")
-    val userAnswers = UserAnswers(CacheMap(
-      "sessionId",
-      Map(
-        RefNumberId.toString      -> JsString("refNumber1"),
-        ContactDetailsId.toString -> Json.toJson(contact)
-      )
-    ))
-    LogoutEvent(Some(userAnswers)) shouldBe LogoutEvent(Some("refNumber1"), Some(contact))
+  "LogoutEvent" should {
+    "accept userAnswers in constructor and should be serialized to correct json" in {
+      val contact     = ContactDetails("Full name", "user@email.com", "07711223344")
+      val userAnswers = UserAnswers(CacheMap(
+        "sessionId",
+        Map(
+          RefNumberId.toString      -> JsString("refNumber1"),
+          ContactDetailsId.toString -> Json.toJson(contact)
+        )
+      ))
+      LogoutEvent(Some(userAnswers)) shouldBe LogoutEvent(Some("refNumber1"), Some(contact))
+    }
+
+    "be empty when userAnswers are empty" in {
+      LogoutEvent(None) shouldBe LogoutEvent(None, None)
+    }
+
+    "be serialized to empty json object when userAnswers are empty" in {
+      Json.toJson(LogoutEvent(None)) shouldBe JsObject.empty
+    }
   }
-
-  it should "be empty when userAnswers are empty" in {
-    LogoutEvent(None) shouldBe LogoutEvent(None, None)
-  }
-
-  it should "be serialized to empty json object when userAnswers are empty" in {
-    Json.toJson(LogoutEvent(None)) shouldBe JsObject.empty
-  }
-
-}

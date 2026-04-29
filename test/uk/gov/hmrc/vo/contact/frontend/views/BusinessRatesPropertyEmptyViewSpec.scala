@@ -21,14 +21,14 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesPropertyEmpty => business_rates_property_empty}
 import play.twirl.api.HtmlFormat
 
-class BusinessRatesPropertyEmptyViewSpec extends ViewBehaviours {
+class BusinessRatesPropertyEmptyViewSpec extends ViewBehaviours:
 
   def businessRatesPropertyEmpty: html.businessRatesPropertyEmpty = app.injector.instanceOf[business_rates_property_empty]
 
   def view: () => HtmlFormat.Appendable = () => businessRatesPropertyEmpty()(using fakeRequest, messages)
 
   "Business Rates Property Empty view" must {
-    behave like normalPage(view, "businessRatesPropertyEmpty", "title", "heading", "p1", "subheading", "url")
+    behave like normalPage(view, "businessRatesPropertyEmpty", "title", "p1", "subheading", "url")
 
     "has a link marked with site.back leading to the Business Rates Category Page" in {
       val doc          = asDocument(view())
@@ -38,5 +38,3 @@ class BusinessRatesPropertyEmptyViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
     }
   }
-
-}

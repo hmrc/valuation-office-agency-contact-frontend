@@ -16,14 +16,15 @@
 
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(layout: PrimaryLayout)
+@this(
+        layout: PrimaryLayout
+)
 
 @()(implicit request: RequestHeader, messages: Messages)
 
 @layout(
     pageTitle = messages("service.unavailable.heading")
 ) {
-    <h1 class="govuk-heading-l">@messages("service.unavailable.heading")</h1>
     <p class="govuk-body">@messages("service.unavailable.p1")</p>
     <p class="govuk-body">
         <a class="govuk-link" href=@messages("service.unavailable.link1.href")>@messages("service.unavailable.link1.text")</a> @messages("service.unavailable.p2")

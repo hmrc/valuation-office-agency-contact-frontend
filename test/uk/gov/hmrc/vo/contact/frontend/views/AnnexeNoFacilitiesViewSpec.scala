@@ -21,14 +21,14 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{annexeNoFacilities => annexe_
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.html.annexeNoFacilities
 
-class AnnexeNoFacilitiesViewSpec extends ViewBehaviours {
+class AnnexeNoFacilitiesViewSpec extends ViewBehaviours:
 
   def councilTaxAnnexeNoFacilities: annexeNoFacilities = app.injector.instanceOf[annexe_no_facilities]
 
   def view: () => HtmlFormat.Appendable = () => councilTaxAnnexeNoFacilities()(using fakeRequest, messages)
 
   "Council Tax Bill view" must {
-    behave like normalPage(view, "annexeNoFacilities", "title", "heading", "p1", "p2", "subheading")
+    behave like normalPage(view, "annexeNoFacilities", "title", "p1", "p2", "subheading")
 
     "has a link marked with site.back leading to the Council Tax annexe self contained Page" in {
       val doc          = asDocument(view())
@@ -38,4 +38,3 @@ class AnnexeNoFacilitiesViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxAnnexeController.onHaveCookingWashingPageLoad().url
     }
   }
-}

@@ -18,11 +18,10 @@ package uk.gov.hmrc.vo.contact.frontend.utils
 
 case class RadioOption(id: String, value: String, messageKey: String, hintKey: Option[String] = None)
 
-object RadioOption {
+object RadioOption:
 
   def apply(keyPrefix: String, option: String): RadioOption = RadioOption(
     s"$keyPrefix.$option",
     option,
     s"$keyPrefix.$option"
   )
-}

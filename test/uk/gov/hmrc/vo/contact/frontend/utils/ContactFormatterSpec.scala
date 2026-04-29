@@ -20,7 +20,7 @@ import uk.gov.hmrc.vo.contact.frontend.SpecBase
 import uk.gov.hmrc.vo.contact.frontend.models.ContactDetails
 import uk.gov.hmrc.vo.contact.frontend.utils.ContactFormatter.*
 
-class ContactFormatterSpec extends SpecBase {
+class ContactFormatterSpec extends SpecBase:
 
   "Contact Formatter" must {
 
@@ -62,4 +62,3 @@ class ContactFormatterSpec extends SpecBase {
     }
 
   }
-}

@@ -16,6 +16,5 @@
 
 package uk.gov.hmrc.vo.contact.frontend.identifiers
 
-case object CouncilTaxPropertySplitMergeId extends Identifier {
+case object CouncilTaxPropertySplitMergeId extends Identifier:
   override def toString: String = "council_tax_property_split_merge"
-}

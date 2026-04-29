@@ -38,7 +38,7 @@ import scala.concurrent.Future
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSugar {
+class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSugar:
 
   val fakeDataCacheConnector: DataCacheConnector = mock[DataCacheConnector]
 
@@ -70,7 +70,6 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
 
   def viewAsString(form: Form[String] = CouncilTaxBusinessEnquiryForm()): String = councilTaxBusinessEnquiry(
     form,
-    NormalMode,
     routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
   )(using fakeRequest, messages).toString
 
@@ -127,7 +126,7 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
     }
 
     "return OK and the small part of the property is used for business page for GET" in {
-      val result = controller().onSmallPartUsedPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onSmallPartUsedPageLoad(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe propertySmallPartUsed()(using fakeRequest, messages).toString
@@ -142,4 +141,3 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
 
     }
   }
-}

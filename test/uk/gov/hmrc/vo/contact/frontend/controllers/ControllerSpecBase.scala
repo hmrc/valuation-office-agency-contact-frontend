@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.SpecBase
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{FakeDataClearAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.models.CacheMap
 
-trait ControllerSpecBase extends SpecBase with Injecting {
+trait ControllerSpecBase extends SpecBase with Injecting:
 
   val cacheMapId = "id"
 
@@ -31,5 +31,4 @@ trait ControllerSpecBase extends SpecBase with Injecting {
 
   def dontGetAnyData = FakeDataRetrievalAction(None)
 
-  def getClearCacheMap = FakeDataClearAction(Some(emptyCacheMap))
-}
+  def getClearCacheMap = FakeDataClearAction()

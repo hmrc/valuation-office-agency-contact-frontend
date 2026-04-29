@@ -18,19 +18,17 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import org.mockito.Mockito.when
 import org.scalatestplus.mockito.MockitoSugar
-import play.api.data.Form
 import play.api.libs.json.JsString
 import play.api.mvc.Call
-import play.api.test.Helpers._
-import uk.gov.hmrc.vo.contact.frontend.controllers.actions._
-import uk.gov.hmrc.vo.contact.frontend.forms.ContactDetailsForm
+import play.api.test.Helpers.*
+import uk.gov.hmrc.vo.contact.frontend.controllers.actions.*
 import uk.gov.hmrc.vo.contact.frontend.identifiers.*
-import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, ContactDetails, NormalMode}
+import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.vo.contact.frontend.views.html.error.internal_server_error
-import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyEnglandLetsNoAction => property_england_lets_no_action}
+import uk.gov.hmrc.vo.contact.frontend.views.html.propertyEnglandLetsNoAction as property_england_lets_no_action
 
-class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with MockitoSugar {
+class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with MockitoSugar:
 
   def propertyEnglandLetsNoAction: property_england_lets_no_action = app.injector.instanceOf[property_england_lets_no_action]
   def internalServerError: internal_server_error                   = app.injector.instanceOf[internal_server_error]
@@ -48,9 +46,9 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with 
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def englandActualBackLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandActualLetsController.onPageLoad().url
+  def englandActualBackLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandActualLetsController.onPageLoad.url
 
-  def viewAsStringNoAction(form: Form[ContactDetails] = ContactDetailsForm()): String =
+  def viewAsStringNoAction: String =
     propertyEnglandLetsNoAction(englandActualBackLink)(using fakeRequest, messages).toString
 
   "England Lets No Action Controller" must {
@@ -64,10 +62,10 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with 
         PropertyEnglandActualLetsId.toString    -> JsString("no")
       )
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
-      val result          = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result          = controller(getRelevantData).onPageLoad(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe viewAsStringNoAction()
+      contentAsString(result) mustBe viewAsStringNoAction
     }
 
     "returns the Property actual nights Controller when enquiry category is business_rates and sub category is business_rates_self_catering" +
@@ -80,7 +78,7 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with 
         val result                  = controller().enquiryBackLink(mockUserAnswers)
         val isBusinessRateSelection = result.isRight
         isBusinessRateSelection mustBe true
-        assert(result.toOption.get == routes.PropertyEnglandActualLetsController.onPageLoad().url)
+        assert(result.toOption.get == routes.PropertyEnglandActualLetsController.onPageLoad.url)
       }
 
     "returns the Property available 140 nights Controller when enquiry category is business_rates and sub category is business_rates_self_catering" +
@@ -92,7 +90,7 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with 
         val result                  = controller().enquiryBackLink(mockUserAnswers)
         val isBusinessRateSelection = result.isRight
         isBusinessRateSelection mustBe true
-        assert(result.toOption.get == routes.PropertyEnglandAvailableLetsController.onPageLoad().url)
+        assert(result.toOption.get == routes.PropertyEnglandAvailableLetsController.onPageLoad.url)
       }
 
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
@@ -109,7 +107,7 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with 
       when(mockUserAnswers.propertyEnglandAvailableLetsEnquiry) `thenReturn` Some("yes")
       when(mockUserAnswers.propertyEnglandActualLetsEnquiry) `thenReturn` Some("no")
       val result = controller().enquiryBackLink(mockUserAnswers)
-      result mustBe Right(uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandActualLetsController.onPageLoad().url)
+      result mustBe Right(uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandActualLetsController.onPageLoad.url)
     }
 
     "The enquiry key function produces a string with a back link when the enquiry category is no to Actual 70 nights Controller" in {
@@ -121,7 +119,7 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with 
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
-      assert(result.toOption.get == routes.PropertyEnglandActualLetsController.onPageLoad().url)
+      assert(result.toOption.get == routes.PropertyEnglandActualLetsController.onPageLoad.url)
     }
 
     "The enquiry key function produces a string with a back link when the enquiry category is no to available 140 nights controller" in {
@@ -132,22 +130,21 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase with 
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection mustBe true
-      assert(result.toOption.get == routes.PropertyEnglandAvailableLetsController.onPageLoad().url)
+      assert(result.toOption.get == routes.PropertyEnglandAvailableLetsController.onPageLoad.url)
     }
 
     "return 500 and the error view for a GET with no enquiry type" in
       intercept[Exception] {
-        val result = controller().onPageLoad(NormalMode)(fakeRequest)
+        val result = controller().onPageLoad(fakeRequest)
         status(result) mustBe INTERNAL_SERVER_ERROR
         contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
       }
 
     "redirect to Session Expired for a GET if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(dontGetAnyData).onPageLoad(fakeRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
   }
-}

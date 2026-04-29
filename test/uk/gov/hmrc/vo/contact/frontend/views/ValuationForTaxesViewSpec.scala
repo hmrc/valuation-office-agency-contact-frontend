@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{valuationForTaxes => valuation_for_taxes}
 import play.twirl.api.HtmlFormat
 
-class ValuationForTaxesViewSpec extends ViewBehaviours {
+class ValuationForTaxesViewSpec extends ViewBehaviours:
 
   def valuationForTaxes: html.valuationForTaxes = app.injector.instanceOf[valuation_for_taxes]
 
@@ -29,7 +29,7 @@ class ValuationForTaxesViewSpec extends ViewBehaviours {
 
   "Valuation For Taxes view" must {
 
-    behave like normalPage(view, "valuationForTaxes", "title", "heading", "email-title", "email")
+    behave like normalPage(view, "valuationForTaxes", "title", "email-title", "email")
 
     "has a link marked with site.back leading to the Enquiry Category Page" in {
       val doc          = asDocument(view())
@@ -47,5 +47,3 @@ class ValuationForTaxesViewSpec extends ViewBehaviours {
       ))
     }
   }
-
-}

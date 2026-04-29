@@ -14,27 +14,26 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.controllers.routes
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(layout: PrimaryLayout)
-
+@this(
+        layout: PrimaryLayout
+)
 
 @()(implicit request: RequestHeader, messages: Messages)
 
 @layout(
- pageTitle = messages("expectedUpdate.title"),
- backLink = Some(routes.EnquiryDateController.onPageLoad().url)
+    pageTitle = messages("expectedUpdate.title"),
+    backLink = EnquiryDateController.onPageLoad.url
 ) {
- <h1 class="govuk-heading-l">@messages("expectedUpdate.heading")</h1>
+    <p class="govuk-body">
+    @messages("expectedUpdate.para1")
+    </p>
 
- <p class="govuk-body">
- @messages("expectedUpdate.para1")
- </p>
+    <p class="govuk-body">
+    @messages("expectedUpdate.para2")
+    </p>
 
- <p class="govuk-body">
- @messages("expectedUpdate.para2")
- </p>
-
- @components.general_enquires(routes.TellUsMoreController.initAndStart.url)
+    @components.general_enquires(routes.TellUsMoreController.initAndStart.url)
 }

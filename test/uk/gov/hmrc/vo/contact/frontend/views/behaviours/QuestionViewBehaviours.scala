@@ -19,9 +19,9 @@ package uk.gov.hmrc.vo.contact.frontend.views.behaviours
 import play.api.data.{Form, FormError}
 import play.twirl.api.HtmlFormat
 
-import scala.jdk.CollectionConverters._
+import scala.jdk.CollectionConverters.*
 
-trait QuestionViewBehaviours[A] extends ViewBehaviours {
+trait QuestionViewBehaviours[A] extends ViewBehaviours:
 
   val errorKey         = "value"
   val errorMessage     = "error.number"
@@ -29,7 +29,7 @@ trait QuestionViewBehaviours[A] extends ViewBehaviours {
 
   val form: Form[A]
 
-  def pageWithTextFields(createView: Form[A] => HtmlFormat.Appendable, messageKeyPrefix: String, expectedFormAction: String, fields: String*): Unit =
+  def pageWithTextFields(createView: Form[A] => HtmlFormat.Appendable, fields: String*): Unit =
     "behave like a question page" when {
       "rendered" must {
         for (field <- fields)
@@ -59,4 +59,3 @@ trait QuestionViewBehaviours[A] extends ViewBehaviours {
           }
         }
     }
-}

@@ -20,14 +20,14 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{propertySmallPartUsed => property_small_part}
 import play.twirl.api.HtmlFormat
 
-class PropertySmallPartUsedViewSpec extends ViewBehaviours {
+class PropertySmallPartUsedViewSpec extends ViewBehaviours:
 
   def propertySmallPartUsed: html.propertySmallPartUsed = app.injector.instanceOf[property_small_part]
 
   def view: () => HtmlFormat.Appendable = () => propertySmallPartUsed()(using fakeRequest, messages)
 
   "Small part of property used for business view" must {
-    behave like normalPage(view, "propertySmallPartUsed", "title", "heading", "p1", "subheading", "p2.url", "p2", "p3.url", "p3")
+    behave like normalPage(view, "propertySmallPartUsed", "title", "p1", "subheading", "p2.url", "p2", "p3.url", "p3")
 
     "has a link marked with site.back leading to the Council Tax band cannot be reduced or removed" in {
       val doc          = asDocument(view())
@@ -37,4 +37,3 @@ class PropertySmallPartUsedViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxBusinessController.onPageLoad().url
     }
   }
-}

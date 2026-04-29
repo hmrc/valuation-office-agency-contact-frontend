@@ -16,23 +16,21 @@
 
 package uk.gov.hmrc.vo.contact.frontend.forms
 
-import play.api.data.{Form, FormError}
 import play.api.data.Forms.{of, single}
 import play.api.data.format.Formatter
+import play.api.data.{Form, FormError}
 import uk.gov.hmrc.vo.contact.frontend.utils.RadioOption
 
-object CouncilTaxBusinessEnquiryForm extends FormErrorHelper {
+object CouncilTaxBusinessEnquiryForm extends FormErrorHelper:
 
-  private def councilTaxBusinessEnquiryFormatter: Formatter[String] = new Formatter[String] {
+  private def councilTaxBusinessEnquiryFormatter: Formatter[String] =
+    new Formatter[String]:
+      def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match
+        case Some(s) if optionIsValid(s) => Right(s)
+        case None                        => produceError(key, "councilTaxBusinessEnquiry.form.error")
+        case _                           => produceError(key, "error.unknown")
 
-    def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match {
-      case Some(s) if optionIsValid(s) => Right(s)
-      case None                        => produceError(key, "councilTaxBusinessEnquiry.form.error")
-      case _                           => produceError(key, "error.unknown")
-    }
-
-    def unbind(key: String, value: String): Map[String, String] = Map(key -> value)
-  }
+      def unbind(key: String, value: String): Map[String, String] = Map(key -> value)
 
   def apply(): Form[String] =
     Form(single("value" -> of(using councilTaxBusinessEnquiryFormatter)))
@@ -44,5 +42,3 @@ object CouncilTaxBusinessEnquiryForm extends FormErrorHelper {
   )
 
   def optionIsValid(value: String): Boolean = options.exists(o => o.value == value)
-
-}

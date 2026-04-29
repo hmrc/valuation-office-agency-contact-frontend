@@ -15,7 +15,6 @@
  *@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components.GovukButton
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.service.model.button.LinkButton
 
@@ -29,9 +28,7 @@
 @layout(
     pageTitle = messages("session_expired.title")
 ) {
-    <h1 class="govuk-heading-l">@messages("session_expired.heading")</h1>
-
     <p class="govuk-body">@messages("session_expired.guidance")</p>
 
-    @govukButton(LinkButton("start-again", routes.Application.start().url))
+    @govukButton(LinkButton("start-again", Application.start().url))
 }

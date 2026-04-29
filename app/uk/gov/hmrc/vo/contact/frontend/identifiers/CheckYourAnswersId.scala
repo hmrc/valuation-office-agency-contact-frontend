@@ -16,6 +16,5 @@
 
 package uk.gov.hmrc.vo.contact.frontend.identifiers
 
-object CheckYourAnswersId extends Identifier {
+object CheckYourAnswersId extends Identifier:
   override def toString: String = "checkYourAnswers"
-}

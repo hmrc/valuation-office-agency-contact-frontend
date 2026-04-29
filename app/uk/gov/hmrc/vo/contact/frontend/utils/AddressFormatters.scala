@@ -18,7 +18,7 @@ package uk.gov.hmrc.vo.contact.frontend.utils
 
 import uk.gov.hmrc.vo.contact.frontend.models.PropertyAddress
 
-object AddressFormatters {
+object AddressFormatters:
 
   def formattedPropertyAddress(address: PropertyAddress, interstitial: String): String =
     insertInterstitials(Seq(Some(address.addressLine1), address.addressLine2, Some(address.town), address.county, Some(address.postcode)), interstitial)
@@ -27,8 +27,6 @@ object AddressFormatters {
     if address.isEmpty then "" else trim(address.head, "") + address.tail.foldLeft("")((acc, elem) => acc + trim(elem, interstitial))
 
   def trim(ostr: Option[String], interstitial: String): String =
-    ostr match {
+    ostr match
       case Some(s) => interstitial + s.trim
       case None    => ""
-    }
-}

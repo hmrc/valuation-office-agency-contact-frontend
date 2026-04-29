@@ -17,12 +17,10 @@
 package uk.gov.hmrc.vo.contact.frontend.forms
 
 import play.api.data.Form
-import play.api.data.Forms._
+import play.api.data.Forms.*
 
-object RefNumberForm {
+object RefNumberForm:
 
   def apply(): Form[Option[String]] = Form(
     single("value" -> optional(text))
   )
-
-}

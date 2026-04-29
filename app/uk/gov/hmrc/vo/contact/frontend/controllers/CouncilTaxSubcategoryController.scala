@@ -16,15 +16,9 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import javax.inject.Inject
-import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.MessagesControllerComponents
+import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-
-import scala.concurrent.{ExecutionContext, Future}
-import play.api.mvc
-import play.api.mvc.AnyContent
 import uk.gov.hmrc.vo.contact.frontend.Navigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
@@ -32,7 +26,10 @@ import uk.gov.hmrc.vo.contact.frontend.forms.CouncilTaxSubcategoryForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.{BusinessRatesSubcategoryId, CouncilTaxSubcategoryId}
 import uk.gov.hmrc.vo.contact.frontend.models.Mode
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
-import uk.gov.hmrc.vo.contact.frontend.views.html.councilTaxSubcategory as council_tax_subcategory
+import uk.gov.hmrc.vo.contact.frontend.views.html.councilTaxSubcategory
+
+import javax.inject.Inject
+import scala.concurrent.ExecutionContext
 
 class CouncilTaxSubcategoryController @Inject() (
   override val messagesApi: MessagesApi,
@@ -41,35 +38,31 @@ class CouncilTaxSubcategoryController @Inject() (
   navigator: Navigator,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
-  councilTaxSubcategory: council_tax_subcategory,
+  councilTaxSubcategory: councilTaxSubcategory,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
-  implicit val ec: ExecutionContext = cc.executionContext
+  given ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
+  def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.councilTaxSubcategory match {
+      val preparedForm = request.userAnswers.councilTaxSubcategory match
         case None        => CouncilTaxSubcategoryForm()
         case Some(value) => CouncilTaxSubcategoryForm().fill(value)
-      }
       Ok(councilTaxSubcategory(preparedForm, mode))
   }
 
-  def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData).async {
+  def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       CouncilTaxSubcategoryForm().bindFromRequest().fold(
-        (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(councilTaxSubcategory(formWithErrors, mode))),
+        formWithErrors => BadRequest(councilTaxSubcategory(formWithErrors, mode)),
         value =>
-          for {
+          for
             _        <- dataCacheConnector.remove(request.sessionId, BusinessRatesSubcategoryId.toString)
             cacheMap <- dataCacheConnector.save[String](request.sessionId, CouncilTaxSubcategoryId.toString, value)
-          } yield {
+          yield
             auditService.sendRadioButtonSelection(request.uri, "councilTaxSubcategory" -> value)
             Redirect(navigator.nextPage(CouncilTaxSubcategoryId, mode).apply(UserAnswers(cacheMap)))
-          }
       )
   }
-}

@@ -16,23 +16,21 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.MessagesControllerComponents
-import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-
-import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
 import play.api.mvc
-import play.api.mvc.AnyContent
+import play.api.mvc.{AnyContent, MessagesControllerComponents}
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.Navigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.vo.contact.frontend.forms.WhatElseForm
+import uk.gov.hmrc.vo.contact.frontend.forms.WhatElseForm.form
 import uk.gov.hmrc.vo.contact.frontend.identifiers.WhatElseId
 import uk.gov.hmrc.vo.contact.frontend.models.Mode
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
-import uk.gov.hmrc.vo.contact.frontend.views.html.whatElse as what_else
+import uk.gov.hmrc.vo.contact.frontend.views.html.whatElse
+
+import javax.inject.Inject
+import scala.concurrent.ExecutionContext
 
 class WhatElseController @Inject() (
   override val messagesApi: MessagesApi,
@@ -40,31 +38,26 @@ class WhatElseController @Inject() (
   navigator: Navigator,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
-  whatElse: what_else,
+  whatElseView: whatElse,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
-  implicit val ec: ExecutionContext = cc.executionContext
+  given ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData) {
+  def onPageLoad: mvc.Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.whatElse match {
-        case None        => WhatElseForm()
-        case Some(value) => WhatElseForm().fill(value)
-      }
-      Ok(whatElse(preparedForm, mode))
+      val preparedForm = request.userAnswers.whatElse.fold(form)(form.fill)
+      Ok(whatElseView(preparedForm))
   }
 
   def onSubmit(mode: Mode): mvc.Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
-      WhatElseForm().bindFromRequest().fold(
-        (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(whatElse(formWithErrors, mode))),
+      form.bindFromRequest().fold(
+        formWithErrors => BadRequest(whatElseView(formWithErrors)),
         value =>
           dataCacheConnector.save[String](request.sessionId, WhatElseId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(WhatElseId, mode).apply(UserAnswers(cacheMap)))
           )
       )
   }
-}

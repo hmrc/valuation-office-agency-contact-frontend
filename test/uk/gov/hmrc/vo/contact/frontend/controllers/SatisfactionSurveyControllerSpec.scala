@@ -18,15 +18,12 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import org.scalatestplus.mockito.MockitoSugar
 import play.api.{Configuration, Environment}
-import play.api.data.Form
 import play.api.libs.json.{JsString, Json}
 import play.api.test.FakeRequest
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.connectors.AuditingService
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
-import uk.gov.hmrc.vo.contact.frontend.forms.{SatisfactionSurvey, SatisfactionSurveyForm}
-import uk.gov.hmrc.vo.contact.frontend
-  .identifiers.{AnswerSectionId, BusinessRatesSubcategoryId, ContactDetailsId, CouncilTaxSubcategoryId, EnquiryCategoryId, PropertyAddressId, TellUsMoreId}
+import uk.gov.hmrc.vo.contact.frontend.identifiers.*
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, ContactDetails, NormalMode, PropertyAddress, TellUsMore}
 import uk.gov.hmrc.vo.contact.frontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.vo.contact.frontend.viewmodels.{AnswerRow, AnswerSection}
@@ -37,7 +34,7 @@ import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 import uk.gov.hmrc.vo.contact.frontend.views.html.error
 
-class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSugar {
+class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSugar:
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
@@ -49,7 +46,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
     None,
     List(
       AnswerRow("enquiryCategory.checkYourAnswersLabel", "enquiryCategory.council_tax", true, ""),
-      AnswerRow("contactDetails.heading", "Test<br>test123@test.com<br>077777777777", false, ""),
+      AnswerRow("contactDetails.title", "Test<br>test123@test.com<br>077777777777", false, ""),
       AnswerRow("propertyAddress.heading", "123 test<br>london<br>bn12 2kj", false, ""),
       AnswerRow("tellUsMore.checkYourAnswersLabel", "some message", false, "")
     )
@@ -74,7 +71,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[SatisfactionSurvey] = SatisfactionSurveyForm()): String =
+  def viewAsString: String =
     satisfactionSurveyThankYou()(using fakeRequest, messages).toString
 
   "SatisfactionSurvey Controller" must {
@@ -83,7 +80,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
       val result = controller().surveyThankyou()(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+      contentAsString(result) mustBe viewAsString
     }
 
     "feedback submission must be successful for formCompleteFeedback" in {
@@ -196,4 +193,3 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
     }
 
   }
-}

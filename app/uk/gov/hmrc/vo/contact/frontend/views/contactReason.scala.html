@@ -15,9 +15,8 @@
  *@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukRadios}
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes
-@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.forms.ContactReasonForm.values
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
 @import uk.gov.hmrc.vo.service.model.input.RadioField
 
@@ -32,10 +31,11 @@
 
 @layout(
     pageTitle = messages("contact.reason.label"),
-    backLink = Some(routes.Application.start().url),
-    theForm = Some(form)
+    backLink = Application.start().url,
+    showH1 = false,
+    theForm = form
 ) {
-    @formWithCSRF(action = routes.ContactReasonController.onSubmit(), Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = ContactReasonController.onSubmit) {
 
         @govukRadios(RadioField.radios(form, "contact", "reason", values))
 

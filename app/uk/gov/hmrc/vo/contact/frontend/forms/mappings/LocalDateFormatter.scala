@@ -20,10 +20,11 @@ import play.api.data.FormError
 import play.api.data.format.Formatter
 
 import java.time.LocalDate
-import scala.util.Try
 import java.util.regex.Pattern
+import scala.util.Try
 
-private[mappings] class LocalDateFormatter(key: String) extends Formatter[Option[LocalDate]] {
+private[mappings] class LocalDateFormatter(key: String) extends Formatter[Option[LocalDate]]:
+
   private val testRegex: Pattern               = """\d+""".r.pattern
   private val earliestEffectiveDate: LocalDate = LocalDate.of(1900, 1, 1)
   private val yearMsg: String                  = s"$key.year"
@@ -44,12 +45,12 @@ private[mappings] class LocalDateFormatter(key: String) extends Formatter[Option
   val monthNumber: String       = s"$key.error.month.number"
   val yearNumber: String        = s"$key.error.year.number"
 
-  override def bind(key: String, data: Map[String, String]): Either[Seq[FormError], Option[LocalDate]] = {
+  override def bind(key: String, data: Map[String, String]): Either[Seq[FormError], Option[LocalDate]] =
     val yearValue  = data.get(s"$key-year").map(_.trim).filter(_ != "")
     val monthValue = data.get(s"$key-month").map(_.trim).filter(_ != "")
     val dayValue   = data.get(s"$key-day").map(_.trim).filter(_ != "")
 
-    val validation: Either[Seq[FormError], Option[LocalDate]] = (dayValue, monthValue, yearValue) match {
+    (dayValue, monthValue, yearValue) match
       case (None, None, None)          => Right(None)
       case (None, None, _)             => Left(List(FormError(key, dayMonthRequired), FormError(key, dayMsg), FormError(key, monthMsg)))
       case (None, _, None)             => Left(List(FormError(key, dayYearRequired), FormError(key, dayMsg), FormError(key, yearMsg)))
@@ -57,14 +58,10 @@ private[mappings] class LocalDateFormatter(key: String) extends Formatter[Option
       case (None, _, _)                => Left(List(FormError(key, dayRequired), FormError(key, dayMsg)))
       case (_, None, _)                => Left(List(FormError(key, monthRequired), FormError(key, monthMsg)))
       case (_, _, None)                => Left(List(FormError(key, yearRequired), FormError(key, yearMsg)))
-      case (Some(x), Some(y), Some(z)) =>
-        validateDateField(key, x, y, z)
-    }
-    validation
-  }
+      case (Some(x), Some(y), Some(z)) => validateDateField(key, x, y, z)
 
   private def validateDateField(key: String, day: String, month: String, year: String): Either[Seq[FormError], Option[LocalDate]] =
-    for {
+    for
       day       <- validateDay(key, day)
       month     <- validateMont(key, month)
       year      <- validateYear(key, year)
@@ -79,7 +76,7 @@ private[mappings] class LocalDateFormatter(key: String) extends Formatter[Option
           else
             Right(Some(date))
         }
-    } yield finalDate
+    yield finalDate
 
   private def validateDay(key: String, day: String): Either[Seq[FormError], Int] =
     if testRegex.matcher(day).matches() then
@@ -117,4 +114,3 @@ private[mappings] class LocalDateFormatter(key: String) extends Formatter[Option
       s"$key-month" -> value.map(_.getMonthValue.toString).getOrElse(""),
       s"$key-year"  -> value.map(_.getYear.toString).getOrElse("")
     )
-}

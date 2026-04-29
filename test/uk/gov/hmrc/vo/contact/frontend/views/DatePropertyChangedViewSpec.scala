@@ -17,33 +17,28 @@
 package uk.gov.hmrc.vo.contact.frontend.views
 
 import play.api.data.Form
-import uk.gov.hmrc.vo.contact.frontend.controllers.routes
-import uk.gov.hmrc.vo.contact.frontend.forms.DatePropertyChangedForm
+import play.twirl.api.HtmlFormat
+import uk.gov.hmrc.vo.contact.frontend.forms.DatePropertyChangedForm.datePropertyChangedForm
 import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
-import uk.gov.hmrc.vo.contact.frontend.views.html.{datePropertyChanged => date_property_changed}
+import uk.gov.hmrc.vo.contact.frontend.views.html.datePropertyChanged
 
 import java.time.LocalDate
-import play.twirl.api.HtmlFormat
 
-class DatePropertyChangedViewSpec extends ViewBehaviours {
+class DatePropertyChangedViewSpec extends ViewBehaviours:
 
-  def datePropertyChanged: html.datePropertyChanged = app.injector.instanceOf[date_property_changed]
+  private def datePropertyChanged = app.injector.instanceOf[datePropertyChanged]
 
-  val messageKeyPrefix = "datePropertyChanged"
+  private val messageKeyPrefix = "datePropertyChanged"
 
-  val backUrl: String = routes.PropertyWindWaterController.onPageLoad().url
-
-  def dateForm: Form[Option[LocalDate]] = DatePropertyChangedForm()
-
-  def createView: () => HtmlFormat.Appendable = () =>
-    datePropertyChanged(dateForm, NormalMode, messageKeyPrefix, "/valuation-office-agency-contact-frontend/about-business-rates")(
+  private def createView: () => HtmlFormat.Appendable = () =>
+    datePropertyChanged(datePropertyChangedForm, messageKeyPrefix, "/valuation-office-agency-contact-frontend/about-business-rates")(
       using fakeRequest,
       messages
     )
 
-  def createViewUsingForm: Form[Option[LocalDate]] => HtmlFormat.Appendable =
-    (form: Form[Option[LocalDate]]) => datePropertyChanged(form, NormalMode, "test", "test")(using fakeRequest, messages)
+  private def createViewUsingForm: Form[Option[LocalDate]] => HtmlFormat.Appendable =
+    (form: Form[Option[LocalDate]]) => datePropertyChanged(form, "test", "test")(using fakeRequest, messages)
 
   "DatePropertyChanged view" must {
     behave like normalPage(createView, messageKeyPrefix)
@@ -52,7 +47,7 @@ class DatePropertyChangedViewSpec extends ViewBehaviours {
   "DatePropertyChanged view" when {
     "rendered" must {
       "contain continue button with the value Continue" in {
-        val doc            = asDocument(createViewUsingForm(dateForm))
+        val doc            = asDocument(createViewUsingForm(datePropertyChangedForm))
         val continueButton = doc.getElementsByClass("govuk-button").first().text()
         assert(continueButton == messages("button.continue.label"))
       }
@@ -66,4 +61,3 @@ class DatePropertyChangedViewSpec extends ViewBehaviours {
       }
     }
   }
-}

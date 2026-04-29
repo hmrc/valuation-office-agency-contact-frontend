@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesValuation => business_rates_valuation}
 import play.twirl.api.HtmlFormat
 
-class BusinessRatesValuationViewSpec extends ViewBehaviours {
+class BusinessRatesValuationViewSpec extends ViewBehaviours:
 
   def businessRatesValuation: html.businessRatesValuation = app.injector.instanceOf[business_rates_valuation]
 
@@ -32,7 +32,6 @@ class BusinessRatesValuationViewSpec extends ViewBehaviours {
       view,
       "businessRatesValuation",
       "title",
-      "heading",
       "p1.url",
       "p1.part1",
       "p1.part2",
@@ -52,4 +51,3 @@ class BusinessRatesValuationViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
     }
   }
-}

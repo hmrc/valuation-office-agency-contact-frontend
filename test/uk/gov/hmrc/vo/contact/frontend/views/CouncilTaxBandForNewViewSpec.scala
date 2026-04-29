@@ -21,14 +21,14 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{councilTaxBandForNew => council_tax_band_for_new}
 import play.twirl.api.HtmlFormat
 
-class CouncilTaxBandForNewViewSpec extends ViewBehaviours {
+class CouncilTaxBandForNewViewSpec extends ViewBehaviours:
 
   def councilTaxBandForNew: html.councilTaxBandForNew = app.injector.instanceOf[council_tax_band_for_new]
 
   def view: () => HtmlFormat.Appendable = () => councilTaxBandForNew()(using fakeRequest, messages)
 
   "Council Tax Band For A New Property view" must {
-    behave like normalPage(view, "councilTaxBandForNew", "title", "heading", "subheading", "p1.part1", "p1.url", "p1.part2", "p2", "p3", "p4", "p4.url", "p4")
+    behave like normalPage(view, "councilTaxBandForNew", "title", "subheading", "p1.part1", "p1.url", "p1.part2", "p2", "p3", "p4", "p4.url", "p4")
 
     "has a link marked with site.back leading to the Council Tax Band For A New Property" in {
       val doc          = asDocument(view())
@@ -38,4 +38,3 @@ class CouncilTaxBandForNewViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
   }
-}

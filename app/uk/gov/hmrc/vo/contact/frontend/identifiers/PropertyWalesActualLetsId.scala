@@ -16,6 +16,5 @@
 
 package uk.gov.hmrc.vo.contact.frontend.identifiers
 
-object PropertyWalesActualLetsId extends Identifier {
+object PropertyWalesActualLetsId extends Identifier:
   override def toString: String = "propertyWalesActualLets"
-}

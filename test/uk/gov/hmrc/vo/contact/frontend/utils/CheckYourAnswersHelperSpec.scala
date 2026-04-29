@@ -30,7 +30,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.ContactFormatter.*
 import uk.gov.hmrc.vo.contact.frontend.SpecBase
 import java.util.Locale
 
-class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
+class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
 
   val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
@@ -249,7 +249,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
         val checkYourAnswers = CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.anythingElse
-        result mustBe Some(AnswerRow("anythingElse.checkYourAnswersLabel", anythingElse.get, false, routes.AnythingElseTellUsController.onPageLoad().url))
+        result mustBe Some(AnswerRow("anythingElse.checkYourAnswersLabel", anythingElse.get, false, routes.AnythingElseTellUsController.onPageLoad.url))
       }
 
       "propertyAddress function should return a None if no property address is found in the User Answers" in {
@@ -271,7 +271,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
         val result = checkYourAnswers.contactDetails
         result mustBe Some(AnswerRow(
-          "contactDetails.heading",
+          "contactDetails.title",
           formattedContactDetails(userAnswers.contactDetails, "<br>"),
           false,
           routes.ContactDetailsController.onPageLoad(CheckMode).url
@@ -291,7 +291,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
           val result = checkYourAnswers.contactDetails
           result mustBe Some(AnswerRow(
-            "contactDetails.heading",
+            "contactDetails.title",
             formattedContactDetails(userAnswers.contactDetails, "<br>"),
             false,
             routes.ContactDetailsController.onPageLoad(CheckMode).url
@@ -334,4 +334,3 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar {
 
     }
   }
-}

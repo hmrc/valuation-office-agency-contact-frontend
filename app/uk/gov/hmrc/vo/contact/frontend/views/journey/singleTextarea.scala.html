@@ -14,14 +14,10 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.Implicits._
-@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.charactercount.CharacterCount
 @import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
 @import uk.gov.hmrc.vo.contact.frontend.journey.model.Page
-@import uk.gov.hmrc.vo.contact.frontend.journey.model.TellUsMorePage
-@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.language.En
-@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.language.Cy
-
+@import uk.gov.hmrc.vo.contact.frontend.journey.model.TellUsMorePage.maxChars
+@import uk.gov.hmrc.vo.service.model.input.TextAreaField
 
 @this(
         formTemplate: formTemplate,
@@ -32,23 +28,6 @@
 
 @formTemplate(form, key, backUrl, messages(page.heading), page.helpWithService) {
 
-    <h1 class="govuk-label-wrapper">
-        <label class="govuk-label govuk-label--l" for="@page.fieldId">
-        @messages(page.heading)
-        </label>
-    </h1>
-
-    @hmrcCharacterCount(
-        CharacterCount(
-            id = page.fieldId,
-            name = page.fieldId,
-            value = form(page.fieldId).value,
-            rows = 5,
-            maxLength = Some(TellUsMorePage.maxChars),
-            errorMessage = form.errors.asTextErrorMessageForField(page.fieldId),
-            language = if(messages.lang.language == "cy") Cy else En,
-            spellcheck = Some(true)
-        )
-    )
+    @hmrcCharacterCount(TextAreaField.characterCount(form, "", page.fieldId, maxLength = maxChars, isPageHeading = true))
 
 }

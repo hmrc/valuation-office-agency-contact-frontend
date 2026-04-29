@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
@@ -30,7 +29,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesSelfCateringEnquiry as business_rates_self_catering_enquiry, propertyEnglandLets as england_lets, propertyWalesLets as wales_lets}
 
 import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 class BusinessRatesSelfCateringController @Inject() (
   override val messagesApi: MessagesApi,
@@ -44,16 +43,15 @@ class BusinessRatesSelfCateringController @Inject() (
   propertyWalesLets: wales_lets,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
-  implicit val ec: ExecutionContext = cc.executionContext
+  given ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.businessRatesSelfCateringEnquiry match {
+      val preparedForm = request.userAnswers.businessRatesSelfCateringEnquiry match
         case None        => BusinessRatesSelfCateringForm()
         case Some(value) => BusinessRatesSelfCateringForm().fill(value)
-      }
 
       Ok(businessRatesSelfCateringEnquiry(preparedForm, mode))
   }
@@ -61,8 +59,7 @@ class BusinessRatesSelfCateringController @Inject() (
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       BusinessRatesSelfCateringForm().bindFromRequest().fold(
-        (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(businessRatesSelfCateringEnquiry(formWithErrors, mode))),
+        formWithErrors => BadRequest(businessRatesSelfCateringEnquiry(formWithErrors, mode)),
         value => {
           auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering" -> value)
           dataCacheConnector.save[String](request.sessionId, BusinessRatesSelfCateringId.toString, value).map(cacheMap =>
@@ -72,14 +69,12 @@ class BusinessRatesSelfCateringController @Inject() (
       )
   }
 
-  def onEngLetsPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+  def onEngLetsPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(propertyEnglandLets())
   }
 
-  def onWalLetsPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+  def onWalLetsPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(propertyWalesLets())
   }
-
-}

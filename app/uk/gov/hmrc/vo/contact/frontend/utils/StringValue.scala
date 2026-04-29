@@ -26,8 +26,8 @@ import play.api.data.format.Formatter
   *
   * @author Yuriy Tumakha
   */
-object StringValue extends Formatter[String] {
+object StringValue extends Formatter[String]:
+
   def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = Right(data.getOrElse(key, ""))
 
   def unbind(key: String, value: String): Map[String, String] = Map(key -> value)
-}

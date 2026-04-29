@@ -28,7 +28,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 
 import scala.concurrent.ExecutionContext
 
-trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
+trait SpecBase extends PlaySpec with GuiceOneAppPerSuite:
 
   def injector: Injector = app.injector
 
@@ -54,7 +54,7 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
     ee: Option[String] = None,
     cr: Option[String] = None,
     cacheMap: CacheMap = CacheMap("", Map())
-  ) extends UserAnswers(cacheMap) {
+  ) extends UserAnswers(cacheMap):
 
     override def tellUsMore: Option[TellUsMore] = Some(tum)
 
@@ -75,6 +75,3 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite {
     override def anythingElse: Option[String] = ae
 
     override def contactReason: Option[String] = cr
-
-  }
-}

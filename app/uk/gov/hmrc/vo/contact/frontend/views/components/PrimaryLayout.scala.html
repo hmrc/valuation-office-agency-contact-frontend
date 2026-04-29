@@ -25,6 +25,7 @@
 @(
         pageTitle: String,
         backLink: Option[String] = None,
+        showH1: Boolean = true,
         theForm: Option[Form[?]] = None,
         overrideErrorSummaryLink: Option[String] = None
 )(contentBlock: Html)(implicit request: RequestHeader, messages: Messages)
@@ -34,7 +35,7 @@
         ErrorSummary(
             errorList = overrideErrorSummaryLink.fold(form.errors.asTextErrorLinks)(
                 link => form.errors.map(
-                    e => ErrorLink(href = Some(link), content = Text(messages(e.message, e.args*)))
+                    e => ErrorLink(href = link, content = Text(messages(e.message, e.args *)))
                 )
             ),
             title = Text(messages("error.summary.title"))
@@ -46,5 +47,5 @@
     pageTitle,
     backLinkUrl = backLink,
     errorSummary = errorSummary,
-    showH1 = false
+    showH1 = showH1
 )(contentBlock)

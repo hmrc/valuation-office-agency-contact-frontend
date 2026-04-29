@@ -16,24 +16,24 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import javax.inject.Inject
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.vo.contact.frontend.views.html.councilTaxBill as council_tax_bill
+import uk.gov.hmrc.vo.contact.frontend.views.html.councilTaxBill
+
+import javax.inject.Inject
 
 class CouncilTaxBillController @Inject() (
   override val messagesApi: MessagesApi,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
-  councilTaxBill: council_tax_bill,
+  councilTaxBill: councilTaxBill,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
   def onPageLoad(): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(councilTaxBill())
   }
-}

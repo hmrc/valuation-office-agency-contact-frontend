@@ -25,7 +25,7 @@ import ContactFormatter._
 import uk.gov.hmrc.vo.contact.frontend.models.{CheckMode, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.viewmodels.AnswerRow
 
-class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages, dateUtil: DateUtil) {
+class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages, dateUtil: DateUtil):
 
   def tellUsMore(keyMessage: String = "tellUsMore.heading"): Option[AnswerRow] = userAnswers.tellUsMore map {
     x => AnswerRow(keyMessage, s"${x.message}", false, routes.TellUsMoreController.onPageLoad(CheckMode).url)
@@ -36,22 +36,21 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages,
   }
 
   def existingEnquiryCategory: Option[AnswerRow] = userAnswers.existingEnquiryCategory map {
-    x => AnswerRow("existingEnquiryCategory.heading", s"existingEnquiryCategory.$x", true, routes.ExistingEnquiryCategoryController.onPageLoad().url)
+    x => AnswerRow("existingEnquiryCategory.heading", s"existingEnquiryCategory.$x", true, routes.ExistingEnquiryCategoryController.onPageLoad.url)
   }
 
-  def refNumber: Option[AnswerRow] = {
+  def refNumber: Option[AnswerRow] =
     val ref = userAnswers.refNumber.map(_.trim).filter(_ != "")
     Option(
-      AnswerRow("refNumber.value", ref.getOrElse("site.not_provided"), ref.isEmpty, routes.RefNumberController.onPageLoad().url)
+      AnswerRow("refNumber.value", ref.getOrElse("site.not_provided"), ref.isEmpty, routes.RefNumberController.onPageLoad.url)
     )
-  }
 
   def whatElse: Option[AnswerRow] = userAnswers.whatElse map {
-    x => AnswerRow("whatElse.message", x, false, routes.WhatElseController.onPageLoad().url)
+    x => AnswerRow("whatElse.message.label", x, false, routes.WhatElseController.onPageLoad.url)
   }
 
   def anythingElse: Option[AnswerRow] = userAnswers.anythingElse map {
-    answer => AnswerRow("anythingElse.checkYourAnswersLabel", answer, false, routes.AnythingElseTellUsController.onPageLoad().url)
+    answer => AnswerRow("anythingElse.checkYourAnswersLabel", answer, false, routes.AnythingElseTellUsController.onPageLoad.url)
   }
 
   def enquiryCategory: Option[AnswerRow] = userAnswers.enquiryCategory map {
@@ -74,14 +73,14 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages,
   def contactDetails: Option[AnswerRow] = userAnswers.contactDetails map {
     _ =>
       AnswerRow(
-        "contactDetails.heading",
+        "contactDetails.title",
         formattedContactDetails(userAnswers.contactDetails, "<br>"),
         false,
         routes.ContactDetailsController.onPageLoad(CheckMode).url
       )
   }
 
-  def datePropertyChanged(keyMessage: String = "datePropertyChanged.poorRepair.heading"): Option[AnswerRow] = userAnswers.datePropertyChanged map {
+  def datePropertyChanged(keyMessage: String = "datePropertyChanged.poorRepair.title"): Option[AnswerRow] = userAnswers.datePropertyChanged map {
     date => AnswerRow(keyMessage, dateUtil.formattedLocalDate(date), false, routes.DatePropertyChangedController.onPageLoad().url)
   }
 
@@ -90,7 +89,7 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages,
   }
 
   def fairRentEnquiryEnquiry: Option[AnswerRow] = userAnswers.fairRentEnquiryEnquiry.map {
-    x => AnswerRow("housingBenefits.heading", s"housingBenefits.form.$x", false, routes.FairRentEnquiryController.onPageLoad().url)
+    x => AnswerRow("housingBenefits.heading", s"housingBenefits.form.$x", false, routes.FairRentEnquiryController.onPageLoad.url)
   }
 
   def housingBenefitTellUsMore: Option[AnswerRow] = userAnswers.getString(lastTellUsMorePage) map {
@@ -102,5 +101,3 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages,
         routes.JourneyController.onPageLoad(changeModePrefix + pageKey).url
       )
   }
-
-}

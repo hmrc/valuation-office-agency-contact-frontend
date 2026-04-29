@@ -16,17 +16,16 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.Logger
-import play.api.data.Form
+import play.api.Logging
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.vo.contact.frontend.journey.model.TellUsMorePage.lastTellUsMorePage
 import uk.gov.hmrc.vo.contact.frontend.Navigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.ExistingEnquiryCategoryForm
-import uk.gov.hmrc.vo.contact.frontend.identifiers.{BusinessRatesSubcategoryId, CouncilTaxSubcategoryId, EnquiryCategoryId, ExistingEnquiryCategoryId, FairRentEnquiryId, OtherSubcategoryId}
+import uk.gov.hmrc.vo.contact.frontend.identifiers.*
+import uk.gov.hmrc.vo.contact.frontend.journey.model.TellUsMorePage.lastTellUsMorePage
 import uk.gov.hmrc.vo.contact.frontend.journey.pages.OtherHAHBEnquiry
 import uk.gov.hmrc.vo.contact.frontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
@@ -45,39 +44,34 @@ class ExistingEnquiryCategoryController @Inject() (
   existingEnquiryCategory: existingEnquiryCategory,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport
+  with Logging:
 
-  private val log = Logger(this.getClass)
+  given ExecutionContext = cc.executionContext
 
-  implicit val ec: ExecutionContext = cc.executionContext
-
-  def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) { implicit request =>
-    val preparedForm = request.userAnswers.existingEnquiryCategory match {
+  def onPageLoad: Action[AnyContent] = (getData andThen requireData) { implicit request =>
+    val preparedForm = request.userAnswers.existingEnquiryCategory match
       case None        => ExistingEnquiryCategoryForm()
       case Some(value) => ExistingEnquiryCategoryForm().fill(value)
-    }
-    enquiryBackLink(request.userAnswers) match {
-      case Right(link) => Ok(existingEnquiryCategory(preparedForm, mode, link))
-      case Left(msg)   =>
-        log.warn(s"Navigation for Existing Enquiry Category page reached with error $msg")
+    enquiryBackLink(request.userAnswers) match
+      case Right(_)  => Ok(existingEnquiryCategory(preparedForm))
+      case Left(msg) =>
+        logger.warn(s"Navigation for Existing Enquiry Category page reached with error $msg")
         throw RuntimeException(s"Navigation for Existing Enquiry Category page reached with error $msg")
-    }
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = getData.async {
     implicit request =>
       ExistingEnquiryCategoryForm().bindFromRequest().fold(
-        (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(existingEnquiryCategory(formWithErrors, mode, ""))),
+        formWithErrors => BadRequest(existingEnquiryCategory(formWithErrors)),
         value =>
-          for {
+          for
             _        <- saveSubCategoryInCache(value, request.sessionId)
             _        <- dataCacheConnector.remove(request.sessionId, EnquiryCategoryId.toString)
             cacheMap <- dataCacheConnector.save[String](request.sessionId, ExistingEnquiryCategoryId.toString, value)
-          } yield {
+          yield
             auditService.sendRadioButtonSelection(request.uri, "existingEnquiryCategory" -> value)
             Redirect(navigator.nextPage(ExistingEnquiryCategoryId, mode).apply(UserAnswers(cacheMap)))
-          }
       )
   }
 
@@ -86,20 +80,17 @@ class ExistingEnquiryCategoryController @Inject() (
   }
 
   private def saveSubCategoryInCache(subcategory: String, sessionId: String) =
-    subcategory match {
+    subcategory match
       case "council_tax"     => dataCacheConnector.save[String](sessionId, CouncilTaxSubcategoryId.toString, subcategory)
       case "business_rates"  => dataCacheConnector.save[String](sessionId, BusinessRatesSubcategoryId.toString, subcategory)
       case "housing_benefit" => dataCacheConnector.save[String](sessionId, lastTellUsMorePage, OtherHAHBEnquiry.key)
       case "fair_rent"       => dataCacheConnector.save[String](sessionId, FairRentEnquiryId.toString, "other_request")
       case "other"           => dataCacheConnector.save[String](sessionId, OtherSubcategoryId.toString, subcategory)
       case _                 => Future.unit
-    }
 
   private[controllers] def enquiryBackLink(answers: UserAnswers): Either[String, String] =
-    answers.contactReason match {
+    answers.contactReason match
       case Some("new_enquiry")     => Right(routes.ContactReasonController.onPageLoad.url)
       case Some("more_details")    => Right(routes.ContactReasonController.onPageLoad.url)
-      case Some("update_existing") => Right(routes.EnquiryDateController.onPageLoad().url)
+      case Some("update_existing") => Right(routes.EnquiryDateController.onPageLoad.url)
       case _                       => Left("Unknown enquiry category in enquiry key")
-    }
-}

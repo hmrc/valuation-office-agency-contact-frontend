@@ -31,10 +31,9 @@ object BRPropertyDemolishedInEngland
   extends CustomizedContent(
     key = "property-demolished-in-England",
     fieldId = "businessRatesPropertyDemolished"
-  ) {
+  ):
+
   override def previousPage: UserAnswers => Call = _ => routes.JourneyController.onPageLoad(EnglandOrWalesPropertyRouter.key)
 
   override def template(customizedContent: CustomizedContent)(using messages: Messages): Appendable =
-    brPropertyDemolishedInEngland(customizedContent)
-
-}
+    brPropertyDemolishedInEngland()

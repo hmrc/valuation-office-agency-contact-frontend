@@ -16,12 +16,12 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{valuationAdvice => valuation_advice}
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class ValuationAdviceControllerSpec extends ControllerSpecBase {
+class ValuationAdviceControllerSpec extends ControllerSpecBase:
 
   def valuationAdvice: html.valuationAdvice = app.injector.instanceOf[valuation_advice]
 
@@ -45,4 +45,3 @@ class ValuationAdviceControllerSpec extends ControllerSpecBase {
     }
 
   }
-}

@@ -14,19 +14,19 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(layout: PrimaryLayout)
+@this(
+        layout: PrimaryLayout
+)
 
 @()(implicit request: RequestHeader, messages: Messages)
 
 @layout(
     pageTitle = messages("businessRatesBill.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url),
+    backLink = BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
 ) {
-    <h1 class="govuk-heading-l">@Messages("businessRatesBill.heading")</h1>
-
     <p class="govuk-body">@Html(Messages("businessRatesBill.p1"))</p>
 
     <h2 class="govuk-heading-m">@messages("businessRatesBill.subheading")</h2>
@@ -36,5 +36,5 @@
         <li class="govuk-body">@Html(Messages("businessRatesBill.url1"))</li>
     </ul>
 
-    @components.general_enquires(uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    @components.general_enquires(TellUsMoreController.onPageLoad(NormalMode).url)
 }

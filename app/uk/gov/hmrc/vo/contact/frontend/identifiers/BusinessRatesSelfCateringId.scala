@@ -16,6 +16,5 @@
 
 package uk.gov.hmrc.vo.contact.frontend.identifiers
 
-object BusinessRatesSelfCateringId extends Identifier {
+object BusinessRatesSelfCateringId extends Identifier:
   override def toString: String = "businessRatesSelfCatering"
-}

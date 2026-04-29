@@ -18,7 +18,8 @@ package uk.gov.hmrc.vo.contact.frontend.models
 
 import uk.gov.hmrc.vo.contact.frontend.SpecBase
 
-class ContactSpec extends SpecBase {
+class ContactSpec extends SpecBase:
+
   val message                        = "message"
   val enquiryCategory                = "EC"
   val subEnquiryCategory             = "SEC"
@@ -46,4 +47,3 @@ class ContactSpec extends SpecBase {
     result.subEnquiryCategory mustBe subEnquiryCategory
     result.contact mustBe contactDetails
   }
-}

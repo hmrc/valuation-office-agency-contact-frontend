@@ -36,7 +36,8 @@ import scala.concurrent.Future
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with MockitoSugar {
+class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with MockitoSugar:
+
   val fakeDataCacheConnector: DataCacheConnector = mock[DataCacheConnector]
 
   def businessRatesSubcategory: html.businessRatesSubcategory = inject[business_rates_subcategory]
@@ -105,7 +106,7 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
     }
 
     "return OK and the correct view for valuation" in {
-      val result = controller().onValuationPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onValuationPageLoad(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe businessRatesValuation()(using fakeRequest, messages).toString()
@@ -126,4 +127,3 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
   }
-}

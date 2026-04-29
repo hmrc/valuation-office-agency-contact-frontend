@@ -17,27 +17,27 @@
 package uk.gov.hmrc.vo.contact.frontend.forms
 
 import play.api.data.Form
-import play.api.data.Forms._
-import uk.gov.hmrc.vo.contact.frontend.utils.FormHelpers.antiXSSRegex
+import play.api.data.Forms.*
 import uk.gov.hmrc.vo.contact.frontend.models.ContactDetails
+import uk.gov.hmrc.vo.contact.frontend.utils.FormHelpers.antiXSSRegex
 
-object ContactDetailsForm {
+object ContactDetailsForm:
 
   private val phoneRegex = """^(\+[-\s\./0-9]*|\d[-\s\./0-9]*)(\(\d{1,3}\)[-\s\./0-9]*|\(\d{1}\-\d{1,3}\)[-\s\./0-9]*|\d{1,20}[-\s\./0-9]*)"""
 
   private val emailRegex =
-    """^[a-zA-Z0-9\.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$""" // scalastyle:ignore
+    """^[a-zA-Z0-9\.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"""
 
-  def apply(): Form[ContactDetails] = Form(
-    mapping(
-      "fullName"      -> text.verifying("contactDetails.fullName.required", _.nonEmpty)
-        .verifying("contactDetails.fullName.invalid", _.matches(antiXSSRegex)),
-      "email"         -> text.verifying("contactDetails.email.required", _.nonEmpty)
-        .verifying("contactDetails.email.invalid", _.matches(emailRegex)),
-      "contactNumber" -> text.verifying("contactDetails.contactNumber.required", _.nonEmpty)
-        .verifying("contactDetails.contactNumber.length", _.length >= 11)
-        .verifying("contactDetails.contactNumber.length", _.length <= 20)
-        .verifying("contactDetails.contactNumber.invalid", _.matches(phoneRegex))
-    )(ContactDetails.apply)(cd => Some(Tuple.fromProductTyped(cd)))
-  )
-}
+  val contactDetailsForm: Form[ContactDetails] =
+    Form(
+      mapping(
+        "fullName"      -> text.verifying("contactDetails.fullName.required", _.nonEmpty)
+          .verifying("contactDetails.fullName.invalid", _.matches(antiXSSRegex)),
+        "email"         -> text.verifying("contactDetails.email.required", _.nonEmpty)
+          .verifying("contactDetails.email.invalid", _.matches(emailRegex)),
+        "contactNumber" -> text.verifying("contactDetails.contactNumber.required", _.nonEmpty)
+          .verifying("contactDetails.contactNumber.length", _.length >= 11)
+          .verifying("contactDetails.contactNumber.length", _.length <= 20)
+          .verifying("contactDetails.contactNumber.invalid", _.matches(phoneRegex))
+      )(ContactDetails.apply)(cd => Some(Tuple.fromProductTyped(cd)))
+    )

@@ -14,21 +14,13 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.vo.contact.frontend.views.behaviours
+package uk.gov.hmrc.vo.contact.frontend
 
-import play.twirl.api.HtmlFormat
-import uk.gov.hmrc.vo.contact.frontend.views.ViewSpecBase
+import scala.concurrent.Future
+import scala.language.implicitConversions
 
-trait SidelinkBehaviours extends ViewSpecBase {
+package object controllers:
 
-  def normalPage(view: () => HtmlFormat.Appendable, messageKeyPrefix: String, expectedGuidanceKeys: String*): Unit =
-    "behave like a normal page" when {
-      "rendered" must {
-        "display the correct guidance" in {
-          val doc = asDocument(view())
-          for (key <- expectedGuidanceKeys) assertContainsText(doc, messages(s"$messageKeyPrefix.$key"))
-        }
+  implicit def toOpt[A](a: A): Option[A] = Some(a)
 
-      }
-    }
-}
+  implicit def toFut[A](a: A): Future[A] = Future.successful(a)

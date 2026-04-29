@@ -17,38 +17,36 @@
 package uk.gov.hmrc.vo.contact.frontend.views
 
 import play.api.data.Form
-import uk.gov.hmrc.vo.contact.frontend.controllers.routes
+import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.forms.AnythingElseForm
 import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.QuestionViewBehaviours
-import uk.gov.hmrc.vo.contact.frontend.views.html.{anythingElseTellUs => anything_else}
-import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.html.anythingElseTellUs
 
-class AnythingElseTellUsViewSpec extends QuestionViewBehaviours[String] {
+class AnythingElseTellUsViewSpec extends QuestionViewBehaviours[String]:
 
-  val messageKeyPrefix = "anythingElse"
+  private val messageKeyPrefix = "anythingElse"
 
-  def anythingElse: anythingElseTellUs = app.injector.instanceOf[anything_else]
+  private def anythingElse: anythingElseTellUs = app.injector.instanceOf[anythingElseTellUs]
 
-  def createView: () => HtmlFormat.Appendable = () => anythingElse(AnythingElseForm(), NormalMode)(using fakeRequest, messages)
+  private def createView: () => HtmlFormat.Appendable = () => anythingElse(AnythingElseForm.form)(using fakeRequest, messages)
 
-  def createAlternativeView: () => HtmlFormat.Appendable = () => anythingElse(AnythingElseForm(), NormalMode)(using fakeRequest, messages)
+  private def createViewUsingForm: Form[String] => HtmlFormat.Appendable = form => anythingElse(form)(using fakeRequest, messages)
 
-  def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => anythingElse(form, NormalMode)(using fakeRequest, messages)
-
-  override val form: Form[String] = AnythingElseForm()
+  override val form: Form[String] = AnythingElseForm.form
 
   "AnythingElseTellUs view" must {
 
-    behave like normalPage(createView, messageKeyPrefix, "title", "heading")
+    "display the correct browser title" in {
+      val doc = asDocument(createView())
+      assertEqualsValue(doc, "title", messages(s"$messageKeyPrefix.message.label") + " - Valuation Office contact form - GOV.UK")
+    }
 
-    behave like pageWithTextFields(createViewUsingForm, messageKeyPrefix, routes.AnythingElseTellUsController.onSubmit().url)
+    behave like pageWithTextFields(createViewUsingForm)
   }
 
   "contain continue button with the value Continue" in {
-    val doc            = asDocument(createViewUsingForm(AnythingElseForm()))
+    val doc            = asDocument(createViewUsingForm(AnythingElseForm.form))
     val continueButton = doc.getElementById("continue-button").text()
     assert(continueButton == messages("button.continue.label"))
   }
@@ -60,4 +58,3 @@ class AnythingElseTellUsViewSpec extends QuestionViewBehaviours[String] {
     val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
     backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
   }
-}

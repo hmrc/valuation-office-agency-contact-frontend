@@ -16,6 +16,5 @@
 
 package uk.gov.hmrc.vo.contact.frontend.identifiers
 
-case object CouncilTaxPropertyEmptyId extends Identifier {
+case object CouncilTaxPropertyEmptyId extends Identifier:
   override def toString: String = "council_tax_property_empty"
-}

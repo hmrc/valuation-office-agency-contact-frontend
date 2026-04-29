@@ -19,7 +19,7 @@ package uk.gov.hmrc.vo.contact.frontend.forms
 import play.api.data.Form
 import uk.gov.hmrc.vo.contact.frontend.forms.behaviours.FormBehaviours
 
-class ContactReasonFormSpec extends FormBehaviours {
+class ContactReasonFormSpec extends FormBehaviours:
 
   val validData: Map[String, String] = Map("reason" -> "new_enquiry")
   val emptyData: Map[String, String] = Map.empty
@@ -40,4 +40,3 @@ class ContactReasonFormSpec extends FormBehaviours {
       checkForError(form, data, expectedError)
     }
   }
-}

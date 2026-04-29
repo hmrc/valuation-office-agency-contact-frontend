@@ -22,20 +22,18 @@ import play.api.data.{Form, FormError}
 import play.api.i18n.Messages
 import uk.gov.hmrc.vo.contact.frontend.utils.{DateUtil, RadioOption}
 
-object EnquiryDateForm extends FormErrorHelper {
+object EnquiryDateForm extends FormErrorHelper:
 
   private val minusDays = 28
 
-  private def enquiryDateFormatter()(using messages: Messages, dateUtil: DateUtil): Formatter[String] = new Formatter[String] {
+  private def enquiryDateFormatter()(using messages: Messages, dateUtil: DateUtil): Formatter[String] =
+    new Formatter[String]:
+      override def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match
+        case Some(s) if optionIsValid(s) => Right(s)
+        case None                        => Left(Seq(FormError(key, "error.enquiryDate.required", Seq(beforeDate()))))
+        case _                           => produceError(key, "error.unknown")
 
-    override def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match {
-      case Some(s) if optionIsValid(s) => Right(s)
-      case None                        => Left(Seq(FormError(key, "error.enquiryDate.required", Seq(beforeDate()))))
-      case _                           => produceError(key, "error.unknown")
-    }
-
-    override def unbind(key: String, value: String): Map[String, String] = Map(key -> value)
-  }
+      override def unbind(key: String, value: String): Map[String, String] = Map(key -> value)
 
   def apply()(using messages: Messages, dateUtil: DateUtil): Form[String] =
     Form(single("value" -> of(using enquiryDateFormatter())))
@@ -50,5 +48,3 @@ object EnquiryDateForm extends FormErrorHelper {
 
   def beforeDate()(using messages: Messages, dateUtil: DateUtil): String =
     dateUtil.formattedZonedDate(dateUtil.nowInUK.minusDays(minusDays))
-
-}

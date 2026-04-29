@@ -31,10 +31,9 @@ object HousingBenefitAppeals
   extends CustomizedContent(
     key = "housing-benefit-appeals",
     fieldId = "housingBenefitAppeals"
-  ) {
+  ):
+
   override def previousPage: UserAnswers => Call = _ => routes.JourneyController.onPageLoad(HousingBenefitEnquiry.key)
 
   override def template(customizedContent: CustomizedContent)(using messages: Messages): Appendable =
-    housingBenefitAppeals(customizedContent)
-
-}
+    housingBenefitAppeals()

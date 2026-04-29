@@ -16,23 +16,21 @@
 
 package uk.gov.hmrc.vo.contact.frontend.forms
 
-import play.api.data.{Form, FormError}
 import play.api.data.Forms.*
 import play.api.data.format.Formatter
+import play.api.data.{Form, FormError}
 import uk.gov.hmrc.vo.contact.frontend.utils.RadioOption
 
-object ExistingEnquiryCategoryForm extends FormErrorHelper {
+object ExistingEnquiryCategoryForm extends FormErrorHelper:
 
-  private def existingEnquiryCategoryFormatter: Formatter[String] = new Formatter[String] {
+  private def existingEnquiryCategoryFormatter: Formatter[String] =
+    new Formatter[String]:
+      def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match
+        case Some(s) if optionIsValid(s) => Right(s)
+        case None                        => produceError(key, "error.existingEnquiryCategory.required")
+        case _                           => produceError(key, "error.unknown")
 
-    def bind(key: String, data: Map[String, String]): Either[Seq[FormError], String] = data.get(key) match {
-      case Some(s) if optionIsValid(s) => Right(s)
-      case None                        => produceError(key, "error.existingEnquiryCategory.required")
-      case _                           => produceError(key, "error.unknown")
-    }
-
-    def unbind(key: String, value: String): Map[String, String] = Map(key -> value)
-  }
+      def unbind(key: String, value: String): Map[String, String] = Map(key -> value)
 
   def apply(): Form[String] =
     Form(single("value" -> of(using existingEnquiryCategoryFormatter)))
@@ -46,4 +44,3 @@ object ExistingEnquiryCategoryForm extends FormErrorHelper {
   )
 
   def optionIsValid(value: String): Boolean = options.exists(o => o.value == value)
-}

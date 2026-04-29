@@ -19,11 +19,13 @@
 @import uk.gov.hmrc.govukfrontend.views.html.components.GovukDateInput
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.dateinput.{DateInput, InputItem}
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errormessage.ErrorMessage
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.{Fieldset, Legend}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errormessage.ErrorMessage
 
-@this(govukDateInput: GovukDateInput)
+@this(
+        govukDateInput: GovukDateInput
+)
 
 @(
         form: Form[?],
@@ -36,32 +38,32 @@
 
 @govukDateInput(DateInput(
     id,
-    namePrefix = Some(form(id).name),
-    errorMessage = form(id).error.map(err => ErrorMessage(content = Text(messages(err.message, err.args*)))),
-    hint = if(hint.isDefined) Some(Hint(content = Text(hint.get))) else None,
-    fieldset = Some(Fieldset(
-        legend = Some(Legend(
+    namePrefix = form(id).name,
+    errorMessage = form(id).error.map(err => ErrorMessage(content = Text(messages(err.message, err.args *)))),
+    hint = if(hint.isDefined) Hint(content = Text(hint.get)) else None,
+    fieldset = Fieldset(
+        legend = Legend(
             content = Text(legend),
             isPageHeading = headingIsLegend,
             classes = legendClass.getOrElse("govuk-fieldset__legend--l")
-        ))
-    )),
+        )
+    ),
     items = Seq(
         InputItem(
             name = form("day").name,
-            label = Some(messages("date.input.day")),
+            label = messages("date.input.day"),
             value = form(s"$id-day").value,
             classes = s"govuk-input--width-2 ${form(id).errors.find(_.message == s"$id.day").map(_ => " govuk-input--error").getOrElse("")}"
         ),
         InputItem(
             name = form("month").name,
-            label = Some(messages("date.input.month")),
+            label = messages("date.input.month"),
             value = form(s"$id-month").value,
             classes = s"govuk-input--width-2 ${form(id).errors.find(_.message == s"$id.month").map(_ => " govuk-input--error").getOrElse("")}"
         ),
         InputItem(
             name = form("year").name,
-            label = Some(messages("date.input.year")),
+            label = messages("date.input.year"),
             value = form(s"$id-year").value,
             classes = s"govuk-input--width-4 ${form(id).errors.find(_.message == s"$id.year").map(_ => " govuk-input--error").getOrElse("")}"
         )

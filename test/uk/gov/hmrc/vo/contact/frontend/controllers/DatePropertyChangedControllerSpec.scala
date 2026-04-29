@@ -19,68 +19,65 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.JsString
-import play.api.test.Helpers._
+import play.api.mvc.Call
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
-import uk.gov.hmrc.vo.contact.frontend.forms.DatePropertyChangedForm
+import uk.gov.hmrc.vo.contact.frontend.forms.DatePropertyChangedForm.datePropertyChangedForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.CouncilTaxSubcategoryId
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
-import uk.gov.hmrc.vo.contact.frontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{datePropertyChanged => date_property_changed}
+import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
+import uk.gov.hmrc.vo.contact.frontend.views.html.datePropertyChanged
 
 import java.time.LocalDate
-import play.api.mvc.Call
-import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoSugar {
+class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoSugar:
 
-  val mockUserAnswers: UserAnswers = mock[UserAnswers]
+  private def datePropertyChangedView = inject[datePropertyChanged]
 
-  def datePropertyChanged: html.datePropertyChanged = inject[date_property_changed]
+  private def routePoorRepair: Call = routes.PropertyWindWaterController.onPageLoad()
+  private def routeBusiness: Call   = routes.CouncilTaxBusinessController.onPageLoad()
+  private def routeAreaChange: Call = routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
 
-  def routePoorRepair: Call = routes.PropertyWindWaterController.onPageLoad()
-  def routeBusiness: Call   = routes.CouncilTaxBusinessController.onPageLoad()
-  def routeAreaChange: Call = routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode)
-
-  def controllerPoorRepair(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
+  private def controllerPoorRepair(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     DatePropertyChangedController(
       messagesApi,
       FakeDataCacheConnector,
       FakeNavigator(desiredRoute = routePoorRepair),
       dataRetrievalAction,
       DataRequiredActionImpl(ec),
-      datePropertyChanged,
+      datePropertyChangedView,
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def controllerBusiness(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
+  private def controllerBusiness(dataRetrievalAction: DataRetrievalAction) =
     DatePropertyChangedController(
       messagesApi,
       FakeDataCacheConnector,
       FakeNavigator(desiredRoute = routeBusiness),
       dataRetrievalAction,
       DataRequiredActionImpl(ec),
-      datePropertyChanged,
+      datePropertyChangedView,
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def controllerAreaChange(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
+  private def controllerAreaChange(dataRetrievalAction: DataRetrievalAction) =
     DatePropertyChangedController(
       messagesApi,
       FakeDataCacheConnector,
       FakeNavigator(desiredRoute = routeAreaChange),
       dataRetrievalAction,
       DataRequiredActionImpl(ec),
-      datePropertyChanged,
+      datePropertyChangedView,
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewBusinessAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()): String =
-    datePropertyChanged(form, NormalMode, "datePropertyChanged.business", routeAreaChange.url)(using fakeRequest, messages).toString
+  private def viewBusinessAsString(form: Form[Option[LocalDate]] = datePropertyChangedForm): String =
+    datePropertyChangedView(form, "datePropertyChanged.business", routeAreaChange.url)(using fakeRequest, messages).toString
 
-  def viewAreaChangeAsString(form: Form[Option[LocalDate]] = DatePropertyChangedForm()): String =
-    datePropertyChanged(form, NormalMode, "datePropertyChanged.areaChange", routeAreaChange.url)(using fakeRequest, messages).toString
+  private def viewAreaChangeAsString(form: Form[Option[LocalDate]] = datePropertyChangedForm): String =
+    datePropertyChangedView(form, "datePropertyChanged.areaChange", routeAreaChange.url)(using fakeRequest, messages).toString
 
   "DatePropertyChangedController Controller" must {
 
@@ -130,5 +127,3 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoS
       an[RuntimeException] should be thrownBy status(result)
     }
   }
-
-}

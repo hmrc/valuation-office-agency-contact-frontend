@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.forms.FormSpec
 
 import scala.util.Try
 
-trait FormBehaviours extends FormSpec {
+trait FormBehaviours extends FormSpec:
 
   val validData: Map[String, String]
 
@@ -42,7 +42,7 @@ trait FormBehaviours extends FormSpec {
       }
 
   def formWithMandatoryTextFields(fields: String*): Unit =
-    for (field <- fields) {
+    for (field <- fields) do
       s"fail to bind when $field is omitted" in {
         val data          = validData - field
         val expectedError = error(field, "error.required")
@@ -54,9 +54,8 @@ trait FormBehaviours extends FormSpec {
         val expectedError = error(field, "error.required")
         checkForError(form, data, expectedError)
       }
-    }
 
-  def formWithConditionallyMandatoryField(booleanField: String, field: String): Unit = {
+  def formWithConditionallyMandatoryField(booleanField: String, field: String): Unit =
     s"bind when $booleanField is false and $field is omitted" in {
       val data      = validData + (booleanField -> "false") - field
       val boundForm = form.bind(data)
@@ -68,10 +67,9 @@ trait FormBehaviours extends FormSpec {
       val expectedError = error(field, "error.required")
       checkForError(form, data, expectedError)
     }
-  }
 
   def formWithBooleans(fields: String*): Unit =
-    for (field <- fields) {
+    for (field <- fields) do
       s"fail to bind when $field is omitted" in {
         val data          = validData - field
         val expectedError = error(field, "error.boolean")
@@ -83,9 +81,8 @@ trait FormBehaviours extends FormSpec {
         val expectedError = error(field, "error.boolean")
         checkForError(form, data, expectedError)
       }
-    }
 
-  def formWithOptionField(field: String, validValues: String*): Unit = {
+  def formWithOptionField(field: String, validValues: String*): Unit =
     for (validValue <- validValues)
       s"bind when $field is set to $validValue" in {
         val data      = validData + (field -> validValue)
@@ -125,9 +122,8 @@ trait FormBehaviours extends FormSpec {
       val expectedError = error(field, "error.unknown")
       checkForError(form, data, expectedError)
     }
-  }
 
-  def formWithDateField(field: String): Unit = {
+  def formWithDateField(field: String): Unit =
     s"fail to bind when $field day is omitted" in {
       val data          = validData - s"$field.day"
       val expectedError = error(s"$field.day", "error.date.day_blank")
@@ -223,6 +219,3 @@ trait FormBehaviours extends FormSpec {
       val expectedError = error("dateOfBirth", "error.invalid_date")
       checkForError(form, data, expectedError)
     }
-
-  }
-}

@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
@@ -27,10 +26,10 @@ import uk.gov.hmrc.vo.contact.frontend.forms.FairRentEnquiryForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.FairRentEnquiryId
 import uk.gov.hmrc.vo.contact.frontend.models.Mode
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
-import uk.gov.hmrc.vo.contact.frontend.views.html.{checkFairRentApplication as check_fair_rent_application, fairRentEnquiry as fair_rent_enquiry, submitFairRentApplication as submit_fair_rent_application}
+import uk.gov.hmrc.vo.contact.frontend.views.html.{checkFairRentApplication, fairRentEnquiry, submitFairRentApplication}
 
 import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 class FairRentEnquiryController @Inject() (
   override val messagesApi: MessagesApi,
@@ -39,46 +38,41 @@ class FairRentEnquiryController @Inject() (
   navigator: Navigator,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
-  fairRentEnquiry: fair_rent_enquiry,
-  submitFairRentApplication: submit_fair_rent_application,
-  checkFairRentApplication: check_fair_rent_application,
+  fairRentEnquiry: fairRentEnquiry,
+  submitFairRentApplication: submitFairRentApplication,
+  checkFairRentApplication: checkFairRentApplication,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
-  implicit val ec: ExecutionContext = cc.executionContext
+  given ExecutionContext = cc.executionContext
 
-  def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+  def onPageLoad: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.fairRentEnquiryEnquiry match {
+      val preparedForm = request.userAnswers.fairRentEnquiryEnquiry match
         case None        => FairRentEnquiryForm()
         case Some(value) => FairRentEnquiryForm().fill(value)
-      }
-      Ok(fairRentEnquiry(preparedForm, mode))
+      Ok(fairRentEnquiry(preparedForm))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       FairRentEnquiryForm().bindFromRequest().fold(
-        (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(fairRentEnquiry(formWithErrors, mode))),
-        value => {
+        formWithErrors => BadRequest(fairRentEnquiry(formWithErrors)),
+        value =>
           auditService.sendRadioButtonSelection(request.uri, "fairRents" -> value)
           dataCacheConnector.save[String](request.sessionId, FairRentEnquiryId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(FairRentEnquiryId, mode).apply(UserAnswers(cacheMap)))
           )
-        }
       )
   }
 
-  def onFairRentEnquiryNew(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+  def onFairRentEnquiryNew: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(submitFairRentApplication())
   }
 
-  def onFairRentEnquiryCheck(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
+  def onFairRentEnquiryCheck: Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
       Ok(checkFairRentApplication())
   }
-
-}

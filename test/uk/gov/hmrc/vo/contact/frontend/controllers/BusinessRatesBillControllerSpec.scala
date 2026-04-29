@@ -18,10 +18,10 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesBill => business_rates_bill}
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class BusinessRatesBillControllerSpec extends ControllerSpecBase {
+class BusinessRatesBillControllerSpec extends ControllerSpecBase:
 
   def businessRatesBill: html.businessRatesBill = app.injector.instanceOf[business_rates_bill]
 
@@ -34,4 +34,3 @@ class BusinessRatesBillControllerSpec extends ControllerSpecBase {
       contentAsString(result) mustBe businessRatesBill()(using fakeRequest, messages).toString
     }
   }
-}

@@ -35,7 +35,7 @@ import java.net.URL
 /**
   * @author Yuriy Tumakha
   */
-class EmailConnectorSpec extends SpecBase with MockitoSugar with ScalaFutures {
+class EmailConnectorSpec extends SpecBase with MockitoSugar with ScalaFutures:
 
   private val contactDetails  = ContactDetails("first", "email", "contactNumber")
   private val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "e")
@@ -76,5 +76,3 @@ class EmailConnectorSpec extends SpecBase with MockitoSugar with ScalaFutures {
       response.body mustBe body
     }
   }
-
-}

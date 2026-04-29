@@ -18,20 +18,19 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, Lang, MessagesApi}
-import play.api.mvc.{Call, Flash, MessagesControllerComponents, Result}
+import play.api.mvc
+import play.api.mvc.*
 import play.twirl.api.HtmlFormat.Appendable
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-
-import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
-import play.api.mvc
-import play.api.mvc.AnyContent
 import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
-import uk.gov.hmrc.vo.contact.frontend.journey.{JourneyMap, JourneyPageRequest}
 import uk.gov.hmrc.vo.contact.frontend.journey.model.{CategoryRouter, CustomizedContent, Page, TellUsMorePage}
+import uk.gov.hmrc.vo.contact.frontend.journey.{JourneyMap, JourneyPageRequest}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.journey.{categoryRouter, customizedContent, notImplemented, singleTextarea}
+
+import javax.inject.Inject
+import scala.concurrent.ExecutionContext
 
 /**
   * @author Yuriy Tumakha
@@ -50,30 +49,31 @@ class JourneyController @Inject() (
   implicit override val messagesApi: MessagesApi
 )(using ec: ExecutionContext
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
   private val flashWithSwitchIndicator = Flash(Map("switching-language" -> "true"))
 
   def onPageLoad(key: String): mvc.Action[AnyContent] = getAnswersAndPage(key) { implicit request =>
     implicit val page: Page[String] = request.page
-    val value                       = page.getValue(request.userAnswers).getOrElse("")
+
+    val value = page.getValue(request.userAnswers).getOrElse("")
     Ok(journeyView(page.form.fill(value), key))
   }
 
   def onSubmit(key: String): mvc.Action[AnyContent] = getAnswersAndPage(key).async { implicit request =>
     implicit val page: Page[String] = request.page
+
     page.form.bindFromRequest().fold(
-      formWithErrors => Future.successful(BadRequest(journeyView(formWithErrors, key))),
+      formWithErrors => BadRequest(journeyView(formWithErrors, key)),
       value =>
-        for {
+        for
           _        <- page.beforeSaveAnswers(dataCacheConnector, request)
           cacheMap <- dataCacheConnector.save[String](request.sessionId, page.key, value)
-        } yield {
-          page match {
+        yield
+          page match
             case categoryRouter: CategoryRouter =>
               auditService.sendRadioButtonSelection(request.uri, categoryRouter.fieldId -> value)
             case _                              =>
-          }
           val userAnswers = UserAnswers(cacheMap)
 
           val call = if request.changeMode then
@@ -84,29 +84,22 @@ class JourneyController @Inject() (
           auditService.sendContinueNextPage(call.url)
 
           redirectWithLang(call, page.nextLang(userAnswers))
-        }
     )
   }
 
   private def redirectWithLang(call: Call, langOpt: Option[Lang]): Result =
-    langOpt match {
+    langOpt match
       case Some(lang) => Redirect(call).withLang(lang).flashing(flashWithSwitchIndicator)
       case _          => Redirect(call)
-    }
 
   private def getAnswersAndPage(key: String) =
     getData andThen requireData andThen journeyMap.getPage(key)
 
-  private def journeyView(form: Form[String], key: String)(using request: JourneyPageRequest[?], page: Page[String]): Appendable = {
-
+  private def journeyView(form: Form[String], key: String)(using request: JourneyPageRequest[?], page: Page[String]): Appendable =
     val backLinkUrl = page.previousPage(request.userAnswers).url
 
-    page match {
+    page match
       case categoryRouter: CategoryRouter   => categoryRouterTemplate(form, key, backLinkUrl, categoryRouter)
       case tellUsMorePage: TellUsMorePage   => singleTextareaTemplate(form, key, backLinkUrl, tellUsMorePage)
-      case customContent: CustomizedContent => customizedContentTemplate(key, backLinkUrl, customContent)
+      case customContent: CustomizedContent => customizedContentTemplate(backLinkUrl, customContent)
       case _                                => notImplementedTemplate(key, backLinkUrl, page)
-    }
-  }
-
-}

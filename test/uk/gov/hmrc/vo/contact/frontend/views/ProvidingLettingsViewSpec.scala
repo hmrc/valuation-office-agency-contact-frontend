@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{providingLettings => providing_lettings}
 import play.twirl.api.HtmlFormat
 
-class ProvidingLettingsViewSpec extends ViewBehaviours {
+class ProvidingLettingsViewSpec extends ViewBehaviours:
 
   def providingLettings: html.providingLettings = app.injector.instanceOf[providing_lettings]
 
@@ -29,7 +29,7 @@ class ProvidingLettingsViewSpec extends ViewBehaviours {
 
   "Housing benefits view" must {
 
-    behave like normalPage(view, "providingLettings", "title", "heading", "p1", "p2")
+    behave like normalPage(view, "providingLettings", "title", "p1", "p2")
 
     "has a link marked with site.back leading to the Enquiry Category Page" in {
       val doc          = asDocument(view())
@@ -39,4 +39,3 @@ class ProvidingLettingsViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
     }
   }
-}

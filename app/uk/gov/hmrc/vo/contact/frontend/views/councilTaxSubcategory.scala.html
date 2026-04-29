@@ -14,16 +14,14 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.govukfrontend.views.Implicits.*
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukRadios}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.{Fieldset, Legend}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
 @import uk.gov.hmrc.vo.contact.frontend.forms.CouncilTaxSubcategoryForm
 @import uk.gov.hmrc.vo.contact.frontend.models.Mode
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
-@import uk.gov.hmrc.govukfrontend.views.Implicits.*
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
 @this(
@@ -38,28 +36,28 @@
 
 @layout(
     pageTitle = messages("councilTaxSubcategory.title"),
-    backLink = Some(EnquiryCategoryController.onPageLoad(mode).url),
-    theForm = Some(form),
-    overrideErrorSummaryLink = Some("#councilTaxSubcategory.council_tax_band_too_high")
+    backLink = EnquiryCategoryController.onPageLoad(mode).url,
+    showH1 = false,
+    theForm = form,
+    overrideErrorSummaryLink = "#councilTaxSubcategory.council_tax_band_too_high"
 ) {
-    @formWithCSRF(action = CouncilTaxSubcategoryController.onSubmit(mode), Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = CouncilTaxSubcategoryController.onSubmit(mode)) {
 
         @govukRadios(Radios(
-            fieldset = Option(Fieldset(legend = Option(
+            fieldset = Fieldset(legend =
                 Legend(content = Text(messages("councilTaxSubcategory.heading")), isPageHeading = true, classes = "govuk-fieldset__legend--l"
-                )))),
-            idPrefix = Option("councilTaxSubcategory"),
+                )),
+            idPrefix = "councilTaxSubcategory",
             name = "value",
             items = CouncilTaxSubcategoryForm.options.map(i => RadioItem(
                 content = Text(messages(i.messageKey)),
-                id = Option(i.id),
-                value = Option(i.value),
+                id = i.id,
+                value = i.value,
                 checked = form("value").value.contains(i.value)
             )
             ),
             errorMessage = form.errors.asTextErrorMessageForField("value")
         ))
-
 
         @govukButton(SubmitButton("continue"))
 

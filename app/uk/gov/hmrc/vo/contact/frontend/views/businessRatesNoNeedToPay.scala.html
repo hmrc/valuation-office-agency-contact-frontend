@@ -16,16 +16,16 @@
 
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(layout: PrimaryLayout)
+@this(
+        layout: PrimaryLayout
+)
 
 @()(implicit request: RequestHeader, messages: Messages)
 
 @layout(
     pageTitle = messages("businessRatesNoNeedToPay.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxBusinessController.onPageLoad().url)
+    backLink = CouncilTaxBusinessController.onPageLoad().url
 ) {
-    <h1 class="govuk-heading-l">@Messages("businessRatesNoNeedToPay.heading")</h1>
-
     <p class="govuk-body">@Html(Messages("businessRatesNoNeedToPay.p1"))</p>
 
     <h2 class="govuk-heading-m">@messages("businessRatesNoNeedToPay.subheading")</h2>

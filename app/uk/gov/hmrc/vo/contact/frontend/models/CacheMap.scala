@@ -16,14 +16,14 @@
 
 package uk.gov.hmrc.vo.contact.frontend.models
 
-import play.api.libs.json._
+import play.api.libs.json.*
 
 /**
   * Replacement for uk.gov.hmrc.http.cache.client.CacheMap
   *
   * @author Yuriy Tumakha
   */
-case class CacheMap(id: String, data: Map[String, JsValue]) {
+case class CacheMap(id: String, data: Map[String, JsValue]):
 
   def getEntry[T](key: String)(using fjs: Reads[T]): Option[T] =
     data
@@ -36,19 +36,16 @@ case class CacheMap(id: String, data: Map[String, JsValue]) {
             valid => valid
           )
       )
-}
 
-object CacheMap {
+object CacheMap:
   implicit val formats: Format[CacheMap] = Json.format[CacheMap]
-}
 
 class KeyStoreEntryValidationException(
   val key: String,
   val invalidJson: JsValue,
   val readingAs: Class[?],
   val errors: scala.collection.Seq[(JsPath, scala.collection.Seq[JsonValidationError])]
-) extends Exception {
+) extends Exception:
 
   override def getMessage: String =
     s"KeyStore entry for key '$key' was '${Json.stringify(invalidJson)}'. Attempt to convert to ${readingAs.getName} gave errors: $errors"
-}

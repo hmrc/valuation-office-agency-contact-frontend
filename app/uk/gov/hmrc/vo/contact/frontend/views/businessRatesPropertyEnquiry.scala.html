@@ -14,16 +14,14 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.govukfrontend.views.Implicits.*
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukRadios}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.{Fieldset, Legend}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
-@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
-@import uk.gov.hmrc.govukfrontend.views.Implicits.*
-@import uk.gov.hmrc.vo.contact.frontend.models.Mode
 @import uk.gov.hmrc.vo.contact.frontend.forms.BusinessRatesPropertyForm
+@import uk.gov.hmrc.vo.contact.frontend.models.Mode
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
 @this(
@@ -37,22 +35,23 @@
 
 @layout(
     pageTitle = messages("businessRatesPropertyEnquiry.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(mode).url),
-    theForm = Some(form),
-    overrideErrorSummaryLink = Some("#businessRatesPropertyEnquiry.england")
+    backLink = BusinessRatesSubcategoryController.onPageLoad(mode).url,
+    showH1 = false,
+    theForm = form,
+    overrideErrorSummaryLink = "#businessRatesPropertyEnquiry.england"
 ) {
-    @formWithCSRF(action = BusinessRatesPropertyController.onSubmit(), Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = BusinessRatesPropertyController.onSubmit()) {
 
         @govukRadios(Radios(
-            fieldset = Option(Fieldset(legend = Option(
+            fieldset = Fieldset(legend =
                 Legend(content = Text(messages("businessRatesPropertyEnquiry.heading")), isPageHeading = true, classes = "govuk-fieldset__legend--l"
-                )))),
-            idPrefix = Option("businessRatesPropertyEnquiry"),
+                )),
+            idPrefix = "businessRatesPropertyEnquiry",
             name = "value",
             items = BusinessRatesPropertyForm.options.map(i => RadioItem(
                 content = Text(messages(i.messageKey)),
-                id = Option(i.id),
-                value = Option(i.value),
+                id = i.id,
+                value = i.value,
                 checked = form("value").value.contains(i.value)
             )
             ),

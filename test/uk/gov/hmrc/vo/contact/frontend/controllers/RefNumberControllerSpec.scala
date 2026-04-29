@@ -18,7 +18,7 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import play.api.data.Form
 import play.api.libs.json.JsString
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.*
@@ -30,11 +30,11 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{refNumber => ref_number}
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class RefNumberControllerSpec extends ControllerSpecBase {
+class RefNumberControllerSpec extends ControllerSpecBase:
 
   def refNumber: html.refNumber = app.injector.instanceOf[ref_number]
 
-  def onwardRoute: Call = routes.RefNumberController.onPageLoad()
+  def onwardRoute: Call = routes.RefNumberController.onPageLoad
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     RefNumberController(
@@ -47,12 +47,12 @@ class RefNumberControllerSpec extends ControllerSpecBase {
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[Option[String]] = RefNumberForm()): String = refNumber(form, NormalMode)(using fakeRequest, messages).toString
+  def viewAsString(form: Form[Option[String]] = RefNumberForm()): String = refNumber(form)(using fakeRequest, messages).toString
 
   "RefNumberController Controller" must {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onPageLoad(fakeRequest)
 
       status(result) mustBe OK
       contentAsString(result) mustBe viewAsString()
@@ -62,7 +62,7 @@ class RefNumberControllerSpec extends ControllerSpecBase {
       val validData       = Map(RefNumberId.toString -> JsString("VO123"))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       contentAsString(result) mustBe viewAsString(RefNumberForm().fill(Option("VO123")))
     }
@@ -73,8 +73,6 @@ class RefNumberControllerSpec extends ControllerSpecBase {
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(onwardRoute.url)
-
     }
 
   }
-}

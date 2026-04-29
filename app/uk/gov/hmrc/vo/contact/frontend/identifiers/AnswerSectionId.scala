@@ -16,6 +16,5 @@
 
 package uk.gov.hmrc.vo.contact.frontend.identifiers
 
-case object AnswerSectionId extends Identifier {
+case object AnswerSectionId extends Identifier:
   override def toString: String = "answerSection"
-}

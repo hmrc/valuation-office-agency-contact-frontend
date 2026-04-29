@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import javax.inject.{Inject, Singleton}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
@@ -26,21 +25,22 @@ import uk.gov.hmrc.vo.contact.frontend.controllers.actions.DataRetrievalAction
 import uk.gov.hmrc.vo.contact.frontend.identifiers.{EnquiryCategoryId, ExistingEnquiryCategoryId, FairRentEnquiryId}
 import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
-import uk.gov.hmrc.vo.contact.frontend.views.html.providingLettings as providing_lettings
+import uk.gov.hmrc.vo.contact.frontend.views.html.providingLettings
 
+import javax.inject.{Inject, Singleton}
 import scala.concurrent.ExecutionContext
 
 @Singleton
 class ProvidingLettingsController @Inject() (
   override val messagesApi: MessagesApi,
-  providingLettings: providing_lettings,
+  providingLettings: providingLettings,
   dataCacheConnector: DataCacheConnector,
   getData: DataRetrievalAction,
   navigator: Navigator,
   cc: MessagesControllerComponents
 )(using ec: ExecutionContext
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
     Ok(providingLettings())
@@ -48,11 +48,9 @@ class ProvidingLettingsController @Inject() (
 
   def toEnquiryForm: Action[AnyContent] = getData.async {
     implicit request =>
-      for {
+      for
         _        <- dataCacheConnector.remove(request.sessionId, ExistingEnquiryCategoryId.toString)
         _        <- dataCacheConnector.save[String](request.sessionId, EnquiryCategoryId.toString, "fair_rent")
         cacheMap <- dataCacheConnector.save[String](request.sessionId, FairRentEnquiryId.toString, "other_request")
-      } yield Redirect(navigator.nextPage(FairRentEnquiryId, NormalMode).apply(UserAnswers(cacheMap)))
+      yield Redirect(navigator.nextPage(FairRentEnquiryId, NormalMode).apply(UserAnswers(cacheMap)))
   }
-
-}

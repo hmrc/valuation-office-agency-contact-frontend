@@ -23,16 +23,13 @@
 
 @layout(
     pageTitle = messages("councilTaxPropertyEmpty.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
+    backLink = CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
 ) {
-    <h1 class="govuk-heading-l">@Messages("councilTaxPropertyEmpty.heading")</h1>
-
-    <p class="govuk-body">@Html(Messages("councilTaxPropertyEmpty.p1"))</p>
+    <p class="govuk-body">@Html(messages("councilTaxPropertyEmpty.p1"))</p>
 
     <h2 class="govuk-heading-m">@messages("councilTaxPropertyEmpty.subHeading")</h2>
 
-    <p class="govuk-body">@Html(Messages("councilTaxPropertyEmpty.p2"))</p>
+    <p class="govuk-body">@Html(messages("councilTaxPropertyEmpty.p2"))</p>
 
-    @components.general_enquires(uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
-
+    @components.general_enquires(TellUsMoreController.onPageLoad(NormalMode).url)
 }

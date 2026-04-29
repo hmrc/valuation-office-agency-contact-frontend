@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.SpecBase
 
 import java.time.LocalDate
 
-class LocalDateFormatterSpec extends SpecBase {
+class LocalDateFormatterSpec extends SpecBase:
 
   val keyValue                  = "value"
   val formatter                 = LocalDateFormatter(keyValue)
@@ -135,5 +135,3 @@ class LocalDateFormatterSpec extends SpecBase {
         Map(inputDay -> "4", inputMonth -> "1", inputYear -> "2020")
     }
   }
-
-}

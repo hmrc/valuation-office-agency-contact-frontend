@@ -21,14 +21,14 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{councilTaxPropertyEmpty => council_tax_property_empty}
 import play.twirl.api.HtmlFormat
 
-class CouncilTaxPropertyEmptyViewSpec extends ViewBehaviours {
+class CouncilTaxPropertyEmptyViewSpec extends ViewBehaviours:
 
   def councilTaxPropertyEmpty: html.councilTaxPropertyEmpty = app.injector.instanceOf[council_tax_property_empty]
 
   def view: () => HtmlFormat.Appendable = () => councilTaxPropertyEmpty()(using fakeRequest, messages)
 
   "Council Tax Property Empty view" must {
-    behave like normalPage(view, "councilTaxPropertyEmpty", "title", "heading", "p1", "p2")
+    behave like normalPage(view, "councilTaxPropertyEmpty", "title", "p1", "p2")
 
     "has a link marked with site.back leading to the Council Tax Property Empty Page" in {
       val doc          = asDocument(view())
@@ -38,5 +38,3 @@ class CouncilTaxPropertyEmptyViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
   }
-
-}

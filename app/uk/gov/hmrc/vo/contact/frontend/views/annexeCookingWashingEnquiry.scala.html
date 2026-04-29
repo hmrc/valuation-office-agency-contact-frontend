@@ -14,15 +14,13 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.govukfrontend.views.Implicits.*
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukRadios}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.{Fieldset, Legend}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
-@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
-@import uk.gov.hmrc.govukfrontend.views.Implicits.*
 @import uk.gov.hmrc.vo.contact.frontend.forms.AnnexeCookingWashingForm
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
 @this(
@@ -36,23 +34,24 @@
 
 @layout(
     pageTitle = messages("annexeCookingWashing.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxAnnexeController.onSelfContainedEnquiryPageLoad().url),
-    theForm = Some(form),
-    overrideErrorSummaryLink = Some("#annexeCookingWashing.form.yes")
+    backLink = CouncilTaxAnnexeController.onSelfContainedEnquiryPageLoad().url,
+    showH1 = false,
+    theForm = form,
+    overrideErrorSummaryLink = "#annexeCookingWashing.form.yes"
 ) {
-    @formWithCSRF(action = CouncilTaxAnnexeController.onHaveCookingWashingSubmit(), Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = CouncilTaxAnnexeController.onHaveCookingWashingSubmit()) {
 
         @govukRadios(Radios(
-            fieldset = Option(Fieldset(legend = Option(
+            fieldset = Fieldset(legend =
                 Legend(content = Text(messages("annexeCookingWashing.heading")), isPageHeading = true, classes = "govuk-fieldset__legend--l"
-                )))),
-            idPrefix = Option("annexeCookingWashing.form"),
+                )),
+            idPrefix = "annexeCookingWashing.form",
             name = "value",
             classes = "govuk-radios--inline",
             items = AnnexeCookingWashingForm.options.map(i => RadioItem(
                 content = Text(messages(i.messageKey)),
-                id = Option(i.id),
-                value = Option(i.value),
+                id = i.id,
+                value = i.value,
                 checked = form("value").value.contains(i.value)
             )
             ),

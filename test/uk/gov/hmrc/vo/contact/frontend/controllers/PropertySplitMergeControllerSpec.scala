@@ -16,18 +16,16 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.data.Form
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction}
-import uk.gov.hmrc.vo.contact.frontend.forms.PropertyWindWaterForm
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
-import uk.gov.hmrc.vo.contact.frontend.views.html.{propertySplitMerge => property_split_merge}
+import uk.gov.hmrc.vo.contact.frontend.views.html.propertySplitMerge
+import uk.gov.hmrc.vo.contact.frontend.views.html.propertySplitMerge as property_split_merge
 
 import javax.inject.Singleton
-import uk.gov.hmrc.vo.contact.frontend.views.html.propertySplitMerge
 
 @Singleton
-class PropertySplitMergeControllerSpec extends ControllerSpecBase {
+class PropertySplitMergeControllerSpec extends ControllerSpecBase:
 
   def propertySplitMergeEnquiry: propertySplitMerge = app.injector.instanceOf[property_split_merge]
 
@@ -40,8 +38,7 @@ class PropertySplitMergeControllerSpec extends ControllerSpecBase {
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[String] = PropertyWindWaterForm()): String =
-    propertySplitMergeEnquiry()(using fakeRequest, messages).toString()
+  def viewAsString: String = propertySplitMergeEnquiry()(using fakeRequest, messages).toString()
 
   "Property Permanent Changes Controller" must {
     "return the correct view for a GET" in {
@@ -53,8 +50,7 @@ class PropertySplitMergeControllerSpec extends ControllerSpecBase {
       val result = controller().onPageLoad()(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+      contentAsString(result) mustBe viewAsString
     }
 
   }
-}

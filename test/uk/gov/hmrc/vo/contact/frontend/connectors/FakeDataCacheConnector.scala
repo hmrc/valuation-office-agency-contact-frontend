@@ -22,7 +22,8 @@ import uk.gov.hmrc.vo.contact.frontend.models.CacheMap
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
-object FakeDataCacheConnector extends DataCacheConnector {
+object FakeDataCacheConnector extends DataCacheConnector:
+
   override def save[A](cacheId: String, key: String, value: A)(implicit fmt: Format[A]): Future[CacheMap] = Future(CacheMap(cacheId, Map()))
 
   override def remove(cacheId: String, key: String): Future[Boolean] = Future.successful(true)
@@ -41,4 +42,3 @@ object FakeDataCacheConnector extends DataCacheConnector {
 
   override def replaceInCollection[A](cacheId: String, collectionKey: String, index: Int, item: A)(implicit fmt: Format[A]): Future[CacheMap] =
     Future(CacheMap(cacheId, Map()))
-}

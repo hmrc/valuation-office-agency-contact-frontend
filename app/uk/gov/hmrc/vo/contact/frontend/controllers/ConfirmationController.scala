@@ -16,25 +16,23 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import javax.inject.{Inject, Singleton}
-import play.api.Logger
+import play.api.Logging
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.MessagesControllerComponents
+import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import ConfirmationController._
-
-import scala.concurrent.ExecutionContext
-import scala.util.{Failure, Success}
-import play.api.mvc
-import play.api.mvc.AnyContent
 import uk.gov.hmrc.vo.contact.frontend.Navigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.{EmailConnector, LightweightContactEventsConnector}
+import uk.gov.hmrc.vo.contact.frontend.controllers.ConfirmationController.*
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.SatisfactionSurveyForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.CheckYourAnswersId
 import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
-import uk.gov.hmrc.vo.contact.frontend.views.html.confirmation as Confirmation
+import uk.gov.hmrc.vo.contact.frontend.views.html.confirmation
+
+import javax.inject.{Inject, Singleton}
+import scala.concurrent.ExecutionContext
+import scala.util.{Failure, Success}
 
 @Singleton()
 class ConfirmationController @Inject() (
@@ -44,56 +42,50 @@ class ConfirmationController @Inject() (
   navigator: Navigator,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
-  confirmation: Confirmation,
+  confirmationView: confirmation,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport
+  with Logging:
 
-  private val log = Logger(this.getClass)
+  given ExecutionContext = cc.executionContext
 
-  implicit val ec: ExecutionContext = cc.executionContext
-
-  def onPageLoadSendEmail: mvc.Action[AnyContent] = (getData andThen requireData).async { implicit request =>
-    val contact = request.userAnswers.contact() match {
+  def onPageLoadSendEmail: Action[AnyContent] = (getData andThen requireData).async { implicit request =>
+    val contact = request.userAnswers.contact() match
       case Right(ct) => ct
       case Left(msg) =>
-        log.warn(s"On Sending Email - Navigation for Confirmation page reached without a contact and error $msg")
+        logger.warn(s"On Sending Email - Navigation for Confirmation page reached without a contact and error $msg")
         throw RuntimeException(s"On Sending Email - Navigation for Confirmation page reached without a contact and error $msg")
-    }
 
     val result = connector.send(contact, messagesApi, request.userAnswers)
 
     result map {
       case Success(_)  =>
-        enquiryKey(request.userAnswers) match {
+        enquiryKey(request.userAnswers) match
           case Right(_)  =>
             emailConnector.sendEnquiryConfirmation(contact)
             Redirect(navigator.nextPage(CheckYourAnswersId, NormalMode).apply(request.userAnswers))
           case Left(msg) =>
-            log.warn(s"Obtaining enquiry value - Navigation for Confirmation page reached with error $msg")
+            logger.warn(s"Obtaining enquiry value - Navigation for Confirmation page reached with error $msg")
             throw RuntimeException(s"Obtaining enquiry value - Navigation for Confirmation page reached with error $msg")
-        }
       case Failure(ex) => throw RuntimeException(s"Navigation for Confirmation page reached with error - ${ex.getMessage}")
     }
   }
 
-  def onPageLoad: mvc.Action[AnyContent] = (getData andThen requireData) { implicit request =>
-    val (contact, answerSections) = (request.userAnswers.contact(), request.userAnswers.answerSection) match {
+  def onPageLoad: Action[AnyContent] = (getData andThen requireData) { implicit request =>
+    val (contact, answerSections) = (request.userAnswers.contact(), request.userAnswers.answerSection) match
       case (Right(ct), Some(as)) => (ct, as)
-      case (Left(msg), _)        =>
-        log.warn(s"On Page load - Navigation for Confirmation page reached without a contact and error $msg")
+      case (msg, _)              =>
+        logger.warn(s"On Page load - Navigation for Confirmation page reached without a contact and error $msg")
         throw RuntimeException(s"On Page load - Navigation for Confirmation page reached without a contact and error $msg")
-    }
 
-    Ok(confirmation(contact, answerSections, whatHappensNextMessages(request.userAnswers), SatisfactionSurveyForm.apply()))
-
+    Ok(confirmationView(contact, answerSections, whatHappensNextMessages(request.userAnswers), SatisfactionSurveyForm.apply()))
   }
-}
 
-object ConfirmationController {
+object ConfirmationController:
 
-  private[controllers] def enquiryKey(answers: UserAnswers): Either[String, String] =
-    (answers.enquiryCategory, answers.existingEnquiryCategory) match {
+  def enquiryKey(answers: UserAnswers): Either[String, String] =
+    (answers.enquiryCategory, answers.existingEnquiryCategory) match
       case (Some("council_tax"), _)     => Right("councilTaxSubcategory")
       case (Some("business_rates"), _)  => Right("businessRatesSubcategory")
       case (Some("housing_benefit"), _) => Right("housingBenefitSubcategory")
@@ -104,12 +96,9 @@ object ConfirmationController {
       case (_, Some("fair_rent"))       => Right("fairRents")
       case (_, Some("other"))           => Right("other")
       case _                            => Left("Unknown enquiry category in enquiry key")
-    }
 
-  private[controllers] def whatHappensNextMessages(answers: UserAnswers): Seq[String] =
-    (answers.enquiryCategory.isDefined, answers.existingEnquiryCategory.isDefined) match {
+  def whatHappensNextMessages(answers: UserAnswers): Seq[String] =
+    (answers.enquiryCategory.isDefined, answers.existingEnquiryCategory.isDefined) match
       case (true, false) => Seq("confirmation.new.p1")
       case (false, true) => Seq("confirmation.existing.p1", "confirmation.existing.p2")
       case _             => Seq.empty[String]
-    }
-}

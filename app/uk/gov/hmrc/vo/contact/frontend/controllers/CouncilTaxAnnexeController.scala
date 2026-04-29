@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
@@ -27,10 +26,10 @@ import uk.gov.hmrc.vo.contact.frontend.forms.{AnnexeCookingWashingForm, AnnexeFo
 import uk.gov.hmrc.vo.contact.frontend.identifiers.{CouncilTaxAnnexeEnquiryId, CouncilTaxAnnexeHaveCookingId, CouncilTaxAnnexeSelfContainedEnquiryId}
 import uk.gov.hmrc.vo.contact.frontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
-import uk.gov.hmrc.vo.contact.frontend.views.html.{annexeCookingWashingEnquiry, annexeNoFacilities, annexeNotSelfContained, annexeRemoved, annexeSelfContained, annexeSelfContainedEnquiry, councilTaxAnnexe}
+import uk.gov.hmrc.vo.contact.frontend.views.html.*
 
 import javax.inject.{Inject, Singleton}
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 @Singleton
 class CouncilTaxAnnexeController @Inject() (
@@ -63,7 +62,7 @@ class CouncilTaxAnnexeController @Inject() (
 
   def onSubmit(mode: Mode): Action[AnyContent] = getData.async { implicit request =>
     AnnexeForm().bindFromRequest().fold(
-      (formWithErrors: Form[String]) => Future.successful(BadRequest(councilTaxAnnexeView(formWithErrors, mode))),
+      formWithErrors => BadRequest(councilTaxAnnexeView(formWithErrors, mode)),
       value =>
         for
           _        <- dataCacheConnector.remove(request.sessionId, CouncilTaxAnnexeEnquiryId.toString)
@@ -87,8 +86,7 @@ class CouncilTaxAnnexeController @Inject() (
 
   def onSelfContainedSubmit: Action[AnyContent] = (getData `andThen` requireData).async { implicit request =>
     AnnexeSelfContainedForm().bindFromRequest().fold(
-      (formWithErrors: Form[String]) =>
-        Future.successful(BadRequest(annexeSelfContainedEnquiryView(formWithErrors))),
+      formWithErrors => BadRequest(annexeSelfContainedEnquiryView(formWithErrors)),
       value =>
         auditService.sendRadioButtonSelection(request.uri, "annexeSelfContainedEnquiry" -> value)
         dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeSelfContainedEnquiryId.toString, value).map(cacheMap =>
@@ -118,7 +116,7 @@ class CouncilTaxAnnexeController @Inject() (
 
   def onHaveCookingWashingSubmit: Action[AnyContent] = (getData `andThen` requireData).async { implicit request =>
     AnnexeCookingWashingForm().bindFromRequest().fold(
-      (formWithErrors: Form[String]) => Future.successful(BadRequest(annexeCookingWashingEnquiryView(formWithErrors))),
+      formWithErrors => BadRequest(annexeCookingWashingEnquiryView(formWithErrors)),
       value =>
         auditService.sendRadioButtonSelection(request.uri, "annexeCookingWashing" -> value)
         dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeHaveCookingId.toString, value).map(cacheMap =>

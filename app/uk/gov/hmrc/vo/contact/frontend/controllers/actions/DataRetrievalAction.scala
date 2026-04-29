@@ -21,30 +21,28 @@ import play.api.mvc.{ActionBuilder, ActionTransformer, AnyContent, BodyParser, C
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.http.HeaderCarrierConverter
 import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
+import uk.gov.hmrc.vo.contact.frontend.controllers.*
 import uk.gov.hmrc.vo.contact.frontend.models.requests.OptionalDataRequest
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 
 import scala.concurrent.{ExecutionContext, Future}
 
 class DataRetrievalActionImpl @Inject() (val dataCacheConnector: DataCacheConnector, cc: ControllerComponents)(using ec: ExecutionContext)
-  extends DataRetrievalAction {
+  extends DataRetrievalAction:
 
-  override protected def transform[A](request: Request[A]): Future[OptionalDataRequest[A]] = {
+  override protected def transform[A](request: Request[A]): Future[OptionalDataRequest[A]] =
     implicit val hc: HeaderCarrier = HeaderCarrierConverter.fromRequestAndSession(request, request.session)
 
-    hc.sessionId match {
+    hc.sessionId match
       case None            => Future.failed(IllegalStateException())
       case Some(sessionId) =>
         dataCacheConnector.fetch(sessionId.toString).map {
           case None       => OptionalDataRequest(request, sessionId.toString, None)
-          case Some(data) => OptionalDataRequest(request, sessionId.toString, Some(UserAnswers(data)))
+          case Some(data) => OptionalDataRequest(request, sessionId.toString, UserAnswers(data))
         }
-    }
-  }
 
   override def parser: BodyParser[AnyContent]               = cc.parsers.default
   override protected def executionContext: ExecutionContext = cc.executionContext
-}
 
 @ImplementedBy(classOf[DataRetrievalActionImpl])
 trait DataRetrievalAction extends ActionTransformer[Request, OptionalDataRequest] with ActionBuilder[OptionalDataRequest, AnyContent]

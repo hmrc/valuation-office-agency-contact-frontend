@@ -22,14 +22,14 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{councilTaxBusinessEnquiry => council_tax_business_enquiry}
 import play.twirl.api.HtmlFormat
 
-class CouncilTaxBusinessEnquiryViewSpec extends ViewBehaviours {
+class CouncilTaxBusinessEnquiryViewSpec extends ViewBehaviours:
 
   val backlink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
 
   def councilTaxBusinessEnquiry: html.councilTaxBusinessEnquiry = app.injector.instanceOf[council_tax_business_enquiry]
 
   def view: () => HtmlFormat.Appendable =
-    () => councilTaxBusinessEnquiry(CouncilTaxBusinessEnquiryForm(), NormalMode, backlink)(using fakeRequest, messages)
+    () => councilTaxBusinessEnquiry(CouncilTaxBusinessEnquiryForm(), backlink)(using fakeRequest, messages)
 
   "Council Tax Bill view" must {
     behave like normalPage(view, "councilTaxBusinessEnquiry", "title", "heading", "form.all_property", "form.large_property", "form.small_property")
@@ -42,5 +42,3 @@ class CouncilTaxBusinessEnquiryViewSpec extends ViewBehaviours {
       backlinkUrl mustBe backlink
     }
   }
-
-}

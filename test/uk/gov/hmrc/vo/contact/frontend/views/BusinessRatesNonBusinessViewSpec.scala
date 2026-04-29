@@ -21,14 +21,14 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesNonBusiness => business_rates_non_business}
 import play.twirl.api.HtmlFormat
 
-class BusinessRatesNonBusinessViewSpec extends ViewBehaviours {
+class BusinessRatesNonBusinessViewSpec extends ViewBehaviours:
 
   def businessRatesNonBusiness: html.businessRatesNonBusiness = app.injector.instanceOf[business_rates_non_business]
 
   def view: () => HtmlFormat.Appendable = () => businessRatesNonBusiness()(using fakeRequest, messages)
 
   "Business rates non business view" must {
-    behave like normalPage(view, "businessRatesNonBusiness", "title", "heading", "p1", "p2", "step1", "step2", "step3", "subheading", "p3")
+    behave like normalPage(view, "businessRatesNonBusiness", "title", "p1", "p2", "step1", "step2", "step3", "subheading", "p3")
 
     "has a link marked with site.back leading to the business rates non business Page" in {
       val doc          = asDocument(view())
@@ -38,5 +38,3 @@ class BusinessRatesNonBusinessViewSpec extends ViewBehaviours {
       backlinkUrl mustBe routes.BusinessRatesPropertyController.onPageLoad().url
     }
   }
-
-}

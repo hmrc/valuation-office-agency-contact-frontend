@@ -17,16 +17,16 @@
 @import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(layout: PrimaryLayout)
+@this(
+        layout: PrimaryLayout
+)
 
 @()(implicit request: RequestHeader, messages: Messages)
 
 @layout(
     pageTitle = messages("councilTaxBill.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url)
+    backLink = CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
 ) {
-    <h1 class="govuk-heading-l">@Messages("councilTaxBill.heading")</h1>
-
     <p class="govuk-body">@Html(Messages("councilTaxBill.p1"))</p>
 
     <h2 class="govuk-heading-m">@messages("councilTaxBill.subheading")</h2>
@@ -36,5 +36,5 @@
         <li><a class="govuk-link">@Html(Messages("councilTaxBill.p3"))</a></li>
     </ul>
 
-    @components.general_enquires(uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    @components.general_enquires(TellUsMoreController.onPageLoad(NormalMode).url)
 }

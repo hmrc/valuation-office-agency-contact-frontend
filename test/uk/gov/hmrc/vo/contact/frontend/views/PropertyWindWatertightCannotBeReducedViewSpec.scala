@@ -22,14 +22,14 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{windWatertightCannotBeReduced
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.html.windWatertightCannotBeReduced
 
-class PropertyWindWatertightCannotBeReducedViewSpec extends ViewBehaviours {
+class PropertyWindWatertightCannotBeReducedViewSpec extends ViewBehaviours:
 
   def PropertyWindWatertightCannotBeReduced: windWatertightCannotBeReduced = app.injector.instanceOf[wind_watertight_cannot_be_reduced]
 
   def view: () => HtmlFormat.Appendable = () => PropertyWindWatertightCannotBeReduced(NormalMode)(using fakeRequest, messages)
 
   "The Property wind and water cannot be reduced or removed view" must {
-    behave like normalPage(view, "propertyWindWaterEnd", "title", "heading", "p1.part1", "p1.part2", "subheading", "p2")
+    behave like normalPage(view, "propertyWindWaterEnd", "title", "p1.part1", "p1.part2", "subheading", "p2")
 
     "has a link marked with site.back leading to the Council Tax band cannot be reduced or removed" in {
       val doc          = asDocument(view())
@@ -39,4 +39,3 @@ class PropertyWindWatertightCannotBeReducedViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
   }
-}

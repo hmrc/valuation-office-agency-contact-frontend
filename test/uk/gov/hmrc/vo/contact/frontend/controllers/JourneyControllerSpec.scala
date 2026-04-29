@@ -20,7 +20,7 @@ import play.api.data.Form
 import play.api.i18n.{DefaultMessagesApi, Lang, Messages, MessagesImpl}
 import play.api.libs.json.JsString
 import play.api.mvc.{Call, Request}
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.*
 import uk.gov.hmrc.vo.contact.frontend.journey.JourneyMap
@@ -30,7 +30,7 @@ import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.vo.contact.frontend.views.html.journey.{categoryRouter, customizedContent, notImplemented, singleTextarea}
 
-class JourneyControllerSpec extends ControllerSpecBase {
+class JourneyControllerSpec extends ControllerSpecBase:
 
   private val pageKey = HousingBenefitAllowancesRouter.key
   private val form    = HousingBenefitAllowancesRouter.form
@@ -138,8 +138,8 @@ class JourneyControllerSpec extends ControllerSpecBase {
         override def previousPage: UserAnswers => Call = _ => appStartPage
       }
 
-      implicit val request: Request[?] = fakeRequest
-      implicit val messages: Messages  = MessagesImpl(Lang("en"), new DefaultMessagesApi)
+      given request: Request[?] = fakeRequest
+      given messages: Messages  = MessagesImpl(Lang("en"), new DefaultMessagesApi)
 
       NotImplementedPage.previousPage(userAnswers).url mustBe NotImplementedPage.appStartPage.url
 
@@ -155,8 +155,8 @@ class JourneyControllerSpec extends ControllerSpecBase {
     "handle customized content HousingBenefitAppeals" in {
       val customizedContentPage = HousingBenefitAppeals
 
-      implicit val request: Request[?] = fakeRequest
-      implicit val messages: Messages  = MessagesImpl(Lang("en"), new DefaultMessagesApi)
+      given request: Request[?] = fakeRequest
+      given messages: Messages  = MessagesImpl(Lang("en"), new DefaultMessagesApi)
 
       customizedContentPage.previousPage(userAnswers).url mustBe routes.JourneyController.onPageLoad(HousingBenefitEnquiry.key).url
 
@@ -164,12 +164,10 @@ class JourneyControllerSpec extends ControllerSpecBase {
         customizedContentPage.nextPage(userAnswers).url
       }
 
-      val html = customizedContentTemplate(customizedContentPage.key, "/back/url", customizedContentPage).toString()
-      html must include("housingBenefitAppeals.heading - service.name - gov.name")
+      val html = customizedContentTemplate("/back/url", customizedContentPage).toString()
+      html must include("housingBenefitAppeals.label - service.name - gov.name")
       html must include("/back/url")
       html must include("https://www.gov.uk/appeal-housing-benefit-decision")
     }
 
   }
-
-}

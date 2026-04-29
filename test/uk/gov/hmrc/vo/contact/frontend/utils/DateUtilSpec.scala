@@ -27,7 +27,7 @@ import java.util.Locale
 /**
   * @author Yuriy Tumakha
   */
-class DateUtilSpec extends SpecBase with Logging {
+class DateUtilSpec extends SpecBase with Logging:
 
   private val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.of("en"))))
   private val messagesWelsh: Messages   = messagesApi.preferred(Seq(Lang(Locale.of("cy"))))
@@ -71,5 +71,3 @@ class DateUtilSpec extends SpecBase with Logging {
       dateUtil.formattedZonedDate(testZonedDate)(using messagesWelsh) mustBe "22 Chwefror 2022"
     }
   }
-
-}

@@ -16,18 +16,18 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.DataRetrievalAction
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{expectedUpdate => expected_update}
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class ExpectedUpdateControllerSpec extends ControllerSpecBase {
+class ExpectedUpdateControllerSpec extends ControllerSpecBase:
 
   def expectedUpdate: html.expectedUpdate = inject[expected_update]
 
-  def onwardRoute: Call = routes.EnquiryDateController.onPageLoad()
+  def onwardRoute: Call = routes.EnquiryDateController.onPageLoad
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     ExpectedUpdateController(messagesApi, dataRetrievalAction, expectedUpdate, MessageControllerComponentsHelpers.stubMessageControllerComponents)
@@ -42,8 +42,6 @@ class ExpectedUpdateControllerSpec extends ControllerSpecBase {
       status(result) mustBe OK
 
       contentAsString(result) mustBe viewAsString()
-
     }
-  }
 
-}
+  }

@@ -27,7 +27,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.check_your_answers
 import java.util.Locale
 import play.twirl.api.HtmlFormat
 
-class CheckYourAnswersViewSpec extends ViewBehaviours {
+class CheckYourAnswersViewSpec extends ViewBehaviours:
 
   private val outputSettings = OutputSettings().prettyPrint(false)
 
@@ -49,7 +49,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
   val checkYourAnswersHelper3    = CheckYourAnswersHelper(userAnswers3)
 
   val backlinkUrl: String                  = uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
-  val backlinkUrlAE: String                = uk.gov.hmrc.vo.contact.frontend.controllers.routes.AnythingElseTellUsController.onPageLoad().url
+  val backlinkUrlAE: String                = uk.gov.hmrc.vo.contact.frontend.controllers.routes.AnythingElseTellUsController.onPageLoad.url
   def checkYourAnswers: check_your_answers = app.injector.instanceOf[check_your_answers]
 
   def view1: () => HtmlFormat.Appendable = () =>
@@ -128,7 +128,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
 
     "contain Contact Details label" in {
       val doc = asDocument(view1())
-      assert(doc.toString.contains(messages("contactDetails.heading")))
+      assert(doc.toString.contains(messages("contactDetails.title")))
     }
 
     "contain Property Details label" in {
@@ -226,4 +226,3 @@ class CheckYourAnswersViewSpec extends ViewBehaviours {
       assertNotRenderedById(doc, "change-link-0")
     }
   }
-}

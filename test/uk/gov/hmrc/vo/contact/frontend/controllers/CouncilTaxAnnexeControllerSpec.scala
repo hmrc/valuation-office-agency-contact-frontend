@@ -21,7 +21,7 @@ import org.mockito.Mockito.when
 import org.scalatestplus.mockito.MockitoSugar.mock
 import play.api.data.Form
 import play.api.libs.json.JsString
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.*
@@ -42,7 +42,7 @@ import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 import uk.gov.hmrc.vo.contact.frontend.views.html.{annexeNoFacilities, annexeSelfContained, annexeSelfContainedEnquiry}
 
-class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
+class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase:
 
   def councilTaxAnnexe: html.councilTaxAnnexe                          = inject[council_tax_annexe]
   def councilTaxAnnexeSelfContainedEnquiry: annexeSelfContainedEnquiry = inject[annexe_self_contained_enquiry]
@@ -81,7 +81,7 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
   def viewCookingWashingAsString(form: Form[String] = AnnexeCookingWashingForm()): String =
     annexeCookingWashingEnquiry(form)(using fakeRequest, messages).toString
 
-  def viewcouncilTaxAnnexeSelfContainedEnquiry(form: Form[String] = AnnexeSelfContainedForm()): String =
+  def viewCouncilTaxAnnexeSelfContainedEnquiry(form: Form[String] = AnnexeSelfContainedForm()): String =
     councilTaxAnnexeSelfContainedEnquiry(form)(using fakeRequest, messages).toString
   "Council Tax Annex Controller" must {
     "return OK and the correct view for a GET" in {
@@ -233,7 +233,7 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
       val result = controller().onSelfContainedEnquiryPageLoad(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe viewcouncilTaxAnnexeSelfContainedEnquiry()
+      contentAsString(result) mustBe viewCouncilTaxAnnexeSelfContainedEnquiry()
     }
 
     "populate the view correctly on a GET when the question has previously been answered for Self Contained Enquiry Page" in {
@@ -242,7 +242,6 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase {
 
       val result = controller(getRelevantData).onSelfContainedEnquiryPageLoad(fakeRequest)
 
-      contentAsString(result) mustBe viewcouncilTaxAnnexeSelfContainedEnquiry(AnnexeSelfContainedForm().fill(AnnexeSelfContainedForm.options.head.value))
+      contentAsString(result) mustBe viewCouncilTaxAnnexeSelfContainedEnquiry(AnnexeSelfContainedForm().fill(AnnexeSelfContainedForm.options.head.value))
     }
   }
-}

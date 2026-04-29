@@ -20,11 +20,11 @@ import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyEnglandLetsNoAction => england_lets_no_action}
 
-class PropertyEnglandLetsNoActionViewSpec extends ViewBehaviours {
+class PropertyEnglandLetsNoActionViewSpec extends ViewBehaviours:
 
   def propertyEnglandLetsNoAction: england_lets_no_action = app.injector.instanceOf[england_lets_no_action]
 
-  def backLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad().url
+  def backLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad.url
 
   def viewEnglandAvailable140Nights: () => HtmlFormat.Appendable = () => propertyEnglandLetsNoAction(backLink)(using fakeRequest, messages)
 
@@ -33,7 +33,6 @@ class PropertyEnglandLetsNoActionViewSpec extends ViewBehaviours {
       viewEnglandAvailable140Nights,
       "businessRatesSelfCateringNoBusinessRate",
       "title",
-      "heading",
       "p1",
       "p2",
       "p2.bullet1",
@@ -48,7 +47,6 @@ class PropertyEnglandLetsNoActionViewSpec extends ViewBehaviours {
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
       backlinkText mustBe messages("site.back")
       val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad().url
+      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad.url
     }
   }
-}

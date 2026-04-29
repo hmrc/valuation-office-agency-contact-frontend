@@ -20,14 +20,12 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.error.session_expired
 import play.twirl.api.HtmlFormat
 
-class SessionExpiredViewSpec extends ViewBehaviours {
+class SessionExpiredViewSpec extends ViewBehaviours:
 
   def sessionExpired: session_expired = app.injector.instanceOf[session_expired]
 
   def view: () => HtmlFormat.Appendable = () => sessionExpired()(using fakeRequest, messages)
 
   "Session Expired view" must {
-
     behave like normalPage(view, "session_expired", "guidance")
   }
-}

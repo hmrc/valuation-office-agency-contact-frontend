@@ -17,25 +17,24 @@
 package uk.gov.hmrc.vo.contact.frontend.views
 
 import play.api.data.Form
-import uk.gov.hmrc.vo.contact.frontend.controllers.routes
-import uk.gov.hmrc.vo.contact.frontend.forms.PropertyAddressForm
+import uk.gov.hmrc.vo.contact.frontend.forms.PropertyAddressForm.propertyAddressForm
 import uk.gov.hmrc.vo.contact.frontend.models.{NormalMode, PropertyAddress}
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.QuestionViewBehaviours
-import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyAddress => property_address}
+import uk.gov.hmrc.vo.contact.frontend.views.html.propertyAddress
 import play.twirl.api.HtmlFormat
 
-class PropertyAddressViewSpec extends QuestionViewBehaviours[PropertyAddress] {
+class PropertyAddressViewSpec extends QuestionViewBehaviours[PropertyAddress]:
 
-  val messageKeyPrefix = "propertyAddress"
+  private val messageKeyPrefix = "propertyAddress"
 
-  def propertyAddress: html.propertyAddress = app.injector.instanceOf[property_address]
+  private def propertyAddress: propertyAddress = app.injector.instanceOf[propertyAddress]
 
-  def createView: () => HtmlFormat.Appendable = () => propertyAddress(PropertyAddressForm(), NormalMode)(using fakeRequest, messages)
+  private def createView: () => HtmlFormat.Appendable = () => propertyAddress(propertyAddressForm, NormalMode)(using fakeRequest, messages)
 
-  def createViewUsingForm: Form[PropertyAddress] => HtmlFormat.Appendable =
+  private def createViewUsingForm: Form[PropertyAddress] => HtmlFormat.Appendable =
     (form: Form[PropertyAddress]) => propertyAddress(form, NormalMode)(using fakeRequest, messages)
 
-  override val form: Form[PropertyAddress] = PropertyAddressForm()
+  override val form: Form[PropertyAddress] = propertyAddressForm
 
   "Property Address view" must {
 
@@ -43,8 +42,6 @@ class PropertyAddressViewSpec extends QuestionViewBehaviours[PropertyAddress] {
 
     behave like pageWithTextFields(
       createViewUsingForm,
-      messageKeyPrefix,
-      routes.ContactDetailsController.onSubmit(NormalMode).url,
       "addressLine1",
       "addressLine2",
       "town",
@@ -53,7 +50,7 @@ class PropertyAddressViewSpec extends QuestionViewBehaviours[PropertyAddress] {
     )
 
     "contain continue button with the value Continue" in {
-      val doc            = asDocument(createViewUsingForm(PropertyAddressForm()))
+      val doc            = asDocument(createViewUsingForm(propertyAddressForm))
       val continueButton = doc.getElementById("continue-button").text()
       assert(continueButton == messages("button.continue.label"))
     }
@@ -66,4 +63,3 @@ class PropertyAddressViewSpec extends QuestionViewBehaviours[PropertyAddress] {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url
     }
   }
-}

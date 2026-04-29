@@ -21,13 +21,11 @@
         layout: PrimaryLayout
 )
 
-@(key: String, backUrl: String, customizedContent: CustomizedContent)(implicit request: RequestHeader, messages: Messages)
+@(backUrl: String, customizedContent: CustomizedContent)(implicit request: RequestHeader, messages: Messages)
 
 @layout(
     pageTitle = messages(customizedContent.heading),
-    backLink = Some(backUrl)
+    backLink = backUrl
 ) {
-
     @customizedContent.render
-
 }

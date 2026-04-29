@@ -11,7 +11,15 @@ ThisBuild / majorVersion := 1
 lazy val microservice = Project(appName, file("."))
   .enablePlugins(PlayScala, SbtDistributablesPlugin)
   .disablePlugins(JUnitXmlReportPlugin)
-  .settings(RoutesKeys.routesImport ++= Seq("uk.gov.hmrc.vo.contact.frontend.models.*"))
+  .settings(
+    RoutesKeys.routesImport ++= Seq(
+      "uk.gov.hmrc.vo.contact.frontend.models.*"
+    ),
+    TwirlKeys.templateImports ++= Seq(
+      "uk.gov.hmrc.vo.contact.frontend.controllers.toOpt",
+      "uk.gov.hmrc.vo.contact.frontend.controllers.routes.*"
+    )
+  )
   .settings(
     PlayKeys.playDefaultPort := 7311,
     libraryDependencies ++= AppDependencies.appDependencies,

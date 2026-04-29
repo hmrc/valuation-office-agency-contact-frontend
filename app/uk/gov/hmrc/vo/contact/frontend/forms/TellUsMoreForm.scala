@@ -17,16 +17,16 @@
 package uk.gov.hmrc.vo.contact.frontend.forms
 
 import play.api.data.Form
-import play.api.data.Forms._
+import play.api.data.Forms.*
 import uk.gov.hmrc.vo.contact.frontend.models.TellUsMore
 
-object TellUsMoreForm {
+object TellUsMoreForm:
 
-  def apply(errorRequiredMessage: String = "error.tell_us_more.required"): Form[TellUsMore] = Form(
-    mapping(
-      "message" -> text.verifying(errorRequiredMessage, _.nonEmpty)
-        .verifying("error.message.max_length", _.length <= 5000)
-        .verifying("error.tell_us_more.invalid", x => !(x.contains('<') || x.contains('>')))
-    )(TellUsMore.apply)(tellUsMore => Some(tellUsMore.message))
-  )
-}
+  def apply(errorRequiredMessage: String = "error.tell_us_more.required"): Form[TellUsMore] =
+    Form(
+      mapping(
+        "message" -> text.verifying(errorRequiredMessage, _.nonEmpty)
+          .verifying("error.message.max_length", _.length <= 5000)
+          .verifying("error.tell_us_more.invalid", x => !(x.contains('<') || x.contains('>')))
+      )(TellUsMore.apply)(tellUsMore => Some(tellUsMore.message))
+    )

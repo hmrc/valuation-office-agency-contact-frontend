@@ -17,7 +17,7 @@
 package uk.gov.hmrc.vo.contact.frontend.controllers.actions
 
 import org.mockito.ArgumentMatchers.any
-import org.mockito.Mockito._
+import org.mockito.Mockito.*
 import org.scalatest.RecoverMethods
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatestplus.mockito.MockitoSugar
@@ -31,11 +31,10 @@ import uk.gov.hmrc.vo.contact.frontend.models.requests.OptionalDataRequest
 
 import scala.concurrent.Future
 
-class DataClearActionSpec extends SpecBase with MockitoSugar with ScalaFutures with RecoverMethods {
+class DataClearActionSpec extends SpecBase with MockitoSugar with ScalaFutures with RecoverMethods:
 
-  class Harness(dataCacheConnector: DataCacheConnector) extends DataClearActionImpl(dataCacheConnector, Helpers.stubControllerComponents()) {
+  class Harness(dataCacheConnector: DataCacheConnector) extends DataClearActionImpl(dataCacheConnector, Helpers.stubControllerComponents()):
     def callTransform[A](request: Request[A]): Future[OptionalDataRequest[A]] = transform(request)
-  }
 
   "Data Clear Action" when {
 
@@ -79,4 +78,3 @@ class DataClearActionSpec extends SpecBase with MockitoSugar with ScalaFutures w
     }
 
   }
-}

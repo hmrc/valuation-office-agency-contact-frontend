@@ -15,18 +15,11 @@
  *@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
-@import uk.gov.hmrc.vo.contact.frontend.models.Mode
-@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
-@import uk.gov.hmrc.vo.contact.frontend.views.html.components.help_with_service_fair_rent
-@import uk.gov.hmrc.vo.contact.frontend.models.TellUsMore
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.label.Label
-@import uk.gov.hmrc.govukfrontend.views.Implicits.*
-@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.charactercount.CharacterCount
 @import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
+@import uk.gov.hmrc.vo.contact.frontend.models.{Mode, TellUsMore}
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.{PrimaryLayout, help_with_service_fair_rent}
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
+@import uk.gov.hmrc.vo.service.model.input.TextAreaField
 
 @this(
         layout: PrimaryLayout,
@@ -37,85 +30,48 @@
 
 @(form: Form[TellUsMore], mode: Mode, enquiryKey: String, backlink: String)(implicit request: RequestHeader, messages: Messages)
 
-@content = {
-
-    @if(enquiryKey == "tellUsMore.poorRepair" || enquiryKey == "tellUsMore.business"
+@prefix = @{
+    if(enquiryKey == "tellUsMore.poorRepair" || enquiryKey == "tellUsMore.business"
             || enquiryKey == "tellUsMore.areaChange" || enquiryKey == "tellUsMore.other"
             || enquiryKey == "tellUsMore.general" || enquiryKey == "tellUsMore.notUsed"
             || enquiryKey == "tellUsMore.business.other" || enquiryKey == "tellUsMore.fairRent") {
-            <h1 class="govuk-label-wrapper">
-                <label class="govuk-label govuk-label--l" for="message">
-                    @messages(s"$enquiryKey.heading")
-                </label>
-            </h1>
-
-    @hmrcCharacterCount(
-        CharacterCount(
-            id = "message",
-            name = "message",
-            value = form("message").value,
-            hint = {
-                if(enquiryKey != "tellUsMore.notUsed") {
-                    Option(Hint(content = Text(messages(s"$enquiryKey.hint"))))
-                    } else None
-                },
-            rows = 4,
-            maxLength = Some(5000),
-            errorMessage = form.errors.asHtmlErrorMessageForField("message")
-        )
-    )
-
-        @if(enquiryKey != "tellUsMore.other" && enquiryKey != "tellUsMore.general" && enquiryKey != "tellUsMore.business.other" && enquiryKey != "tellUsMore.fairRent") {
-            <div class="govuk-inset-text">@messages(s"$enquiryKey.inset")</div>
-        }
-
+        enquiryKey
     } else {
-            <h1 class="govuk-label-wrapper">
-                <label class="govuk-label govuk-label--l" for="message">@messages("tellUsMore.heading")</label>
-            </h1>
-
-        <p class="govuk-body">@messages("tellUsMore.para")</p>
-
-        <ul class="govuk-list govuk-list--bullet">
-            <li>@messages("tellUsMore.para2")</li>
-            <li>@messages("tellUsMore.para3")</li>
-            <li>@messages("tellUsMore.para4") @messages(enquiryKey)</li>
-        </ul>
-
-    @hmrcCharacterCount(
-        CharacterCount(
-            id = "message",
-            name = "message",
-            value = form("message").value,
-            rows = 4,
-            maxLength = Some(5000),
-            hint = Option(Hint(content = Text(messages("tellUsMore.hint")))),
-            errorMessage = form.errors.asHtmlErrorMessageForField("message"),
-            label = Label(content = Text(messages("tellUsMore.message"))
-        )
-    )
-)
-
+        "tellUsMore"
     }
 }
 
-@defining(if(enquiryKey == "tellUsMore.poorRepair" || enquiryKey == "tellUsMore.business" || enquiryKey == "tellUsMore.areaChange" || enquiryKey == "tellUsMore.other"
-|| enquiryKey == "tellUsMore.notUsed" || enquiryKey == "tellUsMore.business.other" || enquiryKey == "tellUsMore.fairRent") messages(s"$enquiryKey.title") else messages("tellUsMore.title")) { title =>
+@hideLabel = @{
+    prefix != "tellUsMore"
+}
 
-    @layout(
-        pageTitle = title,
-        backLink = Some(backlink),
-        theForm = Some(form)
-    ) {
-        @formWithCSRF(action = TellUsMoreController.onSubmit(mode), Symbol("autoComplete") -> "off") {
+@layout(
+    pageTitle = messages(s"$prefix.heading"),
+    backLink = backlink,
+    theForm = form
+) {
+    @formWithCSRF(action = TellUsMoreController.onSubmit(mode)) {
 
-            @content
-
-            @govukButton(SubmitButton("continue"))
-
-            @if(enquiryKey == "tellUsMore.fairRent") {
-                @help_with_service_fair_rent()
+        @if(hideLabel) {
+            @if(messages.isDefinedAt(s"$enquiryKey.inset")) {
+                <div class="govuk-inset-text">@messages(s"$enquiryKey.inset")</div>
             }
+        } else {
+            <p class="govuk-body">@messages("tellUsMore.para")</p>
+
+            <ul class="govuk-list govuk-list--bullet">
+                <li>@messages("tellUsMore.para2")</li>
+                <li>@messages("tellUsMore.para3")</li>
+                <li>@messages("tellUsMore.para4") @messages(enquiryKey)</li>
+            </ul>
+        }
+
+        @hmrcCharacterCount(TextAreaField.characterCount(form, prefix, "message", rows = 4, maxLength = 5000, hideLabel = hideLabel))
+
+        @govukButton(SubmitButton("continue"))
+
+        @if(enquiryKey == "tellUsMore.fairRent") {
+            @help_with_service_fair_rent()
         }
     }
 }

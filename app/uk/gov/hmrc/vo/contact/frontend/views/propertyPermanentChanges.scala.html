@@ -14,21 +14,19 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.vo.contact.frontend.models.{Mode, NormalMode}
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
-@import uk.gov.hmrc.vo.contact.frontend.models.Mode
-@import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 
-@this(layout: PrimaryLayout)
+@this(
+        layout: PrimaryLayout
+)
 
-
-@(mode:Mode)(implicit request: RequestHeader, messages: Messages)
+@(mode: Mode)(implicit request: RequestHeader, messages: Messages)
 
 @layout(
     pageTitle = messages("propertyPermanentChanges.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(mode).url)
+    backLink = CouncilTaxSubcategoryController.onPageLoad(mode).url
 ) {
-    <h1 class="govuk-heading-l">@messages("propertyPermanentChanges.heading")</h1>
-
     <p class="govuk-body">
         <a class="govuk-link" target="_self" href=@messages("propertyPermanentChanges.p1.url")>
         @messages("propertyPermanentChanges.p1.part1")
@@ -40,9 +38,9 @@
 
     <p class="govuk-body">
         <a class="govuk-link" target="_self" href=@messages("propertyPermanentChanges.p2.url")>
-            @messages("propertyPermanentChanges.p2")
+        @messages("propertyPermanentChanges.p2")
         </a>
     </p>
 
-    @components.general_enquires(uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url)
+    @components.general_enquires(TellUsMoreController.onPageLoad(NormalMode).url)
 }

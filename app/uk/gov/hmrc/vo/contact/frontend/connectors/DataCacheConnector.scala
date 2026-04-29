@@ -26,7 +26,7 @@ import scala.concurrent.{ExecutionContext, Future}
 class DataCacheConnectorImpl @Inject() (
   sessionRepository: SessionRepository
 )(using ec: ExecutionContext
-) extends DataCacheConnector {
+) extends DataCacheConnector:
 
   def save[A](cacheId: String, key: String, value: A)(using fmt: Format[A]): Future[CacheMap] =
     sessionRepository.save(cacheId, key, value)
@@ -50,13 +50,12 @@ class DataCacheConnectorImpl @Inject() (
   def removeFromCollection[A](cacheId: String, collectionKey: String, item: A)(using fmt: Format[A]): Future[CacheMap] =
     getEntry[Seq[A]](cacheId, collectionKey)
       .flatMap(
-        remove(_, item) match {
+        remove(_, item) match
           case Seq()  =>
             remove(cacheId, collectionKey)
             fetch(cacheId).map(_.getOrElse(throw Exception(s"Couldn't find document with key $cacheId")))
           case newSeq =>
             save(cacheId, collectionKey, newSeq)
-        }
       )
 
   def replaceInCollection[A](cacheId: String, collectionKey: String, index: Int, item: A)(using fmt: Format[A]): Future[CacheMap] =
@@ -72,10 +71,8 @@ class DataCacheConnectorImpl @Inject() (
   private def replace[A](valuesOpt: Option[Seq[A]], index: Int, value: A): Seq[A] =
     valuesOpt.getOrElse(Seq()).updated(index, value)
 
-}
-
 @ImplementedBy(classOf[DataCacheConnectorImpl])
-trait DataCacheConnector {
+trait DataCacheConnector:
   def save[A](cacheId: String, key: String, value: A)(using fmt: Format[A]): Future[CacheMap]
 
   def remove(cacheId: String, key: String): Future[Boolean]
@@ -91,4 +88,3 @@ trait DataCacheConnector {
   def removeFromCollection[A](cacheId: String, collectionKey: String, item: A)(using fmt: Format[A]): Future[CacheMap]
 
   def replaceInCollection[A](cacheId: String, collectionKey: String, index: Int, item: A)(using fmt: Format[A]): Future[CacheMap]
-}

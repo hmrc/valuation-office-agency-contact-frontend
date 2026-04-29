@@ -34,7 +34,7 @@ import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 import uk.gov.hmrc.vo.contact.frontend.views.html.error
 
-class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
+class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
   val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
@@ -451,8 +451,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar {
       val result = controller(emptyData).initAndStart(fakeRequest)
 
       status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.RefNumberController.onPageLoad().url)
+      redirectLocation(result) mustBe Some(routes.RefNumberController.onPageLoad.url)
     }
 
   }
-}

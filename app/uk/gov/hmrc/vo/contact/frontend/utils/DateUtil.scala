@@ -28,7 +28,7 @@ import javax.inject.{Inject, Singleton}
   * @author Yuriy Tumakha
   */
 @Singleton
-class DateUtil @Inject() (langUtil: LanguageUtils) {
+class DateUtil @Inject() (langUtil: LanguageUtils):
 
   val ukTimezone: ZoneId                    = ZoneId.of("Europe/London")
   val shortDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.UK)
@@ -39,5 +39,3 @@ class DateUtil @Inject() (langUtil: LanguageUtils) {
   def formattedLocalDate(date: LocalDate)(using messages: Messages): String = langUtil.Dates.formatDate(date)
 
   def formattedZonedDate(date: ZonedDateTime)(using messages: Messages): String = formattedLocalDate(date.toLocalDate)
-
-}

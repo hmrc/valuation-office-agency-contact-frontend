@@ -16,24 +16,21 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import javax.inject.{Inject, Singleton}
-import play.api.Logger
+import play.api.Logging
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.{MessagesControllerComponents, Request}
+import play.api.mvc.{Action, AnyContent, MessagesControllerComponents, Request}
 import uk.gov.hmrc.http.HeaderCarrier
-import uk.gov.hmrc.play.http.HeaderCarrierConverter
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import ConfirmationController.whatHappensNextMessages
-
-import scala.concurrent.ExecutionContext
-import play.api.mvc
-import play.api.mvc.AnyContent
+import uk.gov.hmrc.play.http.HeaderCarrierConverter
 import uk.gov.hmrc.vo.contact.frontend.connectors.AuditingService
+import uk.gov.hmrc.vo.contact.frontend.controllers.ConfirmationController.whatHappensNextMessages
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.{SatisfactionSurvey, SatisfactionSurveyForm}
 import uk.gov.hmrc.vo.contact.frontend.utils.{AddressFormatters, UserAnswers}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{confirmation as Confirmation, satisfactionSurveyThankYou as satisfaction_Survey_Thank_You}
+import uk.gov.hmrc.vo.contact.frontend.views.html.{confirmation, satisfactionSurveyThankYou}
 
+import javax.inject.{Inject, Singleton}
+import scala.concurrent.ExecutionContext
 import scala.language.implicitConversions
 
 @Singleton()
@@ -42,43 +39,38 @@ class SatisfactionSurveyController @Inject() (
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
   auditService: AuditingService,
-  confirmation: Confirmation,
-  satisfactionSurveyThankYou: satisfaction_Survey_Thank_You,
+  confirmation: confirmation,
+  satisfactionSurveyThankYou: satisfactionSurveyThankYou,
   cc: MessagesControllerComponents
 )(using ec: ExecutionContext
 ) extends FrontendController(cc)
-  with I18nSupport {
-
-  private val log = Logger(this.getClass)
+  with I18nSupport
+  with Logging:
 
   implicit def hc(using request: Request[?]): HeaderCarrier = HeaderCarrierConverter.fromRequestAndSession(request, request.session)
 
   def enquiryKey(answers: UserAnswers): Either[String, String] =
-    answers.enquiryCategory match {
+    answers.enquiryCategory match
       case Some("council_tax")    => Right("councilTaxSubcategory")
       case Some("business_rates") => Right("businessRatesSubcategory")
       case _                      => Left("Unknown enquiry category in enquiry key")
-    }
 
-  def formCompleteFeedback: mvc.Action[AnyContent] = (getData andThen requireData) { implicit request =>
-    val (contact, answerSections) = (request.userAnswers.contact(), request.userAnswers.answerSection) match {
+  def formCompleteFeedback: Action[AnyContent] = (getData andThen requireData) { implicit request =>
+    val (contact, answerSections) = (request.userAnswers.contact(), request.userAnswers.answerSection) match
       case (Right(ct), Some(as)) => (ct, as)
-      case (Left(msg), _)        =>
-        log.warn(s"Navigation for Survey page reached without a contact and error $msg")
+      case (msg, _)              =>
+        logger.warn(s"Navigation for Survey page reached without a contact and error $msg")
         throw RuntimeException(s"Navigation for Survey page reached without a contact and error $msg")
-    }
 
     SatisfactionSurveyForm().bindFromRequest().fold(
-      formWithErrors =>
-        Ok(confirmation(contact, answerSections, whatHappensNextMessages(request.userAnswers), formWithErrors)),
-      success => {
+      formWithErrors => Ok(confirmation(contact, answerSections, whatHappensNextMessages(request.userAnswers), formWithErrors)),
+      success =>
         auditService.sendRadioButtonSelection(request.uri, "satisfaction" -> success.satisfaction)
         sendFeedback(success, AddressFormatters.formattedPropertyAddress(contact.propertyAddress, ", "))
 
         val call = routes.SatisfactionSurveyController.surveyThankyou
         auditService.sendContinueNextPage(call.url)
         Redirect(call)
-      }
     )
   }
 
@@ -87,8 +79,6 @@ class SatisfactionSurveyController @Inject() (
       auditService.sendSurveyFeedback(Map("feedback" -> f.details.getOrElse(""), "referenceNumber" -> refNum))
     }
 
-  def surveyThankyou: mvc.Action[AnyContent] = Action { implicit request =>
+  def surveyThankyou: Action[AnyContent] = Action { implicit request =>
     Ok(satisfactionSurveyThankYou())
   }
-
-}

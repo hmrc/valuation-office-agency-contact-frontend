@@ -21,14 +21,14 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesBill => business_rates_bill}
 import play.twirl.api.HtmlFormat
 
-class BusinessRatesBillViewSpec extends ViewBehaviours {
+class BusinessRatesBillViewSpec extends ViewBehaviours:
 
   def businessRatesBill: html.businessRatesBill = app.injector.instanceOf[business_rates_bill]
 
   def view: () => HtmlFormat.Appendable = () => businessRatesBill()(using fakeRequest, messages)
 
   "Business Rates Bill view" must {
-    behave like normalPage(view, "businessRatesBill", "title", "heading", "p1", "subheading", "url", "url1")
+    behave like normalPage(view, "businessRatesBill", "title", "p1", "subheading", "url", "url1")
 
     "has a link marked with site.back leading to the Council Tax annexe self contained Page" in {
       val doc          = asDocument(view())
@@ -38,5 +38,3 @@ class BusinessRatesBillViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
     }
   }
-
-}

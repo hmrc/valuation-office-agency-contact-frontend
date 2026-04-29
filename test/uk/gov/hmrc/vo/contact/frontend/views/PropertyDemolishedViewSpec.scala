@@ -21,7 +21,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyDemolished => property_demolished}
 import play.twirl.api.HtmlFormat
 
-class PropertyDemolishedViewSpec extends ViewBehaviours {
+class PropertyDemolishedViewSpec extends ViewBehaviours:
 
   def propertyDemolished: html.propertyDemolished = app.injector.instanceOf[property_demolished]
 
@@ -32,7 +32,6 @@ class PropertyDemolishedViewSpec extends ViewBehaviours {
       view,
       "propertyDemolished",
       "title",
-      "heading",
       "p2.part1",
       "p2.part2",
       "p2.url",
@@ -53,4 +52,3 @@ class PropertyDemolishedViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
   }
-}

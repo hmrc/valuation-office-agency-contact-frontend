@@ -37,7 +37,7 @@ import java.util.Locale
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html.error
 
-class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSugar with BeforeAndAfterEach {
+class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSugar with BeforeAndAfterEach:
 
   val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
@@ -666,7 +666,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
         Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.businessRatesSubcategory,
-          checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.business.heading"),
+          checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.business.title"),
           checkYourAnswersHelper.tellUsMore("tellUsMore.business.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress
@@ -690,7 +690,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
         Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.businessRatesSubcategory,
-          checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.notUsed.heading"),
+          checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.notUsed.title"),
           checkYourAnswersHelper.tellUsMore("tellUsMore.notUsed.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress
@@ -737,7 +737,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
         Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.councilTaxSubcategory,
-          checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.business.heading"),
+          checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.business.title"),
           checkYourAnswersHelper.tellUsMore("tellUsMore.business.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress
@@ -761,7 +761,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
         Seq(
           checkYourAnswersHelper.enquiryCategory,
           checkYourAnswersHelper.councilTaxSubcategory,
-          checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.areaChange.heading"),
+          checkYourAnswersHelper.datePropertyChanged("datePropertyChanged.areaChange.title"),
           checkYourAnswersHelper.tellUsMore("tellUsMore.areaChange.heading"),
           checkYourAnswersHelper.contactDetails,
           checkYourAnswersHelper.propertyAddress
@@ -967,8 +967,6 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
   }
 
-  override protected def beforeEach(): Unit = {
+  override protected def beforeEach(): Unit =
     reset(mockUserAnswers)
     when(mockUserAnswers.contactReason) `thenReturn` None // Backward compatibility
-  }
-}

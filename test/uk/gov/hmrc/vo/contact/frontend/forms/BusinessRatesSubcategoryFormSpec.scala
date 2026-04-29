@@ -19,7 +19,7 @@ package uk.gov.hmrc.vo.contact.frontend.forms
 import uk.gov.hmrc.vo.contact.frontend.forms.behaviours.FormBehaviours
 import play.api.data.Form
 
-class BusinessRatesSubcategoryFormSpec extends FormBehaviours {
+class BusinessRatesSubcategoryFormSpec extends FormBehaviours:
 
   val validData: Map[String, String] = Map(
     "value" -> BusinessRatesSubcategoryForm.options.head.value
@@ -32,4 +32,3 @@ class BusinessRatesSubcategoryFormSpec extends FormBehaviours {
 
     behave like formWithOptionField("value", BusinessRatesSubcategoryForm.options.map(_.value)*)
   }
-}

@@ -22,14 +22,14 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyPermanentChanges => p
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertyPermanentChanges
 
-class PropertyPermanentChangesViewSpec extends ViewBehaviours {
+class PropertyPermanentChangesViewSpec extends ViewBehaviours:
 
   def PropertyPermanentChanges: propertyPermanentChanges = app.injector.instanceOf[property_permanent_changes]
 
   def view: () => HtmlFormat.Appendable = () => PropertyPermanentChanges(NormalMode)(using fakeRequest, messages)
 
   "The Property Permanent Changes view" must {
-    behave like normalPage(view, "propertyPermanentChanges", "title", "heading", "p1.part1", "p1.part2", "subheading", "p2")
+    behave like normalPage(view, "propertyPermanentChanges", "title", "p1.part1", "p1.part2", "subheading", "p2")
 
     "has a link marked with site.back leading to the Council Tax band cannot be reduced or removed" in {
       val doc          = asDocument(view())
@@ -39,4 +39,3 @@ class PropertyPermanentChangesViewSpec extends ViewBehaviours {
       backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
   }
-}

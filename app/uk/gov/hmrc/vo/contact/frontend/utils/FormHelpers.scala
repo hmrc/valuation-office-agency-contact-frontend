@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.utils
 
-object FormHelpers {
+object FormHelpers:
 
   val antiXSSRegex = """^[A-Za-z0-9\s\-&,]+$"""
-}

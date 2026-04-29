@@ -20,7 +20,7 @@ import uk.gov.hmrc.vo.contact.frontend.SpecBase
 import uk.gov.hmrc.vo.contact.frontend.models.PropertyAddress
 import uk.gov.hmrc.vo.contact.frontend.utils.AddressFormatters.*
 
-class AddressFormattersSpec extends SpecBase {
+class AddressFormattersSpec extends SpecBase:
 
   "Address Formatter" must {
 
@@ -64,4 +64,3 @@ class AddressFormattersSpec extends SpecBase {
       trim(None, ", ") mustBe ""
     }
   }
-}

@@ -35,14 +35,14 @@ import scala.concurrent.Future
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with MockitoSugar {
+class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with MockitoSugar:
 
   def councilTaxSubcategory: html.councilTaxSubcategory = inject[council_tax_subcategory]
   def auditService: AuditingService                     = inject[AuditingService]
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
-  def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap): CouncilTaxSubcategoryController = {
+  def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap): CouncilTaxSubcategoryController =
     val fakeDataCacheConnector = mock[DataCacheConnector]
     when(fakeDataCacheConnector.save(any, any, any)(using any))
       .thenReturn(Future.successful(CacheMap("councilTaxSubcategory", Map("councilTaxSubcategory" -> JsString("bar")))))
@@ -58,7 +58,6 @@ class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with Mockit
       councilTaxSubcategory,
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
-  }
 
   def viewAsString(form: Form[String] = CouncilTaxSubcategoryForm()): String =
     councilTaxSubcategory(form, NormalMode)(using fakeRequest, messages).toString
@@ -115,4 +114,3 @@ class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase with Mockit
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
   }
-}

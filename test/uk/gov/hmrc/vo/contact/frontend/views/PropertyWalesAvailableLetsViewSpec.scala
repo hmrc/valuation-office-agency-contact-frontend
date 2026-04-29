@@ -19,26 +19,25 @@ package uk.gov.hmrc.vo.contact.frontend.views
 import play.api.data.Form
 import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 import uk.gov.hmrc.vo.contact.frontend.forms.PropertyWalesAvailableLetsForm
-import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyWalesAvailableLets => property_wales_available_lets}
 import play.api.mvc.Call
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertyWalesAvailableLets
 
-class PropertyWalesAvailableLetsViewSpec extends ViewBehaviours {
+class PropertyWalesAvailableLetsViewSpec extends ViewBehaviours:
 
   def propertyWalesLets140DaysSubcategory: propertyWalesAvailableLets = app.injector.instanceOf[property_wales_available_lets]
 
-  def onwardRoute: Call = routes.PropertyWalesActualLetsController.onPageLoad()
+  def onwardRoute: Call = routes.PropertyWalesActualLetsController.onPageLoad
 
   val messageKeyPrefix = "propertyWalesAvailableLets"
 
   def createView: () => HtmlFormat.Appendable =
-    () => propertyWalesLets140DaysSubcategory(PropertyWalesAvailableLetsForm(), NormalMode)(using fakeRequest, messages)
+    () => propertyWalesLets140DaysSubcategory(PropertyWalesAvailableLetsForm())(using fakeRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => propertyWalesLets140DaysSubcategory(form, NormalMode)(using fakeRequest, messages)
+    (form: Form[String]) => propertyWalesLets140DaysSubcategory(form)(using fakeRequest, messages)
 
   "PropertyEnglandAvailableLetsSubcategory view" when {
     "rendered" must {
@@ -75,4 +74,3 @@ class PropertyWalesAvailableLetsViewSpec extends ViewBehaviours {
         }
       }
   }
-}

@@ -29,10 +29,8 @@ class ServiceUnavailableController @Inject() (
   override val messagesApi: MessagesApi,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
   def show(): Action[AnyContent] = Action { implicit request =>
     Ok(serviceUnavailableView())
   }
-
-}

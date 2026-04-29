@@ -14,16 +14,13 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.govukfrontend.views.Implicits.*
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukRadios}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.{Fieldset, Legend}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes.*
-@import uk.gov.hmrc.vo.contact.frontend.models.Mode
-@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Legend
-@import uk.gov.hmrc.govukfrontend.views.Implicits.*
 @import uk.gov.hmrc.vo.contact.frontend.forms.EnquiryDateForm
+@import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
 @this(
@@ -33,34 +30,35 @@
         govukButton: GovukButton
 )
 
-@(form: Form[String], formattedDate: String, mode: Mode)(implicit request: RequestHeader, messages: Messages)
+@(form: Form[String], formattedDate: String)(implicit request: RequestHeader, messages: Messages)
 
 @layout(
- pageTitle = messages("enquiryDate.title", formattedDate),
- backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactReasonController.onPageLoad.url),
- theForm = Some(form),
- overrideErrorSummaryLink = Some("#enquiryDate.yes")
+    pageTitle = messages("enquiryDate.title", formattedDate),
+    backLink = ContactReasonController.onPageLoad.url,
+    showH1 = false,
+    theForm = form,
+    overrideErrorSummaryLink = "#enquiryDate.yes"
 ) {
- @formWithCSRF(action = EnquiryDateController.onSubmit(), Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = EnquiryDateController.onSubmit()) {
 
-  @govukRadios(Radios(
-   fieldset = Option(Fieldset(legend = Option(
-    Legend(content = Text(messages("enquiryDate.heading", formattedDate)), isPageHeading = true, classes = "govuk-fieldset__legend--l"
-    )))),
-   idPrefix = Option("enquiryDate"),
-   name = "value",
-   items = EnquiryDateForm.options.map(i => RadioItem(
-    content = Text(messages(i.messageKey)),
-    id = Option(i.id),
-    value = Option(i.value),
-    checked = form("value").value.contains(i.value)
-   )
-   ),
-   errorMessage = form.errors.asTextErrorMessageForField("value")
-  ))
+        @govukRadios(Radios(
+            fieldset = Fieldset(legend =
+                Legend(content = Text(messages("enquiryDate.heading", formattedDate)), isPageHeading = true, classes = "govuk-fieldset__legend--l"
+                )),
+            idPrefix = "enquiryDate",
+            name = "value",
+            items = EnquiryDateForm.options.map(i => RadioItem(
+                content = Text(messages(i.messageKey)),
+                id = i.id,
+                value = i.value,
+                checked = form("value").value.contains(i.value)
+            )
+            ),
+            errorMessage = form.errors.asTextErrorMessageForField("value")
+        ))
 
-  @govukButton(SubmitButton("continue"))
+        @govukButton(SubmitButton("continue"))
 
-  @components.help_with_service()
- }
+        @components.help_with_service()
+    }
 }

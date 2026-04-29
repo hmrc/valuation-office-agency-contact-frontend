@@ -41,11 +41,10 @@ class SessionRepository @Inject() (
     timestampSupport = timestampSupport,
     cacheIdType = SimpleCacheId
   )
-  with Logging {
+  with Logging:
 
-  implicit class cacheItemOps(cacheItem: CacheItem) {
+  implicit class cacheItemOps(cacheItem: CacheItem):
     def asCacheMap: CacheMap = CacheMap(cacheItem.id, cacheItem.data.value.toMap)
-  }
 
   def save[T](cacheId: String, key: String, data: T)(using writes: Writes[T]): Future[CacheMap] =
     put(cacheId)(DataKey(key), data)
@@ -70,5 +69,3 @@ class SessionRepository @Inject() (
   def removeEntity(cacheId: String): Future[Boolean] =
     deleteEntity(cacheId)
       .map(_ => true)
-
-}

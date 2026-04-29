@@ -19,41 +19,36 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.{JsString, Json}
+import play.api.mvc.Call
 import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.*
-import uk.gov.hmrc.vo.contact.frontend.forms.WhatElseForm
+import uk.gov.hmrc.vo.contact.frontend.forms.WhatElseForm.form
 import uk.gov.hmrc.vo.contact.frontend.identifiers.WhatElseId
 import uk.gov.hmrc.vo.contact.frontend.models.*
-import uk.gov.hmrc.vo.contact.frontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
-import uk.gov.hmrc.vo.contact.frontend.views.html.error.internal_server_error
-import uk.gov.hmrc.vo.contact.frontend.views.html.{whatElse => what_else}
-import play.api.mvc.Call
-import uk.gov.hmrc.vo.contact.frontend.views.html
-import uk.gov.hmrc.vo.contact.frontend.views.html.error
+import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
+import uk.gov.hmrc.vo.contact.frontend.views.html.whatElse
 
-class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar {
+class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar:
 
-  val mockUserAnswers: UserAnswers = mock[UserAnswers]
+  private def whatElseView: whatElse = app.injector.instanceOf[whatElse]
 
-  def whatElse: html.whatElse                          = app.injector.instanceOf[what_else]
-  def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
+  private def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
-  def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
-
-  def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
+  private def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     WhatElseController(
       messagesApi,
       FakeDataCacheConnector,
       FakeNavigator(desiredRoute = onwardRoute),
       dataRetrievalAction,
       DataRequiredActionImpl(ec),
-      whatElse,
+      whatElseView,
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[String] = WhatElseForm()): String = whatElse(form, NormalMode)(using fakeRequest, messages).toString
+  private def viewAsString(form: Form[String]): String =
+    whatElseView(form)(using fakeRequest, messages).toString
 
   "TellUsMore Controller" must {
 
@@ -62,10 +57,10 @@ class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar {
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString(WhatElseForm())
+      contentAsString(result) mustBe viewAsString(form)
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
@@ -74,9 +69,9 @@ class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar {
       )
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
-      contentAsString(result) mustBe viewAsString(WhatElseForm().fill("value 1"))
+      contentAsString(result) mustBe viewAsString(form.fill("value 1"))
     }
 
     "redirect to the next page when valid data is submitted" in {
@@ -90,7 +85,7 @@ class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar {
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("message", "<>"))
-      val boundForm   = WhatElseForm().bind(Map("message" -> "<>"))
+      val boundForm   = form.bind(Map("message" -> "<>"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -99,7 +94,7 @@ class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar {
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(dontGetAnyData).onPageLoad(fakeRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
@@ -114,4 +109,3 @@ class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar {
     }
 
   }
-}

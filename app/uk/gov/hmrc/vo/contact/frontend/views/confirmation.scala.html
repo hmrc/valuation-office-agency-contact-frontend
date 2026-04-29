@@ -14,12 +14,11 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.Implicits._
+@import uk.gov.hmrc.govukfrontend.views.Implicits.*
 @import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukCharacterCount, GovukErrorSummary, GovukFieldset, GovukPanel, GovukRadios}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.charactercount.CharacterCount
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorSummary
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.ErrorLink
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.panel.Panel
@@ -29,13 +28,18 @@
 @import uk.gov.hmrc.vo.contact.frontend.utils.AddressFormatters.formattedPropertyAddress
 @import uk.gov.hmrc.vo.contact.frontend.viewmodels.AnswerSection
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
-@import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
 
-@this(layout: PrimaryLayout, formWithCSRF: FormWithCSRF,
-        govukButton: GovukButton, govukPanel: GovukPanel,
-        govukFieldset: GovukFieldset, govukRadios: GovukRadios, govukCharacterCountArea: GovukCharacterCount,
-        govukErrorSummary: GovukErrorSummary)
+@this(
+        layout: PrimaryLayout,
+        formWithCSRF: FormWithCSRF,
+        govukButton: GovukButton,
+        govukPanel: GovukPanel,
+        govukFieldset: GovukFieldset,
+        govukRadios: GovukRadios,
+        govukCharacterCountArea: GovukCharacterCount,
+        govukErrorSummary: GovukErrorSummary
+)
 
 @(contact: Contact, answerSections: AnswerSection, whatHappensNextMessages: Seq[String], form: Form[SatisfactionSurvey])(implicit request: RequestHeader, messages: Messages)
 
@@ -45,9 +49,12 @@
 }
 
 @layout(
-    pageTitle = messages("confirmation.title")
+    pageTitle = messages("confirmation.title"),
+    showH1 = false
 ) {
-    @if(form.hasErrors){<script type="text/javascript"> window.location='#error-summary-heading'</script>}
+    @if(form.hasErrors) {
+        <script type="text/javascript"> window.location = '#error-summary-heading'</script>
+    }
     <section tabindex="0">
     @govukPanel(Panel(title = Text(messages("confirmation.heading")), headingLevel = 1,
         content = HtmlContent(panelContent)
@@ -86,13 +93,13 @@
     </p>
 
     <section class="govuk-!-display-none-print">
-    @formWithCSRF(action = routes.SatisfactionSurveyController.formCompleteFeedback, Symbol("autoComplete") -> "off") {
+    @formWithCSRF(action = SatisfactionSurveyController.formCompleteFeedback) {
         @if(form.hasErrors) {
             @govukErrorSummary(
                 ErrorSummary(
                     title = Text(messages("error.summary.title")),
                     errorList = form.mapping.mappings.flatMap(x => form.error(x.key).map(e =>
-                        ErrorLink(href = Option("#satisfaction.verySatisfied"), content = HtmlContent(messages(e.messages, e.args)))
+                        ErrorLink(href = "#satisfaction.verySatisfied", content = HtmlContent(messages(e.messages, e.args)))
                     )),
                     attributes = Map("id" -> "error-summary-heading")
                 )
@@ -119,8 +126,8 @@
                 errorMessage = form.errors.asHtmlErrorMessageForField("satisfaction"),
                 items = SatisfactionSurveyForm.options.map(i => RadioItem(
                     content = Text(messages(i.messageKey)),
-                    id = Option(i.id),
-                    value = Option(i.value),
+                    id = i.id,
+                    value = i.value,
                     checked = form("satisfaction").value.contains(i.value)
                 ))
             ))
@@ -132,7 +139,7 @@
             @messages("confirmation.feedback.improve") @messages("hintText.optional")
         </label>
         @govukCharacterCountArea(CharacterCount(
-            id = "details", name = "details", rows = 5, value = form("details").value, maxLength = Some(1200), hint = Option(Hint(content = Text(messages("confirmation.feedback.warning")))),
+            id = "details", name = "details", rows = 5, value = form("details").value, maxLength = 1200, hint = Hint(content = Text(messages("confirmation.feedback.warning"))),
             errorMessage = form.errors.asHtmlErrorMessageForField("details")
         ))
     </div>

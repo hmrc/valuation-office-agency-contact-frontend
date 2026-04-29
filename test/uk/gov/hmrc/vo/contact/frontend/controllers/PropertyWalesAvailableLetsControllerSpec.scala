@@ -18,7 +18,7 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import play.api.data.Form
 import play.api.libs.json.JsString
-import play.api.test.Helpers.{contentAsString, redirectLocation, status, _}
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
@@ -33,7 +33,7 @@ import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertyWalesAvailableLets
 
-class PropertyWalesAvailableLetsControllerSpec extends ControllerSpecBase {
+class PropertyWalesAvailableLetsControllerSpec extends ControllerSpecBase:
 
   def propertyWalesLets140DaysEnquiry: propertyWalesAvailableLets = inject[property_wales_available_lets]
   def propertyWalesLets: html.propertyWalesLets                   = inject[wales_lets]
@@ -51,19 +51,18 @@ class PropertyWalesAvailableLetsControllerSpec extends ControllerSpecBase {
       dataRetrievalAction,
       DataRequiredActionImpl(ec),
       propertyWalesLets140DaysEnquiry,
-      propertyWalesLetsNoAction,
       stubMessageControllerComponents
     )
 
-  def wales140DaysBackLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad().url
+  def wales140DaysBackLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad.url
 
   def viewAsString(form: Form[String] = PropertyEnglandAvailableLetsForm()): String =
-    propertyWalesLets140DaysEnquiry(form, NormalMode)(using fakeRequest, messages).toString
+    propertyWalesLets140DaysEnquiry(form)(using fakeRequest, messages).toString
 
   "PropertyWalesLets140DaysController" must {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onPageLoad(fakeRequest)
 
       status(result) mustBe OK
     }
@@ -72,7 +71,7 @@ class PropertyWalesAvailableLetsControllerSpec extends ControllerSpecBase {
       val validData       = Map(PropertyWalesAvailableLetsId.toString -> JsString(PropertyWalesAvailableLetsForm.options.head.value))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       contentAsString(result) mustBe viewAsString(PropertyWalesAvailableLetsForm().fill(PropertyWalesAvailableLetsForm.options.head.value))
     }
@@ -80,7 +79,7 @@ class PropertyWalesAvailableLetsControllerSpec extends ControllerSpecBase {
     "redirect to no action page when valid data is submitted" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", PropertyWalesAvailableLetsForm.options.head.value))
 
-      val result = controller().onPageLoad(NormalMode)(postRequest)
+      val result = controller().onPageLoad(postRequest)
 
       status(result) mustBe OK
     }
@@ -104,7 +103,7 @@ class PropertyWalesAvailableLetsControllerSpec extends ControllerSpecBase {
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(dontGetAnyData).onPageLoad(fakeRequest)
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
@@ -119,5 +118,3 @@ class PropertyWalesAvailableLetsControllerSpec extends ControllerSpecBase {
     }
 
   }
-
-}

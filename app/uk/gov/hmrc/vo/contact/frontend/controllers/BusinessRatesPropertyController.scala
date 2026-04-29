@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
@@ -30,7 +29,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesNonBusiness as business_rates_non_business, businessRatesPropertyEnquiry as business_rates_property_enquiry}
 
 import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 class BusinessRatesPropertyController @Inject() (
   override val messagesApi: MessagesApi,
@@ -43,16 +42,15 @@ class BusinessRatesPropertyController @Inject() (
   businessRatesNonBusiness: business_rates_non_business,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
-  implicit val ec: ExecutionContext = cc.executionContext
+  given ExecutionContext = cc.executionContext
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (getData andThen requireData) {
     implicit request =>
-      val preparedForm = request.userAnswers.businessRatesPropertyEnquiry match {
+      val preparedForm = request.userAnswers.businessRatesPropertyEnquiry match
         case None        => BusinessRatesPropertyForm()
         case Some(value) => BusinessRatesPropertyForm().fill(value)
-      }
 
       Ok(businessRatesPropertyEnquiry(preparedForm, mode))
   }
@@ -60,14 +58,12 @@ class BusinessRatesPropertyController @Inject() (
   def onSubmit(mode: Mode): Action[AnyContent] = (getData andThen requireData).async {
     implicit request =>
       BusinessRatesPropertyForm().bindFromRequest().fold(
-        (formWithErrors: Form[String]) =>
-          Future.successful(BadRequest(businessRatesPropertyEnquiry(formWithErrors, mode))),
-        value => {
+        formWithErrors => BadRequest(businessRatesPropertyEnquiry(formWithErrors, mode)),
+        value =>
           auditService.sendRadioButtonSelection(request.uri, "businessRatesPropertyEnquiry" -> value)
           dataCacheConnector.save[String](request.sessionId, BusinessRatesPropertyEnquiryId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(BusinessRatesPropertyEnquiryId, mode).apply(UserAnswers(cacheMap)))
           )
-        }
       )
   }
 
@@ -75,4 +71,3 @@ class BusinessRatesPropertyController @Inject() (
     implicit request =>
       Ok(businessRatesNonBusiness())
   }
-}

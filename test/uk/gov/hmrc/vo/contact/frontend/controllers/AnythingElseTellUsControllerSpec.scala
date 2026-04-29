@@ -19,23 +19,22 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.JsString
+import play.api.mvc.Call
 import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
-import uk.gov.hmrc.vo.contact.frontend.forms.AnythingElseForm
+import uk.gov.hmrc.vo.contact.frontend.forms.AnythingElseForm.form
 import uk.gov.hmrc.vo.contact.frontend.identifiers.{AnythingElseId, EnquiryCategoryId}
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.vo.contact.frontend.views.html.error.internal_server_error
-import uk.gov.hmrc.vo.contact.frontend.views.html.{anythingElseTellUs => anything_else}
-import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html.{anythingElseTellUs, error}
 
-class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSugar {
+class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSugar:
 
   val mockUserAnswers: UserAnswers                     = mock[UserAnswers]
-  def anythingElse: anythingElseTellUs                 = app.injector.instanceOf[anything_else]
+  def anythingElse: anythingElseTellUs                 = app.injector.instanceOf[anythingElseTellUs]
   def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
 
   def onwardRoute: Call = routes.CheckYourAnswersController.onPageLoad()
@@ -51,8 +50,8 @@ class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSu
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[String] = AnythingElseForm(), msg: String = ""): String =
-    anythingElse(form, NormalMode)(using fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = form): String =
+    anythingElse(form)(using fakeRequest, messages).toString
 
   "AnythingElseTellUsMore Controller" must {
 
@@ -61,10 +60,10 @@ class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSu
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString(AnythingElseForm())
+      contentAsString(result) mustBe viewAsString(form)
     }
 
     "populate the view correctly on a GET when the anything else has previously been filled" in {
@@ -74,10 +73,10 @@ class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSu
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString(AnythingElseForm().fill(anythingElseString))
+      contentAsString(result) mustBe viewAsString(form.fill(anythingElseString))
     }
 
     "redirect to the next page when valid data is submitted" in {
@@ -91,7 +90,7 @@ class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSu
 
     "return a Bad Request and errors when invalid data is submitted" in {
       val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
-      val boundForm   = AnythingElseForm().bind(Map("value" -> "invalid value"))
+      val boundForm   = form.bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
@@ -99,4 +98,3 @@ class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSu
       contentAsString(result) mustBe viewAsString(boundForm)
     }
   }
-}

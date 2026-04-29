@@ -16,18 +16,18 @@
 
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 
-@this(layout: PrimaryLayout)
+@this(
+        layout: PrimaryLayout
+)
 
 @()(implicit request: RequestHeader, messages: Messages)
 
 @layout(
     pageTitle = messages("propertySmallPartUsed.title"),
-    backLink = Some(uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxBusinessController.onPageLoad().url)
+    backLink = CouncilTaxBusinessController.onPageLoad().url
 ) {
-    <h1 class="govuk-heading-l">@messages("propertySmallPartUsed.heading")</h1>
-
     <p class="govuk-body">
-        @messages("propertySmallPartUsed.p1")
+    @messages("propertySmallPartUsed.p1")
     </p>
 
     <h2 class="govuk-heading-m">@messages("propertySmallPartUsed.subheading")</h2>
@@ -41,5 +41,4 @@
         @messages("propertySmallPartUsed.p3")
         </a>
     </p>
-
 }

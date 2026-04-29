@@ -19,7 +19,7 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 import play.api.data.Form
 import play.api.i18n.{Lang, Messages}
 import play.api.libs.json.JsString
-import play.api.test.Helpers._
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
 import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, FakeDataCacheConnector}
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
@@ -33,7 +33,7 @@ import java.util.Locale
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class EnquiryDateControllerSpec extends ControllerSpecBase {
+class EnquiryDateControllerSpec extends ControllerSpecBase:
 
   implicit val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
   implicit val dateUtil: DateUtil        = injector.instanceOf[DateUtil]
@@ -41,7 +41,7 @@ class EnquiryDateControllerSpec extends ControllerSpecBase {
   def enquiryDate: html.enquiryDate = inject[enquiry_date]
   def auditService: AuditingService = inject[AuditingService]
 
-  def onwardRoute: Call = routes.EnquiryDateController.onPageLoad()
+  def onwardRoute: Call = routes.EnquiryDateController.onPageLoad
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     EnquiryDateController(
@@ -56,24 +56,23 @@ class EnquiryDateControllerSpec extends ControllerSpecBase {
     )
 
   def viewAsString(form: Form[String] = EnquiryDateForm()): String =
-    enquiryDate(form, EnquiryDateForm.beforeDate(), NormalMode)(using fakeRequest, messages).toString()
+    enquiryDate(form, EnquiryDateForm.beforeDate())(using fakeRequest, messages).toString()
 
   "EnquiryDateController Controller" must {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onPageLoad(fakeRequest)
 
       status(result) mustBe OK
 
       contentAsString(result) mustBe viewAsString()
-
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
       val validData       = Map(EnquiryDateId.toString -> JsString(EnquiryDateForm.options.head.value))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(fakeRequest)
 
       contentAsString(result) mustBe viewAsString(EnquiryDateForm().fill(EnquiryDateForm.options.head.value))
     }
@@ -85,8 +84,5 @@ class EnquiryDateControllerSpec extends ControllerSpecBase {
 
       status(result) mustBe SEE_OTHER
       redirectLocation(result) mustBe Some(onwardRoute.url)
-
     }
   }
-
-}

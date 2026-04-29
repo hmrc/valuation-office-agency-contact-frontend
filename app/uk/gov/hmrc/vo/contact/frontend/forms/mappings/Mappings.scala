@@ -21,6 +21,7 @@ import play.api.data.Forms.of
 
 import java.time.LocalDate
 
-trait Mappings {
-  protected def localDate(key: String): FieldMapping[Option[LocalDate]] = of(using LocalDateFormatter(key))
-}
+trait Mappings:
+
+  protected def localDate(key: String): FieldMapping[Option[LocalDate]] =
+    of(using LocalDateFormatter(key))

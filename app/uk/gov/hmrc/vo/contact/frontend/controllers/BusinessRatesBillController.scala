@@ -28,9 +28,8 @@ class BusinessRatesBillController @Inject() (
   businessRatesBill: business_rates_bill,
   cc: MessagesControllerComponents
 ) extends FrontendController(cc)
-  with I18nSupport {
+  with I18nSupport:
 
   def onPageLoad(): Action[AnyContent] = Action { implicit request =>
     Ok(businessRatesBill())
   }
-}

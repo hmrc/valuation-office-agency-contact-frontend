@@ -30,7 +30,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{enquiryCategory => enquiry_ca
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class EnquiryCategoryControllerSpec extends ControllerSpecBase {
+class EnquiryCategoryControllerSpec extends ControllerSpecBase:
 
   def enquiryCategory: html.enquiryCategory = inject[enquiry_category]
   def auditService: AuditingService         = inject[AuditingService]
@@ -104,4 +104,3 @@ class EnquiryCategoryControllerSpec extends ControllerSpecBase {
     }
 
   }
-}
