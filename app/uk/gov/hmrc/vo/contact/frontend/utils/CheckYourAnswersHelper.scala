@@ -20,8 +20,8 @@ import play.api.i18n.Messages
 import uk.gov.hmrc.vo.contact.frontend.journey.JourneyMap.changeModePrefix
 import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 import uk.gov.hmrc.vo.contact.frontend.journey.model.TellUsMorePage.lastTellUsMorePage
-import AddressFormatters._
-import ContactFormatter._
+import AddressFormatters.*
+import ContactFormatter.*
 import uk.gov.hmrc.vo.contact.frontend.models.{CheckMode, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.viewmodels.AnswerRow
 
@@ -67,7 +67,7 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(using messages: Messages,
   }
 
   def propertyAddress: Option[AnswerRow] = userAnswers.propertyAddress map {
-    addr => AnswerRow("propertyAddress.heading", formattedPropertyAddress(addr, "<br>"), false, routes.PropertyAddressController.onPageLoad(CheckMode).url)
+    addr => AnswerRow("propertyAddress.title", formattedPropertyAddress(addr, "<br>"), false, routes.PropertyAddressController.onPageLoad(CheckMode).url)
   }
 
   def contactDetails: Option[AnswerRow] = userAnswers.contactDetails map {

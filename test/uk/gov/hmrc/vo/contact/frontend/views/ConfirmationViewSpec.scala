@@ -43,7 +43,7 @@ class ConfirmationViewSpec extends ViewBehaviours:
     List(
       AnswerRow("enquiryCategory.checkYourAnswersLabel", "enquiryCategory.council_tax", true, ""),
       AnswerRow("contactDetails.title", "c1<br>c3<br>c5", false, ""),
-      AnswerRow("propertyAddress.heading", "a<br>b<br>c<br>d<br>f", false, ""),
+      AnswerRow("propertyAddress.title", "a<br>b<br>c<br>d<br>f", false, ""),
       AnswerRow("tellUsMore.checkYourAnswersLabel", "some message", false, "")
     )
   )
