@@ -30,20 +30,20 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore]:
   def backLink: String           = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
   def poorRepairBackLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.DatePropertyChangedController.onPageLoad().url
 
-  def tellUsMore: html.tellUsMore = app.injector.instanceOf[tell_us_more]
+  def tellUsMore: html.tellUsMore = inject[tell_us_more]
 
   def createView: () => HtmlFormat.Appendable =
-    () => tellUsMore(TellUsMoreForm(), NormalMode, "tellUsMore.ct-reference", backLink)(using fakeRequest, messages)
+    () => tellUsMore(TellUsMoreForm(), NormalMode, "tellUsMore.ct-reference", backLink)(using getRequest, messages)
 
   def createAlternativeView: () => HtmlFormat.Appendable =
-    () => tellUsMore(TellUsMoreForm(), NormalMode, "tellUsMore.ndr-reference", backLink)(using fakeRequest, messages)
+    () => tellUsMore(TellUsMoreForm(), NormalMode, "tellUsMore.ndr-reference", backLink)(using getRequest, messages)
 
   def createViewUsingForm: Form[TellUsMore] => HtmlFormat.Appendable =
-    (form: Form[TellUsMore]) => tellUsMore(form, NormalMode, "", backLink)(using fakeRequest, messages)
+    (form: Form[TellUsMore]) => tellUsMore(form, NormalMode, "", backLink)(using getRequest, messages)
 
   override val form: Form[TellUsMore] = TellUsMoreForm()
 
-  "TellUsMore view" must {
+  "TellUsMore view" should {
 
     "display the correct browser title" in {
       val doc = asDocument(createView())
@@ -53,8 +53,8 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore]:
     behave like pageWithTextFields(createViewUsingForm, "message")
   }
 
-  "TellUsMore view for property poor repair" must {
-    def view = () => tellUsMore(TellUsMoreForm(), NormalMode, "tellUsMore.poorRepair", poorRepairBackLink)(using fakeRequest, messages)
+  "TellUsMore view for property poor repair" should {
+    def view = () => tellUsMore(TellUsMoreForm(), NormalMode, "tellUsMore.poorRepair", poorRepairBackLink)(using getRequest, messages)
 
     "display the correct browser title" in {
       val doc = asDocument(view())
@@ -78,7 +78,7 @@ class TellUsMoreViewSpec extends QuestionViewBehaviours[TellUsMore]:
   "has a link marked with site.back leading to the Contact Details Page" in {
     val doc          = asDocument(createView())
     val backlinkText = doc.select("a[class=govuk-back-link]").text()
-    backlinkText mustBe messages("site.back")
-    val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-    backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
+    backlinkText shouldBe messages("site.back")
+    val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+    backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
   }

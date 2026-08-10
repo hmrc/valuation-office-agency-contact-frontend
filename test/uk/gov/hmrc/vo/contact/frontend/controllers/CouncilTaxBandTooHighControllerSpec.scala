@@ -23,7 +23,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.councilTaxBandTooHigh as counc
 
 class CouncilTaxBandTooHighControllerSpec extends ControllerSpecBase:
 
-  def councilTaxBandTooHigh: html.councilTaxBandTooHigh = app.injector.instanceOf[council_tax_too_high]
+  def councilTaxBandTooHigh: html.councilTaxBandTooHigh = inject[council_tax_too_high]
 
   def controller =
     CouncilTaxBandTooHighController(
@@ -32,9 +32,9 @@ class CouncilTaxBandTooHighControllerSpec extends ControllerSpecBase:
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  "Council Tax Band Too High Controller" must {
+  "Council Tax Band Too High Controller" should {
     "return the correct view for a GET" in {
-      val result = controller.onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe councilTaxBandTooHigh()(using fakeRequest, messages).toString
+      val result = controller.onPageLoad()(getRequest)
+      contentAsString(result) shouldBe councilTaxBandTooHigh()(using getRequest, messages).toString
     }
   }

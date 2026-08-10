@@ -36,7 +36,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html
 class EnquiryDateControllerSpec extends ControllerSpecBase:
 
   implicit val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
-  implicit val dateUtil: DateUtil        = injector.instanceOf[DateUtil]
+  implicit val dateUtil: DateUtil        = inject[DateUtil]
 
   def enquiryDate: html.enquiryDate = inject[enquiry_date]
   def auditService: AuditingService = inject[AuditingService]
@@ -56,33 +56,33 @@ class EnquiryDateControllerSpec extends ControllerSpecBase:
     )
 
   def viewAsString(form: Form[String] = EnquiryDateForm()): String =
-    enquiryDate(form, EnquiryDateForm.beforeDate())(using fakeRequest, messages).toString()
+    enquiryDate(form, EnquiryDateForm.beforeDate())(using getRequest, messages).toString()
 
-  "EnquiryDateController Controller" must {
+  "EnquiryDateController Controller" should {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(fakeRequest)
+      val result = controller().onPageLoad(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
 
-      contentAsString(result) mustBe viewAsString()
+      contentAsString(result) shouldBe viewAsString()
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
       val validData       = Map(EnquiryDateId.toString -> JsString(EnquiryDateForm.options.head.value))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(getRequest)
 
-      contentAsString(result) mustBe viewAsString(EnquiryDateForm().fill(EnquiryDateForm.options.head.value))
+      contentAsString(result) shouldBe viewAsString(EnquiryDateForm().fill(EnquiryDateForm.options.head.value))
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST")
+      val postRequest = getRequest.withMethod("POST")
         .withFormUrlEncodedBody(("value", EnquiryDateForm.options.head.value))
       val result      = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(onwardRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(onwardRoute.url)
     }
   }

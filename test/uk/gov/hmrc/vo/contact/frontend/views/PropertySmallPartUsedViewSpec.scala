@@ -22,18 +22,18 @@ import play.twirl.api.HtmlFormat
 
 class PropertySmallPartUsedViewSpec extends ViewBehaviours:
 
-  def propertySmallPartUsed: html.propertySmallPartUsed = app.injector.instanceOf[property_small_part]
+  def propertySmallPartUsed: html.propertySmallPartUsed = inject[property_small_part]
 
-  def view: () => HtmlFormat.Appendable = () => propertySmallPartUsed()(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => propertySmallPartUsed()(using getRequest, messages)
 
-  "Small part of property used for business view" must {
+  "Small part of property used for business view" should {
     behave like normalPage(view, "propertySmallPartUsed", "title", "p1", "subheading", "p2.url", "p2", "p3.url", "p3")
 
     "has a link marked with site.back leading to the Council Tax band cannot be reduced or removed" in {
       val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxBusinessController.onPageLoad().url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxBusinessController.onPageLoad().url
     }
   }

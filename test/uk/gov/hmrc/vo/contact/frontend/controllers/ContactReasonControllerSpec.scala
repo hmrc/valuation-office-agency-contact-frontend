@@ -47,30 +47,30 @@ class ContactReasonControllerSpec extends ControllerSpecBase:
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[String] = ContactReasonForm.form): String = contactReason(form)(using fakeRequest, messages).toString()
+  def viewAsString(form: Form[String] = ContactReasonForm.form): String = contactReason(form)(using getRequest, messages).toString()
 
-  "ContactReason Controller" must {
+  "ContactReason Controller" should {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(fakeRequest)
+      val result = controller().onPageLoad(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
 
-      contentAsString(result) mustBe viewAsString()
+      contentAsString(result) shouldBe viewAsString()
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("reason", ContactReasonForm.values.head))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("reason", ContactReasonForm.values.head))
       val result      = controller().onSubmit(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(onwardRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(onwardRoute.url)
     }
 
     "redirect from old URL to new URL" in {
-      val result = controller().redirect()(fakeRequest)
+      val result = controller().redirect()(getRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(onwardRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(onwardRoute.url)
     }
   }

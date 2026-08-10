@@ -22,15 +22,15 @@ import play.twirl.api.HtmlFormat
 
 class ErrorTemplateViewSpec extends ViewBehaviours:
 
-  def errorTemplate: error_template = app.injector.instanceOf[error_template]
+  def errorTemplate: error_template = inject[error_template]
 
   def view: () => HtmlFormat.Appendable = () =>
     errorTemplate(
       messages("global.error.badRequest400.title"),
       messages("global.error.badRequest400.message")
-    )(using fakeRequest, messages)
+    )(using getRequest, messages)
 
-  "error template view" must {
+  "error template view" should {
     behave like normalPage(view, "global.error.badRequest400", "title", "message")
 
   }

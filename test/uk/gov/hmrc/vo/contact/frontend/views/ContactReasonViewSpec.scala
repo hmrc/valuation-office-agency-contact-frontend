@@ -25,19 +25,19 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{contactReason, contactReason 
 
 class ContactReasonViewSpec extends ViewBehaviours:
 
-  def contactReason: contactReason = app.injector.instanceOf[contact_reason]
+  def contactReason: contactReason = inject[contact_reason]
 
   val messageKeyPrefix = "contact.reason"
 
   val backUrl: String = routes.ContactReasonController.onPageLoad.url
 
   def createView: () => HtmlFormat.Appendable =
-    () => contactReason(ContactReasonForm.form)(using fakeRequest, messages)
+    () => contactReason(ContactReasonForm.form)(using getRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    form => contactReason(form)(using fakeRequest, messages)
+    form => contactReason(form)(using getRequest, messages)
 
-  "ContactReason view" must {
+  "ContactReason view" should {
     "display the correct browser title" in {
       val doc = asDocument(createView())
       assertEqualsValue(doc, "title", messages(s"$messageKeyPrefix.label") + " - Valuation Office contact form - GOV.UK")
@@ -50,7 +50,7 @@ class ContactReasonViewSpec extends ViewBehaviours:
   }
 
   "ContactReason view" when {
-    "rendered" must {
+    "rendered" should {
       "contain continue button with the value Continue" in {
         val doc            = asDocument(createViewUsingForm(ContactReasonForm.form))
         val continueButton = doc.getElementsByClass("govuk-button").first().text()

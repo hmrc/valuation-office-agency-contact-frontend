@@ -16,17 +16,16 @@
 
 package uk.gov.hmrc.vo.contact.frontend.journey.model
 
-import org.scalatest.matchers.should
-import org.scalatest.wordspec.AnyWordSpec
 import play.api.libs.json.{JsObject, JsString, Json}
 import uk.gov.hmrc.vo.contact.frontend.identifiers.{ContactDetailsId, RefNumberId}
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, ContactDetails}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
+import uk.gov.hmrc.vo.unit.test.BaseSpec
 
 /**
   * @author Yuriy Tumakha
   */
-class LogoutEventSpec extends AnyWordSpec with should.Matchers:
+class LogoutEventSpec extends BaseSpec:
 
   "LogoutEvent" should {
     "accept userAnswers in constructor and should be serialized to correct json" in {

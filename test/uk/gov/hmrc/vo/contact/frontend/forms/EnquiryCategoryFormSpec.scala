@@ -27,7 +27,7 @@ class EnquiryCategoryFormSpec extends FormBehaviours:
 
   val form: Form[String] = EnquiryCategoryForm.form
 
-  "EnquiryCategory form" must {
+  "EnquiryCategory form" should {
     behave like questionForm[String](EnquiryCategoryForm.values.head)
 
     for (validValue <- EnquiryCategoryForm.values)

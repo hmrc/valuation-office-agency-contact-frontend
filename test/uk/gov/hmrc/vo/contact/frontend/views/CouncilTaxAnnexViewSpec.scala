@@ -25,21 +25,21 @@ import play.twirl.api.HtmlFormat
 
 class CouncilTaxAnnexViewSpec extends ViewBehaviours:
 
-  def councilTaxAnnexe: html.councilTaxAnnexe = app.injector.instanceOf[council_tax_annexe]
+  def councilTaxAnnexe: html.councilTaxAnnexe = inject[council_tax_annexe]
 
   val messageKeyPrefix = "annexe"
 
-  def createView: () => HtmlFormat.Appendable = () => councilTaxAnnexe(AnnexeForm(), NormalMode)(using fakeRequest, messages)
+  def createView: () => HtmlFormat.Appendable = () => councilTaxAnnexe(AnnexeForm(), NormalMode)(using getRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => councilTaxAnnexe(form, NormalMode)(using fakeRequest, messages)
+    (form: Form[String]) => councilTaxAnnexe(form, NormalMode)(using getRequest, messages)
 
-  "CouncilTaxAnnex view" must {
+  "CouncilTaxAnnex view" should {
     behave like normalPage(createView, messageKeyPrefix)
   }
 
   "CouncilTaxAnnex view" when {
-    "rendered" must {
+    "rendered" should {
 
       "contain continue button with the value Continue" in {
         val doc            = asDocument(createViewUsingForm(AnnexeForm()))
@@ -61,14 +61,14 @@ class CouncilTaxAnnexViewSpec extends ViewBehaviours:
       "have a link marked with site.back leading to the Business Rates Subcategory Page" in {
         val doc          = asDocument(createView())
         val backlinkText = doc.select("a[class=govuk-back-link]").text()
-        backlinkText mustBe messages("site.back")
-        val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-        backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
+        backlinkText shouldBe messages("site.back")
+        val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+        backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
       }
     }
 
     for (option <- AnnexeForm.options)
-      s"rendered with a value of '${option.value}'" must {
+      s"rendered with a value of '${option.value}'" should {
         s"have the '${option.value}' radio button selected" in {
           val doc = asDocument(createViewUsingForm(AnnexeForm().bind(Map("value" -> s"${option.value}"))))
           assertContainsRadioButton(doc, option.id, "value", option.value, true)

@@ -30,32 +30,32 @@ class ApplicationControllerSpec extends ControllerSpecBase:
 
   def contactReason: html.contactReason = inject[contact_reason]
 
-  def viewAsString(form: Form[String] = EnquiryCategoryForm.form): String = contactReason(form)(using fakeRequest, messages).toString
+  val testRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest("GET", "/").withHeaders(("X-Session-ID", "id"))
 
-  override val fakeRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest("GET", "/").withHeaders(("X-Session-ID", "id"))
+  def viewAsString(form: Form[String] = EnquiryCategoryForm.form): String = contactReason(form)(using testRequest, messages).toString
 
-  "Application Controller" must {
+  "Application Controller" should {
 
     "return OK and the correct view for a GET" in {
-      val result = appController.start()(fakeRequest)
+      val result = appController.start()(testRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return OK and the correct view for a GET1" in {
-      val result = appController.logout()(fakeRequest)
+      val result = appController.logout()(testRequest)
 
-      status(result) mustBe SEE_OTHER
+      status(result) shouldBe SEE_OTHER
     }
 
     "return OK and the correct welsh view for a GET" in {
-      val result = appController.startWelsh()(fakeRequest)
+      val result = appController.startWelsh()(testRequest)
 
-      status(result) mustBe SEE_OTHER
+      status(result) shouldBe SEE_OTHER
     }
 
     "return the contact reason controller url" in {
-      appController.createRefererURL() mustBe
+      appController.createRefererURL() shouldBe
         uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactReasonController.onPageLoad.url
     }
   }

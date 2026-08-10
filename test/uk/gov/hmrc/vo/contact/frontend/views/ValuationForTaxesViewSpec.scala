@@ -23,20 +23,20 @@ import play.twirl.api.HtmlFormat
 
 class ValuationForTaxesViewSpec extends ViewBehaviours:
 
-  def valuationForTaxes: html.valuationForTaxes = app.injector.instanceOf[valuation_for_taxes]
+  def valuationForTaxes: html.valuationForTaxes = inject[valuation_for_taxes]
 
-  def view: () => HtmlFormat.Appendable = () => valuationForTaxes()(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => valuationForTaxes()(using getRequest, messages)
 
-  "Valuation For Taxes view" must {
+  "Valuation For Taxes view" should {
 
     behave like normalPage(view, "valuationForTaxes", "title", "email-title", "email")
 
     "has a link marked with site.back leading to the Enquiry Category Page" in {
       val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
     }
 
     "The Start again link links to the Enquiry Category Controller onPageLoad method" in {

@@ -24,7 +24,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html
 
 class CouncilTaxBillControllerSpec extends ControllerSpecBase:
 
-  def councilTaxBill: html.councilTaxBill = app.injector.instanceOf[council_tax_bill]
+  def councilTaxBill: html.councilTaxBill = inject[council_tax_bill]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     CouncilTaxBillController(
@@ -35,9 +35,9 @@ class CouncilTaxBillControllerSpec extends ControllerSpecBase:
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  "Council Tax Bill Controller" must {
+  "Council Tax Bill Controller" should {
     "return the correct view for a GET" in {
-      val result = controller().onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe councilTaxBill()(using fakeRequest, messages).toString
+      val result = controller().onPageLoad()(getRequest)
+      contentAsString(result) shouldBe councilTaxBill()(using getRequest, messages).toString
     }
   }

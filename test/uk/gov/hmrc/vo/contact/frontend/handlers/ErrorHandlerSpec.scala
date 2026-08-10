@@ -17,28 +17,25 @@
 package uk.gov.hmrc.vo.contact.frontend.handlers
 
 import play.api.http.HttpErrorHandler
-import play.api.test.FakeRequest
-import play.api.test.Helpers.*
-import uk.gov.hmrc.vo.contact.frontend.SpecBase
+import play.api.test.Helpers.contentAsString
+import uk.gov.hmrc.vo.unit.test.BaseAppSpec
 
-class ErrorHandlerSpec extends SpecBase:
+class ErrorHandlerSpec extends BaseAppSpec:
 
-  def errorHandler: HttpErrorHandler = app.injector.instanceOf[HttpErrorHandler]
+  def errorHandler: HttpErrorHandler = inject[HttpErrorHandler]
 
   "Error handler" should {
     "render error page" in {
-
       val result = errorHandler.onClientError(
-        FakeRequest(),
+        getRequest,
         404,
         "Not found"
       )
 
       val content = contentAsString(result)
 
-      content must include("Page not found")
-      content must include("If you typed the web address, check it is correct.")
-      content must include("If you pasted the web address, check you copied the entire address.")
-
+      content should include("Page not found")
+      content should include("If you typed the web address, check it is correct.")
+      content should include("If you pasted the web address, check you copied the entire address.")
     }
   }

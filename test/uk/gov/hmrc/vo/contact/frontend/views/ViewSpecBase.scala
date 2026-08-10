@@ -19,10 +19,10 @@ package uk.gov.hmrc.vo.contact.frontend.views
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import play.twirl.api.Html
-import uk.gov.hmrc.vo.contact.frontend.SpecBase
 import org.scalatest.Assertion
+import uk.gov.hmrc.vo.unit.test.BaseAppSpec
 
-trait ViewSpecBase extends SpecBase:
+trait ViewSpecBase extends BaseAppSpec:
 
   def asDocument(html: Html): Document = Jsoup.parse(html.toString())
 
@@ -39,8 +39,8 @@ trait ViewSpecBase extends SpecBase:
 
   def assertPageTitleEqualsMessage(doc: Document, expectedMessageKey: String, args: Any*): Assertion =
     val headers = doc.getElementsByTag("h1")
-    headers.size mustBe 1
-    headers.first.text.replaceAll("\u00a0", " ") mustBe messages(expectedMessageKey, args*).replaceAll("&nbsp;", " ")
+    headers.size                                 shouldBe 1
+    headers.first.text.replaceAll("\u00a0", " ") shouldBe messages(expectedMessageKey, args*).replaceAll("&nbsp;", " ")
 
   def assertContainsText(doc: Document, text: String): Assertion =
     assert(doc.toString.contains(text), "\n\ntext " + text + " was not rendered on the page.\n")

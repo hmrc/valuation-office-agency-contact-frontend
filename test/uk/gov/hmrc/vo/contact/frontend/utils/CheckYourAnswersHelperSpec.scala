@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.utils
 
-import org.scalatestplus.mockito.MockitoSugar
 import play.api.i18n.{Lang, Messages}
 import play.api.libs.json.JsString
 import uk.gov.hmrc.vo.contact.frontend.controllers.routes
@@ -27,19 +26,21 @@ import uk.gov.hmrc.vo.contact.frontend.utils.{CheckYourAnswersHelper, DateUtil, 
 import uk.gov.hmrc.vo.contact.frontend.viewmodels.AnswerRow
 import uk.gov.hmrc.vo.contact.frontend.utils.AddressFormatters.*
 import uk.gov.hmrc.vo.contact.frontend.utils.ContactFormatter.*
-import uk.gov.hmrc.vo.contact.frontend.SpecBase
+import uk.gov.hmrc.vo.contact.frontend.FakeUserAnswers
+import uk.gov.hmrc.vo.unit.test.BaseAppSpec
+
 import java.util.Locale
 
-class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
+class CheckYourAnswersHelperSpec extends BaseAppSpec:
 
   val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
   implicit val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
-  implicit val dateUtil: DateUtil        = injector.instanceOf[DateUtil]
+  implicit val dateUtil: DateUtil        = inject[DateUtil]
 
   "Check Your Answers Helper" when {
 
-    "given a User Answers" must {
+    "given a User Answers" should {
 
       "tellUsMore function should return an Answer Row containing tellUsMore.checkYourAnswersLabel label and a message" in {
         val cd                    = ContactDetails("a", "c", "e")
@@ -51,7 +52,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
         val checkYourAnswers = CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.tellUsMore()
-        result mustBe Some(AnswerRow("tellUsMore.heading", "Hello", false, routes.TellUsMoreController.onPageLoad(CheckMode).url))
+        result shouldBe Some(AnswerRow("tellUsMore.heading", "Hello", false, routes.TellUsMoreController.onPageLoad(CheckMode).url))
       }
 
       "tellUsMore function should return an Answer Row containing tellUsMore.checkYourAnswersLabel label and a message when address line 2 and county are None" in {
@@ -64,7 +65,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
         val checkYourAnswers = CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.tellUsMore()
-        result mustBe Some(AnswerRow("tellUsMore.heading", "Hello", false, routes.TellUsMoreController.onPageLoad(CheckMode).url))
+        result shouldBe Some(AnswerRow("tellUsMore.heading", "Hello", false, routes.TellUsMoreController.onPageLoad(CheckMode).url))
       }
 
       "tellUsMore function should return a None if no TellUsMore object is found in the User Answers" in {
@@ -72,7 +73,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
         val checkYourAnswers = CheckYourAnswersHelper(userA)
 
         val result = checkYourAnswers.tellUsMore()
-        result mustBe None
+        result shouldBe None
       }
 
       "enquiryCategory function should return an Answer Row containing enquiryCategory.checkYourAnswersLabel label and a enquiry category option" in {
@@ -86,7 +87,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
         val checkYourAnswers = CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.enquiryCategory
-        result mustBe Some(AnswerRow("enquiry.category.label", s"enquiry.category.$ec.label", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url))
+        result shouldBe Some(AnswerRow("enquiry.category.label", s"enquiry.category.$ec.label", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url))
       }
 
       "enquiryCategory function should return an Answer Row containing enquiryCategory.checkYourAnswersLabel label and a enquiry category option when address line 2 and county are None" in {
@@ -100,7 +101,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
         val checkYourAnswers = CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.enquiryCategory
-        result mustBe Some(AnswerRow("enquiry.category.label", s"enquiry.category.$ec.label", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url))
+        result shouldBe Some(AnswerRow("enquiry.category.label", s"enquiry.category.$ec.label", true, routes.EnquiryCategoryController.onPageLoad(CheckMode).url))
       }
 
       "enquiryCategory function should return a None if no enquiry category option is found in the User Answers" in {
@@ -108,7 +109,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
         val checkYourAnswers = CheckYourAnswersHelper(userA)
 
         val result = checkYourAnswers.enquiryCategory
-        result mustBe None
+        result shouldBe None
       }
 
       "councilTaxSubcategory function should return an Answer Row containing councilTaxSubcategory.checkYourAnswersLabel label and a council tax subcategory option" in {
@@ -121,7 +122,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
         val checkYourAnswers = CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.councilTaxSubcategory
-        result mustBe Some(AnswerRow(
+        result shouldBe Some(AnswerRow(
           "councilTaxSubcategory.heading",
           s"councilTaxSubcategory.$councilTaxSubcategory",
           true,
@@ -140,7 +141,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
           val checkYourAnswers = CheckYourAnswersHelper(userAnswers)
 
           val result = checkYourAnswers.councilTaxSubcategory
-          result mustBe Some(AnswerRow(
+          result shouldBe Some(AnswerRow(
             "councilTaxSubcategory.heading",
             s"councilTaxSubcategory.$councilTaxSubcategory",
             true,
@@ -153,7 +154,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
         val checkYourAnswers = CheckYourAnswersHelper(userA)
 
         val result = checkYourAnswers.councilTaxSubcategory
-        result mustBe None
+        result shouldBe None
       }
 
       "businessRatesSubcategory function should return an Answer Row containing businessRatesSubcategory.checkYourAnswersLabel label and a business rates subcategory option" in {
@@ -166,7 +167,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
         val checkYourAnswers = CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.businessRatesSubcategory
-        result mustBe Some(AnswerRow(
+        result shouldBe Some(AnswerRow(
           "businessRatesSubcategory.heading",
           s"businessRatesSubcategory.$businessSubcategory",
           true,
@@ -185,7 +186,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
           val checkYourAnswers = CheckYourAnswersHelper(userAnswers)
 
           val result = checkYourAnswers.businessRatesSubcategory
-          result mustBe Some(AnswerRow(
+          result shouldBe Some(AnswerRow(
             "businessRatesSubcategory.heading",
             s"businessRatesSubcategory.$businessSubcategory",
             true,
@@ -198,7 +199,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
         val checkYourAnswers = CheckYourAnswersHelper(userA)
 
         val result = checkYourAnswers.businessRatesSubcategory
-        result mustBe None
+        result shouldBe None
       }
 
       "propertyAddress function should return an Answer Row containing propertyAddress.checkYourAnswersLabel label and a council tax address" in {
@@ -211,7 +212,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
         val checkYourAnswers = CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.propertyAddress
-        result mustBe Some(AnswerRow(
+        result shouldBe Some(AnswerRow(
           "propertyAddress.title",
           formattedPropertyAddress(address, "<br>"),
           false,
@@ -230,7 +231,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
           val checkYourAnswers = CheckYourAnswersHelper(userAnswers)
 
           val result = checkYourAnswers.propertyAddress
-          result mustBe Some(AnswerRow(
+          result shouldBe Some(AnswerRow(
             "propertyAddress.title",
             formattedPropertyAddress(address, "<br>"),
             false,
@@ -249,7 +250,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
         val checkYourAnswers = CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.anythingElse
-        result mustBe Some(AnswerRow("anythingElse.checkYourAnswersLabel", anythingElse.get, false, routes.AnythingElseTellUsController.onPageLoad.url))
+        result shouldBe Some(AnswerRow("anythingElse.checkYourAnswersLabel", anythingElse.get, false, routes.AnythingElseTellUsController.onPageLoad.url))
       }
 
       "propertyAddress function should return a None if no property address is found in the User Answers" in {
@@ -257,7 +258,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
         val checkYourAnswers = CheckYourAnswersHelper(userA)
 
         val result = checkYourAnswers.propertyAddress
-        result mustBe None
+        result shouldBe None
       }
 
       "contactDetails function should return an Answer Row containing contactDetails.checkYourAnswersLabel label and a contact details object" in {
@@ -270,7 +271,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
         val checkYourAnswers = CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswers.contactDetails
-        result mustBe Some(AnswerRow(
+        result shouldBe Some(AnswerRow(
           "contactDetails.title",
           formattedContactDetails(userAnswers.contactDetails, "<br>"),
           false,
@@ -290,7 +291,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
           val checkYourAnswers = CheckYourAnswersHelper(userAnswers)
 
           val result = checkYourAnswers.contactDetails
-          result mustBe Some(AnswerRow(
+          result shouldBe Some(AnswerRow(
             "contactDetails.title",
             formattedContactDetails(userAnswers.contactDetails, "<br>"),
             false,
@@ -303,7 +304,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
         val checkYourAnswers = CheckYourAnswersHelper(userA)
 
         val result = checkYourAnswers.contactDetails
-        result mustBe None
+        result shouldBe None
       }
 
       "housingBenefitTellUsMore function should return an Answer Row containing label and a message" in {
@@ -324,7 +325,7 @@ class CheckYourAnswersHelperSpec extends SpecBase with MockitoSugar:
         val checkYourAnswersHelper = CheckYourAnswersHelper(userAnswers)
 
         val result = checkYourAnswersHelper.housingBenefitTellUsMore
-        result mustBe Some(AnswerRow(
+        result shouldBe Some(AnswerRow(
           "housingBenefitSubcategory.other-hb-enquiry",
           "Enquiry details",
           false,

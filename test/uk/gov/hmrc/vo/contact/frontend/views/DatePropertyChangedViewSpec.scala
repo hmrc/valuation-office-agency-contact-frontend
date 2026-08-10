@@ -27,25 +27,25 @@ import java.time.LocalDate
 
 class DatePropertyChangedViewSpec extends ViewBehaviours:
 
-  private def datePropertyChanged = app.injector.instanceOf[datePropertyChanged]
+  private def datePropertyChanged = inject[datePropertyChanged]
 
   private val messageKeyPrefix = "datePropertyChanged"
 
   private def createView: () => HtmlFormat.Appendable = () =>
     datePropertyChanged(datePropertyChangedForm, messageKeyPrefix, "/valuation-office-agency-contact-frontend/about-business-rates")(
-      using fakeRequest,
+      using getRequest,
       messages
     )
 
   private def createViewUsingForm: Form[Option[LocalDate]] => HtmlFormat.Appendable =
-    (form: Form[Option[LocalDate]]) => datePropertyChanged(form, "test", "test")(using fakeRequest, messages)
+    (form: Form[Option[LocalDate]]) => datePropertyChanged(form, "test", "test")(using getRequest, messages)
 
-  "DatePropertyChanged view" must {
+  "DatePropertyChanged view" should {
     behave like normalPage(createView, messageKeyPrefix)
   }
 
   "DatePropertyChanged view" when {
-    "rendered" must {
+    "rendered" should {
       "contain continue button with the value Continue" in {
         val doc            = asDocument(createViewUsingForm(datePropertyChangedForm))
         val continueButton = doc.getElementsByClass("govuk-button").first().text()
@@ -55,9 +55,9 @@ class DatePropertyChangedViewSpec extends ViewBehaviours:
       "have a link marked with site.back leading to the Business Rates Subcategory Page" in {
         val doc          = asDocument(createView())
         val backlinkText = doc.select("a[class=govuk-back-link]").text()
-        backlinkText mustBe messages("site.back")
-        val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-        backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
+        backlinkText shouldBe messages("site.back")
+        val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+        backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
       }
     }
   }

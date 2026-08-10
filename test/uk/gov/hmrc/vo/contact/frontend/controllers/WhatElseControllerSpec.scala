@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.{JsString, Json}
 import play.api.mvc.Call
@@ -30,9 +29,9 @@ import uk.gov.hmrc.vo.contact.frontend.models.*
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html.whatElse
 
-class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar:
+class WhatElseControllerSpec extends ControllerSpecBase:
 
-  private def whatElseView: whatElse = app.injector.instanceOf[whatElse]
+  private def whatElseView: whatElse = inject[whatElse]
 
   private def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
@@ -48,19 +47,19 @@ class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar:
     )
 
   private def viewAsString(form: Form[String]): String =
-    whatElseView(form)(using fakeRequest, messages).toString
+    whatElseView(form)(using getRequest, messages).toString
 
-  "TellUsMore Controller" must {
+  "TellUsMore Controller" should {
 
     "return OK and the correct view for a GET" in {
       val validData: Map[String, JsString] = Map()
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString(form)
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsString(form)
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
@@ -69,43 +68,43 @@ class WhatElseControllerSpec extends ControllerSpecBase with MockitoSugar:
       )
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(getRequest)
 
-      contentAsString(result) mustBe viewAsString(form.fill("value 1"))
+      contentAsString(result) shouldBe viewAsString(form.fill("value 1"))
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("message", "value 1"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("message", "value 1"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(onwardRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(onwardRoute.url)
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("message", "<>"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("message", "<>"))
       val boundForm   = form.bind(Map("message" -> "<>"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe BAD_REQUEST
-      contentAsString(result) mustBe viewAsString(boundForm)
+      status(result)          shouldBe BAD_REQUEST
+      contentAsString(result) shouldBe viewAsString(boundForm)
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(fakeRequest)
+      val result = controller(dontGetAnyData).onPageLoad(getRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("message", "value 1"))
+      val postRequest = getRequest.withFormUrlEncodedBody(("message", "value 1"))
       val result      = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
   }

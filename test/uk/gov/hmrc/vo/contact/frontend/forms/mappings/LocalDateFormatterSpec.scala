@@ -17,11 +17,11 @@
 package uk.gov.hmrc.vo.contact.frontend.forms.mappings
 
 import play.api.data.FormError
-import uk.gov.hmrc.vo.contact.frontend.SpecBase
+import uk.gov.hmrc.vo.unit.test.BaseSpec
 
 import java.time.LocalDate
 
-class LocalDateFormatterSpec extends SpecBase:
+class LocalDateFormatterSpec extends BaseSpec:
 
   val keyValue                  = "value"
   val formatter                 = LocalDateFormatter(keyValue)
@@ -45,93 +45,93 @@ class LocalDateFormatterSpec extends SpecBase:
   val monthNumber: String       = s"$keyValue.error.month.number"
   val yearNumber: String        = s"$keyValue.error.year.number"
 
-  "LocalDateFormatter " must {
+  "LocalDateFormatter" should {
     "returns None when all fields are empty" in {
-      formatter.bind(keyValue, Map.empty).toOption.get mustBe None
+      formatter.bind(keyValue, Map.empty).toOption.get shouldBe None
     }
 
     "returns the list of FormErrors with correct message when day and month are empty" in {
-      formatter.bind(keyValue, Map(inputYear -> "2021")).swap.toOption.get mustBe
+      formatter.bind(keyValue, Map(inputYear -> "2021")).swap.toOption.get shouldBe
         List(FormError(keyValue, dayMonthRequired), FormError(keyValue, day), FormError(keyValue, month))
     }
 
     "returns the list of FormErrors with correct message when day and year are empty" in {
-      formatter.bind(keyValue, Map(inputMonth -> "12")).swap.toOption.get mustBe
+      formatter.bind(keyValue, Map(inputMonth -> "12")).swap.toOption.get shouldBe
         List(FormError(keyValue, dayYearRequired), FormError(keyValue, day), FormError(keyValue, year))
     }
 
     "returns the list of FormErrors with correct message when month and year are empty" in {
-      formatter.bind(keyValue, Map(inputDay -> "1")).swap.toOption.get mustBe
+      formatter.bind(keyValue, Map(inputDay -> "1")).swap.toOption.get shouldBe
         List(FormError(keyValue, monthYearRequired), FormError(keyValue, month), FormError(keyValue, year))
     }
 
     "returns the list of FormErrors with correct message when day is empty" in {
-      formatter.bind(keyValue, Map(inputMonth -> "1", inputYear -> "2021")).swap.toOption.get mustBe
+      formatter.bind(keyValue, Map(inputMonth -> "1", inputYear -> "2021")).swap.toOption.get shouldBe
         List(FormError(keyValue, dayRequired), FormError(keyValue, day))
     }
 
     "returns the list of FormErrors with correct message when month is empty" in {
-      formatter.bind(keyValue, Map(inputDay -> "1", inputYear -> "2021")).swap.toOption.get mustBe
+      formatter.bind(keyValue, Map(inputDay -> "1", inputYear -> "2021")).swap.toOption.get shouldBe
         List(FormError(keyValue, monthRequired), FormError(keyValue, month))
     }
 
     "returns the list of FormErrors with correct message when year is empty" in {
-      formatter.bind(keyValue, Map(inputDay -> "1", inputMonth -> "12")).swap.toOption.get mustBe
+      formatter.bind(keyValue, Map(inputDay -> "1", inputMonth -> "12")).swap.toOption.get shouldBe
         List(FormError(keyValue, yearRequired), FormError(keyValue, year))
     }
 
     "returns the list of FormErrors with correct message when day is greater then 31" in {
-      formatter.bind(keyValue, Map(inputDay -> "32", inputMonth -> "01", inputYear -> "2021")).swap.toOption.get mustBe
+      formatter.bind(keyValue, Map(inputDay -> "32", inputMonth -> "01", inputYear -> "2021")).swap.toOption.get shouldBe
         List(FormError(keyValue, dayRange), FormError(keyValue, day))
     }
 
     "returns the list of FormErrors with correct message when day is equal to 0" in {
-      formatter.bind(keyValue, Map(inputDay -> "0", inputMonth -> "01", inputYear -> "2021")).swap.toOption.get mustBe
+      formatter.bind(keyValue, Map(inputDay -> "0", inputMonth -> "01", inputYear -> "2021")).swap.toOption.get shouldBe
         List(FormError(keyValue, dayRange), FormError(keyValue, day))
     }
 
     "returns the list of FormErrors with correct message when day is not number" in {
-      formatter.bind(keyValue, Map(inputDay -> "e", inputMonth -> "01", inputYear -> "2021")).swap.toOption.get mustBe
+      formatter.bind(keyValue, Map(inputDay -> "e", inputMonth -> "01", inputYear -> "2021")).swap.toOption.get shouldBe
         List(FormError(keyValue, dayNumber), FormError(keyValue, day))
     }
 
     "returns the list of FormErrors with correct message when month is greater then 12" in {
-      formatter.bind(keyValue, Map(inputDay -> "1", inputMonth -> "13", inputYear -> "2020")).swap.toOption.get mustBe
+      formatter.bind(keyValue, Map(inputDay -> "1", inputMonth -> "13", inputYear -> "2020")).swap.toOption.get shouldBe
         List(FormError(keyValue, monthRange), FormError(keyValue, month))
     }
 
     "returns the list of FormErrors with correct message when month is equal to 0" in {
-      formatter.bind(keyValue, Map(inputDay -> "1", inputMonth -> "0", inputYear -> "2020")).swap.toOption.get mustBe
+      formatter.bind(keyValue, Map(inputDay -> "1", inputMonth -> "0", inputYear -> "2020")).swap.toOption.get shouldBe
         List(FormError(keyValue, monthRange), FormError(keyValue, month))
     }
 
     "returns the list of FormErrors with correct message when month is not number" in {
-      formatter.bind(keyValue, Map(inputDay -> "1", inputMonth -> "e", inputYear -> "2020")).swap.toOption.get mustBe
+      formatter.bind(keyValue, Map(inputDay -> "1", inputMonth -> "e", inputYear -> "2020")).swap.toOption.get shouldBe
         List(FormError(keyValue, monthNumber), FormError(keyValue, month))
     }
 
     "returns the list of FormErrors with correct message when year is less then 1900" in {
-      formatter.bind(keyValue, Map(inputDay -> "1", inputMonth -> "12", inputYear -> "1890")).swap.toOption.get mustBe
+      formatter.bind(keyValue, Map(inputDay -> "1", inputMonth -> "12", inputYear -> "1890")).swap.toOption.get shouldBe
         List(FormError(keyValue, yearRange), FormError(keyValue, year))
     }
 
     "returns the list of FormErrors with correct message when year is not number" in {
-      formatter.bind(keyValue, Map(inputDay -> "1", inputMonth -> "12", inputYear -> "yyyy")).swap.toOption.get mustBe
+      formatter.bind(keyValue, Map(inputDay -> "1", inputMonth -> "12", inputYear -> "yyyy")).swap.toOption.get shouldBe
         List(FormError(keyValue, yearNumber), FormError(keyValue, year))
     }
 
     "returns the list of FormErrors with correct message when the date is invalid" in {
-      formatter.bind(keyValue, Map(inputDay -> "31", inputMonth -> "02", inputYear -> "2021")).swap.toOption.get mustBe
+      formatter.bind(keyValue, Map(inputDay -> "31", inputMonth -> "02", inputYear -> "2021")).swap.toOption.get shouldBe
         List(FormError(keyValue, invalidDate), FormError(keyValue, day), FormError(keyValue, month), FormError(keyValue, year))
     }
 
     "returns the correct Local date when the date is correct" in {
-      formatter.bind(keyValue, Map(inputDay -> "4", inputMonth -> "01", inputYear -> "2020")).toOption.get mustBe
+      formatter.bind(keyValue, Map(inputDay -> "4", inputMonth -> "01", inputYear -> "2020")).toOption.get shouldBe
         Some(LocalDate.of(2020, 1, 4))
     }
 
     "returns date variables when the unbind func is called" in {
-      formatter.unbind(keyValue, Some(LocalDate.of(2020, 1, 4))) mustBe
+      formatter.unbind(keyValue, Some(LocalDate.of(2020, 1, 4))) shouldBe
         Map(inputDay -> "4", inputMonth -> "1", inputYear -> "2020")
     }
   }

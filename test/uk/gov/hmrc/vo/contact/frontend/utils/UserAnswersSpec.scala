@@ -16,18 +16,18 @@
 
 package uk.gov.hmrc.vo.contact.frontend.utils
 
-import org.scalatestplus.mockito.MockitoSugar
 import play.api.libs.json.{JsString, Json}
-import uk.gov.hmrc.vo.contact.frontend.SpecBase
+import uk.gov.hmrc.vo.contact.frontend.FakeUserAnswers
 import uk.gov.hmrc.vo.contact.frontend.identifiers.{ContactDetailsId, ContactReasonId, EnquiryCategoryId, PropertyAddressId}
 import uk.gov.hmrc.vo.contact.frontend.journey.model.TellUsMorePage
 import uk.gov.hmrc.vo.contact.frontend.models.*
+import uk.gov.hmrc.vo.unit.test.BaseSpec
 
-class UserAnswersSpec extends SpecBase with MockitoSugar:
+class UserAnswersSpec extends BaseSpec:
 
   val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
-  "Create Contact Model method" must {
+  "Create Contact Model method" should {
 
     "Return a ContactModel object containing a Property Address if all the information is present and the enquiry selected is council_tax" in {
       val contactDetails        = ContactDetails("a", "c", "e")
@@ -42,7 +42,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar:
 
       val result = userAnswers.contact()
 
-      result mustBe Right(expectedResult)
+      result shouldBe Right(expectedResult)
     }
 
     "Return a ContactModel object containing a Property Address if address line 2 and county are None and the enquiry selected is council_tax" in {
@@ -58,7 +58,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar:
 
       val result = userAnswers.contact()
 
-      result mustBe Right(expectedResult)
+      result shouldBe Right(expectedResult)
     }
 
     "Return a ContactModel object containing a Property Address if all the information is present and the enquiry selected is business_rates" in {
@@ -74,7 +74,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar:
 
       val result = userAnswers.contact()
 
-      result mustBe Right(expectedResult)
+      result shouldBe Right(expectedResult)
     }
 
     "Return a ContactModel object containing a Property Address if address line 2 and county are None and the enquiry selected is business_rates" in {
@@ -90,7 +90,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar:
 
       val result = userAnswers.contact()
 
-      result mustBe Right(expectedResult)
+      result shouldBe Right(expectedResult)
     }
 
     "Return a ContactModel object containing a Property Address if address line 2 and county are None and the enquiry selected is housing_benefit" in {
@@ -115,7 +115,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar:
 
       val result = userAnswers.contact()
 
-      result mustBe Right(expectedResult)
+      result shouldBe Right(expectedResult)
     }
 
     "Return a Left(Unable to parse) if some details are missing in order to create a Contact" in {
@@ -123,7 +123,7 @@ class UserAnswersSpec extends SpecBase with MockitoSugar:
 
       val result = userA.contact()
 
-      result mustBe Left("Unable to parse")
+      result shouldBe Left("Unable to parse")
     }
 
   }

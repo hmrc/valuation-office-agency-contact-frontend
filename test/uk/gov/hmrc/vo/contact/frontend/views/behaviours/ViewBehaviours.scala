@@ -33,11 +33,11 @@ trait ViewBehaviours extends ViewSpecBase:
 
   def normalPage(view: () => HtmlFormat.Appendable, messageKeyPrefix: String, expectedGuidanceKeys: String*): Unit =
     "behave like a normal page" when {
-      "rendered" must {
+      "rendered" should {
         "have the correct banner title" in {
           val doc  = asDocument(view())
           val link = doc.select(".govuk-service-navigation__service-name a").first()
-          link.text mustBe messagesApi("service.name")(using Lang(Locale.UK))
+          link.text shouldBe messagesApi("service.name")(using Lang(Locale.UK))
         }
 
         "display the correct browser title" in {

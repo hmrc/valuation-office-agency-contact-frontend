@@ -20,7 +20,7 @@ class BooleanFormSpec extends FormSpec:
 
   val errorKey = "error.key"
 
-  "Boolean Form" must {
+  "Boolean Form" should {
 
     "bind true" in {
       val form = BooleanForm(errorKey).bind(Map("value" -> "true"))

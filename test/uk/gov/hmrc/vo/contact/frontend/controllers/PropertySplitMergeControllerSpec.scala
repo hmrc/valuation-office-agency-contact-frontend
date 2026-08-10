@@ -27,7 +27,7 @@ import javax.inject.Singleton
 @Singleton
 class PropertySplitMergeControllerSpec extends ControllerSpecBase:
 
-  def propertySplitMergeEnquiry: propertySplitMerge = app.injector.instanceOf[property_split_merge]
+  def propertySplitMergeEnquiry: propertySplitMerge = inject[property_split_merge]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     PropertySplitMergeController(
@@ -38,19 +38,19 @@ class PropertySplitMergeControllerSpec extends ControllerSpecBase:
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString: String = propertySplitMergeEnquiry()(using fakeRequest, messages).toString()
+  def viewAsString: String = propertySplitMergeEnquiry()(using getRequest, messages).toString()
 
-  "Property Permanent Changes Controller" must {
+  "Property Permanent Changes Controller" should {
     "return the correct view for a GET" in {
-      val result = controller().onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe propertySplitMergeEnquiry()(using fakeRequest, messages).toString
+      val result = controller().onPageLoad()(getRequest)
+      contentAsString(result) shouldBe propertySplitMergeEnquiry()(using getRequest, messages).toString
     }
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad()(fakeRequest)
+      val result = controller().onPageLoad()(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsString
     }
 
   }

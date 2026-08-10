@@ -22,13 +22,13 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.businessRatesChallenge
 
 class BusinessRatesChallengeControllerSpec extends ControllerSpecBase:
 
-  private def brChallengeView = app.injector.instanceOf[businessRatesChallenge]
+  private def brChallengeView = inject[businessRatesChallenge]
 
-  "BusinessRatesChallengeController" must {
+  "BusinessRatesChallengeController" should {
     "return 200 for GET on ChallengePageLoad" in {
       val result = BusinessRatesChallengeController(messagesApi, brChallengeView, stubMessageControllerComponents)
-        .onChallengePageLoad(fakeRequest)
-      status(result) mustBe OK
-      contentAsString(result) must include("Challenging my business rates valuation")
+        .onChallengePageLoad(getRequest)
+      status(result)        shouldBe OK
+      contentAsString(result) should include("Challenging my business rates valuation")
     }
   }

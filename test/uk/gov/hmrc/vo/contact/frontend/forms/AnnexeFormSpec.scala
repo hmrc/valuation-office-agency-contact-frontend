@@ -27,7 +27,7 @@ class AnnexeFormSpec extends FormBehaviours:
 
   val form: Form[String] = AnnexeForm()
 
-  "Annexe form" must {
+  "Annexe form" should {
     behave like questionForm[String](AnnexeForm.options.head.value)
 
     behave like formWithOptionField("value", AnnexeForm.options.map(_.value)*)

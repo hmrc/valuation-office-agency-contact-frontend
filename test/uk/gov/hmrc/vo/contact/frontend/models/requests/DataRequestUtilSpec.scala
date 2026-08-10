@@ -16,19 +16,18 @@
 
 package uk.gov.hmrc.vo.contact.frontend.models.requests
 
-import org.scalatest.matchers.should
-import org.scalatest.wordspec.AnyWordSpec
 import play.api.libs.json.JsString
 import play.api.mvc.Request
 import play.api.test.FakeRequest
 import uk.gov.hmrc.vo.contact.frontend.identifiers.EnquiryCategoryId
 import uk.gov.hmrc.vo.contact.frontend.models.CacheMap
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
+import uk.gov.hmrc.vo.unit.test.BaseSpec
 
 /**
   * @author Yuriy Tumakha
   */
-class DataRequestUtilSpec extends AnyWordSpec with should.Matchers:
+class DataRequestUtilSpec extends BaseSpec:
 
   val categories: Seq[String] = Seq("housing_benefit", "fair_rent")
 

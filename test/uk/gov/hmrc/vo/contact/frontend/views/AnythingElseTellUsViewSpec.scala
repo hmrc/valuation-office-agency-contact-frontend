@@ -27,15 +27,15 @@ class AnythingElseTellUsViewSpec extends QuestionViewBehaviours[String]:
 
   private val messageKeyPrefix = "anythingElse"
 
-  private def anythingElse: anythingElseTellUs = app.injector.instanceOf[anythingElseTellUs]
+  private def anythingElse: anythingElseTellUs = inject[anythingElseTellUs]
 
-  private def createView: () => HtmlFormat.Appendable = () => anythingElse(AnythingElseForm.form)(using fakeRequest, messages)
+  private def createView: () => HtmlFormat.Appendable = () => anythingElse(AnythingElseForm.form)(using getRequest, messages)
 
-  private def createViewUsingForm: Form[String] => HtmlFormat.Appendable = form => anythingElse(form)(using fakeRequest, messages)
+  private def createViewUsingForm: Form[String] => HtmlFormat.Appendable = form => anythingElse(form)(using getRequest, messages)
 
   override val form: Form[String] = AnythingElseForm.form
 
-  "AnythingElseTellUs view" must {
+  "AnythingElseTellUs view" should {
 
     "display the correct browser title" in {
       val doc = asDocument(createView())
@@ -54,7 +54,7 @@ class AnythingElseTellUsViewSpec extends QuestionViewBehaviours[String]:
   "has a link marked with site.back leading to the Anything Else Tell Us Page" in {
     val doc          = asDocument(createView())
     val backlinkText = doc.select("a[class=govuk-back-link]").text()
-    backlinkText mustBe messages("site.back")
-    val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-    backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
+    backlinkText shouldBe messages("site.back")
+    val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+    backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(NormalMode).url
   }

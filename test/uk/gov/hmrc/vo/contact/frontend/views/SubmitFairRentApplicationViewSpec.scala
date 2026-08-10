@@ -22,18 +22,18 @@ import play.twirl.api.HtmlFormat
 
 class SubmitFairRentApplicationViewSpec extends ViewBehaviours:
 
-  def submitFairRentApplication: html.submitFairRentApplication = app.injector.instanceOf[submit_fair_rent_application]
+  def submitFairRentApplication: html.submitFairRentApplication = inject[submit_fair_rent_application]
 
-  def view: () => HtmlFormat.Appendable = () => submitFairRentApplication()(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => submitFairRentApplication()(using getRequest, messages)
 
-  "Check Fair Rent Application view" must {
+  "Check Fair Rent Application view" should {
     behave like normalPage(view, "fairRentApplication", "title", "p1", "p2", "subheading", "p3")
 
     "has a link marked with site.back leading to the Fair Rent Enquiry self contained Page" in {
       val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.FairRentEnquiryController.onPageLoad.url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.FairRentEnquiryController.onPageLoad.url
     }
   }

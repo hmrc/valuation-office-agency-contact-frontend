@@ -23,18 +23,18 @@ import play.twirl.api.HtmlFormat
 
 class CouncilTaxBandForNewViewSpec extends ViewBehaviours:
 
-  def councilTaxBandForNew: html.councilTaxBandForNew = app.injector.instanceOf[council_tax_band_for_new]
+  def councilTaxBandForNew: html.councilTaxBandForNew = inject[council_tax_band_for_new]
 
-  def view: () => HtmlFormat.Appendable = () => councilTaxBandForNew()(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxBandForNew()(using getRequest, messages)
 
-  "Council Tax Band For A New Property view" must {
+  "Council Tax Band For A New Property view" should {
     behave like normalPage(view, "councilTaxBandForNew", "title", "subheading", "p1.part1", "p1.url", "p1.part2", "p2", "p3", "p4", "p4.url", "p4")
 
     "has a link marked with site.back leading to the Council Tax Band For A New Property" in {
       val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
   }

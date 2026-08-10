@@ -16,9 +16,8 @@
 
 package uk.gov.hmrc.vo.contact.frontend.utils
 
-import play.api.Logging
 import play.api.i18n.{Lang, Messages}
-import uk.gov.hmrc.vo.contact.frontend.SpecBase
+import uk.gov.hmrc.vo.unit.test.BaseAppSpec
 
 import java.time.Month.JANUARY
 import java.time.{LocalDate, LocalTime, ZonedDateTime}
@@ -27,47 +26,45 @@ import java.util.Locale
 /**
   * @author Yuriy Tumakha
   */
-class DateUtilSpec extends SpecBase with Logging:
+class DateUtilSpec extends BaseAppSpec:
 
   private val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.of("en"))))
   private val messagesWelsh: Messages   = messagesApi.preferred(Seq(Lang(Locale.of("cy"))))
 
-  private val dateUtil = injector.instanceOf[DateUtil]
+  private val dateUtil = inject[DateUtil]
 
-  // scalastyle:off
   private val testLocalDate: LocalDate     = LocalDate.of(2022, JANUARY, 22)
   private val testZonedDate: ZonedDateTime = ZonedDateTime.of(testLocalDate.plusMonths(1), LocalTime.of(13, 45), dateUtil.ukTimezone)
-  // scalastyle:on
 
-  "nowInUK" must {
+  "nowInUK" should {
     "return current time in UK time zone" in {
       logger.info("UK Time: " + dateUtil.nowInUK)
-      dateUtil.timeFormatter.format(dateUtil.nowInUK) mustBe dateUtil.timeFormatter.format(ZonedDateTime.now(dateUtil.ukTimezone))
+      dateUtil.timeFormatter.format(dateUtil.nowInUK) shouldBe dateUtil.timeFormatter.format(ZonedDateTime.now(dateUtil.ukTimezone))
     }
   }
 
-  "shortDateFormatter" must {
+  "shortDateFormatter" should {
     "format date in format 'dd/MM/yyyy'" in {
-      testZonedDate.format(dateUtil.shortDateFormatter) mustBe "22/02/2022"
+      testZonedDate.format(dateUtil.shortDateFormatter) shouldBe "22/02/2022"
     }
   }
 
-  "timeFormatter" must {
+  "timeFormatter" should {
     "format date in format 'HH:mm'" in {
-      testZonedDate.format(dateUtil.timeFormatter) mustBe "13:45"
+      testZonedDate.format(dateUtil.timeFormatter) shouldBe "13:45"
     }
   }
 
-  "formattedLocalDate" must {
+  "formattedLocalDate" should {
     "format date in format 'd MMMM yyyy'" in {
-      dateUtil.formattedLocalDate(testLocalDate)(using messagesEnglish) mustBe "22 January 2022"
-      dateUtil.formattedLocalDate(testLocalDate)(using messagesWelsh) mustBe "22 Ionawr 2022"
+      dateUtil.formattedLocalDate(testLocalDate)(using messagesEnglish) shouldBe "22 January 2022"
+      dateUtil.formattedLocalDate(testLocalDate)(using messagesWelsh)   shouldBe "22 Ionawr 2022"
     }
   }
 
-  "formattedZonedDate" must {
+  "formattedZonedDate" should {
     "format date in format 'd MMMM yyyy'" in {
-      dateUtil.formattedZonedDate(testZonedDate)(using messagesEnglish) mustBe "22 February 2022"
-      dateUtil.formattedZonedDate(testZonedDate)(using messagesWelsh) mustBe "22 Chwefror 2022"
+      dateUtil.formattedZonedDate(testZonedDate)(using messagesEnglish) shouldBe "22 February 2022"
+      dateUtil.formattedZonedDate(testZonedDate)(using messagesWelsh)   shouldBe "22 Chwefror 2022"
     }
   }

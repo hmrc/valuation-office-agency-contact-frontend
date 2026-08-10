@@ -23,11 +23,11 @@ import play.twirl.api.HtmlFormat
 
 class CouncilTaxBandTooHighViewSpec extends ViewBehaviours:
 
-  def councilTaxBandTooHigh: html.councilTaxBandTooHigh = app.injector.instanceOf[council_tax_band_too_high]
+  def councilTaxBandTooHigh: html.councilTaxBandTooHigh = inject[council_tax_band_too_high]
 
-  def view: () => HtmlFormat.Appendable = () => councilTaxBandTooHigh()(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxBandTooHigh()(using getRequest, messages)
 
-  "Council Tax Band Too High view" must {
+  "Council Tax Band Too High view" should {
     behave like normalPage(
       view,
       "councilTaxBandTooHigh",
@@ -47,8 +47,8 @@ class CouncilTaxBandTooHighViewSpec extends ViewBehaviours:
     "has a link marked with site.back leading to the Council Tax Band Too High Page" in {
       val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
   }

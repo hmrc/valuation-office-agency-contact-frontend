@@ -23,18 +23,18 @@ import play.twirl.api.HtmlFormat
 
 class BusinessRatesNonBusinessViewSpec extends ViewBehaviours:
 
-  def businessRatesNonBusiness: html.businessRatesNonBusiness = app.injector.instanceOf[business_rates_non_business]
+  def businessRatesNonBusiness: html.businessRatesNonBusiness = inject[business_rates_non_business]
 
-  def view: () => HtmlFormat.Appendable = () => businessRatesNonBusiness()(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => businessRatesNonBusiness()(using getRequest, messages)
 
-  "Business rates non business view" must {
+  "Business rates non business view" should {
     behave like normalPage(view, "businessRatesNonBusiness", "title", "p1", "p2", "step1", "step2", "step3", "subheading", "p3")
 
     "has a link marked with site.back leading to the business rates non business Page" in {
       val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe routes.BusinessRatesPropertyController.onPageLoad().url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe routes.BusinessRatesPropertyController.onPageLoad().url
     }
   }

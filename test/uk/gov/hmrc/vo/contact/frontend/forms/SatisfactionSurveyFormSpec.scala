@@ -28,7 +28,7 @@ class SatisfactionSurveyFormSpec extends FormBehaviours:
 
   val form: Form[SatisfactionSurvey] = SatisfactionSurveyForm()
 
-  "SatisfactionSurvey form" must {
+  "SatisfactionSurvey form" should {
     behave like questionForm(SatisfactionSurvey("verySatisfied", Option("value 1")))
 
     "fail to bind when satisfaction is blank" in {

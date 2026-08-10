@@ -16,9 +16,9 @@
 
 package uk.gov.hmrc.vo.contact.frontend.models
 
-import uk.gov.hmrc.vo.contact.frontend.SpecBase
+import uk.gov.hmrc.vo.unit.test.BaseSpec
 
-class ContactSpec extends SpecBase:
+class ContactSpec extends BaseSpec:
 
   val message                        = "message"
   val enquiryCategory                = "EC"
@@ -30,20 +30,20 @@ class ContactSpec extends SpecBase:
       val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "e")
       val result          = Contact(message, enquiryCategory, subEnquiryCategory, contactDetails, propertyAddress)
 
-      result.propertyAddress mustBe propertyAddress
-      result.message mustBe message
-      result.enquiryCategory mustBe enquiryCategory
-      result.subEnquiryCategory mustBe subEnquiryCategory
-      result.contact mustBe contactDetails
+      result.propertyAddress    shouldBe propertyAddress
+      result.message            shouldBe message
+      result.enquiryCategory    shouldBe enquiryCategory
+      result.subEnquiryCategory shouldBe subEnquiryCategory
+      result.contact            shouldBe contactDetails
     }
 
   "contact model with the property address containing optional fields as None" in {
     val propertyAddress = PropertyAddress("a", None, "c", None, "e")
     val result          = Contact(message, enquiryCategory, subEnquiryCategory, contactDetails, propertyAddress)
 
-    result.propertyAddress mustBe propertyAddress
-    result.message mustBe message
-    result.enquiryCategory mustBe enquiryCategory
-    result.subEnquiryCategory mustBe subEnquiryCategory
-    result.contact mustBe contactDetails
+    result.propertyAddress    shouldBe propertyAddress
+    result.message            shouldBe message
+    result.enquiryCategory    shouldBe enquiryCategory
+    result.subEnquiryCategory shouldBe subEnquiryCategory
+    result.contact            shouldBe contactDetails
   }

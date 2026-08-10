@@ -16,18 +16,17 @@
 
 package uk.gov.hmrc.vo.contact.frontend.journey.pages
 
-import org.scalatest.matchers.should
-import org.scalatest.wordspec.AnyWordSpec
 import play.api.libs.json.{JsString, JsValue}
 import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 import uk.gov.hmrc.vo.contact.frontend.identifiers.BusinessRatesSubcategoryId
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
+import uk.gov.hmrc.vo.unit.test.BaseSpec
 
 /**
   * @author Yuriy Tumakha
   */
-class EnglandOrWalesPropertyRouterSpec extends AnyWordSpec with should.Matchers:
+class EnglandOrWalesPropertyRouterSpec extends BaseSpec:
 
   private val emptyUserAnswers = userAnswers(Map())
 

@@ -31,7 +31,7 @@ class WithRequiredBooleanMappingSpec extends FormSpec:
 
   import TestForm.*
 
-  "With Required Boolean Mapping" must {
+  "With Required Boolean Mapping" should {
 
     "bind true" in {
       testForm.bind(Map("value" -> "true")).get shouldBe true

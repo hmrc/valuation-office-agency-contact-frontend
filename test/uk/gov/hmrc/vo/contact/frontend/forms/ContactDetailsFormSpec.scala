@@ -30,7 +30,7 @@ class ContactDetailsFormSpec extends FormBehaviours:
 
   val form: Form[ContactDetails] = ContactDetailsForm.contactDetailsForm
 
-  "ContactDetails form" must {
+  "ContactDetails form" should {
     behave like questionForm(ContactDetails("Alex", "a@a", "12345678901"))
 
     "fail to bind when email is blank" in {

@@ -16,12 +16,11 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.test.Injecting
-import uk.gov.hmrc.vo.contact.frontend.SpecBase
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{FakeDataClearAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.models.CacheMap
+import uk.gov.hmrc.vo.unit.test.BaseAppSpec
 
-trait ControllerSpecBase extends SpecBase with Injecting:
+trait ControllerSpecBase extends BaseAppSpec:
 
   val cacheMapId = "id"
 

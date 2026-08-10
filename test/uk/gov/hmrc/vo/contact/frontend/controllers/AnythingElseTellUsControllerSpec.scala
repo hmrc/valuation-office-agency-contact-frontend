@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.JsString
 import play.api.mvc.Call
@@ -31,11 +30,11 @@ import uk.gov.hmrc.vo.contact.frontend.utils.{MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html.error.internal_server_error
 import uk.gov.hmrc.vo.contact.frontend.views.html.{anythingElseTellUs, error}
 
-class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSugar:
+class AnythingElseTellUsControllerSpec extends ControllerSpecBase:
 
   val mockUserAnswers: UserAnswers                     = mock[UserAnswers]
-  def anythingElse: anythingElseTellUs                 = app.injector.instanceOf[anythingElseTellUs]
-  def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
+  def anythingElse: anythingElseTellUs                 = inject[anythingElseTellUs]
+  def internalServerError: error.internal_server_error = inject[internal_server_error]
 
   def onwardRoute: Call = routes.CheckYourAnswersController.onPageLoad()
 
@@ -51,19 +50,19 @@ class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSu
     )
 
   def viewAsString(form: Form[String] = form): String =
-    anythingElse(form)(using fakeRequest, messages).toString
+    anythingElse(form)(using getRequest, messages).toString
 
-  "AnythingElseTellUsMore Controller" must {
+  "AnythingElseTellUsMore Controller" should {
 
     "return OK and the correct view for a GET" in {
       val validData = Map(EnquiryCategoryId.toString -> JsString("council_tax"))
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString(form)
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsString(form)
     }
 
     "populate the view correctly on a GET when the anything else has previously been filled" in {
@@ -73,28 +72,28 @@ class AnythingElseTellUsControllerSpec extends ControllerSpecBase with MockitoSu
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString(form.fill(anythingElseString))
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsString(form.fill(anythingElseString))
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("message", "value 1"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("message", "value 1"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(onwardRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(onwardRoute.url)
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest = getRequest.withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm   = form.bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe BAD_REQUEST
-      contentAsString(result) mustBe viewAsString(boundForm)
+      status(result)          shouldBe BAD_REQUEST
+      contentAsString(result) shouldBe viewAsString(boundForm)
     }
   }

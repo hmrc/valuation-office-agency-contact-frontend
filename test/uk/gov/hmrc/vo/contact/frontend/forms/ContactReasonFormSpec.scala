@@ -26,7 +26,7 @@ class ContactReasonFormSpec extends FormBehaviours:
 
   val form: Form[String] = ContactReasonForm.form
 
-  "ContactReason form" must {
+  "ContactReason form" should {
 
     "fail to bind when value is blank" in {
       val data          = emptyData

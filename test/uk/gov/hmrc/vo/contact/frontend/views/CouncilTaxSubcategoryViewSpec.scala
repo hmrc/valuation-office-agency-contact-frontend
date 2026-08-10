@@ -25,18 +25,18 @@ import play.twirl.api.HtmlFormat
 
 class CouncilTaxSubcategoryViewSpec extends ViewBehaviours:
 
-  def councilTaxSubcategory: html.councilTaxSubcategory = app.injector.instanceOf[council_tax_subcategory]
+  def councilTaxSubcategory: html.councilTaxSubcategory = inject[council_tax_subcategory]
 
   val messageKeyPrefix = "councilTaxSubcategory"
 
   def createView: () => HtmlFormat.Appendable =
-    () => councilTaxSubcategory(CouncilTaxSubcategoryForm(), NormalMode)(using fakeRequest, messages)
+    () => councilTaxSubcategory(CouncilTaxSubcategoryForm(), NormalMode)(using getRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    (form: Form[String]) => councilTaxSubcategory(form, NormalMode)(using fakeRequest, messages)
+    (form: Form[String]) => councilTaxSubcategory(form, NormalMode)(using getRequest, messages)
 
   "CouncilTaxSubcategory view" when {
-    "rendered" must {
+    "rendered" should {
       "contain radio buttons for the value" in {
         val doc = asDocument(createViewUsingForm(CouncilTaxSubcategoryForm()))
         for (option <- CouncilTaxSubcategoryForm.options)
@@ -67,14 +67,14 @@ class CouncilTaxSubcategoryViewSpec extends ViewBehaviours:
       "has a link marked with site.back leading to the Enquiry page" in {
         val doc          = asDocument(createView())
         val backlinkText = doc.select("a[class=govuk-back-link]").text()
-        backlinkText mustBe messages("site.back")
-        val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-        backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
+        backlinkText shouldBe messages("site.back")
+        val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+        backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
       }
     }
 
     for (option <- CouncilTaxSubcategoryForm.options)
-      s"rendered with a value of '${option.value}'" must {
+      s"rendered with a value of '${option.value}'" should {
         s"have the '${option.value}' radio button selected" in {
           val doc = asDocument(createViewUsingForm(CouncilTaxSubcategoryForm().bind(Map("value" -> s"${option.value}"))))
           assertContainsRadioButton(doc, option.id, "value", option.value, true)

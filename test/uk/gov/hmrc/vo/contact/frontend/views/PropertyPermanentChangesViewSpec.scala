@@ -24,18 +24,18 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.propertyPermanentChanges
 
 class PropertyPermanentChangesViewSpec extends ViewBehaviours:
 
-  def PropertyPermanentChanges: propertyPermanentChanges = app.injector.instanceOf[property_permanent_changes]
+  def PropertyPermanentChanges: propertyPermanentChanges = inject[property_permanent_changes]
 
-  def view: () => HtmlFormat.Appendable = () => PropertyPermanentChanges(NormalMode)(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => PropertyPermanentChanges(NormalMode)(using getRequest, messages)
 
-  "The Property Permanent Changes view" must {
+  "The Property Permanent Changes view" should {
     behave like normalPage(view, "propertyPermanentChanges", "title", "p1.part1", "p1.part2", "subheading", "p2")
 
     "has a link marked with site.back leading to the Council Tax band cannot be reduced or removed" in {
       val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
   }

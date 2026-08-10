@@ -26,8 +26,8 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.councilTaxPropertyEmpty
 
 class PropertyEmptyControllerSpec extends ControllerSpecBase:
 
-  def councilPropertyEmpty: councilTaxPropertyEmpty               = app.injector.instanceOf[council_tax_property_empty]
-  def businessRatesPropertyEmpty: html.businessRatesPropertyEmpty = app.injector.instanceOf[business_rates_property_empty]
+  def councilPropertyEmpty: councilTaxPropertyEmpty               = inject[council_tax_property_empty]
+  def businessRatesPropertyEmpty: html.businessRatesPropertyEmpty = inject[business_rates_property_empty]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     PropertyEmptyController(
@@ -39,14 +39,14 @@ class PropertyEmptyControllerSpec extends ControllerSpecBase:
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  "Property Empty Controller" must {
+  "Property Empty Controller" should {
     "return the correct council tax view for a GET" in {
-      val result = controller().onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe councilPropertyEmpty()(using fakeRequest, messages).toString
+      val result = controller().onPageLoad()(getRequest)
+      contentAsString(result) shouldBe councilPropertyEmpty()(using getRequest, messages).toString
     }
 
     "return the correct business rates view for a GET" in {
-      val result = controller().onBusinessRatesPageLoad()(fakeRequest)
-      contentAsString(result) mustBe businessRatesPropertyEmpty()(using fakeRequest, messages).toString
+      val result = controller().onBusinessRatesPageLoad()(getRequest)
+      contentAsString(result) shouldBe businessRatesPropertyEmpty()(using getRequest, messages).toString
     }
   }

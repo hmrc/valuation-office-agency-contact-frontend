@@ -32,16 +32,16 @@ class ExpectedUpdateControllerSpec extends ControllerSpecBase:
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     ExpectedUpdateController(messagesApi, dataRetrievalAction, expectedUpdate, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
-  def viewAsString(): String = expectedUpdate()(using fakeRequest, messages).toString()
+  def viewAsString(): String = expectedUpdate()(using getRequest, messages).toString()
 
-  "ExpectedUpdateController Controller" must {
+  "ExpectedUpdateController Controller" should {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad()(fakeRequest)
+      val result = controller().onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
 
-      contentAsString(result) mustBe viewAsString()
+      contentAsString(result) shouldBe viewAsString()
     }
 
   }

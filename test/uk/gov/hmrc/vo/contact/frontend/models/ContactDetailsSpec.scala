@@ -32,10 +32,10 @@ package uk.gov.hmrc.vo.contact.frontend.models
  * limitations under the License.
  */
 
-import org.scalatest.wordspec.AnyWordSpec
 import uk.gov.hmrc.vo.contact.frontend.models.ContactDetails
+import uk.gov.hmrc.vo.unit.test.BaseSpec
 
-class ContactDetailsSpec extends AnyWordSpec:
+class ContactDetailsSpec extends BaseSpec:
 
   val contact: ContactDetails = ContactDetails("Alex", "test@email.com", "02078273278732")
 

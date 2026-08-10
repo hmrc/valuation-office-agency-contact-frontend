@@ -16,9 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import org.mockito.ArgumentMatchers.any
-import org.mockito.Mockito.when
-import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.JsString
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
@@ -36,7 +33,7 @@ import scala.concurrent.Future
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with MockitoSugar:
+class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase:
 
   val fakeDataCacheConnector: DataCacheConnector = mock[DataCacheConnector]
 
@@ -66,64 +63,64 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase with Moc
     )
 
   def viewAsString(form: Form[String] = BusinessRatesSubcategoryForm()): String =
-    businessRatesSubcategory(form, NormalMode)(using fakeRequest, messages).toString
+    businessRatesSubcategory(form, NormalMode)(using getRequest, messages).toString
 
-  "BusinessRatesSubcategory Controller" must {
+  "BusinessRatesSubcategory Controller" should {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onPageLoad(NormalMode)(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsString()
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
       val validData       = Map(BusinessRatesSubcategoryId.toString -> JsString(BusinessRatesSubcategoryForm.options.head.value))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(getRequest)
 
-      contentAsString(result) mustBe viewAsString(BusinessRatesSubcategoryForm().fill(BusinessRatesSubcategoryForm.options.head.value))
+      contentAsString(result) shouldBe viewAsString(BusinessRatesSubcategoryForm().fill(BusinessRatesSubcategoryForm.options.head.value))
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", BusinessRatesSubcategoryForm.options.head.value))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", BusinessRatesSubcategoryForm.options.head.value))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(onwardRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(onwardRoute.url)
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm   = BusinessRatesSubcategoryForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe BAD_REQUEST
-      contentAsString(result) mustBe viewAsString(boundForm)
+      status(result)          shouldBe BAD_REQUEST
+      contentAsString(result) shouldBe viewAsString(boundForm)
     }
 
     "return OK and the correct view for valuation" in {
-      val result = controller().onValuationPageLoad(fakeRequest)
+      val result = controller().onValuationPageLoad(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe businessRatesValuation()(using fakeRequest, messages).toString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe businessRatesValuation()(using getRequest, messages).toString()
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(getRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", BusinessRatesSubcategoryForm.options.head.value))
+      val postRequest = getRequest.withFormUrlEncodedBody(("value", BusinessRatesSubcategoryForm.options.head.value))
       val result      = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
   }

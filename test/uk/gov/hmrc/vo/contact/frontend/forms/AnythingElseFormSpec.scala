@@ -27,7 +27,7 @@ class AnythingElseFormSpec extends FormBehaviours:
 
   val form: Form[String] = AnythingElseForm.form
 
-  "AnythingElse form" must {
+  "AnythingElse form" should {
     behave like questionForm("value 1")
 
     "fail to bind when message length is more than 5000" in {

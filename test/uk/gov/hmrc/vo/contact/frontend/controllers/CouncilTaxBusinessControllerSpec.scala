@@ -16,9 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import org.mockito.ArgumentMatchers.{any, anyString}
-import org.mockito.Mockito.when
-import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.JsString
 import play.api.test.Helpers.{contentAsString, status}
@@ -38,7 +35,7 @@ import scala.concurrent.Future
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 
-class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSugar:
+class CouncilTaxBusinessControllerSpec extends ControllerSpecBase:
 
   val fakeDataCacheConnector: DataCacheConnector = mock[DataCacheConnector]
 
@@ -71,73 +68,71 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase with MockitoSu
   def viewAsString(form: Form[String] = CouncilTaxBusinessEnquiryForm()): String = councilTaxBusinessEnquiry(
     form,
     routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
-  )(using fakeRequest, messages).toString
+  )(using getRequest, messages).toString
 
-  "CouncilTaxBusiness Controller" must {
+  "CouncilTaxBusiness Controller" should {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onPageLoad(NormalMode)(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsString()
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
       val validData       = Map(CouncilTaxBusinessEnquiryId.toString -> JsString(CouncilTaxBusinessEnquiryForm.options.head.value))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(getRequest)
 
-      contentAsString(result) mustBe viewAsString(CouncilTaxBusinessEnquiryForm().fill(CouncilTaxBusinessEnquiryForm.options.head.value))
+      contentAsString(result) shouldBe viewAsString(CouncilTaxBusinessEnquiryForm().fill(CouncilTaxBusinessEnquiryForm.options.head.value))
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", CouncilTaxBusinessEnquiryForm.options.head.value))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", CouncilTaxBusinessEnquiryForm.options.head.value))
 
       val result = controller().onEnquirySubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(onwardRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(onwardRoute.url)
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm   = CouncilTaxBusinessEnquiryForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onEnquirySubmit(NormalMode)(postRequest)
 
-      status(result) mustBe BAD_REQUEST
-      contentAsString(result) mustBe viewAsString(boundForm)
+      status(result)          shouldBe BAD_REQUEST
+      contentAsString(result) shouldBe viewAsString(boundForm)
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(getRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", CouncilTaxSubcategoryForm.options.head.value))
+      val postRequest = getRequest.withFormUrlEncodedBody(("value", CouncilTaxSubcategoryForm.options.head.value))
       val result      = controller(dontGetAnyData).onEnquirySubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
     "return OK and the small part of the property is used for business page for GET" in {
-      val result = controller().onSmallPartUsedPageLoad(fakeRequest)
+      val result = controller().onSmallPartUsedPageLoad(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe propertySmallPartUsed()(using fakeRequest, messages).toString
-
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe propertySmallPartUsed()(using getRequest, messages).toString
     }
 
     "return OK and the small part of the property is used for business rates page for GET" in {
-      val result = controller().onSmallPartUsedBusinessRatesPageLoad()(fakeRequest)
+      val result = controller().onSmallPartUsedBusinessRatesPageLoad()(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe businessRatesNoNeedToPay()(using fakeRequest, messages).toString
-
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe businessRatesNoNeedToPay()(using getRequest, messages).toString
     }
   }
