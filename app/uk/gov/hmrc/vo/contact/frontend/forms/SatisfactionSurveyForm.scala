@@ -19,9 +19,18 @@ package uk.gov.hmrc.vo.contact.frontend.forms
 import play.api.data.Forms.*
 import play.api.data.format.Formatter
 import play.api.data.{Form, FormError}
-import uk.gov.hmrc.vo.contact.frontend.utils.RadioOption
 
 object SatisfactionSurveyForm:
+
+  val satisfactionValues: Seq[String] = Seq(
+    "verySatisfied",
+    "satisfied",
+    "neither",
+    "dissatisfied",
+    "veryDissatisfied"
+  )
+
+  private val satisfactionSet: Set[String] = satisfactionValues.toSet
 
   private val antiXSSMessageRegex = """^['`A-Za-z0-9\s\-&,\.£\(\)%;:\?\!]+$"""
 
@@ -37,22 +46,11 @@ object SatisfactionSurveyForm:
       mapping(
         "satisfaction" -> of[String](using satisfactionFormat)
           .verifying("error.required.feedback", _.nonEmpty)
-          .verifying("error.required.feedback", optionIsValid),
+          .verifying("error.required.feedback", s => s.isEmpty || satisfactionSet(s)),
         "details"      -> optional(text
           .verifying("error.message.max_length.feedback", _.length <= 1200)
           .verifying("error.message.xss-invalid.feedback", _.matches(antiXSSMessageRegex)))
       )(SatisfactionSurvey.apply)(ss => Some(Tuple.fromProductTyped(ss)))
     )
-
-  def options: Seq[RadioOption] = Seq(
-    RadioOption("satisfaction", "verySatisfied"),
-    RadioOption("satisfaction", "satisfied"),
-    RadioOption("satisfaction", "neither"),
-    RadioOption("satisfaction", "dissatisfied"),
-    RadioOption("satisfaction", "veryDissatisfied")
-  )
-
-  def optionIsValid(value: String): Boolean =
-    options.exists(_.value == value)
 
 case class SatisfactionSurvey(satisfaction: String, details: Option[String])

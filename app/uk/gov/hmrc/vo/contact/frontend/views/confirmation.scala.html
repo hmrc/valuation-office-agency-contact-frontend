@@ -14,21 +14,19 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.Implicits.*
-@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukCharacterCount, GovukErrorSummary, GovukFieldset, GovukPanel, GovukRadios}
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.charactercount.CharacterCount
+@import uk.gov.hmrc.govukfrontend.views.html.components.{FormWithCSRF, GovukButton, GovukErrorSummary, GovukFieldset, GovukPanel, GovukRadios}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{HtmlContent, Text}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.errorsummary.{ErrorLink, ErrorSummary}
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.fieldset.Fieldset
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.hint.Hint
 @import uk.gov.hmrc.govukfrontend.views.viewmodels.panel.Panel
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.{RadioItem, Radios}
+@import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcCharacterCount
 @import uk.gov.hmrc.vo.contact.frontend.forms.{SatisfactionSurvey, SatisfactionSurveyForm}
 @import uk.gov.hmrc.vo.contact.frontend.models.Contact
 @import uk.gov.hmrc.vo.contact.frontend.utils.AddressFormatters.formattedPropertyAddress
 @import uk.gov.hmrc.vo.contact.frontend.viewmodels.AnswerSection
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
+@import uk.gov.hmrc.vo.service.model.input.{RadioField, TextAreaField}
 
 @this(
         layout: PrimaryLayout,
@@ -37,7 +35,7 @@
         govukPanel: GovukPanel,
         govukFieldset: GovukFieldset,
         govukRadios: GovukRadios,
-        govukCharacterCountArea: GovukCharacterCount,
+        hmrcCharacterCount: HmrcCharacterCount,
         govukErrorSummary: GovukErrorSummary
 )
 
@@ -118,29 +116,11 @@
 
     <h3 class="govuk-heading-l">@messages("confirmation.feedback") @messages("hintText.optional") </h3>
 
-    <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">@messages("confirmation.feedback.subheading")</legend>
-            @govukRadios(Radios(
-                name = "satisfaction",
-                errorMessage = form.errors.asHtmlErrorMessageForField("satisfaction"),
-                items = SatisfactionSurveyForm.options.map(i => RadioItem(
-                    content = Text(messages(i.messageKey)),
-                    id = i.id,
-                    value = i.value,
-                    checked = form("satisfaction").value.contains(i.value)
-                ))
-            ))
-        </fieldset>
-    </div>
+    @govukRadios(
+        RadioField.radios(form, "confirmation.feedback", "satisfaction", SatisfactionSurveyForm.satisfactionValues, isPageHeading = false)
+    )
 
-    <div class="govuk-form-group">
-        <label class="govuk-label govuk-label--s">
-            @messages("confirmation.feedback.improve") @messages("hintText.optional")
-        </label>
-        @govukCharacterCountArea(CharacterCount(
-            id = "details", name = "details", rows = 5, value = form("details").value, maxLength = 1200, hint = Hint(content = Text(messages("confirmation.feedback.warning"))),
-            errorMessage = form.errors.asHtmlErrorMessageForField("details")
-        ))
-    </div>
+    @hmrcCharacterCount(
+        TextAreaField.characterCount(form, "confirmation.feedback", "details", maxLength = 1200)
+    )
 }

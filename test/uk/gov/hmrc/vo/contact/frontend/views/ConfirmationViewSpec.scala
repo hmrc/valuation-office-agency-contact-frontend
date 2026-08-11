@@ -69,9 +69,9 @@ class ConfirmationViewSpec extends ViewBehaviours:
       "enquirySummary",
       "para1",
       "new.p1",
-      "feedback.subheading",
-      "feedback.improve",
-      "feedback.warning"
+      "feedback.satisfaction.label",
+      "feedback.details.label",
+      "feedback.details.hint"
     )
 
     "Given a property address with address line 2 and county as None it should contain a formatted address string with <br/> interstitial" in {
