@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import org.mockito.Mockito.when
-import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.{JsString, Json}
 import play.api.mvc.Call
@@ -33,10 +31,10 @@ import uk.gov.hmrc.vo.contact.frontend.utils.{MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html.error.internal_server_error
 import uk.gov.hmrc.vo.contact.frontend.views.html.{contactDetails, error}
 
-class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
+class ContactDetailsControllerSpec extends ControllerSpecBase:
 
-  private def contactDetails: contactDetails                   = app.injector.instanceOf[contactDetails]
-  private def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
+  private def contactDetails: contactDetails                   = inject[contactDetails]
+  private def internalServerError: error.internal_server_error = inject[internal_server_error]
 
   private def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
@@ -58,32 +56,32 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
   def refNumberBackLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.RefNumberController.onPageLoad.url
 
   def viewAsStringCT(form: Form[ContactDetails] = contactDetailsForm): String =
-    contactDetails(form, NormalMode, ctBackLink)(using fakeRequest, messages).toString
+    contactDetails(form, NormalMode, ctBackLink)(using getRequest, messages).toString
 
   def viewAsStringNDR(form: Form[ContactDetails] = contactDetailsForm): String =
-    contactDetails(form, NormalMode, ndrBackLink)(using fakeRequest, messages).toString
+    contactDetails(form, NormalMode, ndrBackLink)(using getRequest, messages).toString
 
   def viewAsStringRefNumber(form: Form[ContactDetails] = contactDetailsForm): String =
-    contactDetails(form, NormalMode, refNumberBackLink)(using fakeRequest, messages).toString
+    contactDetails(form, NormalMode, refNumberBackLink)(using getRequest, messages).toString
 
-  "ContactDetails Controller" must {
+  "ContactDetails Controller" should {
 
     "return OK and the correct view for a GET when Contact Reason is more_details" in {
       val validData       = Map(ContactReasonId.toString -> JsString("more_details"))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
-      val result          = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result          = controller(getRelevantData).onPageLoad(NormalMode)(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsStringRefNumber()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsStringRefNumber()
     }
 
     "return OK and the correct view for a GET when enquiry category is business_rates" in {
       val validData       = Map(EnquiryCategoryId.toString -> JsString("business_rates"), BusinessRatesSubcategoryId.toString -> JsString("business_rates_other"))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
-      val result          = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result          = controller(getRelevantData).onPageLoad(NormalMode)(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsStringNDR()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsStringNDR()
     }
 
     "populate the view correctly on a GET when the question has previously been answered and enquiry category is business_rates" in {
@@ -94,13 +92,13 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       )
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(getRequest)
 
-      contentAsString(result) mustBe viewAsStringNDR(contactDetailsForm.fill(ContactDetails("a", "a@test.com", "0847428742424")))
+      contentAsString(result) shouldBe viewAsStringNDR(contactDetailsForm.fill(ContactDetails("a", "a@test.com", "0847428742424")))
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(
         ("fullName", "a"),
         ("email", "a@test.com"),
         ("confirmEmail", "a@test.com"),
@@ -109,48 +107,48 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(onwardRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(onwardRoute.url)
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
-      val postRequest     = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest     = getRequest.withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm       = contactDetailsForm.bind(Map("value" -> "invalid value"))
       val validData       = Map(EnquiryCategoryId.toString -> JsString("business_rates"), BusinessRatesSubcategoryId.toString -> JsString("business_rates_other"))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       val result = controller(getRelevantData).onSubmit(NormalMode)(postRequest)
-      status(result) mustBe BAD_REQUEST
-      contentAsString(result) mustBe viewAsStringNDR(boundForm)
+      status(result)          shouldBe BAD_REQUEST
+      contentAsString(result) shouldBe viewAsStringNDR(boundForm)
     }
 
     "return an error when invalid data is submitted and enquiry category is wrong or unknown" in {
-      val postRequest     = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest     = getRequest.withFormUrlEncodedBody(("value", "invalid value"))
       val validData       = Map(EnquiryCategoryId.toString -> JsString("other"))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       intercept[Exception] {
         val result = controller(getRelevantData).onSubmit(NormalMode)(postRequest)
-        status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
+        status(result)          shouldBe INTERNAL_SERVER_ERROR
+        contentAsString(result) shouldBe internalServerError()(using getRequest, messages).toString
       }
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(getRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
       val postRequest =
-        fakeRequest.withFormUrlEncodedBody(("fullName", "a"), ("email", "a@test.com"), ("confirmEmail", "a@test.com"), ("contactNumber", "0493584384343"))
+        getRequest.withFormUrlEncodedBody(("fullName", "a"), ("email", "a@test.com"), ("confirmEmail", "a@test.com"), ("contactNumber", "0493584384343"))
 
       val result = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates" in {
@@ -158,7 +156,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_other")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
-      isBusinessRatesSelection mustBe true
+      isBusinessRatesSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -167,7 +165,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_bill")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
-      isBusinessRatesSelection mustBe true
+      isBusinessRatesSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -176,7 +174,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_changes")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
-      isBusinessRatesSelection mustBe true
+      isBusinessRatesSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -185,7 +183,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_from_home")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
-      isBusinessRatesSelection mustBe true
+      isBusinessRatesSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -194,7 +192,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_change_valuation")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
-      isBusinessRatesSelection mustBe true
+      isBusinessRatesSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -203,7 +201,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_not_used")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
-      isBusinessRatesSelection mustBe true
+      isBusinessRatesSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -212,7 +210,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_self_catering")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
-      isBusinessRatesSelection mustBe true
+      isBusinessRatesSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -221,7 +219,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_demolished")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
-      isBusinessRatesSelection mustBe true
+      isBusinessRatesSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -230,7 +228,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_property_empty")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
-      isBusinessRatesSelection mustBe true
+      isBusinessRatesSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -239,7 +237,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_valuation")
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
-      isBusinessRatesSelection mustBe true
+      isBusinessRatesSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -248,7 +246,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_property_demolished")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
-      isCouncilTaxSelection mustBe true
+      isCouncilTaxSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -257,7 +255,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_property_poor_repair")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
-      isCouncilTaxSelection mustBe true
+      isCouncilTaxSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -266,7 +264,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_band_too_high")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
-      isCouncilTaxSelection mustBe true
+      isCouncilTaxSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -275,7 +273,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_property_empty")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
-      isCouncilTaxSelection mustBe true
+      isCouncilTaxSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -284,7 +282,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_property_split_merge")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
-      isCouncilTaxSelection mustBe true
+      isCouncilTaxSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -293,7 +291,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_business_uses")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
-      isCouncilTaxSelection mustBe true
+      isCouncilTaxSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -302,7 +300,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_annexe")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
-      isCouncilTaxSelection mustBe true
+      isCouncilTaxSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -311,7 +309,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_bill")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
-      isCouncilTaxSelection mustBe true
+      isCouncilTaxSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -320,7 +318,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_band_for_new")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
-      isCouncilTaxSelection mustBe true
+      isCouncilTaxSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -329,7 +327,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_area_change")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
-      isCouncilTaxSelection mustBe true
+      isCouncilTaxSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -338,7 +336,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.councilTaxSubcategory) `thenReturn` Some("council_tax_other")
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
-      isCouncilTaxSelection mustBe true
+      isCouncilTaxSelection shouldBe true
       assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
     }
 
@@ -346,16 +344,16 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.enquiryCategory) `thenReturn` None
       when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_other")
       val result = controller().enquiryBackLink(mockUserAnswers)
-      result mustBe Left("Unknown enquiry category in enquiry key")
+      result shouldBe Left("Unknown enquiry category in enquiry key")
     }
 
     "return OK and the correct view for a GET when enquiry category is council_tax" in {
       val validData       = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_property_demolished"))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
-      val result          = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result          = controller(getRelevantData).onPageLoad(NormalMode)(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsStringCT()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsStringCT()
     }
 
     "return OK and the correct view for a GET when enquiry category is housing_benefit" in {
@@ -375,9 +373,9 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       )
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
-      val result          = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result          = controller(getRelevantData).onPageLoad(NormalMode)(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "populate the view correctly on a GET when the question has previously been answered and enquiry category is council_tax" in {
@@ -388,16 +386,16 @@ class ContactDetailsControllerSpec extends ControllerSpecBase with MockitoSugar:
       )
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(getRequest)
 
-      contentAsString(result) mustBe viewAsStringCT(contactDetailsForm.fill(ContactDetails("a", "a@test.com", "0847428742424")))
+      contentAsString(result) shouldBe viewAsStringCT(contactDetailsForm.fill(ContactDetails("a", "a@test.com", "0847428742424")))
     }
 
     "return 500 and the error view for a GET with no enquiry type" in
       intercept[Exception] {
-        val result = controller().onPageLoad(NormalMode)(fakeRequest)
-        status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
+        val result = controller().onPageLoad(NormalMode)(getRequest)
+        status(result)          shouldBe INTERNAL_SERVER_ERROR
+        contentAsString(result) shouldBe internalServerError()(using getRequest, messages).toString
       }
 
   }

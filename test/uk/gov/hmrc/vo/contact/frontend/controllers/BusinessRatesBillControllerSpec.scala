@@ -23,14 +23,14 @@ import uk.gov.hmrc.vo.contact.frontend.views.html
 
 class BusinessRatesBillControllerSpec extends ControllerSpecBase:
 
-  def businessRatesBill: html.businessRatesBill = app.injector.instanceOf[business_rates_bill]
+  def businessRatesBill: html.businessRatesBill = inject[business_rates_bill]
 
   def controller =
     BusinessRatesBillController(messagesApi, businessRatesBill, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
-  "BusinessRatesBillController" must {
+  "BusinessRatesBillController" should {
     "return the correct view for a GET" in {
-      val result = controller.onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe businessRatesBill()(using fakeRequest, messages).toString
+      val result = controller.onPageLoad()(getRequest)
+      contentAsString(result) shouldBe businessRatesBill()(using getRequest, messages).toString
     }
   }

@@ -23,14 +23,14 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.propertyDemolished as property
 
 class PropertyDemolishedControllerSpec extends ControllerSpecBase:
 
-  def propertyDemolished: html.propertyDemolished = app.injector.instanceOf[property_demolished]
+  def propertyDemolished: html.propertyDemolished = inject[property_demolished]
 
   def controller =
     PropertyDemolishedController(messagesApi, propertyDemolished, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
-  "Property Demolished Controller" must {
+  "Property Demolished Controller" should {
     "return the correct view for a GET" in {
-      val result = controller.onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe propertyDemolished()(using fakeRequest, messages).toString
+      val result = controller.onPageLoad()(getRequest)
+      contentAsString(result) shouldBe propertyDemolished()(using getRequest, messages).toString
     }
   }

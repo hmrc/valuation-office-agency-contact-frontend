@@ -32,7 +32,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html
 
 class PropertyAddressControllerSpec extends ControllerSpecBase:
 
-  def propertyAddress: html.propertyAddress = app.injector.instanceOf[propertyAddress]
+  def propertyAddress: html.propertyAddress = inject[propertyAddress]
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
@@ -48,28 +48,28 @@ class PropertyAddressControllerSpec extends ControllerSpecBase:
     )
 
   def viewAsString(form: Form[PropertyAddress] = propertyAddressForm): String =
-    propertyAddress(form, NormalMode)(using fakeRequest, messages).toString
+    propertyAddress(form, NormalMode)(using getRequest, messages).toString
 
-  "Property Address Controller" must {
+  "Property Address Controller" should {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onPageLoad(NormalMode)(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsString()
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
       val validData       = Map(PropertyAddressId.toString -> Json.toJson(PropertyAddress("value 1", Some("value 2"), "value 3", Some("value 4"), "AA1 1AA")))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(getRequest)
 
-      contentAsString(result) mustBe viewAsString(propertyAddressForm.fill(PropertyAddress("value 1", Some("value 2"), "value 3", Some("value 4"), "AA1 1AA")))
+      contentAsString(result) shouldBe viewAsString(propertyAddressForm.fill(PropertyAddress("value 1", Some("value 2"), "value 3", Some("value 4"), "AA1 1AA")))
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(
         ("addressLine1", "value 1"),
         ("addressLine2", "value 2"),
         ("town", "value 3"),
@@ -79,29 +79,29 @@ class PropertyAddressControllerSpec extends ControllerSpecBase:
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(onwardRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(onwardRoute.url)
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm   = propertyAddressForm.bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe BAD_REQUEST
-      contentAsString(result) mustBe viewAsString(boundForm)
+      status(result)          shouldBe BAD_REQUEST
+      contentAsString(result) shouldBe viewAsString(boundForm)
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(getRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(
+      val postRequest = getRequest.withFormUrlEncodedBody(
         ("addressLine1", "value 1"),
         ("addressLine2", "value 2"),
         ("town", "value 3"),
@@ -110,25 +110,25 @@ class PropertyAddressControllerSpec extends ControllerSpecBase:
       )
       val result      = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
     "populate the view correctly on a GET when the question has previously been answered and address line 2 and county are None" in {
       val validData       = Map(PropertyAddressId.toString -> Json.toJson(PropertyAddress("value 1", None, "value 3", None, "value 5")))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(getRequest)
 
-      contentAsString(result) mustBe viewAsString(propertyAddressForm.fill(PropertyAddress("value 1", None, "value 3", None, "value 5")))
+      contentAsString(result) shouldBe viewAsString(propertyAddressForm.fill(PropertyAddress("value 1", None, "value 3", None, "value 5")))
     }
 
     "redirect to the next page when valid data is submitted and address line 2 and county are None" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("addressLine1", "value 1"), ("town", "value 3"), ("postcode", "BB11BB"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("addressLine1", "value 1"), ("town", "value 3"), ("postcode", "BB11BB"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(onwardRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(onwardRoute.url)
     }
   }

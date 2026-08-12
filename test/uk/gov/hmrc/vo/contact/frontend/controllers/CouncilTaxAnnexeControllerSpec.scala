@@ -16,9 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import org.mockito.ArgumentMatchers.any
-import org.mockito.Mockito.when
-import org.scalatestplus.mockito.MockitoSugar.mock
 import play.api.data.Form
 import play.api.libs.json.JsString
 import play.api.test.Helpers.*
@@ -76,28 +73,29 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase:
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[String] = AnnexeForm()): String = councilTaxAnnexe(form, NormalMode)(using fakeRequest, messages).toString
+  def viewAsString(form: Form[String] = AnnexeForm()): String = councilTaxAnnexe(form, NormalMode)(using getRequest, messages).toString
 
   def viewCookingWashingAsString(form: Form[String] = AnnexeCookingWashingForm()): String =
-    annexeCookingWashingEnquiry(form)(using fakeRequest, messages).toString
+    annexeCookingWashingEnquiry(form)(using getRequest, messages).toString
 
   def viewCouncilTaxAnnexeSelfContainedEnquiry(form: Form[String] = AnnexeSelfContainedForm()): String =
-    councilTaxAnnexeSelfContainedEnquiry(form)(using fakeRequest, messages).toString
-  "Council Tax Annex Controller" must {
-    "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(NormalMode)(fakeRequest)
+    councilTaxAnnexeSelfContainedEnquiry(form)(using getRequest, messages).toString
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+  "Council Tax Annex Controller" should {
+    "return OK and the correct view for a GET" in {
+      val result = controller().onPageLoad(NormalMode)(getRequest)
+
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsString()
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
       val validData       = Map(CouncilTaxAnnexeEnquiryId.toString -> JsString(AnnexeForm.options.head.value))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(getRequest)
 
-      contentAsString(result) mustBe viewAsString(AnnexeForm().fill(AnnexeForm.options.head.value))
+      contentAsString(result) shouldBe viewAsString(AnnexeForm().fill(AnnexeForm.options.head.value))
     }
 
     "redirect to the next page when valid data is submitted" in {
@@ -107,42 +105,42 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase:
       when(fakeDataCacheConnector.save(any, any, any)(using any))
         .thenReturn(Future.successful(CacheMap("council_tax_annexe", Map("council_tax_annexe" -> JsString("bar")))))
 
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", AnnexeForm.options.head.value))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", AnnexeForm.options.head.value))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(onwardRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(onwardRoute.url)
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm   = AnnexeForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe BAD_REQUEST
-      contentAsString(result) mustBe viewAsString(boundForm)
+      status(result)          shouldBe BAD_REQUEST
+      contentAsString(result) shouldBe viewAsString(boundForm)
     }
 
     "return error page if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
-      status(result) mustBe SEE_OTHER
+      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(getRequest)
+      status(result) shouldBe SEE_OTHER
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", AnnexeForm.options.head.value))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", AnnexeForm.options.head.value))
       val result      = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(onwardRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(onwardRoute.url)
     }
 
     "return OK and the correct view for a annex removed GET" in {
-      val result = controller().onRemovedPageLoad()(fakeRequest)
+      val result = controller().onRemovedPageLoad()(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe annexeRemoved()(using fakeRequest, messages).toString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe annexeRemoved()(using getRequest, messages).toString()
     }
 
     "redirect to the next page when valid data is submitted for annexe self contained" in {
@@ -150,58 +148,58 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase:
       when(fakeDataCacheConnector.save(any, any, any)(using any))
         .thenReturn(Future.successful(CacheMap("annexeSelfContained", Map("annexeSelfContained" -> JsString("bar")))))
 
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", AnnexeSelfContainedForm.options.head.value))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", AnnexeSelfContainedForm.options.head.value))
 
       val result = controller().onSelfContainedSubmit()(postRequest)
 
-      status(result) mustBe SEE_OTHER
+      status(result) shouldBe SEE_OTHER
     }
 
     "return a Bad Request and errors when invalid data is submitted for annexe self contained form" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm   = AnnexeSelfContainedForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSelfContainedSubmit()(postRequest)
 
-      status(result) mustBe BAD_REQUEST
-      contentAsString(result) mustBe councilTaxAnnexeSelfContainedEnquiry(boundForm)(using fakeRequest, messages).toString()
+      status(result)          shouldBe BAD_REQUEST
+      contentAsString(result) shouldBe councilTaxAnnexeSelfContainedEnquiry(boundForm)(using getRequest, messages).toString()
     }
 
     "return OK and the correct view for a no cooking and washing facilities GET" in {
-      val result = controller().onFacilitiesPageLoad()(fakeRequest)
+      val result = controller().onFacilitiesPageLoad()(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe councilTaxAnnexeNoFacilities()(using fakeRequest, messages).toString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe councilTaxAnnexeNoFacilities()(using getRequest, messages).toString()
     }
 
     "return OK and the correct view for a not self contained page GET" in {
-      val result = controller().onNotSelfContainedPageLoad()(fakeRequest)
+      val result = controller().onNotSelfContainedPageLoad()(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe annexeNotSelfContained()(using fakeRequest, messages).toString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe annexeNotSelfContained()(using getRequest, messages).toString()
     }
 
     "return OK and the correct view for annexe self contained GET" in {
-      val result = controller().onSelfContainedPageLoad()(fakeRequest)
+      val result = controller().onSelfContainedPageLoad()(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe councilTaxAnnexeSelfContained()(using fakeRequest, messages).toString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe councilTaxAnnexeSelfContained()(using getRequest, messages).toString()
     }
 
     "return OK and the correct view when onHaveCookingWashingPageLoad is called" in {
-      val result = controller().onHaveCookingWashingPageLoad(fakeRequest)
+      val result = controller().onHaveCookingWashingPageLoad(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewCookingWashingAsString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewCookingWashingAsString()
     }
 
     "populate the view correctly on a GET when the question has previously been answered for cooking washing page" in {
       val validData       = Map(CouncilTaxAnnexeHaveCookingId.toString -> JsString(AnnexeCookingWashingForm.options.head.value))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onHaveCookingWashingPageLoad(fakeRequest)
+      val result = controller(getRelevantData).onHaveCookingWashingPageLoad(getRequest)
 
-      contentAsString(result) mustBe viewCookingWashingAsString(AnnexeCookingWashingForm().fill(AnnexeCookingWashingForm.options.head.value))
+      contentAsString(result) shouldBe viewCookingWashingAsString(AnnexeCookingWashingForm().fill(AnnexeCookingWashingForm.options.head.value))
     }
 
     "redirect to the next page when valid data is submitted for annexe cooking washing form" in {
@@ -211,37 +209,37 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase:
       when(fakeDataCacheConnector.save(any, any, any)(using any))
         .thenReturn(Future.successful(CacheMap("annexeCookingWashing.form", Map("annexeCookingWashing.form" -> JsString("yes")))))
 
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", AnnexeCookingWashingForm.options.head.value))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", AnnexeCookingWashingForm.options.head.value))
 
       val result = controller().onHaveCookingWashingSubmit(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      // redirectLocation(result) mustBe Some(onwardRoute.url)
+      status(result) shouldBe SEE_OTHER
+      // redirectLocation(result) shouldBe Some(onwardRoute.url)
     }
 
     "return a Bad Request and errors when invalid data is submitted for annexe cooking washing form" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm   = AnnexeCookingWashingForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onHaveCookingWashingSubmit()(postRequest)
 
-      status(result) mustBe BAD_REQUEST
-      contentAsString(result) mustBe viewCookingWashingAsString(boundForm)
+      status(result)          shouldBe BAD_REQUEST
+      contentAsString(result) shouldBe viewCookingWashingAsString(boundForm)
     }
 
     "return OK and the correct view for a GET for Self Contained Enquiry Page" in {
-      val result = controller().onSelfContainedEnquiryPageLoad(fakeRequest)
+      val result = controller().onSelfContainedEnquiryPageLoad(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewCouncilTaxAnnexeSelfContainedEnquiry()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewCouncilTaxAnnexeSelfContainedEnquiry()
     }
 
     "populate the view correctly on a GET when the question has previously been answered for Self Contained Enquiry Page" in {
       val validData       = Map(CouncilTaxAnnexeSelfContainedEnquiryId.toString -> JsString(AnnexeSelfContainedForm.options.head.value))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onSelfContainedEnquiryPageLoad(fakeRequest)
+      val result = controller(getRelevantData).onSelfContainedEnquiryPageLoad(getRequest)
 
-      contentAsString(result) mustBe viewCouncilTaxAnnexeSelfContainedEnquiry(AnnexeSelfContainedForm().fill(AnnexeSelfContainedForm.options.head.value))
+      contentAsString(result) shouldBe viewCouncilTaxAnnexeSelfContainedEnquiry(AnnexeSelfContainedForm().fill(AnnexeSelfContainedForm.options.head.value))
     }
   }

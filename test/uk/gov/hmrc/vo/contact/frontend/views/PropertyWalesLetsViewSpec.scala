@@ -22,11 +22,11 @@ import play.twirl.api.HtmlFormat
 
 class PropertyWalesLetsViewSpec extends ViewBehaviours:
 
-  def propertyWalesLets: html.propertyWalesLets = app.injector.instanceOf[wales_lets]
+  def propertyWalesLets: html.propertyWalesLets = inject[wales_lets]
 
-  def view: () => HtmlFormat.Appendable = () => propertyWalesLets()(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => propertyWalesLets()(using getRequest, messages)
 
-  "Property England Lets view" must {
+  "Property England Lets view" should {
     behave like normalPage(
       view,
       "propertyWalesLets",
@@ -45,8 +45,8 @@ class PropertyWalesLetsViewSpec extends ViewBehaviours:
     "has a link marked with site.back leading to the Property Wales Lets Page" in {
       val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad.url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad.url
     }
   }

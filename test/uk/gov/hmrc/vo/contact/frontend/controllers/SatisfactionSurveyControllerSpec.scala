@@ -16,8 +16,7 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import org.scalatestplus.mockito.MockitoSugar
-import play.api.{Configuration, Environment}
+import play.api.Environment
 import play.api.libs.json.{JsString, Json}
 import play.api.test.FakeRequest
 import play.api.test.Helpers.*
@@ -34,13 +33,12 @@ import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 import uk.gov.hmrc.vo.contact.frontend.views.html.error
 
-class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSugar:
+class SatisfactionSurveyControllerSpec extends ControllerSpecBase:
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
   val mockUserAnswers: UserAnswers = mock[UserAnswers]
-  val configuration: Configuration = injector.instanceOf[Configuration]
-  val environment: Environment     = injector.instanceOf[Environment]
+  val environment: Environment     = inject[Environment]
 
   val answerSectionNew: AnswerSection = AnswerSection(
     None,
@@ -52,13 +50,13 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
     )
   )
 
-  def auditingService: AuditingService = injector.instanceOf[AuditingService]
+  def auditingService: AuditingService = inject[AuditingService]
 
-  def confirmation: html.confirmation = app.injector.instanceOf[Confirmation]
+  def confirmation: html.confirmation = inject[Confirmation]
 
-  def satisfactionSurveyThankYou: html.satisfactionSurveyThankYou = app.injector.instanceOf[satisfaction_Survey_Thank_You]
+  def satisfactionSurveyThankYou: html.satisfactionSurveyThankYou = inject[satisfaction_Survey_Thank_You]
 
-  def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
+  def internalServerError: error.internal_server_error = inject[internal_server_error]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     SatisfactionSurveyController(
@@ -72,18 +70,18 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
     )
 
   def viewAsString: String =
-    satisfactionSurveyThankYou()(using fakeRequest, messages).toString
+    satisfactionSurveyThankYou()(using getRequest, messages).toString
 
-  "SatisfactionSurvey Controller" must {
+  "SatisfactionSurvey Controller" should {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().surveyThankyou()(fakeRequest)
+      val result = controller().surveyThankyou()(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsString
     }
 
-    "feedback submission must be successful for formCompleteFeedback" in {
+    "feedback submission should be successful for formCompleteFeedback" in {
       val cd                    = ContactDetails("a", "c", "e")
       val ec                    = "council_tax"
       val propertyAddress       = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
@@ -105,10 +103,10 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
 
       val result = controller(getRelevantData).formCompleteFeedback()(request)
 
-      status(result) mustBe SEE_OTHER
+      status(result) shouldBe SEE_OTHER
     }
 
-    "feedback submission must fail form data is invalid" in {
+    "feedback submission should fail form data is invalid" in {
 
       val cd                    = ContactDetails("a", "c", "e")
       val ec                    = "other"
@@ -131,12 +129,12 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
 
       intercept[Exception] {
         val result = controller(getRelevantData).formCompleteFeedback()(request)
-        status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
+        status(result)          shouldBe INTERNAL_SERVER_ERROR
+        contentAsString(result) shouldBe internalServerError()(using getRequest, messages).toString
       }
     }
 
-    "feedback submission (council tax) must show form errors if survey incomplete" in {
+    "feedback submission (council tax) should show form errors if survey incomplete" in {
       val cd                    = ContactDetails("a", "c", "e")
       val ec                    = "council_tax"
       val propertyAddress       = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
@@ -158,13 +156,13 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
 
       val result = controller(getRelevantData).formCompleteFeedback()(request)
 
-      status(result) mustBe OK
-      contentAsString(result) must include(
+      status(result)        shouldBe OK
+      contentAsString(result) should include(
         "Select how you would describe your experience"
       )
     }
 
-    "feedback submission (business rates) must show form errors if survey incomplete" in {
+    "feedback submission (business rates) should show form errors if survey incomplete" in {
       val cd                  = ContactDetails("a", "c", "e")
       val ec                  = "business_rates"
       val propertyAddress     = PropertyAddress("a", Some("b"), "c", Some("d"), "f")
@@ -186,8 +184,8 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase with MockitoSu
 
       val result = controller(getRelevantData).formCompleteFeedback()(request)
 
-      status(result) mustBe OK
-      contentAsString(result) must include(
+      status(result)        shouldBe OK
+      contentAsString(result) should include(
         "Select how you would describe your experience"
       )
     }

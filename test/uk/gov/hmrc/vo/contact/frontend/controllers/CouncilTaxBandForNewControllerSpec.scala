@@ -23,14 +23,14 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.councilTaxBandForNew as counci
 
 class CouncilTaxBandForNewControllerSpec extends ControllerSpecBase:
 
-  def councilTaxBandForNew: html.councilTaxBandForNew = app.injector.instanceOf[council_tax_for_new]
+  def councilTaxBandForNew: html.councilTaxBandForNew = inject[council_tax_for_new]
 
   def controller =
     CouncilTaxBandForNewController(messagesApi, councilTaxBandForNew, MessageControllerComponentsHelpers.stubMessageControllerComponents)
 
-  "Council Tax Band For A New Property Controller" must {
+  "Council Tax Band For A New Property Controller" should {
     "return the correct view for a GET" in {
-      val result = controller.onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe councilTaxBandForNew()(using fakeRequest, messages).toString
+      val result = controller.onPageLoad()(getRequest)
+      contentAsString(result) shouldBe councilTaxBandForNew()(using getRequest, messages).toString
     }
   }

@@ -22,10 +22,10 @@ import play.twirl.api.HtmlFormat
 
 class SessionExpiredViewSpec extends ViewBehaviours:
 
-  def sessionExpired: session_expired = app.injector.instanceOf[session_expired]
+  def sessionExpired: session_expired = inject[session_expired]
 
-  def view: () => HtmlFormat.Appendable = () => sessionExpired()(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => sessionExpired()(using getRequest, messages)
 
-  "Session Expired view" must {
+  "Session Expired view" should {
     behave like normalPage(view, "session_expired", "guidance")
   }

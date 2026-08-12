@@ -16,12 +16,10 @@
 
 package uk.gov.hmrc.vo.contact.frontend.models
 
-import org.scalatest.OptionValues
-import org.scalatest.wordspec.AnyWordSpec
-import org.scalatest.matchers.should.Matchers
 import uk.gov.hmrc.vo.contact.frontend.models.PropertyAddress
+import uk.gov.hmrc.vo.unit.test.BaseSpec
 
-class PropertyAddressSpec extends AnyWordSpec with Matchers with OptionValues:
+class PropertyAddressSpec extends BaseSpec:
 
   private val address = PropertyAddress("1", Some("High Street"), "London", Some("London"), "ZZ11ZZ")
 
@@ -35,7 +33,7 @@ class PropertyAddressSpec extends AnyWordSpec with Matchers with OptionValues:
 
   "Property address line 2" should {
     "be High Street" in {
-      address.addressLine2.value shouldBe "High Street"
+      address.addressLine2 shouldBe Some("High Street")
     }
   }
 
@@ -47,7 +45,7 @@ class PropertyAddressSpec extends AnyWordSpec with Matchers with OptionValues:
 
   "Property County" should {
     "be London" in {
-      address.county.value shouldBe "London"
+      address.county shouldBe Some("London")
     }
   }
 

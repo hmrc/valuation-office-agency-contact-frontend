@@ -23,19 +23,19 @@ import play.twirl.api.HtmlFormat
 
 class ProvidingLettingsViewSpec extends ViewBehaviours:
 
-  def providingLettings: html.providingLettings = app.injector.instanceOf[providing_lettings]
+  def providingLettings: html.providingLettings = inject[providing_lettings]
 
-  def view: () => HtmlFormat.Appendable = () => providingLettings()(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => providingLettings()(using getRequest, messages)
 
-  "Housing benefits view" must {
+  "Housing benefits view" should {
 
     behave like normalPage(view, "providingLettings", "title", "p1", "p2")
 
     "has a link marked with site.back leading to the Enquiry Category Page" in {
       val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.EnquiryCategoryController.onPageLoad(NormalMode).url
     }
   }

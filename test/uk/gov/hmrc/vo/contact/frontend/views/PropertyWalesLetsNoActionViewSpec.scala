@@ -22,15 +22,15 @@ import play.twirl.api.HtmlFormat
 
 class PropertyWalesLetsNoActionViewSpec extends ViewBehaviours:
 
-  def propertyWalesLetsNoAction: html.propertyWalesLetsNoAction = app.injector.instanceOf[wales_lets_no_action]
+  def propertyWalesLetsNoAction: html.propertyWalesLetsNoAction = inject[wales_lets_no_action]
 
   def wales140DayBackLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesAvailableLetsController.onPageLoad.url
   def wales70DayBackLink: String  = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesActualLetsController.onPageLoad.url
 
-  def view140Days: () => HtmlFormat.Appendable = () => propertyWalesLetsNoAction(wales140DayBackLink)(using fakeRequest, messages)
-  def view7Days: () => HtmlFormat.Appendable   = () => propertyWalesLetsNoAction(wales70DayBackLink)(using fakeRequest, messages)
+  def view140Days: () => HtmlFormat.Appendable = () => propertyWalesLetsNoAction(wales140DayBackLink)(using getRequest, messages)
+  def view7Days: () => HtmlFormat.Appendable   = () => propertyWalesLetsNoAction(wales70DayBackLink)(using getRequest, messages)
 
-  "Property Wales Lets No Action view" must {
+  "Property Wales Lets No Action view" should {
     behave like normalPage(
       view140Days,
       "businessRatesSelfCateringNoBusinessRateWales",
@@ -48,8 +48,8 @@ class PropertyWalesLetsNoActionViewSpec extends ViewBehaviours:
     "has a link marked with site.back leading to the Property Wales Lets 140 Page" in {
       val doc          = asDocument(view140Days())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesAvailableLetsController.onPageLoad.url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyWalesAvailableLetsController.onPageLoad.url
     }
   }

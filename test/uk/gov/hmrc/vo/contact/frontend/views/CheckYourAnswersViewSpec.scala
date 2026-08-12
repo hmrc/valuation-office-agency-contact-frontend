@@ -26,13 +26,14 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.check_your_answers
 
 import java.util.Locale
 import play.twirl.api.HtmlFormat
+import uk.gov.hmrc.vo.contact.frontend.FakeUserAnswers
 
 class CheckYourAnswersViewSpec extends ViewBehaviours:
 
   private val outputSettings = OutputSettings().prettyPrint(false)
 
   implicit val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
-  implicit val dateUtil: DateUtil        = injector.instanceOf[DateUtil]
+  implicit val dateUtil: DateUtil        = inject[DateUtil]
 
   val tellUs: TellUsMore                = TellUsMore("Hello")
   val cd: ContactDetails                = ContactDetails("c1", "c3", "c5")
@@ -50,7 +51,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours:
 
   val backlinkUrl: String                  = uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
   val backlinkUrlAE: String                = uk.gov.hmrc.vo.contact.frontend.controllers.routes.AnythingElseTellUsController.onPageLoad.url
-  def checkYourAnswers: check_your_answers = app.injector.instanceOf[check_your_answers]
+  def checkYourAnswers: check_your_answers = inject[check_your_answers]
 
   def view1: () => HtmlFormat.Appendable = () =>
     checkYourAnswers(
@@ -65,7 +66,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours:
         ).flatten
       )),
       backlinkUrl
-    )(using fakeRequest, messages)
+    )(using getRequest, messages)
 
   def view2: () => HtmlFormat.Appendable = () =>
     checkYourAnswers(
@@ -80,7 +81,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours:
         ).flatten
       )),
       backlinkUrl
-    )(using fakeRequest, messages)
+    )(using getRequest, messages)
 
   def view3: () => HtmlFormat.Appendable = () =>
     checkYourAnswers(
@@ -96,9 +97,9 @@ class CheckYourAnswersViewSpec extends ViewBehaviours:
         ).flatten
       )),
       backlinkUrlAE
-    )(using fakeRequest, messages)
+    )(using getRequest, messages)
 
-  "Check Your Answers view" must {
+  "Check Your Answers view" should {
 
     behave like normalPage(view1, "checkYourAnswers")
 
@@ -111,9 +112,9 @@ class CheckYourAnswersViewSpec extends ViewBehaviours:
     "has a link marked with site.back leading to the Tell Us More Page" in {
       val doc          = asDocument(view1())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "contain Enquiry Type heading" in {
@@ -190,7 +191,7 @@ class CheckYourAnswersViewSpec extends ViewBehaviours:
     "has a link marked with site.edit for changing the council tax subcategory option" in {
       val doc             = asDocument(view1())
       val subcategoryLink = doc.getElementsByClass("change-link-1").first().attr("href")
-      subcategoryLink mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(
+      subcategoryLink shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(
         NormalMode
       ).url
     }
@@ -198,25 +199,25 @@ class CheckYourAnswersViewSpec extends ViewBehaviours:
     "has a link marked with site.edit for changing the contact details" in {
       val doc                = asDocument(view1())
       val contactDetailsLink = doc.getElementsByClass("change-link-2").first().attr("href")
-      contactDetailsLink mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactDetailsController.onPageLoad(CheckMode).url
+      contactDetailsLink shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactDetailsController.onPageLoad(CheckMode).url
     }
 
     "has a link marked with site.edit for changing the property details" in {
       val doc                = asDocument(view2())
       val contactDetailsLink = doc.getElementsByClass("change-link-3").first().attr("href")
-      contactDetailsLink mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(CheckMode).url
+      contactDetailsLink shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyAddressController.onPageLoad(CheckMode).url
     }
 
     "has a link marked with site.edit for changing the enquiry message" in {
       val doc                = asDocument(view2())
       val contactDetailsLink = doc.getElementsByClass("change-link-4").first().attr("href")
-      contactDetailsLink mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(CheckMode).url
+      contactDetailsLink shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(CheckMode).url
     }
 
     "has a link marked with site.edit for changing the business rates subcategory option" in {
       val doc             = asDocument(view2())
       val subcategoryLink = doc.getElementsByClass("change-link-1").first().attr("href")
-      subcategoryLink mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(
+      subcategoryLink shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(
         NormalMode
       ).url
     }

@@ -17,9 +17,10 @@
 package uk.gov.hmrc.vo.contact.frontend.models
 
 import play.api.i18n.DefaultMessagesApi
-import uk.gov.hmrc.vo.contact.frontend.SpecBase
+import uk.gov.hmrc.vo.contact.frontend.FakeUserAnswers
+import uk.gov.hmrc.vo.unit.test.BaseSpec
 
-class ContactWithEnMessagesSpec extends SpecBase:
+class ContactWithEnMessagesSpec extends BaseSpec:
 
   private val contactDetails  = ContactDetails("first", "email", "contactNumber")
   private val propertyAddress = PropertyAddress("a", Some("b"), "c", Some("d"), "e")
@@ -34,10 +35,10 @@ class ContactWithEnMessagesSpec extends SpecBase:
   "return a ContactWithEnMessages when given a contact with proper keys for the enquiryCategory and subEnquiryCategory" in {
     val msgApi = mockMsgApi(Map("en" -> Map("enquiryCategory.council_tax" -> "CT", "councilTaxSubcategory.council_tax_band" -> "TB")))
     val result = ContactWithEnMessage(contact, msgApi, userAnswers)
-    result.enquiryCategoryMsg mustBe "CT"
-    result.isCouncilTaxEnquiry mustBe true
-    result.contactReason mustBe userAnswers.contactReason
-    result.subEnquiryCategoryMsg mustBe "TB"
+    result.enquiryCategoryMsg    shouldBe "CT"
+    result.isCouncilTaxEnquiry   shouldBe true
+    result.contactReason         shouldBe userAnswers.contactReason
+    result.subEnquiryCategoryMsg shouldBe "TB"
   }
 
   "return a ContactWithEnMessages when given a contact with proper keys for the existingEnquiryCategory and subEnquiryCategory" in {
@@ -49,10 +50,10 @@ class ContactWithEnMessagesSpec extends SpecBase:
     val userAnswers =
       FakeUserAnswers(contactDetails, "", "council_tax", "", "", propertyAddress, TellUsMore("message"), ee = Some("council_tax"), cr = Some("more_details"))
     val result      = ContactWithEnMessage(contact, msgApi, userAnswers)
-    result.enquiryCategoryMsg mustBe "CT"
-    result.isCouncilTaxEnquiry mustBe true
-    result.contactReason mustBe userAnswers.contactReason
-    result.subEnquiryCategoryMsg mustBe "Existing Enquiry"
+    result.enquiryCategoryMsg    shouldBe "CT"
+    result.isCouncilTaxEnquiry   shouldBe true
+    result.contactReason         shouldBe userAnswers.contactReason
+    result.subEnquiryCategoryMsg shouldBe "Existing Enquiry"
   }
 
   "throw an exception if the english version of messages is not available" in {

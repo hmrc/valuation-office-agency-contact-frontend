@@ -16,9 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import org.mockito.Mockito.{reset, when}
-import org.scalatest.BeforeAndAfterEach
-import org.scalatestplus.mockito.MockitoSugar
 import play.api.i18n.{Lang, Messages}
 import play.api.libs.json.{JsString, Json}
 import play.api.test.Helpers._
@@ -37,15 +34,15 @@ import java.util.Locale
 import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html.error
 
-class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSugar with BeforeAndAfterEach:
+class CheckYourAnswersControllerSpec extends ControllerSpecBase:
 
   val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
   implicit val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
-  implicit val dateUtil: DateUtil        = injector.instanceOf[DateUtil]
+  implicit val dateUtil: DateUtil        = inject[DateUtil]
 
-  def checkYourAnswers: check_your_answers             = app.injector.instanceOf[check_your_answers]
-  def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
+  def checkYourAnswers: check_your_answers             = inject[check_your_answers]
+  def internalServerError: error.internal_server_error = inject[internal_server_error]
 
   def onwardRoute: Call             = routes.EnquiryCategoryController.onPageLoad(NormalMode)
   def auditService: AuditingService = inject[AuditingService]
@@ -61,7 +58,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  "Check Your Answers Controller" must {
+  "Check Your Answers Controller" should {
 
     "return 200 for a GET" in {
       val contactDetails        = ContactDetails("a", "c", "e")
@@ -82,9 +79,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is blank" in {
@@ -106,9 +103,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is council_tax_business_uses" in {
@@ -130,9 +127,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is council_tax_area_change" in {
@@ -154,9 +151,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is council_tax_other" in {
@@ -178,9 +175,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is council_tax_annexe" in {
@@ -202,9 +199,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is council_tax_band_too_high" in {
@@ -226,9 +223,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is council_tax_bill" in {
@@ -250,9 +247,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is council_tax_band_for_new" in {
@@ -274,9 +271,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is council_tax_property_empty" in {
@@ -298,9 +295,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is council_tax_property_poor_repair" in {
@@ -322,9 +319,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is council_tax_property_split_merge" in {
@@ -346,9 +343,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is business_rates_from_home" in {
@@ -370,9 +367,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is business_rates_bill" in {
@@ -394,9 +391,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is business_rates_property_empty" in {
@@ -418,9 +415,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is business_rates_changes" in {
@@ -442,9 +439,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is business_rates_change_valuation" in {
@@ -466,9 +463,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is business_rates_valuation" in {
@@ -490,9 +487,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is business_rates_demolished" in {
@@ -514,9 +511,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is business_rates_not_used" in {
@@ -538,9 +535,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is business_rates_self_catering" in {
@@ -562,9 +559,9 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return 200 for a GET if subcategory is other-ha-hb-enquiry" in {
@@ -585,15 +582,15 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
 
       val content = contentAsString(result)
-      content must include("What is your enquiry about?")
-      content must include("Housing Benefit and Local Housing Allowances")
-      content must include("What is your other Housing Benefit or Local Housing Allowances enquiry?")
-      content must include("Enquiry details")
+      content should include("What is your enquiry about?")
+      content should include("Housing Benefit and Local Housing Allowances")
+      content should include("What is your other Housing Benefit or Local Housing Allowances enquiry?")
+      content should include("Enquiry details")
     }
 
     "use backLink to PropertyAddress for Housing Benefit category " in {
@@ -616,14 +613,14 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val getRelevantData = FakeDataRetrievalAction(Some(cacheMap))
 
-      controller(getRelevantData).enquiryBackLink(UserAnswers(cacheMap)) mustBe routes.PropertyAddressController.onPageLoad(NormalMode).url
+      controller(getRelevantData).enquiryBackLink(UserAnswers(cacheMap)) shouldBe routes.PropertyAddressController.onPageLoad(NormalMode).url
     }
 
     "redirect to Session Expired for a GET if not existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad()(fakeRequest)
+      val result = controller(dontGetAnyData).onPageLoad()(getRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
     "The user answers section builder produces sections for new enquiry for poor repair" in {
@@ -637,7 +634,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val result                 = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = CheckYourAnswersHelper(mockUserAnswers)
-      result mustBe Some(AnswerSection(
+      result shouldBe Some(AnswerSection(
         None,
         Seq(
           checkYourAnswersHelper.enquiryCategory,
@@ -661,7 +658,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val result                 = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = CheckYourAnswersHelper(mockUserAnswers)
-      result mustBe Some(AnswerSection(
+      result shouldBe Some(AnswerSection(
         None,
         Seq(
           checkYourAnswersHelper.enquiryCategory,
@@ -685,7 +682,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val result                 = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = CheckYourAnswersHelper(mockUserAnswers)
-      result mustBe Some(AnswerSection(
+      result shouldBe Some(AnswerSection(
         None,
         Seq(
           checkYourAnswersHelper.enquiryCategory,
@@ -708,7 +705,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val result                 = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = CheckYourAnswersHelper(mockUserAnswers)
-      result mustBe Some(AnswerSection(
+      result shouldBe Some(AnswerSection(
         None,
         Seq(
           checkYourAnswersHelper.enquiryCategory,
@@ -732,7 +729,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val result                 = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = CheckYourAnswersHelper(mockUserAnswers)
-      result mustBe Some(AnswerSection(
+      result shouldBe Some(AnswerSection(
         None,
         Seq(
           checkYourAnswersHelper.enquiryCategory,
@@ -756,7 +753,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val result                 = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = CheckYourAnswersHelper(mockUserAnswers)
-      result mustBe Some(AnswerSection(
+      result shouldBe Some(AnswerSection(
         None,
         Seq(
           checkYourAnswersHelper.enquiryCategory,
@@ -779,7 +776,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val result                 = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = CheckYourAnswersHelper(mockUserAnswers)
-      result mustBe Some(AnswerSection(
+      result shouldBe Some(AnswerSection(
         None,
         Seq(
           checkYourAnswersHelper.enquiryCategory,
@@ -801,7 +798,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val result                 = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = CheckYourAnswersHelper(mockUserAnswers)
-      result mustBe Some(AnswerSection(
+      result shouldBe Some(AnswerSection(
         None,
         Seq(
           checkYourAnswersHelper.existingEnquiryCategory,
@@ -823,7 +820,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val result                 = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = CheckYourAnswersHelper(mockUserAnswers)
-      result mustBe Some(AnswerSection(
+      result shouldBe Some(AnswerSection(
         None,
         Seq(
           checkYourAnswersHelper.existingEnquiryCategory,
@@ -844,7 +841,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val result                 = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = CheckYourAnswersHelper(mockUserAnswers)
-      result mustBe Some(AnswerSection(
+      result shouldBe Some(AnswerSection(
         None,
         Seq(
           checkYourAnswersHelper.enquiryCategory,
@@ -866,7 +863,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
         val result                 = controller().userAnswersSectionBuilder(mockUserAnswers)
         val checkYourAnswersHelper = CheckYourAnswersHelper(mockUserAnswers)
-        result mustBe Some(AnswerSection(
+        result shouldBe Some(AnswerSection(
           None,
           Seq(
             checkYourAnswersHelper.enquiryCategory,
@@ -888,7 +885,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
       val result                 = controller().userAnswersSectionBuilder(mockUserAnswers)
       val checkYourAnswersHelper = CheckYourAnswersHelper(mockUserAnswers)
-      result mustBe Some(AnswerSection(
+      result shouldBe Some(AnswerSection(
         None,
         Seq(
           checkYourAnswersHelper.enquiryCategory,
@@ -911,7 +908,7 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
 
         val result                 = controller().userAnswersSectionBuilder(mockUserAnswers)
         val checkYourAnswersHelper = CheckYourAnswersHelper(mockUserAnswers)
-        result mustBe Some(AnswerSection(
+        result shouldBe Some(AnswerSection(
           None,
           Seq(
             checkYourAnswersHelper.enquiryCategory,
@@ -926,13 +923,13 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
     "The user answers section builder returns None when giving an unrecognized enquiry category" in {
       when(mockUserAnswers.enquiryCategory) `thenReturn` Some("adsada")
       val result = controller().userAnswersSectionBuilder(mockUserAnswers)
-      result mustBe None
+      result shouldBe None
     }
 
     "The user answers section builder returns None when the enquiry category is None" in {
       when(mockUserAnswers.enquiryCategory) `thenReturn` None
       val result = controller().userAnswersSectionBuilder(mockUserAnswers)
-      result mustBe None
+      result shouldBe None
     }
 
     "return 500 and the error view for a reaching summary page with wrong enquiry or unknown enquiry" in {
@@ -952,17 +949,17 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase with MockitoSuga
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       intercept[Exception] {
-        val result = controller(getRelevantData).onPageLoad()(fakeRequest)
-        status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
+        val result = controller(getRelevantData).onPageLoad()(getRequest)
+        status(result)          shouldBe INTERNAL_SERVER_ERROR
+        contentAsString(result) shouldBe internalServerError()(using getRequest, messages).toString
       }
     }
 
     "return 500 and the error view for a reaching summary page with no enquiry" in
       intercept[Exception] {
-        val result = controller().onPageLoad()(fakeRequest)
-        status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
+        val result = controller().onPageLoad()(getRequest)
+        status(result)          shouldBe INTERNAL_SERVER_ERROR
+        contentAsString(result) shouldBe internalServerError()(using getRequest, messages).toString
       }
 
   }

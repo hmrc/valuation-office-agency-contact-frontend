@@ -16,15 +16,15 @@
 
 package uk.gov.hmrc.vo.contact.frontend.utils
 
-import uk.gov.hmrc.vo.contact.frontend.SpecBase
+import uk.gov.hmrc.vo.unit.test.BaseSpec
 
-class RadioOptionSpec extends SpecBase:
+class RadioOptionSpec extends BaseSpec:
 
-  "Radio Option" must {
+  "Radio Option" should {
     "build correctly from a key prefix and option" in {
       val radioOption = RadioOption("prefix", "option")
-      radioOption.id mustBe "prefix.option"
-      radioOption.value mustBe "option"
-      radioOption.messageKey mustBe "prefix.option"
+      radioOption.id         shouldBe "prefix.option"
+      radioOption.value      shouldBe "option"
+      radioOption.messageKey shouldBe "prefix.option"
     }
   }

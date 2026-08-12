@@ -22,12 +22,12 @@ class ServiceUnavailableControllerSpec extends ControllerSpecBase:
 
   private def serviceUnavailableController = inject[ServiceUnavailableController]
 
-  "ServiceUnavailableController" must {
+  "ServiceUnavailableController" should {
 
     "return OK and the correct view for a GET" in {
-      val result = serviceUnavailableController.show()(fakeRequest)
+      val result = serviceUnavailableController.show()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
   }

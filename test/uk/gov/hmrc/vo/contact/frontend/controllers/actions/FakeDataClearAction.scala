@@ -24,8 +24,11 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class FakeDataClearAction extends DataClearAction:
 
-  override protected def transform[A](request: Request[A]): Future[OptionalDataRequest[A]] = Future.successful(OptionalDataRequest(request, "id", None))
+  override protected def transform[A](request: Request[A]): Future[OptionalDataRequest[A]] =
+    Future.successful(OptionalDataRequest(request, "id", None))
 
-  override def parser: BodyParser[AnyContent] = Helpers.stubControllerComponents().parsers.default
+  override def parser: BodyParser[AnyContent] =
+    Helpers.stubControllerComponents().parsers.default
 
-  override protected def executionContext: ExecutionContext = Helpers.stubControllerComponents().executionContext
+  override protected def executionContext: ExecutionContext =
+    Helpers.stubControllerComponents().executionContext

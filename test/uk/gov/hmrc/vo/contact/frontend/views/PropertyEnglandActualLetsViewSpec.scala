@@ -24,19 +24,19 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyEnglandActualLets => 
 
 class PropertyEnglandActualLetsViewSpec extends ViewBehaviours:
 
-  def propertyEnglandLetsSubcategory: property_england_actual_lets = app.injector.instanceOf[property_england_actual_lets]
+  def propertyEnglandLetsSubcategory: property_england_actual_lets = inject[property_england_actual_lets]
 
   val messageKeyPrefix = "propertyEnglandActualLets"
 
   def createView: () => HtmlFormat.Appendable =
-    () => propertyEnglandLetsSubcategory(PropertyEnglandActualLetsForm())(using fakeRequest, messages)
+    () => propertyEnglandLetsSubcategory(PropertyEnglandActualLetsForm())(using getRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable = (
     form: Form[String]
-  ) => propertyEnglandLetsSubcategory(form)(using fakeRequest, messages)
+  ) => propertyEnglandLetsSubcategory(form)(using getRequest, messages)
 
   "PropertyEnglandActualLetsSubcategory view" when {
-    "rendered" must {
+    "rendered" should {
       "contain radio buttons for the value" in {
         val doc = asDocument(createViewUsingForm(PropertyEnglandActualLetsForm()))
         for (option <- PropertyEnglandActualLetsForm.options)
@@ -52,14 +52,14 @@ class PropertyEnglandActualLetsViewSpec extends ViewBehaviours:
       "has a link marked with site.back leading to the Business Rates Self Containing Holiday Let Page" in {
         val doc          = asDocument(createView())
         val backlinkText = doc.select("a[class=govuk-back-link]").text()
-        backlinkText mustBe messages("site.back")
-        val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-        backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad.url
+        backlinkText shouldBe messages("site.back")
+        val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+        backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad.url
       }
     }
 
     for (option <- PropertyEnglandActualLetsForm.options)
-      s"rendered with a value of '${option.value}'" must {
+      s"rendered with a value of '${option.value}'" should {
         s"have the '${option.value}' radio button selected" in {
           val doc = asDocument(createViewUsingForm(PropertyEnglandActualLetsForm().bind(Map("value" -> s"${option.value}"))))
           assertContainsRadioButton(doc, option.id, "value", option.value, isChecked = true)

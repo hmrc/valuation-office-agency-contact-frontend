@@ -33,9 +33,9 @@ package uk.gov.hmrc.vo.contact.frontend.models
  */
 
 import uk.gov.hmrc.vo.contact.frontend.models.TellUsMore
-import org.scalatest.wordspec.AnyWordSpec
+import uk.gov.hmrc.vo.unit.test.BaseSpec
 
-class TellUsMoreSpec extends AnyWordSpec:
+class TellUsMoreSpec extends BaseSpec:
 
   val tellUsMore: TellUsMore = TellUsMore("Hello")
 

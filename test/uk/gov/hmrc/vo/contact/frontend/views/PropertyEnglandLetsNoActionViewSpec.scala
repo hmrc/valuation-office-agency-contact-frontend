@@ -22,13 +22,13 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyEnglandLetsNoAction =
 
 class PropertyEnglandLetsNoActionViewSpec extends ViewBehaviours:
 
-  def propertyEnglandLetsNoAction: england_lets_no_action = app.injector.instanceOf[england_lets_no_action]
+  def propertyEnglandLetsNoAction: england_lets_no_action = inject[england_lets_no_action]
 
   def backLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad.url
 
-  def viewEnglandAvailable140Nights: () => HtmlFormat.Appendable = () => propertyEnglandLetsNoAction(backLink)(using fakeRequest, messages)
+  def viewEnglandAvailable140Nights: () => HtmlFormat.Appendable = () => propertyEnglandLetsNoAction(backLink)(using getRequest, messages)
 
-  "Property Wales Lets No Action view" must {
+  "Property Wales Lets No Action view" should {
     behave like normalPage(
       viewEnglandAvailable140Nights,
       "businessRatesSelfCateringNoBusinessRate",
@@ -45,8 +45,8 @@ class PropertyEnglandLetsNoActionViewSpec extends ViewBehaviours:
     "has a link marked with site.back leading to the Property England Lets 140 Page" in {
       val doc          = asDocument(viewEnglandAvailable140Nights())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad.url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandAvailableLetsController.onPageLoad.url
     }
   }

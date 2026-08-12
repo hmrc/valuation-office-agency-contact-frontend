@@ -23,16 +23,16 @@ import uk.gov.hmrc.vo.contact.frontend.views.html
 
 class ValuationAdviceControllerSpec extends ControllerSpecBase:
 
-  def valuationAdvice: html.valuationAdvice = app.injector.instanceOf[valuation_advice]
+  def valuationAdvice: html.valuationAdvice = inject[valuation_advice]
 
-  "Valuation Advice Controller" must {
+  "Valuation Advice Controller" should {
     "return 200 for a GET" in {
       val result = ValuationAdviceController(
         messagesApi,
         valuationAdvice,
         MessageControllerComponentsHelpers.stubMessageControllerComponents
-      ).onPageLoad()(fakeRequest)
-      status(result) mustBe OK
+      ).onPageLoad()(getRequest)
+      status(result) shouldBe OK
     }
 
     "return the correct view for a GET" in {
@@ -40,8 +40,8 @@ class ValuationAdviceControllerSpec extends ControllerSpecBase:
         messagesApi,
         valuationAdvice,
         MessageControllerComponentsHelpers.stubMessageControllerComponents
-      ).onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe valuationAdvice()(using fakeRequest, messages).toString
+      ).onPageLoad()(getRequest)
+      contentAsString(result) shouldBe valuationAdvice()(using getRequest, messages).toString
     }
 
   }

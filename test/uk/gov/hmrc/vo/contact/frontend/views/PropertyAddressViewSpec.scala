@@ -27,16 +27,16 @@ class PropertyAddressViewSpec extends QuestionViewBehaviours[PropertyAddress]:
 
   private val messageKeyPrefix = "propertyAddress"
 
-  private def propertyAddress: propertyAddress = app.injector.instanceOf[propertyAddress]
+  private def propertyAddress: propertyAddress = inject[propertyAddress]
 
-  private def createView: () => HtmlFormat.Appendable = () => propertyAddress(propertyAddressForm, NormalMode)(using fakeRequest, messages)
+  private def createView: () => HtmlFormat.Appendable = () => propertyAddress(propertyAddressForm, NormalMode)(using getRequest, messages)
 
   private def createViewUsingForm: Form[PropertyAddress] => HtmlFormat.Appendable =
-    (form: Form[PropertyAddress]) => propertyAddress(form, NormalMode)(using fakeRequest, messages)
+    (form: Form[PropertyAddress]) => propertyAddress(form, NormalMode)(using getRequest, messages)
 
   override val form: Form[PropertyAddress] = propertyAddressForm
 
-  "Property Address view" must {
+  "Property Address view" should {
 
     behave like normalPage(createView, messageKeyPrefix)
 
@@ -58,8 +58,8 @@ class PropertyAddressViewSpec extends QuestionViewBehaviours[PropertyAddress]:
     "has a link marked with site.back leading to the Contact Details Page" in {
       val doc          = asDocument(createView())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.ContactDetailsController.onPageLoad(NormalMode).url
     }
   }

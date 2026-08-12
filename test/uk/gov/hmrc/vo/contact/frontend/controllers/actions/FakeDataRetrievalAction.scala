@@ -31,6 +31,8 @@ class FakeDataRetrievalAction(cacheMapToReturn: Option[CacheMap]) extends DataRe
     case None           => Future(OptionalDataRequest(request, "id", None))
     case Some(cacheMap) => Future(OptionalDataRequest(request, "id", Some(UserAnswers(cacheMap))))
 
-  override def parser: BodyParser[AnyContent] = Helpers.stubControllerComponents().parsers.default
+  override def parser: BodyParser[AnyContent] =
+    Helpers.stubControllerComponents().parsers.default
 
-  override protected def executionContext: ExecutionContext = Helpers.stubControllerComponents().executionContext
+  override protected def executionContext: ExecutionContext =
+    Helpers.stubControllerComponents().executionContext

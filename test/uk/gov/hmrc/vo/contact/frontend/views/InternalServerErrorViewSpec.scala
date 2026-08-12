@@ -23,11 +23,11 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.error
 
 class InternalServerErrorViewSpec extends ViewBehaviours:
 
-  def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
+  def internalServerError: error.internal_server_error = inject[internal_server_error]
 
-  def view: () => HtmlFormat.Appendable = () => internalServerError()(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => internalServerError()(using getRequest, messages)
 
-  "Internal Server Error view" must {
+  "Internal Server Error view" should {
 
     behave like normalPage(view, "error500", "tryagain.para")
   }

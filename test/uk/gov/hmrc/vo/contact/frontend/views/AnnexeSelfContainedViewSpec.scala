@@ -23,18 +23,18 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.annexeSelfContained
 
 class AnnexeSelfContainedViewSpec extends ViewBehaviours:
 
-  def councilTaxAnnexeSelfContained: annexeSelfContained = app.injector.instanceOf[annexe_self_contained]
+  def councilTaxAnnexeSelfContained: annexeSelfContained = inject[annexe_self_contained]
 
-  def view: () => HtmlFormat.Appendable = () => councilTaxAnnexeSelfContained()(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => councilTaxAnnexeSelfContained()(using getRequest, messages)
 
-  "Council Tax Bill view" must {
+  "Council Tax Bill view" should {
     behave like normalPage(view, "annexeSelfContained", "title", "p1", "p2", "subheading")
 
     "has a link marked with site.back leading to the Council Tax annexe self contained Page" in {
       val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxAnnexeController.onHaveCookingWashingPageLoad().url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxAnnexeController.onHaveCookingWashingPageLoad().url
     }
   }

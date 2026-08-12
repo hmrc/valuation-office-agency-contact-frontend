@@ -27,7 +27,7 @@ class AnnexeCookingWashingSpec extends FormBehaviours:
 
   val form: Form[String] = AnnexeCookingWashingForm()
 
-  "AnnexeCookingWashing form" must {
+  "AnnexeCookingWashing form" should {
     behave like questionForm[String](AnnexeCookingWashingForm.options.head.value)
 
     behave like formWithOptionField("value", AnnexeCookingWashingForm.options.map(_.value)*)

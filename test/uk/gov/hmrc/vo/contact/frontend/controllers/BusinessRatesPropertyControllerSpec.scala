@@ -53,48 +53,48 @@ class BusinessRatesPropertyControllerSpec extends ControllerSpecBase:
     )
 
   def viewAsString(form: Form[String] = BusinessRatesPropertyForm()): String =
-    businessRatesPropertyEnquiry(form, NormalMode)(using fakeRequest, messages).toString
+    businessRatesPropertyEnquiry(form, NormalMode)(using getRequest, messages).toString
 
-  "BusinessRatesSelfCateringController" must {
+  "BusinessRatesSelfCateringController" should {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onPageLoad(NormalMode)(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsString()
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
       val validData       = Map(BusinessRatesPropertyEnquiryId.toString -> JsString(BusinessRatesPropertyForm.options.head.value))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(getRequest)
 
-      contentAsString(result) mustBe viewAsString(BusinessRatesPropertyForm().fill(BusinessRatesPropertyForm.options.head.value))
+      contentAsString(result) shouldBe viewAsString(BusinessRatesPropertyForm().fill(BusinessRatesPropertyForm.options.head.value))
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", BusinessRatesPropertyForm.options.head.value))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", BusinessRatesPropertyForm.options.head.value))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
+      status(result) shouldBe SEE_OTHER
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm   = BusinessRatesPropertyForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe BAD_REQUEST
-      contentAsString(result) mustBe viewAsString(boundForm)
+      status(result)          shouldBe BAD_REQUEST
+      contentAsString(result) shouldBe viewAsString(boundForm)
     }
 
     "return OK and the correct view when onNonBusinessPageLoad is called" in {
-      val result = controller().onNonBusinessPageLoad(fakeRequest)
+      val result = controller().onNonBusinessPageLoad(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe businessRatesNonBusiness()(using fakeRequest, messages).toString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe businessRatesNonBusiness()(using getRequest, messages).toString()
     }
   }

@@ -28,7 +28,7 @@ class TellUsMoreFormSpec extends FormBehaviours:
 
   val form: Form[TellUsMore] = TellUsMoreForm()
 
-  "TellUsMore form" must {
+  "TellUsMore form" should {
     behave like questionForm(TellUsMore("value 1"))
 
     "fail to bind when message length is more than 5000" in {

@@ -25,23 +25,23 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.contactDetails
 
 class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails]:
 
-  private def contactDetails: contactDetails = app.injector.instanceOf[contactDetails]
+  private def contactDetails: contactDetails = inject[contactDetails]
 
   private val messageKeyPrefix    = "contactDetails"
   private def ctBackLink: String  = uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
   private def ndrBackLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
 
   private def createNDRViewUsingForm(form: Form[ContactDetails]): HtmlFormat.Appendable =
-    contactDetails(form, NormalMode, ndrBackLink)(using fakeRequest, messages)
+    contactDetails(form, NormalMode, ndrBackLink)(using getRequest, messages)
 
-  private def createCTView(): HtmlFormat.Appendable = contactDetails(contactDetailsForm, NormalMode, ctBackLink)(using fakeRequest, messages)
+  private def createCTView(): HtmlFormat.Appendable = contactDetails(contactDetailsForm, NormalMode, ctBackLink)(using getRequest, messages)
 
   private def createCTViewUsingForm(form: Form[ContactDetails]): HtmlFormat.Appendable =
-    contactDetails(form, NormalMode, ctBackLink)(using fakeRequest, messages)
+    contactDetails(form, NormalMode, ctBackLink)(using getRequest, messages)
 
   override val form: Form[ContactDetails] = contactDetailsForm
 
-  "ContactDetails view" must {
+  "ContactDetails view" should {
 
     behave like normalPage(() => createCTView(), messageKeyPrefix)
 
@@ -55,9 +55,9 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails]:
     "Contact Details has a link marked with site.back leading to the council tax subcategory page when enquiry category is council_tax" in {
       val doc          = asDocument(createCTViewUsingForm(form))
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
 
     "contain continue button with the value Continue when the enquiry category is council_tax" in {
@@ -69,9 +69,9 @@ class ContactDetailsViewSpec extends QuestionViewBehaviours[ContactDetails]:
     "Contact Details has a link marked with site.back leading to the business rates subcategory page when enquiry category is business_rates" in {
       val doc          = asDocument(createNDRViewUsingForm(form))
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
     }
 
     "contain continue button with the value Continue when the enquiry category is business_rates" in {

@@ -24,19 +24,19 @@ import play.twirl.api.HtmlFormat
 
 class BusinessRatesPropertyEnquiryViewSpec extends ViewBehaviours:
 
-  def businessRatesPropertyEnquiry: html.businessRatesPropertyEnquiry = app.injector.instanceOf[business_rates_property_enquiry]
+  def businessRatesPropertyEnquiry: html.businessRatesPropertyEnquiry = inject[business_rates_property_enquiry]
 
   def view: () => HtmlFormat.Appendable =
-    () => businessRatesPropertyEnquiry(BusinessRatesPropertyForm(), NormalMode)(using fakeRequest, messages)
+    () => businessRatesPropertyEnquiry(BusinessRatesPropertyForm(), NormalMode)(using getRequest, messages)
 
-  "Business Rates Property Enquiry view" must {
+  "Business Rates Property Enquiry view" should {
     behave like normalPage(view, "businessRatesPropertyEnquiry", "title", "heading", "england", "wales")
 
     "has a link marked with site.back leading to the Council Tax annexe self contained Page" in {
       val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
     }
   }

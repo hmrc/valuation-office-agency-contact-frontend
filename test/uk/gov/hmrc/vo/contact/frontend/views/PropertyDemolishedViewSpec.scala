@@ -23,11 +23,11 @@ import play.twirl.api.HtmlFormat
 
 class PropertyDemolishedViewSpec extends ViewBehaviours:
 
-  def propertyDemolished: html.propertyDemolished = app.injector.instanceOf[property_demolished]
+  def propertyDemolished: html.propertyDemolished = inject[property_demolished]
 
-  def view: () => HtmlFormat.Appendable = () => propertyDemolished()(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => propertyDemolished()(using getRequest, messages)
 
-  "Property Demolished view" must {
+  "Property Demolished view" should {
     behave like normalPage(
       view,
       "propertyDemolished",
@@ -47,8 +47,8 @@ class PropertyDemolishedViewSpec extends ViewBehaviours:
     "has a link marked with site.back leading to the Property Demolished Page" in {
       val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.CouncilTaxSubcategoryController.onPageLoad(NormalMode).url
     }
   }

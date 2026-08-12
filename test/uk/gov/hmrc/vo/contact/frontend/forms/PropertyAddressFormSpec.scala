@@ -32,7 +32,7 @@ class PropertyAddressFormSpec extends FormBehaviours:
 
   val form: Form[PropertyAddress] = PropertyAddressForm.propertyAddressForm
 
-  "Property Address form" must {
+  "Property Address form" should {
     behave like questionForm(PropertyAddress("value, 1", Some("value, 2"), "value, 3", Some("value, 4"), "AA1 1AA"))
 
     behave like formWithOptionalTextFields("addressLine2", "county")

@@ -16,9 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import org.mockito.ArgumentMatchers.any
-import org.mockito.Mockito.when
-import org.scalatestplus.mockito.MockitoSugar
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsString, Json}
 import play.api.test.Helpers._
@@ -41,7 +38,7 @@ import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 import uk.gov.hmrc.vo.contact.frontend.views.html.error
 
-class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar:
+class ConfirmationControllerSpec extends ControllerSpecBase:
 
   val mockUserAnswers: UserAnswers                     = mock[UserAnswers]
   val mockConnector: LightweightContactEventsConnector = mock[LightweightContactEventsConnector]
@@ -73,8 +70,8 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar:
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
-  def confirmation: html.confirmation                  = app.injector.instanceOf[Confirmation]
-  def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
+  def confirmation: html.confirmation                  = inject[Confirmation]
+  def internalServerError: error.internal_server_error = inject[internal_server_error]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     ConfirmationController(
@@ -102,7 +99,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar:
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  "Confirmation Controller" must {
+  "Confirmation Controller" should {
 
     "return 200 and the correct view for a GET" in {
 
@@ -125,12 +122,12 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar:
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
 
-      contentAsString(result) mustBe confirmation(contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(
-        using fakeRequest,
+      contentAsString(result) shouldBe confirmation(contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(
+        using getRequest,
         messages
       ).toString
     }
@@ -156,12 +153,12 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar:
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
 
-      contentAsString(result) mustBe confirmation(contact, answerSectionExisting, whatHappensExisting, SatisfactionSurveyForm.apply())(
-        using fakeRequest,
+      contentAsString(result) shouldBe confirmation(contact, answerSectionExisting, whatHappensExisting, SatisfactionSurveyForm.apply())(
+        using getRequest,
         messages
       ).toString
     }
@@ -186,21 +183,21 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar:
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
 
-      contentAsString(result) mustBe confirmation(contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(
-        using fakeRequest,
+      contentAsString(result) shouldBe confirmation(contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(
+        using getRequest,
         messages
       ).toString
     }
 
     "redirect to Session Expired for a GET if not existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad()(fakeRequest)
+      val result = controller(dontGetAnyData).onPageLoad()(getRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
     "The enquiry key function produces a string with a businessRatesSubcategory string key when the enquiry category is business_rates" +
@@ -212,7 +209,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                   = enquiryKey(mockUserAnswers)
         val isBusinessRatesSelection = result.toOption.get.startsWith("businessRatesSubcategory")
-        isBusinessRatesSelection mustBe true
+        isBusinessRatesSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a councilTaxSubcategory key when the enquiry category is council_tax" +
@@ -224,13 +221,13 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                = enquiryKey(mockUserAnswers)
         val isCouncilTaxSelection = result.toOption.get.startsWith("councilTaxSubcategory")
-        isCouncilTaxSelection mustBe true
+        isCouncilTaxSelection shouldBe true
       }
 
     "enquiryKey returns a string with a housingBenefitSubcategory key prefix when the enquiry category is housing_benefit" in {
       when(mockUserAnswers.enquiryCategory) `thenReturn` Some("housing_benefit")
 
-      enquiryKey(mockUserAnswers) mustBe Right("housingBenefitSubcategory")
+      enquiryKey(mockUserAnswers) shouldBe Right("housingBenefitSubcategory")
     }
 
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
@@ -240,7 +237,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_other")
 
       val result = enquiryKey(mockUserAnswers)
-      result mustBe Left("Unknown enquiry category in enquiry key")
+      result shouldBe Left("Unknown enquiry category in enquiry key")
     }
 
     "populate the satisfaction survey view correctly on a GET" in {}
@@ -263,11 +260,11 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar:
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       intercept[Exception] {
-        val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+        val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-        status(result) mustBe INTERNAL_SERVER_ERROR
+        status(result) shouldBe INTERNAL_SERVER_ERROR
 
-        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
+        contentAsString(result) shouldBe internalServerError()(using getRequest, messages).toString
       }
     }
 
@@ -289,26 +286,26 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar:
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       intercept[Exception] {
-        val result = controller(getRelevantData).onPageLoad()(fakeRequest)
+        val result = controller(getRelevantData).onPageLoad()(getRequest)
 
-        status(result) mustBe INTERNAL_SERVER_ERROR
+        status(result) shouldBe INTERNAL_SERVER_ERROR
 
-        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
+        contentAsString(result) shouldBe internalServerError()(using getRequest, messages).toString
       }
     }
 
     "return 500 and the error view for a GET with no enquiry type" in
       intercept[Exception] {
-        val result = controller().onPageLoad()(fakeRequest)
-        status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
+        val result = controller().onPageLoad()(getRequest)
+        status(result)          shouldBe INTERNAL_SERVER_ERROR
+        contentAsString(result) shouldBe internalServerError()(using getRequest, messages).toString
       }
 
     "return 500 and error view for a GET when the backend service call fails" in
       intercept[Exception] {
-        val result = controllerF().onPageLoad()(fakeRequest)
-        status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
+        val result = controllerF().onPageLoad()(getRequest)
+        status(result)          shouldBe INTERNAL_SERVER_ERROR
+        contentAsString(result) shouldBe internalServerError()(using getRequest, messages).toString
       }
 
     "return 303 and send email when form complete" in {
@@ -330,9 +327,9 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar:
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoadSendEmail()(fakeRequest)
+      val result = controller(getRelevantData).onPageLoadSendEmail()(getRequest)
 
-      status(result) mustBe SEE_OTHER
+      status(result) shouldBe SEE_OTHER
     }
 
     "will return correct messages if a new enquiry" in {
@@ -341,7 +338,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar:
 
       val result = whatHappensNextMessages(mockUserAnswers)
 
-      result mustBe whatHappensNew
+      result shouldBe whatHappensNew
     }
 
     "will return correct messages if an existing enquiry" in {
@@ -350,7 +347,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar:
 
       val result = whatHappensNextMessages(mockUserAnswers)
 
-      result mustBe whatHappensExisting
+      result shouldBe whatHappensExisting
     }
 
     "will return empty string if new and existing enquiry are both defined in the cache" in {
@@ -359,6 +356,6 @@ class ConfirmationControllerSpec extends ControllerSpecBase with MockitoSugar:
 
       val result = whatHappensNextMessages(mockUserAnswers)
 
-      result mustBe Seq.empty[String]
+      result shouldBe Seq.empty[String]
     }
   }

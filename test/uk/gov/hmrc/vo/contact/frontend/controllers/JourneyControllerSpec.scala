@@ -61,76 +61,76 @@ class JourneyControllerSpec extends ControllerSpecBase:
 
   private def viewAsString(form: Form[String] = form): String =
     categoryRouterTemplate(form, pageKey, HousingBenefitAllowancesRouter.previousPage(userAnswers).url, HousingBenefitAllowancesRouter)(
-      using fakeRequest,
+      using getRequest,
       messages
     ).toString
 
-  "JourneyController" must {
+  "JourneyController" should {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(pageKey)(fakeRequest)
+      val result = controller().onPageLoad(pageKey)(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsString()
 
       journeyMap.journeyMap.values.map(_.key).foreach { key =>
-        val result = controller().onPageLoad(key)(fakeRequest)
-        status(result) mustBe OK
+        val result = controller().onPageLoad(key)(getRequest)
+        status(result) shouldBe OK
       }
     }
 
     "return NOT_FOUND for unknown page key" in {
-      val result = controller().onPageLoad("unknown-page-key")(fakeRequest)
-      status(result) mustBe NOT_FOUND
+      val result = controller().onPageLoad("unknown-page-key")(getRequest)
+      status(result) shouldBe NOT_FOUND
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
       val validData       = Map(HousingBenefitAllowancesRouter.key -> JsString(HousingBenefitAllowancesRouter.options.head))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(pageKey)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(pageKey)(getRequest)
 
-      contentAsString(result) mustBe viewAsString(form.fill(HousingBenefitAllowancesRouter.options.head))
+      contentAsString(result) shouldBe viewAsString(form.fill(HousingBenefitAllowancesRouter.options.head))
     }
 
     "redirect to start page EnquiryCategory when valid data is submitted, but no data retrieved form cache" in {
-      val postRequest = fakeRequest.withMethod("POST")
+      val postRequest = getRequest.withMethod("POST")
         .withFormUrlEncodedBody((HousingBenefitAllowancesRouter.fieldId, HousingBenefitAllowancesRouter.options.head))
 
       val result = controller().onSubmit(pageKey)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.EnquiryCategoryController.onPageLoad(NormalMode).url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.EnquiryCategoryController.onPageLoad(NormalMode).url)
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody((HousingBenefitAllowancesRouter.fieldId, "invalid value"))
+      val postRequest = getRequest.withFormUrlEncodedBody((HousingBenefitAllowancesRouter.fieldId, "invalid value"))
       val boundForm   = form.bind(Map(HousingBenefitAllowancesRouter.fieldId -> "invalid value"))
 
       val result = controller().onSubmit(pageKey)(postRequest)
 
-      status(result) mustBe BAD_REQUEST
-      contentAsString(result) mustBe viewAsString(boundForm)
+      status(result)          shouldBe BAD_REQUEST
+      contentAsString(result) shouldBe viewAsString(boundForm)
     }
 
     "return error page if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(pageKey)(fakeRequest)
-      status(result) mustBe SEE_OTHER
+      val result = controller(dontGetAnyData).onPageLoad(pageKey)(getRequest)
+      status(result) shouldBe SEE_OTHER
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(pageKey)(fakeRequest)
+      val result = controller(dontGetAnyData).onPageLoad(pageKey)(getRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody((HousingBenefitAllowancesRouter.fieldId, HousingBenefitAllowancesRouter.options.head))
+      val postRequest = getRequest.withFormUrlEncodedBody((HousingBenefitAllowancesRouter.fieldId, HousingBenefitAllowancesRouter.options.head))
       val result      = controller(dontGetAnyData).onSubmit(pageKey)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
     "handle NotImplemented page" in {
@@ -138,36 +138,36 @@ class JourneyControllerSpec extends ControllerSpecBase:
         override def previousPage: UserAnswers => Call = _ => appStartPage
       }
 
-      given request: Request[?] = fakeRequest
+      given request: Request[?] = getRequest
       given messages: Messages  = MessagesImpl(Lang("en"), new DefaultMessagesApi)
 
-      NotImplementedPage.previousPage(userAnswers).url mustBe NotImplementedPage.appStartPage.url
+      NotImplementedPage.previousPage(userAnswers).url shouldBe NotImplementedPage.appStartPage.url
 
       assertThrows[NotImplementedError] {
         NotImplementedPage.nextPage(userAnswers).url
       }
 
       val html = notImplementedTemplate(NotImplementedPage.key, "/back/url", NotImplementedPage).toString()
-      html must include(NotImplementedPage.key)
-      html must include("/back/url")
+      html should include(NotImplementedPage.key)
+      html should include("/back/url")
     }
 
     "handle customized content HousingBenefitAppeals" in {
       val customizedContentPage = HousingBenefitAppeals
 
-      given request: Request[?] = fakeRequest
+      given request: Request[?] = getRequest
       given messages: Messages  = MessagesImpl(Lang("en"), new DefaultMessagesApi)
 
-      customizedContentPage.previousPage(userAnswers).url mustBe routes.JourneyController.onPageLoad(HousingBenefitEnquiry.key).url
+      customizedContentPage.previousPage(userAnswers).url shouldBe routes.JourneyController.onPageLoad(HousingBenefitEnquiry.key).url
 
       assertThrows[NotImplementedError] {
         customizedContentPage.nextPage(userAnswers).url
       }
 
       val html = customizedContentTemplate("/back/url", customizedContentPage).toString()
-      html must include("housingBenefitAppeals.label - service.name - gov.name")
-      html must include("/back/url")
-      html must include("https://www.gov.uk/appeal-housing-benefit-decision")
+      html should include("housingBenefitAppeals.label - service.name - gov.name")
+      html should include("/back/url")
+      html should include("https://www.gov.uk/appeal-housing-benefit-decision")
     }
 
   }

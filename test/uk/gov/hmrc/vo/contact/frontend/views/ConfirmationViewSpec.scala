@@ -48,15 +48,15 @@ class ConfirmationViewSpec extends ViewBehaviours:
     )
   )
 
-  def confirmation: html.confirmation = app.injector.instanceOf[Confirmation]
+  def confirmation: html.confirmation = inject[Confirmation]
 
   def view: () => HtmlFormat.Appendable =
-    () => confirmation(contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(using fakeRequest, messages)
+    () => confirmation(contact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(using getRequest, messages)
 
   def alternativeView: () => HtmlFormat.Appendable =
-    () => confirmation(alternativeContact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(using fakeRequest, messages)
+    () => confirmation(alternativeContact, answerSectionNew, whatHappensNew, SatisfactionSurveyForm.apply())(using getRequest, messages)
 
-  "Confirmation view" must {
+  "Confirmation view" should {
 
     behave like normalPage(
       view,
@@ -69,9 +69,9 @@ class ConfirmationViewSpec extends ViewBehaviours:
       "enquirySummary",
       "para1",
       "new.p1",
-      "feedback.subheading",
-      "feedback.improve",
-      "feedback.warning"
+      "feedback.satisfaction.label",
+      "feedback.details.label",
+      "feedback.details.hint"
     )
 
     "Given a property address with address line 2 and county as None it should contain a formatted address string with <br/> interstitial" in {

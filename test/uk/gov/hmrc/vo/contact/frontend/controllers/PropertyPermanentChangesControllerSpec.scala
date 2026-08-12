@@ -27,7 +27,7 @@ import javax.inject.Singleton
 @Singleton
 class PropertyPermanentChangesControllerSpec extends ControllerSpecBase:
 
-  def propertyPermanentChangesEnquiry: propertyPermanentChanges = app.injector.instanceOf[property_permanent_changes]
+  def propertyPermanentChangesEnquiry: propertyPermanentChanges = inject[property_permanent_changes]
 
   def controller =
     PropertyPermanentChangesController(
@@ -37,19 +37,19 @@ class PropertyPermanentChangesControllerSpec extends ControllerSpecBase:
     )
 
   def viewAsString: String =
-    propertyPermanentChangesEnquiry(NormalMode)(using fakeRequest, messages).toString()
+    propertyPermanentChangesEnquiry(NormalMode)(using getRequest, messages).toString()
 
-  "Property Permanent Changes Controller" must {
+  "Property Permanent Changes Controller" should {
     "return the correct view for a GET" in {
-      val result = controller.onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe propertyPermanentChangesEnquiry(NormalMode)(using fakeRequest, messages).toString
+      val result = controller.onPageLoad()(getRequest)
+      contentAsString(result) shouldBe propertyPermanentChangesEnquiry(NormalMode)(using getRequest, messages).toString
     }
 
     "return OK and the correct view for a GET" in {
-      val result = controller.onPageLoad()(fakeRequest)
+      val result = controller.onPageLoad()(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsString
     }
 
   }

@@ -16,49 +16,48 @@
 
 package uk.gov.hmrc.vo.contact.frontend.utils
 
-import uk.gov.hmrc.vo.contact.frontend.SpecBase
 import uk.gov.hmrc.vo.contact.frontend.models.ContactDetails
 import uk.gov.hmrc.vo.contact.frontend.utils.ContactFormatter.*
+import uk.gov.hmrc.vo.unit.test.BaseSpec
 
-class ContactFormatterSpec extends SpecBase:
+class ContactFormatterSpec extends BaseSpec:
 
-  "Contact Formatter" must {
+  "Contact Formatter" should {
 
     "Given a complete Contact Details it should generate a formatted string using the given interstitial" in {
       val cd = ContactDetails("a", "c", "e")
-      formattedContactDetails(Some(cd), "<br/>") mustBe "a<br/>c<br/>e"
+      formattedContactDetails(Some(cd), "<br/>") shouldBe "a<br/>c<br/>e"
     }
 
     "Given a Contact Details with elements that have too many spaces it should generate a formatted string using the given interstitial" in {
       val cd = ContactDetails(" a ", " c ", " e ")
-      formattedContactDetails(Some(cd), "<br/>") mustBe "a<br/>c<br/>e"
+      formattedContactDetails(Some(cd), "<br/>") shouldBe "a<br/>c<br/>e"
     }
 
     "Given no Contact Details it should generate am empty string" in {
-      formattedContactDetails(None, "<br/>") mustBe ""
+      formattedContactDetails(None, "<br/>") shouldBe ""
     }
 
     "Given a complete Confirmed Contact Details it should generate a formatted string using the given interstitial" in {
       val cd = ContactDetails("a", "c", "e")
-      formattedConfirmedContactDetails(cd, "<br/>") mustBe "a<br/>c<br/>e"
+      formattedConfirmedContactDetails(cd, "<br/>") shouldBe "a<br/>c<br/>e"
     }
 
     "Given a Confirmed Contact Details with elements that have too many spaces it should generate a formatted string using the given interstitial" in {
       val cd = ContactDetails(" a ", " c ", " e ")
-      formattedConfirmedContactDetails(cd, "<br/>") mustBe "a<br/>c<br/>e"
+      formattedConfirmedContactDetails(cd, "<br/>") shouldBe "a<br/>c<br/>e"
     }
 
     "Given a Sequence with three strings insert the interstitials" in {
-      insertInterstitials(Seq("a", "b", "c"), ",") mustBe "a,b,c"
+      insertInterstitials(Seq("a", "b", "c"), ",") shouldBe "a,b,c"
     }
 
     "Given an empty sequence return an empty String" in {
-      insertInterstitials(Seq(), ",") mustBe ""
-
+      insertInterstitials(Seq(), ",") shouldBe ""
     }
 
     "Given a sequence of strings that have leading or trailing spaces return the formatted string without the leading or trailing spaces" in {
-      insertInterstitials(Seq(" a ", " b ", " c "), ",") mustBe "a,b,c"
+      insertInterstitials(Seq(" a ", " b ", " c "), ",") shouldBe "a,b,c"
     }
 
   }

@@ -22,11 +22,11 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyEnglandLets => englan
 
 class PropertyEnglandLetsViewSpec extends ViewBehaviours:
 
-  def propertyEnglandLets: england_lets = app.injector.instanceOf[england_lets]
+  def propertyEnglandLets: england_lets = inject[england_lets]
 
-  def view: () => HtmlFormat.Appendable = () => propertyEnglandLets()(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => propertyEnglandLets()(using getRequest, messages)
 
-  "Property England Lets view" must {
+  "Property England Lets view" should {
     behave like normalPage(
       view,
       "propertyEnglandLets",
@@ -45,8 +45,8 @@ class PropertyEnglandLetsViewSpec extends ViewBehaviours:
     "has a link marked with site.back leading to the Property England Lets Page" in {
       val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandActualLetsController.onPageLoad.url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.PropertyEnglandActualLetsController.onPageLoad.url
     }
   }

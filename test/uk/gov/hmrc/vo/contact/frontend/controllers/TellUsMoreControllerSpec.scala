@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import org.mockito.Mockito.when
-import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.JsString
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
@@ -34,14 +32,14 @@ import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 import uk.gov.hmrc.vo.contact.frontend.views.html.error
 
-class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
+class TellUsMoreControllerSpec extends ControllerSpecBase:
 
   val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
   val backLink: String = uk.gov.hmrc.vo.contact.frontend.controllers.routes.TellUsMoreController.onPageLoad(NormalMode).url
 
-  def tellUsMore: html.tellUsMore                      = app.injector.instanceOf[tell_us_more]
-  def internalServerError: error.internal_server_error = app.injector.instanceOf[internal_server_error]
+  def tellUsMore: html.tellUsMore                      = inject[tell_us_more]
+  def internalServerError: error.internal_server_error = inject[internal_server_error]
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 
@@ -57,16 +55,16 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
     )
 
   def viewAsString(form: Form[TellUsMore] = TellUsMoreForm(), msg: String = ""): String =
-    tellUsMore(form, NormalMode, msg, backLink)(using fakeRequest, messages).toString
+    tellUsMore(form, NormalMode, msg, backLink)(using getRequest, messages).toString
 
-  "TellUsMore Controller" must {
+  "TellUsMore Controller" should {
 
     "return OK and the correct view for a GET" in {
       val validData       = Map(EnquiryCategoryId.toString -> JsString("council_tax"), CouncilTaxSubcategoryId.toString -> JsString("council_tax_calculated"))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
-      val result          = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result          = controller(getRelevantData).onPageLoad(NormalMode)(getRequest)
 
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
@@ -78,7 +76,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                   = controller().enquiryKey(mockUserAnswers)
         val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business.other")
-        isBusinessRatesSelection mustBe true
+        isBusinessRatesSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
@@ -90,7 +88,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                   = controller().enquiryKey(mockUserAnswers)
         val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business")
-        isBusinessRatesSelection mustBe true
+        isBusinessRatesSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
@@ -102,7 +100,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                   = controller().enquiryKey(mockUserAnswers)
         val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business.other")
-        isBusinessRatesSelection mustBe true
+        isBusinessRatesSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
@@ -114,7 +112,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                   = controller().enquiryKey(mockUserAnswers)
         val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business.other")
-        isBusinessRatesSelection mustBe true
+        isBusinessRatesSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
@@ -126,7 +124,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                   = controller().enquiryKey(mockUserAnswers)
         val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business.other")
-        isBusinessRatesSelection mustBe true
+        isBusinessRatesSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
@@ -138,7 +136,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                   = controller().enquiryKey(mockUserAnswers)
         val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business.other")
-        isBusinessRatesSelection mustBe true
+        isBusinessRatesSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
@@ -150,7 +148,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                   = controller().enquiryKey(mockUserAnswers)
         val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business.other")
-        isBusinessRatesSelection mustBe true
+        isBusinessRatesSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
@@ -162,7 +160,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                   = controller().enquiryKey(mockUserAnswers)
         val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business.other")
-        isBusinessRatesSelection mustBe true
+        isBusinessRatesSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
@@ -174,7 +172,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                   = controller().enquiryKey(mockUserAnswers)
         val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business.other")
-        isBusinessRatesSelection mustBe true
+        isBusinessRatesSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more tellUsMore.business.other key when the enquiry category is business_rates" +
@@ -186,7 +184,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                   = controller().enquiryKey(mockUserAnswers)
         val isBusinessRatesSelection = result.toOption.get.endsWith("tellUsMore.business.other")
-        isBusinessRatesSelection mustBe true
+        isBusinessRatesSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more ct-reference key when the enquiry category is council_tax" +
@@ -198,7 +196,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                = controller().enquiryKey(mockUserAnswers)
         val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.ct-reference")
-        isCouncilTaxSelection mustBe true
+        isCouncilTaxSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more ct-reference key when the enquiry category is council_tax" +
@@ -210,7 +208,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                = controller().enquiryKey(mockUserAnswers)
         val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.ndr-reference")
-        isCouncilTaxSelection mustBe true
+        isCouncilTaxSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more poorRepair key when the enquiry category is council_tax" +
@@ -222,7 +220,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                = controller().enquiryKey(mockUserAnswers)
         val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.general")
-        isCouncilTaxSelection mustBe true
+        isCouncilTaxSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more other key when the enquiry category is council_tax" +
@@ -234,7 +232,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                = controller().enquiryKey(mockUserAnswers)
         val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.other")
-        isCouncilTaxSelection mustBe true
+        isCouncilTaxSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more areaChange key when the enquiry category is council_tax" +
@@ -246,7 +244,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                = controller().enquiryKey(mockUserAnswers)
         val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.general")
-        isCouncilTaxSelection mustBe true
+        isCouncilTaxSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more areaChange key when the enquiry category is council_tax" +
@@ -258,7 +256,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                = controller().enquiryKey(mockUserAnswers)
         val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.general")
-        isCouncilTaxSelection mustBe true
+        isCouncilTaxSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more areaChange key when the enquiry category is council_tax" +
@@ -270,7 +268,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                = controller().enquiryKey(mockUserAnswers)
         val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.general")
-        isCouncilTaxSelection mustBe true
+        isCouncilTaxSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more areaChange key when the enquiry category is council_tax" +
@@ -282,7 +280,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                = controller().enquiryKey(mockUserAnswers)
         val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.general")
-        isCouncilTaxSelection mustBe true
+        isCouncilTaxSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more areaChange key when the enquiry category is council_tax" +
@@ -294,7 +292,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                = controller().enquiryKey(mockUserAnswers)
         val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.general")
-        isCouncilTaxSelection mustBe true
+        isCouncilTaxSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more areaChange key when the enquiry category is council_tax" +
@@ -306,7 +304,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                = controller().enquiryKey(mockUserAnswers)
         val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.general")
-        isCouncilTaxSelection mustBe true
+        isCouncilTaxSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more areaChange key when the enquiry category is council_tax" +
@@ -318,7 +316,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                = controller().enquiryKey(mockUserAnswers)
         val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.general")
-        isCouncilTaxSelection mustBe true
+        isCouncilTaxSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more areaChange key when the enquiry category is council_tax" +
@@ -330,7 +328,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                = controller().enquiryKey(mockUserAnswers)
         val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.general")
-        isCouncilTaxSelection mustBe true
+        isCouncilTaxSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more business key when the enquiry category is council_tax" +
@@ -342,7 +340,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result                = controller().enquiryKey(mockUserAnswers)
         val isCouncilTaxSelection = result.toOption.get.endsWith("tellUsMore.business")
-        isCouncilTaxSelection mustBe true
+        isCouncilTaxSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more fair rent key when the enquiry category is fair rent" +
@@ -354,7 +352,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result              = controller().enquiryKey(mockUserAnswers)
         val isFairRentSelection = result.toOption.get.endsWith("tellUsMore.fairRent")
-        isFairRentSelection mustBe true
+        isFairRentSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more fair rent key when the enquiry category is fair rent" +
@@ -366,7 +364,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result              = controller().enquiryKey(mockUserAnswers)
         val isFairRentSelection = result.toOption.get.endsWith("tellUsMore.fairRent")
-        isFairRentSelection mustBe true
+        isFairRentSelection shouldBe true
       }
 
     "The enquiry key function produces a string with a tell us more fair rent key when the enquiry category is fair rent" +
@@ -378,7 +376,7 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
         val result              = controller().enquiryKey(mockUserAnswers)
         val isFairRentSelection = result.toOption.get.endsWith("tellUsMore.fairRent")
-        isFairRentSelection mustBe true
+        isFairRentSelection shouldBe true
       }
 
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
@@ -388,16 +386,16 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
       when(mockUserAnswers.businessRatesSubcategory) `thenReturn` Some("business_rates_other")
 
       val result = controller().enquiryKey(mockUserAnswers)
-      result mustBe Left("Unknown enquiry category in enquiry key")
+      result shouldBe Left("Unknown enquiry category in enquiry key")
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("message", "value 1"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("message", "value 1"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(onwardRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(onwardRoute.url)
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
@@ -405,26 +403,26 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest = getRequest.withFormUrlEncodedBody(("value", "invalid value"))
 
       val result = controller(getRelevantData).onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe BAD_REQUEST
+      status(result) shouldBe BAD_REQUEST
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(getRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("message", "value 1"))
+      val postRequest = getRequest.withFormUrlEncodedBody(("message", "value 1"))
       val result      = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
     "return 500 and the error view for a GET with wrong or unknown enquiry type" in {
@@ -432,26 +430,26 @@ class TellUsMoreControllerSpec extends ControllerSpecBase with MockitoSugar:
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
       intercept[Exception] {
-        val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
-        status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
+        val result = controller(getRelevantData).onPageLoad(NormalMode)(getRequest)
+        status(result)          shouldBe INTERNAL_SERVER_ERROR
+        contentAsString(result) shouldBe internalServerError()(using getRequest, messages).toString
       }
     }
 
     "return 500 and the error view for a GET with no enquiry type" in
       intercept[Exception] {
-        val result = controller().onPageLoad(NormalMode)(fakeRequest)
-        status(result) mustBe INTERNAL_SERVER_ERROR
-        contentAsString(result) mustBe internalServerError()(using fakeRequest, messages).toString
+        val result = controller().onPageLoad(NormalMode)(getRequest)
+        status(result)          shouldBe INTERNAL_SERVER_ERROR
+        contentAsString(result) shouldBe internalServerError()(using getRequest, messages).toString
       }
 
     "return Redirect for initAndStart" in {
       val emptyData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, Map.empty)))
 
-      val result = controller(emptyData).initAndStart(fakeRequest)
+      val result = controller(emptyData).initAndStart(getRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.RefNumberController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.RefNumberController.onPageLoad.url)
     }
 
   }

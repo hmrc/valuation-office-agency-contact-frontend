@@ -25,17 +25,17 @@ import play.twirl.api.HtmlFormat
 
 class EnquiryCategoryViewSpec extends ViewBehaviours:
 
-  def enquiryCategory: html.enquiryCategory = app.injector.instanceOf[enquiry_category]
+  def enquiryCategory: html.enquiryCategory = inject[enquiry_category]
 
   val messageKeyPrefix = "enquiry.category"
 
   def createView: () => HtmlFormat.Appendable =
-    () => enquiryCategory(EnquiryCategoryForm.form, NormalMode)(using fakeRequest, messages)
+    () => enquiryCategory(EnquiryCategoryForm.form, NormalMode)(using getRequest, messages)
 
   def createViewUsingForm: Form[String] => HtmlFormat.Appendable =
-    form => enquiryCategory(form, NormalMode)(using fakeRequest, messages)
+    form => enquiryCategory(form, NormalMode)(using getRequest, messages)
 
-  "EnquiryCategory view" must {
+  "EnquiryCategory view" should {
     "display the correct browser title" in {
       val doc = asDocument(createView())
       assertEqualsValue(doc, "title", messages(s"$messageKeyPrefix.label") + " - Valuation Office contact form - GOV.UK")
@@ -48,7 +48,7 @@ class EnquiryCategoryViewSpec extends ViewBehaviours:
   }
 
   "EnquiryCategory view" when {
-    "rendered" must {
+    "rendered" should {
 
       "contain continue button with the value Continue" in {
         val doc            = asDocument(createViewUsingForm(EnquiryCategoryForm.form))
@@ -124,7 +124,7 @@ class EnquiryCategoryViewSpec extends ViewBehaviours:
     for ((value, idx) <- EnquiryCategoryForm.values.zipWithIndex)
       val id = "category" + (if idx == 0 then "" else s"-${idx + 1}")
 
-      s"rendered with a value of '$value'" must {
+      s"rendered with a value of '$value'" should {
         s"have the '$value' radio button selected" in {
           val doc = asDocument(createViewUsingForm(EnquiryCategoryForm.form.bind(Map("category" -> value))))
           assertContainsRadioButton(doc, id, "category", value, true)

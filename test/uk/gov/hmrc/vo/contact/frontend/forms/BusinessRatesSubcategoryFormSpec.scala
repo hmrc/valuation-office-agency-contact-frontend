@@ -27,7 +27,7 @@ class BusinessRatesSubcategoryFormSpec extends FormBehaviours:
 
   val form: Form[String] = BusinessRatesSubcategoryForm()
 
-  "BusinessRatesSubcategory form" must {
+  "BusinessRatesSubcategory form" should {
     behave like questionForm[String](BusinessRatesSubcategoryForm.options.head.value)
 
     behave like formWithOptionField("value", BusinessRatesSubcategoryForm.options.map(_.value)*)

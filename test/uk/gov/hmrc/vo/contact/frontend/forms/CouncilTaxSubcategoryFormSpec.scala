@@ -27,7 +27,7 @@ class CouncilTaxSubcategoryFormSpec extends FormBehaviours:
 
   val form: Form[String] = CouncilTaxSubcategoryForm()
 
-  "CouncilTaxSubcategory form" must {
+  "CouncilTaxSubcategory form" should {
     behave like questionForm[String](CouncilTaxSubcategoryForm.options.head.value)
 
     behave like formWithOptionField("value", CouncilTaxSubcategoryForm.options.map(_.value)*)

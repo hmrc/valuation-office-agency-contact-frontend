@@ -25,11 +25,11 @@ import uk.gov.hmrc.vo.contact.frontend.views.html
 
 class ProvidingLettingsControllerSpec extends ControllerSpecBase:
 
-  def providingLettings: html.providingLettings = app.injector.instanceOf[providing_lettings]
-  def dataCacheConnector: DataCacheConnector    = app.injector.instanceOf[DataCacheConnector]
-  def navigator: Navigator                      = app.injector.instanceOf[Navigator]
+  def providingLettings: html.providingLettings = inject[providing_lettings]
+  def dataCacheConnector: DataCacheConnector    = inject[DataCacheConnector]
+  def navigator: Navigator                      = inject[Navigator]
 
-  "Housing benefits Controller" must {
+  "Housing benefits Controller" should {
     "return 200 for a GET" in {
       val result = ProvidingLettingsController(
         messagesApi,
@@ -38,8 +38,8 @@ class ProvidingLettingsControllerSpec extends ControllerSpecBase:
         dontGetAnyData,
         navigator,
         MessageControllerComponentsHelpers.stubMessageControllerComponents
-      ).onPageLoad()(fakeRequest)
-      status(result) mustBe OK
+      ).onPageLoad()(getRequest)
+      status(result) shouldBe OK
     }
 
     "return the correct view for a GET" in {
@@ -50,8 +50,8 @@ class ProvidingLettingsControllerSpec extends ControllerSpecBase:
         dontGetAnyData,
         navigator,
         MessageControllerComponentsHelpers.stubMessageControllerComponents
-      ).onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe providingLettings()(using fakeRequest, messages).toString
+      ).onPageLoad()(getRequest)
+      contentAsString(result) shouldBe providingLettings()(using getRequest, messages).toString
     }
 
   }

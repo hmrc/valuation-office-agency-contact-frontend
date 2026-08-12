@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
 import play.api.libs.json.JsString
 import play.api.mvc.Call
@@ -32,7 +31,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html.datePropertyChanged
 
 import java.time.LocalDate
 
-class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoSugar:
+class DatePropertyChangedControllerSpec extends ControllerSpecBase:
 
   private def datePropertyChangedView = inject[datePropertyChanged]
 
@@ -74,22 +73,22 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoS
     )
 
   private def viewBusinessAsString(form: Form[Option[LocalDate]] = datePropertyChangedForm): String =
-    datePropertyChangedView(form, "datePropertyChanged.business", routeAreaChange.url)(using fakeRequest, messages).toString
+    datePropertyChangedView(form, "datePropertyChanged.business", routeAreaChange.url)(using getRequest, messages).toString
 
   private def viewAreaChangeAsString(form: Form[Option[LocalDate]] = datePropertyChangedForm): String =
-    datePropertyChangedView(form, "datePropertyChanged.areaChange", routeAreaChange.url)(using fakeRequest, messages).toString
+    datePropertyChangedView(form, "datePropertyChanged.areaChange", routeAreaChange.url)(using getRequest, messages).toString
 
-  "DatePropertyChangedController Controller" must {
+  "DatePropertyChangedController Controller" should {
 
     "return OK and the date view for business sub category" in {
       val validData = Map(CouncilTaxSubcategoryId.toString -> JsString("council_tax_business_uses"))
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controllerBusiness(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controllerBusiness(getRelevantData).onPageLoad(NormalMode)(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewBusinessAsString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewBusinessAsString()
     }
 
     "return OK and the date view for area change sub category" in {
@@ -97,24 +96,24 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoS
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controllerAreaChange(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controllerAreaChange(getRelevantData).onPageLoad(NormalMode)(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAreaChangeAsString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAreaChangeAsString()
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", LocalDate.of(2021, 1, 1).toString))
+      val postRequest = getRequest.withFormUrlEncodedBody(("value", LocalDate.of(2021, 1, 1).toString))
 
       val result = controllerPoorRepair().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routePoorRepair.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routePoorRepair.url)
     }
 
     "return error page if no existing data is found" in {
-      val result = controllerPoorRepair(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
-      status(result) mustBe SEE_OTHER
+      val result = controllerPoorRepair(dontGetAnyData).onPageLoad(NormalMode)(getRequest)
+      status(result) shouldBe SEE_OTHER
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
@@ -122,7 +121,7 @@ class DatePropertyChangedControllerSpec extends ControllerSpecBase with MockitoS
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controllerPoorRepair(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controllerPoorRepair(getRelevantData).onPageLoad(NormalMode)(getRequest)
 
       an[RuntimeException] should be thrownBy status(result)
     }

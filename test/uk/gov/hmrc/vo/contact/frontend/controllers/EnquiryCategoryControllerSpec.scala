@@ -50,57 +50,57 @@ class EnquiryCategoryControllerSpec extends ControllerSpecBase:
     )
 
   def viewAsString(form: Form[String] = EnquiryCategoryForm.form): String =
-    enquiryCategory(form, NormalMode)(using fakeRequest, messages).toString
+    enquiryCategory(form, NormalMode)(using getRequest, messages).toString
 
-  "EnquiryCategory Controller" must {
+  "EnquiryCategory Controller" should {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(NormalMode)(fakeRequest)
+      val result = controller().onPageLoad(NormalMode)(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsString()
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
       val validData       = Map(EnquiryCategoryId.toString -> JsString(EnquiryCategoryForm.values.head))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(NormalMode)(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(NormalMode)(getRequest)
 
-      contentAsString(result) mustBe viewAsString(EnquiryCategoryForm.form.fill(EnquiryCategoryForm.values.head))
+      contentAsString(result) shouldBe viewAsString(EnquiryCategoryForm.form.fill(EnquiryCategoryForm.values.head))
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("category", EnquiryCategoryForm.values.head))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("category", EnquiryCategoryForm.values.head))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(onwardRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(onwardRoute.url)
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("category", "invalid value"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("category", "invalid value"))
       val boundForm   = EnquiryCategoryForm.form.bind(Map("category" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe BAD_REQUEST
-      contentAsString(result) mustBe viewAsString(boundForm)
+      status(result)          shouldBe BAD_REQUEST
+      contentAsString(result) shouldBe viewAsString(boundForm)
     }
 
     "return error page if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(fakeRequest)
-      status(result) mustBe SEE_OTHER
+      val result = controller(dontGetAnyData).onPageLoad(NormalMode)(getRequest)
+      status(result) shouldBe SEE_OTHER
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withMethod("POST")
+      val postRequest = getRequest.withMethod("POST")
         .withFormUrlEncodedBody(("category", EnquiryCategoryForm.values.head))
       val result      = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(onwardRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(onwardRoute.url)
     }
 
   }

@@ -51,12 +51,12 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase:
     )
 
   def viewAsString(form: Form[String] = ExistingEnquiryCategoryForm()): String =
-    existingEnquiryCategory(form)(using fakeRequest, messages).toString
+    existingEnquiryCategory(form)(using getRequest, messages).toString
 
   def viewAsStringEnquiryDate(form: Form[String] = ExistingEnquiryCategoryForm()): String =
-    existingEnquiryCategory(form)(using fakeRequest, messages).toString
+    existingEnquiryCategory(form)(using getRequest, messages).toString
 
-  "ExistingEnquiryCategory Controller" must {
+  "ExistingEnquiryCategory Controller" should {
 
     "return OK and the correct view for a GET when the contact reason is new_enquiry" in {
       val contactReason = "new_enquiry"
@@ -65,10 +65,10 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase:
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsString()
     }
 
     "return OK and the correct view for a GET when the contact reason is more_details" in {
@@ -78,10 +78,10 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase:
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsString()
     }
 
     "return OK and the correct view for a GET when the contact reason is update_existing" in {
@@ -91,10 +91,10 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase:
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsStringEnquiryDate()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsStringEnquiryDate()
     }
 
     "return a runtime exception when the contact reason is empty" in {
@@ -105,10 +105,10 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase:
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
       intercept[RuntimeException] {
-        val result = controller(getRelevantData).onPageLoad(fakeRequest)
+        val result = controller(getRelevantData).onPageLoad(getRequest)
 
-        status(result) mustBe OK
-        contentAsString(result) mustBe viewAsStringEnquiryDate()
+        status(result)          shouldBe OK
+        contentAsString(result) shouldBe viewAsStringEnquiryDate()
       }
     }
 
@@ -119,53 +119,53 @@ class ExistingEnquiryCategoryControllerSpec extends ControllerSpecBase:
       )
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(getRequest)
 
-      contentAsString(result) mustBe viewAsString(ExistingEnquiryCategoryForm().fill(ExistingEnquiryCategoryForm.options.head.value))
+      contentAsString(result) shouldBe viewAsString(ExistingEnquiryCategoryForm().fill(ExistingEnquiryCategoryForm.options.head.value))
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "council_tax"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", "council_tax"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(contactReasonRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(contactReasonRoute.url)
     }
 
     "redirect to the next page when valid data is submitted with business_rates" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "business_rates"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", "business_rates"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(contactReasonRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(contactReasonRoute.url)
     }
 
     "redirect to the next page when valid data is submitted with housing_benefit" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "housing_benefit"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", "housing_benefit"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(contactReasonRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(contactReasonRoute.url)
     }
 
     "redirect to the next page when valid data is submitted with fair_rent" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "fair_rent"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", "fair_rent"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(contactReasonRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(contactReasonRoute.url)
     }
 
     "redirect to the next page when valid data is submitted with other" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "other"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", "other"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(contactReasonRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(contactReasonRoute.url)
     }
   }

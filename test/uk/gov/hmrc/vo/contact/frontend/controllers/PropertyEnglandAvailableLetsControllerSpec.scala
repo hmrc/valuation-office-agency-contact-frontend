@@ -56,64 +56,64 @@ class PropertyEnglandAvailableLetsControllerSpec extends ControllerSpecBase:
     )
 
   def viewAsString(form: Form[String] = PropertyEnglandAvailableLetsForm()): String =
-    propertyEnglandLets140DaysEnquiry(form)(using fakeRequest, messages).toString
+    propertyEnglandLets140DaysEnquiry(form)(using getRequest, messages).toString
 
-  "PropertyEnglandLets140DaysController" must {
+  "PropertyEnglandLets140DaysController" should {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(fakeRequest)
+      val result = controller().onPageLoad(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsString()
     }
 
     "return OK and the correct view for wales lets rates page GET" in {
-      val result = controller().onWalLetsPageLoad(fakeRequest)
+      val result = controller().onWalLetsPageLoad(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe propertyWalesLets()(using fakeRequest, messages).toString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe propertyWalesLets()(using getRequest, messages).toString()
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
       val validData       = Map(PropertyEnglandAvailableLetsId.toString -> JsString(PropertyEnglandAvailableLetsForm.options.head.value))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(getRequest)
 
-      contentAsString(result) mustBe viewAsString(PropertyEnglandAvailableLetsForm().fill(PropertyEnglandAvailableLetsForm.options.head.value))
+      contentAsString(result) shouldBe viewAsString(PropertyEnglandAvailableLetsForm().fill(PropertyEnglandAvailableLetsForm.options.head.value))
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", PropertyEnglandAvailableLetsForm.options.head.value))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", PropertyEnglandAvailableLetsForm.options.head.value))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
+      status(result) shouldBe SEE_OTHER
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
-      val postRequest = fakeRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
+      val postRequest = getRequest.withMethod("POST").withFormUrlEncodedBody(("value", "invalid value"))
       val boundForm   = PropertyEnglandAvailableLetsForm().bind(Map("value" -> "invalid value"))
 
       val result = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe BAD_REQUEST
-      contentAsString(result) mustBe viewAsString(boundForm)
+      status(result)          shouldBe BAD_REQUEST
+      contentAsString(result) shouldBe viewAsString(boundForm)
     }
 
     "redirect to Session Expired for a GET if no existing data is found" in {
-      val result = controller(dontGetAnyData).onPageLoad(fakeRequest)
+      val result = controller(dontGetAnyData).onPageLoad(getRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", PropertyEnglandAvailableLetsForm.options.head.value))
+      val postRequest = getRequest.withFormUrlEncodedBody(("value", PropertyEnglandAvailableLetsForm.options.head.value))
       val result      = controller(dontGetAnyData).onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(routes.SessionExpiredController.onPageLoad.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(routes.SessionExpiredController.onPageLoad.url)
     }
 
   }

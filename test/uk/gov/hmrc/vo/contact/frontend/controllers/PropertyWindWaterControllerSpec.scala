@@ -27,7 +27,7 @@ import javax.inject.Singleton
 @Singleton
 class PropertyWindWaterControllerSpec extends ControllerSpecBase:
 
-  def windWatertightCannotBeReducedEnquiry: windWatertightCannotBeReduced = app.injector.instanceOf[wind_watertight_cannot_be_reduced]
+  def windWatertightCannotBeReducedEnquiry: windWatertightCannotBeReduced = inject[wind_watertight_cannot_be_reduced]
 
   def controller =
     PropertyWindWaterController(
@@ -37,19 +37,19 @@ class PropertyWindWaterControllerSpec extends ControllerSpecBase:
     )
 
   def viewAsString: String =
-    windWatertightCannotBeReducedEnquiry(NormalMode)(using fakeRequest, messages).toString()
+    windWatertightCannotBeReducedEnquiry(NormalMode)(using getRequest, messages).toString()
 
-  "Property Wind And Water Controller" must {
+  "Property Wind And Water Controller" should {
     "return the correct view for a GET" in {
-      val result = controller.onPageLoad()(fakeRequest)
-      contentAsString(result) mustBe windWatertightCannotBeReducedEnquiry(NormalMode)(using fakeRequest, messages).toString
+      val result = controller.onPageLoad()(getRequest)
+      contentAsString(result) shouldBe windWatertightCannotBeReducedEnquiry(NormalMode)(using getRequest, messages).toString
     }
 
     "return OK and the correct view for a GET" in {
-      val result = controller.onPageLoad()(fakeRequest)
+      val result = controller.onPageLoad()(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsString
     }
 
   }

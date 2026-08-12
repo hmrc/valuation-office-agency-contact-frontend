@@ -27,15 +27,15 @@ import play.api.test.FakeRequest
 
 class SessionExpiredControllerSpec extends ControllerSpecBase:
 
-  def sessionExpired: session_expired = app.injector.instanceOf[session_expired]
+  def sessionExpired: session_expired = inject[session_expired]
 
-  def auditService: AuditingService = app.injector.instanceOf[AuditingService]
+  def auditService: AuditingService = inject[AuditingService]
 
-  def getDataAction: DataRetrievalAction = app.injector.instanceOf[DataRetrievalAction]
+  def getDataAction: DataRetrievalAction = inject[DataRetrievalAction]
 
-  val testRequest: FakeRequest[AnyContentAsEmpty.type] = fakeRequest.withSession(SessionKeys.sessionId -> "id")
+  val testRequest: FakeRequest[AnyContentAsEmpty.type] = getRequest.withSession(SessionKeys.sessionId -> "id")
 
-  "SessionExpired Controller" must {
+  "SessionExpired Controller" should {
     "return 200 for a GET" in {
       val result = SessionExpiredController(
         auditService,
@@ -44,7 +44,7 @@ class SessionExpiredControllerSpec extends ControllerSpecBase:
         MessageControllerComponentsHelpers.stubMessageControllerComponents,
         sessionExpired
       ).onPageLoad()(testRequest)
-      status(result) mustBe OK
+      status(result) shouldBe OK
     }
 
     "return the correct view for a GET" in {
@@ -55,6 +55,6 @@ class SessionExpiredControllerSpec extends ControllerSpecBase:
         MessageControllerComponentsHelpers.stubMessageControllerComponents,
         sessionExpired
       ).onPageLoad()(testRequest)
-      contentAsString(result) mustBe sessionExpired()(using fakeRequest, messages).toString
+      contentAsString(result) shouldBe sessionExpired()(using getRequest, messages).toString
     }
   }

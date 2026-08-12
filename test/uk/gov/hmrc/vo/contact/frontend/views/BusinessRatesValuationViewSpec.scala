@@ -23,11 +23,11 @@ import play.twirl.api.HtmlFormat
 
 class BusinessRatesValuationViewSpec extends ViewBehaviours:
 
-  def businessRatesValuation: html.businessRatesValuation = app.injector.instanceOf[business_rates_valuation]
+  def businessRatesValuation: html.businessRatesValuation = inject[business_rates_valuation]
 
-  def view: () => HtmlFormat.Appendable = () => businessRatesValuation()(using fakeRequest, messages)
+  def view: () => HtmlFormat.Appendable = () => businessRatesValuation()(using getRequest, messages)
 
-  "Business rates valuation  view" must {
+  "Business rates valuation  view" should {
     behave like normalPage(
       view,
       "businessRatesValuation",
@@ -46,8 +46,8 @@ class BusinessRatesValuationViewSpec extends ViewBehaviours:
     "has a link marked with site.back leading to the Business Rates valuation page" in {
       val doc          = asDocument(view())
       val backlinkText = doc.select("a[class=govuk-back-link]").text()
-      backlinkText mustBe messages("site.back")
-      val backlinkUrl  = doc.select("a[class=govuk-back-link]").attr("href")
-      backlinkUrl mustBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
+      backlinkText shouldBe messages("site.back")
+      val backlinkUrl = doc.select("a[class=govuk-back-link]").attr("href")
+      backlinkUrl shouldBe uk.gov.hmrc.vo.contact.frontend.controllers.routes.BusinessRatesSubcategoryController.onPageLoad(NormalMode).url
     }
   }

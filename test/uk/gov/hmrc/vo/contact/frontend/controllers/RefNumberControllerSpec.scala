@@ -32,7 +32,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html
 
 class RefNumberControllerSpec extends ControllerSpecBase:
 
-  def refNumber: html.refNumber = app.injector.instanceOf[ref_number]
+  def refNumber: html.refNumber = inject[ref_number]
 
   def onwardRoute: Call = routes.RefNumberController.onPageLoad
 
@@ -47,32 +47,32 @@ class RefNumberControllerSpec extends ControllerSpecBase:
       MessageControllerComponentsHelpers.stubMessageControllerComponents
     )
 
-  def viewAsString(form: Form[Option[String]] = RefNumberForm()): String = refNumber(form)(using fakeRequest, messages).toString
+  def viewAsString(form: Form[Option[String]] = RefNumberForm()): String = refNumber(form)(using getRequest, messages).toString
 
-  "RefNumberController Controller" must {
+  "RefNumberController Controller" should {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().onPageLoad(fakeRequest)
+      val result = controller().onPageLoad(getRequest)
 
-      status(result) mustBe OK
-      contentAsString(result) mustBe viewAsString()
+      status(result)          shouldBe OK
+      contentAsString(result) shouldBe viewAsString()
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
       val validData       = Map(RefNumberId.toString -> JsString("VO123"))
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 
-      val result = controller(getRelevantData).onPageLoad(fakeRequest)
+      val result = controller(getRelevantData).onPageLoad(getRequest)
 
-      contentAsString(result) mustBe viewAsString(RefNumberForm().fill(Option("VO123")))
+      contentAsString(result) shouldBe viewAsString(RefNumberForm().fill(Option("VO123")))
     }
 
     "redirect to the next page when valid data is submitted" in {
-      val postRequest = fakeRequest.withFormUrlEncodedBody(("value", "VO123"))
+      val postRequest = getRequest.withFormUrlEncodedBody(("value", "VO123"))
       val result      = controller().onSubmit(NormalMode)(postRequest)
 
-      status(result) mustBe SEE_OTHER
-      redirectLocation(result) mustBe Some(onwardRoute.url)
+      status(result)           shouldBe SEE_OTHER
+      redirectLocation(result) shouldBe Some(onwardRoute.url)
     }
 
   }
