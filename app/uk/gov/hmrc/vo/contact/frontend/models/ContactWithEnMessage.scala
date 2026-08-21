@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.models
 
-import org.apache.commons.text.StringEscapeUtils
 import play.api.Logger
 import play.api.i18n.{Lang, Messages, MessagesApi}
 import play.api.libs.json.{Json, OFormat}
@@ -54,7 +53,7 @@ object ContactWithEnMessage:
       userAnswers.contactReason,
       enquiryCategoryMsg,
       subEnquiryCategoryMsg,
-      StringEscapeUtils.escapeJava(contact.message)
+      contact.message
     )
 
   def enquiryCategory(contact: Contact)(using messages: Messages): String =

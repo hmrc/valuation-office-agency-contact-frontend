@@ -9,14 +9,13 @@ object AppDependencies {
   private val commonsTextVersion = "1.15.0"
 
   // Test dependencies
-  private val voTestVersion = "0.5.0"
+  private val voTestVersion = "0.6.0"
 
   private val compile = Seq(
     "uk.gov.hmrc"       %% "bootstrap-frontend-play-30" % bootstrapVersion,
     "uk.gov.hmrc"       %% "play-frontend-hmrc-play-30" % playFrontendHmrc,
     "uk.gov.hmrc"       %% "vo-frontend-service"        % voServiceVersion,
-    "uk.gov.hmrc.mongo" %% "hmrc-mongo-play-30"         % hmrcMongoVersion,
-    "org.apache.commons" % "commons-text"               % commonsTextVersion
+    "uk.gov.hmrc.mongo" %% "hmrc-mongo-play-30"         % hmrcMongoVersion
   )
 
   private val test = Seq(
