@@ -27,6 +27,7 @@
 @import uk.gov.hmrc.vo.contact.frontend.views.html.components.PrimaryLayout
 @import uk.gov.hmrc.vo.service.model.button.SubmitButton
 @import uk.gov.hmrc.vo.service.model.input.{RadioField, TextAreaField}
+@import uk.gov.hmrc.vo.service.view.html.PrintLink
 
 @this(
         layout: PrimaryLayout,
@@ -86,9 +87,7 @@
         </dl>
     </section>
 
-    <p class="govuk-body">
-        <a href="javascript:window.print();" class="govuk-link print-link">@messages("site.print.button")</a>
-    </p>
+    @PrintLink("site.print.button")
 
     <section class="govuk-!-display-none-print">
     @formWithCSRF(action = SatisfactionSurveyController.formCompleteFeedback) {
