@@ -22,7 +22,7 @@ import uk.gov.hmrc.vo.contact.frontend.connectors.AuditingService
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.DataRetrievalAction
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html.error.session_expired
-import play.api.mvc.AnyContentAsEmpty
+import play.api.mvc.AnyContent
 import play.api.test.FakeRequest
 
 class SessionExpiredControllerSpec extends ControllerSpecBase:
@@ -33,7 +33,7 @@ class SessionExpiredControllerSpec extends ControllerSpecBase:
 
   def getDataAction: DataRetrievalAction = inject[DataRetrievalAction]
 
-  val testRequest: FakeRequest[AnyContentAsEmpty.type] = getRequest.withSession(SessionKeys.sessionId -> "id")
+  val testRequest: FakeRequest[AnyContent] = getRequest.withSession(SessionKeys.sessionId -> "id")
 
   "SessionExpired Controller" should {
     "return 200 for a GET" in {
