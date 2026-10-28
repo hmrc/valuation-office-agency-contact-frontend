@@ -22,7 +22,7 @@ import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 import uk.gov.hmrc.vo.contact.frontend.journey.JourneyMap.changeModePrefix
 import uk.gov.hmrc.vo.contact.frontend.journey.model.TellUsMorePage
 import uk.gov.hmrc.vo.contact.frontend.models.*
-import uk.gov.hmrc.vo.contact.frontend.utils.{CheckYourAnswersHelper, DateUtil, UserAnswers}
+import uk.gov.hmrc.vo.contact.frontend.utils.{CheckYourAnswersHelper, UserAnswers}
 import uk.gov.hmrc.vo.contact.frontend.viewmodels.AnswerRow
 import uk.gov.hmrc.vo.contact.frontend.utils.AddressFormatters.*
 import uk.gov.hmrc.vo.contact.frontend.utils.ContactFormatter.*
@@ -36,7 +36,6 @@ class CheckYourAnswersHelperSpec extends BaseAppSpec:
   val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
   implicit val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
-  implicit val dateUtil: DateUtil        = inject[DateUtil]
 
   "Check Your Answers Helper" when {
 

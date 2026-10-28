@@ -78,7 +78,7 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase:
         val result                  = controller().enquiryBackLink(mockUserAnswers)
         val isBusinessRateSelection = result.isRight
         isBusinessRateSelection shouldBe true
-        assert(result.toOption.get == routes.PropertyWalesActualLetsController.onPageLoad.url)
+        result.toOption.get     shouldBe routes.PropertyWalesActualLetsController.onPageLoad.url
       }
 
     "returns the Property 140 Days Controller when enquiry category is business_rates and sub category is business_rates_self_catering" +
@@ -90,7 +90,7 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase:
         val result                  = controller().enquiryBackLink(mockUserAnswers)
         val isBusinessRateSelection = result.isRight
         isBusinessRateSelection shouldBe true
-        assert(result.toOption.get == routes.PropertyWalesAvailableLetsController.onPageLoad.url)
+        result.toOption.get     shouldBe routes.PropertyWalesAvailableLetsController.onPageLoad.url
       }
 
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
@@ -119,7 +119,7 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase:
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection shouldBe true
-      assert(result.toOption.get == routes.PropertyWalesActualLetsController.onPageLoad.url)
+      result.toOption.get      shouldBe routes.PropertyWalesActualLetsController.onPageLoad.url
     }
 
     "The enquiry key function produces a string with a back link when the enquiry category is no to 140 days controller" in {
@@ -130,7 +130,7 @@ class PropertyWalesLetsNoActionControllerSpec extends ControllerSpecBase:
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection shouldBe true
-      assert(result.toOption.get == routes.PropertyWalesAvailableLetsController.onPageLoad.url)
+      result.toOption.get      shouldBe routes.PropertyWalesAvailableLetsController.onPageLoad.url
     }
 
     "return 500 and the error view for a GET with no enquiry type" in

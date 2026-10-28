@@ -25,7 +25,7 @@ import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheCon
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.identifiers.AnswerSectionId
 import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
-import uk.gov.hmrc.vo.contact.frontend.utils.{CheckYourAnswersHelper, DateUtil, UserAnswers}
+import uk.gov.hmrc.vo.contact.frontend.utils.{CheckYourAnswersHelper, UserAnswers}
 import uk.gov.hmrc.vo.contact.frontend.viewmodels.AnswerSection
 import uk.gov.hmrc.vo.contact.frontend.views.html.check_your_answers
 
@@ -39,7 +39,6 @@ class CheckYourAnswersController @Inject() (
   requireData: DataRequiredAction,
   checkYourAnswers: check_your_answers,
   cc: MessagesControllerComponents
-)(using dateUtil: DateUtil
 ) extends FrontendController(cc)
   with I18nSupport
   with Logging:

@@ -23,7 +23,7 @@ import play.api.test.FakeRequest
 import play.api.test.Helpers.POST
 import uk.gov.hmrc.vo.contact.frontend.models.requests.DataRequest
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, Contact, ContactDetails, PropertyAddress}
-import uk.gov.hmrc.vo.contact.frontend.utils.{DateUtil, UserAnswers}
+import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.unit.test.BaseAppSpec
 
 /**
@@ -41,7 +41,6 @@ class EmailConnectorSpec extends BaseAppSpec:
   private val msgApi = DefaultMessagesApi(messages = messagesMap)
 
   implicit val request: DataRequest[?] = DataRequest(FakeRequest(), "sessionId", UserAnswers(CacheMap("id", Map())))
-  implicit val dateUtil: DateUtil      = inject[DateUtil]
 
   "EmailConnector" should {
     "send enquiry confirmation" in {

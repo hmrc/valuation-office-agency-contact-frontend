@@ -4,12 +4,12 @@ object AppDependencies {
 
   private val bootstrapVersion   = "10.8.0"
   private val playFrontendHmrc   = "13.16.0"
-  private val voServiceVersion   = "0.15.0"
+  private val voServiceVersion   = "0.19.0"
   private val hmrcMongoVersion   = "2.14.0"
   private val commonsTextVersion = "1.15.0"
 
   // Test dependencies
-  private val voTestVersion = "0.9.0"
+  private val voTestVersion = "0.10.0"
 
   private val compile = Seq(
     "uk.gov.hmrc"       %% "bootstrap-frontend-play-30" % bootstrapVersion,

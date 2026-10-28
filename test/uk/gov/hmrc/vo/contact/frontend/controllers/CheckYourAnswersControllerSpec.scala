@@ -24,7 +24,7 @@ import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionIm
 import uk.gov.hmrc.vo.contact.frontend.identifiers._
 import uk.gov.hmrc.vo.contact.frontend.journey.model.TellUsMorePage
 import uk.gov.hmrc.vo.contact.frontend.models._
-import uk.gov.hmrc.vo.contact.frontend.utils.{CheckYourAnswersHelper, DateUtil, MessageControllerComponentsHelpers, UserAnswers}
+import uk.gov.hmrc.vo.contact.frontend.utils.{CheckYourAnswersHelper, MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.vo.contact.frontend.viewmodels.AnswerSection
 import uk.gov.hmrc.vo.contact.frontend.views.html.check_your_answers
 import uk.gov.hmrc.vo.contact.frontend.views.html.error.internal_server_error
@@ -39,7 +39,6 @@ class CheckYourAnswersControllerSpec extends ControllerSpecBase:
   val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
   implicit val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
-  implicit val dateUtil: DateUtil        = inject[DateUtil]
 
   def checkYourAnswers: check_your_answers             = inject[check_your_answers]
   def internalServerError: error.internal_server_error = inject[internal_server_error]

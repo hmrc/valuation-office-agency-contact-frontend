@@ -26,7 +26,7 @@ import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionIm
 import uk.gov.hmrc.vo.contact.frontend.forms.EnquiryDateForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.EnquiryDateId
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
-import uk.gov.hmrc.vo.contact.frontend.utils.{DateUtil, MessageControllerComponentsHelpers}
+import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{enquiryDate => enquiry_date}
 
 import java.util.Locale
@@ -36,7 +36,6 @@ import uk.gov.hmrc.vo.contact.frontend.views.html
 class EnquiryDateControllerSpec extends ControllerSpecBase:
 
   implicit val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
-  implicit val dateUtil: DateUtil        = inject[DateUtil]
 
   def enquiryDate: html.enquiryDate = inject[enquiry_date]
   def auditService: AuditingService = inject[AuditingService]
@@ -56,7 +55,7 @@ class EnquiryDateControllerSpec extends ControllerSpecBase:
     )
 
   def viewAsString(form: Form[String] = EnquiryDateForm()): String =
-    enquiryDate(form, EnquiryDateForm.beforeDate())(using getRequest, messages).toString()
+    enquiryDate(form, EnquiryDateForm.beforeDate)(using getRequest, messages).toString()
 
   "EnquiryDateController Controller" should {
 

@@ -32,7 +32,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.connectors
 
-import org.mockito.ArgumentCaptor
 import play.api.Environment
 import play.api.libs.json.*
 import play.api.test.Helpers.*
@@ -67,8 +66,8 @@ class LightweightContactEventsConnectorSpec extends BaseAppSpec:
 
     "provided with a Contact Model Input" should {
       "call the Microservice with the given JSON for propertyAddress" in {
-        val headerCarrierNapper = ArgumentCaptor.forClass(classOf[HeaderCarrier])
-        val urlCaptor           = ArgumentCaptor.forClass(classOf[URL])
+        val headerCarrierNapper = captor[HeaderCarrier]
+        val urlCaptor           = captor[URL]
 
         val httpMock          = httpClientMock(method = POST, responseBody = "{}")
         val headerCarrierStub = HeaderCarrier()
@@ -84,14 +83,14 @@ class LightweightContactEventsConnectorSpec extends BaseAppSpec:
 
       "return a 200 status when the send method is successful using contactModel" in {
         val connector = LightweightContactEventsConnector(httpClientMock(method = POST, responseBody = "{}"), auditService, servicesConfig)
-        val result    = await(connector.send(contactModel, messagesApi, userAnswers)(using HeaderCarrier()))
+        val result    = connector.send(contactModel, messagesApi, userAnswers)(using HeaderCarrier()).futureValue
         result.isSuccess shouldBe true
         result.get       shouldBe OK
       }
 
       "call the Microservice with the given JSON for alternativePropertyAddress" in {
-        val headerCarrierNapper = ArgumentCaptor.forClass(classOf[HeaderCarrier])
-        val urlCaptor           = ArgumentCaptor.forClass(classOf[URL])
+        val headerCarrierNapper = captor[HeaderCarrier]
+        val urlCaptor           = captor[URL]
 
         val httpMock          = httpClientMock(method = POST, responseBody = "{}")
         val headerCarrierStub = HeaderCarrier()
@@ -107,14 +106,14 @@ class LightweightContactEventsConnectorSpec extends BaseAppSpec:
 
       "return a 200 status when the send method is successful using alternativeContactModel" in {
         val connector = LightweightContactEventsConnector(httpClientMock(method = POST, responseBody = "{}"), auditService, servicesConfig)
-        val result    = await(connector.send(alternativeContactModel, messagesApi, userAnswers)(using HeaderCarrier()))
+        val result    = connector.send(alternativeContactModel, messagesApi, userAnswers)(using HeaderCarrier()).futureValue
         result.isSuccess shouldBe true
         result.get       shouldBe OK
       }
 
       "return a string representing the error when send method fails" in {
         val connector = LightweightContactEventsConnector(httpClientMock(method = POST, responseBody = "{}", responseStatus = 500), auditService, servicesConfig)
-        val result    = await(connector.send(contactModel, messagesApi, userAnswers)(using HeaderCarrier()))
+        val result    = connector.send(contactModel, messagesApi, userAnswers)(using HeaderCarrier()).futureValue
         result.isFailure shouldBe true
         val e = result.failed.get
         e            shouldBe a[RuntimeException]
@@ -123,7 +122,7 @@ class LightweightContactEventsConnectorSpec extends BaseAppSpec:
 
       "return a failure if the backend service call fails using Contact Model" in {
         val connector = LightweightContactEventsConnector(httpClientMock(method = POST, responseBody = "{}", responseStatus = 500), auditService, servicesConfig)
-        val result    = await(connector.send(contactModel, messagesApi, userAnswers)(using HeaderCarrier()))
+        val result    = connector.send(contactModel, messagesApi, userAnswers)(using HeaderCarrier()).futureValue
         result.isFailure shouldBe true
       }
     }
@@ -131,8 +130,8 @@ class LightweightContactEventsConnectorSpec extends BaseAppSpec:
     "provided with JSON directly" should {
 
       "call the Microservice with the given JSON" in {
-        val headerCarrierNapper = ArgumentCaptor.forClass(classOf[HeaderCarrier])
-        val urlCaptor           = ArgumentCaptor.forClass(classOf[URL])
+        val headerCarrierNapper = captor[HeaderCarrier]
+        val urlCaptor           = captor[URL]
 
         val httpMock          = httpClientMock(method = POST, responseBody = "{}")
         val headerCarrierStub = HeaderCarrier()
@@ -148,14 +147,14 @@ class LightweightContactEventsConnectorSpec extends BaseAppSpec:
 
       "return a case class representing the received JSON when the send method is successful" in {
         val connector = LightweightContactEventsConnector(httpClientMock(method = POST, responseBody = "{}"), auditService, servicesConfig)
-        val result    = await(connector.sendJson(minimalJson, minimalJson)(using HeaderCarrier()))
+        val result    = connector.sendJson(minimalJson, minimalJson)(using HeaderCarrier()).futureValue
         result.isSuccess shouldBe true
         result.get       shouldBe OK
       }
 
       "return a string representing the error when send method fails" in {
         val connector = LightweightContactEventsConnector(httpClientMock(method = POST, responseBody = "{}", responseStatus = 500), auditService, servicesConfig)
-        val result    = await(connector.sendJson(minimalJson, minimalJson)(using HeaderCarrier()))
+        val result    = connector.sendJson(minimalJson, minimalJson)(using HeaderCarrier()).futureValue
         result.isFailure shouldBe true
         val e = result.failed.get
         e            shouldBe a[RuntimeException]
@@ -164,7 +163,7 @@ class LightweightContactEventsConnectorSpec extends BaseAppSpec:
 
       "return failure if the backend service call fails using minimal Json" in {
         val connector = LightweightContactEventsConnector(httpClientMock(method = POST, responseBody = "{}", responseStatus = 500), auditService, servicesConfig)
-        val result    = await(connector.sendJson(minimalJson, minimalJson)(using HeaderCarrier()))
+        val result    = connector.sendJson(minimalJson, minimalJson)(using HeaderCarrier()).futureValue
         result.isFailure shouldBe true
       }
 
