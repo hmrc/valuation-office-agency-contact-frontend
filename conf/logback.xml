@@ -29,7 +29,8 @@
     </logger>
 
 
-    <logger name="uk.gov" level="INFO"/>
+    <logger name="uk.gov" level="DEBUG"/>
+
     <logger name="uk.gov.hmrc.vo.contact.frontend.controllers.Application" level="TRACE"/>
 
     <logger name="application" level="INFO"/>

@@ -18,24 +18,24 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import play.api.data.Form
 import play.api.libs.json.JsString
+import play.api.mvc.Call
 import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, FakeDataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.BusinessRatesPropertyForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.BusinessRatesPropertyEnquiryId
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers.*
-import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesPropertyEnquiry => business_rates_property_enquiry}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesNonBusiness => business_rates_non_business}
-import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
+import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesNonBusiness as business_rates_non_business, businessRatesPropertyEnquiry as business_rates_property_enquiry}
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 class BusinessRatesPropertyControllerSpec extends ControllerSpecBase:
 
   def businessRatesPropertyEnquiry: html.businessRatesPropertyEnquiry = inject[business_rates_property_enquiry]
   def businessRatesNonBusiness: html.businessRatesNonBusiness         = inject[business_rates_non_business]
-  def auditService: AuditingService                                   = inject[AuditingService]
+  def auditService: AuditService                                      = inject[AuditService]
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 

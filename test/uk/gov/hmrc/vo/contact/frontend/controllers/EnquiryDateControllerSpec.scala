@@ -19,26 +19,27 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 import play.api.data.Form
 import play.api.i18n.{Lang, Messages}
 import play.api.libs.json.JsString
+import play.api.mvc.Call
 import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, FakeDataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.EnquiryDateForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.EnquiryDateId
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
-import uk.gov.hmrc.vo.contact.frontend.views.html.{enquiryDate => enquiry_date}
+import uk.gov.hmrc.vo.contact.frontend.views.html
+import uk.gov.hmrc.vo.contact.frontend.views.html.enquiryDate as enquiry_date
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 import java.util.Locale
-import play.api.mvc.Call
-import uk.gov.hmrc.vo.contact.frontend.views.html
 
 class EnquiryDateControllerSpec extends ControllerSpecBase:
 
   implicit val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
 
   def enquiryDate: html.enquiryDate = inject[enquiry_date]
-  def auditService: AuditingService = inject[AuditingService]
+  def auditService: AuditService    = inject[AuditService]
 
   def onwardRoute: Call = routes.EnquiryDateController.onPageLoad
 

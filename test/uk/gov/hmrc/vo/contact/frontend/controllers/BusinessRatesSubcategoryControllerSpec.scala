@@ -18,20 +18,20 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import play.api.data.Form
 import play.api.libs.json.JsString
+import play.api.mvc.Call
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.*
-import play.api.test.Helpers._
 import uk.gov.hmrc.vo.contact.frontend.forms.BusinessRatesSubcategoryForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.BusinessRatesSubcategoryId
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
-import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesSubcategory => business_rates_subcategory}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesValuation => business_rates_valuation}
+import uk.gov.hmrc.vo.contact.frontend.views.html
+import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesSubcategory as business_rates_subcategory, businessRatesValuation as business_rates_valuation}
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 import scala.concurrent.Future
-import play.api.mvc.Call
-import uk.gov.hmrc.vo.contact.frontend.views.html
 
 class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase:
 
@@ -39,7 +39,7 @@ class BusinessRatesSubcategoryControllerSpec extends ControllerSpecBase:
 
   def businessRatesSubcategory: html.businessRatesSubcategory = inject[business_rates_subcategory]
   def businessRatesValuation: html.businessRatesValuation     = inject[business_rates_valuation]
-  def auditService: AuditingService                           = inject[AuditingService]
+  def auditService: AuditService                              = inject[AuditService]
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 

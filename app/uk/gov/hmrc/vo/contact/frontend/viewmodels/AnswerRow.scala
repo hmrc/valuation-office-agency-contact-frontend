@@ -21,4 +21,4 @@ import play.api.libs.json.{Json, OFormat}
 case class AnswerRow(label: String, answer: String, answerIsMessageKey: Boolean, changeUrl: String)
 
 object AnswerRow:
-  implicit val format: OFormat[AnswerRow] = Json.format[AnswerRow]
+  implicit val format: OFormat[AnswerRow] = Json.format

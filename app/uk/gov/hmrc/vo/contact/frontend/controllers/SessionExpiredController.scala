@@ -19,25 +19,24 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.vo.contact.frontend.connectors.AuditingService
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.DataRetrievalAction
+import uk.gov.hmrc.vo.contact.frontend.models.event.UserTimeout
 import uk.gov.hmrc.vo.contact.frontend.views.html.error.session_expired
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 import javax.inject.{Inject, Singleton}
-import scala.concurrent.ExecutionContext
 
 @Singleton
 class SessionExpiredController @Inject() (
-  auditService: AuditingService,
+  audit: AuditService,
   getData: DataRetrievalAction,
   override val messagesApi: MessagesApi,
   cc: MessagesControllerComponents,
   sessionExpired: session_expired
-)(using ec: ExecutionContext
 ) extends FrontendController(cc)
   with I18nSupport:
 
   def onPageLoad: Action[AnyContent] = getData { implicit request =>
-    auditService.sendTimeout(request.userAnswers)
+    audit.send(UserTimeout(request.userAnswers))
     Ok(sessionExpired())
   }

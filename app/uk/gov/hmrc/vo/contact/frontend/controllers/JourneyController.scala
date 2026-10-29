@@ -22,12 +22,14 @@ import play.api.mvc
 import play.api.mvc.*
 import play.twirl.api.HtmlFormat.Appendable
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.journey.model.{CategoryRouter, CustomizedContent, Page, TellUsMorePage}
 import uk.gov.hmrc.vo.contact.frontend.journey.{JourneyMap, JourneyPageRequest}
+import uk.gov.hmrc.vo.contact.frontend.models.event.{ContinueNextPage, RadioButtonSelection}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.journey.{categoryRouter, customizedContent, notImplemented, singleTextarea}
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 import javax.inject.Inject
 import scala.concurrent.ExecutionContext
@@ -37,7 +39,7 @@ import scala.concurrent.ExecutionContext
   */
 class JourneyController @Inject() (
   journeyMap: JourneyMap,
-  auditService: AuditingService,
+  audit: AuditService,
   dataCacheConnector: DataCacheConnector,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
@@ -72,7 +74,7 @@ class JourneyController @Inject() (
         yield
           page match
             case categoryRouter: CategoryRouter =>
-              auditService.sendRadioButtonSelection(request.uri, categoryRouter.fieldId -> value)
+              audit.send(RadioButtonSelection(request.uri, categoryRouter.fieldId, value))
             case _                              =>
           val userAnswers = UserAnswers(cacheMap)
 
@@ -81,7 +83,7 @@ class JourneyController @Inject() (
           else
             page.nextPage(userAnswers)
 
-          auditService.sendContinueNextPage(call.url)
+          audit.send(ContinueNextPage(call.url))
 
           redirectWithLang(call, page.nextLang(userAnswers))
     )

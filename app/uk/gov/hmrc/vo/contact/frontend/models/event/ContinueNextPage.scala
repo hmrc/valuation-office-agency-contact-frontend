@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.vo.contact.frontend.journey.model
+package uk.gov.hmrc.vo.contact.frontend.models.event
 
 import play.api.libs.json.{Json, OWrites}
-import uk.gov.hmrc.vo.contact.frontend.models.ContactDetails
-import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
+import uk.gov.hmrc.vo.service.model.event.AuditEvent
 
 /**
   * @author Yuriy Tumakha
   */
-case class LogoutEvent(refNumber: Option[String], contact: Option[ContactDetails])
+case class ContinueNextPage(
+  url: String
+) extends AuditEvent
 
-object LogoutEvent:
-
-  implicit val logoutEventWrites: OWrites[LogoutEvent] = Json.writes[LogoutEvent]
-
-  def apply(userAnswers: Option[UserAnswers]): LogoutEvent =
-    LogoutEvent(userAnswers.flatMap(_.refNumber), userAnswers.flatMap(_.contactDetails))
+object ContinueNextPage:
+  implicit val writes: OWrites[ContinueNextPage] = Json.writes

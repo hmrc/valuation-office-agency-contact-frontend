@@ -57,7 +57,7 @@ class ConfirmationController @Inject() (
         logger.warn(s"On Sending Email - Navigation for Confirmation page reached without a contact and error $msg")
         throw RuntimeException(s"On Sending Email - Navigation for Confirmation page reached without a contact and error $msg")
 
-    val result = connector.send(contact, messagesApi, request.userAnswers)
+    val result = connector.send(contact, request.userAnswers)
 
     result map {
       case Success(_)  =>

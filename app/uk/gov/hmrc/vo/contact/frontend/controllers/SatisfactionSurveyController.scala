@@ -22,15 +22,15 @@ import play.api.mvc.{Action, AnyContent, MessagesControllerComponents, Request}
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.play.http.HeaderCarrierConverter
-import uk.gov.hmrc.vo.contact.frontend.connectors.AuditingService
 import uk.gov.hmrc.vo.contact.frontend.controllers.ConfirmationController.whatHappensNextMessages
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.{SatisfactionSurvey, SatisfactionSurveyForm}
+import uk.gov.hmrc.vo.contact.frontend.models.event.{ContinueNextPage, RadioButtonSelection, SurveyFeedback, SurveySatisfaction}
 import uk.gov.hmrc.vo.contact.frontend.utils.{AddressFormatters, UserAnswers}
 import uk.gov.hmrc.vo.contact.frontend.views.html.{confirmation, satisfactionSurveyThankYou}
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 import javax.inject.{Inject, Singleton}
-import scala.concurrent.ExecutionContext
 import scala.language.implicitConversions
 
 @Singleton()
@@ -38,11 +38,10 @@ class SatisfactionSurveyController @Inject() (
   override val messagesApi: MessagesApi,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
-  auditService: AuditingService,
+  audit: AuditService,
   confirmation: confirmation,
   satisfactionSurveyThankYou: satisfactionSurveyThankYou,
   cc: MessagesControllerComponents
-)(using ec: ExecutionContext
 ) extends FrontendController(cc)
   with I18nSupport
   with Logging:
@@ -65,20 +64,19 @@ class SatisfactionSurveyController @Inject() (
     SatisfactionSurveyForm().bindFromRequest().fold(
       formWithErrors => Ok(confirmation(contact, answerSections, whatHappensNextMessages(request.userAnswers), formWithErrors)),
       success =>
-        auditService.sendRadioButtonSelection(request.uri, "satisfaction" -> success.satisfaction)
+        audit.send(RadioButtonSelection(request.uri, "satisfaction", success.satisfaction))
         sendFeedback(success, AddressFormatters.formattedPropertyAddress(contact.propertyAddress, ", "))
 
-        val call = routes.SatisfactionSurveyController.surveyThankyou
-        auditService.sendContinueNextPage(call.url)
+        val call = routes.SatisfactionSurveyController.surveyThankYou
+        audit.send(ContinueNextPage(call.url))
         Redirect(call)
     )
   }
 
   private def sendFeedback(f: SatisfactionSurvey, refNum: String)(using headerCarrier: HeaderCarrier): Unit =
-    auditService.sendSurveySatisfaction(Map("satisfaction" -> f.satisfaction, "referenceNumber" -> refNum)).flatMap { _ =>
-      auditService.sendSurveyFeedback(Map("feedback" -> f.details.getOrElse(""), "referenceNumber" -> refNum))
-    }
+    audit.send(SurveySatisfaction(f.satisfaction, refNum))
+    audit.send(SurveyFeedback(f.details.getOrElse(""), refNum))
 
-  def surveyThankyou: Action[AnyContent] = Action { implicit request =>
+  def surveyThankYou: Action[AnyContent] = Action { implicit request =>
     Ok(satisfactionSurveyThankYou())
   }

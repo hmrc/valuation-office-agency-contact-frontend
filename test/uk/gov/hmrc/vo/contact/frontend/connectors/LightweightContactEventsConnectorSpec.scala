@@ -33,20 +33,23 @@
 package uk.gov.hmrc.vo.contact.frontend.connectors
 
 import play.api.Environment
+import play.api.i18n.{Lang, Messages}
 import play.api.libs.json.*
 import play.api.test.Helpers.*
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.vo.contact.frontend.FakeUserAnswers
 import uk.gov.hmrc.vo.contact.frontend.models.*
+import uk.gov.hmrc.vo.service.connectors.AuditService
 import uk.gov.hmrc.vo.unit.test.BaseAppSpec
 
 import java.net.URL
+import java.util.Locale
 
 class LightweightContactEventsConnectorSpec extends BaseAppSpec:
 
-  val environment: Environment      = inject[Environment]
-  val auditService: AuditingService = inject[AuditingService]
-  val minimalJson: JsObject         = JsObject(Map[String, JsValue]())
+  val environment: Environment   = inject[Environment]
+  val auditService: AuditService = inject[AuditService]
+  val minimalJson: JsObject      = JsObject(Map[String, JsValue]())
 
   val message                                     = "message"
   val enquiryCategory                             = "council_tax"
@@ -58,9 +61,11 @@ class LightweightContactEventsConnectorSpec extends BaseAppSpec:
   val contactModel: Contact = Contact(contactDetails, propertyAddress, enquiryCategory, subEnquiryCategory, message)
   val userAnswers           = FakeUserAnswers(contactDetails, "council_tax", "council_tax", "", "", propertyAddress, TellUsMore("message"))
 
-  val contactModelWithMessages: ContactWithEnMessage            = ContactWithEnMessage(contactModel, messagesApi, userAnswers)
+  given Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
+
+  val contactModelWithMessages: ContactWithEnMessage            = ContactWithEnMessage(contactModel, userAnswers)
   val alternativeContactModel: Contact                          = Contact(contactDetails, alternativePropertyAddress, enquiryCategory, subEnquiryCategory, message)
-  val alternativeContactModelWithMessages: ContactWithEnMessage = ContactWithEnMessage(alternativeContactModel, messagesApi, userAnswers)
+  val alternativeContactModelWithMessages: ContactWithEnMessage = ContactWithEnMessage(alternativeContactModel, userAnswers)
 
   "LightweightContactEvents Connector" when {
 
@@ -72,8 +77,8 @@ class LightweightContactEventsConnectorSpec extends BaseAppSpec:
         val httpMock          = httpClientMock(method = POST, responseBody = "{}")
         val headerCarrierStub = HeaderCarrier()
 
-        val connector = LightweightContactEventsConnector(httpMock, auditService, servicesConfig)
-        connector.send(contactModel, messagesApi, userAnswers)(using headerCarrierStub)
+        val connector = LightweightContactEventsConnector(httpMock, auditService, servicesConfig, messagesApi)
+        connector.send(contactModel, userAnswers)(using headerCarrierStub)
 
         verify(httpMock).post(urlCaptor.capture)(using headerCarrierNapper.capture)
 
@@ -82,8 +87,8 @@ class LightweightContactEventsConnectorSpec extends BaseAppSpec:
       }
 
       "return a 200 status when the send method is successful using contactModel" in {
-        val connector = LightweightContactEventsConnector(httpClientMock(method = POST, responseBody = "{}"), auditService, servicesConfig)
-        val result    = connector.send(contactModel, messagesApi, userAnswers)(using HeaderCarrier()).futureValue
+        val connector = LightweightContactEventsConnector(httpClientMock(method = POST, responseBody = "{}"), auditService, servicesConfig, messagesApi)
+        val result    = connector.send(contactModel, userAnswers)(using HeaderCarrier()).futureValue
         result.isSuccess shouldBe true
         result.get       shouldBe OK
       }
@@ -95,8 +100,8 @@ class LightweightContactEventsConnectorSpec extends BaseAppSpec:
         val httpMock          = httpClientMock(method = POST, responseBody = "{}")
         val headerCarrierStub = HeaderCarrier()
 
-        val connector = LightweightContactEventsConnector(httpMock, auditService, servicesConfig)
-        connector.send(alternativeContactModel, messagesApi, userAnswers)(using headerCarrierStub)
+        val connector = LightweightContactEventsConnector(httpMock, auditService, servicesConfig, messagesApi)
+        connector.send(alternativeContactModel, userAnswers)(using headerCarrierStub)
 
         verify(httpMock).post(urlCaptor.capture)(using headerCarrierNapper.capture)
 
@@ -105,15 +110,16 @@ class LightweightContactEventsConnectorSpec extends BaseAppSpec:
       }
 
       "return a 200 status when the send method is successful using alternativeContactModel" in {
-        val connector = LightweightContactEventsConnector(httpClientMock(method = POST, responseBody = "{}"), auditService, servicesConfig)
-        val result    = connector.send(alternativeContactModel, messagesApi, userAnswers)(using HeaderCarrier()).futureValue
+        val connector = LightweightContactEventsConnector(httpClientMock(method = POST, responseBody = "{}"), auditService, servicesConfig, messagesApi)
+        val result    = connector.send(alternativeContactModel, userAnswers)(using HeaderCarrier()).futureValue
         result.isSuccess shouldBe true
         result.get       shouldBe OK
       }
 
       "return a string representing the error when send method fails" in {
-        val connector = LightweightContactEventsConnector(httpClientMock(method = POST, responseBody = "{}", responseStatus = 500), auditService, servicesConfig)
-        val result    = connector.send(contactModel, messagesApi, userAnswers)(using HeaderCarrier()).futureValue
+        val connector =
+          LightweightContactEventsConnector(httpClientMock(method = POST, responseBody = "{}", responseStatus = 500), auditService, servicesConfig, messagesApi)
+        val result    = connector.send(contactModel, userAnswers)(using HeaderCarrier()).futureValue
         result.isFailure shouldBe true
         val e = result.failed.get
         e            shouldBe a[RuntimeException]
@@ -121,51 +127,10 @@ class LightweightContactEventsConnectorSpec extends BaseAppSpec:
       }
 
       "return a failure if the backend service call fails using Contact Model" in {
-        val connector = LightweightContactEventsConnector(httpClientMock(method = POST, responseBody = "{}", responseStatus = 500), auditService, servicesConfig)
-        val result    = connector.send(contactModel, messagesApi, userAnswers)(using HeaderCarrier()).futureValue
+        val connector =
+          LightweightContactEventsConnector(httpClientMock(method = POST, responseBody = "{}", responseStatus = 500), auditService, servicesConfig, messagesApi)
+        val result    = connector.send(contactModel, userAnswers)(using HeaderCarrier()).futureValue
         result.isFailure shouldBe true
       }
-    }
-
-    "provided with JSON directly" should {
-
-      "call the Microservice with the given JSON" in {
-        val headerCarrierNapper = captor[HeaderCarrier]
-        val urlCaptor           = captor[URL]
-
-        val httpMock          = httpClientMock(method = POST, responseBody = "{}")
-        val headerCarrierStub = HeaderCarrier()
-
-        val connector = LightweightContactEventsConnector(httpMock, auditService, servicesConfig)
-        connector.sendJson(minimalJson, minimalJson)(using headerCarrierStub)
-
-        verify(httpMock).post(urlCaptor.capture)(using headerCarrierNapper.capture)
-
-        urlCaptor.getValue.toString            should endWith("/lightweight-contact-events/create")
-        headerCarrierNapper.getValue.nsStamp shouldBe headerCarrierStub.nsStamp
-      }
-
-      "return a case class representing the received JSON when the send method is successful" in {
-        val connector = LightweightContactEventsConnector(httpClientMock(method = POST, responseBody = "{}"), auditService, servicesConfig)
-        val result    = connector.sendJson(minimalJson, minimalJson)(using HeaderCarrier()).futureValue
-        result.isSuccess shouldBe true
-        result.get       shouldBe OK
-      }
-
-      "return a string representing the error when send method fails" in {
-        val connector = LightweightContactEventsConnector(httpClientMock(method = POST, responseBody = "{}", responseStatus = 500), auditService, servicesConfig)
-        val result    = connector.sendJson(minimalJson, minimalJson)(using HeaderCarrier()).futureValue
-        result.isFailure shouldBe true
-        val e = result.failed.get
-        e            shouldBe a[RuntimeException]
-        e.getMessage shouldBe "Received status of 500 from upstream service"
-      }
-
-      "return failure if the backend service call fails using minimal Json" in {
-        val connector = LightweightContactEventsConnector(httpClientMock(method = POST, responseBody = "{}", responseStatus = 500), auditService, servicesConfig)
-        val result    = connector.sendJson(minimalJson, minimalJson)(using HeaderCarrier()).futureValue
-        result.isFailure shouldBe true
-      }
-
     }
   }

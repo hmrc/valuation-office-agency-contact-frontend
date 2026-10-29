@@ -21,4 +21,4 @@ import play.api.libs.json.*
 case class PropertyAddress(addressLine1: String, addressLine2: Option[String], town: String, county: Option[String], postcode: String)
 
 object PropertyAddress:
-  implicit val format: OFormat[PropertyAddress] = Json.format[PropertyAddress]
+  implicit val format: OFormat[PropertyAddress] = Json.format

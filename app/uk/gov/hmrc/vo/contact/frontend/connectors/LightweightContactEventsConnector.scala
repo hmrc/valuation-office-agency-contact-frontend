@@ -18,24 +18,28 @@ package uk.gov.hmrc.vo.contact.frontend.connectors
 
 import play.api.Logging
 import play.api.http.Status.OK
-import play.api.i18n.MessagesApi
+import play.api.i18n.{Lang, Messages, MessagesApi}
 import play.api.libs.json.*
 import play.api.libs.ws.WSBodyWritables.writeableOf_JsValue
 import uk.gov.hmrc.http.HttpReads.Implicits.*
 import uk.gov.hmrc.http.client.HttpClientV2
 import uk.gov.hmrc.http.{HeaderCarrier, HttpResponse, StringContextOps}
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
-import uk.gov.hmrc.vo.contact.frontend.models.{Contact, ContactWithEnMessage, EnquiryAuditEvent}
+import uk.gov.hmrc.vo.contact.frontend.models.event.{FormSubmissionFailed, SendEnquiryToVOA}
+import uk.gov.hmrc.vo.contact.frontend.models.{Contact, ContactWithEnMessage}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
+import java.util.Locale
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success, Try}
 
 class LightweightContactEventsConnector @Inject() (
   httpClientV2: HttpClientV2,
-  auditService: AuditingService,
-  servicesConfig: ServicesConfig
+  audit: AuditService,
+  servicesConfig: ServicesConfig,
+  messagesApi: MessagesApi
 )(using ec: ExecutionContext
 ) extends Logging:
 
@@ -43,43 +47,35 @@ class LightweightContactEventsConnector @Inject() (
   private val baseSegment                             = "/lightweight-contact-events"
   private val jsonContentTypeHeader: (String, String) = "Content-Type" -> "application/json"
 
-  def send(input: Contact, messagesApi: MessagesApi, userAnswers: UserAnswers)(using hc: HeaderCarrier): Future[Try[Int]] =
-    val msg        = ContactWithEnMessage(input, messagesApi, userAnswers)
-    val auditEvent = EnquiryAuditEvent(
-      msg.contact,
-      msg.propertyAddress,
-      msg.isCouncilTaxEnquiry,
-      msg.contactReason,
-      msg.enquiryCategoryMsg,
-      msg.subEnquiryCategoryMsg,
-      msg.message,
-      userAnswers.enquiryDate,
-      userAnswers.refNumber
-    )
-    sendJson(Json.toJson(msg), Json.toJson(auditEvent).as[JsObject])
+  def send(contact: Contact, userAnswers: UserAnswers)(using hc: HeaderCarrier): Future[Try[Int]] =
+    given Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
 
-  def sendJson(msgJson: JsValue, auditEventJson: JsObject)(using hc: HeaderCarrier): Future[Try[Int]] =
+    val contactMessage = ContactWithEnMessage(contact, userAnswers)
+
+    sendContactMessage(contactMessage, userAnswers)
+
+  private def sendContactMessage(contactMessage: ContactWithEnMessage, userAnswers: UserAnswers)(using hc: HeaderCarrier): Future[Try[Int]] =
     val url = s"$serviceUrl$baseSegment/create"
     httpClientV2.post(url"$url")
-      .withBody(msgJson)
+      .withBody(Json.toJson(contactMessage))
       .setHeader(jsonContentTypeHeader)
       .execute[HttpResponse]
       .map {
         response =>
           response.status match
             case OK     =>
-              auditService.sendEnquiryToVO(auditEventJson)
+              audit.send(SendEnquiryToVOA(contactMessage, userAnswers))
               Success(OK)
             case status =>
               val ex = RuntimeException("Received status of " + status + " from upstream service")
               logger.warn(ex.getMessage)
-              auditService.sendFormSubmissionFailed(auditEventJson, s"Response code: $status")
+              audit.send(FormSubmissionFailed(contactMessage, userAnswers, s"Response code: $status"))
               Failure(ex)
       }
       .recover {
         case throwable =>
           val ex = RuntimeException("Received exception " + throwable.getMessage + " from upstream service")
           logger.warn(ex.getMessage)
-          auditService.sendFormSubmissionFailed(auditEventJson, throwable.getMessage)
+          audit.send(FormSubmissionFailed(contactMessage, userAnswers, throwable.getMessage))
           Failure(ex)
       }

@@ -18,25 +18,25 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import play.api.data.Form
 import play.api.libs.json.JsString
-import play.api.test.Helpers.{contentAsString, redirectLocation, status, _}
+import play.api.mvc.Call
+import play.api.test.Helpers.{contentAsString, redirectLocation, status, *}
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, FakeDataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.FairRentEnquiryForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.FairRentEnquiryId
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers.*
-import uk.gov.hmrc.vo.contact.frontend.views.html.{fairRentEnquiry => fair_rent_enquiry}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{checkFairRentApplication => check_fair_rent_application, submitFairRentApplication => submit_fair_rent_application}
-import play.api.mvc.Call
+import uk.gov.hmrc.vo.contact.frontend.views.html.{checkFairRentApplication as check_fair_rent_application, fairRentEnquiry as fair_rent_enquiry, submitFairRentApplication as submit_fair_rent_application}
 import uk.gov.hmrc.vo.contact.frontend.views.html.{checkFairRentApplication, fairRentEnquiry, submitFairRentApplication}
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 class FairRentEnquiryControllerSpec extends ControllerSpecBase:
 
   def fairRentEnquiryEnquiry: fairRentEnquiry          = inject[fair_rent_enquiry]
   def onFairRentEnquiryNew: submitFairRentApplication  = inject[submit_fair_rent_application]
   def onFairRentEnquiryCheck: checkFairRentApplication = inject[check_fair_rent_application]
-  def auditService: AuditingService                    = inject[AuditingService]
+  def auditService: AuditService                       = inject[AuditService]
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 

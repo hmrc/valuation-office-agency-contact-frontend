@@ -18,27 +18,25 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import play.api.data.Form
 import play.api.libs.json.JsString
-import play.api.test.Helpers.{contentAsString, redirectLocation, status}
+import play.api.mvc.Call
 import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, FakeDataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.BusinessRatesSelfCateringForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.BusinessRatesSelfCateringId
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers.*
-import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesSelfCateringEnquiry => business_rates_self_catering_enquiry}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyEnglandLets => england_lets}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyWalesLets => wales_lets}
-import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
+import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesSelfCateringEnquiry as business_rates_self_catering_enquiry, propertyEnglandLets as england_lets, propertyWalesLets as wales_lets}
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 class BusinessRatesSelfCateringControllerSpec extends ControllerSpecBase:
 
   def businessRatesSelfCateringEnquiry: html.businessRatesSelfCateringEnquiry = inject[business_rates_self_catering_enquiry]
   def propertyEnglandLets: html.propertyEnglandLets                           = inject[england_lets]
   def propertyWalesLets: html.propertyWalesLets                               = inject[wales_lets]
-  def auditService: AuditingService                                           = inject[AuditingService]
+  def auditService: AuditService                                              = inject[AuditService]
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 

@@ -18,22 +18,23 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import play.api.data.Form
 import play.api.libs.json.JsString
-import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, FakeDataCacheConnector}
-import uk.gov.hmrc.vo.contact.frontend.controllers.actions.*
+import play.api.mvc.Call
 import play.api.test.Helpers.*
+import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
+import uk.gov.hmrc.vo.contact.frontend.connectors.FakeDataCacheConnector
+import uk.gov.hmrc.vo.contact.frontend.controllers.actions.*
 import uk.gov.hmrc.vo.contact.frontend.forms.EnquiryCategoryForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.EnquiryCategoryId
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
-import uk.gov.hmrc.vo.contact.frontend.views.html.{enquiryCategory => enquiry_category}
-import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
+import uk.gov.hmrc.vo.contact.frontend.views.html.enquiryCategory as enquiry_category
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 class EnquiryCategoryControllerSpec extends ControllerSpecBase:
 
   def enquiryCategory: html.enquiryCategory = inject[enquiry_category]
-  def auditService: AuditingService         = inject[AuditingService]
+  def auditService: AuditService            = inject[AuditService]
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 

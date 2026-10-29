@@ -20,20 +20,22 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.Navigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.BusinessRatesSelfCateringForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.BusinessRatesSelfCateringId
 import uk.gov.hmrc.vo.contact.frontend.models.Mode
+import uk.gov.hmrc.vo.contact.frontend.models.event.RadioButtonSelection
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesSelfCateringEnquiry as business_rates_self_catering_enquiry, propertyEnglandLets as england_lets, propertyWalesLets as wales_lets}
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 import javax.inject.Inject
 import scala.concurrent.ExecutionContext
 
 class BusinessRatesSelfCateringController @Inject() (
   override val messagesApi: MessagesApi,
-  auditService: AuditingService,
+  audit: AuditService,
   dataCacheConnector: DataCacheConnector,
   navigator: Navigator,
   getData: DataRetrievalAction,
@@ -61,7 +63,7 @@ class BusinessRatesSelfCateringController @Inject() (
       BusinessRatesSelfCateringForm().bindFromRequest().fold(
         formWithErrors => BadRequest(businessRatesSelfCateringEnquiry(formWithErrors, mode)),
         value => {
-          auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering" -> value)
+          audit.send(RadioButtonSelection(request.uri, "businessRatesSelfCatering", value))
           dataCacheConnector.save[String](request.sessionId, BusinessRatesSelfCateringId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(BusinessRatesSelfCateringId, mode).apply(UserAnswers(cacheMap)))
           )

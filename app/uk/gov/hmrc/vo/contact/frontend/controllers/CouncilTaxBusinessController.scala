@@ -20,20 +20,22 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.Navigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.CouncilTaxBusinessEnquiryForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.CouncilTaxBusinessEnquiryId
 import uk.gov.hmrc.vo.contact.frontend.models.Mode
+import uk.gov.hmrc.vo.contact.frontend.models.event.RadioButtonSelection
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesNoNeedToPay, councilTaxBusinessEnquiry, propertySmallPartUsed}
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 import javax.inject.Inject
 import scala.concurrent.ExecutionContext
 
 class CouncilTaxBusinessController @Inject() (
   override val messagesApi: MessagesApi,
-  auditService: AuditingService,
+  audit: AuditService,
   dataCacheConnector: DataCacheConnector,
   navigator: Navigator,
   getData: DataRetrievalAction,
@@ -64,7 +66,7 @@ class CouncilTaxBusinessController @Inject() (
           for
             cacheMap <- dataCacheConnector.save[String](request.sessionId, CouncilTaxBusinessEnquiryId.toString, value)
           yield
-            auditService.sendRadioButtonSelection(request.uri, "councilTaxBusinessEnquiry" -> value)
+            audit.send(RadioButtonSelection(request.uri, "councilTaxBusinessEnquiry", value))
             Redirect(navigator.nextPage(CouncilTaxBusinessEnquiryId, mode).apply(UserAnswers(cacheMap)))
       )
   }

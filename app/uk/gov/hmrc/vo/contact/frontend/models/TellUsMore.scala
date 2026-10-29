@@ -21,4 +21,4 @@ import play.api.libs.json.*
 case class TellUsMore(message: String)
 
 object TellUsMore:
-  implicit val format: OFormat[TellUsMore] = Json.format[TellUsMore]
+  implicit val format: OFormat[TellUsMore] = Json.format

@@ -21,18 +21,20 @@ import play.api.Logging
 import play.api.i18n.{I18nSupport, Messages, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.identifiers.AnswerSectionId
 import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
+import uk.gov.hmrc.vo.contact.frontend.models.event.ContinueNextPage
 import uk.gov.hmrc.vo.contact.frontend.utils.{CheckYourAnswersHelper, UserAnswers}
 import uk.gov.hmrc.vo.contact.frontend.viewmodels.AnswerSection
 import uk.gov.hmrc.vo.contact.frontend.views.html.check_your_answers
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 import scala.concurrent.ExecutionContext
 
 class CheckYourAnswersController @Inject() (
-  auditService: AuditingService,
+  audit: AuditService,
   override val messagesApi: MessagesApi,
   dataCacheConnector: DataCacheConnector,
   getData: DataRetrievalAction,
@@ -60,7 +62,7 @@ class CheckYourAnswersController @Inject() (
 
   def goToConfirmationPage(): Action[AnyContent] = (getData andThen requireData) { implicit request =>
     val call = routes.ConfirmationController.onPageLoadSendEmail()
-    auditService.sendContinueNextPage(call.url)
+    audit.send(ContinueNextPage(call.url))
     Redirect(call)
   }
 

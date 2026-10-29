@@ -16,20 +16,20 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
+import play.api.mvc.AnyContent
+import play.api.test.FakeRequest
 import play.api.test.Helpers.*
 import uk.gov.hmrc.http.SessionKeys
-import uk.gov.hmrc.vo.contact.frontend.connectors.AuditingService
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.DataRetrievalAction
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html.error.session_expired
-import play.api.mvc.AnyContent
-import play.api.test.FakeRequest
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 class SessionExpiredControllerSpec extends ControllerSpecBase:
 
   def sessionExpired: session_expired = inject[session_expired]
 
-  def auditService: AuditingService = inject[AuditingService]
+  def auditService: AuditService = inject[AuditService]
 
   def getDataAction: DataRetrievalAction = inject[DataRetrievalAction]
 

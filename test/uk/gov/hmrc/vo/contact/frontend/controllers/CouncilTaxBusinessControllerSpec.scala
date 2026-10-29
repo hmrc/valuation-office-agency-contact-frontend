@@ -18,22 +18,20 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import play.api.data.Form
 import play.api.libs.json.JsString
-import play.api.test.Helpers.{contentAsString, status}
-import play.api.test.Helpers._
+import play.api.mvc.Call
+import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.{CouncilTaxBusinessEnquiryForm, CouncilTaxSubcategoryForm}
 import uk.gov.hmrc.vo.contact.frontend.identifiers.CouncilTaxBusinessEnquiryId
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
-import uk.gov.hmrc.vo.contact.frontend.views.html.{councilTaxBusinessEnquiry => council_tax_business_enquiry}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{propertySmallPartUsed => small_part_used}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesNoNeedToPay => business_rates_no_need_to_pay}
+import uk.gov.hmrc.vo.contact.frontend.views.html
+import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesNoNeedToPay as business_rates_no_need_to_pay, councilTaxBusinessEnquiry as council_tax_business_enquiry, propertySmallPartUsed as small_part_used}
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 import scala.concurrent.Future
-import play.api.mvc.Call
-import uk.gov.hmrc.vo.contact.frontend.views.html
 
 class CouncilTaxBusinessControllerSpec extends ControllerSpecBase:
 
@@ -42,7 +40,7 @@ class CouncilTaxBusinessControllerSpec extends ControllerSpecBase:
   def councilTaxBusinessEnquiry: html.councilTaxBusinessEnquiry = inject[council_tax_business_enquiry]
   def propertySmallPartUsed: html.propertySmallPartUsed         = inject[small_part_used]
   def businessRatesNoNeedToPay: html.businessRatesNoNeedToPay   = inject[business_rates_no_need_to_pay]
-  def auditService: AuditingService                             = inject[AuditingService]
+  def auditService: AuditService                                = inject[AuditService]
 
   def onwardRoute: Call = routes.DatePropertyChangedController.onPageLoad()
 

@@ -16,17 +16,17 @@
 
 package uk.gov.hmrc.vo.contact.frontend
 
-import uk.gov.hmrc.vo.contact.frontend.connectors.AuditingService
 import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 import uk.gov.hmrc.vo.contact.frontend.identifiers.*
 import uk.gov.hmrc.vo.contact.frontend.journey.pages.{EnglandOrWalesPropertyRouter, HousingBenefitAllowancesRouter}
 import uk.gov.hmrc.vo.contact.frontend.models.*
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
+import uk.gov.hmrc.vo.service.connectors.AuditService
 import uk.gov.hmrc.vo.unit.test.BaseAppSpec
 
 class NavigatorSpec extends BaseAppSpec:
 
-  val navigator = Navigator(mock[AuditingService])
+  val navigator = Navigator(mock[AuditService])
 
   val mockUserAnswers: UserAnswers = mock[UserAnswers]
 

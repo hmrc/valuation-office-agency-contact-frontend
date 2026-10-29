@@ -14,24 +14,23 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.vo.contact.frontend.models
+package uk.gov.hmrc.vo.contact.frontend.models.event
 
-import play.api.libs.json.{Json, Writes}
+import play.api.libs.json.{Json, OWrites}
+import uk.gov.hmrc.vo.contact.frontend.models.ContactDetails
+import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
+import uk.gov.hmrc.vo.service.model.event.AuditEvent
 
 /**
   * @author Yuriy Tumakha
   */
-case class EnquiryAuditEvent(
-  contact: ContactDetails,
-  propertyAddress: PropertyAddress,
-  isCouncilTaxEnquiry: Boolean,
-  contactReason: Option[String],
-  enquiryCategoryMsg: String,
-  subEnquiryCategoryMsg: String,
-  message: String,
-  enquiryBeforeLast28days: Option[String],
-  refNumber: Option[String]
-)
+case class UserTimeout(
+  refNumber: Option[String],
+  contact: Option[ContactDetails]
+) extends AuditEvent
 
-object EnquiryAuditEvent:
-  implicit val enquiryAuditEventWrites: Writes[EnquiryAuditEvent] = Json.writes[EnquiryAuditEvent]
+object UserTimeout:
+  implicit val writes: OWrites[UserTimeout] = Json.writes
+
+  def apply(userAnswers: Option[UserAnswers]): UserTimeout =
+    UserTimeout(userAnswers.flatMap(_.refNumber), userAnswers.flatMap(_.contactDetails))
