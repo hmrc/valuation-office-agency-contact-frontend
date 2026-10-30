@@ -22,7 +22,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertyPermanentChanges
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertyPermanentChanges as property_permanent_changes
 
-import javax.inject.Singleton
+import jakarta.inject.Singleton
 
 @Singleton
 class PropertyPermanentChangesControllerSpec extends ControllerSpecBase:

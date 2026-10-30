@@ -19,7 +19,7 @@ package uk.gov.hmrc.vo.contact.frontend.views
 import org.jsoup.nodes.Document.OutputSettings
 import play.api.i18n.{Lang, Messages}
 import uk.gov.hmrc.vo.contact.frontend.models.*
-import uk.gov.hmrc.vo.contact.frontend.utils.{CheckYourAnswersHelper, DateUtil}
+import uk.gov.hmrc.vo.contact.frontend.utils.CheckYourAnswersHelper
 import uk.gov.hmrc.vo.contact.frontend.viewmodels.AnswerSection
 import uk.gov.hmrc.vo.contact.frontend.views.behaviours.ViewBehaviours
 import uk.gov.hmrc.vo.contact.frontend.views.html.check_your_answers
@@ -33,7 +33,6 @@ class CheckYourAnswersViewSpec extends ViewBehaviours:
   private val outputSettings = OutputSettings().prettyPrint(false)
 
   implicit val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
-  implicit val dateUtil: DateUtil        = inject[DateUtil]
 
   val tellUs: TellUsMore                = TellUsMore("Hello")
   val cd: ContactDetails                = ContactDetails("c1", "c3", "c5")

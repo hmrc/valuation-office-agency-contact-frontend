@@ -156,7 +156,7 @@ GET         /submit-fair-rent-application                       uk.gov.hmrc.vo.c
 GET         /check-fair-rents-register                          uk.gov.hmrc.vo.contact.frontend.controllers.FairRentEnquiryController.onFairRentEnquiryCheck
 
 # SURVEY
-GET         /survey-thanks                                      uk.gov.hmrc.vo.contact.frontend.controllers.SatisfactionSurveyController.surveyThankyou
+GET         /survey-thanks                                      uk.gov.hmrc.vo.contact.frontend.controllers.SatisfactionSurveyController.surveyThankYou
 POST        /survey 				                            uk.gov.hmrc.vo.contact.frontend.controllers.SatisfactionSurveyController.formCompleteFeedback
 
 # !!! The JourneyController routes must be defined at the end of the routing configuration because the route pattern /:key matches any single path segment.

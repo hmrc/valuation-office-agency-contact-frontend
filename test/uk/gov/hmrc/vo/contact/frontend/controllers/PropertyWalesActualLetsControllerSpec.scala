@@ -18,25 +18,25 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import play.api.data.Form
 import play.api.libs.json.JsString
+import play.api.mvc.Call
 import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, FakeDataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.PropertyWalesActualLetsForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.PropertyWalesActualLetsId
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers.*
-import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyWalesActualLets => property_wales_actual_lets}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyWalesLets => wales_lets}
-import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertyWalesActualLets
+import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyWalesActualLets as property_wales_actual_lets, propertyWalesLets as wales_lets}
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 class PropertyWalesActualLetsControllerSpec extends ControllerSpecBase:
 
   def propertyWalesLets70DaysEnquiry: propertyWalesActualLets = inject[property_wales_actual_lets]
   def propertyWalesLets: html.propertyWalesLets               = inject[wales_lets]
-  def auditService: AuditingService                           = inject[AuditingService]
+  def auditService: AuditService                              = inject[AuditService]
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 

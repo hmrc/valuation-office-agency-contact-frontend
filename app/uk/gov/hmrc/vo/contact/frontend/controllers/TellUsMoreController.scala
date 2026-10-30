@@ -30,7 +30,7 @@ import uk.gov.hmrc.vo.contact.frontend.models.{Mode, NormalMode, TellUsMore}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.tellUsMore
 
-import javax.inject.Inject
+import jakarta.inject.Inject
 import scala.concurrent.ExecutionContext
 
 class TellUsMoreController @Inject() (

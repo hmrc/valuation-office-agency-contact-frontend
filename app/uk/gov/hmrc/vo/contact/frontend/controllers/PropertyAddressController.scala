@@ -29,7 +29,7 @@ import uk.gov.hmrc.vo.contact.frontend.models.{Mode, PropertyAddress}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertyAddress
 
-import javax.inject.Inject
+import jakarta.inject.Inject
 import scala.concurrent.ExecutionContext
 
 class PropertyAddressController @Inject() (

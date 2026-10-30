@@ -30,7 +30,7 @@ import uk.gov.hmrc.vo.contact.frontend.models.NormalMode
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.confirmation
 
-import javax.inject.{Inject, Singleton}
+import jakarta.inject.{Inject, Singleton}
 import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Success}
 
@@ -57,7 +57,7 @@ class ConfirmationController @Inject() (
         logger.warn(s"On Sending Email - Navigation for Confirmation page reached without a contact and error $msg")
         throw RuntimeException(s"On Sending Email - Navigation for Confirmation page reached without a contact and error $msg")
 
-    val result = connector.send(contact, messagesApi, request.userAnswers)
+    val result = connector.send(contact, request.userAnswers)
 
     result map {
       case Success(_)  =>

@@ -18,34 +18,33 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import play.api.i18n.{Lang, Messages}
 import play.api.libs.json.{JsString, Json}
-import play.api.test.Helpers._
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, FakeDataCacheConnector}
+import play.api.mvc.Call
+import play.api.test.Helpers.*
+import uk.gov.hmrc.vo.contact.frontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
-import uk.gov.hmrc.vo.contact.frontend.identifiers._
+import uk.gov.hmrc.vo.contact.frontend.identifiers.*
 import uk.gov.hmrc.vo.contact.frontend.journey.model.TellUsMorePage
-import uk.gov.hmrc.vo.contact.frontend.models._
-import uk.gov.hmrc.vo.contact.frontend.utils.{CheckYourAnswersHelper, DateUtil, MessageControllerComponentsHelpers, UserAnswers}
+import uk.gov.hmrc.vo.contact.frontend.models.*
+import uk.gov.hmrc.vo.contact.frontend.utils.{CheckYourAnswersHelper, MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.vo.contact.frontend.viewmodels.AnswerSection
-import uk.gov.hmrc.vo.contact.frontend.views.html.check_your_answers
+import uk.gov.hmrc.vo.contact.frontend.views.html.{check_your_answers, error}
 import uk.gov.hmrc.vo.contact.frontend.views.html.error.internal_server_error
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 import java.time.LocalDate
 import java.util.Locale
-import play.api.mvc.Call
-import uk.gov.hmrc.vo.contact.frontend.views.html.error
 
 class CheckYourAnswersControllerSpec extends ControllerSpecBase:
 
   val mockUserAnswers: UserAnswers = mock[UserAnswers]
 
   implicit val messagesEnglish: Messages = messagesApi.preferred(Seq(Lang(Locale.UK)))
-  implicit val dateUtil: DateUtil        = inject[DateUtil]
 
   def checkYourAnswers: check_your_answers             = inject[check_your_answers]
   def internalServerError: error.internal_server_error = inject[internal_server_error]
 
-  def onwardRoute: Call             = routes.EnquiryCategoryController.onPageLoad(NormalMode)
-  def auditService: AuditingService = inject[AuditingService]
+  def onwardRoute: Call          = routes.EnquiryCategoryController.onPageLoad(NormalMode)
+  def auditService: AuditService = inject[AuditService]
 
   def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     CheckYourAnswersController(

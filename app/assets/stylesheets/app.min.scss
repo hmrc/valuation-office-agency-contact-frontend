@@ -1,13 +1,5 @@
 @import 'lib/vo-frontend-service/stylesheets/frontend';
 
-.block-js-enabled {
-  display: none;
-}
-
-.js-enabled .block-js-enabled {
-  display: block;
-}
-
 @media print {
   .govuk-phase-banner, .hmrc-language-select, footer {
     display: none !important;

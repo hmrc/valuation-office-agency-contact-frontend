@@ -24,7 +24,7 @@ import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, 
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertyEnglandLetsNoAction
 
-import javax.inject.{Inject, Singleton}
+import jakarta.inject.{Inject, Singleton}
 import scala.concurrent.ExecutionContext
 
 @Singleton

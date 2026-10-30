@@ -20,20 +20,22 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.Navigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.BusinessRatesPropertyForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.BusinessRatesPropertyEnquiryId
 import uk.gov.hmrc.vo.contact.frontend.models.Mode
+import uk.gov.hmrc.vo.contact.frontend.models.event.RadioButtonSelection
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesNonBusiness as business_rates_non_business, businessRatesPropertyEnquiry as business_rates_property_enquiry}
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
-import javax.inject.Inject
+import jakarta.inject.Inject
 import scala.concurrent.ExecutionContext
 
 class BusinessRatesPropertyController @Inject() (
   override val messagesApi: MessagesApi,
-  auditService: AuditingService,
+  audit: AuditService,
   dataCacheConnector: DataCacheConnector,
   navigator: Navigator,
   getData: DataRetrievalAction,
@@ -60,7 +62,7 @@ class BusinessRatesPropertyController @Inject() (
       BusinessRatesPropertyForm().bindFromRequest().fold(
         formWithErrors => BadRequest(businessRatesPropertyEnquiry(formWithErrors, mode)),
         value =>
-          auditService.sendRadioButtonSelection(request.uri, "businessRatesPropertyEnquiry" -> value)
+          audit.send(RadioButtonSelection(request.uri, "businessRatesPropertyEnquiry", value))
           dataCacheConnector.save[String](request.sessionId, BusinessRatesPropertyEnquiryId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(BusinessRatesPropertyEnquiryId, mode).apply(UserAnswers(cacheMap)))
           )

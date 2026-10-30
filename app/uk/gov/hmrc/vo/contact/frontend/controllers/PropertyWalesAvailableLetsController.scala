@@ -20,20 +20,22 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.Navigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.PropertyWalesAvailableLetsForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.PropertyWalesAvailableLetsId
 import uk.gov.hmrc.vo.contact.frontend.models.Mode
+import uk.gov.hmrc.vo.contact.frontend.models.event.RadioButtonSelection
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertyWalesAvailableLets
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
-import javax.inject.Inject
+import jakarta.inject.Inject
 import scala.concurrent.ExecutionContext
 
 class PropertyWalesAvailableLetsController @Inject() (
   override val messagesApi: MessagesApi,
-  auditService: AuditingService,
+  audit: AuditService,
   dataCacheConnector: DataCacheConnector,
   navigator: Navigator,
   getData: DataRetrievalAction,
@@ -58,7 +60,7 @@ class PropertyWalesAvailableLetsController @Inject() (
       PropertyWalesAvailableLetsForm().bindFromRequest().fold(
         formWithErrors => BadRequest(propertyWalesAvailableLets(formWithErrors)),
         value =>
-          auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering140DaysCY" -> value)
+          audit.send(RadioButtonSelection(request.uri, "businessRatesSelfCatering140DaysCY", value))
           dataCacheConnector.save[String](request.sessionId, PropertyWalesAvailableLetsId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(PropertyWalesAvailableLetsId, mode).apply(UserAnswers(cacheMap)))
           )

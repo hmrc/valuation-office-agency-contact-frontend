@@ -18,20 +18,18 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import play.api.Environment
 import play.api.libs.json.{JsString, Json}
+import play.api.mvc.Call
 import play.api.test.FakeRequest
 import play.api.test.Helpers.*
-import uk.gov.hmrc.vo.contact.frontend.connectors.AuditingService
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.identifiers.*
-import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, ContactDetails, NormalMode, PropertyAddress, TellUsMore}
+import uk.gov.hmrc.vo.contact.frontend.models.*
 import uk.gov.hmrc.vo.contact.frontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.vo.contact.frontend.viewmodels.{AnswerRow, AnswerSection}
-import uk.gov.hmrc.vo.contact.frontend.views.html.error.internal_server_error
-import uk.gov.hmrc.vo.contact.frontend.views.html.{confirmation => Confirmation}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{satisfactionSurveyThankYou => satisfaction_Survey_Thank_You}
-import play.api.mvc.Call
 import uk.gov.hmrc.vo.contact.frontend.views.html
-import uk.gov.hmrc.vo.contact.frontend.views.html.error
+import uk.gov.hmrc.vo.contact.frontend.views.html.error.internal_server_error
+import uk.gov.hmrc.vo.contact.frontend.views.html.{confirmation as Confirmation, error, satisfactionSurveyThankYou as satisfaction_Survey_Thank_You}
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 class SatisfactionSurveyControllerSpec extends ControllerSpecBase:
 
@@ -50,7 +48,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase:
     )
   )
 
-  def auditingService: AuditingService = inject[AuditingService]
+  def auditingService: AuditService = inject[AuditService]
 
   def confirmation: html.confirmation = inject[Confirmation]
 
@@ -75,7 +73,7 @@ class SatisfactionSurveyControllerSpec extends ControllerSpecBase:
   "SatisfactionSurvey Controller" should {
 
     "return OK and the correct view for a GET" in {
-      val result = controller().surveyThankyou()(getRequest)
+      val result = controller().surveyThankYou(getRequest)
 
       status(result)          shouldBe OK
       contentAsString(result) shouldBe viewAsString

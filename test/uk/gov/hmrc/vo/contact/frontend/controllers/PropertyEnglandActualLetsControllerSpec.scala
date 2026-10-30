@@ -21,19 +21,20 @@ import play.api.libs.json.JsString
 import play.api.mvc.Call
 import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, FakeDataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredActionImpl, DataRetrievalAction, FakeDataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.PropertyEnglandActualLetsForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.PropertyEnglandActualLetsId
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers.*
-import uk.gov.hmrc.vo.contact.frontend.views.html.{propertyEnglandActualLets => property_England_actual_lets}
+import uk.gov.hmrc.vo.contact.frontend.views.html.propertyEnglandActualLets as property_England_actual_lets
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 class PropertyEnglandActualLetsControllerSpec extends ControllerSpecBase:
 
   def propertyEnglandActualLetsEnquiry: property_England_actual_lets = inject[property_England_actual_lets]
 
-  def auditService: AuditingService = inject[AuditingService]
+  def auditService: AuditService = inject[AuditService]
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 

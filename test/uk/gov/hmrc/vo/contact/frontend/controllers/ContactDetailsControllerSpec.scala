@@ -157,7 +157,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get      shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_bill" in {
@@ -166,7 +166,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get      shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_changes" in {
@@ -175,7 +175,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get      shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_from_home" in {
@@ -184,7 +184,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get      shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_change_valuation" in {
@@ -193,7 +193,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get      shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_not_used" in {
@@ -202,7 +202,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get      shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_self_catering" in {
@@ -211,7 +211,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get      shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_demolished" in {
@@ -220,7 +220,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get      shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_property_empty" in {
@@ -229,7 +229,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get      shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "The enquiry key function produces a string with a Business subcategory back link when the enquiry category is business_rates_valuation" in {
@@ -238,7 +238,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get      shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "The enquiry key function produces a string with a Council Tax subcategory back link when the enquiry category is council_tax" in {
@@ -247,7 +247,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get   shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_property_poor_repair" in {
@@ -256,7 +256,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get   shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_band_too_high" in {
@@ -265,7 +265,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get   shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_property_empty" in {
@@ -274,7 +274,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get   shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_property_split_merge" in {
@@ -283,7 +283,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get   shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_business_uses" in {
@@ -292,7 +292,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get   shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_annexe" in {
@@ -301,7 +301,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get   shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_bill" in {
@@ -310,7 +310,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get   shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_band_for_new" in {
@@ -319,7 +319,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get   shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_area_change" in {
@@ -328,7 +328,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get   shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "returns the TellUsMoreController when enquiry category is council_tax and sub category is council_tax_other" in {
@@ -337,7 +337,7 @@ class ContactDetailsControllerSpec extends ControllerSpecBase:
       val result                = controller().enquiryBackLink(mockUserAnswers)
       val isCouncilTaxSelection = result.isRight
       isCouncilTaxSelection shouldBe true
-      assert(result.toOption.get == routes.TellUsMoreController.onPageLoad(NormalMode).url)
+      result.toOption.get   shouldBe routes.TellUsMoreController.onPageLoad(NormalMode).url
     }
 
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {

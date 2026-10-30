@@ -22,7 +22,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertySplitMerge
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertySplitMerge as property_split_merge
 
-import javax.inject.Singleton
+import jakarta.inject.Singleton
 
 @Singleton
 class PropertySplitMergeControllerSpec extends ControllerSpecBase:

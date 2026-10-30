@@ -20,21 +20,23 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.Navigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.{AnnexeCookingWashingForm, AnnexeForm, AnnexeSelfContainedForm}
 import uk.gov.hmrc.vo.contact.frontend.identifiers.{CouncilTaxAnnexeEnquiryId, CouncilTaxAnnexeHaveCookingId, CouncilTaxAnnexeSelfContainedEnquiryId}
+import uk.gov.hmrc.vo.contact.frontend.models.event.RadioButtonSelection
 import uk.gov.hmrc.vo.contact.frontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.*
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
-import javax.inject.{Inject, Singleton}
+import jakarta.inject.{Inject, Singleton}
 import scala.concurrent.ExecutionContext
 
 @Singleton
 class CouncilTaxAnnexeController @Inject() (
   override val messagesApi: MessagesApi,
-  auditService: AuditingService,
+  audit: AuditService,
   dataCacheConnector: DataCacheConnector,
   navigator: Navigator,
   getData: DataRetrievalAction,
@@ -68,7 +70,7 @@ class CouncilTaxAnnexeController @Inject() (
           _        <- dataCacheConnector.remove(request.sessionId, CouncilTaxAnnexeEnquiryId.toString)
           cacheMap <- dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeEnquiryId.toString, value)
         yield
-          auditService.sendRadioButtonSelection(request.uri, "annexe" -> value)
+          audit.send(RadioButtonSelection(request.uri, "annexe", value))
           Redirect(navigator.nextPage(CouncilTaxAnnexeEnquiryId, mode).apply(UserAnswers(cacheMap)))
     )
   }
@@ -88,7 +90,7 @@ class CouncilTaxAnnexeController @Inject() (
     AnnexeSelfContainedForm().bindFromRequest().fold(
       formWithErrors => BadRequest(annexeSelfContainedEnquiryView(formWithErrors)),
       value =>
-        auditService.sendRadioButtonSelection(request.uri, "annexeSelfContainedEnquiry" -> value)
+        audit.send(RadioButtonSelection(request.uri, "annexeSelfContainedEnquiry", value))
         dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeSelfContainedEnquiryId.toString, value).map(cacheMap =>
           Redirect(navigator.nextPage(CouncilTaxAnnexeSelfContainedEnquiryId, NormalMode).apply(UserAnswers(cacheMap)))
         )
@@ -118,7 +120,7 @@ class CouncilTaxAnnexeController @Inject() (
     AnnexeCookingWashingForm().bindFromRequest().fold(
       formWithErrors => BadRequest(annexeCookingWashingEnquiryView(formWithErrors)),
       value =>
-        auditService.sendRadioButtonSelection(request.uri, "annexeCookingWashing" -> value)
+        audit.send(RadioButtonSelection(request.uri, "annexeCookingWashing", value))
         dataCacheConnector.save[String](request.sessionId, CouncilTaxAnnexeHaveCookingId.toString, value).map(cacheMap =>
           Redirect(navigator.nextPage(CouncilTaxAnnexeHaveCookingId, NormalMode).apply(UserAnswers(cacheMap)))
         )

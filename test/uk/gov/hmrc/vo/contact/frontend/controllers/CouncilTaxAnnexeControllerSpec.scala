@@ -18,26 +18,21 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 
 import play.api.data.Form
 import play.api.libs.json.JsString
+import play.api.mvc.Call
 import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.*
 import uk.gov.hmrc.vo.contact.frontend.forms.{AnnexeCookingWashingForm, AnnexeForm, AnnexeSelfContainedForm}
 import uk.gov.hmrc.vo.contact.frontend.identifiers.{CouncilTaxAnnexeEnquiryId, CouncilTaxAnnexeHaveCookingId, CouncilTaxAnnexeSelfContainedEnquiryId}
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
-import uk.gov.hmrc.vo.contact.frontend.views.html.{councilTaxAnnexe => council_tax_annexe}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{annexeSelfContainedEnquiry => annexe_self_contained_enquiry}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{annexeNoFacilities => annexe_no_facilities}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{annexeSelfContained => annexe_self_contained}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{annexeNotSelfContained => annexe_not_self_contained}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{annexeCookingWashingEnquiry => annexe_cooking_washing_enquiry}
-import uk.gov.hmrc.vo.contact.frontend.views.html.{annexeRemoved => annexe_removed}
+import uk.gov.hmrc.vo.contact.frontend.views.html
+import uk.gov.hmrc.vo.contact.frontend.views.html.{annexeCookingWashingEnquiry as annexe_cooking_washing_enquiry, annexeNoFacilities as annexe_no_facilities, annexeNotSelfContained as annexe_not_self_contained, annexeRemoved as annexe_removed, annexeSelfContained as annexe_self_contained, annexeSelfContainedEnquiry as annexe_self_contained_enquiry, councilTaxAnnexe as council_tax_annexe}
+import uk.gov.hmrc.vo.contact.frontend.views.html.{annexeNoFacilities, annexeSelfContained, annexeSelfContainedEnquiry}
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 import scala.concurrent.Future
-import play.api.mvc.Call
-import uk.gov.hmrc.vo.contact.frontend.views.html
-import uk.gov.hmrc.vo.contact.frontend.views.html.{annexeNoFacilities, annexeSelfContained, annexeSelfContainedEnquiry}
 
 class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase:
 
@@ -49,7 +44,7 @@ class CouncilTaxAnnexeControllerSpec extends ControllerSpecBase:
   def annexeCookingWashingEnquiry: html.annexeCookingWashingEnquiry    = inject[annexe_cooking_washing_enquiry]
   def annexeNotSelfContained: html.annexeNotSelfContained              = inject[annexe_not_self_contained]
   def annexeRemoved: html.annexeRemoved                                = inject[annexe_removed]
-  def auditService: AuditingService                                    = inject[AuditingService]
+  def auditService: AuditService                                       = inject[AuditService]
 
   val fakeDataCacheConnector: DataCacheConnector = mock[DataCacheConnector]
 

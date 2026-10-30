@@ -25,12 +25,13 @@ import uk.gov.hmrc.http.HttpReads.Implicits.*
 import uk.gov.hmrc.http.client.HttpClientV2
 import uk.gov.hmrc.http.{HeaderCarrier, HttpReads, HttpResponse, StringContextOps}
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
-import uk.gov.hmrc.vo.contact.frontend.models.{Contact, ContactWithEnMessage}
 import uk.gov.hmrc.vo.contact.frontend.models.requests.DataRequest
-import uk.gov.hmrc.vo.contact.frontend.utils.DateUtil
+import uk.gov.hmrc.vo.contact.frontend.models.{Contact, ContactWithEnMessage}
+import uk.gov.hmrc.vo.service.conversion.DateConversion.*
 
-import javax.inject.{Inject, Singleton}
+import jakarta.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
+import scala.language.implicitConversions
 
 /**
   * @author Yuriy Tumakha
@@ -39,8 +40,7 @@ import scala.concurrent.{ExecutionContext, Future}
 class EmailConnector @Inject() (
   servicesConfig: ServicesConfig,
   httpClientV2: HttpClientV2
-)(using ec: ExecutionContext,
-  dateUtil: DateUtil
+)(using ec: ExecutionContext
 ) extends Logging:
 
   private val emailServiceBaseUrl                     = servicesConfig.baseUrl("email")
@@ -58,12 +58,12 @@ class EmailConnector @Inject() (
     sendEmail(contact.contact.email, templateId, parameters)
 
   private def getParametersJson(contact: Contact, isUpdateExistingEnquiry: Boolean)(using messages: Messages): JsObject =
-    val submissionDate = dateUtil.nowInUK
+    val submissionDateTime = nowInUK
     Json.obj(
       "recipientName_FullName" -> contact.contact.fullName,
       "enquirySubject"         -> getEnquirySubject(contact, isUpdateExistingEnquiry),
-      "submissionDate"         -> dateUtil.formattedZonedDate(submissionDate),
-      "submissionTime"         -> submissionDate.format(dateUtil.timeFormatter),
+      "submissionDate"         -> submissionDateTime.formatLongDateByLang,
+      "submissionTime"         -> submissionDateTime.formatTime,
       "nextStep"               -> getNextStepText(isUpdateExistingEnquiry)
     )
 

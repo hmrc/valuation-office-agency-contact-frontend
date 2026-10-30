@@ -19,7 +19,7 @@ package uk.gov.hmrc.vo.contact.frontend.controllers
 import play.api.data.Form
 import play.api.libs.json.JsString
 import uk.gov.hmrc.vo.contact.frontend.FakeNavigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.*
 import play.api.test.Helpers.*
 import uk.gov.hmrc.vo.contact.frontend.forms.CouncilTaxSubcategoryForm
@@ -27,6 +27,7 @@ import uk.gov.hmrc.vo.contact.frontend.identifiers.CouncilTaxSubcategoryId
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{councilTaxSubcategory => council_tax_subcategory}
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 import scala.concurrent.Future
 import play.api.mvc.Call
@@ -35,7 +36,7 @@ import uk.gov.hmrc.vo.contact.frontend.views.html
 class CouncilTaxSubcategoryControllerSpec extends ControllerSpecBase:
 
   def councilTaxSubcategory: html.councilTaxSubcategory = inject[council_tax_subcategory]
-  def auditService: AuditingService                     = inject[AuditingService]
+  def auditService: AuditService                        = inject[AuditService]
 
   def onwardRoute: Call = routes.EnquiryCategoryController.onPageLoad(NormalMode)
 

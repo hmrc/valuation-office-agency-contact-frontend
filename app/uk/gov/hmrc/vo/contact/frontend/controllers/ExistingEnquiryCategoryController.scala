@@ -21,22 +21,24 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.Navigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.ExistingEnquiryCategoryForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.*
 import uk.gov.hmrc.vo.contact.frontend.journey.model.TellUsMorePage.lastTellUsMorePage
 import uk.gov.hmrc.vo.contact.frontend.journey.pages.OtherHAHBEnquiry
+import uk.gov.hmrc.vo.contact.frontend.models.event.RadioButtonSelection
 import uk.gov.hmrc.vo.contact.frontend.models.{Mode, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.existingEnquiryCategory
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
-import javax.inject.Inject
+import jakarta.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
 class ExistingEnquiryCategoryController @Inject() (
   override val messagesApi: MessagesApi,
-  auditService: AuditingService,
+  audit: AuditService,
   dataCacheConnector: DataCacheConnector,
   navigator: Navigator,
   getData: DataRetrievalAction,
@@ -70,7 +72,7 @@ class ExistingEnquiryCategoryController @Inject() (
             _        <- dataCacheConnector.remove(request.sessionId, EnquiryCategoryId.toString)
             cacheMap <- dataCacheConnector.save[String](request.sessionId, ExistingEnquiryCategoryId.toString, value)
           yield
-            auditService.sendRadioButtonSelection(request.uri, "existingEnquiryCategory" -> value)
+            audit.send(RadioButtonSelection(request.uri, "existingEnquiryCategory", value))
             Redirect(navigator.nextPage(ExistingEnquiryCategoryId, mode).apply(UserAnswers(cacheMap)))
       )
   }

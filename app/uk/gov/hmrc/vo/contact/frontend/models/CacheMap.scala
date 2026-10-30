@@ -38,7 +38,7 @@ case class CacheMap(id: String, data: Map[String, JsValue]):
       )
 
 object CacheMap:
-  implicit val formats: Format[CacheMap] = Json.format[CacheMap]
+  implicit val formats: Format[CacheMap] = Json.format
 
 class KeyStoreEntryValidationException(
   val key: String,

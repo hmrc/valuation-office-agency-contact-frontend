@@ -20,12 +20,14 @@ import play.api.i18n.{I18nSupport, Messages, MessagesApi}
 import play.api.{Configuration, mvc}
 import play.api.mvc.{AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.DataRetrievalAction
 import uk.gov.hmrc.vo.contact.frontend.forms.ContactReasonForm
+import uk.gov.hmrc.vo.contact.frontend.models.event.Logout
 import uk.gov.hmrc.vo.contact.frontend.views.html.contactReason
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
-import javax.inject.{Inject, Singleton}
+import jakarta.inject.{Inject, Singleton}
 import scala.concurrent.ExecutionContext
 
 @Singleton
@@ -35,7 +37,7 @@ class Application @Inject() (
   languageSwitchController: LanguageSwitchController,
   getData: DataRetrievalAction,
   dataCacheConnector: DataCacheConnector,
-  auditService: AuditingService,
+  audit: AuditService,
   configuration: Configuration,
   cc: MessagesControllerComponents
 )(using ec: ExecutionContext
@@ -52,7 +54,7 @@ class Application @Inject() (
   }
 
   def logout(): mvc.Action[AnyContent] = getData.async { implicit request =>
-    auditService.sendLogout(request.userAnswers)
+    audit.send(Logout(request.userAnswers))
     dataCacheConnector.clear(request.sessionId).map { _ =>
       Redirect(routes.ContactReasonController.onPageLoad).withNewSession
     }

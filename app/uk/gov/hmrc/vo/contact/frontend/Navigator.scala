@@ -19,20 +19,19 @@ package uk.gov.hmrc.vo.contact.frontend
 import play.api.Logging
 import play.api.mvc.Call
 import uk.gov.hmrc.http.HeaderCarrier
-import uk.gov.hmrc.vo.contact.frontend.connectors.AuditingService
 import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 import uk.gov.hmrc.vo.contact.frontend.identifiers.*
 import uk.gov.hmrc.vo.contact.frontend.journey.pages.{EnglandOrWalesPropertyRouter, HousingBenefitAllowancesRouter}
+import uk.gov.hmrc.vo.contact.frontend.models.event.ContinueNextPage
 import uk.gov.hmrc.vo.contact.frontend.models.{CheckMode, Mode, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
-import javax.inject.{Inject, Singleton}
-import scala.concurrent.ExecutionContext
+import jakarta.inject.{Inject, Singleton}
 
 @Singleton
 class Navigator @Inject() (
-  auditService: AuditingService
-)(using ec: ExecutionContext
+  audit: AuditService
 ) extends Logging:
 
   private val enquiryDateRouting: UserAnswers => Call = answers =>
@@ -340,5 +339,5 @@ class Navigator @Inject() (
     ) andThen auditNextUrl
 
   private def auditNextUrl(call: Call)(using hc: HeaderCarrier): Call =
-    auditService.sendContinueNextPage(call.url)
+    audit.send(ContinueNextPage(call.url))
     call

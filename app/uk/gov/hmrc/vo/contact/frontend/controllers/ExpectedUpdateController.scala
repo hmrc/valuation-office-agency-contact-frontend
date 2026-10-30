@@ -22,7 +22,7 @@ import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.DataRetrievalAction
 import uk.gov.hmrc.vo.contact.frontend.views.html.expectedUpdate
 
-import javax.inject.Inject
+import jakarta.inject.Inject
 
 class ExpectedUpdateController @Inject() (
   override val messagesApi: MessagesApi,

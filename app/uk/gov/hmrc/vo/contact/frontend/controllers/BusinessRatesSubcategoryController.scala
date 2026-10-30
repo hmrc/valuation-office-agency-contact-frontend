@@ -21,20 +21,22 @@ import play.api.mvc
 import play.api.mvc.{AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.Navigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.BusinessRatesSubcategoryForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.{BusinessRatesSubcategoryId, CouncilTaxSubcategoryId}
 import uk.gov.hmrc.vo.contact.frontend.models.Mode
+import uk.gov.hmrc.vo.contact.frontend.models.event.RadioButtonSelection
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesSubcategory as business_rates_subcategory, businessRatesValuation as business_rates_valuation}
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
-import javax.inject.Inject
+import jakarta.inject.Inject
 import scala.concurrent.ExecutionContext
 
 class BusinessRatesSubcategoryController @Inject() (
   override val messagesApi: MessagesApi,
-  auditService: AuditingService,
+  audit: AuditService,
   dataCacheConnector: DataCacheConnector,
   navigator: Navigator,
   getData: DataRetrievalAction,
@@ -64,7 +66,7 @@ class BusinessRatesSubcategoryController @Inject() (
             _        <- dataCacheConnector.remove(request.sessionId, CouncilTaxSubcategoryId.toString)
             cacheMap <- dataCacheConnector.save[String](request.sessionId, BusinessRatesSubcategoryId.toString, value)
           yield
-            auditService.sendRadioButtonSelection(request.uri, "businessRatesSubcategory" -> value)
+            audit.send(RadioButtonSelection(request.uri, "businessRatesSubcategory", value))
             Redirect(navigator.nextPage(BusinessRatesSubcategoryId, mode).apply(UserAnswers(cacheMap)))
       )
   }

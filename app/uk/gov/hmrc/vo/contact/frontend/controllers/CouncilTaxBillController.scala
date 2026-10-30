@@ -22,7 +22,7 @@ import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.views.html.councilTaxBill
 
-import javax.inject.Inject
+import jakarta.inject.Inject
 
 class CouncilTaxBillController @Inject() (
   override val messagesApi: MessagesApi,

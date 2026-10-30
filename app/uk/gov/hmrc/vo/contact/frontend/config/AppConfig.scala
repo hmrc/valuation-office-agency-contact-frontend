@@ -21,7 +21,7 @@ import play.api.mvc.{Call, RequestHeader}
 import uk.gov.hmrc.vo.contact.frontend.controllers.routes
 import uk.gov.hmrc.vo.service.config.VOServiceConfig
 
-import javax.inject.{Inject, Singleton}
+import jakarta.inject.{Inject, Singleton}
 
 @Singleton
 class AppConfig @Inject() (val configuration: Configuration) extends VOServiceConfig:

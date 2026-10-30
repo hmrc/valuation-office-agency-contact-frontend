@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.vo.contact.frontend.controllers
 
-import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsString, Json}
 import play.api.test.Helpers._
 import uk.gov.hmrc.http.HeaderCarrier
@@ -323,7 +322,7 @@ class ConfirmationControllerSpec extends ControllerSpecBase:
         TellUsMoreId.toString            -> Json.toJson(tellUs)
       )
 
-      when(mockConnector.send(any[Contact], any[MessagesApi], any[UserAnswers])(using any[HeaderCarrier])) `thenReturn` Future.successful(Success(OK))
+      when(mockConnector.send(any[Contact], any[UserAnswers])(using any[HeaderCarrier])) `thenReturn` Future.successful(Success(OK))
 
       val getRelevantData = FakeDataRetrievalAction(Some(CacheMap(cacheMapId, validData)))
 

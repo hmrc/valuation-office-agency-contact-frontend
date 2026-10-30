@@ -21,7 +21,7 @@ import play.api.i18n.{DefaultMessagesApi, Lang, Messages, MessagesImpl}
 import play.api.libs.json.JsString
 import play.api.mvc.{Call, Request}
 import play.api.test.Helpers.*
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, FakeDataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.FakeDataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.*
 import uk.gov.hmrc.vo.contact.frontend.journey.JourneyMap
 import uk.gov.hmrc.vo.contact.frontend.journey.model.NotImplemented
@@ -29,6 +29,7 @@ import uk.gov.hmrc.vo.contact.frontend.journey.pages.{HousingBenefitAllowancesRo
 import uk.gov.hmrc.vo.contact.frontend.models.{CacheMap, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.{MessageControllerComponentsHelpers, UserAnswers}
 import uk.gov.hmrc.vo.contact.frontend.views.html.journey.{categoryRouter, customizedContent, notImplemented, singleTextarea}
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
 class JourneyControllerSpec extends ControllerSpecBase:
 
@@ -42,7 +43,7 @@ class JourneyControllerSpec extends ControllerSpecBase:
   def notImplementedTemplate: notImplemented       = inject[notImplemented]
 
   private def journeyMap   = inject[JourneyMap]
-  private def auditService = inject[AuditingService]
+  private def auditService = inject[AuditService]
 
   private def controller(dataRetrievalAction: DataRetrievalAction = getEmptyCacheMap) =
     JourneyController(

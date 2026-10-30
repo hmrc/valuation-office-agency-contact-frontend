@@ -16,9 +16,11 @@
 
 package uk.gov.hmrc.vo.contact.frontend.models
 
-import play.api.i18n.DefaultMessagesApi
+import play.api.i18n.{DefaultMessagesApi, Lang, Messages}
 import uk.gov.hmrc.vo.contact.frontend.FakeUserAnswers
 import uk.gov.hmrc.vo.unit.test.BaseSpec
+
+import java.util.Locale
 
 class ContactWithEnMessagesSpec extends BaseSpec:
 
@@ -33,8 +35,10 @@ class ContactWithEnMessagesSpec extends BaseSpec:
     DefaultMessagesApi(messages = messages)
 
   "return a ContactWithEnMessages when given a contact with proper keys for the enquiryCategory and subEnquiryCategory" in {
-    val msgApi = mockMsgApi(Map("en" -> Map("enquiryCategory.council_tax" -> "CT", "councilTaxSubcategory.council_tax_band" -> "TB")))
-    val result = ContactWithEnMessage(contact, msgApi, userAnswers)
+    val msgApi     = mockMsgApi(Map("en" -> Map("enquiryCategory.council_tax" -> "CT", "councilTaxSubcategory.council_tax_band" -> "TB")))
+    given Messages = msgApi.preferred(Seq(Lang(Locale.UK)))
+
+    val result = ContactWithEnMessage(contact, userAnswers)
     result.enquiryCategoryMsg    shouldBe "CT"
     result.isCouncilTaxEnquiry   shouldBe true
     result.contactReason         shouldBe userAnswers.contactReason
@@ -42,14 +46,16 @@ class ContactWithEnMessagesSpec extends BaseSpec:
   }
 
   "return a ContactWithEnMessages when given a contact with proper keys for the existingEnquiryCategory and subEnquiryCategory" in {
-    val msgApi      = mockMsgApi(Map("en" -> Map(
+    val msgApi     = mockMsgApi(Map("en" -> Map(
       "enquiryCategory.council_tax"            -> "CT",
       "councilTaxSubcategory.council_tax_band" -> "TB",
       "existing.enquiry"                       -> "Existing Enquiry"
     )))
+    given Messages = msgApi.preferred(Seq(Lang(Locale.UK)))
+
     val userAnswers =
       FakeUserAnswers(contactDetails, "", "council_tax", "", "", propertyAddress, TellUsMore("message"), ee = Some("council_tax"), cr = Some("more_details"))
-    val result      = ContactWithEnMessage(contact, msgApi, userAnswers)
+    val result      = ContactWithEnMessage(contact, userAnswers)
     result.enquiryCategoryMsg    shouldBe "CT"
     result.isCouncilTaxEnquiry   shouldBe true
     result.contactReason         shouldBe userAnswers.contactReason
@@ -57,30 +63,38 @@ class ContactWithEnMessagesSpec extends BaseSpec:
   }
 
   "throw an exception if the english version of messages is not available" in {
-    val msgApi = mockMsgApi(Map("fr" -> Map("enquiryCategory.council_tax" -> "CT", "councilTaxSubcategory.council_tax_band" -> "TB")))
+    val msgApi     = mockMsgApi(Map("fr" -> Map("enquiryCategory.council_tax" -> "CT", "councilTaxSubcategory.council_tax_band" -> "TB")))
+    given Messages = msgApi.preferred(Seq(Lang(Locale.UK)))
+
     intercept[Exception] {
-      ContactWithEnMessage(contact, msgApi, userAnswers)
+      ContactWithEnMessage(contact, userAnswers)
     }
   }
 
   "throw an exception if the contact contains an enquiry key that is not business_rates or council_tax" in {
-    val contact = Contact(contactDetails, propertyAddress, "wibble", "council_tax_band", "msg")
-    val msgApi  = mockMsgApi(Map("en" -> Map("councilTaxSubcategory.council_tax_band" -> "TB")))
+    val contact    = Contact(contactDetails, propertyAddress, "wibble", "council_tax_band", "msg")
+    val msgApi     = mockMsgApi(Map("en" -> Map("councilTaxSubcategory.council_tax_band" -> "TB")))
+    given Messages = msgApi.preferred(Seq(Lang(Locale.UK)))
+
     intercept[Exception] {
-      ContactWithEnMessage(contact, msgApi, userAnswers)
+      ContactWithEnMessage(contact, userAnswers)
     }
   }
 
   "throw an exception if the english version of messages does not contain a value for the enquiry category message key" in {
-    val msgApi = mockMsgApi(Map("en" -> Map("councilTaxSubcategory.council_tax_band" -> "TB")))
+    val msgApi     = mockMsgApi(Map("en" -> Map("councilTaxSubcategory.council_tax_band" -> "TB")))
+    given Messages = msgApi.preferred(Seq(Lang(Locale.UK)))
+
     intercept[Exception] {
-      ContactWithEnMessage(contact, msgApi, userAnswers)
+      ContactWithEnMessage(contact, userAnswers)
     }
   }
 
   "throw an exception if the english version of the messages does not contain a value for the sub enquiry category key" in {
-    val msgApi = mockMsgApi(Map("fr" -> Map("enquiryCategory.council_tax" -> "CT")))
+    val msgApi     = mockMsgApi(Map("fr" -> Map("enquiryCategory.council_tax" -> "CT")))
+    given Messages = msgApi.preferred(Seq(Lang(Locale.UK)))
+
     intercept[Exception] {
-      ContactWithEnMessage(contact, msgApi, userAnswers)
+      ContactWithEnMessage(contact, userAnswers)
     }
   }

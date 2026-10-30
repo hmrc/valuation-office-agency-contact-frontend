@@ -76,7 +76,7 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase:
         val result                  = controller().enquiryBackLink(mockUserAnswers)
         val isBusinessRateSelection = result.isRight
         isBusinessRateSelection shouldBe true
-        assert(result.toOption.get == routes.PropertyEnglandActualLetsController.onPageLoad.url)
+        result.toOption.get     shouldBe routes.PropertyEnglandActualLetsController.onPageLoad.url
       }
 
     "returns the Property available 140 nights Controller when enquiry category is business_rates and sub category is business_rates_self_catering" +
@@ -88,7 +88,7 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase:
         val result                  = controller().enquiryBackLink(mockUserAnswers)
         val isBusinessRateSelection = result.isRight
         isBusinessRateSelection shouldBe true
-        assert(result.toOption.get == routes.PropertyEnglandAvailableLetsController.onPageLoad.url)
+        result.toOption.get     shouldBe routes.PropertyEnglandAvailableLetsController.onPageLoad.url
       }
 
     "The enquiry key function produces a Left(Unknown enquiry category in enquiry key) when the enquiry category has not been selected" in {
@@ -117,7 +117,7 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase:
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection shouldBe true
-      assert(result.toOption.get == routes.PropertyEnglandActualLetsController.onPageLoad.url)
+      result.toOption.get      shouldBe routes.PropertyEnglandActualLetsController.onPageLoad.url
     }
 
     "The enquiry key function produces a string with a back link when the enquiry category is no to available 140 nights controller" in {
@@ -128,7 +128,7 @@ class PropertyEnglandLetsNoActionControllerSpec extends ControllerSpecBase:
       val result                   = controller().enquiryBackLink(mockUserAnswers)
       val isBusinessRatesSelection = result.isRight
       isBusinessRatesSelection shouldBe true
-      assert(result.toOption.get == routes.PropertyEnglandAvailableLetsController.onPageLoad.url)
+      result.toOption.get      shouldBe routes.PropertyEnglandAvailableLetsController.onPageLoad.url
     }
 
     "return 500 and the error view for a GET with no enquiry type" in

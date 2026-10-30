@@ -20,20 +20,22 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.Navigator
-import uk.gov.hmrc.vo.contact.frontend.connectors.{AuditingService, DataCacheConnector}
+import uk.gov.hmrc.vo.contact.frontend.connectors.DataCacheConnector
 import uk.gov.hmrc.vo.contact.frontend.controllers.actions.{DataRequiredAction, DataRetrievalAction}
 import uk.gov.hmrc.vo.contact.frontend.forms.PropertyWalesActualLetsForm
 import uk.gov.hmrc.vo.contact.frontend.identifiers.PropertyWalesActualLetsId
 import uk.gov.hmrc.vo.contact.frontend.models.Mode
+import uk.gov.hmrc.vo.contact.frontend.models.event.RadioButtonSelection
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.propertyWalesActualLets
+import uk.gov.hmrc.vo.service.connectors.AuditService
 
-import javax.inject.Inject
+import jakarta.inject.Inject
 import scala.concurrent.ExecutionContext
 
 class PropertyWalesActualLetsController @Inject() (
   override val messagesApi: MessagesApi,
-  auditService: AuditingService,
+  audit: AuditService,
   dataCacheConnector: DataCacheConnector,
   navigator: Navigator,
   getData: DataRetrievalAction,
@@ -58,7 +60,7 @@ class PropertyWalesActualLetsController @Inject() (
       PropertyWalesActualLetsForm().bindFromRequest().fold(
         formWithErrors => BadRequest(propertyWalesActualLets(formWithErrors)),
         value =>
-          auditService.sendRadioButtonSelection(request.uri, "businessRatesSelfCatering70Days" -> value)
+          audit.send(RadioButtonSelection(request.uri, "businessRatesSelfCatering70Days", value))
           dataCacheConnector.save[String](request.sessionId, PropertyWalesActualLetsId.toString, value).map(cacheMap =>
             Redirect(navigator.nextPage(PropertyWalesActualLetsId, mode).apply(UserAnswers(cacheMap)))
           )
