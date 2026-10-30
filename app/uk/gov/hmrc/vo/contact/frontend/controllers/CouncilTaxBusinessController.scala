@@ -30,7 +30,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesNoNeedToPay, councilTaxBusinessEnquiry, propertySmallPartUsed}
 import uk.gov.hmrc.vo.service.connectors.AuditService
 
-import javax.inject.Inject
+import jakarta.inject.Inject
 import scala.concurrent.ExecutionContext
 
 class CouncilTaxBusinessController @Inject() (

@@ -29,7 +29,7 @@ import uk.gov.hmrc.vo.contact.frontend.models.requests.DataRequest
 import uk.gov.hmrc.vo.contact.frontend.models.{Contact, ContactWithEnMessage}
 import uk.gov.hmrc.vo.service.conversion.DateConversion.*
 
-import javax.inject.{Inject, Singleton}
+import jakarta.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 import scala.language.implicitConversions
 

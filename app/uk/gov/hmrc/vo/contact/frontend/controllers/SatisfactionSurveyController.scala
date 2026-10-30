@@ -30,7 +30,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.{AddressFormatters, UserAnswers}
 import uk.gov.hmrc.vo.contact.frontend.views.html.{confirmation, satisfactionSurveyThankYou}
 import uk.gov.hmrc.vo.service.connectors.AuditService
 
-import javax.inject.{Inject, Singleton}
+import jakarta.inject.{Inject, Singleton}
 import scala.language.implicitConversions
 
 @Singleton()

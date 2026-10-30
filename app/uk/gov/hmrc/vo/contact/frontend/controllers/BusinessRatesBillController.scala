@@ -21,7 +21,7 @@ import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.vo.contact.frontend.views.html.businessRatesBill as business_rates_bill
 
-import javax.inject.Inject
+import jakarta.inject.Inject
 
 class BusinessRatesBillController @Inject() (
   override val messagesApi: MessagesApi,

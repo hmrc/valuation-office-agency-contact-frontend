@@ -22,7 +22,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.MessageControllerComponentsHelpers
 import uk.gov.hmrc.vo.contact.frontend.views.html.windWatertightCannotBeReduced
 import uk.gov.hmrc.vo.contact.frontend.views.html.windWatertightCannotBeReduced as wind_watertight_cannot_be_reduced
 
-import javax.inject.Singleton
+import jakarta.inject.Singleton
 
 @Singleton
 class PropertyWindWaterControllerSpec extends ControllerSpecBase:

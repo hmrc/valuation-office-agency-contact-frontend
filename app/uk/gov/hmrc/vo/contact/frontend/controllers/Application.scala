@@ -27,7 +27,7 @@ import uk.gov.hmrc.vo.contact.frontend.models.event.Logout
 import uk.gov.hmrc.vo.contact.frontend.views.html.contactReason
 import uk.gov.hmrc.vo.service.connectors.AuditService
 
-import javax.inject.{Inject, Singleton}
+import jakarta.inject.{Inject, Singleton}
 import scala.concurrent.ExecutionContext
 
 @Singleton

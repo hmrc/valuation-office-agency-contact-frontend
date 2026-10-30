@@ -31,7 +31,7 @@ import uk.gov.hmrc.vo.contact.frontend.models.{ContactDetails, Mode, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.contactDetails
 
-import javax.inject.Inject
+import jakarta.inject.Inject
 import scala.concurrent.ExecutionContext
 
 class ContactDetailsController @Inject() (

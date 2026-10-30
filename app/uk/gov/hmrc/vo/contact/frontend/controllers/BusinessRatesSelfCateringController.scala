@@ -30,7 +30,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesSelfCateringEnquiry as business_rates_self_catering_enquiry, propertyEnglandLets as england_lets, propertyWalesLets as wales_lets}
 import uk.gov.hmrc.vo.service.connectors.AuditService
 
-import javax.inject.Inject
+import jakarta.inject.Inject
 import scala.concurrent.ExecutionContext
 
 class BusinessRatesSelfCateringController @Inject() (

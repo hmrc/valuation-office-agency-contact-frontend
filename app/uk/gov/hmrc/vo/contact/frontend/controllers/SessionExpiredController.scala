@@ -24,7 +24,7 @@ import uk.gov.hmrc.vo.contact.frontend.models.event.UserTimeout
 import uk.gov.hmrc.vo.contact.frontend.views.html.error.session_expired
 import uk.gov.hmrc.vo.service.connectors.AuditService
 
-import javax.inject.{Inject, Singleton}
+import jakarta.inject.{Inject, Singleton}
 
 @Singleton
 class SessionExpiredController @Inject() (

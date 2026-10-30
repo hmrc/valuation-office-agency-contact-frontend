@@ -30,7 +30,7 @@ import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.contact.frontend.views.html.{businessRatesNonBusiness as business_rates_non_business, businessRatesPropertyEnquiry as business_rates_property_enquiry}
 import uk.gov.hmrc.vo.service.connectors.AuditService
 
-import javax.inject.Inject
+import jakarta.inject.Inject
 import scala.concurrent.ExecutionContext
 
 class BusinessRatesPropertyController @Inject() (

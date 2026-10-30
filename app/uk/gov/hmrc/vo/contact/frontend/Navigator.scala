@@ -27,7 +27,7 @@ import uk.gov.hmrc.vo.contact.frontend.models.{CheckMode, Mode, NormalMode}
 import uk.gov.hmrc.vo.contact.frontend.utils.UserAnswers
 import uk.gov.hmrc.vo.service.connectors.AuditService
 
-import javax.inject.{Inject, Singleton}
+import jakarta.inject.{Inject, Singleton}
 
 @Singleton
 class Navigator @Inject() (

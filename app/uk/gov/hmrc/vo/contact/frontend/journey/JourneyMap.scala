@@ -25,7 +25,7 @@ import uk.gov.hmrc.vo.contact.frontend.journey.pages.*
 import uk.gov.hmrc.vo.contact.frontend.models.requests.DataRequest
 import uk.gov.hmrc.vo.contact.frontend.views.html.error.page_not_found
 
-import javax.inject.{Inject, Singleton}
+import jakarta.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 
 /**
