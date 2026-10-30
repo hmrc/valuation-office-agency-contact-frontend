@@ -1,0 +1,22 @@
+{
+  "error": "Response code: 500",
+  "contact": {
+    "fullName": "First Last",
+    "email": "user@email.com",
+    "contactNumber": "1234567890"
+  },
+  "propertyAddress": {
+    "addressLine1": "address line 1",
+    "addressLine2": "address line 2",
+    "town": "Town",
+    "county": "County",
+    "postcode": "postcode"
+  },
+  "isCouncilTaxEnquiry": true,
+  "contactReason": "Some contact reason",
+  "enquiryCategoryMsg": "Council Tax",
+  "subEnquiryCategoryMsg": "My property has been partially or fully demolished",
+  "message": "Message text",
+  "enquiryBeforeLast28days": "yes",
+  "refNumber": "VOR12345678"
+}
